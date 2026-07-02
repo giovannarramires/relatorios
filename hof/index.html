@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Ads — Dashboard HOF Germani 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+  const KEY = 'dash_hof_auth';
+
+  async function deriveKey(password, salt) {
+    const enc = new TextEncoder();
+    const km  = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      { name:'PBKDF2', salt, iterations:100000, hash:'SHA-256' },
+      km, { name:'AES-GCM', length:256 }, false, ['decrypt']
+    );
+  }
+
+  async function tryDecrypt(password) {
+    const el = document.getElementById('enc-data');
+    if (!el) return null;
+    try {
+      const bytes = Uint8Array.from(atob(el.textContent.trim()), c => c.charCodeAt(0));
+      const salt  = bytes.slice(0, 16);
+      const iv    = bytes.slice(16, 28);
+      const ct    = bytes.slice(28);
+      const key   = await deriveKey(password, salt);
+      const plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ct);
+      return JSON.parse(new TextDecoder().decode(plain));
+    } catch(e) { return null; }
+  }
+
+  document.addEventListener('DOMContentLoaded', async function(){
+    const overlay = document.getElementById('auth-overlay');
+    const cached  = sessionStorage.getItem(KEY);
+    if (cached) {
+      const data = await tryDecrypt(cached);
+      if (data) {
+        window.RAW = data;
+        overlay.style.display = 'none';
+        window.__initDashboard && window.__initDashboard();
+        return;
+      }
+    }
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('pwd-input').focus();
+  });
+
+  window.__checkPwd = async function(){
+    const val  = document.getElementById('pwd-input').value;
+    const data = await tryDecrypt(val);
+    if (data) {
+      sessionStorage.setItem(KEY, val);
+      window.RAW = data;
+      document.getElementById('auth-overlay').style.display = 'none';
+      document.body.style.overflow = '';
+      window.__initDashboard && window.__initDashboard();
+    } else {
+      const err = document.getElementById('pwd-error');
+      err.style.display = 'block';
+      document.getElementById('pwd-input').value = '';
+      document.getElementById('pwd-input').focus();
+      setTimeout(()=>{ err.style.display='none'; }, 2500);
+    }
+  };
+
+  window.__pwdKeydown = function(e){ if(e.key==='Enter') window.__checkPwd(); };
+})();
+</script>
+<style>
+#auth-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0040c1 0%, #1877F2 55%, #42AEFF 100%);
+  align-items: center; justify-content: center;
+}
+.auth-card {
+  background: white; border-radius: 20px;
+  padding: 44px 40px 36px;
+  width: 360px; max-width: 90vw;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  text-align: center;
+}
+.auth-logo {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, #0040c1, #1877F2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+.auth-logo svg { width: 30px; height: 30px; fill: white; }
+.auth-title { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+.auth-sub { font-family: 'Inter', sans-serif; font-size: 13px; color: #64748b; margin-bottom: 28px; }
+.auth-input {
+  width: 100%; padding: 13px 16px; border-radius: 10px;
+  border: 2px solid #e2e8f0; font-family: 'Inter', sans-serif;
+  font-size: 15px; color: #0f172a; outline: none;
+  transition: border-color .15s;
+  text-align: center; letter-spacing: 3px;
+}
+.auth-input:focus { border-color: #1877F2; }
+.auth-btn {
+  margin-top: 14px; width: 100%; padding: 13px;
+  background: linear-gradient(135deg, #0040c1, #1877F2);
+  color: white; border: none; border-radius: 10px;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: opacity .15s;
+}
+.auth-btn:hover { opacity: .9; }
+.auth-error {
+  display: none; margin-top: 10px;
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: #ef4444; font-weight: 500;
+}
+.auth-footer { margin-top: 24px; font-family: 'Inter', sans-serif; font-size: 11px; color: #94a3b8; }
+</style>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #eef1f8;
+  --surface:   #ffffff;
+  --border:    #e2e8f0;
+  --text:      #0f172a;
+  --text-2:    #475569;
+  --text-3:    #94a3b8;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow:    0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+  --radius:    14px;
+  --meta:      #1877F2;
+}
+
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* ── HEADER ────────────────────────────────── */
+.header {
+  background: linear-gradient(135deg, #0040c1 0%, #1877F2 55%, #42AEFF 100%);
+  padding: 0 36px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 4px 20px rgba(24,119,242,0.35);
+}
+
+.header-left { display: flex; align-items: center; gap: 14px; }
+
+.header-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.header-icon svg { width: 22px; height: 22px; fill: white; }
+
+.header-title { font-size: 17px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+.header-sub   { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 400; margin-top: 1px; }
+
+.header-right { display: flex; align-items: center; gap: 12px; }
+
+.header-badge {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white; padding: 6px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.2px;
+  backdrop-filter: blur(4px);
+}
+
+.header-tag {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  padding: 5px 10px; border-radius: 8px;
+  font-size: 11px; font-weight: 500;
+}
+
+/* ── CONTAINER ─────────────────────────────── */
+.container { max-width: 1400px; margin: 0 auto; padding: 28px 36px 60px; }
+
+/* ── FILTERS ───────────────────────────────── */
+.filters-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 20px 24px; margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: center;
+}
+
+.filter-group { display: flex; flex-direction: column; gap: 10px; }
+
+.filter-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-3);
+}
+
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.pill {
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--border); background: var(--surface);
+  color: var(--text-2); transition: all 0.18s; user-select: none;
+  white-space: nowrap;
+}
+.pill:hover { border-color: var(--meta); color: var(--meta); box-shadow: 0 2px 8px rgba(24,119,242,0.12); }
+
+.pill.active.m { background: #1877F2; border-color: #1877F2; color: white; box-shadow: 0 2px 10px rgba(24,119,242,0.3); }
+.pill.active.a-all    { background: #0f172a; border-color: #0f172a; color: white; }
+.pill.active.a-hof    { background: #6366f1; border-color: #6366f1; color: white; }
+.pill.active.a-port   { background: #10b981; border-color: #10b981; color: white; }
+.pill.active.a-pac    { background: #3b82f6; border-color: #3b82f6; color: white; }
+.pill.active.a-latam  { background: #f59e0b; border-color: #f59e0b; color: white; }
+
+.divider { width: 1px; background: var(--border); align-self: stretch; }
+
+/* ── KPI CARDS ─────────────────────────────── */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-bottom: 22px;
+}
+
+.kpi { background: var(--surface); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-3); margin-bottom: 10px; }
+.kpi-value { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1; margin-bottom: 6px; }
+.kpi-sub   { font-size: 11px; color: var(--text-3); }
+
+.kpi.hero {
+  background: linear-gradient(135deg, #0040c1 0%, #1877F2 100%);
+  box-shadow: 0 6px 20px rgba(24,119,242,0.35);
+}
+.kpi.hero .kpi-label { color: rgba(255,255,255,0.75); }
+.kpi.hero .kpi-value { color: white; }
+.kpi.hero .kpi-sub   { color: rgba(255,255,255,0.65); }
+
+/* ── SECTION HEADER ────────────────────────── */
+.section-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.section-title  { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-2); }
+.section-hint   { font-size: 11px; color: var(--text-3); }
+
+/* ── CAMPAIGN TYPE CARDS ───────────────────── */
+.tipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 12px; margin-bottom: 24px;
+}
+
+.tipo-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 18px 18px 14px; box-shadow: var(--shadow-sm);
+  cursor: pointer; border: 2px solid transparent;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.tipo-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--tc); opacity: 0; transition: opacity 0.2s;
+  pointer-events: none;
+}
+.tipo-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.tipo-card:hover::after { opacity: 0.04; }
+.tipo-card.active { border-color: var(--tc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--tc) 25%, transparent), var(--shadow); }
+.tipo-card.active::after { opacity: 0.06; }
+.tipo-card.dim { opacity: 0.35; transform: none !important; }
+
+.tc-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--tc); border-radius: 14px 14px 0 0;
+}
+
+.tc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.tc-icon { font-size: 16px; line-height: 1; }
+.tc-name { font-size: 11px; font-weight: 800; letter-spacing: 0.4px; color: var(--tc); text-transform: uppercase; }
+.tc-spend { font-size: 19px; font-weight: 900; color: var(--text); letter-spacing: -0.4px; margin-bottom: 3px; }
+.tc-total { font-size: 10px; color: var(--text-3); margin-bottom: 10px; }
+.tc-sparkline { display: block; }
+.tc-pct {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 8px; margin-top: 8px;
+  background: color-mix(in srgb, var(--tc) 12%, transparent);
+  color: var(--tc);
+}
+
+/* ── CHART ─────────────────────────────────── */
+.chart-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 24px 28px; margin-bottom: 22px; box-shadow: var(--shadow-sm);
+}
+.chart-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.chart-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.chart-subtitle { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.chart-area { height: 290px; position: relative; }
+
+/* ── TABLE ─────────────────────────────────── */
+.table-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 24px 28px; box-shadow: var(--shadow-sm); overflow-x: auto;
+}
+.table-card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.table-note { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+table { width: 100%; border-collapse: collapse; min-width: 700px; }
+th {
+  text-align: right; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--text-3); padding: 10px 12px;
+  border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+th:first-child { text-align: left; }
+td {
+  text-align: right; font-size: 12px; padding: 13px 12px;
+  border-bottom: 1px solid #f1f5f9; color: var(--text-2);
+  white-space: nowrap;
+}
+td:first-child { text-align: left; }
+
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: #f8faff; }
+
+.td-tipo {
+  font-weight: 700; font-size: 12px; color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.td-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tc); flex-shrink: 0; }
+.td-desc { font-size: 10px; color: var(--text-3); font-weight: 400; display: block; margin-top: 1px; }
+.td-zero { color: var(--text-3) !important; font-weight: 400; }
+.td-strong { font-weight: 700; color: var(--text) !important; }
+.td-tax { color: #ef4444 !important; }
+.td-blue { color: #1877F2 !important; font-weight: 700; }
+
+tfoot tr td {
+  font-weight: 800; font-size: 12px; color: var(--text) !important;
+  background: #f8faff !important; border-top: 2px solid var(--border) !important;
+  border-bottom: none !important;
+}
+
+/* ── EMPTY ──────────────────────────────────── */
+.empty { text-align: center; padding: 48px; color: var(--text-3); font-size: 14px; }
+
+/* ── ACCOUNT BREAKDOWN ──────────────────────── */
+.acc-breakdown {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px; margin-bottom: 22px;
+}
+.acc-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 16px 20px; box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--ac);
+}
+.acc-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ac); margin-bottom: 6px; }
+.acc-spend { font-size: 20px; font-weight: 900; color: var(--text); letter-spacing: -0.4px; }
+.acc-detail { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+.acc-months { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+.acc-month-chip {
+  font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
+  background: color-mix(in srgb, var(--ac) 10%, transparent);
+  color: var(--ac);
+}
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 1100px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px)  {
+  .container { padding: 16px; }
+  .header { padding: 0 16px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .tipo-grid { grid-template-columns: 1fr 1fr; }
+  .header-right .header-tag { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── ENCRYPTED DATA ── -->
+<pre id="enc-data" style="display:none">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</pre>
+
+<!-- ── AUTH OVERLAY ── -->
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-7-2l-4-4 1.41-1.41L12 14.17l6.59-6.58L20 9l-8 8z" opacity="0"/><path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-14h-2v6l5.25 3.15.75-1.23-4-2.37V7z"/></svg>
+    </div>
+    <div class="auth-title">Dashboard HOF Germani</div>
+    <div class="auth-sub">Investimentos Meta Ads · 2026</div>
+    <input id="pwd-input" class="auth-input" type="password" placeholder="••••••••" onkeydown="__pwdKeydown(event)" autofocus>
+    <button class="auth-btn" onclick="__checkPwd()">Entrar</button>
+    <div id="pwd-error" class="auth-error">Senha incorreta. Tente novamente.</div>
+    <div class="auth-footer">Acesso restrito · Gestão GGD</div>
+  </div>
+</div>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <div class="header-left">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div>
+      <div class="header-title">Meta Ads Dashboard</div>
+      <div class="header-sub">Dr. Marcelo Germani — HOF Germani</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-tag">13,83% ISS+IOF</div>
+    <div class="header-badge">📅 Jan – Jun 2026</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ── FILTERS ── -->
+  <div class="filters-card">
+    <div class="filter-group">
+      <div class="filter-label">Mês</div>
+      <div class="pills" id="month-pills">
+        <div class="pill m active" data-m="all" onclick="toggleMonth('all')">Todos</div>
+        <div class="pill m" data-m="Jan" onclick="toggleMonth('Jan')">Jan</div>
+        <div class="pill m" data-m="Fev" onclick="toggleMonth('Fev')">Fev</div>
+        <div class="pill m" data-m="Mar" onclick="toggleMonth('Mar')">Mar</div>
+        <div class="pill m" data-m="Abr" onclick="toggleMonth('Abr')">Abr</div>
+        <div class="pill m" data-m="Mai" onclick="toggleMonth('Mai')">Mai</div>
+        <div class="pill m" data-m="Jun" onclick="toggleMonth('Jun')">Jun</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="filter-group">
+      <div class="filter-label">Conta</div>
+      <div class="pills" id="account-pills">
+        <div class="pill active a-all"  data-a="all"               onclick="setAccount('all')">Todas as Contas</div>
+        <div class="pill a-hof"         data-a="CA_HOF_PRESENCIAIS" onclick="setAccount('CA_HOF_PRESENCIAIS')">HOF Presenciais</div>
+        <div class="pill a-port"        data-a="CA_PORTUGAL_REAL"   onclick="setAccount('CA_PORTUGAL_REAL')">Portugal Real</div>
+        <div class="pill a-pac"         data-a="CA_PACIENTE_MODELO" onclick="setAccount('CA_PACIENTE_MODELO')">Paciente Modelo</div>
+        <div class="pill a-latam"       data-a="CA_LATAM"           onclick="setAccount('CA_LATAM')">LATAM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KPI ── -->
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <!-- ── CAMPAIGN TYPES ── -->
+  <div class="section-header">
+    <div class="section-title">Tipo de Campanha</div>
+    <div class="section-hint">clique para filtrar ↓</div>
+  </div>
+  <div class="tipo-grid" id="tipo-grid"></div>
+
+  <!-- ── ACCOUNT BREAKDOWN (shown when tipo is selected) ── -->
+  <div id="acc-section" style="display:none">
+    <div class="section-header" style="margin-top:4px">
+      <div class="section-title" id="acc-section-title">Distribuição por Conta</div>
+    </div>
+    <div class="acc-breakdown" id="acc-breakdown"></div>
+  </div>
+
+  <!-- ── CHART ── -->
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-title" id="chart-title">Investimento Mensal</div>
+        <div class="chart-subtitle" id="chart-subtitle">Valor de veiculação (sem imposto) · R$</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button onclick="setChartType('bar')"  id="btn-bar"  style="padding:5px 12px;border-radius:8px;border:1.5px solid var(--border);background:white;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2)">Barras</button>
+        <button onclick="setChartType('line')" id="btn-line" style="padding:5px 12px;border-radius:8px;border:1.5px solid var(--border);background:white;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-2)">Linha</button>
+      </div>
+    </div>
+    <div class="chart-area"><canvas id="mainChart"></canvas></div>
+  </div>
+
+  <!-- ── DETAIL TABLE ── -->
+  <div class="table-card">
+    <div class="table-card-header">
+      <div>
+        <div class="chart-title" id="table-title">Detalhamento Completo</div>
+        <div class="table-note">Valores em R$ · Imposto 13,83% (ISS + IOF + contribuições) · fonte: Ads Manager Meta</div>
+      </div>
+      <div id="table-tipo-badge"></div>
+    </div>
+    <div id="table-container"></div>
+  </div>
+
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────
+const TAX = 0.1383;
+const MONTHS = ['Jan','Fev','Mar','Abr','Mai','Jun'];
+const MONTH_FULL = {Jan:'Janeiro',Fev:'Fevereiro',Mar:'Março',Abr:'Abril',Mai:'Maio',Jun:'Junho'};
+
+const ACC_COLORS = {
+  CA_HOF_PRESENCIAIS: '#6366f1',
+  CA_LATAM:           '#f59e0b',
+  CA_PORTUGAL_REAL:   '#10b981',
+  CA_PACIENTE_MODELO: '#3b82f6',
+};
+const ACC_SHORT = {
+  CA_HOF_PRESENCIAIS: 'HOF Presenciais',
+  CA_LATAM:           'LATAM',
+  CA_PORTUGAL_REAL:   'Portugal Real',
+  CA_PACIENTE_MODELO: 'Paciente Modelo',
+};
+
+const TC = {
+  EPIC:         {color:'#5B4FE9', icon:'🎓', desc:'Curso EPIC'},
+  INSIDERS:     {color:'#9333EA', icon:'⭐', desc:'Programa Insiders'},
+  PLAY:         {color:'#EC4899', icon:'▶️', desc:'HOF Play'},
+  'DISTRIBUIÇÃO':{color:'#F59E0B', icon:'📢', desc:'Distribuição de Conteúdo'},
+  SEGUIDORES:   {color:'#10B981', icon:'👥', desc:'Crescimento de Seguidores'},
+  PACIENTE:     {color:'#2563EB', icon:'🩺', desc:'Paciente Modelo'},
+  ORIGENZ:      {color:'#DC2626', icon:'🌍', desc:'Origenz'},
+  HSS:          {color:'#EA580C', icon:'🔒', desc:'HOF Sem Segredos'},
+  INTENSIVE:    {color:'#0D9488', icon:'⚡', desc:'Intensive Presencial'},
+  OUTROS:       {color:'#6B7280', icon:'📌', desc:'Outros'},
+};
+
+let RAW;
+
+// ── STATE ────────────────────────────────────────────────────────────
+let activeMonths = [...MONTHS];
+let allMonths    = true;
+let activeAcc    = 'all';
+let activeTipo   = null;
+let chartType    = 'bar';
+let mainChart    = null;
+
+// ── HELPERS ──────────────────────────────────────────────────────────
+function fmt(v) {
+  return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function fmtShort(v) {
+  if (v >= 1000) return 'R$ ' + (v/1000).toFixed(1).replace('.',',') + 'K';
+  return 'R$ ' + v.toFixed(0);
+}
+
+function getSpend(tipo, month, acc) {
+  if (acc === 'all') {
+    return Object.values(RAW).reduce((s, ad) => s + ((ad[tipo]?.[month]) || 0), 0);
+  }
+  return (RAW[acc]?.[tipo]?.[month]) || 0;
+}
+
+function tipoTotal(tipo) {
+  return activeMonths.reduce((s, m) => s + getSpend(tipo, m, activeAcc), 0);
+}
+
+function allTipos() {
+  return Object.keys(TC).filter(t => {
+    if (activeAcc === 'all') return Object.values(RAW).some(a => a[t]);
+    return !!RAW[activeAcc]?.[t];
+  });
+}
+
+// ── SPARKLINE ────────────────────────────────────────────────────────
+function sparkline(tipo, color) {
+  const vals = MONTHS.map(m => getSpend(tipo, m, activeAcc));
+  const max  = Math.max(...vals, 1);
+  const W=120, H=28, bW=12, gap=6;
+  const bars = MONTHS.map((m, i) => {
+    const h   = Math.max((vals[i]/max)*H, vals[i]>0?2:0);
+    const x   = i*(bW+gap);
+    const y   = H-h;
+    const dim = !activeMonths.includes(m) ? 0.2 : 1;
+    return `<rect x="${x}" y="${y}" width="${bW}" height="${h}" fill="${color}" opacity="${dim}" rx="2"/>`;
+  }).join('');
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" class="tc-sparkline">${bars}</svg>`;
+}
+
+// ── KPI ──────────────────────────────────────────────────────────────
+function renderKPI() {
+  // When a tipo is selected, KPIs reflect only that tipo
+  const visibleTipos = allTipos().filter(t => activeTipo ? t === activeTipo : true);
+  let totalSpend = 0, topT = null, topS = 0;
+  visibleTipos.forEach(t => {
+    const s = tipoTotal(t);
+    totalSpend += s;
+    if (s > topS) { topS = s; topT = t; }
+  });
+
+  // For the "share of total" badge, compute global total
+  const globalTotal = allTipos().reduce((s,t) => s + tipoTotal(t), 0);
+
+  const tax   = totalSpend * TAX;
+  const total = totalSpend + tax;
+  const cfg   = TC[topT] || {};
+  const months = activeMonths.length;
+
+  const heroLabel = activeTipo ? `Investido — ${activeTipo}` : 'Total Investido';
+  const heroSub   = activeTipo
+    ? `${((totalSpend/globalTotal)*100).toFixed(1)}% do total geral · ${months} ${months===1?'mês':'meses'}`
+    : `${months} ${months===1?'mês':'meses selecionados'} · sem imposto`;
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi hero" style="${activeTipo ? `background:linear-gradient(135deg,${cfg.color}dd,${cfg.color}99)` : ''}">
+      <div class="kpi-label">${heroLabel}</div>
+      <div class="kpi-value">${fmt(totalSpend)}</div>
+      <div class="kpi-sub">${heroSub}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Total c/ Impostos</div>
+      <div class="kpi-value" style="color:${activeTipo ? cfg.color : '#1877F2'}">${fmt(total)}</div>
+      <div class="kpi-sub">Valor efetivo pago à Meta</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Impostos (13,83%)</div>
+      <div class="kpi-value" style="color:#ef4444">${fmt(tax)}</div>
+      <div class="kpi-sub">ISS + IOF + contrib.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">${activeTipo ? 'Tipo Selecionado' : 'Maior Investimento'}</div>
+      <div class="kpi-value" style="color:${cfg.color||'#333'};font-size:18px">${topT||'—'} ${cfg.icon||''}</div>
+      <div class="kpi-sub">${topT ? fmt(topS)+' · '+((topS/globalTotal)*100).toFixed(1)+'% do total' : 'Sem dados'}</div>
+    </div>
+  `;
+}
+
+// ── TIPO CARDS ───────────────────────────────────────────────────────
+function renderTipoCards() {
+  const tipos = allTipos();
+  const totalAll = tipos.reduce((s,t) => s+tipoTotal(t), 0);
+  const sorted   = [...tipos].sort((a,b) => tipoTotal(b)-tipoTotal(a));
+
+  document.getElementById('tipo-grid').innerHTML = sorted.map(tipo => {
+    const s   = tipoTotal(tipo);
+    if (s <= 0) return '';
+    const cfg = TC[tipo] || {color:'#999', icon:'📌', desc:tipo};
+    const pct = totalAll>0 ? ((s/totalAll)*100).toFixed(1) : 0;
+    const isA = activeTipo === tipo;
+    const dim = activeTipo && !isA;
+    return `
+      <div class="tipo-card ${isA?'active':''} ${dim?'dim':''}"
+           style="--tc:${cfg.color}" onclick="toggleTipo('${tipo}')">
+        <div class="tc-bar"></div>
+        <div class="tc-header">
+          <span class="tc-icon">${cfg.icon}</span>
+          <span class="tc-name">${tipo}</span>
+        </div>
+        <div class="tc-spend">${fmt(s)}</div>
+        <div class="tc-total">c/ imp: ${fmt(s*(1+TAX))}</div>
+        ${sparkline(tipo, cfg.color)}
+        <span class="tc-pct">${pct}% do total</span>
+      </div>`;
+  }).join('');
+}
+
+// ── ACCOUNT BREAKDOWN ────────────────────────────────────────────────
+function renderAccBreakdown() {
+  const sec = document.getElementById('acc-section');
+  if (!activeTipo || activeAcc !== 'all') { sec.style.display='none'; return; }
+  sec.style.display = '';
+  document.getElementById('acc-section-title').textContent = `Distribuição por Conta — ${activeTipo}`;
+
+  const accounts = Object.keys(RAW);
+  const cards = accounts.map(acc => {
+    const months = activeMonths;
+    const vals   = months.map(m => (RAW[acc]?.[activeTipo]?.[m])||0);
+    const total  = vals.reduce((s,v) => s+v, 0);
+    if (total <= 0) return '';
+    const color = ACC_COLORS[acc];
+    const chips = months
+      .map((m,i) => vals[i]>0 ? `<span class="acc-month-chip" style="--ac:${color}">${m}: ${fmtShort(vals[i])}</span>` : '')
+      .join('');
+    return `
+      <div class="acc-card" style="--ac:${color}">
+        <div class="acc-name">${ACC_SHORT[acc]}</div>
+        <div class="acc-spend">${fmt(total)}</div>
+        <div class="acc-detail">c/ imp: ${fmt(total*(1+TAX))}</div>
+        <div class="acc-months">${chips}</div>
+      </div>`;
+  }).join('');
+  document.getElementById('acc-breakdown').innerHTML = cards || '<div class="empty">Sem dados para esta conta/mês.</div>';
+}
+
+// ── CHART ────────────────────────────────────────────────────────────
+function renderChart() {
+  const tipos   = allTipos().filter(t => activeTipo ? t===activeTipo : tipoTotal(t)>0);
+  const labels  = activeMonths.map(m => MONTH_FULL[m]);
+
+  const datasets = tipos.map(tipo => {
+    const cfg = TC[tipo] || {color:'#999'};
+    const data = activeMonths.map(m => getSpend(tipo, m, activeAcc));
+    return {
+      label: `${TC[tipo]?.icon||''} ${tipo}`,
+      data,
+      backgroundColor: cfg.color + (chartType==='bar' ? 'cc' : '22'),
+      borderColor: cfg.color,
+      borderWidth: chartType==='bar' ? 1 : 2.5,
+      borderRadius: chartType==='bar' ? 5 : 0,
+      fill: chartType==='line',
+      tension: 0.35,
+      pointBackgroundColor: cfg.color,
+      pointRadius: chartType==='line' ? 4 : 0,
+    };
+  });
+
+  if (mainChart) mainChart.destroy();
+  mainChart = new Chart(document.getElementById('mainChart'), {
+    type: chartType,
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font:{family:'Inter',size:11}, boxWidth:10, padding:14, usePointStyle:true }
+        },
+        tooltip: {
+          backgroundColor: '#1e293b', titleFont:{family:'Inter',size:12,weight:'700'},
+          bodyFont:{family:'Inter',size:11}, padding:12, cornerRadius:8,
+          callbacks: { label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}` }
+        }
+      },
+      scales: {
+        x: {
+          stacked: chartType==='bar',
+          grid:{display:false},
+          ticks:{font:{family:'Inter',size:11}, color:'#94a3b8'}
+        },
+        y: {
+          stacked: chartType==='bar',
+          grid:{color:'#f1f5f9'},
+          ticks:{font:{family:'Inter',size:10}, color:'#94a3b8', callback: v => fmtShort(v)}
+        }
+      }
+    }
+  });
+
+  document.getElementById('chart-title').textContent =
+    activeTipo ? `Evolução Mensal — ${activeTipo}` : 'Investimento Mensal por Tipo de Campanha';
+
+  // button highlight
+  ['bar','line'].forEach(t => {
+    const btn = document.getElementById('btn-'+t);
+    btn.style.background = t===chartType ? '#1877F2' : 'white';
+    btn.style.color      = t===chartType ? 'white'   : 'var(--text-2)';
+    btn.style.borderColor= t===chartType ? '#1877F2' : 'var(--border)';
+  });
+}
+
+// ── TABLE ─────────────────────────────────────────────────────────────
+function renderTable() {
+  const tipos = allTipos().filter(t => activeTipo ? t===activeTipo : true);
+  const months = activeMonths;
+
+  // Table title
+  document.getElementById('table-title').textContent =
+    activeTipo ? `Detalhamento — ${TC[activeTipo]?.icon||''} ${activeTipo}` : 'Detalhamento por Tipo de Campanha';
+
+  // Badge
+  document.getElementById('table-tipo-badge').innerHTML = activeTipo
+    ? `<span style="background:${TC[activeTipo]?.color+'22'};color:${TC[activeTipo]?.color};padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer" onclick="toggleTipo('${activeTipo}')">✕ Limpar filtro</span>`
+    : '';
+
+  let grandSpend = 0;
+  const grandM = months.map(() => 0);
+  let rows = '';
+
+  const sorted = [...tipos].sort((a,b) => tipoTotal(b)-tipoTotal(a));
+
+  sorted.forEach(tipo => {
+    const vals  = months.map(m => getSpend(tipo, m, activeAcc));
+    const total = vals.reduce((s,v)=>s+v,0);
+    if (total <= 0) return;
+    const tax   = total * TAX;
+    const cfg   = TC[tipo] || {color:'#999', icon:'📌', desc:tipo};
+    grandSpend += total;
+    vals.forEach((v,i) => grandM[i]+=v);
+
+    rows += `
+      <tr>
+        <td>
+          <div class="td-tipo" style="--tc:${cfg.color}">
+            <div class="td-dot"></div>
+            ${cfg.icon} ${tipo}
+          </div>
+          <span class="td-desc">${cfg.desc}</span>
+        </td>
+        ${vals.map(v => `<td class="${v===0?'td-zero':''}">${v===0?'—':fmt(v)}</td>`).join('')}
+        <td class="td-strong">${fmt(total)}</td>
+        <td class="td-tax">+${fmt(tax)}</td>
+        <td class="td-blue">${fmt(total+tax)}</td>
+      </tr>`;
+  });
+
+  const gTax = grandSpend * TAX;
+
+  document.getElementById('table-container').innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Campanha</th>
+          ${months.map(m=>`<th>${m}</th>`).join('')}
+          <th>Spend Total</th>
+          <th>Imposto</th>
+          <th>c/ Imposto</th>
+        </tr>
+      </thead>
+      <tbody>${rows || '<tr><td colspan="'+(months.length+4)+'" class="empty">Sem dados para os filtros selecionados.</td></tr>'}</tbody>
+      <tfoot>
+        <tr>
+          <td>TOTAL GERAL</td>
+          ${grandM.map(v=>`<td>${fmt(v)}</td>`).join('')}
+          <td>${fmt(grandSpend)}</td>
+          <td style="color:#ef4444">+${fmt(gTax)}</td>
+          <td style="color:#1877F2">${fmt(grandSpend+gTax)}</td>
+        </tr>
+      </tfoot>
+    </table>`;
+}
+
+// ── EVENT HANDLERS ───────────────────────────────────────────────────
+function toggleMonth(m) {
+  if (m==='all') {
+    activeMonths = [...MONTHS]; allMonths = true;
+  } else {
+    if (allMonths) { activeMonths = [m]; allMonths = false; }
+    else {
+      const idx = activeMonths.indexOf(m);
+      if (idx>=0) {
+        activeMonths = activeMonths.filter(x=>x!==m);
+        if (activeMonths.length===0) { activeMonths=[...MONTHS]; allMonths=true; }
+      } else {
+        activeMonths = [...activeMonths, m].sort((a,b)=>MONTHS.indexOf(a)-MONTHS.indexOf(b));
+        if (activeMonths.length===MONTHS.length) allMonths=true;
+      }
+    }
+  }
+  // Sync pills
+  document.querySelectorAll('#month-pills .pill').forEach(p => {
+    const pm = p.dataset.m;
+    p.classList.toggle('active', pm==='all' ? allMonths : (!allMonths && activeMonths.includes(pm)));
+  });
+  render();
+}
+
+function setAccount(acc) {
+  activeAcc = acc;
+  document.querySelectorAll('#account-pills .pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.a===acc);
+  });
+  render();
+}
+
+function toggleTipo(tipo) {
+  activeTipo = activeTipo===tipo ? null : tipo;
+  render();
+}
+
+function setChartType(type) {
+  chartType = type;
+  renderChart();
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────
+function render() {
+  renderKPI();
+  renderTipoCards();
+  renderAccBreakdown();
+  renderChart();
+  renderTable();
+}
+
+window.__initDashboard = function() {
+  RAW = window.RAW;
+  render();
+};
+</script>
+</body>
+</html>
