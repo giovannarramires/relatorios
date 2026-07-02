@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha por aí — Relatório Junho 2026</title>
+<style>
+  /* ── Reset & Base ─────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bege:       #F2EBDF;
+    --bege-claro: #FAF6F1;
+    --terracota:  #BF6A45;
+    --terracota2: #A85A38;
+    --verde:      #6B7C5C;
+    --verde2:     #556347;
+    --ocre:       #C89640;
+    --marrom:     #3D2718;
+    --marrom2:    #2A1A0E;
+    --creme:      #F5EDE0;
+    --branco:     #FFFFFF;
+    --verde-ok:   #2E6E35;
+    --vermelho:   #B02A2A;
+    --amarelo:    #A06A00;
+    --card-bg:    #FFFFFF;
+    --text-muted: rgba(61,39,24,0.55);
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bege-claro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Slides container ─────────────────────────────────────────── */
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .slide.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* ── Navigation ───────────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1000;
+    background: rgba(242,235,223,0.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 20px;
+    border-radius: 40px;
+    border: 1px solid rgba(191,106,69,0.3);
+    box-shadow: 0 2px 12px rgba(61,39,24,0.12);
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--marrom);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    transition: background 0.2s;
+    font-family: inherit;
+  }
+  .nav button:hover { background: rgba(191,106,69,0.25); }
+  .nav button:disabled { opacity: 0.3; cursor: default; }
+  .nav .counter {
+    color: var(--terracota2);
+    font-size: 12px;
+    font-family: 'Trebuchet MS', sans-serif;
+    min-width: 55px;
+    text-align: center;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(61,39,24,0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot.active { background: var(--terracota); transform: scale(1.3); }
+
+  /* ── Keyboard hint ────────────────────────────────────────────── */
+  .hint {
+    position: fixed;
+    top: 14px;
+    right: 20px;
+    color: rgba(61,39,24,0.35);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+  }
+
+  /* ── Shared utilities ─────────────────────────────────────────── */
+  .sans { font-family: 'Trebuchet MS', sans-serif; }
+  .serif { font-family: 'Georgia', serif; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .tag-ok  { background: #d4edda; color: var(--verde-ok); }
+  .tag-warn{ background: #fff3cd; color: var(--amarelo); }
+  .tag-bad { background: #f8d7da; color: var(--vermelho); }
+
+  .up   { color: var(--verde-ok); }
+  .down { color: var(--vermelho); }
+  .flat { color: var(--verde); }
+
+  /* ── Slide header bar ─────────────────────────────────────────── */
+  .slide-header {
+    background: var(--terracota);
+    padding: 18px 48px 14px;
+    flex-shrink: 0;
+  }
+  .slide-header h1 {
+    font-size: clamp(20px, 2.8vw, 30px);
+    color: var(--branco);
+    font-weight: normal;
+    letter-spacing: -.01em;
+  }
+  .slide-header p {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: rgba(250,246,241,0.8);
+    margin-top: 4px;
+  }
+
+  /* ── Card KPI ─────────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--branco);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border-left: 4px solid var(--terracota);
+  }
+  .kpi-card .kpi-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    color: var(--verde);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .kpi-card .kpi-val {
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: bold;
+    color: var(--terracota);
+    margin: 4px 0 3px;
+    line-height: 1;
+  }
+  .kpi-card .kpi-delta {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+  }
+
+  /* ── Tables ───────────────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(9px, 1.1vw, 13px);
+  }
+  thead th {
+    background: var(--terracota);
+    color: var(--branco);
+    padding: 9px 10px;
+    text-align: left;
+    font-weight: bold;
+  }
+  tbody tr:nth-child(even) { background: var(--bege); }
+  tbody tr:nth-child(odd)  { background: var(--branco); }
+  tbody tr.total-row {
+    background: var(--terracota2);
+    color: var(--branco);
+    font-weight: bold;
+  }
+  tbody tr.total-row td { color: var(--branco); }
+  tbody td { padding: 8px 10px; }
+  .thead-verde thead th { background: var(--verde); }
+
+  /* ── Funil ────────────────────────────────────────────────────── */
+  .funil-step {
+    border-radius: 6px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    color: var(--branco);
+  }
+  .funil-step .fs-label { font-size: clamp(12px,1.4vw,16px); font-weight: bold; }
+  .funil-step .fs-sub   { font-size: 11px; opacity: .85; font-family: 'Trebuchet MS', sans-serif; }
+  .funil-step .fs-right { text-align: right; font-family: 'Trebuchet MS', sans-serif; font-size: 12px; }
+
+  /* ── Bar horizontal ───────────────────────────────────────────── */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .bar-label { font-family: 'Trebuchet MS', sans-serif; font-size: 11px; width: 160px; flex-shrink: 0; color: var(--marrom); }
+  .bar-track { flex: 1; background: var(--bege); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill  { height: 100%; border-radius: 4px; background: var(--terracota); }
+  .bar-val   { font-family: 'Trebuchet MS', sans-serif; font-size: 11px; width: 110px; text-align: right; flex-shrink: 0; font-weight: bold; color: var(--marrom); }
+
+  /* ── Note box ─────────────────────────────────────────────────── */
+  .note {
+    background: rgba(107,124,92,0.12);
+    border-left: 3px solid var(--verde);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: var(--verde2);
+    line-height: 1.5;
+  }
+  .note.warn {
+    background: rgba(191,106,69,0.1);
+    border-color: var(--terracota);
+    color: var(--terracota2);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 1 — CAPA                                                  */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s1 {
+    background: var(--bege);
+    flex-direction: row;
+  }
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 10 — BENCHMARKS                                           */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s10 { background: var(--bege-claro); }
+
+  .capa-stripe {
+    width: 10px;
+    background: var(--terracota);
+    flex-shrink: 0;
+  }
+  .capa-stripe-thin {
+    width: 4px;
+    background: var(--ocre);
+    flex-shrink: 0;
+  }
+  .capa-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+  .capa-eyebrow {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(11px,1.2vw,14px);
+    color: var(--ocre);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .capa-title {
+    font-size: clamp(40px, 6vw, 80px);
+    color: var(--marrom);
+    line-height: 1.05;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .capa-sub {
+    font-size: clamp(22px, 3vw, 40px);
+    color: var(--terracota);
+    margin-bottom: 28px;
+  }
+  .capa-divider {
+    width: 80px;
+    height: 3px;
+    background: var(--ocre);
+    margin-bottom: 22px;
+  }
+  .capa-canais {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(12px,1.3vw,15px);
+    color: var(--marrom2);
+    letter-spacing: .04em;
+  }
+  .capa-footer {
+    margin-top: auto;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: rgba(61,39,24,0.5);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 2 — VISÃO GERAL                                           */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s2 { background: var(--bege-claro); }
+  .s2-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+    padding: 18px 40px 70px;
+  }
+  .kpi-card-lg {
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 20px 22px;
+    border-top: 4px solid var(--terracota);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .kpi-card-lg .kpi-label { font-family: 'Trebuchet MS', sans-serif; font-size: 10px; color: var(--verde); text-transform: uppercase; letter-spacing: .07em; }
+  .kpi-card-lg .kpi-val { font-size: clamp(22px,2.8vw,34px); font-weight: bold; color: var(--terracota); margin: 8px 0 6px; line-height: 1; }
+  .kpi-card-lg .kpi-delta { font-family: 'Trebuchet MS', sans-serif; font-size: 12px; }
+  .kpi-card-lg.verde { border-top-color: var(--verde); }
+  .kpi-card-lg.verde .kpi-val { color: var(--verde); }
+  .kpi-card-lg.ocre  { border-top-color: var(--ocre); }
+  .kpi-card-lg.ocre  .kpi-val { color: var(--ocre); }
+
+  .s2-note {
+    padding: 0 40px 18px;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 3 — META VISÃO GERAL                                      */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s3 { background: var(--bege-claro); }
+  .s3-body { flex: 1; padding: 16px 40px 70px; overflow: auto; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 4 — META CAMPANHAS                                        */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s4 { background: var(--bege-claro); }
+  .s4-body { flex: 1; padding: 12px 40px 70px; overflow: auto; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 5 — FUNIL META                                            */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s5 { background: var(--bege-claro); }
+  .s5-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 20px 48px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 6 — GOOGLE ADS                                            */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s6 { background: var(--bege-claro); }
+  .s6-body {
+    flex: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+    padding: 16px 40px 70px;
+  }
+  .s6-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 7 — SHOPIFY RECEITA                                       */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s7 { background: var(--bege-claro); }
+  .s7-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 8 — SHOPIFY FUNIL + PRODUTOS                              */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s8 { background: var(--bege-claro); }
+  .s8-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 9 — CLIENTES + CANAIS                                     */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s9 { background: var(--bege-claro); }
+  .s9-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 11 — RECOMENDAÇÕES                                        */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s11b { background: var(--bege-claro); }
+  .rec-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 16px 40px 70px;
+    align-items: start;
+  }
+  .rec-col { border-radius: 10px; overflow: hidden; }
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 5B — META INVESTIMENTO                                    */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s5b { background: var(--bege-claro); }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 12 — ENCERRAMENTO                                         */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s12 {
+    background: var(--bege);
+    flex-direction: row;
+  }
+
+  .rec-col-head {
+    padding: 12px 16px;
+    color: var(--branco);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', sans-serif;
+    letter-spacing: .03em;
+  }
+  .rec-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: var(--branco);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(10px,1.1vw,13px);
+    color: var(--marrom);
+    line-height: 1.45;
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-item:nth-child(even) { background: var(--bege); }
+  .rec-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+  .enc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+  .enc-eyebrow { font-family: 'Trebuchet MS', sans-serif; font-size: 14px; color: var(--ocre); font-style: italic; margin-bottom: 14px; letter-spacing: .05em; }
+  .enc-title { font-size: clamp(50px,7vw,90px); color: var(--terracota); font-weight: bold; margin-bottom: 28px; }
+  .enc-divider { width: 80px; height: 3px; background: var(--ocre); margin-bottom: 24px; }
+  .enc-name { font-family: 'Trebuchet MS', sans-serif; font-size: 16px; color: var(--marrom); margin-bottom: 6px; }
+  .enc-email { font-family: 'Trebuchet MS', sans-serif; font-size: 13px; color: var(--terracota2); margin-bottom: 30px; }
+  .enc-footer { margin-top: auto; font-family: 'Trebuchet MS', sans-serif; font-size: 10px; color: rgba(61,39,24,0.55); line-height: 1.6; }
+
+  /* ── Seção title dentro de slide ─────────────────────────────── */
+  .section-title {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--verde);
+    margin-bottom: 10px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE Pinterest Ads                                             */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s6p { background: var(--bege-claro); }
+  .thead-ocre thead th { background: var(--ocre); }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE s9b — Soluções Alertas: font override                    */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s9b [style*="font-size:10.5px"] { font-size: 12.5px !important; }
+  #s9b [style*="font-size:12px"]   { font-size: 14px !important; }
+  #s9b [style*="font-size:11px"]   { font-size: 12.5px !important; }
+</style>
+<script>
+(function(){
+  const KEY = 'santosha_auth';
+  const PWD = 'santosha2026';
+  if (sessionStorage.getItem(KEY) === '1') return;
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('auth-overlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('pwd-input').focus();
+  });
+  window.__checkPwd = function(){
+    const val = document.getElementById('pwd-input').value;
+    if (val === PWD) {
+      sessionStorage.setItem(KEY, '1');
+      document.getElementById('auth-overlay').style.display = 'none';
+      document.body.style.overflow = '';
+    } else {
+      const err = document.getElementById('pwd-error');
+      err.style.display = 'block';
+      document.getElementById('pwd-input').value = '';
+      document.getElementById('pwd-input').focus();
+      setTimeout(()=>{ err.style.display='none'; }, 2500);
+    }
+  };
+  window.__pwdKeydown = function(e){ if(e.key==='Enter') window.__checkPwd(); };
+})();
+</script>
+<style>
+#auth-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #BF6A45 0%, #A85A38 100%);
+  align-items: center; justify-content: center;
+}
+.auth-card {
+  background: #FAF6F1; border-radius: 20px;
+  padding: 44px 40px 36px; width: 360px; max-width: 90vw;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2); text-align: center;
+}
+.auth-symbol { font-size: 40px; margin-bottom: 16px; }
+.auth-title { font-size: 20px; font-weight: 800; color: #3B2A1A; margin-bottom: 4px; }
+.auth-sub { font-size: 13px; color: #8B6B50; margin-bottom: 28px; }
+.auth-input {
+  width: 100%; padding: 13px 16px; border-radius: 10px;
+  border: 2px solid #E8D9C8; font-size: 15px; color: #3B2A1A;
+  outline: none; transition: border-color .15s; text-align: center; letter-spacing: 3px;
+  background: white;
+}
+.auth-input:focus { border-color: #BF6A45; }
+.auth-btn {
+  margin-top: 14px; width: 100%; padding: 13px;
+  background: linear-gradient(135deg, #BF6A45, #A85A38);
+  color: white; border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .15s;
+}
+.auth-btn:hover { opacity: .9; }
+.auth-error { display: none; margin-top: 10px; font-size: 13px; color: #A85A38; font-weight: 500; }
+.auth-footer { margin-top: 24px; font-size: 11px; color: #B09070; }
+</style>
+</head>
+<body>
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-symbol">🌿</div>
+    <div class="auth-title">Santosha por aí</div>
+    <div class="auth-sub">Relatório Junho 2026</div>
+    <input id="pwd-input" class="auth-input" type="password" placeholder="••••••••" onkeydown="__pwdKeydown(event)">
+    <button class="auth-btn" onclick="__checkPwd()">Acessar</button>
+    <div id="pwd-error" class="auth-error">Senha incorreta. Tente novamente.</div>
+    <div class="auth-footer">Acesso restrito · Gio Growth Digital</div>
+  </div>
+</div>
+
+<span class="hint">← → ou clique nas setas</span>
+
+<div class="deck" id="deck">
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 1 — CAPA                                               -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide active" id="s1">
+    <div class="capa-stripe"></div>
+    <div class="capa-stripe-thin"></div>
+    <div class="capa-content">
+      <p class="capa-eyebrow">Relatório de Resultados</p>
+      <img src="data:image/webp;base64,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" style="width:340px;margin-bottom:4px;filter:drop-shadow(0 2px 8px rgba(61,39,24,0.15))">
+      <p class="capa-sub">Junho 2026</p>
+      <div class="capa-divider"></div>
+      <p class="capa-canais">Meta Ads &nbsp;·&nbsp; Google Ads &nbsp;·&nbsp; Pinterest Ads &nbsp;·&nbsp; Shopify</p>
+      <p class="capa-footer" style="margin-top:48px">GGD — Gestão de Tráfego</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 2 — VISÃO GERAL                                        -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s2">
+    <div class="slide-header">
+      <h1>Visão Geral — Junho 2026</h1>
+      <p>Meta Ads + Google Ads + Pinterest Ads + Shopify</p>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding:16px 40px 70px;overflow:auto">
+
+      <!-- Resultado -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Receita Shopify</div>
+          <div class="kpi-val">R$ 47.311,11</div>
+          <div class="kpi-delta flat">AOV R$ 325,05</div>
+        </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Total de Pedidos</div>
+          <div class="kpi-val">140</div>
+        </div>
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">Taxa de Recorrência</div>
+          <div class="kpi-val">27,94%</div>
+          <div class="kpi-delta flat">38 clientes recorrentes</div>
+        </div>
+      </div>
+
+      <!-- ROAS duplo -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="kpi-card-lg">
+          <div class="kpi-label">ROAS Campanhas</div>
+          <div class="kpi-val">4,84x</div>
+          <div class="kpi-delta flat">Receita Shopify ÷ campanhas sem imposto (R$ 9.776,15)</div>
+        </div>
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">ROAS com Imposto</div>
+          <div class="kpi-val">4,41x</div>
+          <div class="kpi-delta flat">Receita Shopify ÷ total pago incl. COFINS + PIS + ISS (R$ 10.722,20)</div>
+        </div>
+      </div>
+
+      <!-- Breakdown de investimento -->
+      <div>
+        <div class="section-title">Investimento — Campanhas &amp; Impostos (NF)</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Canal</th>
+              <th>Campanhas</th>
+              <th>Impostos NF</th>
+              <th>Total Pago</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Meta Ads</strong></td>
+              <td>R$ 6.840,76</td>
+              <td style="color:var(--vermelho)"><strong>R$ 946,05</strong></td>
+              <td><strong>R$ 7.786,81</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Google Ads</strong></td>
+              <td>R$ 2.531,37</td>
+              <td>—</td>
+              <td><strong>R$ 2.531,37</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Pinterest Ads</strong></td>
+              <td>R$ 404,02</td>
+              <td>—</td>
+              <td><strong>R$ 404,02</strong></td>
+            </tr>
+            <tr class="total-row">
+              <td>TOTAL</td>
+              <td>R$ 9.776,15</td>
+              <td>R$ 946,05</td>
+              <td>R$ 10.722,20</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px">
+          Impostos Meta (COFINS 7,60% + PIS 1,65% + ISS 2,90%) = 13,83% efetivo sobre o subtotal de campanhas · 41 transações · Google Ads e Pinterest Ads: impostos não discriminados em NF separada
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 5B — META ADS INVESTIMENTO + IMPOSTOS                  -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s5b">
+    <div class="slide-header">
+      <h1>Meta Ads — Investimento &amp; Impostos</h1>
+      <p>Nota fiscal de junho 2026 &nbsp;|&nbsp; 41 transações processadas</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;height:calc(100% - 90px);padding:24px 36px">
+
+      <!-- Coluna esquerda: 3 números principais -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="section-title">Resumo de Investimento</div>
+
+        <div style="background:var(--card-bg);border-radius:14px;padding:24px 28px;border-left:5px solid var(--verde)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Investimento em Campanhas</div>
+          <div style="font-size:38px;font-weight:800;color:var(--verde);line-height:1">R$&nbsp;6.840,76</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">Subtotal — custo real das campanhas, sem impostos</div>
+        </div>
+
+        <div style="background:var(--card-bg);border-radius:14px;padding:24px 28px;border-left:5px solid var(--vermelho)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Total de Impostos</div>
+          <div style="font-size:38px;font-weight:800;color:var(--vermelho);line-height:1">R$&nbsp;946,05</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">COFINS + PIS + ISS — 13,83% sobre o subtotal</div>
+        </div>
+
+        <div style="background:var(--terracota);border-radius:14px;padding:24px 28px;border-left:5px solid var(--ocre)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:6px">Total Pago (campanhas + impostos)</div>
+          <div style="font-size:42px;font-weight:800;color:#fff;line-height:1">R$&nbsp;7.786,81</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px">Valor total debitado da conta — incluindo todos os tributos</div>
+        </div>
+      </div>
+
+      <!-- Coluna direita: Breakdown dos impostos -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="section-title">Detalhamento dos Impostos</div>
+
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="background:var(--terracota);color:#fff">
+              <th style="padding:10px 14px;text-align:left;border-radius:8px 0 0 0">Imposto</th>
+              <th style="padding:10px 14px;text-align:center">Alíquota</th>
+              <th style="padding:10px 14px;text-align:right;border-radius:0 8px 0 0">Valor (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:var(--card-bg)">
+              <td style="padding:12px 14px;font-weight:600">COFINS</td>
+              <td style="padding:12px 14px;text-align:center;color:var(--text-muted)">7,60%</td>
+              <td style="padding:12px 14px;text-align:right;font-weight:700">591,78</td>
+            </tr>
+            <tr style="background:rgba(0,0,0,0.04)">
+              <td style="padding:12px 14px;font-weight:600">PIS</td>
+              <td style="padding:12px 14px;text-align:center;color:var(--text-muted)">1,65%</td>
+              <td style="padding:12px 14px;text-align:right;font-weight:700">128,49</td>
+            </tr>
+            <tr style="background:var(--card-bg)">
+              <td style="padding:12px 14px;font-weight:600">ISS</td>
+              <td style="padding:12px 14px;text-align:center;color:var(--text-muted)">2,90%</td>
+              <td style="padding:12px 14px;text-align:right;font-weight:700">225,78</td>
+            </tr>
+            <tr style="background:var(--terracota);color:#fff;font-weight:800">
+              <td style="padding:12px 14px;border-radius:0 0 0 8px">Total de Impostos</td>
+              <td style="padding:12px 14px;text-align:center">12,15%*</td>
+              <td style="padding:12px 14px;text-align:right;border-radius:0 0 8px 0">946,05</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note" style="margin-top:4px">
+          * Alíquota nominal é 12,15% (COFINS 7,60% + PIS 1,65% + ISS 2,90%). O percentual efetivo observado foi <strong>13,83%</strong> sobre o subtotal, pois a base de cálculo dos impostos difere ligeiramente do valor da campanha.
+        </div>
+
+        <div style="background:var(--card-bg);border-radius:10px;padding:16px 20px;margin-top:4px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Composição do gasto total</div>
+          <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;gap:2px">
+            <div style="background:var(--verde);flex:6840;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">87,9% — Campanhas</div>
+            <div style="background:var(--vermelho);flex:946;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">12,1% — Impostos</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px">
+            <span>R$ 6.840,76</span>
+            <span>R$ 946,05</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 4 — META ADS: MELHORES PÚBLICOS & CRIATIVOS            -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s4">
+    <div class="slide-header">
+      <h1>Meta Ads — Melhores Públicos & Criativos</h1>
+      <p>Dados extraídos em tempo real · CA - Santosha #2 (Windsor.ai) · Junho 2026</p>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:14px 40px 70px;overflow:auto">
+
+      <!-- Públicos -->
+      <div>
+        <div class="section-title" style="color:var(--terracota)">Melhores Públicos (Adsets) — por ROAS</div>
+        <table>
+          <thead>
+            <tr><th>Público</th><th>Invest.</th><th>Compras</th><th>Receita</th><th>ROAS</th><th>CPA</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ADV_STORIES</strong><br><small style="color:var(--verde)">ABO Vitalício</small></td>
+              <td>R$ 109,51</td><td>1</td><td>R$ 666,40</td>
+              <td style="color:var(--verde-ok)"><strong>6,09x</strong></td>
+              <td>R$ 109,51</td>
+            </tr>
+            <tr>
+              <td><strong>ADV</strong><br><small style="color:var(--verde)">Catálogo Público Frio</small></td>
+              <td>R$ 3.544,26</td><td>60</td><td>R$ 16.370,46</td>
+              <td style="color:var(--verde-ok)"><strong>4,62x</strong></td>
+              <td>R$ 59,07</td>
+            </tr>
+            <tr>
+              <td><strong>YOGA_ALTO_PADRAO</strong><br><small style="color:var(--verde)">Frete Grátis PF</small></td>
+              <td>R$ 298,17</td><td>2</td><td>R$ 1.140,00</td>
+              <td><strong>3,82x</strong></td>
+              <td>R$ 149,09</td>
+            </tr>
+            <tr>
+              <td><strong>[AUTO][ADVANTAGE]</strong><br><small style="color:var(--verde)">Catálogo Advantage+</small></td>
+              <td>R$ 1.133,05</td><td>14</td><td>R$ 4.149,92</td>
+              <td><strong>3,66x</strong></td>
+              <td>R$ 80,93</td>
+            </tr>
+            <tr>
+              <td><strong>ADV_YOGA_IOS</strong><br><small style="color:var(--vermelho)">Promoção Junho</small></td>
+              <td>R$ 667,89</td><td>6</td><td>R$ 1.973,49</td>
+              <td style="color:var(--vermelho)"><strong>2,95x</strong></td>
+              <td>R$ 111,32</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px">
+          <strong>Destaque de engajamento — [ADVANTAGE][EX_SEGUIDORES]</strong><br>
+          R$ 165,05 · Alcance 22.767 · CTR <strong style="color:var(--verde-ok)">4,36%</strong> · CPC <strong style="color:var(--verde-ok)">R$ 0,14</strong><br>
+          Melhor CTR da conta. Alimenta o funil de remarketing — não gera compra direta.
+        </div>
+      </div>
+
+      <!-- Criativos -->
+      <div>
+        <div class="section-title" style="color:var(--verde)">Melhores Criativos (Ads) — por ROAS</div>
+        <table>
+          <thead>
+            <tr><th>Criativo</th><th>Invest.</th><th>Compras</th><th>Receita</th><th>ROAS</th><th>CTR</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120250769688860558" target="_blank" style="color:var(--verde);text-decoration:none">AD_MES_YOGA ↗</a></strong><br><small style="color:var(--verde)">ABO Vitalício</small></td>
+              <td>R$ 108,79</td><td>1</td><td>R$ 666,40</td>
+              <td style="color:var(--verde-ok)"><strong>6,12x</strong></td>
+              <td>1,34%</td>
+            </tr>
+            <tr>
+              <td><strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120246828557850558" target="_blank" style="color:var(--verde);text-decoration:none">CATALOGO_TODOS_PRODUTOS ↗</a></strong><br><small style="color:var(--verde)">Público Frio</small></td>
+              <td>R$ 3.544,26</td><td>60</td><td>R$ 16.370,46</td>
+              <td style="color:var(--verde-ok)"><strong>4,62x</strong></td>
+              <td>2,46%</td>
+            </tr>
+            <tr>
+              <td><strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120252133311850558" target="_blank" style="color:var(--verde);text-decoration:none">AD_FRETE_GRATIS ↗</a></strong><br><small style="color:var(--verde)">Frete Grátis PF</small></td>
+              <td>R$ 298,17</td><td>2</td><td>R$ 1.140,00</td>
+              <td><strong>3,82x</strong></td>
+              <td>0,10%</td>
+            </tr>
+            <tr>
+              <td><strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120213699750140558" target="_blank" style="color:var(--verde);text-decoration:none">AD01_ALL_PRODUCTS ↗</a></strong><br><small style="color:var(--verde)">Advantage+</small></td>
+              <td>R$ 1.133,05</td><td>14</td><td>R$ 4.149,92</td>
+              <td><strong>3,66x</strong></td>
+              <td>2,19%</td>
+            </tr>
+            <tr>
+              <td><strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120250764942890558" target="_blank" style="color:var(--verde);text-decoration:none">AD_PROGRESSIVO_CATALOGO ↗</a></strong><br><small style="color:var(--amarelo)">Promoção Junho</small></td>
+              <td>R$ 547,98</td><td>6</td><td>R$ 1.973,49</td>
+              <td style="color:var(--amarelo)"><strong>3,60x</strong></td>
+              <td>2,38%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px">
+          <strong><a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=593997882748700&selected_ad_ids=120245257666980558" target="_blank" style="color:var(--verde);text-decoration:none">Destaque de engajamento — Post "nosso amado flow da manhã" ↗</a></strong><br>
+          R$ 165,05 · Impressões 26.807 · CTR <strong style="color:var(--verde-ok)">4,36%</strong> · CPC <strong style="color:var(--verde-ok)">R$ 0,14</strong><br>
+          Criativo orgânico com o maior engajamento da conta. Potencial para testar como criativo de conversão.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 5 — FUNIL META                                         -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s5">
+    <div class="slide-header">
+      <h1>Meta Ads — Funil de Conversão & Benchmarks</h1>
+      <p>CA - Santosha #2 &nbsp;|&nbsp; Junho 2026 &nbsp;|&nbsp; Nicho: Yoga / Wellness / E-commerce</p>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1.4fr;gap:28px;padding:16px 40px 70px;align-items:start;overflow:auto">
+
+      <!-- Funil -->
+      <div>
+        <div class="section-title">Funil Meta Ads — Junho 2026</div>
+        <div class="funil-step" style="background:var(--terracota); width:100%">
+          <div><div class="fs-label">Cliques no Link</div><div class="fs-sub">topo do funil</div></div>
+          <div class="fs-right"><strong style="font-size:22px">6.706</strong></div>
+        </div>
+        <div class="funil-step" style="background:var(--terracota2); width:88%">
+          <div><div class="fs-label">Adição ao Carrinho</div><div class="fs-sub">8,65% dos cliques</div></div>
+          <div class="fs-right"><strong style="font-size:22px">580</strong></div>
+        </div>
+        <div class="funil-step" style="background:#8C4E30; width:75%">
+          <div><div class="fs-label">Início de Checkout</div><div class="fs-sub">31,9% do carrinho</div></div>
+          <div class="fs-right"><strong style="font-size:22px">185</strong></div>
+        </div>
+        <div class="funil-step" style="background:#6E3C22; width:60%">
+          <div><div class="fs-label">Compras Finalizadas</div><div class="fs-sub">44,9% do checkout</div></div>
+          <div class="fs-right"><strong style="font-size:22px">83</strong></div>
+        </div>
+        <div class="note" style="margin-top:14px">
+          <strong>Conversão total (clique → compra): 1,24%</strong><br>
+          Gargalo: 68,1% de abandono entre carrinho e checkout — ativar e-mail de recuperação
+        </div>
+
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px">
+          <div class="kpi-card">
+            <div class="kpi-label">Catálogo PF — motor da conta</div>
+            <div class="kpi-val">72%</div>
+            <div class="kpi-delta flat">das compras atribuídas | ROAS 4,62x</div>
+          </div>
+          <div class="kpi-card" style="border-left-color:var(--verde)">
+            <div class="kpi-label">ABO Vitalício — potencial oculto</div>
+            <div class="kpi-val" style="color:var(--verde)">6,09x</div>
+            <div class="kpi-delta flat">Melhor ROAS da conta — escalar com mais budget</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benchmarks -->
+      <div>
+        <div class="section-title" style="color:var(--terracota)">Benchmarks — Nicho Yoga / Wellness (Meta Ads)</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Métrica</th>
+              <th>Santosha Jun/26</th>
+              <th>Benchmark Yoga/Wellness</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CTR (link)</td>
+              <td><strong>1,41%</strong></td>
+              <td>1,5 – 2,2%</td>
+              <td><span class="tag tag-warn">⚠️ Abaixo</span></td>
+            </tr>
+            <tr>
+              <td>CPM</td>
+              <td><strong>R$ 14,60</strong></td>
+              <td>R$ 11 – 17</td>
+              <td><span class="tag tag-ok">✅ Na média</span></td>
+            </tr>
+            <tr>
+              <td>CPC (link)</td>
+              <td><strong>R$ 1,03</strong></td>
+              <td>R$ 0,70 – 1,10</td>
+              <td><span class="tag tag-ok">✅ Na média</span></td>
+            </tr>
+            <tr>
+              <td>Add to Cart (dos cliques)</td>
+              <td><strong style="color:var(--verde-ok)">8,65%</strong></td>
+              <td>4 – 8%</td>
+              <td><span class="tag tag-ok">✅ Acima</span></td>
+            </tr>
+            <tr>
+              <td>CVR clique → compra</td>
+              <td><strong>1,24%</strong></td>
+              <td>1,2 – 2,0%</td>
+              <td><span class="tag tag-warn">⚠️ Limite inferior</span></td>
+            </tr>
+            <tr>
+              <td>Abandono carrinho → checkout</td>
+              <td><strong>68,1%</strong></td>
+              <td>65 – 75%</td>
+              <td><span class="tag tag-ok">✅ Na faixa</span></td>
+            </tr>
+            <tr>
+              <td>ROAS (atribuído Meta)</td>
+              <td><strong style="color:var(--verde-ok)">3,51x</strong></td>
+              <td>2,5 – 3,5x</td>
+              <td><span class="tag tag-ok">✅ Topo da faixa</span></td>
+            </tr>
+            <tr>
+              <td>CPA</td>
+              <td><strong>R$ 83,33</strong></td>
+              <td>R$ 60 – 130</td>
+              <td><span class="tag tag-ok">✅ Na faixa</span></td>
+            </tr>
+            <tr>
+              <td>Frequência</td>
+              <td><strong>2,75</strong></td>
+              <td>2,0 – 3,5 (ideal)</td>
+              <td><span class="tag tag-ok">✅ Saudável</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note warn" style="margin-top:10px">
+          <strong>Principal oportunidade:</strong> CTR abaixo do benchmark indica criativos com potencial de melhora. Um CTR de 2,0% no mesmo volume de impressões geraria ~9.500 cliques (+41%) sem aumentar o CPM — impacto direto em compras e CPA.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 3 — META ADS: VISÃO GERAL + CAMPANHAS                  -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s3">
+    <div class="slide-header">
+      <h1>Meta Ads — Resultados & Campanhas</h1>
+      <p>CA - Santosha #2 &nbsp;|&nbsp; Junho 2026</p>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1.5fr;gap:20px;padding:14px 40px 70px;overflow:auto">
+
+      <!-- Esquerda: métricas gerais -->
+      <div>
+        <div class="section-title">Métricas Gerais</div>
+        <table>
+          <thead><tr><th>Métrica</th><th>Junho 2026</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Investimento</strong></td><td><strong>R$ 6.916,34</strong></td></tr>
+            <tr><td>Impressões</td><td>473.802</td></tr>
+            <tr><td>Alcance</td><td>172.515</td></tr>
+            <tr><td>Frequência</td><td>2,75</td></tr>
+            <tr><td>Cliques no Link</td><td>6.706</td></tr>
+            <tr><td>CTR (link)</td><td>1,41%</td></tr>
+            <tr><td>CPC (link)</td><td>R$ 1,03</td></tr>
+            <tr><td>CPM</td><td>R$ 14,60</td></tr>
+            <tr><td><strong>Compras (atrib.)</strong></td><td><strong>83</strong></td></tr>
+            <tr><td><strong>Receita (atrib.)</strong></td><td><strong>R$ 24.300,27</strong></td></tr>
+            <tr><td><strong>ROAS (Meta)</strong></td><td><strong>3,51x</strong></td></tr>
+            <tr><td>CPA</td><td>R$ 83,33</td></tr>
+            <tr><td>Adições ao Carrinho</td><td>580</td></tr>
+            <tr><td>Início de Checkout</td><td>185</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:10px">Atribuição: 7 dias clique / 1 dia view. Receita Meta (R$ 24.300) ≠ Shopify (R$ 47.311) — Shopify consolida todos os canais.</div>
+      </div>
+
+      <!-- Direita: campanhas -->
+      <div>
+        <div class="section-title">Campanhas de Vendas (Conversão)</div>
+        <table>
+          <thead>
+            <tr><th>Campanha</th><th>Invest.</th><th>Compras</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Catálogo | Público Frio</td><td>R$ 3.544,26</td><td>60</td><td>R$ 16.370,46</td><td><strong>4,62x</strong></td><td>R$ 59,07</td><td><span class="tag tag-ok">✅ Top</span></td></tr>
+            <tr><td>Catálogo | Advantage+</td><td>R$ 1.133,05</td><td>14</td><td>R$ 4.149,92</td><td>3,66x</td><td>R$ 80,93</td><td><span class="tag tag-ok">✅ Positivo</span></td></tr>
+            <tr><td>Promoção Junho</td><td>R$ 999,89</td><td>6</td><td>R$ 1.973,49</td><td style="color:var(--vermelho)"><strong>1,97x</strong></td><td>R$ 166,65</td><td><span class="tag tag-bad">❌ Negativo</span></td></tr>
+            <tr><td>Frete Grátis | PF</td><td>R$ 298,17</td><td>2</td><td>R$ 1.140,00</td><td>3,82x</td><td>R$ 149,09</td><td><span class="tag tag-warn">⚠️ Baixo vol.</span></td></tr>
+            <tr><td>ABO Vitalício</td><td>R$ 109,51</td><td>1</td><td>R$ 666,40</td><td style="color:var(--verde-ok)"><strong>6,09x</strong></td><td>R$ 109,51</td><td><span class="tag tag-warn">⚠️ Baixo vol.</span></td></tr>
+            <tr><td>Frete Grátis | PQ</td><td>R$ 155,86</td><td>0</td><td>R$ 0,00</td><td>—</td><td>—</td><td><span class="tag tag-bad">❌ Pausar</span></td></tr>
+            <tr class="total-row"><td>TOTAL VENDAS</td><td>R$ 6.240,74</td><td>83</td><td>R$ 24.300,27</td><td>3,89x</td><td>R$ 75,19</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:12px" class="section-title">Topo de Funil / Awareness — R$ 675,60 (9,8% do invest.)</div>
+        <table>
+          <thead>
+            <tr><th>Campanha</th><th>Invest.</th><th>Impressões</th><th>Cliques</th><th>Objetivo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Distribuição | Video View</td><td>R$ 334,35</td><td>49.773</td><td>274</td><td>Aquecimento de público</td></tr>
+            <tr><td>Seguidores / Engajamento</td><td>R$ 165,05</td><td>26.807</td><td>1.169</td><td>Crescimento de base</td></tr>
+            <tr><td>Tráfego | App Santosha</td><td>R$ 122,15</td><td>17.655</td><td>449</td><td>Visitas ao App</td></tr>
+            <tr><td>Tráfego | Página App</td><td>R$ 54,05</td><td>5.736</td><td>175</td><td>Visitas ao App</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 6 — GOOGLE ADS                                         -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s6">
+    <div class="slide-header">
+      <h1>Google Ads — Performance</h1>
+      <p>Conta Santosha 853-596-5913 &nbsp;|&nbsp; Junho 2026</p>
+    </div>
+    <div class="s6-body">
+      <div class="s6-kpis">
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">Investimento</div>
+          <div class="kpi-val">R$ 2.531,37</div>
+                  </div>
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">Receita Atribuída</div>
+          <div class="kpi-val">R$ 12.556,55</div>
+                  </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">ROAS</div>
+          <div class="kpi-val">4,96x</div>
+                  </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">CPA</div>
+          <div class="kpi-val">R$ 67,17</div>
+                  </div>
+      </div>
+      <div>
+        <div class="section-title">Performance por Campanha — Junho 2026</div>
+        <table class="thead-verde">
+          <thead>
+            <tr>
+              <th>Campanha</th><th>Tipo</th><th>Investimento</th><th>Cliques</th><th>Conversões</th><th>Receita Atrib.</th><th>ROAS</th><th>CPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shopping | ROAS8</td><td>Shopping</td><td>R$ 303,53</td><td>239</td><td>7,0</td><td>R$ 2.448,20</td>
+              <td style="color:var(--verde-ok)"><strong>8,07x</strong></td><td style="color:var(--verde-ok)"><strong>R$ 43,36</strong></td>
+            </tr>
+            <tr>
+              <td>Performance Max</td><td>PMax</td><td>R$ 979,00</td><td>1.044</td><td>14,5</td><td>R$ 4.845,25</td><td>4,95x</td><td>R$ 67,75</td>
+            </tr>
+            <tr>
+              <td>Search | Institucional</td><td>Search</td><td>R$ 1.248,84</td><td>371</td><td>16,2</td><td>R$ 5.263,10</td><td>4,21x</td><td>R$ 76,91</td>
+            </tr>
+            <tr class="total-row">
+              <td>TOTAL</td><td>—</td><td>R$ 2.531,37</td><td>1.654</td><td>37,7</td><td>R$ 12.556,55</td><td>4,96x</td><td>R$ 67,17</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        ★ <strong>Shopping estreou com o melhor ROAS da conta (8,07x)</strong> e menor CPA (R$ 43,36)
+        &nbsp;·&nbsp; <strong>Search com ROAS 4,21x</strong> com orçamento estável
+        &nbsp;·&nbsp; PMax com orçamento reduzido em relação à primeira quinzena
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 7 — GOOGLE ADS / PALAVRAS-CHAVE & TERMOS              -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s6b">
+    <div class="slide-header">
+      <h1>Google Ads — Palavras-chave & Termos de Pesquisa</h1>
+      <p>Search Institucional + Shopping ROAS8 &nbsp;|&nbsp; Junho 2026 &nbsp;|&nbsp; 217 termos rastreados</p>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:14px 36px 70px;overflow:auto">
+
+      <!-- Coluna esquerda: Top conversores -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+
+        <div>
+          <div class="section-title" style="color:var(--verde-ok)">🏆 Top termos por receita gerada</div>
+          <table style="font-size:11px" class="thead-verde">
+            <thead><tr><th>Termo</th><th>Canal</th><th>Conv.</th><th>Receita</th><th>ROAS</th></tr></thead>
+            <tbody>
+              <tr style="background:#e8f5e9">
+                <td><strong>santosha</strong> <span class="tag tag-ok" style="font-size:9px">BRAND</span></td><td>Search</td><td>6,6</td><td><strong>R$ 2.443</strong></td><td style="color:var(--verde-ok)"><strong>18,7x</strong></td>
+              </tr>
+              <tr style="background:#e8f5e9">
+                <td><strong>santosha yoga</strong> <span class="tag tag-ok" style="font-size:9px">BRAND</span></td><td>Search</td><td>6,2</td><td><strong>R$ 1.675</strong></td><td style="color:var(--verde-ok)"><strong>70,5x</strong></td>
+              </tr>
+              <tr>
+                <td>tapetes yoga</td><td>Shopping</td><td>1,0</td><td>R$ 704</td><td>85,6x</td>
+              </tr>
+              <tr>
+                <td>yoga mat</td><td>Shopping</td><td>2,0</td><td>R$ 616</td><td>149,5x</td>
+              </tr>
+              <tr>
+                <td>mat yoga dobravel</td><td>Shopping</td><td>2,0</td><td>R$ 756</td><td>>1000x</td>
+              </tr>
+              <tr>
+                <td>sequência ashtanga</td><td>Shopping</td><td>2,0</td><td>R$ 372</td><td>>1000x</td>
+              </tr>
+              <tr>
+                <td>yoga cards</td><td>Search</td><td>1,0</td><td>R$ 84</td><td>73,3x</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:8px;font-size:10px">
+            <strong>78% das conversões da Search vêm de termos de marca</strong> (santosha + santosha yoga = 12,7 das 16,2 conv). Proteger budget de brand é prioridade máxima.
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title" style="color:var(--verde)">🛍️ Top termos Shopping por impressões</div>
+          <table style="font-size:11px">
+            <thead><tr><th>Termo</th><th>Imp.</th><th>Cliques</th><th>CTR</th><th>Conv.</th></tr></thead>
+            <tbody>
+              <tr><td>tapete yoga</td><td>1.610</td><td>17</td><td>1,1%</td><td>0</td></tr>
+              <tr><td>tapete de yoga</td><td>1.386</td><td>8</td><td>0,6%</td><td>0</td></tr>
+              <tr><td>yoga mat</td><td>260</td><td>2</td><td>0,8%</td><td>2 ✅</td></tr>
+              <tr><td>mat de yoga dobravel</td><td>149</td><td>4</td><td>2,7%</td><td>0</td></tr>
+              <tr><td>ashtanga yoga</td><td>110</td><td>10</td><td>9,1%</td><td>0</td></tr>
+              <tr><td>tapete yoga dobravel</td><td>123</td><td>3</td><td>2,4%</td><td>2 ✅</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Coluna direita: Diagnósticos -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+
+        <div>
+          <div class="section-title" style="color:var(--verde)">Tipos de Correspondência — Performance</div>
+          <table style="font-size:11px">
+            <thead><tr><th>Tipo de Correspondência</th><th>Gasto</th><th>Conv.</th><th>Receita</th><th>CPA</th></tr></thead>
+            <tbody>
+              <tr style="background:#e8f5e9"><td><strong>EXATO</strong></td><td>R$ 168,54</td><td>12,7</td><td>R$ 4.118</td><td style="color:var(--verde-ok)"><strong>R$ 13,27</strong></td></tr>
+              <tr style="background:#e8f5e9"><td><strong>FRASE</strong></td><td>R$ 76,65</td><td>2,5</td><td>R$ 1.061</td><td style="color:var(--verde-ok)"><strong>R$ 30,66</strong></td></tr>
+              <tr style="background:#fff3cd"><td>AI MAX</td><td>R$ 53,12</td><td>0</td><td>R$ 0</td><td style="color:var(--amarelo)">—</td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:8px;font-size:10.5px">
+            Exato e Frase concentram toda a performance: <strong>R$ 5.179 de receita com CPA entre R$ 13 e R$ 31</strong>. Prioridade: manter e escalar budget nessas correspondências.
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title" style="color:var(--vermelho)">💸 Top gastos sem nenhuma conversão</div>
+          <table style="font-size:11px">
+            <thead><tr><th>Termo</th><th>Canal</th><th>Gasto</th><th>Cliques</th></tr></thead>
+            <tbody>
+              <tr><td>yoga (genérico)</td><td>Search</td><td style="color:var(--vermelho)">R$ 87,97</td><td>12</td></tr>
+              <tr><td>tapete de yoga</td><td>Search</td><td style="color:var(--vermelho)">R$ 84,01</td><td>18</td></tr>
+              <tr><td>tapete yoga</td><td>Search+Shop</td><td style="color:var(--vermelho)">R$ 65,59</td><td>25</td></tr>
+              <tr><td>yoga mat</td><td>Search</td><td>R$ 24,42</td><td>1</td></tr>
+              <tr><td>bloco de yoga</td><td>Search</td><td>R$ 15,45</td><td>2</td></tr>
+              <tr><td>santoshaporai / satosha</td><td>Search</td><td>R$ 32,93</td><td>8</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <div class="section-title" style="color:var(--ocre)">🔍 Quality Score</div>
+          <div class="kpi-card" style="border-left-color:var(--verde-ok)">
+            <div class="kpi-label">Keywords Exato / Frase</div>
+            <div class="kpi-val" style="color:var(--verde-ok);font-size:28px">10 / 10</div>
+            <div class="kpi-delta flat">Relevância máxima — base sólida para escalar ✅</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE Pinterest Ads — PERFORMANCE                            -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s6p">
+    <div class="slide-header">
+      <h1>Pinterest Ads — Performance</h1>
+      <p>Conta: Santosha por aí — Haddad e Rocha Ltda &nbsp;|&nbsp; Junho 2026 &nbsp;|&nbsp; Atribuição: 30d clique / 30d engajamento / 30d visualização</p>
+    </div>
+    <div class="s6-body">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">Investimento</div>
+          <div class="kpi-val">R$ 404,02</div>
+        </div>
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">Receita Atribuída</div>
+          <div class="kpi-val">R$ 3.488,54</div>
+        </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">ROAS</div>
+          <div class="kpi-val">8,63x</div>
+        </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">CPA</div>
+          <div class="kpi-val">R$ 44,89</div>
+        </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Conversões</div>
+          <div class="kpi-val">9</div>
+          <div class="kpi-delta flat">Ticket médio R$ 387,62</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Performance por Campanha — Junho 2026</div>
+        <table class="thead-ocre">
+          <thead>
+            <tr>
+              <th>Campanha</th><th>Tipo</th><th>Investimento</th><th>Cliques de Saída</th><th>Conversões</th><th>Receita Atrib.</th><th>ROAS</th><th>CPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>[GGD][VENDAS][CATÁLOGO][ADV]</td><td>Catálogo</td><td>R$ 194,74</td><td>1.617</td><td>4</td><td>R$ 1.555,26</td>
+              <td>7,99x</td><td>R$ 48,68</td>
+            </tr>
+            <tr>
+              <td>[GGD][VENDAS][BARALHOS]</td><td>Conversões</td><td>R$ 209,29</td><td>186</td><td>5</td><td>R$ 1.933,28</td>
+              <td style="color:var(--verde-ok)"><strong>9,24x</strong></td><td style="color:var(--verde-ok)"><strong>R$ 41,86</strong></td>
+            </tr>
+            <tr class="total-row">
+              <td>TOTAL</td><td>—</td><td>R$ 404,02</td><td>1.803</td><td>9</td><td>R$ 3.488,54</td><td>8,63x</td><td>R$ 44,89</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        ★ <strong>ROAS 8,63x</strong> — melhor eficiência entre os canais pagos do mês
+        &nbsp;·&nbsp; <strong>Baralhos com ROAS 9,24x e CPA R$ 41,86</strong> — audiência altamente qualificada
+        &nbsp;·&nbsp; Catálogo ADV com <strong>CTR 1,83%</strong> muito acima do benchmark da plataforma (0,5–1%)
+        &nbsp;·&nbsp; Ticket médio <strong>R$ 387,62</strong> — o mais alto entre todos os canais pagos
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 — SHOPIFY RECEITA                                    -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s7">
+    <div class="slide-header">
+      <h1>Shopify — Performance da Loja</h1>
+      <p>Junho 2026 &nbsp;|&nbsp; Fonte: Shopify Admin</p>
+    </div>
+    <div class="s7-body">
+      <!-- Esquerda: KPIs + Receita -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="kpi-card">
+            <div class="kpi-label">Total de Vendas</div>
+            <div class="kpi-val">R$ 47.311,11</div>
+                      </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Vendas Brutas</div>
+            <div class="kpi-val">R$ 51.648,50</div>
+                      </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Total de Pedidos</div>
+            <div class="kpi-val">140</div>
+                      </div>
+          <div class="kpi-card" style="border-left-color:var(--vermelho)">
+            <div class="kpi-label">Ticket Médio (AOV)</div>
+            <div class="kpi-val" style="color:var(--vermelho)">R$ 325,05</div>
+                      </div>
+        </div>
+        <table>
+          <thead><tr><th>Métrica</th><th>Junho</th></tr></thead>
+          <tbody>
+            <tr><td>Vendas Brutas</td><td>R$ 51.648,50</td></tr>
+            <tr><td>Descontos</td><td>−R$ 6.140,81</td></tr>
+            <tr><td>Devoluções</td><td>R$ 0,00</td><td>—</td></tr>
+            <tr><td>Vendas Líquidas</td><td>R$ 45.507,69</td></tr>
+            <tr><td>Frete Cobrado</td><td>R$ 1.803,42</td></tr>
+            <tr class="total-row"><td>Total de Vendas</td><td>R$ 47.311,11</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Direita: Alertas -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="section-title">Alertas e Pontos de Atenção</div>
+        <div class="note warn">
+          <strong>Descontos +142%</strong><br>
+          Representam 11,9% das vendas brutas. Cupom MESDOYOGA (72 usos) + 50+ códigos de parceiros a 5%.
+        </div>
+        <div class="note warn">
+          <strong>AOV caiu 9%</strong><br>
+          Tráfego novo de Pinterest e Facebook tem menor intenção de compra e menor ticket médio.
+        </div>
+        <div class="note warn">
+          <strong>Taxa de conversão caiu 7%</strong><br>
+          Tráfego cresceu 27% mas conversão recuou — oportunidade de CRO nas páginas de produto e checkout.
+        </div>
+        <div class="note warn">
+          <strong>Linktr caiu 39% em receita</strong><br>
+          Verificar se o link na bio foi atualizado ou se houve redução de posts com CTA direto.
+        </div>
+        <div class="note warn">
+          <strong>Manual de Sequências</strong><br>
+          64% de desconto sobre venda bruta (R$ 1.300 de desc. em R$ 2.011 bruto).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 8 — SHOPIFY FUNIL + PRODUTOS                           -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s8">
+    <div class="slide-header">
+      <h1>Shopify — Funil, Produtos & Ações</h1>
+      <p>Junho 2026</p>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:10px;padding:10px 40px 70px;overflow:auto">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;flex:1;min-height:0">
+      <!-- Funil Shopify -->
+      <div>
+        <div class="section-title">Funil da Loja</div>
+        <div class="funil-step" style="background:var(--ocre); width:100%">
+          <div><div class="fs-label">Sessões</div><div class="fs-sub">100%</div></div>
+          <div class="fs-right"><strong style="font-size:22px">11.785</strong></div>
+        </div>
+        <div class="funil-step" style="background:#B88228; width:84%">
+          <div><div class="fs-label">Adicionou ao Carrinho</div><div class="fs-sub">4,43% das sessões</div></div>
+          <div class="fs-right"><strong style="font-size:22px">523</strong></div>
+        </div>
+        <div class="funil-step" style="background:#A07020; width:68%">
+          <div><div class="fs-label">Chegou ao Checkout</div><div class="fs-sub">2,47% das sessões</div></div>
+          <div class="fs-right"><strong style="font-size:22px">292</strong></div>
+        </div>
+        <div class="funil-step" style="background:#885A18; width:52%">
+          <div><div class="fs-label">Finalizou Compra</div><div class="fs-sub">1,02% das sessões</div></div>
+          <div class="fs-right"><strong style="font-size:22px">121</strong></div>
+        </div>
+        <div class="note" style="margin-top:10px">Taxa de conversão: <strong>1,02%</strong> · Gargalo: Checkout → Compra (41,4% vs benchmark 45–60%)</div>
+      </div>
+      <!-- Top Produtos -->
+      <div>
+        <div class="section-title">Top 10 Produtos por Receita Líquida</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div class="bar-row"><span class="bar-label">Cartasanas de Yoga</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--terracota)"></div></div><span class="bar-val">R$ 6.702,84</span></div>
+          <div class="bar-row"><span class="bar-label">Cartasflow</span><div class="bar-track"><div class="bar-fill" style="width:63.7%;background:var(--terracota2)"></div></div><span class="bar-val">R$ 4.272,80</span></div>
+          <div class="bar-row"><span class="bar-label">Matosha | Guia Lunar</span><div class="bar-track"><div class="bar-fill" style="width:62%;background:var(--verde)"></div></div><span class="bar-val">R$ 4.158,26</span></div>
+          <div class="bar-row"><span class="bar-label">Matosha | Guia Monstera</span><div class="bar-track"><div class="bar-fill" style="width:52.6%;background:var(--verde2)"></div></div><span class="bar-val">R$ 3.522,38</span></div>
+          <div class="bar-row"><span class="bar-label">Pôster Ashtanga A2</span><div class="bar-track"><div class="bar-fill" style="width:50.3%;background:var(--ocre)"></div></div><span class="bar-val">R$ 3.373,40</span></div>
+          <div class="bar-row"><span class="bar-label">MATravel | Waves</span><div class="bar-track"><div class="bar-fill" style="width:47.7%;background:#A07020"></div></div><span class="bar-val">R$ 3.194,10</span></div>
+          <div class="bar-row"><span class="bar-label">Matosha | You are the Sun</span><div class="bar-track"><div class="bar-fill" style="width:45.9%;background:#886018"></div></div><span class="bar-val">R$ 3.077,00</span></div>
+          <div class="bar-row"><span class="bar-label">Matosha | Yoginis</span><div class="bar-track"><div class="bar-fill" style="width:39.1%;background:#705010"></div></div><span class="bar-val">R$ 2.622,60</span></div>
+          <div class="bar-row"><span class="bar-label">Matosha | MOCHA</span><div class="bar-track"><div class="bar-fill" style="width:37.5%;background:#584008"></div></div><span class="bar-val">R$ 2.511,00</span></div>
+          <div class="bar-row"><span class="bar-label">Yoga Bag | Marrom</span><div class="bar-track"><div class="bar-fill" style="width:33.1%;background:var(--marrom)"></div></div><span class="bar-val">R$ 2.221,45</span></div>
+        </div>
+        <div class="note" style="margin-top:10px">Total 21 produtos · 257 itens · <strong>R$ 45.507,69</strong></div>
+      </div>
+      </div>
+      <!-- Pontos de Atenção & Ações -->
+      <div style="border-top:1px solid rgba(191,106,69,0.2);padding-top:10px">
+        <div class="section-title" style="color:var(--terracota);margin-bottom:8px">Pontos de Atenção & Ações</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
+          <div style="background:rgba(200,150,64,0.08);border-left:4px solid var(--ocre);border-radius:8px;padding:12px 14px;font-family:'Trebuchet MS',sans-serif;font-size:10.5px;color:var(--marrom)">
+            <div style="font-weight:bold;font-size:11.5px;color:var(--ocre);margin-bottom:7px">📦 AOV caiu 9%</div>
+            · Cross-sell: "Complete sua prática" (Cartas → Bloco, Pôster)
+          </div>
+          <div style="background:rgba(191,106,69,0.08);border-left:4px solid var(--terracota);border-radius:8px;padding:12px 14px;font-family:'Trebuchet MS',sans-serif;font-size:10.5px;color:var(--marrom)">
+            <div style="font-weight:bold;font-size:11.5px;color:var(--terracota2);margin-bottom:7px">📉 Conversão caiu 7%</div>
+            · Avaliações + fotos de clientes<br>
+            · Badge "mais vendido" / estoque<br>
+            · One-Page Checkout + Clarity
+          </div>
+          <div style="background:rgba(107,124,92,0.08);border-left:4px solid var(--verde);border-radius:8px;padding:12px 14px;font-family:'Trebuchet MS',sans-serif;font-size:10.5px;color:var(--marrom)">
+            <div style="font-weight:bold;font-size:11.5px;color:var(--verde2);margin-bottom:7px">🔗 Linktr −39% receita</div>
+            · Auditar links e priorizar top produtos<br>
+            · Link direto nos Stories<br>
+            · Verificar CTA "link na bio"
+          </div>
+          <div class="note" style="padding:12px 14px">
+            <div style="font-weight:bold;color:var(--terracota2);margin-bottom:8px;font-family:'Trebuchet MS',sans-serif;font-size:11px">Prioridade</div>
+            <ol style="font-family:'Trebuchet MS',sans-serif;font-size:10.5px;color:var(--verde2);padding-left:14px;line-height:1.8;margin:0">
+              <li>One-Page Checkout</li>
+              <li>Clarity (auditar mobile)</li>
+              <li>Auditar Linktree</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 10 — BENCHMARKS                                        -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s10">
+    <div class="slide-header">
+      <h1>Benchmarks do Setor — Comparativo Santosha</h1>
+      <p>Fontes: Triple Whale, WordStream, Shopify, AdAmigo.ai, Baymard Institute · 2025–2026 · Setor: Fashion &amp; Lifestyle E-commerce</p>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:14px 36px 70px;align-items:start;overflow:auto">
+
+      <!-- META ADS -->
+      <div>
+        <div class="section-title" style="color:var(--terracota)">📘 Meta Ads — Fashion / Lifestyle</div>
+        <table style="font-size:11px">
+          <thead><tr><th>Métrica</th><th>Benchmark</th><th>Santosha Jun</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>CTR (link)</td>
+              <td>2,19% <small style="color:var(--verde)">(mediana)<br>2,84% fashion</small></td>
+              <td><strong>1,41%</strong></td>
+              <td><span class="tag tag-bad">↓ abaixo</span></td>
+            </tr>
+            <tr>
+              <td>CPM</td>
+              <td>~R$ 13–15</td>
+              <td><strong>R$ 14,60</strong></td>
+              <td><span class="tag tag-ok">✅ na média</span></td>
+            </tr>
+            <tr>
+              <td>CPC (link)</td>
+              <td>R$ 0,80–1,20 <small style="color:var(--verde)">(apparel)</small></td>
+              <td><strong>R$ 1,03</strong></td>
+              <td><span class="tag tag-ok">✅ na média</span></td>
+            </tr>
+            <tr>
+              <td>CVR clique → compra</td>
+              <td>1,57%</td>
+              <td><strong>1,24%</strong></td>
+              <td><span class="tag tag-warn">⚠️ próximo</span></td>
+            </tr>
+            <tr>
+              <td>ROAS (fashion median)</td>
+              <td>2,18x <small style="color:var(--verde)">(top: 6x)</small></td>
+              <td><strong>3,51x</strong></td>
+              <td><span class="tag tag-ok">✅ +61% acima</span></td>
+            </tr>
+            <tr>
+              <td>ROAS catálogo/retargeting</td>
+              <td>4,7x</td>
+              <td><strong>4,62x</strong></td>
+              <td><span class="tag tag-ok">✅ referência</span></td>
+            </tr>
+            <tr>
+              <td>ROAS prospecção</td>
+              <td>3,1x</td>
+              <td><strong>1,97x*</strong></td>
+              <td><span class="tag tag-bad">↓ abaixo</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:8px;font-size:10px">*Promoção Junho — campanha de prospecção com CPA alto. Catálogo PF (prospecção principal) entrega 3,66–4,62x ✅</div>
+      </div>
+
+      <!-- GOOGLE ADS -->
+      <div>
+        <div class="section-title" style="color:var(--verde)">📗 Google Ads — E-commerce</div>
+        <table style="font-size:11px">
+          <thead><tr><th>Métrica</th><th>Benchmark</th><th>Santosha Jun</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>ROAS Search</td>
+              <td>5,17x <small style="color:var(--verde)">(média)</small></td>
+              <td><strong>4,21x</strong></td>
+              <td><span class="tag tag-warn">⚠️ próximo</span></td>
+            </tr>
+            <tr>
+              <td>ROAS Performance Max</td>
+              <td>2,57x <small style="color:var(--verde)">(média)</small></td>
+              <td><strong>4,95x</strong></td>
+              <td><span class="tag tag-ok">✅ +93% acima</span></td>
+            </tr>
+            <tr>
+              <td>ROAS Shopping</td>
+              <td>3,68x <small style="color:var(--verde)">(e-comm geral)</small></td>
+              <td><strong>8,07x</strong></td>
+              <td><span class="tag tag-ok">✅ +120% acima</span></td>
+            </tr>
+            <tr>
+              <td>CVR Google Shopping</td>
+              <td>2,81%</td>
+              <td><strong>2,9%*</strong></td>
+              <td><span class="tag tag-ok">✅ acima</span></td>
+            </tr>
+            <tr>
+              <td>CPA</td>
+              <td>R$ 150–220 <small style="color:var(--verde)">(fashion BR est.)</small></td>
+              <td><strong>R$ 67,17</strong></td>
+              <td><span class="tag tag-ok">✅ excelente</span></td>
+            </tr>
+            <tr>
+              <td>CTR Search</td>
+              <td>3,5–5%</td>
+              <td><strong>3,67%</strong></td>
+              <td><span class="tag tag-ok">✅ na média</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:8px;font-size:10px">*CVR Shopping estimado: 7 conv / 239 cliques = 2,9%. Google Ads é o canal de melhor eficiência da conta em junho.</div>
+      </div>
+
+      <!-- SHOPIFY -->
+      <div>
+        <div class="section-title" style="color:var(--ocre)">📙 Shopify — Funil da Loja</div>
+        <table style="font-size:11px">
+          <thead><tr><th>Etapa do Funil</th><th>Benchmark</th><th>Santosha Jun</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Taxa de Conversão geral</td>
+              <td>1,4% média<br><small style="color:var(--verde)">2–3% bom<br>3,5%+ top 10%</small></td>
+              <td><strong>1,02%</strong></td>
+              <td><span class="tag tag-bad">↓ abaixo</span></td>
+            </tr>
+            <tr>
+              <td>Add to Cart (sessões)</td>
+              <td>4,6% global<br><small style="color:var(--verde)">9,0–9,5% Brasil</small></td>
+              <td><strong>4,43%</strong></td>
+              <td><span class="tag tag-warn">⚠️ na média global, abaixo BR</span></td>
+            </tr>
+            <tr>
+              <td>Abandono de carrinho</td>
+              <td>69–70% global<br><small style="color:var(--verde)">80–81% Brasil</small></td>
+              <td><strong>44,2%*</strong></td>
+              <td><span class="tag tag-ok">✅ muito abaixo (ótimo)</span></td>
+            </tr>
+            <tr>
+              <td>Checkout completion<br><small>(checkout → compra)</small></td>
+              <td>45% média<br><small style="color:var(--verde)">59%+ top 20%<br>66%+ top 10%</small></td>
+              <td><strong>41,4%</strong></td>
+              <td><span class="tag tag-warn">⚠️ abaixo da média</span></td>
+            </tr>
+            <tr>
+              <td>Carrinho → Checkout</td>
+              <td>~55–60%</td>
+              <td><strong>55,8%</strong></td>
+              <td><span class="tag tag-ok">✅ na média</span></td>
+            </tr>
+            <tr>
+              <td>Mobile CVR vs Desktop</td>
+              <td>30–40% menor</td>
+              <td><strong>83% mobile</strong></td>
+              <td><span class="tag tag-warn">⚠️ atenção ao UX mobile</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:8px;font-size:10px">*Abandono de carrinho Shopify calculado: (523 − 292) / 523 = 44,2% — bem abaixo do benchmark, sinal de audiência qualificada. O gargalo real está no <strong>checkout → compra</strong>.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE Como Melhorar: Checkout → Compra                       -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s10b">
+    <div class="slide-header">
+      <h1>Melhorias e Recomendações</h1>
+      <p>Checkout &nbsp;·&nbsp; Prioridades para Julho 2026</p>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:12px 40px 70px;overflow:auto">
+      <!-- Checkout improvement -->
+      <div>
+        <div class="section-title" style="color:var(--terracota)">🛒 Como Melhorar: Checkout → Compra &nbsp;|&nbsp; atual: <span style="color:var(--vermelho)">41,4%</span> &nbsp;·&nbsp; benchmark: 45–60%</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+          <div style="background:rgba(176,42,42,0.08);border-left:4px solid var(--vermelho);border-radius:8px;padding:13px 16px;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--marrom)">
+            <strong style="color:var(--vermelho);font-size:13px">🔴 O que pode impactar</strong><br><br>
+            · Frete revelado só no checkout<br>
+            · Parcelas insuficientes · Sem PIX<br>
+            · UX mobile ruim (83% do tráfego)<br>
+            · Falta de selos de segurança
+          </div>
+          <div style="background:rgba(160,106,0,0.08);border-left:4px solid var(--ocre);border-radius:8px;padding:13px 16px;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--marrom)">
+            <strong style="color:var(--ocre);font-size:13px">🟡 Foco mobile</strong><br><br>
+            · Shopify One-Page Checkout<br>
+            · Velocidade &lt;3s<br>
+            · Botão de compra sempre visível<br>
+            · Autopreenchimento ativo
+          </div>
+          <div style="background:rgba(46,110,53,0.08);border-left:4px solid var(--verde-ok);border-radius:8px;padding:13px 16px;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--marrom)">
+            <strong style="color:var(--verde-ok);font-size:13px">🟢 Ações imediatas</strong><br><br>
+            · E-mail abandono de checkout<br>
+            · PIX com 5% de desconto<br>
+            · Selos SSL + reviews visíveis<br>
+            · Prazo de entrega no checkout
+          </div>
+          <div style="background:rgba(107,124,92,0.08);border-left:4px solid var(--verde);border-radius:8px;padding:13px 16px;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--marrom)">
+            <strong style="color:var(--verde);font-size:13px">📈 Médio prazo</strong><br><br>
+            · Parcelamento sem juros<br>
+            · Urgência no carrinho<br>
+            · A/B test: imagem no checkout
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(191,106,69,0.2)"></div>
+      <!-- Recomendações -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;flex:1">
+        <div class="rec-col">
+          <div class="rec-col-head" style="background:var(--vermelho)">🔴 &nbsp;Imediato</div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--vermelho)"></div><div><strong>Resgatar budget</strong> Performance Max Google<br><small>−57% de invest. reduziu volume sem ganho proporcional</small></div></div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--vermelho)"></div><div><strong>Ativar e-mail</strong> abandono de carrinho<br><small>44% de abandono entre carrinho e checkout</small></div></div>
+        </div>
+        <div class="rec-col">
+          <div class="rec-col-head" style="background:var(--amarelo)">🟡 &nbsp;Curto Prazo</div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--amarelo)"></div><div><strong>Escalar Catálogo PF</strong><br><small>ROAS 4,62x | CPA R$ 59 — melhor relação vol. × efic.</small></div></div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--amarelo)"></div><div><strong>Expandir Shopping Google</strong><br><small>ROAS 8,07x, CPA R$ 43 — melhor da conta, ampliar catálogo</small></div></div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--amarelo)"></div><div><strong>Refresh criativo</strong> Catálogo Advantage+<br><small>CTR caiu em junho — testar novos ativos</small></div></div>
+        </div>
+        <div class="rec-col">
+          <div class="rec-col-head" style="background:var(--verde)">🟢 &nbsp;Médio Prazo</div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--verde)"></div><div><strong>Criar combos</strong> atrativos com tapete<br><small>Ticket médio mínimo de R$ 350</small></div></div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--verde)"></div><div><strong>E-mail marketing</strong> cross-sell<br><small>Segmentado por produto comprado — base crescente</small></div></div>
+          <div class="rec-item"><div class="rec-dot" style="background:var(--verde)"></div><div><strong>Escalar ABO Vitalício</strong><br><small>ROAS 6,09x com baixo volume atual — potencial inexplorado</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 12 — ENCERRAMENTO                                      -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide" id="s12">
+    <div class="capa-stripe"></div>
+    <div class="capa-stripe-thin"></div>
+    <div class="enc-content">
+            <p class="enc-eyebrow">"inspirando YOGA, expirando ARTE"</p>
+      <h1 class="enc-title">Obrigada!</h1>
+      <div class="enc-divider"></div>
+      <p class="enc-name">GGD — Gestão de Tráfego</p>
+      <p class="enc-email">giovannarramires@gmail.com</p>
+
+    </div>
+  </section>
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ──────────────────────────────────────────────── -->
+<nav class="nav">
+  <button id="btnPrev" onclick="go(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1 / 11</span>
+  <button id="btnNext" onclick="go(1)">→</button>
+</nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const total = slides.length;
+  let cur = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    counter.textContent = `${cur + 1} / ${total}`;
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === total - 1;
+  }
+
+  function go(dir) { goTo(cur + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+  });
+
+  goTo(0);
+</script>
+
+<div style="position:fixed;top:18px;right:28px;z-index:999;pointer-events:none">
+  <img src="data:image/webp;base64,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" style="height:38px;opacity:0.85;filter:drop-shadow(0 1px 4px rgba(61,39,24,0.12))">
+</div>
+</body>
+</html>
