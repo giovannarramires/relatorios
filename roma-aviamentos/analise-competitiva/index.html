@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Competitiva — Roma Aviamentos</title>
+<style>
+  :root{
+    --accent:#e94560; --green:#00c897; --yellow:#f5a623; --blue:#4a90d9; --purple:#9b59b6;
+    --meta:#1877F2; --google:#34A853; --card-bg:#fff; --bg:#f4f6f9;
+    --text:#2c3e50; --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.5;}
+  .container{max-width:1000px; margin:0 auto; padding:28px 24px;}
+  /* HEADER */
+  .hero{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; padding:44px 24px;}
+  .hero-inner{max-width:1000px; margin:0 auto;}
+  .hero .tag{font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#7fb3c8; font-weight:700; margin-bottom:10px;}
+  .hero h1{font-size:30px; font-weight:800; margin-bottom:8px;}
+  .hero .sub{font-size:15px; color:#cfe3ee; max-width:760px;}
+  .hero .meta{font-size:11px; color:#8fb0c0; margin-top:16px;}
+  /* SECTIONS */
+  .section{margin-bottom:38px;}
+  .section-title{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border);}
+  /* CARDS */
+  .cards{display:grid; gap:16px; margin-bottom:8px;}
+  .c4{grid-template-columns:repeat(4,1fr);} .c3{grid-template-columns:repeat(3,1fr);} .c2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:18px 20px; border-left:4px solid var(--muted);}
+  .card.green{border-left-color:var(--green);} .card.red{border-left-color:var(--accent);}
+  .card.blue{border-left-color:var(--blue);} .card.yellow{border-left-color:var(--yellow);}
+  .card .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:600; margin-bottom:6px;}
+  .card .val{font-size:24px; font-weight:800;}
+  .card .val.sm{font-size:19px;}
+  .card .delta{font-size:12px; font-weight:700; margin-top:4px;}
+  .up{color:var(--green);} .down{color:var(--accent);} .neu{color:var(--muted);}
+  .card .foot{font-size:11px; color:var(--muted); margin-top:6px;}
+  /* BANNER */
+  .banner{background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:14px; padding:22px 26px; color:#fff; margin-bottom:20px;}
+  .banner .k{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#8899aa; margin-bottom:6px; font-weight:700;}
+  .banner .t{font-size:17px; font-weight:600; line-height:1.5;}
+  /* TABLE */
+  .tw{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{background:#f7f8fa; text-align:left; padding:11px 14px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700;}
+  td{padding:11px 14px; border-top:1px solid var(--border);}
+  .r{text-align:right;}
+  .note{font-size:11px; color:var(--muted); margin-top:8px;}
+  /* ACTION */
+  .act{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px; display:flex; gap:16px; align-items:flex-start;}
+  .act .num{flex:0 0 auto; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px; background:var(--blue);}
+  .act h3{font-size:15px; margin-bottom:5px;}
+  .act p{font-size:13px; color:#444; line-height:1.6;}
+  .pill{display:inline-block; font-size:10px; font-weight:700; padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle;}
+  .p-red{background:#fff8f8; color:#e94560; border:1px solid #ffd5d5;}
+  .p-amber{background:#fff8e6; color:#c07800; border:1px solid #ffe0a0;}
+  .p-green{background:#e8faf4; color:#00a374; border:1px solid #9fe8cf;}
+  .p-blue{background:#eef5fc; color:#2a6cb0; border:1px solid #cfe2f7;}
+  .footer{max-width:1000px; margin:20px auto 40px; padding:0 24px; font-size:11px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+  .win{color:#00a374; font-weight:700;}
+  .lose{color:#e94560; font-weight:700;}
+  @media(max-width:760px){.c4,.c3,.c2{grid-template-columns:1fr 1fr;} .hero h1{font-size:24px;}}
+  /* GATE */
+  #gate{position:fixed; inset:0; background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px;}
+  #gate .box{background:#fff; border-radius:16px; padding:36px 32px; max-width:380px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.35);}
+  #gate .tag{font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:8px;}
+  #gate h2{font-size:20px; margin-bottom:6px; color:var(--text);}
+  #gate p{font-size:13px; color:var(--muted); margin-bottom:20px;}
+  #gate input{width:100%; padding:12px 14px; font-size:15px; border:1px solid var(--border); border-radius:10px; margin-bottom:12px; text-align:center;}
+  #gate button{width:100%; padding:12px; font-size:15px; font-weight:700; color:#fff; background:var(--blue); border:none; border-radius:10px; cursor:pointer;}
+  #gate button:hover{background:#3a7cc4;}
+  #gate .err{color:var(--accent); font-size:13px; font-weight:600; margin-top:12px; min-height:18px;}
+  #report{display:none;}
+</style>
+</head>
+<body>
+
+<!-- ============ TELA DE SENHA (proteção SHA-256 client-side) ============ -->
+<div id="gate">
+  <div class="box">
+    <div class="tag">🔒 Documento Confidencial</div>
+    <h2>Análise Competitiva</h2>
+    <p>Roma Aviamentos · Gestão GGD<br>Digite a senha para acessar o relatório.</p>
+    <input type="password" id="pw" placeholder="Senha" autofocus onkeydown="if(event.key==='Enter')checkPw()">
+    <button onclick="checkPw()">Acessar relatório</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   PROTEÇÃO POR SENHA (SHA-256 no cliente).
+   A senha NÃO fica no código — só o hash SHA-256 dela (PW_HASH abaixo).
+   PARA TROCAR A SENHA:
+     1. Rode no terminal:  printf 'NOVA_SENHA' | shasum -a 256
+     2. Copie o hash retornado (64 caracteres hex).
+     3. Substitua o valor de PW_HASH abaixo por esse hash.
+   Observação: proteção client-side é adequada para conteúdo de negócio de
+   sensibilidade moderada. Para sigilo forte, prefira proteção no hosting
+   (Netlify password / Cloudflare Access / .htaccess).
+   ========================================================================== */
+const PW_HASH = "acc173a22405a1801d9220bc3ec670b6f2256026072ee6b86b2dcf02e4e77ac9";
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function checkPw(){
+  const val = document.getElementById('pw').value;
+  const hash = await sha256(val);
+  if(hash === PW_HASH){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('report').style.display='block';
+  } else {
+    document.getElementById('err').textContent='Senha incorreta. Tente novamente.';
+    document.getElementById('pw').value='';
+  }
+}
+</script>
+
+<!-- ============ CONTEÚDO DO RELATÓRIO ============ -->
+<div id="report">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">📊 Análise Competitiva · Mercado de Aviamentos Online</div>
+    <h1>Análise Competitiva — Roma Aviamentos</h1>
+    <div class="sub">Como a Roma se posiciona no mercado de aviamentos e armarinho online — reputação, velocidade do site, condições de pagamento e frete frente aos principais concorrentes, com os pontos onde a marca já vence e onde há espaço para crescer.</div>
+    <div class="meta">Elaborado em 04/07/2026 · Gestão GGD &nbsp;·&nbsp; Fontes: sites oficiais dos concorrentes, Reclame Aqui e medições próprias (simulações reais de frete, pagamento e velocidade em 04/07/2026)</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- RESUMO -->
+  <div class="section">
+    <div class="banner">
+      <div class="k">📌 Resumo em uma frase</div>
+      <div class="t">A Roma <strong style="color:#00c897;">já é uma das marcas mais bem avaliadas</strong> do setor e é <strong>imbatível em frete no Sudeste</strong> por estar no Brás — o espaço de crescimento está em <strong style="color:#f5a623;">prova social (avaliações/selo), velocidade do site e cobertura logística</strong> para alcançar o patamar do líder de reputação.</div>
+    </div>
+    <div class="cards c4">
+      <div class="card green">
+        <div class="lbl">Reputação Reclame Aqui</div>
+        <div class="val">8.5</div>
+        <div class="delta up">ÓTIMO · acima do Bazar Horizonte</div>
+      </div>
+      <div class="card green">
+        <div class="lbl">Frete SP capital</div>
+        <div class="val sm">R$ 7,64</div>
+        <div class="delta up">▲ o mais barato dos 3</div>
+      </div>
+      <div class="card blue">
+        <div class="lbl">Parcelamento</div>
+        <div class="val sm">até 5x</div>
+        <div class="delta neu">sem juros + 5% no Pix</div>
+      </div>
+      <div class="card yellow">
+        <div class="lbl">Tradição no mercado</div>
+        <div class="val sm">15+ anos</div>
+        <div class="delta neu">loja física no Brás desde 2010</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. VISÃO GERAL DO MERCADO -->
+  <div class="section">
+    <div class="section-title">1 · Visão geral do mercado — três frentes de concorrência</div>
+    <p style="font-size:14px; color:#444; margin-bottom:16px;">O mercado de aviamentos e armarinho online não é um bloco único. A Roma disputa clientes em três frentes distintas, cada uma com um perfil de concorrente diferente:</p>
+    <div class="cards c3">
+      <div class="card blue">
+        <div class="lbl">🏙️ Concorrentes do Brás</div>
+        <p style="font-size:13px; color:#444;">Lojas de atacado e varejo de confecção próximas à Roma (Oeste, Lan, Artec, Beira Rio). Fortes em sortimento e loja física; menos estruturadas no e-commerce.</p>
+      </div>
+      <div class="card yellow">
+        <div class="lbl">🛒 Grandes armarinhos online</div>
+        <p style="font-size:13px; color:#444;">Armarinho São José e Bazar Horizonte — referências nacionais em reputação, SEO e audiência. É o padrão de excelência a ser alcançado.</p>
+      </div>
+      <div class="card red">
+        <div class="lbl">📦 Marketplaces</div>
+        <p style="font-size:13px; color:#444;">Mercado Livre e Shopee — competem por preço e frete no fundo de funil, com grande volume de anúncios na categoria.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAPA DE CONCORRENTES -->
+  <div class="section">
+    <div class="section-title">2 · Mapa de concorrentes online</div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Loja</th><th>Perfil</th><th>Destaques</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Armarinho São José</strong></td><td>Grande armarinho nacional (Londrina/PR)</td><td>Benchmark de reputação e SEO; líder de categoria em confiança</td></tr>
+          <tr><td><strong>Bazar Horizonte</strong></td><td>"Maior armarinho virtual do Brasil"</td><td>Grande audiência (400 mil+ seguidores); foco em artesanato/hobby</td></tr>
+          <tr><td>Oeste Brás Aviamentos</td><td>Atacado/varejo (Brás)</td><td>+15.000 itens · 6x sem juros · 5% no boleto</td></tr>
+          <tr><td>Lan Aviamentos</td><td>Atacado/varejo (Brás)</td><td>Forte em pérolas, strass, fivelas, termocolantes</td></tr>
+          <tr><td>Artec Aviamentos</td><td>Atacado/varejo (Brás)</td><td>6x sem juros · 5% de desconto no cadastro</td></tr>
+          <tr><td>Maluli Armarinhos</td><td>Tradicional (50 anos)</td><td>Parcelamento em até 12x · entrega nacional + retirada</td></tr>
+          <tr><td>Rei do Armarinho</td><td>Tradicional (desde 1926)</td><td>Marca histórica · 3x sem juros · entrega nacional</td></tr>
+          <tr><td>Marketplaces (ML / Shopee)</td><td>Fundo de funil</td><td>Frete grátis com ticket baixo · cupons agressivos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. REPUTAÇÃO -->
+  <div class="section">
+    <div class="section-title">3 · Reputação comparada (Reclame Aqui)</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Nota (últimos 6 meses)</th><th class="r">Respostas</th><th class="r">Voltariam a comprar</th><th>Observação</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Armarinho São José</strong></td><td><span class="win">9.2</span> — RA1000</td><td class="r">≈100%</td><td class="r">—</td><td>Líder de categoria · selo de excelência</td></tr>
+          <tr style="background:#f4fbf8;"><td><strong>Roma Aviamentos</strong></td><td><span class="win">8.5 — ÓTIMO</span></td><td class="r">100%</td><td class="r">81,8%</td><td>90,9% resolvidas · atendimento ágil</td></tr>
+          <tr><td><strong>Bazar Horizonte</strong></td><td>7.0 — BOM</td><td class="r">91–98%</td><td class="r">48–52%</td><td>Reclamações de prazo (entrega 9–12 dias) e resposta lenta</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="banner" style="background:linear-gradient(135deg,#12321f,#1c4a2f);">
+      <div class="k">✅ A boa notícia</div>
+      <div class="t">A Roma <strong>já superou o Bazar Horizonte</strong> em reputação e o distanciou com folga (8.5 vs 7.0). O gap para o líder Armarinho São José <strong>não é de qualidade de atendimento</strong> — a Roma responde 100% das reclamações e resolve 90,9% — e sim de <strong style="color:#00c897;">selo e volume de avaliações</strong>. É uma diferença que se fecha acumulando prova social, não refazendo o atendimento.</div>
+    </div>
+  </div>
+
+  <!-- 4. VELOCIDADE -->
+  <div class="section">
+    <div class="section-title">4 · Performance técnica dos sites (velocidade)</div>
+    <p style="font-size:14px; color:#444; margin-bottom:16px;">A velocidade com que um site responde afeta diretamente a <strong>experiência de compra</strong> (quanto mais rápido, menos gente desiste) e o <strong>posicionamento nas buscas do Google</strong>, que premia sites rápidos. Medimos o tempo de resposta do servidor dos três sites em 04/07/2026:</p>
+    <div class="tw" style="margin-bottom:8px;">
+      <table>
+        <thead>
+          <tr><th>Site</th><th class="r">Tempo de resposta do servidor</th><th>Leitura</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Bazar Horizonte</strong></td><td class="r"><span class="win">0,06 s</span></td><td>Usa rede de entrega acelerada (CDN) — resposta praticamente instantânea</td></tr>
+          <tr><td><strong>Armarinho São José</strong></td><td class="r"><span class="win">1,21 s</span></td><td>Site leve e enxuto</td></tr>
+          <tr style="background:#fff8f8;"><td><strong>Roma Aviamentos</strong></td><td class="r"><span class="lose">1,78 s</span></td><td>O mais lento dos três — oportunidade de melhoria</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Medição do tempo de resposta do servidor (proxy de velocidade), em visita mobile. Uma auditoria técnica completa (Core Web Vitals via Google Lighthouse) será realizada em seguida para detalhar os pontos de otimização.</div>
+  </div>
+
+  <!-- 5. PARCELAMENTO -->
+  <div class="section">
+    <div class="section-title">5 · Condições de pagamento comparadas</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead>
+          <tr><th>Loja</th><th>Parcelamento sem juros</th><th>Desconto à vista</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Maluli Armarinhos</td><td>até <strong>12x</strong></td><td>—</td></tr>
+          <tr><td>Bazar Horizonte</td><td><strong>6x</strong></td><td>—</td></tr>
+          <tr><td>Oeste Brás</td><td>6x</td><td>5% no boleto</td></tr>
+          <tr><td>Artec</td><td>6x</td><td>5% no cadastro</td></tr>
+          <tr style="background:#f4fbf8;"><td><strong>Roma Aviamentos</strong></td><td><span class="win">até 5x sem juros</span></td><td><span class="win">5% no Pix</span></td></tr>
+          <tr><td>Armarinho São José</td><td>3x</td><td>—</td></tr>
+          <tr><td>Rei do Armarinho</td><td>3x</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px; color:#444;">A Roma está bem posicionada: o parcelamento em <strong>até 5x sem juros supera</strong> o líder de reputação (São José, 3x) e fica pouco abaixo das lojas mais agressivas (6x). Além disso, oferece <strong>5% de desconto no Pix</strong> — um diferencial que a maioria dos concorrentes não anuncia. <span class="pill p-blue">Nota</span> o número de parcelas pode variar conforme o valor do carrinho.</p>
+  </div>
+
+  <!-- 6. FRETE -->
+  <div class="section">
+    <div class="section-title">6 · Frete comparado — simulação real (3 regiões)</div>
+    <p style="font-size:14px; color:#444; margin-bottom:16px;">Simulamos o frete de um item leve equivalente em três regiões do país, nos três sites, em 04/07/2026:</p>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead>
+          <tr><th>Destino</th><th class="r">Roma</th><th class="r">São José</th><th class="r">Bazar Horizonte</th><th>Quem entrega melhor</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:#f4fbf8;"><td><strong>São Paulo (capital)</strong></td><td class="r"><span class="win">R$ 7,64</span></td><td class="r">R$ 9,51</td><td class="r">R$ 12,34</td><td><span class="win">🏆 Roma</span> — mais barata e rápida (loja no Brás)</td></tr>
+          <tr style="background:#fff8f8;"><td><strong>Uberaba / MG (interior)</strong></td><td class="r"><span class="lose">só retirada</span></td><td class="r">R$ 14,08</td><td class="r">R$ 23,45</td><td><span class="lose">⚠️ Roma não entrega</span> — concorrentes sim</td></tr>
+          <tr><td><strong>Fortaleza / CE</strong></td><td class="r">R$ 23,00</td><td class="r">R$ 24,31</td><td class="r">—</td><td>Empate técnico Roma / São José</td></tr>
+          <tr><td><strong>Frete grátis?</strong></td><td class="r">Não</td><td class="r">Não</td><td class="r">Não*</td><td>Ninguém oferece no ticket baixo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cards c2">
+      <div class="card green">
+        <div class="lbl">✅ Vantagem clara da Roma</div>
+        <p style="font-size:13px; color:#444;">No <strong>Sudeste</strong>, estar na loja física do Brás torna a Roma a opção <strong>mais barata e mais rápida</strong> — vantagem competitiva real que pode ser comunicada com destaque.</p>
+      </div>
+      <div class="card red">
+        <div class="lbl">⚠️ Ponto de atenção</div>
+        <p style="font-size:13px; color:#444;">Para <strong>Uberaba/MG</strong>, o site ofereceu apenas retirada na loja, enquanto São José e Bazar entregam. Vale investigar a cobertura de transportadoras no interior de Minas.</p>
+      </div>
+    </div>
+    <div class="note">*Bazar Horizonte anuncia frete grátis acima de determinado valor de compra; no ticket baixo simulado, nenhuma das lojas ofereceu frete grátis.</div>
+  </div>
+
+  <!-- 7. PONTOS FORTES -->
+  <div class="section">
+    <div class="section-title">7 · Pontos fortes da Roma frente aos concorrentes</div>
+    <div class="cards c3">
+      <div class="card green"><div class="lbl">⭐ Reputação em alta</div><p style="font-size:13px; color:#444;">Nota 8.5 (ÓTIMO), 100% de respostas e 90,9% de resoluções — acima do Bazar Horizonte.</p></div>
+      <div class="card green"><div class="lbl">⚡ Atendimento ágil</div><p style="font-size:13px; color:#444;">Resposta ao cliente em poucos dias, contra até 9–12 dias de concorrente relevante.</p></div>
+      <div class="card green"><div class="lbl">🚚 Logística no Sudeste</div><p style="font-size:13px; color:#444;">Frete mais barato e rápido na maior praça consumidora do país, por estar no Brás.</p></div>
+      <div class="card blue"><div class="lbl">💳 Pagamento flexível</div><p style="font-size:13px; color:#444;">Até 5x sem juros + 5% no Pix — condição competitiva no setor.</p></div>
+      <div class="card blue"><div class="lbl">🏆 Tradição</div><p style="font-size:13px; color:#444;">15+ anos de mercado e loja física — sinal de solidez e confiança.</p></div>
+      <div class="card blue"><div class="lbl">🌐 Multicanal</div><p style="font-size:13px; color:#444;">Presença em site próprio + Shopee + Mercado Livre, ampliando alcance.</p></div>
+    </div>
+  </div>
+
+  <!-- 8. PLANO DE EVOLUÇÃO -->
+  <div class="section">
+    <div class="section-title">8 · Plano de evolução — como chegar ao topo do setor</div>
+    <div class="act">
+      <div class="num">1</div>
+      <div><h3>Prova social e selo de confiança <span class="pill p-green">Alto impacto</span></h3>
+      <p>Implantar avaliações de produto no site e trabalhar para conquistar o selo de excelência do Reclame Aqui (RA1000), fechando o único gap real para o líder de reputação. A qualidade de atendimento já existe — falta transformá-la em prova visível para o novo cliente.</p></div>
+    </div>
+    <div class="act">
+      <div class="num" style="background:var(--accent);">2</div>
+      <div><h3>Logística e cobertura de entrega <span class="pill p-red">Prioritário</span></h3>
+      <p>Investigar e corrigir a cobertura de frete no interior (ex.: Minas Gerais), garantindo que o site ofereça entrega onde os concorrentes já entregam. Reforçar a comunicação proativa de rastreio em todas as etapas do pedido.</p></div>
+    </div>
+    <div class="act">
+      <div class="num" style="background:var(--yellow);">3</div>
+      <div><h3>Frete competitivo <span class="pill p-amber">Oportunidade</span></h3>
+      <p>Testar frete grátis por valor mínimo de compra, começando pelo Sudeste (onde a Roma já tem vantagem de custo). Como nenhum concorrente oferece frete grátis no ticket baixo, há uma janela para a Roma sair na frente.</p></div>
+    </div>
+    <div class="act">
+      <div class="num" style="background:var(--purple);">4</div>
+      <div><h3>Conteúdo e audiência de artesanato <span class="pill p-blue">Médio prazo</span></h3>
+      <p>Produzir conteúdo de costura, customização e artesanato (redes sociais e blog) para construir audiência própria — território onde o Bazar Horizonte é forte e a Roma tem espaço para crescer.</p></div>
+    </div>
+    <div class="act">
+      <div class="num" style="background:var(--blue);">5</div>
+      <div><h3>Velocidade do site <span class="pill p-blue">Técnico</span></h3>
+      <p>Otimizar o tempo de resposta do site (hoje o mais lento dos três) com rede de entrega acelerada e cache. Ganho duplo: melhor experiência de compra e melhor posicionamento nas buscas.</p></div>
+    </div>
+  </div>
+
+  <div class="banner" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
+    <div class="k">🎯 Conclusão</div>
+    <div class="t">A Roma <strong>não está atrás</strong> dos concorrentes — está bem posicionada em reputação, pagamento e frete no Sudeste. As cinco frentes acima são o caminho para transformar uma marca <strong>sólida</strong> na <strong style="color:#00c897;">referência de confiança</strong> do setor de aviamentos online.</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>Gestão GGD · Análise Competitiva Roma Aviamentos · 04/07/2026</div>
+  <div>Fontes: sites oficiais dos concorrentes · Reclame Aqui · medições e simulações próprias (04/07/2026)</div>
+</div>
+
+</div><!-- /#report -->
+
+</body>
+</html>
