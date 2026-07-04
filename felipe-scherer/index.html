@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+  Relatório — Análise de Checkouts | Low Ticket
+  Felipe Scherer | Gestão GGD — Giovanna Ramires
+  Período: junho + julho/2026
+  Proteção: gate de senha client-side (troque em CONFIG.senha, linha ~também no JS)
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felipe Scherer — Análise de Checkouts</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+  --h1:#4338ca;--h2:#2563eb;
+  --vtic:#10b981;--vass:#f59e0b;--pf:#3b82f6;--pq:#8b5cf6;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow:0 4px 12px rgba(0,0,0,.08);--shadow-lg:0 10px 30px rgba(0,0,0,.12);--radius:14px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ---- GATE DE SENHA ---- */
+#gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1e1b4b,#2563eb);display:flex;align-items:center;justify-content:center}
+#gate.hidden{display:none}
+.gate-card{background:#fff;border-radius:18px;padding:40px 36px;width:min(90vw,380px);box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}
+.gate-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--h1),var(--h2));display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 18px}
+.gate-card h2{font-size:18px;font-weight:800;margin-bottom:6px}
+.gate-card p{font-size:13px;color:var(--text-2);margin-bottom:22px}
+.gate-card input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:12px;outline:none;transition:border .18s}
+.gate-card input:focus{border-color:var(--h2)}
+.gate-card button{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.gate-err{color:#ef4444;font-size:12px;font-weight:600;height:16px;margin-top:8px}
+
+/* ---- HEADER ---- */
+.header{background:linear-gradient(135deg,var(--h1) 0%,var(--h2) 100%);padding:0 36px;min-height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.2);flex-wrap:wrap;gap:8px}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.header-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.header-sub{font-size:11px;color:rgba(255,255,255,.75)}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600}
+
+.container{max-width:1240px;margin:0 auto;padding:28px 30px 70px}
+.intro{background:var(--surface);border-radius:var(--radius);padding:24px 26px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.intro h1{font-size:20px;font-weight:900;letter-spacing:-.4px;margin-bottom:8px}
+.intro p{font-size:13.5px;color:var(--text-2);line-height:1.6}
+.tag{display:inline-block;background:#eef2ff;color:var(--h1);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;margin-right:6px}
+
+.section-header{display:flex;align-items:baseline;gap:10px;margin:34px 0 14px}
+.section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2)}
+.section-hint{font-size:11px;color:var(--text-3)}
+
+/* ---- VEREDITO ---- */
+.verdict{background:linear-gradient(135deg,#065f46,#10b981);border-radius:var(--radius);padding:26px 28px;color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.verdict .medal{font-size:44px}
+.verdict-body{flex:1;min-width:220px}
+.verdict-body h3{font-size:15px;font-weight:700;opacity:.85;margin-bottom:4px}
+.verdict-body .big{font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
+.verdict-body p{font-size:13px;opacity:.92;line-height:1.5}
+.verdict-stats{display:flex;gap:26px;flex-wrap:wrap}
+.verdict-stat .v{font-size:22px;font-weight:900}
+.verdict-stat .l{font-size:11px;opacity:.8}
+
+/* ---- KPI CARDS ---- */
+.ck-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ck{background:var(--surface);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm);border-top:4px solid var(--c)}
+.ck-name{font-size:14px;font-weight:800;margin-bottom:2px}
+.ck-role{font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;font-weight:600}
+.ck-roas{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--c)}
+.ck-roas-l{font-size:10px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.ck-rows{display:flex;flex-direction:column;gap:9px}
+.ck-row{display:flex;justify-content:space-between;font-size:12px}
+.ck-row .k{color:var(--text-3)}
+.ck-row .v{font-weight:700;color:var(--text)}
+.badge-win{display:inline-block;background:#d1fae5;color:#065f46;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
+.badge-low{display:inline-block;background:#fef3c7;color:#92400e;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
+
+/* ---- TABLE ---- */
+.card{background:var(--surface);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow-sm);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+th,td{padding:12px 14px;text-align:center}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:700;border-bottom:2px solid var(--border)}
+th:first-child,td:first-child{text-align:left}
+tbody tr{border-bottom:1px solid #f1f5f9}
+tbody tr:last-child{border-bottom:none}
+td.metric{font-weight:600;color:var(--text-2)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+.best{background:#ecfdf5;font-weight:800;color:#065f46;border-radius:6px}
+
+.chart-card{background:var(--surface);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm)}
+.chart-card h4{font-size:13px;font-weight:800;margin-bottom:2px}
+.chart-card .sub{font-size:11px;color:var(--text-3);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-wrap{position:relative;height:270px}
+
+.insights{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.insight{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);border-left:4px solid var(--h2)}
+.insight h5{font-size:13px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.insight p{font-size:12.5px;color:var(--text-2);line-height:1.55}
+.insight.warn{border-left-color:var(--vass)}
+
+.footer{text-align:center;margin-top:40px;font-size:11px;color:var(--text-3)}
+.note{font-size:11px;color:var(--text-3);margin-top:10px;font-style:italic}
+
+@media(max-width:900px){.ck-grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.insights{grid-template-columns:1fr}}
+@media(max-width:560px){.ck-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="app">
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">📊</div>
+    <div>
+      <div class="header-title">Felipe Scherer — Análise de Checkouts</div>
+      <div class="header-sub">Campanhas Low Ticket · Meta Ads · Gestão GGD</div>
+    </div>
+  </div>
+  <div class="header-badge">Jun + Jul / 2026</div>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+    <h1>Qual checkout converte melhor?</h1>
+    <p style="margin-bottom:12px"><span class="tag">4 CHECKOUTS COMPARADOS</span><span class="tag">FUNIL COMPLETO</span><span class="tag">JUNHO + JULHO 2026</span></p>
+    <p>Comparamos quatro variações de checkout nas campanhas de <b>Low Ticket</b>, acompanhando cada etapa do funil de conversão — da abertura da página até a compra concluída — para identificar qual experiência de compra entrega o melhor retorno.</p>
+    <p class="note">Checkouts avaliados: VTIC e VASS (novos testes) · PF e PQ (checkouts atuais). Julho considera os dias 01–04 (parcial).</p>
+  </div>
+
+  <!-- VEREDITO -->
+  <div class="verdict">
+    <div class="medal">🏆</div>
+    <div class="verdict-body">
+      <h3>MELHOR CHECKOUT DO PERÍODO</h3>
+      <div class="big">Checkout VTIC</div>
+      <p>Único com retorno positivo (ROAS acima de 1), a maior taxa de conversão do checkout e o maior ticket médio. É o checkout que transforma mais visitantes em compradores — e cada compra vale mais.</p>
+    </div>
+    <div class="verdict-stats">
+      <div class="verdict-stat"><div class="v">1,27</div><div class="l">ROAS</div></div>
+      <div class="verdict-stat"><div class="v">71%</div><div class="l">Checkout → Compra</div></div>
+      <div class="verdict-stat"><div class="v">R$ 29</div><div class="l">Ticket médio</div></div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="section-header"><span class="section-title">Visão por checkout</span><span class="section-hint">consolidado jun + jul</span></div>
+  <div class="ck-grid" id="ckGrid"></div>
+
+  <!-- TABELA FUNIL -->
+  <div class="section-header"><span class="section-title">Funil de conversão — passo a passo</span><span class="section-hint">verde = melhor da linha</span></div>
+  <div class="card">
+    <table id="funnelTable"></table>
+  </div>
+
+  <!-- GRAFICOS -->
+  <div class="section-header"><span class="section-title">Comparativos visuais</span></div>
+  <div class="grid2">
+    <div class="chart-card">
+      <h4>Etapas do funil (%)</h4>
+      <div class="sub">Quanto maior, melhor a passagem de etapa</div>
+      <div class="chart-wrap"><canvas id="funnelChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>Retorno (ROAS) e Ticket médio</h4>
+      <div class="sub">Eficiência financeira de cada checkout</div>
+      <div class="chart-wrap"><canvas id="roasChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TENDENCIA -->
+  <div class="section-header"><span class="section-title">Tendência — Junho → Julho</span><span class="section-hint">julho parcial (01–04)</span></div>
+  <div class="grid2">
+    <div class="chart-card">
+      <h4>ROAS por checkout</h4>
+      <div class="sub">Evolução do retorno mês a mês</div>
+      <div class="chart-wrap"><canvas id="trendRoas"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4>Conversão de página (visita → compra)</h4>
+      <div class="sub">% de quem abre a página e compra</div>
+      <div class="chart-wrap"><canvas id="trendConv"></canvas></div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-header"><span class="section-title">Principais leituras</span></div>
+  <div class="insights">
+    <div class="insight">
+      <h5>✅ O VTIC fecha quase o dobro</h5>
+      <p>Entre quem inicia o checkout, o <b>VTIC converte 71%</b> em compra, contra 45% do PF e 38% do PQ. A experiência de pagamento do VTIC tem muito menos atrito na hora de finalizar.</p>
+    </div>
+    <div class="insight">
+      <h5>💰 Ticket médio 2,6x maior</h5>
+      <p>Cada compra pelo <b>VTIC vale R$ 29</b>, contra R$ 11 dos checkouts atuais (PF/PQ). Isso é o que leva o retorno do VTIC a ficar positivo enquanto os demais ficam abaixo de 1.</p>
+    </div>
+    <div class="insight">
+      <h5>📈 Conversão de página líder</h5>
+      <p>De cada 100 pessoas que abrem a página, <b>21 compram no VTIC</b> — a maior taxa entre todos. No PQ, apenas 13 compram.</p>
+    </div>
+    <div class="insight warn">
+      <h5>⚠️ VASS ainda com pouco volume</h5>
+      <p>O checkout VASS mostra ticket médio alto (R$ 31), mas rodou com investimento baixo e poucas vendas — precisa de mais volume de teste antes de uma conclusão definitiva.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Gestão GGD · Giovanna Ramires — Meta Ads &nbsp;·&nbsp; Dados: Meta Ads (jun + jul/2026) &nbsp;·&nbsp; Atribuição padrão da conta
+  </div>
+
+</div>
+</div>
+
+<script>
+// ====== DADOS BRUTOS (jun+jul consolidado) ======
+const CK = {
+  VTIC:{name:'VTIC',role:'Novo teste',color:'#10b981',spend:1130.70,impr:37705,lc:306,lpv:231,ic:69,pur:49,rev:1436.12},
+  VASS:{name:'VASS',role:'Novo teste',color:'#f59e0b',spend:305.01,impr:10184,lc:71,lpv:40,ic:15,pur:8,rev:248.94},
+  PF:{name:'PF',role:'Checkout atual',color:'#3b82f6',spend:3024.01,impr:97822,lc:1137,lpv:806,ic:300,pur:136,rev:1524.56},
+  PQ:{name:'PQ',role:'Checkout atual',color:'#8b5cf6',spend:2412.69,impr:72054,lc:1005,lpv:812,ic:287,pur:109,rev:1230.58},
+};
+// tendência
+const TREND = {
+  jun:{VTIC:{spend:603.32,lpv:104,ic:42,pur:28,rev:787.71},VASS:{spend:256.28,lpv:32,ic:14,pur:8,rev:248.94},PF:{spend:2516.86,lpv:693,ic:269,pur:118,rev:1322.78},PQ:{spend:2096.03,lpv:737,ic:278,pur:105,rev:1177.05}},
+  jul:{VTIC:{spend:527.38,lpv:127,ic:27,pur:21,rev:648.41},VASS:{spend:48.73,lpv:8,ic:1,pur:0,rev:0},PF:{spend:507.15,lpv:113,ic:31,pur:18,rev:201.78},PQ:{spend:316.66,lpv:75,ic:9,pur:4,rev:53.53}},
+};
+const order=['VTIC','VASS','PF','PQ'];
+const BRL=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const P=(a,b)=>b?(100*a/b):0;
+
+function render(){
+  // ---- CARDS ----
+  const winRoas=Math.max(...order.map(k=>CK[k].rev/CK[k].spend));
+  document.getElementById('ckGrid').innerHTML = order.map(k=>{
+    const d=CK[k], roas=d.rev/d.spend;
+    const win = roas===winRoas ? '<span class="badge-win">Melhor</span>' : (k==='VASS'?'<span class="badge-low">Baixo volume</span>':'');
+    return `<div class="ck" style="--c:${d.color}">
+      <div class="ck-name">Checkout ${d.name}${win}</div>
+      <div class="ck-role">${d.role}</div>
+      <div class="ck-roas">${roas.toFixed(2)}</div>
+      <div class="ck-roas-l">ROAS</div>
+      <div class="ck-rows">
+        <div class="ck-row"><span class="k">Investimento</span><span class="v">${BRL(d.spend)}</span></div>
+        <div class="ck-row"><span class="k">Compras</span><span class="v">${d.pur}</span></div>
+        <div class="ck-row"><span class="k">Custo/compra</span><span class="v">${BRL(d.spend/d.pur)}</span></div>
+        <div class="ck-row"><span class="k">Ticket médio</span><span class="v">${d.pur?BRL(d.rev/d.pur):'-'}</span></div>
+        <div class="ck-row"><span class="k">Conv. de página</span><span class="v">${P(d.pur,d.lpv).toFixed(1)}%</span></div>
+      </div></div>`;
+  }).join('');
+
+  // ---- TABELA ----
+  const rows=[
+    {m:'Investimento',f:d=>BRL(d.spend),best:null},
+    {m:'Taxa de abertura (clique→página)',f:d=>P(d.lpv,d.lc).toFixed(1)+'%',best:'max',val:d=>P(d.lpv,d.lc)},
+    {m:'Custo por visualização de página',f:d=>BRL(d.spend/d.lpv),best:'min',val:d=>d.spend/d.lpv},
+    {m:'Página → Checkout iniciado',f:d=>P(d.ic,d.lpv).toFixed(1)+'%',best:'max',val:d=>P(d.ic,d.lpv)},
+    {m:'Checkout → Compra',f:d=>P(d.pur,d.ic).toFixed(1)+'%',best:'max',val:d=>P(d.pur,d.ic)},
+    {m:'Conversão de página (visita→compra)',f:d=>P(d.pur,d.lpv).toFixed(1)+'%',best:'max',val:d=>P(d.pur,d.lpv)},
+    {m:'Compras',f:d=>d.pur,best:null},
+    {m:'Custo por compra (CPA)',f:d=>BRL(d.spend/d.pur),best:'min',val:d=>d.spend/d.pur},
+    {m:'Ticket médio',f:d=>d.pur?BRL(d.rev/d.pur):'-',best:'max',val:d=>d.pur?d.rev/d.pur:0},
+    {m:'ROAS',f:d=>(d.rev/d.spend).toFixed(2),best:'max',val:d=>d.rev/d.spend},
+  ];
+  let html=`<thead><tr><th>Métrica</th>${order.map(k=>`<th><span class="dot" style="background:${CK[k].color}"></span>${CK[k].name}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach(r=>{
+    let bestK=null;
+    if(r.best){const vals=order.map(k=>({k,v:r.val(CK[k])})).filter(x=>x.v>0||r.m==='Compras');
+      bestK=(r.best==='max'?vals.reduce((a,b)=>b.v>a.v?b:a):vals.reduce((a,b)=>b.v<a.v?b:a)).k;}
+    html+=`<tr><td class="metric">${r.m}</td>${order.map(k=>`<td class="${k===bestK?'best':''}">${r.f(CK[k])}</td>`).join('')}</tr>`;
+  });
+  html+='</tbody>';
+  document.getElementById('funnelTable').innerHTML=html;
+
+  // ---- CHARTS ----
+  Chart.defaults.font.family="'Inter',sans-serif";
+  const labels=order.map(k=>CK[k].name);
+  const colors=order.map(k=>CK[k].color);
+
+  new Chart(document.getElementById('funnelChart'),{type:'bar',
+    data:{labels:['Taxa abertura','Pág→Checkout','Checkout→Compra','Conv. página'],
+      datasets:order.map(k=>{const d=CK[k];return{label:d.name,backgroundColor:d.color,borderRadius:4,
+        data:[P(d.lpv,d.lc),P(d.ic,d.lpv),P(d.pur,d.ic),P(d.pur,d.lpv)]};})},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}});
+
+  new Chart(document.getElementById('roasChart'),{type:'bar',
+    data:{labels,datasets:[
+      {label:'ROAS',data:order.map(k=>CK[k].rev/CK[k].spend),backgroundColor:colors,borderRadius:4,yAxisID:'y'},
+      {label:'Ticket médio (R$)',type:'line',data:order.map(k=>CK[k].pur?CK[k].rev/CK[k].pur:0),borderColor:'#0f172a',backgroundColor:'#0f172a',tension:.3,yAxisID:'y1',pointRadius:4}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
+      scales:{y:{position:'left',title:{display:true,text:'ROAS'},grid:{drawOnChartArea:false}},
+              y1:{position:'right',title:{display:true,text:'Ticket R$'}}}}});
+
+  const mk=(id,metricFn,fmt)=>new Chart(document.getElementById(id),{type:'line',
+    data:{labels:['Junho','Julho'],datasets:order.map(k=>({label:k,borderColor:CK[k].color,backgroundColor:CK[k].color,tension:.3,pointRadius:4,
+      data:[metricFn(TREND.jun[k]),metricFn(TREND.jul[k])]}))},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
+      scales:{y:{ticks:{callback:fmt}}}}});
+  mk('trendRoas',d=>d.spend?d.rev/d.spend:0,v=>v.toFixed(2));
+  mk('trendConv',d=>P(d.pur,d.lpv),v=>v+'%');
+}
+render();
+</script>
+</body>
+</html>
