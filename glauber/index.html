@@ -22,8 +22,6 @@
   header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
   .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--mut);font-size:11px;padding:3px 9px;border-radius:20px;margin-right:6px}
   h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);margin:34px 0 14px;font-weight:600}
-
-  /* Scorecards */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
   .card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
@@ -31,8 +29,6 @@
   .card .foot{font-size:12px;color:var(--mut);margin-top:6px}
   .card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
   .s-green{background:var(--green)} .s-yellow{background:var(--yellow)} .s-red{background:var(--red)} .s-accent{background:var(--accent)} .s-gray{background:var(--gray)}
-
-  /* Funil */
   .funnel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
   .frow{display:flex;align-items:center;gap:14px;padding:9px 0}
   .frow .name{width:150px;font-size:13px;color:var(--txt);flex-shrink:0}
@@ -43,8 +39,6 @@
   .frow .conv b{font-size:14px}
   .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600;margin-left:6px}
   .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)} .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
-
-  /* Tables */
   table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
   thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
   tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
@@ -55,11 +49,7 @@
   .d-green{background:var(--green)} .d-yellow{background:var(--yellow)} .d-red{background:var(--red)} .d-gray{background:var(--gray)}
   .bench{color:var(--mut);font-size:12px}
   .stage-tag{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;padding:14px 12px 4px;font-weight:700}
-
-  .grid2{display:grid;grid-template-columns:1fr;gap:20px}
   .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
-  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--yellow);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--mut);margin-top:10px}
-  .note b{color:var(--txt)}
   footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
   footer ul{margin:8px 0 0 18px} footer li{margin:4px 0}
   a{color:var(--accent);text-decoration:none}
@@ -81,15 +71,12 @@
     </div>
   </header>
 
-  <!-- ===== RESUMO EXECUTIVO ===== -->
   <h2 class="sec">1 · Resumo Executivo</h2>
   <div class="cards" id="scorecards"></div>
 
-  <!-- ===== FUNIL DE PERDA ===== -->
   <h2 class="sec">2 · Funil de Perda — onde o balde está furando</h2>
   <div class="funnel" id="funnel"></div>
 
-  <!-- ===== 4 ETAPAS COM SEMÁFORO ===== -->
   <h2 class="sec">3 · Diagnóstico por Etapa (semáforo vs. benchmark)</h2>
   <table id="stagetable">
     <thead><tr>
@@ -98,151 +85,112 @@
     <tbody></tbody>
   </table>
 
-  <!-- ===== GRÁFICO TEMPORAL ===== -->
   <h2 class="sec">4 · Lucro Líquido &amp; Investimento (dia a dia)</h2>
   <div class="chartbox"><canvas id="chartLucro" height="110"></canvas></div>
 
-  <!-- ===== POR CAMPANHA ===== -->
-  <h2 class="sec">5 · Ranking por Campanha (só VENDA)</h2>
-  <table id="camptable">
+  <h2 class="sec">5 · Ranking por Campanha (só VENDA) — funil completo</h2>
+  <div style="overflow-x:auto">
+  <table id="camptable" style="min-width:1500px">
     <thead><tr>
-      <th>Campanha</th><th>Público</th><th class="num">Gasto</th><th class="num">LP Views</th>
-      <th class="num">Fluxo</th><th class="num">Conv.Pág</th><th class="num">Compras</th>
-      <th class="num">CPA</th><th class="num">Faturamento</th><th class="num">ROAS</th>
+      <th>Campanha</th><th>Púb.</th>
+      <th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th><th class="num">CTR</th><th class="num">CPC</th><th class="num">Freq.</th>
+      <th class="num">LP Views</th><th class="num">Fluxo</th><th class="num">Custo/LP</th>
+      <th class="num">Checkouts</th><th class="num">Conv.Pág</th><th class="num">Custo/Chk</th>
+      <th class="num">Compras</th><th class="num">Conv.Chk</th><th class="num">CPA</th>
+      <th class="num">Faturam.</th><th class="num">Lucro</th><th class="num">ROAS</th>
+      <th class="num">Perfil</th><th class="num">Custo/Perfil</th>
     </tr></thead>
     <tbody></tbody>
   </table>
+  </div>
 
   <footer>
     <b>Notas técnicas &amp; ressalvas</b>
     <ul>
-      <li><b>Ticket médio varia bastante.</b> Ticket médio realizado no período = <b>R$ 627</b> (mistura de vendas de R$ 97 com vendas de ~R$ 5.000). Os benchmarks de CPA/ROAS abaixo usam os valores de referência do guia (R$ 27–97) e estão <b>provisórios</b> — recalibrar com o ticket real do produto.</li>
+      <li><b>Ticket médio varia bastante.</b> Faturamento ÷ compras dá o ticket médio do período (mistura de vendas de R$ 97 com vendas de ~R$ 5.000). Os benchmarks de CPA/ROAS abaixo usam os valores de referência do guia (R$ 27–97) e estão <b>provisórios</b> — recalibrar com o ticket real do produto.</li>
       <li><b>Campanha de tráfego excluída.</b> O funil ignora a campanha <code>[TRAFEGO][EVENTO_PRESENCIAL][JORNADA_MATOGROSSENSE]</code> (objetivo tráfego, evento presencial) — nunca somar com o funil de VENDA (regra L4).</li>
       <li><b>Subnotificação do Pixel.</b> Dados via Meta Pixel/Windsor sofrem subnotificação pós-iOS14 (15–40%). Validar paridade semanal com a plataforma de vendas.</li>
-      <li><b>Atribuição atrasada.</b> 29/06 registra R$ 16.195 de faturamento com R$ 0 de gasto no dia = conversões de cliques anteriores (boleto/Pix). O faturamento do dia nem sempre pertence ao gasto do dia.</li>
+      <li><b>Atribuição atrasada.</b> Dias com faturamento e pouco/nenhum gasto = conversões de cliques anteriores (boleto/Pix). O faturamento do dia nem sempre pertence ao gasto do dia.</li>
       <li><b>Frequência/Alcance.</b> No total, alcance é a soma por campanha (há sobreposição de pessoas entre campanhas); leia a frequência total como aproximação e prefira a análise por campanha.</li>
     </ul>
-    <div style="margin-top:12px">GGD · Gio Growth Digital — estrutura baseada nos guias "Organização de Métricas" e "Especificação de Dashboard de Funil". Gerado com dados de <span id="gerado">—</span>.</div>
+    <div style="margin-top:12px">GGD · Gio Growth Digital — atualização automática 3×/dia (06h · 14h · 20h). Gerado com dados de <span id="gerado">—</span>.</div>
   </footer>
 
 </div>
 
 <script>
 /* ============================================================
-   DADOS  —  para atualizar o dashboard, troque só este bloco.
-   (funil de VENDA, últimos 30 dias, exclui campanha de TRÁFEGO)
+   DADOS — gerados automaticamente pelo gerar_dash_glauber.py
    ============================================================ */
-const META = {
-  periodo: "últimos 30 dias (09/06 – 05/07/2026)",
-  gerado:  "06/07/2026"
-};
+const META = {"periodo": "últimos 30 dias (09/06 – 03/07/2026)", "gerado": "06/07/2026"};
+const T = {"spend": 17750.75, "impressions": 295261.0, "reach": 139990.0, "linkClicks": 3082.0, "lpViews": 2311.0, "initiateCheckout": 215.0, "purchases": 55.0, "revenue": 34506.8, "profileVisits": 835.0};
+const DAILY = [["09/06", 626.44, 97.0], ["10/06", 332.64, 491.8], ["11/06", 494.93, 691.0], ["12/06", 268.91, 4997.0], ["13/06", 428.02, 494.0], ["14/06", 494.43, 988.0], ["15/06", 583.19, 1285.0], ["16/06", 1474.84, 885.0], ["17/06", 1578.81, 97.0], ["18/06", 527.99, 497.0], ["19/06", 1080.99, 291.0], ["20/06", 1260.62, 299.6], ["21/06", 995.49, 1032.0], ["22/06", 1914.58, 494.0], ["23/06", 1168.68, 638.2], ["24/06", 830.12, 291.0], ["25/06", 1798.67, 2026.0], ["26/06", 1712.86, 2125.6], ["27/06", 178.54, 591.0], ["28/06", 0.0, 0.0], ["29/06", 0.0, 16195.6], ["02/07", 0.0, 0.0], ["03/07", 0.0, 0.0]];
+const CAMPS = [["CBO · PF · 01 · pg02 NV", "Frio", 2517.32, 33880, 18192, 336, 243, 28, 7, 6723.2, 73], ["CBO · PF · 02 · pg02 EH", "Frio", 2268.82, 44013, 14768, 387, 291, 35, 10, 8668.6, 93], ["CBO · PF · 02 · VIDEOS · pg02", "Frio", 2082.06, 43158, 26380, 537, 398, 30, 6, 6679.0, 125], ["CBO · PQ · 02 · pg02", "Quente", 1886.66, 32837, 6215, 262, 241, 29, 11, 2267.8, 110], ["CBO · PF · 01 · pg02", "Frio", 1558.26, 18075, 10144, 218, 172, 18, 4, 1234.6, 70], ["ABO · PF · 02 · pg02", "Frio", 1451.99, 20942, 10879, 208, 182, 11, 2, 194.0, 87], ["CBO · PQ · 02 · pg02 #2", "Quente", 1274.63, 24230, 4764, 152, 139, 18, 6, 7064.0, 62], ["CBO · PF · 01 · pg02 N", "Frio", 852.09, 12538, 8113, 96, 86, 7, 1, 494.0, 29], ["CBO · PF · 02 · pg02", "Frio", 811.7, 11415, 8884, 120, 97, 7, 2, 194.0, 41], ["CBO · PF · 02 · pg02 #2", "Frio", 778.21, 19656, 12078, 539, 268, 6, 0, 0.0, 41], ["CBO · PQ · NEW", "Quente", 764.67, 10075, 3058, 66, 57, 6, 1, 97.0, 34], ["CBO · PQ · pg02", "Quente", 675.82, 8289, 3391, 57, 53, 5, 1, 97.0, 29], ["CBO · PF · 02 · pg02 #3", "Frio", 670.44, 11364, 8655, 78, 61, 14, 4, 793.6, 34], ["CBO · PF · 02 · pg02 #4", "Frio", 158.08, 4789, 4469, 26, 23, 1, 0, 0.0, 7]];
 
-// Totais agregados do funil (VENDA)
-const T = {
-  spend: 17750.75,
-  impressions: 295261,
-  reach: 139990,          // soma por campanha (sobreposição) — aproximação
-  linkClicks: 3082,
-  lpViews: 2311,
-  initiateCheckout: 215,
-  purchases: 55,
-  revenue: 34506.80
-};
-
-// Série diária (VENDA) para o gráfico
-const DAILY = [
-  ["09/06",626.44,97],["10/06",332.64,491.8],["11/06",494.93,691],["12/06",268.91,4997],
-  ["13/06",428.02,494],["14/06",494.43,988],["15/06",583.19,1285],["16/06",1474.84,885],
-  ["17/06",1578.81,97],["18/06",527.99,497],["19/06",1080.99,291],["20/06",1260.62,299.6],
-  ["21/06",995.49,1032],["22/06",1914.58,494],["23/06",1168.68,638.2],["24/06",830.12,291],
-  ["25/06",1798.67,2026],["26/06",1712.86,2125.6],["27/06",178.54,591],["28/06",0,0],
-  ["29/06",0,16195.6],["02/07",0,0],["03/07",0,0]
-];
-
-// Campanhas de VENDA (nome, público, spend, impr, reach, linkClicks, lpv, ic, purch, revenue)
-const CAMPS = [
-  ["CBO · PF · pg02 · VIDEOS","Frio",2082.06,43158,26380,537,398,30,6,6679],
-  ["CBO · PF · pg02 · EH","Frio",2268.82,44013,14768,387,291,35,10,8668.6],
-  ["CBO · PF · pg02 · NV (pg01)","Frio",2517.32,33880,18192,336,243,28,7,6723.2],
-  ["CBO · PQ · pg02","Quente",1886.66,32837,6215,262,241,29,11,2267.8],
-  ["ABO · PF · pg02","Frio",1451.99,20942,10879,208,182,11,2,194],
-  ["CBO · PF · pg02 (pg01)","Frio",1558.26,18075,10144,218,172,18,4,1234.6],
-  ["CBO · PQ · pg02 (#2)","Quente",1274.63,24230,4764,152,139,18,6,7064],
-  ["CBO · PF · pg02 #1","Frio",670.44,11364,8655,78,61,14,4,793.6],
-  ["CBO · PF · pg02 #2","Frio",811.70,11415,8884,120,97,7,2,194],
-  ["CBO · PF · pg02 · N (pg01)","Frio",852.09,12538,8113,96,86,7,1,494],
-  ["CBO · PQ · NEW","Quente",764.67,10075,3058,66,57,6,1,97],
-  ["CBO · PQ · pg02 (#3)","Quente",675.82,8289,3391,57,53,5,1,97],
-  ["CBO · PF · pg02 · (sem venda)","Frio",778.21,19656,12078,539,268,6,0,0],
-  ["CBO · PF · pg02 #3","Frio",158.08,4789,4469,26,23,1,0,0]
-];
 
 /* ============================================================
    BENCHMARKS  (provisórios — valores de referência R$27–97)
-   dir: 'up' = maior é melhor | 'down' = menor é melhor
    ============================================================ */
 const BENCH = {
-  cpm:        {dir:'down', ideal:22,   crit:35,   fmt:'money', label:'R$ 12–22'},
-  ctr:        {dir:'up',   ideal:1.2,  crit:0.7,  fmt:'pct',   label:'> 1,2%'},
-  cpc:        {dir:'down', ideal:1.5,  crit:2.5,  fmt:'money', label:'< R$ 1,50'},
-  freq:       {dir:'down', ideal:3.0,  crit:4.0,  fmt:'dec',   label:'< 3,0'},
-  fluxo:      {dir:'up',   ideal:85,   crit:70,   fmt:'pct',   label:'> 85%'},
-  custoLp:    {dir:'down', ideal:3,    crit:6,    fmt:'money', label:'< R$ 3,00'},
-  convPag:    {dir:'up',   ideal:18,   crit:10,   fmt:'pct',   label:'> 18%'},
-  custoIc:    {dir:'gray', label:'—'},
-  convChk:    {dir:'up',   ideal:45,   crit:30,   fmt:'pct',   label:'> 45%'},
-  cpa:        {dir:'gray', label:'definir c/ ticket real'},
-  roas:       {dir:'up',   ideal:3.5,  crit:1.5,  fmt:'dec',   label:'> 3,5 (mín. 2,0)'}
+  cpm:     {dir:'down', ideal:22,   crit:35,   fmt:'money', label:'R$ 12–22'},
+  ctr:     {dir:'up',   ideal:1.2,  crit:0.7,  fmt:'pct',   label:'> 1,2%'},
+  cpc:     {dir:'down', ideal:1.5,  crit:2.5,  fmt:'money', label:'< R$ 1,50'},
+  freq:    {dir:'down', ideal:3.0,  crit:4.0,  fmt:'dec',   label:'< 3,0'},
+  fluxo:   {dir:'up',   ideal:85,   crit:70,   fmt:'pct',   label:'> 85%'},
+  custoLp: {dir:'down', ideal:3,    crit:6,    fmt:'money', label:'< R$ 3,00'},
+  convPag: {dir:'up',   ideal:18,   crit:10,   fmt:'pct',   label:'> 18%'},
+  custoIc: {dir:'gray', label:'—'},
+  convChk: {dir:'up',   ideal:45,   crit:30,   fmt:'pct',   label:'> 45%'},
+  cpa:     {dir:'gray', label:'definir c/ ticket real'},
+  roas:    {dir:'up',   ideal:3.5,  crit:1.5,  fmt:'dec',   label:'> 3,5 (mín. 2,0)'}
 };
 
-/* ================= helpers ================= */
-const brl = v => "R$ " + (v??0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pct = v => (v??0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
-const dec = v => (v??0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const intf= v => (v??0).toLocaleString('pt-BR');
+const brl = v => "R$ " + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const dec = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf= v => (v||0).toLocaleString('pt-BR');
 const fmt = (v,f)=> f==='money'?brl(v): f==='pct'?pct(v): f==='dec'?dec(v): intf(v);
 
 function status(val,b){
   if(!b || b.dir==='gray') return 'gray';
   if(b.dir==='up')   return val>=b.ideal?'green': val<=b.crit?'red':'yellow';
-  /* down */         return val<=b.ideal?'green': val>=b.crit?'red':'yellow';
+  return val<=b.ideal?'green': val>=b.crit?'red':'yellow';
 }
 
-/* ================= métricas derivadas ================= */
 const M = {
-  cpm:     T.spend/T.impressions*1000,
-  ctr:     T.linkClicks/T.impressions*100,
-  cpc:     T.spend/T.linkClicks,
-  freq:    T.impressions/T.reach,
-  fluxo:   T.lpViews/T.linkClicks*100,
-  custoLp: T.spend/T.lpViews,
-  convPag: T.initiateCheckout/T.lpViews*100,
-  custoIc: T.spend/T.initiateCheckout,
-  convChk: T.purchases/T.initiateCheckout*100,
-  cpa:     T.spend/T.purchases,
-  roas:    T.revenue/T.spend,
+  cpm:     T.impressions? T.spend/T.impressions*1000 : 0,
+  ctr:     T.impressions? T.linkClicks/T.impressions*100 : 0,
+  cpc:     T.linkClicks? T.spend/T.linkClicks : 0,
+  freq:    T.reach? T.impressions/T.reach : 0,
+  fluxo:   T.linkClicks? T.lpViews/T.linkClicks*100 : 0,
+  custoLp: T.lpViews? T.spend/T.lpViews : 0,
+  convPag: T.lpViews? T.initiateCheckout/T.lpViews*100 : 0,
+  custoIc: T.initiateCheckout? T.spend/T.initiateCheckout : 0,
+  convChk: T.initiateCheckout? T.purchases/T.initiateCheckout*100 : 0,
+  cpa:     T.purchases? T.spend/T.purchases : 0,
+  roas:    T.spend? T.revenue/T.spend : 0,
   lucro:   T.revenue - T.spend,
-  ticket:  T.revenue/T.purchases
+  ticket:  T.purchases? T.revenue/T.purchases : 0,
+  custoVisita: T.profileVisits? T.spend/T.profileVisits : 0
 };
 
-/* ================= 1. Scorecards ================= */
 document.getElementById('periodo').textContent = "Período: "+META.periodo;
 document.getElementById('gerado').textContent = META.gerado;
 const roasSt = status(M.roas,BENCH.roas);
 const cards = [
-  {lbl:"Investimento",  val:brl(T.spend),  foot:"Gasto no período",           st:"accent"},
-  {lbl:"Faturamento",   val:brl(T.revenue),foot:"Valor de conversão (Pixel)", st:"accent"},
-  {lbl:"Lucro Líquido", val:brl(M.lucro),  foot:"Faturamento − Gasto",        st:M.lucro>0?"green":"red"},
-  {lbl:"ROAS",          val:dec(M.roas)+"x",foot:"Retorno · ideal > 3,5",     st:roasSt},
+  {lbl:"Investimento",  val:brl(T.spend),   foot:"Gasto no período",           st:"accent"},
+  {lbl:"Faturamento",   val:brl(T.revenue), foot:"Valor de conversão (Pixel)", st:"accent"},
+  {lbl:"Lucro Líquido", val:brl(M.lucro),   foot:"Faturamento − Gasto",        st:M.lucro>0?"green":"red"},
+  {lbl:"ROAS",          val:dec(M.roas)+"x",foot:"Retorno · ideal > 3,5",      st:roasSt},
   {lbl:"Compras",       val:intf(T.purchases),foot:"Ticket médio "+brl(M.ticket), st:"accent"},
-  {lbl:"CPA",           val:brl(M.cpa),    foot:"Custo por compra",            st:"gray"}
+  {lbl:"CPA",           val:brl(M.cpa),     foot:"Custo por compra",           st:"gray"},
+  {lbl:"Visitas ao Perfil",val:intf(T.profileVisits),foot:"Custo/visita "+brl(M.custoVisita), st:"accent"}
 ];
 document.getElementById('scorecards').innerHTML = cards.map(c=>`
   <div class="card"><span class="stripe s-${c.st}"></span>
     <div class="lbl">${c.lbl}</div><div class="val">${c.val}</div><div class="foot">${c.foot}</div>
   </div>`).join('');
 
-/* ================= 2. Funil de Perda ================= */
 const steps = [
   {name:"Impressões",  val:T.impressions,     conv:null},
   {name:"Cliques link",val:T.linkClicks,      conv:{lbl:"CTR",   v:M.ctr,   b:BENCH.ctr}},
@@ -250,7 +198,7 @@ const steps = [
   {name:"Checkouts",   val:T.initiateCheckout,conv:{lbl:"Conv.Pág",v:M.convPag,b:BENCH.convPag}},
   {name:"Compras",     val:T.purchases,       conv:{lbl:"Conv.Chk",v:M.convChk,b:BENCH.convChk}}
 ];
-const maxV = steps[0].val;
+const maxV = steps[0].val || 1;
 document.getElementById('funnel').innerHTML = steps.map(s=>{
   const w = Math.max((s.val/maxV*100),2.4);
   let conv='';
@@ -263,13 +211,14 @@ document.getElementById('funnel').innerHTML = steps.map(s=>{
       ${conv}</div>`;
 }).join('');
 
-/* ================= 3. Tabela por etapa ================= */
 const rows = [
   {stage:"Etapa 1 · Anúncio"},
   {k:"CPM",                     v:M.cpm,     b:BENCH.cpm,     read:"Custo do leilão"},
   {k:"CTR (link)",              v:M.ctr,     b:BENCH.ctr,     read:"Atratividade do criativo"},
   {k:"CPC (link)",              v:M.cpc,     b:BENCH.cpc,     read:"Custo de entrada no funil"},
   {k:"Frequência",              v:M.freq,    b:BENCH.freq,    read:"Saturação (aprox.)"},
+  {k:"Visitas ao Perfil",       v:T.profileVisits, b:{dir:'gray',fmt:'int',label:'—'}, read:"Interesse gerado no perfil (@ecovoltan)"},
+  {k:"Custo por Visita ao Perfil",v:M.custoVisita, b:{dir:'gray',fmt:'money',label:'—'}, read:"Gasto ÷ visitas ao perfil"},
   {stage:"Etapa 2 · Página de Vendas"},
   {k:"Fluxo de Tráfego (Connect)",v:M.fluxo, b:BENCH.fluxo,   read:"LP Views ÷ Cliques"},
   {k:"Custo por LP View",       v:M.custoLp, b:BENCH.custoLp, read:"Custo do prospect qualificado"},
@@ -294,7 +243,6 @@ tb.innerHTML = rows.map(r=>{
     <td class="bench">${r.read}</td></tr>`;
 }).join('');
 
-/* ================= 4. Gráfico temporal ================= */
 new Chart(document.getElementById('chartLucro'),{
   type:'bar',
   data:{ labels:DAILY.map(d=>d[0]),
@@ -310,29 +258,54 @@ new Chart(document.getElementById('chartLucro'),{
       y:{ticks:{color:'#8b98a9',callback:v=>'R$'+v.toLocaleString('pt-BR')},grid:{color:'#1c2330'}}}}
 });
 
-/* ================= 5. Tabela por campanha ================= */
 const ct = document.querySelector('#camptable tbody');
 const campRows = CAMPS.map(c=>{
-  const [name,pub,spend,impr,reach,lc,lpv,ic,pur,rev]=c;
-  const fluxo = lc? lpv/lc*100 : 0;
-  const convPag = lpv? ic/lpv*100 : 0;
-  const cpa = pur? spend/pur : null;
-  const roas = spend? rev/spend : 0;
-  return {name,pub,spend,lpv,fluxo,convPag,pur,cpa,rev,roas};
+  const [name,pub,spend,impr,reach,lc,lpv,ic,pur,rev,pv]=c;
+  return {
+    name, pub, spend, impr, pv, lpv, ic, pur, rev,
+    cpm:     impr? spend/impr*1000 : 0,
+    ctr:     impr? lc/impr*100 : 0,
+    cpc:     lc? spend/lc : 0,
+    freq:    reach? impr/reach : 0,
+    fluxo:   lc? lpv/lc*100 : 0,
+    custoLp: lpv? spend/lpv : 0,
+    convPag: lpv? ic/lpv*100 : 0,
+    custoIc: ic? spend/ic : 0,
+    convChk: ic? pur/ic*100 : 0,
+    cpa:     pur? spend/pur : null,
+    lucro:   rev - spend,
+    roas:    spend? rev/spend : 0,
+    custoPv: pv? spend/pv : 0
+  };
 }).sort((a,b)=>b.spend-a.spend);
 ct.innerHTML = campRows.map(r=>{
-  const fSt=status(r.fluxo,BENCH.fluxo), pSt=status(r.convPag,BENCH.convPag), rSt=status(r.roas,BENCH.roas);
+  const cpmSt=status(r.cpm,BENCH.cpm), ctrSt=status(r.ctr,BENCH.ctr), cpcSt=status(r.cpc,BENCH.cpc),
+        frSt=status(r.freq,BENCH.freq), fSt=status(r.fluxo,BENCH.fluxo), clpSt=status(r.custoLp,BENCH.custoLp),
+        pSt=status(r.convPag,BENCH.convPag), ckSt=status(r.convChk,BENCH.convChk), rSt=status(r.roas,BENCH.roas);
+  const dt=(s)=>`<span class="dot d-${s}"></span>`;
   return `<tr>
     <td class="metric-name">${r.name}</td>
     <td>${r.pub}</td>
     <td class="num">${brl(r.spend)}</td>
+    <td class="num">${intf(r.impr)}</td>
+    <td class="num">${dt(cpmSt)}${brl(r.cpm)}</td>
+    <td class="num">${dt(ctrSt)}${pct(r.ctr)}</td>
+    <td class="num">${dt(cpcSt)}${brl(r.cpc)}</td>
+    <td class="num">${dt(frSt)}${dec(r.freq)}</td>
     <td class="num">${intf(r.lpv)}</td>
-    <td class="num"><span class="dot d-${fSt}"></span>${pct(r.fluxo)}</td>
-    <td class="num"><span class="dot d-${pSt}"></span>${pct(r.convPag)}</td>
+    <td class="num">${dt(fSt)}${pct(r.fluxo)}</td>
+    <td class="num">${dt(clpSt)}${brl(r.custoLp)}</td>
+    <td class="num">${intf(r.ic)}</td>
+    <td class="num">${dt(pSt)}${pct(r.convPag)}</td>
+    <td class="num">${brl(r.custoIc)}</td>
     <td class="num">${intf(r.pur)}</td>
+    <td class="num">${dt(ckSt)}${pct(r.convChk)}</td>
     <td class="num">${r.cpa!=null?brl(r.cpa):'—'}</td>
     <td class="num">${brl(r.rev)}</td>
-    <td class="num"><span class="dot d-${rSt}"></span>${dec(r.roas)}x</td></tr>`;
+    <td class="num">${brl(r.lucro)}</td>
+    <td class="num">${dt(rSt)}${dec(r.roas)}x</td>
+    <td class="num">${intf(r.pv)}</td>
+    <td class="num">${brl(r.custoPv)}</td></tr>`;
 }).join('');
 </script>
 </body>
