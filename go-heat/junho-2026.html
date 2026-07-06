@@ -37,6 +37,11 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .header-sub{font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.3px}
 .header-right{display:flex;align-items:center;gap:12px}
 .header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:700}
+.histnav{background:#fff;border-bottom:1px solid var(--border);padding:11px 36px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;position:sticky;top:76px;z-index:99;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.histnav-lbl{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin-right:2px}
+.histnav a{font-size:12.5px;font-weight:700;color:var(--text-2);text-decoration:none;padding:6px 15px;border-radius:20px;border:1.5px solid var(--border);transition:all .16s}
+.histnav a:hover{border-color:var(--h2);color:var(--h2)}
+.histnav a.atual{background:linear-gradient(135deg,var(--h1),var(--h2));border-color:transparent;color:#fff}
 .container{max-width:1320px;margin:0 auto;padding:26px 36px 40px}
 .watermark{font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;color:var(--text-3);text-align:right;text-transform:uppercase;opacity:.6;margin:2px 0 18px}
 .watermark span{color:var(--h2)}
@@ -116,6 +121,7 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
     <div class="header-badge" id="hdrPeriod">📅 —</div>
   </div>
 </header>
+<nav class="histnav" id="histnav"></nav>
 <div class="container">
   <div class="watermark">GO <span>HEAT</span> · MÊS DE REFERÊNCIA: <span id="wmMes">—</span></div>
 
@@ -200,6 +206,10 @@ const MES_FOCO = 6;      // 1=Jan … 12=Dez  (mês do relatório)
 const ANO_FOCO = 2026;
 const PARCIAL  = false;  // true se o mês ainda não fechou
 const DATA_ATUALIZACAO = '06/07/2026';
+const HISTORICO = [   // meses publicados (mais recente por ultimo); a rotina semanal adiciona novos
+  {rotulo:'Junho/2026', arq:'junho-2026.html'},
+  {rotulo:'Julho/2026', arq:'julho-2026.html'}
+];
 // ╚══════════════════════════════════════════════════════════════════════════╝
 const TAX = 0.1383;      // ISS+IOF (alíquota real da conta)
 const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
@@ -252,6 +262,14 @@ document.getElementById('wmMes').textContent = (MESES_LONG[fi]+' '+ANO_FOCO).toU
 document.getElementById('adsTitle').textContent = '🔥 Anúncios trabalhados em '+MESES_LONG[fi]+'/'+String(ANO_FOCO).slice(2);
 document.getElementById('footUpdate').innerHTML = 'Atualizado em '+DATA_ATUALIZACAO+(PARCIAL?' · <b>'+MESES_LONG[fi]+' ainda em andamento (dados parciais)</b>':'');
 document.title = 'Go Heat — Relatório '+MESES_LONG[fi]+' '+ANO_FOCO;
+
+// ===== NAV HISTORICO (link fixo + navegacao por mes) =====
+(function(){
+  const atual = MESES_LONG[fi]+'/'+ANO_FOCO;
+  document.getElementById('histnav').innerHTML =
+    '<span class="histnav-lbl">Relatórios:</span>' +
+    HISTORICO.map(h=>'<a href="'+h.arq+'"'+(h.rotulo===atual?' class="atual"':'')+'>'+h.rotulo+'</a>').join('');
+})();
 
 // ===== HERO investimento do mês =====
 (function(){
