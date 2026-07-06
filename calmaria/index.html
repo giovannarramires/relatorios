@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Cal.maria · Meta Ads — Julho 2026</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
     --bege-claro:#FAF6F1; --bege:#F2EBDF; --creme:#F5EDE0; --branco:#FFF;
@@ -237,13 +236,6 @@
     <div class="resumo-funil">De cada 100 impressões, <b>3,0%</b> viram clique no link. <b>78,7%</b> dos cliques chegam a acessar o site, <b>0,7%</b> dos acessos adicionam ao carrinho e <b>0,5%</b> dos acessos convertem em compra.</div>
   </div>
 
-  <div class="tag">Evolução</div>
-  <div class="bloco">
-    <div class="bloco-titulo">📈 Evolução semanal</div>
-    <div class="bloco-desc">Investimento e compras por semana (segunda a domingo). Acompanha o ritmo ao longo do tempo.</div>
-    <div class="chart-box"><canvas id="grafico"></canvas></div>
-  </div>
-
   <div class="tag">Quem converte</div>
   <div class="bloco">
     <div class="bloco-titulo" style="color:var(--terracota)">🎯 Públicos que convertem</div>
@@ -409,32 +401,5 @@
   </footer>
 </div>
 
-<script>
-const ctx = document.getElementById('grafico');
-new Chart(ctx, {
-  data: {
-    labels: ["11/05", "18/05", "25/05", "01/06", "08/06", "15/06", "22/06", "29/06", "06/07"],
-    datasets: [
-      { type:'bar', label:'Investimento (R$)', data:[208.37, 150.25, 120.81, 313.5, 434.15, 291.05, 140.83, 351.23, 15.3],
-        backgroundColor:'rgba(191,106,69,.75)', borderRadius:6, yAxisID:'y', order:2 },
-      { type:'line', label:'Compras', data:[1, 11, 5, 13, 20, 16, 7, 6, 0],
-        borderColor:'#2E6E35', backgroundColor:'#2E6E35', borderWidth:3,
-        tension:.35, pointRadius:4, yAxisID:'y1', order:1 }
-    ]
-  },
-  options: {
-    responsive:true, maintainAspectRatio:false,
-    interaction:{mode:'index',intersect:false},
-    plugins:{ legend:{labels:{font:{family:'Trebuchet MS'},color:'#3D2718'}} },
-    scales:{
-      y:{ position:'left', title:{display:true,text:'Investimento (R$)'},
-          grid:{color:'rgba(61,39,24,.06)'}, ticks:{color:'#3D2718'} },
-      y1:{ position:'right', title:{display:true,text:'Compras'}, beginAtZero:true,
-           grid:{drawOnChartArea:false}, ticks:{color:'#2E6E35',precision:0} },
-      x:{ grid:{display:false}, ticks:{color:'#3D2718'} }
-    }
-  }
-});
-</script>
 </body>
 </html>
