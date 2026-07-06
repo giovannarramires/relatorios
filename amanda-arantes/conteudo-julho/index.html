@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanda Arantes · Sugestões de Conteúdo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nude:#e7d3c4; --nude-soft:#f6ece5; --sand:#c9a58a; --cocoa:#8a6551;
+    --deep:#4a3528; --ink:#3a2c22; --gold:#b98d5f; --cream:#fbf7f3; --line:#eaddd2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+
+  .hero{background:linear-gradient(135deg,#f6ece5 0%,#e7d3c4 55%,#d9bda8 100%);padding:76px 24px 64px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 22% 22%,rgba(255,255,255,.5),transparent 45%)}
+  .hero .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:12px;color:var(--cocoa);font-weight:500;margin-bottom:18px;position:relative}
+  .hero h1{font-size:56px;font-weight:600;color:var(--deep);line-height:1.06;position:relative}
+  .hero .sub{font-size:19px;color:var(--cocoa);margin-top:14px;font-weight:300;position:relative}
+  .hero .period{display:inline-block;margin-top:24px;padding:9px 26px;border:1px solid var(--sand);border-radius:40px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:rgba(255,255,255,.35);position:relative}
+
+  .intro{padding:56px 0 20px;text-align:center}
+  .intro p{font-size:19px;color:var(--ink);font-weight:300;max-width:680px;margin:0 auto}
+  .intro .serif-lead{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--deep);font-style:italic;margin-bottom:18px}
+  .intro strong{color:var(--cocoa);font-weight:500}
+
+  section{padding:34px 0}
+  .s-title{text-align:center;margin-bottom:38px}
+  .s-title .eyebrow{letter-spacing:.35em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:600}
+  .s-title h2{font-size:38px;color:var(--deep);font-weight:600;margin-top:6px}
+
+  .pilar{display:flex;gap:28px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;margin-bottom:24px;box-shadow:0 10px 34px rgba(138,101,81,.07)}
+  .p-side{flex:none;width:78px;text-align:center}
+  .p-ic{font-size:40px}
+  .p-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--sand);line-height:1;margin-top:6px}
+  .p-tag{letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;color:var(--gold);font-weight:600}
+  .p-body h3{font-size:32px;color:var(--deep);font-weight:600;margin:4px 0 10px}
+  .p-desc{color:var(--ink);font-weight:300;font-size:15.5px}
+  .p-freq{display:inline-block;margin:16px 0 6px;background:var(--nude-soft);color:var(--cocoa);font-size:13px;font-weight:500;padding:7px 16px;border-radius:30px}
+  .p-ideias-t{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--deep);font-weight:600;margin-top:14px}
+  .p-ideias{list-style:none;margin-top:8px}
+  .p-ideias li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--ink);font-weight:300;font-size:15px}
+  .p-ideias li::before{content:"✧";position:absolute;left:0;color:var(--sand);font-size:15px}
+
+  .semana{background:linear-gradient(135deg,#6f4d3c,#8a6551);border-radius:24px;padding:44px 38px;box-shadow:0 20px 50px rgba(111,77,60,.26)}
+  .semana h2{text-align:center;font-family:'Cormorant Garamond',serif;font-size:34px;color:#fff;font-weight:600;margin-bottom:6px}
+  .semana .leg{text-align:center;color:#e7d3c4;font-weight:300;margin-bottom:28px;font-size:14.5px}
+  .dias{display:flex;flex-direction:column;gap:10px}
+  .dia{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:15px 22px}
+  .d-nome{font-family:'Cormorant Garamond',serif;font-size:21px;color:#fff;font-weight:600}
+  .d-tema{color:#f0dccd;font-size:14.5px;font-weight:300}
+
+  .fecho{text-align:center;padding:56px 24px 20px}
+  .fecho .serif{font-size:30px;color:var(--deep);font-style:italic;font-weight:500;max-width:640px;margin:0 auto 14px}
+  .fecho p{color:var(--cocoa);font-weight:300;max-width:600px;margin:0 auto;font-size:16px}
+
+  footer{text-align:center;padding:44px 24px 46px;color:var(--cocoa)}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--deep);font-weight:600}
+  footer .sm{font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-top:8px;opacity:.75}
+
+  @media(max-width:720px){
+    .hero h1{font-size:40px}
+    .pilar{flex-direction:column;gap:14px;padding:26px}
+    .p-side{width:auto;display:flex;gap:14px;align-items:center}
+    .p-n{margin-top:0}
+    .dia{flex-direction:column;align-items:flex-start;gap:4px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Estratégia de Conteúdo</div>
+  <h1>Vamos crescer juntas ✨</h1>
+  <div class="sub">Sugestões de conteúdo para atrair novos seguidores</div>
+  <div class="period">Julho de 2026</div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <div class="serif-lead">Amanda, olhamos com carinho tudo o que você postou.</div>
+    <p>Cruzamos o seu conteúdo do Instagram com o que roda nos anúncios e chegamos a uma conclusão linda: <strong>o que mais faz gente nova te seguir é você sendo você</strong> — a mãe, a mulher real, o seu olhar de estilo. Aqui vão três caminhos para julho, pensados para trazer <strong>mais seguidores certos</strong>, daqueles que ficam e se identificam.</p>
+  </div>
+
+  <section>
+    <div class="s-title">
+      <div class="eyebrow">O Caminho</div>
+      <h2>Três pilares de conteúdo</h2>
+    </div>
+    
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">💛</div>
+        <div class="p-n">01</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar que mais traz seguidores</div>
+        <h3>Maternidade & Emoção</h3>
+        <p class="p-desc">São os conteúdos que mais fazem gente nova querer te seguir. Quando você fala da Heleonora e da sua história, o público se identifica e fica. É o seu conteúdo mais poderoso — e o que menos apareceu em junho.</p>
+        <div class="p-freq">🎬 2 Reels por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“Coisas que ninguém me contou sobre ser mãe” — sua voz sobre cenas reais do dia</li>
+<li>O ritual da noite com a Heleonora (a música que você canta pra ela)</li>
+<li>Uma memória da sua infância recriada hoje com a sua filha</li>
+<li>Carta em vídeo: o que a maternidade mudou em você</li>
+<li>“Um dia comigo e a Heleonora” — rotina real, sem roteiro</li></ul>
+      </div>
+    </div>
+
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">✨</div>
+        <div class="p-n">02</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar do alcance</div>
+        <h3>Lifestyle com Revelação</h3>
+        <p class="p-desc">Seus maiores virais nasceram aqui: transformação, bastidor e aquele “antes e depois” que prende. É o conteúdo aspiracional que traz gente nova de fora e mostra o seu estilo de vida.</p>
+        <div class="p-freq">🎬 2 Reels por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“Arrume-se comigo para…” — um compromisso, um evento, um jantar</li>
+<li>“Duas versões minhas” — a mesma base, dois estilos diferentes</li>
+<li>Bastidor de um ensaio, viagem ou parceria</li>
+<li>“Chic sem esforço” — elevar um look simples com poucos detalhes</li>
+<li>Um dia na sua vida: treino, casa e os pequenos rituais</li></ul>
+      </div>
+    </div>
+
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">🔖</div>
+        <div class="p-n">03</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar que o algoritmo ama</div>
+        <h3>Moda que dá vontade de salvar</h3>
+        <p class="p-desc">Conteúdo útil que as pessoas salvam para ver depois — e quanto mais salvam, mais o Instagram entrega para gente nova. Aqui entra a sua autoridade em moda e tendência.</p>
+        <div class="p-freq">🎬 1 Reel por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“1 peça, 4 looks” — versatilidade em 15 segundos</li>
+<li>A tendência da estação explicada (alfaiataria, tons do inverno…)</li>
+<li>Sua lista de desejos da estação</li>
+<li>“Detalhes que elevam qualquer produção” — dicas rápidas de styling</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="semana">
+      <h2>Uma semana ideal</h2>
+      <div class="leg">Cerca de 5 Reels por semana — o formato que mais alcança gente nova</div>
+      <div class="dias">
+        <div class="dia"><span class="d-nome">Segunda</span><span class="d-tema">💛 Maternidade / emoção</span></div>
+<div class="dia"><span class="d-nome">Terça</span><span class="d-tema">✨ Lifestyle com revelação</span></div>
+<div class="dia"><span class="d-nome">Quarta</span><span class="d-tema">🔖 Moda salvável</span></div>
+<div class="dia"><span class="d-nome">Quinta</span><span class="d-tema">💛 Maternidade / emoção</span></div>
+<div class="dia"><span class="d-nome">Sexta</span><span class="d-tema">✨ Lifestyle com revelação</span></div>
+<div class="dia"><span class="d-nome">Sábado</span><span class="d-tema">Stories & bastidores</span></div>
+<div class="dia"><span class="d-nome">Domingo</span><span class="d-tema">Descanso / repost do melhor da semana</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fecho">
+    <div class="serif">“Quando o conteúdo é verdadeiro, o seguidor certo chega — e fica.”</div>
+    <p>Essas são sugestões para inspirar. O tom, o timing e a magia continuam sendo seus. A gente cuida dos dados e dos anúncios para levar cada Reel seu ainda mais longe. 🤍</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="brand">Gio Growth Digital</div>
+  <div class="sm">Estratégia de Conteúdo · Julho 2026</div>
+</footer>
+
+</body>
+</html>
