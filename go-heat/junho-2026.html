@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  RELATÓRIO META ADS — GO HEAT                                     ║
+  ║  Giovanna Ramires · Gestão GGD                                    ║
+  ║  Comparativo histórico 2025×2026 + Investimento mensal (c/ imposto)║
+  ║  + anúncios do mês (clicáveis)                                     ║
+  ║                                                                    ║
+  ║  ► Para gerar o relatório de outro mês, altere MES_FOCO (nº 1-12) ║
+  ║    e ANO_FOCO no bloco CONFIG do <script>. Nada mais muda.         ║
+  ║  Imposto = 13,83% (ISS+IOF) — alíquota real da conta, conferida    ║
+  ║  no relatório de transações do Gerenciador de Pagamentos.          ║
+  ║  Fonte: Meta Ads (CA- Go Heat 388563776008716) via Windsor.ai      ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Heat — Relatório Meta Ads</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow:0 4px 12px rgba(0,0,0,.08);--shadow-lg:0 10px 30px rgba(0,0,0,.12);--radius:14px;
+--h1:#7a1815;--h2:#e0a51c;--ink:#241008}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+/* marca d'água / faixa de marca Go Heat ao longo do documento */
+.brandstrip{background:var(--ink);color:#fff;text-align:center;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:6px;font-size:12px;padding:7px 0;text-transform:uppercase;opacity:.95}
+.brandstrip span{color:var(--h2)}
+.header{background:linear-gradient(135deg,var(--h1) 0%,var(--h2) 100%);padding:0 36px;height:76px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.header-left{display:flex;align-items:center;gap:15px}
+.logo{width:52px;height:52px;border-radius:12px;background:#1a1207;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;line-height:.9;border:2px solid rgba(255,255,255,.35)}
+.logo b{color:#fff;font-size:15px;font-weight:700}.logo i{color:var(--h2);font-size:15px;font-weight:700;font-style:normal}.logo-img{height:54px;width:auto;max-width:130px;border-radius:11px;background:#eceef2;padding:5px 9px;display:block;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.header-title{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:1px}
+.header-sub{font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.3px}
+.header-right{display:flex;align-items:center;gap:12px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:700}
+.container{max-width:1320px;margin:0 auto;padding:26px 36px 40px}
+.watermark{font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;color:var(--text-3);text-align:right;text-transform:uppercase;opacity:.6;margin:2px 0 18px}
+.watermark span{color:var(--h2)}
+.section-header{display:flex;align-items:baseline;gap:10px;margin:34px 0 15px}
+.section-tag{width:4px;height:20px;background:var(--h2);border-radius:3px;align-self:center}
+.section-title{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:.5px;color:var(--text);text-transform:uppercase}
+.section-hint{font-size:11px;color:var(--text-3)}
+/* HERO investimento do mês */
+.hero{background:linear-gradient(135deg,#1a1207 0%,#3b1f0a 60%,var(--h1) 130%);border-radius:18px;padding:26px 30px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero::after{content:'🥊';position:absolute;right:22px;bottom:-14px;font-size:110px;opacity:.08}
+.hero-label{font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:13px;color:var(--h2);font-weight:600;margin-bottom:16px}
+.hero-row{display:flex;flex-wrap:wrap;gap:14px}
+.hero-box{flex:1;min-width:160px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:16px 18px}
+.hero-box.total{background:rgba(249,115,22,.22);border-color:rgba(249,115,22,.5)}
+.hb-l{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:8px}
+.hb-v{font-size:27px;font-weight:900;letter-spacing:-.5px;font-family:'Inter'}
+.hb-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px}
+.plus{align-self:center;font-size:26px;font-weight:300;color:rgba(255,255,255,.5)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.kpi-bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--h2)}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);margin-bottom:10px}
+.kpi-value{font-size:23px;font-weight:900;letter-spacing:-.5px;line-height:1;margin-bottom:8px}
+.kpi-sub{font-size:11px;color:var(--text-3)}
+.delta{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:7px}
+.delta.up{background:#dcfce7;color:#16a34a}.delta.down{background:#fee2e2;color:#dc2626}.delta.flat{background:#f1f5f9;color:#64748b}
+.card{background:var(--surface);border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow-sm);overflow-x:auto}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:14px}
+.chart-title{font-size:15px;font-weight:800;color:var(--text)}.chart-subtitle{font-size:12px;color:var(--text-3);margin-top:2px}
+.metric-pills{display:flex;gap:6px;flex-wrap:wrap}
+.mpill{padding:7px 15px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text-2);transition:all .16s;user-select:none;white-space:nowrap}
+.mpill:hover{border-color:var(--h2);color:var(--h2)}.mpill.active{background:var(--h2);border-color:var(--h2);color:#fff}
+.chart-area{height:300px;position:relative}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:right;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);padding:10px 12px;border-bottom:2px solid var(--border);white-space:nowrap}
+th:first-child{text-align:left}
+td{text-align:right;font-size:12.5px;padding:11px 12px;border-bottom:1px solid #f1f5f9;color:var(--text-2);white-space:nowrap}
+td:first-child{text-align:left;font-weight:700;color:var(--text)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fff7ed}
+tbody tr.focus td{background:#fff7ed;box-shadow:inset 3px 0 0 var(--h2)}
+tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background:#fff2e6!important;border-top:2px solid var(--border)!important;border-bottom:none!important}
+.td-tax{color:#c2410c!important}.td-total{color:var(--text)!important;font-weight:800}
+.yoy{font-size:10.5px;font-weight:800;padding:1px 6px;border-radius:6px}
+.yoy.up{background:#dcfce7;color:#16a34a}.yoy.down{background:#fee2e2;color:#dc2626}
+.ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.ad-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1.5px solid var(--border);transition:all .2s;overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+.ad-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--h2)}
+.ad-top{padding:15px 18px 12px;border-bottom:1px solid #f1f5f9}
+.ad-rank{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:7px;background:var(--h2);color:#fff;font-size:11px;font-weight:900;margin-right:8px;font-family:'Oswald'}
+.ad-rank.gray{background:#cbd5e1}
+.ad-name{font-size:13px;font-weight:800;color:var(--text);letter-spacing:-.2px;line-height:1.25;display:inline}
+.ad-camp{font-size:10px;color:var(--text-3);margin-top:7px;font-weight:600}
+.ad-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#f1f5f9}
+.ad-m{background:var(--surface);padding:11px 16px}
+.ad-m-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);margin-bottom:4px}
+.ad-m-value{font-size:16px;font-weight:900;color:var(--text);letter-spacing:-.3px}.ad-m-value.orange{color:var(--h2)}
+.ad-link{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;background:#fff7ed;color:var(--h1);font-size:12px;font-weight:800;transition:all .16s}
+.ad-card:hover .ad-link{background:var(--h2);color:#fff}
+.foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:36px;line-height:1.8;padding-top:20px;border-top:1px solid var(--border)}
+.foot b{color:var(--text-2)}
+@media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.container{padding:16px}.header{padding:0 16px;height:64px}.header-title{font-size:19px}.kpi-grid{grid-template-columns:1fr 1fr}.hero-box{min-width:130px}}
+</style>
+</head>
+<body>
+<div class="brandstrip">GO <span>HEAT</span> &nbsp;·&nbsp; RELATÓRIO DE TRÁFEGO META ADS &nbsp;·&nbsp; GESTÃO <span>GGD</span></div>
+<header class="header">
+  <div class="header-left">
+    <img class="logo-img" src="logo-go-heat.png" alt="Go Heat" onerror="this.remove();var f=document.getElementById(String.fromCharCode(108,111,103,111,70,98));if(f)f.style.display=String.fromCharCode(102,108,101,120)"><div class="logo" id="logoFb" style="display:none"><b>GO</b><i>HEAT</i></div>
+    <div>
+      <div class="header-title">GO HEAT</div>
+      <div class="header-sub">Relatório Meta Ads · Campanha de Mensagens (Direct)</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge" id="hdrPeriod">📅 —</div>
+  </div>
+</header>
+<div class="container">
+  <div class="watermark">GO <span>HEAT</span> · MÊS DE REFERÊNCIA: <span id="wmMes">—</span></div>
+
+  <!-- INVESTIMENTO DO MÊS (HERO) -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">💰 Investimento do mês</div>
+    <div class="section-hint" id="invHint">Campanha + Imposto (ISS+IOF 13,83%) = Total pago</div>
+  </div>
+  <div class="hero">
+    <div class="hero-label" id="heroLabel">Investimento —</div>
+    <div class="hero-row">
+      <div class="hero-box"><div class="hb-l">Valor de campanha</div><div class="hb-v" id="hCamp">—</div><div class="hb-s">Mídia veiculada no Meta</div></div>
+      <div class="plus">+</div>
+      <div class="hero-box"><div class="hb-l">Imposto (13,83%)</div><div class="hb-v" id="hTax">—</div><div class="hb-s">ISS + IOF</div></div>
+      <div class="plus">=</div>
+      <div class="hero-box total"><div class="hb-l">Total pago</div><div class="hb-v" id="hTot">—</div><div class="hb-s">Débito real na fatura</div></div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE DO MÊS -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">📊 Performance do mês</div>
+    <div class="section-hint" id="perfHint">Comparado ao mesmo mês de 2025</div>
+  </div>
+  <div class="kpi-grid" id="kpiGrid"></div>
+
+  <!-- INVESTIMENTO MENSAL DETALHADO -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">🧾 Investimento mensal · Campanha · Imposto · Total</div>
+    <div class="section-hint">Toda vez que o relatório é atualizado, este quadro mostra o pago em cada mês</div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div><div class="chart-title">Quadro de investimento por mês</div><div class="chart-subtitle">Imposto de 13,83% (ISS+IOF) — alíquota real da conta conferida no relatório de transações</div></div></div>
+    <table>
+      <thead><tr><th>Mês</th>
+        <th>Campanha 25</th><th>Imposto 25</th><th>Total 25</th>
+        <th>Campanha 26</th><th>Imposto 26</th><th>Total 26</th></tr></thead>
+      <tbody id="invBody"></tbody>
+      <tfoot id="invFoot"></tfoot>
+    </table>
+  </div>
+
+  <!-- COMPARATIVO HISTÓRICO -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">📈 Comparativo histórico · 2025 × 2026</div>
+    <div class="section-hint">Selecione a métrica</div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-header">
+      <div><div class="chart-title" id="chartTitle">Investimento (R$)</div><div class="chart-subtitle">Barras cinza = 2025 · Barras laranja = 2026</div></div>
+      <div class="metric-pills" id="metricPills"></div>
+    </div>
+    <div class="chart-area"><canvas id="mainChart"></canvas></div>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Mês</th>
+        <th>Invest. 25</th><th>Invest. 26</th><th>Cliques 25</th><th>Cliques 26</th>
+        <th>Msg 25</th><th>Msg 26</th><th>Custo/Msg 25</th><th>Custo/Msg 26</th></tr></thead>
+      <tbody id="tblBody"></tbody>
+      <tfoot id="tblFoot"></tfoot>
+    </table>
+  </div>
+
+  <!-- ADS DO MÊS -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title" id="adsTitle">🔥 Anúncios trabalhados no mês</div>
+    <div class="section-hint">Clique no card para abrir o criativo no Instagram</div>
+  </div>
+  <div class="ads-grid" id="adsGrid"></div>
+
+  <div class="foot">
+    <b>GO HEAT</b> · Relatório gerado por <b>Giovanna Ramires — Gestão GGD</b> · Fonte: Meta Ads (conta CA- Go Heat) via Windsor.ai<br>
+    Mensagens = <em>conversas iniciadas por mensagem (janela 7 dias)</em> · Imposto = 13,83% (ISS+IOF), alíquota real conferida no relatório de transações da conta<br>
+    <span id="footUpdate"></span>
+  </div>
+</div>
+
+<script>
+// ╔═══════════════ CONFIG — altere só isto p/ gerar outro mês ═══════════════╗
+const MES_FOCO = 6;      // 1=Jan … 12=Dez  (mês do relatório)
+const ANO_FOCO = 2026;
+const PARCIAL  = false;  // true se o mês ainda não fechou
+const DATA_ATUALIZACAO = '06/07/2026';
+// ╚══════════════════════════════════════════════════════════════════════════╝
+const TAX = 0.1383;      // ISS+IOF (alíquota real da conta)
+const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const MESES_LONG = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+// ===== DADOS MENSAIS (valor de CAMPANHA, sem imposto) =====
+const D25 = {
+  spend:[1647.44,1267.95,1536.68,1297.54,1808.88,1262.21,1249.56,1952.97,1491.75,1804.03,2622.43,1565.78],
+  clicks:[562,415,426,368,563,487,442,716,566,653,925,529],
+  msgs:[146,116,128,99,139,100,116,184,175,158,157,118],
+  cpm:[11.28,10.93,12.01,13.11,13.01,12.62,10.77,10.61,8.52,11.42,16.70,13.27]
+};
+const D26 = {
+  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,392.16],
+  clicks:[824,650,727,499,1049,1337,170],
+  msgs:[267,204,202,153,244,327,34],
+  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,11.53]
+};
+// ===== ANÚNCIOS por mês (ordenados por investimento) =====
+const ADS_BY_MONTH = {
+  6:[
+    {name:'AD_CONHEÇA_GO_HEAT',        spend:1215.15, clicks:738, msgs:177, cpm:6.87,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:589.93,  clicks:274, msgs:80,  cpm:7.37,  url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD_APRESENTANDO_ACADEMIA',  spend:418.90,  clicks:188, msgs:42,  cpm:9.97,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD_MULHER_TB_PODE_DEVE',    spend:322.96,  clicks:115, msgs:23,  cpm:14.04, url:'https://www.instagram.com/p/DZpXekCDJCZ/'},
+    {name:'AD05_JIU',                  spend:28.09,   clicks:11,  msgs:3,   cpm:9.36,  url:'https://www.instagram.com/p/DaK7iAhM12W/'},
+    {name:'AD_PERNAS_DEFINIDAS',       spend:25.71,   clicks:10,  msgs:0,   cpm:null,  url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
+    {name:'AD_TREINE_HOJE',            spend:4.19,    clicks:1,   msgs:1,   cpm:4.19,  url:'https://www.instagram.com/p/DXeffwmjIVs/'}
+  ],
+  7:[
+    {name:'AD_PERNAS_DEFINIDAS',       spend:113.14, clicks:40, msgs:6,  cpm:18.86, url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
+    {name:'AD_CONHEÇA_GO_HEAT',        spend:106.99, clicks:55, msgs:12, cpm:8.92,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:88.73,  clicks:42, msgs:8,  cpm:11.09, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD05_JIU',                  spend:83.92,  clicks:33, msgs:8,  cpm:10.49, url:'https://www.instagram.com/p/DaK7iAhM12W/'}
+  ]
+};
+
+// ===== HELPERS =====
+const brl = n => 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const brl0 = n => 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const num = n => n.toLocaleString('pt-BR');
+const sum = a => a.reduce((x,y)=>x+y,0);
+const N26 = D26.spend.length;
+const fi = MES_FOCO-1; // índice do mês foco
+const has26focus = ANO_FOCO===2026 && fi<N26;
+
+// ===== CABEÇALHO / MÊS =====
+document.getElementById('hdrPeriod').textContent = '📅 '+MESES_LONG[fi]+' '+ANO_FOCO+(PARCIAL?' (parcial)':'');
+document.getElementById('wmMes').textContent = (MESES_LONG[fi]+' '+ANO_FOCO).toUpperCase();
+document.getElementById('adsTitle').textContent = '🔥 Anúncios trabalhados em '+MESES_LONG[fi]+'/'+String(ANO_FOCO).slice(2);
+document.getElementById('footUpdate').innerHTML = 'Atualizado em '+DATA_ATUALIZACAO+(PARCIAL?' · <b>'+MESES_LONG[fi]+' ainda em andamento (dados parciais)</b>':'');
+document.title = 'Go Heat — Relatório '+MESES_LONG[fi]+' '+ANO_FOCO;
+
+// ===== HERO investimento do mês =====
+(function(){
+  const camp = (ANO_FOCO===2026?D26:D25).spend[fi];
+  const tax = camp*TAX, tot = camp+tax;
+  document.getElementById('heroLabel').textContent = 'Investimento · '+MESES_LONG[fi]+' '+ANO_FOCO+(PARCIAL?' (parcial)':'');
+  document.getElementById('hCamp').textContent = brl(camp);
+  document.getElementById('hTax').textContent = brl(tax);
+  document.getElementById('hTot').textContent = brl(tot);
+})();
+
+// ===== KPIs performance do mês vs mesmo mês 2025 =====
+function deltaBadge(v26,v25,invert){
+  if(v25==null||v25===0) return '<span class="delta flat">—</span>';
+  let p=(v26-v25)/v25*100, good=invert?p<0:p>0;
+  let cls=Math.abs(p)<0.5?'flat':(good?'up':'down'), a=p>0?'▲':(p<0?'▼':'•');
+  return `<span class="delta ${cls}">${a} ${Math.abs(p).toFixed(1)}%</span>`;
+}
+(function(){
+  const cur = ANO_FOCO===2026?D26:D25;
+  const s=cur.spend[fi], c=cur.clicks[fi], m=cur.msgs[fi], cp=cur.cpm[fi];
+  const p25={s:D25.spend[fi],c:D25.clicks[fi],m:D25.msgs[fi],cp:D25.cpm[fi]};
+  const ref = ANO_FOCO===2026;
+  const R = MESES[fi]+'/25';
+  const kpis=[
+    {l:'Investimento (campanha)',v:brl0(s),sub:ref?`${R}: ${brl0(p25.s)}`:'',d:ref?deltaBadge(s,p25.s,false):''},
+    {l:'Cliques no link',v:num(c),sub:ref?`${R}: ${num(p25.c)}`:'',d:ref?deltaBadge(c,p25.c,false):''},
+    {l:'Mensagens iniciadas',v:num(m),sub:ref?`${R}: ${num(p25.m)}`:'',d:ref?deltaBadge(m,p25.m,false):''},
+    {l:'Custo por mensagem',v:brl(cp),sub:ref?`${R}: ${brl(p25.cp)}`:'',d:ref?deltaBadge(cp,p25.cp,true):''}
+  ];
+  document.getElementById('kpiGrid').innerHTML=kpis.map(k=>`
+    <div class="kpi"><div class="kpi-bar"></div><div class="kpi-label">${k.l}</div>
+    <div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.sub} &nbsp; ${k.d}</div></div>`).join('');
+})();
+
+// ===== INVESTIMENTO MENSAL (campanha/imposto/total) =====
+(function(){
+  let rows='';
+  for(let i=0;i<12;i++){
+    const c25=D25.spend[i], has26=i<N26, c26=has26?D26.spend[i]:null;
+    const foc = (ANO_FOCO===2026&&i===fi);
+    rows+=`<tr class="${foc?'focus':''}"><td>${MESES[i]}${(has26&&i===6)?' *':''}</td>
+      <td>${brl0(c25)}</td><td class="td-tax">${brl0(c25*TAX)}</td><td class="td-total">${brl0(c25*(1+TAX))}</td>
+      <td>${has26?brl0(c26):'—'}</td><td class="td-tax">${has26?brl0(c26*TAX):'—'}</td><td class="td-total">${has26?brl0(c26*(1+TAX)):'—'}</td></tr>`;
+  }
+  document.getElementById('invBody').innerHTML=rows;
+  const s25=sum(D25.spend), s26=sum(D26.spend);
+  document.getElementById('invFoot').innerHTML=`<tr><td>TOTAL</td>
+    <td>${brl0(s25)}</td><td class="td-tax">${brl0(s25*TAX)}</td><td class="td-total">${brl0(s25*(1+TAX))}</td>
+    <td>${brl0(s26)}</td><td class="td-tax">${brl0(s26*TAX)}</td><td class="td-total">${brl0(s26*(1+TAX))}</td></tr>`;
+})();
+
+// ===== TABELA COMPARATIVA PERFORMANCE =====
+(function(){
+  const yoy=(a,b,inv)=>{if(b==null||a==null||b===0)return'';let p=(a-b)/b*100,g=inv?p<0:p>0;return ` <span class="yoy ${g?'up':'down'}">${p>0?'+':''}${p.toFixed(0)}%</span>`;};
+  let rows='';
+  for(let i=0;i<12;i++){
+    const h=i<N26;
+    rows+=`<tr class="${(ANO_FOCO===2026&&i===fi)?'focus':''}"><td>${MESES[i]}${(h&&i===6)?' *':''}</td>
+      <td>${brl0(D25.spend[i])}</td><td>${h?brl0(D26.spend[i])+yoy(D26.spend[i],D25.spend[i],false):'—'}</td>
+      <td>${num(D25.clicks[i])}</td><td>${h?num(D26.clicks[i])+yoy(D26.clicks[i],D25.clicks[i],false):'—'}</td>
+      <td>${num(D25.msgs[i])}</td><td>${h?num(D26.msgs[i])+yoy(D26.msgs[i],D25.msgs[i],false):'—'}</td>
+      <td>${brl(D25.cpm[i])}</td><td>${h?brl(D26.cpm[i]):'—'}</td></tr>`;
+  }
+  document.getElementById('tblBody').innerHTML=rows;
+  const s25=sum(D25.spend),s26=sum(D26.spend),c25=sum(D25.clicks),c26=sum(D26.clicks),m25=sum(D25.msgs),m26=sum(D26.msgs);
+  document.getElementById('tblFoot').innerHTML=`<tr><td>TOTAL</td>
+    <td>${brl0(s25)}</td><td>${brl0(s26)}</td><td>${num(c25)}</td><td>${num(c26)}</td>
+    <td>${num(m25)}</td><td>${num(m26)}</td><td>${brl(s25/m25)}</td><td>${brl(s26/m26)}</td></tr>`;
+})();
+
+// ===== GRÁFICO =====
+const METRICS={spend:{t:'Investimento (R$)',f:v=>brl0(v)},clicks:{t:'Cliques no link',f:v=>num(v)},
+  msgs:{t:'Mensagens iniciadas',f:v=>num(v)},cpm:{t:'Custo por mensagem (R$)',f:v=>brl(v)}};
+let chart, cur='spend';
+document.getElementById('metricPills').innerHTML=Object.keys(METRICS).map(k=>
+  `<div class="mpill ${k==='spend'?'active':''}" data-k="${k}">${METRICS[k].t.replace(' (R$)','')}</div>`).join('');
+document.querySelectorAll('.mpill').forEach(p=>p.onclick=()=>{
+  document.querySelectorAll('.mpill').forEach(x=>x.classList.remove('active'));p.classList.add('active');cur=p.dataset.k;render();});
+function render(){
+  const M=METRICS[cur];document.getElementById('chartTitle').textContent=M.t;
+  const d26=D26[cur].concat(Array(12-N26).fill(null));
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('mainChart'),{type:'bar',
+    data:{labels:MESES,datasets:[
+      {label:'2025',data:D25[cur],backgroundColor:'#cbd5e1',borderRadius:5,barPercentage:.72,categoryPercentage:.7},
+      {label:'2026',data:d26,backgroundColor:'#f97316',borderRadius:5,barPercentage:.72,categoryPercentage:.7}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{family:'Inter',weight:'700',size:12},usePointStyle:true,pointStyle:'circle',padding:16}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+(c.parsed.y==null?'—':M.f(c.parsed.y))}}},
+      scales:{x:{grid:{display:false},ticks:{font:{family:'Inter',weight:'600'}}},
+        y:{beginAtZero:true,grid:{color:'#f1f5f9'},ticks:{font:{family:'Inter'},callback:v=>M.f(v)}}}}});
+}
+render();
+
+// ===== ADS DO MÊS =====
+(function(){
+  const ADS = ADS_BY_MONTH[MES_FOCO]||[];
+  document.getElementById('adsGrid').innerHTML=ADS.map((a,i)=>`
+    <a class="ad-card" href="${a.url}" target="_blank" rel="noopener">
+      <div class="ad-top"><span class="ad-rank ${a.msgs===0?'gray':''}">${i+1}</span>
+        <span class="ad-name">${a.name}</span>
+        <div class="ad-camp">[GGD][MENSAGEM][DIRECT][GO_HEAT]</div></div>
+      <div class="ad-metrics">
+        <div class="ad-m"><div class="ad-m-label">Investimento</div><div class="ad-m-value">${brl(a.spend)}</div></div>
+        <div class="ad-m"><div class="ad-m-label">Cliques no link</div><div class="ad-m-value">${num(a.clicks)}</div></div>
+        <div class="ad-m"><div class="ad-m-label">Mensagens</div><div class="ad-m-value orange">${num(a.msgs)}</div></div>
+        <div class="ad-m"><div class="ad-m-label">Custo / Msg</div><div class="ad-m-value">${a.cpm==null?'—':brl(a.cpm)}</div></div>
+      </div>
+      <div class="ad-link">🔗 Ver criativo no Instagram</div>
+    </a>`).join('');
+})();
+</script>
+</body>
+</html>
