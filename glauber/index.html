@@ -107,7 +107,7 @@
   <footer>
     <b>Notas técnicas &amp; ressalvas</b>
     <ul>
-      <li><b>Ticket médio varia bastante.</b> Faturamento ÷ compras dá o ticket médio do período (mistura de vendas de R$ 97 com vendas de ~R$ 5.000). Os benchmarks de CPA/ROAS abaixo usam os valores de referência do guia (R$ 27–97) e estão <b>provisórios</b> — recalibrar com o ticket real do produto.</li>
+      <li><b>Produto base R$ 97 + upsells.</b> O ticket base é R$ 97, mas há order bumps/upsells de alto valor (vendas de ~R$ 5.000) que elevam o faturamento — por isso o ticket médio realizado fica bem acima de R$ 97. É esse fundo de funil que faz o ROAS fechar mesmo com CPA acima do valor do produto. Benchmark de CPA calibrado no produto R$ 97 (verde &lt; R$ 40, crítico &gt; R$ 80).</li>
       <li><b>Campanha de tráfego excluída.</b> O funil ignora a campanha <code>[TRAFEGO][EVENTO_PRESENCIAL][JORNADA_MATOGROSSENSE]</code> (objetivo tráfego, evento presencial) — nunca somar com o funil de VENDA (regra L4).</li>
       <li><b>Subnotificação do Pixel.</b> Dados via Meta Pixel/Windsor sofrem subnotificação pós-iOS14 (15–40%). Validar paridade semanal com a plataforma de vendas.</li>
       <li><b>Atribuição atrasada.</b> Dias com faturamento e pouco/nenhum gasto = conversões de cliques anteriores (boleto/Pix). O faturamento do dia nem sempre pertence ao gasto do dia.</li>
@@ -129,7 +129,7 @@ const CAMPS = [["CBO · PF · 01 · pg02 NV", "Frio", 2517.32, 33880, 18192, 336
 
 
 /* ============================================================
-   BENCHMARKS  (provisórios — valores de referência R$27–97)
+   BENCHMARKS  (Low Ticket — produto base R$ 97)
    ============================================================ */
 const BENCH = {
   cpm:     {dir:'down', ideal:22,   crit:35,   fmt:'money', label:'R$ 12–22'},
@@ -141,7 +141,7 @@ const BENCH = {
   convPag: {dir:'up',   ideal:18,   crit:10,   fmt:'pct',   label:'> 18%'},
   custoIc: {dir:'gray', label:'—'},
   convChk: {dir:'up',   ideal:45,   crit:30,   fmt:'pct',   label:'> 45%'},
-  cpa:     {dir:'gray', label:'definir c/ ticket real'},
+  cpa:     {dir:'down', ideal:40,   crit:80,   fmt:'money', label:'< R$ 40 (prod. R$ 97)'},
   roas:    {dir:'up',   ideal:3.5,  crit:1.5,  fmt:'dec',   label:'> 3,5 (mín. 2,0)'}
 };
 
@@ -183,7 +183,7 @@ const cards = [
   {lbl:"Lucro Líquido", val:brl(M.lucro),   foot:"Faturamento − Gasto",        st:M.lucro>0?"green":"red"},
   {lbl:"ROAS",          val:dec(M.roas)+"x",foot:"Retorno · ideal > 3,5",      st:roasSt},
   {lbl:"Compras",       val:intf(T.purchases),foot:"Ticket médio "+brl(M.ticket), st:"accent"},
-  {lbl:"CPA",           val:brl(M.cpa),     foot:"Custo por compra",           st:"gray"},
+  {lbl:"CPA",           val:brl(M.cpa),     foot:"Custo por compra · prod. R$ 97", st:status(M.cpa,BENCH.cpa)},
   {lbl:"Visitas ao Perfil",val:intf(T.profileVisits),foot:"Custo/visita "+brl(M.custoVisita), st:"accent"}
 ];
 document.getElementById('scorecards').innerHTML = cards.map(c=>`
@@ -300,7 +300,7 @@ ct.innerHTML = campRows.map(r=>{
     <td class="num">${brl(r.custoIc)}</td>
     <td class="num">${intf(r.pur)}</td>
     <td class="num">${dt(ckSt)}${pct(r.convChk)}</td>
-    <td class="num">${r.cpa!=null?brl(r.cpa):'—'}</td>
+    <td class="num">${r.cpa!=null?dt(status(r.cpa,BENCH.cpa))+brl(r.cpa):'—'}</td>
     <td class="num">${brl(r.rev)}</td>
     <td class="num">${brl(r.lucro)}</td>
     <td class="num">${dt(rSt)}${dec(r.roas)}x</td>
