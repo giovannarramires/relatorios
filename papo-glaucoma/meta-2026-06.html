@@ -10,7 +10,8 @@
   :root{
     --bg:#F4F8F9; --card-bg:#FFF; --tinta:#123A45; --teal:#0E7C86;
     --azul:#1F6FB2; --azul-medio:#4F94CD; --ocre:#D69A3C; --verde:#2E8B6F;
-    --vermelho:#C0492E; --creme:#EAF3F4; --creme2:#F0F6F7; --meta:#1877F2;
+    --vermelho:#C0492E; --creme:#EAF3F4; --creme2:#F0F6F7;
+    --meta:#1877F2; --google:#4285F4;
     --text-muted:rgba(18,58,69,0.55); --linha:rgba(18,58,69,0.10);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -21,24 +22,21 @@
   a{color:inherit}
 
   header{background:linear-gradient(135deg,#0E7C86 0%,#12586A 55%,#123A45 100%);
-    color:#EAF6F7;padding:38px 20px 30px;text-align:center;border-bottom:5px solid var(--teal)}
-  header .marca{font-family:Georgia,serif;font-size:36px;letter-spacing:.5px;
+    color:#EAF6F7;padding:34px 20px 26px;text-align:center;border-bottom:5px solid var(--teal)}
+  header .marca{font-family:Georgia,serif;font-size:34px;letter-spacing:.5px;
     display:flex;align-items:center;justify-content:center;gap:12px}
-  header .sub{opacity:.92;margin-top:6px;font-size:15px}
-  /* selo de plataforma */
+  header .sub{opacity:.92;margin-top:5px;font-size:14.5px}
   .plataformas{display:flex;justify-content:center;gap:10px;margin-top:16px}
-  .plat{display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:24px;
-    font-size:13.5px;font-weight:bold;border:1.5px solid rgba(255,255,255,.35)}
-  .plat.ativo{background:#fff;color:var(--meta);border-color:#fff}
-  .plat.soon{opacity:.6;font-weight:normal}
-  .plat.soon .em-breve{font-size:11px;opacity:.85;font-weight:normal}
+  .plat{display:inline-flex;align-items:center;gap:7px;padding:8px 20px;border-radius:24px;
+    font-size:14px;font-weight:bold;border:1.5px solid rgba(255,255,255,.4);
+    text-decoration:none;color:#EAF6F7;transition:all .15s;cursor:pointer}
+  .plat:hover{background:rgba(255,255,255,.18)}
+  .plat.ativo{background:#fff;color:var(--tinta);border-color:#fff}
 
-  /* barra de navegação por mês */
-  .mnav{background:#fff;border-bottom:1px solid var(--linha);padding:10px 20px;
-    display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:99;
+  .mnav{background:#fff;border-bottom:1px solid var(--linha);padding:10px 20px;display:flex;
+    align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:99;
     box-shadow:0 2px 8px rgba(18,58,69,.05);justify-content:center}
-  .mnav-label{font-size:12px;font-weight:bold;color:var(--text-muted);
-    text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
+  .mnav-label{font-size:12px;font-weight:bold;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
   .mnav-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;
     font-size:13.5px;font-weight:bold;text-decoration:none;color:var(--tinta);
     background:var(--creme2);border:1px solid var(--linha);transition:all .15s}
@@ -48,24 +46,35 @@
   .mnav-pill.ativo .mnav-hoje{background:#fff;color:var(--ocre)}
 
   .periodo-strip{max-width:1080px;margin:22px auto 0;padding:0 20px;text-align:center}
-  .periodo-strip .p1{display:inline-block;background:var(--teal);color:#fff;padding:7px 18px;
-    border-radius:30px;font-size:14px;font-weight:bold}
+  .periodo-strip .p1{display:inline-block;background:var(--teal);color:#fff;padding:7px 18px;border-radius:30px;font-size:14px;font-weight:bold}
   .periodo-strip .p2{color:var(--text-muted);font-size:12.5px;margin-top:8px}
 
-  .bloco{background:var(--card-bg);border-radius:16px;padding:26px 26px 28px;
-    margin-top:22px;box-shadow:0 2px 14px rgba(18,58,69,.06);border:1px solid var(--linha)}
-  .bloco-titulo{font-family:Georgia,serif;font-size:22px;color:var(--tinta);
-    margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .bloco{background:var(--card-bg);border-radius:16px;padding:26px 26px 28px;margin-top:22px;
+    box-shadow:0 2px 14px rgba(18,58,69,.06);border:1px solid var(--linha)}
+  .bloco-titulo{font-family:Georgia,serif;font-size:22px;color:var(--tinta);margin-bottom:4px;display:flex;align-items:center;gap:10px}
   .bloco-desc{color:var(--text-muted);font-size:13.5px;margin-bottom:20px}
-  .tag{display:inline-block;background:var(--creme);color:var(--teal);font-size:11px;
-    font-weight:bold;padding:3px 10px;border-radius:20px;text-transform:uppercase;
-    letter-spacing:.5px;margin-top:24px}
+  .tag{display:inline-block;background:var(--creme);color:var(--teal);font-size:11px;font-weight:bold;
+    padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-top:24px}
 
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .kpi{background:var(--creme2);border-radius:12px;padding:18px 16px;border:1px solid var(--linha)}
   .kpi-label{font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
-  .kpi-value{font-family:Georgia,serif;font-size:28px;margin-top:6px;font-weight:bold}
+  .kpi-value{font-family:Georgia,serif;font-size:27px;margin-top:6px;font-weight:bold}
   .kpi-sub{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+  /* caixa de investimento com impostos (Meta) */
+  .invest-box{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:stretch}
+  .invest-total{background:linear-gradient(135deg,var(--teal),#12586A);color:#fff;border-radius:14px;
+    padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
+  .invest-total .il{font-size:13.5px;opacity:.92;text-transform:uppercase;letter-spacing:.4px}
+  .invest-total .il small{text-transform:none;opacity:.85;font-size:12px}
+  .invest-total .iv{font-family:Georgia,serif;font-size:38px;font-weight:bold;margin-top:6px}
+  .invest-linhas{display:flex;flex-direction:column;gap:10px;justify-content:center}
+  .invest-linhas>div{display:flex;justify-content:space-between;align-items:center;
+    background:var(--creme2);border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
+  .invest-linhas span{font-size:13.5px;color:var(--text-muted)}
+  .invest-linhas span small{display:block;font-size:11px}
+  .invest-linhas b{font-family:Georgia,serif;font-size:18px;color:var(--tinta)}
 
   .ret-linha{margin-bottom:11px}
   .ret-nome{font-size:13px;color:var(--tinta);margin-bottom:4px;font-weight:bold}
@@ -73,12 +82,10 @@
   .ret-barra{height:32px;border-radius:8px;display:flex;align-items:center;min-width:52px;transition:width .6s ease}
   .ret-num{color:#fff;font-weight:bold;font-size:13.5px;padding:0 12px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.25)}
   .ret-taxa{font-size:12.5px;color:var(--text-muted);white-space:nowrap;font-weight:bold}
-  .resumo{margin-top:16px;background:var(--creme);border-left:4px solid var(--teal);
-    padding:14px 16px;border-radius:8px;font-size:13.5px}
+  .resumo{margin-top:16px;background:var(--creme);border-left:4px solid var(--teal);padding:14px 16px;border-radius:8px;font-size:13.5px}
 
   table{width:100%;border-collapse:collapse;font-size:13px}
-  th{text-align:left;color:var(--text-muted);font-weight:bold;font-size:11.5px;text-transform:uppercase;
-    letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid var(--linha)}
+  th{text-align:left;color:var(--text-muted);font-weight:bold;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid var(--linha)}
   td{padding:10px;border-bottom:1px solid var(--linha);vertical-align:middle}
   tr:last-child td{border-bottom:none}
   .td-forte{font-weight:bold}
@@ -102,8 +109,7 @@
   .cr-metricas i{font-style:normal;font-size:9.5px;color:var(--text-muted)}
   .cr-link{background:var(--azul);color:#fff;text-align:center;font-size:11.5px;font-weight:bold;padding:7px;letter-spacing:.3px}
 
-  .nota{background:#FBF4E6;border:1px solid var(--ocre);border-radius:12px;padding:16px 18px;
-    font-size:13px;color:var(--tinta);margin-top:24px}
+  .nota{background:#FBF4E6;border:1px solid var(--ocre);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--tinta);margin-top:24px}
   .nota b{color:#A5701F}
   .vazio{text-align:center;color:var(--text-muted);padding:22px;font-style:italic}
   .chart-box{position:relative;height:300px}
@@ -111,30 +117,22 @@
   footer{text-align:center;color:var(--text-muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--linha)}
   footer b{color:var(--teal)}
 
-  @media(max-width:820px){.criativos{grid-template-columns:1fr 1fr}}
-  @media(max-width:720px){
-    .kpis{grid-template-columns:1fr 1fr}
-    header .marca{font-size:29px}
-    .tabela-scroll{overflow-x:auto}
-    table{min-width:640px}
-  }
+  @media(max-width:820px){.criativos{grid-template-columns:1fr 1fr}.invest-box{grid-template-columns:1fr}}
+  @media(max-width:720px){.kpis{grid-template-columns:1fr 1fr}header .marca{font-size:28px}.tabela-scroll{overflow-x:auto}table{min-width:640px}}
   @media(max-width:460px){.kpis{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
   <div class="marca">👁️ Papo Glaucoma</div>
-  <div class="sub">Relatório de mídia paga · Conteúdo &amp; Audiência</div>
-  <div class="plataformas">
-    <span class="plat ativo">📘 Meta Ads</span>
-    <span class="plat soon">🔍 Google Ads <span class="em-breve">· em breve</span></span>
-  </div>
+  <div class="sub">Relatório de mídia paga · Meta Ads</div>
+  <div class="plataformas"><a class="plat ativo" href="index.html">📘 Meta Ads</a><a class="plat" href="google-2026-06.html">🔍 Google Ads</a></div>
 </header>
 
-<nav class="mnav"><div class="mnav-label">📅 Histórico 2026</div><a class="mnav-pill" href="2026-01.html">Jan</a><a class="mnav-pill" href="2026-02.html">Fev</a><a class="mnav-pill" href="2026-03.html">Mar</a><a class="mnav-pill" href="2026-04.html">Abr</a><a class="mnav-pill" href="2026-05.html">Mai</a><a class="mnav-pill ativo" href="2026-06.html">Jun</a><a class="mnav-pill" href="index.html">Jul <span class="mnav-hoje">agora</span></a></nav>
+<nav class="mnav"><div class="mnav-label">📅 2026</div><a class="mnav-pill" href="meta-2026-01.html">Jan</a><a class="mnav-pill" href="meta-2026-02.html">Fev</a><a class="mnav-pill" href="meta-2026-03.html">Mar</a><a class="mnav-pill" href="meta-2026-04.html">Abr</a><a class="mnav-pill" href="meta-2026-05.html">Mai</a><a class="mnav-pill ativo" href="meta-2026-06.html">Jun</a><a class="mnav-pill" href="index.html">Jul <span class="mnav-hoje">agora</span></a></nav>
 
 <div class="periodo-strip">
-  <span class="p1">Junho 2026</span>
+  <span class="p1">Meta Ads · Junho 2026</span>
   <div class="p2">01/06/2026 a 30/06/2026 &nbsp;·&nbsp; atualizado automaticamente em 06/07/2026</div>
 </div>
 
@@ -142,21 +140,26 @@
 
   <div class="tag">Histórico do ano</div>
   <div class="bloco">
-    <div class="bloco-titulo">📅 Visão anual — investimento mês a mês</div>
-    <div class="bloco-desc">Barras = investimento por mês (o mês selecionado fica em destaque). Linha = plays de vídeo de 3s. Use a barra acima para navegar entre os meses.</div>
+    <div class="bloco-titulo">📅 Visão anual — Meta Ads mês a mês</div>
+    <div class="bloco-desc">Barras = investimento total (c/ impostos) por mês. Linha = plays de vídeo de 3s. O mês selecionado fica em destaque. Use as abas acima para trocar de plataforma ou de mês.</div>
     <div class="chart-box"><canvas id="chartAno"></canvas></div>
   </div>
 
-  <div class="tag">Visão geral do mês</div>
+  <div class="tag">Investimento do mês</div>
   <div class="bloco">
-    <div class="bloco-titulo">📊 Resumo do investimento — Junho 2026</div>
-    <div class="bloco-desc">Números acumulados do mês. A variação vs o mês anterior aparece no card de investimento.</div>
-    <div class="kpis"><div class="kpi">
-      <div class="kpi-label">Investimento no mês</div>
-      <div class="kpi-value" style="color:var(--teal)">R$ 617,10</div>
-      <div class="kpi-sub">total investido · <span style="color:#2E8B6F;font-weight:bold">▲ 7%</span> vs mês ant.</div>
+    <div class="bloco-titulo">💰 Investimento — Junho 2026</div>
+    <div class="bloco-desc">O valor total debitado inclui os impostos aplicados pela Meta (ISS+IOF 13,83% sobre a campanha), conferidos no faturamento da conta.</div>
+    <div class="invest-box">
+      <div class="invest-total">
+        <span class="il">Investimento total <small>(campanha + impostos)</small></span>
+        <span class="iv">R$ 702,44</span>
+      </div>
+      <div class="invest-linhas">
+        <div><span>Somente campanha (mídia)</span><b>R$ 617,10</b></div>
+        <div><span>Impostos <small>ISS+IOF 13,83%</small></span><b>R$ 85,34</b></div>
+      </div>
     </div>
-<div class="kpi">
+    <div class="kpis" style="margin-top:18px"><div class="kpi">
       <div class="kpi-label">Alcance</div>
       <div class="kpi-value" style="color:var(--azul)">41.821</div>
       <div class="kpi-sub">frequência 1,61x · soma p/ campanha</div>
@@ -170,6 +173,11 @@
       <div class="kpi-label">Cliques</div>
       <div class="kpi-value" style="color:var(--tinta)">1.648</div>
       <div class="kpi-sub">CTR 2,4% · CPC R$ 0,37</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Conversas no Direct</div>
+      <div class="kpi-value" style="color:var(--teal)">17</div>
+      <div class="kpi-sub">campanha de mensagem</div>
     </div></div>
   </div>
 
@@ -190,7 +198,7 @@
 <div class="kpi">
       <div class="kpi-label">Custo por ThruPlay</div>
       <div class="kpi-value" style="color:var(--tinta)">R$ 0,03</div>
-      <div class="kpi-sub">invest. de vídeo ÷ ThruPlays</div>
+      <div class="kpi-sub">só campanha ÷ ThruPlays</div>
     </div>
 <div class="kpi">
       <div class="kpi-label">Alcance do vídeo</div>
@@ -253,12 +261,12 @@
 <div class="kpi">
       <div class="kpi-label">Custo por conversa</div>
       <div class="kpi-value" style="color:var(--tinta)">R$ 13,19</div>
-      <div class="kpi-sub">investimento ÷ conversas</div>
+      <div class="kpi-sub">só campanha ÷ conversas</div>
     </div>
 <div class="kpi">
-      <div class="kpi-label">Investimento em mensagens</div>
+      <div class="kpi-label">Investimento (campanha)</div>
       <div class="kpi-value" style="color:var(--azul)">R$ 171,47</div>
-      <div class="kpi-sub">campanha de mensagem</div>
+      <div class="kpi-sub">mídia da campanha de mensagem</div>
     </div>
 <div class="kpi">
       <div class="kpi-label">Cliques no link</div>
@@ -270,14 +278,14 @@
   <div class="tag">Seguidores / Crescimento</div>
   <div class="bloco">
     <div class="bloco-titulo" style="color:var(--verde)">👥 Crescimento de audiência</div>
-    <div class="bloco-desc">Campanhas de seguidores (posts impulsionados). Indicador-proxy: <b>visitas ao perfil</b> geradas pelos anúncios — o primeiro passo para um novo seguidor.</div>
+    <div class="bloco-desc">Campanhas de seguidores (posts impulsionados). Indicador-proxy: <b>visitas ao perfil</b> geradas pelos anúncios.</div>
     <div class="kpis"><div class="kpi">
       <div class="kpi-label">Visitas ao perfil (total)</div>
       <div class="kpi-value" style="color:var(--teal)">289</div>
       <div class="kpi-sub">todas as campanhas</div>
     </div>
 <div class="kpi">
-      <div class="kpi-label">Visitas via campanha Seguidores</div>
+      <div class="kpi-label">Visitas via camp. Seguidores</div>
       <div class="kpi-value" style="color:var(--azul)">216</div>
       <div class="kpi-sub">custo R$ 0,39 por visita</div>
     </div>
@@ -287,7 +295,7 @@
       <div class="kpi-sub">curtidas, comentários, salvos</div>
     </div>
 <div class="kpi">
-      <div class="kpi-label">Investimento em crescimento</div>
+      <div class="kpi-label">Investimento (campanha)</div>
       <div class="kpi-value" style="color:var(--verde)">R$ 83,59</div>
       <div class="kpi-sub">alcance 7.111</div>
     </div></div>
@@ -297,118 +305,75 @@
   <div class="tag">Campanhas</div>
   <div class="bloco">
     <div class="bloco-titulo">🗂️ Desempenho por campanha</div>
-    <div class="bloco-desc">Visão consolidada de cada campanha ativa no mês, ordenada por investimento.</div>
+    <div class="bloco-desc">Cada campanha do Meta no mês (valores de mídia, sem impostos), ordenada por investimento.</div>
     <div class="tabela-scroll"><table>
-      <thead><tr>
-        <th>Campanha</th><th>Investimento</th><th>Impressões</th><th>Alcance</th>
-        <th>CPM</th><th>CTR</th><th>Plays 3s</th><th>Conversas</th><th>Visitas perfil</th>
-      </tr></thead>
+      <thead><tr><th>Campanha</th><th>Campanha (R$)</th><th>Impressões</th><th>Alcance</th>
+        <th>CPM</th><th>CTR</th><th>Plays 3s</th><th>Conversas</th><th>Visitas perfil</th></tr></thead>
       <tbody><tr>
       <td><div class="cmp-nome">Distribuição de vídeo · RJ</div><div class="cmp-tipo">🎬 Vídeo</div></td>
-      <td class="td-forte">R$ 362,04</td>
-      <td>50.619</td>
-      <td>31.798</td>
-      <td>R$ 7,15</td>
-      <td>2,2%</td>
-      <td>32.114</td>
-      <td>2</td>
-      <td>55</td>
+      <td class="td-forte">R$ 362,04</td><td>50.619</td><td>31.798</td>
+      <td>R$ 7,15</td><td>2,2%</td><td>32.114</td>
+      <td>2</td><td>55</td>
     </tr>
 <tr>
       <td><div class="cmp-nome">Mensagens no Direct · RJ</div><div class="cmp-tipo">💬 Mensagem</div></td>
-      <td class="td-forte">R$ 171,47</td>
-      <td>9.365</td>
-      <td>2.912</td>
-      <td>R$ 18,31</td>
-      <td>3,4%</td>
-      <td>0</td>
-      <td>13</td>
-      <td>18</td>
+      <td class="td-forte">R$ 171,47</td><td>9.365</td><td>2.912</td>
+      <td>R$ 18,31</td><td>3,4%</td><td>0</td>
+      <td>13</td><td>18</td>
     </tr>
 <tr>
       <td><div class="cmp-nome">Post do Instagram: Se você tem glaucoma, deixa eu... — Cópia</div><div class="cmp-tipo">👥 Seguidores</div></td>
-      <td class="td-forte">R$ 35,96</td>
-      <td>2.893</td>
-      <td>2.811</td>
-      <td>R$ 12,43</td>
-      <td>4,0%</td>
-      <td>1.001</td>
-      <td>1</td>
-      <td>120</td>
+      <td class="td-forte">R$ 35,96</td><td>2.893</td><td>2.811</td>
+      <td>R$ 12,43</td><td>4,0%</td><td>1.001</td>
+      <td>1</td><td>120</td>
     </tr>
 <tr>
       <td><div class="cmp-nome">Post do Instagram: Se você tem glaucoma, deixa eu...</div><div class="cmp-tipo">👥 Seguidores</div></td>
-      <td class="td-forte">R$ 35,87</td>
-      <td>3.046</td>
-      <td>2.843</td>
-      <td>R$ 11,78</td>
-      <td>2,4%</td>
-      <td>1.426</td>
-      <td>1</td>
-      <td>69</td>
+      <td class="td-forte">R$ 35,87</td><td>3.046</td><td>2.843</td>
+      <td>R$ 11,78</td><td>2,4%</td><td>1.426</td>
+      <td>1</td><td>69</td>
     </tr>
 <tr>
       <td><div class="cmp-nome">Post do Instagram: Muita gente acredita que...</div><div class="cmp-tipo">👥 Seguidores</div></td>
-      <td class="td-forte">R$ 10,43</td>
-      <td>1.402</td>
-      <td>1.333</td>
-      <td>R$ 7,44</td>
-      <td>1,6%</td>
-      <td>3</td>
-      <td>—</td>
-      <td>23</td>
+      <td class="td-forte">R$ 10,43</td><td>1.402</td><td>1.333</td>
+      <td>R$ 7,44</td><td>1,6%</td><td>3</td>
+      <td>—</td><td>23</td>
     </tr>
 <tr>
       <td><div class="cmp-nome">Post do Instagram: Cada pico de pressão ocular é...</div><div class="cmp-tipo">👥 Seguidores</div></td>
-      <td class="td-forte">R$ 1,33</td>
-      <td>127</td>
-      <td>124</td>
-      <td>R$ 10,47</td>
-      <td>3,9%</td>
-      <td>65</td>
-      <td>—</td>
-      <td>4</td>
+      <td class="td-forte">R$ 1,33</td><td>127</td><td>124</td>
+      <td>R$ 10,47</td><td>3,9%</td><td>65</td>
+      <td>—</td><td>4</td>
     </tr></tbody>
     </table></div>
   </div>
 
 
   <div class="nota">
-    <b>Como ler o crescimento de seguidores:</b> o Meta Ads não reporta diretamente o número de
-    <b>novos seguidores</b> gerados por anúncio. Por isso usamos <b>visitas ao perfil</b> como
-    indicador-proxy — é a etapa imediatamente anterior a seguir a conta. Para acompanhar o número
-    real de seguidores ganhos, o ideal é cruzar com a contagem do próprio Instagram.
+    <b>Investimento com impostos:</b> a Meta cobra <b>ISS+IOF de 13,83%</b> sobre o valor de mídia — por isso o
+    <b>total debitado</b> é maior que o gasto de campanha. Alíquota conferida no faturamento real da conta.
+    <br><b>Seguidores:</b> o Meta não reporta novos seguidores por anúncio; usamos <b>visitas ao perfil</b> como proxy.
   </div>
 
   <footer>
-    Relatório de <b>Meta Ads</b> · gerado e atualizado automaticamente toda segunda-feira · <b>GGD — Gio Growth Digital</b><br>
-    Papo Glaucoma · o relatório de Google Ads será publicado em página própria
+    Relatório de <b>Meta Ads</b> · Papo Glaucoma · gerado e atualizado automaticamente toda segunda-feira · <b>GGD — Gio Growth Digital</b><br>
+    Meta Ads (conteúdo/audiência) + Google Ads / Sol Oftalmologia (captação de leads)
   </footer>
 </div>
 
 <script>
   new Chart(document.getElementById('chartAno'), {
-    data: {
-      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul"],
-      datasets: [
-        { type:'bar', label:'Investimento (R$)', data:[187.4, 578.64, 448.63, 397.96, 578.4, 617.1, 92.21],
-          backgroundColor:["#0E7C86", "#0E7C86", "#0E7C86", "#0E7C86", "#0E7C86", "#D69A3C", "#0E7C86"], borderRadius:5, yAxisID:'y', order:2 },
-        { type:'line', label:'Plays de vídeo (3s)', data:[3963, 6682, 11564, 22350, 43564, 34609, 8703],
-          borderColor:'#1F6FB2', backgroundColor:'rgba(31,111,178,.12)', borderWidth:2.5,
-          tension:.35, fill:true, pointRadius:3, yAxisID:'y1', order:1 }
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:'index', intersect:false },
+    data: { labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul"], datasets: [
+      { type:'bar', label:'Investimento (R$)', data:[213.32, 658.67, 510.68, 453.0, 658.39, 702.44, 104.96], backgroundColor:["#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#D69A3C", "#1877F2"], borderRadius:5, yAxisID:'y', order:2 },
+      { type:'line', label:"Plays de vídeo (3s)", data:[3963, 6682, 11564, 22350, 43564, 34609, 8703], borderColor:"#1F6FB2",
+        backgroundColor:'rgba(66,133,244,.10)', borderWidth:2.5, tension:.35, fill:true, pointRadius:3, yAxisID:'y1', order:1 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
       plugins:{ legend:{ position:'bottom', labels:{ boxWidth:14, font:{ size:12 } } } },
       scales:{
-        y:{ position:'left', beginAtZero:true, title:{ display:true, text:'Investimento (R$)' },
-            ticks:{ callback:v=>'R$ '+v } },
-        y1:{ position:'right', beginAtZero:true, grid:{ drawOnChartArea:false },
-             title:{ display:true, text:'Plays de vídeo' } }
-      }
-    }
+        y:{ position:'left', beginAtZero:true, title:{ display:true, text:'Investimento (R$)' }, ticks:{ callback:v=>'R$ '+v } },
+        y1:{ position:'right', beginAtZero:true, grid:{ drawOnChartArea:false }, title:{ display:true, text:"Plays de vídeo" } }
+      } }
   });
 </script>
 </body>

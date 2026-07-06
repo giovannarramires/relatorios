@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Papo Glaucoma · Google Ads — Março 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#F4F8F9; --card-bg:#FFF; --tinta:#123A45; --teal:#0E7C86;
+    --azul:#1F6FB2; --azul-medio:#4F94CD; --ocre:#D69A3C; --verde:#2E8B6F;
+    --vermelho:#C0492E; --creme:#EAF3F4; --creme2:#F0F6F7;
+    --meta:#1877F2; --google:#4285F4;
+    --text-muted:rgba(18,58,69,0.55); --linha:rgba(18,58,69,0.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Trebuchet MS','Segoe UI',sans-serif;background:var(--bg);
+    color:var(--tinta);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px}
+  h1,h2,h3{font-family:Georgia,serif;font-weight:normal}
+  a{color:inherit}
+
+  header{background:linear-gradient(135deg,#0E7C86 0%,#12586A 55%,#123A45 100%);
+    color:#EAF6F7;padding:34px 20px 26px;text-align:center;border-bottom:5px solid var(--teal)}
+  header .marca{font-family:Georgia,serif;font-size:34px;letter-spacing:.5px;
+    display:flex;align-items:center;justify-content:center;gap:12px}
+  header .sub{opacity:.92;margin-top:5px;font-size:14.5px}
+  .plataformas{display:flex;justify-content:center;gap:10px;margin-top:16px}
+  .plat{display:inline-flex;align-items:center;gap:7px;padding:8px 20px;border-radius:24px;
+    font-size:14px;font-weight:bold;border:1.5px solid rgba(255,255,255,.4);
+    text-decoration:none;color:#EAF6F7;transition:all .15s;cursor:pointer}
+  .plat:hover{background:rgba(255,255,255,.18)}
+  .plat.ativo{background:#fff;color:var(--tinta);border-color:#fff}
+
+  .mnav{background:#fff;border-bottom:1px solid var(--linha);padding:10px 20px;display:flex;
+    align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:99;
+    box-shadow:0 2px 8px rgba(18,58,69,.05);justify-content:center}
+  .mnav-label{font-size:12px;font-weight:bold;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
+  .mnav-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;
+    font-size:13.5px;font-weight:bold;text-decoration:none;color:var(--tinta);
+    background:var(--creme2);border:1px solid var(--linha);transition:all .15s}
+  .mnav-pill:hover{background:var(--creme);border-color:var(--teal)}
+  .mnav-pill.ativo{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .mnav-hoje{font-size:10px;background:var(--ocre);color:#fff;padding:1px 6px;border-radius:10px;font-weight:bold}
+  .mnav-pill.ativo .mnav-hoje{background:#fff;color:var(--ocre)}
+
+  .periodo-strip{max-width:1080px;margin:22px auto 0;padding:0 20px;text-align:center}
+  .periodo-strip .p1{display:inline-block;background:var(--teal);color:#fff;padding:7px 18px;border-radius:30px;font-size:14px;font-weight:bold}
+  .periodo-strip .p2{color:var(--text-muted);font-size:12.5px;margin-top:8px}
+
+  .bloco{background:var(--card-bg);border-radius:16px;padding:26px 26px 28px;margin-top:22px;
+    box-shadow:0 2px 14px rgba(18,58,69,.06);border:1px solid var(--linha)}
+  .bloco-titulo{font-family:Georgia,serif;font-size:22px;color:var(--tinta);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .bloco-desc{color:var(--text-muted);font-size:13.5px;margin-bottom:20px}
+  .tag{display:inline-block;background:var(--creme);color:var(--teal);font-size:11px;font-weight:bold;
+    padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-top:24px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:var(--creme2);border-radius:12px;padding:18px 16px;border:1px solid var(--linha)}
+  .kpi-label{font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+  .kpi-value{font-family:Georgia,serif;font-size:27px;margin-top:6px;font-weight:bold}
+  .kpi-sub{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+  /* caixa de investimento com impostos (Meta) */
+  .invest-box{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:stretch}
+  .invest-total{background:linear-gradient(135deg,var(--teal),#12586A);color:#fff;border-radius:14px;
+    padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
+  .invest-total .il{font-size:13.5px;opacity:.92;text-transform:uppercase;letter-spacing:.4px}
+  .invest-total .il small{text-transform:none;opacity:.85;font-size:12px}
+  .invest-total .iv{font-family:Georgia,serif;font-size:38px;font-weight:bold;margin-top:6px}
+  .invest-linhas{display:flex;flex-direction:column;gap:10px;justify-content:center}
+  .invest-linhas>div{display:flex;justify-content:space-between;align-items:center;
+    background:var(--creme2);border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
+  .invest-linhas span{font-size:13.5px;color:var(--text-muted)}
+  .invest-linhas span small{display:block;font-size:11px}
+  .invest-linhas b{font-family:Georgia,serif;font-size:18px;color:var(--tinta)}
+
+  .ret-linha{margin-bottom:11px}
+  .ret-nome{font-size:13px;color:var(--tinta);margin-bottom:4px;font-weight:bold}
+  .ret-barra-wrap{display:flex;align-items:center;gap:12px}
+  .ret-barra{height:32px;border-radius:8px;display:flex;align-items:center;min-width:52px;transition:width .6s ease}
+  .ret-num{color:#fff;font-weight:bold;font-size:13.5px;padding:0 12px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .ret-taxa{font-size:12.5px;color:var(--text-muted);white-space:nowrap;font-weight:bold}
+  .resumo{margin-top:16px;background:var(--creme);border-left:4px solid var(--teal);padding:14px 16px;border-radius:8px;font-size:13.5px}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--text-muted);font-weight:bold;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid var(--linha)}
+  td{padding:10px;border-bottom:1px solid var(--linha);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  .td-forte{font-weight:bold}
+  .cmp-nome{font-weight:bold;font-size:13.5px}
+  .cmp-tipo{font-size:11px;color:var(--text-muted)}
+
+  .criativos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .criativo{display:flex;flex-direction:column;background:var(--creme2);border-radius:12px;overflow:hidden;
+    border:1px solid var(--linha);text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s;position:relative}
+  a.criativo:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(18,58,69,.14)}
+  .cr-thumb{position:relative;aspect-ratio:1/1;background:var(--creme);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .cr-thumb img{width:100%;height:100%;object-fit:cover}
+  .cr-fallback{font-size:40px;opacity:.35;display:none}
+  .cr-thumb.sem-img .cr-fallback{display:block}
+  .cr-badge{position:absolute;top:8px;left:8px;background:var(--teal);color:#fff;font-size:10.5px;font-weight:bold;padding:3px 8px;border-radius:20px}
+  .cr-info{padding:11px 12px 13px;flex:1;display:flex;flex-direction:column}
+  .cr-nome{font-weight:bold;font-size:12px;margin-bottom:8px;line-height:1.3}
+  .cr-metricas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:auto}
+  .cr-metricas span{display:flex;flex-direction:column;font-size:11.5px}
+  .cr-metricas b{font-weight:bold}
+  .cr-metricas i{font-style:normal;font-size:9.5px;color:var(--text-muted)}
+  .cr-link{background:var(--azul);color:#fff;text-align:center;font-size:11.5px;font-weight:bold;padding:7px;letter-spacing:.3px}
+
+  .nota{background:#FBF4E6;border:1px solid var(--ocre);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--tinta);margin-top:24px}
+  .nota b{color:#A5701F}
+  .vazio{text-align:center;color:var(--text-muted);padding:22px;font-style:italic}
+  .chart-box{position:relative;height:300px}
+
+  footer{text-align:center;color:var(--text-muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--linha)}
+  footer b{color:var(--teal)}
+
+  @media(max-width:820px){.criativos{grid-template-columns:1fr 1fr}.invest-box{grid-template-columns:1fr}}
+  @media(max-width:720px){.kpis{grid-template-columns:1fr 1fr}header .marca{font-size:28px}.tabela-scroll{overflow-x:auto}table{min-width:640px}}
+  @media(max-width:460px){.kpis{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="marca">👁️ Papo Glaucoma</div>
+  <div class="sub">Relatório de mídia paga · Google Ads</div>
+  <div class="plataformas"><a class="plat" href="index.html">📘 Meta Ads</a><a class="plat ativo" href="google-2026-03.html">🔍 Google Ads</a></div>
+</header>
+
+<nav class="mnav"><div class="mnav-label">📅 2026</div><a class="mnav-pill" href="google-2026-01.html">Jan</a><a class="mnav-pill" href="google-2026-02.html">Fev</a><a class="mnav-pill ativo" href="google-2026-03.html">Mar</a><a class="mnav-pill" href="google-2026-04.html">Abr</a><a class="mnav-pill" href="google-2026-05.html">Mai</a><a class="mnav-pill" href="google-2026-06.html">Jun</a><a class="mnav-pill" href="google-2026-07.html">Jul <span class="mnav-hoje">agora</span></a></nav>
+
+<div class="periodo-strip">
+  <span class="p1">Google Ads · Março 2026</span>
+  <div class="p2">01/03/2026 a 31/03/2026 &nbsp;·&nbsp; atualizado automaticamente em 06/07/2026</div>
+</div>
+
+<div class="wrap">
+
+  <div class="tag">Histórico do ano</div>
+  <div class="bloco">
+    <div class="bloco-titulo">📅 Visão anual — Google Ads mês a mês</div>
+    <div class="bloco-desc">Barras = investimento por mês. Linha = conversões (leads) por mês. O mês selecionado fica em destaque. Use as abas acima para trocar de plataforma ou de mês.</div>
+    <div class="chart-box"><canvas id="chartAno"></canvas></div>
+  </div>
+
+  <div class="tag">Investimento do mês</div>
+  <div class="bloco">
+    <div class="bloco-titulo" style="color:var(--google)">💰 Investimento — Março 2026</div>
+    <div class="bloco-desc">Conta <b>Sol Oftalmologia</b> (Google Ads · Rede de Pesquisa). Campanhas de <b>geração de leads</b> para exames e glaucoma.</div>
+    <div class="kpis"><div class="kpi">
+      <div class="kpi-label">Investimento no mês</div>
+      <div class="kpi-value" style="color:var(--google)">R$ 3.263,38</div>
+      <div class="kpi-sub">valor da plataforma (Google)</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Impressões</div>
+      <div class="kpi-value" style="color:var(--tinta)">139.775</div>
+      <div class="kpi-sub">CTR 1,8%</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Cliques</div>
+      <div class="kpi-value" style="color:var(--tinta)">2.511</div>
+      <div class="kpi-sub">CPC R$ 1,30</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Custo por clique</div>
+      <div class="kpi-value" style="color:var(--azul)">R$ 1,30</div>
+      <div class="kpi-sub">investimento ÷ cliques</div>
+    </div></div>
+  </div>
+
+  <div class="tag">Resultados</div>
+  <div class="bloco">
+    <div class="bloco-titulo" style="color:var(--verde)">🎯 Conversões &amp; custo por lead</div>
+    <div class="bloco-desc">Conversões = contatos/agendamentos gerados pela busca. É uma conta de captação (não e-commerce), por isso o foco é volume de leads e o custo por lead (CPA).</div>
+    <div class="kpis"><div class="kpi">
+      <div class="kpi-label">Conversões (leads)</div>
+      <div class="kpi-value" style="color:var(--verde)">327</div>
+      <div class="kpi-sub">contatos/agendamentos gerados</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Custo por conversão</div>
+      <div class="kpi-value" style="color:var(--google)">R$ 9,98</div>
+      <div class="kpi-sub">investimento ÷ conversões</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Taxa de conversão</div>
+      <div class="kpi-value" style="color:var(--tinta)">13,0%</div>
+      <div class="kpi-sub">conversões ÷ cliques</div>
+    </div>
+<div class="kpi">
+      <div class="kpi-label">Cliques → lead</div>
+      <div class="kpi-value" style="color:var(--tinta)">2.511</div>
+      <div class="kpi-sub">13,0% viram lead</div>
+    </div></div>
+  </div>
+
+  <div class="tag">Campanhas</div>
+  <div class="bloco">
+    <div class="bloco-titulo">🗂️ Desempenho por campanha</div>
+    <div class="bloco-desc">Cada campanha de busca do Google no mês, ordenada por investimento.</div>
+    <div class="tabela-scroll"><table>
+      <thead><tr><th>Campanha</th><th>Investimento</th><th>Impressões</th><th>Cliques</th>
+        <th>CTR</th><th>CPC</th><th>Conversões</th><th>CPA</th><th>Taxa conv.</th></tr></thead>
+      <tbody><tr>
+      <td><div class="cmp-nome">Exames</div><div class="cmp-tipo">🔎 SEARCH</div></td>
+      <td class="td-forte">R$ 1.743,03</td><td>94.721</td><td>1.586</td>
+      <td>1,7%</td><td>R$ 1,10</td><td class="td-forte">237</td>
+      <td>R$ 7,34</td><td>15,0%</td>
+    </tr>
+<tr>
+      <td><div class="cmp-nome">Glaucoma</div><div class="cmp-tipo">🔎 SEARCH</div></td>
+      <td class="td-forte">R$ 1.520,35</td><td>45.054</td><td>925</td>
+      <td>2,1%</td><td>R$ 1,64</td><td class="td-forte">90</td>
+      <td>R$ 16,99</td><td>9,7%</td>
+    </tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="nota">
+    <b>Sobre as conversões do Google:</b> representam <b>leads</b> (contatos/agendamentos), não vendas com valor
+    monetário — por isso não há ROAS nesta conta, e sim <b>custo por lead (CPA)</b>. O valor de investimento é o
+    da plataforma Google (o gross-up de impostos aplica-se apenas ao Meta).
+  </div>
+
+  <footer>
+    Relatório de <b>Google Ads</b> · Papo Glaucoma · gerado e atualizado automaticamente toda segunda-feira · <b>GGD — Gio Growth Digital</b><br>
+    Meta Ads (conteúdo/audiência) + Google Ads / Sol Oftalmologia (captação de leads)
+  </footer>
+</div>
+
+<script>
+  new Chart(document.getElementById('chartAno'), {
+    data: { labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul"], datasets: [
+      { type:'bar', label:'Investimento (R$)', data:[2130.38, 3002.32, 3263.38, 3276.75, 768.32, 1254.33, 235.13], backgroundColor:["#4285F4", "#4285F4", "#D69A3C", "#4285F4", "#4285F4", "#4285F4", "#4285F4"], borderRadius:5, yAxisID:'y', order:2 },
+      { type:'line', label:"Conversões (leads)", data:[166, 214, 327, 310, 101, 198, 31], borderColor:"#34A853",
+        backgroundColor:'rgba(66,133,244,.10)', borderWidth:2.5, tension:.35, fill:true, pointRadius:3, yAxisID:'y1', order:1 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:14, font:{ size:12 } } } },
+      scales:{
+        y:{ position:'left', beginAtZero:true, title:{ display:true, text:'Investimento (R$)' }, ticks:{ callback:v=>'R$ '+v } },
+        y1:{ position:'right', beginAtZero:true, grid:{ drawOnChartArea:false }, title:{ display:true, text:"Conversões" } }
+      } }
+  });
+</script>
+</body>
+</html>
