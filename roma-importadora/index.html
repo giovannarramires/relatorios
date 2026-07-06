@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roma Importadora — Relatório de Tráfego 2026 (Google + Meta)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --accent:#e4002b; --red:#e4002b; --green:#00b874; --yellow:#f5a623; --blue:#4a90d9;
+    --meta:#0866FF; --google:#34A853; --wa:#25D366; --card-bg:#fff; --bg:#f4f6f9;
+    --text:#22303c; --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.5;}
+  .container{max-width:1040px; margin:0 auto; padding:28px 24px;}
+  .hero{background:linear-gradient(135deg,#1a0006,#3d0010,#7a0016); color:#fff; padding:46px 24px;}
+  .hero-inner{max-width:1040px; margin:0 auto;}
+  .hero .tag{font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#ff8ba0; font-weight:800; margin-bottom:12px;}
+  .hero h1{font-size:31px; font-weight:800; margin-bottom:10px; letter-spacing:-.5px;}
+  .hero .sub{font-size:15px; color:#ffd7de; max-width:820px;}
+  .hero .meta{font-size:11px; color:#e39aa8; margin-top:18px; letter-spacing:.3px;}
+  .section{margin-bottom:40px;}
+  .section-title{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border);}
+  .section-title span{color:var(--accent);}
+  .cards{display:grid; gap:15px; margin-bottom:8px;}
+  .c5{grid-template-columns:repeat(5,1fr);} .c4{grid-template-columns:repeat(4,1fr);} .c3{grid-template-columns:repeat(3,1fr);} .c2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:16px 18px; border-left:4px solid var(--muted);}
+  .card.green{border-left-color:var(--green);} .card.red{border-left-color:var(--accent);}
+  .card.blue{border-left-color:var(--blue);} .card.yellow{border-left-color:var(--yellow);}
+  .card.meta{border-left-color:var(--meta);} .card.google{border-left-color:var(--google);} .card.wa{border-left-color:var(--wa);}
+  .card .lbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; margin-bottom:6px;}
+  .card .val{font-size:23px; font-weight:800;}
+  .card .val.sm{font-size:18px;}
+  .card .foot{font-size:11px; color:var(--muted); margin-top:5px;}
+  .banner{background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:14px; padding:22px 26px; color:#fff; margin-bottom:20px;}
+  .banner.rd{background:linear-gradient(135deg,#3d0010,#7a0016);}
+  .banner .k{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#9fb0c0; margin-bottom:8px; font-weight:800;}
+  .banner.rd .k{color:#ff9aab;}
+  .banner .t{font-size:16px; font-weight:500; line-height:1.6;}
+  .banner .t b{font-weight:800;}
+  .tw{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{background:#f7f8fa; text-align:left; padding:10px 13px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:800; white-space:nowrap;}
+  td{padding:10px 13px; border-top:1px solid var(--border); white-space:nowrap;}
+  .r{text-align:right;} .b{font-weight:700;}
+  tr.win td{background:#f2fcf8;} tr.lose td{background:#fff6f6;}
+  .note{font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5;}
+  .chart-box{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px;}
+  .chart-box h4{font-size:13px; margin-bottom:14px; color:#333; font-weight:700;}
+  .chart-wrap{position:relative; height:300px;}
+  .act{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px; display:flex; gap:16px; align-items:flex-start;}
+  .act .num{flex:0 0 auto; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px; background:var(--blue);}
+  .act.crit .num{background:var(--accent);} .act.hi .num{background:var(--yellow);} .act.md .num{background:var(--green);}
+  .act .body{flex:1;}
+  .act h3{font-size:15px; margin-bottom:5px;}
+  .act p{font-size:13px; color:#444; line-height:1.6;}
+  .pill{display:inline-block; font-size:10px; font-weight:800; padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle;}
+  .p-red{background:#fff3f4; color:#e4002b; border:1px solid #ffd0d6;}
+  .p-amber{background:#fff8e6; color:#c07800; border:1px solid #ffe0a0;}
+  .p-green{background:#e8faf4; color:#00a374; border:1px solid #b9f0dd;}
+  .p-blue{background:#eef5fc; color:#2a6db0; border:1px solid #cfe3f7;}
+  .badge{display:inline-block; font-size:10px; font-weight:800; padding:2px 8px; border-radius:6px;}
+  .bg-win{background:#e8faf4; color:#00a374;} .bg-lose{background:#fff3f4; color:#e4002b;} .bg-mid{background:#fff8e6; color:#c07800;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .box{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px;}
+  .box h4{font-size:14px; margin-bottom:10px; color:#333;}
+  .box ul{margin:0 0 0 18px;} .box li{font-size:13px; color:#444; margin-bottom:7px; line-height:1.5;}
+  .lp{display:flex; gap:20px; align-items:flex-start; background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px;}
+  .lp .diag{flex:1;}
+  .funnel{background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px 22px;}
+  .fstep{display:flex; align-items:center; gap:14px; padding:10px 0;}
+  .fstep .bar{height:34px; border-radius:8px; display:flex; align-items:center; padding:0 14px; color:#fff; font-weight:800; font-size:14px; white-space:nowrap;}
+  .fstep .desc{font-size:12.5px; color:#555;}
+  .foot{text-align:center; font-size:11px; color:var(--muted); padding:24px; border-top:1px solid var(--border); margin-top:20px;}
+  @media(max-width:820px){ .c5,.c4,.c3{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} .lp{flex-direction:column;} }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">Roma Importadora · Relatório de Tráfego Pago</div>
+    <h1>Aquisição de Lojistas (B2B) — 2026</h1>
+    <div class="sub">Consolidado de Google Ads e Meta Ads da operação atacadista da Roma. Diagnóstico de resultados, palavras-chave, criativos, jornada de conversão (landing + WhatsApp) e plano de otimização para gerar mais lojistas qualificados.</div>
+    <div class="meta">Contas: Google Ads 834-271-0345 · Meta Ads 2323547161498705 &nbsp;|&nbsp; Fonte: Windsor.ai (dados reais) &nbsp;|&nbsp; Período: jan–06/jul 2026 &nbsp;|&nbsp; Emitido em 06/07/2026 · GGD</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- RESUMO -->
+  <div class="section">
+    <div class="section-title">1 · Resumo Executivo</div>
+    <div class="cards c5">
+      <div class="card red"><div class="lbl">Investimento total</div><div class="val">R$ 11.054</div><div class="foot">Meta R$6.286 + Google R$4.767</div></div>
+      <div class="card wa"><div class="lbl">Conversas WhatsApp (Meta)</div><div class="val">2.719</div><div class="foot">R$ 2,31 por conversa</div></div>
+      <div class="card google"><div class="lbl">Conversões Google</div><div class="val">156</div><div class="foot">R$ 30,56 por conversão</div></div>
+      <div class="card blue"><div class="lbl">Impressões totais</div><div class="val">813 mil</div><div class="foot">Meta 705k + Google 108k</div></div>
+      <div class="card yellow"><div class="lbl">Cliques (Google)</div><div class="val">8.234</div><div class="foot">CTR 7,6% · CPC R$0,58</div></div>
+    </div>
+    <div class="note">As duas contas são <b>novas em 2026</b>: o Meta começou a rodar em 11/mar e o Google só em 12/mai. Por isso os totais representam ~4 meses (Meta) e ~8 semanas (Google), não o ano cheio.</div>
+  </div>
+
+  <!-- VEREDITO -->
+  <div class="section">
+    <div class="banner rd">
+      <div class="k">⚠️ O ponto mais importante deste relatório</div>
+      <div class="t">O motor de geração de lojistas (campanha de <b>WhatsApp no Meta</b>) foi praticamente <b>desligado no fim de junho</b> para dar lugar às campanhas de <b>reconhecimento/alcance do evento "Importadora Aberta 11/jul"</b>. Resultado: as conversas caíram de <b>~24/dia (média jun) para ~3/dia em julho</b> e o custo por conversa saltou de <b>R$1,85 → R$31</b>. A divulgação do evento é legítima, mas ela <b>substituiu</b> a captação em vez de <b>somar</b> a ela. Ação imediata: religar a campanha de WhatsApp em paralelo (ver plano no fim).</div>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="section">
+    <div class="section-title"><span>2 · Meta Ads</span> — WhatsApp como motor de captação</div>
+    <div class="cards c4">
+      <div class="card meta"><div class="lbl">Investimento</div><div class="val">R$ 6.286</div><div class="foot">11/mar a 06/jul</div></div>
+      <div class="card wa"><div class="lbl">Conversas iniciadas</div><div class="val">2.719</div><div class="foot">via WhatsApp</div></div>
+      <div class="card green"><div class="lbl">Custo / conversa</div><div class="val">R$ 2,31</div><div class="foot">R$1,85 só no WhatsApp</div></div>
+      <div class="card blue"><div class="lbl">Impressões / Alcance</div><div class="val sm">705k / grande</div><div class="foot">2 camp. awareness escalaram em jul</div></div>
+    </div>
+
+    <div class="chart-box">
+      <h4>Evolução mensal — Conversas de WhatsApp vs Custo por conversa</h4>
+      <div class="chart-wrap"><canvas id="chMeta"></canvas></div>
+      <div class="note">Captação crescente e barata de março a junho (custo/conversa estável em ~R$2). Em julho o volume desaba porque a verba migrou para reconhecimento do evento físico. Julho é parcial (6 dias).</div>
+    </div>
+
+    <div class="tw" style="margin-top:16px;">
+      <table>
+        <thead><tr><th>Campanha</th><th>Objetivo</th><th>Status</th><th class="r">Invest.</th><th class="r">Impressões</th><th class="r">Alcance</th><th class="r">Resultado</th></tr></thead>
+        <tbody>
+          <tr class="win"><td class="b">[GGD][MENSAGEM][WHATSAPP]</td><td>Mensagens</td><td><span class="badge bg-mid">1 ativa + 1 pausada</span></td><td class="r b">R$ 5.008</td><td class="r">252.758</td><td class="r">~98 mil</td><td class="r b">2.708 conversas · R$1,85</td></tr>
+          <tr><td class="b">[GGD][ALCANCE][IMPORTADORA_ABERTA][11_JUL]</td><td>Reconhecimento</td><td><span class="badge bg-mid">Ativa</span></td><td class="r">R$ 333</td><td class="r">232.225</td><td class="r">185.239</td><td class="r">Alcance evento · CPM R$1,43</td></tr>
+          <tr><td class="b">[GGD][RECONHECIMENTO][VISITAR_IMPORTADORA]</td><td>Reconhecimento</td><td><span class="badge bg-mid">Ativa</span></td><td class="r">R$ 658</td><td class="r">190.490</td><td class="r">134.901</td><td class="r">Alcance marca · CPM R$3,45</td></tr>
+          <tr><td class="b">[GGD][SEGUIDORES][COPA] — 3 posts</td><td>Cliques / Engaj.</td><td><span class="badge bg-lose">Pausadas</span></td><td class="r">R$ 233</td><td class="r">25.058</td><td class="r">—</td><td class="r">Impulsionamento de posts</td></tr>
+          <tr><td class="b">Posts impulsionados (conchas, estoque, Mega SP)</td><td>Cliques</td><td><span class="badge bg-mid">Ativos</span></td><td class="r">R$ 54</td><td class="r">4.376</td><td class="r">—</td><td class="r">CTR alto (9–14%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>Leitura:</b> 80% da verba e 99,6% dos resultados vêm de <b>uma única campanha de WhatsApp</b> muito eficiente (R$1,85/conversa). O resto é branding do evento e boost de posts. Não há campanha de <b>formulário de lead</b> — toda a conversão é a pessoa clicar e cair no WhatsApp. Qualidade de criativo dos anúncios de alcance está em "AVERAGE" (há espaço para melhorar o criativo).</div>
+  </div>
+
+  <!-- GOOGLE -->
+  <div class="section">
+    <div class="section-title"><span>3 · Google Ads</span> — Search de alta intenção (conta nova, 8 semanas)</div>
+    <div class="cards c5">
+      <div class="card google"><div class="lbl">Investimento</div><div class="val sm">R$ 4.767</div><div class="foot">desde 12/mai</div></div>
+      <div class="card blue"><div class="lbl">Impressões</div><div class="val sm">107.815</div><div class="foot">100% Search</div></div>
+      <div class="card yellow"><div class="lbl">Cliques · CTR</div><div class="val sm">8.234 · 7,6%</div><div class="foot">CPC R$0,58</div></div>
+      <div class="card green"><div class="lbl">Conversões</div><div class="val sm">156</div><div class="foot">CPA R$30,56</div></div>
+      <div class="card red"><div class="lbl">Tendência CPA</div><div class="val sm">R$63 → R$24</div><div class="foot">maio → junho (melhorou)</div></div>
+    </div>
+
+    <div class="chart-box">
+      <h4>Evolução mensal — Investimento e Conversões (Google)</h4>
+      <div class="chart-wrap"><canvas id="chGoogle"></canvas></div>
+      <div class="note">Aprendizado rápido: o CPA caiu de R$63 (maio) para R$24 (junho) conforme o algoritmo maturou. Maio e julho são parciais.</div>
+    </div>
+
+    <div class="tw" style="margin-top:16px;">
+      <table>
+        <thead><tr><th>Campanha (Search)</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">CTR</th><th class="r">Invest.</th><th class="r">Conv.</th><th class="r">CPA</th><th>Veredito</th></tr></thead>
+        <tbody>
+          <tr class="win"><td class="b">[GGD][SEARC][INSTITUCIONAL]</td><td class="r">67.191</td><td class="r">5.948</td><td class="r">8,85%</td><td class="r">R$ 3.043</td><td class="r b">144</td><td class="r b">R$ 21,13</td><td><span class="badge bg-win">Escalar</span></td></tr>
+          <tr><td class="b">[GGD][SEARCH][B2B-SUDESTE]</td><td class="r">21.498</td><td class="r">1.463</td><td class="r">6,80%</td><td class="r">R$ 997</td><td class="r">10</td><td class="r">R$ 99,71</td><td><span class="badge bg-mid">Otimizar keywords</span></td></tr>
+          <tr class="lose"><td class="b">[GGD][SEARCH][PALHA_INDIANA]</td><td class="r">19.151</td><td class="r">825</td><td class="r">4,31%</td><td class="r">R$ 727</td><td class="r">2</td><td class="r">R$ 363,97</td><td><span class="badge bg-lose">Rever / pausar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="box">
+        <h4>🏆 Palavras-chave campeãs</h4>
+        <div class="tw" style="border:none;">
+          <table>
+            <thead><tr><th>Termo</th><th class="r">Invest.</th><th class="r">Conv.</th><th class="r">CPA</th></tr></thead>
+            <tbody>
+              <tr class="win"><td>fornecedor de aviamentos</td><td class="r">R$1.362</td><td class="r b">48</td><td class="r">R$28</td></tr>
+              <tr class="win"><td>aviamentos atacado brás</td><td class="r">R$165</td><td class="r b">10,5</td><td class="r">R$16</td></tr>
+              <tr class="win"><td>fornecedor armarinho</td><td class="r">R$216</td><td class="r b">8</td><td class="r">R$27</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">"Fornecedor de aviamentos" sozinho gera 1/3 de todas as conversões — CTR 9,7%. É o coração da conta.</div>
+      </div>
+      <div class="box">
+        <h4>🔴 Palavras-chave queimando verba (0 conversão)</h4>
+        <div class="tw" style="border:none;">
+          <table>
+            <thead><tr><th>Termo</th><th class="r">Invest.</th><th class="r">Conv.</th></tr></thead>
+            <tbody>
+              <tr class="lose"><td>produtos para revenda</td><td class="r">R$225</td><td class="r">0</td></tr>
+              <tr class="lose"><td>comprar no atacado</td><td class="r">R$220</td><td class="r">1</td></tr>
+              <tr class="lose"><td>distribuidora atacado</td><td class="r">R$166</td><td class="r">0</td></tr>
+              <tr class="lose"><td>comprar aviamentos no atacado</td><td class="r">R$161</td><td class="r">0,5</td></tr>
+              <tr class="lose"><td>+ palha indiana (campanha)</td><td class="r">R$727</td><td class="r">2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">~<b>R$1.500</b> gastos em termos genéricos/desalinhados que quase não convertem. Verba que pode ir para o INSTITUCIONAL.</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:12px;"><b>Nuance de qualidade:</b> a conversa do Meta custa R$1,85 e a do Google R$30,56 — mas não são iguais. O lead do Google vem de quem <b>busca ativamente</b> "fornecedor de aviamentos" (intenção de compra alta = lojista de verdade). O do Meta vem de interrupção (mais volume, intenção menor). Os dois se complementam; não dá para julgar só pelo custo.</div>
+  </div>
+
+  <!-- FUNIL / LANDING -->
+  <div class="section">
+    <div class="section-title"><span>4 · Jornada de Conversão</span> — Landing page e o "formulário"</div>
+    <div class="funnel" style="margin-bottom:16px;">
+      <div class="fstep"><div class="bar" style="width:100%;background:#4a90d9;">Anúncio (Google Search + Meta) — 813 mil impressões</div></div>
+      <div class="fstep"><div class="bar" style="width:70%;background:#5b7fb0;">Clique → landing <b style="margin:0 4px;">romaimportadora.com.br/qlfleads</b></div><div class="desc">6.850 cliques do Google caem aqui</div></div>
+      <div class="fstep"><div class="bar" style="width:45%;background:var(--wa);">Botão "Fale no WhatsApp Agora"</div><div class="desc">Único caminho de conversão</div></div>
+      <div class="fstep"><div class="bar" style="width:28%;background:#128C7E;">Conversa no WhatsApp → time comercial qualifica na mão</div></div>
+    </div>
+
+    <div class="lp">
+      <div class="diag">
+        <h4 style="margin-bottom:12px;">O que a landing tem hoje</h4>
+        <p style="font-size:13px;color:#444;line-height:1.7;">Página de uma dobra: título "A maior importadora de aviamentos do Brasil", filtro de público ("se você possui empresa com CNPJ ativo"), 3 selos (Inovação/Qualidade/Variedade) e <b>botões que levam 100% ao WhatsApp</b>. <b>Não existe formulário</b> — nenhum campo é preenchido no site. A qualificação (CNPJ, segmento, cidade, volume) acontece toda dentro do chat, manualmente.</p>
+        <div class="grid2" style="margin-top:14px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;margin-bottom:6px;">✔ Pontos fortes</div>
+            <ul style="margin-left:16px;">
+              <li style="font-size:12.5px;margin-bottom:5px;">Fricção mínima — 1 clique para falar</li>
+              <li style="font-size:12.5px;margin-bottom:5px;">Mensagem clara e filtro de público (CNPJ)</li>
+              <li style="font-size:12.5px;">WhatsApp é o canal que o lojista já usa</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;margin-bottom:6px;">✘ O que trava resultado</div>
+            <ul style="margin-left:16px;">
+              <li style="font-size:12.5px;margin-bottom:5px;"><b>Zero captura:</b> quem não clica no WhatsApp some — sem base para remarketing</li>
+              <li style="font-size:12.5px;margin-bottom:5px;"><b>Sem qualificação prévia:</b> o comercial recebe tudo cru e gasta tempo separando curioso de lojista</li>
+              <li style="font-size:12.5px;margin-bottom:5px;"><b>Sem prova social:</b> nenhum depoimento/foto de lojista cliente</li>
+              <li style="font-size:12.5px;">Sem pedido mínimo/catálogo — dúvidas básicas caem no chat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:10px;">Observação de design: o topo usa foto da fachada (portão fechado, imagem escura) atrás do texto branco, o que reduz leitura e o ar "premium" que o discurso promete.</div>
+  </div>
+
+  <!-- PLANO -->
+  <div class="section">
+    <div class="section-title">5 · O que precisa melhorar — Plano de ação priorizado</div>
+
+    <div class="act crit">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Religar o WhatsApp em paralelo ao evento <span class="pill p-red">Urgente · esta semana</span></h3>
+        <p>A campanha de mensagens é o que traz lojista a R$1,85. Reative-a com verba própria <b>ao lado</b> das campanhas de alcance do evento — não no lugar delas. Meta sugerida: voltar a ~20–25 conversas/dia. Após 11/jul (fim do evento), migrar a verba de reconhecimento de volta para captação.</p>
+      </div>
+    </div>
+
+    <div class="act hi">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>Podar as palavras-chave que não convertem no Google <span class="pill p-amber">Alto impacto · rápido</span></h3>
+        <p>Pausar/negativar "produtos para revenda", "distribuidora atacado", "comprar no atacado" e reavaliar a campanha PALHA_INDIANA (CPA R$364). Isso libera ~R$1.500 para reforçar o INSTITUCIONAL (CPA R$21) e a keyword "fornecedor de aviamentos". Ganho estimado: +30–50% de conversões com a mesma verba.</p>
+      </div>
+    </div>
+
+    <div class="act md">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Adicionar captura + qualificação na landing <span class="pill p-green">Estrutural</span></h3>
+        <p>Manter o botão de WhatsApp (baixa fricção), mas incluir um <b>formulário curto alternativo</b> (Nome, WhatsApp, CNPJ, Segmento, Cidade) para: (a) criar base de remarketing de quem não clica, (b) chegar no chat já qualificado, (c) medir qualidade por origem. Alternativa sem formulário: fluxo automático no WhatsApp que faz essas 3–4 perguntas antes de cair no comercial.</p>
+      </div>
+    </div>
+
+    <div class="act md">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Medir o que importa: conversa → lojista → pedido <span class="pill p-green">Estrutural</span></h3>
+        <p>Hoje sabemos custo por conversa/conversão, mas não quantas viram <b>lojista ativo</b>. Marcar no WhatsApp/CRM quais conversas fecham compra para calcular o CPA real por cliente e saber se Google ou Meta traz o melhor lojista. Sem isso, otimizamos por proxy.</p>
+      </div>
+    </div>
+
+    <div class="act md">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>Fortalecer a landing e os criativos <span class="pill p-blue">Contínuo</span></h3>
+        <p>Trocar a foto de fachada por imagem do mix de produtos/estoque; incluir <b>2–3 depoimentos de lojistas</b> e números (nº de itens, cidades atendidas); deixar claro pedido mínimo. Nos anúncios de alcance (qualidade "AVERAGE"), testar criativos novos para melhorar entrega e CPM.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    Roma Importadora · Relatório de Tráfego Pago 2026 — Google Ads 834-271-0345 + Meta Ads 2323547161498705<br>
+    Dados reais via Windsor.ai · CNPJ 10.730.088/0002-31 · Elaborado por GGD em 06/07/2026
+  </div>
+</div>
+
+<script>
+new Chart(document.getElementById('chMeta'),{
+  type:'bar',
+  data:{labels:['Março','Abril','Maio','Junho','Julho*'],
+    datasets:[
+      {type:'bar',label:'Conversas WhatsApp',data:[605,645,730,723,16],backgroundColor:'#25D366',yAxisID:'y',borderRadius:6},
+      {type:'line',label:'Custo por conversa (R$)',data:[1.96,1.93,1.98,2.65,31.15],borderColor:'#e4002b',backgroundColor:'#e4002b',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:4}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom'}},
+    scales:{
+      y:{position:'left',title:{display:true,text:'Conversas'},beginAtZero:true},
+      y1:{position:'right',title:{display:true,text:'R$ / conversa'},beginAtZero:true,grid:{drawOnChartArea:false}}
+    }}
+});
+new Chart(document.getElementById('chGoogle'),{
+  type:'bar',
+  data:{labels:['Maio*','Junho','Julho*'],
+    datasets:[
+      {type:'bar',label:'Investimento (R$)',data:[1134,2919,714],backgroundColor:'#34A853',yAxisID:'y',borderRadius:6},
+      {type:'line',label:'Conversões',data:[18,121,17],borderColor:'#4a90d9',backgroundColor:'#4a90d9',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:5}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom'}},
+    scales:{
+      y:{position:'left',title:{display:true,text:'R$ investido'},beginAtZero:true},
+      y1:{position:'right',title:{display:true,text:'Conversões'},beginAtZero:true,grid:{drawOnChartArea:false}}
+    }}
+});
+</script>
+</body>
+</html>
