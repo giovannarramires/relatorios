@@ -245,6 +245,25 @@
       <div class="t">Em junho, sem campanha específica, a conta ganhou <b>378 seguidores</b> — mas quase todos "de brinde" pela campanha de WhatsApp, a um custo alto de <b>R$ 4,20 por seguidor</b>. Em julho, as 3 campanhas <b>[SEGUIDORES]</b> passaram a captar seguidor de propósito a <b>R$ 0,29</b> — e a mais barata (Pingentes de Conchas) a apenas <b>R$ 0,20</b>. Mesmo em só 7 dias, o ritmo saltou de <b>12,6 para 40,1 seguidores/dia</b>. Vale escalar as duas melhores e produzir novos criativos de produto na mesma linha.</div>
     </div>
     <div class="note" style="margin-top:10px;">Fonte dos dados de seguidores: coluna "Seguidores no Instagram" e métrica personalizada "Custo por seguidor" do Meta Ads Manager (a API do Windsor não expõe follows). O custo por seguidor "misto" da conta (R$ 5,07 em junho / R$ 2,30 em julho) divide toda a verba pelos seguidores e por isso fica inflado — a leitura correta da estratégia de crescimento é o número das campanhas dedicadas: <b>R$ 0,29</b>.</div>
+
+    <h4 style="font-size:14px;margin:24px 0 10px;color:#333;">📅 Histórico mensal de seguidores — desde o início da conta</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mês</th><th class="r">Seguidores ganhos</th><th class="r">Custo por seguidor</th><th>Tinha campanha dedicada?</th></tr></thead>
+        <tbody>
+          <tr><td class="b">Março <span style="font-weight:400;color:#999">(parcial)</span></td><td class="r">272</td><td class="r">R$ 4,22</td><td><span class="badge bg-lose">Não — só incidental</span></td></tr>
+          <tr class="win"><td class="b">Abril</td><td class="r b">770</td><td class="r b">R$ 1,56</td><td><span class="badge bg-win">Sim — [COPA]</span></td></tr>
+          <tr><td class="b">Maio</td><td class="r">340</td><td class="r">R$ 4,04</td><td><span class="badge bg-lose">Não — só incidental</span></td></tr>
+          <tr><td class="b">Junho</td><td class="r">378</td><td class="r">R$ 5,07</td><td><span class="badge bg-lose">Não — só incidental</span></td></tr>
+          <tr class="win"><td class="b">Julho <span style="font-weight:400;color:#999">(parcial, 1–7)</span></td><td class="r b">281</td><td class="r b">R$ 2,30</td><td><span class="badge bg-win">Sim — [SEGUIDORES]</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-box" style="margin-top:14px;">
+      <h4>Seguidores ganhos vs Custo por seguidor — histórico mensal</h4>
+      <div class="chart-wrap"><canvas id="chHistSeg"></canvas></div>
+      <div class="note">O padrão é claro: nos meses <b>com campanha dedicada</b> de seguidores (abril [COPA] e julho [SEGUIDORES]), o volume sobe e o custo cai (R$ 1,56 e R$ 2,30 na conta — R$ 0,29 só nas dedicadas). Nos meses <b>sem</b> campanha (mai/jun), os seguidores vieram "de brinde" das campanhas de WhatsApp, a R$ 4–5 cada. Conclusão: manter uma campanha de seguidores sempre ativa é a forma mais barata de crescer o perfil. Custo por seguidor = métrica da conta (verba total ÷ seguidores).</div>
+    </div>
   </div>
 
   <!-- 7 · LEITURA ESTRATÉGICA -->
@@ -502,6 +521,20 @@ new Chart(document.getElementById('chHistGoogle'),{
     scales:{
       y:{position:'left',title:{display:true,text:'Contatos'},beginAtZero:true},
       y1:{position:'right',title:{display:true,text:'R$ / contato'},beginAtZero:true,grid:{drawOnChartArea:false}}
+    }}
+});
+new Chart(document.getElementById('chHistSeg'),{
+  type:'bar',
+  data:{labels:['Mar*','Abr','Mai','Jun','Jul*'],
+    datasets:[
+      {type:'bar',label:'Seguidores ganhos',data:[272,770,340,378,281],backgroundColor:['#8fb8ff','#0866FF','#8fb8ff','#8fb8ff','#0866FF'],yAxisID:'y',borderRadius:6},
+      {type:'line',label:'Custo por seguidor (R$)',data:[4.22,1.56,4.04,5.07,2.30],borderColor:'#e4002b',backgroundColor:'#e4002b',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:4}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom'}},
+    scales:{
+      y:{position:'left',title:{display:true,text:'Seguidores'},beginAtZero:true},
+      y1:{position:'right',title:{display:true,text:'R$ / seguidor'},beginAtZero:true,grid:{drawOnChartArea:false}}
     }}
 });
 </script>
