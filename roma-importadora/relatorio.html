@@ -176,18 +176,10 @@
   <!-- GOOGLE -->
   <div class="section">
     <div class="section-title"><span>3 · Google Ads</span> — Search de alta intenção <span class="monthtag">Junho 2026</span></div>
-    <div class="cards c5">
+    <div class="cards c3">
       <div class="card google"><div class="lbl">Investimento (junho)</div><div class="val sm">R$ 2.919</div><div class="foot">100% Search</div></div>
       <div class="card blue"><div class="lbl">Impressões (junho)</div><div class="val sm">72.197</div><div class="foot">Search</div></div>
       <div class="card yellow"><div class="lbl">Cliques · CTR</div><div class="val sm">5.284 · 7,3%</div><div class="foot">CPC R$0,55</div></div>
-      <div class="card green"><div class="lbl">Conversões (junho)</div><div class="val sm">121</div><div class="foot">CPA R$24,12</div></div>
-      <div class="card red"><div class="lbl">Tendência CPA</div><div class="val sm">R$63 → R$24</div><div class="foot">maio → junho (melhorou)</div></div>
-    </div>
-
-    <div class="chart-box">
-      <h4>Evolução mensal — Investimento e Conversões (histórico mai–jun)</h4>
-      <div class="chart-wrap"><canvas id="chGoogle"></canvas></div>
-      <div class="note">Aprendizado rápido: o CPA caiu de R$63 (maio, parcial a partir de 12/mai) para R$24 (junho) conforme o algoritmo maturou.</div>
     </div>
 
     <div class="tw" style="margin-top:16px;">
@@ -325,32 +317,6 @@ new Chart(document.getElementById('chMeta'),{
       y:{position:'left',title:{display:true,text:'Conversas'},beginAtZero:true},
       y1:{position:'right',title:{display:true,text:'R$ / conversa'},beginAtZero:true,grid:{drawOnChartArea:false}}
     }}
-});
-new Chart(document.getElementById('chGoogle'),{
-  type:'bar',
-  data:{labels:['Maio*','Junho'],
-    datasets:[
-      {type:'bar',label:'Investimento (R$)',data:[1134,2919],backgroundColor:'#34A853',yAxisID:'y',borderRadius:6},
-      {type:'line',label:'Conversões',data:[18,121],borderColor:'#4a90d9',backgroundColor:'#4a90d9',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:5}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'bottom'}},
-    scales:{
-      y:{position:'left',title:{display:true,text:'R$ investido'},beginAtZero:true},
-      y1:{position:'right',title:{display:true,text:'Conversões'},beginAtZero:true,grid:{drawOnChartArea:false}}
-    }}
-});
-new Chart(document.getElementById('chLeilao'),{
-  type:'bar',
-  data:{labels:['Institucional','Palha Indiana','B2B-Sudeste'],
-    datasets:[
-      {label:'Apareceu (ganho)',data:[10.7,13.7,10.0],backgroundColor:'#34A853',stack:'s'},
-      {label:'Perdido por verba',data:[15.5,18.0,89.5],backgroundColor:'#f5a623',stack:'s'},
-      {label:'Perdido por ranking',data:[74.5,66.6,2.0],backgroundColor:'#e4002b',stack:'s'}
-    ]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%';}}}},
-    scales:{x:{stacked:true,max:100,title:{display:true,text:'% do leilão'},ticks:{callback:function(v){return v+'%';}}},y:{stacked:true}}}
 });
 </script>
 </body>
