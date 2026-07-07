@@ -43,6 +43,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .kpi{background:var(--surface);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--h2)}
 .kpi.k-lead::before{background:var(--good)}.kpi.k-cpl::before{background:var(--warn)}.kpi.k-inv::before{background:var(--cap)}.kpi.k-pag::before{background:var(--dist)}
+.kpi.k-connect{box-shadow:0 0 0 2px rgba(139,92,246,.25),var(--shadow-sm)}.kpi.k-connect::before{width:5px;background:linear-gradient(180deg,#8b5cf6,#6366f1)}
 .kpi-l{font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:6px}
 .kpi-v{font-size:24px;font-weight:800;letter-spacing:-.8px}
 .kpi-s{font-size:11px;color:var(--text-2);margin-top:4px}
@@ -74,7 +75,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .fconn .pill{border-radius:20px;padding:4px 13px;font-weight:800;font-size:11.5px;background:#fff;border:1px solid var(--border);color:var(--text-2);box-shadow:var(--shadow-sm)}
 .fconn .pill.hot{background:rgba(16,185,129,.12);border-color:transparent;color:#059669}
 .fconn .pill.warn{background:rgba(245,158,11,.14);border-color:transparent;color:#b45309}
-.fsummary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.fsummary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
 .fsum{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center}
 .fsum .v{font-size:20px;font-weight:800;letter-spacing:-.5px}
 .fsum .l{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-top:2px}
@@ -140,7 +141,7 @@ tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f
     <span class="section-hint">— investimento · leads · CPL · conversão da página, dia a dia</span></div>
   <div class="card tbl-scroll"><table id="tblDaily"><thead><tr>
     <th>Dia</th><th class="num">Campanha</th><th class="num">Imposto</th><th class="num">Total pago</th>
-    <th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
+    <th class="num">Cliques</th><th class="num">Connect rate</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
 
   <div class="section-title"><span class="bar"></span>Evolução Diária · Leads × Investimento</div>
   <div class="card"><div class="chart-box"><canvas id="chartDaily"></canvas></div></div>
@@ -191,6 +192,8 @@ const BRL0 = v => 'R$ ' + Math.round(v||0).toLocaleString('pt-BR');
 const N = v => (v||0).toLocaleString('pt-BR');
 const PCT = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
 const cplClass = c => c==null?'cpl-mid':(c<=13?'cpl-good':(c<=18?'cpl-mid':'cpl-bad'));
+const crColor = r => r>=80?'#059669':(r>=65?'#b45309':'#dc2626');   // connect rate: verde/amarelo/vermelho
+const crClass = r => r>=80?'cpl-good':(r>=65?'cpl-mid':'cpl-bad');
 
 const TAX = 0.1383;                        // ISS+IOF — alíquota real da conta (conferida no relatório de transações)
 const campGeral = T.spend + T.dist_spend;  // investido em campanha (líquido, sem imposto)
@@ -238,7 +241,7 @@ document.getElementById('kpis').innerHTML = `
   <div class="kpi k-cpl"><div class="kpi-l">CPL médio</div><div class="kpi-v">${BRL(cplMedio)}</div><div class="kpi-s">melhor dia ${BRL(cplMin)}</div></div>
   <div class="kpi k-pag"><div class="kpi-l">Conversão da página</div><div class="kpi-v">${PCT(txPagina)}</div><div class="kpi-s">leads ÷ quem chegou na página</div></div>
   <div class="kpi"><div class="kpi-l">Cliques no link</div><div class="kpi-v">${N(T.lc)}</div><div class="kpi-s">CTR link ${PCT(ctrLink)}</div></div>
-  <div class="kpi"><div class="kpi-l">Chegaram na página</div><div class="kpi-v">${N(T.lpv)}</div><div class="kpi-s">${PCT(txClickPage)} dos cliques carregaram</div></div>
+  <div class="kpi k-connect"><div class="kpi-l">Connect Rate ⚡</div><div class="kpi-v" style="color:${crColor(txClickPage)}">${PCT(txClickPage)}</div><div class="kpi-s">${N(T.lpv)} de ${N(T.lc)} cliques chegaram na página</div></div>
   <div class="kpi"><div class="kpi-l">Custo/clique</div><div class="kpi-v">${BRL(cpc)}</div><div class="kpi-s">no link</div></div>
   <div class="kpi"><div class="kpi-l">Impressões</div><div class="kpi-v">${N(T.impr)}</div><div class="kpi-s">CPM ${BRL(cpm)}</div></div>`;
 
@@ -252,11 +255,14 @@ document.getElementById('invBox').innerHTML=`
 let rows='';
 daily.forEach(x=>{
   const cpl=x.leads?x.spend/x.leads:0, txp=x.lpv?x.leads/x.lpv*100:0;
+  const cr=x.lc?x.lpv/x.lc*100:0;
   const imp=x.spend*TAX, tot=x.spend*(1+TAX);
   rows+=`<tr><td><b>${x.d}</b></td>
     <td class="num">${BRL(x.spend)}</td>
     <td class="num" style="color:#b45309">${BRL(imp)}</td>
     <td class="num"><b>${BRL(tot)}</b></td>
+    <td class="num">${N(x.lc)}</td>
+    <td class="num"><span class="cpl-badge ${crClass(cr)}">${PCT(cr)}</span></td>
     <td class="num"><b>${x.leads}</b></td>
     <td class="num"><span class="cpl-badge ${cplClass(cpl)}">${BRL(cpl)}</span></td>
     <td class="num"><span class="pg-pill">${PCT(txp)}</span></td></tr>`;
@@ -265,6 +271,8 @@ rows+=`<tr class="total-row"><td>TOTAL</td>
   <td class="num">${BRL(T.spend)}</td>
   <td class="num">${BRL(T.spend*TAX)}</td>
   <td class="num">${BRL(T.spend*(1+TAX))}</td>
+  <td class="num">${N(T.lc)}</td>
+  <td class="num">${PCT(txClickPage)}</td>
   <td class="num">${T.leads}</td>
   <td class="num">${BRL(cplMedio)}</td>
   <td class="num">${PCT(txPagina)}</td></tr>`;
@@ -291,18 +299,19 @@ document.getElementById('funnel').innerHTML=`
     ${seg('s1',segW[0],'Impressões',N(T.impr),'alcance '+N(T.reach))}
     ${conn('','CTR '+PCT(ctrLink)+' clicaram no link')}
     ${seg('s2',segW[1],'Cliques no link',N(T.lc),'CPC '+BRL(cpc))}
-    ${conn(txClickPage>=65?'':'warn',PCT(txClickPage)+' carregaram a página · perde '+PCT(100-txClickPage))}
+    ${conn(txClickPage>=80?'hot':'warn','Connect rate '+PCT(txClickPage)+' · perde '+PCT(100-txClickPage)+' no carregamento')}
     ${seg('s3',segW[2],'Chegaram na página',N(T.lpv),'landing page view')}
     ${conn('hot','Conversão da página '+PCT(txPagina))}
     ${seg('s4',segW[3],'Leads / Cadastros',N(T.leads),'CPL '+BRL(cplMedio))}
   </div>
   <div class="fsummary">
     <div class="fsum"><div class="v">${PCT(ctrLink)}</div><div class="l">CTR do anúncio</div></div>
+    <div class="fsum" style="border-color:${crColor(txClickPage)}44"><div class="v" style="color:${crColor(txClickPage)}">${PCT(txClickPage)}</div><div class="l">Connect Rate ⚡</div></div>
     <div class="fsum hl"><div class="v">${PCT(txPagina)}</div><div class="l">Conversão da página</div></div>
     <div class="fsum"><div class="v">${BRL(cplMedio)}</div><div class="l">Custo por lead</div></div>
   </div>`;
 document.getElementById('funnelNote').innerHTML=
-  `📌 <b>Conversão da página = ${PCT(txPagina)}</b> — de cada 100 pessoas que abriram a página de captura, ~${Math.round(txPagina)} deixaram o cadastro. Benchmark saudável de LP de captação: 30–45%. Atenção ao degrau <b>clique → página</b>: ${PCT(100-txClickPage)} dos cliques não chegam a carregar a página (velocidade / desistência).`;
+  `⚡ <b>Connect Rate = ${PCT(txClickPage)}</b> — de cada 100 cliques pagos, só ${Math.round(txClickPage)} chegam a carregar a página; os outros ${Math.round(100-txClickPage)} são verba perdida antes de ver a oferta (velocidade da página / desistência no carregamento). Benchmark bom: 80%+. Cada ponto recuperado aqui vira lead sem gastar a mais.<br>📌 <b>Conversão da página = ${PCT(txPagina)}</b> — dos que chegam, ~${Math.round(txPagina)} em 100 deixam o cadastro. Benchmark saudável de LP de captação: 30–45%.`;
 
 // PÚBLICOS
 const maxPub=Math.max(...publicos.map(p=>p.leads),1);
