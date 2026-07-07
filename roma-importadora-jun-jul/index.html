@@ -165,23 +165,6 @@
     </div>
   </div>
 
-  <!-- GRÁFICOS -->
-  <div class="section">
-    <div class="section-title"><span>3 · Leitura visual</span> — o que mudou de junho para julho</div>
-    <div class="grid2">
-      <div class="chart-box">
-        <h4>Conversas de WhatsApp por dia — o motor de captação desacelerou</h4>
-        <div class="chart-wrap"><canvas id="chConv"></canvas></div>
-        <div class="note">De 24,1 conversas/dia (junho) para 3,1/dia (julho): a verba migrou para o alcance do evento físico.</div>
-      </div>
-      <div class="chart-box">
-        <h4>Onde foi a verba em julho (R$ 644, dias 1–7)</h4>
-        <div class="chart-wrap"><canvas id="chSpend"></canvas></div>
-        <div class="note">67% da verba da semana foi para a divulgação do evento "Importadora Aberta 11/jul".</div>
-      </div>
-    </div>
-  </div>
-
   <!-- 4 · CAMPANHAS JUNHO -->
   <div class="section">
     <div class="section-title"><span>4 · Detalhamento por campanha</span> <span class="monthtag">Junho 2026</span></div>
@@ -524,21 +507,6 @@
 </div>
 
 <script>
-new Chart(document.getElementById('chConv'),{
-  type:'bar',
-  data:{labels:['Junho (média/dia)','Julho (média/dia)'],
-    datasets:[{label:'Conversas WhatsApp / dia',data:[24.1,3.1],backgroundColor:['#25D366','#e4002b'],borderRadius:8}]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false}},
-    scales:{y:{beginAtZero:true,title:{display:true,text:'Conversas / dia'}}}}
-});
-new Chart(document.getElementById('chSpend'),{
-  type:'doughnut',
-  data:{labels:['Alcance Evento 11/jul','WhatsApp','Seguidores (3)','Reconhecimento'],
-    datasets:[{data:[431.46,74.85,69.79,67.89],backgroundColor:['#7a0016','#25D366','#0866FF','#4a90d9'],borderWidth:2,borderColor:'#fff'}]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:function(c){return c.label+': R$ '+c.parsed.toFixed(2);}}}}}
-});
 new Chart(document.getElementById('chHistMeta'),{
   type:'bar',
   data:{labels:['Mar*','Abr','Mai','Jun','Jul*'],
