@@ -49,18 +49,27 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .kpi-s b{color:var(--good)}
 .card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
 .chart-box{position:relative;height:320px}
-.funnel{display:flex;flex-direction:column;gap:10px}
-.fstep{display:flex;align-items:center;gap:16px}
-.fbar-wrap{flex:1}
-.fbar-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
-.fbar-top .fname{font-weight:700}.fbar-top .fval{font-weight:800}
-.fbar{height:34px;border-radius:8px;display:flex;align-items:center;padding-left:12px;color:#fff;font-size:12px;font-weight:700;min-width:60px}
-.fbar.s1{background:linear-gradient(90deg,var(--h1),var(--h2))}
-.fbar.s2{background:linear-gradient(90deg,#2563eb,#38bdf8)}
-.fbar.s3{background:linear-gradient(90deg,#8b5cf6,#c084fc)}
-.fbar.s4{background:linear-gradient(90deg,#10b981,#34d399)}
-.frate{font-size:11px;color:var(--text-3);width:130px;text-align:right}
-.frate b{color:var(--text);font-size:13px}.frate .rc{color:var(--good);font-weight:800}
+.funnelV{display:flex;flex-direction:column;align-items:center;padding:4px 0}
+.fseg{color:#fff;border-radius:12px;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 6px 16px rgba(0,0,0,.13);min-width:210px}
+.fseg .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.92}
+.fseg .fsub{font-size:10px;font-weight:500;opacity:.85;text-transform:none;letter-spacing:0;margin-top:2px}
+.fseg .fv{font-size:23px;font-weight:800;letter-spacing:-.5px;white-space:nowrap}
+.fseg.s1{background:linear-gradient(135deg,#4338ca,#4f46e5)}
+.fseg.s2{background:linear-gradient(135deg,#2563eb,#3b82f6)}
+.fseg.s3{background:linear-gradient(135deg,#8b5cf6,#a855f7)}
+.fseg.s4{background:linear-gradient(135deg,#059669,#10b981)}
+.fconn{display:flex;align-items:center;gap:9px;padding:8px 0}
+.fconn .chev{color:#cbd5e1;font-size:13px}
+.fconn .pill{border-radius:20px;padding:4px 13px;font-weight:800;font-size:11.5px;background:#fff;border:1px solid var(--border);color:var(--text-2);box-shadow:var(--shadow-sm)}
+.fconn .pill.hot{background:rgba(16,185,129,.12);border-color:transparent;color:#059669}
+.fconn .pill.warn{background:rgba(245,158,11,.14);border-color:transparent;color:#b45309}
+.fsummary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.fsum{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center}
+.fsum .v{font-size:20px;font-weight:800;letter-spacing:-.5px}
+.fsum .l{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-top:2px}
+.fsum.hl{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3)}
+.fsum.hl .v{color:#059669}
+@media(max-width:560px){.fseg{width:100%!important}.fsummary{grid-template-columns:1fr}}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--border);white-space:nowrap}
 td{padding:10px;border-bottom:1px solid #f1f5f9}
@@ -241,16 +250,28 @@ new Chart(document.getElementById('chartDaily'),{type:'bar',
     scales:{y:{position:'left',beginAtZero:true,title:{display:true,text:'Leads'},grid:{color:'#f1f5f9'}},
       y1:{position:'right',beginAtZero:true,title:{display:true,text:'Investimento (R$)'},grid:{drawOnChartArea:false},ticks:{callback:v=>'R$'+v}}}}});
 
-// FUNIL
-const pImp=100, pLc=T.impr?T.lc/T.impr*100:0, pLpv=T.impr?T.lpv/T.impr*100:0, pLead=T.impr?T.leads/T.impr*100:0;
-const w=p=>Math.max(8,Math.min(100,p*2.9))+'%';
+// FUNIL — formato afunilado, com as taxas de conversão entre etapas
+const segW=['100%','74%','54%','40%'];
+const seg=(cls,w,label,val,sub)=>`<div class="fseg ${cls}" style="width:${w}">
+  <div><div class="fl">${label}</div><div class="fsub">${sub}</div></div><div class="fv">${val}</div></div>`;
+const conn=(cls,txt)=>`<div class="fconn"><span class="chev">▼</span><span class="pill ${cls}">${txt}</span></div>`;
 document.getElementById('funnel').innerHTML=`
-  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Impressões</span><span class="fval">${N(T.impr)}</span></div><div class="fbar s1" style="width:100%">100%</div></div><div class="frate">alcance<br><b>${N(T.reach)}</b></div></div>
-  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Cliques no link</span><span class="fval">${N(T.lc)}</span></div><div class="fbar s2" style="width:${w(pLc)}">CTR ${PCT(ctrLink)}</div></div><div class="frate">CPC<br><b>${BRL(cpc)}</b></div></div>
-  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Chegaram na página (LP View)</span><span class="fval">${N(T.lpv)}</span></div><div class="fbar s3" style="width:${w(pLpv)}">${PCT(txClickPage)} dos cliques</div></div><div class="frate">perda clique→página<br><b>${PCT(100-txClickPage)}</b></div></div>
-  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Leads / Cadastros</span><span class="fval">${N(T.leads)}</span></div><div class="fbar s4" style="width:${w(pLead)}">${PCT(txPagina)} de quem chegou</div></div><div class="frate">Conversão da página<br><span class="rc">${PCT(txPagina)}</span></div></div>`;
+  <div class="funnelV">
+    ${seg('s1',segW[0],'Impressões',N(T.impr),'alcance '+N(T.reach))}
+    ${conn('','CTR '+PCT(ctrLink)+' clicaram no link')}
+    ${seg('s2',segW[1],'Cliques no link',N(T.lc),'CPC '+BRL(cpc))}
+    ${conn(txClickPage>=65?'':'warn',PCT(txClickPage)+' carregaram a página · perde '+PCT(100-txClickPage))}
+    ${seg('s3',segW[2],'Chegaram na página',N(T.lpv),'landing page view')}
+    ${conn('hot','Conversão da página '+PCT(txPagina))}
+    ${seg('s4',segW[3],'Leads / Cadastros',N(T.leads),'CPL '+BRL(cplMedio))}
+  </div>
+  <div class="fsummary">
+    <div class="fsum"><div class="v">${PCT(ctrLink)}</div><div class="l">CTR do anúncio</div></div>
+    <div class="fsum hl"><div class="v">${PCT(txPagina)}</div><div class="l">Conversão da página</div></div>
+    <div class="fsum"><div class="v">${BRL(cplMedio)}</div><div class="l">Custo por lead</div></div>
+  </div>`;
 document.getElementById('funnelNote').innerHTML=
-  `📌 <b>Conversão da página = ${PCT(txPagina)}</b> — de cada 100 pessoas que abriram a página de captura, ~${Math.round(txPagina)} deixaram o cadastro. Benchmark saudável de LP de captação: 30–45%. Entre o clique e a página abrir há perda de ${PCT(100-txClickPage)} (velocidade da página / desistência) — ponto de atenção.`;
+  `📌 <b>Conversão da página = ${PCT(txPagina)}</b> — de cada 100 pessoas que abriram a página de captura, ~${Math.round(txPagina)} deixaram o cadastro. Benchmark saudável de LP de captação: 30–45%. Atenção ao degrau <b>clique → página</b>: ${PCT(100-txClickPage)} dos cliques não chegam a carregar a página (velocidade / desistência).`;
 
 // PÚBLICOS
 const maxPub=Math.max(...publicos.map(p=>p.leads),1);
