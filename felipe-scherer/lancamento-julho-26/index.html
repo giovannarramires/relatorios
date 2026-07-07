@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Dashboard Lançamento JUL/26 · Felipe Scherer · Gestão GGD · GERADO AUTOMATICAMENTE -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felipe Scherer — Lançamento JUL/26</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+--h1:#4338ca;--h2:#2563eb;--cap:#2563eb;--dist:#8b5cf6;--good:#10b981;--warn:#f59e0b;--bad:#ef4444;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--radius:14px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
+.header{background:linear-gradient(135deg,var(--h1),var(--h2));padding:0 36px;min-height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.2);flex-wrap:wrap;gap:8px}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.header-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.header-sub{font-size:11px;color:rgba(255,255,255,.75)}
+.header-right{font-size:11px;color:rgba(255,255,255,.85);text-align:right;padding:12px 0}
+.header-right b{color:#fff}
+.wrap{max-width:1200px;margin:0 auto;padding:26px 24px}
+.section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2);margin:34px 0 14px;display:flex;align-items:center;gap:8px}
+.section-title:first-child{margin-top:6px}
+.section-title .bar{width:4px;height:16px;border-radius:2px;background:var(--h1)}
+.section-hint{font-size:11.5px;color:var(--text-3);font-weight:500;text-transform:none;letter-spacing:0;margin-left:2px}
+.phases{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.phase{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);border-left:4px solid var(--cap);position:relative}
+.phase.dist{border-left-color:var(--dist)}
+.phase-tag{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(37,99,235,.12);color:var(--cap);display:inline-block}
+.phase.dist .phase-tag{background:rgba(139,92,246,.12);color:var(--dist)}
+.phase-name{font-size:15px;font-weight:800;margin:9px 0 3px}
+.phase-desc{font-size:11.5px;color:var(--text-3);margin-bottom:12px}
+.phase-metrics{display:flex;gap:22px;flex-wrap:wrap}
+.pm{display:flex;flex-direction:column}
+.pm-v{font-size:19px;font-weight:800;letter-spacing:-.5px}
+.pm-l{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.live{position:absolute;top:16px;right:18px;font-size:9.5px;font-weight:700;color:var(--good);display:flex;align-items:center;gap:5px}
+.live .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--surface);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--h2)}
+.kpi.k-lead::before{background:var(--good)}.kpi.k-cpl::before{background:var(--warn)}.kpi.k-inv::before{background:var(--cap)}.kpi.k-pag::before{background:var(--dist)}
+.kpi-l{font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:6px}
+.kpi-v{font-size:24px;font-weight:800;letter-spacing:-.8px}
+.kpi-s{font-size:11px;color:var(--text-2);margin-top:4px}
+.kpi-s b{color:var(--good)}
+.card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.chart-box{position:relative;height:320px}
+.funnel{display:flex;flex-direction:column;gap:10px}
+.fstep{display:flex;align-items:center;gap:16px}
+.fbar-wrap{flex:1}
+.fbar-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.fbar-top .fname{font-weight:700}.fbar-top .fval{font-weight:800}
+.fbar{height:34px;border-radius:8px;display:flex;align-items:center;padding-left:12px;color:#fff;font-size:12px;font-weight:700;min-width:60px}
+.fbar.s1{background:linear-gradient(90deg,var(--h1),var(--h2))}
+.fbar.s2{background:linear-gradient(90deg,#2563eb,#38bdf8)}
+.fbar.s3{background:linear-gradient(90deg,#8b5cf6,#c084fc)}
+.fbar.s4{background:linear-gradient(90deg,#10b981,#34d399)}
+.frate{font-size:11px;color:var(--text-3);width:130px;text-align:right}
+.frate b{color:var(--text);font-size:13px}.frate .rc{color:var(--good);font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid #f1f5f9}
+th.num,td.num{text-align:right}
+tr:hover td{background:#f8fafc}
+.tbl-scroll{overflow-x:auto}
+tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f8fafc}
+.tag-pub{font-weight:700;font-size:12px}
+.minibar{height:6px;border-radius:3px;background:#e2e8f0;overflow:hidden;margin-top:4px;width:100%}
+.minibar>span{display:block;height:100%;background:linear-gradient(90deg,var(--good),#34d399)}
+.cpl-badge{font-weight:800;padding:2px 8px;border-radius:6px;font-size:11.5px;white-space:nowrap}
+.cpl-good{background:rgba(16,185,129,.12);color:#059669}
+.cpl-mid{background:rgba(245,158,11,.14);color:#b45309}
+.cpl-bad{background:rgba(239,68,68,.12);color:#dc2626}
+.pg-pill{font-weight:700;font-size:11.5px;padding:2px 8px;border-radius:6px;background:rgba(139,92,246,.1);color:#7c3aed}
+.rank{display:inline-flex;width:20px;height:20px;border-radius:5px;background:#eef2ff;color:var(--h1);font-weight:800;font-size:11px;align-items:center;justify-content:center;margin-right:6px}
+.btn-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#fff;background:var(--h2);padding:5px 11px;border-radius:7px;text-decoration:none;white-space:nowrap}
+.btn-link:hover{background:var(--h1)}
+.sim{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.sim-inputs{display:flex;flex-direction:column;gap:16px}
+.sim-field label{font-size:11px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:6px}
+.sim-field input[type=range]{width:100%}
+.sim-field .rv{font-size:20px;font-weight:800;color:var(--h1)}
+.sim-out{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:var(--radius);padding:22px;color:#fff}
+.sim-out .so-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.sim-out .so-row:last-child{border:none}
+.sim-out .so-l{font-size:12px;color:rgba(255,255,255,.7)}
+.sim-out .so-v{font-size:20px;font-weight:800}
+.sim-out .roas-big{font-size:34px;font-weight:900;letter-spacing:-1px}
+.roas-pos{color:#34d399}.roas-neg{color:#f87171}
+.note{font-size:11px;color:var(--text-3);margin-top:10px;line-height:1.5}
+.footer{text-align:center;font-size:11px;color:var(--text-3);margin-top:40px}
+@media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}.phases,.sim{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">🚀</div>
+    <div><div class="header-title">Felipe Scherer — Lançamento JUL/26</div>
+      <div class="header-sub">Meta Ads · Captação + Distribuição · Gestão GGD</div></div>
+  </div>
+  <div class="header-right" id="hdrRight"></div>
+</div>
+<div class="wrap">
+  <div class="section-title"><span class="bar"></span>Fases do Lançamento</div>
+  <div class="phases" id="phases"></div>
+
+  <div class="section-title"><span class="bar"></span>Visão Geral · Captação</div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="section-title"><span class="bar"></span>Controle Diário da Operação
+    <span class="section-hint">— investimento · leads · CPL · conversão da página, dia a dia</span></div>
+  <div class="card tbl-scroll"><table id="tblDaily"><thead><tr>
+    <th>Dia</th><th class="num">Investido</th><th class="num">Cliques link</th>
+    <th class="num">Chegou na página</th><th class="num">Leads</th>
+    <th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Evolução Diária · Leads × Investimento</div>
+  <div class="card"><div class="chart-box"><canvas id="chartDaily"></canvas></div></div>
+
+  <div class="section-title"><span class="bar"></span>Funil da Captação
+    <span class="section-hint">— do anúncio até o lead, com a taxa de conversão da página</span></div>
+  <div class="card"><div class="funnel" id="funnel"></div><p class="note" id="funnelNote"></p></div>
+
+  <div class="section-title"><span class="bar"></span>Origem dos Leads · por Público (conjunto)</div>
+  <div class="card tbl-scroll"><table id="tblPub"><thead><tr>
+    <th>Público / Conjunto</th><th class="num">Leads</th><th class="num">Investido</th>
+    <th class="num">CPL</th><th style="width:22%">Participação</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Melhores Criativos · com link do anúncio
+    <span class="section-hint">— clique em "Ver anúncio" para abrir o post no Facebook/Instagram</span></div>
+  <div class="card tbl-scroll"><table id="tblAd"><thead><tr>
+    <th>#</th><th>Criativo</th><th class="num">Leads</th><th class="num">CPL</th>
+    <th class="num">Conv. página</th><th class="num">Investido</th><th>Anúncio</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Projeção de Faturamento & ROI</div>
+  <div class="card">
+    <p class="note" id="simIntro" style="margin-top:0;margin-bottom:18px"></p>
+    <div class="sim">
+      <div class="sim-inputs">
+        <div class="sim-field"><label>Ticket médio do produto</label>
+          <div class="rv" id="rvTicket">R$ 297</div>
+          <input type="range" id="ticket" min="47" max="2000" step="10" value="297"></div>
+        <div class="sim-field"><label>Conversão de leads em venda</label>
+          <div class="rv" id="rvConv">3,0%</div>
+          <input type="range" id="conv" min="0.5" max="15" step="0.5" value="3"></div>
+      </div>
+      <div class="sim-out">
+        <div class="so-row"><span class="so-l">Vendas estimadas</span><span class="so-v" id="oVendas">–</span></div>
+        <div class="so-row"><span class="so-l">Faturamento projetado</span><span class="so-v" id="oFat">–</span></div>
+        <div class="so-row"><span class="so-l">Investimento atual</span><span class="so-v" id="oInv">–</span></div>
+        <div class="so-row"><span class="so-l">ROAS projetado</span><span class="roas-big" id="oRoas">–</span></div>
+      </div>
+    </div>
+    <p class="note" id="breakeven"></p>
+  </div>
+  <div class="footer" id="footer"></div>
+</div>
+<script>
+const DATA = {"meta": {"gerado_em": "2026-07-07", "conta": "406495927539938", "periodo_ini": "02/07", "periodo_fim": "07/07"}, "totals": {"spend": 9783.18, "leads": 708, "lc": 3163, "lpv": 2103, "impr": 221796, "reach": 186120, "dist_spend": 580.5, "dist_vviews": 73873, "dist_reach": 83357}, "daily": [{"d": "02/07", "spend": 2367.48, "lc": 713, "lpv": 548, "leads": 166, "impr": 62665}, {"d": "03/07", "spend": 2517.77, "lc": 894, "lpv": 492, "leads": 171, "impr": 57799}, {"d": "04/07", "spend": 880.14, "lc": 363, "lpv": 123, "leads": 58, "impr": 19432}, {"d": "05/07", "spend": 2247.26, "lc": 569, "lpv": 434, "leads": 134, "impr": 36863}, {"d": "06/07", "spend": 1206.97, "lc": 450, "lpv": 364, "leads": 121, "impr": 31848}, {"d": "07/07", "spend": 563.56, "lc": 174, "lpv": 142, "leads": 58, "impr": 13189}], "publicos": [{"publico": "MIX_ADV_TRABALHO", "leads": 161, "spend": 1976.49, "cpl": 12.28}, {"publico": "LAL_VVIEW_95", "leads": 132, "spend": 1713.54, "cpl": 12.98}, {"publico": "INTERESSES_ADVOGADO", "leads": 120, "spend": 1450.9, "cpl": 12.09}, {"publico": "ADV / DIREITO_TRABALHISTA", "leads": 115, "spend": 1326.3, "cpl": 11.53}, {"publico": "MIX_LAL", "leads": 87, "spend": 1489.62, "cpl": 17.12}, {"publico": "ADV", "leads": 79, "spend": 1085.45, "cpl": 13.74}, {"publico": "LAL_PURCHASE", "leads": 14, "spend": 213.12, "cpl": 15.22}], "criativos": [{"ad": "AD_FEED_VIDEO_AD12_IDZE", "leads": 112, "spend": 1089.35, "lc": 487, "lpv": 337, "link": "https://facebook.com/p/104241485323869_1032247132526778", "cpl": 9.73, "txPagina": 33.2}, {"ad": "AD_FEED_VIDEO_AD06_IDZE", "leads": 106, "spend": 1075.92, "lc": 367, "lpv": 266, "link": "https://facebook.com/p/104241485323869_1031879239230234", "cpl": 10.15, "txPagina": 39.8}, {"ad": "AD_FEED_VIDEO_AD05_IDZE", "leads": 92, "spend": 976.62, "lc": 329, "lpv": 219, "link": "https://facebook.com/p/104241485323869_1031879252563566", "cpl": 10.62, "txPagina": 42.0}, {"ad": "AD_FEED_VIDEO_AD02_IDZE", "leads": 63, "spend": 840.39, "lc": 316, "lpv": 203, "link": "https://facebook.com/p/104241485323869_1031879255896899", "cpl": 13.34, "txPagina": 31.0}, {"ad": "AD_FEED_NATIVO_1_PROMESSA", "leads": 49, "spend": 564.68, "lc": 132, "lpv": 101, "link": "https://facebook.com/p/104241485323869_1031817249236433", "cpl": 11.52, "txPagina": 48.5}, {"ad": "AD_FEED_NATIVO_6_NR1", "leads": 40, "spend": 529.37, "lc": 177, "lpv": 129, "link": "https://facebook.com/p/104241485323869_1031806365904188", "cpl": 13.23, "txPagina": 31.0}, {"ad": "AD_FEED_VIDEO_AD01_IDZE", "leads": 38, "spend": 575.8, "lc": 185, "lpv": 116, "link": "https://facebook.com/p/104241485323869_1031879265896898", "cpl": 15.15, "txPagina": 32.8}, {"ad": "AD_FEED_VIDEO_AD03_IDZE", "leads": 31, "spend": 513.45, "lc": 232, "lpv": 148, "link": "https://facebook.com/p/104241485323869_1031879249230233", "cpl": 16.56, "txPagina": 20.9}, {"ad": "AD_FEED_VIDEO_AD10_IDZE", "leads": 31, "spend": 511.06, "lc": 160, "lpv": 90, "link": "https://facebook.com/p/104241485323869_1032247165860108", "cpl": 16.49, "txPagina": 34.4}, {"ad": "AD_FEED_NATIVO_2_LAUDO", "leads": 30, "spend": 455.84, "lc": 109, "lpv": 63, "link": "https://facebook.com/p/104241485323869_1031806409237517", "cpl": 15.19, "txPagina": 47.6}, {"ad": "AD_FEED_VIDEO_AD04_IDZE", "leads": 29, "spend": 568.17, "lc": 193, "lpv": 113, "link": "https://facebook.com/p/104241485323869_1031879275896897", "cpl": 19.59, "txPagina": 25.7}, {"ad": "AD_FEED_NATIVO_7_LAUDO", "leads": 26, "spend": 312.57, "lc": 87, "lpv": 54, "link": "https://facebook.com/p/104241485323869_1031806375904187", "cpl": 12.02, "txPagina": 48.1}]};
+const T = DATA.totals, daily = DATA.daily, publicos = DATA.publicos, criativos = DATA.criativos;
+const BRL = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const BRL0 = v => 'R$ ' + Math.round(v||0).toLocaleString('pt-BR');
+const N = v => (v||0).toLocaleString('pt-BR');
+const PCT = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+const cplClass = c => c==null?'cpl-mid':(c<=13?'cpl-good':(c<=18?'cpl-mid':'cpl-bad'));
+
+const INVEST_TOTAL = +(T.spend + T.dist_spend).toFixed(2);
+const cplMedio = T.leads ? T.spend/T.leads : 0;
+const ctrLink  = T.impr ? T.lc/T.impr*100 : 0;
+const txClickPage = T.lc ? T.lpv/T.lc*100 : 0;
+const txPagina = T.lpv ? T.leads/T.lpv*100 : 0;
+const cpc = T.lc ? T.spend/T.lc : 0;
+const cpm = T.impr ? T.spend/T.impr*1000 : 0;
+const cplMin = Math.min(...daily.filter(d=>d.leads>0).map(d=>d.spend/d.leads));
+const diasAtivos = daily.filter(d=>d.leads>0).length || 1;
+
+// HEADER
+document.getElementById('hdrRight').innerHTML =
+  `Período: <b>${DATA.meta.periodo_ini} – ${DATA.meta.periodo_fim} 2026</b><br>Atualizado em <b>${DATA.meta.gerado_em}</b>`;
+
+// FASES
+document.getElementById('phases').innerHTML = `
+  <div class="phase"><div class="live"><span class="dot"></span>ATIVA</div>
+    <span class="phase-tag">Fase 1 · Captação</span>
+    <div class="phase-name">Cadastro de Leads</div>
+    <div class="phase-desc">Objetivo Cadastro · públicos LAL + interesses jurídicos</div>
+    <div class="phase-metrics">
+      <div class="pm"><span class="pm-v">${N(T.leads)}</span><span class="pm-l">Leads</span></div>
+      <div class="pm"><span class="pm-v">${BRL0(T.spend)}</span><span class="pm-l">Investido</span></div>
+      <div class="pm"><span class="pm-v">${BRL(cplMedio)}</span><span class="pm-l">CPL médio</span></div>
+    </div></div>
+  <div class="phase dist"><div class="live"><span class="dot"></span>ATIVA</div>
+    <span class="phase-tag">Fase 2 · Distribuição</span>
+    <div class="phase-name">Aquecimento / VView</div>
+    <div class="phase-desc">Engajamento e views de vídeo p/ base 180d · nutrição do público</div>
+    <div class="phase-metrics">
+      <div class="pm"><span class="pm-v">${N(T.dist_vviews)}</span><span class="pm-l">Video views</span></div>
+      <div class="pm"><span class="pm-v">${BRL0(T.dist_spend)}</span><span class="pm-l">Investido</span></div>
+      <div class="pm"><span class="pm-v">${N(T.dist_reach)}</span><span class="pm-l">Alcance</span></div>
+    </div></div>`;
+
+// KPIs
+document.getElementById('kpis').innerHTML = `
+  <div class="kpi k-inv"><div class="kpi-l">Investimento total</div><div class="kpi-v">${BRL0(INVEST_TOTAL)}</div><div class="kpi-s">Captação ${BRL0(T.spend)} + Distrib. ${BRL0(T.dist_spend)}</div></div>
+  <div class="kpi k-lead"><div class="kpi-l">Leads captados</div><div class="kpi-v">${N(T.leads)}</div><div class="kpi-s"><b>~${Math.round(T.leads/diasAtivos)}/dia</b> em média</div></div>
+  <div class="kpi k-cpl"><div class="kpi-l">CPL médio</div><div class="kpi-v">${BRL(cplMedio)}</div><div class="kpi-s">melhor dia ${BRL(cplMin)}</div></div>
+  <div class="kpi k-pag"><div class="kpi-l">Conversão da página</div><div class="kpi-v">${PCT(txPagina)}</div><div class="kpi-s">leads ÷ quem chegou na página</div></div>
+  <div class="kpi"><div class="kpi-l">Cliques no link</div><div class="kpi-v">${N(T.lc)}</div><div class="kpi-s">CTR link ${PCT(ctrLink)}</div></div>
+  <div class="kpi"><div class="kpi-l">Chegaram na página</div><div class="kpi-v">${N(T.lpv)}</div><div class="kpi-s">${PCT(txClickPage)} dos cliques carregaram</div></div>
+  <div class="kpi"><div class="kpi-l">Custo/clique</div><div class="kpi-v">${BRL(cpc)}</div><div class="kpi-s">no link</div></div>
+  <div class="kpi"><div class="kpi-l">Impressões</div><div class="kpi-v">${N(T.impr)}</div><div class="kpi-s">CPM ${BRL(cpm)}</div></div>`;
+
+// TABELA DIÁRIA
+let rows='';
+daily.forEach(x=>{
+  const cpl=x.leads?x.spend/x.leads:0, txp=x.lpv?x.leads/x.lpv*100:0;
+  rows+=`<tr><td><b>${x.d}</b></td><td class="num">${BRL(x.spend)}</td>
+    <td class="num">${N(x.lc)}</td><td class="num">${N(x.lpv)}</td>
+    <td class="num"><b>${x.leads}</b></td>
+    <td class="num"><span class="cpl-badge ${cplClass(cpl)}">${BRL(cpl)}</span></td>
+    <td class="num"><span class="pg-pill">${PCT(txp)}</span></td></tr>`;
+});
+rows+=`<tr class="total-row"><td>TOTAL</td><td class="num">${BRL(T.spend)}</td>
+  <td class="num">${N(T.lc)}</td><td class="num">${N(T.lpv)}</td><td class="num">${T.leads}</td>
+  <td class="num">${BRL(cplMedio)}</td><td class="num">${PCT(txPagina)}</td></tr>`;
+document.querySelector('#tblDaily tbody').innerHTML=rows;
+
+// GRÁFICO
+new Chart(document.getElementById('chartDaily'),{type:'bar',
+  data:{labels:daily.map(x=>x.d),datasets:[
+    {type:'bar',label:'Leads',data:daily.map(x=>x.leads),backgroundColor:'#10b981',borderRadius:6,yAxisID:'y',order:2},
+    {type:'line',label:'Investimento (R$)',data:daily.map(x=>x.spend),borderColor:'#4338ca',backgroundColor:'rgba(67,56,202,.08)',borderWidth:3,tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#4338ca',yAxisID:'y1',order:1}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,font:{size:12,weight:'600'}}},
+      tooltip:{callbacks:{label:c=>c.dataset.yAxisID==='y1'?'  Investido: '+BRL(c.raw):'  Leads: '+c.raw}}},
+    scales:{y:{position:'left',beginAtZero:true,title:{display:true,text:'Leads'},grid:{color:'#f1f5f9'}},
+      y1:{position:'right',beginAtZero:true,title:{display:true,text:'Investimento (R$)'},grid:{drawOnChartArea:false},ticks:{callback:v=>'R$'+v}}}}});
+
+// FUNIL
+const pImp=100, pLc=T.impr?T.lc/T.impr*100:0, pLpv=T.impr?T.lpv/T.impr*100:0, pLead=T.impr?T.leads/T.impr*100:0;
+const w=p=>Math.max(8,Math.min(100,p*2.9))+'%';
+document.getElementById('funnel').innerHTML=`
+  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Impressões</span><span class="fval">${N(T.impr)}</span></div><div class="fbar s1" style="width:100%">100%</div></div><div class="frate">alcance<br><b>${N(T.reach)}</b></div></div>
+  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Cliques no link</span><span class="fval">${N(T.lc)}</span></div><div class="fbar s2" style="width:${w(pLc)}">CTR ${PCT(ctrLink)}</div></div><div class="frate">CPC<br><b>${BRL(cpc)}</b></div></div>
+  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Chegaram na página (LP View)</span><span class="fval">${N(T.lpv)}</span></div><div class="fbar s3" style="width:${w(pLpv)}">${PCT(txClickPage)} dos cliques</div></div><div class="frate">perda clique→página<br><b>${PCT(100-txClickPage)}</b></div></div>
+  <div class="fstep"><div class="fbar-wrap"><div class="fbar-top"><span class="fname">Leads / Cadastros</span><span class="fval">${N(T.leads)}</span></div><div class="fbar s4" style="width:${w(pLead)}">${PCT(txPagina)} de quem chegou</div></div><div class="frate">Conversão da página<br><span class="rc">${PCT(txPagina)}</span></div></div>`;
+document.getElementById('funnelNote').innerHTML=
+  `📌 <b>Conversão da página = ${PCT(txPagina)}</b> — de cada 100 pessoas que abriram a página de captura, ~${Math.round(txPagina)} deixaram o cadastro. Benchmark saudável de LP de captação: 30–45%. Entre o clique e a página abrir há perda de ${PCT(100-txClickPage)} (velocidade da página / desistência) — ponto de atenção.`;
+
+// PÚBLICOS
+const maxPub=Math.max(...publicos.map(p=>p.leads),1);
+document.querySelector('#tblPub tbody').innerHTML=publicos.map(p=>`
+  <tr><td class="tag-pub">${p.publico}</td><td class="num"><b>${p.leads}</b></td>
+  <td class="num">${BRL(p.spend)}</td>
+  <td class="num"><span class="cpl-badge ${cplClass(p.cpl)}">${p.cpl==null?'–':BRL(p.cpl)}</span></td>
+  <td><div class="minibar"><span style="width:${(p.leads/maxPub*100).toFixed(0)}%"></span></div>
+      <span style="font-size:10px;color:#94a3b8">${(T.leads?p.leads/T.leads*100:0).toFixed(1)}%</span></td></tr>`).join('');
+
+// CRIATIVOS
+document.querySelector('#tblAd tbody').innerHTML=criativos.map((a,i)=>`
+  <tr><td><span class="rank">${i+1}</span></td><td style="font-weight:600">${a.ad}</td>
+  <td class="num"><b>${a.leads}</b></td>
+  <td class="num"><span class="cpl-badge ${cplClass(a.cpl)}">${a.cpl==null?'–':BRL(a.cpl)}</span></td>
+  <td class="num"><span class="pg-pill">${PCT(a.txPagina)}</span></td>
+  <td class="num">${BRL(a.spend)}</td>
+  <td>${a.link?`<a class="btn-link" href="${a.link}" target="_blank" rel="noopener">▶ Ver anúncio</a>`:'–'}</td></tr>`).join('');
+
+// SIMULADOR
+document.getElementById('simIntro').innerHTML=
+  `O carrinho ainda não abriu — o retorno abaixo é uma <b>projeção</b>. Ajuste o ticket médio e a taxa de conversão esperada dos ${N(T.leads)} leads para estimar faturamento e ROAS sobre o investimento atual (${BRL0(INVEST_TOTAL)}).`;
+document.getElementById('oInv').textContent=BRL0(INVEST_TOTAL);
+const ticket=document.getElementById('ticket'),conv=document.getElementById('conv');
+function calcROI(){
+  const t=+ticket.value,c=+conv.value/100;
+  const vendas=Math.round(T.leads*c),fat=vendas*t,roas=fat/INVEST_TOTAL;
+  document.getElementById('rvTicket').textContent=BRL0(t);
+  document.getElementById('rvConv').textContent=(+conv.value).toLocaleString('pt-BR',{minimumFractionDigits:1})+'%';
+  document.getElementById('oVendas').textContent=vendas;
+  document.getElementById('oFat').textContent=BRL0(fat);
+  const r=document.getElementById('oRoas');
+  r.textContent=roas.toFixed(2).replace('.',',')+'x';
+  r.className='roas-big '+(roas>=1?'roas-pos':'roas-neg');
+  const beConv=INVEST_TOTAL/t/T.leads*100;
+  document.getElementById('breakeven').innerHTML=
+    `⚖️ Com ticket de <b>${BRL0(t)}</b>, o lançamento empata (ROAS 1x) convertendo <b>${beConv.toFixed(1)}%</b> dos leads (<b>${Math.ceil(INVEST_TOTAL/t)}</b> vendas). Acima disso, lucro.`;
+}
+ticket.addEventListener('input',calcROI);conv.addEventListener('input',calcROI);calcROI();
+
+document.getElementById('footer').innerHTML=
+  `Gestão GGD · Giovanna Ramires · Dados Meta Ads via Windsor.ai · Conta ${DATA.meta.conta} · Atualização automática 3×/dia (06h · 14h · 21h)`;
+</script>
+</body>
+</html>
