@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roma Importadora — Atacado de Aviamentos direto da importadora (proposta de LP)</title>
+<style>
+  :root{
+    --vermelho:#e4002b; --vinho:#7a0016; --escuro:#1a0006; --wa:#25D366; --wa2:#128C7E;
+    --ouro:#f5b700; --bg:#faf7f5; --texto:#22181a; --muted:#6c6068; --linha:#ece2e4; --card:#fff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--texto); line-height:1.55;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+  .badge-mock{position:fixed; top:0; left:0; right:0; background:#111; color:#fff; text-align:center; font-size:11px; letter-spacing:.5px; padding:5px; z-index:99;}
+  .badge-mock b{color:var(--ouro);}
+
+  /* HERO */
+  .hero{background:linear-gradient(120deg,#1a0006 0%,#3d0010 55%,#7a0016 100%); color:#fff; padding:78px 0 64px; position:relative; overflow:hidden;}
+  .hero::after{content:""; position:absolute; right:-120px; top:-120px; width:420px; height:420px; background:radial-gradient(circle,rgba(255,183,0,.18),transparent 70%); border-radius:50%;}
+  .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:44px; align-items:center;}
+  .eyebrow{display:inline-block; background:rgba(255,183,0,.16); color:#ffd98a; border:1px solid rgba(255,183,0,.35); font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:6px 14px; border-radius:30px; margin-bottom:18px;}
+  .hero h1{font-size:41px; line-height:1.1; font-weight:800; letter-spacing:-.8px; margin-bottom:16px;}
+  .hero h1 span{color:var(--ouro);}
+  .hero .lead{font-size:17px; color:#ffe0e6; max-width:520px; margin-bottom:24px;}
+  .selos{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px;}
+  .selo{display:flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:#fff; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); padding:7px 12px; border-radius:8px;}
+  .selo b{color:var(--ouro);}
+  .cta{display:inline-flex; align-items:center; gap:10px; background:var(--wa); color:#04351f; font-weight:800; font-size:16px; padding:15px 26px; border-radius:12px; text-decoration:none; box-shadow:0 10px 26px rgba(37,211,102,.35); transition:transform .15s,box-shadow .15s;}
+  .cta:hover{transform:translateY(-2px); box-shadow:0 14px 32px rgba(37,211,102,.45);}
+  .cta.sec{background:#fff; color:var(--vinho); box-shadow:0 10px 26px rgba(0,0,0,.18);}
+  .cta-sub{font-size:12px; color:#e6b3bd; margin-top:10px;}
+
+  /* FORM CARD */
+  .formcard{background:#fff; border-radius:18px; padding:26px 24px; box-shadow:0 24px 60px rgba(0,0,0,.35); color:var(--texto);}
+  .formcard h3{font-size:19px; margin-bottom:4px; color:var(--vinho);}
+  .formcard p.sub{font-size:13px; color:var(--muted); margin-bottom:18px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block; font-size:12px; font-weight:700; color:#4a3d40; margin-bottom:5px;}
+  .field input,.field select{width:100%; padding:12px 13px; border:1.5px solid var(--linha); border-radius:9px; font-size:14px; font-family:inherit; background:#fff; color:var(--texto);}
+  .field input:focus,.field select:focus{outline:none; border-color:var(--vermelho);}
+  .formcard .cta{width:100%; justify-content:center; margin-top:6px;}
+  .formcard .privacy{font-size:11px; color:var(--muted); text-align:center; margin-top:12px; line-height:1.5;}
+
+  /* FAIXA CONFIANÇA */
+  .trust{background:#fff; border-bottom:1px solid var(--linha);}
+  .trust .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; padding:22px 20px;}
+  .trust .item{display:flex; align-items:center; gap:12px; flex:1; min-width:210px;}
+  .trust .ic{width:44px; height:44px; border-radius:11px; background:#fff3f4; color:var(--vermelho); display:flex; align-items:center; justify-content:center; font-size:22px; flex:0 0 auto;}
+  .trust .item b{display:block; font-size:15px;}
+  .trust .item span{font-size:12.5px; color:var(--muted);}
+
+  section.blk{padding:56px 0;}
+  .kicker{font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--vermelho); margin-bottom:10px;}
+  h2.tit{font-size:30px; font-weight:800; letter-spacing:-.5px; margin-bottom:12px; max-width:760px;}
+  p.intro{font-size:16px; color:#514348; max-width:720px; margin-bottom:30px;}
+
+  /* VS MARKETPLACE */
+  .vs{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .vs .col{border-radius:16px; padding:26px 24px;}
+  .vs .roma{background:linear-gradient(135deg,#2a0009,#7a0016); color:#fff;}
+  .vs .mkt{background:#fff; border:1.5px solid var(--linha);}
+  .vs h4{font-size:18px; margin-bottom:16px; display:flex; align-items:center; gap:9px;}
+  .vs ul{list-style:none;}
+  .vs li{font-size:14.5px; padding:9px 0; display:flex; gap:10px; align-items:flex-start; border-top:1px solid rgba(255,255,255,.12);}
+  .vs .mkt li{border-top-color:var(--linha); color:#514348;}
+  .vs li:first-child{border-top:none;}
+  .vs .roma .ck{color:var(--ouro); font-weight:800;}
+  .vs .mkt .ck{color:#c00; font-weight:800;}
+
+  /* CATEGORIAS */
+  .cats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .cat{background:#fff; border:1px solid var(--linha); border-radius:13px; padding:20px 16px; text-align:center;}
+  .cat .em{font-size:30px; display:block; margin-bottom:8px;}
+  .cat b{font-size:14px;}
+
+  /* PARA QUEM */
+  .quem{display:flex; flex-wrap:wrap; gap:10px;}
+  .quem span{background:#fff; border:1px solid var(--linha); border-radius:30px; padding:9px 16px; font-size:14px; font-weight:600; color:#4a3d40;}
+  .quem span::before{content:"✔ "; color:var(--wa2); font-weight:800;}
+
+  /* PASSOS */
+  .passos{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .passo{background:#fff; border:1px solid var(--linha); border-radius:14px; padding:24px; position:relative;}
+  .passo .n{width:38px; height:38px; border-radius:50%; background:var(--vermelho); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .passo b{font-size:16px; display:block; margin-bottom:6px;}
+  .passo p{font-size:13.5px; color:var(--muted);}
+
+  /* DEPOIMENTOS */
+  .deps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .dep{background:#fff; border:1px solid var(--linha); border-radius:14px; padding:22px;}
+  .dep .stars{color:var(--ouro); font-size:15px; margin-bottom:10px;}
+  .dep p{font-size:14px; color:#3f3438; margin-bottom:14px; font-style:italic;}
+  .dep .who{display:flex; align-items:center; gap:11px;}
+  .dep .av{width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#7a0016,#e4002b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800;}
+  .dep .who b{font-size:13.5px; display:block;}
+  .dep .who span{font-size:12px; color:var(--muted);}
+  .placeholder-note{font-size:12px; color:#b08; background:#fff3f8; border:1px dashed #f0c; border-radius:8px; padding:8px 12px; margin-top:14px;}
+
+  /* CTA FINAL */
+  .final{background:linear-gradient(120deg,#1a0006,#7a0016); color:#fff; text-align:center; padding:64px 0;}
+  .final h2{font-size:32px; font-weight:800; margin-bottom:12px;}
+  .final p{font-size:16px; color:#ffd7de; max-width:560px; margin:0 auto 26px;}
+
+  footer.rdp{background:#140005; color:#a98; font-size:12px; text-align:center; padding:26px 20px;}
+
+  @media(max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;} .hero h1{font-size:32px;}
+    .vs,.passos,.deps{grid-template-columns:1fr;} .cats{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+<div class="badge-mock">PROPOSTA DE REDESENHO — <b>Landing /qlfleads</b> · Roma Importadora · mockup GGD (conteúdo/números de exemplo a validar com o cliente)</div>
+
+<!-- HERO -->
+<div class="hero" style="margin-top:26px;">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Atacado exclusivo para CNPJ</span>
+      <h1>Compre aviamentos <span>direto da importadora</span> e aumente sua margem em cada peça</h1>
+      <p class="lead">Milhares de itens de aviamentos, armarinho e artesanato num só fornecedor — com preço de atacado, pronta-entrega no Brasil e nota fiscal. Pare de depender de marketplace e atravessador.</p>
+      <div class="selos">
+        <div class="selo">🏭 Importadora <b>própria</b></div>
+        <div class="selo">📦 <b>Pronta-entrega</b> no Brasil</div>
+        <div class="selo">🧾 Nota fiscal &amp; <b>CNPJ</b></div>
+        <div class="selo">📍 Brás — São Paulo</div>
+      </div>
+      <a class="cta" href="#form">💬 Quero comprar no atacado</a>
+      <div class="cta-sub">Atendimento por um consultor de verdade — resposta rápida no WhatsApp.</div>
+    </div>
+
+    <!-- FORM DE QUALIFICAÇÃO -->
+    <div class="formcard" id="form">
+      <h3>Receba a tabela de atacado</h3>
+      <p class="sub">Preencha para liberar preços e falar com um consultor. Exclusivo para lojistas com CNPJ.</p>
+      <form onsubmit="return false;">
+        <div class="field"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
+        <div class="field"><label>WhatsApp</label><input type="tel" placeholder="(11) 90000-0000"></div>
+        <div class="field"><label>CNPJ da loja</label><input type="text" placeholder="00.000.000/0000-00"></div>
+        <div class="field"><label>Segmento da sua loja</label>
+          <select>
+            <option value="">Selecione…</option>
+            <option>Armarinho / Aviamentos</option>
+            <option>Artesanato / Ateliê</option>
+            <option>Festas / Embalagens</option>
+            <option>Bijuteria / Acessórios</option>
+            <option>Confecção / Costura</option>
+            <option>Papelaria</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field"><label>Cidade / UF</label><input type="text" placeholder="Ex.: São Paulo / SP"></div>
+        <a class="cta" href="#" onclick="return false;">Liberar tabela e falar no WhatsApp →</a>
+        <div class="privacy">🔒 Seus dados são usados só para o atendimento comercial. Ao enviar, você concorda em ser contatado pela Roma Importadora.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FAIXA CONFIANÇA -->
+<div class="trust">
+  <div class="wrap">
+    <div class="item"><div class="ic">🏭</div><div><b>Importadora própria</b><span>Sem atravessador no meio</span></div></div>
+    <div class="item"><div class="ic">📦</div><div><b>Pronta-entrega</b><span>Estoque no Brasil, sem esperar 60 dias</span></div></div>
+    <div class="item"><div class="ic">🧾</div><div><b>Nota fiscal</b><span>Compra segura, 100% legal</span></div></div>
+    <div class="item"><div class="ic">🤝</div><div><b>Consultor dedicado</b><span>Atendimento humano no WhatsApp</span></div></div>
+  </div>
+</div>
+
+<!-- VS MARKETPLACE -->
+<section class="blk"><div class="wrap">
+  <div class="kicker">Por que comprar da Roma</div>
+  <h2 class="tit">Marketplace vende pra qualquer um. A Roma abastece o seu negócio.</h2>
+  <p class="intro">Se você revende, comprar no varejo do marketplace come a sua margem. Na importadora, o preço é de quem compra em volume — pra você lucrar na revenda.</p>
+  <div class="vs">
+    <div class="col roma">
+      <h4>🏭 Roma Importadora</h4>
+      <ul>
+        <li><span class="ck">✔</span> Preço de <b>atacado</b>, pensado pra revenda</li>
+        <li><span class="ck">✔</span> <b>Fornecedor fixo</b> — reponha estoque sempre no mesmo lugar</li>
+        <li><span class="ck">✔</span> <b>Variedade</b> de aviamentos num pedido só</li>
+        <li><span class="ck">✔</span> <b>Pronta-entrega</b> e nota fiscal</li>
+        <li><span class="ck">✔</span> <b>Consultor</b> que entende de loja</li>
+      </ul>
+    </div>
+    <div class="col mkt">
+      <h4>🛒 Marketplace / importado avulso</h4>
+      <ul>
+        <li><span class="ck">✕</span> Preço de <b>varejo</b> — margem apertada pra revenda</li>
+        <li><span class="ck">✕</span> Vendedor <b>muda a cada compra</b></li>
+        <li><span class="ck">✕</span> Frete e prazos <b>imprevisíveis</b> (às vezes da China)</li>
+        <li><span class="ck">✕</span> Sem relacionamento nem suporte</li>
+        <li><span class="ck">✕</span> Risco de <b>ruptura</b> de estoque</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- CATEGORIAS -->
+<section class="blk" style="background:#fff; border-top:1px solid var(--linha); border-bottom:1px solid var(--linha);"><div class="wrap">
+  <div class="kicker">Sortimento</div>
+  <h2 class="tit">Tudo de aviamentos, num fornecedor só</h2>
+  <div class="cats">
+    <div class="cat"><span class="em">🧵</span><b>Linhas &amp; Fios</b></div>
+    <div class="cat"><span class="em">🔘</span><b>Botões &amp; Zíperes</b></div>
+    <div class="cat"><span class="em">💎</span><b>Bijuteria &amp; Miçangas</b></div>
+    <div class="cat"><span class="em">🎀</span><b>Fitas &amp; Laços</b></div>
+    <div class="cat"><span class="em">🎉</span><b>Festas &amp; Embalagens</b></div>
+    <div class="cat"><span class="em">🧶</span><b>Crochê &amp; Tricô</b></div>
+    <div class="cat"><span class="em">✂️</span><b>Costura &amp; Ateliê</b></div>
+    <div class="cat"><span class="em">📦</span><b>e muito mais…</b></div>
+  </div>
+  <p class="intro" style="margin-top:20px;">*Categorias ilustrativas — ajustar ao mix real da Roma.</p>
+</div></section>
+
+<!-- PARA QUEM -->
+<section class="blk"><div class="wrap">
+  <div class="kicker">É pra você?</div>
+  <h2 class="tit">Feito para lojistas que revendem</h2>
+  <p class="intro">Se você tem uma loja física ou online em um destes segmentos, a Roma é o seu fornecedor:</p>
+  <div class="quem">
+    <span>Armarinho</span><span>Loja de aviamentos</span><span>Ateliê de artesanato</span>
+    <span>Loja de festas</span><span>Bijuteria</span><span>Confecção</span>
+    <span>Papelaria criativa</span><span>Loja de costura</span><span>E-commerce do nicho</span>
+  </div>
+</div></section>
+
+<!-- COMO FUNCIONA -->
+<section class="blk" style="background:#fff; border-top:1px solid var(--linha);"><div class="wrap">
+  <div class="kicker">Simples e rápido</div>
+  <h2 class="tit">Como começar a comprar</h2>
+  <div class="passos">
+    <div class="passo"><div class="n">1</div><b>Preencha com seu CNPJ</b><p>Leva 30 segundos. Confirmamos que você é lojista e liberamos o atacado.</p></div>
+    <div class="passo"><div class="n">2</div><b>Fale com um consultor</b><p>No WhatsApp, com preços e condições pro seu segmento — sem robô.</p></div>
+    <div class="passo"><div class="n">3</div><b>Receba e revenda</b><p>Pronta-entrega, com nota fiscal. Reabasteça sempre no mesmo fornecedor.</p></div>
+  </div>
+</div></section>
+
+<!-- DEPOIMENTOS -->
+<section class="blk"><div class="wrap">
+  <div class="kicker">Quem já compra</div>
+  <h2 class="tit">Lojistas que abastecem com a Roma</h2>
+  <div class="deps">
+    <div class="dep"><div class="stars">★★★★★</div><p>"Migrei do marketplace pra Roma e minha margem melhorou muito. Consigo repor tudo num pedido só."</p><div class="who"><div class="av">M</div><div><b>Marina S.</b><span>Armarinho · Guarulhos/SP</span></div></div></div>
+    <div class="dep"><div class="stars">★★★★★</div><p>"Atendimento de gente, não de robô. O consultor entende do que a minha loja precisa."</p><div class="who"><div class="av">R</div><div><b>Rafael T.</b><span>Loja de festas · Campinas/SP</span></div></div></div>
+    <div class="dep"><div class="stars">★★★★★</div><p>"Pronta-entrega salva. Não dependo mais de esperar produto vindo de fora."</p><div class="who"><div class="av">C</div><div><b>Cláudia M.</b><span>Ateliê · São Paulo/SP</span></div></div></div>
+  </div>
+  <div class="placeholder-note">⚠ Depoimentos de exemplo — substituir por prints/vídeos reais de lojistas clientes (a prova social é o maior ganho vs. a LP atual).</div>
+</div></section>
+
+<!-- CTA FINAL -->
+<div class="final"><div class="wrap">
+  <h2>Pronto pra comprar com preço de importadora?</h2>
+  <p>Preencha com seu CNPJ e um consultor libera a tabela de atacado pro seu segmento hoje mesmo.</p>
+  <a class="cta sec" href="#form">💬 Quero comprar no atacado</a>
+</div></div>
+
+<footer class="rdp">
+  Roma Importadora · Atacado de aviamentos para lojistas (CNPJ) · Brás — São Paulo/SP<br>
+  Proposta de redesenho da landing /qlfleads · GGD · 07/07/2026 — números e depoimentos ilustrativos a validar.
+</footer>
+</body>
+</html>
