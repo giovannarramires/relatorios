@@ -4,12 +4,13 @@
   Relatório — Análise de Checkouts | Low Ticket
   Felipe Scherer | Gestão GGD — Giovanna Ramires
   Período: junho + julho/2026
-  Proteção: gate de senha client-side (troque em CONFIG.senha, linha ~também no JS)
+  VERSÃO 2 — com dados REAIS de venda das plataformas (Kiwify/Ticto/Assiny)
+  Atribuição PF/PQ por página de checkout (src: lp-1=PF, lp-2=PQ). Assiny sem testes internos.
 -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Felipe Scherer — Análise de Checkouts</title>
+<title>Felipe Scherer — Análise de Checkouts (dados reais)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -17,21 +18,9 @@
 :root{
   --bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
   --h1:#4338ca;--h2:#2563eb;
-  --vtic:#10b981;--vass:#f59e0b;--pf:#3b82f6;--pq:#8b5cf6;
+  --pf:#3b82f6;--pq:#8b5cf6;--vtic:#10b981;--vass:#f59e0b;
   --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow:0 4px 12px rgba(0,0,0,.08);--shadow-lg:0 10px 30px rgba(0,0,0,.12);--radius:14px}
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
-/* ---- GATE DE SENHA ---- */
-#gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1e1b4b,#2563eb);display:flex;align-items:center;justify-content:center}
-#gate.hidden{display:none}
-.gate-card{background:#fff;border-radius:18px;padding:40px 36px;width:min(90vw,380px);box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}
-.gate-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--h1),var(--h2));display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 18px}
-.gate-card h2{font-size:18px;font-weight:800;margin-bottom:6px}
-.gate-card p{font-size:13px;color:var(--text-2);margin-bottom:22px}
-.gate-card input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:12px;outline:none;transition:border .18s}
-.gate-card input:focus{border-color:var(--h2)}
-.gate-card button{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
-.gate-err{color:#ef4444;font-size:12px;font-weight:600;height:16px;margin-top:8px}
 
 /* ---- HEADER ---- */
 .header{background:linear-gradient(135deg,var(--h1) 0%,var(--h2) 100%);padding:0 36px;min-height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.2);flex-wrap:wrap;gap:8px}
@@ -46,13 +35,14 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .intro h1{font-size:20px;font-weight:900;letter-spacing:-.4px;margin-bottom:8px}
 .intro p{font-size:13.5px;color:var(--text-2);line-height:1.6}
 .tag{display:inline-block;background:#eef2ff;color:var(--h1);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;margin-right:6px}
+.tag.green{background:#d1fae5;color:#065f46}
 
 .section-header{display:flex;align-items:baseline;gap:10px;margin:34px 0 14px}
 .section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2)}
 .section-hint{font-size:11px;color:var(--text-3)}
 
 /* ---- VEREDITO ---- */
-.verdict{background:linear-gradient(135deg,#065f46,#10b981);border-radius:var(--radius);padding:26px 28px;color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.verdict{background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:var(--radius);padding:26px 28px;color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 .verdict .medal{font-size:44px}
 .verdict-body{flex:1;min-width:220px}
 .verdict-body h3{font-size:15px;font-weight:700;opacity:.85;margin-bottom:4px}
@@ -73,7 +63,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .ck-row{display:flex;justify-content:space-between;font-size:12px}
 .ck-row .k{color:var(--text-3)}
 .ck-row .v{font-weight:700;color:var(--text)}
-.badge-win{display:inline-block;background:#d1fae5;color:#065f46;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
+.badge-win{display:inline-block;background:#dbeafe;color:#1e40af;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
 .badge-low{display:inline-block;background:#fef3c7;color:#92400e;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
 
 /* ---- TABLE ---- */
@@ -86,7 +76,7 @@ tbody tr{border-bottom:1px solid #f1f5f9}
 tbody tr:last-child{border-bottom:none}
 td.metric{font-weight:600;color:var(--text-2)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
-.best{background:#ecfdf5;font-weight:800;color:#065f46;border-radius:6px}
+.best{background:#eff6ff;font-weight:800;color:#1e40af;border-radius:6px}
 
 .chart-card{background:var(--surface);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm)}
 .chart-card h4{font-size:13px;font-weight:800;margin-bottom:2px}
@@ -99,6 +89,7 @@ td.metric{font-weight:600;color:var(--text-2)}
 .insight h5{font-size:13px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .insight p{font-size:12.5px;color:var(--text-2);line-height:1.55}
 .insight.warn{border-left-color:var(--vass)}
+.insight.win{border-left-color:var(--pf)}
 
 .footer{text-align:center;margin-top:40px;font-size:11px;color:var(--text-3)}
 .note{font-size:11px;color:var(--text-3);margin-top:10px;font-style:italic}
@@ -115,7 +106,7 @@ td.metric{font-weight:600;color:var(--text-2)}
     <div class="header-icon">📊</div>
     <div>
       <div class="header-title">Felipe Scherer — Análise de Checkouts</div>
-      <div class="header-sub">Campanhas Low Ticket · Meta Ads · Gestão GGD</div>
+      <div class="header-sub">Campanhas Low Ticket · Dados reais das plataformas · Gestão GGD</div>
     </div>
   </div>
   <div class="header-badge">Jun + Jul / 2026</div>
@@ -124,219 +115,208 @@ td.metric{font-weight:600;color:var(--text-2)}
 <div class="container">
 
   <div class="intro">
-    <h1>Qual checkout converte melhor?</h1>
-    <p style="margin-bottom:12px"><span class="tag">4 CHECKOUTS COMPARADOS</span><span class="tag">FUNIL COMPLETO</span><span class="tag">JUNHO + JULHO 2026</span></p>
-    <p>Comparamos quatro variações de checkout nas campanhas de <b>Low Ticket</b>, acompanhando cada etapa do funil de conversão — da abertura da página até a compra concluída — para identificar qual experiência de compra entrega o melhor retorno.</p>
-    <p class="note">Checkouts avaliados: VTIC e VASS (novos testes) · PF e PQ (checkouts atuais). Julho considera os dias 01–04 (parcial).</p>
+    <h1>Qual checkout realmente vende mais?</h1>
+    <p style="margin-bottom:12px"><span class="tag green">DADOS REAIS CONFIRMADOS</span><span class="tag">4 CHECKOUTS</span><span class="tag">VENDAS APROVADAS + ORDER BUMPS</span></p>
+    <p>Cruzamos as campanhas de <b>Low Ticket</b> no Meta Ads com o <b>faturamento real de cada plataforma de checkout</b> — Kiwify (PF e PQ), Ticto (VTIC) e Assiny (VASS). Consideramos apenas <b>vendas aprovadas</b> (pagas, sem PIX/boleto pendente), já com os <b>order bumps</b> somados.</p>
+    <p class="note">Atribuição PF × PQ feita pela página de checkout efetivamente usada. Removidos 2 pedidos de teste interno no Assiny. Período: junho + julho (01–04)/2026.</p>
   </div>
 
   <!-- VEREDITO -->
   <div class="verdict">
     <div class="medal">🏆</div>
     <div class="verdict-body">
-      <h3>MELHOR CHECKOUT DO PERÍODO</h3>
-      <div class="big">Checkout VTIC</div>
-      <p>Único com retorno positivo (ROAS acima de 1), a maior taxa de conversão do checkout e o maior ticket médio. É o checkout que transforma mais visitantes em compradores — e cada compra vale mais.</p>
+      <h3>MELHOR CHECKOUT — PELO FATURAMENTO REAL</h3>
+      <div class="big">Checkout PF (Kiwify)</div>
+      <p>Com os dados reais das plataformas, o <b>PF é o mais lucrativo</b>: maior volume de vendas, maior faturamento e o melhor retorno de todos. Os checkouts atuais (PF e PQ) — que pareciam dar prejuízo no Meta — na verdade lideram: o Meta apenas <b>não registrava</b> a maior parte das vendas do Kiwify.</p>
     </div>
     <div class="verdict-stats">
-      <div class="verdict-stat"><div class="v">1,27</div><div class="l">ROAS</div></div>
-      <div class="verdict-stat"><div class="v">71%</div><div class="l">Checkout → Compra</div></div>
-      <div class="verdict-stat"><div class="v">R$ 29</div><div class="l">Ticket médio</div></div>
+      <div class="verdict-stat"><div class="v">2,46</div><div class="l">ROAS real</div></div>
+      <div class="verdict-stat"><div class="v">231</div><div class="l">Vendas aprovadas</div></div>
+      <div class="verdict-stat"><div class="v">R$ 7.452</div><div class="l">Faturamento</div></div>
     </div>
   </div>
 
   <!-- CARDS -->
-  <div class="section-header"><span class="section-title">Visão por checkout</span><span class="section-hint">consolidado jun + jul</span></div>
+  <div class="section-header"><span class="section-title">Visão por checkout</span><span class="section-hint">dados reais · jun + jul</span></div>
   <div class="ck-grid" id="ckGrid"></div>
 
-  <!-- TABELA FUNIL -->
-  <div class="section-header"><span class="section-title">Funil de conversão — passo a passo</span><span class="section-hint">verde = melhor da linha</span></div>
+  <!-- TABELA VENDAS REAIS -->
+  <div class="section-header"><span class="section-title">Vendas reais por checkout</span><span class="section-hint">azul = melhor da linha</span></div>
   <div class="card">
-    <table id="funnelTable"></table>
+    <table id="realTable"></table>
   </div>
 
-  <!-- GRAFICOS -->
-  <div class="section-header"><span class="section-title">Comparativos visuais</span></div>
+  <!-- META x REAL -->
+  <div class="section-header"><span class="section-title">A grande diferença — Meta × Real</span><span class="section-hint">o que o Meta registrava vs. o que de fato vendeu</span></div>
   <div class="grid2">
     <div class="chart-card">
-      <h4>Etapas do funil (%)</h4>
-      <div class="sub">Quanto maior, melhor a passagem de etapa</div>
-      <div class="chart-wrap"><canvas id="funnelChart"></canvas></div>
+      <h4>Faturamento: Meta registrava × Real</h4>
+      <div class="sub">O Kiwify (PF/PQ) subnotificava a maior parte das vendas</div>
+      <div class="chart-wrap"><canvas id="metaRealChart"></canvas></div>
     </div>
     <div class="chart-card">
-      <h4>Retorno (ROAS) e Ticket médio</h4>
-      <div class="sub">Eficiência financeira de cada checkout</div>
+      <h4>ROAS: antes (Meta) × agora (Real)</h4>
+      <div class="sub">Retorno recalculado com o faturamento verdadeiro</div>
       <div class="chart-wrap"><canvas id="roasChart"></canvas></div>
     </div>
   </div>
+  <p class="note" style="margin-top:12px">💡 O Meta capturava só <b>~20% das vendas do PF</b> e <b>~26% do PQ</b>, contra <b>~91% do VTIC</b> (Ticto). Por isso o relatório anterior — baseado só no Meta — dava PF e PQ como prejuízo. Com o dado real, os dois viram os campeões.</p>
 
-  <!-- TENDENCIA -->
-  <div class="section-header"><span class="section-title">Tendência — Junho → Julho</span><span class="section-hint">julho parcial (01–04)</span></div>
+  <!-- ORDER BUMPS -->
+  <div class="section-header"><span class="section-title">Order bumps — adesão por checkout</span><span class="section-hint">% dos pedidos que levaram ao menos 1 order bump</span></div>
   <div class="grid2">
     <div class="chart-card">
-      <h4>ROAS por checkout</h4>
-      <div class="sub">Evolução do retorno mês a mês</div>
-      <div class="chart-wrap"><canvas id="trendRoas"></canvas></div>
+      <h4>Taxa de adesão ao order bump</h4>
+      <div class="sub">Quanto maior, mais gente aceita a oferta extra</div>
+      <div class="chart-wrap"><canvas id="bumpChart"></canvas></div>
     </div>
     <div class="chart-card">
-      <h4>Conversão de página (visita → compra)</h4>
-      <div class="sub">% de quem abre a página e compra</div>
-      <div class="chart-wrap"><canvas id="trendConv"></canvas></div>
+      <h4>Order bumps vendidos (unidades)</h4>
+      <div class="sub">Volume absoluto de bumps no período</div>
+      <div class="chart-wrap"><canvas id="bumpQtyChart"></canvas></div>
     </div>
   </div>
 
   <!-- INSIGHTS -->
   <div class="section-header"><span class="section-title">Principais leituras</span></div>
   <div class="insights">
-    <div class="insight">
-      <h5>✅ O VTIC fecha quase o dobro</h5>
-      <p>Entre quem inicia o checkout, o <b>VTIC converte 71%</b> em compra, contra 45% do PF e 38% do PQ. A experiência de pagamento do VTIC tem muito menos atrito na hora de finalizar.</p>
+    <div class="insight win">
+      <h5>🏆 PF e PQ são lucrativos, não prejuízo</h5>
+      <p>Com o faturamento real, o <b>PF fecha ROAS 2,46</b> e o <b>PQ 1,93</b> — ambos bem acima de 1. A leitura anterior de prejuízo vinha só da subnotificação do pixel do Kiwify para o Meta.</p>
     </div>
     <div class="insight">
-      <h5>💰 Ticket médio 2,6x maior</h5>
-      <p>Cada compra pelo <b>VTIC vale R$ 29</b>, contra R$ 11 dos checkouts atuais (PF/PQ). Isso é o que leva o retorno do VTIC a ficar positivo enquanto os demais ficam abaixo de 1.</p>
+      <h5>📉 O VTIC parecia melhor porque rastreava melhor</h5>
+      <p>O Ticto (VTIC) registrava ~91% das vendas no Meta, então parecia o único positivo. Ele é sólido (ROAS real 1,39), mas <b>fica atrás de PF e PQ</b> em retorno real.</p>
     </div>
     <div class="insight">
-      <h5>📈 Conversão de página líder</h5>
-      <p>De cada 100 pessoas que abrem a página, <b>21 compram no VTIC</b> — a maior taxa entre todos. No PQ, apenas 13 compram.</p>
+      <h5>🛒 Order bump: PQ lidera a adesão</h5>
+      <p>O <b>PQ tem a maior taxa de adesão (29%)</b>, seguido de PF (23%) e VTIC (21%). A oferta extra funciona bem em todos os checkouts atuais e ajuda a elevar o ticket médio.</p>
     </div>
     <div class="insight warn">
-      <h5>⚠️ VASS ainda com pouco volume</h5>
-      <p>O checkout VASS mostra ticket médio alto (R$ 31), mas rodou com investimento baixo e poucas vendas — precisa de mais volume de teste antes de uma conclusão definitiva.</p>
+      <h5>⚠️ VASS: volume baixo, sem conclusão</h5>
+      <p>O Assiny (VASS) teve apenas <b>8 vendas reais</b> e 1 order bump — investimento pequeno e amostra insuficiente. ROAS real 0,52, mas precisa de mais volume antes de qualquer decisão.</p>
     </div>
   </div>
 
-  <!-- PROXIMO PASSO -->
-  <div class="section-header"><span class="section-title">Próximo passo</span><span class="section-hint">para fechar a análise com precisão</span></div>
-  <div style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:var(--radius);padding:26px 28px;color:#fff;box-shadow:var(--shadow-lg)">
+  <!-- CONCLUSAO -->
+  <div class="section-header"><span class="section-title">Conclusão &amp; recomendação</span><span class="section-hint">com base no faturamento real</span></div>
+  <div style="background:linear-gradient(135deg,#065f46,#10b981);border-radius:var(--radius);padding:26px 28px;color:#fff;box-shadow:var(--shadow-lg)">
     <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
-      <div style="font-size:32px">📩</div>
+      <div style="font-size:32px">✅</div>
       <div style="flex:1;min-width:260px">
-        <h3 style="font-size:17px;font-weight:800;margin-bottom:8px">Precisamos dos relatórios de vendas de cada checkout</h3>
-        <p style="font-size:13.5px;opacity:.92;line-height:1.6;margin-bottom:16px">
-          O Meta registra as conversões de forma diferente em cada plataforma de checkout — por isso os números de faturamento vistos aqui podem não refletir 100% da venda real. Para bater o martelo sobre qual checkout <b>de fato</b> traz o melhor resultado, precisamos cruzar estes dados com o faturamento real de cada plataforma.
+        <h3 style="font-size:17px;font-weight:800;margin-bottom:8px">Manter e escalar o PF; o PQ como forte segundo</h3>
+        <p style="font-size:13.5px;opacity:.94;line-height:1.6;margin-bottom:14px">
+          Os dados reais mudam a conclusão do teste: os <b>checkouts atuais (Kiwify)</b> são os que mais dão retorno. O <b>PF</b> é o vencedor claro (ROAS 2,46, ticket médio R$ 32) e deve receber a maior fatia de verba; o <b>PQ</b> segue como forte alternativa (ROAS 1,93, melhor adesão de bump). O VTIC fica como terceira opção sólida e o VASS precisa de mais teste.
         </p>
-        <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.8;margin-bottom:10px">Nos envie, referente a junho + julho/2026:</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
-          <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 14px">
-            <div style="font-weight:800;font-size:14px;margin-bottom:4px">Ticto</div>
-            <div style="font-size:11.5px;opacity:.85">Relatório de vendas do período</div>
-          </div>
-          <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 14px">
-            <div style="font-weight:800;font-size:14px;margin-bottom:4px">Assiny</div>
-            <div style="font-size:11.5px;opacity:.85">Relatório de vendas do período</div>
-          </div>
-          <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 14px">
-            <div style="font-weight:800;font-size:14px;margin-bottom:4px">Kiwify</div>
-            <div style="font-size:11.5px;opacity:.85">Relatório de vendas do período</div>
-          </div>
-        </div>
-        <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.8;margin-bottom:8px">De cada plataforma, o ideal é:</p>
         <ul style="font-size:13px;line-height:1.7;opacity:.95;padding-left:20px;margin:0">
-          <li><b>Nº de vendas aprovadas</b> (pagas — não incluir PIX/boleto pendente)</li>
-          <li><b>Faturamento total</b> no período (já com os order bumps)</li>
-          <li>Se possível, <b>quantos order bumps</b> foram vendidos (taxa de adesão)</li>
+          <li><b>Escalar o PF</b> — melhor retorno e maior volume de vendas aprovadas.</li>
+          <li><b>Corrigir o rastreamento do Kiwify → Meta</b> (pixel/CAPI) para o otimizador de anúncios enxergar as vendas reais e melhorar a entrega.</li>
+          <li><b>Reforçar o order bump no PF</b> — adesão de 23% com espaço para chegar aos 29% do PQ.</li>
         </ul>
-        <p style="font-size:12px;opacity:.8;margin-top:16px">💡 Pode exportar o CSV/planilha do painel de cada uma, ou até um print da tela de relatório do período. Com isso, fechamos a comparação definitiva de qual checkout entrega o melhor retorno real.</p>
       </div>
     </div>
   </div>
 
   <div class="footer">
-    Gestão GGD · Giovanna Ramires — Meta Ads &nbsp;·&nbsp; Dados: Meta Ads (jun + jul/2026) &nbsp;·&nbsp; Atribuição padrão da conta
+    Gestão GGD · Giovanna Ramires — Meta Ads &nbsp;·&nbsp; Dados: Kiwify + Ticto + Assiny (vendas aprovadas, jun + jul/2026) &nbsp;·&nbsp; Investimento: Meta Ads
   </div>
 
 </div>
 </div>
 
 <script>
-// ====== DADOS BRUTOS (jun+jul consolidado) ======
+// ====== DADOS REAIS (vendas aprovadas das plataformas, jun+jul) ======
+// vendas = pedidos aprovados | fat = faturamento c/ order bumps | bumps = unidades | pedBump = pedidos c/ >=1 bump
+// spend = investimento Meta | metaRev/metaPur = o que o Meta registrava (relatório anterior)
 const CK = {
-  VTIC:{name:'VTIC',role:'Novo teste',color:'#10b981',spend:1130.70,impr:37705,lc:306,lpv:231,ic:69,pur:49,rev:1436.12},
-  VASS:{name:'VASS',role:'Novo teste',color:'#f59e0b',spend:305.01,impr:10184,lc:71,lpv:40,ic:15,pur:8,rev:248.94},
-  PF:{name:'PF',role:'Checkout atual',color:'#3b82f6',spend:3024.01,impr:97822,lc:1137,lpv:806,ic:300,pur:136,rev:1524.56},
-  PQ:{name:'PQ',role:'Checkout atual',color:'#8b5cf6',spend:2412.69,impr:72054,lc:1005,lpv:812,ic:287,pur:109,rev:1230.58},
+  PF:  {name:'PF',  role:'Kiwify · atual', color:'#3b82f6', vendas:231, fat:7452.26, bumps:115, pedBump:53, spend:3024.01, metaRev:1524.56, metaPur:136},
+  PQ:  {name:'PQ',  role:'Kiwify · atual', color:'#8b5cf6', vendas:132, fat:4648.97, bumps:88,  pedBump:38, spend:2412.69, metaRev:1230.58, metaPur:109},
+  VTIC:{name:'VTIC',role:'Ticto · teste',  color:'#10b981', vendas:52,  fat:1573.00, bumps:18,  pedBump:11, spend:1130.70, metaRev:1436.12, metaPur:49},
+  VASS:{name:'VASS',role:'Assiny · teste', color:'#f59e0b', vendas:8,   fat:159.17,  bumps:1,   pedBump:1,  spend:305.01,  metaRev:248.94,  metaPur:8},
 };
-// tendência
-const TREND = {
-  jun:{VTIC:{spend:603.32,lpv:104,ic:42,pur:28,rev:787.71},VASS:{spend:256.28,lpv:32,ic:14,pur:8,rev:248.94},PF:{spend:2516.86,lpv:693,ic:269,pur:118,rev:1322.78},PQ:{spend:2096.03,lpv:737,ic:278,pur:105,rev:1177.05}},
-  jul:{VTIC:{spend:527.38,lpv:127,ic:27,pur:21,rev:648.41},VASS:{spend:48.73,lpv:8,ic:1,pur:0,rev:0},PF:{spend:507.15,lpv:113,ic:31,pur:18,rev:201.78},PQ:{spend:316.66,lpv:75,ic:9,pur:4,rev:53.53}},
-};
-const order=['VTIC','VASS','PF','PQ'];
+const order=['PF','PQ','VTIC','VASS'];
 const BRL=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const P=(a,b)=>b?(100*a/b):0;
+const roas=d=>d.fat/d.spend;
+const ticket=d=>d.vendas?d.fat/d.vendas:0;
+const cpa=d=>d.vendas?d.spend/d.vendas:0;
+const adesao=d=>d.vendas?100*d.pedBump/d.vendas:0;
 
 function render(){
   // ---- CARDS ----
-  const winRoas=Math.max(...order.map(k=>CK[k].rev/CK[k].spend));
+  const winRoas=Math.max(...order.map(k=>roas(CK[k])));
   document.getElementById('ckGrid').innerHTML = order.map(k=>{
-    const d=CK[k], roas=d.rev/d.spend;
-    const win = roas===winRoas ? '<span class="badge-win">Melhor</span>' : (k==='VASS'?'<span class="badge-low">Baixo volume</span>':'');
+    const d=CK[k];
+    const win = roas(d)===winRoas ? '<span class="badge-win">Vencedor</span>' : (k==='VASS'?'<span class="badge-low">Baixo volume</span>':'');
     return `<div class="ck" style="--c:${d.color}">
       <div class="ck-name">Checkout ${d.name}${win}</div>
       <div class="ck-role">${d.role}</div>
-      <div class="ck-roas">${roas.toFixed(2)}</div>
-      <div class="ck-roas-l">ROAS</div>
+      <div class="ck-roas">${roas(d).toFixed(2)}</div>
+      <div class="ck-roas-l">ROAS real</div>
       <div class="ck-rows">
-        <div class="ck-row"><span class="k">Investimento</span><span class="v">${BRL(d.spend)}</span></div>
-        <div class="ck-row"><span class="k">Compras</span><span class="v">${d.pur}</span></div>
-        <div class="ck-row"><span class="k">Custo/compra</span><span class="v">${BRL(d.spend/d.pur)}</span></div>
-        <div class="ck-row"><span class="k">Ticket médio</span><span class="v">${d.pur?BRL(d.rev/d.pur):'-'}</span></div>
-        <div class="ck-row"><span class="k">Conv. de página</span><span class="v">${P(d.pur,d.lpv).toFixed(1)}%</span></div>
+        <div class="ck-row"><span class="k">Vendas aprovadas</span><span class="v">${d.vendas}</span></div>
+        <div class="ck-row"><span class="k">Faturamento</span><span class="v">${BRL(d.fat)}</span></div>
+        <div class="ck-row"><span class="k">Ticket médio</span><span class="v">${BRL(ticket(d))}</span></div>
+        <div class="ck-row"><span class="k">Custo/venda</span><span class="v">${BRL(cpa(d))}</span></div>
+        <div class="ck-row"><span class="k">Adesão order bump</span><span class="v">${adesao(d).toFixed(0)}%</span></div>
       </div></div>`;
   }).join('');
 
-  // ---- TABELA ----
+  // ---- TABELA REAL ----
   const rows=[
-    {m:'Investimento',f:d=>BRL(d.spend),best:null},
-    {m:'Taxa de abertura (clique→página)',f:d=>P(d.lpv,d.lc).toFixed(1)+'%',best:'max',val:d=>P(d.lpv,d.lc)},
-    {m:'Custo por visualização de página',f:d=>BRL(d.spend/d.lpv),best:'min',val:d=>d.spend/d.lpv},
-    {m:'Página → Checkout iniciado',f:d=>P(d.ic,d.lpv).toFixed(1)+'%',best:'max',val:d=>P(d.ic,d.lpv)},
-    {m:'Checkout → Compra',f:d=>P(d.pur,d.ic).toFixed(1)+'%',best:'max',val:d=>P(d.pur,d.ic)},
-    {m:'Conversão de página (visita→compra)',f:d=>P(d.pur,d.lpv).toFixed(1)+'%',best:'max',val:d=>P(d.pur,d.lpv)},
-    {m:'Compras',f:d=>d.pur,best:null},
-    {m:'Custo por compra (CPA)',f:d=>BRL(d.spend/d.pur),best:'min',val:d=>d.spend/d.pur},
-    {m:'Ticket médio',f:d=>d.pur?BRL(d.rev/d.pur):'-',best:'max',val:d=>d.pur?d.rev/d.pur:0},
-    {m:'ROAS',f:d=>(d.rev/d.spend).toFixed(2),best:'max',val:d=>d.rev/d.spend},
+    {m:'Investimento (Meta)',f:d=>BRL(d.spend),best:null},
+    {m:'Vendas aprovadas',f:d=>d.vendas,best:'max',val:d=>d.vendas},
+    {m:'Faturamento (c/ order bumps)',f:d=>BRL(d.fat),best:'max',val:d=>d.fat},
+    {m:'Ticket médio',f:d=>BRL(ticket(d)),best:'max',val:d=>ticket(d)},
+    {m:'Custo por venda (CPA)',f:d=>BRL(cpa(d)),best:'min',val:d=>cpa(d)},
+    {m:'Order bumps vendidos',f:d=>d.bumps,best:'max',val:d=>d.bumps},
+    {m:'Adesão ao order bump',f:d=>adesao(d).toFixed(0)+'%',best:'max',val:d=>adesao(d)},
+    {m:'ROAS real',f:d=>roas(d).toFixed(2),best:'max',val:d=>roas(d)},
+    {m:'ROAS que o Meta mostrava',f:d=>(d.metaRev/d.spend).toFixed(2),best:null},
   ];
   let html=`<thead><tr><th>Métrica</th>${order.map(k=>`<th><span class="dot" style="background:${CK[k].color}"></span>${CK[k].name}</th>`).join('')}</tr></thead><tbody>`;
   rows.forEach(r=>{
     let bestK=null;
-    if(r.best){const vals=order.map(k=>({k,v:r.val(CK[k])})).filter(x=>x.v>0||r.m==='Compras');
+    if(r.best){const vals=order.map(k=>({k,v:r.val(CK[k])}));
       bestK=(r.best==='max'?vals.reduce((a,b)=>b.v>a.v?b:a):vals.reduce((a,b)=>b.v<a.v?b:a)).k;}
     html+=`<tr><td class="metric">${r.m}</td>${order.map(k=>`<td class="${k===bestK?'best':''}">${r.f(CK[k])}</td>`).join('')}</tr>`;
   });
   html+='</tbody>';
-  document.getElementById('funnelTable').innerHTML=html;
+  document.getElementById('realTable').innerHTML=html;
 
   // ---- CHARTS ----
   Chart.defaults.font.family="'Inter',sans-serif";
   const labels=order.map(k=>CK[k].name);
   const colors=order.map(k=>CK[k].color);
 
-  new Chart(document.getElementById('funnelChart'),{type:'bar',
-    data:{labels:['Taxa abertura','Pág→Checkout','Checkout→Compra','Conv. página'],
-      datasets:order.map(k=>{const d=CK[k];return{label:d.name,backgroundColor:d.color,borderRadius:4,
-        data:[P(d.lpv,d.lc),P(d.ic,d.lpv),P(d.pur,d.ic),P(d.pur,d.lpv)]};})},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
-      scales:{y:{ticks:{callback:v=>v+'%'}}}}});
+  // Meta x Real (faturamento)
+  new Chart(document.getElementById('metaRealChart'),{type:'bar',
+    data:{labels,datasets:[
+      {label:'Registrado no Meta',data:order.map(k=>CK[k].metaRev),backgroundColor:'#cbd5e1',borderRadius:4},
+      {label:'Faturamento real',data:order.map(k=>CK[k].fat),backgroundColor:colors,borderRadius:4}
+    ]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+BRL(c.parsed.y)}}},
+      scales:{y:{ticks:{callback:v=>'R$ '+v.toLocaleString('pt-BR')}}}}});
 
+  // ROAS Meta x Real
   new Chart(document.getElementById('roasChart'),{type:'bar',
     data:{labels,datasets:[
-      {label:'ROAS',data:order.map(k=>CK[k].rev/CK[k].spend),backgroundColor:colors,borderRadius:4,yAxisID:'y'},
-      {label:'Ticket médio (R$)',type:'line',data:order.map(k=>CK[k].pur?CK[k].rev/CK[k].pur:0),borderColor:'#0f172a',backgroundColor:'#0f172a',tension:.3,yAxisID:'y1',pointRadius:4}
+      {label:'ROAS no Meta (antes)',data:order.map(k=>CK[k].metaRev/CK[k].spend),backgroundColor:'#cbd5e1',borderRadius:4},
+      {label:'ROAS real (agora)',data:order.map(k=>roas(CK[k])),backgroundColor:colors,borderRadius:4}
     ]},
     options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
-      scales:{y:{position:'left',title:{display:true,text:'ROAS'},grid:{drawOnChartArea:false}},
-              y1:{position:'right',title:{display:true,text:'Ticket R$'}}}}});
+      scales:{y:{title:{display:true,text:'ROAS'},grid:{color:'#f1f5f9'}}}}});
 
-  const mk=(id,metricFn,fmt)=>new Chart(document.getElementById(id),{type:'line',
-    data:{labels:['Junho','Julho'],datasets:order.map(k=>({label:k,borderColor:CK[k].color,backgroundColor:CK[k].color,tension:.3,pointRadius:4,
-      data:[metricFn(TREND.jun[k]),metricFn(TREND.jul[k])]}))},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
-      scales:{y:{ticks:{callback:fmt}}}}});
-  mk('trendRoas',d=>d.spend?d.rev/d.spend:0,v=>v.toFixed(2));
-  mk('trendConv',d=>P(d.pur,d.lpv),v=>v+'%');
+  // Adesão order bump
+  new Chart(document.getElementById('bumpChart'),{type:'bar',
+    data:{labels,datasets:[{label:'Adesão (%)',data:order.map(k=>adesao(CK[k])),backgroundColor:colors,borderRadius:4}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(0)+'% dos pedidos'}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}});
+
+  // Order bumps qty
+  new Chart(document.getElementById('bumpQtyChart'),{type:'bar',
+    data:{labels,datasets:[{label:'Order bumps',data:order.map(k=>CK[k].bumps),backgroundColor:colors,borderRadius:4}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
 }
 render();
 </script>
