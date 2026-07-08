@@ -61,6 +61,16 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .invcard.total{background:linear-gradient(135deg,#0f172a,#1e293b)}
 .invcard.total .il{color:rgba(255,255,255,.7)}.invcard.total .iv{color:#fff}.invcard.total .is{color:rgba(255,255,255,.65)}
 @media(max-width:700px){.invbox{grid-template-columns:1fr}}
+.budget{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.budget-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.budget-title{font-size:13px;font-weight:800}
+.budget-total{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.budget-total span{font-size:13px;color:var(--text-3);font-weight:600}
+.pbar{height:28px;border-radius:14px;background:#e2e8f0;overflow:hidden;position:relative}
+.pbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--h1),var(--h2));border-radius:14px;transition:width .6s;min-width:3px}
+.pbar-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text)}
+.budget-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:11.5px;color:var(--text-2);margin-top:11px}
+.budget-foot b{color:var(--text)}
 .funnelV{display:flex;flex-direction:column;align-items:center;padding:4px 0}
 .fseg{color:#fff;border-radius:12px;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 6px 16px rgba(0,0,0,.13);min-width:210px}
 .fseg .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.92}
@@ -137,13 +147,18 @@ tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f
     <span class="section-hint">— campanha · imposto (ISS+IOF 13,83%) · total pago</span></div>
   <div class="invbox" id="invBox"></div>
 
+  <div class="section-title"><span class="bar"></span>Orçamento do Projeto
+    <span class="section-hint">— quanto do investimento total planejado já foi aplicado</span></div>
+  <div class="budget" id="budgetBox"></div>
+
   <div class="section-title"><span class="bar"></span>Controle Diário da Operação
     <span class="section-hint">— investimento · alcance de anúncio (CPM/CTR) · leads · CPL · conversão da página, dia a dia</span></div>
   <div class="card tbl-scroll"><table id="tblDaily"><thead><tr>
     <th>Dia</th><th class="num">Campanha</th><th class="num">Imposto</th><th class="num">Total pago</th>
     <th class="num">Impressões</th><th class="num">CPM</th><th class="num">Cliques</th><th class="num">CTR</th><th class="num">Connect rate</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
 
-  <div class="section-title"><span class="bar"></span>Evolução Diária · Leads × Investimento</div>
+  <div class="section-title"><span class="bar"></span>Evolução Diária · Leads · Investimento · CPL vs Meta
+    <span class="section-hint">— barras = leads · linha azul = investimento · linha laranja = CPL do dia · tracejado vermelho = meta R$ 11</span></div>
   <div class="card"><div class="chart-box"><canvas id="chartDaily"></canvas></div></div>
 
   <div class="section-title"><span class="bar"></span>Funil da Captação
@@ -195,6 +210,8 @@ const cplClass = c => c==null?'cpl-mid':(c<=13?'cpl-good':(c<=18?'cpl-mid':'cpl-
 const crColor = r => r>=80?'#059669':(r>=65?'#b45309':'#dc2626');   // connect rate: verde/amarelo/vermelho
 const crClass = r => r>=80?'cpl-good':(r>=65?'cpl-mid':'cpl-bad');
 
+const META_CPL = 11;                       // meta de CPL do projeto (R$) — linha tracejada no gráfico
+const BUDGET_TOTAL = 70000;                // orçamento total planejado do lançamento (R$)
 const TAX = 0.1383;                        // ISS+IOF — alíquota real da conta (conferida no relatório de transações)
 const campGeral = T.spend + T.dist_spend;  // investido em campanha (líquido, sem imposto)
 const impGeral  = campGeral * TAX;         // imposto
@@ -251,6 +268,20 @@ document.getElementById('invBox').innerHTML=`
   <div class="invcard tax"><div class="il">Imposto · ISS+IOF 13,83%</div><div class="iv">${BRL0(impGeral)}</div><div class="is">tributo sobre a mídia, cobrado por cima do valor da campanha</div></div>
   <div class="invcard total"><div class="il">Total pago</div><div class="iv">${BRL0(totGeral)}</div><div class="is">desembolso real = campanha + imposto</div></div>`;
 
+// ORÇAMENTO DO PROJETO — quanto do total planejado já foi investido
+const investedReal = INVEST_TOTAL;                                   // já desembolsado (campanha + imposto)
+const budgetPct    = Math.min(investedReal/BUDGET_TOTAL*100, 100);
+const budgetRest   = Math.max(BUDGET_TOTAL - investedReal, 0);
+document.getElementById('budgetBox').innerHTML=`
+  <div class="budget-top">
+    <div class="budget-title">Investimento aplicado no lançamento</div>
+    <div class="budget-total">${BRL0(investedReal)} <span>de ${BRL0(BUDGET_TOTAL)} planejados</span></div>
+  </div>
+  <div class="pbar"><i style="width:${budgetPct.toFixed(1)}%"></i><span class="pbar-lbl">${PCT(budgetPct)} do orçamento</span></div>
+  <div class="budget-foot">
+    <span>Já investido (total pago c/ imposto): <b>${BRL0(investedReal)}</b></span>
+    <span>Restante do orçamento: <b>${BRL0(budgetRest)}</b></span></div>`;
+
 // TABELA DIÁRIA (campanha · imposto · total pago · leads · CPL · conv. página)
 let rows='';
 daily.forEach(x=>{
@@ -286,15 +317,21 @@ rows+=`<tr class="total-row"><td>TOTAL</td>
 document.querySelector('#tblDaily tbody').innerHTML=rows;
 
 // GRÁFICO
-new Chart(document.getElementById('chartDaily'),{type:'bar',
+new Chart(document.getElementById('chartDaily'),{
   data:{labels:daily.map(x=>x.d),datasets:[
-    {type:'bar',label:'Leads',data:daily.map(x=>x.leads),backgroundColor:'#10b981',borderRadius:6,yAxisID:'y',order:2},
-    {type:'line',label:'Investimento (R$)',data:daily.map(x=>x.spend),borderColor:'#4338ca',backgroundColor:'rgba(67,56,202,.08)',borderWidth:3,tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#4338ca',yAxisID:'y1',order:1}]},
+    {type:'bar',label:'Leads',data:daily.map(x=>x.leads),backgroundColor:'#10b981',borderRadius:6,yAxisID:'y',order:3},
+    {type:'line',label:'Investimento (R$)',data:daily.map(x=>x.spend),borderColor:'#4338ca',backgroundColor:'rgba(67,56,202,.08)',borderWidth:3,tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#4338ca',yAxisID:'y1',order:2},
+    {type:'line',label:'CPL do dia (R$)',data:daily.map(x=>x.leads?+(x.spend/x.leads).toFixed(2):null),borderColor:'#f59e0b',borderWidth:2.5,tension:.35,pointRadius:3,pointBackgroundColor:'#f59e0b',yAxisID:'yc',order:1},
+    {type:'line',label:'Meta CPL '+BRL0(META_CPL),data:daily.map(()=>META_CPL),borderColor:'#ef4444',borderWidth:2,borderDash:[6,5],pointRadius:0,yAxisID:'yc',order:0}]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'top',labels:{usePointStyle:true,font:{size:12,weight:'600'}}},
-      tooltip:{callbacks:{label:c=>c.dataset.yAxisID==='y1'?'  Investido: '+BRL(c.raw):'  Leads: '+c.raw}}},
+      tooltip:{callbacks:{label:c=>{
+        if(c.dataset.yAxisID==='y1')return '  Investido: '+BRL(c.raw);
+        if(c.dataset.yAxisID==='yc')return '  '+c.dataset.label+': '+(c.raw==null?'–':BRL(c.raw));
+        return '  Leads: '+c.raw;}}}},
     scales:{y:{position:'left',beginAtZero:true,title:{display:true,text:'Leads'},grid:{color:'#f1f5f9'}},
-      y1:{position:'right',beginAtZero:true,title:{display:true,text:'Investimento (R$)'},grid:{drawOnChartArea:false},ticks:{callback:v=>'R$'+v}}}}});
+      y1:{position:'right',beginAtZero:true,title:{display:true,text:'Investimento (R$)'},grid:{drawOnChartArea:false},ticks:{callback:v=>'R$'+v}},
+      yc:{display:false,beginAtZero:true}}}});
 
 // FUNIL — formato afunilado, com as taxas de conversão entre etapas
 const segW=['100%','74%','54%','40%'];
