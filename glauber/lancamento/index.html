@@ -6,75 +6,232 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;color:#0f172a;padding:24px}
 .wrap{max-width:1120px;margin:0 auto}
-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:14px}
 h1{font-size:22px}.sub{color:#64748b;font-size:13px;margin-top:4px}
 .badge{background:#0f172a;color:#fff;border-radius:10px;padding:10px 16px;text-align:center}
 .badge b{font-size:22px;display:block}
+.filtro{background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.filtro label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.filtro input{border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px}
+.filtro button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.filtro button:hover{background:#eef2f7}
 .sec{font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em;margin:6px 2px 10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px}
-.card{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.card{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+.s-green{background:#16a34a}.s-yellow{background:#f59e0b}.s-red{background:#dc2626}.s-accent{background:#6366f1}.s-gray{background:#cbd5e1}
 .card-t{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
-.card-v{font-size:23px;font-weight:700;margin:5px 0}
+.card-v{font-size:22px;font-weight:700;margin:5px 0}
 .card-s{font-size:11px;color:#94a3b8}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;align-items:start}
 @media(max-width:720px){.row{grid-template-columns:1fr}}
 .panel{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
 .panel h2{font-size:14px;margin-bottom:12px;color:#334155}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #f1f5f9;white-space:nowrap}
 th{color:#64748b;font-size:11px;text-transform:uppercase}
-td.camp{font-family:ui-monospace,monospace;font-size:11px;color:#475569;white-space:nowrap}
+td.camp{font-family:ui-monospace,monospace;font-size:11px;color:#475569}
 a{color:#6366f1}
-.fstep{margin-bottom:10px}
+.stage-tag{background:#f8fafc;font-weight:700;color:#334155;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}
+.p-green{background:#16a34a}.p-yellow{background:#f59e0b}.p-red{background:#dc2626}.p-gray{background:#cbd5e1;color:#475569}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.fstep{margin-bottom:9px}
 .flabel{display:flex;justify-content:space-between;font-size:13px;color:#334155;margin-bottom:3px}
 .fbar{background:#eef2f7;border-radius:6px;height:14px;overflow:hidden}
 .fbar span{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#0ea5e9);border-radius:6px}
 .fpct{font-size:11px;color:#94a3b8;margin-top:2px}
-.chartbox{position:relative;height:220px;width:100%}
-.aviso{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:14px}
+.chartbox{position:relative;height:170px;width:100%}
 footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 </style></head><body><div class="wrap">
 <header>
   <div><h1>🎟️ Lançamento Imersão 18/07 · Dr. Glauber</h1>
-  <div class="sub">Vendas HeroSpark × Investimento Meta (campanha + imposto 13.83%) · atualizado 08/07/2026 16h43</div></div>
-  <div class="badge"><b>10</b>dias p/ o evento</div>
+  <div class="sub" id="sub"></div></div>
+  <div class="badge"><b id="dias-ev"></b>dias p/ o evento</div>
 </header>
-
+<div class="filtro">
+  <label>Período:</label>
+  <input type="date" id="de"> <span style="color:#94a3b8">até</span> <input type="date" id="ate">
+  <button onclick="setRange('hoje')">Hoje</button>
+  <button onclick="setRange('tudo')">Tudo</button>
+  <span id="fresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
+</div>
 <div class="sec">Vendas · Imersão 18/07</div>
-<div class="grid"><div class="card"><div class="card-t">Ingressos vendidos</div><div class="card-v" style="color:#dc2626">1</div><div class="card-s">meta 50 · 2%</div></div><div class="card"><div class="card-t">Faturamento</div><div class="card-v" style="color:#16a34a">R$ 244,03</div><div class="card-s">vendas pagas (HeroSpark)</div></div><div class="card"><div class="card-t">Ticket médio</div><div class="card-v" style="color:#0f172a">R$ 244,03</div><div class="card-s">por ingresso</div></div></div>
+<div class="grid" id="kpis-venda"></div>
 <div class="sec">Investimento &amp; retorno</div>
-<div class="grid"><div class="card"><div class="card-t">Investimento campanha</div><div class="card-v" style="color:#0f172a">R$ 147,29</div><div class="card-s">gasto Meta (sem imposto)</div></div><div class="card"><div class="card-t">Imposto (13.83%)</div><div class="card-v" style="color:#7c3aed">R$ 20,37</div><div class="card-s">sobre o gasto Meta</div></div><div class="card"><div class="card-t">Investimento TOTAL</div><div class="card-v" style="color:#0f172a">R$ 167,66</div><div class="card-s">campanha + imposto</div></div><div class="card"><div class="card-t">ROAS campanha</div><div class="card-v" style="color:#0f172a">1.66x</div><div class="card-s">faturamento ÷ gasto</div></div><div class="card"><div class="card-t">ROAS c/ imposto</div><div class="card-v" style="color:#f59e0b">1.46x</div><div class="card-s">÷ invest. total · alvo 2.0x</div></div><div class="card"><div class="card-t">Custo por ingresso</div><div class="card-v" style="color:#0f172a">R$ 167,66</div><div class="card-s">CPA c/ imposto</div></div></div>
+<div class="grid" id="kpis-inv"></div>
 <div class="row">
-  <div class="panel"><h2>Ingressos por tipo</h2>
-    <table><thead><tr><th>Tipo</th><th>Vendas</th><th>Faturamento</th></tr></thead>
-    <tbody><tr><td>VIP</td><td>0</td><td>R$ 0,00</td></tr><tr><td>Comum</td><td>1</td><td>R$ 244,03</td></tr></tbody></table>
-    <div class="card-s" style="margin-top:10px">Preços: Comum R$ 97,00 · VIP R$ 497,00</div></div>
-  <div class="panel"><h2>Formas de pagamento</h2><div class="chartbox"><canvas id="cf"></canvas></div></div>
+  <div class="panel"><h2>Funil de vendas — onde perde</h2><div id="funil"></div></div>
+  <div class="panel"><h2>🏆 Criativos que vendem</h2><div id="criativos"></div></div>
 </div>
-<div class="sec">Métricas Meta (campanhas de venda)</div>
-<div class="grid"><div class="card"><div class="card-t">Impressões</div><div class="card-v" style="color:#0f172a">3.112</div><div class="card-s"></div></div><div class="card"><div class="card-t">Alcance</div><div class="card-v" style="color:#0f172a">1.730</div><div class="card-s">freq. 1.80</div></div><div class="card"><div class="card-t">Cliques no link</div><div class="card-v" style="color:#0f172a">33</div><div class="card-s">CTR 1.06%</div></div><div class="card"><div class="card-t">Connect Rate</div><div class="card-v" style="color:#f59e0b">45%</div><div class="card-s">LPV ÷ cliques</div></div><div class="card"><div class="card-t">CPC</div><div class="card-v" style="color:#0f172a">R$ 4,46</div><div class="card-s"></div></div><div class="card"><div class="card-t">CPM</div><div class="card-v" style="color:#0f172a">R$ 47,33</div><div class="card-s"></div></div></div>
-<div class="row">
-  <div class="panel"><h2>Funil de vendas — onde perde</h2><div class="fstep"><div class="flabel">Impressões<b>3.112</b></div><div class="fbar"><span style="width:100.0%"></span></div><div class="fpct">100.0% do topo</div></div><div class="fstep"><div class="flabel">Alcance<b>1.730</b></div><div class="fbar"><span style="width:55.6%"></span></div><div class="fpct">55.6% do topo · −44% vs etapa anterior</div></div><div class="fstep"><div class="flabel">Cliques no link<b>33</b></div><div class="fbar"><span style="width:2.0%"></span></div><div class="fpct">1.1% do topo · −98% vs etapa anterior</div></div><div class="fstep"><div class="flabel">LP Views<b>15</b></div><div class="fbar"><span style="width:2.0%"></span></div><div class="fpct">0.5% do topo · −55% vs etapa anterior</div></div><div class="fstep"><div class="flabel">Checkout iniciado<b>1</b></div><div class="fbar"><span style="width:2.0%"></span></div><div class="fpct">0.0% do topo · −93% vs etapa anterior</div></div><div class="fstep"><div class="flabel">Compras (Meta)<b>1</b></div><div class="fbar"><span style="width:2.0%"></span></div><div class="fpct">0.0% do topo</div></div></div>
-  <div class="panel"><h2>🏆 Criativos que vendem</h2>
-    <table><thead><tr><th>Criativo</th><th>Gasto</th><th>Impr.</th><th>Cliques</th><th>LPV</th>
-    <th>Compras</th><th>Video views</th><th>ThruPlay</th><th>Post</th></tr></thead>
-    <tbody><tr><td class='camp'>GV_CAPTACAO_MIX_ADS</td><td>R$ 25,70</td><td>627</td><td>6</td><td>2</td><td>1</td><td>2</td><td>1</td><td>—</td></tr></tbody></table>
-    <div class="card-s" style="margin-top:8px">Só criativos com venda registrada (Meta). Ordenado por compras.</div></div>
-</div>
-<div class="panel" style="margin-bottom:20px"><h2>Detalhe por campanha</h2>
-  <table><thead><tr><th>Campanha</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>Cliques</th>
-  <th>CTR</th><th>CPC</th><th>CPM</th><th>LPV</th><th>Compras</th></tr></thead>
-  <tbody><tr><td class='camp'>…[CBO][PF][02]_pg02</td><td>R$ 73,34</td><td>1.297</td><td>985</td><td>26</td><td>2.00%</td><td>R$ 2,82</td><td>R$ 56,55</td><td>8</td><td>0</td></tr><tr><td class='camp'>…[CBO][PQ][02]_pg02_</td><td>R$ 29,61</td><td>746</td><td>493</td><td>13</td><td>1.74%</td><td>R$ 2,28</td><td>R$ 39,69</td><td>2</td><td>1</td></tr><tr><td class='camp'>…[CBO][PF][02]_pg02_EH</td><td>R$ 44,34</td><td>984</td><td>675</td><td>14</td><td>1.42%</td><td>R$ 3,17</td><td>R$ 45,06</td><td>5</td><td>0</td></tr></tbody></table></div>
-<div class="panel" style="margin-bottom:20px"><h2>Evolução diária de vendas</h2><div class="chartbox" style="height:160px"><canvas id="cd"></canvas></div></div>
-<footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto 13.83% · GGD</footer>
+<div class="panel" style="margin-bottom:20px"><h2>Diagnóstico por etapa — métrica × benchmark</h2>
+  <table><thead><tr><th>Métrica</th><th>Valor</th><th>Benchmark ideal</th><th>Status</th><th>Leitura</th></tr></thead>
+  <tbody id="stage"></tbody></table></div>
+<div class="panel" style="margin-bottom:20px"><h2>Detalhe por campanha</h2><div id="camp"></div></div>
+<div class="panel" style="margin-bottom:20px"><h2>Evolução diária</h2><div class="chartbox"><canvas id="cd"></canvas></div></div>
+<footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto · benchmarks calibrados no produto R$ 97 · GGD</footer>
 </div>
 <script>
-const fl=["Pix"], fv=[1];
-if(fl.length) new Chart(document.getElementById('cf'),{type:'doughnut',
-  data:{labels:fl,datasets:[{data:fv,backgroundColor:['#0ea5e9','#6366f1','#f59e0b','#94a3b8']}]},
-  options:{maintainAspectRatio:false,responsive:true,plugins:{legend:{position:'bottom'}}}});
-const ld=["07-08"], vd=[1];
-if(ld.length) new Chart(document.getElementById('cd'),{type:'bar',
-  data:{labels:ld,datasets:[{label:'Vendas',data:vd,backgroundColor:'#6366f1'}]},
-  options:{maintainAspectRatio:false,responsive:true,scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+const DADOS = {"gerado": "08/07/2026 17h00", "imersao": "2026-07-18", "metaVendas": 50, "roasAlvo": 2.0, "impostoPct": 0.1383, "precoComum": 97.0, "precoVip": 497.0, "dias": [{"date": "2026-07-08", "spend": 186.07, "impressions": 3656, "reach": 2537, "clicks": 68, "link_clicks": 41, "lpv": 24, "checkout": 3, "purchases": 1, "purchase_value": 494, "profile_visits": 20}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 106.03, "impressions": 1790, "reach": 1305, "link_clicks": 23, "lpv": 16, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 9}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PQ][02]_pg02", "spend": 31.44, "impressions": 835, "reach": 537, "link_clicks": 8, "lpv": 3, "checkout": 2, "purchases": 1, "purchase_value": 494, "profile_visits": 6}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02_EH", "spend": 48.6, "impressions": 1031, "reach": 695, "link_clicks": 10, "lpv": 5, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 5}], "criativos": [{"date": "2026-07-08", "ad_name": "GV_CAPTACAO_MIX_ADS", "spend": 25.7, "impressions": 627, "link_clicks": 6, "lpv": 2, "purchases": 1, "video_view": 2, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagU3imghdA/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_08", "spend": 61.18, "impressions": 1169, "link_clicks": 18, "lpv": 7, "purchases": 0, "video_view": 12, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBt8JAzfn/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_006", "spend": 26.73, "impressions": 643, "link_clicks": 6, "lpv": 4, "purchases": 0, "video_view": 4, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagUZRxAmJ9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 17.86, "impressions": 345, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagUhytgxoc/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_001", "spend": 15.27, "impressions": 190, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBwj4ggb9/"}], "vendas": [{"date": "2026-07-08", "valor": 244.03, "tipo": "Comum", "forma": "Pix"}]};
+const BENCH = {
+  cpm:{dir:'down',ideal:22,crit:35,fmt:'money',label:'R$ 12–22'},
+  ctr:{dir:'up',ideal:1.2,crit:0.7,fmt:'pct',label:'> 1,2%'},
+  cpc:{dir:'down',ideal:1.5,crit:2.5,fmt:'money',label:'< R$ 1,50'},
+  freq:{dir:'down',ideal:3.0,crit:4.0,fmt:'dec',label:'< 3,0'},
+  fluxo:{dir:'up',ideal:85,crit:70,fmt:'pct',label:'> 85%'},
+  custoLp:{dir:'down',ideal:3,crit:6,fmt:'money',label:'< R$ 3,00'},
+  convPag:{dir:'up',ideal:18,crit:10,fmt:'pct',label:'> 18%'},
+  custoIc:{dir:'gray',fmt:'money',label:'—'},
+  convChk:{dir:'up',ideal:45,crit:30,fmt:'pct',label:'> 45%'},
+  cpa:{dir:'down',ideal:40,crit:80,fmt:'money',label:'< R$ 40 (prod. R$ 97)'},
+  roas:{dir:'up',ideal:DADOS.roasAlvo,crit:1.5,fmt:'dec',label:'> '+DADOS.roasAlvo.toFixed(1).replace('.',',')}
+};
+const brl=v=>"R$ "+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const dec=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf=v=>Math.round(v||0).toLocaleString('pt-BR');
+const fmt=(v,f)=>f==='money'?brl(v):f==='pct'?pct(v):f==='dec'?dec(v):intf(v);
+function status(val,b){if(!b||b.dir==='gray')return 'gray';
+  if(b.dir==='up')return val>=b.ideal?'green':val<=b.crit?'red':'yellow';
+  return val<=b.ideal?'green':val>=b.crit?'red':'yellow';}
+
+let chart=null;
+const datas=(DADOS.dias||[]).map(d=>d.date).sort();
+const minD=datas[0]||DADOS.imersao, maxD=datas[datas.length-1]||DADOS.imersao;
+
+function within(d,de,ate){return d>=de&&d<=ate;}
+function sum(arr,k){return arr.reduce((a,x)=>a+(+x[k]||0),0);}
+
+function render(){
+  const de=document.getElementById('de').value||minD, ate=document.getElementById('ate').value||maxD;
+  const dias=(DADOS.dias||[]).filter(d=>within(d.date,de,ate));
+  const vendas=(DADOS.vendas||[]).filter(v=>within(v.date,de,ate));
+  const camps=(DADOS.campanhas||[]).filter(c=>within(c.date,de,ate));
+  const cria=(DADOS.criativos||[]).filter(c=>within(c.date,de,ate));
+
+  // agregados Meta
+  const T={spend:sum(dias,'spend'),impressions:sum(dias,'impressions'),reach:sum(dias,'reach'),
+    linkClicks:sum(dias,'link_clicks'),lpViews:sum(dias,'lpv'),initiateCheckout:sum(dias,'checkout'),
+    purchasesMeta:sum(dias,'purchases'),profileVisits:sum(dias,'profile_visits')};
+  // vendas HeroSpark (fonte de verdade)
+  const nV=vendas.length, fat=sum(vendas,'valor');
+  const imposto=T.spend*DADOS.impostoPct, investTotal=T.spend+imposto;
+
+  const M={
+    cpm:T.impressions?T.spend/T.impressions*1000:0,
+    ctr:T.impressions?T.linkClicks/T.impressions*100:0,
+    cpc:T.linkClicks?T.spend/T.linkClicks:0,
+    freq:T.reach?T.impressions/T.reach:0,
+    fluxo:T.linkClicks?T.lpViews/T.linkClicks*100:0,
+    custoLp:T.lpViews?T.spend/T.lpViews:0,
+    convPag:T.lpViews?T.initiateCheckout/T.lpViews*100:0,
+    custoIc:T.initiateCheckout?T.spend/T.initiateCheckout:0,
+    convChk:T.initiateCheckout?T.purchasesMeta/T.initiateCheckout*100:0,
+    cpa:nV?T.spend/nV:0, roasCamp:T.spend?fat/T.spend:0, roasImp:investTotal?fat/investTotal:0,
+    ticket:nV?fat/nV:0, lucro:fat-investTotal, custoVisita:T.profileVisits?T.spend/T.profileVisits:0
+  };
+  const pctMeta=DADOS.metaVendas?nV/DADOS.metaVendas*100:0;
+  const corV=nV>=DADOS.metaVendas?'green':nV>=DADOS.metaVendas*0.6?'yellow':'red';
+  const corR=status(M.roasImp,BENCH.roas);
+
+  const card=(t,v,s,st)=>`<div class="card"><span class="stripe s-${st||'accent'}"></span>
+    <div class="card-t">${t}</div><div class="card-v">${v}</div><div class="card-s">${s||''}</div></div>`;
+  document.getElementById('kpis-venda').innerHTML=[
+    card('Ingressos vendidos',intf(nV),`meta ${DADOS.metaVendas} · ${pctMeta.toFixed(0)}%`,corV),
+    card('Faturamento',brl(fat),'vendas pagas (HeroSpark)','green'),
+    card('Ticket médio',nV?brl(M.ticket):'—','por ingresso','accent'),
+    card('Lucro líquido',brl(M.lucro),'faturamento − invest. total',M.lucro>0?'green':'red'),
+  ].join('');
+  document.getElementById('kpis-inv').innerHTML=[
+    card('Investimento campanha',brl(T.spend),'gasto Meta (sem imposto)','accent'),
+    card(`Imposto ${(DADOS.impostoPct*100).toFixed(2)}%`,brl(imposto),'sobre o gasto','accent'),
+    card('Investimento TOTAL',brl(investTotal),'campanha + imposto','accent'),
+    card('ROAS campanha',dec(M.roasCamp)+'x','faturamento ÷ gasto',status(M.roasCamp,BENCH.roas)),
+    card('ROAS c/ imposto',dec(M.roasImp)+'x','÷ invest. total · alvo '+DADOS.roasAlvo+'x',corR),
+    card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
+  ].join('');
+
+  // Funil
+  const steps=[['Impressões',T.impressions,null],['Alcance',T.reach,null],
+    ['Cliques no link',T.linkClicks,{l:'CTR',v:M.ctr,b:BENCH.ctr}],
+    ['LP Views',T.lpViews,{l:'Connect',v:M.fluxo,b:BENCH.fluxo}],
+    ['Checkout iniciado',T.initiateCheckout,{l:'Conv.Pág',v:M.convPag,b:BENCH.convPag}],
+    ['Compras (Meta)',T.purchasesMeta,{l:'Conv.Chk',v:M.convChk,b:BENCH.convChk}]];
+  const base=steps[0][1]||1;
+  document.getElementById('funil').innerHTML=steps.map((s,i)=>{
+    const w=Math.max(s[1]/base*100,2), conv=s[2]?`<span class="pill p-${status(s[2].v,s[2].b)}">${s[2].l} ${fmt(s[2].v,s[2].b.fmt)}</span>`:'';
+    return `<div class="fstep"><div class="flabel"><span>${s[0]} ${conv}</span><b>${intf(s[1])}</b></div>
+      <div class="fbar"><span style="width:${w.toFixed(1)}%"></span></div>
+      <div class="fpct">${(s[1]/base*100).toFixed(1)}% do topo</div></div>`;
+  }).join('');
+
+  // Criativos que vendem (agrega por ad_name no período, só compra>0)
+  const agC={};
+  cria.forEach(c=>{const k=c.ad_name;(agC[k]=agC[k]||{ad_name:k,spend:0,impressions:0,link_clicks:0,lpv:0,purchases:0,video_view:0,thruplay:0,permalink:c.permalink});
+    ['spend','impressions','link_clicks','lpv','purchases','video_view','thruplay'].forEach(f=>agC[k][f]+=(+c[f]||0));});
+  const vendedores=Object.values(agC).filter(c=>c.purchases>0).sort((a,b)=>b.purchases-a.purchases);
+  document.getElementById('criativos').innerHTML=`<table><thead><tr><th>Criativo</th><th>Gasto</th><th>Cliques</th><th>LPV</th><th>Compras</th><th>Vídeo</th><th>Post</th></tr></thead><tbody>`+
+    (vendedores.map(c=>`<tr><td class="camp">${c.ad_name}</td><td>${brl(c.spend)}</td><td>${intf(c.link_clicks)}</td><td>${intf(c.lpv)}</td><td>${intf(c.purchases)}</td><td>${intf(c.video_view)}</td><td>${c.permalink?`<a href="${c.permalink}" target="_blank">ver</a>`:'—'}</td></tr>`).join('')
+     || `<tr><td colspan="7" style="color:#94a3b8">nenhum criativo com venda no período</td></tr>`)+`</tbody></table>
+     <div class="card-s" style="margin-top:8px">Só criativos com compra (Meta), ordenado por vendas.</div>`;
+
+  // Tabela de etapas (benchmark + semáforo)
+  const rows=[['Etapa 1 · Anúncio'],
+    ['CPM',M.cpm,BENCH.cpm,'Custo do leilão'],['CTR (link)',M.ctr,BENCH.ctr,'Atratividade do criativo'],
+    ['CPC (link)',M.cpc,BENCH.cpc,'Custo de entrada no funil'],['Frequência',M.freq,BENCH.freq,'Saturação'],
+    ['Visitas ao perfil',T.profileVisits,{dir:'gray',fmt:'int',label:'—'},'Interesse no perfil'],
+    ['Custo/visita perfil',M.custoVisita,{dir:'gray',fmt:'money',label:'—'},'Gasto ÷ visitas'],
+    ['Etapa 2 · Página de vendas'],
+    ['Connect (Fluxo)',M.fluxo,BENCH.fluxo,'LP Views ÷ Cliques'],['Custo por LP View',M.custoLp,BENCH.custoLp,'Custo do prospect'],
+    ['Etapa 3 · Checkout'],
+    ['Conv. da página',M.convPag,BENCH.convPag,'Checkouts ÷ LP Views'],['Custo por checkout',M.custoIc,BENCH.custoIc,'Previsor de CPA'],
+    ['Etapa 4 · Resultado'],
+    ['Conv. do checkout',M.convChk,BENCH.convChk,'Compras ÷ Checkouts'],['CPA (custo/compra)',M.cpa,BENCH.cpa,'vs. ticket do produto'],
+    ['ROAS campanha',M.roasCamp,BENCH.roas,'Faturamento ÷ Gasto']];
+  const lbl={green:'Saudável',yellow:'Atenção',red:'Crítico',gray:'—'};
+  const clr={green:'#16a34a',yellow:'#f59e0b',red:'#dc2626',gray:'#cbd5e1'};
+  document.getElementById('stage').innerHTML=rows.map(r=>{
+    if(r.length===1)return `<tr><td colspan="5" class="stage-tag">${r[0]}</td></tr>`;
+    const st=status(r[1],r[2]);
+    return `<tr><td>${r[0]}</td><td>${fmt(r[1],r[2].fmt||'dec')}</td><td style="color:#94a3b8">${r[2].label||'—'}</td>
+      <td><span class="dot" style="background:${clr[st]}"></span>${lbl[st]}</td><td style="color:#94a3b8">${r[3]}</td></tr>`;
+  }).join('');
+
+  // Campanhas (agrega por nome no período)
+  const agK={};
+  camps.forEach(c=>{const k=c.campaign;(agK[k]=agK[k]||{campaign:k,spend:0,impressions:0,reach:0,link_clicks:0,lpv:0,checkout:0,purchases:0});
+    ['spend','impressions','reach','link_clicks','lpv','checkout','purchases'].forEach(f=>agK[k][f]+=(+c[f]||0));});
+  const cs=Object.values(agK).sort((a,b)=>b.spend-a.spend);
+  document.getElementById('camp').innerHTML=`<table><thead><tr><th>Campanha</th><th>Gasto</th><th>Impr.</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>LPV</th><th>Checkout</th><th>Compras</th></tr></thead><tbody>`+
+    (cs.map(c=>{const ct=c.impressions?c.link_clicks/c.impressions*100:0,cc=c.link_clicks?c.spend/c.link_clicks:0;
+      return `<tr><td class="camp">${c.campaign.replace('[GGD][CAPTACAO][VENDA][PAGO]','…')}</td><td>${brl(c.spend)}</td><td>${intf(c.impressions)}</td><td>${intf(c.link_clicks)}</td><td>${pct(ct)}</td><td>${brl(cc)}</td><td>${intf(c.lpv)}</td><td>${intf(c.checkout)}</td><td>${intf(c.purchases)}</td></tr>`;}).join('')
+     || `<tr><td colspan="9" style="color:#94a3b8">sem campanhas no período</td></tr>`)+`</tbody></table>`;
+
+  // gráfico diário (vendas + gasto)
+  const dd=[...new Set([...dias.map(d=>d.date),...vendas.map(v=>v.date)])].sort();
+  const vpd=dd.map(x=>vendas.filter(v=>v.date===x).length);
+  const gpd=dd.map(x=>{const d=dias.find(z=>z.date===x);return d?+d.spend:0;});
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('cd'),{data:{labels:dd.map(x=>x.slice(5)),
+    datasets:[{type:'bar',label:'Vendas',data:vpd,backgroundColor:'#6366f1',yAxisID:'y'},
+      {type:'line',label:'Gasto (R$)',data:gpd,borderColor:'#16a34a',yAxisID:'y1'}]},
+    options:{maintainAspectRatio:false,responsive:true,scales:{y:{position:'left',beginAtZero:true,ticks:{precision:0}},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false}}}}});
+
+  document.getElementById('fresumo').textContent=`${dd.length} dia(s) · ${nV} venda(s)`;
+}
+function setRange(k){
+  if(k==='hoje'){document.getElementById('de').value=maxD;document.getElementById('ate').value=maxD;}
+  else{document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;}
+  render();
+}
+// init
+document.getElementById('sub').textContent=`Controle diário · Vendas HeroSpark × Investimento Meta (c/ imposto ${(DADOS.impostoPct*100).toFixed(2)}%) · atualizado ${DADOS.gerado}`;
+const hoje=new Date(), ev=new Date(DADOS.imersao+'T00:00:00');
+document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-hoje)/864e5));
+document.getElementById('de').min=document.getElementById('ate').min=minD;
+document.getElementById('de').max=document.getElementById('ate').max=maxD;
+document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;
+document.getElementById('de').addEventListener('change',render);
+document.getElementById('ate').addEventListener('change',render);
+render();
 </script></body></html>
