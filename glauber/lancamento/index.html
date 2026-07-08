@@ -42,6 +42,10 @@ a{color:#6366f1}
 .fbar span{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#0ea5e9);border-radius:6px}
 .fpct{font-size:11px;color:#94a3b8;margin-top:2px}
 .chartbox{position:relative;height:170px;width:100%}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.vbar{background:#eef2f7;border-radius:10px;height:24px;overflow:hidden;position:relative}
+.vbar span{display:block;height:100%;border-radius:10px}
+.vbar b{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#0f172a}
 footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 </style></head><body><div class="wrap">
 <header>
@@ -56,6 +60,8 @@ footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
   <button onclick="setRange('tudo')">Tudo</button>
   <span id="fresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
 </div>
+<div class="sec">Verba do lançamento</div>
+<div class="panel" id="verba" style="margin-bottom:20px"></div>
 <div class="sec">Vendas · Imersão 18/07</div>
 <div class="grid" id="kpis-venda"></div>
 <div class="sec">Investimento &amp; retorno</div>
@@ -72,7 +78,7 @@ footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 <footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto · benchmarks calibrados no produto R$ 97 · GGD</footer>
 </div>
 <script>
-const DADOS = {"gerado": "08/07/2026 17h02", "imersao": "2026-07-18", "metaVendas": 50, "roasAlvo": 2.0, "impostoPct": 0.1383, "precoComum": 97.0, "precoVip": 497.0, "dias": [{"date": "2026-07-08", "spend": 186.07, "impressions": 3656, "reach": 2537, "clicks": 68, "link_clicks": 41, "lpv": 24, "checkout": 3, "purchases": 1, "purchase_value": 494, "profile_visits": 20}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 106.03, "impressions": 1790, "reach": 1305, "link_clicks": 23, "lpv": 16, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 9}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PQ][02]_pg02", "spend": 31.44, "impressions": 835, "reach": 537, "link_clicks": 8, "lpv": 3, "checkout": 2, "purchases": 1, "purchase_value": 494, "profile_visits": 6}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 48.6, "impressions": 1031, "reach": 695, "link_clicks": 10, "lpv": 5, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 5}], "criativos": [{"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_001", "spend": 15.27, "impressions": 190, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBwj4ggb9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_006", "spend": 26.73, "impressions": 643, "link_clicks": 6, "lpv": 4, "purchases": 0, "video_view": 4, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagUZRxAmJ9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_08", "spend": 61.18, "impressions": 1169, "link_clicks": 18, "lpv": 7, "purchases": 0, "video_view": 12, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBt8JAzfn/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_07", "spend": 0.39, "impressions": 27, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiPuUig4Op/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 17.86, "impressions": 345, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagUhytgxoc/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_MIX_ADS", "spend": 25.7, "impressions": 627, "link_clicks": 6, "lpv": 2, "purchases": 1, "video_view": 2, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagU3imghdA/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 3.77, "impressions": 111, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagU0cWAZCP/"}], "vendas": [{"date": "2026-07-08", "valor": 244.03, "tipo": "Comum", "forma": "Pix"}]};
+const DADOS = {"gerado": "08/07/2026 17h08", "imersao": "2026-07-18", "metaVendas": 50, "roasAlvo": 2.0, "impostoPct": 0.1383, "precoComum": 97.0, "precoVip": 497.0, "verba": 10000.0, "dias": [{"date": "2026-07-08", "spend": 186.07, "impressions": 3656, "reach": 2537, "clicks": 68, "link_clicks": 41, "lpv": 24, "checkout": 3, "purchases": 1, "purchase_value": 494, "profile_visits": 20}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 106.03, "impressions": 1790, "reach": 1305, "link_clicks": 23, "lpv": 16, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 9}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PQ][02]_pg02", "spend": 31.44, "impressions": 835, "reach": 537, "link_clicks": 8, "lpv": 3, "checkout": 2, "purchases": 1, "purchase_value": 494, "profile_visits": 6}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 48.6, "impressions": 1031, "reach": 695, "link_clicks": 10, "lpv": 5, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 5}], "criativos": [{"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_001", "spend": 15.27, "impressions": 190, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBwj4ggb9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_006", "spend": 26.73, "impressions": 643, "link_clicks": 6, "lpv": 4, "purchases": 0, "video_view": 4, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagUZRxAmJ9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_08", "spend": 61.18, "impressions": 1169, "link_clicks": 18, "lpv": 7, "purchases": 0, "video_view": 12, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBt8JAzfn/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_07", "spend": 0.39, "impressions": 27, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiPuUig4Op/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 17.86, "impressions": 345, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagUhytgxoc/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_MIX_ADS", "spend": 25.7, "impressions": 627, "link_clicks": 6, "lpv": 2, "purchases": 1, "video_view": 2, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagU3imghdA/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 3.77, "impressions": 111, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagU0cWAZCP/"}], "vendas": [{"date": "2026-07-08", "valor": 244.03, "tipo": "Comum", "forma": "Pix"}]};
 const BENCH = {
   cpm:{dir:'down',ideal:22,crit:35,fmt:'money',label:'R$ 12–22'},
   ctr:{dir:'up',ideal:1.2,crit:0.7,fmt:'pct',label:'> 1,2%'},
@@ -150,6 +156,20 @@ function render(){
     card('ROAS c/ imposto',dec(M.roasImp)+'x','÷ invest. total · alvo '+DADOS.roasAlvo+'x',corR),
     card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
   ].join('');
+
+  // Verba do lançamento (CUMULATIVA — todos os dias, independe do filtro)
+  const gastoAll=sum(DADOS.dias||[],'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
+  const impAll=gastoAll*DADOS.impostoPct;
+  const pctVerba=DADOS.verba?investAll/DADOS.verba*100:0, saldo=DADOS.verba-investAll;
+  const corVb=pctVerba>=90?'#dc2626':pctVerba>=70?'#f59e0b':'#16a34a';
+  document.getElementById('verba').innerHTML=
+    `<div class="vgrid">`+
+    card('Verba total',brl(DADOS.verba),'orçamento do lançamento','accent')+
+    card('Investimento campanha',brl(gastoAll),'sem imposto (acumulado)','accent')+
+    card('Imposto '+(DADOS.impostoPct*100).toFixed(2)+'%',brl(impAll),'sobre o gasto','accent')+
+    card('Consumido (c/ imposto)',brl(investAll),pctVerba.toFixed(1)+'% da verba',pctVerba>=90?'red':pctVerba>=70?'yellow':'green')+
+    card('Saldo restante',brl(saldo),(100-pctVerba).toFixed(1)+'% disponível',saldo>0?'green':'red')+
+    `</div><div class="vbar"><span style="width:${Math.min(Math.max(pctVerba,0),100).toFixed(1)}%;background:${corVb}"></span><b>${pctVerba.toFixed(1)}% consumido · ${brl(investAll)} de ${brl(DADOS.verba)}</b></div>`;
 
   // Funil
   const steps=[['Impressões',T.impressions,null],['Alcance',T.reach,null],
