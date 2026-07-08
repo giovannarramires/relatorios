@@ -138,10 +138,10 @@ tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f
   <div class="invbox" id="invBox"></div>
 
   <div class="section-title"><span class="bar"></span>Controle Diário da Operação
-    <span class="section-hint">— investimento · leads · CPL · conversão da página, dia a dia</span></div>
+    <span class="section-hint">— investimento · alcance de anúncio (CPM/CTR) · leads · CPL · conversão da página, dia a dia</span></div>
   <div class="card tbl-scroll"><table id="tblDaily"><thead><tr>
     <th>Dia</th><th class="num">Campanha</th><th class="num">Imposto</th><th class="num">Total pago</th>
-    <th class="num">Cliques</th><th class="num">Connect rate</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
+    <th class="num">Impressões</th><th class="num">CPM</th><th class="num">Cliques</th><th class="num">CTR</th><th class="num">Connect rate</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
 
   <div class="section-title"><span class="bar"></span>Evolução Diária · Leads × Investimento</div>
   <div class="card"><div class="chart-box"><canvas id="chartDaily"></canvas></div></div>
@@ -168,7 +168,7 @@ tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f
       <div class="sim-inputs">
         <div class="sim-field"><label>Ticket médio do produto</label>
           <div class="rv" id="rvTicket">R$ 297</div>
-          <input type="range" id="ticket" min="47" max="2000" step="10" value="297"></div>
+          <input type="range" id="ticket" min="47" max="2800" step="10" value="297"></div>
         <div class="sim-field"><label>Conversão de leads em venda</label>
           <div class="rv" id="rvConv">3,0%</div>
           <input type="range" id="conv" min="0.5" max="15" step="0.5" value="3"></div>
@@ -256,12 +256,16 @@ let rows='';
 daily.forEach(x=>{
   const cpl=x.leads?x.spend/x.leads:0, txp=x.lpv?x.leads/x.lpv*100:0;
   const cr=x.lc?x.lpv/x.lc*100:0;
+  const cpmD=x.impr?x.spend/x.impr*1000:0, ctrD=x.impr?x.lc/x.impr*100:0;
   const imp=x.spend*TAX, tot=x.spend*(1+TAX);
   rows+=`<tr><td><b>${x.d}</b></td>
     <td class="num">${BRL(x.spend)}</td>
     <td class="num" style="color:#b45309">${BRL(imp)}</td>
     <td class="num"><b>${BRL(tot)}</b></td>
+    <td class="num">${N(x.impr)}</td>
+    <td class="num">${BRL(cpmD)}</td>
     <td class="num">${N(x.lc)}</td>
+    <td class="num">${PCT(ctrD)}</td>
     <td class="num"><span class="cpl-badge ${crClass(cr)}">${PCT(cr)}</span></td>
     <td class="num"><b>${x.leads}</b></td>
     <td class="num"><span class="cpl-badge ${cplClass(cpl)}">${BRL(cpl)}</span></td>
@@ -271,7 +275,10 @@ rows+=`<tr class="total-row"><td>TOTAL</td>
   <td class="num">${BRL(T.spend)}</td>
   <td class="num">${BRL(T.spend*TAX)}</td>
   <td class="num">${BRL(T.spend*(1+TAX))}</td>
+  <td class="num">${N(T.impr)}</td>
+  <td class="num">${BRL(cpm)}</td>
   <td class="num">${N(T.lc)}</td>
+  <td class="num">${PCT(ctrLink)}</td>
   <td class="num">${PCT(txClickPage)}</td>
   <td class="num">${T.leads}</td>
   <td class="num">${BRL(cplMedio)}</td>
