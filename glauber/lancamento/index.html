@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lançamento Imersão 18/07 · Dr. Glauber</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;color:#0f172a;padding:24px}
+.wrap{max-width:1080px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+h1{font-size:22px}.sub{color:#64748b;font-size:13px;margin-top:4px}
+.badge{background:#0f172a;color:#fff;border-radius:10px;padding:10px 16px;text-align:center}
+.badge b{font-size:22px;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
+.card{background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.card-t{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.card-v{font-size:26px;font-weight:700;margin:6px 0}
+.card-s{font-size:12px;color:#94a3b8}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:720px){.row{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.panel h2{font-size:14px;margin-bottom:12px;color:#334155}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid #f1f5f9}
+th{color:#64748b;font-size:12px;text-transform:uppercase}
+.aviso{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:14px}
+footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
+</style></head><body><div class="wrap">
+<header>
+  <div><h1>🎟️ Lançamento Imersão 18/07 · Dr. Glauber</h1>
+  <div class="sub">Vendas HeroSpark × Investimento Meta Ads · atualizado 08/07/2026 15h28</div></div>
+  <div class="badge"><b>10</b>dias p/ o evento</div>
+</header>
+<div class="aviso">Ainda sem vendas pagas registradas — o painel enche automaticamente conforme as vendas da Imersão entram na HeroSpark.</div>
+<div class="grid"><div class="card"><div class="card-t">Ingressos vendidos</div>
+        <div class="card-v" style="color:#dc2626">0</div>
+        <div class="card-s">meta 100 · 0%</div></div><div class="card"><div class="card-t">Faturamento</div>
+        <div class="card-v" style="color:#16a34a">R$ 0,00</div>
+        <div class="card-s">vendas pagas (HeroSpark)</div></div><div class="card"><div class="card-t">Investimento Meta</div>
+        <div class="card-v" style="color:#0f172a">R$ 15.237,06</div>
+        <div class="card-s">campanhas de venda</div></div><div class="card"><div class="card-t">ROAS</div>
+        <div class="card-v" style="color:#dc2626">0.00x</div>
+        <div class="card-s">alvo 3.0x</div></div><div class="card"><div class="card-t">Custo por ingresso</div>
+        <div class="card-v" style="color:#0f172a">—</div>
+        <div class="card-s">CPA real</div></div><div class="card"><div class="card-t">Ticket médio</div>
+        <div class="card-v" style="color:#0f172a">—</div>
+        <div class="card-s">por ingresso</div></div></div>
+<div class="row">
+  <div class="panel"><h2>Ingressos por tipo</h2>
+    <table><thead><tr><th>Tipo</th><th>Vendas</th><th>Faturamento</th></tr></thead>
+    <tbody><tr><td>VIP</td><td>0</td><td>R$ 0,00</td></tr><tr><td>Comum</td><td>0</td><td>R$ 0,00</td></tr></tbody></table></div>
+  <div class="panel"><h2>Formas de pagamento</h2><canvas id="cf" height="180"></canvas></div>
+</div>
+<div class="panel" style="margin-bottom:20px"><h2>Evolução diária de vendas</h2><canvas id="cd" height="120"></canvas></div>
+<footer>Fonte de faturamento: HeroSpark (planilha) · Investimento: Meta Ads (campanhas de venda) · GGD</footer>
+</div>
+<script>
+const fl=[], fv=[];
+if(fl.length) new Chart(document.getElementById('cf'),{type:'doughnut',
+  data:{labels:fl,datasets:[{data:fv,backgroundColor:['#0ea5e9','#6366f1','#f59e0b','#94a3b8']}]},
+  options:{plugins:{legend:{position:'bottom'}}}});
+const ld=[], vd=[], ftd=[];
+if(ld.length) new Chart(document.getElementById('cd'),{type:'bar',
+  data:{labels:ld,datasets:[{label:'Vendas',data:vd,backgroundColor:'#6366f1',yAxisID:'y'},
+  {label:'Faturamento (R$)',data:ftd,type:'line',borderColor:'#16a34a',yAxisID:'y1'}]},
+  options:{scales:{y:{position:'left',beginAtZero:true},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false}}}}});
+</script></body></html>
