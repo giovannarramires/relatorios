@@ -206,7 +206,7 @@ const BRL = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,
 const BRL0 = v => 'R$ ' + Math.round(v||0).toLocaleString('pt-BR');
 const N = v => (v||0).toLocaleString('pt-BR');
 const PCT = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
-const cplClass = c => c==null?'cpl-mid':(c<=13?'cpl-good':(c<=18?'cpl-mid':'cpl-bad'));
+const cplClass = c => c==null?'cpl-mid':(c<=META_CPL?'cpl-good':(c<=META_CPL*1.3?'cpl-mid':'cpl-bad'));  // verde ≤ meta · laranja até +30% · vermelho acima
 const crColor = r => r>=80?'#059669':(r>=65?'#b45309':'#dc2626');   // connect rate: verde/amarelo/vermelho
 const crClass = r => r>=80?'cpl-good':(r>=65?'cpl-mid':'cpl-bad');
 
