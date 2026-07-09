@@ -49,14 +49,18 @@ a{color:#6366f1}
 footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 </style></head><body><div class="wrap">
 <header>
-  <div><h1>🎓 Lançamento Dominando Cicatrizes de Acne · Carol</h1>
+  <div><h1>🎓 Lançamento Dominando Cicatrizes de Acne · Carol <span id="lanc-chip" style="display:none;background:#6366f1;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle;margin-left:6px"></span></h1>
   <div class="sub" id="sub"></div></div>
   <div class="badge"><b id="dias-ev"></b>dias p/ fechar o carrinho</div>
 </header>
 <div class="filtro">
+  <label>Lançamento:</label>
+  <select id="lanc"></select>
+  <span style="width:1px;height:22px;background:#e2e8f0"></span>
   <label>Período:</label>
   <input type="date" id="de"> <span style="color:#94a3b8">até</span> <input type="date" id="ate">
   <button onclick="setRange('hoje')">Hoje</button>
+  <button onclick="setRange('lanc')">Lançamento</button>
   <button onclick="setRange('tudo')">Tudo</button>
   <span id="fresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
 </div>
@@ -78,7 +82,7 @@ footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 <footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto · benchmarks calibrados no produto R$ 97 · GGD</footer>
 </div>
 <script>
-const DADOS = {"gerado": "08/07/2026 22h08", "imersao": "2026-07-17", "metaVendas": 40, "roasAlvo": 2.0, "impostoPct": 0.1225, "precoProduto": 97.0, "verba": 10000.0, "dias": [{"date": "2026-07-08", "spend": 225.38, "impressions": 2865, "reach": 1601, "clicks": 66, "link_clicks": 33, "lpv": 5, "checkout": 6, "purchases": 1, "purchase_value": 97, "profile_visits": 30}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 225.38, "impressions": 2865, "reach": 1601, "link_clicks": 33, "lpv": 5, "checkout": 6, "purchases": 1, "purchase_value": 97, "profile_visits": 30}], "criativos": [{"date": "2026-07-08", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 59.06, "impressions": 820, "link_clicks": 12, "lpv": 3, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 46.88, "impressions": 433, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 73, "thruplay": 10, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 47.23, "impressions": 772, "link_clicks": 10, "lpv": 1, "purchases": 0, "video_view": 155, "thruplay": 27, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 55.64, "impressions": 632, "link_clicks": 7, "lpv": 1, "purchases": 0, "video_view": 147, "thruplay": 32, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 16.57, "impressions": 208, "link_clicks": 3, "lpv": 0, "purchases": 0, "video_view": 26, "thruplay": 5, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}], "vendas": []};
+const DADOS = {"gerado": "08/07/2026 22h26", "imersao": "2026-07-17", "metaVendas": 40, "roasAlvo": 2.0, "impostoPct": 0.1225, "precoProduto": 97.0, "verba": 10000.0, "lancamentos": [{"nome": "Lançamento 03", "de": "2026-07-08", "ate": "2026-07-17", "evento": "2026-07-17"}], "dias": [{"date": "2026-07-08", "spend": 225.38, "impressions": 2865, "reach": 1601, "clicks": 66, "link_clicks": 33, "lpv": 5, "checkout": 6, "purchases": 1, "purchase_value": 97, "profile_visits": 30}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 225.38, "impressions": 2865, "reach": 1601, "link_clicks": 33, "lpv": 5, "checkout": 6, "purchases": 1, "purchase_value": 97, "profile_visits": 30}], "criativos": [{"date": "2026-07-08", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 59.06, "impressions": 820, "link_clicks": 12, "lpv": 3, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 46.88, "impressions": 433, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 73, "thruplay": 10, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 47.23, "impressions": 772, "link_clicks": 10, "lpv": 1, "purchases": 0, "video_view": 155, "thruplay": 27, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 55.64, "impressions": 632, "link_clicks": 7, "lpv": 1, "purchases": 0, "video_view": 147, "thruplay": 32, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 16.57, "impressions": 208, "link_clicks": 3, "lpv": 0, "purchases": 0, "video_view": 26, "thruplay": 5, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}], "vendas": []};
 const BENCH = {
   cpm:{dir:'down',ideal:22,crit:35,fmt:'money',label:'R$ 12–22'},
   ctr:{dir:'up',ideal:1.2,crit:0.7,fmt:'pct',label:'> 1,2%'},
@@ -104,6 +108,10 @@ function status(val,b){if(!b||b.dir==='gray')return 'gray';
 let chart=null;
 const datas=(DADOS.dias||[]).map(d=>d.date).sort();
 const minD=datas[0]||DADOS.imersao, maxD=datas[datas.length-1]||DADOS.imersao;
+
+// Lançamentos (seletor) — o último da lista é o padrão ao abrir
+const LANCS=DADOS.lancamentos||[];
+let curLanc=LANCS.length?LANCS[LANCS.length-1]:null;
 
 function within(d,de,ate){return d>=de&&d<=ate;}
 function sum(arr,k){return arr.reduce((a,x)=>a+(+x[k]||0),0);}
@@ -168,8 +176,9 @@ function render(){
     card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
   ].join('');
 
-  // Verba do lançamento (CUMULATIVA — todos os dias, independe do filtro)
-  const gastoAll=sum(DADOS.dias||[],'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
+  // Verba do lançamento — soma só a janela do lançamento selecionado (independe do filtro De/Até)
+  const diasLanc=curLanc?(DADOS.dias||[]).filter(d=>within(d.date,curLanc.de,curLanc.ate)):(DADOS.dias||[]);
+  const gastoAll=sum(diasLanc,'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
   const impAll=gastoAll*DADOS.impostoPct;
   const pctVerba=DADOS.verba?investAll/DADOS.verba*100:0, saldo=DADOS.verba-investAll;
   const corVb=pctVerba>=90?'#dc2626':pctVerba>=70?'#f59e0b':'#16a34a';
@@ -261,18 +270,38 @@ function render(){
 
   document.getElementById('fresumo').textContent=`${dd.length} dia(s) · ${nV} venda(s)`;
 }
+// limites do seletor de data (engloba dados + janelas dos lançamentos)
+const boundMin=[minD,...LANCS.map(l=>l.de)].sort()[0];
+const boundMax=[maxD,...LANCS.map(l=>l.ate)].sort().slice(-1)[0];
 function setRange(k){
   if(k==='hoje'){document.getElementById('de').value=maxD;document.getElementById('ate').value=maxD;}
-  else{document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;}
+  else if(k==='lanc'&&curLanc){document.getElementById('de').value=curLanc.de;document.getElementById('ate').value=curLanc.ate;}
+  else{document.getElementById('de').value=boundMin;document.getElementById('ate').value=boundMax;}
   render();
+}
+function updateBadge(){
+  const evd=(curLanc&&curLanc.evento)||DADOS.imersao;
+  const hj=new Date(), ev=new Date(evd+'T00:00:00');
+  document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-hj)/864e5));
+}
+function chipLanc(){
+  const c=document.getElementById('lanc-chip'); if(!c)return;
+  c.textContent=curLanc?curLanc.nome:''; c.style.display=curLanc?'inline-block':'none';
 }
 // init
 document.getElementById('sub').textContent=`Controle diário · Vendas HeroSpark × Investimento Meta (c/ imposto ${(DADOS.impostoPct*100).toFixed(2)}%) · atualizado ${DADOS.gerado}`;
-const hoje=new Date(), ev=new Date(DADOS.imersao+'T00:00:00');
-document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-hoje)/864e5));
-document.getElementById('de').min=document.getElementById('ate').min=minD;
-document.getElementById('de').max=document.getElementById('ate').max=maxD;
-document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;
+const selL=document.getElementById('lanc');
+if(LANCS.length){
+  selL.innerHTML=LANCS.map((l,i)=>`<option value="${i}">${l.nome} (${l.de.slice(5)}→${l.ate.slice(5)})</option>`).join('');
+  selL.value=String(LANCS.length-1);
+  selL.addEventListener('change',()=>{curLanc=LANCS[+selL.value]||null;updateBadge();chipLanc();setRange('lanc');});
+}else{selL.style.display='none';}
+updateBadge(); chipLanc();
+document.getElementById('de').min=document.getElementById('ate').min=boundMin;
+document.getElementById('de').max=document.getElementById('ate').max=boundMax;
+// abre já na janela do lançamento atual
+if(curLanc){document.getElementById('de').value=curLanc.de;document.getElementById('ate').value=curLanc.ate;}
+else{document.getElementById('de').value=boundMin;document.getElementById('ate').value=boundMax;}
 document.getElementById('de').addEventListener('change',render);
 document.getElementById('ate').addEventListener('change',render);
 render();
