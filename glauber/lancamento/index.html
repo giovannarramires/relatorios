@@ -12,7 +12,10 @@ h1{font-size:22px}.sub{color:#64748b;font-size:13px;margin-top:4px}
 .badge b{font-size:22px;display:block}
 .filtro{background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .filtro label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
-.filtro input{border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px}
+.filtro input,.filtro select{border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px;background:#fff}
+.filtro select{font-weight:600;color:#4338ca}
+.divv{width:1px;height:22px;background:#e2e8f0}
+.chip{background:#eef2ff;color:#4338ca;border-radius:999px;padding:3px 11px;font-size:14px;font-weight:600;margin-left:8px;vertical-align:middle}
 .filtro button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
 .filtro button:hover{background:#eef2f7}
 .sec{font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em;margin:6px 2px 10px}
@@ -49,15 +52,18 @@ a{color:#6366f1}
 footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 </style></head><body><div class="wrap">
 <header>
-  <div><h1>🎟️ Lançamento Imersão 18/07 · Dr. Glauber</h1>
+  <div><h1>🎟️ Imersão US Nervos · Dr. Glauber <span class="chip" id="lancchip"></span></h1>
   <div class="sub" id="sub"></div></div>
   <div class="badge"><b id="dias-ev"></b>dias p/ o evento</div>
 </header>
 <div class="filtro">
+  <label>Lançamento:</label>
+  <select id="lancamento"></select>
+  <span class="divv"></span>
   <label>Período:</label>
   <input type="date" id="de"> <span style="color:#94a3b8">até</span> <input type="date" id="ate">
+  <button onclick="setRange('tudo')">Todo o lançamento</button>
   <button onclick="setRange('hoje')">Hoje</button>
-  <button onclick="setRange('tudo')">Tudo</button>
   <span id="fresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
 </div>
 <div class="sec">Verba do lançamento</div>
@@ -78,7 +84,7 @@ footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
 <footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto · benchmarks calibrados no produto R$ 97 · GGD</footer>
 </div>
 <script>
-const DADOS = {"gerado": "08/07/2026 20h45", "imersao": "2026-07-18", "metaVendas": 50, "roasAlvo": 2.0, "impostoPct": 0.1225, "precoComum": 97.0, "precoVip": 497.0, "verba": 10000.0, "dias": [{"date": "2026-07-08", "spend": 186.07, "impressions": 3656, "reach": 2537, "clicks": 68, "link_clicks": 41, "lpv": 24, "checkout": 3, "purchases": 1, "purchase_value": 494, "profile_visits": 20}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 106.03, "impressions": 1790, "reach": 1305, "link_clicks": 23, "lpv": 16, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 9}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PQ][02]_pg02", "spend": 31.44, "impressions": 835, "reach": 537, "link_clicks": 8, "lpv": 3, "checkout": 2, "purchases": 1, "purchase_value": 494, "profile_visits": 6}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 48.6, "impressions": 1031, "reach": 695, "link_clicks": 10, "lpv": 5, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 5}], "criativos": [{"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_001", "spend": 15.27, "impressions": 190, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBwj4ggb9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_006", "spend": 26.73, "impressions": 643, "link_clicks": 6, "lpv": 4, "purchases": 0, "video_view": 4, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagUZRxAmJ9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_08", "spend": 61.18, "impressions": 1169, "link_clicks": 18, "lpv": 7, "purchases": 0, "video_view": 12, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBt8JAzfn/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_07", "spend": 0.39, "impressions": 27, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiPuUig4Op/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 17.86, "impressions": 345, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagUhytgxoc/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_MIX_ADS", "spend": 25.7, "impressions": 627, "link_clicks": 6, "lpv": 2, "purchases": 1, "video_view": 2, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagU3imghdA/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 3.77, "impressions": 111, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagU0cWAZCP/"}], "vendas": [{"date": "2026-07-08", "valor": 244.03, "tipo": "Comum", "forma": "Pix"}]};
+const DADOS = {"gerado": "08/07/2026 21h42", "imersao": "2026-07-18", "metaVendas": 50, "roasAlvo": 2.0, "impostoPct": 0.1225, "precoComum": 97.0, "precoVip": 497.0, "verba": 10000.0, "lancamentos": [{"nome": "Lançamento 03", "de": "2026-07-08", "ate": "2026-07-17", "evento": "2026-07-18"}], "dias": [{"date": "2026-07-08", "spend": 186.07, "impressions": 3656, "reach": 2537, "clicks": 68, "link_clicks": 41, "lpv": 24, "checkout": 3, "purchases": 1, "purchase_value": 494, "profile_visits": 20}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 106.03, "impressions": 1790, "reach": 1305, "link_clicks": 23, "lpv": 16, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 9}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PQ][02]_pg02", "spend": 31.44, "impressions": 835, "reach": 537, "link_clicks": 8, "lpv": 3, "checkout": 2, "purchases": 1, "purchase_value": 494, "profile_visits": 6}, {"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][VENDA][PAGO][CBO][PF][02]_pg02", "spend": 48.6, "impressions": 1031, "reach": 695, "link_clicks": 10, "lpv": 5, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 5}], "criativos": [{"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_001", "spend": 15.27, "impressions": 190, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBwj4ggb9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_006", "spend": 26.73, "impressions": 643, "link_clicks": 6, "lpv": 4, "purchases": 0, "video_view": 4, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagUZRxAmJ9/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_08", "spend": 61.18, "impressions": 1169, "link_clicks": 18, "lpv": 7, "purchases": 0, "video_view": 12, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiBt8JAzfn/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_NEW_CANVA_LEO_07", "spend": 0.39, "impressions": 27, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiPuUig4Op/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 17.86, "impressions": 345, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagUhytgxoc/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_MIX_ADS", "spend": 25.7, "impressions": 627, "link_clicks": 6, "lpv": 2, "purchases": 1, "video_view": 2, "thruplay": 1, "permalink": "https://www.instagram.com/p/DagU3imghdA/"}, {"date": "2026-07-08", "ad_name": "GV_CAPTACAO_FEED_IMG01_060", "spend": 3.77, "impressions": 111, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DagU0cWAZCP/"}], "vendas": [{"date": "2026-07-08", "valor": 244.03, "tipo": "Comum", "forma": "Pix"}]};
 const BENCH = {
   cpm:{dir:'down',ideal:22,crit:35,fmt:'money',label:'R$ 12–22'},
   ctr:{dir:'up',ideal:1.2,crit:0.7,fmt:'pct',label:'> 1,2%'},
@@ -104,6 +110,8 @@ function status(val,b){if(!b||b.dir==='gray')return 'gray';
 let chart=null;
 const datas=(DADOS.dias||[]).map(d=>d.date).sort();
 const minD=datas[0]||DADOS.imersao, maxD=datas[datas.length-1]||DADOS.imersao;
+const LS=DADOS.lancamentos||[];
+let curL=LS.length?LS[LS.length-1]:{nome:'Lançamento',de:minD,ate:DADOS.imersao,evento:DADOS.imersao};
 
 function within(d,de,ate){return d>=de&&d<=ate;}
 function sum(arr,k){return arr.reduce((a,x)=>a+(+x[k]||0),0);}
@@ -168,8 +176,9 @@ function render(){
     card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
   ].join('');
 
-  // Verba do lançamento (CUMULATIVA — todos os dias, independe do filtro)
-  const gastoAll=sum(DADOS.dias||[],'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
+  // Verba do lançamento (soma a janela do LANÇAMENTO selecionado — independe do filtro manual de dia)
+  const diasLanc=(DADOS.dias||[]).filter(d=>within(d.date,curL.de,curL.ate));
+  const gastoAll=sum(diasLanc,'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
   const impAll=gastoAll*DADOS.impostoPct;
   const pctVerba=DADOS.verba?investAll/DADOS.verba*100:0, saldo=DADOS.verba-investAll;
   const corVb=pctVerba>=90?'#dc2626':pctVerba>=70?'#f59e0b':'#16a34a';
@@ -261,19 +270,28 @@ function render(){
 
   document.getElementById('fresumo').textContent=`${dd.length} dia(s) · ${nV} venda(s)`;
 }
+function applyLanc(L){
+  curL=L;
+  const de=document.getElementById('de'),ate=document.getElementById('ate');
+  de.min=ate.min=L.de; de.max=ate.max=L.ate; de.value=L.de; ate.value=L.ate;
+  const ev=new Date(L.evento+'T00:00:00');
+  document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-new Date())/864e5));
+  document.getElementById('lancchip').textContent=L.nome;
+  render();
+}
 function setRange(k){
-  if(k==='hoje'){document.getElementById('de').value=maxD;document.getElementById('ate').value=maxD;}
-  else{document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;}
+  const de=document.getElementById('de'),ate=document.getElementById('ate');
+  if(k==='hoje'){const t=(maxD<curL.ate?maxD:curL.ate);de.value=t;ate.value=t;}
+  else{de.value=curL.de;ate.value=curL.ate;}
   render();
 }
 // init
 document.getElementById('sub').textContent=`Controle diário · Vendas HeroSpark × Investimento Meta (c/ imposto ${(DADOS.impostoPct*100).toFixed(2)}%) · atualizado ${DADOS.gerado}`;
-const hoje=new Date(), ev=new Date(DADOS.imersao+'T00:00:00');
-document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-hoje)/864e5));
-document.getElementById('de').min=document.getElementById('ate').min=minD;
-document.getElementById('de').max=document.getElementById('ate').max=maxD;
-document.getElementById('de').value=minD;document.getElementById('ate').value=maxD;
+const sel=document.getElementById('lancamento');
+sel.innerHTML=LS.map((L,i)=>`<option value="${i}">${L.nome} · ${L.de.slice(8)}/${L.de.slice(5,7)}–${L.ate.slice(8)}/${L.ate.slice(5,7)}</option>`).join('');
+sel.value=String(Math.max(0,LS.length-1));
+sel.addEventListener('change',()=>applyLanc(LS[+sel.value]));
 document.getElementById('de').addEventListener('change',render);
 document.getElementById('ate').addEventListener('change',render);
-render();
+applyLanc(curL);
 </script></body></html>
