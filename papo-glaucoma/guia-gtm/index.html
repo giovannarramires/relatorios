@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Instalação do GTM — App do Quiz Papo Glaucoma</title>
+<style>
+  :root {
+    --ink: #16241c;
+    --body: #2d3a33;
+    --muted: #6a7a71;
+    --ground: #ffffff;
+    --panel: #f4f8f4;
+    --panel-2: #eef4ee;
+    --border: #dde6de;
+    --green: #0a7d2c;
+    --green-deep: #075f22;
+    --green-bright: #008c27;
+    --amber-bg: #fdf7e6;
+    --amber-border: #eeddaa;
+    --amber-text: #856012;
+    --code-bg: #0e1a13;
+    --code-text: #dbe7dd;
+    --code-dim: #7c9c85;
+    --code-key: #86d0a0;
+    --code-str: #d9c98a;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--panel);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  /* ---- Header ---- */
+  header.doc {
+    background: var(--ground);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  header.doc .inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 34px 24px 32px;
+    border-top: 3px solid var(--green-bright);
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+  header.doc h1 {
+    font-size: 1.95rem;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  header.doc p.lede {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    max-width: 60ch;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-top: 22px;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--green-deep);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .chip b { color: var(--muted); font-weight: 500; }
+
+  /* ---- Context callout ---- */
+  .context {
+    background: var(--ground);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green-bright);
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin: 0 0 44px;
+  }
+  .context p { margin: 0; }
+  .context p + p { margin-top: 10px; }
+
+  /* ---- Section headings ---- */
+  h2.sec {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 0 0 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---- Steps ---- */
+  ol.steps { list-style: none; margin: 0 0 44px; padding: 0; counter-reset: step; }
+  ol.steps > li {
+    position: relative;
+    padding: 0 0 30px 56px;
+    counter-increment: step;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: -2px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--green-bright);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 50%;
+    font-variant-numeric: tabular-nums;
+  }
+  ol.steps > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 17px; top: 40px; bottom: 6px;
+    width: 2px;
+    background: var(--border);
+  }
+  ol.steps h3 {
+    margin: 4px 0 8px;
+    font-size: 1.12rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  ol.steps p { margin: 0 0 6px; }
+
+  /* ---- Code blocks ---- */
+  figure.code {
+    margin: 14px 0 4px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #0a140e;
+    background: var(--code-bg);
+  }
+  figure.code figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px 8px 14px;
+    background: #0a140e;
+    border-bottom: 1px solid #1c2b21;
+  }
+  .fname {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--code-dim);
+    letter-spacing: 0.02em;
+  }
+  button.copy {
+    font-family: var(--sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--code-text);
+    background: #1a2a20;
+    border: 1px solid #2a3d31;
+    border-radius: 5px;
+    padding: 4px 11px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  button.copy:hover { background: var(--green-bright); border-color: var(--green-bright); color: #fff; }
+  button.copy:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
+  button.copy.done { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
+
+  figure.code pre {
+    margin: 0;
+    padding: 16px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--code-text);
+    tab-size: 2;
+  }
+  figure.code code { font-family: inherit; white-space: pre; }
+  .tok-key { color: var(--code-key); }
+  .tok-str { color: var(--code-str); }
+  .tok-com { color: var(--code-dim); font-style: italic; }
+
+  /* ---- Divider label for alternatives ---- */
+  .altnote {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0 0 24px;
+  }
+  .alt {
+    background: var(--ground);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+  .alt h3 {
+    margin: 0 0 4px;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+  .alt .when { font-size: 0.86rem; color: var(--green-deep); margin: 0 0 12px; font-weight: 600; }
+
+  /* ---- Attention ---- */
+  .attn {
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 0 0 44px;
+  }
+  .attn .lbl {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--amber-text);
+    margin: 0 0 8px;
+  }
+  .attn p { margin: 0; color: #5f4a15; }
+
+  /* ---- Validation checklist ---- */
+  ul.check { list-style: none; margin: 0 0 20px; padding: 0; }
+  ul.check li {
+    position: relative;
+    padding: 10px 0 10px 34px;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.check li:last-child { border-bottom: 0; }
+  ul.check li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 15px;
+    width: 16px; height: 16px;
+    border: 2px solid var(--green-bright);
+    border-radius: 4px;
+  }
+
+  code.inline {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: var(--green-deep);
+    word-break: break-word;
+  }
+  a { color: var(--green-deep); }
+
+  /* ---- Footer ---- */
+  footer.doc {
+    margin-top: 20px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer.doc strong { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    header.doc h1 { font-size: 1.6rem; }
+    ol.steps > li { padding-left: 46px; }
+    ol.steps > li::before { width: 30px; height: 30px; font-size: 0.85rem; }
+    ol.steps > li:not(:last-child)::after { left: 14px; }
+  }
+</style>
+</head>
+<body>
+<header class="doc">
+  <div class="inner">
+    <p class="eyebrow">Gio Growth Digital · Documentação técnica</p>
+    <h1>Instalação do Google Tag Manager no app do quiz</h1>
+    <p class="lede">Guia para adicionar o container GTM ao aplicativo do quiz do Papo Glaucoma (<code class="inline">/estagio</code>). Toda a configuração de tags já está pronta e publicada — falta apenas este passo no código do app.</p>
+    <div class="meta">
+      <span class="chip"><b>Container:</b> GTM-MKRDH4M</span>
+      <span class="chip"><b>App:</b> papoglaucoma.com.br/estagio</span>
+      <span class="chip"><b>Tempo:</b> ~10 min + deploy</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="context">
+    <p><strong>O que é preciso fazer:</strong> inserir o script do Google Tag Manager (container <code class="inline">GTM-MKRDH4M</code>) no aplicativo do quiz. É uma edição única no layout raiz do app.</p>
+    <p><strong>Por que:</strong> o rastreamento de conversões (Meta Pixel e Google Analytics) já está montado e publicado no GTM, mas o app do quiz ainda não carrega o container. Sem esta instalação, nenhum evento é registrado.</p>
+  </div>
+
+  <h2 class="sec">Caminho recomendado — Next.js (App Router)</h2>
+  <p class="altnote">Usa o pacote oficial do Next.js, que injeta o script e o <code class="inline">&lt;noscript&gt;</code> automaticamente. É o caminho mais simples e seguro.</p>
+
+  <ol class="steps">
+    <li>
+      <h3>Instalar o pacote oficial</h3>
+      <p>No terminal, na raiz do projeto do app do quiz:</p>
+      <figure class="code">
+        <figcaption><span class="fname">terminal</span><button class="copy" type="button">Copiar</button></figcaption>
+        <pre><code>npm install @next/third-parties</code></pre>
+      </figure>
+    </li>
+    <li>
+      <h3>Adicionar o componente no layout raiz</h3>
+      <p>No arquivo <code class="inline">app/layout.tsx</code> (o layout que envolve todas as páginas do app), importe e renderize o componente com o ID do container:</p>
+      <figure class="code">
+        <figcaption><span class="fname">app/layout.tsx</span><button class="copy" type="button">Copiar</button></figcaption>
+<pre><code><span class="tok-key">import</span> { GoogleTagManager } <span class="tok-key">from</span> <span class="tok-str">'@next/third-parties/google'</span>
+
+<span class="tok-key">export default function</span> RootLayout({ children }) {
+  <span class="tok-key">return</span> (
+    &lt;html lang=<span class="tok-str">"pt-BR"</span>&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+      &lt;GoogleTagManager gtmId=<span class="tok-str">"GTM-MKRDH4M"</span> /&gt;
+    &lt;/html&gt;
+  )
+}</code></pre>
+      </figure>
+    </li>
+    <li>
+      <h3>Publicar (deploy)</h3>
+      <p>Fazer o deploy do app com a alteração, exatamente como em qualquer atualização de código do quiz. A partir do momento em que a nova versão estiver no ar, o container começa a carregar em <code class="inline">/estagio</code>.</p>
+    </li>
+    <li>
+      <h3>Confirmar que carregou</h3>
+      <p>Abrir <code class="inline">papoglaucoma.com.br/estagio/quiz</code>, abrir o Console do navegador (F12 → aba Console) e digitar:</p>
+      <figure class="code">
+        <figcaption><span class="fname">Console do navegador</span><button class="copy" type="button">Copiar</button></figcaption>
+        <pre><code>window.google_tag_manager</code></pre>
+      </figure>
+      <p style="margin-top:8px">Deve retornar um objeto contendo <code class="inline">GTM-MKRDH4M</code>. Se aparecer, a instalação está correta. ✅</p>
+    </li>
+  </ol>
+
+  <h2 class="sec">Alternativas (somente se não usar o pacote oficial)</h2>
+  <p class="altnote">Escolha <strong>uma</strong> das opções abaixo conforme a estrutura do projeto. Não é necessário aplicar mais de uma.</p>
+
+  <div class="alt">
+    <h3>Opção A — App Router, manualmente</h3>
+    <p class="when">Se o projeto usa a pasta <code class="inline">app/</code> e você prefere não instalar o pacote.</p>
+    <figure class="code">
+      <figcaption><span class="fname">app/layout.tsx</span><button class="copy" type="button">Copiar</button></figcaption>
+<pre><code><span class="tok-key">import</span> Script <span class="tok-key">from</span> <span class="tok-str">'next/script'</span>
+
+<span class="tok-key">export default function</span> RootLayout({ children }) {
+  <span class="tok-key">return</span> (
+    &lt;html lang=<span class="tok-str">"pt-BR"</span>&gt;
+      &lt;head&gt;
+        &lt;Script id=<span class="tok-str">"gtm-mkrdh4m"</span> strategy=<span class="tok-str">"afterInteractive"</span>&gt;
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MKRDH4M');`}
+        &lt;/Script&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;noscript&gt;
+          &lt;iframe src=<span class="tok-str">"https://www.googletagmanager.com/ns.html?id=GTM-MKRDH4M"</span>
+            height=<span class="tok-str">"0"</span> width=<span class="tok-str">"0"</span> style={{ display: <span class="tok-str">'none'</span>, visibility: <span class="tok-str">'hidden'</span> }} /&gt;
+        &lt;/noscript&gt;
+        {children}
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</code></pre>
+    </figure>
+  </div>
+
+  <div class="alt">
+    <h3>Opção B — Pages Router</h3>
+    <p class="when">Se o projeto usa a pasta <code class="inline">pages/</code> (estrutura mais antiga).</p>
+    <figure class="code">
+      <figcaption><span class="fname">pages/_document.tsx</span><button class="copy" type="button">Copiar</button></figcaption>
+<pre><code><span class="tok-key">import</span> { Html, Head, Main, NextScript } <span class="tok-key">from</span> <span class="tok-str">'next/document'</span>
+
+<span class="tok-key">export default function</span> Document() {
+  <span class="tok-key">return</span> (
+    &lt;Html lang=<span class="tok-str">"pt-BR"</span>&gt;
+      &lt;Head&gt;
+        &lt;script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MKRDH4M');` }} /&gt;
+      &lt;/Head&gt;
+      &lt;body&gt;
+        &lt;noscript&gt;&lt;iframe src=<span class="tok-str">"https://www.googletagmanager.com/ns.html?id=GTM-MKRDH4M"</span> height=<span class="tok-str">"0"</span> width=<span class="tok-str">"0"</span> style={{ display: <span class="tok-str">'none'</span> }} /&gt;&lt;/noscript&gt;
+        &lt;Main /&gt;
+        &lt;NextScript /&gt;
+      &lt;/body&gt;
+    &lt;/Html&gt;
+  )
+}</code></pre>
+    </figure>
+  </div>
+
+  <div class="attn">
+    <p class="lbl">⚠ Ponto de atenção</p>
+    <p>O quiz em <code class="inline">/estagio</code> parece ser um <strong>aplicativo separado</strong> do site principal. O site principal (a home) já tem o GTM instalado, mas o app do quiz não o herda automaticamente. Por isso, o código acima precisa ser inserido no <strong>layout raiz do próprio app do quiz</strong> — não no site institucional. Use sempre o ID <code class="inline">GTM-MKRDH4M</code>.</p>
+  </div>
+
+  <h2 class="sec">Checklist de validação</h2>
+  <ul class="check">
+    <li>O código foi adicionado ao <strong>layout raiz do app do quiz</strong> (não ao site principal).</li>
+    <li>O ID usado é exatamente <code class="inline">GTM-MKRDH4M</code>.</li>
+    <li>O deploy foi concluído e a nova versão está no ar.</li>
+    <li>No console de <code class="inline">/estagio/quiz</code>, <code class="inline">window.google_tag_manager</code> retorna um objeto com <code class="inline">GTM-MKRDH4M</code>.</li>
+    <li>Avisar a equipe da Gio Growth Digital para validar os eventos no modo de teste do GTM.</li>
+  </ul>
+
+  <footer class="doc">
+    <p>Assim que a instalação estiver no ar, a <strong>Gio Growth Digital</strong> roda o modo de pré-visualização (Tag Assistant) do GTM e confirma que os eventos de conversão do quiz — Lead, etapas e clique no WhatsApp — estão disparando corretamente. Nenhuma outra ação de rastreamento é necessária do lado do desenvolvimento.</p>
+    <p style="margin-top:14px">Dúvidas técnicas: <a href="mailto:giovannaramires@giogrowthdigital.com.br">giovannaramires@giogrowthdigital.com.br</a> · Documento gerado em 15/07/2026.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var fig = btn.closest('figure.code');
+      var code = fig ? fig.querySelector('code') : null;
+      if (!code) return;
+      var text = code.textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copiado ✓';
+        btn.classList.add('done');
+        setTimeout(function () {
+          btn.textContent = original;
+          btn.classList.remove('done');
+        }, 1800);
+      }).catch(function () {
+        btn.textContent = 'Erro ao copiar';
+        setTimeout(function () { btn.textContent = 'Copiar'; }, 1800);
+      });
+    });
+  });
+</script>
+</body>
+</html>
