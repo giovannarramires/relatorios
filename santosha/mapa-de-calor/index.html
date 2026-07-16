@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha — Mapa de Calor & Fricção</title>
+<style>
+  :root{
+    --bege:#F5EFE4; --bege2:#EFE7D8; --creme:#FBF8F1;
+    --terra:#B5623A; --terra-esc:#8F4A2B; --ocre:#D9A441;
+    --musgo:#59684A; --musgo-cl:#7C8A63; --marrom:#4A3B2E;
+    --verde:#5E8A5A; --amarelo:#E4B23C; --vermelho:#C0553C;
+    --linha:#E2D8C6; --sombra:0 6px 24px rgba(74,59,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bege);color:var(--marrom);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px 80px}
+  .mono{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-esc) 60%,var(--marrom) 100%);
+    color:var(--creme);padding:52px 22px 46px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 82% -10%,rgba(217,164,65,.30),transparent 55%);pointer-events:none}
+  .hero .kicker{letter-spacing:.32em;font-size:.72rem;text-transform:uppercase;opacity:.85;font-weight:600}
+  .hero h1{font-size:2.35rem;margin:12px 0 8px;font-weight:800;letter-spacing:-.5px}
+  .hero p{opacity:.92;font-size:1.02rem;max-width:660px;margin:0 auto}
+  .hero .data{margin-top:16px;font-size:.8rem;opacity:.78;letter-spacing:.04em}
+
+  /* SECTIONS */
+  section{margin-top:46px}
+  h2{font-size:1.5rem;color:var(--terra-esc);font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--musgo);color:#fff;width:30px;height:30px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex:0 0 auto}
+  .sub{color:var(--musgo);font-size:.95rem;margin-bottom:20px;margin-left:40px}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;box-shadow:var(--sombra);border-top:4px solid var(--terra)}
+  .kpi.warn{border-top-color:var(--ocre)} .kpi.bad{border-top-color:var(--vermelho)} .kpi.ok{border-top-color:var(--verde)}
+  .kpi .v{font-size:1.85rem;font-weight:800;color:var(--terra-esc);line-height:1}
+  .kpi.warn .v{color:#a5761f} .kpi.bad .v{color:var(--vermelho)} .kpi.ok .v{color:var(--verde)}
+  .kpi .v small{font-size:1rem;font-weight:700}
+  .kpi .l{font-size:.8rem;color:#6b5d4d;margin-top:6px;line-height:1.35}
+  .kpi .t{display:inline-block;margin-top:9px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:20px}
+  .t-g{background:#DDECD3;color:#33632c} .t-y{background:#F7E7C0;color:#8a6410} .t-r{background:#F1D6CC;color:#a5401f}
+
+  .lead{background:var(--creme);border:1px solid var(--linha);border-left:5px solid var(--terra);border-radius:12px;
+    padding:16px 20px;margin-top:20px;box-shadow:var(--sombra);font-size:.95rem;color:#5c4e3f}
+  .lead b{color:var(--marrom)}
+
+  /* SCROLL DEPTH */
+  .depthwrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .panel{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:20px 22px;box-shadow:var(--sombra)}
+  .panel h3{font-size:1.05rem;color:var(--marrom);margin-bottom:2px}
+  .panel .cap{font-size:.78rem;color:var(--musgo);margin-bottom:16px}
+  .drow{display:grid;grid-template-columns:38px 1fr 52px;align-items:center;gap:9px;margin-bottom:7px}
+  .drow .p{font-size:.78rem;color:#6b5d4d;text-align:right}
+  .drow .val{font-size:.78rem;font-weight:800;text-align:right;color:var(--marrom)}
+  .track{height:16px;background:var(--bege2);border-radius:5px;overflow:hidden}
+  .track>span{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--ocre),var(--terra))}
+  .track>span.low{background:linear-gradient(90deg,#D9B98A,#C08A5A)}
+  .foldline{position:relative;margin:11px 0 9px;padding-left:47px;font-size:.66rem;font-weight:800;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--vermelho)}
+  .foldline::before{content:"";position:absolute;left:47px;right:0;top:50%;border-top:2px dashed rgba(192,85,60,.5);z-index:0}
+  .foldline span{position:relative;background:var(--creme);padding-right:9px}
+  .panel .note{font-size:.78rem;color:#6b5d4d;margin-top:12px}
+
+  /* CLIQUES */
+  .clicks{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cl{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;box-shadow:var(--sombra)}
+  .cl h3{font-size:1rem;color:var(--terra-esc);margin-bottom:12px}
+  .cbar{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .cbar .nm{font-size:.82rem;width:150px;flex:0 0 auto;color:var(--marrom)}
+  .cbar .bt{flex:1;height:18px;background:var(--bege2);border-radius:5px;overflow:hidden}
+  .cbar .bt>span{display:block;height:100%;background:linear-gradient(90deg,var(--ocre),var(--terra));border-radius:5px}
+  .cbar .pc{font-size:.8rem;font-weight:800;width:52px;text-align:right;color:var(--terra-esc)}
+
+  /* FRICÇÕES */
+  .find{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;margin-bottom:13px;
+    box-shadow:var(--sombra);border-left:5px solid var(--linha);display:flex;gap:16px;align-items:flex-start}
+  .find.crit{border-left-color:var(--vermelho)} .find.warn{border-left-color:var(--ocre)} .find.ok{border-left-color:var(--verde)}
+  .find .sev{flex:0 0 auto;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:5px 10px;border-radius:8px;margin-top:2px}
+  .find.crit .sev{background:var(--vermelho);color:#fff} .find.warn .sev{background:var(--ocre);color:#4a3410} .find.ok .sev{background:var(--verde);color:#fff}
+  .find h4{font-size:1.02rem;color:var(--marrom);margin-bottom:5px}
+  .find p{font-size:.9rem;color:#5c4e3f}
+  .find .ev{font-size:.76rem;color:var(--musgo);margin-top:8px}
+  .find .ev b{color:var(--marrom)}
+
+  /* VALIDAÇÃO TÉCNICA */
+  .tech{background:linear-gradient(135deg,var(--musgo),#485539);color:#F3F0E4;border-radius:16px;padding:24px 26px;box-shadow:var(--sombra)}
+  .tech h2{color:#fff} .tech h2 .n{background:#fff;color:var(--musgo)}
+  .tech .sub{color:rgba(243,240,228,.8);margin-left:40px}
+  .tech .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .tech .ti{background:rgba(255,255,255,.08);border-radius:11px;padding:14px 16px;border-left:4px solid var(--ocre)}
+  .tech .ti.no{border-left-color:#d98b6a}
+  .tech .ti .h{font-weight:800;font-size:.92rem;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .tech .ti .h .mk{font-size:.9rem}
+  .tech .ti p{font-size:.83rem;opacity:.92}
+  .tech .ti code{background:rgba(0,0,0,.22);padding:1px 6px;border-radius:5px;font-size:.78rem}
+
+  /* PLANO */
+  .phase{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--musgo);
+    margin:26px 0 14px 2px;display:flex;align-items:center;gap:10px}
+  .phase::after{content:"";flex:1;height:1px;background:var(--linha)}
+  .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .step{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:18px 17px 16px;box-shadow:var(--sombra);position:relative}
+  .step .num{position:absolute;top:-12px;left:16px;background:var(--terra);color:#fff;width:30px;height:30px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;box-shadow:var(--sombra)}
+  .step h4{margin:8px 0 6px;color:var(--terra-esc);font-size:1rem}
+  .step p{font-size:.85rem;color:#6b5d4d}
+  .step .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+  .step .b{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:20px}
+  .b-imp{background:#EDD9D0;color:#8f4a2b} .b-esf{background:#DCE6D2;color:#3f5233}
+
+  /* METAS */
+  .metas{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .meta{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;box-shadow:var(--sombra);text-align:center}
+  .meta .mv{font-size:1.5rem;font-weight:800;color:var(--terra-esc)}
+  .meta .ml{font-size:.78rem;color:#6b5d4d;margin-top:5px}
+
+  .callout{background:rgba(94,138,90,.12);border-left:4px solid var(--verde);border-radius:10px;padding:14px 18px;
+    margin-top:22px;font-size:.9rem;color:#43563c}
+  .callout b{color:var(--musgo)}
+
+  footer{margin-top:54px;text-align:center;color:var(--musgo);font-size:.8rem;border-top:1px solid var(--linha);padding-top:20px}
+
+  @media(max-width:760px){
+    .kpis{grid-template-columns:repeat(2,1fr)} .metas{grid-template-columns:repeat(2,1fr)}
+    .depthwrap,.clicks,.tech .tgrid{grid-template-columns:1fr}
+    .hero h1{font-size:1.7rem} .sub,.tech .sub{margin-left:0} h2{font-size:1.25rem}
+    .find{flex-direction:column;gap:8px} .cbar .nm{width:110px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">Santosha por aí · Comportamento &amp; Conversão</div>
+  <h1>Mapa de Calor &amp; Fricção</h1>
+  <p>Onde o funil perde a venda antes do carrinho — diagnóstico a partir do Microsoft Clarity (mapas de clique e rolagem + gravações) e validação técnica direta no site.</p>
+  <div class="data">16 de julho de 2026 · janela de 30 dias · 5.401 sessões · ~90% mobile · santoshaporai.com.br</div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. PANORAMA -->
+  <section>
+    <h2><span class="n">1</span>Panorama</h2>
+    <div class="sub">Os números que resumem o comportamento — e por que acendem o alerta.</div>
+    <div class="kpis">
+      <div class="kpi warn"><div class="v mono">1,70</div><div class="l">Páginas por sessão</div><span class="t t-y">navegação rasa</span></div>
+      <div class="kpi bad"><div class="v mono">39,9<small>%</small></div><div class="l">Profundidade de rolagem média</div><span class="t t-r">para antes da dobra</span></div>
+      <div class="kpi warn"><div class="v mono">31<small>s</small></div><div class="l">Tempo ativo por sessão</div><span class="t t-y">de 1,3 min total</span></div>
+      <div class="kpi warn"><div class="v mono">14,2<small>%</small></div><div class="l">Retornos rápidos (quick-back)</div><span class="t t-y">decepção na página</span></div>
+      <div class="kpi bad"><div class="v mono">~18<small>%</small></div><div class="l">Produto → Adicionar à sacola</div><span class="t t-r">958 → 176 sessões</span></div>
+      <div class="kpi warn"><div class="v mono">3,17<small>%</small></div><div class="l">Cliques mortos (dead clicks)</div><span class="t t-y">171 sessões</span></div>
+      <div class="kpi warn"><div class="v mono">2,8<small>s</small></div><div class="l">LCP no mobile</div><span class="t t-y">precisa melhorar</span></div>
+      <div class="kpi ok"><div class="v mono">0<small>%</small></div><div class="l">Cliques de raiva (rage)</div><span class="t t-g">sem revolta aguda</span></div>
+    </div>
+    <div class="lead">
+      A leitura é consistente: <b>o tráfego chega, mas não desce a página nem avança no funil.</b> Metade das pessoas sai antes de rolar 25% da home, e a queda é ainda mais brusca na página de produto — bem onde mora a decisão de compra. Sem revolta explícita (rage ≈ 0), o padrão é de <b>fricção silenciosa</b>: overlays cobrindo conteúdo, blocos que parecem tocáveis mas não respondem, e informação de decisão jogada para baixo da linha de abandono.
+    </div>
+  </section>
+
+  <!-- 2. ROLAGEM -->
+  <section>
+    <h2><span class="n">2</span>Profundidade de rolagem · mobile</h2>
+    <div class="sub">Quanto da página cada pessoa realmente vê. A queda acontece no primeiro terço.</div>
+    <div class="depthwrap">
+      <div class="panel">
+        <h3>Home</h3>
+        <div class="cap">% de visitantes que alcança cada faixa da página</div>
+        <div class="drow"><span class="p mono">10%</span><div class="track"><span style="width:99.6%"></span></div><span class="val mono">99,6%</span></div>
+        <div class="foldline"><span>linha de abandono</span></div>
+        <div class="drow"><span class="p mono">15%</span><div class="track"><span class="low" style="width:61%"></span></div><span class="val mono">61,1%</span></div>
+        <div class="drow"><span class="p mono">25%</span><div class="track"><span class="low" style="width:50.1%"></span></div><span class="val mono">50,1%</span></div>
+        <div class="drow"><span class="p mono">40%</span><div class="track"><span class="low" style="width:24.3%"></span></div><span class="val mono">24,3%</span></div>
+        <div class="note">Entre 10% e 15% a home perde <b>~39% da audiência de uma vez</b> — a faixa ocupada pelo banner de cookies e pelo hero.</div>
+      </div>
+      <div class="panel">
+        <h3>Produto — Pôster Ashtanga Yoga</h3>
+        <div class="cap">% de visitantes que alcança cada faixa da página</div>
+        <div class="drow"><span class="p mono">10%</span><div class="track"><span style="width:98.2%"></span></div><span class="val mono">98,2%</span></div>
+        <div class="foldline"><span>linha de abandono</span></div>
+        <div class="drow"><span class="p mono">15%</span><div class="track"><span class="low" style="width:53.2%"></span></div><span class="val mono">53,2%</span></div>
+        <div class="drow"><span class="p mono">20%</span><div class="track"><span class="low" style="width:28.7%"></span></div><span class="val mono">28,7%</span></div>
+        <div class="drow"><span class="p mono">40%</span><div class="track"><span class="low" style="width:13.4%"></span></div><span class="val mono">13,4%</span></div>
+        <div class="note">Só <b>28,7% rolam além de 20%</b>. A página tem <b>5.912px</b> de altura; preço extra, avaliações e provas de confiança ficam num terreno que quase ninguém alcança.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CLIQUES -->
+  <section>
+    <h2><span class="n">3</span>Onde o público toca</h2>
+    <div class="sub">O ranking de cliques mostra intenção real — e um padrão de busca por interação.</div>
+    <div class="clicks">
+      <div class="cl">
+        <h3>Home</h3>
+        <div class="cbar"><span class="nm">Abrir menu ☰</span><div class="bt"><span style="width:100%"></span></div><span class="pc mono">11,4%</span></div>
+        <div class="cbar"><span class="nm">Botão de coleção</span><div class="bt"><span style="width:56%"></span></div><span class="pc mono">6,4%</span></div>
+        <div class="cbar"><span class="nm">Mats (menu)</span><div class="bt"><span style="width:28%"></span></div><span class="pc mono">3,2%</span></div>
+        <div class="note" style="font-size:.78rem;color:#6b5d4d;margin-top:10px">Menu e busca lideram: as pessoas procuram caminho em vez de fluir pela vitrine.</div>
+      </div>
+      <div class="cl">
+        <h3>Produto</h3>
+        <div class="cbar"><span class="nm">Adicionar à sacola</span><div class="bt"><span style="width:100%"></span></div><span class="pc mono">16,3%</span></div>
+        <div class="cbar"><span class="nm">Imagem do produto</span><div class="bt"><span style="width:50%"></span></div><span class="pc mono">8,2%</span></div>
+        <div class="cbar"><span class="nm">Abrir menu ☰</span><div class="bt"><span style="width:18%"></span></div><span class="pc mono">3,0%</span></div>
+        <div class="note" style="font-size:.78rem;color:#6b5d4d;margin-top:10px">O CTA é o elemento nº 1 — a intenção existe. A imagem em 2º: querem ampliá-la e ver mais fotos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FRICÇÕES -->
+  <section>
+    <h2><span class="n">4</span>Pontos de fricção</h2>
+    <div class="sub">O que está entre o clique e a compra, ordenado por gravidade.</div>
+
+    <div class="find crit"><span class="sev">Crítico</span><div>
+      <h4>Overlays empilhados cobrem conteúdo e CTA no mobile</h4>
+      <p>O banner de <b>cookies</b> é fixo e ocupa ~40% da tela do celular, sobrepondo os cards da home e, na página de produto, o próprio <b>“Adicionar à sacola”</b>. Somam-se o <b>widget de chat/contato</b> (em 72%+ das sessões) e um pop-up <b>“Desconto pra você”</b> que aparece justamente sobre o rodapé de compra.</p>
+      <div class="ev">Evidência: <b>heatmap Home + Produto</b> · gravações mobile mostram o pop-up sobre o CTA no momento da decisão.</div>
+    </div></div>
+
+    <div class="find crit"><span class="sev">Crítico</span><div>
+      <h4>Informação de decisão abaixo da linha de abandono</h4>
+      <p>Apenas <b>28,7% rolam além de 20%</b> da página de produto. <b>Pix e parcelamento não aparecem em nenhum ponto da página</b> (confirmado no código), e as avaliações ficam no fim de uma página de 5.912px. Quem decide na primeira tela não vê prova social nem condição de pagamento.</p>
+      <div class="ev">Evidência: <b>curva de rolagem</b> · inspeção do DOM (<code style="background:#efe3d0;padding:1px 5px;border-radius:4px">mencionaPix:false</code>).</div>
+    </div></div>
+
+    <div class="find warn"><span class="sev">Atenção</span><div>
+      <h4>Blocos que parecem tocáveis, mas não respondem</h4>
+      <p>Descrição, características e medidas são <b>texto estático, sem acordeões</b> (<code style="background:#efe3d0;padding:1px 5px;border-radius:4px">details: 0</code> no DOM). Nas gravações, usuários tocam nesses blocos esperando expandir — e nada acontece. É a origem dos cliques mortos: interação <b>ausente</b>, não quebrada.</p>
+      <div class="ev">Evidência: <b>3,17% de dead clicks (171 sessões)</b> · gravações mobile · validação técnica no site.</div>
+    </div></div>
+
+    <div class="find warn"><span class="sev">Atenção</span><div>
+      <h4>Navegação rasa e dependência do menu</h4>
+      <p><b>1,70 página por sessão</b> e o menu-hambúrguer como clique nº 1 (11,4%) indicam que falta descoberta na própria página: as pessoas recorrem ao menu/busca em vez de fluir por vitrines e recomendações.</p>
+      <div class="ev">Evidência: <b>páginas/sessão 1,70</b> · heatmap da Home.</div>
+    </div></div>
+
+    <div class="find warn"><span class="sev">Atenção</span><div>
+      <h4>Indecisão entre variações + peso da página</h4>
+      <p>A IA das gravações observou usuários <b>alternando repetidamente entre variações</b> (Matosha, MATravel) antes de decidir — falta um guia claro do que muda. Some-se o <b>LCP de 2,8s</b> no mobile, que contribui para a saída precoce por impaciência.</p>
+      <div class="ev">Evidência: <b>resumo de IA das gravações</b> · Desempenho Clarity 80/100 · LCP mobile 2,8s.</div>
+    </div></div>
+
+    <div class="find ok"><span class="sev">Saudável</span><div>
+      <h4>A intenção de compra existe</h4>
+      <p><b>“Adicionar à sacola” é o clique nº 1</b> na página de produto (16,3%) e permanece fixo no rodapé — bom. Há adições reais (Matosha, Cartasflow) e rage clicks ≈ 0. O problema não é falta de desejo; é a fricção que atravessa o caminho até a sacola.</p>
+      <div class="ev">Evidência: <b>heatmap de clique do produto</b> · CTA sticky confirmado no site · rage 0%.</div>
+    </div></div>
+  </section>
+
+  <!-- 5. VALIDAÇÃO TÉCNICA -->
+  <section>
+    <div class="tech">
+      <h2><span class="n">5</span>Validação técnica no site</h2>
+      <div class="sub">Abrimos a página de produto ao vivo, lemos console, rede e DOM. O que se confirma — e o que se descarta.</div>
+      <div class="tgrid">
+        <div class="ti no">
+          <div class="h"><span class="mk">✕</span> Não há erro de JavaScript quebrando o site</div>
+          <p>Todos os assets do tema e do Shopify carregam <code>200 OK</code>. Os erros de console eram de uma <b>extensão do navegador do visitante</b> (excalidraw), não do site. O “erro JS” apontado pela IA do Clarity é <b>impreciso</b>.</p>
+        </div>
+        <div class="ti">
+          <div class="h"><span class="mk">✓</span> Descrição sem acordeões</div>
+          <p><code>details: 0</code> no DOM. Os dead clicks vêm de <b>interatividade ausente</b>, não de bug — e por isso são fáceis de resolver.</p>
+        </div>
+        <div class="ti">
+          <div class="h"><span class="mk">✓</span> Pix e parcelamento invisíveis</div>
+          <p><code>mencionaPix:false</code>, <code>mencionaParcel:false</code> em toda a página de produto. A condição de pagamento só aparece no checkout — tarde demais.</p>
+        </div>
+        <div class="ti">
+          <div class="h"><span class="mk">✓</span> Página longa, prova social no fim</div>
+          <p><b>5.912px</b> de altura, com o widget de avaliações (judge.me) lá embaixo. Com 40% de scroll ≈ 2.365px, quase ninguém chega às reviews.</p>
+        </div>
+        <div class="ti">
+          <div class="h"><span class="mk">✓</span> Frete grátis já ajustado</div>
+          <p>A barra já exibe <b>“Frete Grátis acima de R$350”</b> (era R$650). O heatmap histórico ainda mostra R$650 por ser janela de 30 dias.</p>
+        </div>
+        <div class="ti">
+          <div class="h"><span class="mk">⚠</span> Beacons de analytics em 503</div>
+          <p>GA4 (<code>G-5JGTZSRW5Y</code>) e Merchant Center retornaram <code>503</code> no carregamento. Pode ser transitório, mas merece monitorar — <b>503 recorrente = subnotificação de eventos</b>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PLANO -->
+  <section>
+    <h2><span class="n">6</span>Plano de ação</h2>
+    <div class="sub">Do maior atrito removível ao ajuste fino. Impacto × esforço em cada card.</div>
+
+    <div class="phase">Prioridade 1 · agora</div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Desafogar o rodapé de compra no mobile</h4>
+        <p>Cookies, chat e pop-up de desconto não podem coexistir sobre o “Adicionar à sacola”. Reduzir cookies a uma faixa fina e atrasar chat/pop-up para depois de scroll ou X segundos.</p>
+        <div class="meta"><span class="b b-imp">Impacto alto</span><span class="b b-esf">Esforço baixo</span></div></div>
+      <div class="step"><div class="num">2</div><h4>Subir preço, pagamento e prova social</h4>
+        <p>Trazer Pix/parcelamento, avaliações e frete para os primeiros 20% da página de produto. Encurtar a galeria de imagem que empurra tudo para baixo.</p>
+        <div class="meta"><span class="b b-imp">Impacto alto</span><span class="b b-esf">Esforço médio</span></div></div>
+      <div class="step"><div class="num">3</div><h4>Tornar descrição e medidas tocáveis</h4>
+        <p>Converter descrição, características e “Mais infos” em acordeões/abas. Elimina os dead clicks e melhora a leitura no mobile — correção simples, alto retorno.</p>
+        <div class="meta"><span class="b b-imp">Impacto médio</span><span class="b b-esf">Esforço baixo</span></div></div>
+    </div>
+
+    <div class="phase">Prioridade 2 · próximas semanas</div>
+    <div class="steps">
+      <div class="step"><div class="num">4</div><h4>Guia de escolha entre variações</h4>
+        <p>Resolver na página a dúvida “qual modelo?” — tabela de diferenças, guia de tamanho de mat/pôster. Reduz a hesitação vista nas gravações.</p>
+        <div class="meta"><span class="b b-imp">Impacto médio</span><span class="b b-esf">Esforço médio</span></div></div>
+      <div class="step"><div class="num">5</div><h4>Otimizar LCP mobile (&lt; 2,5s)</h4>
+        <p>Comprimir/lazy-load da imagem hero e priorizar o conteúdo acima da dobra. Reduz o abandono por impaciência no topo.</p>
+        <div class="meta"><span class="b b-imp">Impacto médio</span><span class="b b-esf">Esforço médio</span></div></div>
+      <div class="step"><div class="num">6</div><h4>Investigar os 503 de analytics</h4>
+        <p>Confirmar se o 503 de GA4/Merchant Center é recorrente. Se for, corrige subnotificação de eventos e melhora a fidelidade do rastreamento.</p>
+        <div class="meta"><span class="b b-imp">Impacto médio</span><span class="b b-esf">Esforço baixo</span></div></div>
+    </div>
+
+    <div class="phase">Prioridade 3 · evolução</div>
+    <div class="steps">
+      <div class="step"><div class="num">7</div><h4>Enriquecer descoberta e cross-sell</h4>
+        <p>Vitrines temáticas, “combina com” e recomendações na home e no produto reduzem a dependência do menu e elevam páginas/sessão acima de 1,70.</p>
+        <div class="meta"><span class="b b-imp">Impacto médio</span><span class="b b-esf">Esforço alto</span></div></div>
+    </div>
+
+    <div class="callout">
+      <b>Já em andamento:</b> o frete grátis mínimo caiu de R$650 para <b>R$350</b> (16/07) — confirmado ao vivo no site. Vale revalidar a curva de rolagem e a taxa de add-to-cart em ~2 semanas para medir o efeito isolado dessa mudança.
+    </div>
+  </section>
+
+  <!-- 7. METAS -->
+  <section>
+    <h2><span class="n">7</span>Como medir o progresso</h2>
+    <div class="sub">Métricas-alvo para a próxima leitura do Clarity.</div>
+    <div class="metas">
+      <div class="meta"><div class="mv mono">↑ 20%</div><div class="ml">Rolagem do produto na faixa 20% (hoje 28,7%)</div></div>
+      <div class="meta"><div class="mv mono">↓ 1,5%</div><div class="ml">Cliques mortos (hoje 3,17%)</div></div>
+      <div class="meta"><div class="mv mono">↑ 18%</div><div class="ml">Taxa Produto → Adicionar à sacola</div></div>
+      <div class="meta"><div class="mv mono">↓ 14%</div><div class="ml">Retornos rápidos / quick-back</div></div>
+    </div>
+  </section>
+
+  <footer>
+    Diagnóstico a partir do Microsoft Clarity (30 dias, mobile priorizado) + validação técnica ao vivo no site · Santosha por aí · Gio Growth Digital · 16 de julho de 2026
+  </footer>
+
+</div>
+</body>
+</html>
