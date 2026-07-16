@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha — Análise Competitiva</title>
+<style>
+  :root{
+    --bege:#F5EFE4; --bege2:#EFE7D8; --creme:#FBF8F1;
+    --terra:#B5623A; --terra-esc:#8F4A2B; --ocre:#D9A441;
+    --musgo:#59684A; --musgo-cl:#7C8A63; --marrom:#4A3B2E;
+    --verde:#5E8A5A; --amarelo:#E4B23C; --vermelho:#C0553C;
+    --linha:#E2D8C6; --sombra:0 6px 24px rgba(74,59,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bege);color:var(--marrom);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px 80px}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-esc) 60%,var(--marrom) 100%);
+    color:var(--creme);padding:52px 22px 46px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% -10%,rgba(217,164,65,.28),transparent 55%);pointer-events:none}
+  .hero .kicker{letter-spacing:.32em;font-size:.72rem;text-transform:uppercase;opacity:.85;font-weight:600}
+  .hero h1{font-size:2.35rem;margin:12px 0 8px;font-weight:800;letter-spacing:-.5px}
+  .hero p{opacity:.9;font-size:1.02rem;max-width:640px;margin:0 auto}
+  .hero .data{margin-top:16px;font-size:.8rem;opacity:.75;letter-spacing:.04em}
+
+  /* SECTIONS */
+  section{margin-top:46px}
+  h2{font-size:1.5rem;color:var(--terra-esc);font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--musgo);color:#fff;width:30px;height:30px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex:0 0 auto}
+  .sub{color:var(--musgo);font-size:.95rem;margin-bottom:20px;margin-left:40px}
+
+  /* CARDS concorrentes */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px}
+  .card{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:18px 18px 16px;
+    box-shadow:var(--sombra);position:relative}
+  .card.us{border:2px solid var(--terra);background:linear-gradient(160deg,#fff,#FBF4EA)}
+  .card h3{font-size:1.12rem;color:var(--marrom);margin-bottom:2px}
+  .card .ig{font-size:.82rem;color:var(--musgo);font-weight:700}
+  .card .tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    padding:3px 9px;border-radius:20px;margin-top:9px;margin-bottom:8px}
+  .card p{font-size:.86rem;color:#6b5d4d}
+  .t-lider{background:#F3E2C4;color:#8a6a1f}
+  .t-reten{background:#DCE6D2;color:#3f5233}
+  .t-ltv{background:#E7D9CF;color:#7a4a2c}
+  .t-pag{background:#D9E4EE;color:#2f5875}
+  .t-prod{background:#EDD9D0;color:#8f4a2b}
+  .t-nicho{background:#E6E0D0;color:#6a5a2e}
+  .t-us{background:var(--terra);color:#fff}
+  .bars{margin-top:10px;height:7px;background:var(--bege2);border-radius:6px;overflow:hidden}
+  .bars>span{display:block;height:100%;background:linear-gradient(90deg,var(--ocre),var(--terra))}
+
+  /* MATRIZ */
+  .scroll{overflow-x:auto;border-radius:16px;box-shadow:var(--sombra);border:1px solid var(--linha)}
+  table{border-collapse:collapse;width:100%;min-width:820px;background:var(--creme);font-size:.83rem}
+  thead th{background:var(--marrom);color:var(--creme);padding:13px 8px;text-align:center;font-weight:700;
+    position:sticky;top:0;font-size:.8rem}
+  thead th:first-child{text-align:left;padding-left:16px;min-width:190px}
+  thead th.us{background:var(--terra)}
+  tbody td{padding:11px 6px;text-align:center;border-bottom:1px solid var(--linha);vertical-align:middle}
+  tbody td:first-child{text-align:left;padding-left:16px;font-weight:700;color:var(--marrom);font-size:.82rem}
+  tbody tr:nth-child(even){background:#FBF6EC}
+  td.us{background:rgba(181,98,58,.07)}
+  .cell{display:inline-block;min-width:34px;padding:4px 7px;border-radius:8px;font-weight:800;font-size:.78rem;line-height:1.25}
+  .g{background:#DDECD3;color:#33632c}   /* forte */
+  .y{background:#F7E7C0;color:#8a6410}   /* parcial */
+  .r{background:#F1D6CC;color:#a5401f}   /* ausente/fraco */
+  .star{font-size:.7rem}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 0 40px;font-size:.8rem;color:#6b5d4d}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+  /* "faz melhor" blocos */
+  .win{background:var(--creme);border:1px solid var(--linha);border-left:5px solid var(--musgo);
+    border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--sombra)}
+  .win h4{color:var(--terra-esc);font-size:1.05rem;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .win h4 .ig{font-size:.75rem;background:var(--bege2);color:var(--musgo);padding:2px 9px;border-radius:20px;font-weight:700}
+  .win ul{list-style:none;margin-left:2px}
+  .win li{padding:4px 0 4px 22px;position:relative;font-size:.9rem;color:#5c4e3f}
+  .win li::before{content:"▲";position:absolute;left:0;color:var(--ocre);font-size:.7rem;top:7px}
+  .win li b{color:var(--marrom)}
+
+  /* Defesa */
+  .defesa{background:linear-gradient(135deg,var(--musgo),#485539);color:#F3F0E4;border-radius:16px;padding:24px 26px;box-shadow:var(--sombra)}
+  .defesa h2{color:#fff}
+  .defesa h2 .n{background:#fff;color:var(--musgo)}
+  .defesa ul{list-style:none;margin-top:10px}
+  .defesa li{padding:7px 0 7px 26px;position:relative}
+  .defesa li::before{content:"✦";position:absolute;left:0;color:var(--ocre)}
+  .defesa b{color:#fff}
+
+  /* PLANO */
+  .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px}
+  .step{background:var(--creme);border:1px solid var(--linha);border-radius:14px;padding:16px 17px;box-shadow:var(--sombra);position:relative}
+  .step .num{position:absolute;top:-12px;left:16px;background:var(--terra);color:#fff;width:30px;height:30px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;box-shadow:var(--sombra)}
+  .step h4{margin:10px 0 6px;color:var(--terra-esc);font-size:1rem}
+  .step p{font-size:.85rem;color:#6b5d4d}
+  .step .who{display:inline-block;margin-top:9px;font-size:.7rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.05em;padding:3px 9px;border-radius:20px;background:#DDECD3;color:#33632c}
+  .phase{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--musgo);
+    margin:26px 0 14px 2px;display:flex;align-items:center;gap:10px}
+  .phase::after{content:"";flex:1;height:1px;background:var(--linha)}
+
+  footer{margin-top:54px;text-align:center;color:var(--musgo);font-size:.8rem;border-top:1px solid var(--linha);padding-top:20px}
+
+  @media(max-width:640px){
+    .hero h1{font-size:1.7rem}
+    .sub,.legend{margin-left:0}
+    h2{font-size:1.25rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">Santosha por aí · Inteligência de Mercado</div>
+  <h1>Análise Competitiva</h1>
+  <p>O que os 6 principais concorrentes de yoga do Brasil fazem hoje melhor que a Santosha — e onde ainda estamos à frente.</p>
+  <div class="data">16 de julho de 2026 · pesquisa direta nos sites + auditoria do santoshaporai.com.br</div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. MAPA -->
+  <section>
+    <h2><span class="n">1</span>Quem são os concorrentes</h2>
+    <p class="sub">Cada um domina um eixo diferente. A barra indica alcance no Instagram (proxy de força de marca).</p>
+    <div class="grid">
+      <div class="card us">
+        <h3>Santosha por aí</h3>
+        <div class="ig">~53,4k seguidores</div>
+        <span class="tag t-us">Nós · Yoga + Arte</span>
+        <p>Identidade artística autoral, app Sanflow e Retiro próprio. Frágil na mecânica de conversão.</p>
+        <div class="bars"><span style="width:22%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Yogateria</h3>
+        <div class="ig">~247k seguidores</div>
+        <span class="tag t-lider">Líder de mercado</span>
+        <p>Operação madura e multicanal. Prova social e SEO em escala industrial.</p>
+        <div class="bars"><span style="width:100%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Yogini</h3>
+        <div class="ig">86k seguidores</div>
+        <span class="tag t-reten">Retenção / Moda</span>
+        <p>Moda inspirada em yoga, 7 lojas físicas. Cashback 10% + WhatsApp. Usa o nome "Santosha".</p>
+        <div class="bars"><span style="width:60%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Ekomat</h3>
+        <div class="ig">44k seguidores</div>
+        <span class="tag t-ltv">LTV / Premium eco</span>
+        <p>Sustentável e premium. Único com clube de assinatura (Satsanga) e quiz de recomendação.</p>
+        <div class="bars"><span style="width:44%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Om Joy</h3>
+        <div class="ig">27k seguidores</div>
+        <span class="tag t-pag">Pagamento / Preço</span>
+        <p>Preço e variedade. Desconto no Pix, 12x, marketplaces e Reels virais.</p>
+        <div class="bars"><span style="width:33%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Yoga House</h3>
+        <div class="ig">social fraco</div>
+        <span class="tag t-prod">Produto / Curadoria</span>
+        <p>Curadoria premium (Manduka, Liforme). Frete R$300 e 12x visível no card.</p>
+        <div class="bars"><span style="width:8%"></span></div>
+      </div>
+      <div class="card">
+        <h3>Yogi Buda</h3>
+        <div class="ig">2,9k seguidores</div>
+        <span class="tag t-nicho">Nicho / Custom</span>
+        <p>Amplitude R$29–R$2.499, personalização de produto e entrada barata (R$129).</p>
+        <div class="bars"><span style="width:12%"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MATRIZ -->
+  <section>
+    <h2><span class="n">2</span>Matriz de calor — alavanca por alavanca</h2>
+    <p class="sub">Verde = forte · Amarelo = parcial/frágil · Vermelho = ausente. A coluna da Santosha está destacada.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Alavanca</th>
+            <th class="us">Santosha</th>
+            <th>Yogateria</th>
+            <th>Yogini</th>
+            <th>Ekomat</th>
+            <th>Om Joy</th>
+            <th>Yoga House</th>
+            <th>Yogi Buda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parcelamento visível</td>
+            <td class="us"><span class="cell r">ausente</span></td>
+            <td><span class="cell y">3x</span></td>
+            <td><span class="cell y">6x</span></td>
+            <td><span class="cell y">3x</span></td>
+            <td><span class="cell g">12x</span></td>
+            <td><span class="cell g">12x</span></td>
+            <td><span class="cell y">n/d</span></td>
+          </tr>
+          <tr>
+            <td>Desconto no Pix</td>
+            <td class="us"><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell g">sim</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell y">n/d</span></td>
+          </tr>
+          <tr>
+            <td>Reviews na vitrine</td>
+            <td class="us"><span class="cell r">7 · escondida</span></td>
+            <td><span class="cell g">milhares <span class="star">★</span></span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell g">4,8/32</span></td>
+            <td><span class="cell y">marketpl.</span></td>
+            <td><span class="cell y">baixo vol.</span></td>
+            <td><span class="cell y">n/d</span></td>
+          </tr>
+          <tr>
+            <td>Cupom 1ª compra</td>
+            <td class="us"><span class="cell r">não</span></td>
+            <td><span class="cell g">5%</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell g">10%</span></td>
+            <td><span class="cell g">5%</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell y">n/d</span></td>
+          </tr>
+          <tr>
+            <td>Recorrência / clube</td>
+            <td class="us"><span class="cell r">nenhum</span></td>
+            <td><span class="cell y">afiliados 5%</span></td>
+            <td><span class="cell g">cashback 10%</span></td>
+            <td><span class="cell g">Satsanga <span class="star">★</span></span></td>
+            <td><span class="cell y">B2B estúdio</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+          </tr>
+          <tr>
+            <td>SEO / conteúdo</td>
+            <td class="us"><span class="cell y">blog ativo</span></td>
+            <td><span class="cell g">LP+100 posts <span class="star">★</span></span></td>
+            <td><span class="cell g">blog forte</span></td>
+            <td><span class="cell g">blog comercial</span></td>
+            <td><span class="cell y">categorias</span></td>
+            <td><span class="cell g">marca/tipo/nível</span></td>
+            <td><span class="cell g">blog</span></td>
+          </tr>
+          <tr>
+            <td>Frete grátis (piso)</td>
+            <td class="us"><span class="cell y">R$350</span></td>
+            <td><span class="cell g">R$300</span></td>
+            <td><span class="cell y">n/d</span></td>
+            <td><span class="cell g">R$350</span></td>
+            <td><span class="cell y">promo</span></td>
+            <td><span class="cell g">R$300</span></td>
+            <td><span class="cell r">R$499</span></td>
+          </tr>
+          <tr>
+            <td>Multicanal / marketplace</td>
+            <td class="us"><span class="cell r">só site</span></td>
+            <td><span class="cell g">ML+farmácia+revenda <span class="star">★</span></span></td>
+            <td><span class="cell g">7 lojas físicas</span></td>
+            <td><span class="cell y">embaixadores</span></td>
+            <td><span class="cell g">Amazon+Shopee</span></td>
+            <td><span class="cell r">só site</span></td>
+            <td><span class="cell y">atacado</span></td>
+          </tr>
+          <tr>
+            <td>Prova social quantificada</td>
+            <td class="us"><span class="cell r">não usa</span></td>
+            <td><span class="cell g">285k vendidos <span class="star">★</span></span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+          </tr>
+          <tr>
+            <td>Identidade artística autoral</td>
+            <td class="us"><span class="cell g">DNA da marca <span class="star">★</span></span></td>
+            <td><span class="cell y">imita (Leela)</span></td>
+            <td><span class="cell y">moda</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+            <td><span class="cell r">não</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><i class="dot g" style="background:#DDECD3"></i> Forte</span>
+      <span><i class="dot y" style="background:#F7E7C0"></i> Parcial / frágil</span>
+      <span><i class="dot r" style="background:#F1D6CC"></i> Ausente / fraco</span>
+      <span>★ Destaque do setor</span>
+      <span>n/d = não confirmado no acesso</span>
+    </div>
+  </section>
+
+  <!-- 3. FAZ MELHOR -->
+  <section>
+    <h2><span class="n">3</span>O que cada um faz melhor que nós</h2>
+    <p class="sub">Os pontos concretos, com evidência coletada no site de cada um.</p>
+
+    <div class="win">
+      <h4>🥇 Yogateria <span class="ig">247k IG · a mais completa</span></h4>
+      <ul>
+        <li><b>Prova social massiva:</b> 4.075 · 3.404 · 1.582 reviews por produto (Judge.me) + copy "285.377 tapetes em 1.203 cidades". Nós temos 7 reviews e nem mostramos estrelas na vitrine.</li>
+        <li><b>SEO transacional:</b> landing pages em 1º lugar ("tapete de yoga preço") que são conteúdo E vitrine + blog de 100+ posts + YouTube.</li>
+        <li><b>Distribuição:</b> site + Mercado Livre + farmácias + revendedores + loja física + <b>afiliados 5%</b> (professores viram vendedores).</li>
+        <li><b>Reputação verificada:</b> ReclameAqui 7.6/10, 100% respondidas, exibido como selo.</li>
+        <li><em>Fraqueza dela: só 3x sem juros — dá pra superar.</em></li>
+      </ul>
+    </div>
+
+    <div class="win">
+      <h4>🥈 Yogini <span class="ig">86k IG · retenção</span></h4>
+      <ul>
+        <li><b>Cashback 10%</b> com regras claras + <b>lembrete via WhatsApp</b> — motor de recompra automatizado.</li>
+        <li><b>6x sem juros</b> e programa "The Club" de curadoria.</li>
+        <li>⚠️ <b>Usa o conceito "Santosha"</b> (contentamento) na própria marca — risco direto de confusão e de SEO de nome.</li>
+      </ul>
+    </div>
+
+    <div class="win">
+      <h4>🥉 Ekomat <span class="ig">44k IG · LTV</span></h4>
+      <ul>
+        <li><b>Satsanga + Club Ekomat</b> — única assinatura/clube do setor, o real fosso de LTV.</li>
+        <li><b>Quiz de recomendação de tapete</b> reduz atrito de escolha; <b>cupom 1ª compra 10%</b>; troca em <b>60 dias</b>.</li>
+        <li>Reviews on-page (4,8/32) e blog de intenção comercial ("PU ou PVC", "melhor tapete pra Hot Yoga").</li>
+      </ul>
+    </div>
+
+    <div class="win">
+      <h4>Om Joy <span class="ig">27k IG · pagamento</span></h4>
+      <ul>
+        <li><b>Desconto no Pix</b> no preço à vista (único confirmado) + <b>até 12x</b> + cupom 1ª compra 5%.</li>
+        <li><b>Logística reversa gratuita</b> e presença em <b>Amazon e Shopee</b>.</li>
+        <li>Reels virais (humor/rotina do professor) e preço de entrada a partir de R$75.</li>
+      </ul>
+    </div>
+
+    <div class="win">
+      <h4>Yoga House <span class="ig">concorrente direta no mat</span></h4>
+      <ul>
+        <li><b>Frete grátis a R$300</b> e <b>parcelamento 12x já visível no card</b> do produto.</li>
+        <li><b>Autoridade por curadoria</b> (Manduka, Liforme) + navegação por marca/tipo/nível.</li>
+        <li>Promoções percentuais agressivas (−40% a −50%) com preço-âncora.</li>
+      </ul>
+    </div>
+
+    <div class="win">
+      <h4>Yogi Buda <span class="ig">2,9k IG · nicho</span></h4>
+      <ul>
+        <li><b>Personalização de produto</b> — diferencial que ninguém mais tem.</li>
+        <li>Produto de entrada a <b>R$129</b> que captura iniciantes + frete fixo R$25 transparente.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. DEFESA -->
+  <section class="defesa">
+    <h2><span class="n">✦</span>Onde a Santosha ainda ganha — e deve defender</h2>
+    <ul>
+      <li><b>Identidade yoga + arte autoral:</b> estampas próprias e tom poético. A Yogateria só imita parcialmente (linha Leela); o resto não tem nada parecido. É o fosso mais defensável.</li>
+      <li><b>Ecossistema próprio:</b> app Sanflow + Retiro (8ª edição) + blog ativo. Nenhum concorrente tem app e retiro próprios — base perfeita para um clube de recorrência.</li>
+    </ul>
+  </section>
+
+  <!-- 5. PLANO -->
+  <section>
+    <h2><span class="n">4</span>Plano de ação priorizado</h2>
+    <p class="sub">Ataca exatamente os atritos de checkout já mapeados em junho — resolve dois problemas de uma vez.</p>
+
+    <div class="phase">Semana 1 · quick wins de conversão (Shopify, sem mídia)</div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div>
+        <h4>Parcelamento visível</h4>
+        <p>Exibir "até 6–12x sem juros" na página de produto. Supera até a Yogateria (só 3x).</p>
+        <span class="who">Alta prioridade</span>
+      </div>
+      <div class="step"><div class="num">2</div>
+        <h4>Desconto no Pix</h4>
+        <p>Destacar preço à vista no Pix, como a Om Joy. Gatilho de conversão imediato.</p>
+        <span class="who">Alta prioridade</span>
+      </div>
+      <div class="step"><div class="num">3</div>
+        <h4>Cupom de boas-vindas</h4>
+        <p>Pop-up de captura de e-mail + cupom 10% na 1ª compra (estilo Ekomat).</p>
+        <span class="who">Alta prioridade</span>
+      </div>
+      <div class="step"><div class="num">4</div>
+        <h4>Estrelas nas coleções</h4>
+        <p>Mostrar avaliação na vitrine + incentivar reviews (app tipo Judge.me).</p>
+        <span class="who">Alta prioridade</span>
+      </div>
+    </div>
+
+    <div class="phase">Mês 1–2 · fossos de médio prazo</div>
+    <div class="steps">
+      <div class="step"><div class="num">5</div>
+        <h4>Clube ligado ao Sanflow</h4>
+        <p>Assinatura/recorrência usando o app próprio — o fosso de LTV que a Ekomat provou e que ninguém replica fácil.</p>
+        <span class="who" style="background:#F3E2C4;color:#8a6a1f">Diferenciação</span>
+      </div>
+      <div class="step"><div class="num">6</div>
+        <h4>Landing pages de SEO</h4>
+        <p>"tapete de yoga estampado", "mat de yoga arte" — captura busca transacional que hoje só vai pros concorrentes.</p>
+        <span class="who" style="background:#F3E2C4;color:#8a6a1f">Diferenciação</span>
+      </div>
+      <div class="step"><div class="num">7</div>
+        <h4>Recuperação de carrinho</h4>
+        <p>Fluxo e-mail + WhatsApp (como o cashback da Yogini). Ataca os −58% que abandonam no checkout.</p>
+        <span class="who" style="background:#F3E2C4;color:#8a6a1f">Diferenciação</span>
+      </div>
+      <div class="step"><div class="num">8</div>
+        <h4>Prova social quantificada</h4>
+        <p>Copy "X mats levados a Y cidades" — a Yogateria converte com isso e nós temos o número.</p>
+        <span class="who" style="background:#F3E2C4;color:#8a6a1f">Diferenciação</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Santosha por aí · Análise competitiva — 16/07/2026 · Gio Growth Digital<br>
+    Fontes: navegação direta em yogateria.com.br, yogini.com.br, ekomat.com.br, omjoy.com.br, yogahousebrasil.com.br, yogibuda.com e auditoria de santoshaporai.com.br.
+  </footer>
+
+</div>
+</body>
+</html>
