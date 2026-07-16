@@ -95,6 +95,22 @@
     <div class="warn" style="margin-top:20px;">📉 <b>O que o gráfico mostra:</b> em <b>todos os meses de 2026</b> (linha vermelha) o faturamento da primeira quinzena ficou <b>abaixo de 2024 e 2025</b>. A queda é consistente ao longo do ano, não pontual — reforçando que o desafio central é <b>recuperar volume de tráfego e demanda</b>, e não a eficiência da mídia (que está saudável).</div>
   </div>
 
+  <!-- A VIRADA DE JULHO -->
+  <div class="section">
+    <h2><span class="bar" style="background:var(--green)"></span> A virada de julho — recuperação dentro de 2026</h2>
+    <div class="sub">Faturamento do dia 1 ao 15 · meses de 2026 · Fonte: Octopus</div>
+    <p class="lead">Depois de três meses seguidos em queda (abril, maio e junho, na faixa de R$ 110 a 118 mil), <strong>julho reverteu a tendência</strong>: R$ 125.848,12 na primeira quinzena — o <strong>melhor resultado desde março</strong> e acima da média mensal de todo o primeiro semestre.</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="l">Julho vs. Junho</div><div class="v" style="color:var(--green)">+14,3%</div><div class="s">R$ 110,1k → R$ 125,8k</div></div>
+      <div class="kpi"><div class="l">Julho vs. média Abr–Jun</div><div class="v" style="color:var(--green)">+11,7%</div><div class="s">Média do trimestre: R$ 112,7k</div></div>
+      <div class="kpi"><div class="l">Posição no ano</div><div class="v" style="color:var(--green)">Melhor desde março</div><div class="s">4 meses</div></div>
+    </div>
+    <div style="position:relative;height:300px;margin-top:22px;">
+      <canvas id="mes2026Chart"></canvas>
+    </div>
+    <div class="note">✅ <strong>A leitura para a cliente:</strong> o faturamento vinha caindo mês a mês e, em julho, <strong>parou de cair e voltou a subir</strong>. Ainda não recuperamos o patamar de 2024/2025, mas o movimento mudou de direção — e isso com a mídia rodando enxuta (3,2% do faturamento). O foco agora é transformar essa virada em tendência, trazendo mais tráfego para a loja.</div>
+  </div>
+
   <!-- META ADS -->
   <div class="section">
     <h2><span class="bar" style="background:var(--blue)"></span> Meta Ads (Facebook / Instagram)</h2>
@@ -186,6 +202,27 @@
       plugins:{
         legend:{position:'top',labels:{usePointStyle:true,boxWidth:8,font:{size:12}}},
         tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+brl(c.parsed.y);}}}
+      },
+      scales:{
+        y:{beginAtZero:false,ticks:{callback:function(v){return 'R$ '+(v/1000)+'k';},font:{size:11},color:'#6c757d'},grid:{color:'#eef1f5'}},
+        x:{ticks:{font:{size:11},color:'#6c757d'},grid:{display:false}}
+      }
+    }
+  });
+
+  // Barras — meses de 2026, julho destacado
+  var meses26=['Jan','Fev','Mar','Abr','Mai','Jun','Jul'];
+  var v26=[159062.84,113441.42,129420.79,109953.49,118053.76,110094.70,125848.12];
+  var cores=v26.map(function(_,i){return i===6?'#00c897':'#c5d3e2';});
+  var ctx2=document.getElementById('mes2026Chart').getContext('2d');
+  new Chart(ctx2,{
+    type:'bar',
+    data:{labels:meses26,datasets:[{label:'Faturamento (1–15)',data:v26,backgroundColor:cores,borderRadius:6,maxBarThickness:64}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:function(c){return brl(c.parsed.y);}}}
       },
       scales:{
         y:{beginAtZero:false,ticks:{callback:function(v){return 'R$ '+(v/1000)+'k';},font:{size:11},color:'#6c757d'},grid:{color:'#eef1f5'}},
