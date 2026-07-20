@@ -64,9 +64,20 @@ def main():
     else:                                    # formato cru do Windsor
         meses = build_meses(doc["rows"], doc.get("ano_atual"), doc.get("mes_atual"))
 
+    # normaliza criativos: garante 'tipo' (deriva da campanha quando ausente)
+    criativos = doc.get("criativos", [])
+    for c in criativos:
+        if not c.get("tipo"):
+            c["tipo"] = tipo_de(c.get("campanha") or c.get("raw") or "")
+
     dados_json = json.dumps(meses, ensure_ascii=False)
+    criativos_json = json.dumps(criativos, ensure_ascii=False)
+    mes_criativos = doc.get("mes_criativos", "")
     gerado = doc.get("gerado_em", "")
-    html = TEMPLATE.replace("__DADOS__", dados_json).replace("__GERADO__", gerado)
+    html = (TEMPLATE.replace("__DADOS__", dados_json)
+                    .replace("__CRIATIVOS__", criativos_json)
+                    .replace("__MESCRIATIVOS__", mes_criativos)
+                    .replace("__GERADO__", gerado))
     out = os.path.join(out_dir, "index.html")
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
@@ -157,6 +168,27 @@ tbody tr:hover td{background:#f0fdfa}
 .tag{display:inline-block;font-size:9px;font-weight:800;padding:2px 7px;border-radius:6px;margin-left:4px;vertical-align:middle}
 .tag.msg{background:#cffafe;color:#0e7490}.tag.alc{background:#fef3c7;color:#b45309}.tag.seg{background:#e0e7ff;color:#4338ca}.tag.eng{background:#fce7f3;color:#be185d}.tag.out{background:#f1f5f9;color:#64748b}
 tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background:#f0fbfb!important;border-top:2px solid var(--border)!important;border-bottom:none!important}
+/* Criativos */
+.cr-group-title{font-size:12px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.5px;margin:6px 0 12px;display:flex;align-items:center;gap:8px}
+.cr-group-title .tag{margin-left:0}
+.cr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px;margin-bottom:8px}
+.cr-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1.5px solid var(--border);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;transition:all .2s}
+.cr-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--c2)}
+.cr-thumb{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f1f5f9;display:block}
+.cr-thumb.ph{display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:34px}
+.cr-rank{position:absolute;top:10px;left:10px;background:var(--c3);color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:12px;width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.cr-imgwrap{position:relative}
+.cr-body{padding:12px 14px 10px}
+.cr-name{font-size:12.5px;font-weight:800;color:var(--text);letter-spacing:-.2px;line-height:1.25;word-break:break-word}
+.cr-metrics{display:flex;gap:0;margin-top:11px;border-top:1px solid #f1f5f9;padding-top:10px}
+.cr-m{flex:1;text-align:center}
+.cr-m + .cr-m{border-left:1px solid #f1f5f9}
+.cr-m-v{font-size:15px;font-weight:900;color:var(--text);letter-spacing:-.3px}
+.cr-m-v.orange{color:var(--c3)}.cr-m-v.teal{color:var(--c2)}
+.cr-m-l{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-3);margin-top:3px}
+.cr-link{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;background:#f0fbfb;color:var(--c1);font-size:11.5px;font-weight:800;transition:all .16s}
+.cr-card:hover .cr-link{background:var(--c2);color:#fff}
+.cr-note{font-size:12.5px;color:var(--text-3);padding:6px 2px}
 .foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:36px;line-height:1.8;padding-top:20px;border-top:1px solid var(--border)}
 .foot b{color:var(--text-2)}
 @media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr}}
@@ -229,6 +261,14 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
     </table>
   </div>
 
+  <!-- CRIATIVOS -->
+  <div class="section-header">
+    <span class="section-tag"></span>
+    <span class="section-title">Criativos do mês</span>
+    <span class="section-hint" id="cr-hint">—</span>
+  </div>
+  <div class="card"><div id="criativos"></div></div>
+
   <div class="foot">
     Fonte: <b>Meta Ads</b> · conta CA-Alarcon (3553771504851630) via <b>Windsor.ai</b><br>
     <b>Conversas iniciadas</b> = novas conversas no Direct atribuídas aos anúncios (janela 7 dias) — objetivo principal da conta.<br>
@@ -238,6 +278,8 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 
 <script>
 const MESES = __DADOS__;
+const CRIATIVOS = __CRIATIVOS__;
+const MES_CRIATIVOS = "__MESCRIATIVOS__";
 const GERADO = "__GERADO__";
 document.getElementById('upd').textContent = GERADO.split('-').reverse().join('/');
 
@@ -358,7 +400,54 @@ function render(){
     <td>${num(t.clicks)}</td><td>${brl(t.cpc)}</td><td>${pct(t.ctr)}</td>
     <td>${num(t.conv)}</td><td>${brl(t.custoConv)}</td></tr>`;
 
+  renderCriativos(m);
   renderChart();
+}
+
+/* ---------- criativos do mes ---------- */
+function crCard(c, rank){
+  const cconv = c.conv? c.spend/c.conv : 0;
+  const img = c.thumb
+    ? `<img class="cr-thumb" src="${c.thumb}" alt="${c.nome}" loading="lazy" referrerpolicy="no-referrer" onerror="var w=this.parentNode;this.remove();w.insertAdjacentHTML('afterbegin','<div class=&quot;cr-thumb ph&quot;>🖼️</div>')">`
+    : `<div class="cr-thumb ph">🖼️</div>`;
+  const link = c.url? `<div class="cr-link">▶ Ver no Instagram</div>` : "";
+  return `<a class="cr-card" href="${c.url||'#'}" target="_blank" rel="noopener">
+    <div class="cr-imgwrap">${img}<div class="cr-rank">${rank}</div></div>
+    <div class="cr-body">
+      <div class="cr-name">${c.nome}</div>
+      <div class="cr-metrics">
+        <div class="cr-m"><div class="cr-m-v orange">${num(c.conv)}</div><div class="cr-m-l">Conversas</div></div>
+        <div class="cr-m"><div class="cr-m-v">${brl(c.spend)}</div><div class="cr-m-l">Investido</div></div>
+        <div class="cr-m"><div class="cr-m-v teal">${c.conv?brl(cconv):'—'}</div><div class="cr-m-l">Custo/Conv.</div></div>
+      </div>
+    </div>${link}</a>`;
+}
+function renderCriativos(m){
+  const box = document.getElementById('criativos');
+  const hint = document.getElementById('cr-hint');
+  if(m.id !== MES_CRIATIVOS || !CRIATIVOS.length){
+    hint.textContent = "prints disponíveis apenas no mês corrente";
+    box.innerHTML = `<div class="cr-note">Os criativos (com print e link) ficam disponíveis no mês em andamento (${MES_CRIATIVOS.split('-').reverse().join('/')}). Selecione o mês atual para vê-los.</div>`;
+    return;
+  }
+  hint.innerHTML = "print e link clicável · "+m.label;
+  const grupos = [
+    {tipo:"msg", titulo:"Mensagem · Direct", tagcls:"msg", sub:"trazem as conversas"},
+    {tipo:"alc", titulo:"Alcance · Distribuição", tagcls:"alc", sub:"topo de funil / awareness"},
+  ];
+  let html = "";
+  grupos.forEach(g=>{
+    const lista = CRIATIVOS.filter(c=>c.tipo===g.tipo).sort((a,b)=> b.conv-a.conv || b.spend-a.spend);
+    if(!lista.length) return;
+    html += `<div class="cr-group-title"><span class="tag ${g.tagcls}">${g.tipo.toUpperCase()}</span> ${g.titulo} <span style="font-weight:600;color:var(--text-3);text-transform:none;letter-spacing:0">· ${g.sub}</span></div>`;
+    html += `<div class="cr-grid">${lista.map((c,i)=>crCard(c,i+1)).join('')}</div>`;
+  });
+  // criativos de tipos fora dos grupos (seg/eng/out), se houver
+  const resto = CRIATIVOS.filter(c=>!["msg","alc"].includes(c.tipo)).sort((a,b)=>b.spend-a.spend);
+  if(resto.length){
+    html += `<div class="cr-group-title">Outros criativos</div><div class="cr-grid">${resto.map((c,i)=>crCard(c,i+1)).join('')}</div>`;
+  }
+  box.innerHTML = html;
 }
 
 /* ---------- grafico historico ---------- */
