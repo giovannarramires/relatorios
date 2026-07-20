@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controle de Saldo — GGD</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#eef1f8; --surface:#fff; --border:#e6ebf3; --text:#0f172a; --text-2:#475569; --text-3:#94a3b8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); padding:28px 18px 60px; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  header { background:linear-gradient(120deg,#0f172a,#1e3a8a); color:#fff; border-radius:18px; padding:26px 28px; margin-bottom:22px; }
+  header h1 { font-size:24px; font-weight:800; letter-spacing:-.5px; }
+  header p { color:#c7d2fe; font-size:13px; margin-top:6px; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 18px; }
+  .k-val { font-size:28px; font-weight:800; letter-spacing:-1px; }
+  .k-rot { font-size:13px; color:var(--text-2); font-weight:600; margin-top:2px; }
+  .k-sub { font-size:11px; color:var(--text-3); margin-top:4px; }
+  .banner { background:#fef2f2; border:1px solid #fecaca; border-left:5px solid #dc2626; border-radius:12px; padding:16px 20px; margin-bottom:20px; }
+  .banner-t { font-weight:800; color:#b91c1c; font-size:15px; margin-bottom:8px; }
+  .banner ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
+  .banner li { font-size:13px; color:#7f1d1d; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px 20px 8px; margin-bottom:20px; }
+  .card h2 { font-size:15px; font-weight:800; display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+  .hbar { width:5px; height:16px; border-radius:3px; display:inline-block; }
+  .tbl-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13px; min-width:820px; }
+  thead th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.4px; color:var(--text-3); font-weight:700; padding:8px 10px; border-bottom:2px solid var(--border); }
+  thead th:not(:nth-child(1)):not(:nth-child(2)) { text-align:right; }
+  tbody td { padding:11px 10px; border-bottom:1px solid #f1f5f9; vertical-align:middle; }
+  tbody tr:hover { background:#f8fafc; }
+  .cli { font-weight:700; white-space:nowrap; }
+  .dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:8px; vertical-align:middle; }
+  .num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .muted { color:var(--text-3); }
+  .small { font-size:12px; }
+  .pill { font-size:11px; font-weight:800; padding:4px 10px; border-radius:20px; white-space:nowrap; }
+  .verba { text-align:right; min-width:150px; }
+  .vlabel { font-size:12px; white-space:nowrap; }
+  .bar { height:5px; background:#eef2f7; border-radius:3px; margin:4px 0 2px; overflow:hidden; }
+  .fill { height:100%; border-radius:3px; }
+  .vpct { font-size:11px; font-weight:700; }
+  footer { text-align:center; color:var(--text-3); font-size:12px; margin-top:24px; line-height:1.7; }
+  @media (max-width:720px) { .kpis { grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>⛽ Controle de Saldo — Contas de Tráfego</h1>
+    <p>Meta Ads + Google Ads · Julho 2026 · atualizado em 20/07/2026 (dados até ontem) · dia 19 de 31</p>
+  </header>
+
+  <div class="kpis"><div class="kpi"><div class="k-val" style="color:#0f172a">0</div><div class="k-rot">Recarregar já</div><div class="k-sub">saldo ≤ 3 dias ou zerado</div></div><div class="kpi"><div class="k-val" style="color:#0f172a">0</div><div class="k-rot">Atenção</div><div class="k-sub">saldo dura ≤ 7 dias</div></div><div class="kpi"><div class="k-val" style="color:#0f172a">0</div><div class="k-rot">Vão estourar a verba</div><div class="k-sub">projeção > verba do mês</div></div><div class="kpi"><div class="k-val" style="color:#0f172a">R$ 121.673</div><div class="k-rot">Gasto total no mês</div><div class="k-sub">Julho 2026</div></div></div>
+
+
+
+    <div class="card">
+      <h2><span class="hbar" style="background:#1877F2"></span>Meta Ads — 21 contas</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr>
+          <th>Cliente</th><th>Plat.</th><th>Gasto / Verba (mês)</th><th>Projeção fim mês</th>
+          <th>Gasto ontem</th><th>Ritmo</th><th>Saldo atual</th><th>Dura</th><th>Status</th>
+        </tr></thead>
+        <tbody>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Felipe Scherer</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 70.261</td>
+        <td class="num">R$ 4.208</td>
+        <td class="num muted">R$ 2.266/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>LE Medical</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 29.752</td>
+        <td class="num">R$ 1.020</td>
+        <td class="num muted">R$ 960/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Carol (Caroline Baima)</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 11.733</td>
+        <td class="num">R$ 1.359</td>
+        <td class="num muted">R$ 378/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>HOF Presenciais</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 8.757</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 282/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Santosha #2</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 8.041</td>
+        <td class="num">R$ 117</td>
+        <td class="num muted">R$ 259/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Glauber</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 7.652</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 247/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Murilo Soares</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 6.259</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 202/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Roma Aviamentos</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 4.624</td>
+        <td class="num">R$ 148</td>
+        <td class="num muted">R$ 149/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>HOF Paciente Modelo</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 3.773</td>
+        <td class="num">R$ 160</td>
+        <td class="num muted">R$ 122/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Roma Importadora</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 2.165</td>
+        <td class="num">R$ 60</td>
+        <td class="num muted">R$ 70/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Go Heat</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 1.763</td>
+        <td class="num">R$ 55</td>
+        <td class="num muted">R$ 57/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Calmaria</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 1.656</td>
+        <td class="num">R$ 72</td>
+        <td class="num muted">R$ 53/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Amanda Arantes</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 1.401</td>
+        <td class="num">R$ 54</td>
+        <td class="num muted">R$ 45/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Papo Glaucoma</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 552</td>
+        <td class="num">R$ 21</td>
+        <td class="num muted">R$ 18/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Alarcon</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 465</td>
+        <td class="num">R$ 18</td>
+        <td class="num muted">R$ 15/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>HOF Portugal Real</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 433</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 14/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>DCVet</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 204</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 7/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Santosha #1</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 0</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 0/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>HOF Presencial Iniciante</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 0</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 0/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Fernanda Fiori</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 0</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 0/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#1877F2"></span>Diego Vasconcelos</td>
+        <td class="muted small">Meta</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 0</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 0/dia</td>
+        <td class="num muted">definir</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h2><span class="hbar" style="background:#E37400"></span>Google Ads — 6 contas</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr>
+          <th>Cliente</th><th>Plat.</th><th>Gasto / Verba (mês)</th><th>Projeção fim mês</th>
+          <th>Gasto ontem</th><th>Ritmo</th><th>Saldo atual</th><th>Dura</th><th>Status</th>
+        </tr></thead>
+        <tbody>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>LE Medical</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 24.247</td>
+        <td class="num">R$ 1.397</td>
+        <td class="num muted">R$ 782/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>Roma Varejo</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 5.305</td>
+        <td class="num">R$ 243</td>
+        <td class="num muted">R$ 171/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>Santosha</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 4.769</td>
+        <td class="num">R$ 256</td>
+        <td class="num muted">R$ 154/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>Roma Importadora</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 3.193</td>
+        <td class="num">R$ 65</td>
+        <td class="num muted">R$ 103/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>Sol Oftalmologia</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 1.513</td>
+        <td class="num">R$ 45</td>
+        <td class="num muted">R$ 49/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+      <tr>
+        <td class="cli"><span class="dot" style="background:#E37400"></span>Calmaria</td>
+        <td class="muted small">Google</td>
+        <td class="num muted">definir</td>
+        <td class="num">R$ 0</td>
+        <td class="num">R$ 0</td>
+        <td class="num muted">R$ 0/dia</td>
+        <td class="num muted">cartão</td>
+        <td class="num muted">—</td>
+        <td><span class="pill" style="color:#94a3b8;background:#f8fafc">—</span></td>
+      </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  <footer>
+    Saldo pré-pago = saldo inicial + recargas − gasto do mês. &nbsp;·&nbsp; Verba/recargas editáveis em <code>contas.csv</code> e <code>recargas.csv</code>.<br>
+    Atualização automática diária · Growth Digital · saldo total pré-pago estimado: <b>R$ 0</b>
+  </footer>
+</div>
+</body>
+</html>
