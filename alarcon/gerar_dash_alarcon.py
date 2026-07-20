@@ -75,9 +75,11 @@ def main():
 
     dados_json = json.dumps(meses, ensure_ascii=False)
     criativos_json = json.dumps(cpm, ensure_ascii=False)
+    imposto = doc.get("meta_imposto_rate", 0.1383)
     gerado = doc.get("gerado_em", "")
     html = (TEMPLATE.replace("__DADOS__", dados_json)
                     .replace("__CRIATIVOS__", criativos_json)
+                    .replace("__IMPOSTO__", json.dumps(imposto))
                     .replace("__GERADO__", gerado))
     out = os.path.join(out_dir, "index.html")
     with open(out, "w", encoding="utf-8") as f:
@@ -124,6 +126,19 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .mbtn.active{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:#fff;box-shadow:var(--shadow)}
 .mbtn.empty{opacity:.35;cursor:not-allowed}
 .mbtn.empty:hover{border-color:var(--border);color:var(--text-2)}
+/* Hero investimento (mídia + imposto + total) */
+.hero{background:linear-gradient(135deg,var(--ink) 0%,var(--c1) 90%,var(--c2) 160%);border-radius:18px;padding:22px 26px;color:#fff;box-shadow:var(--shadow-lg);margin-top:16px;position:relative;overflow:hidden}
+.hero::after{content:'🏉';position:absolute;right:20px;bottom:-16px;font-size:96px;opacity:.08}
+.hero-label{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:12px;color:var(--c2);font-weight:700;margin-bottom:14px}
+.hero-label span{color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.3px;text-transform:none}
+.hero-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.hero-box{flex:1;min-width:160px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:15px 18px}
+.hero-box.total{background:rgba(0,166,166,.22);border-color:rgba(0,166,166,.55)}
+.hb-l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:7px}
+.hb-v{font-size:25px;font-weight:900;letter-spacing:-.5px}
+.hb-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px}
+.hero-op{align-self:center;font-size:24px;font-weight:300;color:rgba(255,255,255,.45)}
+@media(max-width:640px){.hero-op{display:none}.hero-box{min-width:130px}}
 .section-header{display:flex;align-items:baseline;gap:10px;margin:28px 0 14px}
 .section-tag{width:4px;height:20px;background:var(--c2);border-radius:3px;align-self:center}
 .section-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--text);text-transform:uppercase}
@@ -215,6 +230,18 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
   <!-- SELETOR DE MES -->
   <div class="selector" id="selector"></div>
 
+  <!-- HERO INVESTIMENTO (mídia + imposto + total) -->
+  <div class="hero">
+    <div class="hero-label">Quanto o cliente pagou <span id="hero-mes">—</span></div>
+    <div class="hero-row">
+      <div class="hero-box"><div class="hb-l">Investimento em mídia</div><div class="hb-v" id="hero-midia">—</div><div class="hb-s">verba que foi para os anúncios</div></div>
+      <div class="hero-op">+</div>
+      <div class="hero-box"><div class="hb-l">Imposto <span id="hero-taxpct"></span></div><div class="hb-v" id="hero-imposto">—</div><div class="hb-s">ISS + IOF sobre a mídia</div></div>
+      <div class="hero-op">=</div>
+      <div class="hero-box total"><div class="hb-l">Total pago</div><div class="hb-v" id="hero-total">—</div><div class="hb-s">mídia + imposto (gasto real)</div></div>
+    </div>
+  </div>
+
   <!-- KPIS -->
   <div class="section-header">
     <span class="section-tag"></span>
@@ -280,6 +307,7 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 <script>
 const MESES = __DADOS__;
 const CRIATIVOS_POR_MES = __CRIATIVOS__;
+const IMPOSTO = __IMPOSTO__;
 const GERADO = "__GERADO__";
 document.getElementById('upd').textContent = GERADO.split('-').reverse().join('/');
 
@@ -342,6 +370,14 @@ function render(){
   const t = totais(m);
   document.getElementById('periodo').textContent = m.label + (m.atual? " · parcial":"");
 
+  // hero: investimento em mídia + imposto + total pago
+  const imposto = t.spend * IMPOSTO;
+  document.getElementById('hero-mes').textContent = "· "+m.label + (m.atual? " (parcial)":"");
+  document.getElementById('hero-taxpct').textContent = "("+(IMPOSTO*100).toLocaleString('pt-BR',{maximumFractionDigits:2})+"%)";
+  document.getElementById('hero-midia').textContent = brl(t.spend);
+  document.getElementById('hero-imposto').textContent = brl(imposto);
+  document.getElementById('hero-total').textContent = brl(t.spend + imposto);
+
   // vizinhos: mes anterior (na lista) e mesmo mes ano anterior
   const idx = MESES.findIndex(x=>x.id===sel);
   const prev = idx>0? totais(MESES[idx-1]) : null;
@@ -358,7 +394,7 @@ function render(){
     </div>`;
 
   document.getElementById('kpis-1').innerHTML =
-    kpi('spend','Investimento',brl(t.spend), t.spend, prev&&prev.spend, yoy&&yoy.spend,'up',brl, "investimento em mídia no mês") +
+    kpi('spend','Investimento (mídia)',brl(t.spend), t.spend, prev&&prev.spend, yoy&&yoy.spend,'up',brl, "sem imposto · veja o total pago acima") +
     kpi('','CPM',brl(t.cpm), t.cpm, prev&&prev.cpm, yoy&&yoy.cpm,'down',brl,"custo por 1.000 impressões") +
     kpi('','CPC (todos)',brl(t.cpc), t.cpc, prev&&prev.cpc, yoy&&yoy.cpc,'down',brl,"CPC no link: "+brl(t.cpcLink)) +
     kpi('hl','Custo / Conversa',brl(t.custoConv), t.custoConv, prev&&prev.custoConv, yoy&&yoy.custoConv,'down',brl, t.conv+" conversas iniciadas");
