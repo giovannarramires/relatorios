@@ -33,7 +33,10 @@ def main():
     os.makedirs(cr_dir, exist_ok=True)
 
     doc = json.load(open(raw_path, encoding="utf-8"))
-    criativos = doc.get("criativos", [])
+    # aceita lista unica (criativos) ou mapa por mes (criativos_por_mes)
+    criativos = list(doc.get("criativos", []))
+    for lst in doc.get("criativos_por_mes", {}).values():
+        criativos.extend(lst)
     ok = fail = 0
     for c in criativos:
         src = c.get("thumb_src") or c.get("thumb", "")

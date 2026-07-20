@@ -64,19 +64,20 @@ def main():
     else:                                    # formato cru do Windsor
         meses = build_meses(doc["rows"], doc.get("ano_atual"), doc.get("mes_atual"))
 
-    # normaliza criativos: garante 'tipo' (deriva da campanha quando ausente)
-    criativos = doc.get("criativos", [])
-    for c in criativos:
-        if not c.get("tipo"):
-            c["tipo"] = tipo_de(c.get("campanha") or c.get("raw") or "")
+    # criativos por mes (mapa id->lista). Aceita tambem lista unica antiga.
+    cpm = doc.get("criativos_por_mes")
+    if cpm is None:
+        cpm = {doc.get("mes_criativos", ""): doc.get("criativos", [])} if doc.get("criativos") else {}
+    for mid, lst in cpm.items():
+        for c in lst:
+            if not c.get("tipo"):
+                c["tipo"] = tipo_de(c.get("campanha") or c.get("raw") or "")
 
     dados_json = json.dumps(meses, ensure_ascii=False)
-    criativos_json = json.dumps(criativos, ensure_ascii=False)
-    mes_criativos = doc.get("mes_criativos", "")
+    criativos_json = json.dumps(cpm, ensure_ascii=False)
     gerado = doc.get("gerado_em", "")
     html = (TEMPLATE.replace("__DADOS__", dados_json)
                     .replace("__CRIATIVOS__", criativos_json)
-                    .replace("__MESCRIATIVOS__", mes_criativos)
                     .replace("__GERADO__", gerado))
     out = os.path.join(out_dir, "index.html")
     with open(out, "w", encoding="utf-8") as f:
@@ -278,8 +279,7 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 
 <script>
 const MESES = __DADOS__;
-const CRIATIVOS = __CRIATIVOS__;
-const MES_CRIATIVOS = "__MESCRIATIVOS__";
+const CRIATIVOS_POR_MES = __CRIATIVOS__;
 const GERADO = "__GERADO__";
 document.getElementById('upd').textContent = GERADO.split('-').reverse().join('/');
 
@@ -425,25 +425,29 @@ function crCard(c, rank){
 function renderCriativos(m){
   const box = document.getElementById('criativos');
   const hint = document.getElementById('cr-hint');
-  if(m.id !== MES_CRIATIVOS || !CRIATIVOS.length){
-    hint.textContent = "prints disponíveis apenas no mês corrente";
-    box.innerHTML = `<div class="cr-note">Os criativos (com print e link) ficam disponíveis no mês em andamento (${MES_CRIATIVOS.split('-').reverse().join('/')}). Selecione o mês atual para vê-los.</div>`;
+  const lista0 = CRIATIVOS_POR_MES[m.id] || [];
+  if(!lista0.length){
+    hint.textContent = "sem criativos catalogados neste mês";
+    box.innerHTML = `<div class="cr-note">Os criativos (com print e link) estão catalogados a partir de 2026. Selecione um mês de 2026 para vê-los.</div>`;
     return;
   }
   hint.innerHTML = "print e link clicável · "+m.label;
   const grupos = [
     {tipo:"msg", titulo:"Mensagem · Direct", tagcls:"msg", sub:"trazem as conversas"},
     {tipo:"alc", titulo:"Alcance · Distribuição", tagcls:"alc", sub:"topo de funil / awareness"},
+    {tipo:"seg", titulo:"Seguidores · Tráfego", tagcls:"seg", sub:"crescimento de perfil"},
+    {tipo:"eng", titulo:"Engajamento", tagcls:"eng", sub:"engajamento"},
   ];
   let html = "";
+  const usados = new Set();
   grupos.forEach(g=>{
-    const lista = CRIATIVOS.filter(c=>c.tipo===g.tipo).sort((a,b)=> b.conv-a.conv || b.spend-a.spend);
+    const lista = lista0.filter(c=>c.tipo===g.tipo).sort((a,b)=> b.conv-a.conv || b.spend-a.spend);
     if(!lista.length) return;
+    lista.forEach(c=>usados.add(c));
     html += `<div class="cr-group-title"><span class="tag ${g.tagcls}">${g.tipo.toUpperCase()}</span> ${g.titulo} <span style="font-weight:600;color:var(--text-3);text-transform:none;letter-spacing:0">· ${g.sub}</span></div>`;
     html += `<div class="cr-grid">${lista.map((c,i)=>crCard(c,i+1)).join('')}</div>`;
   });
-  // criativos de tipos fora dos grupos (seg/eng/out), se houver
-  const resto = CRIATIVOS.filter(c=>!["msg","alc"].includes(c.tipo)).sort((a,b)=>b.spend-a.spend);
+  const resto = lista0.filter(c=>!usados.has(c)).sort((a,b)=>b.spend-a.spend);
   if(resto.length){
     html += `<div class="cr-group-title">Outros criativos</div><div class="cr-grid">${resto.map((c,i)=>crCard(c,i+1)).join('')}</div>`;
   }
