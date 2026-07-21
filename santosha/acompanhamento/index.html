@@ -5,62 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Santosha · Acompanhamento Meta + Google</title>
 <style>
-:root{
-  --bg:#f6f1e7; --card:#fffdf8; --ink:#3a2f27; --muted:#8a7b6d;
-  --terra:#c06b45; --terra2:#a2542f; --musgo:#6b7a4f; --ocre:#c9a13b;
-  --line:#e7ddcd; --good:#5f7a45; --mid:#c9902f; --zero:#b9b0a3;
-}
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#3a2f27;--muted:#8a7b6d;--terra:#c06b45;--terra2:#a2542f;--line:#e7ddcd;--good:#5f7a45;--mid:#c9902f;--zero:#b9b0a3;}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  line-height:1.45;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:22px 16px 60px}
 header.top{text-align:center;padding:14px 0 6px}
 .brand{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--terra2);font-weight:600}
 h1{margin:6px 0 2px;font-size:26px;font-weight:700}
-.periodo{color:var(--muted);font-size:14px}
-.periodo b{color:var(--ink)}
-h2{font-size:15px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra2);
-  margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.periodo{color:var(--muted);font-size:14px} .periodo b{color:var(--ink)}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra2);margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
 .note{font-size:12.5px;color:var(--muted);margin:-6px 0 14px}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 15px;
-  box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 15px}
 .card .lab{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
 .card .val{font-size:24px;font-weight:700;margin-top:4px;line-height:1.1}
-.card .val.sm{font-size:20px}
 .delta{display:inline-block;margin-top:6px;font-size:11.5px;font-weight:600;padding:2px 7px;border-radius:20px}
-.delta.up{background:#e6efe0;color:var(--good)}
-.delta.down{background:#f6e5df;color:var(--terra2)}
+.delta.up{background:#e6efe0;color:var(--good)} .delta.down{background:#f6e5df;color:var(--terra2)}
 .big{border-left:4px solid var(--terra)}
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
 table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:640px}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
-th{background:#efe7d8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--terra2);position:sticky;top:0}
+th{background:#efe7d8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--terra2)}
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
-.adname{font-weight:600;max-width:260px}
-.adname .sub{display:block;font-weight:400;font-size:11.5px;color:var(--muted);margin-top:2px}
-tr:last-child td{border-bottom:none}
-tbody tr:hover{background:#faf6ec}
-td a{color:var(--terra2);font-weight:600;text-decoration:none;white-space:nowrap}
-td a:hover{text-decoration:underline}
-.muted{color:var(--muted)}
-.good{color:var(--good);font-weight:700}
-.mid{color:var(--mid);font-weight:700}
-.zero{color:var(--zero)}
+.adname{font-weight:600;max-width:260px} .adname .sub{display:block;font-weight:400;font-size:11.5px;color:var(--muted);margin-top:2px}
+tr:last-child td{border-bottom:none} tbody tr:hover{background:#faf6ec}
+td a{color:var(--terra2);font-weight:600;text-decoration:none;white-space:nowrap} td a:hover{text-decoration:underline}
+.muted{color:var(--muted)} .good{color:var(--good);font-weight:700} .mid{color:var(--mid);font-weight:700} .zero{color:var(--zero)}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .mini{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
 .mini h3{margin:0 0 10px;font-size:14px;color:var(--terra2)}
 .mini .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
-.mini .row:last-child{border-bottom:none}
-.mini .row b{font-variant-numeric:tabular-nums}
+.mini .row:last-child{border-bottom:none} .mini .row b{font-variant-numeric:tabular-nums}
 .legend{font-size:12px;color:var(--muted);margin-top:10px}
 footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
-@media(max-width:720px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .split{grid-template-columns:1fr}
-  h1{font-size:22px}
-}
+@media(max-width:720px){.cards{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}h1{font-size:22px}}
 </style>
 </head>
 <body>
@@ -72,7 +50,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
   </header>
 
   <h2>Visão geral do mês (Meta + Google)</h2>
-  <div class="note">Período parcial (mês em andamento). O comparativo mostra o ritmo projetado do mês contra junho fechado.</div>
+  <div class="note">Período parcial (mês em andamento). O comparativo usa o ritmo projetado do mês contra Junho fechado.</div>
   <div class="cards">
     <div class="card big"><div class="lab">Investimento</div><div class="val">R$ 8.566,80</div><span class="delta up">▲ 34% vs jun</span></div>
     <div class="card big"><div class="lab">Faturamento (ads)</div><div class="val">R$ 19.867,33</div><span class="delta down">▼ 25% vs jun</span></div>
@@ -104,14 +82,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
 
   <h2>Anúncios rodando agora no Meta (28 ativos · R$ 2.799,16)</h2>
   <div class="note">Somente anúncios com status ATIVO no período. Clique em “abrir” para ver o criativo/destino.</div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr>
-        <th>Anúncio</th><th class="r">Investido</th><th class="r">Impr.</th><th class="r">Cliques</th>
-        <th class="r">LPV</th><th class="r">Add cart</th><th class="r">Vendas</th><th class="r">ROAS</th><th class="r">Link</th>
-      </tr></thead>
-      <tbody><tr>
-      <td class="adname">CATALOGO_TODOS_PRODUTOS<span class="sub">—</span></td>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Anúncio</th><th class="r">Investido</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">LPV</th><th class="r">Add cart</th><th class="r">Vendas</th><th class="r">ROAS</th><th class="r">Link</th></tr></thead>
+    <tbody><tr>
+      <td class="adname">CATALOGO_TODOS_PRODUTOS<span class="sub">catálogo (dinâmico)</span></td>
       <td class="r">R$ 1.478,80</td>
       <td class="r">71.406</td>
       <td class="r">1.654</td>
@@ -119,7 +93,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
       <td class="r">79</td>
       <td class="r">24</td>
       <td class="r good">3,28</td>
-      <td class="r"><span class="muted">catálogo</span></td>
+      <td class="r"><span class="muted">—</span></td>
     </tr><tr>
       <td class="adname">AD01_APRESENTANDO_MATOSHA<span class="sub">loja/collections/mats</span></td>
       <td class="r">R$ 200,14</td>
@@ -391,18 +365,13 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
       <td class="r zero">—</td>
       <td class="r"><a href="https://santoshaporai.com.br/collections/baralhos/products/cartasflow" target="_blank" rel="noopener">abrir ↗</a></td>
     </tr></tbody>
-    </table>
-  </div>
+  </table></div>
   <div class="legend">LPV = visualizações da página de destino · ROAS por anúncio pode estar subnotificado (atribuição Meta &lt; Shopify).</div>
 
   <h2>Campanhas no Google Ads</h2>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr>
-        <th>Campanha</th><th class="r">Investido</th><th class="r">Impr.</th><th class="r">Cliques</th>
-        <th class="r">Conv.</th><th class="r">Valor</th><th class="r">ROAS</th>
-      </tr></thead>
-      <tbody><tr>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Campanha</th><th class="r">Investido</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">Conv.</th><th class="r">Valor</th><th class="r">ROAS</th></tr></thead>
+    <tbody><tr>
       <td class="adname">Shopping<span class="sub">[GGD][SHOPPING][VENDAS][ROAS8]</span></td>
       <td class="r">R$ 1.112,67</td>
       <td class="r">45.850</td>
@@ -427,8 +396,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
       <td class="r">R$ 878,40</td>
       <td class="r zero">0,88</td>
     </tr></tbody>
-    </table>
-  </div>
+  </table></div>
 
   <footer>
     Dados via Windsor.ai · Meta (CA - Santosha #2) + Google Ads (Santosha)<br>
