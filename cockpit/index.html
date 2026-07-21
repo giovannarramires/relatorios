@@ -104,6 +104,7 @@ function render(id, rows){
       else if(c==='Alerta'&&v) v=`<span class="al">⚠️ ${v}</span>`;
       else if(c==='Status conta') v=`<span class="dot" style="background:${String(v).includes('Rodando')?'var(--verde)':'var(--vermelho)'}"></span>${v}`;
       else if(c==='Dashboard'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">abrir ↗</a>`;
+      else if(c==='Relatório mensal'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">pasta ↗</a>`;
       return `<td>${v}</td>`;
     }).join('')+'</tr>').join('')+'</tbody>';
 }
