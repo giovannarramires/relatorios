@@ -89,19 +89,6 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
     <div class="mini" id="miniGoogle"></div>
   </div>
 
-  <h2>Dia a dia</h2>
-  <div class="note">Cada linha é um dia do período selecionado. Clique nos botões acima ou escolha as datas para filtrar.</div>
-  <div class="tbl-wrap">
-    <table id="tblDias">
-      <thead><tr>
-        <th>Dia</th><th class="r">Invest. Meta</th><th class="r">Invest. Google</th><th class="r">Invest. total</th>
-        <th class="r">Faturam. (ads)</th><th class="r">Vendas</th><th class="r">ROAS</th>
-      </tr></thead>
-      <tbody id="bodyDias"></tbody>
-      <tfoot id="footDias"></tfoot>
-    </table>
-  </div>
-
   <h2>Campanhas no Google <span class="tag" id="gTag"></span></h2>
   <div class="tbl-wrap">
     <table>
@@ -174,23 +161,6 @@ function render(){
   document.getElementById("miniGoogle").innerHTML =
     "<h3>Google Ads</h3>"+row("Investimento",brl(gS))+row("Faturamento",brl(gV))+row("ROAS",nf(gRoas,2)+"x")+
     row("Conversões",nf(gCv,1))+row("Impressões",nf(gI,0))+row("Cliques",nf(gC,0));
-
-  // tabela dia a dia
-  const dias=[...new Set(md.map(r=>r.date))].sort();
-  const gByDay={}; gd.forEach(r=>{ (gByDay[r.date]=gByDay[r.date]||{s:0,v:0,c:0}); gByDay[r.date].s+=r.spend; gByDay[r.date].v+=r.val; gByDay[r.date].c+=r.conv; });
-  let body="";
-  dias.forEach(dt=>{
-    const m=md.find(r=>r.date===dt)||{spend:0,pur:0,val:0};
-    const gg=gByDay[dt]||{s:0,v:0,c:0};
-    const ts=m.spend+gg.s, tv=m.val+gg.v, tr=ts? tv/ts:0, tven=m.pur+gg.c;
-    body+="<tr><td>"+fmtDia(dt)+"</td><td class='r'>"+brl(m.spend)+"</td><td class='r'>"+brl(gg.s)+"</td>"+
-      "<td class='r'>"+brl(ts)+"</td><td class='r'>"+brl(tv)+"</td><td class='r'>"+nf(tven,0)+"</td>"+
-      "<td class='r "+roasCls(tr)+"'>"+(tr?nf(tr,2):"—")+"</td></tr>";
-  });
-  document.getElementById("bodyDias").innerHTML = body || "<tr><td colspan='7' class='muted' style='text-align:center'>Sem dados no período.</td></tr>";
-  document.getElementById("footDias").innerHTML =
-    "<tr><td>Total</td><td class='r'>"+brl(mS)+"</td><td class='r'>"+brl(gS)+"</td><td class='r'>"+brl(tS)+"</td>"+
-    "<td class='r'>"+brl(tV)+"</td><td class='r'>"+nf(tVen,0)+"</td><td class='r "+roasCls(tRoas)+"'>"+(tRoas?nf(tRoas,2):"—")+"</td></tr>";
 
   // campanhas google agregadas no período
   const gAgg={};
