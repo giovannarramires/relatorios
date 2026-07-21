@@ -224,6 +224,11 @@ document.getElementById("quick").addEventListener("click",e=>{
 ["de","ate"].forEach(id=>document.getElementById(id).addEventListener("change",()=>{
   document.querySelectorAll(".qbtn").forEach(x=>x.classList.remove("active")); render();
 }));
+// padrão determinístico na abertura: mês todo (evita o Chrome restaurar datas antigas)
+document.getElementById("de").value=DMIN;
+document.getElementById("ate").value=DMAX;
+document.querySelectorAll(".qbtn").forEach(x=>x.classList.remove("active"));
+document.querySelector('.qbtn[data-q="mes"]').classList.add("active");
 render();
 </script>
 </body>
