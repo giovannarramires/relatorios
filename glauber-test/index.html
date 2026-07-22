@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Glauber — Controle Diário · Funil de Vendas | GGD</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3441;
+    --txt:#e6edf3; --mut:#8b98a9; --accent:#4f9cff;
+    --green:#2ec27e; --greenbg:#12301f;
+    --yellow:#e8b13b; --yellowbg:#332807;
+    --red:#f2545b; --redbg:#331013;
+    --gray:#6b7688; --graybg:#1e2530;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5;padding:28px 20px 60px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:26px}
+  header.top h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+  header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--mut);font-size:11px;padding:3px 9px;border-radius:20px;margin-right:6px}
+  h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);margin:34px 0 14px;font-weight:600}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
+  .card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .card .val{font-size:27px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
+  .card .foot{font-size:12px;color:var(--mut);margin-top:6px}
+  .card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .s-green{background:var(--green)} .s-yellow{background:var(--yellow)} .s-red{background:var(--red)} .s-accent{background:var(--accent)} .s-gray{background:var(--gray)}
+  .funnel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+  .frow{display:flex;align-items:center;gap:14px;padding:9px 0}
+  .frow .name{width:150px;font-size:13px;color:var(--txt);flex-shrink:0}
+  .frow .barwrap{flex:1;background:var(--panel2);border-radius:6px;height:30px;position:relative;overflow:hidden}
+  .frow .bar{height:100%;background:linear-gradient(90deg,#2f6fd0,#4f9cff);border-radius:6px;display:flex;align-items:center;padding-left:12px}
+  .frow .barnum{font-size:13px;font-weight:600;color:#fff;white-space:nowrap}
+  .frow .conv{width:150px;text-align:right;font-size:12px;color:var(--mut);flex-shrink:0}
+  .frow .conv b{font-size:14px}
+  .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600;margin-left:6px}
+  .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)} .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+  thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+  tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
+  tbody tr:hover{background:#141a24}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .metric-name{font-weight:600}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .d-green{background:var(--green)} .d-yellow{background:var(--yellow)} .d-red{background:var(--red)} .d-gray{background:var(--gray)}
+  .bench{color:var(--mut);font-size:12px}
+  .stage-tag{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;padding:14px 12px 4px;font-weight:700}
+  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
+  footer ul{margin:8px 0 0 18px} footer li{margin:4px 0}
+  a{color:var(--accent);text-decoration:none}
+  @media(max-width:640px){.frow .name{width:92px}.frow .conv{width:110px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>Dr. Glauber — Controle Diário · Funil de Vendas</h1>
+      <div class="sub">Meta Ads · conta <code>702387911807956</code> (CA 01 - Dr. Glauber) · @ecovoltan</div>
+    </div>
+    <div>
+      <span class="badge" id="periodo">Período: —</span>
+      <span class="badge">Janela: 1 dia no clique</span>
+      <span class="badge">Fonte: Meta Pixel (Windsor)</span>
+    </div>
+  </header>
+
+  <h2 class="sec">1 · Resumo Executivo</h2>
+  <div class="cards" id="scorecards"></div>
+
+  <h2 class="sec">2 · Funil de Perda — onde o balde está furando</h2>
+  <div class="funnel" id="funnel"></div>
+
+  <h2 class="sec">3 · Diagnóstico por Etapa (semáforo vs. benchmark)</h2>
+  <table id="stagetable">
+    <thead><tr>
+      <th>Métrica</th><th class="num">Valor</th><th>Benchmark ideal</th><th>Status</th><th>Leitura</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h2 class="sec">4 · Lucro Líquido &amp; Investimento (dia a dia)</h2>
+  <div class="chartbox"><canvas id="chartLucro" height="110"></canvas></div>
+
+  <h2 class="sec">5 · Ranking por Campanha (só VENDA) — funil completo</h2>
+  <div style="overflow-x:auto">
+  <table id="camptable" style="min-width:1500px">
+    <thead><tr>
+      <th>Campanha</th><th>Púb.</th>
+      <th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th><th class="num">CTR</th><th class="num">CPC</th><th class="num">Freq.</th>
+      <th class="num">LP Views</th><th class="num">Fluxo</th><th class="num">Custo/LP</th>
+      <th class="num">Checkouts</th><th class="num">Conv.Pág</th><th class="num">Custo/Chk</th>
+      <th class="num">Compras</th><th class="num">Conv.Chk</th><th class="num">CPA</th>
+      <th class="num">Faturam.</th><th class="num">Lucro</th><th class="num">ROAS</th>
+      <th class="num">Perfil</th><th class="num">Custo/Perfil</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+  </div>
+
+  <h2 class="sec">6 · Criativos que geraram vendas — custo por ação</h2>
+  <div style="overflow-x:auto">
+  <table id="cretable" style="min-width:1080px">
+    <thead><tr>
+      <th>Criativo</th>
+      <th class="num">Gasto</th><th class="num">Cliques</th><th class="num">Vendas</th>
+      <th class="num">Custo/Clique</th><th class="num">Custo/Venda</th>
+      <th class="num">Custo/View 3s</th><th class="num">Custo/ThruPlay 15s</th><th class="num">Custo/View 25%</th>
+      <th>Anúncio</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+  </div>
+
+  <footer>
+    <b>Notas técnicas &amp; ressalvas</b>
+    <ul>
+      <li><b>Produto base R$ 97 + upsells.</b> O ticket base é R$ 97, mas há order bumps/upsells de alto valor (vendas de ~R$ 5.000) que elevam o faturamento — por isso o ticket médio realizado fica bem acima de R$ 97. É esse fundo de funil que faz o ROAS fechar mesmo com CPA acima do valor do produto. Benchmark de CPA calibrado no produto R$ 97 (verde &lt; R$ 40, crítico &gt; R$ 80).</li>
+      <li><b>Campanha de tráfego excluída.</b> O funil ignora a campanha <code>[TRAFEGO][EVENTO_PRESENCIAL][JORNADA_MATOGROSSENSE]</code> (objetivo tráfego, evento presencial) — nunca somar com o funil de VENDA (regra L4).</li>
+      <li><b>Subnotificação do Pixel.</b> Dados via Meta Pixel/Windsor sofrem subnotificação pós-iOS14 (15–40%). Validar paridade semanal com a plataforma de vendas.</li>
+      <li><b>Atribuição atrasada.</b> Dias com faturamento e pouco/nenhum gasto = conversões de cliques anteriores (boleto/Pix). O faturamento do dia nem sempre pertence ao gasto do dia.</li>
+      <li><b>Frequência/Alcance.</b> No total, alcance é a soma por campanha (há sobreposição de pessoas entre campanhas); leia a frequência total como aproximação e prefira a análise por campanha.</li>
+      <li><b>Criativos (seção 6).</b> Lista <b>apenas os criativos que geraram pelo menos 1 venda</b> no período; cada linha soma o mesmo anúncio em todos os conjuntos/campanhas onde ele roda (agregado por nome do criativo). O link <i>ver criativo&nbsp;↗</i> abre o post real no Instagram. Métricas de vídeo: <b>View 3s</b> = reproduções de 3&nbsp;segundos; <b>ThruPlay 15s</b> = reproduzido até 15s ou até o fim; <b>View 25%</b> = assistiu 25% do vídeo. Criativos de imagem não têm views de vídeo (aparece “—”).</li>
+    </ul>
+    <div style="margin-top:12px">GGD · Gio Growth Digital — atualização automática 3×/dia (06h · 14h · 20h). Gerado com dados de <span id="gerado">—</span>.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   DADOS — gerados automaticamente pelo gerar_dash_glauber.py
+   ============================================================ */
+const META = {"periodo": "últimos 30 dias (22/06 – 21/07/2026)", "gerado": "22/07/2026"};
+const T = {"spend": 12293.57, "impressions": 202147.0, "reach": 79791.0, "linkClicks": 1667.0, "lpViews": 1319.0, "initiateCheckout": 146.0, "purchases": 37.0, "revenue": 24855.58, "profileVisits": 482.0};
+const DAILY = [["22/06", 1914.58, 494.0], ["23/06", 1168.68, 638.2], ["24/06", 830.12, 291.0], ["25/06", 1798.67, 2026.0], ["26/06", 1712.86, 2125.6], ["27/06", 178.54, 591.0], ["28/06", 0.0, 0.0], ["29/06", 0.0, 16195.6], ["02/07", 0.0, 0.0], ["03/07", 0.0, 0.0], ["08/07", 423.59, 591.0], ["09/07", 690.27, 97.0], ["10/07", 468.03, 0.0], ["11/07", 592.7, 1123.2], ["12/07", 441.65, 97.0], ["13/07", 352.34, 97.0], ["14/07", 364.75, 194.0], ["15/07", 498.8, 1.99], ["16/07", 617.85, 292.99], ["17/07", 240.14, 0.0], ["18/07", 0.0, 0.0], ["19/07", 0.0, 0.0], ["21/07", 0.0, 0.0]];
+const CAMPS = [["CBO · PF · 01 · pg02", "Frio", 2517.32, 33880, 18192, 336, 243, 28, 7, 6723.2, 73], ["CBO · PF · 02 · pg02", "Frio", 2340.42, 30358, 8123, 244, 200, 26, 10, 1185.58, 82], ["CBO · PQ · 02 · pg02", "Quente", 2114.3, 50633, 6871, 247, 212, 26, 9, 8187.2, 99], ["CBO · PF · 02 · pg02 #2", "Frio", 1481.84, 28520, 9247, 221, 188, 31, 7, 7577.6, 84], ["CBO · PF · 01 · pg02 N", "Frio", 852.09, 12538, 8098, 96, 86, 7, 1, 494.0, 29], ["CBO · PF · 02 · VIDEOS · pg02", "Frio", 671.91, 14047, 10581, 221, 141, 4, 0, 0.0, 28], ["CBO · PQ · 02 · pg02 #2", "Quente", 562.1, 6666, 3721, 57, 49, 7, 1, 494.0, 22], ["CBO · PF · 01 · pg02 #2", "Frio", 473.35, 4819, 2852, 72, 54, 6, 0, 0.0, 21], ["ABO · PF · 02 · pg02", "Frio", 405.6, 6385, 3665, 62, 54, 7, 1, 97.0, 10], ["CBO · PF · 02 · pg01", "Frio", 309.73, 5136, 3289, 41, 35, 0, 1, 97.0, 17], ["CBO · PQ · 02 · pg01", "Quente", 304.04, 5727, 2518, 38, 31, 1, 0, 0.0, 9], ["CBO · PF · 02 · pg02 #3", "Frio", 260.87, 3438, 2634, 32, 26, 2, 0, 0.0, 8], ["CBO · PQ · pg02", "Quente", 0.0, 0, 0, 0, 0, 1, 0, 0.0, 0], ["CBO · PQ · NEW", "Quente", 0.0, 0, 0, 0, 0, 0, 0, 0.0, 0]];
+const CRE = [["GV_CAPTACAO_FEED_IMG01_060", 1670.17, 248, 8, 178, 11, 9, "https://www.instagram.com/p/DagUhytgxoc/"], ["GV_CAPTACAO_FEED_V01_024", 1366.21, 163, 7, 2176, 530, 788, "https://www.instagram.com/p/Dah_S2_ASxA/"], ["GV_CAPTACAO_MIX_ADS", 1263.06, 156, 3, 44, 5, 2, "https://www.instagram.com/p/DZ8HJJ9Aveh/"], ["GV_CAPTACAO_NEW_CANVA_LEO_07", 1247.42, 121, 3, 0, 0, 0, "https://www.instagram.com/p/DZYGBRrgFIa/"], ["FF_PG_CAPTACAO_FEED_IMG01_081", 971.14, 85, 4, 69, 6, 0, "https://www.instagram.com/p/DamCYxtgqDc/"], ["GV_CAPTACAO_NEW_CANVA_LEO_08", 631.64, 85, 4, 43, 2, 0, "https://www.instagram.com/p/DaiBt8JAzfn/"], ["GV_CAPTACAO_FEED_IMG01_066", 526.04, 70, 2, 77, 15, 2, "https://www.instagram.com/p/DaFlOcYgxM_/"], ["FF_PG_CAPTACAO_FEED_IMG01_080", 413.97, 39, 2, 24, 1, 0, "https://www.instagram.com/p/DamCY3Fgsox/"], ["GV_CAPTACAO_FEED_IMG01_006", 262.72, 36, 1, 25, 1, 0, "https://www.instagram.com/p/DagUZRxAmJ9/"], ["FF_PG_CAPTACAO_FEED_IMG01_091", 178.64, 43, 1, 0, 0, 0, "https://www.instagram.com/p/Da1niTtgqlj/"], ["FF_PG_CAPTACAO_FEED_IMG01_087", 67.58, 8, 2, 0, 0, 0, "https://www.instagram.com/p/Da1lcujAQHO/"]];
+
+
+/* ============================================================
+   BENCHMARKS  (Low Ticket — produto base R$ 97)
+   ============================================================ */
+const BENCH = {
+  cpm:     {dir:'down', ideal:22,   crit:35,   fmt:'money', label:'R$ 12–22'},
+  ctr:     {dir:'up',   ideal:1.2,  crit:0.7,  fmt:'pct',   label:'> 1,2%'},
+  cpc:     {dir:'down', ideal:1.5,  crit:2.5,  fmt:'money', label:'< R$ 1,50'},
+  freq:    {dir:'down', ideal:3.0,  crit:4.0,  fmt:'dec',   label:'< 3,0'},
+  fluxo:   {dir:'up',   ideal:85,   crit:70,   fmt:'pct',   label:'> 85%'},
+  custoLp: {dir:'down', ideal:3,    crit:6,    fmt:'money', label:'< R$ 3,00'},
+  convPag: {dir:'up',   ideal:18,   crit:10,   fmt:'pct',   label:'> 18%'},
+  custoIc: {dir:'gray', label:'—'},
+  convChk: {dir:'up',   ideal:45,   crit:30,   fmt:'pct',   label:'> 45%'},
+  cpa:     {dir:'down', ideal:40,   crit:80,   fmt:'money', label:'< R$ 40 (prod. R$ 97)'},
+  roas:    {dir:'up',   ideal:3.5,  crit:1.5,  fmt:'dec',   label:'> 3,5 (mín. 2,0)'}
+};
+
+const brl = v => "R$ " + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const dec = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf= v => (v||0).toLocaleString('pt-BR');
+const fmt = (v,f)=> f==='money'?brl(v): f==='pct'?pct(v): f==='dec'?dec(v): intf(v);
+
+function status(val,b){
+  if(!b || b.dir==='gray') return 'gray';
+  if(b.dir==='up')   return val>=b.ideal?'green': val<=b.crit?'red':'yellow';
+  return val<=b.ideal?'green': val>=b.crit?'red':'yellow';
+}
+
+const M = {
+  cpm:     T.impressions? T.spend/T.impressions*1000 : 0,
+  ctr:     T.impressions? T.linkClicks/T.impressions*100 : 0,
+  cpc:     T.linkClicks? T.spend/T.linkClicks : 0,
+  freq:    T.reach? T.impressions/T.reach : 0,
+  fluxo:   T.linkClicks? T.lpViews/T.linkClicks*100 : 0,
+  custoLp: T.lpViews? T.spend/T.lpViews : 0,
+  convPag: T.lpViews? T.initiateCheckout/T.lpViews*100 : 0,
+  custoIc: T.initiateCheckout? T.spend/T.initiateCheckout : 0,
+  convChk: T.initiateCheckout? T.purchases/T.initiateCheckout*100 : 0,
+  cpa:     T.purchases? T.spend/T.purchases : 0,
+  roas:    T.spend? T.revenue/T.spend : 0,
+  lucro:   T.revenue - T.spend,
+  ticket:  T.purchases? T.revenue/T.purchases : 0,
+  custoVisita: T.profileVisits? T.spend/T.profileVisits : 0
+};
+
+document.getElementById('periodo').textContent = "Período: "+META.periodo;
+document.getElementById('gerado').textContent = META.gerado;
+const roasSt = status(M.roas,BENCH.roas);
+const cards = [
+  {lbl:"Investimento",  val:brl(T.spend),   foot:"Gasto no período",           st:"accent"},
+  {lbl:"Faturamento",   val:brl(T.revenue), foot:"Valor de conversão (Pixel)", st:"accent"},
+  {lbl:"Lucro Líquido", val:brl(M.lucro),   foot:"Faturamento − Gasto",        st:M.lucro>0?"green":"red"},
+  {lbl:"ROAS",          val:dec(M.roas)+"x",foot:"Retorno · ideal > 3,5",      st:roasSt},
+  {lbl:"Compras",       val:intf(T.purchases),foot:"Ticket médio "+brl(M.ticket), st:"accent"},
+  {lbl:"CPA",           val:brl(M.cpa),     foot:"Custo por compra · prod. R$ 97", st:status(M.cpa,BENCH.cpa)},
+  {lbl:"Visitas ao Perfil",val:intf(T.profileVisits),foot:"Custo/visita "+brl(M.custoVisita), st:"accent"}
+];
+document.getElementById('scorecards').innerHTML = cards.map(c=>`
+  <div class="card"><span class="stripe s-${c.st}"></span>
+    <div class="lbl">${c.lbl}</div><div class="val">${c.val}</div><div class="foot">${c.foot}</div>
+  </div>`).join('');
+
+const steps = [
+  {name:"Impressões",  val:T.impressions,     conv:null},
+  {name:"Cliques link",val:T.linkClicks,      conv:{lbl:"CTR",   v:M.ctr,   b:BENCH.ctr}},
+  {name:"Visualiz. LP",val:T.lpViews,         conv:{lbl:"Fluxo", v:M.fluxo, b:BENCH.fluxo}},
+  {name:"Checkouts",   val:T.initiateCheckout,conv:{lbl:"Conv.Pág",v:M.convPag,b:BENCH.convPag}},
+  {name:"Compras",     val:T.purchases,       conv:{lbl:"Conv.Chk",v:M.convChk,b:BENCH.convChk}}
+];
+const maxV = steps[0].val || 1;
+document.getElementById('funnel').innerHTML = steps.map(s=>{
+  const w = Math.max((s.val/maxV*100),2.4);
+  let conv='';
+  if(s.conv){ const st=status(s.conv.v,s.conv.b);
+    conv=`<div class="conv">${s.conv.lbl} <span class="pill p-${st}">${fmt(s.conv.v,s.conv.b.fmt)}</span></div>`;
+  } else conv=`<div class="conv"></div>`;
+  return `<div class="frow">
+      <div class="name">${s.name}</div>
+      <div class="barwrap"><div class="bar" style="width:${w}%"><span class="barnum">${intf(s.val)}</span></div></div>
+      ${conv}</div>`;
+}).join('');
+
+const rows = [
+  {stage:"Etapa 1 · Anúncio"},
+  {k:"CPM",                     v:M.cpm,     b:BENCH.cpm,     read:"Custo do leilão"},
+  {k:"CTR (link)",              v:M.ctr,     b:BENCH.ctr,     read:"Atratividade do criativo"},
+  {k:"CPC (link)",              v:M.cpc,     b:BENCH.cpc,     read:"Custo de entrada no funil"},
+  {k:"Frequência",              v:M.freq,    b:BENCH.freq,    read:"Saturação (aprox.)"},
+  {k:"Visitas ao Perfil",       v:T.profileVisits, b:{dir:'gray',fmt:'int',label:'—'}, read:"Interesse gerado no perfil (@ecovoltan)"},
+  {k:"Custo por Visita ao Perfil",v:M.custoVisita, b:{dir:'gray',fmt:'money',label:'—'}, read:"Gasto ÷ visitas ao perfil"},
+  {stage:"Etapa 2 · Página de Vendas"},
+  {k:"Fluxo de Tráfego (Connect)",v:M.fluxo, b:BENCH.fluxo,   read:"LP Views ÷ Cliques"},
+  {k:"Custo por LP View",       v:M.custoLp, b:BENCH.custoLp, read:"Custo do prospect qualificado"},
+  {stage:"Etapa 3 · Checkout"},
+  {k:"Conv. da Página",         v:M.convPag, b:BENCH.convPag, read:"Checkouts ÷ LP Views · copy/oferta"},
+  {k:"Custo por Checkout",      v:M.custoIc, b:BENCH.custoIc, read:"Previsor de CPA"},
+  {stage:"Etapa 4 · Resultado"},
+  {k:"Conv. do Checkout",       v:M.convChk, b:BENCH.convChk, read:"Compras ÷ Checkouts · pagamento"},
+  {k:"CPA (custo por compra)",  v:M.cpa,     b:BENCH.cpa,     read:"vs. ticket do produto"},
+  {k:"ROAS",                    v:M.roas,    b:BENCH.roas,    read:"Faturamento ÷ Gasto"}
+];
+const tb = document.querySelector('#stagetable tbody');
+tb.innerHTML = rows.map(r=>{
+  if(r.stage) return `<tr><td colspan="5" class="stage-tag">${r.stage}</td></tr>`;
+  const st=status(r.v,r.b);
+  const stTxt={green:"Saudável",yellow:"Atenção",red:"Crítico",gray:"—"}[st];
+  return `<tr>
+    <td class="metric-name">${r.k}</td>
+    <td class="num">${fmt(r.v,r.b.fmt||'dec')}</td>
+    <td class="bench">${r.b.label||'—'}</td>
+    <td><span class="dot d-${st}"></span>${stTxt}</td>
+    <td class="bench">${r.read}</td></tr>`;
+}).join('');
+
+new Chart(document.getElementById('chartLucro'),{
+  type:'bar',
+  data:{ labels:DAILY.map(d=>d[0]),
+    datasets:[
+      {type:'bar',label:'Investimento',data:DAILY.map(d=>d[1]),backgroundColor:'#33405a',borderRadius:3,order:2},
+      {type:'line',label:'Faturamento',data:DAILY.map(d=>d[2]),borderColor:'#4f9cff',backgroundColor:'#4f9cff',tension:.3,order:1,pointRadius:2},
+      {type:'line',label:'Lucro Líquido',data:DAILY.map(d=>d[2]-d[1]),borderColor:'#2ec27e',backgroundColor:'#2ec27e',tension:.3,order:0,pointRadius:2,borderWidth:2}
+    ]},
+  options:{responsive:true,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{color:'#8b98a9',boxWidth:12}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+brl(c.parsed.y)}}},
+    scales:{x:{ticks:{color:'#8b98a9',maxRotation:0,autoSkip:true},grid:{color:'#1c2330'}},
+      y:{ticks:{color:'#8b98a9',callback:v=>'R$'+v.toLocaleString('pt-BR')},grid:{color:'#1c2330'}}}}
+});
+
+const ct = document.querySelector('#camptable tbody');
+const campRows = CAMPS.map(c=>{
+  const [name,pub,spend,impr,reach,lc,lpv,ic,pur,rev,pv]=c;
+  return {
+    name, pub, spend, impr, pv, lpv, ic, pur, rev,
+    cpm:     impr? spend/impr*1000 : 0,
+    ctr:     impr? lc/impr*100 : 0,
+    cpc:     lc? spend/lc : 0,
+    freq:    reach? impr/reach : 0,
+    fluxo:   lc? lpv/lc*100 : 0,
+    custoLp: lpv? spend/lpv : 0,
+    convPag: lpv? ic/lpv*100 : 0,
+    custoIc: ic? spend/ic : 0,
+    convChk: ic? pur/ic*100 : 0,
+    cpa:     pur? spend/pur : null,
+    lucro:   rev - spend,
+    roas:    spend? rev/spend : 0,
+    custoPv: pv? spend/pv : 0
+  };
+}).sort((a,b)=>b.spend-a.spend);
+ct.innerHTML = campRows.map(r=>{
+  const cpmSt=status(r.cpm,BENCH.cpm), ctrSt=status(r.ctr,BENCH.ctr), cpcSt=status(r.cpc,BENCH.cpc),
+        frSt=status(r.freq,BENCH.freq), fSt=status(r.fluxo,BENCH.fluxo), clpSt=status(r.custoLp,BENCH.custoLp),
+        pSt=status(r.convPag,BENCH.convPag), ckSt=status(r.convChk,BENCH.convChk), rSt=status(r.roas,BENCH.roas);
+  const dt=(s)=>`<span class="dot d-${s}"></span>`;
+  return `<tr>
+    <td class="metric-name">${r.name}</td>
+    <td>${r.pub}</td>
+    <td class="num">${brl(r.spend)}</td>
+    <td class="num">${intf(r.impr)}</td>
+    <td class="num">${dt(cpmSt)}${brl(r.cpm)}</td>
+    <td class="num">${dt(ctrSt)}${pct(r.ctr)}</td>
+    <td class="num">${dt(cpcSt)}${brl(r.cpc)}</td>
+    <td class="num">${dt(frSt)}${dec(r.freq)}</td>
+    <td class="num">${intf(r.lpv)}</td>
+    <td class="num">${dt(fSt)}${pct(r.fluxo)}</td>
+    <td class="num">${dt(clpSt)}${brl(r.custoLp)}</td>
+    <td class="num">${intf(r.ic)}</td>
+    <td class="num">${dt(pSt)}${pct(r.convPag)}</td>
+    <td class="num">${brl(r.custoIc)}</td>
+    <td class="num">${intf(r.pur)}</td>
+    <td class="num">${dt(ckSt)}${pct(r.convChk)}</td>
+    <td class="num">${r.cpa!=null?dt(status(r.cpa,BENCH.cpa))+brl(r.cpa):'—'}</td>
+    <td class="num">${brl(r.rev)}</td>
+    <td class="num">${brl(r.lucro)}</td>
+    <td class="num">${dt(rSt)}${dec(r.roas)}x</td>
+    <td class="num">${intf(r.pv)}</td>
+    <td class="num">${brl(r.custoPv)}</td></tr>`;
+}).join('');
+
+/* ---- Seção 6 · Criativos (custo por ação, agregado por anúncio) ---- */
+const ctc = document.querySelector('#cretable tbody');
+const dash = '<span style="color:var(--mut)">—</span>';
+const cst  = (spend,q) => q ? brl(spend/q) : dash;
+if(!CRE.length){
+  ctc.innerHTML = `<tr><td colspan="10" style="color:var(--mut);text-align:center;padding:18px">Nenhum criativo com venda registrada nesta atualização.</td></tr>`;
+} else {
+  ctc.innerHTML = CRE.map(c=>{
+    const [name,spend,clk,pur,v3,v15,v25,link]=c;
+    const anc = link ? `<a href="${link}" target="_blank" rel="noopener">ver criativo ↗</a>` : dash;
+    return `<tr>
+      <td class="metric-name">${name}</td>
+      <td class="num">${brl(spend)}</td>
+      <td class="num">${intf(clk)}</td>
+      <td class="num">${intf(pur)}</td>
+      <td class="num">${cst(spend,clk)}</td>
+      <td class="num">${cst(spend,pur)}</td>
+      <td class="num">${cst(spend,v3)}</td>
+      <td class="num">${cst(spend,v15)}</td>
+      <td class="num">${cst(spend,v25)}</td>
+      <td>${anc}</td></tr>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
