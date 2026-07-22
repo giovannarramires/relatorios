@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cockpit GGD</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#1a1d24; --line:#2a2e37; --txt:#e8eaed; --mut:#9aa0aa;
+    --verde:#2ecc71; --amarelo:#f1c40f; --vermelho:#e74c3c; --azul:#4a9eff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,Segoe UI,Roboto,sans-serif;padding:24px;max-width:1200px;margin:0 auto}
+  /* --- tela de senha --- */
+  #lock{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:50}
+  #lock .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px;width:340px;max-width:90%;text-align:center}
+  #lock h1{font-size:20px;margin-bottom:6px}
+  #lock h1 span{color:var(--azul)}
+  #lock p{color:var(--mut);font-size:13px;margin-bottom:20px}
+  #lock input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:15px;margin-bottom:12px}
+  #lock button{width:100%;padding:12px;border:none;border-radius:10px;background:var(--azul);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+  #lock .err{color:var(--vermelho);font-size:13px;min-height:18px;margin-top:8px}
+  /* --- painel --- */
+  header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  h1.top{font-size:22px;font-weight:700}
+  h1.top span{color:var(--azul)}
+  .sub{color:var(--mut);font-size:13px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .kpi .n{font-size:28px;font-weight:700}
+  .kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+  section{margin-bottom:28px}
+  h2{font-size:15px;font-weight:600;margin-bottom:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .tblwrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;position:sticky;top:0;background:var(--card)}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600}
+  .p-ativo{background:rgba(46,204,113,.15);color:var(--verde)}
+  .p-pausado{background:rgba(241,196,15,.15);color:var(--amarelo)}
+  .p-onboarding{background:rgba(74,158,255,.15);color:var(--azul)}
+  .p-encerrado{background:rgba(154,160,170,.15);color:var(--mut)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+  .al{color:var(--vermelho);font-weight:600}
+  a{color:var(--azul);text-decoration:none}
+  .logbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .logbar label{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .logbar select{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;cursor:pointer}
+  footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
+  #app{display:none}
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <div class="box">
+    <h1>Cockpit <span>GGD</span></h1>
+    <p>Painel interno · protegido por senha</p>
+    <input id="pw" type="password" placeholder="Senha" autocomplete="current-password">
+    <button id="btn">Abrir</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div>
+      <h1 class="top">Cockpit <span>GGD</span></h1>
+      <div class="sub">Controle de clientes · saúde diária · diário de bordo</div>
+    </div>
+    <div class="sub" id="atualizado"></div>
+  </header>
+  <div class="kpis" id="kpis"></div>
+  <section><h2>🚦 Saúde de hoje</h2><div class="tblwrap"><table id="saude"></table></div></section>
+  <section><h2>👥 Clientes</h2><div class="tblwrap"><table id="clientes"></table></div></section>
+  <section>
+    <h2>📋 Diário de bordo</h2>
+    <div class="logbar">
+      <label for="logFiltro">Dia:</label>
+      <select id="logFiltro"></select>
+    </div>
+    <div class="tblwrap"><table id="log"></table></div>
+  </section>
+  <footer>Cockpit GGD · snapshot criptografado · atualizado pelo n8n às 08h</footer>
+</div>
+
+<script>
+// ---------- cripto (AES-256-GCM + PBKDF2, compatível com o gerador do n8n) ----------
+const b64ToBytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+async function deriveKey(pw, salt){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
+    km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+}
+async function loadData(pw){
+  const blob = await (await fetch('./data.json?t=' + Date.now())).json();
+  const key = await deriveKey(pw, b64ToBytes(blob.salt));
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64ToBytes(blob.iv)}, key, b64ToBytes(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+// ---------- render ----------
+const pill = s => { const k=(s||'').toLowerCase(); return `<span class="pill p-${k||'encerrado'}">${s||'—'}</span>`; };
+function render(id, rows){
+  const t=document.getElementById(id);
+  if(!rows || !rows.length){ t.innerHTML='<tbody><tr><td style="color:var(--mut);padding:16px">sem dados</td></tr></tbody>'; return; }
+  const cols=Object.keys(rows[0]).filter(c=>c);
+  t.innerHTML='<thead><tr>'+cols.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
+    rows.map(r=>'<tr>'+cols.map(c=>{
+      let v=r[c]??'';
+      if(c==='Status') v=pill(v);
+      else if(c==='Alerta'&&v) v=`<span class="al">⚠️ ${v}</span>`;
+      else if(c==='Status conta') v=`<span class="dot" style="background:${String(v).includes('Rodando')?'var(--verde)':'var(--vermelho)'}"></span>${v}`;
+      else if(c==='Dashboard'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">abrir ↗</a>`;
+      else if(c==='Relatório mensal'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">pasta ↗</a>`;
+      return `<td>${v}</td>`;
+    }).join('')+'</tr>').join('')+'</tbody>';
+}
+function build(data){
+  const cli=data.clientes||[], sau=data.saude||[], log=data.log||[];
+  const ativos=cli.filter(c=>String(c.Status).toLowerCase()==='ativo');
+  const comMeta=ativos.filter(c=>c['Meta (ID)']&&c['Meta (ID)']!=='CONFIRMAR'&&!/fora/i.test(c['Meta (ID)'])).length;
+  const comGoogle=ativos.filter(c=>c['Google Ads (ID)']&&c['Google Ads (ID)']!=='CONFIRMAR').length;
+  const dias=[...new Set(sau.map(s=>s.Data))];
+  const hoje=dias.length?dias[dias.length-1]:null;
+  const saudeHoje=sau.filter(s=>s.Data===hoje);
+  const alertas=saudeHoje.filter(s=>s.Alerta).length;
+  document.getElementById('kpis').innerHTML=[
+    ['Clientes ativos',ativos.length,'var(--verde)'],
+    ['No Meta Ads',comMeta,'var(--azul)'],
+    ['No Google Ads',comGoogle,'var(--azul)'],
+    ['Alertas hoje',alertas,alertas?'var(--vermelho)':'var(--verde)']
+  ].map(([l,n,c])=>`<div class="kpi"><div class="n" style="color:${c}">${n}</div><div class="l">${l}</div></div>`).join('');
+  render('clientes',cli);
+  render('saude',saudeHoje.length?saudeHoje:sau.slice(-10));
+  // --- diário de bordo com filtro por data ---
+  const diasLog=[...new Set(log.map(l=>l.Data).filter(Boolean))].sort().reverse();
+  const sel=document.getElementById('logFiltro');
+  sel.innerHTML='<option value="__all__">Todos os dias</option>'+
+    diasLog.map(d=>`<option value="${d}">${d}</option>`).join('');
+  const pintaLog=()=>{
+    const v=sel.value;
+    const filt=(v==='__all__'?log:log.filter(l=>l.Data===v));
+    render('log',filt.slice().reverse());
+  };
+  sel.value=diasLog.length?diasLog[0]:'__all__';  // abre no dia mais recente
+  sel.onchange=pintaLog;
+  pintaLog();
+  document.getElementById('atualizado').textContent='snapshot de '+(data.gerado_em||'—');
+}
+
+// ---------- fluxo de senha ----------
+async function tryOpen(){
+  const pw=document.getElementById('pw').value;
+  const err=document.getElementById('err');
+  if(!pw){ err.textContent='Digite a senha.'; return; }
+  err.textContent='abrindo…';
+  try{
+    const data=await loadData(pw);
+    sessionStorage.setItem('cockpit_pw', pw);
+    document.getElementById('lock').style.display='none';
+    document.getElementById('app').style.display='block';
+    build(data);
+  }catch(e){
+    err.textContent='Senha incorreta ou snapshot ainda não publicado.';
+  }
+}
+document.getElementById('btn').addEventListener('click', tryOpen);
+document.getElementById('pw').addEventListener('keydown', e=>{ if(e.key==='Enter') tryOpen(); });
+// tenta reabrir com a senha da sessão
+const saved=sessionStorage.getItem('cockpit_pw');
+if(saved){ document.getElementById('pw').value=saved; tryOpen(); }
+</script>
+</body>
+</html>
