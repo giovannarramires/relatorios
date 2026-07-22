@@ -45,6 +45,9 @@
   .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
   .al{color:var(--vermelho);font-weight:600}
   a{color:var(--azul);text-decoration:none}
+  .logbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .logbar label{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .logbar select{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;cursor:pointer}
   footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
   #app{display:none}
 </style>
@@ -72,7 +75,14 @@
   <div class="kpis" id="kpis"></div>
   <section><h2>🚦 Saúde de hoje</h2><div class="tblwrap"><table id="saude"></table></div></section>
   <section><h2>👥 Clientes</h2><div class="tblwrap"><table id="clientes"></table></div></section>
-  <section><h2>📋 Diário de bordo (últimos 15)</h2><div class="tblwrap"><table id="log"></table></div></section>
+  <section>
+    <h2>📋 Diário de bordo</h2>
+    <div class="logbar">
+      <label for="logFiltro">Dia:</label>
+      <select id="logFiltro"></select>
+    </div>
+    <div class="tblwrap"><table id="log"></table></div>
+  </section>
   <footer>Cockpit GGD · snapshot criptografado · atualizado pelo n8n às 08h</footer>
 </div>
 
@@ -125,7 +135,19 @@ function build(data){
   ].map(([l,n,c])=>`<div class="kpi"><div class="n" style="color:${c}">${n}</div><div class="l">${l}</div></div>`).join('');
   render('clientes',cli);
   render('saude',saudeHoje.length?saudeHoje:sau.slice(-10));
-  render('log',log.slice(-15).reverse());
+  // --- diário de bordo com filtro por data ---
+  const diasLog=[...new Set(log.map(l=>l.Data).filter(Boolean))].sort().reverse();
+  const sel=document.getElementById('logFiltro');
+  sel.innerHTML='<option value="__all__">Todos os dias</option>'+
+    diasLog.map(d=>`<option value="${d}">${d}</option>`).join('');
+  const pintaLog=()=>{
+    const v=sel.value;
+    const filt=(v==='__all__'?log:log.filter(l=>l.Data===v));
+    render('log',filt.slice().reverse());
+  };
+  sel.value=diasLog.length?diasLog[0]:'__all__';  // abre no dia mais recente
+  sel.onchange=pintaLog;
+  pintaLog();
   document.getElementById('atualizado').textContent='snapshot de '+(data.gerado_em||'—');
 }
 
