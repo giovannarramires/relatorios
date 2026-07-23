@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Dashboard Lançamento JUL/26 · Felipe Scherer · Gestão GGD · GERADO AUTOMATICAMENTE -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felipe Scherer — Lançamento JUL/26</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+--h1:#4338ca;--h2:#2563eb;--cap:#2563eb;--dist:#8b5cf6;--good:#10b981;--warn:#f59e0b;--bad:#ef4444;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--radius:14px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
+.header{background:linear-gradient(135deg,var(--h1),var(--h2));padding:0 36px;min-height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.2);flex-wrap:wrap;gap:8px}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.header-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.header-sub{font-size:11px;color:rgba(255,255,255,.75)}
+.header-right{font-size:11px;color:rgba(255,255,255,.85);text-align:right;padding:12px 0}
+.header-right b{color:#fff}
+.wrap{max-width:1200px;margin:0 auto;padding:26px 24px}
+.section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2);margin:34px 0 14px;display:flex;align-items:center;gap:8px}
+.section-title:first-child{margin-top:6px}
+.section-title .bar{width:4px;height:16px;border-radius:2px;background:var(--h1)}
+.section-hint{font-size:11.5px;color:var(--text-3);font-weight:500;text-transform:none;letter-spacing:0;margin-left:2px}
+.phases{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.phase{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);border-left:4px solid var(--cap);position:relative}
+.phase.dist{border-left-color:var(--dist)}
+.phase-tag{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(37,99,235,.12);color:var(--cap);display:inline-block}
+.phase.dist .phase-tag{background:rgba(139,92,246,.12);color:var(--dist)}
+.phase-name{font-size:15px;font-weight:800;margin:9px 0 3px}
+.phase-desc{font-size:11.5px;color:var(--text-3);margin-bottom:12px}
+.phase-metrics{display:flex;gap:22px;flex-wrap:wrap}
+.pm{display:flex;flex-direction:column}
+.pm-v{font-size:19px;font-weight:800;letter-spacing:-.5px}
+.pm-l{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.live{position:absolute;top:16px;right:18px;font-size:9.5px;font-weight:700;color:var(--good);display:flex;align-items:center;gap:5px}
+.live .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--surface);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--h2)}
+.kpi.k-lead::before{background:var(--good)}.kpi.k-cpl::before{background:var(--warn)}.kpi.k-inv::before{background:var(--cap)}.kpi.k-pag::before{background:var(--dist)}
+.kpi.k-connect{box-shadow:0 0 0 2px rgba(139,92,246,.25),var(--shadow-sm)}.kpi.k-connect::before{width:5px;background:linear-gradient(180deg,#8b5cf6,#6366f1)}
+.kpi-l{font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:6px}
+.kpi-v{font-size:24px;font-weight:800;letter-spacing:-.8px}
+.kpi-s{font-size:11px;color:var(--text-2);margin-top:4px}
+.kpi-s b{color:var(--good)}
+.card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.chart-box{position:relative;height:320px}
+.invbox{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.invcard{border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);background:var(--surface)}
+.invcard .il{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+.invcard .iv{font-size:26px;font-weight:800;letter-spacing:-.8px}
+.invcard .is{font-size:11px;color:var(--text-2);margin-top:5px;line-height:1.4}
+.invcard.camp{border-left:4px solid var(--cap)}
+.invcard.tax{border-left:4px solid var(--warn)}
+.invcard.tax .iv{color:#b45309}
+.invcard.total{background:linear-gradient(135deg,#0f172a,#1e293b)}
+.invcard.total .il{color:rgba(255,255,255,.7)}.invcard.total .iv{color:#fff}.invcard.total .is{color:rgba(255,255,255,.65)}
+@media(max-width:700px){.invbox{grid-template-columns:1fr}}
+.budget{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.budget-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.budget-title{font-size:13px;font-weight:800}
+.budget-total{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.budget-total span{font-size:13px;color:var(--text-3);font-weight:600}
+.pbar{height:28px;border-radius:14px;background:#e2e8f0;overflow:hidden;position:relative}
+.pbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--h1),var(--h2));border-radius:14px;transition:width .6s;min-width:3px}
+.pbar-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text)}
+.budget-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:11.5px;color:var(--text-2);margin-top:11px}
+.budget-foot b{color:var(--text)}
+.funnelV{display:flex;flex-direction:column;align-items:center;padding:4px 0}
+.fseg{color:#fff;border-radius:12px;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 6px 16px rgba(0,0,0,.13);min-width:210px}
+.fseg .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.92}
+.fseg .fsub{font-size:10px;font-weight:500;opacity:.85;text-transform:none;letter-spacing:0;margin-top:2px}
+.fseg .fv{font-size:23px;font-weight:800;letter-spacing:-.5px;white-space:nowrap}
+.fseg.s1{background:linear-gradient(135deg,#4338ca,#4f46e5)}
+.fseg.s2{background:linear-gradient(135deg,#2563eb,#3b82f6)}
+.fseg.s3{background:linear-gradient(135deg,#8b5cf6,#a855f7)}
+.fseg.s4{background:linear-gradient(135deg,#059669,#10b981)}
+.fconn{display:flex;align-items:center;gap:9px;padding:8px 0}
+.fconn .chev{color:#cbd5e1;font-size:13px}
+.fconn .pill{border-radius:20px;padding:4px 13px;font-weight:800;font-size:11.5px;background:#fff;border:1px solid var(--border);color:var(--text-2);box-shadow:var(--shadow-sm)}
+.fconn .pill.hot{background:rgba(16,185,129,.12);border-color:transparent;color:#059669}
+.fconn .pill.warn{background:rgba(245,158,11,.14);border-color:transparent;color:#b45309}
+.fsummary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.fsum{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center}
+.fsum .v{font-size:20px;font-weight:800;letter-spacing:-.5px}
+.fsum .l{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-top:2px}
+.fsum.hl{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3)}
+.fsum.hl .v{color:#059669}
+@media(max-width:560px){.fseg{width:100%!important}.fsummary{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid #f1f5f9}
+th.num,td.num{text-align:right}
+tr:hover td{background:#f8fafc}
+.tbl-scroll{overflow-x:auto}
+tr.total-row td{border-top:2px solid var(--border);font-weight:800;background:#f8fafc}
+.tag-pub{font-weight:700;font-size:12px}
+.minibar{height:6px;border-radius:3px;background:#e2e8f0;overflow:hidden;margin-top:4px;width:100%}
+.minibar>span{display:block;height:100%;background:linear-gradient(90deg,var(--good),#34d399)}
+.cpl-badge{font-weight:800;padding:2px 8px;border-radius:6px;font-size:11.5px;white-space:nowrap}
+.cpl-good{background:rgba(16,185,129,.12);color:#059669}
+.cpl-mid{background:rgba(245,158,11,.14);color:#b45309}
+.cpl-bad{background:rgba(239,68,68,.12);color:#dc2626}
+.pg-pill{font-weight:700;font-size:11.5px;padding:2px 8px;border-radius:6px;background:rgba(139,92,246,.1);color:#7c3aed}
+.rank{display:inline-flex;width:20px;height:20px;border-radius:5px;background:#eef2ff;color:var(--h1);font-weight:800;font-size:11px;align-items:center;justify-content:center;margin-right:6px}
+.btn-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#fff;background:var(--h2);padding:5px 11px;border-radius:7px;text-decoration:none;white-space:nowrap}
+.btn-link:hover{background:var(--h1)}
+.sim{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.sim-inputs{display:flex;flex-direction:column;gap:16px}
+.sim-field label{font-size:11px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:6px}
+.sim-field input[type=range]{width:100%}
+.sim-field .rv{font-size:20px;font-weight:800;color:var(--h1)}
+.sim-out{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:var(--radius);padding:22px;color:#fff}
+.sim-out .so-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.sim-out .so-row:last-child{border:none}
+.sim-out .so-l{font-size:12px;color:rgba(255,255,255,.7)}
+.sim-out .so-v{font-size:20px;font-weight:800}
+.sim-out .roas-big{font-size:34px;font-weight:900;letter-spacing:-1px}
+.roas-pos{color:#34d399}.roas-neg{color:#f87171}
+.note{font-size:11px;color:var(--text-3);margin-top:10px;line-height:1.5}
+.footer{text-align:center;font-size:11px;color:var(--text-3);margin-top:40px}
+@media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}.phases,.sim{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">🚀</div>
+    <div><div class="header-title">Felipe Scherer — Lançamento JUL/26</div>
+      <div class="header-sub">Meta Ads · Captação + Distribuição · Gestão GGD</div></div>
+  </div>
+  <div class="header-right" id="hdrRight"></div>
+</div>
+<div class="wrap">
+  <div class="section-title"><span class="bar"></span>Fases do Lançamento</div>
+  <div class="phases" id="phases"></div>
+
+  <div class="section-title"><span class="bar"></span>Visão Geral · Captação</div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="section-title"><span class="bar"></span>Quadro de Investimento
+    <span class="section-hint">— campanha · imposto (ISS+IOF 13,83%) · total pago</span></div>
+  <div class="invbox" id="invBox"></div>
+
+  <div class="section-title"><span class="bar"></span>Orçamento do Projeto
+    <span class="section-hint">— quanto do investimento total planejado já foi aplicado</span></div>
+  <div class="budget" id="budgetBox"></div>
+
+  <div class="section-title"><span class="bar"></span>Controle Diário da Operação
+    <span class="section-hint">— investimento · alcance de anúncio (CPM/CTR) · leads · CPL · conversão da página, dia a dia</span></div>
+  <div class="card tbl-scroll"><table id="tblDaily"><thead><tr>
+    <th>Dia</th><th class="num">Campanha</th><th class="num">Imposto</th><th class="num">Total pago</th>
+    <th class="num">Impressões</th><th class="num">CPM</th><th class="num">Cliques</th><th class="num">CTR</th><th class="num">Connect rate</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv. página</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Evolução Diária · Leads · Investimento · CPL vs Meta
+    <span class="section-hint">— barras = leads · linha azul = investimento · linha laranja = CPL do dia · tracejado vermelho = meta R$ 11</span></div>
+  <div class="card"><div class="chart-box"><canvas id="chartDaily"></canvas></div></div>
+
+  <div class="section-title"><span class="bar"></span>Funil da Captação
+    <span class="section-hint">— do anúncio até o lead, com a taxa de conversão da página</span></div>
+  <div class="card"><div class="funnel" id="funnel"></div><p class="note" id="funnelNote"></p></div>
+
+  <div class="section-title"><span class="bar"></span>Origem dos Leads · por Público (conjunto)</div>
+  <div class="card tbl-scroll"><table id="tblPub"><thead><tr>
+    <th>Público / Conjunto</th><th class="num">Leads</th><th class="num">Investido</th>
+    <th class="num">CPL</th><th style="width:22%">Participação</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Melhores Criativos · com link do anúncio
+    <span class="section-hint">— clique em "Ver anúncio" para abrir o post no Facebook/Instagram</span></div>
+  <div class="card tbl-scroll"><table id="tblAd"><thead><tr>
+    <th>#</th><th>Criativo</th><th class="num">Leads</th><th class="num">CPL</th>
+    <th class="num">Conv. página</th><th class="num">Investido</th><th>Anúncio</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="section-title"><span class="bar"></span>Projeção de Faturamento & ROI</div>
+  <div class="card">
+    <p class="note" id="simIntro" style="margin-top:0;margin-bottom:18px"></p>
+    <div class="sim">
+      <div class="sim-inputs">
+        <div class="sim-field"><label>Ticket médio do produto</label>
+          <div class="rv" id="rvTicket">R$ 297</div>
+          <input type="range" id="ticket" min="47" max="2800" step="10" value="297"></div>
+        <div class="sim-field"><label>Conversão de leads em venda</label>
+          <div class="rv" id="rvConv">3,0%</div>
+          <input type="range" id="conv" min="0.5" max="15" step="0.5" value="3"></div>
+      </div>
+      <div class="sim-out">
+        <div class="so-row"><span class="so-l">Vendas estimadas</span><span class="so-v" id="oVendas">–</span></div>
+        <div class="so-row"><span class="so-l">Faturamento projetado</span><span class="so-v" id="oFat">–</span></div>
+        <div class="so-row"><span class="so-l">Total pago (c/ imposto)</span><span class="so-v" id="oInv">–</span></div>
+        <div class="so-row"><span class="so-l">ROAS projetado</span><span class="roas-big" id="oRoas">–</span></div>
+      </div>
+    </div>
+    <p class="note" id="breakeven"></p>
+  </div>
+  <div class="footer" id="footer"></div>
+</div>
+<script>
+const DATA = {"meta": {"gerado_em": "2026-07-23", "conta": "406495927539938", "periodo_ini": "02/07", "periodo_fim": "22/07"}, "totals": {"spend": 46715.8, "leads": 3400, "lc": 14446, "lpv": 10762, "impr": 1116763, "reach": 448442, "dist_spend": 1624.46, "dist_vviews": 252224, "dist_reach": 180662}, "daily": [{"d": "02/07", "spend": 2367.48, "lc": 713, "lpv": 548, "leads": 166, "impr": 62665}, {"d": "03/07", "spend": 2517.77, "lc": 894, "lpv": 492, "leads": 171, "impr": 57799}, {"d": "04/07", "spend": 880.14, "lc": 363, "lpv": 123, "leads": 58, "impr": 19432}, {"d": "05/07", "spend": 2247.26, "lc": 569, "lpv": 434, "leads": 134, "impr": 36863}, {"d": "06/07", "spend": 1207.03, "lc": 450, "lpv": 364, "leads": 121, "impr": 31852}, {"d": "07/07", "spend": 1248.2, "lc": 411, "lpv": 321, "leads": 119, "impr": 32067}, {"d": "08/07", "spend": 2289.79, "lc": 759, "lpv": 597, "leads": 207, "impr": 53683}, {"d": "09/07", "spend": 2040.81, "lc": 802, "lpv": 638, "leads": 212, "impr": 54762}, {"d": "10/07", "spend": 3002.43, "lc": 994, "lpv": 763, "leads": 209, "impr": 82323}, {"d": "11/07", "spend": 2140.1, "lc": 764, "lpv": 601, "leads": 191, "impr": 48393}, {"d": "12/07", "spend": 2375.75, "lc": 769, "lpv": 593, "leads": 175, "impr": 50788}, {"d": "13/07", "spend": 2682.96, "lc": 857, "lpv": 649, "leads": 211, "impr": 64580}, {"d": "14/07", "spend": 3370.25, "lc": 904, "lpv": 684, "leads": 188, "impr": 80609}, {"d": "15/07", "spend": 1777.97, "lc": 505, "lpv": 382, "leads": 135, "impr": 41361}, {"d": "16/07", "spend": 1819.52, "lc": 514, "lpv": 407, "leads": 136, "impr": 45068}, {"d": "17/07", "spend": 1651.12, "lc": 551, "lpv": 419, "leads": 133, "impr": 46355}, {"d": "18/07", "spend": 1665.44, "lc": 557, "lpv": 417, "leads": 164, "impr": 40705}, {"d": "19/07", "spend": 4052.68, "lc": 1030, "lpv": 784, "leads": 238, "impr": 85159}, {"d": "20/07", "spend": 2361.72, "lc": 650, "lpv": 497, "leads": 145, "impr": 55902}, {"d": "21/07", "spend": 2888.76, "lc": 857, "lpv": 643, "leads": 180, "impr": 72864}, {"d": "22/07", "spend": 2128.62, "lc": 533, "lpv": 406, "leads": 107, "impr": 53533}], "publicos": [{"publico": "INTERESSES_ADVOGADO", "leads": 653, "spend": 8573.53, "cpl": 13.13}, {"publico": "ADV", "leads": 380, "spend": 4426.3, "cpl": 11.65}, {"publico": "LAL_VVIEW_95", "leads": 353, "spend": 5190.44, "cpl": 14.7}, {"publico": "ADV / DIREITO_TRABALHISTA", "leads": 342, "spend": 4547.14, "cpl": 13.3}, {"publico": "ENVOLVIMENTO_180", "leads": 267, "spend": 3294.27, "cpl": 12.34}, {"publico": "MIX_ADV_TRABALHO", "leads": 261, "spend": 3675.9, "cpl": 14.08}, {"publico": "ENVOLVIMENTO_90", "leads": 227, "spend": 3404.95, "cpl": 15.0}, {"publico": "ADV]_AD05_EH", "leads": 168, "spend": 1935.93, "cpl": 11.52}, {"publico": "MIX_LAL", "leads": 138, "spend": 2358.7, "cpl": 17.09}, {"publico": "ENVOLVIMENTO_365", "leads": 107, "spend": 1249.98, "cpl": 11.68}, {"publico": "LAL_CADASTRADOS", "leads": 96, "spend": 1724.68, "cpl": 17.97}, {"publico": "MIX_ADV_TRABALHO]_AD01_EH", "leads": 87, "spend": 1249.88, "cpl": 14.37}, {"publico": "QUENTE_180D", "leads": 68, "spend": 827.15, "cpl": 12.16}, {"publico": "ADV]_AD05__EH", "leads": 44, "spend": 576.1, "cpl": 13.09}, {"publico": "INTERESSES_ADVOGADO]_AD05_EH", "leads": 25, "spend": 484.93, "cpl": 19.4}, {"publico": "ENVOLVIMENTO_90]_AD17_EH", "leads": 25, "spend": 346.36, "cpl": 13.85}, {"publico": "MIX_ADV_TRABALHO]_AD12 _EH", "leads": 24, "spend": 319.18, "cpl": 13.3}, {"publico": "LAL_LEAD_PURCHASE", "leads": 21, "spend": 409.2, "cpl": 19.49}, {"publico": "LAL_PURCHASE", "leads": 14, "spend": 353.41, "cpl": 25.24}, {"publico": "LAL_VVIEW_95]_AD17_EH", "leads": 13, "spend": 114.76, "cpl": 8.83}, {"publico": "LAL_VVIEW_95]_AD02_EH", "leads": 12, "spend": 171.8, "cpl": 14.32}, {"publico": "INTERESSES_ADVOGADO]_AD17_EH", "leads": 11, "spend": 141.06, "cpl": 12.82}, {"publico": "ENVOLVIMENTO_180]_AD06 — Cópia", "leads": 8, "spend": 55.92, "cpl": 6.99}, {"publico": "ADV]_AD12_EH", "leads": 7, "spend": 117.17, "cpl": 16.74}, {"publico": "INTERESSES_ADVOGADO]_AD02_EH", "leads": 6, "spend": 121.87, "cpl": 20.31}, {"publico": "QUENTE_90D", "leads": 5, "spend": 111.23, "cpl": 22.25}, {"publico": "INTERESSES_ADVOGADO]_AD18_EH", "leads": 4, "spend": 52.49, "cpl": 13.12}, {"publico": "LAL_VVIEW_95]_AD04_EH", "leads": 3, "spend": 38.47, "cpl": 12.82}, {"publico": "MIX_ADV_TRABALHO]_AD05 — Cópia", "leads": 3, "spend": 42.71, "cpl": 14.24}, {"publico": "MIX_LAL]_AD02 — Cópia", "leads": 3, "spend": 34.65, "cpl": 11.55}, {"publico": "ENVOLVIMENTO_180]_AD12 — Cópia", "leads": 3, "spend": 49.47, "cpl": 16.49}, {"publico": "ADV]_AD05 — Cópia", "leads": 3, "spend": 28.51, "cpl": 9.5}, {"publico": "ENVOLVIMENTO_90]_AD17_EH — Cópia", "leads": 3, "spend": 31.2, "cpl": 10.4}, {"publico": "ADV]_AD12 _EH", "leads": 2, "spend": 34.24, "cpl": 17.12}, {"publico": "ENVOLVIMENTO_180]_AD17_EH", "leads": 2, "spend": 31.42, "cpl": 15.71}, {"publico": "LAL_CADASTRADOS]_AD01 _EH", "leads": 2, "spend": 39.79, "cpl": 19.89}, {"publico": "MIX_ADV_TRABALHO]_AD01 — Cópia", "leads": 2, "spend": 47.63, "cpl": 23.82}, {"publico": "ADV]_AD12 — Cópia", "leads": 2, "spend": 31.07, "cpl": 15.54}, {"publico": "ADV / DIREITO_TRABALHISTA]_AD06_EH", "leads": 1, "spend": 49.08, "cpl": 49.08}, {"publico": "INTERESSES_ADVOGADO]_AD15_EH", "leads": 1, "spend": 41.36, "cpl": 41.36}, {"publico": "ENVOLVIMENTO_90]_AD14_EH", "leads": 1, "spend": 29.43, "cpl": 29.43}, {"publico": "LAL_CADASTRADOS]_AD05 — Cópia", "leads": 1, "spend": 42.93, "cpl": 42.93}, {"publico": "ADV / DIREITO_TRABALHISTA]_AD06 — Cópia", "leads": 1, "spend": 12.95, "cpl": 12.95}, {"publico": "ENVOLVIMENTO_365]_AD06 — Cópia", "leads": 1, "spend": 29.16, "cpl": 29.16}, {"publico": "LAL_VVIEW_95]_AD06_EH", "leads": 0, "spend": 25.75, "cpl": null}, {"publico": "MIX_ADV_TRABALHO]_AD05_EH", "leads": 0, "spend": 26.06, "cpl": null}, {"publico": "INTERESSES_ADVOGADO]_AD12_EH", "leads": 0, "spend": 13.19, "cpl": null}, {"publico": "MIX_ADV_TRABALHO]_AD12 — Cópia", "leads": 0, "spend": 43.6, "cpl": null}, {"publico": "ENVOLVIMENTO_365]_AD12 — Cópia", "leads": 0, "spend": 23.94, "cpl": null}, {"publico": "INTERESSES_ADVOGADO]_AD05 — Cópia", "leads": 0, "spend": 11.35, "cpl": null}, {"publico": "ENVOLVIMENTO_180]_AD15 — Cópia", "leads": 0, "spend": 25.8, "cpl": null}, {"publico": "ADV]_AD05__EH — Cópia", "leads": 0, "spend": 11.3, "cpl": null}, {"publico": "ADV]_AD12_EH — Cópia", "leads": 0, "spend": 14.0, "cpl": null}, {"publico": "ENVOLVIMENTO_90]_AD17 — Cópia", "leads": 0, "spend": 13.64, "cpl": null}, {"publico": "ENVOLVIMENTO_365]_AD05 — Cópia", "leads": 0, "spend": 28.33, "cpl": null}, {"publico": "LAL_VVIEW_95]_AD06 — Cópia", "leads": 0, "spend": 17.81, "cpl": null}, {"publico": "ADV]_AD05_EH — Cópia", "leads": 0, "spend": 8.56, "cpl": null}, {"publico": "MIX_ADV_TRABALHO]_AD01_EH — Cópia", "leads": 0, "spend": 11.74, "cpl": null}], "criativos": [{"ad": "AD_FEED_VIDEO_AD05_IDZE", "leads": 716, "spend": 8955.1, "lc": 2611, "lpv": 1969, "link": "https://facebook.com/p/104241485323869_1042454368172721", "cpl": 12.51, "txPagina": 36.4}, {"ad": "AD_FEED_VIDEO_AD12_IDZE", "leads": 613, "spend": 7505.3, "lc": 2892, "lpv": 2201, "link": "https://facebook.com/p/104241485323869_1042454294839395", "cpl": 12.24, "txPagina": 27.9}, {"ad": "AD_FEED_VIDEO_AD06_IDZE", "leads": 466, "spend": 6075.55, "lc": 1823, "lpv": 1403, "link": "https://facebook.com/p/104241485323869_1042454504839374", "cpl": 13.04, "txPagina": 33.2}, {"ad": "AD_FEED_VIDEO_AD17_IDZE", "leads": 416, "spend": 4301.68, "lc": 1456, "lpv": 1164, "link": "https://facebook.com/p/104241485323869_1042195244865300", "cpl": 10.34, "txPagina": 35.7}, {"ad": "AD_FEED_VIDEO_AD02_IDZE", "leads": 280, "spend": 3825.0, "lc": 1217, "lpv": 899, "link": "https://facebook.com/p/104241485323869_1042454601506031", "cpl": 13.66, "txPagina": 31.1}, {"ad": "AD_FEED_VIDEO_AD01_IDZE", "leads": 165, "spend": 2620.79, "lc": 642, "lpv": 450, "link": "https://facebook.com/p/104241485323869_1042454838172674", "cpl": 15.88, "txPagina": 36.7}, {"ad": "AD_FEED_VIDEO_AD15_IDZE", "leads": 115, "spend": 1722.08, "lc": 412, "lpv": 321, "link": "https://facebook.com/p/104241485323869_1042195021531989", "cpl": 14.97, "txPagina": 35.8}, {"ad": "AD_FEED_VIDEO_AD14_IDZE", "leads": 68, "spend": 1029.16, "lc": 465, "lpv": 371, "link": "https://facebook.com/p/104241485323869_1042195768198581", "cpl": 15.13, "txPagina": 18.3}, {"ad": "AD_FEED_NATIVO_1_PROMESSA", "leads": 58, "spend": 715.85, "lc": 158, "lpv": 120, "link": "https://facebook.com/p/104241485323869_1031817249236433", "cpl": 12.34, "txPagina": 48.3}, {"ad": "AD_CARR_08", "leads": 58, "spend": 729.04, "lc": 195, "lpv": 131, "link": "https://facebook.com/p/104241485323869_1042182764866548", "cpl": 12.57, "txPagina": 44.3}, {"ad": "AD_CARR_11", "leads": 52, "spend": 840.55, "lc": 344, "lpv": 239, "link": "https://facebook.com/p/104241485323869_1042182181533273", "cpl": 16.16, "txPagina": 21.8}, {"ad": "AD_FEED_VIDEO_AD04_IDZE", "leads": 51, "spend": 1018.89, "lc": 305, "lpv": 193, "link": "https://facebook.com/p/104241485323869_1042454308172727", "cpl": 19.98, "txPagina": 26.4}]};
+const T = DATA.totals, daily = DATA.daily, publicos = DATA.publicos, criativos = DATA.criativos;
+const BRL = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const BRL0 = v => 'R$ ' + Math.round(v||0).toLocaleString('pt-BR');
+const N = v => (v||0).toLocaleString('pt-BR');
+const PCT = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+const cplClass = c => c==null?'cpl-mid':(c<=META_CPL?'cpl-good':(c<=META_CPL*1.3?'cpl-mid':'cpl-bad'));  // verde ≤ meta · laranja até +30% · vermelho acima
+const crColor = r => r>=80?'#059669':(r>=65?'#b45309':'#dc2626');   // connect rate: verde/amarelo/vermelho
+const crClass = r => r>=80?'cpl-good':(r>=65?'cpl-mid':'cpl-bad');
+
+const META_CPL = 11;                       // meta de CPL do projeto (R$) — linha tracejada no gráfico
+const BUDGET_TOTAL = 70000;                // orçamento total planejado do lançamento (R$)
+const TAX = 0.1383;                        // ISS+IOF — alíquota real da conta (conferida no relatório de transações)
+const campGeral = T.spend + T.dist_spend;  // investido em campanha (líquido, sem imposto)
+const impGeral  = campGeral * TAX;         // imposto
+const totGeral  = campGeral * (1 + TAX);   // total pago (desembolso real)
+const INVEST_TOTAL = +totGeral.toFixed(2); // ROI usa o total pago (com imposto)
+const cplMedio = T.leads ? T.spend/T.leads : 0;
+const ctrLink  = T.impr ? T.lc/T.impr*100 : 0;
+const txClickPage = T.lc ? T.lpv/T.lc*100 : 0;
+const txPagina = T.lpv ? T.leads/T.lpv*100 : 0;
+const cpc = T.lc ? T.spend/T.lc : 0;
+const cpm = T.impr ? T.spend/T.impr*1000 : 0;
+const cplMin = Math.min(...daily.filter(d=>d.leads>0).map(d=>d.spend/d.leads));
+const diasAtivos = daily.filter(d=>d.leads>0).length || 1;
+
+// HEADER
+document.getElementById('hdrRight').innerHTML =
+  `Período: <b>${DATA.meta.periodo_ini} – ${DATA.meta.periodo_fim} 2026</b><br>Atualizado em <b>${DATA.meta.gerado_em}</b>`;
+
+// FASES
+document.getElementById('phases').innerHTML = `
+  <div class="phase"><div class="live"><span class="dot"></span>ATIVA</div>
+    <span class="phase-tag">Fase 1 · Captação</span>
+    <div class="phase-name">Cadastro de Leads</div>
+    <div class="phase-desc">Objetivo Cadastro · públicos LAL + interesses jurídicos</div>
+    <div class="phase-metrics">
+      <div class="pm"><span class="pm-v">${N(T.leads)}</span><span class="pm-l">Leads</span></div>
+      <div class="pm"><span class="pm-v">${BRL0(T.spend)}</span><span class="pm-l">Investido</span></div>
+      <div class="pm"><span class="pm-v">${BRL(cplMedio)}</span><span class="pm-l">CPL médio</span></div>
+    </div></div>
+  <div class="phase dist"><div class="live"><span class="dot"></span>ATIVA</div>
+    <span class="phase-tag">Fase 2 · Distribuição</span>
+    <div class="phase-name">Aquecimento / VView</div>
+    <div class="phase-desc">Engajamento e views de vídeo p/ base 180d · nutrição do público</div>
+    <div class="phase-metrics">
+      <div class="pm"><span class="pm-v">${N(T.dist_vviews)}</span><span class="pm-l">Video views</span></div>
+      <div class="pm"><span class="pm-v">${BRL0(T.dist_spend)}</span><span class="pm-l">Investido</span></div>
+      <div class="pm"><span class="pm-v">${N(T.dist_reach)}</span><span class="pm-l">Alcance</span></div>
+    </div></div>`;
+
+// KPIs
+document.getElementById('kpis').innerHTML = `
+  <div class="kpi k-inv"><div class="kpi-l">Total pago (c/ imposto)</div><div class="kpi-v">${BRL0(totGeral)}</div><div class="kpi-s">campanha ${BRL0(campGeral)} + imposto ${BRL0(impGeral)}</div></div>
+  <div class="kpi k-lead"><div class="kpi-l">Leads captados</div><div class="kpi-v">${N(T.leads)}</div><div class="kpi-s"><b>~${Math.round(T.leads/diasAtivos)}/dia</b> em média</div></div>
+  <div class="kpi k-cpl"><div class="kpi-l">CPL médio</div><div class="kpi-v">${BRL(cplMedio)}</div><div class="kpi-s">melhor dia ${BRL(cplMin)}</div></div>
+  <div class="kpi k-pag"><div class="kpi-l">Conversão da página</div><div class="kpi-v">${PCT(txPagina)}</div><div class="kpi-s">leads ÷ quem chegou na página</div></div>
+  <div class="kpi"><div class="kpi-l">Cliques no link</div><div class="kpi-v">${N(T.lc)}</div><div class="kpi-s">CTR link ${PCT(ctrLink)}</div></div>
+  <div class="kpi k-connect"><div class="kpi-l">Connect Rate ⚡</div><div class="kpi-v" style="color:${crColor(txClickPage)}">${PCT(txClickPage)}</div><div class="kpi-s">${N(T.lpv)} de ${N(T.lc)} cliques chegaram na página</div></div>
+  <div class="kpi"><div class="kpi-l">Custo/clique</div><div class="kpi-v">${BRL(cpc)}</div><div class="kpi-s">no link</div></div>
+  <div class="kpi"><div class="kpi-l">Impressões</div><div class="kpi-v">${N(T.impr)}</div><div class="kpi-s">CPM ${BRL(cpm)}</div></div>`;
+
+// QUADRO DE INVESTIMENTO (campanha · imposto · total)
+document.getElementById('invBox').innerHTML=`
+  <div class="invcard camp"><div class="il">Investido em campanha</div><div class="iv">${BRL0(campGeral)}</div><div class="is">Captação ${BRL0(T.spend)} + Distribuição ${BRL0(T.dist_spend)} · valor líquido dos anúncios</div></div>
+  <div class="invcard tax"><div class="il">Imposto · ISS+IOF 13,83%</div><div class="iv">${BRL0(impGeral)}</div><div class="is">tributo sobre a mídia, cobrado por cima do valor da campanha</div></div>
+  <div class="invcard total"><div class="il">Total pago</div><div class="iv">${BRL0(totGeral)}</div><div class="is">desembolso real = campanha + imposto</div></div>`;
+
+// ORÇAMENTO DO PROJETO — quanto do total planejado já foi investido
+const investedReal = INVEST_TOTAL;                                   // já desembolsado (campanha + imposto)
+const budgetPct    = Math.min(investedReal/BUDGET_TOTAL*100, 100);
+const budgetRest   = Math.max(BUDGET_TOTAL - investedReal, 0);
+document.getElementById('budgetBox').innerHTML=`
+  <div class="budget-top">
+    <div class="budget-title">Investimento aplicado no lançamento</div>
+    <div class="budget-total">${BRL0(investedReal)} <span>de ${BRL0(BUDGET_TOTAL)} planejados</span></div>
+  </div>
+  <div class="pbar"><i style="width:${budgetPct.toFixed(1)}%"></i><span class="pbar-lbl">${PCT(budgetPct)} do orçamento</span></div>
+  <div class="budget-foot">
+    <span>Já investido (total pago c/ imposto): <b>${BRL0(investedReal)}</b></span>
+    <span>Restante do orçamento: <b>${BRL0(budgetRest)}</b></span></div>`;
+
+// TABELA DIÁRIA (campanha · imposto · total pago · leads · CPL · conv. página)
+let rows='';
+daily.forEach(x=>{
+  const cpl=x.leads?x.spend/x.leads:0, txp=x.lpv?x.leads/x.lpv*100:0;
+  const cr=x.lc?x.lpv/x.lc*100:0;
+  const cpmD=x.impr?x.spend/x.impr*1000:0, ctrD=x.impr?x.lc/x.impr*100:0;
+  const imp=x.spend*TAX, tot=x.spend*(1+TAX);
+  rows+=`<tr><td><b>${x.d}</b></td>
+    <td class="num">${BRL(x.spend)}</td>
+    <td class="num" style="color:#b45309">${BRL(imp)}</td>
+    <td class="num"><b>${BRL(tot)}</b></td>
+    <td class="num">${N(x.impr)}</td>
+    <td class="num">${BRL(cpmD)}</td>
+    <td class="num">${N(x.lc)}</td>
+    <td class="num">${PCT(ctrD)}</td>
+    <td class="num"><span class="cpl-badge ${crClass(cr)}">${PCT(cr)}</span></td>
+    <td class="num"><b>${x.leads}</b></td>
+    <td class="num"><span class="cpl-badge ${cplClass(cpl)}">${BRL(cpl)}</span></td>
+    <td class="num"><span class="pg-pill">${PCT(txp)}</span></td></tr>`;
+});
+rows+=`<tr class="total-row"><td>TOTAL</td>
+  <td class="num">${BRL(T.spend)}</td>
+  <td class="num">${BRL(T.spend*TAX)}</td>
+  <td class="num">${BRL(T.spend*(1+TAX))}</td>
+  <td class="num">${N(T.impr)}</td>
+  <td class="num">${BRL(cpm)}</td>
+  <td class="num">${N(T.lc)}</td>
+  <td class="num">${PCT(ctrLink)}</td>
+  <td class="num">${PCT(txClickPage)}</td>
+  <td class="num">${T.leads}</td>
+  <td class="num">${BRL(cplMedio)}</td>
+  <td class="num">${PCT(txPagina)}</td></tr>`;
+document.querySelector('#tblDaily tbody').innerHTML=rows;
+
+// GRÁFICO
+new Chart(document.getElementById('chartDaily'),{
+  data:{labels:daily.map(x=>x.d),datasets:[
+    {type:'bar',label:'Leads',data:daily.map(x=>x.leads),backgroundColor:'#10b981',borderRadius:6,yAxisID:'y',order:3},
+    {type:'line',label:'Investimento (R$)',data:daily.map(x=>x.spend),borderColor:'#4338ca',backgroundColor:'rgba(67,56,202,.08)',borderWidth:3,tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#4338ca',yAxisID:'y1',order:2},
+    {type:'line',label:'CPL do dia (R$)',data:daily.map(x=>x.leads?+(x.spend/x.leads).toFixed(2):null),borderColor:'#f59e0b',borderWidth:2.5,tension:.35,pointRadius:3,pointBackgroundColor:'#f59e0b',yAxisID:'yc',order:1},
+    {type:'line',label:'Meta CPL '+BRL0(META_CPL),data:daily.map(()=>META_CPL),borderColor:'#ef4444',borderWidth:2,borderDash:[6,5],pointRadius:0,yAxisID:'yc',order:0}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,font:{size:12,weight:'600'}}},
+      tooltip:{callbacks:{label:c=>{
+        if(c.dataset.yAxisID==='y1')return '  Investido: '+BRL(c.raw);
+        if(c.dataset.yAxisID==='yc')return '  '+c.dataset.label+': '+(c.raw==null?'–':BRL(c.raw));
+        return '  Leads: '+c.raw;}}}},
+    scales:{y:{position:'left',beginAtZero:true,title:{display:true,text:'Leads'},grid:{color:'#f1f5f9'}},
+      y1:{position:'right',beginAtZero:true,title:{display:true,text:'Investimento (R$)'},grid:{drawOnChartArea:false},ticks:{callback:v=>'R$'+v}},
+      yc:{display:false,beginAtZero:true}}}});
+
+// FUNIL — formato afunilado, com as taxas de conversão entre etapas
+const segW=['100%','74%','54%','40%'];
+const seg=(cls,w,label,val,sub)=>`<div class="fseg ${cls}" style="width:${w}">
+  <div><div class="fl">${label}</div><div class="fsub">${sub}</div></div><div class="fv">${val}</div></div>`;
+const conn=(cls,txt)=>`<div class="fconn"><span class="chev">▼</span><span class="pill ${cls}">${txt}</span></div>`;
+document.getElementById('funnel').innerHTML=`
+  <div class="funnelV">
+    ${seg('s1',segW[0],'Impressões',N(T.impr),'alcance '+N(T.reach))}
+    ${conn('','CTR '+PCT(ctrLink)+' clicaram no link')}
+    ${seg('s2',segW[1],'Cliques no link',N(T.lc),'CPC '+BRL(cpc))}
+    ${conn(txClickPage>=80?'hot':'warn','Connect rate '+PCT(txClickPage)+' · perde '+PCT(100-txClickPage)+' no carregamento')}
+    ${seg('s3',segW[2],'Chegaram na página',N(T.lpv),'landing page view')}
+    ${conn('hot','Conversão da página '+PCT(txPagina))}
+    ${seg('s4',segW[3],'Leads / Cadastros',N(T.leads),'CPL '+BRL(cplMedio))}
+  </div>
+  <div class="fsummary">
+    <div class="fsum"><div class="v">${PCT(ctrLink)}</div><div class="l">CTR do anúncio</div></div>
+    <div class="fsum" style="border-color:${crColor(txClickPage)}44"><div class="v" style="color:${crColor(txClickPage)}">${PCT(txClickPage)}</div><div class="l">Connect Rate ⚡</div></div>
+    <div class="fsum hl"><div class="v">${PCT(txPagina)}</div><div class="l">Conversão da página</div></div>
+    <div class="fsum"><div class="v">${BRL(cplMedio)}</div><div class="l">Custo por lead</div></div>
+  </div>`;
+document.getElementById('funnelNote').innerHTML=
+  `⚡ <b>Connect Rate = ${PCT(txClickPage)}</b> — de cada 100 cliques pagos, só ${Math.round(txClickPage)} chegam a carregar a página; os outros ${Math.round(100-txClickPage)} são verba perdida antes de ver a oferta (velocidade da página / desistência no carregamento). Benchmark bom: 80%+. Cada ponto recuperado aqui vira lead sem gastar a mais.<br>📌 <b>Conversão da página = ${PCT(txPagina)}</b> — dos que chegam, ~${Math.round(txPagina)} em 100 deixam o cadastro. Benchmark saudável de LP de captação: 30–45%.`;
+
+// PÚBLICOS
+const maxPub=Math.max(...publicos.map(p=>p.leads),1);
+document.querySelector('#tblPub tbody').innerHTML=publicos.map(p=>`
+  <tr><td class="tag-pub">${p.publico}</td><td class="num"><b>${p.leads}</b></td>
+  <td class="num">${BRL(p.spend)}</td>
+  <td class="num"><span class="cpl-badge ${cplClass(p.cpl)}">${p.cpl==null?'–':BRL(p.cpl)}</span></td>
+  <td><div class="minibar"><span style="width:${(p.leads/maxPub*100).toFixed(0)}%"></span></div>
+      <span style="font-size:10px;color:#94a3b8">${(T.leads?p.leads/T.leads*100:0).toFixed(1)}%</span></td></tr>`).join('');
+
+// CRIATIVOS
+document.querySelector('#tblAd tbody').innerHTML=criativos.map((a,i)=>`
+  <tr><td><span class="rank">${i+1}</span></td><td style="font-weight:600">${a.ad}</td>
+  <td class="num"><b>${a.leads}</b></td>
+  <td class="num"><span class="cpl-badge ${cplClass(a.cpl)}">${a.cpl==null?'–':BRL(a.cpl)}</span></td>
+  <td class="num"><span class="pg-pill">${PCT(a.txPagina)}</span></td>
+  <td class="num">${BRL(a.spend)}</td>
+  <td>${a.link?`<a class="btn-link" href="${a.link}" target="_blank" rel="noopener">▶ Ver anúncio</a>`:'–'}</td></tr>`).join('');
+
+// SIMULADOR
+document.getElementById('simIntro').innerHTML=
+  `O carrinho ainda não abriu — o retorno abaixo é uma <b>projeção</b>. Ajuste o ticket médio e a taxa de conversão esperada dos ${N(T.leads)} leads para estimar faturamento e ROAS sobre o <b>total pago</b> (${BRL0(INVEST_TOTAL)}, campanha + imposto).`;
+document.getElementById('oInv').textContent=BRL0(INVEST_TOTAL);
+const ticket=document.getElementById('ticket'),conv=document.getElementById('conv');
+function calcROI(){
+  const t=+ticket.value,c=+conv.value/100;
+  const vendas=Math.round(T.leads*c),fat=vendas*t,roas=fat/INVEST_TOTAL;
+  document.getElementById('rvTicket').textContent=BRL0(t);
+  document.getElementById('rvConv').textContent=(+conv.value).toLocaleString('pt-BR',{minimumFractionDigits:1})+'%';
+  document.getElementById('oVendas').textContent=vendas;
+  document.getElementById('oFat').textContent=BRL0(fat);
+  const r=document.getElementById('oRoas');
+  r.textContent=roas.toFixed(2).replace('.',',')+'x';
+  r.className='roas-big '+(roas>=1?'roas-pos':'roas-neg');
+  const beConv=INVEST_TOTAL/t/T.leads*100;
+  document.getElementById('breakeven').innerHTML=
+    `⚖️ Com ticket de <b>${BRL0(t)}</b>, o lançamento empata (ROAS 1x) convertendo <b>${beConv.toFixed(1)}%</b> dos leads (<b>${Math.ceil(INVEST_TOTAL/t)}</b> vendas). Acima disso, lucro.`;
+}
+ticket.addEventListener('input',calcROI);conv.addEventListener('input',calcROI);calcROI();
+
+document.getElementById('footer').innerHTML=
+  `Gestão GGD · Giovanna Ramires · Dados Meta Ads via Windsor.ai · Conta ${DATA.meta.conta} · Atualização automática 3×/dia (06h · 14h · 21h)`;
+</script>
+</body>
+</html>
