@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lançamento Dominando Cicatrizes de Acne · Carol</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;color:#0f172a;padding:24px}
+.wrap{max-width:1120px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+h1{font-size:22px}.sub{color:#64748b;font-size:13px;margin-top:4px}
+.badge{background:#0f172a;color:#fff;border-radius:10px;padding:10px 16px;text-align:center}
+.badge b{font-size:22px;display:block}
+.filtro{background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.filtro label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.filtro input{border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px}
+.filtro button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.filtro button:hover{background:#eef2f7}
+.sec{font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em;margin:6px 2px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.card{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+.s-green{background:#16a34a}.s-yellow{background:#f59e0b}.s-red{background:#dc2626}.s-accent{background:#6366f1}.s-gray{background:#cbd5e1}
+.card-t{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.card-v{font-size:22px;font-weight:700;margin:5px 0}
+.card-s{font-size:11px;color:#94a3b8}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;align-items:start}
+@media(max-width:720px){.row{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
+.panel h2{font-size:14px;margin-bottom:12px;color:#334155}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #f1f5f9;white-space:nowrap}
+th{color:#64748b;font-size:11px;text-transform:uppercase}
+td.camp{font-family:ui-monospace,monospace;font-size:11px;color:#475569}
+a{color:#6366f1}
+.stage-tag{background:#f8fafc;font-weight:700;color:#334155;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}
+.p-green{background:#16a34a}.p-yellow{background:#f59e0b}.p-red{background:#dc2626}.p-gray{background:#cbd5e1;color:#475569}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.fstep{margin-bottom:9px}
+.flabel{display:flex;justify-content:space-between;font-size:13px;color:#334155;margin-bottom:3px}
+.fbar{background:#eef2f7;border-radius:6px;height:14px;overflow:hidden}
+.fbar span{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#0ea5e9);border-radius:6px}
+.fpct{font-size:11px;color:#94a3b8;margin-top:2px}
+.chartbox{position:relative;height:170px;width:100%}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.vbar{background:#eef2f7;border-radius:10px;height:24px;overflow:hidden;position:relative}
+.vbar span{display:block;height:100%;border-radius:10px}
+.vbar b{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#0f172a}
+footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
+</style></head><body><div class="wrap">
+<header>
+  <div><h1>🎓 Lançamento Dominando Cicatrizes de Acne · Carol <span id="lanc-chip" style="display:none;background:#6366f1;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle;margin-left:6px"></span></h1>
+  <div class="sub" id="sub"></div></div>
+  <div class="badge"><b id="dias-ev"></b>dias p/ fechar o carrinho</div>
+</header>
+<div class="filtro">
+  <label>Lançamento:</label>
+  <select id="lanc"></select>
+  <span style="width:1px;height:22px;background:#e2e8f0"></span>
+  <label>Período:</label>
+  <input type="date" id="de"> <span style="color:#94a3b8">até</span> <input type="date" id="ate">
+  <button onclick="setRange('hoje')">Hoje</button>
+  <button onclick="setRange('lanc')">Lançamento</button>
+  <button onclick="setRange('tudo')">Tudo</button>
+  <span id="fresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
+</div>
+<div class="sec">Verba do lançamento</div>
+<div class="panel" id="verba" style="margin-bottom:20px"></div>
+<div class="sec">Vendas · Dominando Cicatrizes de Acne</div>
+<div class="grid" id="kpis-venda"></div>
+<div class="sec">Investimento &amp; retorno</div>
+<div class="grid" id="kpis-inv"></div>
+<div class="row">
+  <div class="panel"><h2>Funil de vendas — onde perde</h2><div id="funil"></div></div>
+  <div class="panel"><h2>🏆 Criativos que vendem</h2><div id="criativos"></div></div>
+</div>
+<div class="panel" style="margin-bottom:20px"><h2>Diagnóstico por etapa — métrica × benchmark</h2>
+  <table><thead><tr><th>Métrica</th><th>Valor</th><th>Benchmark ideal</th><th>Status</th><th>Leitura</th></tr></thead>
+  <tbody id="stage"></tbody></table></div>
+<div class="panel" style="margin-bottom:20px"><h2>Detalhe por campanha</h2><div id="camp"></div></div>
+<div class="panel" style="margin-bottom:20px"><h2>Evolução diária</h2><div class="chartbox"><canvas id="cd"></canvas></div></div>
+<footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto · benchmarks calibrados p/ educação médica (dermatologia) · ticket R$ 97/497 · GGD</footer>
+</div>
+<script>
+const DADOS = {"gerado": "23/07/2026 02h49", "imersao": "2026-08-01", "metaVendas": 40, "roasAlvo": 2.0, "impostoPct": 0.1225, "precoProduto": 97.0, "verba": 10000.0, "lancamentos": [{"nome": "Lançamento 03", "de": "2026-07-08", "ate": "2026-07-17", "evento": "2026-07-18"}, {"nome": "Lançamento 04", "de": "2026-07-18", "ate": "2026-07-31", "evento": "2026-08-01"}], "dias": [{"date": "2026-07-08", "spend": 281.3, "impressions": 3557, "reach": 1922, "clicks": 90, "link_clicks": 47, "lpv": 6, "checkout": 8, "purchases": 2, "purchase_value": 591, "profile_visits": 47}, {"date": "2026-07-09", "spend": 250.59, "impressions": 2885, "reach": 1777, "clicks": 72, "link_clicks": 43, "lpv": 9, "checkout": 6, "purchases": 2, "purchase_value": 194, "profile_visits": 35}, {"date": "2026-07-10", "spend": 176.49, "impressions": 1951, "reach": 1249, "clicks": 48, "link_clicks": 29, "lpv": 5, "checkout": 2, "purchases": 0, "purchase_value": 0, "profile_visits": 24}, {"date": "2026-07-11", "spend": 287.23, "impressions": 3264, "reach": 2117, "clicks": 76, "link_clicks": 36, "lpv": 13, "checkout": 4, "purchases": 2, "purchase_value": 194, "profile_visits": 42}, {"date": "2026-07-12", "spend": 277.93, "impressions": 3121, "reach": 1991, "clicks": 71, "link_clicks": 35, "lpv": 6, "checkout": 3, "purchases": 0, "purchase_value": 0, "profile_visits": 39}, {"date": "2026-07-13", "spend": 269.33, "impressions": 2947, "reach": 1865, "clicks": 50, "link_clicks": 30, "lpv": 8, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 23}, {"date": "2026-07-14", "spend": 264.77, "impressions": 2827, "reach": 1960, "clicks": 47, "link_clicks": 24, "lpv": 13, "checkout": 4, "purchases": 1, "purchase_value": 102.1, "profile_visits": 24}, {"date": "2026-07-15", "spend": 596.71, "impressions": 6860, "reach": 3937, "clicks": 100, "link_clicks": 53, "lpv": 42, "checkout": 8, "purchases": 1, "purchase_value": 97, "profile_visits": 49}, {"date": "2026-07-16", "spend": 382.82, "impressions": 4243, "reach": 2711, "clicks": 59, "link_clicks": 34, "lpv": 29, "checkout": 3, "purchases": 2, "purchase_value": 98.99, "profile_visits": 26}, {"date": "2026-07-17", "spend": 1459.88, "impressions": 22697, "reach": 16969, "clicks": 1120, "link_clicks": 972, "lpv": 754, "checkout": 59, "purchases": 5, "purchase_value": 1279, "profile_visits": 135}, {"date": "2026-07-18", "spend": 1585.16, "impressions": 14790, "reach": 9962, "clicks": 1038, "link_clicks": 978, "lpv": 781, "checkout": 35, "purchases": 3, "purchase_value": 291, "profile_visits": 87}, {"date": "2026-07-19", "spend": 1360.1, "impressions": 12748, "reach": 8165, "clicks": 570, "link_clicks": 474, "lpv": 372, "checkout": 18, "purchases": 3, "purchase_value": 291, "profile_visits": 84}, {"date": "2026-07-20", "spend": 1034.79, "impressions": 10997, "reach": 7188, "clicks": 204, "link_clicks": 116, "lpv": 92, "checkout": 12, "purchases": 9, "purchase_value": 8073, "profile_visits": 87}, {"date": "2026-07-21", "spend": 635.13, "impressions": 6261, "reach": 3957, "clicks": 133, "link_clicks": 83, "lpv": 69, "checkout": 5, "purchases": 2, "purchase_value": 194, "profile_visits": 48}, {"date": "2026-07-22", "spend": 367.6, "impressions": 4033, "reach": 2296, "clicks": 72, "link_clicks": 50, "lpv": 40, "checkout": 9, "purchases": 4, "purchase_value": 2788, "profile_visits": 31}], "campanhas": [{"date": "2026-07-08", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 281.3, "impressions": 3557, "reach": 1922, "clicks": 90, "link_clicks": 47, "lpv": 6, "checkout": 8, "purchases": 2, "purchase_value": 591, "profile_visits": 47}, {"date": "2026-07-09", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 250.59, "impressions": 2885, "reach": 1777, "clicks": 72, "link_clicks": 43, "lpv": 9, "checkout": 6, "purchases": 2, "purchase_value": 194, "profile_visits": 35}, {"date": "2026-07-10", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 176.49, "impressions": 1951, "reach": 1249, "clicks": 48, "link_clicks": 29, "lpv": 5, "checkout": 2, "purchases": 0, "purchase_value": 0, "profile_visits": 24}, {"date": "2026-07-11", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 287.23, "impressions": 3264, "reach": 2117, "clicks": 76, "link_clicks": 36, "lpv": 13, "checkout": 4, "purchases": 2, "purchase_value": 194, "profile_visits": 42}, {"date": "2026-07-12", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 277.93, "impressions": 3121, "reach": 1991, "clicks": 71, "link_clicks": 35, "lpv": 6, "checkout": 3, "purchases": 0, "purchase_value": 0, "profile_visits": 39}, {"date": "2026-07-13", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 269.33, "impressions": 2947, "reach": 1865, "clicks": 50, "link_clicks": 30, "lpv": 8, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 23}, {"date": "2026-07-14", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 264.77, "impressions": 2827, "reach": 1960, "clicks": 47, "link_clicks": 24, "lpv": 13, "checkout": 4, "purchases": 1, "purchase_value": 102.1, "profile_visits": 24}, {"date": "2026-07-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 291.27, "impressions": 3130, "reach": 2296, "clicks": 49, "link_clicks": 23, "lpv": 18, "checkout": 4, "purchases": 1, "purchase_value": 97, "profile_visits": 28}, {"date": "2026-07-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PQ]", "spend": 305.44, "impressions": 3730, "reach": 1641, "clicks": 51, "link_clicks": 30, "lpv": 24, "checkout": 4, "purchases": 0, "purchase_value": 0, "profile_visits": 21}, {"date": "2026-07-16", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 382.82, "impressions": 4243, "reach": 2711, "clicks": 59, "link_clicks": 34, "lpv": 29, "checkout": 3, "purchases": 2, "purchase_value": 98.99, "profile_visits": 26}, {"date": "2026-07-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 1459.88, "impressions": 22697, "reach": 16969, "clicks": 1120, "link_clicks": 972, "lpv": 754, "checkout": 58, "purchases": 5, "purchase_value": 1279, "profile_visits": 135}, {"date": "2026-07-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PQ]", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 0, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 0}, {"date": "2026-07-18", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 1585.16, "impressions": 14790, "reach": 9962, "clicks": 1038, "link_clicks": 978, "lpv": 781, "checkout": 35, "purchases": 3, "purchase_value": 291, "profile_visits": 87}, {"date": "2026-07-19", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 1360.1, "impressions": 12748, "reach": 8165, "clicks": 570, "link_clicks": 474, "lpv": 372, "checkout": 18, "purchases": 3, "purchase_value": 291, "profile_visits": 84}, {"date": "2026-07-20", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 1034.79, "impressions": 10997, "reach": 7188, "clicks": 204, "link_clicks": 116, "lpv": 92, "checkout": 12, "purchases": 9, "purchase_value": 8073, "profile_visits": 87}, {"date": "2026-07-21", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 635.13, "impressions": 6261, "reach": 3957, "clicks": 133, "link_clicks": 83, "lpv": 69, "checkout": 5, "purchases": 2, "purchase_value": 194, "profile_visits": 48}, {"date": "2026-07-22", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE][PF]", "spend": 367.6, "impressions": 4033, "reach": 2296, "clicks": 72, "link_clicks": 50, "lpv": 40, "checkout": 9, "purchases": 4, "purchase_value": 2788, "profile_visits": 31}], "criativos": [{"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 46.88, "impressions": 433, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 73, "thruplay": 10, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 64.13, "impressions": 986, "link_clicks": 21, "lpv": 2, "purchases": 1, "video_view": 215, "thruplay": 42, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 17.77, "impressions": 219, "link_clicks": 3, "lpv": 0, "purchases": 0, "video_view": 30, "thruplay": 7, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-08", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 82.78, "impressions": 957, "link_clicks": 9, "lpv": 1, "purchases": 0, "video_view": 218, "thruplay": 40, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-08", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 69.74, "impressions": 962, "link_clicks": 13, "lpv": 3, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-09", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 1.79, "impressions": 8, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 2, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-09", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 83.25, "impressions": 1020, "link_clicks": 17, "lpv": 3, "purchases": 0, "video_view": 263, "thruplay": 42, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-09", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 1.84, "impressions": 19, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 5, "thruplay": 1, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-09", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 93.11, "impressions": 984, "link_clicks": 15, "lpv": 4, "purchases": 2, "video_view": 258, "thruplay": 40, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-09", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 70.6, "impressions": 854, "link_clicks": 11, "lpv": 2, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-10", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 0.31, "impressions": 3, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-10", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 57.11, "impressions": 595, "link_clicks": 16, "lpv": 3, "purchases": 0, "video_view": 150, "thruplay": 23, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-10", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 4.84, "impressions": 39, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 7, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-10", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 64.33, "impressions": 851, "link_clicks": 9, "lpv": 1, "purchases": 0, "video_view": 204, "thruplay": 35, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-10", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 49.9, "impressions": 463, "link_clicks": 4, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-11", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 101.66, "impressions": 1171, "link_clicks": 10, "lpv": 5, "purchases": 1, "video_view": 263, "thruplay": 38, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-11", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 90.72, "impressions": 1097, "link_clicks": 12, "lpv": 4, "purchases": 0, "video_view": 276, "thruplay": 45, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-11", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 94.85, "impressions": 996, "link_clicks": 14, "lpv": 4, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-12", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 99.2, "impressions": 1208, "link_clicks": 14, "lpv": 2, "purchases": 0, "video_view": 209, "thruplay": 43, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-12", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 97.54, "impressions": 1014, "link_clicks": 13, "lpv": 3, "purchases": 0, "video_view": 204, "thruplay": 31, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-12", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 81.19, "impressions": 899, "link_clicks": 8, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-13", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 0.02, "impressions": 1, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-13", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 95.32, "impressions": 1253, "link_clicks": 15, "lpv": 5, "purchases": 0, "video_view": 255, "thruplay": 37, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-13", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 0.31, "impressions": 7, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-13", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 97.03, "impressions": 881, "link_clicks": 10, "lpv": 0, "purchases": 0, "video_view": 179, "thruplay": 51, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-13", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 76.65, "impressions": 805, "link_clicks": 5, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-14", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 0.24, "impressions": 2, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-14", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 92.82, "impressions": 1063, "link_clicks": 6, "lpv": 3, "purchases": 1, "video_view": 215, "thruplay": 30, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-14", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 97.22, "impressions": 973, "link_clicks": 11, "lpv": 7, "purchases": 0, "video_view": 218, "thruplay": 37, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-14", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 74.49, "impressions": 789, "link_clicks": 7, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-15", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 99.16, "impressions": 972, "link_clicks": 9, "lpv": 9, "purchases": 0, "video_view": 191, "thruplay": 42, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-15", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 0.16, "impressions": 2, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-15", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 105.98, "impressions": 1171, "link_clicks": 10, "lpv": 6, "purchases": 1, "video_view": 289, "thruplay": 56, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_004", "spend": 108.17, "impressions": 925, "link_clicks": 8, "lpv": 8, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Daz76SgsAG1/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 85.97, "impressions": 985, "link_clicks": 4, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_043", "spend": 15.15, "impressions": 143, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Daz7wVisvLo/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_045", "spend": 115.24, "impressions": 1576, "link_clicks": 10, "lpv": 8, "purchases": 0, "video_view": 9, "thruplay": 1, "permalink": "https://www.instagram.com/p/Daz7z5HMIRE/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_047", "spend": 61.14, "impressions": 1068, "link_clicks": 12, "lpv": 8, "purchases": 0, "video_view": 7, "thruplay": 0, "permalink": "https://www.instagram.com/p/Daz715Wsw3l/"}, {"date": "2026-07-15", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_063", "spend": 5.74, "impressions": 18, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Daz74VYsNuy/"}, {"date": "2026-07-16", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 108.04, "impressions": 1288, "link_clicks": 12, "lpv": 11, "purchases": 2, "video_view": 248, "thruplay": 45, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-16", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 185.24, "impressions": 1799, "link_clicks": 16, "lpv": 15, "purchases": 0, "video_view": 435, "thruplay": 73, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-16", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 89.54, "impressions": 1156, "link_clicks": 6, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 0.4, "impressions": 3, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 1.38, "impressions": 15, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiCYKWMoit/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_037", "spend": 19.39, "impressions": 149, "link_clicks": 2, "lpv": 0, "purchases": 0, "video_view": 20, "thruplay": 4, "permalink": "https://www.instagram.com/p/DZuu7vJsk7i/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 194.45, "impressions": 8258, "link_clicks": 103, "lpv": 51, "purchases": 1, "video_view": 1866, "thruplay": 254, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 494, "impressions": 7238, "link_clicks": 90, "lpv": 67, "purchases": 1, "video_view": 1646, "thruplay": 284, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 236.72, "impressions": 1242, "link_clicks": 14, "lpv": 12, "purchases": 2, "video_view": 248, "thruplay": 56, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-17", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 51.33, "impressions": 437, "link_clicks": 5, "lpv": 2, "purchases": 0, "video_view": 108, "thruplay": 20, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_004", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Daz76SgsAG1/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_005", "spend": 29.93, "impressions": 201, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiC7j5M4qs/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_082", "spend": 62.93, "impressions": 837, "link_clicks": 3, "lpv": 2, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5P3ycMVbQ/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 121.23, "impressions": 1389, "link_clicks": 16, "lpv": 12, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 18.95, "impressions": 181, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}, {"date": "2026-07-17", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_088", "spend": 13.5, "impressions": 133, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QYxkszuX/"}, {"date": "2026-07-17", "ad_name": "FRIO_BROAD_REELS_036", "spend": 215.29, "impressions": 2603, "link_clicks": 736, "lpv": 605, "purchases": 0, "video_view": 2154, "thruplay": 1565, "permalink": "https://www.instagram.com/p/Da5Oyv3MD9G/"}, {"date": "2026-07-17", "ad_name": "FRIO_BROAD_REELS_039", "spend": 0.38, "impressions": 11, "link_clicks": 3, "lpv": 3, "purchases": 0, "video_view": 7, "thruplay": 3, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 5.45, "impressions": 57, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 10, "thruplay": 2, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 10.25, "impressions": 53, "link_clicks": 3, "lpv": 3, "purchases": 0, "video_view": 10, "thruplay": 3, "permalink": "https://www.instagram.com/p/Da5OVnLsU5T/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_037", "spend": 8.52, "impressions": 59, "link_clicks": 3, "lpv": 3, "purchases": 0, "video_view": 5, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu7vJsk7i/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 239.96, "impressions": 4101, "link_clicks": 52, "lpv": 26, "purchases": 1, "video_view": 778, "thruplay": 123, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 499.95, "impressions": 3279, "link_clicks": 43, "lpv": 38, "purchases": 1, "video_view": 939, "thruplay": 167, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 464.62, "impressions": 2292, "link_clicks": 26, "lpv": 24, "purchases": 1, "video_view": 537, "thruplay": 110, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-18", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_041", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDTh5sbHS/"}, {"date": "2026-07-18", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_082", "spend": 17.35, "impressions": 251, "link_clicks": 4, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5P3ycMVbQ/"}, {"date": "2026-07-18", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 199.91, "impressions": 2208, "link_clicks": 22, "lpv": 20, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-18", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 22.07, "impressions": 137, "link_clicks": 3, "lpv": 2, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}, {"date": "2026-07-18", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_088", "spend": 16.97, "impressions": 107, "link_clicks": 3, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QYxkszuX/"}, {"date": "2026-07-18", "ad_name": "FRIO_BROAD_REELS_036", "spend": 100.11, "impressions": 2246, "link_clicks": 819, "lpv": 659, "purchases": 0, "video_view": 2086, "thruplay": 1750, "permalink": "https://www.instagram.com/p/Da5Oyv3MD9G/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 12.27, "impressions": 60, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 6, "thruplay": 2, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 8.65, "impressions": 45, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 12, "thruplay": 1, "permalink": "https://www.instagram.com/p/Da5OVnLsU5T/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_037", "spend": 1.71, "impressions": 16, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu7vJsk7i/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 181.76, "impressions": 4295, "link_clicks": 63, "lpv": 39, "purchases": 1, "video_view": 715, "thruplay": 142, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 447.01, "impressions": 2720, "link_clicks": 36, "lpv": 34, "purchases": 0, "video_view": 646, "thruplay": 117, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-19", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 452.66, "impressions": 2359, "link_clicks": 26, "lpv": 21, "purchases": 0, "video_view": 507, "thruplay": 102, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-19", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_082", "spend": 18.8, "impressions": 199, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5P3ycMVbQ/"}, {"date": "2026-07-19", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 169.27, "impressions": 1858, "link_clicks": 25, "lpv": 17, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-19", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 24.13, "impressions": 147, "link_clicks": 5, "lpv": 5, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}, {"date": "2026-07-19", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_088", "spend": 19.29, "impressions": 128, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QYxkszuX/"}, {"date": "2026-07-19", "ad_name": "FRIO_BROAD_REELS_036", "spend": 24.55, "impressions": 921, "link_clicks": 317, "lpv": 254, "purchases": 0, "video_view": 865, "thruplay": 784, "permalink": "https://www.instagram.com/p/Da5Oyv3MD9G/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 5.36, "impressions": 49, "link_clicks": 1, "lpv": 1, "purchases": 1, "video_view": 6, "thruplay": 1, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 15.76, "impressions": 82, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 16, "thruplay": 5, "permalink": "https://www.instagram.com/p/Da5OVnLsU5T/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_037", "spend": 0.71, "impressions": 8, "link_clicks": 0, "lpv": 0, "purchases": 1, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu7vJsk7i/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 177.95, "impressions": 3838, "link_clicks": 35, "lpv": 22, "purchases": 2, "video_view": 563, "thruplay": 115, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 393.61, "impressions": 3669, "link_clicks": 39, "lpv": 33, "purchases": 3, "video_view": 778, "thruplay": 136, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-20", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 225.97, "impressions": 1179, "link_clicks": 11, "lpv": 10, "purchases": 0, "video_view": 211, "thruplay": 44, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-20", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 194.7, "impressions": 1955, "link_clicks": 25, "lpv": 22, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-20", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 11.43, "impressions": 116, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}, {"date": "2026-07-20", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_088", "spend": 9.3, "impressions": 101, "link_clicks": 2, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QYxkszuX/"}, {"date": "2026-07-20", "ad_name": "FRIO_BROAD_REELS_036", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5Oyv3MD9G/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 5.82, "impressions": 45, "link_clicks": 2, "lpv": 2, "purchases": 0, "video_view": 8, "thruplay": 1, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 15.94, "impressions": 99, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 26, "thruplay": 11, "permalink": "https://www.instagram.com/p/Da5OVnLsU5T/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_037", "spend": 0.25, "impressions": 3, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 1, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu7vJsk7i/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 173.22, "impressions": 1893, "link_clicks": 23, "lpv": 21, "purchases": 0, "video_view": 417, "thruplay": 72, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 225.19, "impressions": 1687, "link_clicks": 28, "lpv": 23, "purchases": 0, "video_view": 378, "thruplay": 72, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-21", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 3.65, "impressions": 26, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 5, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-21", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 183.08, "impressions": 2269, "link_clicks": 28, "lpv": 23, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-21", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 20.7, "impressions": 187, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}, {"date": "2026-07-21", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_088", "spend": 7.28, "impressions": 52, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QYxkszuX/"}, {"date": "2026-07-22", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_033", "spend": 0.36, "impressions": 2, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZuu9eNMQt4/"}, {"date": "2026-07-22", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_036", "spend": 87.96, "impressions": 693, "link_clicks": 9, "lpv": 5, "purchases": 0, "video_view": 110, "thruplay": 25, "permalink": "https://www.instagram.com/p/Da5OVnLsU5T/"}, {"date": "2026-07-22", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_038", "spend": 45.91, "impressions": 429, "link_clicks": 6, "lpv": 5, "purchases": 0, "video_view": 106, "thruplay": 21, "permalink": "https://www.instagram.com/p/DZuu78UsnOI/"}, {"date": "2026-07-22", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V01_039", "spend": 58.94, "impressions": 448, "link_clicks": 11, "lpv": 10, "purchases": 1, "video_view": 114, "thruplay": 18, "permalink": "https://www.instagram.com/p/DaiCef1MuvH/"}, {"date": "2026-07-22", "ad_name": "AD_CB_PG_CAPTACAO_REELS_V02_040", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DaiDYT-sCZM/"}, {"date": "2026-07-22", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_083", "spend": 166.71, "impressions": 2342, "link_clicks": 24, "lpv": 20, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QPlPMp6f/"}, {"date": "2026-07-22", "ad_name": "CB_PG_CAPTACAO_IMG_FEED_V01_086", "spend": 8.62, "impressions": 125, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Da5QUe_MGFq/"}], "vendas": [{"date": "2026-07-09", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-09", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-09", "valor": 497.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-08", "valor": 494.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-08", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-10", "valor": 497.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-11", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-11", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-14", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-15", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-15", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-16", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-16", "valor": 1.99, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-17", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-17", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-17", "valor": 494.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-17", "valor": 397.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-18", "valor": 494.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-18", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-18", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-18", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-19", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-19", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-19", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-20", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-21", "valor": 97.0, "tipo": "Curso", "forma": "Cartão"}, {"date": "2026-07-21", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-22", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-22", "valor": 97.0, "tipo": "Curso", "forma": "Pix"}, {"date": "2026-07-22", "valor": 97.0, "tipo": "Curso", "forma": "Bank_Slip"}]};
+// Benchmarks CALIBRADOS PRO NICHO: educação/curso para médicos dermatologistas.
+// Público profissional, estreito e caro (saúde tem CPM ~2–3× a média no leilão BR)
+// → CPM/CPC/Custo-LP mais altos que infoproduto genérico. Frequência mais tolerante
+// (público pequeno num lançamento de 10 dias satura rápido — normal). Conv. de
+// página/checkout um pouco menores (compra de alta consideração, ticket R$ 97–497).
+// Connect (Fluxo) é métrica técnica de LP → independe do nicho, mantida. CPA ancorado
+// em ½ do ticket (p/ bater ROAS alvo 2,0); ROAS atrelado ao alvo.
+const BENCH = {
+  cpm:{dir:'down',ideal:40,crit:60,fmt:'money',label:'R$ 30–40'},
+  ctr:{dir:'up',ideal:1.0,crit:0.6,fmt:'pct',label:'> 1,0%'},
+  cpc:{dir:'down',ideal:3.0,crit:5.0,fmt:'money',label:'< R$ 3,00'},
+  freq:{dir:'down',ideal:4.0,crit:6.0,fmt:'dec',label:'< 4,0'},
+  fluxo:{dir:'up',ideal:85,crit:70,fmt:'pct',label:'> 85%'},
+  custoLp:{dir:'down',ideal:6,crit:12,fmt:'money',label:'< R$ 6,00'},
+  convPag:{dir:'up',ideal:12,crit:7,fmt:'pct',label:'> 12%'},
+  convCompraPag:{dir:'up',ideal:12,crit:6,fmt:'pct',label:'> 12%'},
+  custoIc:{dir:'gray',fmt:'money',label:'—'},
+  convChk:{dir:'up',ideal:40,crit:25,fmt:'pct',label:'> 40%'},
+  cpa:{dir:'down',ideal:130,crit:250,fmt:'money',label:'< R$ 130 (½ do ticket)'},
+  roas:{dir:'up',ideal:DADOS.roasAlvo,crit:1.5,fmt:'dec',label:'> '+DADOS.roasAlvo.toFixed(1).replace('.',',')}
+};
+const brl=v=>"R$ "+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const dec=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf=v=>Math.round(v||0).toLocaleString('pt-BR');
+const fmt=(v,f)=>f==='money'?brl(v):f==='pct'?pct(v):f==='dec'?dec(v):intf(v);
+function status(val,b){if(!b||b.dir==='gray')return 'gray';
+  if(b.dir==='up')return val>=b.ideal?'green':val<=b.crit?'red':'yellow';
+  return val<=b.ideal?'green':val>=b.crit?'red':'yellow';}
+
+let chart=null;
+const datas=(DADOS.dias||[]).map(d=>d.date).sort();
+const minD=datas[0]||DADOS.imersao, maxD=datas[datas.length-1]||DADOS.imersao;
+
+// Lançamentos (seletor) — o último da lista é o padrão ao abrir
+const LANCS=DADOS.lancamentos||[];
+let curLanc=LANCS.length?LANCS[LANCS.length-1]:null;
+
+function within(d,de,ate){return d>=de&&d<=ate;}
+function sum(arr,k){return arr.reduce((a,x)=>a+(+x[k]||0),0);}
+
+function render(){
+  const de=document.getElementById('de').value||minD, ate=document.getElementById('ate').value||maxD;
+  const dias=(DADOS.dias||[]).filter(d=>within(d.date,de,ate));
+  const vendas=(DADOS.vendas||[]).filter(v=>within(v.date,de,ate));
+  const camps=(DADOS.campanhas||[]).filter(c=>within(c.date,de,ate));
+  const cria=(DADOS.criativos||[]).filter(c=>within(c.date,de,ate));
+
+  // agregados Meta
+  const T={spend:sum(dias,'spend'),impressions:sum(dias,'impressions'),reach:sum(dias,'reach'),
+    linkClicks:sum(dias,'link_clicks'),lpViews:sum(dias,'lpv'),initiateCheckout:sum(dias,'checkout'),
+    purchasesMeta:sum(dias,'purchases'),profileVisits:sum(dias,'profile_visits')};
+  // vendas HeroSpark (fonte de verdade)
+  const nV=vendas.length, fat=sum(vendas,'valor');
+  const imposto=T.spend*DADOS.impostoPct, investTotal=T.spend+imposto;
+
+  const M={
+    cpm:T.impressions?T.spend/T.impressions*1000:0,
+    ctr:T.impressions?T.linkClicks/T.impressions*100:0,
+    cpc:T.linkClicks?T.spend/T.linkClicks:0,
+    freq:T.reach?T.impressions/T.reach:0,
+    fluxo:T.linkClicks?T.lpViews/T.linkClicks*100:0,
+    custoLp:T.lpViews?T.spend/T.lpViews:0,
+    convPag:T.lpViews?T.initiateCheckout/T.lpViews*100:0,
+    convCompraPag:T.lpViews?T.purchasesMeta/T.lpViews*100:0,
+    custoIc:T.initiateCheckout?T.spend/T.initiateCheckout:0,
+    convChk:T.initiateCheckout?T.purchasesMeta/T.initiateCheckout*100:0,
+    cpa:nV?T.spend/nV:0, roasCamp:T.spend?fat/T.spend:0, roasImp:investTotal?fat/investTotal:0,
+    ticket:nV?fat/nV:0, lucro:fat-investTotal, custoVisita:T.profileVisits?T.spend/T.profileVisits:0
+  };
+  const clr={green:'#16a34a',yellow:'#f59e0b',red:'#dc2626',gray:'#cbd5e1'};
+  const lbl={green:'Saudável',yellow:'Atenção',red:'Crítico',gray:'—'};
+  // célula colorida por benchmark
+  const mc=(v,b,f)=>{const st=b?status(v,b):'gray';const col=(b&&b.dir!=='gray')?clr[st]:'#334155';
+    return `<td style="color:${col};font-weight:${(b&&b.dir!=='gray')?600:400}">${fmt(v,f||(b&&b.fmt)||'dec')}</td>`;};
+  // métricas de uma linha (campanha/criativo) a partir dos campos crus
+  const met=o=>{const s=+o.spend||0,im=+o.impressions||0,rc=+o.reach||0,lc=+o.link_clicks||0,
+    lp=+o.lpv||0,ck=+o.checkout||0,pu=+o.purchases||0,pv=+o.purchase_value||0,pf=+o.profile_visits||0;
+    return {cpm:im?s/im*1000:0,ctr:im?lc/im*100:0,cpc:lc?s/lc:0,freq:rc?im/rc:0,fluxo:lc?lp/lc*100:0,
+      custoLp:lp?s/lp:0,convPag:lp?ck/lp*100:0,custoIc:ck?s/ck:0,convChk:ck?pu/ck*100:0,
+      cpa:pu?s/pu:0,roas:s?pv/s:0,custoPf:pf?s/pf:0};};
+  const pctMeta=DADOS.metaVendas?nV/DADOS.metaVendas*100:0;
+  const corV=nV>=DADOS.metaVendas?'green':nV>=DADOS.metaVendas*0.6?'yellow':'red';
+  const corR=status(M.roasImp,BENCH.roas);
+
+  const card=(t,v,s,st)=>`<div class="card"><span class="stripe s-${st||'accent'}"></span>
+    <div class="card-t">${t}</div><div class="card-v">${v}</div><div class="card-s">${s||''}</div></div>`;
+  document.getElementById('kpis-venda').innerHTML=[
+    card('Ingressos vendidos',intf(nV),`meta ${DADOS.metaVendas} · ${pctMeta.toFixed(0)}%`,corV),
+    card('Faturamento',brl(fat),'vendas pagas (HeroSpark)','green'),
+    card('Ticket médio',nV?brl(M.ticket):'—','por ingresso','accent'),
+    card('Lucro líquido',brl(M.lucro),'faturamento − invest. total',M.lucro>0?'green':'red'),
+  ].join('');
+  document.getElementById('kpis-inv').innerHTML=[
+    card('Investimento campanha',brl(T.spend),'gasto Meta (sem imposto)','accent'),
+    card(`Imposto ${(DADOS.impostoPct*100).toFixed(2)}%`,brl(imposto),'sobre o gasto','accent'),
+    card('Investimento TOTAL',brl(investTotal),'campanha + imposto','accent'),
+    card('ROAS campanha',dec(M.roasCamp)+'x','faturamento ÷ gasto',status(M.roasCamp,BENCH.roas)),
+    card('ROAS c/ imposto',dec(M.roasImp)+'x','÷ invest. total · alvo '+DADOS.roasAlvo+'x',corR),
+    card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
+  ].join('');
+
+  // Verba do lançamento — soma só a janela do lançamento selecionado (independe do filtro De/Até)
+  const diasLanc=curLanc?(DADOS.dias||[]).filter(d=>within(d.date,curLanc.de,curLanc.ate)):(DADOS.dias||[]);
+  const gastoAll=sum(diasLanc,'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
+  const impAll=gastoAll*DADOS.impostoPct;
+  const pctVerba=DADOS.verba?investAll/DADOS.verba*100:0, saldo=DADOS.verba-investAll;
+  const corVb=pctVerba>=90?'#dc2626':pctVerba>=70?'#f59e0b':'#16a34a';
+  document.getElementById('verba').innerHTML=
+    `<div class="vgrid">`+
+    card('Verba total',brl(DADOS.verba),'orçamento do lançamento','accent')+
+    card('Investimento campanha',brl(gastoAll),'sem imposto (acumulado)','accent')+
+    card('Imposto '+(DADOS.impostoPct*100).toFixed(2)+'%',brl(impAll),'sobre o gasto','accent')+
+    card('Consumido (c/ imposto)',brl(investAll),pctVerba.toFixed(1)+'% da verba',pctVerba>=90?'red':pctVerba>=70?'yellow':'green')+
+    card('Saldo restante',brl(saldo),(100-pctVerba).toFixed(1)+'% disponível',saldo>0?'green':'red')+
+    `</div><div class="vbar"><span style="width:${Math.min(Math.max(pctVerba,0),100).toFixed(1)}%;background:${corVb}"></span><b>${pctVerba.toFixed(1)}% consumido · ${brl(investAll)} de ${brl(DADOS.verba)}</b></div>`;
+
+  // Funil
+  const steps=[['Impressões',T.impressions,null],['Alcance',T.reach,null],
+    ['Cliques no link',T.linkClicks,{l:'CTR',v:M.ctr,b:BENCH.ctr}],
+    ['LP Views',T.lpViews,{l:'Connect',v:M.fluxo,b:BENCH.fluxo}],
+    ['Checkout iniciado',T.initiateCheckout,{l:'Conv.Pág',v:M.convPag,b:BENCH.convPag}],
+    ['Compras (Meta)',T.purchasesMeta,{l:'Conv.Chk',v:M.convChk,b:BENCH.convChk}]];
+  const base=steps[0][1]||1;
+  document.getElementById('funil').innerHTML=steps.map((s,i)=>{
+    const w=Math.max(s[1]/base*100,2), conv=s[2]?`<span class="pill p-${status(s[2].v,s[2].b)}">${s[2].l} ${fmt(s[2].v,s[2].b.fmt)}</span>`:'';
+    return `<div class="fstep"><div class="flabel"><span>${s[0]} ${conv}</span><b>${intf(s[1])}</b></div>
+      <div class="fbar"><span style="width:${w.toFixed(1)}%"></span></div>
+      <div class="fpct">${(s[1]/base*100).toFixed(1)}% do topo</div></div>`;
+  }).join('');
+
+  // Criativos que vendem (agrega por ad_name no período, só compra>0)
+  const agC={};
+  cria.forEach(c=>{const k=c.ad_name;(agC[k]=agC[k]||{ad_name:k,spend:0,impressions:0,link_clicks:0,lpv:0,purchases:0,video_view:0,thruplay:0,permalink:c.permalink});
+    ['spend','impressions','link_clicks','lpv','purchases','video_view','thruplay'].forEach(f=>agC[k][f]+=(+c[f]||0));});
+  const vendedores=Object.values(agC).filter(c=>c.purchases>0).sort((a,b)=>b.purchases-a.purchases);
+  document.getElementById('criativos').innerHTML=`<table><thead><tr><th>Criativo</th><th>Gasto</th><th>Compras</th><th>Custo/Venda</th><th>Cliques</th><th>LPV</th><th>Vídeo</th><th>Post</th></tr></thead><tbody>`+
+    (vendedores.map(c=>{const cpaC=c.purchases?c.spend/c.purchases:null;
+      return `<tr><td class="camp">${c.ad_name}</td><td>${brl(c.spend)}</td><td><b>${intf(c.purchases)}</b></td>`+
+      (cpaC!=null?`<td style="font-weight:700;color:${clr[status(cpaC,BENCH.cpa)]}">${brl(cpaC)}</td>`:`<td style="color:#94a3b8">—</td>`)+
+      `<td>${intf(c.link_clicks)}</td><td>${intf(c.lpv)}</td><td>${intf(c.video_view)}</td><td>${c.permalink?`<a href="${c.permalink}" target="_blank">ver</a>`:'—'}</td></tr>`;}).join('')
+     || `<tr><td colspan="8" style="color:#94a3b8">nenhum criativo com venda no período</td></tr>`)+`</tbody></table>
+     <div class="card-s" style="margin-top:8px">Custo/Venda = gasto ÷ compras · só criativos com venda, ordenado por vendas.</div>`;
+
+  // Tabela de etapas (benchmark + semáforo)
+  const rows=[['Etapa 1 · Anúncio'],
+    ['CPM',M.cpm,BENCH.cpm,'Custo do leilão'],['CTR (link)',M.ctr,BENCH.ctr,'Atratividade do criativo'],
+    ['CPC (link)',M.cpc,BENCH.cpc,'Custo de entrada no funil'],['Frequência',M.freq,BENCH.freq,'Saturação'],
+    ['Visitas ao perfil',T.profileVisits,{dir:'gray',fmt:'int',label:'—'},'Interesse no perfil'],
+    ['Custo/visita perfil',M.custoVisita,{dir:'gray',fmt:'money',label:'—'},'Gasto ÷ visitas'],
+    ['Etapa 2 · Página de vendas'],
+    ['Connect (Fluxo)',M.fluxo,BENCH.fluxo,'LP Views ÷ Cliques'],['Custo por LP View',M.custoLp,BENCH.custoLp,'Custo do prospect'],
+    ['Etapa 3 · Checkout iniciado'],
+    ['Checkout iniciado',M.convPag,BENCH.convPag,'Checkouts ÷ LP Views'],['Custo por checkout',M.custoIc,BENCH.custoIc,'Previsor de CPA'],
+    ['Conversão de página',M.convCompraPag,BENCH.convCompraPag,'Compras ÷ LP Views'],
+    ['Etapa 4 · Resultado'],
+    ['Conv. do checkout',M.convChk,BENCH.convChk,'Compras ÷ Checkouts'],['CPA (custo/compra)',M.cpa,BENCH.cpa,'vs. ticket do produto'],
+    ['ROAS campanha',M.roasCamp,BENCH.roas,'Faturamento ÷ Gasto']];
+  document.getElementById('stage').innerHTML=rows.map(r=>{
+    if(r.length===1)return `<tr><td colspan="5" class="stage-tag">${r[0]}</td></tr>`;
+    const st=status(r[1],r[2]);
+    return `<tr><td>${r[0]}</td><td>${fmt(r[1],r[2].fmt||'dec')}</td><td style="color:#94a3b8">${r[2].label||'—'}</td>
+      <td><span class="dot" style="background:${clr[st]}"></span>${lbl[st]}</td><td style="color:#94a3b8">${r[3]}</td></tr>`;
+  }).join('');
+
+  // Campanhas (agrega por nome no período)
+  const agK={};
+  camps.forEach(c=>{const k=c.campaign;(agK[k]=agK[k]||{campaign:k,spend:0,impressions:0,reach:0,link_clicks:0,lpv:0,checkout:0,purchases:0,purchase_value:0,profile_visits:0});
+    ['spend','impressions','reach','link_clicks','lpv','checkout','purchases','purchase_value','profile_visits'].forEach(f=>agK[k][f]+=(+c[f]||0));});
+  const cs=Object.values(agK).sort((a,b)=>b.spend-a.spend);
+  const nd='<td style="color:#94a3b8">—</td>';
+  document.getElementById('camp').innerHTML=`<table><thead><tr><th>Campanha</th><th>Gasto</th><th>Compras</th><th>Custo/Compra</th><th>ROAS</th><th>CPM</th><th>CTR</th><th>CPC</th><th>Freq</th><th>Connect</th><th>Custo/LPV</th><th>Conv.Pág</th><th>Custo/Chk</th><th>Conv.Chk</th><th>Impr.</th><th>Cliques</th><th>LPV</th><th>Chk</th></tr></thead><tbody>`+
+    (cs.map(c=>{const m=met(c);
+      return `<tr><td class="camp">${c.campaign.replace('[GGD][CAPTACAO][PAGA][VENDA][DOMINANDO_CICATRIZES_ACNE]','…')}</td>`+
+        `<td>${brl(c.spend)}</td><td><b>${intf(c.purchases)}</b></td>`+
+        (c.purchases?mc(m.cpa,BENCH.cpa,'money'):nd)+
+        (c.purchases?mc(m.roas,BENCH.roas,'dec'):nd)+
+        mc(m.cpm,BENCH.cpm,'money')+mc(m.ctr,BENCH.ctr,'pct')+mc(m.cpc,BENCH.cpc,'money')+
+        mc(m.freq,BENCH.freq,'dec')+mc(m.fluxo,BENCH.fluxo,'pct')+
+        (c.lpv?mc(m.custoLp,BENCH.custoLp,'money'):nd)+(c.lpv?mc(m.convPag,BENCH.convPag,'pct'):nd)+
+        (c.checkout?`<td>${brl(m.custoIc)}</td>`:nd)+(c.checkout?mc(m.convChk,BENCH.convChk,'pct'):nd)+
+        `<td>${intf(c.impressions)}</td><td>${intf(c.link_clicks)}</td><td>${intf(c.lpv)}</td><td>${intf(c.checkout)}</td></tr>`;}).join('')
+     || `<tr><td colspan="18" style="color:#94a3b8">sem campanhas no período</td></tr>`)+`</tbody></table>
+     <div class="card-s" style="margin-top:8px">Diagnóstico completo por campanha · Custo/Compra e ROAS = Meta · cada métrica colorida pelo benchmark (verde saudável · amarelo atenção · vermelho crítico)</div>`;
+
+  // gráfico diário (vendas + gasto)
+  const dd=[...new Set([...dias.map(d=>d.date),...vendas.map(v=>v.date)])].sort();
+  const vpd=dd.map(x=>vendas.filter(v=>v.date===x).length);
+  const gpd=dd.map(x=>{const d=dias.find(z=>z.date===x);return d?+d.spend:0;});
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('cd'),{data:{labels:dd.map(x=>x.slice(5)),
+    datasets:[{type:'bar',label:'Vendas',data:vpd,backgroundColor:'#6366f1',yAxisID:'y'},
+      {type:'line',label:'Gasto (R$)',data:gpd,borderColor:'#16a34a',yAxisID:'y1'}]},
+    options:{maintainAspectRatio:false,responsive:true,scales:{y:{position:'left',beginAtZero:true,ticks:{precision:0}},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false}}}}});
+
+  document.getElementById('fresumo').textContent=`${dd.length} dia(s) · ${nV} venda(s)`;
+}
+// limites do seletor de data (engloba dados + janelas dos lançamentos)
+const boundMin=[minD,...LANCS.map(l=>l.de)].sort()[0];
+const boundMax=[maxD,...LANCS.map(l=>l.ate)].sort().slice(-1)[0];
+function setRange(k){
+  if(k==='hoje'){document.getElementById('de').value=maxD;document.getElementById('ate').value=maxD;}
+  else if(k==='lanc'&&curLanc){document.getElementById('de').value=curLanc.de;document.getElementById('ate').value=curLanc.ate;}
+  else{document.getElementById('de').value=boundMin;document.getElementById('ate').value=boundMax;}
+  render();
+}
+function updateBadge(){
+  const evd=(curLanc&&curLanc.evento)||DADOS.imersao;
+  const hj=new Date(), ev=new Date(evd+'T00:00:00');
+  document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-hj)/864e5));
+}
+function chipLanc(){
+  const c=document.getElementById('lanc-chip'); if(!c)return;
+  c.textContent=curLanc?curLanc.nome:''; c.style.display=curLanc?'inline-block':'none';
+}
+// init
+document.getElementById('sub').textContent=`Controle diário · Vendas HeroSpark × Investimento Meta (c/ imposto ${(DADOS.impostoPct*100).toFixed(2)}%) · atualizado ${DADOS.gerado}`;
+const selL=document.getElementById('lanc');
+if(LANCS.length){
+  selL.innerHTML=LANCS.map((l,i)=>`<option value="${i}">${l.nome} (${l.de.slice(5)}→${l.ate.slice(5)})</option>`).join('');
+  selL.value=String(LANCS.length-1);
+  selL.addEventListener('change',()=>{curLanc=LANCS[+selL.value]||null;updateBadge();chipLanc();setRange('lanc');});
+}else{selL.style.display='none';}
+updateBadge(); chipLanc();
+document.getElementById('de').min=document.getElementById('ate').min=boundMin;
+document.getElementById('de').max=document.getElementById('ate').max=boundMax;
+// abre já na janela do lançamento atual
+if(curLanc){document.getElementById('de').value=curLanc.de;document.getElementById('ate').value=curLanc.ate;}
+else{document.getElementById('de').value=boundMin;document.getElementById('ate').value=boundMax;}
+document.getElementById('de').addEventListener('change',render);
+document.getElementById('ate').addEventListener('change',render);
+render();
+</script></body></html>
