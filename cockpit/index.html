@@ -96,6 +96,7 @@
       <a href="https://relatorios.giogrowthdigital.com.br/roma-aviamentos/" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#1f2937;color:#e5e7eb;text-decoration:none;font-size:13px">🧵 Roma Aviamentos ↗</a>
       <a href="https://relatorios.giogrowthdigital.com.br/roma-importadora/" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#1f2937;color:#e5e7eb;text-decoration:none;font-size:13px">📦 Roma Importadora ↗</a>
       <a href="https://relatorios.giogrowthdigital.com.br/google-guardian/" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#1f2937;color:#e5e7eb;text-decoration:none;font-size:13px">🛡️ Google Guardian ↗</a>
+      <a href="https://relatorios.giogrowthdigital.com.br/cockpit/comandos/hubs-clientes/" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#243042;color:#cfe3ff;border:1px solid #35507a;text-decoration:none;font-size:13px">🧩 Comando: Hubs dos clientes ↗</a>
     </div>
   </section>
   <section><h2>🚦 Saúde de hoje</h2><div class="tblwrap"><table id="saude"></table></div></section>
@@ -128,6 +129,12 @@ async function loadData(pw){
 
 // ---------- render ----------
 const pill = s => { const k=(s||'').toLowerCase(); return `<span class="pill p-${k||'encerrado'}">${s||'—'}</span>`; };
+// transforma qualquer URL no texto em link clicavel (log, obs, etc.)
+const linkify = s => String(s).replace(/https?:\/\/[^\s<]+/g, m=>{
+  const t=m.replace(/[.,;)]+$/,''); const trail=m.slice(t.length);
+  const label=t.replace(/^https?:\/\//,''); const short=label.length>46?label.slice(0,46)+'…':label;
+  return `<a href="${t}" target="_blank" rel="noopener" style="color:#7cc4ff">${short} ↗</a>`+trail;
+});
 function render(id, rows){
   const t=document.getElementById(id);
   if(!rows || !rows.length){ t.innerHTML='<tbody><tr><td style="color:var(--mut);padding:16px">sem dados</td></tr></tbody>'; return; }
@@ -140,6 +147,7 @@ function render(id, rows){
       else if(c==='Status conta') v=`<span class="dot" style="background:${String(v).includes('Rodando')?'var(--verde)':'var(--vermelho)'}"></span>${v}`;
       else if(c==='Dashboard'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">abrir ↗</a>`;
       else if(c==='Relatório mensal'&&v) v=`<a href="https://${String(v).replace(/^https?:\/\//,'')}" target="_blank">pasta ↗</a>`;
+      else if(typeof v==='string' && /https?:\/\//.test(v)) v=linkify(v);
       return `<td>${v}</td>`;
     }).join('')+'</tr>').join('')+'</tbody>';
 }

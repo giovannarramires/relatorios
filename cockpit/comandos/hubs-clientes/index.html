@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Comando — Hubs dos clientes (GGD)</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --accent:#127a63; --accent-soft:#e3f1ec;
+    --code-bg:#0f1613; --code-ink:#dfe7e2;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --accent:#48c3a0; --accent-soft:#123027;
+      --code-bg:#0a110e; --code-ink:#d3ddd7;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:clamp(22px,4vw,48px) clamp(16px,4vw,32px) 60px}
+  .back{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent);text-decoration:none;margin-bottom:18px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(23px,4vw,32px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15px;color:var(--ink-soft);max-width:64ch;margin-bottom:8px}
+  .how{font-size:13.5px;color:var(--ink-soft);max-width:64ch;margin-bottom:22px}
+  .how b{color:var(--ink)}
+
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--line-soft);padding:3px 10px;border-radius:999px}
+  button{font:inherit;font-size:14px;font-weight:650;cursor:pointer;border:none;border-radius:10px;padding:10px 18px;background:var(--accent);color:#fff;transition:opacity .12s ease, transform .08s ease}
+  button:hover{opacity:.92}
+  button:active{transform:translateY(1px)}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  button.ok{background:#0c7a54}
+
+  .codewrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+  textarea{width:100%;height:60vh;min-height:340px;resize:vertical;border:none;outline:none;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:2}
+  footer{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="https://relatorios.giogrowthdigital.com.br/cockpit/">← Cockpit</a>
+  <p class="eyebrow">GGD · Comando reutilizável</p>
+  <h1>Hubs de relatórios — todos os clientes</h1>
+  <p class="lede">Comando pronto pra replicar a Central de Relatórios (o hub clicável, igual ao da LE Medical) para todos os clientes ativos + Fernanda, religando o Cockpit no fim.</p>
+  <p class="how">Como usar: clique em <b>Copiar comando</b>, abra um <b>chat novo</b> do Claude Code na máquina, cole e envie. Ele constrói o gerador, cria os 14 hubs em <b>/{slug}/central/</b>, religa o Cockpit e devolve a tabela final com status 200.</p>
+
+  <div class="bar">
+    <span class="tag">Faz os 14 de uma vez · sem checkpoint</span>
+    <button id="copy">Copiar comando</button>
+  </div>
+
+  <div class="codewrap">
+    <textarea id="cmd" readonly spellcheck="false">Replicar o padrão de "hub de cliente" (central de relatórios clicável) que já fiz pra LE Medical, agora para TODOS os clientes ativos + Fernanda. Contexto e regras abaixo — siga à risca, é ambiente de produção. Faça os 14 de uma vez, sem parar para validação.
+
+## O que é o hub (referência)
+A LE Medical já tem um hub pronto. LEIA e use como molde EXATO (design, tokens, light/dark, noindex, emoji por cliente):
+  /Users/giovannaramires/Library/GGD/relatorios/le-medical/index.html
+Ele lista, em cards: dashboard(s) do cliente, deep links Meta/Google, e slots "em breve" (Relatórios mensais / NFs / Otimizações). Antes de codar o template, carregue a skill artifact-design. Os hubs são HTML/CSS puro (sem JS).
+
+## Repos e arquitetura (2 repos, tudo local)
+- SITE: /Users/giovannaramires/Library/GGD/relatorios  → github giovannarramires/relatorios (GitHub Pages, domínio relatorios.giogrowthdigital.com.br). gh já autenticado; credential helper osxkeychain funciona.
+- AUTOMAÇÕES: /Users/giovannaramires/Library/GGD/ggd-automacoes → github giovannarramires/ggd-automacoes.
+- Painel do Cockpit: relatorios/cockpit/index.html. Ele transforma a coluna "Dashboard" do clientes.csv em link "abrir" automaticamente, e tem uma lista fixa de pills "Acessos rápidos" (adicione um pill por cliente lá).
+- Config do Cockpit (fonte da verdade dos clientes): ggd-automacoes/cockpit/clientes.csv
+- Workflow cockpit-pilot.yml regenera o data.json cripto e publica em relatorios/cockpit/data.json. Ele NÃO mexe no index.html — pode editar o index.html direto e dar push.
+
+## Decisão de caminho (importante — evita colisão)
+Muitos clientes já têm o dashboard na RAIZ /{slug}/ (gerado por workflows na nuvem), então NÃO ponha o hub na raiz. Coloque cada hub em:
+  relatorios/{slug}/central/index.html   → URL relatorios.giogrowthdigital.com.br/{slug}/central/
+E aponte o Cockpit (coluna Dashboard + pill) para /{slug}/central/. Os dashboards existentes em /{slug}/ ficam intactos e viram cards DENTRO do hub.
+Para uniformizar, MOVA também o hub da LE Medical de /le-medical/ para /le-medical/central/ (atualize o pill e a coluna Dashboard dela; os links internos dela já são absolutos p/ /le-medical/relatorio-junho-26 e /le-medical/relatorios-mensais, que permanecem).
+
+## Faça um GERADOR (não 14 páginas na mão)
+Crie ggd-automacoes/hubs/gen_hubs.py + ggd-automacoes/hubs/hubs.json (config por cliente: slug, nome, emoji, meta_id, google_id, imposto, lista de cards[title,url,badge]). O gerador escreve cada relatorios/{slug}/central/index.html a partir de UM template idêntico ao da LE Medical. Assim, cliente novo = 1 entrada no JSON.
+
+## Conteúdo de cada hub (regras)
+Fonte 1 = ggd-automacoes/cockpit/clientes.csv (colunas: Cliente, Status, Meta (ID), Google Ads (ID), Modelo, Dashboard, Obs...). Fonte 2 = os pills em relatorios/cockpit/index.html (têm URLs extras: /glauber/lancamento/, /felipe-scherer/lancamento-julho-26/, /carol/lancamento/, /amanda-arantes/conteudo-julho/, /amanda-seguidores/, /santosha/dashboard/, etc). Fonte 3 = MEMORY.md em /Users/giovannaramires/.claude/projects/-Users-giovannaramires/memory/ (detalhes por cliente: dashboards, pastas Drive, contas).
+Para cada cliente monte os cards:
+- Card destaque: o dashboard principal (coluna Dashboard). Se tiver dashboards extras (lançamento/seguidores/etc.), cada um vira um card "No ar".
+- Meta Ads (se Meta ID existir e não for CONFIRMAR/"fora"): https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=META_ID
+- Google Ads (se Google ID existir): https://ads.google.com/aw/campaigns?authuser=0 (mostre o ID no texto).
+- Chips no topo com IDs Meta/Google e imposto (se estiver na coluna Obs).
+- Slots "em breve" (padrão, a menos que exista link real): Relatórios mensais, NFs mensais, Otimizações Google. (NF: só link de Google Drive quando houver — NUNCA publicar PDF fiscal no site público.)
+
+## Clientes a fazer (14) — LE Medical já feito, é só o molde
+Alarcon, Amanda Arantes, Calmaria, Carol (L4), Glauber (L4), Fernanda (L4), Santosha, HOF Germani, Go Heat, Roma Varejo, Roma Importadora, Felipe Scherer, Papo Glaucoma, Sol Oftalmologia.
+(Slugs: use os das pastas existentes — roma-aviamentos p/ Roma Varejo, amanda-arantes p/ Amanda, etc. Fernanda e Sol não têm pasta ainda: crie slugs fernanda-l4 e sol-oftalmologia.)
+
+## Publicar e religar (o fluxo que funciona)
+1) relatorios: rode o gerador (gera todos os /{slug}/central/index.html) + edite cockpit/index.html adicionando um pill por cliente (e ajuste o da LE Medical). Commit SO os caminhos que voce mexeu (NAO use git add -A — ha arquivos untracked no repo). Push com fallback: se rejeitar, git pull --rebase -q origin main e push de novo (a nuvem da push concorrente).
+2) ggd-automacoes: no cockpit/clientes.csv, preencha a coluna "Dashboard" de cada cliente com relatorios.giogrowthdigital.com.br/{slug}/central/ (ajuste LE Medical p/ /le-medical/central/). Commit so cockpit/clientes.csv (+ a pasta hubs/). Push (mesmo fallback). Depois: gh workflow run cockpit-pilot.yml.
+3) VERIFIQUE cada hub no ar: curl -s -o /dev/null -w "%{http_code}" "https://relatorios.giogrowthdigital.com.br/{slug}/central/?cb=$RANDOM" — tem que dar 200 (GitHub Pages leva ~1 min; faca retry). Confira tambem que o pill e o link do Cockpit abrem.
+
+## Ao final
+Atualize a memoria: crie um memory "hubs de clientes (padrao)" descrevendo o esquema /{slug}/central/, o gerador ggd-automacoes/hubs/, e como plugar relatorio novo. Adicione o ponteiro no MEMORY.md.
+
+Comece lendo o hub da LE Medical, o clientes.csv e os pills do cockpit; construa o template+gerador; e gere os 14 hubs de uma vez, publicando e religando o Cockpit, SEM parar para validacao. So volte a falar comigo no resumo final: tabela cliente x URL do hub x status (200 ok).</textarea>
+  </div>
+
+  <footer>GGD · comando reutilizável · criado em 30/07/2026</footer>
+</div>
+
+<script>
+  var btn = document.getElementById('copy');
+  var ta = document.getElementById('cmd');
+  btn.addEventListener('click', function(){
+    var txt = ta.value;
+    function done(){
+      btn.textContent = '✓ Copiado';
+      btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent = 'Copiar comando'; btn.classList.remove('ok'); }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ ta.focus(); ta.select(); done(); });
+    } else {
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      done();
+    }
+  });
+</script>
+</body>
+</html>
