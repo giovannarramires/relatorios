@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Mensal — LE Medical — Junho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --le-ink: #403838;
+    --le-blue-soft: #A4C9FA;
+    --le-blue: #4A7FC7;
+    --le-blue-ice: #EEF4FD;
+    --le-warm-gray: #F4F2F1;
+    --le-bg: #FFFFFF;
+    --le-text-secondary: #8A8180;
+    --le-border: #E7E3E1;
+    --le-success: #4E9C7A;
+    --le-warning: #C9A24B;
+    --le-danger: #C15B5B;
+    --le-font-title: 'Nunito', system-ui, sans-serif;
+    --le-font-body: 'Inter', system-ui, sans-serif;
+    --le-radius: 16px;
+  }
+
+  body {
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: var(--le-font-body);
+    overflow: hidden;
+  }
+
+  #stage {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    transform-origin: top left;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--le-bg);
+    display: none;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; flex-direction: column; }
+
+  /* Nav */
+  #nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(64,56,56,0.85);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: var(--le-font-body);
+    font-size: 13px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(8px);
+  }
+  #nav button {
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--le-font-body);
+    transition: background 0.15s;
+  }
+  #nav button:hover { background: rgba(255,255,255,0.15); }
+
+  /* ─── SHARED COMPONENTS ─── */
+  .slide-header {
+    padding: 36px 56px 0;
+    border-bottom: 2px solid var(--le-blue-soft);
+    padding-bottom: 16px;
+    margin-bottom: 0;
+  }
+  .slide-header h2 {
+    font-family: var(--le-font-title);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--le-ink);
+  }
+  .slide-header p {
+    font-size: 13px;
+    color: var(--le-text-secondary);
+    margin-top: 2px;
+  }
+
+  .slide-body {
+    flex: 1;
+    padding: 24px 56px 20px;
+    overflow: hidden;
+  }
+
+  /* Footer */
+  .slide-footer {
+    padding: 0 56px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .slide-footer span {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-family: var(--le-font-body);
+  }
+  .footer-logo {
+    height: 22px;
+    opacity: 0.55;
+  }
+
+  /* Cards */
+  .kpi-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--le-warm-gray);
+    border-radius: var(--le-radius);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .kpi-card .label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .kpi-card .value {
+    font-family: var(--le-font-title);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1;
+  }
+  .kpi-card .sub {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+  }
+  .kpi-card.blue { background: var(--le-blue-ice); }
+  .kpi-card.blue .value { color: var(--le-blue); }
+  .kpi-card.green .value { color: var(--le-success); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  thead th {
+    font-family: var(--le-font-body);
+    font-weight: 600;
+    color: var(--le-text-secondary);
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1.5px solid var(--le-border);
+  }
+  tbody tr:nth-child(even) { background: var(--le-warm-gray); }
+  tbody td {
+    padding: 9px 12px;
+    color: var(--le-ink);
+    font-size: 12px;
+    border-bottom: 1px solid var(--le-border);
+  }
+  tbody tr:last-child td { border-bottom: none; font-weight: 600; }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-green { background: #E8F5EF; color: var(--le-success); }
+  .tag-red { background: #FBEAEA; color: var(--le-danger); }
+  .tag-yellow { background: #FDF5E6; color: var(--le-warning); }
+  .tag-blue { background: var(--le-blue-ice); color: var(--le-blue); }
+
+  /* Highlight box */
+  .info-box {
+    background: var(--le-blue-ice);
+    border-left: 3px solid var(--le-blue);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--le-ink);
+    line-height: 1.5;
+  }
+  .info-box strong { color: var(--le-blue); }
+
+  /* Bar */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .bar-label {
+    font-size: 12px;
+    color: var(--le-ink);
+    width: 160px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track {
+    flex: 1;
+    height: 22px;
+    background: var(--le-warm-gray);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--le-blue);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 60px;
+  }
+  .bar-val {
+    font-size: 12px;
+    color: var(--le-text-secondary);
+    width: 110px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Funnel */
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .funnel-step .step-label {
+    font-size: 12px;
+    color: var(--le-ink);
+    width: 170px;
+    flex-shrink: 0;
+  }
+  .funnel-step .step-bar {
+    height: 28px;
+    background: var(--le-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .funnel-step .step-pct {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    min-width: 80px;
+  }
+
+  /* ─── SLIDE 1 — CAPA ─── */
+  #s1 {
+    background: var(--le-bg);
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .capa-left {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+  }
+  .capa-right {
+    width: 45%;
+    background: var(--le-blue-ice);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 18px;
+    position: relative;
+  }
+  .capa-circle {
+    width: 220px;
+    height: 220px;
+    background: var(--le-blue-soft);
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    opacity: 0.4;
+  }
+  .capa-badge {
+    background: var(--le-blue);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .capa-left h1 {
+    font-family: var(--le-font-title);
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .capa-left p {
+    font-size: 15px;
+    color: var(--le-text-secondary);
+    margin-bottom: 36px;
+  }
+  .kpi-mini {
+    background: var(--le-bg);
+    border-radius: var(--le-radius);
+    padding: 18px 22px;
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+    z-index: 1;
+  }
+  .kpi-mini .label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+  .kpi-mini .value {
+    font-family: var(--le-font-title);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--le-blue);
+    margin-top: 2px;
+  }
+
+  /* ─── SLIDE 2 — RESUMO ─── */
+  .resumo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .resumo-card {
+    background: var(--le-warm-gray);
+    border-radius: var(--le-radius);
+    padding: 18px 16px;
+  }
+  .resumo-card .r-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--le-text-secondary);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .resumo-card .r-val {
+    font-family: var(--le-font-title);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1;
+  }
+  .resumo-card .r-sub {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    margin-top: 4px;
+  }
+  .resumo-card.highlight { background: var(--le-blue-ice); }
+  .resumo-card.highlight .r-val { color: var(--le-blue); }
+
+  /* ─── ROAS BAR ─── */
+  .roas-compare {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .roas-item {
+    flex: 1;
+    background: var(--le-warm-gray);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .roas-item .ri-label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .roas-item .ri-bar {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+  }
+  .roas-item .ri-val {
+    font-family: var(--le-font-title);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--le-ink);
+  }
+
+  /* ─── two-col layout ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ─── Section label ─── */
+  .section-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--le-blue-soft);
+    color: var(--le-ink);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-family: var(--le-font-title);
+  }
+
+  /* ─── Tax breakdown ─── */
+  .tax-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--le-border);
+    font-size: 13px;
+  }
+  .tax-row:last-child { border-bottom: none; }
+  .tax-row .tr-name { color: var(--le-ink); }
+  .tax-row .tr-val { font-weight: 600; color: var(--le-ink); }
+  .tax-row.total-row .tr-name { font-family: var(--le-font-title); font-weight: 800; font-size: 15px; color: var(--le-blue); }
+  .tax-row.total-row .tr-val { font-family: var(--le-font-title); font-size: 20px; color: var(--le-blue); }
+
+  /* oportunidades */
+  .op-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--le-warm-gray);
+    margin-bottom: 8px;
+  }
+  .op-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: var(--le-font-title);
+  }
+  .op-num.red { background: var(--le-danger); color: #fff; }
+  .op-num.amber { background: var(--le-warning); color: #fff; }
+  .op-body .op-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--le-ink);
+    line-height: 1.3;
+  }
+  .op-body .op-impact {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    margin-top: 2px;
+  }
+
+  /* encerramento */
+  #s13 {
+    background: var(--le-blue-ice);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+<!-- ─── SLIDE 1 — CAPA ─── -->
+<div class="slide active" id="s1">
+  <div class="capa-left">
+    <span class="capa-badge">Junho 2026</span>
+    <h1>Relatório<br>Mensal</h1>
+    <p>Performance completa — Site · Meta Ads · Google Ads</p>
+    <img src="Manual da Marca/logo-le-medical.png" alt="LE Medical" style="height:40px; object-fit:contain; margin-top:12px;">
+  </div>
+  <div class="capa-right">
+    <div class="capa-circle"></div>
+    <div class="kpi-mini">
+      <div class="label">Receita Total</div>
+      <div class="value">R$ 717.359</div>
+    </div>
+    <div class="kpi-mini">
+      <div class="label">Investimento Total em Mídia</div>
+      <div class="value">R$ 52.336</div>
+    </div>
+    <div class="kpi-mini">
+      <div class="label">ROAS Geral (real)</div>
+      <div class="value">13,71x</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SLIDE 2 — RESUMO EXECUTIVO ─── -->
+<div class="slide" id="s2">
+  <div class="slide-header">
+    <h2>Resumo Executivo</h2>
+    <p>Principais indicadores — Junho 2026</p>
+  </div>
+  <div class="slide-body">
+    <div class="resumo-grid">
+      <div class="resumo-card highlight">
+        <div class="r-label">Receita total (site)</div>
+        <div class="r-val">R$ 717.359</div>
+        <div class="r-sub">891 pedidos pagos</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Ticket médio</div>
+        <div class="r-val">R$ 805</div>
+        <div class="r-sub">por pedido pago</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Visitas ao site</div>
+        <div class="r-val">73.394</div>
+        <div class="r-sub">Taxa de venda 1,21%</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Carrinhos criados</div>
+        <div class="r-val">3.746</div>
+        <div class="r-sub">Conv. checkout: 41,97%</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Meta Ads (c/ impostos)</div>
+        <div class="r-val">R$ 35.308</div>
+        <div class="r-sub">Incl. COFINS + PIS + ISS</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Google Ads</div>
+        <div class="r-val">R$ 17.028</div>
+        <div class="r-sub">5 campanhas ativas</div>
+      </div>
+      <div class="resumo-card">
+        <div class="r-label">Total investido em mídia</div>
+        <div class="r-val">R$ 52.336</div>
+        <div class="r-sub">Meta + Google</div>
+      </div>
+      <div class="resumo-card highlight">
+        <div class="r-label">ROAS Geral Real</div>
+        <div class="r-val">13,71x</div>
+        <div class="r-sub">receita / invest. total</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:24px;margin-top:0;">
+      <div class="roas-compare" style="margin-top:0;">
+        <div class="roas-item">
+          <div class="ri-label">ROAS Meta (plataforma)</div>
+          <div class="ri-bar" style="width:80%; background: var(--le-blue-soft);"></div>
+          <div class="ri-val">~20,55x</div>
+        </div>
+        <div class="roas-item">
+          <div class="ri-label">ROAS Google (plataforma)</div>
+          <div class="ri-bar" style="width:82%; background: var(--le-blue);"></div>
+          <div class="ri-val">~21,23x</div>
+        </div>
+        <div class="roas-item" style="background: var(--le-blue-ice);">
+          <div class="ri-label">ROAS Geral Real (conservador)</div>
+          <div class="ri-bar" style="width:53%; background: var(--le-success);"></div>
+          <div class="ri-val" style="color:var(--le-success);">13,71x</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-pill" style="font-size:11px;padding:3px 12px;margin-bottom:10px;">Top estados por receita</div>
+        <div class="bar-row" style="margin-bottom:7px;">
+          <span class="bar-label">São Paulo</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%">231 vendas</div></div>
+          <span class="bar-val">R$ 181.702</span>
+        </div>
+        <div class="bar-row" style="margin-bottom:7px;">
+          <span class="bar-label">Minas Gerais</span>
+          <div class="bar-track"><div class="bar-fill" style="width:41%">91 vendas</div></div>
+          <span class="bar-val">R$ 74.267</span>
+        </div>
+        <div class="bar-row" style="margin-bottom:7px;">
+          <span class="bar-label">Rio Grande do Sul</span>
+          <div class="bar-track"><div class="bar-fill" style="width:30%">78 vendas</div></div>
+          <span class="bar-val">R$ 54.638</span>
+        </div>
+        <div class="bar-row" style="margin-bottom:7px;">
+          <span class="bar-label">Rio de Janeiro</span>
+          <div class="bar-track"><div class="bar-fill" style="width:26%">65 vendas</div></div>
+          <span class="bar-val">R$ 47.939</span>
+        </div>
+        <div class="bar-row" style="margin-bottom:0;">
+          <span class="bar-label">Paraná</span>
+          <div class="bar-track"><div class="bar-fill" style="width:24%">61 vendas</div></div>
+          <span class="bar-val">R$ 45.109</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>2 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 4 — FUNIL VISÃO GERAL ─── -->
+<div class="slide" id="s_funil_geral">
+  <div class="slide-header">
+    <h2>Funil de Vendas — Junho 2026</h2>
+    <p>Cada etapa do caminho visita → venda paga</p>
+  </div>
+  <div class="slide-body" style="padding-top:18px; display:flex; gap:32px; align-items:flex-start;">
+    <!-- Funil visual -->
+    <div style="flex:1;">
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <div style="background:var(--le-blue); border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="color:#fff; font-weight:700; font-size:13px;">Visitas totais</span>
+          <span style="color:#fff; font-family:var(--le-font-title); font-size:18px; font-weight:800;">73.394</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 62% avançam</div>
+        <div style="background:#5B8FD4; border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 28px;">
+          <span style="color:#fff; font-weight:700; font-size:13px;">View de produto</span>
+          <span style="color:#fff; font-family:var(--le-font-title); font-size:18px; font-weight:800;">45.855</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 8,2% adicionam ao carrinho</div>
+        <div style="background:#7AA6DC; border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 56px;">
+          <span style="color:#fff; font-weight:700; font-size:13px;">Carrinhos criados</span>
+          <span style="color:#fff; font-family:var(--le-font-title); font-size:18px; font-weight:800;">3.746</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 56,7% iniciam checkout</div>
+        <div style="background:#94BADE; border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 84px;">
+          <span style="color:var(--le-ink); font-weight:700; font-size:13px;">Checkout iniciado</span>
+          <span style="color:var(--le-ink); font-family:var(--le-font-title); font-size:18px; font-weight:800;">2.123</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 67,2% chegam ao pagamento</div>
+        <div style="background:#AECEE5; border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 112px;">
+          <span style="color:var(--le-ink); font-weight:700; font-size:13px;">Etapa de pagamento</span>
+          <span style="color:var(--le-ink); font-family:var(--le-font-title); font-size:18px; font-weight:800;">1.426</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 72,2% criam pedido</div>
+        <div style="background:#C5DFED; border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 140px;">
+          <span style="color:var(--le-ink); font-weight:700; font-size:13px;">Pedidos criados</span>
+          <span style="color:var(--le-ink); font-family:var(--le-font-title); font-size:18px; font-weight:800;">1.030</span>
+        </div>
+        <div style="text-align:center; font-size:10px; color:var(--le-text-secondary); margin:-2px 0;">▼ 86,5% confirmam pagamento</div>
+        <div style="background:var(--le-success); border-radius:10px; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; margin:0 168px;">
+          <span style="color:#fff; font-weight:700; font-size:13px;">Vendas pagas ✓</span>
+          <span style="color:#fff; font-family:var(--le-font-title); font-size:18px; font-weight:800;">891</span>
+        </div>
+      </div>
+    </div>
+    <!-- KPIs laterais -->
+    <div style="width:260px; display:flex; flex-direction:column; gap:10px; padding-top:4px;">
+      <div class="kpi-card blue">
+        <div class="label">Conversão geral</div>
+        <div class="value">1,21%</div>
+        <div class="sub">visitas → vendas pagas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Abandono de carrinho</div>
+        <div class="value" style="color:var(--le-warning);">~76%</div>
+        <div class="sub">2.855 carrinhos perdidos</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Checkout → venda</div>
+        <div class="value">41,97%</div>
+        <div class="sub">de quem inicia, 42% conclui</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Ticket médio</div>
+        <div class="value">R$ 805</div>
+        <div class="sub">por pedido pago</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>3 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 5 — FUNIL PERFORMANCE VS MERCADO ─── -->
+<div class="slide" id="s_funil_bench">
+  <div class="slide-header">
+    <h2>Nossa Performance vs Mercado</h2>
+    <p>Comparativo com benchmarks Brasil e global · Junho 2026</p>
+  </div>
+  <div class="slide-body" style="padding-top:20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; height:100%;">
+      <!-- Barras comparativas -->
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <!-- Add-to-cart -->
+        <div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:var(--le-ink);">Add-to-cart (view → carrinho)</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center; margin-bottom:4px;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">LE Medical</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:52%; height:100%; background:var(--le-blue); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">8,2%</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">Mercado</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:63%; height:100%; background:var(--le-blue-soft); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:var(--le-ink); font-size:12px; font-weight:700;">~10%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Carrinho → Checkout -->
+        <div>
+          <div style="margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:var(--le-ink);">Carrinho → Checkout</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center; margin-bottom:4px;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">LE Medical</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:56%; height:100%; background:var(--le-blue); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">56%</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">Mercado BR</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:55%; height:100%; background:var(--le-blue-soft); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:var(--le-ink); font-size:12px; font-weight:700;">40–70%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Checkout → Venda -->
+        <div>
+          <div style="margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:var(--le-ink);">Checkout → Venda</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center; margin-bottom:4px;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">LE Medical</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:42%; height:100%; background:var(--le-warning); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">42%</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">Top 20%</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:59%; height:100%; background:var(--le-success); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">&gt;59%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Conversão geral -->
+        <div>
+          <div style="margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:var(--le-ink);">Conversão geral (visita → venda)</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center; margin-bottom:4px;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">LE Medical</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:55%; height:100%; background:var(--le-blue); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">1,21%</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span style="font-size:11px; color:var(--le-text-secondary); width:80px;">Brasil</span>
+            <div style="flex:1; height:24px; background:var(--le-warm-gray); border-radius:6px; overflow:hidden;">
+              <div style="width:63%; height:100%; background:var(--le-blue-soft); border-radius:6px; display:flex; align-items:center; padding-left:8px;">
+                <span style="color:var(--le-ink); font-size:12px; font-weight:700;">1,17–1,65%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Resumo de posição -->
+      <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px;">
+        <div class="info-box" style="background:var(--le-blue-ice); border-left-color:var(--le-blue);">
+          <strong>Abandono de carrinho: melhor que a média BR</strong><br>
+          76% (LE Medical) vs 82% (Neotrust Brasil) — estamos acima da média nacional nessa etapa.
+        </div>
+        <div class="info-box" style="background:#FDF5E6; border-left-color:var(--le-warning);">
+          <strong>Checkout → Venda: oportunidade clara</strong><br>
+          42% vs top 20% do mercado (&gt;59%). Cada ponto percentual ganho aqui = ~20 vendas extras/mês sem aumentar tráfego.
+        </div>
+        <div class="info-box" style="background:#FDF5E6; border-left-color:var(--le-warning);">
+          <strong>Add-to-cart abaixo do ideal</strong><br>
+          8,2% vs ~10% saudável (global). Otimizações na página de produto podem adicionar &gt;150 vendas/mês.
+        </div>
+        <div style="background:var(--le-warm-gray); border-radius:12px; padding:12px 16px; font-size:12px; color:var(--le-ink);">
+          <strong>Fontes:</strong> NuvemCommerce 2026 · Neotrust · Littledata/Shopify · Baymard Institute
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>4 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 6 — FUNIL DIAGNÓSTICO ─── -->
+<div class="slide" id="s_funil_diag">
+  <div class="slide-header">
+    <h2>Diagnóstico — Onde Estamos e Onde Melhorar</h2>
+    <p>Avaliação por etapa do funil · Junho 2026</p>
+  </div>
+  <div class="slide-body" style="padding-top:20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <!-- Pontos positivos -->
+      <div>
+        <div class="section-pill" style="background:#E8F5EF; color:var(--le-success);">✓ Estamos bem</div>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+          <div style="background:#E8F5EF; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-success);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Abandono de carrinho abaixo da média</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">76% vs 82% nacional — 6 pontos melhor que o benchmark Brasil (Neotrust)</div>
+          </div>
+          <div style="background:#E8F5EF; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-success);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Carrinho → Checkout dentro da faixa</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">56% está dentro do intervalo saudável (40–70%) para e-commerce Brasil</div>
+          </div>
+          <div style="background:#E8F5EF; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-success);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Conversão geral na média do mercado</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">1,21% vs 1,17% (NuvemCommerce) — acima do piso do benchmark para lojas &gt;R$100k/mês</div>
+          </div>
+          <div style="background:#E8F5EF; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-success);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Confirmação de pagamento sólida</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">86,5% dos pedidos criados são pagos — indicador de confiança e intenção de compra alta</div>
+          </div>
+        </div>
+      </div>
+      <!-- Oportunidades -->
+      <div>
+        <div class="section-pill" style="background:#FDF5E6; color:var(--le-warning);">⚡ Oportunidade</div>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+          <div style="background:#FDF5E6; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-warning);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Checkout → Venda: principal gargalo</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">42% vs top 20% do mercado (&gt;59%). Potencial de +17 pp = ~350 vendas extras/mês</div>
+          </div>
+          <div style="background:#FDF5E6; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-warning);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Add-to-cart abaixo do ideal global</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">8,2% vs ~10% saudável — página de produto pode ser otimizada para converter mais views em carrinhos</div>
+          </div>
+          <div style="background:#FDF5E6; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-warning);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">~4.080 abandonos/mês não recuperados</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">2.855 carrinhos + 1.232 checkouts abandonados — sem fluxo ativo de recuperação (e-mail/WhatsApp)</div>
+          </div>
+          <div style="background:#FBEAEA; border-radius:12px; padding:14px 16px; border-left:3px solid var(--le-danger);">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">Maior foco: fundo de funil</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">Não faltam visitantes — faltam conversões. O tráfego é saudável; o checkout e a recuperação são a prioridade</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>5 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 8 — PRIORIDADE 2: RECUPERAÇÃO ─── -->
+<div class="slide" id="s_funil_p2">
+  <div class="slide-header">
+    <h2>Prioridade 2 — Recuperação de Abandonos</h2>
+    <p>~4.080 oportunidades/mês não aproveitadas · potencial: 150–250 vendas extras</p>
+  </div>
+  <div class="slide-body" style="padding-top:18px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <!-- Fluxos de recuperação -->
+      <div>
+        <div class="section-pill" style="margin-bottom:12px;">Fluxos de recuperação</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="background:var(--le-warm-gray); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:6px;">✉ Sequência de e-mail — 3 toques</div>
+            <div style="display:flex; gap:8px; flex-direction:column;">
+              <div style="font-size:11px; color:var(--le-text-secondary);">🕐 <strong>1h após abandono</strong> — lembrete simples com foto do produto</div>
+              <div style="font-size:11px; color:var(--le-text-secondary);">🕐 <strong>24h</strong> — argumento de valor + avaliações de médicos</div>
+              <div style="font-size:11px; color:var(--le-text-secondary);">🕐 <strong>72h</strong> — oferta com urgência (desconto PIX ou frete grátis)</div>
+            </div>
+          </div>
+          <div style="background:var(--le-warm-gray); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">📱 WhatsApp — checkout abandonado</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">Disparo manual ou automático para quem chegou ao checkout e não finalizou · alta taxa de abertura (&gt;80%)</div>
+          </div>
+          <div style="background:var(--le-warm-gray); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:12px; font-weight:700; color:var(--le-ink); margin-bottom:4px;">🎯 Retargeting segmentado</div>
+            <div style="font-size:11px; color:var(--le-text-secondary);">Meta Ads com audiência de "visitou produto mas não comprou" e "carrinho abandonado" — já temos pixel configurado</div>
+          </div>
+        </div>
+      </div>
+      <!-- Volume e potencial -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="section-pill" style="margin-bottom:0;">Volume mensal de abandono</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="kpi-card">
+            <div class="label">Carrinhos abandonados</div>
+            <div class="value" style="font-size:26px; color:var(--le-warning);">2.855</div>
+            <div class="sub">76% dos carrinhos criados</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Checkouts abandonados</div>
+            <div class="value" style="font-size:26px; color:var(--le-warning);">1.232</div>
+            <div class="sub">58% dos checkouts iniciados</div>
+          </div>
+        </div>
+        <div style="background:var(--le-blue-ice); border-radius:16px; padding:18px 20px;">
+          <div style="font-size:11px; color:var(--le-text-secondary); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">Potencial de recuperação</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:12px; color:var(--le-ink);">Taxa de recuperação estimada</span>
+            <span style="font-size:12px; font-weight:700; color:var(--le-blue);">5–8%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:12px; color:var(--le-ink);">Vendas extras estimadas</span>
+            <span style="font-size:14px; font-weight:800; font-family:var(--le-font-title); color:var(--le-blue);">150–250/mês</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; color:var(--le-ink);">Receita adicional estimada</span>
+            <span style="font-size:14px; font-weight:800; font-family:var(--le-font-title); color:var(--le-success);">+R$ 120–200k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>6 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 9 — PRIORIDADE 3: PÁGINA DE PRODUTO ─── -->
+<div class="slide" id="s_funil_p3">
+  <div class="slide-header">
+    <h2>Prioridade 3 — Página de Produto</h2>
+    <p>Meta: view→carrinho de 8,2% para 10–12% · +150 vendas/mês</p>
+  </div>
+  <div class="slide-body" style="padding-top:18px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-blue-soft); color:var(--le-ink); font-size:13px;">1</div>
+          <div class="op-body">
+            <div class="op-title">Comparativo de modelos na página</div>
+            <div class="op-impact">Tabela clara: Classic III vs Cardiology IV vs Lightweight II — ajuda o estudante a decidir sem sair do site</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-blue-soft); color:var(--le-ink); font-size:13px;">2</div>
+          <div class="op-body">
+            <div class="op-title">Avaliações de médicos com especialidade</div>
+            <div class="op-impact">Reviews com CRM + especialidade (ex: Cardiologista, UTI) aumentam confiança no produto profissional</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-blue-soft); color:var(--le-ink); font-size:13px;">3</div>
+          <div class="op-body">
+            <div class="op-title">Parcelamento em evidência</div>
+            <div class="op-impact">Mostrar "12x de R$ X sem juros" no topo da página, ao lado do preço — ticket médio de R$805 exige facilitar a visualização do parcelamento</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-blue-soft); color:var(--le-ink); font-size:13px;">4</div>
+          <div class="op-body">
+            <div class="op-title">Prazo de entrega por CEP</div>
+            <div class="op-impact">Calculadora de prazo integrada à página do produto — reduz dúvida e antecipa uma objeção de compra comum</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; justify-content:center;">
+        <div style="background:var(--le-warm-gray); border-radius:16px; padding:20px 24px; text-align:center;">
+          <div style="font-size:11px; color:var(--le-text-secondary); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">View → Carrinho hoje</div>
+          <div style="font-family:var(--le-font-title); font-size:42px; font-weight:800; color:var(--le-warning);">8,2%</div>
+          <div style="font-size:12px; color:var(--le-text-secondary);">45.855 views → 3.746 carrinhos</div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--le-blue);">→</div>
+        <div style="background:#E8F5EF; border-radius:16px; padding:20px 24px; text-align:center;">
+          <div style="font-size:11px; color:var(--le-success); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Meta em 60–90 dias</div>
+          <div style="font-family:var(--le-font-title); font-size:42px; font-weight:800; color:var(--le-success);">10–12%</div>
+          <div style="font-size:12px; color:var(--le-text-secondary);">+800–1.700 carrinhos extras/mês</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>7 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 11 — META ADS INVESTIMENTO ─── -->
+<div class="slide" id="s5">
+  <div class="slide-header">
+    <h2>Meta Ads — Investimento e Impostos</h2>
+    <p>Discriminação completa do valor debitado em junho 2026</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-pill">Composição do investimento</div>
+        <div style="background:var(--le-warm-gray); border-radius:var(--le-radius); padding:20px 24px;">
+          <div class="tax-row">
+            <span class="tr-name">Valor investido em campanhas</span>
+            <span class="tr-val">R$ 31.018,65</span>
+          </div>
+          <div class="tax-row" style="padding-top:14px;">
+            <span class="tr-name" style="color:var(--le-text-secondary); font-size:12px; font-weight:600;">IMPOSTOS SOBRE SERVIÇOS</span>
+            <span class="tr-val" style="color:var(--le-text-secondary);">R$ 4.290,00</span>
+          </div>
+          <div class="tax-row" style="padding:6px 0 6px 16px; border-bottom:none;">
+            <span class="tr-name" style="color:var(--le-text-secondary); font-size:12px;">COFINS · 7,60% sobre total cobrado</span>
+            <span class="tr-val" style="color:var(--le-text-secondary); font-size:12px;">R$ 2.683,46</span>
+          </div>
+          <div class="tax-row" style="padding:6px 0 6px 16px; border-bottom:none;">
+            <span class="tr-name" style="color:var(--le-text-secondary); font-size:12px;">PIS · 1,65% sobre total cobrado</span>
+            <span class="tr-val" style="color:var(--le-text-secondary); font-size:12px;">R$ 582,59</span>
+          </div>
+          <div class="tax-row" style="padding:6px 0 14px 16px;">
+            <span class="tr-name" style="color:var(--le-text-secondary); font-size:12px;">ISS · 2,90% sobre total cobrado</span>
+            <span class="tr-val" style="color:var(--le-text-secondary); font-size:12px;">R$ 1.023,95</span>
+          </div>
+          <div class="tax-row total-row" style="padding-top:14px;">
+            <span class="tr-name">Total debitado</span>
+            <span class="tr-val">R$ 35.308,65</span>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:12px; font-size:11px;">
+          Impostos calculados sobre o <strong>total cobrado pela Meta</strong> (não sobre o subtotal). Taxa combinada: <strong>12,15%</strong>. Valores conferidos nos PDFs de transação.
+        </div>
+      </div>
+      <div>
+        <div class="section-pill">Performance geral — Meta</div>
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="kpi-card">
+            <div class="label">Compras atribuídas</div>
+            <div class="value" style="font-size:24px;">833</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="label">ROAS plataforma</div>
+            <div class="value" style="font-size:24px;">~20,55x</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CPA médio</div>
+            <div class="value" style="font-size:24px;">R$ 37,24</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Campanhas ativas</div>
+            <div class="value" style="font-size:24px;">7</div>
+          </div>
+        </div>
+        <div style="margin-top:12px; background:var(--le-blue-ice); border-radius:var(--le-radius); padding:14px 18px;">
+          <div style="font-size:11px; color:var(--le-text-secondary); text-transform:uppercase; letter-spacing:0.05em; font-weight:600; margin-bottom:8px;">Composição do investimento</div>
+          <div style="display:flex; gap:6px; align-items:center; font-size:12px; color:var(--le-ink);">
+            <div style="width:72%; height:16px; background:var(--le-blue); border-radius:4px 0 0 4px;"></div>
+            <div style="width:28%; height:16px; background:var(--le-danger); border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--le-text-secondary); margin-top:4px;">
+            <span style="color:var(--le-blue);">■ Campanha: R$ 31.018 (87,8%)</span>
+            <span style="color:var(--le-danger);">■ Impostos: R$ 4.290 (12,2%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>8 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 6 — META CAMPANHAS ─── -->
+<div class="slide" id="s6">
+  <div class="slide-header">
+    <h2>Meta Ads — Performance por Campanha</h2>
+    <p>Junho 2026 · Dados de campanha (pré-imposto)</p>
+  </div>
+  <div class="slide-body" style="padding-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Campanha</th>
+          <th>Investimento</th>
+          <th>Compras</th>
+          <th>CPA</th>
+          <th>ROAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[VENDAS][2026][PF]</td>
+          <td>R$ 8.814,56</td>
+          <td>257</td>
+          <td>R$ 34,30</td>
+          <td style="color:var(--le-success); font-weight:700;">25,16x</td>
+        </tr>
+        <tr>
+          <td>[ADV][CATALOGO]_01</td>
+          <td>R$ 9.365,42</td>
+          <td>248</td>
+          <td>R$ 37,76</td>
+          <td>13,41x</td>
+        </tr>
+        <tr>
+          <td>[COPA_MUNDO_26]</td>
+          <td>R$ 3.259,22</td>
+          <td>102</td>
+          <td>R$ 31,95</td>
+          <td style="color:var(--le-success); font-weight:700;">22,88x</td>
+        </tr>
+        <tr>
+          <td>[CATALOGO][2026]</td>
+          <td>R$ 3.061,06</td>
+          <td>83</td>
+          <td>R$ 36,88</td>
+          <td style="color:var(--le-success); font-weight:700;">25,58x</td>
+        </tr>
+        <tr>
+          <td>[CATALOGO][RMKT]</td>
+          <td>R$ 2.939,73</td>
+          <td>74</td>
+          <td>R$ 39,73</td>
+          <td style="color:var(--le-success); font-weight:700;">25,77x</td>
+        </tr>
+        <tr>
+          <td>[CATALOGO][2026]_02</td>
+          <td>R$ 1.772,22</td>
+          <td>42</td>
+          <td>R$ 42,20</td>
+          <td>22,41x</td>
+        </tr>
+        <tr>
+          <td>[VENDAS][PF]</td>
+          <td>R$ 1.243,91</td>
+          <td>22</td>
+          <td style="color:var(--le-danger);">R$ 56,54</td>
+          <td>13,52x</td>
+        </tr>
+        <tr style="background:var(--le-blue-ice);">
+          <td><strong>TOTAL</strong></td>
+          <td><strong>R$ 31.018,65</strong></td>
+          <td><strong>833</strong></td>
+          <td><strong>R$ 37,24</strong></td>
+          <td style="color:var(--le-blue); font-weight:800;">~20,55x</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>9 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 7 — META ADS MELHORES CRIATIVOS ─── -->
+<div class="slide" id="s6b">
+  <div class="slide-header">
+    <h2>Meta Ads — Melhores Criativos</h2>
+    <p>Junho 2026 · Ranking por ROAS · investimento mínimo R$ 400</p>
+  </div>
+  <div class="slide-body" style="padding-top:14px;">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:26%;">Anúncio</th>
+          <th style="width:18%;">Campanha</th>
+          <th style="width:10%;">Invest.</th>
+          <th style="width:8%;">Compras</th>
+          <th style="width:9%;">CPA</th>
+          <th style="width:9%;">ROAS</th>
+          <th style="width:10%; text-align:center;">Criativo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>MIX_ADS</strong> <span style="color:var(--le-text-secondary);font-size:10px;">LAL Mulher</span></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">COPA_MUNDO</td>
+          <td>R$ 425</td>
+          <td>26</td>
+          <td>R$ 16,38</td>
+          <td style="color:var(--le-success);font-weight:700;">43,65x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122282343254149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr>
+          <td><strong>AD_</strong> <span style="color:var(--le-text-secondary);font-size:10px;">MIX LAL</span></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">[VENDAS][PF]</td>
+          <td>R$ 2.322</td>
+          <td>87</td>
+          <td>R$ 26,70</td>
+          <td style="color:var(--le-success);font-weight:700;">34,28x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122273293154149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr>
+          <td><strong>AD00_CATALOGO_LITTMANN</strong></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">[CATALOGO]_02</td>
+          <td>R$ 746</td>
+          <td>23</td>
+          <td>R$ 32,47</td>
+          <td style="color:var(--le-success);font-weight:700;">30,50x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122261787944149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr>
+          <td><strong>AD_ULTIMOS_DIAS_VOLTA_AULAS</strong></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">[VENDAS][PF]</td>
+          <td>R$ 3.393</td>
+          <td>112</td>
+          <td>R$ 30,30</td>
+          <td style="color:var(--le-success);font-weight:700;">27,61x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122273303720149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr>
+          <td><strong>MIX_ADS</strong> <span style="color:var(--le-text-secondary);font-size:10px;">ADV</span></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">COPA_MUNDO</td>
+          <td>R$ 1.626</td>
+          <td>61</td>
+          <td>R$ 26,66</td>
+          <td style="color:var(--le-success);font-weight:700;">25,91x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122282343266149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr>
+          <td><strong>LIT_CATALOGO</strong></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">[CATALOGO][RMKT]</td>
+          <td>R$ 2.939</td>
+          <td>74</td>
+          <td>R$ 39,73</td>
+          <td style="color:var(--le-success);font-weight:700;">25,77x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122274114056149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+        <tr style="background:var(--le-warm-gray);">
+          <td><strong>[CONJUNTO_ADVANTAGE]</strong> <span style="color:var(--le-text-secondary);font-size:10px;">maior volume</span></td>
+          <td style="font-size:11px;color:var(--le-text-secondary);">[ADV][CATALOGO]</td>
+          <td>R$ 4.845</td>
+          <td><strong>141</strong></td>
+          <td>R$ 34,36</td>
+          <td>9,93x</td>
+          <td style="text-align:center;"><a href="https://www.facebook.com/permalink.php?story_fbid=122245986596149645&amp;id=194514880407400" target="_blank" style="display:inline-block;padding:3px 12px;background:var(--le-blue-ice);color:var(--le-blue);border-radius:12px;font-size:11px;font-weight:600;text-decoration:none;">Ver</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>10 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 8 — GOOGLE ADS VISÃO GERAL ─── -->
+<div class="slide" id="s7">
+  <div class="slide-header">
+    <h2>Google Ads — Visão Geral</h2>
+    <p>Junho 2026 · 5 campanhas ativas</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-pill">Indicadores gerais</div>
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="kpi-card blue">
+            <div class="label">Investimento total</div>
+            <div class="value" style="font-size:20px;">R$ 17.028</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="label">ROAS</div>
+            <div class="value">~21,23x</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Impressões</div>
+            <div class="value" style="font-size:22px;">861.000</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Cliques</div>
+            <div class="value" style="font-size:22px;">19.631</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CPC médio</div>
+            <div class="value" style="font-size:22px;">R$ 0,87</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CTR médio</div>
+            <div class="value" style="font-size:22px;">3,99%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Conversões</div>
+            <div class="value" style="font-size:22px;">406,55</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CPA médio</div>
+            <div class="value" style="font-size:22px;">R$ 41,89</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-pill">Destaque competitivo</div>
+        <div style="background:var(--le-warm-gray); border-radius:var(--le-radius); padding:16px 20px; margin-bottom:12px;">
+          <div style="font-size:11px; color:var(--le-text-secondary); text-transform:uppercase; letter-spacing:0.05em; font-weight:600; margin-bottom:12px;">Posição no leilão vs. concorrentes</div>
+          <div class="bar-row" style="margin-bottom:8px;">
+            <span class="bar-label" style="width:130px;">Le Medical</span>
+            <div class="bar-track"><div class="bar-fill" style="width:80%; background:var(--le-success);">Topo 80,4% · 1ª pos 40,3%</div></div>
+          </div>
+          <div class="bar-row" style="margin-bottom:8px;">
+            <span class="bar-label" style="width:130px;">Mercado Livre</span>
+            <div class="bar-track"><div class="bar-fill" style="width:64%; background:var(--le-text-secondary);">Topo 79,7% · 1ª pos 31,6%</div></div>
+          </div>
+          <div class="bar-row" style="margin-bottom:8px;">
+            <span class="bar-label" style="width:130px;">Util. Clínicas</span>
+            <div class="bar-track"><div class="bar-fill" style="width:50%; background:var(--le-border); color:var(--le-text-secondary);">Topo 75,3%</div></div>
+          </div>
+          <div class="bar-row" style="margin-bottom:8px;">
+            <span class="bar-label" style="width:130px;">Amazon</span>
+            <div class="bar-track"><div class="bar-fill" style="width:41%; background:var(--le-border); color:var(--le-text-secondary);">Topo 72,0%</div></div>
+          </div>
+        </div>
+        <div class="kpi-card green">
+          <div class="label">Destaque do mês</div>
+          <div class="value" style="font-size:18px; line-height:1.3;">Maior taxa de 1ª posição</div>
+          <div class="sub">Le Medical supera Mercado Livre na qualidade de posicionamento — 40,25% vs. 31,57%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>11 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 8 — GOOGLE CAMPANHAS ─── -->
+<div class="slide" id="s8">
+  <div class="slide-header">
+    <h2>Google Ads — Performance por Campanha</h2>
+    <p>Junho 2026</p>
+  </div>
+  <div class="slide-body" style="padding-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Campanha</th>
+          <th>Tipo</th>
+          <th>Orçam./dia</th>
+          <th>Investimento</th>
+          <th>Conv.</th>
+          <th>CPA</th>
+          <th>ROAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PMAX</td>
+          <td>Performance Max</td>
+          <td>R$ 250</td>
+          <td>R$ 8.761,74</td>
+          <td>185,95</td>
+          <td>R$ 47,12</td>
+          <td>16,87x</td>
+        </tr>
+        <tr>
+          <td>ESTETOSCOPIO_02</td>
+          <td>Search</td>
+          <td>R$ 120</td>
+          <td>R$ 4.446,81</td>
+          <td>110,43</td>
+          <td>R$ 40,27</td>
+          <td>21,42x</td>
+        </tr>
+        <tr>
+          <td>INSTITUCIONAL</td>
+          <td>Search</td>
+          <td>R$ 140</td>
+          <td>R$ 605,96</td>
+          <td>52,85</td>
+          <td>R$ 11,47</td>
+          <td style="color:var(--le-success); font-weight:700;">66,01x</td>
+        </tr>
+        <tr>
+          <td>LITTMANN_02</td>
+          <td>Search</td>
+          <td>R$ 90</td>
+          <td>R$ 1.713,66</td>
+          <td>30,30</td>
+          <td style="color:var(--le-warning);">R$ 56,56</td>
+          <td>14,08x</td>
+        </tr>
+        <tr>
+          <td>SHOPPING Curva-A</td>
+          <td>Shopping</td>
+          <td>R$ 150</td>
+          <td>R$ 1.500,11</td>
+          <td>27,02</td>
+          <td>R$ 55,52</td>
+          <td style="color:var(--le-success);">36,20x</td>
+        </tr>
+        <tr style="background:var(--le-blue-ice);">
+          <td><strong>TOTAL</strong></td>
+          <td></td>
+          <td></td>
+          <td><strong>R$ 17.028,28</strong></td>
+          <td><strong>406,55</strong></td>
+          <td><strong>R$ 41,89</strong></td>
+          <td style="color:var(--le-blue); font-weight:800;">~21,23x</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display:flex; gap:12px; margin-top:14px;">
+      <div class="info-box" style="flex:1; border-left-color:var(--le-warning);">
+        <strong>⚠️ 3 campanhas limitadas pelo orçamento</strong> — PMAX, ESTETOSCOPIO e SHOPPING. Aumentar budget pode escalar resultados com ROAS já validado.
+      </div>
+      <div class="info-box" style="flex:1;">
+        <strong>🏆 INSTITUCIONAL</strong> com ROAS de <strong>66x</strong> e CPA de <strong>R$ 11,47</strong> — a campanha mais eficiente da conta. Ótima candidata a aumento de budget.
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>12 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 9 — PARCELA DE IMPRESSÃO ─── -->
+<div class="slide" id="s9b">
+  <div class="slide-header">
+    <h2>Google Ads — Parcela de Impressão e Leilão</h2>
+    <p>Junho 2026 · Onde estamos ganhando e perdendo o leilão</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col" style="gap:24px;">
+      <div>
+        <div class="section-pill">Distribuição por campanha</div>
+        <div style="font-size:10px; color:var(--le-text-secondary); display:flex; gap:16px; margin-bottom:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--le-success);border-radius:2px;display:inline-block;"></span>Impressão capturada</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--le-danger);border-radius:2px;display:inline-block;"></span>Perda p/ posição</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--le-warning);border-radius:2px;display:inline-block;"></span>Perda p/ orçamento</span>
+        </div>
+        <!-- Institucional -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:600;color:var(--le-ink);margin-bottom:4px;">Institucional</div>
+          <div style="display:flex;height:20px;border-radius:6px;overflow:hidden;">
+            <div style="width:99.7%;background:var(--le-success);"></div>
+            <div style="width:0.3%;background:var(--le-danger);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--le-text-secondary);margin-top:2px;">99,7% capturado · 0,3% perda posição · 0% orçamento</div>
+        </div>
+        <!-- Shopping -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:600;color:var(--le-ink);margin-bottom:4px;">Shopping Curva-A</div>
+          <div style="display:flex;height:20px;border-radius:6px;overflow:hidden;">
+            <div style="width:83.1%;background:var(--le-success);"></div>
+            <div style="width:16.1%;background:var(--le-danger);"></div>
+            <div style="width:0.8%;background:var(--le-warning);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--le-text-secondary);margin-top:2px;">~100% capturado · 16,1% perda posição · 0,8% orçamento</div>
+        </div>
+        <!-- Littmann -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:600;color:var(--le-ink);margin-bottom:4px;">Littmann 02</div>
+          <div style="display:flex;height:20px;border-radius:6px;overflow:hidden;">
+            <div style="width:69.1%;background:var(--le-success);"></div>
+            <div style="width:30.9%;background:var(--le-danger);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--le-text-secondary);margin-top:2px;">69,1% capturado · 31,0% perda posição · 0% orçamento</div>
+        </div>
+        <!-- Estetoscópio -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:600;color:var(--le-ink);margin-bottom:4px;">Estetoscópio 02</div>
+          <div style="display:flex;height:20px;border-radius:6px;overflow:hidden;">
+            <div style="width:41.2%;background:var(--le-success);"></div>
+            <div style="width:34.5%;background:var(--le-danger);"></div>
+            <div style="width:23.9%;background:var(--le-warning);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--le-text-secondary);margin-top:2px;">41,2% capturado · 34,5% perda posição · <strong style="color:var(--le-warning);">23,9% perda orçamento</strong></div>
+        </div>
+        <!-- PMAX -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:600;color:var(--le-ink);margin-bottom:4px;">PMAX <span style="font-size:10px;font-weight:400;color:var(--le-text-secondary)">(fatia de Search)</span></div>
+          <div style="display:flex;height:20px;border-radius:6px;overflow:hidden;">
+            <div style="width:31.8%;background:var(--le-success);"></div>
+            <div style="width:61.7%;background:var(--le-danger);"></div>
+            <div style="width:6%;background:var(--le-warning);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--le-text-secondary);margin-top:2px;">31,8% capturado · 61,7% perda posição · 6,0% orçamento</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="section-pill">Leitura estratégica</div>
+        <div class="kpi-card green">
+          <div class="label">Dominância total</div>
+          <div class="value" style="font-size:16px;line-height:1.3;">Institucional + Shopping</div>
+          <div class="sub">99,7% e ~100% de impressão — praticamente sem disputa</div>
+        </div>
+        <div class="kpi-card" style="background:#FDF5E6;">
+          <div class="label" style="color:var(--le-warning);">Perda por orçamento — ganho fácil</div>
+          <div class="value" style="font-size:16px;line-height:1.3;color:var(--le-warning);">Estetoscópio 02: 23,9%</div>
+          <div class="sub">Você perde 1 em cada 4 leilões por falta de verba, não por qualidade. Aumentar budget = resultado imediato.</div>
+        </div>
+        <div class="kpi-card" style="background:#FBEAEA;">
+          <div class="label" style="color:var(--le-danger);">Perda por posição — investigar</div>
+          <div class="value" style="font-size:16px;line-height:1.3;color:var(--le-danger);">PMAX: 61,7%</div>
+          <div class="sub">Alta perda por rank na busca. Pode indicar Quality Score baixo ou lances insuficientes nos termos de Search.</div>
+        </div>
+        <div class="info-box" style="font-size:11px;">
+          A parcela de impressão da PMAX reflete apenas a fatia de <strong>Search</strong> — a campanha roda em outros formatos não contabilizados aqui.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>13 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 10 — CONCORRENTES ─── -->
+<div class="slide" id="s10b">
+  <div class="slide-header">
+    <h2>Google Ads — Concorrentes Diretos</h2>
+    <p>Junho 2026 · Baseado nas campanhas de Search (Institucional, Littmann, Estetoscópio)</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col" style="gap:24px;">
+      <div>
+        <div class="section-pill">Ranking por presença no leilão</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Concorrente</th>
+              <th>Campanhas</th>
+              <th>Onde aparece</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;color:var(--le-danger);">estetoscopiosmedical.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-red">3 de 3</span></td>
+              <td style="font-size:11px;">Institucional · Littmann · Estetoscópio</td>
+            </tr>
+            <tr>
+              <td>rioclarense.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-yellow">2 de 3</span></td>
+              <td style="font-size:11px;">Littmann · Estetoscópio</td>
+            </tr>
+            <tr>
+              <td>utilidadesclinicas.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-yellow">2 de 3</span></td>
+              <td style="font-size:11px;">Littmann · Estetoscópio</td>
+            </tr>
+            <tr>
+              <td>bisturi.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-yellow">2 de 3</span></td>
+              <td style="font-size:11px;">Littmann · Estetoscópio</td>
+            </tr>
+            <tr>
+              <td>tecnomedi.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-yellow">2 de 3</span></td>
+              <td style="font-size:11px;">Littmann · Estetoscópio</td>
+            </tr>
+            <tr>
+              <td>magazinemedica.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-blue">1 de 3</span></td>
+              <td style="font-size:11px;">Institucional</td>
+            </tr>
+            <tr>
+              <td>tiradentessaude.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-blue">1 de 3</span></td>
+              <td style="font-size:11px;">Littmann</td>
+            </tr>
+            <tr>
+              <td>biolandbrasil.com.br</td>
+              <td style="text-align:center;"><span class="tag tag-blue">1 de 3</span></td>
+              <td style="font-size:11px;">Estetoscópio</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top:12px; font-size:11px;">
+          Marketplaces (Amazon, Mercado Livre, Shopee, Magalu) aparecem em todos os leilões, mas competem de forma difusa — não disputam termo a termo como os nichados acima.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="section-pill">Análise</div>
+        <div class="kpi-card" style="background:#FBEAEA;">
+          <div class="label" style="color:var(--le-danger);">Rival principal — monitorar de perto</div>
+          <div class="value" style="font-size:14px;line-height:1.4;color:var(--le-danger);">estetoscopiosmedical.com.br</div>
+          <div class="sub" style="margin-top:4px;">Único concorrente presente nas 3 campanhas — inclusive no termo de marca LE Medical. Se for escolher um domínio para acompanhar posicionamento, preço e criativos, é esse.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Cluster Littmann (maior disputa)</div>
+          <div class="value" style="font-size:14px;line-height:1.4;">7 concorrentes diretos</div>
+          <div class="sub" style="margin-top:4px;">É o termo mais disputado do portfólio — 7 lojas nichadas brigando. Explica os 31% de perda por posição no Littmann 02.</div>
+        </div>
+        <div class="kpi-card blue">
+          <div class="label">Ponto positivo</div>
+          <div class="value" style="font-size:14px;line-height:1.4;">Institucional praticamente blindado</div>
+          <div class="sub" style="margin-top:4px;">99,7% de impressão no termo de marca. Concorrentes aparecem mas não têm tração real — sua marca está protegida.</div>
+        </div>
+        <div class="info-box" style="font-size:11px;">
+          PMax e Shopping não expõem domínios concorrentes — essa análise cobre apenas as campanhas de Search.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>14 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 11 — LEILÃO INSTITUCIONAL ─── -->
+<div class="slide" id="s_leilao_inst">
+  <div class="slide-header">
+    <h2>Leilão — INSTITUCIONAL</h2>
+    <p>Junho 2026 · Parcela de impressões: <strong style="color:var(--le-success);">99,72%</strong> · Domínio absoluto no termo de marca</p>
+  </div>
+  <div class="slide-body" style="padding-top:14px;">
+    <table style="font-size:11.5px;">
+      <thead>
+        <tr>
+          <th>Domínio</th>
+          <th>Part. Impressões</th>
+          <th>Sobreposição</th>
+          <th>Pos. Superior</th>
+          <th>Topo da Página</th>
+          <th>1ª Posição</th>
+          <th>Parcela Vitórias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);">
+          <td style="font-weight:700;color:var(--le-blue);">LE Medical (Você)</td>
+          <td style="font-weight:700;color:var(--le-blue);">99,72%</td>
+          <td>—</td><td>—</td>
+          <td style="color:var(--le-success);font-weight:700;">98,75%</td>
+          <td style="color:var(--le-success);font-weight:700;">98,65%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>mercadolivre.com.br</td><td>29,26%</td><td>29,34%</td><td>0,16%</td><td>85,60%</td><td>0,16%</td>
+          <td style="color:var(--le-success);font-weight:600;">99,68%</td>
+        </tr>
+        <tr>
+          <td>shopee.com.br</td><td>27,22%</td><td>27,30%</td><td>0,00%</td><td>92,35%</td><td>0,00%</td>
+          <td style="color:var(--le-success);font-weight:600;">99,72%</td>
+        </tr>
+        <tr>
+          <td>estetoscopiosmedical.com.br</td><td>13,75%</td><td>13,79%</td><td>0,34%</td><td>77,44%</td><td>0,34%</td>
+          <td style="color:var(--le-success);font-weight:600;">99,68%</td>
+        </tr>
+        <tr>
+          <td>amazon.com.br</td><td>12,41%</td><td>12,44%</td><td>0,00%</td><td>79,10%</td><td>0,00%</td>
+          <td style="color:var(--le-success);font-weight:600;">99,72%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display:flex;gap:12px;margin-top:14px;">
+      <div class="info-box" style="flex:1;">
+        <strong>Parcela de vitórias: 99,68–99,72%</strong> contra todos os concorrentes — você ganha praticamente todos os leilões no seu próprio termo de marca. Nenhum rival tem tração real aqui.
+      </div>
+      <div class="info-box" style="flex:1;border-left-color:var(--le-warning);">
+        <strong>Atenção:</strong> estetoscopiosmedical.com.br insiste no seu termo de marca (13,75% de impressões sobrepostas) — o único rival nichado que tenta disputar sua marca.
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>15 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 12 — LEILÃO LITTMANN ─── -->
+<div class="slide" id="s_leilao_litt">
+  <div class="slide-header">
+    <h2>Leilão — LITTMANN 02</h2>
+    <p>Junho 2026 · Parcela de impressões: 69,08% · 8 concorrentes ativos</p>
+  </div>
+  <div class="slide-body" style="padding-top:14px;">
+    <table style="font-size:11px;">
+      <thead>
+        <tr>
+          <th>Domínio</th>
+          <th>Part. Impressões</th>
+          <th>Sobreposição</th>
+          <th>Pos. Superior</th>
+          <th>Topo da Página</th>
+          <th>1ª Posição</th>
+          <th>Parcela Vitórias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);">
+          <td style="font-weight:700;color:var(--le-blue);">LE Medical (Você)</td>
+          <td style="font-weight:700;color:var(--le-blue);">69,08%</td>
+          <td>—</td><td>—</td>
+          <td style="color:var(--le-success);font-weight:700;">84,48%</td>
+          <td style="font-weight:700;">46,64%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>utilidadesclinicas.com.br</td><td>38,05%</td><td>49,78%</td><td>35,96%</td><td>82,15%</td><td>29,59%</td>
+          <td style="color:var(--le-success);font-weight:600;">56,71%</td>
+        </tr>
+        <tr>
+          <td>mercadolivre.com.br</td><td>34,79%</td><td>40,29%</td><td>27,15%</td><td>79,11%</td><td>13,81%</td>
+          <td style="color:var(--le-success);font-weight:600;">61,52%</td>
+        </tr>
+        <tr>
+          <td>amazon.com.br</td><td>22,35%</td><td>26,13%</td><td>20,45%</td><td>74,93%</td><td>13,09%</td>
+          <td style="color:var(--le-success);font-weight:600;">65,39%</td>
+        </tr>
+        <tr>
+          <td>rioclarense.com.br</td><td>16,66%</td><td>21,21%</td><td>40,51%</td><td>64,75%</td><td>27,38%</td>
+          <td style="color:var(--le-success);font-weight:600;">63,14%</td>
+        </tr>
+        <tr>
+          <td>estetoscopiosmedical.com.br</td><td>13,08%</td><td>16,38%</td><td>27,85%</td><td>67,21%</td><td>13,16%</td>
+          <td style="color:var(--le-success);font-weight:600;">65,92%</td>
+        </tr>
+        <tr>
+          <td>apple.com</td><td>12,13%</td><td>14,12%</td>
+          <td style="color:var(--le-danger);font-weight:600;">64,35%</td>
+          <td>81,65%</td><td>51,94%</td><td>62,80%</td>
+        </tr>
+        <tr>
+          <td>google.com</td><td>&lt;10%</td><td>7,64%</td>
+          <td style="color:var(--le-danger);font-weight:600;">66,96%</td>
+          <td>81,40%</td><td>57,98%</td><td>65,54%</td>
+        </tr>
+        <tr>
+          <td>shopee.com.br</td><td>&lt;10%</td><td>5,38%</td><td>27,93%</td><td>65,56%</td><td>14,68%</td>
+          <td style="color:var(--le-success);font-weight:600;">68,04%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:12px;font-size:11px;">
+      <strong>Ponto de atenção:</strong> apple.com e google.com aparecem acima de você em mais de 64% das vezes — são agregadores/comparadores, não lojas rivais. Você vence todos os concorrentes nichados em +60% dos leilões.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>16 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 13 — LEILÃO ESTETOSCÓPIO ─── -->
+<div class="slide" id="s_leilao_este">
+  <div class="slide-header">
+    <h2>Leilão — ESTETOSCÓPIO 02</h2>
+    <p>Junho 2026 · Parcela de impressões: 40,95% · Maior disputa da conta</p>
+  </div>
+  <div class="slide-body" style="padding-top:12px;">
+    <table style="font-size:11px;">
+      <thead>
+        <tr>
+          <th>Domínio</th>
+          <th>Part. Impressões</th>
+          <th>Sobreposição</th>
+          <th>Pos. Superior</th>
+          <th>Topo da Página</th>
+          <th>1ª Posição</th>
+          <th>Parcela Vitórias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);">
+          <td style="font-weight:700;color:var(--le-blue);">LE Medical (Você)</td>
+          <td style="font-weight:700;color:var(--le-blue);">40,95%</td>
+          <td>—</td><td>—</td>
+          <td style="font-weight:700;">79,42%</td>
+          <td style="font-weight:700;">35,47%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>mercadolivre.com.br</td><td>41,02%</td><td>50,44%</td><td>38,78%</td><td>77,41%</td><td>27,76%</td>
+          <td>32,94%</td>
+        </tr>
+        <tr>
+          <td>utilidadesclinicas.com.br</td><td>27,19%</td><td>46,69%</td>
+          <td style="color:var(--le-warning);font-weight:600;">42,30%</td>
+          <td>75,99%</td><td>32,08%</td><td>32,86%</td>
+        </tr>
+        <tr>
+          <td>rioclarense.com.br</td><td>13,86%</td><td>24,45%</td>
+          <td style="color:var(--le-warning);font-weight:600;">43,91%</td>
+          <td>62,60%</td><td>31,67%</td><td>36,55%</td>
+        </tr>
+        <tr>
+          <td>amazon.com.br</td><td>19,33%</td><td>24,87%</td><td>29,15%</td><td>70,80%</td><td>16,62%</td><td>37,98%</td>
+        </tr>
+        <tr>
+          <td>estetoscopiosmedical.com.br</td><td>&lt;10%</td><td>15,28%</td><td>35,45%</td><td>62,11%</td><td>18,68%</td><td>38,73%</td>
+        </tr>
+        <tr>
+          <td>google.com</td><td>&lt;10%</td><td>6,77%</td>
+          <td style="color:var(--le-danger);font-weight:600;">62,96%</td>
+          <td>72,38%</td><td>47,10%</td><td>39,20%</td>
+        </tr>
+        <tr>
+          <td>apple.com</td><td>&lt;10%</td><td>8,03%</td>
+          <td style="color:var(--le-danger);font-weight:600;">63,57%</td>
+          <td>72,81%</td><td>46,91%</td><td>38,86%</td>
+        </tr>
+        <tr>
+          <td>shopee.com.br</td><td>10,16%</td><td>7,58%</td><td>35,12%</td><td>62,06%</td><td>18,58%</td><td>39,86%</td>
+        </tr>
+        <tr>
+          <td>my-best.com</td><td>&lt;10%</td><td>6,60%</td><td>44,26%</td><td>65,31%</td><td>30,05%</td><td>39,75%</td>
+        </tr>
+        <tr>
+          <td>magazineluiza.com.br</td><td>&lt;10%</td><td>7,08%</td><td>17,61%</td><td>46,49%</td><td>9,52%</td><td>40,44%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:10px;font-size:11px;">
+      <strong>Maior disputa da conta:</strong> 10 concorrentes ativos. Parcela de vitórias gira em torno de 33–40% — leilão muito equilibrado. Aumentar budget e Quality Score são os alavancadores diretos aqui.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>17 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 14 — LEILÃO PMAX ─── -->
+<div class="slide" id="s_leilao_pmax">
+  <div class="slide-header">
+    <h2>Leilão — PMAX</h2>
+    <p>Junho 2026 · Parcela de impressões (Search): 34,42% · 8 concorrentes</p>
+  </div>
+  <div class="slide-body" style="padding-top:14px;">
+    <table style="font-size:11.5px;">
+      <thead>
+        <tr>
+          <th>Domínio</th>
+          <th>Part. Impressões</th>
+          <th>Sobreposição</th>
+          <th>Pos. Superior</th>
+          <th>Topo da Página</th>
+          <th>1ª Posição</th>
+          <th>Parcela Vitórias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);">
+          <td style="font-weight:700;color:var(--le-blue);">LE Medical (Você)</td>
+          <td style="font-weight:700;color:var(--le-blue);">34,42%</td>
+          <td>—</td><td>—</td>
+          <td style="font-weight:700;">80,41%</td>
+          <td style="font-weight:700;">40,25%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>mercadolivre.com.br</td><td>42,40%</td><td>48,42%</td><td>38,14%</td><td>79,65%</td><td>31,57%</td>
+          <td>28,06%</td>
+        </tr>
+        <tr>
+          <td>utilidadesclinicas.com.br</td><td>25,08%</td><td>46,62%</td>
+          <td style="color:var(--le-warning);font-weight:600;">40,51%</td>
+          <td>75,33%</td><td>30,62%</td><td>27,92%</td>
+        </tr>
+        <tr>
+          <td>rioclarense.com.br</td><td>10,70%</td><td>22,99%</td>
+          <td style="color:var(--le-warning);font-weight:600;">43,82%</td>
+          <td>63,68%</td><td>31,55%</td><td>30,95%</td>
+        </tr>
+        <tr>
+          <td>amazon.com.br</td><td>20,45%</td><td>25,80%</td><td>28,54%</td><td>71,96%</td><td>18,32%</td><td>31,88%</td>
+        </tr>
+        <tr>
+          <td>shopee.com.br</td><td>10,99%</td><td>7,86%</td><td>31,11%</td><td>65,50%</td><td>18,23%</td><td>33,58%</td>
+        </tr>
+        <tr>
+          <td>estetoscopiosmedical.com.br</td><td>&lt;10%</td><td>14,48%</td><td>32,69%</td><td>63,75%</td><td>17,12%</td><td>32,79%</td>
+        </tr>
+        <tr>
+          <td>my-best.com</td><td>&lt;10%</td><td>4,96%</td><td>40,68%</td><td>63,00%</td><td>26,57%</td><td>33,72%</td>
+        </tr>
+        <tr>
+          <td>magazineluiza.com.br</td><td>&lt;10%</td><td>6,79%</td><td>18,13%</td><td>51,21%</td><td>11,17%</td><td>33,99%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:12px;font-size:11px;">
+      <strong>Mercado Livre tem mais impressões que você (42,4% vs 34,4%)</strong> — principal rival no PMAX. Rioclarense e utilidadesclinicas aparecem acima de você em ~40% das vezes, sinalizando lance ou Quality Score inferior nesses termos.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>18 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 15 — LEILÃO SHOPPING ─── -->
+<div class="slide" id="s_leilao_shop">
+  <div class="slide-header">
+    <h2>Leilão — SHOPPING Curva-A</h2>
+    <p>Junho 2026 · Parcela de impressões: 24,48% · Concorrência forte de marketplaces</p>
+  </div>
+  <div class="slide-body" style="padding-top:14px;">
+    <table style="font-size:11.5px;">
+      <thead>
+        <tr>
+          <th>Domínio</th>
+          <th>Part. Impressões</th>
+          <th>Sobreposição</th>
+          <th>Pos. Superior</th>
+          <th>Topo da Página</th>
+          <th>1ª Posição</th>
+          <th>Parcela Vitórias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);">
+          <td style="font-weight:700;color:var(--le-blue);">LE Medical (Você)</td>
+          <td style="font-weight:700;color:var(--le-blue);">24,48%</td>
+          <td>—</td><td>—</td>
+          <td style="font-weight:700;">79,16%</td>
+          <td style="font-weight:700;">40,48%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>mercadolivre.com.br</td><td>44,53%</td><td>49,81%</td>
+          <td style="color:var(--le-danger);font-weight:600;">41,68%</td>
+          <td>81,17%</td><td>36,12%</td><td>19,40%</td>
+        </tr>
+        <tr>
+          <td>utilidadesclinicas.com.br</td><td>22,34%</td><td>48,29%</td>
+          <td style="color:var(--le-warning);font-weight:600;">39,96%</td>
+          <td>73,36%</td><td>29,51%</td><td>19,76%</td>
+        </tr>
+        <tr>
+          <td>amazon.com.br</td><td>21,18%</td><td>27,65%</td><td>31,22%</td><td>72,31%</td><td>20,29%</td><td>22,37%</td>
+        </tr>
+        <tr>
+          <td>rioclarense.com.br</td><td>&lt;10%</td><td>23,16%</td>
+          <td style="color:var(--le-warning);font-weight:600;">44,73%</td>
+          <td>64,85%</td><td>32,47%</td><td>21,95%</td>
+        </tr>
+        <tr>
+          <td>shopee.com.br</td><td>11,93%</td><td>7,86%</td><td>33,61%</td><td>66,75%</td><td>18,86%</td><td>23,84%</td>
+        </tr>
+        <tr>
+          <td>magazineluiza.com.br</td><td>&lt;10%</td><td>7,30%</td><td>18,68%</td><td>54,49%</td><td>12,51%</td><td>24,15%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display:flex;gap:12px;margin-top:14px;">
+      <div class="info-box" style="flex:1;border-left-color:var(--le-danger);">
+        <strong>Parcela de vitórias baixa (19–24%)</strong> contra todos os rivais — Shopping é o ambiente mais competitivo da conta. Mercado Livre lidera com 44,53% de impressões vs seus 24,48%.
+      </div>
+      <div class="info-box" style="flex:1;">
+        <strong>Rioclarense aparece acima de você em 44,73%</strong> dos leilões compartilhados — concorrente nichado mais agressivo no Shopping. Vale investigar preço e feed de produtos.
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>19 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 16 — PALAVRAS-CHAVE ─── -->
+<div class="slide" id="s16_kw">
+  <div class="slide-header">
+    <h2>Google Ads — Top Palavras-chave</h2>
+    <p>Junho 2026 · Ordenado por volume de conversões</p>
+  </div>
+  <div class="slide-body" style="padding-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Palavra-chave</th>
+          <th>Tipo</th>
+          <th>Cliques</th>
+          <th>CTR</th>
+          <th>CPC</th>
+          <th>Conv.</th>
+          <th>Taxa Conv.</th>
+          <th>CPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>estetoscópio littmann classic iii</td>
+          <td>Ampla</td>
+          <td>165</td>
+          <td>7,76%</td>
+          <td>R$ 1,21</td>
+          <td>89,33</td>
+          <td style="color:var(--le-success); font-weight:700;">54,14%</td>
+          <td style="color:var(--le-success); font-weight:700;">R$ 2,24</td>
+        </tr>
+        <tr>
+          <td>estetoscópio</td>
+          <td>Ampla</td>
+          <td>2.841</td>
+          <td>7,19%</td>
+          <td>R$ 0,97</td>
+          <td>87,71</td>
+          <td>3,08%</td>
+          <td>R$ 31,47</td>
+        </tr>
+        <tr>
+          <td>esteto littmann</td>
+          <td>Ampla</td>
+          <td>212</td>
+          <td>8,25%</td>
+          <td>R$ 0,83</td>
+          <td>33,21</td>
+          <td>15,66%</td>
+          <td>R$ 5,28</td>
+        </tr>
+        <tr>
+          <td>"estetoscópio littmann"</td>
+          <td>Frase</td>
+          <td>347</td>
+          <td>6,30%</td>
+          <td>R$ 1,02</td>
+          <td>56,70</td>
+          <td>16,34%</td>
+          <td>R$ 6,26</td>
+        </tr>
+        <tr>
+          <td>[le medical]</td>
+          <td>Exata</td>
+          <td>1.302</td>
+          <td style="color:var(--le-success); font-weight:700;">39,32%</td>
+          <td>R$ 0,33</td>
+          <td>24,27</td>
+          <td>1,86%</td>
+          <td>R$ 17,58</td>
+        </tr>
+        <tr>
+          <td>littmann classic iii</td>
+          <td>Ampla</td>
+          <td>348</td>
+          <td>10,25%</td>
+          <td>R$ 0,99</td>
+          <td>40,72</td>
+          <td>11,70%</td>
+          <td>R$ 8,49</td>
+        </tr>
+        <tr>
+          <td>estetoscópio littmann</td>
+          <td>Ampla</td>
+          <td>758</td>
+          <td>14,15%</td>
+          <td>R$ 1,05</td>
+          <td>97,36</td>
+          <td>12,84%</td>
+          <td>R$ 8,21</td>
+        </tr>
+        <tr>
+          <td>"littmann"</td>
+          <td>Frase</td>
+          <td>1.441</td>
+          <td>11,08%</td>
+          <td>R$ 0,94</td>
+          <td>11,28</td>
+          <td>0,78%</td>
+          <td style="color:var(--le-danger);">R$ 120,46</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:14px;">
+      <strong>"estetoscópio littmann classic iii"</strong> tem a maior taxa de conversão da conta: <strong>54,14%</strong> com CPA de apenas <strong>R$ 2,24</strong> — candidata prioritária para expansão de orçamento e estrutura de campanha dedicada.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>20 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 17 — CONSOLIDADO ─── -->
+<div class="slide" id="s10">
+  <div class="slide-header">
+    <h2>Consolidado Geral — Junho 2026</h2>
+    <p>Visão unificada de investimento e resultados</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-pill">Investimento consolidado</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Origem</th>
+              <th>Campanha</th>
+              <th>Impostos</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Meta Ads</td>
+              <td>R$ 31.018,65</td>
+              <td style="color:var(--le-danger);">R$ 4.290,00</td>
+              <td><strong>R$ 35.308,65</strong></td>
+            </tr>
+            <tr>
+              <td>Google Ads</td>
+              <td>R$ 17.028,28</td>
+              <td style="color:var(--le-text-secondary);">—</td>
+              <td><strong>R$ 17.028,28</strong></td>
+            </tr>
+            <tr style="background:var(--le-blue-ice);">
+              <td><strong>TOTAL</strong></td>
+              <td><strong>R$ 48.046,93</strong></td>
+              <td style="color:var(--le-danger);"><strong>R$ 4.290,00</strong></td>
+              <td style="color:var(--le-blue);"><strong>R$ 52.336,93</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="display:flex; gap:8px; margin-top:16px;">
+          <div style="flex:1; text-align:center;">
+            <div style="height:100px; background:var(--le-blue); border-radius:8px 8px 0 0; position:relative; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:13px;">Meta 67,5%</div>
+          </div>
+          <div style="flex:0.5; text-align:center;">
+            <div style="height:60px; background:var(--le-blue-soft); border-radius:8px 8px 0 0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:var(--le-ink); font-weight:700; font-size:13px;">Google 32,5%</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; font-size:11px; color:var(--le-text-secondary); margin-top:4px;">
+          <div style="flex:1; text-align:center;">Meta R$ 35.308</div>
+          <div style="flex:0.5; text-align:center;">Google R$ 17.028</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="section-pill">Resultado de negócio</div>
+        <div class="kpi-card blue">
+          <div class="label">Receita total (site)</div>
+          <div class="value">R$ 717.359</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Total investido em mídia</div>
+          <div class="value" style="font-size:22px;">R$ 52.336</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="label">ROAS Geral Real</div>
+          <div class="value">13,71x</div>
+          <div class="sub">receita / total investido</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Lucro bruto s/ invest.</div>
+          <div class="value" style="font-size:22px;">R$ 665.022</div>
+        </div>
+        <div class="info-box" style="font-size:11px;">
+          ROAS Meta (~20x) e Google (~21x) são atribuídos por cada plataforma e podem ter sobreposição. O ROAS de <strong>13,71x</strong> usa a receita real do site — a métrica mais confiável.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>21 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 18 — OPORTUNIDADES ─── -->
+<div class="slide" id="s11">
+  <div class="slide-header">
+    <h2>Oportunidades e Ações Prioritárias</h2>
+    <p>Recomendações para julho 2026</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-pill" style="background:#FBEAEA; color:var(--le-danger);">Alta Prioridade</div>
+        <div class="op-item">
+          <div class="op-num red">1</div>
+          <div class="op-body">
+            <div class="op-title">Aumentar budget PMAX + ESTETOSCOPIO (ambas limitadas)</div>
+            <div class="op-impact">+Volume de conversões Google com ROAS já validado</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num red">2</div>
+          <div class="op-body">
+            <div class="op-title">Aumentar budget Meta [VENDAS][2026][PF] — 257 compras, ROAS 25x</div>
+            <div class="op-impact">Escala da campanha de melhor performance da conta</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num red">3</div>
+          <div class="op-body">
+            <div class="op-title">Implementar recuperação de carrinho abandonado</div>
+            <div class="op-impact">3.746 carrinhos criados → 891 vendas. Potencial +200–400 vendas sem aumentar tráfego</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num red">4</div>
+          <div class="op-body">
+            <div class="op-title">Reativar [CATALOGO][2026] (ROAS 25,58x comprovado)</div>
+            <div class="op-impact">Campanha pausada com excelente histórico — recuperar volume</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-pill" style="background:#FDF5E6; color:var(--le-warning);">Média Prioridade</div>
+        <div class="op-item">
+          <div class="op-num amber">5</div>
+          <div class="op-body">
+            <div class="op-title">Escalar "estetoscópio littmann classic iii" no Google</div>
+            <div class="op-impact">Taxa de conv. 54%, CPA R$ 2,24 — keyword de altíssima eficiência</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num amber">6</div>
+          <div class="op-body">
+            <div class="op-title">Revisar ou pausar "littmann cardiology" Google (0 conv., R$ 64 gastos)</div>
+            <div class="op-impact">Realocação de budget para termos mais eficientes</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num amber">7</div>
+          <div class="op-body">
+            <div class="op-title">Campanhas regionais SP + MG + RS</div>
+            <div class="op-impact">3 estados = 45% das vendas e 43% da receita — concentrar esforços</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num amber">8</div>
+          <div class="op-body">
+            <div class="op-title">Aplicar recomendações Google (Opt. Score ESTETOSCOPIO 60,6%)</div>
+            <div class="op-impact">Melhoria de performance na campanha de maior volume</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>22 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 19 — MONITORAMENTO ─── -->
+<div class="slide" id="s12">
+  <div class="slide-header">
+    <h2>Pontos de Atenção e Monitoramento</h2>
+    <p>Análise dos destaques positivos e alertas do mês</p>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-pill" style="background:#E8F5EF; color:var(--le-success);">Positivos do mês</div>
+        <div class="op-item" style="background:#E8F5EF;">
+          <div class="op-num" style="background:var(--le-success); color:#fff;">✓</div>
+          <div class="op-body">
+            <div class="op-title">ROAS Meta RMKT acima de 25x — audiência quente muito eficiente</div>
+          </div>
+        </div>
+        <div class="op-item" style="background:#E8F5EF;">
+          <div class="op-num" style="background:var(--le-success); color:#fff;">✓</div>
+          <div class="op-body">
+            <div class="op-title">Le Medical lidera 1ª posição Google (40,25%) — supera Mercado Livre</div>
+          </div>
+        </div>
+        <div class="op-item" style="background:#E8F5EF;">
+          <div class="op-num" style="background:var(--le-success); color:#fff;">✓</div>
+          <div class="op-body">
+            <div class="op-title">Google INSTITUCIONAL com ROAS 66x — CPA de apenas R$ 11,47</div>
+          </div>
+        </div>
+        <div class="op-item" style="background:#E8F5EF;">
+          <div class="op-num" style="background:var(--le-success); color:#fff;">✓</div>
+          <div class="op-body">
+            <div class="op-title">CPC médio Google R$ 0,87 — alta relevância dos anúncios</div>
+          </div>
+        </div>
+        <div class="op-item" style="background:#E8F5EF;">
+          <div class="op-num" style="background:var(--le-success); color:#fff;">✓</div>
+          <div class="op-body">
+            <div class="op-title">AD_ (MIX_LAL) Meta: melhor anúncio — CPA R$ 26,70, ROAS 34x</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-pill" style="background:#FBEAEA; color:var(--le-danger);">Alertas e ajustes</div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-danger); color:#fff;">!</div>
+          <div class="op-body">
+            <div class="op-title">[ADV][CATALOGO]_01 — maior investimento Meta (R$ 9.365) com ROAS 13,41x</div>
+            <div class="op-impact">Monitorar — testar novos criativos para melhorar eficiência</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-danger); color:#fff;">!</div>
+          <div class="op-body">
+            <div class="op-title">[CONJUNTO_ADVANTAGE] — 141 compras mas ROAS 9,93x (abaixo da média)</div>
+            <div class="op-impact">Monitorar frequência e fadigação de audiência</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-danger); color:#fff;">!</div>
+          <div class="op-body">
+            <div class="op-title">LITTMANN_02 Google — ROAS 14x e CPA R$ 56,56 (mais alto da conta)</div>
+            <div class="op-impact">Revisar estrutura de campanha e match types</div>
+          </div>
+        </div>
+        <div class="op-item">
+          <div class="op-num" style="background:var(--le-danger); color:#fff;">!</div>
+          <div class="op-body">
+            <div class="op-title">Funil de compra: 44% dos carrinhos abandonam antes do checkout</div>
+            <div class="op-impact">Maior oportunidade de crescimento sem aumento de investimento</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>23 / 23 · GGD — Gio Growth Digital · Junho 2026</span>
+  </div>
+</div>
+
+<!-- ─── SLIDE 12 — ENCERRAMENTO ─── -->
+<div class="slide" id="s12b" style="background:var(--le-blue-ice); align-items:center; justify-content:center;">
+  <div style="width:300px; height:300px; background:var(--le-blue-soft); border-radius:50%; position:absolute; top:-80px; right:-80px; opacity:0.35;"></div>
+  <div style="width:180px; height:180px; background:var(--le-blue-soft); border-radius:50%; position:absolute; bottom:-50px; left:-50px; opacity:0.25;"></div>
+  <img src="Manual da Marca/logo-le-medical.png" alt="LE Medical" style="height:120px; object-fit:contain; position:relative; z-index:1;">
+</div>
+
+</div><!-- /stage -->
+
+<div id="nav">
+  <button id="prev-btn">← Anterior</button>
+  <span id="counter">1 / 13</span>
+  <button id="next-btn">Próximo →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+
+  function scale() {
+    const stage = document.getElementById('stage');
+    const sw = window.innerWidth, sh = window.innerHeight;
+    const ratio = Math.min(sw / 1280, sh / 720);
+    stage.style.transform = `scale(${ratio})`;
+    stage.style.left = ((sw - 1280 * ratio) / 2) + 'px';
+    stage.style.top  = ((sh - 720  * ratio) / 2) + 'px';
+    stage.style.position = 'fixed';
+  }
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  document.getElementById('next-btn').addEventListener('click', () => show(current + 1));
+  document.getElementById('prev-btn').addEventListener('click', () => show(current - 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   show(current - 1);
+  });
+
+  window.addEventListener('resize', scale);
+  scale();
+</script>
+</body>
+</html>
