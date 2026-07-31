@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha — Diagnóstico & Plano de Crescimento</title>
+<style>
+  :root{
+    --bege:#F5EFE4; --bege2:#EFE7D8; --creme:#FBF8F1;
+    --terra:#B5623A; --terra-esc:#8F4A2B; --ocre:#D9A441;
+    --musgo:#59684A; --musgo-cl:#7C8A63; --marrom:#4A3B2E;
+    --verde:#5E8A5A; --amarelo:#E4B23C; --vermelho:#C0553C;
+    --linha:#E2D8C6; --sombra:0 6px 24px rgba(74,59,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bege);color:var(--marrom);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px 90px}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-esc) 60%,var(--marrom) 100%);
+    color:var(--creme);padding:54px 22px 48px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% -10%,rgba(217,164,65,.28),transparent 55%);pointer-events:none}
+  .hero .kicker{letter-spacing:.32em;font-size:.72rem;text-transform:uppercase;opacity:.85;font-weight:600}
+  .hero h1{font-size:2.4rem;margin:12px 0 10px;font-weight:800;letter-spacing:-.5px}
+  .hero p{opacity:.92;font-size:1.04rem;max-width:680px;margin:0 auto}
+  .hero .data{margin-top:18px;font-size:.8rem;opacity:.78;letter-spacing:.04em}
+
+  section{margin-top:50px}
+  h2{font-size:1.5rem;color:var(--terra-esc);font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--musgo);color:#fff;width:30px;height:30px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex:0 0 auto}
+  .sub{color:var(--musgo);font-size:.95rem;margin-bottom:20px;margin-left:40px}
+
+  /* KPIs topo */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:26px}
+  .kpi{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:18px 16px;box-shadow:var(--sombra);text-align:center}
+  .kpi .v{font-size:1.7rem;font-weight:800;color:var(--terra-esc);letter-spacing:-.5px}
+  .kpi .l{font-size:.76rem;color:var(--musgo);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-weight:600}
+  .kpi .d{font-size:.78rem;margin-top:6px;font-weight:700}
+  .down{color:var(--vermelho)} .up{color:var(--verde)}
+
+  /* resumo executivo */
+  .lead{background:var(--creme);border:1px solid var(--linha);border-left:5px solid var(--terra);border-radius:14px;
+    padding:22px 24px;box-shadow:var(--sombra);font-size:1.0rem}
+  .lead b{color:var(--terra-esc)}
+  .lead .big{font-size:1.08rem;font-weight:700;color:var(--marrom);margin-bottom:8px;display:block}
+
+  /* tabelas */
+  .scroll{overflow-x:auto;border-radius:16px;box-shadow:var(--sombra);border:1px solid var(--linha)}
+  table{border-collapse:collapse;width:100%;min-width:640px;background:var(--creme);font-size:.86rem}
+  thead th{background:var(--marrom);color:var(--creme);padding:12px 10px;text-align:center;font-weight:700}
+  thead th:first-child{text-align:left}
+  tbody td{padding:11px 10px;text-align:center;border-top:1px solid var(--linha)}
+  tbody td:first-child{text-align:left;font-weight:700;color:var(--marrom)}
+  tbody tr:nth-child(even){background:#fdfbf6}
+  .hl-bad{color:var(--vermelho);font-weight:800}
+  .hl-good{color:var(--verde);font-weight:800}
+  td .mut{color:var(--musgo);font-size:.78rem}
+
+  /* cards causa */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .cause{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:18px;box-shadow:var(--sombra);position:relative}
+  .cause .rank{position:absolute;top:-10px;left:16px;background:var(--vermelho);color:#fff;font-size:.72rem;font-weight:800;
+    padding:3px 10px;border-radius:20px;letter-spacing:.03em}
+  .cause h4{font-size:1.02rem;color:var(--terra-esc);margin:8px 0 6px}
+  .cause p{font-size:.86rem;color:#6b5d4d}
+  .cause .num{font-size:1.35rem;font-weight:800;color:var(--marrom);display:block;margin-top:6px}
+
+  /* barras tendência */
+  .trend{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:22px 22px 14px;box-shadow:var(--sombra)}
+  .trow{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;margin:12px 0}
+  .trow .mo{font-weight:800;color:var(--musgo);font-size:.9rem}
+  .barw{position:relative}
+  .barw .bar{height:26px;border-radius:7px;background:linear-gradient(90deg,var(--ocre),var(--terra));display:flex;align-items:center;
+    justify-content:flex-end;padding-right:10px;color:#fff;font-weight:800;font-size:.82rem;min-width:44px}
+  .barw.mgood .bar{background:linear-gradient(90deg,#8FB27E,var(--verde))}
+  .barw.mbad .bar{background:linear-gradient(90deg,#D99A7E,var(--vermelho))}
+  .legenda{font-size:.8rem;color:var(--musgo);margin-top:6px}
+
+  /* melhores ads */
+  .adgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .ad{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:18px;box-shadow:var(--sombra)}
+  .ad .brand{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--terra);display:flex;justify-content:space-between}
+  .ad .brand .age{color:var(--musgo);background:var(--bege2);padding:2px 8px;border-radius:12px;font-size:.68rem}
+  .ad .hook{font-size:.94rem;font-weight:700;color:var(--marrom);margin:9px 0 8px;font-style:italic;line-height:1.4}
+  .ad .meta{font-size:.8rem;color:#6b5d4d}
+  .ad .angle{display:inline-block;font-size:.7rem;font-weight:700;background:#EDD9D0;color:#8f4a2b;padding:3px 9px;border-radius:20px;margin-top:8px}
+
+  /* dois blocos padrões */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:20px 22px;box-shadow:var(--sombra)}
+  .panel h3{font-size:1.05rem;color:var(--terra-esc);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .panel ul{list-style:none}
+  .panel li{font-size:.88rem;padding:8px 0 8px 26px;position:relative;border-top:1px dashed var(--linha);color:#5c4f40}
+  .panel li:first-child{border-top:none}
+  .panel li::before{content:"";position:absolute;left:6px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--ocre)}
+  .panel li b{color:var(--marrom)}
+
+  /* oportunidades / matriz */
+  .opp{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:18px 20px;box-shadow:var(--sombra);margin-bottom:14px;
+    display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center}
+  .opp .o-n{width:44px;height:44px;border-radius:50%;background:var(--terra);color:#fff;font-weight:800;font-size:1.15rem;
+    display:flex;align-items:center;justify-content:center}
+  .opp h4{font-size:1.0rem;color:var(--marrom);margin-bottom:3px}
+  .opp p{font-size:.85rem;color:#6b5d4d}
+  .opp .badges{display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+  .badge{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .imp-alto{background:#DCE6D2;color:#3f5233} .imp-medio{background:#F3E2C4;color:#8a6a1f}
+  .esf-baixo{background:#D9E4EE;color:#2f5875} .esf-medio{background:#E7D9CF;color:#7a4a2c}
+
+  /* plano 30/60/90 */
+  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .pcol{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:20px;box-shadow:var(--sombra);border-top:5px solid var(--musgo)}
+  .pcol.p2{border-top-color:var(--ocre)} .pcol.p3{border-top-color:var(--terra)}
+  .pcol h4{font-size:1.05rem;color:var(--terra-esc);margin-bottom:4px}
+  .pcol .when{font-size:.74rem;color:var(--musgo);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:12px}
+  .pcol ul{list-style:none} .pcol li{font-size:.85rem;padding:7px 0 7px 22px;position:relative;color:#5c4f40;border-top:1px dashed var(--linha)}
+  .pcol li:first-child{border-top:none}
+  .pcol li::before{content:"→";position:absolute;left:2px;color:var(--terra);font-weight:800}
+
+  .note{font-size:.82rem;color:var(--musgo);margin-top:14px;margin-left:40px;font-style:italic}
+  footer{text-align:center;margin-top:60px;padding-top:24px;border-top:1px solid var(--linha);color:var(--musgo);font-size:.82rem}
+  @media(max-width:720px){.two{grid-template-columns:1fr}.opp{grid-template-columns:36px 1fr;}.opp .badges{grid-column:1/-1;flex-direction:row}.hero h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">Santosha · Yoga & Arte</div>
+  <h1>Diagnóstico &amp; Plano de Crescimento</h1>
+  <p>Onde perdemos resultado, o que o mercado está fazendo melhor, e o caminho para retomar o crescimento — Meta Ads + análise competitiva.</p>
+  <div class="data">Período analisado: maio–julho 2026 · Conta Meta Ads · Elaborado por GGD · 31/07/2026</div>
+</div>
+
+<div class="wrap">
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi"><div class="v">R$372</div><div class="l">Ticket médio</div><div class="d down">▼ −26% vs maio</div></div>
+    <div class="kpi"><div class="v">2,43x</div><div class="l">ROAS julho</div><div class="d down">▼ de 4,55x em maio</div></div>
+    <div class="kpi"><div class="v">R$20,1</div><div class="l">CPM julho</div><div class="d down">▲ +38% vs junho</div></div>
+    <div class="kpi"><div class="v">90</div><div class="l">de 114 vendas em 1 anúncio</div><div class="d down">risco de concentração</div></div>
+    <div class="kpi"><div class="v">5,3x</div><div class="l">ROAS do melhor criativo</div><div class="d up">▲ subescalado</div></div>
+  </div>
+
+  <!-- RESUMO -->
+  <section>
+    <h2><span class="n">01</span> Em uma frase</h2>
+    <div class="lead">
+      <span class="big">O problema não é volume de vendas — é o <b>valor</b> de cada venda.</span>
+      Continuamos vendendo em quantidade parecida, mas o <b>ticket médio caiu 26%</b> (de R$369 para R$272), o que derrubou o retorno de R$4,55 para R$2,43 por real investido. Ao mesmo tempo, a mídia ficou <b>38% mais cara</b> e a conta está apoiada num <b>único anúncio</b> que já dá sinais de cansaço. A boa notícia: os criativos mais rentáveis estão rodando com <b>pouca verba</b>, o mercado deixou <b>frentes inteiras abertas</b> (oferta, storytelling de fundadora, autoridade de professoras) e a segunda metade de julho já reagiu quando ajustamos a estrutura. Há um caminho claro de recuperação.
+    </div>
+  </section>
+
+  <!-- ONDE PERDEMOS -->
+  <section>
+    <h2><span class="n">02</span> Onde perdemos</h2>
+    <p class="sub">A curva dos últimos 3 meses na conta Meta Ads.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Mês</th><th>Investido</th><th>Vendas</th><th>Receita (Meta)</th><th>ROAS</th><th>Ticket médio</th><th>CPM</th></tr></thead>
+        <tbody>
+          <tr><td>Maio</td><td>R$5.350</td><td>66</td><td>R$24.353</td><td class="hl-good">4,55x</td><td class="hl-good">R$369</td><td>R$16,70</td></tr>
+          <tr><td>Junho</td><td>R$6.916</td><td>83</td><td>R$24.300</td><td>3,51x</td><td>R$293</td><td>R$14,60</td></tr>
+          <tr><td>Julho</td><td>R$7.610</td><td>68</td><td>R$18.479</td><td class="hl-bad">2,43x</td><td class="hl-bad">R$272</td><td class="hl-bad">R$20,10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Receita atribuída pelo Meta (subnotifica frente ao faturamento real da Shopify, que é a fonte de verdade). O que importa aqui é a <b>tendência</b> — e ela é consistente em todas as métricas.</p>
+
+    <div class="cards" style="margin-top:26px">
+      <div class="cause"><span class="rank">CAUSA 1 · maior peso</span>
+        <h4>Ticket médio despencou</h4>
+        <p>O carrinho médio caiu de R$369 para R$272. É a raiz da queda de retorno. Vendemos quase a mesma quantidade — mas de itens mais baratos.</p>
+        <span class="num down">−26%</span>
+      </div>
+      <div class="cause"><span class="rank">CAUSA 2</span>
+        <h4>Mix migrou para o barato</h4>
+        <p>Os <b>tapetes premium (R$378–558) caíram ~24%</b> e as <b>bolsas zeraram</b> (ruptura de estoque). O catálogo passou a empurrar pôster e e-book, de ticket baixo.</p>
+        <span class="num down">tapetes ▼24%</span>
+      </div>
+      <div class="cause"><span class="rank">CAUSA 3</span>
+        <h4>Mídia ficou mais cara</h4>
+        <p>O CPM subiu 38% em julho. Parte é leilão/sazonalidade, parte é <b>fadiga</b>: a conta gira em torno de poucos criativos e a frequência sobe.</p>
+        <span class="num down">CPM +38%</span>
+      </div>
+      <div class="cause"><span class="rank">CAUSA 4</span>
+        <h4>Menos intenção de compra</h4>
+        <p>A taxa de quem vê a página e adiciona ao carrinho caiu de 11,7% para 9,3%. Estamos comprando tráfego com menos vontade de comprar.</p>
+        <span class="num down">carrinho ▼</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCENTRAÇÃO + REAÇÃO -->
+  <section>
+    <h2><span class="n">03</span> O motor está numa perna só</h2>
+    <p class="sub">Toda a conta depende de um anúncio — e ele começou a cansar.</p>
+    <div class="two">
+      <div class="panel">
+        <h3>⚠️ Concentração de risco</h3>
+        <ul>
+          <li><b>1 anúncio</b> (catálogo de todos os produtos) sozinho fez <b>90 das ~114 vendas</b> e R$23 mil dos R$32 mil de receita.</li>
+          <li>Esse anúncio já roda com <b>frequência 3,9</b> — as mesmas pessoas o vêem quase 4× por semana. Isso encarece e desgasta.</li>
+          <li>Se ele fadigar sem substituto pronto, a conta cai junto. Precisamos de <b>mais pernas</b> sustentando o resultado.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>✅ A conta já reagiu quando mexemos</h3>
+        <ul>
+          <li>Em meados de julho pausamos os conjuntos de baixo retorno e reorganizamos a estrutura.</li>
+          <li>Resultado na <b>2ª metade do mês</b>: ROAS subiu de <b>1,92 → 2,83</b> e o ticket voltou de <b>R$209 → R$324</b>.</li>
+          <li>Ou seja: a estrutura responde. O plano abaixo é acelerar o que já está funcionando.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSSOS CRIATIVOS -->
+  <section>
+    <h2><span class="n">04</span> Temos criativos bons rodando com verba de menos</h2>
+    <p class="sub">Ranking por retorno (ROAS) — os vencedores estão subescalados ou pausados.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Anúncio</th><th>Status</th><th>Investido</th><th>ROAS</th><th>Frequência</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td>AD14_VID_MATS <span class="mut">(vídeo tapetes)</span></td><td>Pausado</td><td>R$422</td><td class="hl-good">6,84x</td><td>2,0</td><td class="mut">melhor ROAS e está PARADO — religar</td></tr>
+          <tr><td>CARTAS_FLOW <span class="mut">(cartas/oráculo)</span></td><td>Ativo</td><td>R$406</td><td class="hl-good">5,29x</td><td>1,6</td><td class="mut">frequência baixa = muito espaço p/ crescer</td></tr>
+          <tr><td>CATALOGO_TODOS_PRODUTOS</td><td>Ativo</td><td>R$5.749</td><td>4,02x</td><td class="hl-bad">3,9</td><td class="mut">o motor único, já fadigando</td></tr>
+          <tr><td>CARTASANAS</td><td>Ativo</td><td>R$351</td><td>3,72x</td><td>1,9</td><td class="mut">teste promissor, pouca verba</td></tr>
+          <tr><td>FEEDBACK_MATRAVEL <span class="mut">(depoimento/UGC)</span></td><td>Ativo</td><td>R$211</td><td>3,49x</td><td>1,2</td><td class="mut">prova social funciona — escalar formato</td></tr>
+          <tr><td>AD_MINI_FLOW</td><td>Pausado</td><td>R$202</td><td class="hl-bad">0,24x</td><td>2,6</td><td class="mut">corte correto</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Padrão: <b>verba demais</b> no catálogo genérico que empurra item barato, e <b>verba de menos</b> nos criativos de maior retorno (cartas, vídeo de tapete, depoimento). Redistribuir isso é a alavanca mais rápida.</p>
+  </section>
+
+  <!-- MERCADO -->
+  <section>
+    <h2><span class="n">05</span> O que os concorrentes estão fazendo</h2>
+    <p class="sub">Levantamento na Biblioteca de Anúncios do Meta + Instagram (31/07/2026).</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Marca</th><th>Anúncios ativos</th><th>Seguidores IG</th><th>Oferta no anúncio</th><th>Ângulo dominante</th></tr></thead>
+        <tbody>
+          <tr><td>Yogateria <span class="mut">líder</span></td><td class="hl-bad">~130</td><td>247 mil</td><td>Frete grátis &gt;R$300 · "150 mil clientes"</td><td>VSL de fundador + prova social + catálogo em volume</td></tr>
+          <tr><td>Yogini</td><td>~40–50</td><td>86 mil</td><td>Até <b>60% off</b> + <b>10% 1ª compra</b></td><td>Moda de bem-estar, desconto agressivo, coleções</td></tr>
+          <tr><td>Ekomat</td><td>~10</td><td>44 mil</td><td>Cupom <b>EKOMAT10</b> (10% off)</td><td>Autoridade do professor + sustentabilidade</td></tr>
+          <tr><td>Om Joy</td><td class="mut">nenhum ativo</td><td>—</td><td>—</td><td>Variedade/preço (só site)</td></tr>
+          <tr style="background:#FBF4EA"><td style="color:var(--terra)">Santosha <span class="mut">nós</span></td><td>~10 <span class="mut">(posts impulsionados)</span></td><td>—</td><td class="hl-bad">Nenhuma oferta no copy</td><td>Yoga + arte autoral (posicionamento único)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">A Yogateria joga em <b>outra escala de investimento</b> (~130 anúncios) e é a única com VSL de fundador. Mas nenhuma delas ocupa o território <b>arte autoral + tapete lavável de verdade</b> — que é só nosso.</p>
+  </section>
+
+  <!-- MELHORES ADS DELES -->
+  <section>
+    <h2><span class="n">06</span> Os melhores anúncios do nicho</h2>
+    <p class="sub">Os que estão no ar há mais tempo (3–5 meses = vencedores que não param) e com mais variações.</p>
+    <div class="adgrid">
+      <div class="ad">
+        <div class="brand"><span>Yogateria</span><span class="age">no ar ~4,5 meses</span></div>
+        <div class="hook">"Houve uma época da minha vida… um acidente me obrigou a parar. Foi daí que nasceu a Yogateria."</div>
+        <div class="meta">VSL do fundador (0:50). O formato mais sofisticado do nicho, rodando em várias versões.</div>
+        <div class="angle">Storytelling + transformação</div>
+      </div>
+      <div class="ad">
+        <div class="brand"><span>Yogateria</span><span class="age">no ar ~4,5 meses</span></div>
+        <div class="hook">"Já são mais de 150 mil clientes felizes!"</div>
+        <div class="meta">Estático de catálogo com garantia/atendimento embutidos.</div>
+        <div class="angle">Prova social numérica</div>
+      </div>
+      <div class="ad">
+        <div class="brand"><span>Yogateria</span><span class="age">no ar ~4,5 meses</span></div>
+        <div class="hook">"Frete Grátis acima de R$300… 'O produto superou minhas expectativas e chegou antes do prazo!'"</div>
+        <div class="meta">Oferta de frete + review real dentro do anúncio.</div>
+        <div class="angle">Oferta + review</div>
+      </div>
+      <div class="ad">
+        <div class="brand"><span>Yogini</span><span class="age">no ar ~5 meses</span></div>
+        <div class="hook">"Descubra a Linha de Permanentes — tecidos conscientes, fibras naturais, feitas para durar."</div>
+        <div class="meta">O anúncio mais antigo do estudo. Coleção atemporal.</div>
+        <div class="angle">Durabilidade + sustentabilidade</div>
+      </div>
+      <div class="ad">
+        <div class="brand"><span>Yogini</span><span class="age">várias versões</span></div>
+        <div class="hook">"Garanta as suas peças com até 60% OFF" + "10% OFF na 1ª compra"</div>
+        <div class="meta">A oferta mais forte do nicho, em vários criativos/URLs.</div>
+        <div class="angle">Desconto agressivo</div>
+      </div>
+      <div class="ad">
+        <div class="brand"><span>Ekomat</span><span class="age">push recente</span></div>
+        <div class="hook">"Ainda em dúvida sobre qual tapete escolher? Pergunte ao seu professor… cupom exclusivo de 10% OFF."</div>
+        <div class="meta">Recomendada por centenas de professores há +15 anos.</div>
+        <div class="angle">Autoridade do professor + cupom</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PADRÕES -->
+  <section>
+    <h2><span class="n">07</span> O que performa (e o que engaja)</h2>
+    <p class="sub">Padrões que se repetem entre os líderes — em anúncios e no orgânico.</p>
+    <div class="two">
+      <div class="panel">
+        <h3>🎯 Nos anúncios</h3>
+        <ul>
+          <li><b>Prova social numérica</b> — "150 mil clientes", "1.500 professores", reviews dentro do copy. Todo líder ancora em números.</li>
+          <li><b>Oferta como gancho</b> — frete grátis, cupom de 1ª compra, % off. <b>Santosha não roda nenhuma oferta no copy.</b></li>
+          <li><b>Durabilidade / "compra para a vida"</b> como justificativa do preço premium.</li>
+          <li><b>VSL de fundador</b> (transformação) como criativo de topo — só a Yogateria explora.</li>
+          <li><b>Autoridade do professor/embaixador</b> — território exclusivo da Ekomat.</li>
+          <li><b>Produtos-gancho baratos</b> (limpador de língua, incenso) para adquirir cliente mais barato que anunciando o tapete direto.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>🌿 No orgânico (Instagram)</h3>
+        <ul>
+          <li><b>Reels educacionais</b> de yoga/bem-estar dominam — conteúdo que constrói autoridade sem vender direto.</li>
+          <li><b>Rosto humano/fundador na câmera</b> gera proximidade (Yogateria).</li>
+          <li><b>Frases inspiracionais e manifestos poéticos</b> puxam alcance e salvamentos.</li>
+          <li><b>UGC por hashtag de marca</b> (#yoginiporai) = prova social e conteúdo grátis.</li>
+          <li><b>Highlights por linha de produto</b> — vitrine navegável no perfil (Ekomat).</li>
+          <li><b>Propósito na bio</b> + comunidade + collabs com influenciadoras/podcast próprio (Yogini).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPORTUNIDADES -->
+  <section>
+    <h2><span class="n">08</span> Onde a Santosha pode ganhar</h2>
+    <p class="sub">Gaps que os concorrentes exploram e nós ainda não — priorizados por impacto × esforço.</p>
+
+    <div class="opp"><div class="o-n">1</div>
+      <div><h4>Oferta explícita no anúncio</h4><p>Hoje impulsionamos posts sem nenhum gancho de conversão. Testar "10% OFF na 1ª compra" e "frete grátis acima de X" no copy — provável maior salto de ROAS de curto prazo.</p></div>
+      <div class="badges"><span class="badge imp-alto">Impacto alto</span><span class="badge esf-baixo">Esforço baixo</span></div>
+    </div>
+    <div class="opp"><div class="o-n">2</div>
+      <div><h4>Reequilibrar a verba para os vencedores</h4><p>Religar o vídeo de tapete (ROAS 6,8x, hoje parado) e escalar cartas + depoimento, tirando peso do catálogo genérico que empurra item barato.</p></div>
+      <div class="badges"><span class="badge imp-alto">Impacto alto</span><span class="badge esf-baixo">Esforço baixo</span></div>
+    </div>
+    <div class="opp"><div class="o-n">3</div>
+      <div><h4>"Tapete lavável de verdade" + arte como pilar fixo</h4><p>Já temos esse ângulo único (lavar com água e sabão). Transformá-lo em criativo-demonstração recorrente justifica o ticket premium melhor que o "feito para durar" genérico dos outros.</p></div>
+      <div class="badges"><span class="badge imp-alto">Impacto alto</span><span class="badge esf-medio">Esforço médio</span></div>
+    </div>
+    <div class="opp"><div class="o-n">4</div>
+      <div><h4>VSL de fundadora / história de origem</h4><p>Ninguém no nicho de tapete-arte tem storytelling de origem em vídeo. Temos munição real (yoga + arte autoral) para um criativo de topo emocional imbatível.</p></div>
+      <div class="badges"><span class="badge imp-alto">Impacto alto</span><span class="badge esf-medio">Esforço médio</span></div>
+    </div>
+    <div class="opp"><div class="o-n">5</div>
+      <div><h4>Prova social numérica + reviews no criativo</h4><p>Começar a exibir número de praticantes/tapetes vendidos e depoimentos dentro do anúncio — como fazem os líderes.</p></div>
+      <div class="badges"><span class="badge imp-medio">Impacto médio</span><span class="badge esf-baixo">Esforço baixo</span></div>
+    </div>
+    <div class="opp"><div class="o-n">6</div>
+      <div><h4>Produtos-gancho de baixo ticket para aquisição</h4><p>Usar CartasFLOW, pôsteres e oráculos (baixo ticket / alta margem) como porta de entrada mais barata que anunciar o tapete de R$558 — e fazer upsell depois.</p></div>
+      <div class="badges"><span class="badge imp-medio">Impacto médio</span><span class="badge esf-baixo">Esforço baixo</span></div>
+    </div>
+    <div class="opp"><div class="o-n">7</div>
+      <div><h4>Programa de embaixadoras (professoras) + cupom</h4><p>Ocupar o território "autoridade do professor" da Ekomat, ligado ao app Sanflow — combinando o ângulo dela com o ecossistema que só nós temos.</p></div>
+      <div class="badges"><span class="badge imp-medio">Impacto médio</span><span class="badge esf-medio">Esforço médio</span></div>
+    </div>
+    <div class="opp"><div class="o-n">8</div>
+      <div><h4>Série educacional em Reels + hashtag de comunidade</h4><p>Unir prática + arte numa série recorrente e lançar uma hashtag (#meuflowsantosha) para gerar UGC — território que combina o conteúdo da Yogateria com a identidade que só nós temos.</p></div>
+      <div class="badges"><span class="badge imp-medio">Impacto médio</span><span class="badge esf-medio">Esforço médio</span></div>
+    </div>
+  </section>
+
+  <!-- PLANO -->
+  <section>
+    <h2><span class="n">09</span> Plano de retomada</h2>
+    <p class="sub">Sequência sugerida — do que dá resultado rápido ao que constrói vantagem duradoura.</p>
+    <div class="plan">
+      <div class="pcol">
+        <h4>Agir agora</h4>
+        <div class="when">Próximos 15 dias</div>
+        <ul>
+          <li>Religar o vídeo de tapete (ROAS 6,8x parado)</li>
+          <li>Escalar cartas + depoimento (verba p/ os vencedores)</li>
+          <li>Subir 1 anúncio com oferta no copy (frete / 1ª compra)</li>
+          <li>Repor estoque de bolsas e reapontar catálogo p/ tapetes premium</li>
+        </ul>
+      </div>
+      <div class="pcol p2">
+        <h4>Estruturar</h4>
+        <div class="when">30–60 dias</div>
+        <ul>
+          <li>Produzir a VSL de fundadora (história de origem)</li>
+          <li>Criar linha de criativos "lavável + arte" (demonstração)</li>
+          <li>Inserir prova social numérica e reviews nos anúncios</li>
+          <li>Testar produtos-gancho de baixo ticket para aquisição</li>
+        </ul>
+      </div>
+      <div class="pcol p3">
+        <h4>Construir fosso</h4>
+        <div class="when">60–90 dias</div>
+        <ul>
+          <li>Programa de embaixadoras (professoras) + cupom via Sanflow</li>
+          <li>Série educacional em Reels + hashtag de comunidade</li>
+          <li>Recuperação de carrinho (e-mail + WhatsApp)</li>
+          <li>Elevar conversão do site de 1,02% → 1,5% (CRO)</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Só restaurar o ticket de R$272 para os ~R$369 de maio, no volume atual, recupera cerca de <b>R$6 mil/mês em receita</b> — sem gastar um real a mais em mídia.</p>
+  </section>
+
+  <footer>
+    Elaborado por GGD · Gio Growth Digital · para Santosha Por Aí<br>
+    Dados: Meta Ads (conta CA-Santosha) · Meta Ad Library · Instagram · maio–julho 2026
+  </footer>
+
+</div>
+</body>
+</html>
