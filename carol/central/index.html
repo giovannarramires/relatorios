@@ -58,6 +58,28 @@
   footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   footer a{color:var(--accent);text-decoration:none;font-weight:600}
   @media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+  .track{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:30px}
+  .track-ids{display:flex;flex-direction:column;gap:9px}
+  .tid{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:13.5px}
+  .tid .tk{min-width:96px;color:var(--ink-soft);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .tid code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--line-soft);padding:2px 8px;border-radius:6px;color:var(--ink)}
+  .tid .tnote{color:var(--ink-soft);opacity:.75;font-size:12px}
+  .tid .miss{color:var(--ink-soft);opacity:.7;font-style:italic;font-size:13px}
+  .cp,.cpre{cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--accent);border-radius:7px;font-size:11px;font-weight:700;padding:2px 9px}
+  .cp:hover,.cpre:hover{border-color:var(--accent)}
+  .cp.ok,.cpre.ok{color:#0c7a54;border-color:#0c7a54}
+  @media (prefers-color-scheme: dark){.cp.ok,.cpre.ok{color:#7ff0c2;border-color:#2f7a5e}}
+  .genbtn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;background:var(--meta-soft);color:var(--meta);border:1px solid color-mix(in srgb,var(--meta) 30%,var(--line));border-radius:8px;font-size:12.5px;font-weight:700;padding:4px 11px}
+  .genbtn:hover{border-color:var(--meta)}
+  .codes{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:12px}
+  .codes>summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);list-style:none}
+  .codes>summary::-webkit-details-marker{display:none}
+  .code-card{margin-top:12px}
+  .code-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+  .code-hd b{font-size:12.5px;color:var(--ink)}
+  .code-card pre{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:var(--ink);white-space:pre;max-width:100%}
+  .track-empty{color:var(--ink-soft);font-size:13px;font-style:italic}
 </style>
 </head>
 <body>
@@ -101,14 +123,36 @@
 
   </div>
 
+  <p class="sec-h">Rastreamento &amp; códigos de instalação</p>
+  <div class="track">
+    <div class="track-ids">
+    <div class="tid"><span class="tk">Pixel Meta</span> <span class="miss">a cadastrar</span></div>
+    <div class="tid"><span class="tk">GTM</span> <span class="miss">a cadastrar</span></div>
+    <div class="tid"><span class="tk">GA4</span> <span class="miss">a cadastrar</span></div>
+    <div class="tid"><span class="tk">Token CAPI</span> <span class="miss">cadastre o Pixel primeiro</span></div>
+    </div>
+    <p class="track-empty">Cadastre o Pixel/GTM/GA4 deste cliente no <code>hubs.json</code> pra gerar os códigos de instalação aqui.</p>
+  </div>
+
+
   <div class="note">
     ℹ️ <b>Sobre os acessos:</b> os relatórios abrem em nova aba. Os cards “Em breve” são espaços já reservados — é só me pedir pra plugar cada relatório aqui conforme forem prontos.
   </div>
 
   <footer>
-    <span>Carol — Dra. Caroline Baima · Central GGD · atualizada em 30/07/2026</span>
+    <span>Carol — Dra. Caroline Baima · Central GGD · atualizada em 31/07/2026</span>
     <a href="https://relatorios.giogrowthdigital.com.br/cockpit/">← Voltar ao Cockpit</a>
   </footer>
 </div>
+
+<script>
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.cp,.cpre'); if(!b) return;
+  var txt=b.classList.contains('cpre')?b.closest('.code-card').querySelector('pre').textContent:b.getAttribute('data-copy');
+  var done=function(){var o=b.textContent;b.textContent='copiado ✓';b.classList.add('ok');setTimeout(function(){b.textContent=o;b.classList.remove('ok');},1400);};
+  function fb(t,d){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');d&&d();}catch(_){}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(function(){fb(txt,done);});}else{fb(txt,done);}
+});
+</script>
 </body>
 </html>
