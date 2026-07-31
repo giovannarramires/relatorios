@@ -49,6 +49,23 @@
   .logbar label{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
   .logbar select{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;cursor:pointer}
   footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
+  /* --- rastreamento & códigos --- */
+  .copybtn{margin-left:8px;padding:2px 8px;border:1px solid var(--line);background:#12141a;color:var(--azul);border-radius:7px;font-size:11px;cursor:pointer;vertical-align:middle}
+  .copybtn:hover{border-color:var(--azul)}
+  .copybtn.ok{color:var(--verde);border-color:var(--verde)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .cell-muted{color:var(--mut)}
+  .cell-warn{color:var(--amarelo);font-weight:600}
+  .verbtn{padding:4px 12px;border:1px solid #35507a;background:#243042;color:#cfe3ff;border-radius:8px;font-size:12px;cursor:pointer;white-space:nowrap}
+  .verbtn:hover{border-color:var(--azul)}
+  .verbtn:disabled{opacity:.4;cursor:not-allowed}
+  .codecell{background:#0c0e12;padding:14px !important;white-space:normal}
+  .codecard{margin-bottom:12px}
+  .codecard:last-child{margin-bottom:0}
+  .codecard .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+  .codecard .hd b{font-size:12px;color:var(--txt)}
+  .codecard .hint{color:var(--mut);font-size:11px;margin-right:8px}
+  .codecard pre{background:#12141a;border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:#d7dbe2;white-space:pre;max-width:100%}
   #app{display:none}
 </style>
 </head>
@@ -120,6 +137,11 @@
       <a href="https://relatorios.giogrowthdigital.com.br/le-medical/central/" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#0f2e27;color:#c9efe3;border:1px solid #1c4a3f;text-decoration:none;font-size:13px">🩺 LE Medical ↗</a>
     </div>
   </section>
+  <section>
+    <h2>🎯 Rastreamento &amp; códigos de instalação</h2>
+    <div class="sub" style="margin:-6px 0 10px">Pixel, token da API (CAPI), GTM e GA4 de cada cliente — pra mandar rapidinho sem ficar caçando. Clique em <b>ver código</b> e o snippet pronto (gerado do ID) aparece com botão de copiar. <span style="color:var(--amarelo)">a confirmar</span>/<span style="color:var(--mut)">a preencher</span> = falta cadastrar em <span class="mono">rastreamento.csv</span>.</div>
+    <div class="tblwrap"><table id="rastreio"></table></div>
+  </section>
   <section><h2>🚦 Saúde de hoje</h2><div class="tblwrap"><table id="saude"></table></div></section>
   <section><h2>👥 Clientes</h2><div class="tblwrap"><table id="clientes"></table></div></section>
   <section>
@@ -172,6 +194,111 @@ function render(id, rows){
       return `<td>${v}</td>`;
     }).join('')+'</tr>').join('')+'</tbody>';
 }
+// ---------- rastreamento: copiar + gerar snippets a partir do ID ----------
+function fallbackCopy(text,done){
+  const ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); done&&done(); }catch(e){} document.body.removeChild(ta);
+}
+function copyToClip(text,btn){
+  const done=()=>{ if(!btn) return; const o=btn.textContent; btn.textContent='copiado ✓'; btn.classList.add('ok');
+    setTimeout(()=>{ btn.textContent=o; btn.classList.remove('ok'); },1400); };
+  if(navigator.clipboard&&navigator.clipboard.writeText)
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));
+  else fallbackCopy(text,done);
+}
+function mkCopyBtn(text,label){
+  const b=document.createElement('button'); b.className='copybtn'; b.textContent=label||'copiar';
+  b.addEventListener('click',e=>{ e.stopPropagation(); copyToClip(text,b); }); return b;
+}
+const real=x=>x&&x.trim()&&!/^confirmar$/i.test(x.trim());
+function valNode(value,isToken){
+  const v=(value||'').trim();
+  const span=document.createElement('span');
+  if(!v){ span.className='cell-muted'; span.textContent=isToken?'a preencher':'—'; return span; }
+  if(/^confirmar$/i.test(v)){ span.className='cell-warn'; span.textContent='a confirmar'; return span; }
+  const wrap=document.createElement('span');
+  const val=document.createElement('span'); val.className='mono';
+  val.textContent=isToken?(v.length>8?v.slice(0,4)+'…'+v.slice(-4):'••••'):v;
+  wrap.appendChild(val); wrap.appendChild(mkCopyBtn(v,'copiar')); return wrap;
+}
+// geradores de código (padrão oficial Meta/Google) — <\/script> escapado p/ não fechar o script da página
+function metaPixelCode(id){
+  return "<!-- Meta Pixel Code -->\n<script>\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n"+
+  "n.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n"+
+  "n.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\n"+
+  "s.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\n"+
+  "fbq('init', '"+id+"');\nfbq('track', 'PageView');\n<\/script>\n"+
+  "<noscript><img height=\"1\" width=\"1\" style=\"display:none\"\nsrc=\"https://www.facebook.com/tr?id="+id+"&ev=PageView&noscript=1\"\n/></noscript>\n<!-- End Meta Pixel Code -->";
+}
+function gtmHead(id){
+  return "<!-- Google Tag Manager -->\n<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n"+
+  "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n"+
+  "j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n"+
+  "'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n"+
+  "})(window,document,'script','dataLayer','"+id+"');<\/script>\n<!-- End Google Tag Manager -->";
+}
+function gtmBody(id){
+  return "<!-- Google Tag Manager (noscript) -->\n<noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id="+id+"\"\n"+
+  "height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript>\n<!-- End Google Tag Manager (noscript) -->";
+}
+function ga4Code(id){
+  return "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id="+id+"\"><\/script>\n"+
+  "<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n"+
+  "  gtag('js', new Date());\n  gtag('config', '"+id+"');\n<\/script>";
+}
+function codeCard(title,hint,code){
+  const c=document.createElement('div'); c.className='codecard';
+  const hd=document.createElement('div'); hd.className='hd';
+  const b=document.createElement('b'); b.textContent=title; hd.appendChild(b);
+  const right=document.createElement('span');
+  const h=document.createElement('span'); h.className='hint'; h.textContent=hint||''; right.appendChild(h);
+  right.appendChild(mkCopyBtn(code,'copiar código')); hd.appendChild(right);
+  const pre=document.createElement('pre'); pre.textContent=code;
+  c.appendChild(hd); c.appendChild(pre); return c;
+}
+function buildCodes(r){
+  const frag=document.createElement('div');
+  if(real(r.GTM)){
+    frag.appendChild(codeCard('GTM — cole no <head> (o mais alto possível)','container '+r.GTM.trim(),gtmHead(r.GTM.trim())));
+    frag.appendChild(codeCard('GTM — cole logo após abrir o <body>','noscript',gtmBody(r.GTM.trim())));
+  }
+  if(real(r.Pixel)) frag.appendChild(codeCard('Meta Pixel — cole no <head>','pixel '+r.Pixel.trim(),metaPixelCode(r.Pixel.trim())));
+  if(real(r.GA4))   frag.appendChild(codeCard('Google Analytics 4 — cole no <head>','id '+r.GA4.trim(),ga4Code(r.GA4.trim())));
+  return frag;
+}
+function renderRastreio(rows){
+  const t=document.getElementById('rastreio'); if(!t) return;
+  if(!rows||!rows.length){ t.innerHTML='<tbody><tr><td style="color:var(--mut);padding:16px">sem dados</td></tr></tbody>'; return; }
+  const cols=['Cliente','Pixel','Token CAPI','GTM','GA4','Códigos'];
+  const thead=document.createElement('thead'); const htr=document.createElement('tr');
+  cols.forEach(c=>{ const th=document.createElement('th'); th.textContent=c; htr.appendChild(th); });
+  thead.appendChild(htr);
+  const tbody=document.createElement('tbody');
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    const tdC=document.createElement('td'); const bc=document.createElement('b'); bc.textContent=r.Cliente||''; tdC.appendChild(bc); tr.appendChild(tdC);
+    [['Pixel',false],['Token CAPI',true],['GTM',false],['GA4',false]].forEach(([k,isTok])=>{
+      const td=document.createElement('td'); td.appendChild(valNode(r[k],isTok)); tr.appendChild(td);
+    });
+    const tdBtn=document.createElement('td');
+    const hasCode=real(r.Pixel)||real(r.GTM)||real(r.GA4);
+    const btn=document.createElement('button'); btn.className='verbtn'; btn.textContent='＜/＞ ver código'; btn.disabled=!hasCode;
+    const detail=document.createElement('tr'); detail.style.display='none';
+    const dtd=document.createElement('td'); dtd.className='codecell'; dtd.colSpan=6; detail.appendChild(dtd);
+    let built=false;
+    btn.addEventListener('click',()=>{
+      if(detail.style.display==='none'){
+        if(!built){ dtd.appendChild(buildCodes(r)); built=true; }
+        detail.style.display=''; btn.textContent='ocultar código';
+      } else { detail.style.display='none'; btn.textContent='＜/＞ ver código'; }
+    });
+    tdBtn.appendChild(btn); tr.appendChild(tdBtn);
+    tbody.appendChild(tr); tbody.appendChild(detail);
+  });
+  t.innerHTML=''; t.appendChild(thead); t.appendChild(tbody);
+}
+
 function build(data){
   const cli=data.clientes||[], sau=data.saude||[], log=data.log||[];
   const ativos=cli.filter(c=>String(c.Status).toLowerCase()==='ativo');
@@ -188,6 +315,7 @@ function build(data){
     ['Alertas hoje',alertas,alertas?'var(--vermelho)':'var(--verde)']
   ].map(([l,n,c])=>`<div class="kpi"><div class="n" style="color:${c}">${n}</div><div class="l">${l}</div></div>`).join('');
   render('clientes',cli);
+  renderRastreio(data.rastreamento||[]);
   render('saude',saudeHoje.length?saudeHoje:sau.slice(-10));
   // --- diário de bordo com filtro por data ---
   const diasLog=[...new Set(log.map(l=>l.Data).filter(Boolean))].sort().reverse();
