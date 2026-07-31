@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Diego Vasconcelos (L4) — Central de Relatórios</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:60ch}
+
+  .accounts{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 30px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft)}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+
+  .sec-h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
+
+  .card{position:relative;display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease}
+  a.card:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(18,33,31,.08),0 22px 44px -20px rgba(18,33,31,.4);border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+  a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .card.feature{grid-column:1 / -1;border-color:color-mix(in srgb, var(--accent) 35%, var(--line));background:linear-gradient(180deg,var(--accent-soft),var(--card) 60%)}
+  .card .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .card .ic{font-size:20px;line-height:1}
+  .card h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .card .desc{font-size:13.5px;color:var(--ink-soft)}
+  .card .arrow{color:var(--accent);font-weight:700;font-size:14px}
+  .badge{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+  .badge.live{color:#0c7a54;background:#d6f2e5}
+  .badge.soon{color:var(--ink-soft);background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.badge.live{color:#7ff0c2;background:#12362a}}
+  .card.soon{opacity:.72;cursor:default}
+  .card.soon:hover{transform:none;box-shadow:var(--shadow);border-color:var(--line)}
+
+  .note{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .note b{color:var(--ink)}
+  footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+  .track{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:30px}
+  .track-ids{display:flex;flex-direction:column;gap:9px}
+  .tid{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:13.5px}
+  .tid .tk{min-width:96px;color:var(--ink-soft);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .tid code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--line-soft);padding:2px 8px;border-radius:6px;color:var(--ink)}
+  .tid .tnote{color:var(--ink-soft);opacity:.75;font-size:12px}
+  .tid .miss{color:var(--ink-soft);opacity:.7;font-style:italic;font-size:13px}
+  .cp,.cpre{cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--accent);border-radius:7px;font-size:11px;font-weight:700;padding:2px 9px}
+  .cp:hover,.cpre:hover{border-color:var(--accent)}
+  .cp.ok,.cpre.ok{color:#0c7a54;border-color:#0c7a54}
+  @media (prefers-color-scheme: dark){.cp.ok,.cpre.ok{color:#7ff0c2;border-color:#2f7a5e}}
+  .genbtn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;background:var(--meta-soft);color:var(--meta);border:1px solid color-mix(in srgb,var(--meta) 30%,var(--line));border-radius:8px;font-size:12.5px;font-weight:700;padding:4px 11px}
+  .genbtn:hover{border-color:var(--meta)}
+  .codes{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:12px}
+  .codes>summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);list-style:none}
+  .codes>summary::-webkit-details-marker{display:none}
+  .code-card{margin-top:12px}
+  .code-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+  .code-hd b{font-size:12.5px;color:var(--ink)}
+  .code-card pre{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:var(--ink);white-space:pre;max-width:100%}
+  .track-empty{color:var(--ink-soft);font-size:13px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">GGD · Cliente</p>
+  <h1>🧑‍⚕️ Diego Vasconcelos (L4) — Central de Relatórios</h1>
+  <p class="lede">Central do Diego Vasconcelos (grupo L4). Gestão de tráfego no Meta Ads. Os relatórios entram aqui conforme forem publicados.</p>
+
+  <div class="accounts">
+    <span class="chip"><span class="dot m"></span> Meta <b>1692760568149609</b></span>
+  </div>
+
+  <p class="sec-h">Relatórios & acessos</p>
+  <div class="grid">
+
+    <div class="card soon">
+      <div class="row"><span class="ic">📊</span><span class="badge soon">Em breve</span></div>
+      <h3>Dashboard</h3>
+      <p class="desc">Painel de acompanhamento deste cliente — em preparação.</p>
+    </div>
+
+    <a class="card" href="https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=1692760568149609" target="_blank" rel="noopener">
+      <div class="row"><span class="ic">📘</span><span class="badge live">Ao vivo</span></div>
+      <h3>Gerenciador Meta Ads</h3>
+      <p class="desc">Campanhas da conta 1692760568149609 no Ads Manager.</p>
+      <span class="arrow">Abrir Meta →</span>
+    </a>
+
+    <div class="card soon">
+      <div class="row"><span class="ic">📊</span><span class="badge soon">Em breve</span></div>
+      <h3>Relatórios mensais</h3>
+      <p class="desc">Apresentação mensal consolidada — entra aqui conforme os meses forem fechados.</p>
+    </div>
+
+    <div class="card soon">
+      <div class="row"><span class="ic">🧾</span><span class="badge soon">Em breve</span></div>
+      <h3>NFs mensais (Meta + Google)</h3>
+      <p class="desc">Fatura/recibo do Meta e do Google do mês — link da pasta do Drive entra aqui.</p>
+    </div>
+
+  </div>
+
+  <p class="sec-h">Rastreamento &amp; códigos de instalação</p>
+  <div class="track">
+    <div class="track-ids">
+    <div class="tid"><span class="tk">Pixel Meta</span> <code>2162551911191882</code><button class="cp" data-copy="2162551911191882">copiar</button> <span class="tnote">(PIXEL_DIEGO_LANCAMENTOS (CAPI ativa))</span></div>
+    <div class="tid"><span class="tk">GTM</span> <span class="miss">a cadastrar</span></div>
+    <div class="tid"><span class="tk">GA4</span> <span class="miss">a cadastrar</span></div>
+    <div class="tid"><span class="tk">Token CAPI</span> <a class="genbtn" href="https://business.facebook.com/events_manager2/list/dataset/2162551911191882/settings" target="_blank" rel="noopener">🔑 Gerar token da CAPI →</a> <span class="tnote">(Events Manager → Configurações → API de Conversões)</span></div>
+    </div>
+    <details class="codes">
+    <summary>&lt;/&gt; Ver códigos de instalação — copiar e mandar pro cliente</summary>
+    <div class="code-card">
+      <div class="code-hd"><b>Meta Pixel — cole no &lt;head&gt;</b><button class="cpre">copiar código</button></div>
+      <pre>&lt;!-- Meta Pixel Code --&gt;
+&lt;script&gt;
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2162551911191882');
+fbq('track', 'PageView');
+&lt;/script&gt;
+&lt;noscript&gt;&lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2162551911191882&amp;ev=PageView&amp;noscript=1"
+/&gt;&lt;/noscript&gt;
+&lt;!-- End Meta Pixel Code --&gt;</pre>
+    </div>
+  </details>
+  </div>
+
+
+  <div class="note">
+    ℹ️ <b>Sobre os acessos:</b> os relatórios abrem em nova aba. Os cards “Em breve” são espaços já reservados — é só me pedir pra plugar cada relatório aqui conforme forem prontos.
+  </div>
+
+  <footer>
+    <span>Diego Vasconcelos (L4) · Central GGD · atualizada em 31/07/2026</span>
+    <a href="https://relatorios.giogrowthdigital.com.br/cockpit/">← Voltar ao Cockpit</a>
+  </footer>
+</div>
+
+<script>
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.cp,.cpre'); if(!b) return;
+  var txt=b.classList.contains('cpre')?b.closest('.code-card').querySelector('pre').textContent:b.getAttribute('data-copy');
+  var done=function(){var o=b.textContent;b.textContent='copiado ✓';b.classList.add('ok');setTimeout(function(){b.textContent=o;b.classList.remove('ok');},1400);};
+  function fb(t,d){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');d&&d();}catch(_){}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(function(){fb(txt,done);});}else{fb(txt,done);}
+});
+</script>
+</body>
+</html>
