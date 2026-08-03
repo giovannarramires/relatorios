@@ -101,6 +101,29 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 .ad-m-value{font-size:16px;font-weight:900;color:var(--text);letter-spacing:-.3px}.ad-m-value.orange{color:var(--h2)}
 .ad-link{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;background:#fff7ed;color:var(--h1);font-size:12px;font-weight:800;transition:all .16s}
 .ad-card:hover .ad-link{background:var(--h2);color:#fff}
+/* FUNIL completo do mês */
+.funnel-intro{font-size:12px;color:var(--text-2);margin-bottom:14px;line-height:1.5}
+.funnel-groups{display:flex;flex-direction:column}
+.fgrp-lbl{font-family:'Oswald',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin:12px 0 4px}
+.fgrp-lbl:first-child{margin-top:0}
+.fstage{display:flex;align-items:center;gap:14px;margin:5px 0}
+.fbar-wrap{flex:1;min-width:0}
+.fbar{height:50px;border-radius:10px;display:flex;align-items:center;padding:0 18px;color:#fff;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.fbar.meta{background:linear-gradient(135deg,var(--h1),var(--h2))}
+.fbar.gym{background:linear-gradient(135deg,#0f766e,#10b981)}
+.fbar-l{font-size:12.5px;font-weight:800;letter-spacing:.2px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.28)}
+.fbar-v{margin-left:auto;font-size:19px;font-weight:900;letter-spacing:-.4px;text-shadow:0 1px 2px rgba(0,0,0,.28);padding-left:14px}
+.fconv{flex:0 0 118px;text-align:left}
+.fconv-p{font-size:16px;font-weight:900;color:var(--text);line-height:1.1}
+.fconv-l{font-size:9.5px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+.fconv.empty{visibility:hidden}
+.fnote{font-size:10.5px;color:var(--text-3);margin-top:3px;padding-left:2px}
+.fstats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;padding-top:20px;border-top:1px dashed var(--border)}
+.fstat{background:#fbfcfe;border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.fstat-l{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);margin-bottom:7px}
+.fstat-v{font-size:22px;font-weight:900;letter-spacing:-.5px;color:var(--h1)}
+.fstat-s{font-size:10.5px;color:var(--text-3);margin-top:4px}
+@media(max-width:640px){.fstats{grid-template-columns:1fr}.fconv{flex-basis:76px}.fbar-v{font-size:16px}.fbar-l{font-size:11px}}
 .foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:36px;line-height:1.8;padding-top:20px;border-top:1px solid var(--border)}
 .foot b{color:var(--text-2)}
 @media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr}}
@@ -147,6 +170,19 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
     <div class="section-hint" id="perfHint">Comparado ao mesmo mês de 2025</div>
   </div>
   <div class="kpi-grid" id="kpiGrid"></div>
+
+  <!-- FUNIL COMPLETO DO MÊS -->
+  <div class="section-header" id="funilHeader" style="display:none"><div class="section-tag"></div>
+    <div class="section-title">🎯 Funil completo do mês</div>
+    <div class="section-hint">Da impressão no Meta até a matrícula fechada</div>
+  </div>
+  <div class="card" id="funilCard" style="display:none">
+    <div class="card-header"><div><div class="chart-title">Da impressão à matrícula</div>
+      <div class="chart-subtitle">Meta Ads entrega até a mensagem no Direct; daí em diante é a operação da academia</div></div></div>
+    <div class="funnel-intro">Cada barra é uma etapa do caminho do lead. O número à direita é a <b>taxa de conversão da etapa imediatamente anterior</b> (quantos avançaram). As larguras das barras são ilustrativas — o que vale é o número e a %.</div>
+    <div class="funnel-groups" id="funnel"></div>
+    <div class="fstats" id="funilStats"></div>
+  </div>
 
   <!-- INVESTIMENTO MENSAL DETALHADO -->
   <div class="section-header"><div class="section-tag"></div>
@@ -226,13 +262,17 @@ const D25 = {
   spend:[1647.44,1267.95,1536.68,1297.54,1808.88,1262.21,1249.56,1952.97,1491.75,1804.03,2622.43,1565.78],
   clicks:[562,415,426,368,563,487,442,716,566,653,925,529],
   msgs:[146,116,128,99,139,100,116,184,175,158,157,118],
-  cpm:[11.28,10.93,12.01,13.11,13.01,12.62,10.77,10.61,8.52,11.42,16.7,13.27]
+  cpm:[11.28,10.93,12.01,13.11,13.01,12.62,10.77,10.61,8.52,11.42,16.7,13.27],
+  impressions:[229845,167176,208837,172817,224556,177535,157643,199455,174924,197984,218190,180785],
+  reach:[87825,69459,79094,68907,77294,69862,68134,71861,63283,64210,71596,69455]
 };
 const D26 = {
-  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,1993.87,174.57],
-  clicks:[824,650,727,499,1049,1337,1098,132],
-  msgs:[267,204,202,153,244,327,240,26],
-  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,8.31,6.71]
+  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,1993.87,188.07],
+  clicks:[824,650,727,499,1049,1337,1098,141],
+  msgs:[267,204,202,153,244,327,240,29],
+  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,8.31,6.49],
+  impressions:[253806,208105,209673,109652,169719,168756,151913,15493],
+  reach:[94688,74770,76137,34167,43790,59008,50562,10079]
 };
 // ===== ANÚNCIOS por mês (ordenados por investimento) =====
 const ADS_BY_MONTH = {
@@ -351,6 +391,10 @@ const ADS_BY_MONTH = {
     {name:'AD05_MUAY_THAI_DE_VERDADE', spend:108.21, clicks:85, msgs:15, cpm:7.21, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
     {name:'AD_CONHEÇA_GO_HEAT', spend:66.36, clicks:47, msgs:11, cpm:6.03, url:'https://www.instagram.com/p/DYfBlOrDPtT/'}
   ]
+};
+// ===== FUNIL OFFLINE (agendamento/presença/fechamento — dados da academia) =====
+const FUNIL_OFFLINE = {
+  7:{agendamentos:121, presenca:86, fechamentos:14}
 };
 // ===== HELPERS =====
 const brl = n => 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -486,6 +530,62 @@ render();
       </div>
       <div class="ad-link">🔗 Ver criativo no Instagram</div>
     </a>`).join('');
+})();
+
+// ===== FUNIL COMPLETO DO MÊS (Meta Ads -> operação da academia) =====
+(function(){
+  const F = (typeof FUNIL_OFFLINE!=='undefined') ? FUNIL_OFFLINE[MES_FOCO] : null;
+  if(!F) return;                       // só renderiza em meses com dados da academia
+  const cur = ANO_FOCO===2026?D26:D25;
+  const imp=cur.impressions[fi], reach=cur.reach[fi], clk=cur.clicks[fi], msg=cur.msgs[fi], sp=cur.spend[fi];
+  const stages=[
+    {l:'Impressões',        v:imp,           grp:'meta',note:'Vezes que os anúncios apareceram'},
+    {l:'Alcance',           v:reach,         grp:'meta',note:'Pessoas únicas que viram o anúncio'},
+    {l:'Cliques no link',   v:clk,           grp:'meta',note:'Cliques que abriram o Direct'},
+    {l:'Mensagens iniciadas',v:msg,          grp:'meta',note:'Conversas abertas no Direct (janela 7 dias)'},
+    {l:'Agendamentos',      v:F.agendamentos,grp:'gym', note:'Aula experimental marcada'},
+    {l:'Presença na aula',  v:F.presenca,    grp:'gym', note:'Compareceram à aula experimental'},
+    {l:'Fechamentos',       v:F.fechamentos, grp:'gym', note:'Matrículas efetivadas'}
+  ];
+  const pct = (a,b)=> b>0 ? a/b*100 : 0;
+  const fmtp = p => p.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+  let html='', lastGrp='';
+  stages.forEach((s,i)=>{
+    if(s.grp!==lastGrp){
+      html+=`<div class="fgrp-lbl">${s.grp==='meta'?'🟠 No Meta Ads (tráfego pago)':'🟢 Na academia (operação comercial)'}</div>`;
+      lastGrp=s.grp;
+    }
+    const w = 100 - i*11;                          // taper ilustrativo (100→34)
+    const conv = i===0 ? null : pct(s.v, stages[i-1].v);
+    html+=`<div class="fstage">
+      <div class="fbar-wrap">
+        <div class="fbar ${s.grp}" style="width:${w}%">
+          <span class="fbar-l">${s.l}</span><span class="fbar-v">${num(s.v)}</span>
+        </div>
+        <div class="fnote">${s.note}</div>
+      </div>
+      <div class="fconv ${conv==null?'empty':''}">
+        <div class="fconv-p">${conv==null?'':fmtp(conv)}</div>
+        <div class="fconv-l">da etapa anterior</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('funnel').innerHTML=html;
+
+  // ---- indicadores-chave do funil ----
+  const stats=[
+    {l:'CTR (cliques/impressões)', v:fmtp(pct(clk,imp)),               s:`${num(clk)} cliques em ${num(imp)} impressões`},
+    {l:'Custo por mensagem',       v:brl(msg?sp/msg:0),                s:`${brl0(sp)} ÷ ${num(msg)} mensagens`},
+    {l:'Custo por agendamento',    v:brl(F.agendamentos?sp/F.agendamentos:0), s:`${brl0(sp)} ÷ ${num(F.agendamentos)} agendamentos`},
+    {l:'Custo por fechamento (CAC)',v:brl(F.fechamentos?sp/F.fechamentos:0),  s:`${brl0(sp)} ÷ ${num(F.fechamentos)} matrículas`},
+    {l:'Mensagem → fechamento',    v:fmtp(pct(F.fechamentos,msg)),     s:`${num(F.fechamentos)} de ${num(msg)} conversas`},
+    {l:'Agendamento → fechamento', v:fmtp(pct(F.fechamentos,F.agendamentos)), s:`${num(F.fechamentos)} de ${num(F.agendamentos)} visitas`}
+  ];
+  document.getElementById('funilStats').innerHTML=stats.map(x=>`
+    <div class="fstat"><div class="fstat-l">${x.l}</div><div class="fstat-v">${x.v}</div><div class="fstat-s">${x.s}</div></div>`).join('');
+
+  document.getElementById('funilHeader').style.display='';
+  document.getElementById('funilCard').style.display='';
 })();
 </script>
 </body>
