@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HSS Play + Anatomy — Dr. Marcelo Germani</title>
+
+<!-- ===== Meta Pixel (já embutido — resolve a medição) ===== -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','521397457593837');
+fbq('track','PageView');
+fbq('track','ViewContent',{content_name:'HSS Play + Anatomy'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=521397457593837&ev=PageView&noscript=1"/></noscript>
+<!-- ======================================================== -->
+
+<style>
+  :root{
+    --bg:#ffffff; --ink:#14171c; --muted:#5c6672; --line:#e7eaef;
+    --brand:#1f5fd6; --brand2:#3f82ff; --gold:#c79a3b; --good:#1f9d63;
+    --deep:#0c1424; --deep2:#111d33; --soft:#eef3ff;
+    --ph:#b8791f; --phbg:rgba(220,150,20,.10); --phline:rgba(220,150,20,.5);
+    --shadow:0 1px 3px rgba(10,20,40,.06),0 12px 34px rgba(10,20,40,.07);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  /* draft ribbon */
+  .draft{background:#1a1d24;color:#ffd27a;text-align:center;font-size:12.5px;font-weight:600;padding:7px 14px;letter-spacing:.02em}
+  /* sticky bar */
+  .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+  .brand{font-weight:800;font-size:15px;letter-spacing:-.01em}
+  .brand span{color:var(--brand)}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--brand2),var(--brand));color:#fff;text-decoration:none;
+    font-weight:700;font-size:15px;padding:12px 22px;border-radius:999px;box-shadow:0 6px 18px rgba(31,95,214,.32);border:0;cursor:pointer;transition:transform .12s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.sm{padding:9px 16px;font-size:13.5px}
+  .btn.big{font-size:17px;padding:16px 34px}
+  .btn.gold{background:linear-gradient(180deg,#e0b64e,#c79a3b);box-shadow:0 6px 18px rgba(199,154,59,.35);color:#2a2109}
+  /* hero */
+  .hero{background:radial-gradient(1200px 500px at 50% -10%,var(--deep2),var(--deep));color:#eef2f8;text-align:center;padding:56px 0 48px}
+  .kick{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8fb4ff}
+  .hero h1{font-size:34px;line-height:1.15;margin:14px 0 14px;letter-spacing:-.02em;font-weight:800}
+  .hero h1 em{font-style:normal;color:#ffd27a}
+  .hero p.lead{font-size:18px;color:#c3ccdb;max-width:600px;margin:0 auto 26px}
+  .video{max-width:620px;margin:0 auto 26px;aspect-ratio:16/9;border-radius:16px;border:1px solid rgba(255,255,255,.14);
+    background:linear-gradient(135deg,#16223a,#0e1728);display:flex;align-items:center;justify-content:center;color:#8ea3c4;position:relative}
+  .video .play{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(255,255,255,.25)}
+  .video small{position:absolute;bottom:12px;font-size:11.5px;color:#7f93b3}
+  .trust{margin-top:18px;font-size:13.5px;color:#9fb0cc}
+  .stars{color:#ffd27a;letter-spacing:2px}
+  /* sections */
+  section{padding:52px 0}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);text-align:center}
+  h2{font-size:26px;line-height:1.25;text-align:center;margin:10px 0 8px;letter-spacing:-.01em;font-weight:800}
+  .sec-sub{text-align:center;color:var(--muted);max-width:580px;margin:0 auto 30px}
+  .pain{background:#f7f9fc;border-radius:18px;padding:26px}
+  .pain ul{list-style:none;margin:0;padding:0}
+  .pain li{padding:11px 0 11px 34px;position:relative;border-bottom:1px solid var(--line)}
+  .pain li:last-child{border-bottom:0}
+  .pain li:before{content:"✕";position:absolute;left:4px;top:10px;color:#d0473c;font-weight:800}
+  /* cards get */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .c{border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);background:#fff}
+  .c .ic{font-size:24px}.c h3{margin:10px 0 6px;font-size:17px}.c p{margin:0;color:var(--muted);font-size:14.5px}
+  .c.hi{border:1px solid var(--brand);background:linear-gradient(180deg,#fff,var(--soft))}
+  /* includes list */
+  .inc{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .inc div{display:flex;gap:12px;align-items:flex-start;padding:15px 20px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .inc div:last-child{border-bottom:0}
+  .inc .ck{color:var(--good);font-weight:800;flex:0 0 auto}
+  /* authority */
+  .auth{display:flex;gap:22px;align-items:center;background:var(--deep);color:#eef2f8;border-radius:20px;padding:26px}
+  .auth .ph-img{width:120px;height:120px;flex:0 0 120px;border-radius:16px;background:linear-gradient(135deg,#1b2942,#0e1728);display:flex;align-items:center;justify-content:center;color:#7f93b3;font-size:12px;text-align:center;border:1px solid rgba(255,255,255,.12)}
+  .auth h3{margin:0 0 6px;font-size:20px}.auth p{margin:0;color:#c3ccdb;font-size:14.5px}
+  /* testimonials */
+  .quotes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .q{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;box-shadow:var(--shadow);font-size:14px}
+  .q .who{margin-top:12px;font-weight:700;font-size:13px}.q .who small{display:block;color:var(--muted);font-weight:400}
+  /* offer */
+  .offer{background:radial-gradient(900px 400px at 50% -20%,var(--deep2),var(--deep));color:#eef2f8;border-radius:22px;padding:38px 26px;text-align:center}
+  .price{font-size:15px;color:#9fb0cc}.price s{opacity:.7}
+  .big-price{font-size:44px;font-weight:800;margin:8px 0 2px;color:#fff}
+  .big-price small{font-size:16px;font-weight:600;color:#c3ccdb}
+  .parc{color:#ffd27a;font-weight:700;margin-bottom:20px}
+  .offer .inc{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.12);text-align:left;margin:0 auto 24px;max-width:460px}
+  .offer .inc div{border-color:rgba(255,255,255,.10);color:#dbe3f0}
+  .guar{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:16px;color:#9fb0cc;font-size:13.5px}
+  .seal{width:52px;height:52px;border-radius:50%;border:2px solid var(--good);color:var(--good);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex:0 0 auto;text-align:center;line-height:1.1}
+  /* faq */
+  details{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:2px 18px;background:#fff}
+  summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;font-size:15.5px}
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";float:right;color:var(--brand);font-weight:800}
+  details[open] summary:after{content:"–"}
+  details p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
+  /* placeholder */
+  .ph{background:var(--phbg);border:1px dashed var(--phline);color:var(--ph);border-radius:6px;padding:1px 7px;font-weight:600;font-size:.92em}
+  .cta-final{text-align:center;padding:44px 0 8px}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:30px 0 50px}
+  @media (max-width:640px){
+    .hero h1{font-size:27px}.cards{grid-template-columns:1fr}.quotes{grid-template-columns:1fr}
+    .auth{flex-direction:column;text-align:center}.bar .brand{font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft">RASCUNHO v01 · GGD — texto entre [colchetes] a confirmar com o material do curso</div>
+
+<div class="bar"><div class="wrap">
+  <div class="brand">HSS <span>Play</span> + Anatomy</div>
+  <a class="btn sm cta" href="https://pay.hotmart.com/V106295140K?src=lp_hss_play" onclick="fbq('track','InitiateCheckout')">Assinar agora</a>
+</div></div>
+
+<!-- HERO -->
+<header class="hero"><div class="wrap">
+  <div class="kick">HSS Play + Anatomy · por Dr. Marcelo Germani</div>
+  <h1>Domine a Harmonização Orofacial <em>com segurança</em> — da anatomia à prática clínica</h1>
+  <p class="lead">Acesso completo à biblioteca de aulas do HSS Play somado ao curso de Anatomia aplicada. Aprenda no seu ritmo, com quem é referência em HOF.</p>
+  <div class="video">
+    <div class="play">▶</div>
+    <small>[inserir VSL / vídeo de apresentação]</small>
+  </div>
+  <a class="btn big cta" href="https://pay.hotmart.com/V106295140K?src=lp_hss_play" onclick="fbq('track','InitiateCheckout')">Quero assinar agora</a>
+  <div class="trust"><span class="stars">★★★★★</span> &nbsp;<span class="ph">[X mil profissionais já assistindo / avaliação média]</span></div>
+</div></header>
+
+<!-- PARA QUEM / DOR -->
+<section><div class="wrap">
+  <div class="eyebrow">Se você se identifica com isso</div>
+  <h2>Insegurança na hora do procedimento custa caro</h2>
+  <p class="sec-sub">O HSS Play + Anatomy foi feito para o profissional que quer atuar em Harmonização Orofacial com base sólida — e parar de aprender de forma solta e incompleta.</p>
+  <div class="pain"><ul>
+    <li>Você conhece a técnica, mas sente falta de <b>domínio da anatomia</b> para agir com segurança e evitar intercorrências.</li>
+    <li>O conteúdo bom está <b>espalhado</b> — um pedaço em cada curso, canal ou evento.</li>
+    <li>Cursos presenciais são <b>caros e pontuais</b>: acabam e você fica sem a quem recorrer na dúvida.</li>
+    <li>Você quer <b>evoluir no seu ritmo</b>, revisitar o conteúdo antes de cada caso, sem depender de data marcada.</li>
+  </ul></div>
+</div></section>
+
+<!-- A SOLUÇÃO -->
+<section style="background:#f7f9fc"><div class="wrap">
+  <div class="eyebrow">A solução</div>
+  <h2>Tudo o que você precisa, em um só lugar</h2>
+  <p class="sec-sub">Duas frentes que se completam: a base que dá segurança e a biblioteca que mantém você sempre atualizado.</p>
+  <div class="cards">
+    <div class="c hi">
+      <div class="ic">🎬</div>
+      <h3>HSS Play</h3>
+      <p>A biblioteca de aulas de Harmonização Orofacial do Dr. Germani — técnicas, casos e protocolos <span class="ph">[atualizada com nova frequência: definir]</span>, para assistir quando e quantas vezes quiser.</p>
+    </div>
+    <div class="c hi">
+      <div class="ic">🧠</div>
+      <h3>Anatomy</h3>
+      <p>O curso de anatomia aplicada à HOF: a base que te dá <b>segurança clínica</b> para planejar e executar cada procedimento evitando complicações.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section><div class="wrap">
+  <div class="eyebrow">O que está incluso</div>
+  <h2>Ao assinar, você recebe</h2>
+  <div class="inc" style="margin-top:22px">
+    <div><span class="ck">✓</span><span>Acesso completo à biblioteca <b>HSS Play</b> — <span class="ph">[nº de aulas / módulos]</span></span></div>
+    <div><span class="ck">✓</span><span>Curso <b>Anatomy</b> completo — anatomia aplicada à Harmonização Orofacial</span></div>
+    <div><span class="ck">✓</span><span>Novos conteúdos adicionados <span class="ph">[frequência: mensal? semanal?]</span></span></div>
+    <div><span class="ck">✓</span><span>Acesso por <span class="ph">[período: 12 meses?]</span>, de qualquer dispositivo</span></div>
+    <div><span class="ck">✓</span><span><span class="ph">[Certificado de conclusão? incluir se houver]</span></span></div>
+    <div><span class="ck">✓</span><span><span class="ph">[Comunidade / suporte / bônus? incluir se houver]</span></span></div>
+  </div>
+</div></section>
+
+<!-- AUTORIDADE -->
+<section style="background:#f7f9fc"><div class="wrap">
+  <div class="auth">
+    <div class="ph-img">[foto<br>Dr. Germani]</div>
+    <div>
+      <h3>Dr. Marcelo Germani</h3>
+      <p>Referência em Harmonização Orofacial e criador do universo HOF Sem Segredos. <span class="ph">[bio curta: formação, títulos, nº de alunos formados, tempo de atuação]</span></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- DEPOIMENTOS -->
+<section><div class="wrap">
+  <div class="eyebrow">Quem já faz parte</div>
+  <h2>O que dizem os alunos</h2>
+  <div class="quotes" style="margin-top:22px">
+    <div class="q">“<span class="ph">[depoimento 1]</span>”<div class="who"><span class="ph">[Nome]</span><small><span class="ph">[profissão/cidade]</span></small></div></div>
+    <div class="q">“<span class="ph">[depoimento 2]</span>”<div class="who"><span class="ph">[Nome]</span><small><span class="ph">[profissão/cidade]</span></small></div></div>
+    <div class="q">“<span class="ph">[depoimento 3]</span>”<div class="who"><span class="ph">[Nome]</span><small><span class="ph">[profissão/cidade]</span></small></div></div>
+  </div>
+</div></section>
+
+<!-- OFERTA -->
+<section><div class="wrap">
+  <div class="offer">
+    <div class="eyebrow" style="color:#8fb4ff">A oferta</div>
+    <h2 style="color:#fff">Combo HSS Play + Anatomy</h2>
+    <div class="price"><s class="ph">[de R$ ___]</s></div>
+    <div class="big-price">R$ 1.183<small> à vista</small></div>
+    <div class="parc"><span class="ph">[ou em até 12x de R$ ___ — confirmar parcelamento]</span></div>
+    <div class="inc">
+      <div><span class="ck">✓</span><span>Biblioteca HSS Play completa</span></div>
+      <div><span class="ck">✓</span><span>Curso Anatomy completo</span></div>
+      <div><span class="ck">✓</span><span>Atualizações + acesso por <span class="ph">[período]</span></span></div>
+    </div>
+    <a class="btn big gold cta" href="https://pay.hotmart.com/V106295140K?src=lp_hss_play" onclick="fbq('track','InitiateCheckout')">Assinar o combo agora</a>
+    <div class="guar">
+      <div class="seal">7<br>dias</div>
+      <div style="text-align:left">Garantia incondicional de 7 dias. Não gostou? Devolvemos 100% do valor, sem burocracia (Hotmart).</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="background:#f7f9fc"><div class="wrap">
+  <div class="eyebrow">Dúvidas</div>
+  <h2>Perguntas frequentes</h2>
+  <div style="margin-top:24px">
+    <details><summary>Preciso já atuar com Harmonização Orofacial?</summary><p>Não. O conteúdo atende <span class="ph">[desde quem está começando até quem já atua — ajustar ao público real]</span>, com a base de anatomia que dá segurança para evoluir.</p></details>
+    <details><summary>Serve para a minha formação?</summary><p><span class="ph">[Definir público: dentistas / biomédicos / demais profissionais habilitados]</span>. O material é voltado a profissionais da saúde habilitados a realizar HOF.</p></details>
+    <details><summary>Por quanto tempo tenho acesso?</summary><p><span class="ph">[Definir: acesso por 12 meses / vitalício]</span>, para assistir quantas vezes quiser, de qualquer dispositivo.</p></details>
+    <details><summary>Recebo certificado?</summary><p><span class="ph">[Responder conforme a oferta]</span>.</p></details>
+    <details><summary>Como funciona o pagamento e a garantia?</summary><p>Pagamento seguro pela Hotmart (cartão, <span class="ph">[pix/boleto?]</span>). Você tem 7 dias de garantia: se não for para você, é só pedir o reembolso.</p></details>
+  </div>
+</div></section>
+
+<!-- CTA FINAL -->
+<section class="cta-final"><div class="wrap">
+  <h2>Comece hoje a estudar com segurança</h2>
+  <p class="sec-sub">Acesso imediato ao HSS Play + Anatomy assim que a assinatura é confirmada.</p>
+  <a class="btn big cta" href="https://pay.hotmart.com/V106295140K?src=lp_hss_play" onclick="fbq('track','InitiateCheckout')">Quero assinar agora</a>
+</div></section>
+
+<footer>
+  HSS Play + Anatomy · Dr. Marcelo Germani &nbsp;|&nbsp; <span class="ph">[CNPJ / termos / política de privacidade]</span><br>
+  Rascunho v01 produzido pela GGD · Gestão de Tráfego — agosto/2026
+</footer>
+
+</body>
+</html>
