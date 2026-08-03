@@ -124,6 +124,14 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 .fstat-v{font-size:22px;font-weight:900;letter-spacing:-.5px;color:var(--h1)}
 .fstat-s{font-size:10.5px;color:var(--text-3);margin-top:4px}
 @media(max-width:640px){.fstats{grid-template-columns:1fr}.fconv{flex-basis:76px}.fbar-v{font-size:16px}.fbar-l{font-size:11px}}
+/* Benchmark de mercado */
+.bench-ref{font-size:11px;color:var(--text-3);margin-bottom:14px;line-height:1.5}
+.bench-pill{display:inline-block;font-size:11px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap}
+.bench-pill.good{background:#dcfce7;color:#16a34a}
+.bench-pill.mid{background:#fef9c3;color:#ca8a04}
+.bench-pill.bad{background:#fee2e2;color:#dc2626}
+.bench-insight{margin-top:18px;padding:16px 18px;background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid var(--h2);border-radius:10px;font-size:12.5px;line-height:1.6;color:var(--text-2)}
+.bench-insight b{color:var(--h1)}
 .foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:36px;line-height:1.8;padding-top:20px;border-top:1px solid var(--border)}
 .foot b{color:var(--text-2)}
 @media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr}}
@@ -228,6 +236,20 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
     <div class="section-hint">Clique no card para abrir o criativo no Instagram</div>
   </div>
   <div class="ads-grid" id="adsGrid"></div>
+
+  <!-- BENCHMARK DE MERCADO (apoio permanente) -->
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">📐 Benchmark de mercado · Academia</div>
+    <div class="section-hint">Apoio de leitura — referências do setor por etapa do funil</div>
+  </div>
+  <div class="card">
+    <div class="bench-ref">Faixas de referência do mercado de academias/estúdios (tráfego local no Meta → visita → matrícula). Variam por praça, ticket e época do ano — servem de apoio à leitura, não como meta contratual. Comparação relativa ao mês em foco.</div>
+    <table>
+      <thead><tr><th>Métrica</th><th id="benchMes">Mês</th><th>Benchmark academia</th><th>Status</th></tr></thead>
+      <tbody id="benchBody"></tbody>
+    </table>
+    <div class="bench-insight" id="benchInsight" style="display:none"></div>
+  </div>
 
   <div class="foot">
     <b>GO HEAT</b> · Relatório gerado por <b>Giovanna Ramires — Gestão GGD</b> · Fonte: Meta Ads (conta CA- Go Heat) via Windsor.ai<br>
@@ -586,6 +608,49 @@ render();
 
   document.getElementById('funilHeader').style.display='';
   document.getElementById('funilCard').style.display='';
+})();
+
+// ===== BENCHMARK DE MERCADO · ACADEMIA (apoio permanente) =====
+(function(){
+  const cur = ANO_FOCO===2026?D26:D25;
+  const imp=cur.impressions[fi]||0, clk=cur.clicks[fi]||0, msg=cur.msgs[fi]||0, sp=cur.spend[fi]||0;
+  const F = (typeof FUNIL_OFFLINE!=='undefined') ? FUNIL_OFFLINE[MES_FOCO] : null;
+  const pct = (a,b)=> b>0 ? a/b*100 : null;
+  const fmtp = p => p==null ? '—' : p.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+  const fmtr = v => v==null ? '—' : brl(v);
+  // status vs faixa [lo,hi]: dir 'up' = maior melhor (piso = lo) · 'down' = custo (teto = hi)
+  function stat(v,lo,hi,dir){
+    if(v==null) return ['mid','—'];
+    if(dir==='down'){ if(v<=hi) return['good','Saudável']; if(v<=hi*1.3) return['mid','Atenção']; return['bad','Alto']; }
+    if(v>=lo) return['good','Saudável']; if(v>=lo*0.7) return['mid','Atenção']; return['bad','Abaixo'];
+  }
+  const defs=[
+    {l:'CTR no link',            v:pct(clk,imp),                     fmt:fmtp, bench:'0,8% – 1,3%',   lo:0.8, hi:1.3, dir:'up', on:true},
+    {l:'Custo por conversa (msg)',v:msg?sp/msg:null,                 fmt:fmtr, bench:'R$ 6 – R$ 15',  lo:6,   hi:15,  dir:'down',on:true},
+    {l:'Mensagem → agendamento', v:F?pct(F.agendamentos,msg):null,   fmt:fmtp, bench:'30% – 45%',    lo:30,  hi:45,  dir:'up', on:!!F},
+    {l:'Agendamento → presença', v:F?pct(F.presenca,F.agendamentos):null, fmt:fmtp, bench:'60% – 75%', lo:60, hi:75, dir:'up', on:!!F},
+    {l:'Presença → matrícula',   v:F?pct(F.fechamentos,F.presenca):null, fmt:fmtp, bench:'35% – 55%', lo:35, hi:55, dir:'up', on:!!F},
+    {l:'Mensagem → matrícula',   v:F?pct(F.fechamentos,msg):null,    fmt:fmtp, bench:'8% – 15%',     lo:8,   hi:15,  dir:'up', on:!!F},
+    {l:'CAC (custo por matrícula)',v:(F&&F.fechamentos)?sp/F.fechamentos:null, fmt:fmtr, bench:'R$ 120 – R$ 300', lo:120, hi:300, dir:'down', on:!!F}
+  ].filter(d=>d.on);
+  document.getElementById('benchMes').textContent = MESES[fi]+'/'+String(ANO_FOCO).slice(2);
+  document.getElementById('benchBody').innerHTML = defs.map(d=>{
+    const [cls,lbl]=stat(d.v,d.lo,d.hi,d.dir);
+    return `<tr><td>${d.l}</td><td>${d.fmt(d.v)}</td><td>${d.bench}</td><td><span class="bench-pill ${cls}">${lbl}</span></td></tr>`;
+  }).join('');
+
+  // Insight de oportunidade: destaca o gargalo do fechamento na experimental
+  if(F && F.presenca>0){
+    const fech=pct(F.fechamentos,F.presenca);
+    if(fech!=null && fech<35){
+      const projN=Math.round(F.presenca*0.35), projCAC=projN?sp/projN:null;
+      document.getElementById('benchInsight').innerHTML =
+        `<b>Maior alavanca do mês:</b> o fechamento na aula experimental está em <b>${fmtp(fech)}</b>, abaixo do piso de mercado (35–55%). `+
+        `Com as mesmas ${num(F.presenca)} presenças de ${MESES_LONG[fi]}, chegar a 35% já seriam <b>~${projN} matrículas</b> (vs ${num(F.fechamentos)} de hoje) e o CAC cairia para <b>~${fmtr(projCAC)}</b> — sem gastar R$1 a mais em mídia. `+
+        `A alavanca é o <b>processo comercial no fim da aula</b>: oferta e matrícula fechadas no dia + follow-up de quem não fechou.`;
+      document.getElementById('benchInsight').style.display='';
+    }
+  }
 })();
 </script>
 </body>
