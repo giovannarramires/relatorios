@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HSS Play — Diagnóstico e Recomendação · GGD</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --ink:#141a24; --muted:#616b7a; --line:#e6e9ef;
+    --brand:#2f6df6; --brand2:#5a8bff; --good:#1f9d63; --warn:#d9930f; --bad:#e0483d;
+    --soft:#eef3ff; --shadow:0 1px 3px rgba(20,30,50,.06),0 8px 24px rgba(20,30,50,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#0d1015;--card:#161b22;--ink:#e9edf3;--muted:#9aa4b2;--line:#252b35;
+      --brand:#5a8bff;--brand2:#3f6fd6;--good:#37c07e;--warn:#e6b53c;--bad:#f16b60;
+      --soft:#182238;--shadow:0 1px 3px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);}
+  }
+  :root[data-theme="dark"]{--bg:#0d1015;--card:#161b22;--ink:#e9edf3;--muted:#9aa4b2;--line:#252b35;--soft:#182238;}
+  :root[data-theme="light"]{--bg:#f4f5f7;--card:#ffffff;--ink:#141a24;--muted:#616b7a;--line:#e6e9ef;--soft:#eef3ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:34px 20px 60px}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--brand)}
+  h1{font-size:27px;line-height:1.2;margin:8px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 26px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+  h2{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+  .lead{font-size:19px;line-height:1.45;font-weight:600;margin:0}
+  .lead .hl{color:var(--brand)}
+  .stage{display:flex;align-items:center;gap:14px;padding:8px 0}
+  .lab{width:190px;flex:0 0 190px;font-size:14px}
+  .lab small{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
+  .track{flex:1;height:36px}
+  .bar{height:36px;border-radius:8px;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  .bar.win{background:linear-gradient(90deg,var(--good),#37c07e)}
+  .bar.loss{background:var(--bad)}
+  .val{width:120px;flex:0 0 120px;text-align:right;font-weight:700;font-size:16px}
+  .val small{display:block;color:var(--muted);font-weight:500;font-size:11.5px}
+  .drop{margin-left:204px;color:var(--bad);font-size:12.5px;font-weight:600;padding:2px 0 4px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .ins{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+  .ins .ic{font-size:22px}
+  .ins h3{font-size:15px;margin:8px 0 6px}
+  .ins p{margin:0;font-size:13.5px;color:var(--muted)}
+  .ins.g{border-top:3px solid var(--good)} .ins.w{border-top:3px solid var(--warn)} .ins.b{border-top:3px solid var(--brand)}
+  .flow{display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .row .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);width:58px;flex:0 0 58px}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13.5px;font-weight:600}
+  .step.pay{background:rgba(224,72,61,.10);border-color:rgba(224,72,61,.35)}
+  .step.lp{background:rgba(31,157,99,.12);border-color:rgba(31,157,99,.4);color:var(--good)}
+  .arw{color:var(--muted);font-weight:700}
+  .ben{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .ben div{font-size:13px}.ben b{display:block;font-size:14px;margin-bottom:2px}
+  ul.clean{margin:6px 0 0;padding-left:0;list-style:none}
+  ul.clean li{padding:7px 0 7px 26px;position:relative;font-size:14px;border-bottom:1px solid var(--line)}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li:before{content:"";position:absolute;left:2px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--brand)}
+  .cta{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:16px;padding:24px}
+  .cta h2{color:rgba(255,255,255,.85)}
+  .cta p{margin:0 0 4px;font-size:15.5px}
+  .sig{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
+  @media (max-width:640px){
+    .lab{width:130px;flex-basis:130px}.val{width:92px;flex-basis:92px}.drop{margin-left:144px}
+    .grid3{grid-template-columns:1fr}.ben{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">GGD · Gestão de Tráfego</div>
+  <h1>HSS Play — o que os anúncios mostraram e como aumentar as vendas</h1>
+  <p class="sub">Campanhas Meta Ads (Stories) · período 31/07 a 03/08/2026 · investimento R$ 1.563</p>
+
+  <div class="card">
+    <p class="lead">Os anúncios estão <span class="hl">atraindo e levando pessoas até o checkout com custo baixo</span>. A perda está concentrada em um único ponto — e ela tem solução.</p>
+  </div>
+
+  <div class="card">
+    <h2>O caminho do cliente (funil)</h2>
+    <div class="stage">
+      <div class="lab">Pessoas alcançadas</div>
+      <div class="track"><div class="bar" style="width:100%"></div></div>
+      <div class="val">18.942</div>
+    </div>
+    <div class="stage">
+      <div class="lab">Clicaram no anúncio</div>
+      <div class="track"><div class="bar" style="width:26%"></div></div>
+      <div class="val">354<small>R$ 4 / clique</small></div>
+    </div>
+    <div class="stage">
+      <div class="lab">Chegaram ao checkout</div>
+      <div class="track"><div class="bar win" style="width:19%"></div></div>
+      <div class="val">187<small>R$ 8 cada</small></div>
+    </div>
+    <div class="drop">↓ aqui está a perda: das 187 que chegaram ao pagamento, apenas 1 comprou</div>
+    <div class="stage">
+      <div class="lab">Compraram</div>
+      <div class="track"><div class="bar loss" style="width:4%"></div></div>
+      <div class="val">1<small>R$ 1.183</small></div>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-bottom:20px">
+    <div class="ins g">
+      <div class="ic">✅</div>
+      <h3>O topo funciona</h3>
+      <p>Cliques baratos (R$ 4) e 187 pessoas chegando ao checkout a R$ 8 cada. O anúncio faz o papel dele.</p>
+    </div>
+    <div class="ins w">
+      <div class="ic">⚠️</div>
+      <h3>A perda é no checkout</h3>
+      <p>De 187 pessoas que chegaram ao pagamento, só 1 comprou — uma conversão de 0,5%.</p>
+    </div>
+    <div class="ins b">
+      <div class="ic">💡</div>
+      <h3>O motivo</h3>
+      <p>O anúncio leva a pessoa <b>direto para a página de pagamento de R$ 1.183</b>, sem antes apresentar o valor da assinatura.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Recomendação: uma Landing Page antes do checkout</h2>
+    <div class="flow">
+      <div class="row">
+        <span class="tag">Hoje</span>
+        <span class="step">📱 Anúncio</span><span class="arw">→</span>
+        <span class="step pay">💳 Checkout R$ 1.183</span>
+        <span style="font-size:12.5px;color:var(--muted)">(pessoa fria pulando direto pro pagamento)</span>
+      </div>
+      <div class="row">
+        <span class="tag">Proposto</span>
+        <span class="step">📱 Anúncio</span><span class="arw">→</span>
+        <span class="step lp">🎬 Landing Page / VSL</span><span class="arw">→</span>
+        <span class="step pay">💳 Checkout</span>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin:16px 0 0">
+      Uma página entre o anúncio e o pagamento apresenta o Dr. Germani, o que a pessoa recebe no HSS Play + Anatomy, resultados e a oferta — <b>aquecendo</b> quem chegou frio antes de pedir R$ 1.183.
+    </p>
+    <div class="ben">
+      <div><b>+ Vendas</b>Mais gente decide comprar depois de entender o valor.</div>
+      <div><b>+ Medição</b>Passamos a enxergar cada etapa da página com precisão.</div>
+      <div><b>+ Remarketing</b>Quem visita a página vira público quente e barato de reimpactar.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>O que a página teria</h2>
+    <ul class="clean">
+      <li>Abertura com vídeo (VSL) ou headline forte + botão de assinatura</li>
+      <li>Autoridade: Dr. Germani e a proposta do HSS Play</li>
+      <li>O que a pessoa recebe (HSS Play + Anatomy) e para quem é</li>
+      <li>Depoimentos / provas de resultado</li>
+      <li>A oferta clara: o que inclui, parcelamento e garantia</li>
+      <li>Perguntas frequentes (quebra de objeções) + chamada final para o checkout</li>
+    </ul>
+  </div>
+
+  <div class="cta card">
+    <h2>Próximo passo</h2>
+    <p><b>Podemos produzir essa landing page.</b></p>
+    <p>Para começar, precisamos do vídeo/VSL (ou material para roteiro), depoimentos disponíveis e os detalhes da oferta (valores, parcelamento e garantia).</p>
+  </div>
+
+  <p class="sig">Análise elaborada pela GGD · Gestão de Tráfego a partir dos dados da conta Meta Ads · agosto/2026</p>
+</div>
+</body>
+</html>
