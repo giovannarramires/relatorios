@@ -201,16 +201,22 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 </div>
 
 <script>
-// ╔═══════════════ CONFIG — altere só isto p/ gerar outro mês ═══════════════╗
+// ╔═══════════════ CONFIG (gerado automaticamente — não edite à mão) ═══════════════╗
 const MES_FOCO = 6;      // 1=Jan … 12=Dez  (mês do relatório)
 const ANO_FOCO = 2026;
-const PARCIAL  = false;  // true se o mês ainda não fechou
-const DATA_ATUALIZACAO = '06/07/2026';
-const HISTORICO = [   // meses publicados (mais recente por ultimo); a rotina semanal adiciona novos
+const PARCIAL  = false;   // true se o mês ainda não fechou
+const DATA_ATUALIZACAO = '03/08/2026';
+const HISTORICO = [
+  {rotulo:'Janeiro/2026', arq:'janeiro-2026.html'},
+  {rotulo:'Fevereiro/2026', arq:'fevereiro-2026.html'},
+  {rotulo:'Março/2026', arq:'marco-2026.html'},
+  {rotulo:'Abril/2026', arq:'abril-2026.html'},
+  {rotulo:'Maio/2026', arq:'maio-2026.html'},
   {rotulo:'Junho/2026', arq:'junho-2026.html'},
-  {rotulo:'Julho/2026', arq:'julho-2026.html'}
+  {rotulo:'Julho/2026', arq:'julho-2026.html'},
+  {rotulo:'Agosto/2026', arq:'agosto-2026.html'}
 ];
-// ╚══════════════════════════════════════════════════════════════════════════╝
+// ╚═══════════════════════════════════════════════════════════════════════════════╝
 const TAX = 0.1383;      // ISS+IOF (alíquota real da conta)
 const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 const MESES_LONG = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
@@ -220,33 +226,37 @@ const D25 = {
   spend:[1647.44,1267.95,1536.68,1297.54,1808.88,1262.21,1249.56,1952.97,1491.75,1804.03,2622.43,1565.78],
   clicks:[562,415,426,368,563,487,442,716,566,653,925,529],
   msgs:[146,116,128,99,139,100,116,184,175,158,157,118],
-  cpm:[11.28,10.93,12.01,13.11,13.01,12.62,10.77,10.61,8.52,11.42,16.70,13.27]
+  cpm:[11.28,10.93,12.01,13.11,13.01,12.62,10.77,10.61,8.52,11.42,16.7,13.27]
 };
 const D26 = {
-  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,392.16],
-  clicks:[824,650,727,499,1049,1337,170],
-  msgs:[267,204,202,153,244,327,34],
-  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,11.53]
+  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,1993.87,149.76],
+  clicks:[824,650,727,499,1049,1337,1098,110],
+  msgs:[267,204,202,153,244,327,240,22],
+  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,8.31,6.81]
 };
 // ===== ANÚNCIOS por mês (ordenados por investimento) =====
 const ADS_BY_MONTH = {
   6:[
-    {name:'AD_CONHEÇA_GO_HEAT',        spend:1215.15, clicks:738, msgs:177, cpm:6.87,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
-    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:589.93,  clicks:274, msgs:80,  cpm:7.37,  url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
-    {name:'AD_APRESENTANDO_ACADEMIA',  spend:418.90,  clicks:188, msgs:42,  cpm:9.97,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
-    {name:'AD_MULHER_TB_PODE_DEVE',    spend:322.96,  clicks:115, msgs:23,  cpm:14.04, url:'https://www.instagram.com/p/DZpXekCDJCZ/'},
-    {name:'AD05_JIU',                  spend:28.09,   clicks:11,  msgs:3,   cpm:9.36,  url:'https://www.instagram.com/p/DaK7iAhM12W/'},
-    {name:'AD_PERNAS_DEFINIDAS',       spend:25.71,   clicks:10,  msgs:0,   cpm:null,  url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
-    {name:'AD_TREINE_HOJE',            spend:4.19,    clicks:1,   msgs:1,   cpm:4.19,  url:'https://www.instagram.com/p/DXeffwmjIVs/'}
+    {name:'AD_CONHEÇA_GO_HEAT', spend:1215.15, clicks:738, msgs:177, cpm:6.87, url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:589.93, clicks:274, msgs:80, cpm:7.37, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD_APRESENTANDO_ACADEMIA', spend:418.9, clicks:188, msgs:42, cpm:9.97, url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD_MULHER_TB_PODE_DEVE', spend:322.96, clicks:115, msgs:23, cpm:14.04, url:'https://www.instagram.com/p/DZpXekCDJCZ/'},
+    {name:'AD05_JIU', spend:28.09, clicks:11, msgs:3, cpm:9.36, url:'https://www.instagram.com/p/DaK7iAhM12W/'},
+    {name:'AD_PERNAS_DEFINIDAS', spend:25.71, clicks:10, msgs:0, cpm:null, url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
+    {name:'AD_TREINE_HOJE', spend:4.19, clicks:1, msgs:1, cpm:4.19, url:'https://www.instagram.com/p/DXeffwmjIVs/'}
   ],
   7:[
-    {name:'AD_PERNAS_DEFINIDAS',       spend:113.14, clicks:40, msgs:6,  cpm:18.86, url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
-    {name:'AD_CONHEÇA_GO_HEAT',        spend:106.99, clicks:55, msgs:12, cpm:8.92,  url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
-    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:88.73,  clicks:42, msgs:8,  cpm:11.09, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
-    {name:'AD05_JIU',                  spend:83.92,  clicks:33, msgs:8,  cpm:10.49, url:'https://www.instagram.com/p/DaK7iAhM12W/'}
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:782.41, clicks:504, msgs:91, cpm:8.6, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD_CONHEÇA_GO_HEAT', spend:767.26, clicks:459, msgs:120, cpm:6.39, url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD05_JIU', spend:314.36, clicks:91, msgs:22, cpm:14.29, url:'https://www.instagram.com/p/DaK7iAhM12W/'},
+    {name:'AD_PERNAS_DEFINIDAS', spend:113.2, clicks:40, msgs:6, cpm:18.87, url:'https://www.instagram.com/p/DaLSv-gMN_o/'},
+    {name:'AD_TREINO_GLUTEO', spend:16.64, clicks:4, msgs:0, cpm:null, url:'https://www.instagram.com/p/DbJNUrIsWsK/'}
+  ],
+  8:[
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:107.75, clicks:84, msgs:15, cpm:7.18, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD_CONHEÇA_GO_HEAT', spend:65.91, clicks:47, msgs:11, cpm:5.99, url:'https://www.instagram.com/p/DYfBlOrDPtT/'}
   ]
 };
-
 // ===== HELPERS =====
 const brl = n => 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const brl0 = n => 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
