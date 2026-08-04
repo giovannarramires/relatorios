@@ -86,6 +86,8 @@
   .ptab.active[data-platform="google"]   { color: var(--google-color);   border-bottom-color: var(--google-color); }
   .ptab.active[data-platform="merchant"] { color: var(--merchant-color); border-bottom-color: var(--merchant-color); }
   .ptab.active[data-platform="search"]   { color: var(--search-color);   border-bottom-color: var(--search-color); }
+  .ptab[data-platform="validacao"]        { font-weight: 700; }
+  .ptab.active[data-platform="validacao"] { color: var(--green);          border-bottom-color: var(--green); }
 
   .month-pills { display: flex; gap: 6px; align-items: center; padding: 8px 0; }
   .month-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-right: 4px; }
@@ -311,7 +313,10 @@
 <div class="tab-nav">
   <div class="tab-nav-inner">
     <div class="platform-tabs">
-      <button class="ptab active" data-platform="meta" onclick="switchPlatform('meta')">
+      <button class="ptab active" data-platform="validacao" onclick="switchPlatform('validacao')">
+        <span class="ptab-dot"></span> ⭐ Validação de Escala de Verba
+      </button>
+      <button class="ptab" data-platform="meta" onclick="switchPlatform('meta')">
         <span class="ptab-dot"></span> Meta Ads
       </button>
       <button class="ptab" data-platform="google" onclick="switchPlatform('google')">
@@ -2218,33 +2223,33 @@
 
 
 <!-- ═══════════════════════════════════════════
-     META ADS · JUL/26
+     VALIDAÇÃO DE ESCALA DE VERBA · JUL/26 (Meta + Google)
 ═══════════════════════════════════════════ -->
-<div id="content-meta-jul26" class="tab-content active">
+<div id="content-validacao-jul26" class="tab-content active">
 
   <!-- platform bar -->
   <div style="background:#fff; border-bottom:1px solid var(--border);">
     <div style="max-width:1200px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; gap:12px;">
-      <span style="font-size:18px;">📱</span>
+      <span style="font-size:18px;">⭐</span>
       <div>
-        <div style="font-size:13px; font-weight:700; color:var(--meta-color);">Meta Ads — Julho 2026</div>
-        <div style="font-size:11px; color:var(--muted);">Conta ID 334867505168849 &nbsp;·&nbsp; Pré-pago</div>
+        <div style="font-size:13px; font-weight:700; color:var(--green);">Validação de Escala de Verba — Julho 2026</div>
+        <div style="font-size:11px; color:var(--muted);">Estudo consolidado Meta Ads + Google Ads &nbsp;·&nbsp; dados diários (Windsor.ai)</div>
       </div>
     </div>
   </div>
 
   <div class="container">
 
-    <!-- ★★★ HERÓI: MAIS VERBA = MAIS FATURAMENTO (DIA A DIA) ★★★ -->
+    <!-- ★★★ ESTUDO ★★★ -->
     <div class="section">
       <div style="background:linear-gradient(135deg,#0f3d2e,#0a5a3f); border-radius:16px; padding:26px 28px; color:#fff; box-shadow:0 8px 30px rgba(0,90,63,0.25);">
-        <div style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#7fe9c4; font-weight:700; margin-bottom:6px;">A leitura que mais importa deste relatório</div>
-        <div style="font-size:26px; font-weight:800; line-height:1.2; margin-bottom:8px;">📈 Mais verba, mais faturamento — o dia a dia de julho</div>
-        <div style="font-size:14px; color:#cfeee0; max-width:860px;">Dentro do mesmo mês: nos primeiros 21 dias rodamos com a <b style="color:#fff;">verba cheia</b> e o faturamento veio forte. Nos <b style="color:#fff;">últimos 10 dias reduzimos o investimento</b> — e o faturamento caiu na <b style="color:#fff;">mesma proporção</b>. Dia a dia, a receita seguiu a verba.</div>
+        <div style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#7fe9c4; font-weight:700; margin-bottom:6px;">Estudo do mês · Meta Ads + Google Ads somados</div>
+        <div style="font-size:26px; font-weight:800; line-height:1.2; margin-bottom:8px;">📈 Mais verba, mais faturamento — validado dia a dia em julho</div>
+        <div style="font-size:14px; color:#cfeee0; max-width:880px;">Fizemos a conta somando os <b style="color:#fff;">dois canais (Meta + Google)</b>, dia a dia. Dentro do mesmo mês: nos primeiros 21 dias rodamos com a <b style="color:#fff;">verba cheia</b> e o faturamento veio forte. Nos <b style="color:#fff;">últimos 10 dias reduzimos o investimento</b> — e o faturamento caiu na <b style="color:#fff;">mesma proporção</b>. A receita seguiu a verba, todo dia.</div>
 
         <!-- gráfico diário verba x faturamento -->
         <div style="background:rgba(255,255,255,0.96); border-radius:14px; padding:18px 20px; margin-top:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:2px;">Verba investida × Faturamento — cada dia de julho (Meta + Google)</div>
+          <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:2px;">Verba investida × Faturamento — cada dia de julho (Meta + Google somados)</div>
           <div style="font-size:11px; color:var(--muted); margin-bottom:10px;">Barras = faturamento do dia (R$ mil) · Linha vermelha = verba investida no dia (R$). As barras <b style="color:#00a374;">verdes</b> são a fase de verba cheia (dias 1–21); as <b style="color:#c07800;">âmbar</b>, a fase de recuo (dias 22–31).</div>
           <canvas id="chartDaily" height="120"></canvas>
         </div>
@@ -2288,8 +2293,61 @@
         <!-- conclusão 1:1 -->
         <div style="background:rgba(0,0,0,0.22); border-radius:14px; padding:18px 20px; margin-top:16px; border-left:4px solid #00e5b0;">
           <div style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#7fe9c4; font-weight:700; margin-bottom:6px;">A prova está no ROAS: proporção ~1 para 1</div>
-          <div style="font-size:14px; color:#eafff6; line-height:1.55;">O retorno por real ficou <b>praticamente igual nas duas fases</b> (30,9x na cheia · 31,5x no recuo). Ou seja: <b style="color:#00e5b0;">cortamos a verba pela metade e o faturamento caiu pela metade</b> — não foi sazonalidade nem eficiência, foi <b>verba</b>. Cada real a menos no fim do mês tirou ~R$ 31 de faturamento.<br><span style="display:inline-block; margin-top:10px; background:#00c897; color:#053b2a; font-weight:800; padding:6px 12px; border-radius:8px;">👉 Para agosto: manter a verba cheia o mês inteiro — sem recuo no fim.</span> <span style="color:#cfeee0;">Estimativa: rodar os 10 dias finais no ritmo dos primeiros 21 teria adicionado <b style="color:#fff;">~R$ 52 mil</b> de faturamento no mês (mesmo ROAS ~31x, com ~R$ 1,7 mil a mais de verba).</span></div>
+          <div style="font-size:14px; color:#eafff6; line-height:1.55;">O retorno por real ficou <b>praticamente igual nas duas fases</b> (30,9x na cheia · 31,5x no recuo). Ou seja: <b style="color:#00e5b0;">reduzimos a verba pela metade e o faturamento caiu pela metade</b> — não foi sazonalidade nem eficiência, foi <b>verba</b>. Cada real a menos no fim do mês tirou ~R$ 31 de faturamento.<br><span style="display:inline-block; margin-top:10px; background:#00c897; color:#053b2a; font-weight:800; padding:6px 12px; border-radius:8px;">👉 Para agosto: manter a verba cheia o mês inteiro — sem recuo no fim.</span> <span style="color:#cfeee0;">Estimativa: rodar os 10 dias finais no ritmo dos primeiros 21 teria adicionado <b style="color:#fff;">~R$ 52 mil</b> de faturamento no mês (mesmo ROAS ~31x, com ~R$ 1,7 mil a mais de verba).</span></div>
         </div>
+
+        <!-- nota metodologia -->
+        <div style="font-size:11px; color:#9fd7c4; margin-top:14px; line-height:1.5;">📋 <b>Metodologia:</b> soma diária de verba (Meta <i>Amount Spent</i> + Google <i>Cost</i>) e de faturamento atribuído (Meta <i>purchase value</i> + Google <i>conversions value</i>), 01–31/jul/2026, fonte Windsor.ai. Fase 1 = dias 01–21 (verba cheia) · Fase 2 = dias 22–31 (recuo). ROAS = faturamento ÷ verba.</div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- fim content-validacao-jul26 -->
+
+<!-- VALIDAÇÃO · JUN/26 (placeholder) -->
+<div id="content-validacao-jun26" class="tab-content">
+  <div style="background:#fff; border-bottom:1px solid var(--border);">
+    <div style="max-width:1200px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; gap:12px;">
+      <span style="font-size:18px;">⭐</span>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--green);">Validação de Escala de Verba</div>
+        <div style="font-size:11px; color:var(--muted);">Estudo Meta + Google</div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section">
+      <div style="display:flex; gap:14px; align-items:center; background:#e8faf4; border:1px solid var(--border); border-left:4px solid var(--green); border-radius:12px; padding:16px 20px;">
+        <div style="font-size:26px;">📅</div>
+        <div style="font-size:13px; color:var(--text); line-height:1.5;">O estudo de escala de verba foi feito com os dados de <b>julho/2026</b>. Selecione a pílula <b>Jul/26</b> (canto superior direito) para ver a validação dia a dia.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- fim content-validacao-jun26 -->
+
+<!-- ═══════════════════════════════════════════
+     META ADS · JUL/26
+═══════════════════════════════════════════ -->
+<div id="content-meta-jul26" class="tab-content">
+
+  <!-- platform bar -->
+  <div style="background:#fff; border-bottom:1px solid var(--border);">
+    <div style="max-width:1200px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; gap:12px;">
+      <span style="font-size:18px;">📱</span>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--meta-color);">Meta Ads — Julho 2026</div>
+        <div style="font-size:11px; color:var(--muted);">Conta ID 334867505168849 &nbsp;·&nbsp; Pré-pago</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ponteiro p/ aba de validação -->
+    <div class="section">
+      <div style="display:flex; gap:14px; align-items:center; background:#e8faf4; border:1px solid var(--border); border-left:4px solid var(--green); border-radius:12px; padding:16px 20px;">
+        <div style="font-size:26px;">⭐</div>
+        <div style="font-size:13px; color:var(--text); line-height:1.5;">A leitura que mais importa deste mês — <b>a validação de escala de verba (Meta + Google, dia a dia)</b> — está na aba <b style="color:var(--green);">⭐ Validação de Escala de Verba</b> lá em cima. Aqui embaixo segue o detalhamento só do Meta Ads.</div>
       </div>
     </div>
 
@@ -2662,7 +2720,7 @@
 
 <script>
 /* ── TAB SWITCHING ── */
-let currentPlatform = 'meta';
+let currentPlatform = 'validacao';
 let currentMonth    = 'jul26';
 
 function switchPlatform(platform) {
@@ -2685,6 +2743,7 @@ function showContent(platform, month) {
   const target = document.getElementById(`content-${platform}-${month}`);
   if (target) {
     target.classList.add('active');
+    if (platform === 'validacao' && month === 'jul26') initEscala();
     if (platform === 'meta'   && month === 'jun26') initCharts();
     if (platform === 'meta'   && month === 'jul26') initChartsJul();
     if (platform === 'google' && month === 'jun26') initChartsGoogle();
@@ -2772,13 +2831,11 @@ function initCharts() {
   });
 }
 
-/* ── META CHARTS · JULHO (canvases próprios + gráfico de elasticidade) ── */
-let chartsJulInited = false;
-function initChartsJul() {
-  if (chartsJulInited) return;
-  chartsJulInited = true;
-
-  // Verba × Faturamento dia a dia (jul/26, Meta+Google) — eixo duplo
+/* ── VALIDAÇÃO DE ESCALA DE VERBA · gráfico diário Meta+Google (eixo duplo) ── */
+let escalaInited = false;
+function initEscala() {
+  if (escalaInited) return;
+  escalaInited = true;
   const dDias   = Array.from({length:31}, (_,i)=>String(i+1).padStart(2,'0'));
   const dVerba  = [272,316,313,108,115,291,372,281,268,295,162,145,227,302,573,548,640,464,391,588,394,260,160,156,144,149,160,167,151,136,177];
   const dRecMil = [10.3,12.2,7.9,2.2,3.5,7.7,9.7,11.5,8.0,17.4,9.2,6.4,12.2,13.4,25.4,11.7,8.1,8.1,3.5,20.7,9.5,5.1,13.6,3.2,5.1,3.2,6.3,4.3,3.9,2.1,5.4];
@@ -2799,6 +2856,15 @@ function initChartsJul() {
       }
     }
   });
+}
+
+initEscala();
+
+/* ── META CHARTS · JULHO (canvases próprios) ── */
+let chartsJulInited = false;
+function initChartsJul() {
+  if (chartsJulInited) return;
+  chartsJulInited = true;
 
   new Chart(document.getElementById('chartReceitaJul'), {
     type:'bar', data:{labels:meses, datasets:[
@@ -2823,8 +2889,6 @@ function initChartsJul() {
     ]}, options:{...baseOpts, plugins:{legend:{display:true,labels:{boxWidth:12,font:{size:11}}}}, scales:{x:{grid:{display:false}},y:{grid:{color:'#f0f0f0'},ticks:{callback:v=>'R$'+v}}}}
   });
 }
-
-initChartsJul();
 
 /* ── GOOGLE ADS CHARTS ── */
 const gMeses   = ['Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26','Jul/26'];
