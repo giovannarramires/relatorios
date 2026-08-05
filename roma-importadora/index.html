@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roma Importadora — Relatório de Junho 2026 (Google + Meta)</title>
+<title>Roma Importadora — Relatório Mensal de Tráfego Pago (Google + Meta)</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
@@ -20,6 +20,14 @@
   .hero h1{font-size:31px; font-weight:800; margin-bottom:10px; letter-spacing:-.5px;}
   .hero .sub{font-size:15px; color:#ffd7de; max-width:820px;}
   .hero .meta{font-size:11px; color:#e39aa8; margin-top:18px; letter-spacing:.3px;}
+  /* seletor de mês */
+  .monthbar{position:sticky; top:0; z-index:20; background:rgba(244,246,249,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); padding:12px 0;}
+  .monthbar-inner{max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .monthbar .lab{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-right:2px;}
+  .mbtn{border:1px solid var(--border); background:#fff; color:var(--muted); font-weight:800; font-size:13.5px; padding:8px 18px; border-radius:30px; cursor:pointer; transition:all .15s; letter-spacing:.3px;}
+  .mbtn:hover{border-color:#f2a9b5; color:var(--accent);}
+  .mbtn.active{background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 3px 10px rgba(228,0,43,.28);}
+  .mpanel{display:none;} .mpanel.show{display:block;}
   .section{margin-bottom:40px;}
   .section-title{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border);}
   .section-title span{color:var(--accent);}
@@ -34,10 +42,13 @@
   .card .val{font-size:23px; font-weight:800;}
   .card .val.sm{font-size:18px;}
   .card .foot{font-size:11px; color:var(--muted); margin-top:5px;}
+  .delta{font-size:11px; font-weight:800; margin-top:4px;}
+  .delta.up{color:#00a374;} .delta.down{color:#e4002b;} .delta.flat{color:var(--muted);}
   .banner{background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:14px; padding:22px 26px; color:#fff; margin-bottom:20px;}
   .banner.rd{background:linear-gradient(135deg,#3d0010,#7a0016);}
+  .banner.gd{background:linear-gradient(135deg,#0b3d2e,#12684a);}
   .banner .k{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#9fb0c0; margin-bottom:8px; font-weight:800;}
-  .banner.rd .k{color:#ff9aab;}
+  .banner.rd .k{color:#ff9aab;} .banner.gd .k{color:#8ff0cf;}
   .banner .t{font-size:16px; font-weight:500; line-height:1.6;}
   .banner .t b{font-weight:800;}
   .tw{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; overflow-x:auto;}
@@ -85,150 +96,278 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="tag">Roma Importadora · Relatório Mensal de Tráfego Pago</div>
-    <h1>Relatório de Junho 2026 — Aquisição de Lojistas (B2B)</h1>
-    <div class="sub">Desempenho de <b>junho/2026</b> no Google Ads e Meta Ads da operação atacadista da Roma: resultados do mês, criativos, palavras-chave, jornada de conversão (landing + WhatsApp) e o novo desenho de campanhas para julho.</div>
-    <div class="meta">Contas: Google Ads 834-271-0345 · Meta Ads 2323547161498705 &nbsp;|&nbsp; Mês de referência: Junho/2026 &nbsp;|&nbsp; Emitido em 06/07/2026 · GGD</div>
+    <h1>Aquisição de Lojistas (B2B) — Google Ads + Meta Ads</h1>
+    <div class="sub">Desempenho mensal da operação atacadista da Roma no Google Ads e Meta Ads: resultados do mês, criativos, palavras-chave, jornada de conversão (landing + WhatsApp) e evolução histórica. <b>Use o seletor de mês abaixo</b> para navegar entre os meses.</div>
+    <div class="meta">Contas: Google Ads 834-271-0345 · Meta Ads 2323547161498705 &nbsp;|&nbsp; CNPJ 10.730.088/0002-31 &nbsp;|&nbsp; Atualizado em 05/08/2026 · GGD</div>
+  </div>
+</div>
+
+<!-- SELETOR DE MÊS -->
+<div class="monthbar">
+  <div class="monthbar-inner">
+    <span class="lab">Mês de referência:</span>
+    <button class="mbtn" data-month="jun" onclick="setMonth('jun')">Junho 2026</button>
+    <button class="mbtn active" data-month="jul" onclick="setMonth('jul')">Julho 2026</button>
   </div>
 </div>
 
 <div class="container">
 
-  <!-- RESUMO -->
-  <div class="section">
-    <div class="section-title">1 · Resumo Executivo <span class="monthtag">Junho 2026</span></div>
-    <div class="cards c4">
-      <div class="card red"><div class="lbl">Investimento em junho</div><div class="val">R$ 4.837</div><div class="foot">Meta R$1.918 + Google R$2.919</div></div>
-      <div class="card blue"><div class="lbl">Impressões em junho</div><div class="val">242 mil</div><div class="foot">Meta 170k + Google 72k</div></div>
-      <div class="card yellow"><div class="lbl">Cliques em junho</div><div class="val">9.537</div><div class="foot">Google 5.284 + Meta 4.253</div></div>
-      <div class="card wa"><div class="lbl">Conversas WhatsApp (Meta)</div><div class="val">723</div><div class="foot">R$ 2,65 por conversa</div></div>
+  <!-- ==================== PAINEL JUNHO ==================== -->
+  <div class="mpanel" id="panel-jun">
+
+    <div class="section">
+      <div class="section-title">1 · Resumo Executivo <span class="monthtag">Junho 2026</span></div>
+      <div class="cards c4">
+        <div class="card red"><div class="lbl">Investimento em junho</div><div class="val">R$ 4.837</div><div class="foot">Meta R$1.918 + Google R$2.919</div></div>
+        <div class="card blue"><div class="lbl">Impressões em junho</div><div class="val">242 mil</div><div class="foot">Meta 170k + Google 72k</div></div>
+        <div class="card yellow"><div class="lbl">Cliques em junho</div><div class="val">9.537</div><div class="foot">Google 5.284 + Meta 4.253</div></div>
+        <div class="card wa"><div class="lbl">Conversas WhatsApp (Meta)</div><div class="val">723</div><div class="foot">R$ 2,65 por conversa</div></div>
+      </div>
+    </div>
+
+    <!-- META JUNHO -->
+    <div class="section">
+      <div class="section-title"><span>2 · Meta Ads</span> — WhatsApp como motor de captação <span class="monthtag">Junho 2026</span></div>
+      <div class="cards c4">
+        <div class="card meta"><div class="lbl">Investimento (junho)</div><div class="val">R$ 1.918</div><div class="foot">R$1.574 nos anúncios de WhatsApp</div></div>
+        <div class="card wa"><div class="lbl">Conversas iniciadas (junho)</div><div class="val">723</div><div class="foot">via WhatsApp</div></div>
+        <div class="card green"><div class="lbl">Custo / conversa (junho)</div><div class="val">R$ 2,18</div><div class="foot">campanha de mensagem</div></div>
+        <div class="card blue"><div class="lbl">Impressões (junho)</div><div class="val sm">169.635</div><div class="foot">alcance amplo (WhatsApp + marca)</div></div>
+      </div>
+
+      <div class="tw" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Campanha (junho)</th><th>Objetivo</th><th class="r">Invest.</th><th class="r">Impressões</th><th class="r">Alcance</th><th class="r">Resultado</th></tr></thead>
+          <tbody>
+            <tr class="win"><td class="b">[GGD][MENSAGEM][WHATSAPP]</td><td>Mensagens</td><td class="r b">R$ 1.574</td><td class="r">78.558</td><td class="r">30.737</td><td class="r b">722 conversas · R$2,18</td></tr>
+            <tr><td class="b">[GGD][RECONHECIMENTO][VISITAR_IMPORTADORA]</td><td>Reconhecimento</td><td class="r">R$ 344</td><td class="r">91.077</td><td class="r">70.845</td><td class="r">Alcance de marca · 1 conversa</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="banner rd" style="margin-top:22px;">
+        <div class="k">Leitura do mês</div>
+        <div class="t">Em junho o WhatsApp foi <b>motor quase único</b>: 99% dos resultados vieram de uma só campanha, a R$2,18 por conversa. Base sólida e barata — mas concentrada. Para julho, redesenhamos o Meta como <b>funil</b> (público + evento + mensagem), para não depender de uma única campanha.</div>
+      </div>
+    </div>
+
+    <!-- CRIATIVOS JUNHO -->
+    <div class="section">
+      <div class="section-title"><span>2.1 · Criativos que rodaram em Junho</span> — resultado por anúncio <span class="monthtag">Junho 2026</span></div>
+      <div class="cards c4">
+        <div class="card meta"><div class="lbl">Investimento (Meta, jun)</div><div class="val sm">R$ 1.918</div><div class="foot">R$1.574 nos anúncios de WhatsApp</div></div>
+        <div class="card wa"><div class="lbl">Conversas em junho</div><div class="val">723</div><div class="foot">R$ 2,65 por conversa</div></div>
+        <div class="card green"><div class="lbl">Criativo campeão (custo)</div><div class="val sm">Volta às Aulas</div><div class="foot">269 conversas a R$1,90</div></div>
+        <div class="card yellow"><div class="lbl">Criativo campeão (engajamento)</div><div class="val sm">Caixas Organizadoras</div><div class="foot">CTR 7,49% · 261 conversas</div></div>
+      </div>
+
+      <div class="tw" style="margin-top:14px;">
+        <table>
+          <thead><tr><th>Criativo (anúncio)</th><th>Objetivo</th><th class="r">Impr.</th><th class="r">Alcance</th><th class="r">CTR</th><th class="r">Invest.</th><th class="r">Conversas</th><th class="r">Custo/conversa</th><th>Desempenho</th></tr></thead>
+          <tbody>
+            <tr class="win"><td><span class="adname">AD_VOLTA_AS_AULAS</span><a class="vlink" href="https://www.instagram.com/p/DZcxcxCAM0c/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">23.893</td><td class="r">11.420</td><td class="r">5,01%</td><td class="r">R$ 512</td><td class="r b">269</td><td class="r b">R$ 1,90</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr class="win"><td><span class="adname">AD_CAIXAS_ORGANIZADORAS</span><a class="vlink" href="https://www.instagram.com/p/DZcxlQyAKCQ/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">24.931</td><td class="r">15.243</td><td class="r b">7,49%</td><td class="r">R$ 516</td><td class="r b">261</td><td class="r">R$ 1,98</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr><td><span class="adname">AD_COPA_DO_MUNDO</span><a class="vlink" href="https://facebook.com/p/113411841268296_999269682751479" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">26.512</td><td class="r">13.476</td><td class="r">3,75%</td><td class="r">R$ 479</td><td class="r">178</td><td class="r">R$ 2,69</td><td><span class="badge bg-mid">Manter</span></td></tr>
+            <tr><td><span class="adname">AD_PALHA_INDIANA</span></td><td>Mensagem/WhatsApp</td><td class="r">2.017</td><td class="r">1.610</td><td class="r">3,32%</td><td class="r">R$ 48</td><td class="r">10</td><td class="r">R$ 4,81</td><td><span class="badge bg-mid">Baixo alcance</span></td></tr>
+            <tr><td><span class="adname">MIX_ADS</span><a class="vlink" href="https://www.instagram.com/p/DYXQcg4AD_Y/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Reconhecimento (alcance)</td><td class="r">91.077</td><td class="r">71.032</td><td class="r">0,07%</td><td class="r">R$ 344</td><td class="r">1</td><td class="r">—</td><td><span class="badge bg-mid">Só marca</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>O que junho ensina:</b> criativos de <b>produto com apelo sazonal</b> (Volta às Aulas e Caixas Organizadoras) foram os melhores — CTR alto e conversa abaixo de R$2. Os 3 principais responderam por <b>708 das 723 conversas do mês</b>. O anúncio de reconhecimento (MIX_ADS) entrega alcance de marca (71 mil pessoas), mas não gera conversa — é branding, não captação.</div>
+    </div>
+
+    <!-- GOOGLE JUNHO -->
+    <div class="section">
+      <div class="section-title"><span>3 · Google Ads</span> — Search de alta intenção <span class="monthtag">Junho 2026</span></div>
+      <div class="cards c4">
+        <div class="card google"><div class="lbl">Investimento (junho)</div><div class="val sm">R$ 2.919</div><div class="foot">100% Search</div></div>
+        <div class="card wa"><div class="lbl">Contatos reais (junho)</div><div class="val">56</div><div class="foot">54 ligações + 2 conversas</div></div>
+        <div class="card yellow"><div class="lbl">CPA por contato real</div><div class="val sm">R$ 52,13</div><div class="foot">R$2.919 ÷ 56</div></div>
+        <div class="card blue"><div class="lbl">Cliques · CTR</div><div class="val sm">5.284 · 7,3%</div><div class="foot">CPC R$0,55</div></div>
+      </div>
+
+      <div class="tw" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Campanha (Search, junho)</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">CTR</th><th class="r">Invest.</th><th>Veredito</th></tr></thead>
+          <tbody>
+            <tr class="win"><td class="b">[GGD][SEARC][INSTITUCIONAL]</td><td class="r">43.094</td><td class="r">3.746</td><td class="r b">8,69%</td><td class="r">R$ 1.725</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr class="lose"><td class="b">[GGD][SEARCH][B2B-SUDESTE]</td><td class="r">12.615</td><td class="r">841</td><td class="r">6,67%</td><td class="r">R$ 630</td><td><span class="badge bg-lose">Otimizar keywords</span></td></tr>
+            <tr class="lose"><td class="b">[GGD][SEARCH][PALHA_INDIANA]</td><td class="r">16.488</td><td class="r">697</td><td class="r">4,23%</td><td class="r">R$ 564</td><td><span class="badge bg-lose">Rever / pausar</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:10px;"><b>Metodologia de conversão:</b> a conta reportava 131 "conversões", mas metade era <b>visualização de página</b> (GA4). Consideramos como <b>contato real</b> apenas <b>ligações + conversas iniciadas = 56</b>. Em 15/07 corrigimos a conta (visualizações rebaixadas a secundárias) para o otimizador do Google mirar contato de verdade — efeito visível em julho.</div>
     </div>
   </div>
+  <!-- ==================== FIM PAINEL JUNHO ==================== -->
 
-  <!-- META -->
-  <div class="section">
-    <div class="section-title"><span>2 · Meta Ads</span> — WhatsApp como motor de captação <span class="monthtag">Junho 2026</span></div>
-    <div class="cards c4">
-      <div class="card meta"><div class="lbl">Investimento (junho)</div><div class="val">R$ 1.918</div><div class="foot">R$1.574 nos anúncios de WhatsApp</div></div>
-      <div class="card wa"><div class="lbl">Conversas iniciadas (junho)</div><div class="val">723</div><div class="foot">via WhatsApp</div></div>
-      <div class="card green"><div class="lbl">Custo / conversa (junho)</div><div class="val">R$ 2,65</div><div class="foot">R$2,18 só no WhatsApp</div></div>
-      <div class="card blue"><div class="lbl">Impressões (junho)</div><div class="val sm">169.635</div><div class="foot">alcance amplo (WhatsApp + marca)</div></div>
+
+  <!-- ==================== PAINEL JULHO ==================== -->
+  <div class="mpanel show" id="panel-jul">
+
+    <div class="section">
+      <div class="section-title">1 · Resumo Executivo <span class="monthtag">Julho 2026</span></div>
+      <div class="cards c4">
+        <div class="card red"><div class="lbl">Investimento em julho</div><div class="val">R$ 4.180</div><div class="foot">Meta R$1.596 + Google R$2.583</div><div class="delta down">▼ R$657 vs junho</div></div>
+        <div class="card blue"><div class="lbl">Impressões em julho</div><div class="val">761 mil</div><div class="foot">Meta 689k + Google 72k</div><div class="delta up">▲ +215% (evento físico)</div></div>
+        <div class="card google"><div class="lbl">Contatos reais Google</div><div class="val">92</div><div class="foot">84 ligações + 8 conversas</div><div class="delta up">▲ de 56 em junho</div></div>
+        <div class="card yellow"><div class="lbl">CPA real (Google)</div><div class="val">R$ 28,08</div><div class="foot">R$2.583 ÷ 92</div><div class="delta up">▼ de R$52,13 em junho</div></div>
+      </div>
+      <div class="banner gd" style="margin-top:18px;">
+        <div class="k">✔ O mês em uma frase</div>
+        <div class="t">Julho foi um mês de <b>construir base e amadurecer a conta</b>: o <b>Google virou o motor de contatos qualificados</b> — 92 contatos reais (vs 56) a <b>quase metade do custo</b> (R$28 vs R$52) e gastando menos. No Meta, redistribuímos a verba para o <b>evento físico (Importadora Aberta, 280 mil pessoas alcançadas)</b> e para <b>campanhas de seguidores</b>, ampliando a audiência que vira comprador nos próximos meses.</div>
+      </div>
     </div>
 
+    <!-- META JULHO -->
+    <div class="section">
+      <div class="section-title"><span>2 · Meta Ads</span> — de motor único a funil de captação <span class="monthtag">Julho 2026</span></div>
+      <div class="cards c4">
+        <div class="card meta"><div class="lbl">Investimento (julho)</div><div class="val">R$ 1.596</div><div class="foot">77% em base · 23% em conversa</div></div>
+        <div class="card blue"><div class="lbl">Alcance do evento físico</div><div class="val sm">280.216</div><div class="foot">Importadora Aberta · 11/jul</div></div>
+        <div class="card wa"><div class="lbl">Custo / conversa</div><div class="val">R$ 2,08</div><div class="foot">campanha de mensagem (175 conversas)</div></div>
+        <div class="card green"><div class="lbl">Custo por seguidor</div><div class="val sm">≈ R$ 0,29</div><div class="foot">campanhas dedicadas de seguidores</div></div>
+      </div>
+
+      <div class="banner" style="margin-top:16px;">
+        <div class="k">Como a verba do Meta foi distribuída em julho</div>
+        <div class="t">Diferente de junho (quase tudo em conversa), julho investiu em <b>construção de audiência</b>: <b>R$670 no evento físico</b> (280k de alcance), <b>R$196 em seguidores</b> (CTR 9–11%), <b>R$366 em reconhecimento/remarketing/lives</b> e <b>R$364 na campanha de conversa</b>. Ou seja, <b>77% foi para encher o topo do funil</b> e só 23% para conversa direta — por isso o volume de conversas caiu no mês, mas o <b>motor de conversa ficou ainda mais eficiente</b> (R$2,08 vs R$2,18 em junho).</div>
+      </div>
+
+      <div class="tw" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Campanha (julho)</th><th>Objetivo</th><th class="r">Invest.</th><th class="r">Impressões</th><th class="r">Alcance</th><th class="r">Resultado</th></tr></thead>
+          <tbody>
+            <tr class="win"><td class="b">[GGD][MENSAGEM][WHATSAPP]</td><td>Mensagens</td><td class="r b">R$ 365</td><td class="r">20.100</td><td class="r">12.816</td><td class="r b">175 conversas · R$2,08</td></tr>
+            <tr><td class="b">[GGD][ALCANCE][IMPORTADORA_ABERTA][11_JUL]</td><td>Evento físico</td><td class="r">R$ 670</td><td class="r">488.249</td><td class="r">280.216</td><td class="r">Alcance de marca · evento</td></tr>
+            <tr class="win"><td class="b">[GGD][SEGUIDORES] (3 campanhas)</td><td>Seguidores</td><td class="r">R$ 196</td><td class="r">19.245</td><td class="r">14.708</td><td class="r">CTR 9–11% · ≈R$0,29/seg.</td></tr>
+            <tr><td class="b">[GGD][RECONHECIMENTO][VISITAR_IMPORTADORA]</td><td>Reconhecimento</td><td class="r">R$ 227</td><td class="r">62.772</td><td class="r">42.055</td><td class="r">Alcance de marca</td></tr>
+            <tr><td class="b">[GGD][RECONHECIMENTO][RMKT]</td><td>Remarketing</td><td class="r">R$ 60</td><td class="r">41.319</td><td class="r">31.917</td><td class="r">5 conversas · relembrar produto</td></tr>
+            <tr><td class="b">[GGD][LIVES][LEMBRETES]</td><td>Lembrete de live</td><td class="r">R$ 79</td><td class="r">57.517</td><td class="r">43.700</td><td class="r">2 conversas · avisos de live</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="funnel" style="margin-top:16px;">
+        <div class="fstep"><div class="bar" style="background:#0866FF;width:100%;">1 · Seguidores + Evento</div><div class="desc">Atrair o <b>maior número de público</b> para o perfil e para a loja física — enche o topo do funil.</div></div>
+        <div class="fstep"><div class="bar" style="background:#7a0016;width:66%;">2 · Reconhecimento + Lives</div><div class="desc">Nutre quem chegou com conteúdo e lembretes — <b>aquece antes de vender</b>.</div></div>
+        <div class="fstep"><div class="bar" style="background:#25D366;width:40%;">3 · Mensagem (WhatsApp)</div><div class="desc">A conversa vem como <b>consequência</b> do público aquecido — a R$2,08, mais barata que em junho.</div></div>
+      </div>
+      <div class="banner rd" style="margin-top:14px;">
+        <div class="k">⚠ Ponto de atenção — o que ajustamos para agosto</div>
+        <div class="t">Com o evento já entregue, a base foi construída, mas as <b>conversas diárias caíram</b> enquanto a verba estava no evento. Para agosto, o plano é <b>religar a campanha de conversa em paralelo</b> — aproveitando a audiência e os seguidores que julho acumulou — para <b>somar</b> volume de WhatsApp ao ganho do Google, e não trocar um pelo outro.</div>
+      </div>
+    </div>
+
+    <!-- CRIATIVOS JULHO -->
+    <div class="section">
+      <div class="section-title"><span>2.1 · Criativos que rodaram em Julho</span> — resultado por anúncio <span class="monthtag">Julho 2026</span></div>
+      <div class="cards c4">
+        <div class="card meta"><div class="lbl">Investimento (Meta, jul)</div><div class="val sm">R$ 1.596</div><div class="foot">conversa + base</div></div>
+        <div class="card wa"><div class="lbl">Conversas (mensagem)</div><div class="val">175</div><div class="foot">R$ 2,08 por conversa</div></div>
+        <div class="card green"><div class="lbl">Campeão de custo</div><div class="val sm">MIX de Julho</div><div class="foot">48 conversas a R$1,33</div></div>
+        <div class="card yellow"><div class="lbl">Campeão de engajamento</div><div class="val sm">Pingentes de Conchas</div><div class="foot">CTR 11,28% (seguidores)</div></div>
+      </div>
+
+      <div class="tw" style="margin-top:14px;">
+        <table>
+          <thead><tr><th>Criativo (anúncio)</th><th>Objetivo</th><th class="r">Impr.</th><th class="r">Alcance</th><th class="r">CTR</th><th class="r">Invest.</th><th class="r">Conversas</th><th class="r">Custo/conversa</th><th>Desempenho</th></tr></thead>
+          <tbody>
+            <tr class="win"><td><span class="adname">AD_CAIXAS_ORGANIZADORAS</span><a class="vlink" href="https://www.instagram.com/p/DblPMMeA3TO/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">9.751</td><td class="r">7.226</td><td class="r b">7,48%</td><td class="r">R$ 184</td><td class="r b">109</td><td class="r">R$ 1,68</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr class="win"><td><span class="adname">AD_MIX_JULHO</span><a class="vlink" href="https://www.instagram.com/p/DbDgPmOANNc/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">3.949</td><td class="r">3.284</td><td class="r">5,34%</td><td class="r">R$ 64</td><td class="r b">48</td><td class="r b">R$ 1,33</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr><td><span class="adname">AD_PALHA_INDIANA</span><a class="vlink" href="https://www.instagram.com/p/DZcxi_GgC74/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">4.460</td><td class="r">3.299</td><td class="r">2,76%</td><td class="r">R$ 84</td><td class="r">13</td><td class="r">R$ 6,45</td><td><span class="badge bg-mid">Rever</span></td></tr>
+            <tr><td><span class="adname">AD_COPA_DO_MUNDO</span></td><td>Mensagem/WhatsApp</td><td class="r">1.903</td><td class="r">1.580</td><td class="r">2,26%</td><td class="r">R$ 33</td><td class="r">4</td><td class="r">R$ 8,18</td><td><span class="badge bg-mid">Cansado</span></td></tr>
+            <tr class="win"><td><span class="adname">SEGUIDORES — Pingentes de Conchas</span><a class="vlink" href="https://www.instagram.com/p/DaT-mpLAJta/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Seguidores</td><td class="r">8.546</td><td class="r">6.537</td><td class="r b">11,28%</td><td class="r">R$ 80</td><td class="r">6</td><td class="r">≈R$0,29/seg.</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr class="win"><td><span class="adname">SEGUIDORES — Já temos estoque</span><a class="vlink" href="https://www.instagram.com/p/DaT-zwkAp5_/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Seguidores</td><td class="r">8.150</td><td class="r">5.973</td><td class="r">9,98%</td><td class="r">R$ 80</td><td class="r">6</td><td class="r">≈R$0,29/seg.</td><td><span class="badge bg-win">Escalar</span></td></tr>
+            <tr><td><span class="adname">IMPORTADORA_ABERTA (evento)</span><a class="vlink" href="https://www.instagram.com/p/DaT-RC1AVN3/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Evento físico</td><td class="r">488.249</td><td class="r">280.216</td><td class="r">0,10%</td><td class="r">R$ 670</td><td class="r">—</td><td class="r">—</td><td><span class="badge bg-mid">Marca/evento</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>O que julho ensina:</b> na conversa, os criativos de <b>produto</b> seguem imbatíveis — <b>Caixas Organizadoras</b> (109 conversas a R$1,68) e o <b>MIX de Julho</b> (48 a R$1,33) puxaram quase tudo, mais baratos que em junho. Os criativos de <b>seguidores</b> têm CTR altíssimo (9–11%) e captam seguidor a ~R$0,29 — abastecem o topo do funil. Copa do Mundo e Palha Indiana cansaram (custo alto) e serão substituídos.</div>
+    </div>
+
+    <!-- GOOGLE JULHO -->
+    <div class="section">
+      <div class="section-title"><span>3 · Google Ads</span> — o motor de contatos qualificados <span class="monthtag">Julho 2026</span></div>
+      <div class="cards c4">
+        <div class="card google"><div class="lbl">Investimento (julho)</div><div class="val sm">R$ 2.583</div><div class="foot">100% Search · ▼ vs R$2.919</div></div>
+        <div class="card wa"><div class="lbl">Contatos reais (julho)</div><div class="val">92</div><div class="foot">84 ligações + 8 conversas</div></div>
+        <div class="card green"><div class="lbl">CPA por contato real</div><div class="val sm">R$ 28,08</div><div class="foot">▼ 46% vs R$52,13 em junho</div></div>
+        <div class="card yellow"><div class="lbl">Cliques · CTR</div><div class="val sm">6.345 · 8,8%</div><div class="foot">CPC R$0,41</div></div>
+      </div>
+
+      <div class="banner gd" style="margin-top:16px;">
+        <div class="k">Por que o Google melhorou tanto</div>
+        <div class="t">As correções de 15/07 pagaram: <b>rebaixamos as "visualizações de página"</b> (que inflavam a conversão) para o otimizador mirar contato real, <b>negativamos termos que só gastavam</b> e <b>reforçamos extensões + WhatsApp nativo</b>. Resultado: <b>84 ligações</b> (vs 54) e <b>8 conversas</b> (vs 2) — mais que o dobro de contato real, por menos dinheiro. A <b>B2B-Sudeste</b>, a campanha de prospecção de lojista novo, foi a que mais cresceu.</div>
+      </div>
+
+      <div class="tw" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Campanha (Search, julho)</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">CTR</th><th class="r">Invest.</th><th>Veredito</th></tr></thead>
+          <tbody>
+            <tr class="win"><td class="b">[GGD][SEARC][INSTITUCIONAL]</td><td class="r">38.019</td><td class="r">3.683</td><td class="r b">9,69%</td><td class="r">R$ 1.407</td><td><span class="badge bg-win">Manter</span></td></tr>
+            <tr class="win"><td class="b">[GGD][SEARCH][B2B-SUDESTE]</td><td class="r">34.205</td><td class="r">2.662</td><td class="r">7,78%</td><td class="r">R$ 1.176</td><td><span class="badge bg-win">Escalou · manter</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:8px;">A campanha <b>PALHA_INDIANA foi pausada</b> (custava R$364 por contato). A verba concentrou nas duas que trazem lojista de verdade.</div>
+
+      <div class="grid2" style="margin-top:18px;">
+        <div class="box">
+          <h4>🏆 Palavras-chave que convertem (julho)</h4>
+          <div class="tw" style="border:none;">
+            <table>
+              <thead><tr><th>Termo</th><th class="r">Invest.</th><th class="r">Contatos</th></tr></thead>
+              <tbody>
+                <tr class="win"><td>fornecedor armarinho</td><td class="r">R$647</td><td class="r b">41</td></tr>
+                <tr class="win"><td>fornecedor de aviamentos</td><td class="r">R$902</td><td class="r b">29</td></tr>
+                <tr class="win"><td>aviamentos atacado brás</td><td class="r">R$191</td><td class="r">11</td></tr>
+                <tr class="win"><td>Roma Importadora (marca)</td><td class="r">R$19</td><td class="r">9</td></tr>
+                <tr class="win"><td>comprar no atacado</td><td class="r">R$238</td><td class="r">5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note">"Fornecedor armarinho" e "fornecedor de aviamentos" são o <b>coração da conta</b> — 70 dos contatos do mês. Termo de marca converte quase de graça.</div>
+        </div>
+        <div class="box">
+          <h4>🔴 Termos que ainda consomem verba (julho)</h4>
+          <div class="tw" style="border:none;">
+            <table>
+              <thead><tr><th>Termo</th><th class="r">Invest.</th><th class="r">Contatos</th></tr></thead>
+              <tbody>
+                <tr class="lose"><td>produtos para revenda</td><td class="r">R$103</td><td class="r">0</td></tr>
+                <tr class="lose"><td>distribuidora atacado</td><td class="r">R$70</td><td class="r">0</td></tr>
+                <tr class="lose"><td>comprar aviamentos no atacado</td><td class="r">R$56</td><td class="r">0</td></tr>
+                <tr class="lose"><td>armarinho atacado (genérico)</td><td class="r">R$35</td><td class="r">0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note">Termos amplos e de baixa intenção, ~<b>R$264</b> sem contato. Parte já foi negativada em 15/07; o restante é o próximo alvo — verba que migra para os termos de "fornecedor".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== FIM PAINEL JULHO ==================== -->
+
+
+  <!-- ==================== EVERGREEN: EVOLUÇÃO, JORNADA, ESTUDO ==================== -->
+
+  <!-- EVOLUÇÃO MENSAL -->
+  <div class="section">
+    <div class="section-title"><span>4 · Evolução Mensal</span> — a trajetória da conta (março → julho)</div>
     <div class="chart-box">
-      <h4>Evolução mensal — Conversas de WhatsApp vs Custo por conversa (histórico mar–jun)</h4>
-      <div class="chart-wrap"><canvas id="chMeta"></canvas></div>
-      <div class="note">Captação crescente e barata de março a junho: o volume subiu de 605 para 723 conversas/mês mantendo o custo por conversa em torno de R$2.</div>
+      <h4>Conversas de WhatsApp (Meta) · Contatos reais (Google) · Custo por conversa</h4>
+      <div class="chart-wrap"><canvas id="chEvol"></canvas></div>
+      <div class="note">De março a junho, o Meta cresceu como motor de conversas baratas (~R$2). Em <b>julho</b>, a verba do Meta migrou para o <b>evento físico e para seguidores</b> (por isso a barra de conversas cai), enquanto o <b>Google mais que dobrou os contatos reais</b> (linha verde: 56 → 92) a metade do custo. A leitura conjunta: a base foi ampliada e o canal de alta intenção (Google) assumiu o volume qualificado.</div>
     </div>
-
-    <div class="tw" style="margin-top:16px;">
-      <table>
-        <thead><tr><th>Campanha (junho)</th><th>Objetivo</th><th class="r">Invest.</th><th class="r">Impressões</th><th class="r">Alcance</th><th class="r">Resultado</th></tr></thead>
-        <tbody>
-          <tr class="win"><td class="b">[GGD][MENSAGEM][WHATSAPP]</td><td>Mensagens</td><td class="r b">R$ 1.574</td><td class="r">78.558</td><td class="r">30.737</td><td class="r b">722 conversas · R$2,18</td></tr>
-          <tr><td class="b">[GGD][RECONHECIMENTO][VISITAR_IMPORTADORA]</td><td>Reconhecimento</td><td class="r">R$ 344</td><td class="r">91.077</td><td class="r">70.845</td><td class="r">Alcance de marca · 1 conversa</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="banner" style="margin-top:22px;">
-      <div class="k">✔ Ações tomadas — novo desenho da conta para julho</div>
-      <div class="t">Em junho o WhatsApp foi <b>motor quase único</b> (99% dos resultados em uma só campanha). Para julho, reestruturamos o Meta como um <b>funil de 3 estágios</b>: construir público primeiro e transformar a mensagem em <b>consequência</b> do funil, e não no ponto de partida.</div>
-    </div>
-    <div class="funnel" style="margin-top:12px;">
-      <div class="fstep"><div class="bar" style="background:#0866FF;width:100%;">1 · Campanha de Seguidores</div><div class="desc">Atrair o <b>maior número de público</b> para o perfil — enche o topo do funil.</div></div>
-      <div class="fstep"><div class="bar" style="background:#7a0016;width:72%;">2 · Campanha de Distribuição</div><div class="desc">Alimenta e nutre quem chega no perfil com conteúdo — <b>aquece antes de vender</b>.</div></div>
-      <div class="fstep"><div class="bar" style="background:#25D366;width:46%;">3 · Campanha de Mensagem</div><div class="desc">A conversa vem como <b>consequência</b> do público aquecido — não como grande motor.</div></div>
-    </div>
-    <div class="banner rd" style="margin-top:14px;">
-      <div class="k">⚠ Ponto de cuidado e atenção</div>
-      <div class="t">O novo desenho exige acompanhamento próximo: medir a <b>qualidade do lead/contato</b> e manter a <b>conversão controlada</b> mês a mês, para entender se cada campanha está <b>fazendo sentido ou não</b>. Sem essa leitura, o funil pode gerar volume de público sem qualidade — por isso julho terá respostas e atualização de qualidade e conversão, não só de volume.</div>
-    </div>
-  </div>
-
-  <!-- CRIATIVOS JUNHO -->
-  <div class="section">
-    <div class="section-title"><span>2.1 · Criativos que rodaram em Junho</span> — resultado por anúncio <span class="monthtag">Junho 2026</span></div>
-    <div class="cards c4">
-      <div class="card meta"><div class="lbl">Investimento (Meta, jun)</div><div class="val sm">R$ 1.918</div><div class="foot">R$1.574 nos anúncios de WhatsApp</div></div>
-      <div class="card wa"><div class="lbl">Conversas em junho</div><div class="val">723</div><div class="foot">R$ 2,65 por conversa</div></div>
-      <div class="card green"><div class="lbl">Criativo campeão (custo)</div><div class="val sm">Volta às Aulas</div><div class="foot">269 conversas a R$1,90</div></div>
-      <div class="card yellow"><div class="lbl">Criativo campeão (engajamento)</div><div class="val sm">Caixas Organizadoras</div><div class="foot">CTR 7,49% · 261 conversas</div></div>
-    </div>
-
-    <div class="tw" style="margin-top:14px;">
-      <table>
-        <thead><tr><th>Criativo (anúncio)</th><th>Objetivo</th><th class="r">Impr.</th><th class="r">Alcance</th><th class="r">CTR</th><th class="r">Invest.</th><th class="r">Conversas</th><th class="r">Custo/conversa</th><th>Desempenho</th></tr></thead>
-        <tbody>
-          <tr class="win"><td><span class="adname">AD_VOLTA_AS_AULAS</span><a class="vlink" href="https://www.instagram.com/p/DZcxcxCAM0c/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">23.893</td><td class="r">11.420</td><td class="r">5,01%</td><td class="r">R$ 512</td><td class="r b">269</td><td class="r b">R$ 1,90</td><td><span class="badge bg-win">Escalar</span></td></tr>
-          <tr class="win"><td><span class="adname">AD_CAIXAS_ORGANIZADORAS</span><a class="vlink" href="https://www.instagram.com/p/DZcxlQyAKCQ/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">24.931</td><td class="r">15.243</td><td class="r b">7,49%</td><td class="r">R$ 516</td><td class="r b">261</td><td class="r">R$ 1,98</td><td><span class="badge bg-win">Escalar</span></td></tr>
-          <tr><td><span class="adname">AD_COPA_DO_MUNDO</span><a class="vlink" href="https://facebook.com/p/113411841268296_999269682751479" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Mensagem/WhatsApp</td><td class="r">26.512</td><td class="r">13.476</td><td class="r">3,75%</td><td class="r">R$ 479</td><td class="r">178</td><td class="r">R$ 2,69</td><td><span class="badge bg-mid">Manter</span></td></tr>
-          <tr><td><span class="adname">AD_PALHA_INDIANA</span></td><td>Mensagem/WhatsApp</td><td class="r">2.017</td><td class="r">1.610</td><td class="r">3,32%</td><td class="r">R$ 48</td><td class="r">10</td><td class="r">R$ 4,81</td><td><span class="badge bg-mid">Baixo alcance</span></td></tr>
-          <tr><td><span class="adname">AD_MIX</span></td><td>Mensagem/WhatsApp</td><td class="r">1.205</td><td class="r">1.090</td><td class="r">3,32%</td><td class="r">R$ 19</td><td class="r">4</td><td class="r">R$ 4,71</td><td><span class="badge bg-mid">Baixo alcance</span></td></tr>
-          <tr><td><span class="adname">MIX_ADS</span><a class="vlink" href="https://www.instagram.com/p/DYXQcg4AD_Y/" target="_blank" rel="noopener">🔗 ver criativo</a></td><td>Reconhecimento (alcance)</td><td class="r">91.077</td><td class="r">71.032</td><td class="r">0,07%</td><td class="r">R$ 344</td><td class="r">1</td><td class="r">—</td><td><span class="badge bg-mid">Só marca</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note"><b>Clique em "ver criativo"</b> para abrir o anúncio publicado no Instagram/Facebook. <b>O que junho ensina:</b> os criativos de <b>produto com apelo sazonal</b> (Volta às Aulas e Caixas Organizadoras) foram os melhores — CTR alto e conversa abaixo de R$2. O de <b>Copa do Mundo</b> gerou volume mas com CTR/custo pior. Os 3 principais responderam por <b>708 das 723 conversas do mês</b>. Recomendação: manter Volta às Aulas e Caixas Organizadoras no ar com mais verba e produzir novos criativos de produto na mesma linha. O anúncio de reconhecimento (MIX_ADS) entrega alcance de marca (71 mil pessoas), mas não gera conversa — é branding, não captação.</div>
-  </div>
-
-  <!-- GOOGLE -->
-  <div class="section">
-    <div class="section-title"><span>3 · Google Ads</span> — Search de alta intenção <span class="monthtag">Junho 2026</span></div>
-    <div class="cards c3">
-      <div class="card google"><div class="lbl">Investimento (junho)</div><div class="val sm">R$ 2.919</div><div class="foot">100% Search</div></div>
-      <div class="card blue"><div class="lbl">Impressões (junho)</div><div class="val sm">72.197</div><div class="foot">Search</div></div>
-      <div class="card yellow"><div class="lbl">Cliques · CTR</div><div class="val sm">5.284 · 7,3%</div><div class="foot">CPC R$0,55</div></div>
-    </div>
-
-    <div class="tw" style="margin-top:16px;">
-      <table>
-        <thead><tr><th>Campanha (Search, junho)</th><th class="r">Impr.</th><th class="r">Cliques</th><th class="r">CTR</th><th class="r">Invest.</th><th>Veredito</th></tr></thead>
-        <tbody>
-          <tr class="win"><td class="b">[GGD][SEARC][INSTITUCIONAL]</td><td class="r">43.094</td><td class="r">3.746</td><td class="r b">8,69%</td><td class="r">R$ 1.725</td><td><span class="badge bg-win">Escalar</span></td></tr>
-          <tr class="lose"><td class="b">[GGD][SEARCH][B2B-SUDESTE]</td><td class="r">12.615</td><td class="r">841</td><td class="r">6,67%</td><td class="r">R$ 630</td><td><span class="badge bg-lose">Otimizar keywords</span></td></tr>
-          <tr class="lose"><td class="b">[GGD][SEARCH][PALHA_INDIANA]</td><td class="r">16.488</td><td class="r">697</td><td class="r">4,23%</td><td class="r">R$ 564</td><td><span class="badge bg-lose">Rever / pausar</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="grid2" style="margin-top:18px;">
-      <div class="box">
-        <h4>🏆 Palavras-chave que puxam o tráfego (junho)</h4>
-        <div class="tw" style="border:none;">
-          <table>
-            <thead><tr><th>Termo</th><th class="r">Invest.</th></tr></thead>
-            <tbody>
-              <tr class="win"><td>fornecedor de aviamentos</td><td class="r b">R$838</td></tr>
-              <tr class="win"><td>fornecedor armarinho</td><td class="r">R$96</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="note">"Fornecedor de aviamentos" é o termo de <b>maior intenção de compra</b> e o que mais concentra investimento (CTR 9,8%). É o coração da conta.</div>
-      </div>
-      <div class="box">
-        <h4>🔴 Termos genéricos que consomem verba (junho)</h4>
-        <div class="tw" style="border:none;">
-          <table>
-            <thead><tr><th>Termo</th><th class="r">Invest.</th></tr></thead>
-            <tbody>
-              <tr class="lose"><td>comprar no atacado</td><td class="r">R$141</td></tr>
-              <tr class="lose"><td>produtos para revenda</td><td class="r">R$60</td></tr>
-              <tr class="lose"><td>distribuidora atacado</td><td class="r">R$40</td></tr>
-              <tr class="lose"><td>+ palha indiana (campanha)</td><td class="r">R$564</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="note">Em junho, a campanha PALHA_INDIANA e os termos genéricos do B2B somaram ~<b>R$805</b> — palavras amplas e de <b>baixa intenção</b>. Verba que pode migrar para os termos de "fornecedor", que trazem o lojista certo.</div>
-      </div>
-    </div>
-    <div class="note" style="margin-top:12px;"><b>Nuance de qualidade:</b> o contato do Google vem de quem <b>busca ativamente</b> "fornecedor de aviamentos" (intenção de compra alta = lojista de verdade), enquanto o do Meta vem de interrupção (mais volume, intenção menor). Os dois se complementam — não dá para julgar só pelo volume.</div>
   </div>
 
   <!-- FUNIL / LANDING -->
   <div class="section">
-    <div class="section-title"><span>4 · Jornada de Conversão</span> — Landing page e o "formulário"</div>
+    <div class="section-title"><span>5 · Jornada de Conversão</span> — Landing page e o "formulário"</div>
     <div class="funnel" style="margin-bottom:16px;">
-      <div class="fstep"><div class="bar" style="width:100%;background:#4a90d9;">Anúncio (Google Search + Meta) — 242 mil impressões em junho</div></div>
+      <div class="fstep"><div class="bar" style="width:100%;background:#4a90d9;">Anúncio (Google Search + Meta)</div></div>
       <div class="fstep"><div class="bar" style="width:70%;background:#5b7fb0;">Clique → landing <b style="margin:0 4px;">romaimportadora.com.br/qlfleads</b></div><div class="desc">a maior parte dos cliques do Google cai aqui</div></div>
       <div class="fstep"><div class="bar" style="width:45%;background:var(--wa);">Botão "Fale no WhatsApp Agora"</div><div class="desc">Único caminho de conversão</div></div>
       <div class="fstep"><div class="bar" style="width:28%;background:#128C7E;">Conversa no WhatsApp → time comercial qualifica na mão</div></div>
@@ -259,15 +398,15 @@
         </div>
       </div>
     </div>
-    <div class="note" style="margin-top:10px;">Observação de design: o topo usa foto da fachada (portão fechado, imagem escura) atrás do texto branco, o que reduz leitura e o ar "premium" que o discurso promete. Melhorar a página também ajuda o Ad Rank no Google.</div>
+    <div class="note" style="margin-top:10px;">Melhorar a página também eleva o Ad Rank no Google: hoje todo o tráfego cai na mesma página genérica, o que segura o Índice de Qualidade e encarece o clique.</div>
   </div>
 
   <!-- ESTUDO B2B -->
   <div class="section">
-    <div class="section-title"><span>4.1 · Estudo B2B</span> — Como facilitar a compra e vender mais no atacado <span class="monthtag">Análise de concorrência</span></div>
+    <div class="section-title"><span>6 · Estudo B2B</span> — Como facilitar a compra e vender mais no atacado <span class="monthtag">Análise de concorrência</span></div>
     <div class="banner rd">
       <div class="k">Por que isso entra no relatório</div>
-      <div class="t">Além do tráfego, mapeamos <b>como o lojista compra</b> — comparando o processo da Roma com <b>5 concorrentes diretos</b> do atacado (Brás e 25 de Março), em 4 critérios: preço, cadastro, pagamento e pedido mínimo. A conclusão conecta direto com a jornada da seção 4: a Roma tem a <b>melhor base do mercado</b>, mas <b>esconde o preço</b> e depende de atendente humano para fechar — é aí que o lead quente esfria.</div>
+      <div class="t">Além do tráfego, mapeamos <b>como o lojista compra</b> — comparando o processo da Roma com <b>5 concorrentes diretos</b> do atacado (Brás e 25 de Março), em 4 critérios: preço, cadastro, pagamento e pedido mínimo. A Roma tem a <b>melhor base do mercado</b>, mas <b>esconde o preço</b> e depende de atendente humano para fechar — é aí que o lead quente esfria.</div>
     </div>
     <div class="grid2" style="margin-top:16px;">
       <div class="box">
@@ -282,32 +421,38 @@
         <h4>🔁 Alavanca 2 — Funil único</h4>
         <ul>
           <li>Uma rota só: <b>bio dos perfis → cadastro/catálogo → WhatsApp Business</b>, tudo medível.</li>
-          <li>Transforma a audiência de ~318 mil seguidores em <b>comprador</b>, em vez de dispersar entre 2 perfis, site e catálogo.</li>
-          <li>Complementa a captura na landing discutida na seção 4.</li>
+          <li>Transforma a audiência (agora reforçada pelas campanhas de seguidores) em <b>comprador</b>, em vez de dispersar entre 2 perfis, site e catálogo.</li>
+          <li>Complementa a captura na landing discutida na seção 5.</li>
         </ul>
       </div>
     </div>
-    <div class="note" style="margin-top:12px;">Estudo completo na apresentação B2B entregue ao cliente. <b>Próximo passo sugerido:</b> aprovar o piloto dessas 2 alavancas e medir a conversão de lead em pedido nos próximos 60 dias.</div>
+    <div class="note" style="margin-top:12px;"><b>Próximo passo sugerido:</b> aprovar o piloto dessas 2 alavancas e medir a conversão de lead em pedido nos próximos 60 dias.</div>
   </div>
 
   <div class="foot">
-    Roma Importadora · Relatório de Junho 2026 — Google Ads 834-271-0345 + Meta Ads 2323547161498705<br>
-    CNPJ 10.730.088/0002-31 · Elaborado por GGD em 06/07/2026
+    Roma Importadora · Relatório Mensal de Tráfego Pago — Google Ads 834-271-0345 + Meta Ads 2323547161498705<br>
+    CNPJ 10.730.088/0002-31 · Elaborado por GGD · Atualizado em 05/08/2026
   </div>
 </div>
 
 <script>
-new Chart(document.getElementById('chMeta'),{
-  type:'bar',
-  data:{labels:['Março','Abril','Maio','Junho'],
+function setMonth(m){
+  document.querySelectorAll('.mpanel').forEach(function(p){ p.classList.toggle('show', p.id==='panel-'+m); });
+  document.querySelectorAll('.mbtn').forEach(function(b){ b.classList.toggle('active', b.dataset.month===m); });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+new Chart(document.getElementById('chEvol'),{
+  data:{labels:['Março','Abril','Maio','Junho','Julho'],
     datasets:[
-      {type:'bar',label:'Conversas WhatsApp',data:[605,645,730,723],backgroundColor:'#25D366',yAxisID:'y',borderRadius:6},
-      {type:'line',label:'Custo por conversa (R$)',data:[1.96,1.93,1.98,2.65],borderColor:'#e4002b',backgroundColor:'#e4002b',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:4}
+      {type:'bar',label:'Conversas WhatsApp (Meta)',data:[605,645,730,723,195],backgroundColor:'#25D366',yAxisID:'y',borderRadius:6,order:3},
+      {type:'line',label:'Contatos reais (Google)',data:[null,null,null,56,92],borderColor:'#34A853',backgroundColor:'#34A853',yAxisID:'y',tension:.3,borderWidth:3,pointRadius:4,order:1},
+      {type:'line',label:'Custo por conversa Meta (R$)',data:[1.96,1.93,1.98,2.18,2.08],borderColor:'#e4002b',backgroundColor:'#e4002b',yAxisID:'y1',tension:.3,borderWidth:3,pointRadius:4,order:2}
     ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'bottom'}},
     scales:{
-      y:{position:'left',title:{display:true,text:'Conversas'},beginAtZero:true},
+      y:{position:'left',title:{display:true,text:'Conversas / Contatos'},beginAtZero:true},
       y1:{position:'right',title:{display:true,text:'R$ / conversa'},beginAtZero:true,grid:{drawOnChartArea:false}}
     }}
 });
