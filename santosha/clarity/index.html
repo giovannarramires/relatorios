@@ -165,12 +165,16 @@
   <div class="alerta">
     <div class="ai">!</div>
     <div>
-      <h4>Atenção: o Clarity parou de coletar dados em ~23/07/2026</h4>
+      <h4>Atenção: o Clarity parou de coletar dados em ~23/07/2026 — causa identificada</h4>
       <p>Todos os números deste relatório são reais, mas são uma <b>foto até 23/07</b> — não do site de hoje. A queda é abrupta e não é sazonalidade:
-      <b>799 sessões</b> nos 17 dias anteriores contra <b>10</b> nos últimos 14 dias e <b>0</b> nos últimos 3.
-      O pixel do Clarity continua instalado na loja (<code>projectId xi8jceh6i2</code>, web pixel do Shopify), e o próprio Clarity exibe o aviso
-      <i>"o script está desativado — habilite as permissões de script no Shopify"</i>. Restabelecer a coleta é a ação nº 0 —
-      sem ela não há como medir nenhuma das melhorias abaixo.</p>
+      <b>799 sessões</b> nos 17 dias anteriores contra <b>10</b> nos últimos 14 dias e <b>0</b> nos últimos 3.</p>
+      <p style="margin-top:8px"><b>Causa:</b> o app embed do Microsoft Clarity está <b>desligado no tema</b>. O app segue instalado e o pixel
+      aparece como conectado no painel da Shopify — mas quem grava sessão e monta mapa de calor é o app embed, e ele não está ativo.
+      Confirmado por dois caminhos: a Shopify reporta <b>"Extensões: 0 ativas"</b> no app, e o HTML da loja ao vivo não tem
+      <b>nenhuma</b> ocorrência de <code>clarity.ms</code> (só o registro do pixel em <code>webPixelsConfigList</code>).</p>
+      <p style="margin-top:8px"><b>Correção (1 minuto, não altera a aparência do site):</b> Loja virtual → Temas → tema ativo → Personalizar →
+      ícone 🧩 <b>Configurações do app</b> → ligar <b>Microsoft Clarity</b> → Salvar. Os dados de 23/07 até a religação não são recuperáveis.
+      Enquanto isso, nenhuma das melhorias abaixo é mensurável.</p>
     </div>
   </div>
 
@@ -482,7 +486,7 @@
 
     <div class="phase">Ação nº 0 — sem isso, nada é mensurável</div>
     <div class="steps">
-      <div class="step"><div class="num">0</div><h4>Religar a coleta do Clarity</h4><p>Habilitar as permissões de script do app Microsoft Clarity no Shopify. A coleta está parada desde ~23/07 — hoje o site voa às cegas e nenhuma melhoria abaixo poderá ser comprovada.</p><div class="meta"><span class="b b-imp">Bloqueador</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">0</div><h4>Religar a coleta do Clarity</h4><p>Ligar o app embed do Microsoft Clarity no tema: Loja virtual → Temas → Personalizar → 🧩 Configurações do app → Microsoft Clarity → Salvar. Parado desde ~23/07 — hoje o site voa às cegas e nenhuma melhoria abaixo poderá ser comprovada.</p><div class="meta"><span class="b b-imp">Bloqueador</span><span class="b b-esf">Baixo esforço</span></div></div>
       <div class="step"><div class="num">0b</div><h4>Assistir às gravações do checkout</h4><p>Ver as sessões em que a pessoa clica no botão de finalizar compra da gaveta e não avança. Confirma (ou derruba) a hipótese de botão/checkout quebrado — maior retorno potencial do relatório.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
     </div>
 
