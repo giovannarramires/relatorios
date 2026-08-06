@@ -113,11 +113,22 @@
   .step .b{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:20px}
   .b-imp{background:#EDD9D0;color:#8f4a2b} .b-esf{background:#DCE6D2;color:#3f5233}
 
+  /* HEATMAPS */
+  .heat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .hcard{background:var(--creme);border:1px solid var(--linha);border-radius:16px;padding:14px;box-shadow:var(--sombra)}
+  .hcard .cap{font-size:.82rem;font-weight:700;color:var(--marrom);margin-bottom:2px}
+  .hcard .cap2{font-size:.72rem;color:var(--musgo);margin-bottom:10px}
+  .hframe{background:var(--bege2);border-radius:10px;overflow:hidden;border:1px solid var(--linha);aspect-ratio:768/900}
+  .hframe img{width:100%;display:block}
+  .hleg{display:flex;align-items:center;gap:8px;font-size:.68rem;color:var(--musgo);margin-top:9px}
+  .hleg .bar{flex:1;height:8px;border-radius:5px;background:linear-gradient(90deg,#c0553c,#e4b23c,#5e8a5a,#4a72b0,#6b57b8)}
+
   footer{text-align:center;color:var(--musgo);font-size:.78rem;margin-top:54px;padding-top:22px;border-top:1px solid var(--linha)}
 
   @media(max-width:760px){
     .kpis{grid-template-columns:1fr 1fr} .grid2{grid-template-columns:1fr}
     .tech .tgrid{grid-template-columns:1fr} .hero h1{font-size:1.8rem}
+    .heat{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -230,9 +241,58 @@
     </div>
   </section>
 
-  <!-- 5. FRICÇÃO -->
+  <!-- 5. MAPAS DE CALOR -->
   <section>
-    <h2><span class="n">5</span>Sinais de fricção</h2>
+    <h2><span class="n">5</span>Mapas de calor (mobile)</h2>
+    <div class="sub">Onde os dedos realmente tocam — capturado do Clarity na visão de celular (89% do tráfego).</div>
+    <div class="heat">
+      <div class="hcard">
+        <div class="cap">Home · toque</div>
+        <div class="cap2">1.036 páginas · 1.443 toques</div>
+        <div class="hframe"><img src="img/home-toque.png" alt="Mapa de calor de toque da Home mobile"></div>
+        <div class="hleg"><span>+ tocado</span><span class="bar"></span><span>− tocado</span></div>
+      </div>
+      <div class="hcard">
+        <div class="cap">Home · rolagem</div>
+        <div class="cap2">Vermelho = quase todo mundo chega ali</div>
+        <div class="hframe"><img src="img/home-rolagem.png" alt="Mapa de rolagem da Home mobile"></div>
+        <div class="hleg"><span>99,8% aqui</span><span class="bar"></span><span>rola menos</span></div>
+      </div>
+      <div class="hcard">
+        <div class="cap">Produto · toque</div>
+        <div class="cap2">331 páginas · 317 toques (Matosha)</div>
+        <div class="hframe"><img src="img/produto-toque.png" alt="Mapa de calor de toque da página de produto mobile"></div>
+        <div class="hleg"><span>+ tocado</span><span class="bar"></span><span>− tocado</span></div>
+      </div>
+    </div>
+    <div class="find crit" style="margin-top:20px">
+      <div class="sev">Crítico</div>
+      <div><h4>O banner de cookies rouba o primeiro toque de todo mundo</h4>
+      <p>Nos três mapas, o ponto <b>mais quente é o botão "Aceitar todos os cookies"</b> — na Home e na página de produto ele é o
+      clique nº 1. O aviso abre grande, no meio da tela, e <b>cobre o hero e o produto</b> logo na entrada. É a primeira coisa com que a
+      pessoa precisa lidar antes de ver a oferta, e some do foco quem chega de anúncio.</p>
+      <div class="ev">Home: <b>171 toques (11,9%)</b> em "Aceitar" · Produto: <b>27 toques (8,5%)</b>, o mais clicado da página</div></div>
+    </div>
+    <div class="find warn">
+      <div class="sev">Atenção</div>
+      <div><h4>A rolagem morre logo depois da primeira dobra</h4>
+      <p>O mapa de rolagem da Home mostra <b>99,8% vendo o topo</b>, mas a barra despenca já entre 10% e 15% da página — quando
+      aparece o corte do "lançamento". Conteúdo importante mais abaixo (coleções, prova social) é visto por menos da metade.</p>
+      <div class="ev">Home: <b>99,8%</b> aos 10% → <b>63%</b> aos 15% → <b>~26%</b> aos 40% da página</div></div>
+    </div>
+    <div class="find ok">
+      <div class="sev">Positivo</div>
+      <div><h4>Na página de produto, o dedo vai para tamanho e sacola</h4>
+      <p>Fora o cookie, os toques quentes no produto são os <b>seletores de tamanho</b> (swatches) e o botão fixo
+      <b>"Adicionar à sacola"</b>. A intenção de compra está lá — é o caminho até o checkout que precisa ficar mais leve.</p>
+      <div class="ev">Swatches de tamanho: 2º, 3º e 4º elementos mais tocados</div></div>
+    </div>
+    <p style="font-size:.74rem;color:var(--musgo);margin-top:6px">As capturas mostram o banner de "Frete Grátis acima de R$650" (histórico do período); ao vivo já está em R$350.</p>
+  </section>
+
+  <!-- 6. FRICÇÃO -->
+  <section>
+    <h2><span class="n">6</span>Sinais de fricção</h2>
     <div class="sub">Onde o Clarity flagra irritação, cliques perdidos e desistência rápida.</div>
     <div class="kpis" style="margin-bottom:18px">
       <div class="kpi bad"><div class="v mono">12,98<small>%</small></div><div class="l">Retornos rápidos<br>(1.100 sessões saem e voltam)</div><span class="t t-r">Alto</span></div>
@@ -263,9 +323,9 @@
     </div>
   </section>
 
-  <!-- 6. CHAT / AGENTE -->
+  <!-- 7. CHAT / AGENTE -->
   <section>
-    <h2><span class="n">6</span>O agente de chat</h2>
+    <h2><span class="n">7</span>O agente de chat</h2>
     <div class="sub">O widget de conversa aparece em quase toda sessão — mas quase ninguém fala com ele.</div>
     <div class="grid2">
       <div class="panel">
@@ -293,7 +353,7 @@
 
   <!-- 7. PERFORMANCE / CWV -->
   <section class="tech">
-    <h2><span class="n">7</span>Velocidade e estabilidade (Core Web Vitals)</h2>
+    <h2><span class="n">8</span>Velocidade e estabilidade (Core Web Vitals)</h2>
     <div class="sub">Nota geral 74/100 sobre 788 páginas medidas — todos os três indicadores no amarelo.</div>
     <div class="tgrid">
       <div class="ti"><div class="h">LCP · Carregamento</div><div class="big">3,2s</div><p>Ideal ≤ 2,5s · precisa de melhorias</p></div>
@@ -310,21 +370,22 @@
 
   <!-- 8. PLANO -->
   <section>
-    <h2><span class="n">8</span>O que fazer com isso</h2>
+    <h2><span class="n">9</span>O que fazer com isso</h2>
     <div class="sub">Ações priorizadas por impacto na conversão × esforço.</div>
 
     <div class="phase">Rápido &amp; alto impacto</div>
     <div class="steps">
-      <div class="step"><div class="num">1</div><h4>Pix e parcelamento na página de produto</h4><p>Selo de Pix e "em até Nx" visível acima da dobra — o público in-app precisa ver a facilidade de pagamento antes de decidir.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
-      <div class="step"><div class="num">2</div><h4>Ativar as descrições/medidas</h4><p>Transformar as specs em acordeões reais — elimina os cliques mortos e melhora a leitura no celular.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
-      <div class="step"><div class="num">3</div><h4>Aliviar o chat em mobile</h4><p>Bolha menor / nudge menos agressivo pra não brigar com o "Adicionar à sacola".</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">1</div><h4>Enxugar o banner de cookies</h4><p>Transformar em barra discreta no rodapé (não modal no centro) — hoje é o clique nº1 e cobre o hero/produto na entrada. Ganho imediato de foco na oferta.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">2</div><h4>Pix e parcelamento na página de produto</h4><p>Selo de Pix e "em até Nx" visível acima da dobra — o público in-app precisa ver a facilidade de pagamento antes de decidir.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">3</div><h4>Ativar as descrições/medidas</h4><p>Transformar as specs em acordeões reais — elimina os cliques mortos e melhora a leitura no celular.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">4</div><h4>Aliviar o chat em mobile</h4><p>Bolha menor / nudge menos agressivo pra não brigar com o "Adicionar à sacola".</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
     </div>
 
     <div class="phase">Estrutural</div>
     <div class="steps">
-      <div class="step"><div class="num">4</div><h4>Otimizar checkout para in-app</h4><p>Reduzir o atrito de finalizar dentro do Instagram — incentivar "abrir no navegador", habilitar carteiras onde der. É onde mais se perde (18% do carrinho fecha).</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
-      <div class="step"><div class="num">5</div><h4>Acelerar a primeira dobra</h4><p>Atacar LCP 3,2s e CLS 0,16 (imagem hero, fontes, reserva de espaço) pra cortar os 13% de quick-back.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
-      <div class="step"><div class="num">6</div><h4>Prova social nos best-sellers</h4><p>Reviews e "mais vendido" nos pôsteres e cartas Matosha/Cartasflow, que já concentram o interesse.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">5</div><h4>Otimizar checkout para in-app</h4><p>Reduzir o atrito de finalizar dentro do Instagram — incentivar "abrir no navegador", habilitar carteiras onde der. É onde mais se perde (18% do carrinho fecha).</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">6</div><h4>Acelerar a primeira dobra</h4><p>Atacar LCP 3,2s e CLS 0,16 (imagem hero, fontes, reserva de espaço) pra cortar os 13% de quick-back.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">7</div><h4>Prova social nos best-sellers</h4><p>Reviews e "mais vendido" nos pôsteres e cartas Matosha/Cartasflow, que já concentram o interesse.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Médio esforço</span></div></div>
     </div>
   </section>
 
