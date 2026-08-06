@@ -1,14 +1,14 @@
 name: Deploy to GitHub Pages
 
-# Deploy por FILA (não cancela o deploy em andamento).
-# Motivo: este é um monorepo de todos os clientes e as automações empurram
-# commits a cada poucos minutos. O deploy padrão do Pages usava
-# cancel-in-progress e os deploys se cancelavam entre si, nunca publicando.
-# Com cancel-in-progress: false os deploys ENFILEIRAM e cada um conclui.
+# DESATIVADO no push em 06/08/2026 — quem publica o site agora é o
+# Cloudflare Pages (projeto ggd-relatorios, conectado a este repo).
+# Motivo: em 06/08 o backend do GitHub Pages passou a cancelar TODA deployment
+# ("##[error]Deployment cancelled"), com o site parado desde 04:25 UTC. Não era
+# o nosso workflow: a fila (cancel-in-progress: false) já estava correta e
+# mesmo assim 21 deploys seguidos morreram. Fica só como workflow_dispatch,
+# para reativar na mão se um dia precisarmos voltar pro GitHub Pages.
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
