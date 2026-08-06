@@ -123,6 +123,25 @@
   .hleg{display:flex;align-items:center;gap:8px;font-size:.68rem;color:var(--musgo);margin-top:9px}
   .hleg .bar{flex:1;height:8px;border-radius:5px;background:linear-gradient(90deg,#c0553c,#e4b23c,#5e8a5a,#4a72b0,#6b57b8)}
 
+  /* alerta */
+  .alerta{display:flex;gap:16px;align-items:flex-start;background:#F7E3DC;border:1px solid #E0B8A8;
+    border-left:6px solid var(--vermelho);border-radius:14px;padding:18px 20px;margin-top:26px;box-shadow:var(--sombra)}
+  .alerta .ai{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--vermelho);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem}
+  .alerta h4{font-size:1.02rem;color:#8a3520;margin-bottom:5px}
+  .alerta p{font-size:.89rem;color:#6d4536}
+  .alerta code{background:rgba(0,0,0,.07);padding:1px 6px;border-radius:5px;font-size:.8rem}
+
+  /* destaque numérico */
+  .bignum{background:var(--creme);border:1px solid var(--linha);border-left:6px solid var(--vermelho);border-radius:14px;
+    padding:20px 24px;margin-top:16px;box-shadow:var(--sombra);display:flex;align-items:center;gap:22px}
+  .bignum .n2{font-size:3rem;font-weight:800;color:var(--vermelho);line-height:1;font-variant-numeric:tabular-nums}
+  .bignum p{font-size:.93rem;color:#5c4e3f}
+  .bignum p b{color:var(--marrom)}
+
+  .metodo{font-size:.78rem;color:var(--musgo);background:var(--bege2);border-radius:10px;padding:11px 14px;margin-top:14px}
+  .metodo b{color:var(--marrom)}
+
   footer{text-align:center;color:var(--musgo);font-size:.78rem;margin-top:54px;padding-top:22px;border-top:1px solid var(--linha)}
 
   @media(max-width:760px){
@@ -138,10 +157,22 @@
   <div class="kicker">Santosha · Comportamento no Site</div>
   <h1>Relatório Microsoft Clarity</h1>
   <p>Como as pessoas realmente navegam, param e desistem no santoshaporai.com.br — sessões, funil, fricção e performance.</p>
-  <div class="data">Últimos 30 dias · dados até 05/08/2026 · projeto Clarity <b>xi8jceh6i2</b></div>
+  <div class="data">Janela de 30 dias · coleta ativa até ~23/07/2026 · projeto Clarity <b>xi8jceh6i2</b></div>
 </div>
 
 <div class="wrap">
+
+  <div class="alerta">
+    <div class="ai">!</div>
+    <div>
+      <h4>Atenção: o Clarity parou de coletar dados em ~23/07/2026</h4>
+      <p>Todos os números deste relatório são reais, mas são uma <b>foto até 23/07</b> — não do site de hoje. A queda é abrupta e não é sazonalidade:
+      <b>799 sessões</b> nos 17 dias anteriores contra <b>10</b> nos últimos 14 dias e <b>0</b> nos últimos 3.
+      O pixel do Clarity continua instalado na loja (<code>projectId xi8jceh6i2</code>, web pixel do Shopify), e o próprio Clarity exibe o aviso
+      <i>"o script está desativado — habilite as permissões de script no Shopify"</i>. Restabelecer a coleta é a ação nº 0 —
+      sem ela não há como medir nenhuma das melhorias abaixo.</p>
+    </div>
+  </div>
 
   <!-- 1. PANORAMA -->
   <section>
@@ -209,9 +240,85 @@
     </div>
   </section>
 
-  <!-- 4. PÁGINAS E PRODUTOS -->
+  <!-- 4. ABANDONO DE SACOLA -->
   <section>
-    <h2><span class="n">4</span>O que as pessoas mais olham</h2>
+    <h2><span class="n">4</span>Quem coloca na sacola e não volta</h2>
+    <div class="sub">O mesmo caminho, agora medido em sequência — e o mapa de calor filtrado <b>só</b> em quem abandonou.</div>
+
+    <div class="funnel">
+      <div class="fstep"><div class="fbar" style="width:100%"></div><div class="fc"><div class="fn">Viu produto<small>1ª etapa da jornada</small></div><div class="fv mono">1.318</div><div class="fp">100%</div></div></div>
+      <div class="fdrop">↓ 1.179 saem sem colocar nada na sacola</div>
+      <div class="fstep"><div class="fbar" style="width:10.6%"></div><div class="fc"><div class="fn">Adicionou à sacola<small>na mesma sessão, depois de ver o produto</small></div><div class="fv mono">139</div><div class="fp">10,6%</div></div></div>
+      <div class="fdrop">↓ 129 param aqui e não voltam</div>
+      <div class="fstep crit"><div class="fbar" style="width:0.8%"></div><div class="fc"><div class="fn">Clicou em finalizar compra<small>último ponto que conseguimos enxergar</small></div><div class="fv mono">10</div><div class="fp">0,8%</div></div></div>
+    </div>
+
+    <div class="bignum">
+      <div class="n2 mono">92,8%</div>
+      <p><b>De cada 100 sacolas montadas, ~93 nunca chegam ao checkout.</b> Esse é o ponto exato onde o cliente para e não volta —
+      não é na entrada do site, nem na escolha do produto. Quem chega a montar a sacola já decidiu comprar; a perda acontece
+      entre a sacola e o pagamento. Conversão ponta a ponta: <b>0,76%</b>. Quem compra leva em média <b>3,6 minutos</b>.</p>
+    </div>
+
+    <div class="metodo">
+      <b>Por que estes números são menores que os da seção 3:</b> lá cada evento é contado isoladamente no período.
+      Aqui exigimos as três etapas <b>na ordem e na mesma sessão</b> — é a leitura mais dura e mais fiel de jornada real de compra.
+    </div>
+
+    <div class="grid2" style="margin-top:22px">
+      <div class="panel">
+        <h3>Onde o dedo vai — só nos que abandonaram</h3>
+        <div class="cap">Página de produto · 34 exibições · 78 toques · 129 sessões abandonadas</div>
+        <div class="brow"><div class="nm">Ícone da sacola no topo <span>abrem a gaveta, olham e saem</span><div class="track"><span style="width:100%"></span></div></div><div class="val">7</div></div>
+        <div class="brow"><div class="nm">Botão de checkout na gaveta <span>clicam — e mesmo assim não avançam</span><div class="track"><span style="width:71%"></span></div></div><div class="val">5</div></div>
+        <div class="brow"><div class="nm">Popup de brinde (Avada) <span>4 no botão + 3 no "fechar"</span><div class="track"><span style="width:100%"></span></div></div><div class="val">7</div></div>
+        <div class="brow"><div class="nm">Seletores de tamanho <span>swatches</span><div class="track"><span style="width:100%"></span></div></div><div class="val">7</div></div>
+        <div class="brow"><div class="nm">"Fechar" a gaveta da sacola <span>desistência explícita</span><div class="track"><span style="width:43%"></span></div></div><div class="val">3</div></div>
+      </div>
+      <div class="panel">
+        <h3>Até onde eles rolam antes de desistir</h3>
+        <div class="cap">Mapa de rolagem do mesmo grupo · página de produto</div>
+        <div class="brow"><div class="nm">10% da página<div class="track"><span class="musgo" style="width:100%"></span></div></div><div class="val">100%</div></div>
+        <div class="brow"><div class="nm">15% da página<div class="track"><span class="musgo" style="width:82%"></span></div></div><div class="val">82%</div></div>
+        <div class="brow"><div class="nm">20% da página<div class="track"><span class="musgo" style="width:74%"></span></div></div><div class="val">74%</div></div>
+        <div class="brow"><div class="nm">25% da página<div class="track"><span class="musgo" style="width:44%"></span></div></div><div class="val">44%</div></div>
+        <div class="brow"><div class="nm">40% da página<div class="track"><span class="musgo" style="width:24%"></span></div></div><div class="val">24%</div></div>
+        <p style="font-size:.78rem;color:#6b5d4d;margin-top:10px">O precipício está entre <b>20% e 25%</b> da página: cai de 74% para 44% num só passo.
+        Tudo que estiver depois disso (reviews, garantias, prova social) praticamente não existe para quem abandona.</p>
+      </div>
+    </div>
+
+    <div class="find crit" style="margin-top:20px">
+      <div class="sev">Investigar</div>
+      <div><h4>Eles clicam em "finalizar compra" — e o checkout não acontece</h4>
+      <p>Dentro desse grupo que <b>nunca registrou início de checkout</b>, o botão de finalizar compra da gaveta aparece como o
+      <b>2º elemento mais tocado</b>. Ou seja: a pessoa clica e, aparentemente, nada avança. Pode ser falha do botão na gaveta,
+      pode ser o evento que não registra — <b>é hipótese, não conclusão</b>. Confirmar assistindo às gravações dessas sessões é a
+      próxima ação de maior retorno de todo o relatório.</p>
+      <div class="ev"><b>5 toques (6,41%)</b> no botão de checkout, em sessões que o funil marca como "não chegou ao checkout"</div></div>
+    </div>
+
+    <div class="find warn">
+      <div class="sev">Atenção</div>
+      <div><h4>O popup de brinde compete com a compra</h4>
+      <p>O popup do app <b>Avada Gift Campaign</b> concentra <b>7 dos 78 toques (9%)</b> desse grupo — e quase metade desses toques
+      é para <b>fechar</b> o popup. Ele está disputando atenção exatamente no momento da decisão, na página de produto.</p>
+      <div class="ev">4 toques no botão do popup · 3 toques no "fechar"</div></div>
+    </div>
+
+    <div class="find warn">
+      <div class="sev">Estrutural</div>
+      <div><h4>Não existe página de carrinho — e o checkout é uma caixa-preta</h4>
+      <p>A loja usa <b>gaveta lateral</b> em vez de página <code>/cart</code>, então todo o abandono acontece na própria página de produto
+      (por isso o mapa de calor acima é dela). E o <b>checkout hospedado da Shopify o Clarity não consegue gravar</b> — não existe evento de
+      Compra no projeto. Nosso rastro termina na porta do checkout; dali pra frente, só o Shopify enxerga.</p>
+      <div class="ev">Sem página <code>/cart</code> · sem evento de Compra no Clarity</div></div>
+    </div>
+  </section>
+
+  <!-- 5. PÁGINAS E PRODUTOS -->
+  <section>
+    <h2><span class="n">5</span>O que as pessoas mais olham</h2>
     <div class="sub">Páginas e produtos que concentram a atenção — onde vale investir em conversão.</div>
     <div class="grid2">
       <div class="panel">
@@ -243,7 +350,7 @@
 
   <!-- 5. MAPAS DE CALOR -->
   <section>
-    <h2><span class="n">5</span>Mapas de calor (mobile)</h2>
+    <h2><span class="n">6</span>Mapas de calor (mobile)</h2>
     <div class="sub">Onde os dedos realmente tocam — capturado do Clarity na visão de celular (89% do tráfego).</div>
     <div class="heat">
       <div class="hcard">
@@ -292,7 +399,7 @@
 
   <!-- 6. FRICÇÃO -->
   <section>
-    <h2><span class="n">6</span>Sinais de fricção</h2>
+    <h2><span class="n">7</span>Sinais de fricção</h2>
     <div class="sub">Onde o Clarity flagra irritação, cliques perdidos e desistência rápida.</div>
     <div class="kpis" style="margin-bottom:18px">
       <div class="kpi bad"><div class="v mono">12,98<small>%</small></div><div class="l">Retornos rápidos<br>(1.100 sessões saem e voltam)</div><span class="t t-r">Alto</span></div>
@@ -325,7 +432,7 @@
 
   <!-- 7. CHAT / AGENTE -->
   <section>
-    <h2><span class="n">7</span>O agente de chat</h2>
+    <h2><span class="n">8</span>O agente de chat</h2>
     <div class="sub">O widget de conversa aparece em quase toda sessão — mas quase ninguém fala com ele.</div>
     <div class="grid2">
       <div class="panel">
@@ -353,7 +460,7 @@
 
   <!-- 7. PERFORMANCE / CWV -->
   <section class="tech">
-    <h2><span class="n">8</span>Velocidade e estabilidade (Core Web Vitals)</h2>
+    <h2><span class="n">9</span>Velocidade e estabilidade (Core Web Vitals)</h2>
     <div class="sub">Nota geral 74/100 sobre 788 páginas medidas — todos os três indicadores no amarelo.</div>
     <div class="tgrid">
       <div class="ti"><div class="h">LCP · Carregamento</div><div class="big">3,2s</div><p>Ideal ≤ 2,5s · precisa de melhorias</p></div>
@@ -370,8 +477,14 @@
 
   <!-- 8. PLANO -->
   <section>
-    <h2><span class="n">9</span>O que fazer com isso</h2>
+    <h2><span class="n">10</span>O que fazer com isso</h2>
     <div class="sub">Ações priorizadas por impacto na conversão × esforço.</div>
+
+    <div class="phase">Ação nº 0 — sem isso, nada é mensurável</div>
+    <div class="steps">
+      <div class="step"><div class="num">0</div><h4>Religar a coleta do Clarity</h4><p>Habilitar as permissões de script do app Microsoft Clarity no Shopify. A coleta está parada desde ~23/07 — hoje o site voa às cegas e nenhuma melhoria abaixo poderá ser comprovada.</p><div class="meta"><span class="b b-imp">Bloqueador</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">0b</div><h4>Assistir às gravações do checkout</h4><p>Ver as sessões em que a pessoa clica no botão de finalizar compra da gaveta e não avança. Confirma (ou derruba) a hipótese de botão/checkout quebrado — maior retorno potencial do relatório.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+    </div>
 
     <div class="phase">Rápido &amp; alto impacto</div>
     <div class="steps">
@@ -379,18 +492,20 @@
       <div class="step"><div class="num">2</div><h4>Pix e parcelamento na página de produto</h4><p>Selo de Pix e "em até Nx" visível acima da dobra — o público in-app precisa ver a facilidade de pagamento antes de decidir.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
       <div class="step"><div class="num">3</div><h4>Ativar as descrições/medidas</h4><p>Transformar as specs em acordeões reais — elimina os cliques mortos e melhora a leitura no celular.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
       <div class="step"><div class="num">4</div><h4>Aliviar o chat em mobile</h4><p>Bolha menor / nudge menos agressivo pra não brigar com o "Adicionar à sacola".</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">5</div><h4>Rever o popup de brinde (Avada)</h4><p>Ele leva 9% dos toques de quem abandona — e metade é pra fechar. Tirar da página de produto ou atrasar o disparo pra depois da decisão.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
+      <div class="step"><div class="num">6</div><h4>Subir a prova de compra pra antes de 25% da página</h4><p>Frete, Pix, garantia e reviews precisam estar acima do precipício de rolagem — quem abandona nunca passa de 25% da página de produto.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Baixo esforço</span></div></div>
     </div>
 
     <div class="phase">Estrutural</div>
     <div class="steps">
-      <div class="step"><div class="num">5</div><h4>Otimizar checkout para in-app</h4><p>Reduzir o atrito de finalizar dentro do Instagram — incentivar "abrir no navegador", habilitar carteiras onde der. É onde mais se perde (18% do carrinho fecha).</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
-      <div class="step"><div class="num">6</div><h4>Acelerar a primeira dobra</h4><p>Atacar LCP 3,2s e CLS 0,16 (imagem hero, fontes, reserva de espaço) pra cortar os 13% de quick-back.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
-      <div class="step"><div class="num">7</div><h4>Prova social nos best-sellers</h4><p>Reviews e "mais vendido" nos pôsteres e cartas Matosha/Cartasflow, que já concentram o interesse.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">7</div><h4>Otimizar checkout para in-app</h4><p>Reduzir o atrito de finalizar dentro do Instagram — incentivar "abrir no navegador", habilitar carteiras onde der. É onde mais se perde (18% do carrinho fecha).</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">8</div><h4>Acelerar a primeira dobra</h4><p>Atacar LCP 3,2s e CLS 0,16 (imagem hero, fontes, reserva de espaço) pra cortar os 13% de quick-back.</p><div class="meta"><span class="b b-imp">Alto impacto</span><span class="b b-esf">Médio esforço</span></div></div>
+      <div class="step"><div class="num">9</div><h4>Prova social nos best-sellers</h4><p>Reviews e "mais vendido" nos pôsteres e cartas Matosha/Cartasflow, que já concentram o interesse.</p><div class="meta"><span class="b b-imp">Médio impacto</span><span class="b b-esf">Médio esforço</span></div></div>
     </div>
   </section>
 
   <footer>
-    Santosha · Relatório Microsoft Clarity — últimos 30 dias (até 05/08/2026) · projeto xi8jceh6i2<br>
+    Santosha · Relatório Microsoft Clarity — janela de 30 dias · coleta ativa até ~23/07/2026 · projeto xi8jceh6i2<br>
     Fonte: Microsoft Clarity (comportamento no site). Vendas: Shopify é a fonte de verdade. · GGD Growth Digital
   </footer>
 
