@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estratégia de WhatsApp — Recuperação de Carrinho e Recompra | Roma Aviamentos</title>
+<style>
+  :root{
+    --accent:#e94560; --green:#00c897; --yellow:#f5a623; --blue:#4a90d9; --purple:#9b59b6;
+    --wa:#25D366; --wa-dark:#075E54; --card-bg:#fff; --bg:#f4f6f9;
+    --text:#2c3e50; --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.55;}
+  .container{max-width:1040px; margin:0 auto; padding:28px 24px;}
+  /* HEADER */
+  .hero{background:linear-gradient(135deg,#075E54,#128C7E,#25D366); color:#fff; padding:46px 24px;}
+  .hero-inner{max-width:1040px; margin:0 auto;}
+  .hero .tag{font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#c8f5e2; font-weight:700; margin-bottom:10px;}
+  .hero h1{font-size:31px; font-weight:800; margin-bottom:10px; line-height:1.25;}
+  .hero .sub{font-size:15px; color:#e2fbf0; max-width:800px;}
+  .hero .meta{font-size:11px; color:#a9e6cc; margin-top:18px;}
+  /* SECTIONS */
+  .section{margin-bottom:40px;}
+  .section-title{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border);}
+  h2.h{font-size:21px; font-weight:800; margin-bottom:10px;}
+  p.lead{font-size:14px; color:#3d4d5c; margin-bottom:16px; max-width:900px;}
+  p.body{font-size:13.5px; color:#42525f; margin-bottom:12px; max-width:900px;}
+  ul.bullets{margin:0 0 14px 18px; font-size:13.5px; color:#42525f;}
+  ul.bullets li{margin-bottom:6px;}
+  /* CARDS */
+  .cards{display:grid; gap:16px; margin-bottom:14px;}
+  .c4{grid-template-columns:repeat(4,1fr);} .c3{grid-template-columns:repeat(3,1fr);} .c2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:18px 20px; border-left:4px solid var(--muted);}
+  .card.green{border-left-color:var(--green);} .card.red{border-left-color:var(--accent);}
+  .card.blue{border-left-color:var(--blue);} .card.yellow{border-left-color:var(--yellow);}
+  .card.wa{border-left-color:var(--wa);}
+  .card .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:600; margin-bottom:6px;}
+  .card .val{font-size:24px; font-weight:800;}
+  .card .val.sm{font-size:18px;}
+  .card .foot{font-size:11.5px; color:var(--muted); margin-top:6px; line-height:1.45;}
+  /* BANNER */
+  .banner{background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:14px; padding:22px 26px; color:#fff; margin-bottom:20px;}
+  .banner .k{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#8899aa; margin-bottom:6px; font-weight:700;}
+  .banner .t{font-size:17px; font-weight:600; line-height:1.55;}
+  .banner.g{background:linear-gradient(135deg,#075E54,#128C7E);}
+  .banner.g .k{color:#a9e6cc;}
+  /* TABLE */
+  .tw{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:12.5px; min-width:640px;}
+  th{background:#f7f8fa; text-align:left; padding:11px 13px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; vertical-align:bottom;}
+  td{padding:11px 13px; border-top:1px solid var(--border); vertical-align:top;}
+  tr.tot td{background:#f7f8fa; font-weight:800;}
+  .r{text-align:right;} .c{text-align:center;}
+  .note{font-size:11.5px; color:var(--muted); margin-top:9px; line-height:1.5;}
+  /* ACTION */
+  .act{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px; display:flex; gap:16px; align-items:flex-start;}
+  .act .num{flex:0 0 auto; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:14px; background:var(--wa-dark);}
+  .act h3{font-size:15px; margin-bottom:5px;}
+  .act p{font-size:13px; color:#444; line-height:1.6;}
+  .pill{display:inline-block; font-size:10px; font-weight:700; padding:2px 9px; border-radius:20px; margin-left:6px; vertical-align:middle;}
+  .p-red{background:#fff8f8; color:#e94560; border:1px solid #ffd5d5;}
+  .p-amber{background:#fff8e6; color:#c07800; border:1px solid #ffe0a0;}
+  .p-green{background:#e8faf4; color:#00a374; border:1px solid #9fe8cf;}
+  .p-blue{background:#eef5fc; color:#2a6cb0; border:1px solid #cfe2f7;}
+  .p-grey{background:#f2f4f6; color:#6c757d; border:1px solid #e0e6ed;}
+  /* RÉGUA BLOCK */
+  .regua{background:#fff; border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:18px;}
+  .regua .rh{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+  .regua .rid{font-size:11px; font-weight:800; color:#fff; background:var(--wa-dark); padding:3px 10px; border-radius:6px; letter-spacing:.5px;}
+  .regua h3{font-size:17px; font-weight:800;}
+  .regua .rmeta{font-size:12px; color:var(--muted); margin-bottom:14px;}
+  .grid-meta{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:14px;}
+  .gm{background:#f7f9fb; border:1px solid var(--border); border-radius:9px; padding:10px 12px;}
+  .gm .k{font-size:9.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; margin-bottom:3px;}
+  .gm .v{font-size:12.5px; font-weight:600; line-height:1.4;}
+  /* CHAT */
+  .chat{background:#ece5dd; border-radius:12px; padding:16px 14px; margin:6px 0 4px;}
+  .bub{background:#dcf8c6; border-radius:10px 10px 10px 2px; padding:11px 13px; font-size:13px; line-height:1.55; max-width:88%; margin-bottom:10px; box-shadow:0 1px 1px rgba(0,0,0,.08); white-space:pre-line;}
+  .bub:last-child{margin-bottom:0;}
+  .bub .when{display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#0b7c5c; margin-bottom:6px;}
+  .bub .btns{margin-top:9px; padding-top:8px; border-top:1px solid rgba(0,0,0,.09); display:flex; gap:8px; flex-wrap:wrap;}
+  .bub .btn{font-size:11.5px; font-weight:700; color:#075E54; background:#fff; border-radius:6px; padding:5px 11px; border:1px solid #cfe0d6;}
+  .var{background:#fff; border:1px dashed #9ec9b4; border-radius:4px; padding:0 4px; font-size:12px; color:#0b7c5c; font-weight:600;}
+  /* FASES */
+  .fase{border-left:3px solid var(--wa); padding-left:16px; margin-bottom:20px;}
+  .fase .ft{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--wa-dark); margin-bottom:4px;}
+  .fase h3{font-size:16px; margin-bottom:6px;}
+  .fase p{font-size:13px; color:#444;}
+  .check{background:#fff; border:1px solid var(--border); border-radius:12px; padding:16px 20px;}
+  .check li{font-size:13px; margin:0 0 9px 18px; color:#42525f;}
+  .footer{max-width:1040px; margin:20px auto 40px; padding:0 24px; font-size:11px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+  @media(max-width:820px){.c4,.c3,.c2,.grid-meta{grid-template-columns:1fr 1fr;} .hero h1{font-size:24px;} .bub{max-width:100%;}}
+  @media(max-width:520px){.c4,.c3,.c2,.grid-meta{grid-template-columns:1fr;}}
+  /* GATE */
+  #gate{position:fixed; inset:0; background:linear-gradient(135deg,#075E54,#128C7E,#25D366); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px;}
+  #gate .box{background:#fff; border-radius:16px; padding:36px 32px; max-width:380px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.35);}
+  #gate .tag{font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#128C7E; font-weight:700; margin-bottom:8px;}
+  #gate h2{font-size:20px; margin-bottom:6px; color:var(--text);}
+  #gate p{font-size:13px; color:var(--muted); margin-bottom:20px;}
+  #gate input{width:100%; padding:12px 14px; font-size:15px; border:1px solid var(--border); border-radius:10px; margin-bottom:12px; text-align:center;}
+  #gate button{width:100%; padding:12px; font-size:15px; font-weight:700; color:#fff; background:#128C7E; border:none; border-radius:10px; cursor:pointer;}
+  #gate button:hover{background:#0e6f63;}
+  #gate .err{color:var(--accent); font-size:13px; font-weight:600; margin-top:12px; min-height:18px;}
+  #report{display:none;}
+</style>
+</head>
+<body>
+
+<!-- ============ TELA DE SENHA (proteção SHA-256 client-side) ============ -->
+<div id="gate">
+  <div class="box">
+    <div class="tag">🔒 Documento Confidencial</div>
+    <h2>Estratégia de WhatsApp</h2>
+    <p>Roma Aviamentos · Gestão GGD<br>Digite a senha para acessar o documento.</p>
+    <input type="password" id="pw" placeholder="Senha" autofocus onkeydown="if(event.key==='Enter')checkPw()">
+    <button onclick="checkPw()">Acessar documento</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<script>
+/* Proteção client-side por SHA-256. Para trocar a senha:
+   printf 'NOVA_SENHA' | shasum -a 256   →  substituir PW_HASH abaixo. */
+const PW_HASH = "acc173a22405a1801d9220bc3ec670b6f2256026072ee6b86b2dcf02e4e77ac9";
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function checkPw(){
+  const hash = await sha256(document.getElementById('pw').value);
+  if(hash === PW_HASH){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('report').style.display='block';
+  } else {
+    document.getElementById('err').textContent='Senha incorreta. Tente novamente.';
+    document.getElementById('pw').value='';
+  }
+}
+</script>
+
+<div id="report">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">Proposta estratégica · Gestão GGD</div>
+    <h1>Recuperação de carrinho e recompra por WhatsApp</h1>
+    <div class="sub">Um plano para transformar a base de clientes da Roma — quem já comprou, quem abandonou o carrinho e quem está na hora de repor — em faturamento recorrente, usando o canal com a maior taxa de leitura do Brasil.</div>
+    <div class="meta">Roma Aviamentos · Agosto/2026 · Documento de proposta — nenhuma ação executada</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============ 1. RESUMO EXECUTIVO ============ -->
+<div class="section">
+  <div class="section-title">1 · Resumo executivo</div>
+  <h2 class="h">A Roma já tem o ativo mais caro do e-commerce: uma base grande de clientes que compra de novo.</h2>
+  <p class="lead">Aviamento é consumível. Linha acaba, tinta spray acaba, fita acaba, elástico acaba. A cliente que comprou em julho vai precisar comprar de novo — a única questão é <strong>de quem</strong>. Hoje esse retorno acontece por conta própria (a força da marca Roma aparece nos 23% de tráfego direto). A proposta é deixar de esperar e passar a <strong>convidar, na hora certa, com o produto certo</strong>.</p>
+
+  <div class="cards c4">
+    <div class="card wa">
+      <div class="lbl">Onde está o dinheiro parado</div>
+      <div class="val sm">Carrinho + recompra</div>
+      <div class="foot">Duas fontes que não exigem nenhum real a mais de mídia: quem já quis comprar e quem já comprou.</div>
+    </div>
+    <div class="card green">
+      <div class="lbl">Potencial estimado</div>
+      <div class="val">+R$ 35–70 mil</div>
+      <div class="foot">de faturamento incremental por mês no cenário-base. Estimativa com premissas abertas na seção 12 — a validar com os dados de vocês.</div>
+    </div>
+    <div class="card blue">
+      <div class="lbl">Custo operacional</div>
+      <div class="val">~R$ 4–5 mil/mês</div>
+      <div class="foot">Mensagens + plataforma. Relação de retorno estimada entre 8x e 14x.</div>
+    </div>
+    <div class="card yellow">
+      <div class="lbl">Prazo até a 1ª venda</div>
+      <div class="val">~3 semanas</div>
+      <div class="foot">A parte de recompra e reativação começa só com um export de pedidos — não depende de desenvolvimento na loja.</div>
+    </div>
+  </div>
+
+  <div class="banner g">
+    <div class="k">A ideia em uma frase</div>
+    <div class="t">Em vez de pagar de novo por um clique para trazer alguém que já conhece a Roma, mandamos uma mensagem — barata, lida em minutos e no canal que a costureira e a artesã já usam o dia inteiro — no momento exato em que o produto dela está acabando ou em que ela deixou o carrinho para trás.</div>
+  </div>
+</div>
+
+<!-- ============ 2. POR QUE A ROMA ============ -->
+<div class="section">
+  <div class="section-title">2 · Por que a Roma é o caso ideal para isso</div>
+  <p class="lead">Não é uma tática genérica: os números da própria operação mostram por que este canal encaixa aqui melhor do que na maioria dos e-commerces.</p>
+
+  <div class="cards c3">
+    <div class="card green">
+      <div class="lbl">O crescimento veio do ticket</div>
+      <div class="val">R$ 204 → R$ 260</div>
+      <div class="foot">O faturamento recorde de julho veio de <strong>cesta maior</strong>, não de mais pedidos. Mensagem de reposição e de complemento age exatamente nessa alavanca.</div>
+    </div>
+    <div class="card blue">
+      <div class="lbl">Catálogo de repetição</div>
+      <div class="val">~75%</div>
+      <div class="foot">do catálogo é artesanato/armarinho — consumo recorrente. Já existe classificação por linha no feed (ex.: "Artesanato &gt; Arame", "Lãs e Fios &gt; Fio Náutico"), que é o que permite acertar o ciclo por produto.</div>
+    </div>
+    <div class="card yellow">
+      <div class="lbl">Vantagens que ninguém vê</div>
+      <div class="val sm">5x sem juros + 5% no Pix</div>
+      <div class="foot">Só aparecem <strong>dentro</strong> do checkout. Quem desiste antes nunca fica sabendo. A mensagem de recuperação leva essa informação até ela — sem custo nenhum de desconto extra.</div>
+    </div>
+    <div class="card red">
+      <div class="lbl">Ticket baixo, frete pesado</div>
+      <div class="val sm">Frete &gt; produto</div>
+      <div class="foot">35% do catálogo custa R$10–30. É a maior causa de abandono nesse perfil — e se resolve convidando a cliente a <strong>completar a cesta</strong>, não dando desconto.</div>
+    </div>
+    <div class="card blue">
+      <div class="lbl">Marca forte</div>
+      <div class="val">23%</div>
+      <div class="foot">da receita vem de tráfego direto: gente que digita "Roma" e entra. Base com afinidade alta responde muito melhor a mensagem direta do que público frio.</div>
+    </div>
+    <div class="card green">
+      <div class="lbl">Mídia enxuta</div>
+      <div class="val">3,4%</div>
+      <div class="foot">do faturamento é custo de mídia. Uma camada de CRM aumenta a receita sem mexer nessa proporção — melhora a eficiência do conjunto.</div>
+    </div>
+  </div>
+
+  <p class="body">Há ainda um efeito colateral positivo: cliente que volta pelo WhatsApp é cliente que a Roma <strong>não precisa recomprar no leilão</strong> do Google e do Meta. Isso libera a mídia para fazer o que ela faz melhor — trazer gente nova — enquanto a base é cuidada por um canal de custo quase fixo.</p>
+</div>
+
+<!-- ============ 3. DADOS ============ -->
+<div class="section">
+  <div class="section-title">3 · O que dá para fazer com os dados que vocês já têm</div>
+  <p class="lead">Toda a inteligência da estratégia sai de informação que já existe na loja. Abaixo, o que cada dado permite fazer — e o que precisamos receber para calibrar.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%">Dado que já existe</th>
+          <th style="width:38%">O que ele permite</th>
+          <th style="width:22%">Régua que ele alimenta</th>
+          <th style="width:16%">Como chega até nós</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Histórico de pedidos</strong> (cliente, data, itens, valor)</td>
+          <td>Calcular o ciclo real de recompra de cada cliente e de cada linha de produto; identificar quem está atrasado em relação ao próprio ritmo</td>
+          <td>Reposição por ciclo · Reativação · VIP</td>
+          <td>Export CSV do Octopus (mensal ou diário)</td>
+        </tr>
+        <tr>
+          <td><strong>Itens de cada pedido</strong></td>
+          <td>Saber o que a pessoa usa e montar a cesta lógica de complemento (quem compra lã precisa de agulha; quem compra tinta spray precisa de verniz)</td>
+          <td>Cross-sell de cesta · Reposição</td>
+          <td>Mesmo export, nível item</td>
+        </tr>
+        <tr>
+          <td><strong>Carrinhos abandonados</strong></td>
+          <td>Recuperar a venda que estava a um passo de acontecer, com os produtos que a pessoa escolheu</td>
+          <td>Carrinho abandonado</td>
+          <td>Webhook/API da plataforma <span class="pill p-amber">depende da LojaComm</span></td>
+        </tr>
+        <tr>
+          <td><strong>Checkouts iniciados e Pix não pago</strong></td>
+          <td>A fatia mais quente de todas: pessoa já preencheu dados, escolheu frete e desistiu no último passo. Contato sempre disponível</td>
+          <td>Checkout abandonado <span class="pill p-red">prioridade</span></td>
+          <td>Webhook/API ou relatório de pedidos pendentes</td>
+        </tr>
+        <tr>
+          <td><strong>Estoque por SKU</strong></td>
+          <td>Avisar quem quis um produto esgotado no momento em que ele volta — hoje ~9,6% do catálogo fica fora de estoque em algum momento</td>
+          <td>Voltou ao estoque</td>
+          <td>Feed de produtos (já existe)</td>
+        </tr>
+        <tr>
+          <td><strong>Telefone e consentimento</strong></td>
+          <td>Base elegível para disparo. É o insumo que define o tamanho de tudo</td>
+          <td>Todas</td>
+          <td>Cadastro do Octopus + ajuste no checkout</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Observação importante: as três primeiras réguas funcionam <strong>só com o export de pedidos</strong>, sem nenhuma alteração técnica na loja. É por isso que o plano começa por elas — a Roma fatura antes de qualquer dependência de desenvolvimento.</p>
+</div>
+
+<!-- ============ 4. COMO FUNCIONA ============ -->
+<div class="section">
+  <div class="section-title">4 · Como funciona na prática</div>
+
+  <div class="cards c3">
+    <div class="card blue">
+      <div class="lbl">Passo 1 · Leitura</div>
+      <div class="val sm">Os dados da loja</div>
+      <div class="foot">Todo dia, o sistema lê pedidos, itens, carrinhos e estoque. Ninguém precisa mexer em planilha manualmente.</div>
+    </div>
+    <div class="card yellow">
+      <div class="lbl">Passo 2 · Decisão</div>
+      <div class="val sm">Quem recebe o quê</div>
+      <div class="foot">Cada cliente cai em uma régua por vez, com regras de frequência e supressão (quem comprou ontem não recebe cobrança hoje).</div>
+    </div>
+    <div class="card wa">
+      <div class="lbl">Passo 3 · Envio</div>
+      <div class="val sm">WhatsApp oficial</div>
+      <div class="foot">Disparo pela API oficial da Meta, com número verificado da Roma e mensagens aprovadas. Respostas caem no atendimento normal.</div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="k">O ponto técnico que precisa ficar claro desde já</div>
+    <div class="t">Disparo em massa só pode ser feito pela <strong>API oficial do WhatsApp (WhatsApp Business Platform)</strong>. Fazer isso por aplicativo comum ou por ferramenta "não oficial" leva ao bloqueio do número — e o número da Roma é um ativo que não dá para perder. Todo o plano é desenhado dentro das regras da Meta: modelos de mensagem aprovados, consentimento registrado e opção de sair a qualquer momento.</div>
+  </div>
+
+  <p class="body"><strong>Duas rotas possíveis de execução</strong>, e a recomendação é combinar as duas:</p>
+  <div class="cards c2">
+    <div class="card green">
+      <div class="lbl">Rota A — recomendada para começar</div>
+      <div class="val sm">Automação sob medida (GGD)</div>
+      <div class="foot">Montamos o motor das réguas de recompra, reativação, pós-compra e cross-sell integrando o export da loja à API oficial. Vantagem: sai do papel em ~3 semanas, sem depender de fila de desenvolvimento da plataforma, e a régua fica desenhada com a lógica de aviamentos — não a genérica da ferramenta.</div>
+    </div>
+    <div class="card blue">
+      <div class="lbl">Rota B — para carrinho em tempo real</div>
+      <div class="val sm">Plataforma de mensageria + webhook</div>
+      <div class="foot">Carrinho e checkout abandonados exigem evento em tempo real da loja. Aqui entra uma plataforma homologada (Zenvia, Blip, Octadesk, Reportana ou similar) e um pedido formal à LojaComm/Octopus para liberar o webhook de carrinho. Abrimos esse chamado em paralelo à Rota A.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 5. SEGMENTAÇÃO ============ -->
+<div class="section">
+  <div class="section-title">5 · Como a base é dividida</div>
+  <p class="lead">Nada de "lista única". Cada pessoa entra em um dos grupos abaixo, e o grupo define o tom, a oferta e a frequência. A régua nunca compete com ela mesma.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th style="width:20%">Grupo</th><th style="width:26%">Quem é</th><th style="width:32%">O que ela precisa ouvir</th><th style="width:22%">Frequência</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Quente</strong> <span class="pill p-red">topo</span></td><td>Abandonou carrinho ou checkout nos últimos 3 dias</td><td>"Seu carrinho está guardado" + facilitação (Pix com 5%, 5x sem juros, prazo de entrega)</td><td>Até 3 toques em 72h, depois para</td></tr>
+        <tr><td><strong>Na hora de repor</strong></td><td>Comprou consumível e está chegando no fim do ciclo estimado</td><td>Lembrete útil com os itens exatos que ela levou, em 1 clique para repetir</td><td>1 toque no ciclo + 1 reforço em 7 dias</td></tr>
+        <tr><td><strong>Recém-comprou</strong></td><td>Pedido nos últimos 15 dias</td><td>Confirmação, rastreio e o complemento natural do que ela comprou</td><td>Serviço (sempre) + 1 sugestão</td></tr>
+        <tr><td><strong>Esfriando</strong></td><td>Sem comprar há 90–180 dias</td><td>Novidades da linha dela + motivo real para voltar</td><td>1 campanha por mês, no máximo</td></tr>
+        <tr><td><strong>Inativa</strong></td><td>Sem comprar há mais de 180 dias</td><td>Oferta de reconquista mais forte, campanha pontual</td><td>1 a cada 90 dias</td></tr>
+        <tr><td><strong>VIP / volume</strong></td><td>Compra frequente ou ticket muito acima da média</td><td>Atendimento humano, condição especial — e sondagem para o atacado</td><td>Contato humano, não automático</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="banner" style="margin-top:18px">
+    <div class="k">Oportunidade escondida na base</div>
+    <div class="t">Dentro do varejo existe um grupo que compra em quantidade e com frequência de <strong>lojista</strong> — ateliês, professoras de artesanato, pequenas confecções. Essa lista é a ponte natural para a <strong>Roma Importadora</strong>: são pessoas que já confiam na marca e hoje pagam preço de varejo por volume de atacado. Um contato humano para essa lista pode virar cliente B2B recorrente, com custo de aquisição zero.</div>
+  </div>
+</div>
+
+<!-- ============ 6. CICLO DE RECOMPRA ============ -->
+<div class="section">
+  <div class="section-title">6 · O ciclo de recompra por linha de produto</div>
+  <p class="lead">Aqui está o coração da personalização. Aviamento não tem um ciclo só: linha de costura acaba rápido, base de corte dura anos. Mandar o lembrete na hora errada queima a lista; na hora certa, parece um favor.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th style="width:26%">Linha</th><th style="width:14%">Comportamento</th><th style="width:16%" class="c">1º lembrete</th><th style="width:44%">Complemento natural (cross-sell)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Linhas de costura, agulhas, alfinetes</td><td><span class="pill p-green">Consumo rápido</span></td><td class="c"><strong>30–45 dias</strong></td><td>Cones da mesma cor, tesoura, fita métrica, caixa organizadora</td></tr>
+        <tr><td>Zíper, botão, elástico, viés</td><td><span class="pill p-green">Consumo rápido</span></td><td class="c"><strong>30–45 dias</strong></td><td>Linha combinando, entretela, aviamento de acabamento</td></tr>
+        <tr><td>Tinta spray e verniz spray</td><td><span class="pill p-green">Consumo rápido</span></td><td class="c"><strong>45–60 dias</strong></td><td>Verniz fixador, máscara/estêncil, base MDF, luva</td></tr>
+        <tr><td>Fitas (cetim, gorgurão), laços</td><td><span class="pill p-blue">Consumo médio</span></td><td class="c"><strong>45–60 dias</strong></td><td>Cola quente e refil, pérolas, aplique, embalagem</td></tr>
+        <tr><td>Feltro, EVA, tecidos para artesanato</td><td><span class="pill p-blue">Consumo médio</span></td><td class="c"><strong>60–75 dias</strong></td><td>Cola, moldes, olhos móveis, enchimento</td></tr>
+        <tr><td>Lantejoula, miçanga, paetê, pedraria</td><td><span class="pill p-blue">Consumo médio</span></td><td class="c"><strong>60–90 dias</strong></td><td>Linha de nylon, agulha de bordar, bastidor, fecho</td></tr>
+        <tr><td>Lãs e fios (tricô, crochê)</td><td><span class="pill p-amber">Sazonal</span></td><td class="c"><strong>60–90 dias + pico no frio</strong></td><td>Agulha de tricô/crochê, marcador de ponto, receita/kit</td></tr>
+        <tr><td>Bases de corte, tesouras, ferramentas, máquinas</td><td><span class="pill p-grey">Durável</span></td><td class="c"><strong>Não lembrar de repor</strong></td><td>Usar como gatilho de <strong>consumível</strong>: quem comprou base de corte precisa de lâmina, régua, cortador</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>Como esses prazos viram números reais:</strong> os intervalos acima são o ponto de partida do mercado. Com o export de pedidos, calculamos o intervalo mediano real entre a 1ª e a 2ª compra de cada linha na base da Roma e substituímos a estimativa pelo número de vocês — por linha e, quando houver histórico suficiente, por cliente. É esse cálculo que faz o lembrete cair no dia certo em vez de "mais ou menos".</p>
+
+  <div class="banner g" style="margin-top:16px">
+    <div class="k">A regra que evita o erro mais comum</div>
+    <div class="t">Produto durável nunca entra em régua de reposição — ninguém quer receber "está na hora de comprar outra tesoura". Ele entra como <strong>gatilho de consumível</strong>: quem comprou a ferramenta é exatamente quem vai precisar do insumo que ela consome.</div>
+  </div>
+</div>
+
+<!-- ============ 7. RÉGUAS ============ -->
+<div class="section">
+  <div class="section-title">7 · As 8 réguas de comunicação</div>
+  <p class="lead">Visão geral do que roda, quando roda e para que serve. O detalhamento com as mensagens vem na seção seguinte.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th style="width:5%">#</th><th style="width:24%">Régua</th><th style="width:19%">Gatilho</th><th style="width:14%">Toques</th><th style="width:20%">Objetivo</th><th style="width:18%">Fase</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>R1</strong></td><td>Checkout abandonado / Pix não pago</td><td>Iniciou pagamento e não concluiu</td><td>3 em 72h</td><td>Fechar a venda já quase feita</td><td><span class="pill p-amber">Fase 2</span></td></tr>
+        <tr><td><strong>R2</strong></td><td>Carrinho abandonado</td><td>Adicionou item e saiu</td><td>3 em 72h</td><td>Trazer de volta com os produtos escolhidos</td><td><span class="pill p-amber">Fase 2</span></td></tr>
+        <tr><td><strong>R3</strong></td><td>Pós-compra (serviço)</td><td>Pedido aprovado / enviado</td><td>2–3</td><td>Confiança, menos "cadê meu pedido" no SAC e abertura de canal</td><td><span class="pill p-green">Fase 1</span></td></tr>
+        <tr><td><strong>R4</strong></td><td>Reposição por ciclo</td><td>Fim do ciclo da linha comprada</td><td>2</td><td>Recompra — o motor principal</td><td><span class="pill p-green">Fase 1</span></td></tr>
+        <tr><td><strong>R5</strong></td><td>Cross-sell de cesta</td><td>7–15 dias após a entrega</td><td>1</td><td>Aumentar ticket e frequência</td><td><span class="pill p-green">Fase 1</span></td></tr>
+        <tr><td><strong>R6</strong></td><td>Reativação de inativos</td><td>90–180 e +180 dias sem comprar</td><td>2 por campanha</td><td>Recuperar cliente que parou</td><td><span class="pill p-green">Fase 1</span></td></tr>
+        <tr><td><strong>R7</strong></td><td>VIP e ponte com o atacado</td><td>Frequência ou volume acima do corte</td><td>Humano</td><td>Fidelizar e originar cliente B2B</td><td><span class="pill p-blue">Fase 3</span></td></tr>
+        <tr><td><strong>R8</strong></td><td>Voltou ao estoque</td><td>SKU desejado volta a ficar disponível</td><td>1</td><td>Converter demanda que já existia</td><td><span class="pill p-blue">Fase 3</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ 8. MENSAGENS ============ -->
+<div class="section">
+  <div class="section-title">8 · As mensagens, prontas</div>
+  <p class="lead">Textos escritos para o público da Roma — costureira, artesã, ateliê — em tom de gente, não de robô. Os campos entre colchetes são preenchidos automaticamente com os dados de cada pessoa. Todos precisam de aprovação prévia da Meta antes de entrar no ar (processo padrão, de 1 a 2 dias).</p>
+
+  <!-- R1 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R1</span><h3>Checkout abandonado / Pix gerado e não pago</h3><span class="pill p-red">Maior conversão de todas</span></div>
+    <div class="rmeta">É a pessoa que já escolheu o frete, já viu o valor final e parou no último clique. Quase sempre é dúvida de pagamento, distração ou o Pix que ela deixou para depois e esqueceu.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">Checkout iniciado sem pagamento</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">40 min · 20 h · 68 h</div></div>
+      <div class="gm"><div class="k">Incentivo</div><div class="v">Só no 3º toque</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">12–20% de recuperação</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Toque 1 · 40 minutos depois</span>Oi, <span class="var">[nome]</span>! Aqui é da Roma Aviamentos 💚
+Vi que seu pedido ficou quase pronto e o pagamento não foi confirmado. Guardei tudo separadinho pra você.
+
+🛒 <span class="var">[itens]</span>
+💰 Total: <span class="var">[valor]</span>
+
+É só tocar no botão que você volta exatamente de onde parou. Se preferir, pagando no Pix você tem <strong>5% de desconto</strong> na hora.
+        <div class="btns"><span class="btn">Finalizar meu pedido</span><span class="btn">Preciso de ajuda</span></div>
+      </div>
+      <div class="bub"><span class="when">Toque 2 · no dia seguinte</span>Oi, <span class="var">[nome]</span>, tudo bem? Seu carrinho ainda está guardado 😊
+
+Se ficou alguma dúvida, resolvo rapidinho aqui:
+• <strong>Pix</strong> com 5% de desconto, aprovação na hora
+• <strong>Até 5x sem juros</strong> no cartão
+• Envio saindo do Brás — <span class="var">[prazo]</span> pra <span class="var">[cidade]</span>
+
+Quer que eu confira o frete pro seu CEP?
+        <div class="btns"><span class="btn">Voltar ao carrinho</span><span class="btn">Falar com atendente</span></div>
+      </div>
+      <div class="bub"><span class="when">Toque 3 · 3º dia (último)</span><span class="var">[nome]</span>, este é meu último lembrete pra não te encher 🙂
+
+Separei um cupom só pro seu carrinho: <strong><span class="var">[cupom]</span></strong> — vale até amanhã, <span class="var">[data]</span>.
+
+Depois disso os itens voltam pro estoque geral e não consigo garantir a disponibilidade.
+        <div class="btns"><span class="btn">Usar meu cupom</span><span class="btn">Não quero receber</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R2 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R2</span><h3>Carrinho abandonado</h3></div>
+    <div class="rmeta">Pessoa colocou produto no carrinho e saiu antes do checkout. Volume maior que a R1, intenção um pouco menor — por isso o tom é mais leve e o foco é resolver o frete completando a cesta.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">Carrinho parado</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">1 h · 24 h · 72 h</div></div>
+      <div class="gm"><div class="k">Incentivo</div><div class="v">Frete no 2º, desconto no 3º</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">6–12% de recuperação</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Toque 1 · 1 hora depois</span>Oi, <span class="var">[nome]</span>! 💚 Você deixou <span class="var">[produto]</span> no carrinho da Roma.
+
+Está tudo separado, é só continuar de onde parou.
+        <div class="btns"><span class="btn">Ver meu carrinho</span></div>
+      </div>
+      <div class="bub"><span class="when">Toque 2 · 24 horas · foco no frete</span><span class="var">[nome]</span>, uma dica de quem vende aviamento há muito tempo 😉
+
+Como nossos produtos são pequenos, <strong>o frete é o mesmo para vários itens</strong> — dá pra aproveitar a viagem e já garantir o que você vai precisar no próximo trabalho.
+
+Quem levou <span class="var">[produto]</span> costuma levar junto:
+• <span class="var">[complemento 1]</span>
+• <span class="var">[complemento 2]</span>
+• <span class="var">[complemento 3]</span>
+        <div class="btns"><span class="btn">Completar meu carrinho</span></div>
+      </div>
+      <div class="bub"><span class="when">Toque 3 · 72 horas (último)</span>Última chamada, <span class="var">[nome]</span> 🙂 Seu carrinho vai expirar hoje.
+
+Cupom <strong><span class="var">[cupom]</span></strong> ativo até meia-noite. No Pix, ainda entram os 5% em cima disso.
+        <div class="btns"><span class="btn">Finalizar agora</span><span class="btn">Sair da lista</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R3 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R3</span><h3>Pós-compra — o toque que não custa quase nada</h3><span class="pill p-green">Mensagem de serviço</span></div>
+    <div class="rmeta">Mensagens de acompanhamento de pedido têm custo muito menor que as promocionais (e são gratuitas quando a cliente responde). Além de reduzir "cadê meu pedido" no atendimento, é aqui que a Roma constrói a permissão para as outras réguas.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">Pedido pago / enviado / entregue</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">3</div></div>
+      <div class="gm"><div class="k">Custo</div><div class="v">Muito baixo</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">−30% de contatos de rastreio no SAC</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Na aprovação do pagamento</span>Pagamento confirmado, <span class="var">[nome]</span>! 🎉
+Pedido <span class="var">[número]</span> já está sendo separado aqui no Brás.
+
+Assim que sair pra entrega eu te aviso por aqui com o código de rastreio.
+      </div>
+      <div class="bub"><span class="when">No envio</span>Seu pedido saiu pra viagem 🚚
+Rastreio: <span class="var">[código]</span> · Previsão: <span class="var">[data]</span>
+
+Pode acompanhar direto no link abaixo.
+        <div class="btns"><span class="btn">Acompanhar entrega</span></div>
+      </div>
+      <div class="bub"><span class="when">3 dias após a entrega</span><span class="var">[nome]</span>, chegou tudo certinho? 😊
+
+Se algo veio diferente do esperado, me conta que a gente resolve. E se você fizer algo lindo com o que comprou, manda foto — a gente adora ver (e às vezes publica, com sua autorização) 💚
+      </div>
+    </div>
+    <p class="note">Essa última mensagem faz três coisas ao mesmo tempo: mede satisfação, gera conteúdo real para as redes (a audiência social da Roma é enorme) e abre a janela de conversa que torna as mensagens seguintes mais baratas.</p>
+  </div>
+
+  <!-- R4 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R4</span><h3>Reposição por ciclo — o motor da recompra</h3><span class="pill p-green">Maior receita no acumulado</span></div>
+    <div class="rmeta">Cada cliente recebe no fim do ciclo <strong>da linha que ela comprou</strong>, com os itens exatos dela e a opção de repetir o pedido em um toque. Não é promoção: é um lembrete útil.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">Ciclo da linha (seção 6)</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">2, com 7 dias entre eles</div></div>
+      <div class="gm"><div class="k">Incentivo</div><div class="v">Nenhum no 1º toque</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">3–6% de conversão</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Toque 1 · no fim do ciclo</span>Oi, <span class="var">[nome]</span>! 💚 Faz <span class="var">[dias]</span> dias que você levou <span class="var">[produto]</span> da Roma.
+
+Se já estiver acabando, deixei seu pedido pronto pra repetir — mesmos itens, mesmas cores, sem precisar procurar tudo de novo:
+
+🧵 <span class="var">[lista de itens]</span>
+
+E se precisar de outra cor ou quantidade, é só me falar que eu ajusto.
+        <div class="btns"><span class="btn">Repetir meu pedido</span><span class="btn">Quero mudar algo</span></div>
+      </div>
+      <div class="bub"><span class="when">Toque 2 · 7 dias depois</span><span class="var">[nome]</span>, chegou coisa nova na linha de <span class="var">[categoria]</span> essa semana 👀
+
+<span class="var">[novidade 1]</span>
+<span class="var">[novidade 2]</span>
+
+Se for repor mesmo, aproveita e leva junto — o frete é o mesmo.
+        <div class="btns"><span class="btn">Ver novidades</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R5 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R5</span><h3>Cross-sell de cesta</h3></div>
+    <div class="rmeta">Entre 7 e 15 dias depois da entrega, quando a cliente já começou o trabalho e está sentindo falta do complemento. É a régua que mais mexe no ticket médio — a alavanca que já vem puxando o faturamento da Roma.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">D+7 a D+15 da entrega</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">1</div></div>
+      <div class="gm"><div class="k">Base</div><div class="v">Cesta lógica da seção 6</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">2–4% de conversão</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Único toque</span>Oi, <span class="var">[nome]</span>! Como foi com <span class="var">[produto]</span>? 😊
+
+Quem trabalha com isso quase sempre precisa também de:
+• <span class="var">[complemento 1]</span> — <span class="var">[preço]</span>
+• <span class="var">[complemento 2]</span> — <span class="var">[preço]</span>
+
+Deixei separado aqui, caso você queira aproveitar o mesmo frete.
+        <div class="btns"><span class="btn">Ver os itens</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R6 -->
+  <div class="regua">
+    <div class="rh"><span class="rid">R6</span><h3>Reativação de quem parou</h3></div>
+    <div class="rmeta">Duas ondas: quem sumiu há 90–180 dias (ainda lembra da Roma, precisa de motivo) e quem sumiu há mais de 180 (precisa de oferta forte). Campanha, não automação diária.</div>
+    <div class="grid-meta">
+      <div class="gm"><div class="k">Gatilho</div><div class="v">90–180 d · +180 d</div></div>
+      <div class="gm"><div class="k">Toques</div><div class="v">2 por campanha</div></div>
+      <div class="gm"><div class="k">Incentivo</div><div class="v">Progressivo por tempo parado</div></div>
+      <div class="gm"><div class="k">Meta</div><div class="v">1,5–3% de conversão</div></div>
+    </div>
+    <div class="chat">
+      <div class="bub"><span class="when">Onda 1 · 90 a 180 dias</span>Oi, <span class="var">[nome]</span>! Senti sua falta por aqui 💚
+
+Desde a sua última compra chegou bastante coisa nova em <span class="var">[categoria preferida]</span>. Separei o que mais tem saído:
+
+<span class="var">[3 produtos da linha dela]</span>
+
+E se quiser algo específico, me pergunta — tem mais de 26 mil itens no site e eu acho pra você.
+        <div class="btns"><span class="btn">Ver novidades</span></div>
+      </div>
+      <div class="bub"><span class="when">Onda 2 · mais de 180 dias</span><span class="var">[nome]</span>, faz um tempo que a gente não se fala 🙂
+
+Preparei uma condição de boas-vindas de volta: <strong><span class="var">[cupom]</span></strong>, válido por 7 dias no site todo.
+
+A Roma é do Brás e trabalha com atacado e varejo — se você produz pra vender, vale muito a pena comparar nossos preços.
+        <div class="btns"><span class="btn">Usar meu cupom</span><span class="btn">Não quero mais receber</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R7 / R8 -->
+  <div class="cards c2">
+    <div class="regua" style="margin-bottom:0">
+      <div class="rh"><span class="rid">R7</span><h3>VIP e ponte com o atacado</h3></div>
+      <div class="rmeta">Lista curta, contato humano, sem automação. Objetivo duplo: fidelizar quem sustenta o faturamento e descobrir quem é lojista disfarçado de varejo.</div>
+      <div class="chat">
+        <div class="bub"><span class="when">Abordagem humana</span>Oi, <span class="var">[nome]</span>! Aqui é a <span class="var">[atendente]</span>, da Roma.
+
+Vi que você compra com a gente com frequência e queria te agradecer de verdade 💚
+
+Se você produz pra vender ou revende, consigo te apresentar as condições de atacado da Roma Importadora — os preços mudam bastante no volume. Faz sentido pra você?
+        </div>
+      </div>
+    </div>
+    <div class="regua" style="margin-bottom:0">
+      <div class="rh"><span class="rid">R8</span><h3>Voltou ao estoque</h3></div>
+      <div class="rmeta">Cerca de 1 em cada 10 produtos do catálogo fica indisponível em algum momento. Quem quis e não achou é a compradora mais fácil que existe — basta avisar.</div>
+      <div class="chat">
+        <div class="bub"><span class="when">No momento da reposição</span>Boa notícia, <span class="var">[nome]</span>! 🎉
+
+<span class="var">[produto]</span> voltou pro estoque. Como costuma sair rápido, quis te avisar primeiro.
+          <div class="btns"><span class="btn">Garantir o meu</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 9. INCENTIVO ============ -->
+<div class="section">
+  <div class="section-title">9 · Política de desconto — proteger a margem</div>
+  <p class="lead">O erro clássico é começar dando desconto. Boa parte de quem abandonou volta sozinha com um empurrão simples — dar 10% para essa pessoa é jogar margem fora. Por isso a régua sobe em escada.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:12%">Toque</th><th style="width:30%">O que se oferece</th><th style="width:20%">Custo para a Roma</th><th style="width:38%">Por quê</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1º</strong></td><td>Nada. Só o link do carrinho + lembrar do Pix com 5% e do 5x sem juros</td><td><span class="pill p-green">Zero</span></td><td>Essas condições <em>já existem</em> e a cliente não as viu. Informar converte sem custo novo</td></tr>
+        <tr><td><strong>2º</strong></td><td>Ajuda com o frete: sugestão de completar a cesta ou cupom de frete acima de um valor mínimo</td><td><span class="pill p-amber">Baixo</span></td><td>Ataca a objeção real do ticket baixo e ainda <strong>aumenta</strong> o pedido em vez de reduzir</td></tr>
+        <tr><td><strong>3º</strong></td><td>Cupom de 7% a 10%, exclusivo, com validade de 24h</td><td><span class="pill p-red">Médio</span></td><td>Só para quem ignorou os dois anteriores — ou seja, quem realmente não voltaria sem isso</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="bullets" style="margin-top:14px">
+    <li><strong>Cupom sempre exclusivo e rastreável</strong> (um código por régua, e de preferência por pessoa) — é assim que se mede o retorno de verdade e se evita vazamento em sites de cupom.</li>
+    <li><strong>Nunca no site inteiro.</strong> Desconto público treina o cliente a esperar promoção; desconto individual e com prazo curto resolve o caso e não vicia a base.</li>
+    <li><strong>Piso de margem por linha.</strong> Linhas de margem apertada saem da mecânica de desconto e entram só na de frete/cesta.</li>
+  </ul>
+</div>
+
+<!-- ============ 10. REGRAS ============ -->
+<div class="section">
+  <div class="section-title">10 · Frequência, higiene e conformidade</div>
+  <p class="lead">Uma base de WhatsApp se destrói rápido se for tratada como lista de spam. Estas regras não são burocracia — são o que mantém o canal funcionando no ano que vem.</p>
+
+  <div class="cards c2">
+    <div class="card blue">
+      <div class="lbl">Regras de convivência</div>
+      <div class="val sm">Limites de contato</div>
+      <div class="foot">
+        • Máximo de <strong>4 mensagens promocionais por mês</strong> por pessoa.<br>
+        • Envio das <strong>8h às 20h</strong>, de segunda a sábado. Nunca domingo, nunca feriado.<br>
+        • <strong>Uma régua por vez</strong>: quem está em recuperação de carrinho não recebe campanha de reativação.<br>
+        • <strong>Supressão de 7 dias</strong> após qualquer compra — ninguém recebe cobrança de carrinho depois de já ter comprado.<br>
+        • Quem responde vira <strong>conversa humana</strong> na hora; a automação para.
+      </div>
+    </div>
+    <div class="card green">
+      <div class="lbl">LGPD e regras da Meta</div>
+      <div class="val sm">O que precisa estar em ordem</div>
+      <div class="foot">
+        • <strong>Consentimento</strong> registrado no cadastro/checkout, com data e origem — texto claro autorizando contato por WhatsApp.<br>
+        • <strong>Saída fácil</strong> em toda mensagem promocional, com baixa imediata da lista.<br>
+        • <strong>Modelos aprovados</strong> pela Meta antes de qualquer disparo.<br>
+        • <strong>Aquecimento do número</strong>: começar com volume baixo e subir conforme a qualidade se mantém, para preservar a reputação.<br>
+        • Base própria da Roma, sempre. <strong>Nada de lista comprada</strong> — é o caminho mais rápido para o bloqueio.
+      </div>
+    </div>
+  </div>
+
+  <p class="note"><strong>Sobre custo de mensagem:</strong> a Meta cobra por mensagem enviada, com preço diferente por tipo — as promocionais custam bem mais que as de serviço/acompanhamento de pedido, e a conversa iniciada pela cliente é gratuita. É por isso que a estratégia usa a R3 (pós-compra) como base: ela é barata, é bem recebida e abre janelas de conversa que barateiam o resto. Valores vigentes a confirmar na contratação.</p>
+</div>
+
+<!-- ============ 11. MEDIÇÃO ============ -->
+<div class="section">
+  <div class="section-title">11 · Como vamos medir</div>
+  <p class="lead">A pergunta que importa não é "quantas mensagens enviamos", é <strong>quanto de venda existe hoje que não existiria sem o canal</strong>. Por isso a medição inclui um grupo de controle.</p>
+
+  <div class="cards c4">
+    <div class="card wa"><div class="lbl">Entrega e leitura</div><div class="val">85–95%</div><div class="foot">Saúde da base e qualidade dos telefones</div></div>
+    <div class="card blue"><div class="lbl">Cliques na mensagem</div><div class="val">15–25%</div><div class="foot">Qualidade da oferta e do texto</div></div>
+    <div class="card green"><div class="lbl">Conversão da régua</div><div class="val">varia</div><div class="foot">Meta por régua definida na seção 7</div></div>
+    <div class="card red"><div class="lbl">Pedidos de saída</div><div class="val">&lt; 1%</div><div class="foot">Termômetro de excesso: passou disso, reduzimos a frequência</div></div>
+  </div>
+
+  <div class="banner" style="margin-top:8px">
+    <div class="k">Grupo de controle — 10% da base</div>
+    <div class="t">Em cada régua, 10% das pessoas elegíveis <strong>não recebem nada</strong>. Comparando o que esse grupo compra sozinho com o que o grupo que recebeu compra, sabemos a receita <strong>de fato incremental</strong> — sem contar como vitória a venda que aconteceria de qualquer jeito. É o que separa relatório bonito de resultado real.</div>
+  </div>
+
+  <ul class="bullets">
+    <li>Todo link levará marcação própria de origem, para a venda aparecer identificada no Google Analytics e não se misturar ao tráfego direto.</li>
+    <li>Cupom exclusivo por régua como segunda fonte de conferência.</li>
+    <li>Relatório mensal com receita por régua, custo do canal, retorno e evolução da taxa de recompra da base — integrado ao acompanhamento que a Roma já recebe.</li>
+    <li>As listas geradas aqui também alimentam a mídia: público de abandono no Meta e no Google, exclusão de quem já comprou e público semelhante a partir dos melhores clientes — o que ajuda diretamente na meta de trazer clientes novos.</li>
+  </ul>
+</div>
+
+<!-- ============ 12. PROJEÇÃO ============ -->
+<div class="section">
+  <div class="section-title">12 · Projeção de resultado</div>
+  <p class="lead">Os números abaixo são <strong>estimativas com premissas declaradas</strong>, feitas a partir do volume atual de pedidos e do ticket médio da Roma, com taxas de referência do mercado brasileiro de e-commerce. O primeiro entregável do projeto é justamente trocar essas premissas pelos números reais da base.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:26%">Régua</th><th class="r" style="width:16%">Alcance/mês</th><th class="r" style="width:14%">Conversão</th><th class="r" style="width:14%">Pedidos</th><th class="r" style="width:18%">Receita estimada</th><th style="width:12%">Confiança</th></tr></thead>
+      <tbody>
+        <tr><td>R1 · Checkout abandonado</td><td class="r">~720</td><td class="r">12%</td><td class="r">86</td><td class="r"><strong>R$ 19.800</strong></td><td><span class="pill p-green">Alta</span></td></tr>
+        <tr><td>R2 · Carrinho abandonado</td><td class="r">~750</td><td class="r">7%</td><td class="r">52</td><td class="r"><strong>R$ 12.000</strong></td><td><span class="pill p-amber">Média</span></td></tr>
+        <tr><td>R4 · Reposição por ciclo</td><td class="r">~1.500</td><td class="r">4%</td><td class="r">60</td><td class="r"><strong>R$ 13.800</strong></td><td><span class="pill p-amber">Média</span></td></tr>
+        <tr><td>R5 · Cross-sell de cesta</td><td class="r">~1.000</td><td class="r">3%</td><td class="r">30</td><td class="r"><strong>R$ 6.900</strong></td><td><span class="pill p-amber">Média</span></td></tr>
+        <tr><td>R6 · Reativação</td><td class="r">~1.300</td><td class="r">2%</td><td class="r">26</td><td class="r"><strong>R$ 6.000</strong></td><td><span class="pill p-grey">A validar</span></td></tr>
+        <tr class="tot"><td>Total mensal (cenário-base)</td><td class="r">~5.270</td><td class="r">—</td><td class="r">254</td><td class="r">R$ 58.500</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>Premissas:</strong> ~1.000 pedidos/mês e ticket médio de R$ 230 (base: jun–jul/2026); proporção de abandono e de contatos com telefone válido conforme padrão do setor; taxas de conversão na faixa média de referência do mercado brasileiro para WhatsApp. Cenário conservador: metade destes valores (~R$ 29 mil/mês). Cenário otimista, com base engajada e oferta afiada: ~R$ 85 mil/mês.</p>
+
+  <div class="cards c3" style="margin-top:18px">
+    <div class="card green"><div class="lbl">Receita incremental (base)</div><div class="val">R$ 58,5 mil</div><div class="foot">por mês, ≈ +20% sobre o faturamento atual</div></div>
+    <div class="card blue"><div class="lbl">Custo do canal</div><div class="val">R$ 4–5 mil</div><div class="foot">~12 mil mensagens/mês + plataforma</div></div>
+    <div class="card wa"><div class="lbl">Retorno estimado</div><div class="val">~12x</div><div class="foot">Sem aumentar um real de mídia</div></div>
+  </div>
+  <p class="note">Nenhuma projeção substitui teste. A recomendação é começar pelas réguas de maior confiança, medir com grupo de controle por 60 dias e só então decidir o tamanho definitivo da operação.</p>
+</div>
+
+<!-- ============ 13. IMPLANTAÇÃO ============ -->
+<div class="section">
+  <div class="section-title">13 · Plano de implantação</div>
+
+  <div class="fase">
+    <div class="ft">Fase 1 · Semanas 1 a 3 — começa a faturar sem depender de ninguém</div>
+    <h3>Recompra, cross-sell, reativação e pós-compra</h3>
+    <p>Contratação do WhatsApp oficial e verificação do número · export do histórico de pedidos e cálculo do ciclo real de recompra por linha · redação e aprovação dos modelos na Meta · montagem das réguas R3, R4, R5 e R6 · ajuste do texto de consentimento no checkout. <strong>Não depende de desenvolvimento na loja.</strong></p>
+  </div>
+
+  <div class="fase">
+    <div class="ft">Fase 2 · Semanas 3 a 6 — a fatia mais quente</div>
+    <h3>Carrinho e checkout abandonados</h3>
+    <p>Abertura do chamado com a LojaComm/Octopus para liberar o evento de carrinho e checkout em tempo real · escolha da plataforma de mensageria · montagem das réguas R1 e R2 com a escada de incentivo · testes com volume controlado. <strong>Único ponto com dependência externa</strong> — por isso o chamado é aberto já na semana 1.</p>
+  </div>
+
+  <div class="fase">
+    <div class="ft">Fase 3 · Semanas 6 a 10 — refino e expansão</div>
+    <h3>VIP, volta ao estoque e otimização</h3>
+    <p>Lista VIP e sondagem de atacado · aviso de reposição de estoque · testes de horário, texto e nível de desconto · integração das listas com Meta e Google Ads · primeiro relatório completo com grupo de controle e leitura de receita incremental.</p>
+  </div>
+</div>
+
+<!-- ============ 14. O QUE PRECISAMOS ============ -->
+<div class="section">
+  <div class="section-title">14 · O que precisamos da Roma para começar</div>
+  <div class="check">
+    <ul>
+      <li><strong>Export do histórico de pedidos</strong> dos últimos 12 a 24 meses, com: identificador do cliente, telefone, data do pedido, valor, itens (código, nome, categoria/linha, quantidade) e status. Em CSV já resolve.</li>
+      <li><strong>Definição do número de WhatsApp</strong> que será usado — se o atual do atendimento entra na API oficial ou se será um número novo dedicado.</li>
+      <li><strong>Acesso ao Gerenciador de Negócios</strong> da Meta para configurar a conta de mensagens.</li>
+      <li><strong>Aval para abrir o chamado na LojaComm/Octopus</strong> pedindo o evento de carrinho e checkout abandonado (podemos redigir o pedido técnico, como já fizemos no chamado anterior).</li>
+      <li><strong>Aprovação da política de desconto</strong>: teto de cupom, valor mínimo para frete e quais linhas ficam fora por margem.</li>
+      <li><strong>Uma pessoa responsável no atendimento</strong> para receber as respostas — o volume de conversas vai aumentar, e isso é boa notícia desde que tenha quem responda.</li>
+      <li><strong>Ajuste do texto de consentimento</strong> no cadastro e no checkout (fornecemos a redação).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 15. RISCOS ============ -->
+<div class="section">
+  <div class="section-title">15 · Riscos e como tratamos</div>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:26%">Risco</th><th style="width:36%">Como se manifesta</th><th style="width:38%">Como evitamos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bloqueio do número</strong></td><td>Muitas denúncias de spam derrubam a qualidade e limitam o envio</td><td>API oficial, base com consentimento, aquecimento gradual, limite de frequência e saída fácil em toda mensagem</td></tr>
+        <tr><td><strong>Atraso da plataforma</strong></td><td>LojaComm demora a liberar o evento de carrinho</td><td>Fase 1 não depende disso — a Roma já está faturando com recompra enquanto o chamado anda</td></tr>
+        <tr><td><strong>Base sem telefone ou sem aceite</strong></td><td>Alcance menor que o projetado</td><td>Medimos no primeiro export; ajuste no checkout aumenta a base elegível mês a mês</td></tr>
+        <tr><td><strong>Canibalização</strong></td><td>Dar desconto para quem compraria de qualquer forma</td><td>Escada de incentivo (nada no 1º toque) + grupo de controle medindo o que é realmente incremental</td></tr>
+        <tr><td><strong>Sobrecarga do atendimento</strong></td><td>Mais conversas do que a equipe consegue responder</td><td>Volume liberado por etapas, respostas rápidas padronizadas e horários de envio combinados com a escala da equipe</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="banner g">
+  <div class="k">Em resumo</div>
+  <div class="t">A Roma já pagou para conquistar essas clientes. Elas conhecem a marca, gostam do preço e voltam sozinhas — em parte. A proposta é simplesmente estar presente no momento em que a linha está acabando e no minuto em que o carrinho foi deixado para trás. Sem verba nova de mídia, sem promoção geral, sem incomodar ninguém.</div>
+</div>
+
+</div>
+
+<div class="footer">
+  <div>Gestão GGD · Proposta estratégica para Roma Aviamentos</div>
+  <div>Agosto/2026 · Documento de sugestão — nenhuma ação executada</div>
+</div>
+
+</div><!-- /#report -->
+
+</body>
+</html>
