@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LE Medical — Acompanhamento diário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --espresso:#403838; --azul-suave:#A4C9FA; --azul:#4A7FC7; --gelo:#EEF4FD;
+  --branco:#fff; --pos:#4E9C7A; --aten:#C9A24B; --neg:#C15B5B;
+  --linha:#E3EAF5; --cinza:#7A7070;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--gelo);color:var(--espresso);
+     font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+     font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Nunito,Inter,sans-serif;font-weight:800;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 20px 64px}
+header.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;
+           justify-content:space-between;margin-bottom:22px}
+h1{font-size:26px;letter-spacing:-.4px}
+.sub{color:var(--cinza);font-size:14px;margin-top:4px}
+.meses{display:flex;gap:8px;flex-wrap:wrap}
+.mes{border:1px solid var(--linha);background:var(--branco);color:var(--espresso);
+     border-radius:999px;padding:8px 16px;font:600 14px Inter,sans-serif;cursor:pointer}
+.mes:hover{border-color:var(--azul-suave)}
+.mes.on{background:var(--azul);border-color:var(--azul);color:#fff}
+.card{background:var(--branco);border:1px solid var(--linha);border-radius:16px;
+      padding:18px 20px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.kpis{grid-template-columns:1fr}}
+.kpi .lab{font-size:12.5px;color:var(--cinza);font-weight:500;text-transform:none}
+.kpi .val{font-family:Nunito,sans-serif;font-weight:800;font-size:26px;letter-spacing:-.5px;
+          margin-top:6px;color:var(--azul)}
+.kpi .val.dark{color:var(--espresso)}
+.kpi .hint{font-size:12px;color:var(--cinza);margin-top:4px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:18px}
+.plat h3{font-size:16px;display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot.meta{background:var(--azul)}
+.dot.google{background:var(--azul-suave)}
+.dot.site{background:var(--pos)}
+.plinha{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--linha);font-size:14px}
+.plinha:last-child{border-bottom:0}
+.plinha b{font-weight:600}
+section{margin-bottom:18px}
+h2{font-size:18px;margin-bottom:12px}
+.tabwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:920px;font-size:13.5px}
+th,td{padding:8px 10px;text-align:right;white-space:nowrap}
+th{font-weight:600;color:var(--cinza);font-size:12px;border-bottom:1px solid var(--linha)}
+thead tr.grp th{text-align:center;font-family:Nunito,sans-serif;font-weight:800;
+                color:var(--espresso);font-size:12.5px;border-bottom:0;padding-bottom:2px}
+td:first-child,th:first-child{text-align:left;position:sticky;left:0;background:var(--branco)}
+tbody tr:nth-child(even) td{background:#FAFCFF}
+tbody tr:nth-child(even) td:first-child{background:#FAFCFF}
+tbody tr:hover td{background:var(--gelo)}
+td.sep,th.sep{border-left:1px solid var(--linha)}
+tfoot td{font-weight:700;border-top:2px solid var(--linha);background:var(--branco)!important}
+.muted{color:#B9B2B2}
+.nota{font-size:13px;color:var(--cinza);background:var(--branco);border:1px solid var(--linha);
+      border-radius:16px;padding:16px 20px}
+.nota b{color:var(--espresso)}
+.nota ul{margin:8px 0 0;padding-left:18px}
+.nota li{margin:4px 0}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--cinza);margin-bottom:10px}
+.legenda span{display:flex;align-items:center;gap:6px}
+svg{display:block;width:100%;height:auto}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 9px;
+      background:var(--gelo);color:var(--azul)}
+footer{margin-top:28px;font-size:12.5px;color:var(--cinza);text-align:center}
+@media(max-width:640px){h1{font-size:22px}.kpi .val{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>LE Medical — Acompanhamento diário</h1>
+      <div class="sub">Investimento, faturamento, vendas, ROAS e custo por venda — por plataforma, dia a dia.
+        <span class="pill" id="atualizado"></span></div>
+    </div>
+    <div class="meses" id="meses"></div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid2" id="plataformas"></div>
+
+  <section class="card">
+    <h2>Investimento × faturamento por dia</h2>
+    <div class="legenda">
+      <span><i class="dot meta"></i> Investimento Meta</span>
+      <span><i class="dot google"></i> Investimento Google</span>
+      <span><i class="dot site"></i> <span id="legFat">Faturamento</span></span>
+      <span>escala das barras à esquerda · da linha à direita</span>
+    </div>
+    <div id="gfx"></div>
+  </section>
+
+  <section class="card">
+    <h2>Dia a dia</h2>
+    <div class="tabwrap"><table id="tab"></table></div>
+  </section>
+
+  <div class="nota">
+    <b>Como ler:</b>
+    <ul>
+      <li><b>Faturamento por plataforma</b> é o valor de conversão que cada plataforma se atribui (Meta e Google contam a mesma venda quando os dois participam) — por isso a soma passa do faturamento real do site.</li>
+      <li><b>Real (site)</b> vem da Nuvemshop e é a fonte da verdade: o <b>ROAS real</b> usa faturamento do site ÷ investimento total.</li>
+      <li><b>Custo por venda</b> = investimento ÷ vendas da própria plataforma; no total, investimento total ÷ pedidos reais.</li>
+      <li>Investimento é o valor de mídia. O Meta ainda cobra <b id="imp"></b> de impostos (COFINS/PIS/ISS) sobre o valor cobrado — mostrado à parte no card de investimento.</li>
+      <li>Google conta conversões com casas decimais (modelo de atribuição), por isso vendas do Google podem sair quebradas.</li>
+    </ul>
+  </div>
+
+  <footer>GGD — Gio Growth Digital · dados Meta Ads + Google Ads (Windsor.ai) e Nuvemshop</footer>
+</div>
+
+<script id="dados" type="application/json">{"atualizado": "07/08/2026", "gerado_em": "2026-08-07", "imposto_meta": 0.1383, "meta": [{"date": "2026-07-01", "spend": 1004.74, "impr": 110068.0, "clicks": 1181.0, "lpv": 649.0, "vendas": 32.0, "receita": 34181.92}, {"date": "2026-07-02", "spend": 850.39, "impr": 82239.0, "clicks": 991.0, "lpv": 583.0, "vendas": 25.0, "receita": 13833.3}, {"date": "2026-07-03", "spend": 1121.25, "impr": 126537.0, "clicks": 1244.0, "lpv": 707.0, "vendas": 16.0, "receita": 14492.93}, {"date": "2026-07-04", "spend": 1370.58, "impr": 126520.0, "clicks": 1517.0, "lpv": 874.0, "vendas": 30.0, "receita": 28219.15}, {"date": "2026-07-05", "spend": 1306.66, "impr": 131678.0, "clicks": 1586.0, "lpv": 982.0, "vendas": 35.0, "receita": 31234.75}, {"date": "2026-07-06", "spend": 1068.44, "impr": 151180.0, "clicks": 1331.0, "lpv": 771.0, "vendas": 25.0, "receita": 19399.9}, {"date": "2026-07-07", "spend": 1405.83, "impr": 146013.0, "clicks": 1973.0, "lpv": 1197.0, "vendas": 40.0, "receita": 26085.54}, {"date": "2026-07-08", "spend": 1151.66, "impr": 110979.0, "clicks": 1784.0, "lpv": 1012.0, "vendas": 35.0, "receita": 26634.24}, {"date": "2026-07-09", "spend": 817.88, "impr": 94169.0, "clicks": 1294.0, "lpv": 794.0, "vendas": 44.0, "receita": 37293.09}, {"date": "2026-07-10", "spend": 698.53, "impr": 88057.0, "clicks": 1216.0, "lpv": 716.0, "vendas": 23.0, "receita": 18846.65}, {"date": "2026-07-11", "spend": 670.81, "impr": 86483.0, "clicks": 1299.0, "lpv": 764.0, "vendas": 21.0, "receita": 17234.19}, {"date": "2026-07-12", "spend": 798.92, "impr": 121663.0, "clicks": 1567.0, "lpv": 958.0, "vendas": 27.0, "receita": 23633.68}, {"date": "2026-07-13", "spend": 757.86, "impr": 103147.0, "clicks": 1332.0, "lpv": 841.0, "vendas": 34.0, "receita": 26327.8}, {"date": "2026-07-14", "spend": 771.83, "impr": 87842.0, "clicks": 1200.0, "lpv": 704.0, "vendas": 37.0, "receita": 32303.39}, {"date": "2026-07-15", "spend": 744.26, "impr": 89377.0, "clicks": 1171.0, "lpv": 654.0, "vendas": 34.0, "receita": 27551.23}, {"date": "2026-07-16", "spend": 714.09, "impr": 87351.0, "clicks": 1175.0, "lpv": 694.0, "vendas": 38.0, "receita": 33845.53}, {"date": "2026-07-17", "spend": 1039.5, "impr": 116183.0, "clicks": 1647.0, "lpv": 1034.0, "vendas": 28.0, "receita": 20960.34}, {"date": "2026-07-18", "spend": 922.39, "impr": 104384.0, "clicks": 1677.0, "lpv": 1095.0, "vendas": 24.0, "receita": 21275.85}, {"date": "2026-07-19", "spend": 1019.57, "impr": 133092.0, "clicks": 1914.0, "lpv": 1233.0, "vendas": 42.0, "receita": 35589.84}, {"date": "2026-07-20", "spend": 1092.09, "impr": 147247.0, "clicks": 1870.0, "lpv": 1137.0, "vendas": 33.0, "receita": 29885.28}, {"date": "2026-07-21", "spend": 1168.44, "impr": 139770.0, "clicks": 2061.0, "lpv": 1319.0, "vendas": 27.0, "receita": 24856.01}, {"date": "2026-07-22", "spend": 1065.75, "impr": 124137.0, "clicks": 1787.0, "lpv": 1068.0, "vendas": 18.0, "receita": 14511.01}, {"date": "2026-07-23", "spend": 957.99, "impr": 111676.0, "clicks": 1587.0, "lpv": 972.0, "vendas": 37.0, "receita": 31752.19}, {"date": "2026-07-24", "spend": 1148.6, "impr": 123444.0, "clicks": 1936.0, "lpv": 1169.0, "vendas": 39.0, "receita": 31804.34}, {"date": "2026-07-25", "spend": 1573.7, "impr": 162767.0, "clicks": 2444.0, "lpv": 1568.0, "vendas": 26.0, "receita": 19786.34}, {"date": "2026-07-26", "spend": 1611.39, "impr": 175603.0, "clicks": 2639.0, "lpv": 1767.0, "vendas": 36.0, "receita": 26981.92}, {"date": "2026-07-27", "spend": 1850.18, "impr": 203619.0, "clicks": 2845.0, "lpv": 1772.0, "vendas": 57.0, "receita": 46260.39}, {"date": "2026-07-28", "spend": 1856.34, "impr": 201703.0, "clicks": 2796.0, "lpv": 1697.0, "vendas": 47.0, "receita": 39061.86}, {"date": "2026-07-29", "spend": 1471.04, "impr": 144156.0, "clicks": 2307.0, "lpv": 1507.0, "vendas": 68.0, "receita": 51761.84}, {"date": "2026-07-30", "spend": 1388.94, "impr": 138454.0, "clicks": 2209.0, "lpv": 1361.0, "vendas": 58.0, "receita": 45594.78}, {"date": "2026-07-31", "spend": 1252.58, "impr": 140481.0, "clicks": 2221.0, "lpv": 1259.0, "vendas": 54.0, "receita": 44907.83}, {"date": "2026-08-01", "spend": 1868.09, "impr": 223863.0, "clicks": 3961.0, "lpv": 2399.0, "vendas": 34.0, "receita": 29829.5}, {"date": "2026-08-02", "spend": 1775.01, "impr": 216717.0, "clicks": 3620.0, "lpv": 2142.0, "vendas": 40.0, "receita": 32628.7}, {"date": "2026-08-03", "spend": 1900.24, "impr": 250624.0, "clicks": 3563.0, "lpv": 2085.0, "vendas": 62.0, "receita": 53274.14}, {"date": "2026-08-04", "spend": 1993.56, "impr": 227088.0, "clicks": 3459.0, "lpv": 2253.0, "vendas": 74.0, "receita": 54124.57}, {"date": "2026-08-05", "spend": 1878.03, "impr": 201132.0, "clicks": 3172.0, "lpv": 1753.0, "vendas": 57.0, "receita": 50571.35}, {"date": "2026-08-06", "spend": 1772.41, "impr": 177094.0, "clicks": 2988.0, "lpv": 1773.0, "vendas": 64.0, "receita": 50444.07}, {"date": "2026-08-07", "spend": 397.42, "impr": 38010.0, "clicks": 646.0, "lpv": 293.0, "vendas": 7.0, "receita": 5903.24}], "google": [{"date": "2026-07-01", "spend": 650.0199, "impr": 32856.0, "clicks": 721.0, "vendas": 23.0116, "receita": 19103.8189}, {"date": "2026-07-02", "spend": 636.1663, "impr": 34675.0, "clicks": 682.0, "vendas": 19.3204, "receita": 16637.6436}, {"date": "2026-07-03", "spend": 656.3039, "impr": 34471.0, "clicks": 686.0, "vendas": 19.9096, "receita": 20441.1006}, {"date": "2026-07-04", "spend": 620.5833, "impr": 29043.0, "clicks": 581.0, "vendas": 16.9622, "receita": 16100.951}, {"date": "2026-07-05", "spend": 541.1007, "impr": 24928.0, "clicks": 510.0, "vendas": 20.6736, "receita": 18693.0433}, {"date": "2026-07-06", "spend": 746.0237, "impr": 27038.0, "clicks": 673.0, "vendas": 23.047, "receita": 20713.6282}, {"date": "2026-07-07", "spend": 759.5946, "impr": 30272.0, "clicks": 629.0, "vendas": 22.6831, "receita": 16296.8308}, {"date": "2026-07-08", "spend": 638.8775, "impr": 32600.0, "clicks": 699.0, "vendas": 23.1748, "receita": 18258.434}, {"date": "2026-07-09", "spend": 631.1039, "impr": 39491.0, "clicks": 780.0, "vendas": 23.415, "receita": 18826.9258}, {"date": "2026-07-10", "spend": 645.5508, "impr": 33136.0, "clicks": 739.0, "vendas": 15.8211, "receita": 15136.3987}, {"date": "2026-07-11", "spend": 622.8196, "impr": 29589.0, "clicks": 733.0, "vendas": 21.5439, "receita": 17374.116}, {"date": "2026-07-12", "spend": 612.4273, "impr": 26903.0, "clicks": 648.0, "vendas": 20.665, "receita": 18606.2429}, {"date": "2026-07-13", "spend": 693.2896, "impr": 31928.0, "clicks": 782.0, "vendas": 38.9147, "receita": 32284.6998}, {"date": "2026-07-14", "spend": 658.8396, "impr": 40444.0, "clicks": 759.0, "vendas": 22.7174, "receita": 18505.5699}, {"date": "2026-07-15", "spend": 904.7693, "impr": 46990.0, "clicks": 958.0, "vendas": 38.0567, "receita": 31936.0419}, {"date": "2026-07-16", "spend": 994.1771, "impr": 50354.0, "clicks": 967.0, "vendas": 32.8422, "receita": 29307.4429}, {"date": "2026-07-17", "spend": 1206.2762, "impr": 66526.0, "clicks": 1181.0, "vendas": 29.1179, "receita": 24730.6235}, {"date": "2026-07-18", "spend": 1245.4386, "impr": 55450.0, "clicks": 1063.0, "vendas": 21.4553, "receita": 18642.1621}, {"date": "2026-07-19", "spend": 1396.6686, "impr": 52084.0, "clicks": 1005.0, "vendas": 22.9269, "receita": 20245.6215}, {"date": "2026-07-20", "spend": 2199.0434, "impr": 102802.0, "clicks": 1707.0, "vendas": 33.1096, "receita": 28819.6632}, {"date": "2026-07-21", "spend": 1729.8482, "impr": 96117.0, "clicks": 1526.0, "vendas": 49.8065, "receita": 43849.162}, {"date": "2026-07-22", "spend": 1598.9612, "impr": 83604.0, "clicks": 1391.0, "vendas": 43.622, "receita": 35693.5666}, {"date": "2026-07-23", "spend": 1526.2454, "impr": 90666.0, "clicks": 1277.0, "vendas": 23.2692, "receita": 28376.2906}, {"date": "2026-07-24", "spend": 1414.6432, "impr": 74974.0, "clicks": 1229.0, "vendas": 27.7364, "receita": 23331.8347}, {"date": "2026-07-25", "spend": 1228.9412, "impr": 60260.0, "clicks": 1076.0, "vendas": 23.5559, "receita": 20697.3212}, {"date": "2026-07-26", "spend": 1221.9553, "impr": 57541.0, "clicks": 996.0, "vendas": 21.8589, "receita": 19053.955}, {"date": "2026-07-27", "spend": 2154.5304, "impr": 82180.0, "clicks": 1624.0, "vendas": 55.4106, "receita": 48836.1822}, {"date": "2026-07-28", "spend": 2020.2703, "impr": 94984.0, "clicks": 1766.0, "vendas": 36.6096, "receita": 30658.604}, {"date": "2026-07-29", "spend": 1915.9774, "impr": 80633.0, "clicks": 1531.0, "vendas": 35.9874, "receita": 28935.0533}, {"date": "2026-07-30", "spend": 1799.0345, "impr": 87391.0, "clicks": 1527.0, "vendas": 43.2512, "receita": 35700.2531}, {"date": "2026-07-31", "spend": 1521.9645, "impr": 65206.0, "clicks": 1317.0, "vendas": 36.6925, "receita": 32661.7222}, {"date": "2026-08-01", "spend": 1860.9958, "impr": 83061.0, "clicks": 1432.0, "vendas": 28.006, "receita": 26439.5643}, {"date": "2026-08-02", "spend": 1716.8108, "impr": 75024.0, "clicks": 1327.0, "vendas": 25.221, "receita": 23220.4391}, {"date": "2026-08-03", "spend": 2364.3868, "impr": 86244.0, "clicks": 1734.0, "vendas": 40.1674, "receita": 31114.637}, {"date": "2026-08-04", "spend": 2567.5878, "impr": 121476.0, "clicks": 2217.0, "vendas": 48.5733, "receita": 42907.7872}, {"date": "2026-08-05", "spend": 2750.3932, "impr": 137770.0, "clicks": 2313.0, "vendas": 36.5909, "receita": 31062.2297}, {"date": "2026-08-06", "spend": 2361.7885, "impr": 107516.0, "clicks": 2083.0, "vendas": 35.5692, "receita": 26805.7512}, {"date": "2026-08-07", "spend": 452.471, "impr": 22317.0, "clicks": 398.0, "vendas": 2.0, "receita": 2534.63}], "site": []}</script>
+<script>
+const D = JSON.parse(document.getElementById('dados').textContent);
+const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const brl = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const brl0 = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const nInt = v => Math.round(v||0).toLocaleString('pt-BR');
+const n1 = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const roas = (r,s) => s > 0 ? (r/s).toFixed(2).replace('.',',')+'x' : '—';
+const cpv = (s,v) => v > 0 ? brl(s/v) : '—';
+const mesKey = dt => dt.slice(0,7);
+const dia = dt => dt.slice(8,10)+'/'+dt.slice(5,7);
+const idx = arr => Object.fromEntries(arr.map(r => [r.date, r]));
+
+const IM = idx(D.meta), IG = idx(D.google), IS = idx(D.site);
+const DIAS = [...new Set([...D.meta, ...D.google, ...D.site].map(r => r.date))].sort();
+const KEYS = [...new Set(DIAS.map(mesKey))].sort();
+document.getElementById('atualizado').textContent = 'atualizado em ' + D.atualizado;
+document.getElementById('imp').textContent = (D.imposto_meta*100).toFixed(2).replace('.',',') + '%';
+
+let mesAtivo = KEYS[KEYS.length-1];
+
+const btns = KEYS.map(k => {
+  const [a,m] = k.split('-');
+  const b = document.createElement('button');
+  b.className = 'mes'; b.dataset.k = k;
+  b.textContent = MESES[+m-1].replace(/^./,c=>c.toUpperCase()) + '/' + a.slice(2);
+  b.onclick = () => { mesAtivo = k; render(); };
+  document.getElementById('meses').appendChild(b);
+  return b;
+});
+
+function linhas(){
+  return DIAS.filter(dt => mesKey(dt) === mesAtivo).map(dt => {
+    const m = IM[dt]||{}, g = IG[dt]||{}, s = IS[dt]||null;
+    const inv = (m.spend||0) + (g.spend||0);
+    return {dt, m, g, s, inv,
+            rec: (m.receita||0) + (g.receita||0),
+            ven: (m.vendas||0) + (g.vendas||0)};
+  });
+}
+function soma(L){
+  const t = {spendM:0,spendG:0,recM:0,recG:0,venM:0,venG:0,recS:0,pedS:0,temSite:false};
+  L.forEach(r => {
+    t.spendM += r.m.spend||0; t.spendG += r.g.spend||0;
+    t.recM += r.m.receita||0; t.recG += r.g.receita||0;
+    t.venM += r.m.vendas||0;  t.venG += r.g.vendas||0;
+    if (r.s) { t.recS += r.s.receita||0; t.pedS += r.s.pedidos||0; t.temSite = true; }
+  });
+  t.inv = t.spendM + t.spendG; t.rec = t.recM + t.recG; t.ven = t.venM + t.venG;
+  return t;
+}
+
+function kpis(t){
+  const imp = t.spendM * D.imposto_meta;
+  const cards = [
+    {lab:'Investimento total', val:brl(t.inv), dark:true,
+     hint:'+ ' + brl(imp) + ' de impostos Meta'},
+    {lab:'Faturamento real (site)', val: t.temSite ? brl(t.recS) : '—',
+     hint: t.temSite ? nInt(t.pedS) + ' pedidos na Nuvemshop' : 'aguardando leitura da Nuvemshop'},
+    {lab:'ROAS real', val: t.temSite ? roas(t.recS, t.inv) : '—',
+     hint:'faturamento do site ÷ investimento'},
+    {lab:'Custo por venda real', val: t.temSite ? cpv(t.inv, t.pedS) : '—',
+     hint:'investimento ÷ pedidos do site'},
+    {lab:'Faturamento nas plataformas', val:brl(t.rec), dark:true,
+     hint:'Meta + Google (há sobreposição)'},
+    {lab:'Vendas nas plataformas', val:n1(t.ven), dark:true,
+     hint:nInt(t.venM) + ' Meta · ' + n1(t.venG) + ' Google'},
+  ];
+  document.getElementById('kpis').innerHTML = cards.map(c =>
+    '<div class="card kpi"><div class="lab">'+c.lab+'</div>' +
+    '<div class="val'+(c.dark?' dark':'')+'">'+c.val+'</div>' +
+    '<div class="hint">'+c.hint+'</div></div>').join('');
+}
+
+function plataformas(t){
+  const blocos = [
+    {cls:'meta', nome:'Meta Ads', inv:t.spendM, rec:t.recM, ven:t.venM,
+     extra:['Impostos (13,83%)', brl(t.spendM*D.imposto_meta)]},
+    {cls:'google', nome:'Google Ads', inv:t.spendG, rec:t.recG, ven:t.venG, extra:null},
+  ];
+  document.getElementById('plataformas').innerHTML = blocos.map(b =>
+    '<div class="card plat"><h3><i class="dot '+b.cls+'"></i> '+b.nome+'</h3>' +
+    '<div style="margin-top:10px">' +
+    l('Investimento', brl(b.inv)) +
+    (b.extra ? l(b.extra[0], b.extra[1]) : '') +
+    l('Faturamento atribuído', brl(b.rec)) +
+    l('Vendas', b.cls==='google' ? n1(b.ven) : nInt(b.ven)) +
+    l('ROAS', roas(b.rec, b.inv)) +
+    l('Custo por venda', cpv(b.inv, b.ven)) +
+    '</div></div>').join('');
+  function l(a,b){ return '<div class="plinha"><span>'+a+'</span><b>'+b+'</b></div>'; }
+}
+
+function tabela(L, t){
+  const site = t.temSite;
+  let h = '<thead><tr class="grp"><th></th>' +
+    '<th colspan="4" class="sep">Meta Ads</th>' +
+    '<th colspan="4" class="sep">Google Ads</th>' +
+    '<th colspan="3" class="sep">Total</th>' +
+    (site ? '<th colspan="3" class="sep">Real (site)</th>' : '') + '</tr>' +
+    '<tr><th>Dia</th>' +
+    '<th class="sep">Invest.</th><th>Fatur.</th><th>Vendas</th><th>ROAS</th>' +
+    '<th class="sep">Invest.</th><th>Fatur.</th><th>Vendas</th><th>ROAS</th>' +
+    '<th class="sep">Invest.</th><th>Vendas</th><th>C/venda</th>' +
+    (site ? '<th class="sep">Fatur.</th><th>Pedidos</th><th>ROAS</th>' : '') +
+    '</tr></thead><tbody>';
+  L.forEach(r => {
+    const m = r.m, g = r.g, s = r.s;
+    const rot = dia(r.dt) + (r.dt === D.gerado_em ? ' <span class="muted">parcial</span>' : '');
+    h += '<tr><td>'+rot+'</td>' +
+      '<td class="sep">'+brl0(m.spend)+'</td><td>'+brl0(m.receita)+'</td><td>'+nInt(m.vendas)+'</td><td>'+roas(m.receita,m.spend)+'</td>' +
+      '<td class="sep">'+brl0(g.spend)+'</td><td>'+brl0(g.receita)+'</td><td>'+n1(g.vendas)+'</td><td>'+roas(g.receita,g.spend)+'</td>' +
+      '<td class="sep">'+brl0(r.inv)+'</td><td>'+n1(r.ven)+'</td><td>'+(r.ven?brl0(r.inv/r.ven):'—')+'</td>';
+    if (site) h += s
+      ? '<td class="sep">'+brl0(s.receita)+'</td><td>'+nInt(s.pedidos)+'</td><td>'+roas(s.receita,r.inv)+'</td>'
+      : '<td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td>';
+    h += '</tr>';
+  });
+  h += '</tbody><tfoot><tr><td>Total</td>' +
+    '<td class="sep">'+brl0(t.spendM)+'</td><td>'+brl0(t.recM)+'</td><td>'+nInt(t.venM)+'</td><td>'+roas(t.recM,t.spendM)+'</td>' +
+    '<td class="sep">'+brl0(t.spendG)+'</td><td>'+brl0(t.recG)+'</td><td>'+n1(t.venG)+'</td><td>'+roas(t.recG,t.spendG)+'</td>' +
+    '<td class="sep">'+brl0(t.inv)+'</td><td>'+n1(t.ven)+'</td><td>'+(t.ven?brl0(t.inv/t.ven):'—')+'</td>' +
+    (site ? '<td class="sep">'+brl0(t.recS)+'</td><td>'+nInt(t.pedS)+'</td><td>'+roas(t.recS,t.inv)+'</td>' : '') +
+    '</tr></tfoot>';
+  document.getElementById('tab').innerHTML = h;
+}
+
+function grafico(L, t){
+  const W = 1160, H = 300, pad = {t:14, r:74, b:28, l:66};
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
+  const usaSite = t.temSite;
+  // escalas separadas: barras (investimento) à esquerda, linha (faturamento) à direita —
+  // faturamento é ~10x o investimento, num eixo só as barras sumiriam.
+  const topI = Math.max(...L.map(r => r.inv), 1) * 1.15;
+  const topR = Math.max(...L.map(r => usaSite ? (r.s ? r.s.receita : 0) : r.rec), 1) * 1.15;
+  const x = i => pad.l + (iw / L.length) * (i + .5);
+  const y = v => pad.t + ih - (v / topI) * ih;   // eixo esquerdo (investimento)
+  const yr = v => pad.t + ih - (v / topR) * ih;  // eixo direito (faturamento)
+  const bw = Math.max(4, Math.min(26, (iw / L.length) * .58));
+  let s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Investimento e faturamento por dia">';
+  for (let k = 0; k <= 4; k++) {
+    const yy = y(topI * k / 4);
+    s += '<line x1="'+pad.l+'" x2="'+(W-pad.r)+'" y1="'+yy+'" y2="'+yy+'" stroke="#E3EAF5"/>' +
+         '<text x="'+(pad.l-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="#4A7FC7">'+brl0(topI*k/4).replace('R$ ','')+'</text>' +
+         '<text x="'+(W-pad.r+8)+'" y="'+(yy+4)+'" text-anchor="start" font-size="11" fill="#4E9C7A">'+brl0(topR*k/4).replace('R$ ','')+'</text>';
+  }
+  L.forEach((r,i) => {
+    const gs = r.g.spend||0, ms = r.m.spend||0;
+    s += '<rect x="'+(x(i)-bw/2)+'" y="'+y(gs)+'" width="'+bw+'" height="'+(y(0)-y(gs))+'" fill="#A4C9FA"/>';
+    s += '<rect x="'+(x(i)-bw/2)+'" y="'+y(gs+ms)+'" width="'+bw+'" height="'+(y(0)-y(ms))+'" fill="#4A7FC7"/>';
+    if (i % Math.ceil(L.length/16) === 0)
+      s += '<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10.5" fill="#7A7070">'+dia(r.dt).slice(0,2)+'</text>';
+  });
+  const pts = L.map((r,i) => {
+    const v = usaSite ? (r.s ? r.s.receita : null) : r.rec;
+    return v === null ? null : [x(i), yr(v)];
+  });
+  let dpath = '', aberto = false;
+  pts.forEach(p => {
+    if (!p) { aberto = false; return; }
+    dpath += (aberto ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ';
+    aberto = true;
+  });
+  if (dpath) s += '<path d="'+dpath+'" fill="none" stroke="#4E9C7A" stroke-width="2.5" stroke-linejoin="round"/>';
+  pts.forEach(p => { if (p) s += '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3" fill="#4E9C7A"/>'; });
+  s += '</svg>';
+  document.getElementById('gfx').innerHTML = s;
+}
+
+function render(){
+  btns.forEach(b => b.classList.toggle('on', b.dataset.k === mesAtivo));
+  const L = linhas(), t = soma(L);
+  document.getElementById('legFat').textContent =
+    t.temSite ? 'Faturamento real (site)' : 'Faturamento atribuído (Meta + Google)';
+  kpis(t); plataformas(t); grafico(L, t); tabela(L, t);
+}
+render();
+</script>
+</body>
+</html>
