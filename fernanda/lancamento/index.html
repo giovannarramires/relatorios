@@ -1,0 +1,566 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lançamento Botox com Segurança · Dra. Fernanda Fiori</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;color:#0f172a;padding:24px}
+.wrap{max-width:1120px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+h1{font-size:22px}.sub{color:#64748b;font-size:13px;margin-top:4px}
+.badge{background:#0f172a;color:#fff;border-radius:10px;padding:10px 16px;text-align:center}
+.badge b{font-size:22px;display:block}
+.filtro{background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.filtro label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.filtro input,.filtro select{border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px;background:#fff}
+.filtro select{font-weight:600;color:#4338ca}
+.divv{width:1px;height:22px;background:#e2e8f0}
+.chip{background:#eef2ff;color:#4338ca;border-radius:999px;padding:3px 11px;font-size:14px;font-weight:600;margin-left:8px;vertical-align:middle}
+.filtro button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.filtro button:hover{background:#eef2f7}
+.sec{font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em;margin:6px 2px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.card{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+.s-green{background:#16a34a}.s-yellow{background:#f59e0b}.s-red{background:#dc2626}.s-accent{background:#6366f1}.s-gray{background:#cbd5e1}
+.card-t{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.03em}
+.card-v{font-size:22px;font-weight:700;margin:5px 0}
+.card-s{font-size:11px;color:#94a3b8}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;align-items:start}
+@media(max-width:720px){.row{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
+.panel h2{font-size:14px;margin-bottom:12px;color:#334155}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #f1f5f9;white-space:nowrap}
+th{color:#64748b;font-size:11px;text-transform:uppercase}
+td.camp{font-family:ui-monospace,monospace;font-size:11px;color:#475569}
+a{color:#6366f1}
+.stage-tag{background:#f8fafc;font-weight:700;color:#334155;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}
+.p-green{background:#16a34a}.p-yellow{background:#f59e0b}.p-red{background:#dc2626}.p-gray{background:#cbd5e1;color:#475569}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.fstep{margin-bottom:9px}
+.flabel{display:flex;justify-content:space-between;font-size:13px;color:#334155;margin-bottom:3px}
+.fbar{background:#eef2f7;border-radius:6px;height:14px;overflow:hidden}
+.fbar span{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#0ea5e9);border-radius:6px}
+.fpct{font-size:11px;color:#94a3b8;margin-top:2px}
+.chartbox{position:relative;height:170px;width:100%}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.vbar{background:#eef2f7;border-radius:10px;height:24px;overflow:hidden;position:relative}
+.vbar span{display:block;height:100%;border-radius:10px}
+.vbar b{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#0f172a}
+footer{color:#94a3b8;font-size:12px;text-align:center;margin-top:24px}
+</style></head><body><div class="wrap">
+<header>
+  <div><h1>💉 Imersão Botox com Segurança · Dra. Fernanda <span class="chip" id="lancchip"></span></h1>
+  <div class="sub" id="sub"></div></div>
+  <div class="badge"><b id="dias-ev"></b>dias p/ o evento</div>
+</header>
+<div class="filtro">
+  <label>Lançamento:</label>
+  <select id="lancamento"></select>
+  <span class="divv"></span>
+  <label>Período:</label>
+  <input type="date" id="de"> <span style="color:#94a3b8">até</span> <input type="date" id="ate">
+  <button onclick="setRange('tudo')">Todo o lançamento</button>
+  <button onclick="setRange('hoje')">Hoje</button>
+  <span style="margin-left:auto;display:flex;gap:12px;align-items:center">
+    <span id="live" style="font-size:12px;font-weight:600;color:#94a3b8"></span>
+    <span id="fresumo" style="font-size:12px;color:#64748b"></span>
+  </span>
+</div>
+<div class="sec">Verba do lançamento</div>
+<div class="panel" id="verba" style="margin-bottom:20px"></div>
+<div class="sec">Vendas · Imersão Botox com Segurança Médica</div>
+<div id="fonte-vendas" style="display:none;background:#fef3c7;border:1px solid #fcd34d;color:#92400e;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:12px"></div>
+<div class="grid" id="kpis-venda"></div>
+<div class="sec">Investimento &amp; retorno</div>
+<div class="grid" id="kpis-inv"></div>
+<div class="row">
+  <div class="panel"><h2>Funil de vendas — onde perde</h2><div id="funil"></div></div>
+  <div class="panel"><h2>🏆 Criativos que vendem</h2><div id="criativos"></div></div>
+</div>
+<div class="panel" style="margin-bottom:20px"><h2>Diagnóstico por etapa — métrica × benchmark</h2>
+  <table><thead><tr><th>Métrica</th><th>Valor</th><th>Benchmark ideal</th><th>Status</th><th>Leitura</th></tr></thead>
+  <tbody id="stage"></tbody></table></div>
+<div class="panel" style="margin-bottom:20px"><h2>Detalhe por campanha</h2><div id="camp"></div></div>
+
+<div class="sec">🔬 Teste de página <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#94a3b8">— cada página de vendas agrupa as campanhas com aquela nomenclatura (respeita o filtro de período acima)</span></div>
+<div class="grid" id="teste-pagina-cards"></div>
+<div class="panel" style="margin-bottom:20px"><h2>Comparativo por página</h2><div id="teste-pagina"></div></div>
+<div class="panel" style="margin-bottom:20px"><h2>Evolução diária</h2><div class="chartbox"><canvas id="cd"></canvas></div></div>
+
+<div style="border-top:2px dashed #cbd5e1;margin:30px 0 22px"></div>
+<div class="sec" style="font-size:15px;color:#334155">💎 Produto Principal · ticket maior / ascensão <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#94a3b8">— curso/formação de ticket maior da Dra. Fernanda vendido na HeroSpark; entra sozinho pela esteira do lançamento · filtro de período PRÓPRIO</span></div>
+<div class="filtro" style="margin-bottom:12px">
+  <label>Compra ticket maior · período:</label>
+  <input type="date" id="fde" onchange="renderFormacao()"> <span style="color:#94a3b8">até</span> <input type="date" id="fate" onchange="renderFormacao()">
+  <span id="fmeses"></span>
+  <button onclick="setF('tudo')">Tudo</button>
+  <span id="fcresumo" style="font-size:12px;color:#64748b;margin-left:auto"></span>
+</div>
+<div class="grid" id="kpis-principal"></div>
+<div class="panel" style="margin-bottom:20px"><h2>Vendas por dia · Produto Principal</h2>
+  <div class="chartbox"><canvas id="fccd"></canvas></div>
+  <div id="fc-diario" style="margin-top:14px;overflow-x:auto"></div>
+</div>
+<div class="row">
+  <div class="panel"><h2>Origem das vendas do produto principal</h2><div id="fc-origem"></div></div>
+  <div class="panel"><h2>🔗 Esteira: quem subiu de ticket (Imersão → ticket maior)</h2><div id="fc-esteira"></div></div>
+</div>
+<footer>Faturamento: HeroSpark (planilha) · Investimento: Meta Ads campanhas de venda + imposto (12,25%) · ingresso R$ 97 (de R$ 997) · benchmarks calibrados no histórico da 1ª edição · GGD</footer>
+</div>
+<script>
+const DADOS = {"gerado": "07/08/2026 13h27", "imersao": "2026-08-15", "metaVendas": 60, "roasAlvo": 1.2, "impostoPct": 0.1225, "precoComum": 97.0, "precoVip": 497.0, "orcamentoDiario": 520.0, "lancamentos": [{"nome": "1ª edição", "de": "2026-06-13", "ate": "2026-06-26", "evento": "2026-06-27", "verba": 8000.0, "camp": "CAPTACAO.*BOTOX_COM_SEGURANCA"}, {"nome": "2ª edição", "de": "2026-08-06", "ate": "2026-08-14", "evento": "2026-08-15", "verba": 5000.0, "camp": "CAPTACAO.*BOTOX_COM_SEGURANCA"}], "csvUrl": "", "dias": [{"date": "2026-06-13", "spend": 1395.09, "impressions": 30521, "reach": 18270, "clicks": 523, "link_clicks": 330, "lpv": 280, "checkout": 37, "purchases": 4, "purchase_value": 788, "profile_visits": 214}, {"date": "2026-06-14", "spend": 1749.97, "impressions": 32878, "reach": 19771, "clicks": 527, "link_clicks": 352, "lpv": 311, "checkout": 49, "purchases": 7, "purchase_value": 679, "profile_visits": 189}, {"date": "2026-06-15", "spend": 1290.93, "impressions": 33004, "reach": 22239, "clicks": 523, "link_clicks": 313, "lpv": 282, "checkout": 56, "purchases": 11, "purchase_value": 1467, "profile_visits": 236}, {"date": "2026-06-16", "spend": 682.01, "impressions": 17485, "reach": 12424, "clicks": 282, "link_clicks": 164, "lpv": 150, "checkout": 28, "purchases": 5, "purchase_value": 485, "profile_visits": 133}, {"date": "2026-06-17", "spend": 252.92, "impressions": 9353, "reach": 6772, "clicks": 135, "link_clicks": 82, "lpv": 76, "checkout": 18, "purchases": 7, "purchase_value": 679, "profile_visits": 65}, {"date": "2026-06-18", "spend": 246.55, "impressions": 10434, "reach": 7460, "clicks": 171, "link_clicks": 96, "lpv": 88, "checkout": 15, "purchases": 4, "purchase_value": 388, "profile_visits": 90}, {"date": "2026-06-19", "spend": 199.58, "impressions": 7829, "reach": 6236, "clicks": 114, "link_clicks": 68, "lpv": 64, "checkout": 12, "purchases": 2, "purchase_value": 200.8, "profile_visits": 48}, {"date": "2026-06-20", "spend": 237.38, "impressions": 8172, "reach": 6360, "clicks": 123, "link_clicks": 72, "lpv": 67, "checkout": 9, "purchases": 2, "purchase_value": 194, "profile_visits": 53}, {"date": "2026-06-21", "spend": 257.92, "impressions": 7440, "reach": 5489, "clicks": 108, "link_clicks": 57, "lpv": 51, "checkout": 16, "purchases": 3, "purchase_value": 297.8, "profile_visits": 56}, {"date": "2026-06-22", "spend": 265.59, "impressions": 7614, "reach": 5559, "clicks": 117, "link_clicks": 57, "lpv": 51, "checkout": 15, "purchases": 5, "purchase_value": 498.6, "profile_visits": 66}, {"date": "2026-06-23", "spend": 280.34, "impressions": 9091, "reach": 6662, "clicks": 160, "link_clicks": 80, "lpv": 71, "checkout": 13, "purchases": 4, "purchase_value": 388, "profile_visits": 86}, {"date": "2026-06-24", "spend": 268.48, "impressions": 7723, "reach": 5956, "clicks": 110, "link_clicks": 57, "lpv": 46, "checkout": 8, "purchases": 1, "purchase_value": 497, "profile_visits": 60}, {"date": "2026-06-25", "spend": 272.85, "impressions": 9564, "reach": 7250, "clicks": 132, "link_clicks": 71, "lpv": 64, "checkout": 7, "purchases": 0, "purchase_value": 0, "profile_visits": 66}, {"date": "2026-06-26", "spend": 460.34, "impressions": 17391, "reach": 13485, "clicks": 215, "link_clicks": 124, "lpv": 117, "checkout": 20, "purchases": 3, "purchase_value": 691, "profile_visits": 117}, {"date": "2026-06-27", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 2, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 0}, {"date": "2026-08-06", "spend": 592.15, "impressions": 13036, "reach": 10267, "clicks": 368, "link_clicks": 213, "lpv": 178, "checkout": 5, "purchases": 0, "purchase_value": 0, "profile_visits": 131}, {"date": "2026-08-07", "spend": 181.72, "impressions": 3504, "reach": 3013, "clicks": 76, "link_clicks": 46, "lpv": 43, "checkout": 12, "purchases": 2, "purchase_value": 194, "profile_visits": 19}], "campanhas": [{"date": "2026-06-13", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 929.7, "impressions": 22467, "reach": 12810, "clicks": 328, "link_clicks": 211, "lpv": 184, "checkout": 18, "purchases": 3, "purchase_value": 691, "profile_visits": 131}, {"date": "2026-06-13", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 465.39, "impressions": 8054, "reach": 5460, "clicks": 195, "link_clicks": 119, "lpv": 96, "checkout": 19, "purchases": 1, "purchase_value": 97, "profile_visits": 83}, {"date": "2026-06-14", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 1232.59, "impressions": 25690, "reach": 14876, "clicks": 404, "link_clicks": 269, "lpv": 234, "checkout": 35, "purchases": 4, "purchase_value": 388, "profile_visits": 144}, {"date": "2026-06-14", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 517.38, "impressions": 7188, "reach": 4895, "clicks": 123, "link_clicks": 83, "lpv": 77, "checkout": 14, "purchases": 3, "purchase_value": 291, "profile_visits": 45}, {"date": "2026-06-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 928.77, "impressions": 27804, "reach": 18494, "clicks": 417, "link_clicks": 252, "lpv": 228, "checkout": 41, "purchases": 8, "purchase_value": 1176, "profile_visits": 185}, {"date": "2026-06-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 362.16, "impressions": 5200, "reach": 3745, "clicks": 106, "link_clicks": 61, "lpv": 54, "checkout": 15, "purchases": 3, "purchase_value": 291, "profile_visits": 51}, {"date": "2026-06-16", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 432.92, "impressions": 14112, "reach": 10162, "clicks": 225, "link_clicks": 129, "lpv": 114, "checkout": 22, "purchases": 5, "purchase_value": 485, "profile_visits": 112}, {"date": "2026-06-16", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 249.09, "impressions": 3373, "reach": 2262, "clicks": 57, "link_clicks": 35, "lpv": 36, "checkout": 6, "purchases": 0, "purchase_value": 0, "profile_visits": 21}, {"date": "2026-06-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 252.92, "impressions": 9353, "reach": 6772, "clicks": 135, "link_clicks": 82, "lpv": 76, "checkout": 18, "purchases": 6, "purchase_value": 582, "profile_visits": 65}, {"date": "2026-06-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 0, "checkout": 0, "purchases": 1, "purchase_value": 97, "profile_visits": 0}, {"date": "2026-06-18", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 246.55, "impressions": 10434, "reach": 7460, "clicks": 171, "link_clicks": 96, "lpv": 88, "checkout": 15, "purchases": 4, "purchase_value": 388, "profile_visits": 90}, {"date": "2026-06-19", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 199.58, "impressions": 7829, "reach": 6236, "clicks": 114, "link_clicks": 68, "lpv": 64, "checkout": 12, "purchases": 2, "purchase_value": 200.8, "profile_visits": 48}, {"date": "2026-06-20", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 237.38, "impressions": 8172, "reach": 6360, "clicks": 123, "link_clicks": 72, "lpv": 67, "checkout": 9, "purchases": 2, "purchase_value": 194, "profile_visits": 53}, {"date": "2026-06-21", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 257.92, "impressions": 7440, "reach": 5489, "clicks": 108, "link_clicks": 57, "lpv": 51, "checkout": 16, "purchases": 3, "purchase_value": 297.8, "profile_visits": 56}, {"date": "2026-06-22", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 265.59, "impressions": 7614, "reach": 5559, "clicks": 117, "link_clicks": 57, "lpv": 51, "checkout": 15, "purchases": 5, "purchase_value": 498.6, "profile_visits": 66}, {"date": "2026-06-23", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 280.34, "impressions": 9091, "reach": 6662, "clicks": 160, "link_clicks": 80, "lpv": 71, "checkout": 13, "purchases": 4, "purchase_value": 388, "profile_visits": 86}, {"date": "2026-06-24", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 268.48, "impressions": 7723, "reach": 5956, "clicks": 110, "link_clicks": 57, "lpv": 46, "checkout": 8, "purchases": 1, "purchase_value": 497, "profile_visits": 60}, {"date": "2026-06-25", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 272.85, "impressions": 9564, "reach": 7250, "clicks": 132, "link_clicks": 71, "lpv": 64, "checkout": 7, "purchases": 0, "purchase_value": 0, "profile_visits": 66}, {"date": "2026-06-26", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 460.34, "impressions": 17391, "reach": 13485, "clicks": 215, "link_clicks": 124, "lpv": 117, "checkout": 20, "purchases": 3, "purchase_value": 691, "profile_visits": 117}, {"date": "2026-06-27", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 2, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 0}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 451, "impressions": 10303, "reach": 7932, "clicks": 319, "link_clicks": 184, "lpv": 157, "checkout": 5, "purchases": 0, "purchase_value": 0, "profile_visits": 113}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 141.15, "impressions": 2733, "reach": 2335, "clicks": 49, "link_clicks": 29, "lpv": 21, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 18}, {"date": "2026-08-07", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "spend": 136.01, "impressions": 2960, "reach": 2554, "clicks": 54, "link_clicks": 30, "lpv": 28, "checkout": 9, "purchases": 2, "purchase_value": 194, "profile_visits": 13}, {"date": "2026-08-07", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "spend": 45.71, "impressions": 544, "reach": 459, "clicks": 22, "link_clicks": 16, "lpv": 15, "checkout": 3, "purchases": 0, "purchase_value": 0, "profile_visits": 6}], "criativos": [{"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_064", "spend": 96.83, "impressions": 1889, "link_clicks": 19, "lpv": 21, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FmFA97C/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 148.91, "impressions": 3652, "link_clicks": 37, "lpv": 33, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 45.77, "impressions": 819, "link_clicks": 15, "lpv": 12, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_067", "spend": 57.6, "impressions": 1149, "link_clicks": 12, "lpv": 9, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FvNAosg/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 115.77, "impressions": 1952, "link_clicks": 17, "lpv": 18, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fw1gR3P/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_069", "spend": 50.86, "impressions": 1049, "link_clicks": 15, "lpv": 13, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6r2XAGK_/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_070", "spend": 81.41, "impressions": 1951, "link_clicks": 14, "lpv": 19, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FlMgUHZ/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 100.24, "impressions": 1867, "link_clicks": 28, "lpv": 24, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6oOEgZqs/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_072", "spend": 152.94, "impressions": 4637, "link_clicks": 48, "lpv": 36, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6t8zAsW3/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_073", "spend": 122.48, "impressions": 2493, "link_clicks": 29, "lpv": 27, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FxtgOxT/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_074", "spend": 7.4, "impressions": 135, "link_clicks": 1, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fp_g838/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_075", "spend": 65.87, "impressions": 1045, "link_clicks": 14, "lpv": 11, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6i2xA0_A/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_076", "spend": 113.23, "impressions": 3021, "link_clicks": 28, "lpv": 22, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FmHAIn8/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_077", "spend": 98.29, "impressions": 1817, "link_clicks": 22, "lpv": 12, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6qUbgR_6/"}, {"date": "2026-06-13", "ad_name": "FF_PG_CAPTACAO_MIX", "spend": 137.49, "impressions": 3045, "link_clicks": 31, "lpv": 23, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fl3goqt/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_064", "spend": 34.38, "impressions": 598, "link_clicks": 11, "lpv": 10, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FmFA97C/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 355.15, "impressions": 10084, "link_clicks": 106, "lpv": 99, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 47.65, "impressions": 651, "link_clicks": 7, "lpv": 5, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_067", "spend": 33.07, "impressions": 533, "link_clicks": 6, "lpv": 5, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FvNAosg/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 111.91, "impressions": 1262, "link_clicks": 15, "lpv": 13, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fw1gR3P/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_069", "spend": 149.57, "impressions": 2131, "link_clicks": 25, "lpv": 22, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6r2XAGK_/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_070", "spend": 63.76, "impressions": 728, "link_clicks": 8, "lpv": 6, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FlMgUHZ/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 173.29, "impressions": 2290, "link_clicks": 25, "lpv": 20, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6oOEgZqs/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_072", "spend": 112.56, "impressions": 2120, "link_clicks": 24, "lpv": 19, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6t8zAsW3/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_073", "spend": 130.08, "impressions": 3123, "link_clicks": 31, "lpv": 30, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FxtgOxT/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_074", "spend": 15.6, "impressions": 148, "link_clicks": 4, "lpv": 4, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fp_g838/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_075", "spend": 87.21, "impressions": 1078, "link_clicks": 13, "lpv": 13, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6i2xA0_A/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_076", "spend": 177.05, "impressions": 3243, "link_clicks": 32, "lpv": 25, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FmHAIn8/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_077", "spend": 97.48, "impressions": 1968, "link_clicks": 13, "lpv": 10, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6qUbgR_6/"}, {"date": "2026-06-14", "ad_name": "FF_PG_CAPTACAO_MIX", "spend": 161.21, "impressions": 2921, "link_clicks": 32, "lpv": 30, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fl3goqt/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_064", "spend": 4.42, "impressions": 79, "link_clicks": 2, "lpv": 4, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FmFA97C/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 262.89, "impressions": 11754, "link_clicks": 94, "lpv": 82, "purchases": 5, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 4.97, "impressions": 61, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_067", "spend": 32.09, "impressions": 531, "link_clicks": 6, "lpv": 6, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4OhmgnhV/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 61.66, "impressions": 848, "link_clicks": 12, "lpv": 11, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_069", "spend": 212.75, "impressions": 5986, "link_clicks": 60, "lpv": 52, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6r2XAGK_/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_070", "spend": 11.31, "impressions": 156, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FlMgUHZ/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 175.51, "impressions": 2589, "link_clicks": 29, "lpv": 26, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6oOEgZqs/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_072", "spend": 48.87, "impressions": 847, "link_clicks": 10, "lpv": 9, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6t8zAsW3/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_073", "spend": 29.96, "impressions": 889, "link_clicks": 9, "lpv": 9, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FxtgOxT/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_074", "spend": 1.73, "impressions": 12, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-Fp_g838/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_075", "spend": 79.44, "impressions": 987, "link_clicks": 9, "lpv": 5, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6i2xA0_A/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_076", "spend": 216.36, "impressions": 5554, "link_clicks": 52, "lpv": 50, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4MX_AOKq/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_077", "spend": 61.9, "impressions": 1393, "link_clicks": 11, "lpv": 10, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6qUbgR_6/"}, {"date": "2026-06-15", "ad_name": "FF_PG_CAPTACAO_MIX", "spend": 87.07, "impressions": 1318, "link_clicks": 18, "lpv": 17, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D1pgcI7/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 171.71, "impressions": 7467, "link_clicks": 53, "lpv": 50, "purchases": 3, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 1.61, "impressions": 20, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 112.59, "impressions": 2189, "link_clicks": 23, "lpv": 20, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_069", "spend": 60.11, "impressions": 1902, "link_clicks": 22, "lpv": 19, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4LEPA8TS/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_070", "spend": 0.75, "impressions": 7, "link_clicks": 0, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FlMgUHZ/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 80.19, "impressions": 1207, "link_clicks": 9, "lpv": 9, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D-4gOQg/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_074", "spend": 25.92, "impressions": 287, "link_clicks": 4, "lpv": 5, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZpvexug_tC/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_075", "spend": 46.04, "impressions": 496, "link_clicks": 4, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZpvf7UgEa6/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_076", "spend": 124.11, "impressions": 3057, "link_clicks": 35, "lpv": 28, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4MX_AOKq/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_077", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6qUbgR_6/"}, {"date": "2026-06-16", "ad_name": "FF_PG_CAPTACAO_MIX", "spend": 58.98, "impressions": 853, "link_clicks": 13, "lpv": 14, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D1pgcI7/"}, {"date": "2026-06-17", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 145.64, "impressions": 6318, "link_clicks": 48, "lpv": 47, "purchases": 3, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-17", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 6.71, "impressions": 107, "link_clicks": 3, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-17", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 100.57, "impressions": 2928, "link_clicks": 31, "lpv": 28, "purchases": 3, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-17", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_069", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4LEPA8TS/"}, {"date": "2026-06-17", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D-4gOQg/"}, {"date": "2026-06-18", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 144.51, "impressions": 7184, "link_clicks": 72, "lpv": 63, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-18", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 0.03, "impressions": 2, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-18", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 102.01, "impressions": 3248, "link_clicks": 24, "lpv": 25, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-18", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_077", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZf-FtggRm4/"}, {"date": "2026-06-19", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 112.85, "impressions": 5477, "link_clicks": 38, "lpv": 35, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-19", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 1.52, "impressions": 33, "link_clicks": 2, "lpv": 2, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-19", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 85.21, "impressions": 2319, "link_clicks": 28, "lpv": 27, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-20", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 135.76, "impressions": 5255, "link_clicks": 54, "lpv": 49, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-20", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 101.62, "impressions": 2917, "link_clicks": 18, "lpv": 18, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-21", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 150.9, "impressions": 4970, "link_clicks": 39, "lpv": 34, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-21", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 0.66, "impressions": 5, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-21", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 106.36, "impressions": 2465, "link_clicks": 18, "lpv": 17, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-22", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 158.97, "impressions": 5248, "link_clicks": 43, "lpv": 37, "purchases": 5, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-22", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 2.82, "impressions": 54, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-22", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 103.8, "impressions": 2312, "link_clicks": 14, "lpv": 14, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-23", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 180.55, "impressions": 6568, "link_clicks": 63, "lpv": 57, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-23", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 99.79, "impressions": 2523, "link_clicks": 17, "lpv": 14, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-24", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 174.41, "impressions": 5723, "link_clicks": 41, "lpv": 32, "purchases": 1, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-24", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_066", "spend": 2.81, "impressions": 50, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm6mOdgnFo/"}, {"date": "2026-06-24", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 91.26, "impressions": 1950, "link_clicks": 16, "lpv": 14, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-25", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 177.03, "impressions": 7116, "link_clicks": 55, "lpv": 47, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-25", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 95.82, "impressions": 2448, "link_clicks": 16, "lpv": 17, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-26", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 296.85, "impressions": 13082, "link_clicks": 89, "lpv": 85, "purchases": 3, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-26", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 163.49, "impressions": 4309, "link_clicks": 35, "lpv": 32, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-06-27", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-06-27", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 0, "impressions": 0, "link_clicks": 0, "lpv": 1, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 440.12, "impressions": 10081, "link_clicks": 179, "lpv": 153, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCRMJgGJg/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 9.21, "impressions": 181, "link_clicks": 4, "lpv": 3, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DbtCNVpAqTu/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 141.15, "impressions": 2733, "link_clicks": 29, "lpv": 21, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D-4gOQg/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_113", "spend": 0.11, "impressions": 3, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Dbs8dnNAhsu/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_MEDICO_V01_064", "spend": 0.51, "impressions": 25, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 3, "thruplay": 1, "permalink": "https://www.instagram.com/p/Dbs_66lghEc/"}, {"date": "2026-08-06", "ad_name": "FF_PG_CAPTACAO_V01_064", "spend": 1.05, "impressions": 13, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 4, "thruplay": 2, "permalink": "https://www.instagram.com/p/Dbs_5cVAuUH/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_065", "spend": 113.69, "impressions": 2814, "link_clicks": 26, "lpv": 25, "purchases": 2, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Dbs8c9fgSNl/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_068", "spend": 1.72, "impressions": 25, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Dbs8dOngIf8/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_071", "spend": 45.71, "impressions": 544, "link_clicks": 18, "lpv": 15, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/DZm4D-4gOQg/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_113", "spend": 0.1, "impressions": 4, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Dbs8dnNAhsu/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_FEED_IMG01_120", "spend": 2.85, "impressions": 21, "link_clicks": 0, "lpv": 0, "purchases": 0, "video_view": 0, "thruplay": 0, "permalink": "https://www.instagram.com/p/Dbs8dR5AuWK/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_MEDICO_V01_064", "spend": 8.7, "impressions": 45, "link_clicks": 1, "lpv": 1, "purchases": 0, "video_view": 12, "thruplay": 2, "permalink": "https://www.instagram.com/p/Dbs_66lghEc/"}, {"date": "2026-08-07", "ad_name": "FF_PG_CAPTACAO_V01_064", "spend": 8.95, "impressions": 51, "link_clicks": 2, "lpv": 2, "purchases": 0, "video_view": 14, "thruplay": 1, "permalink": "https://www.instagram.com/p/Dbs_5cVAuUH/"}], "paginas": [{"date": "2026-06-13", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 929.7, "impressions": 22467, "reach": 20326, "clicks": 328, "link_clicks": 211, "lpv": 184, "checkout": 18, "purchases": 3, "purchase_value": 691, "profile_visits": 132}, {"date": "2026-06-13", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 465.39, "impressions": 8054, "reach": 7181, "clicks": 195, "link_clicks": 119, "lpv": 96, "checkout": 19, "purchases": 1, "purchase_value": 97, "profile_visits": 83}, {"date": "2026-06-14", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 1232.59, "impressions": 25690, "reach": 22508, "clicks": 404, "link_clicks": 269, "lpv": 234, "checkout": 35, "purchases": 4, "purchase_value": 388, "profile_visits": 144}, {"date": "2026-06-14", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 517.38, "impressions": 7188, "reach": 6287, "clicks": 123, "link_clicks": 83, "lpv": 77, "checkout": 14, "purchases": 3, "purchase_value": 291, "profile_visits": 45}, {"date": "2026-06-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 928.77, "impressions": 27804, "reach": 23992, "clicks": 417, "link_clicks": 252, "lpv": 228, "checkout": 41, "purchases": 8, "purchase_value": 1176, "profile_visits": 187}, {"date": "2026-06-15", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 362.16, "impressions": 5200, "reach": 4399, "clicks": 106, "link_clicks": 61, "lpv": 54, "checkout": 15, "purchases": 3, "purchase_value": 291, "profile_visits": 52}, {"date": "2026-06-16", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 432.92, "impressions": 14112, "reach": 11830, "clicks": 225, "link_clicks": 129, "lpv": 114, "checkout": 22, "purchases": 5, "purchase_value": 485, "profile_visits": 112}, {"date": "2026-06-16", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 249.09, "impressions": 3373, "reach": 2837, "clicks": 57, "link_clicks": 35, "lpv": 36, "checkout": 6, "purchases": 0, "purchase_value": 0, "profile_visits": 21}, {"date": "2026-06-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 252.92, "impressions": 9353, "reach": 7552, "clicks": 135, "link_clicks": 82, "lpv": 76, "checkout": 18, "purchases": 6, "purchase_value": 582, "profile_visits": 65}, {"date": "2026-06-17", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 0, "checkout": 0, "purchases": 1, "purchase_value": 97, "profile_visits": 0}, {"date": "2026-06-18", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 246.55, "impressions": 10434, "reach": 8309, "clicks": 171, "link_clicks": 96, "lpv": 88, "checkout": 15, "purchases": 4, "purchase_value": 388, "profile_visits": 90}, {"date": "2026-06-19", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 199.58, "impressions": 7829, "reach": 6702, "clicks": 114, "link_clicks": 68, "lpv": 64, "checkout": 12, "purchases": 2, "purchase_value": 200.8, "profile_visits": 48}, {"date": "2026-06-20", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 237.38, "impressions": 8172, "reach": 6823, "clicks": 123, "link_clicks": 72, "lpv": 67, "checkout": 9, "purchases": 2, "purchase_value": 194, "profile_visits": 53}, {"date": "2026-06-21", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 257.92, "impressions": 7440, "reach": 6026, "clicks": 108, "link_clicks": 57, "lpv": 51, "checkout": 16, "purchases": 3, "purchase_value": 297.8, "profile_visits": 56}, {"date": "2026-06-22", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 265.59, "impressions": 7614, "reach": 6248, "clicks": 117, "link_clicks": 57, "lpv": 51, "checkout": 15, "purchases": 5, "purchase_value": 498.6, "profile_visits": 66}, {"date": "2026-06-23", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 280.34, "impressions": 9091, "reach": 7270, "clicks": 160, "link_clicks": 80, "lpv": 71, "checkout": 13, "purchases": 4, "purchase_value": 388, "profile_visits": 86}, {"date": "2026-06-24", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 268.48, "impressions": 7723, "reach": 6419, "clicks": 110, "link_clicks": 57, "lpv": 46, "checkout": 8, "purchases": 1, "purchase_value": 497, "profile_visits": 60}, {"date": "2026-06-25", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 272.85, "impressions": 9564, "reach": 7669, "clicks": 132, "link_clicks": 71, "lpv": 64, "checkout": 7, "purchases": 0, "purchase_value": 0, "profile_visits": 66}, {"date": "2026-06-26", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 460.34, "impressions": 17391, "reach": 14527, "clicks": 215, "link_clicks": 124, "lpv": 117, "checkout": 20, "purchases": 3, "purchase_value": 691, "profile_visits": 117}, {"date": "2026-06-27", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 0, "impressions": 0, "reach": 0, "clicks": 0, "link_clicks": 0, "lpv": 2, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 0}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 107.88, "impressions": 1785, "reach": 1635, "clicks": 58, "link_clicks": 35, "lpv": 31, "checkout": 1, "purchases": 0, "purchase_value": 0, "profile_visits": 28}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://www.instagram.com/p/Dbs_tmqA3Wf", "spend": 0.08, "impressions": 2, "reach": 2, "clicks": 0, "link_clicks": 0, "lpv": 0, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 0}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://www.instagram.com/p/Dbs_xU4A1E7", "spend": 341.48, "impressions": 8478, "reach": 7153, "clicks": 260, "link_clicks": 148, "lpv": 125, "checkout": 4, "purchases": 0, "purchase_value": 0, "profile_visits": 124}, {"date": "2026-08-06", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 141.15, "impressions": 2733, "reach": 2335, "clicks": 49, "link_clicks": 29, "lpv": 21, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 18}, {"date": "2026-08-07", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 18.93, "impressions": 277, "reach": 228, "clicks": 7, "link_clicks": 2, "lpv": 1, "checkout": 0, "purchases": 0, "purchase_value": 0, "profile_visits": 2}, {"date": "2026-08-07", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PF]", "link": "https://www.instagram.com/p/Dbs_xU4A1E7", "spend": 102.21, "impressions": 2637, "reach": 2347, "clicks": 43, "link_clicks": 25, "lpv": 24, "checkout": 8, "purchases": 2, "purchase_value": 194, "profile_visits": 15}, {"date": "2026-08-07", "campaign": "[GGD][CAPTACAO][PAGA][VENDA][BOTOX_COM_SEGURANCA][PQ]", "link": "https://dermatocursos.com.br/imersao-pratica", "spend": 45.85, "impressions": 547, "reach": 474, "clicks": 22, "link_clicks": 18, "lpv": 15, "checkout": 3, "purchases": 0, "purchase_value": 0, "profile_visits": 6}], "vendas": []};
+// Benchmarks CALIBRADOS no nicho (educação médica/dermato — CPM alto, público
+// caro e estreito) e no histórico REAL da 1ª edição (13–27/06/26: CPM 37,70 ·
+// CTR 0,92% · CPC 4,09 · Freq 1,45 · Connect 89,4% · custo/LPV 4,57 ·
+// checkout/LPV 17,7% · conv.checkout 19,1% · CPA 135,52 · ROAS 0,92).
+// O ideal fica um pouco melhor que o histórico; o crítico, um pouco pior.
+const BENCH = {
+  cpm:{dir:'down',ideal:38,crit:60,fmt:'money',label:'< R$ 38'},
+  ctr:{dir:'up',ideal:1.0,crit:0.6,fmt:'pct',label:'> 1,0%'},
+  cpc:{dir:'down',ideal:3.0,crit:5.0,fmt:'money',label:'< R$ 3,00'},
+  freq:{dir:'down',ideal:3.0,crit:5.0,fmt:'dec',label:'< 3,0'},
+  fluxo:{dir:'up',ideal:85,crit:70,fmt:'pct',label:'> 85%'},
+  custoLp:{dir:'down',ideal:4,crit:8,fmt:'money',label:'< R$ 4,00'},
+  convPag:{dir:'up',ideal:15,crit:8,fmt:'pct',label:'> 15%'},
+  convCompraPag:{dir:'up',ideal:4,crit:2,fmt:'pct',label:'> 4%'},
+  custoIc:{dir:'gray',fmt:'money',label:'—'},
+  convChk:{dir:'up',ideal:25,crit:12,fmt:'pct',label:'> 25%'},
+  cpa:{dir:'down',ideal:81,crit:130,fmt:'money',label:'< R$ 81 (ingresso R$ 97)'},
+  roas:{dir:'up',ideal:DADOS.roasAlvo,crit:0.8,fmt:'dec',label:'> '+DADOS.roasAlvo.toFixed(1).replace('.',',')}
+};
+const brl=v=>"R$ "+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const dec=v=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf=v=>Math.round(v||0).toLocaleString('pt-BR');
+const fmt=(v,f)=>f==='money'?brl(v):f==='pct'?pct(v):f==='dec'?dec(v):intf(v);
+function status(val,b){if(!b||b.dir==='gray')return 'gray';
+  if(b.dir==='up')return val>=b.ideal?'green':val<=b.crit?'red':'yellow';
+  return val<=b.ideal?'green':val>=b.crit?'red':'yellow';}
+
+// ---- VENDAS AO VIVO (lê o CSV publicado direto no navegador) ----
+let LIVE_VENDAS=null;
+const PAGOS=new Set(['paid','approved','aprovado','pago','completed','paid_out']);
+function parseCSV(t){const rows=[];let row=[],f='',i=0,q=false;
+  while(i<t.length){const c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else { if(c==='"')q=true; else if(c===','){row.push(f);f='';} else if(c==='\n'){row.push(f);rows.push(row);row=[];f='';} else if(c!=='\r')f+=c; }
+    i++;}
+  if(f.length||row.length){row.push(f);rows.push(row);} return rows;}
+async function fetchVendasLive(){
+  try{
+    const r=await fetch(DADOS.csvUrl,{cache:'no-store'}); if(!r.ok)return null;
+    const rows=parseCSV(await r.text()); if(rows.length<2)return null;
+    const h=rows[0].map(x=>x.trim()), ix={}; h.forEach((k,i)=>ix[k]=i);
+    const out=[];
+    for(let j=1;j<rows.length;j++){const r2=rows[j]; if(!r2||!r2[ix['transacao_id']]&&!r2[ix['produto']])continue;
+      const st=(r2[ix['status']]||'').trim().toLowerCase(); if(!PAGOS.has(st))continue;
+      let raw={}; try{raw=JSON.parse(r2[ix['raw_json']]||'{}');}catch(e){}
+      const vc=raw.value_cents||raw.net_value_cents;
+      let val=vc?parseFloat(String(vc).replace(',','.'))/100 : parseFloat(String(r2[ix['valor']]||'0').replace(/[^0-9.,-]/g,'').replace(',','.'))||0;
+      const prod=(r2[ix['produto']]||raw.product_name||''); const fo=(r2[ix['forma_pagamento']]||raw.payment_method||'').toLowerCase();
+      out.push({date:(r2[ix['data_venda']]||raw.payment_date||'').slice(0,10),valor:val,
+        tipo:/vip/i.test(prod)?'VIP':/comum/i.test(prod)?'Comum':'Outro',
+        forma:fo.includes('pix')?'Pix':(fo.includes('cred')||fo.includes('card'))?'Cartão':fo.includes('bol')?'Boleto':(fo||'n/d'),
+        produto:prod,email:(r2[ix['email']]||raw.buyer_email||'').trim().toLowerCase(),nome:(r2[ix['nome']]||raw.buyer_name||'').trim(),
+        utm_content:(raw.utm_content||(ix['utm_content']!=null?r2[ix['utm_content']]:'')||'').trim(),
+        utm_medium:(raw.utm_medium||(ix['utm_medium']!=null?r2[ix['utm_medium']]:'')||'').trim(),
+        utm_campaign:(raw.utm_campaign||(ix['utm_campaign']!=null?r2[ix['utm_campaign']]:'')||'').trim(),
+        utm_source:(raw.utm_source||(ix['utm_source']!=null?r2[ix['utm_source']]:'')||'').trim()});}
+    return out;
+  }catch(e){return null;}
+}
+
+let chart=null, chartF=null;
+const datas=(DADOS.dias||[]).map(d=>d.date).sort();
+const minD=datas[0]||DADOS.imersao, maxD=datas[datas.length-1]||DADOS.imersao;
+const LS=DADOS.lancamentos||[];
+let curL=LS.length?LS[LS.length-1]:{nome:'Lançamento',de:minD,ate:DADOS.imersao,evento:DADOS.imersao};
+
+function within(d,de,ate){return d>=de&&d<=ate;}
+function sum(arr,k){return arr.reduce((a,x)=>a+(+x[k]||0),0);}
+// Filtro por produto/lançamento: rebuilda a série diária a partir das campanhas
+// (mesmos campos que `dias`), mantendo só as que casam com o padrão do lançamento
+// (curL.camp). Sem camp, usa a série `dias` completa (todas as campanhas de VENDA).
+const DIAS_KEYS=['spend','impressions','reach','clicks','link_clicks','lpv','checkout','purchases','purchase_value','profile_visits'];
+function diasDe(campRe){
+  if(!campRe) return DADOS.dias||[];
+  const re=new RegExp(campRe,'i'), by={};
+  (DADOS.campanhas||[]).forEach(c=>{ if(!re.test(c.campaign||'')) return;
+    const d=by[c.date]||(by[c.date]={date:c.date}); DIAS_KEYS.forEach(k=>d[k]=(d[k]||0)+(+c[k]||0)); });
+  return Object.values(by).sort((a,b)=>a.date<b.date?-1:(a.date>b.date?1:0));
+}
+function campsDe(campRe){ if(!campRe) return DADOS.campanhas||[];
+  const re=new RegExp(campRe,'i'); return (DADOS.campanhas||[]).filter(c=>re.test(c.campaign||'')); }
+// Teste de página: a PÁGINA é identificada pela NOMENCLATURA DA CAMPANHA
+// (cada página de vendas testada tem sua própria campanha). O rótulo destaca os
+// tokens que variam, escondendo o prefixo fixo do padrão GGD. Se quiser um apelido
+// bonito, cadastre o nome exato da campanha no PAGE_MAP abaixo.
+const PAGE_MAP={
+  // Ex.: '[GGD][VENDAS][INGRESSO][LC01][PAGINA_A][PF]':{nome:'Página A',tag:'campeã'},
+};
+const _STOP=new Set(['GGD','CAPTACAO','PAGA','PAGO','VENDA','VENDAS','INGRESSO']);
+function pageInfo(camp){
+  const raw=String(camp||'').trim();
+  if(!raw) return {key:'?',nome:'(sem campanha)',tag:'',link:''};
+  if(PAGE_MAP[raw]) return {key:raw,link:'',...PAGE_MAP[raw]};
+  const toks=(raw.match(/\[([^\]]+)\]/g)||[]).map(t=>t.slice(1,-1));
+  // sufixo/variante FORA dos colchetes (ex.: "PG_V2", "PG_V4", "_02")
+  const extra=raw.replace(/\[[^\]]*\]/g,' ').split(/\s+/).filter(Boolean);
+  const all=[...toks,...extra];
+  const dist=all.filter(t=>!_STOP.has(t.toUpperCase()));
+  const nome=(dist.length?dist:all).join(' · ')||raw;
+  return {key:raw,nome:nome,tag:'',link:''};
+}
+
+function render(){
+  const de=document.getElementById('de').value||minD, ate=document.getElementById('ate').value||maxD;
+  const dias=diasDe(curL.camp).filter(d=>within(d.date,de,ate));
+  const VEND=LIVE_VENDAS||DADOS.vendas||[];
+  // Ticket maior (produto principal) = ascensão da Fernanda (a confirmar na HeroSpark). Todo o resto = Imersão (ticket menor).
+  // Regex casa nomes prováveis de ascensão (formação/mentoria/método/...) e NÃO casa "Imersão". Ajustar ao nome real quando criado.
+  const isPrincipal=v=>/(forma[çc][ãa]o|mentoria|m[eé]todo|acompanhamento|premium|avan[çc]ad)/i.test(v.produto||'');
+  // KPIs do lançamento contam SÓ a Imersão — o ticket maior tem seção própria no fim do dash.
+  const vendas=VEND.filter(v=>within(v.date,de,ate)&&!isPrincipal(v));
+  const camps=campsDe(curL.camp).filter(c=>within(c.date,de,ate));
+  const cria=(DADOS.criativos||[]).filter(c=>within(c.date,de,ate));
+
+  // agregados Meta
+  const T={spend:sum(dias,'spend'),impressions:sum(dias,'impressions'),reach:sum(dias,'reach'),
+    linkClicks:sum(dias,'link_clicks'),lpViews:sum(dias,'lpv'),initiateCheckout:sum(dias,'checkout'),
+    purchasesMeta:sum(dias,'purchases'),profileVisits:sum(dias,'profile_visits')};
+  // vendas HeroSpark (fonte de verdade). Enquanto o webhook da HeroSpark não
+  // estiver plugado (VEND vazio), cai no PIXEL do Meta p/ o dash não nascer
+  // zerado — o pixel SUBNOTIFICA, então o selo avisa que a fonte é provisória.
+  const semCSV=!VEND.length;
+  const nV=semCSV?T.purchasesMeta:vendas.length;
+  const fat=semCSV?sum(dias,'purchase_value'):sum(vendas,'valor');
+  const fonteV=semCSV?'pixel Meta (provisório)':'HeroSpark';
+  const elF=document.getElementById('fonte-vendas');
+  if(elF){elF.innerHTML=semCSV
+    ? '⚠️ <b>Fonte das vendas: pixel do Meta</b> (provisório — o webhook da HeroSpark ainda não está plugado). O pixel subnotifica: os números reais tendem a ser maiores.'
+    : '';
+   elF.style.display=semCSV?'block':'none';}
+  const imposto=T.spend*DADOS.impostoPct, investTotal=T.spend+imposto;
+
+  const M={
+    cpm:T.impressions?T.spend/T.impressions*1000:0,
+    ctr:T.impressions?T.linkClicks/T.impressions*100:0,
+    cpc:T.linkClicks?T.spend/T.linkClicks:0,
+    freq:T.reach?T.impressions/T.reach:0,
+    fluxo:T.linkClicks?T.lpViews/T.linkClicks*100:0,
+    custoLp:T.lpViews?T.spend/T.lpViews:0,
+    convPag:T.lpViews?T.initiateCheckout/T.lpViews*100:0,
+    convCompraPag:T.lpViews?T.purchasesMeta/T.lpViews*100:0,
+    custoIc:T.initiateCheckout?T.spend/T.initiateCheckout:0,
+    convChk:T.initiateCheckout?T.purchasesMeta/T.initiateCheckout*100:0,
+    cpa:nV?T.spend/nV:0, roasCamp:T.spend?fat/T.spend:0, roasImp:investTotal?fat/investTotal:0,
+    ticket:nV?fat/nV:0, lucro:fat-investTotal, custoVisita:T.profileVisits?T.spend/T.profileVisits:0
+  };
+  const clr={green:'#16a34a',yellow:'#f59e0b',red:'#dc2626',gray:'#cbd5e1'};
+  const lbl={green:'Saudável',yellow:'Atenção',red:'Crítico',gray:'—'};
+  // célula colorida por benchmark
+  const mc=(v,b,f)=>{const st=b?status(v,b):'gray';const col=(b&&b.dir!=='gray')?clr[st]:'#334155';
+    return `<td style="color:${col};font-weight:${(b&&b.dir!=='gray')?600:400}">${fmt(v,f||(b&&b.fmt)||'dec')}</td>`;};
+  // métricas de uma linha (campanha/criativo) a partir dos campos crus
+  const met=o=>{const s=+o.spend||0,im=+o.impressions||0,rc=+o.reach||0,lc=+o.link_clicks||0,
+    lp=+o.lpv||0,ck=+o.checkout||0,pu=+o.purchases||0,pv=+o.purchase_value||0,pf=+o.profile_visits||0;
+    return {cpm:im?s/im*1000:0,ctr:im?lc/im*100:0,cpc:lc?s/lc:0,freq:rc?im/rc:0,fluxo:lc?lp/lc*100:0,
+      custoLp:lp?s/lp:0,convPag:lp?ck/lp*100:0,custoIc:ck?s/ck:0,convChk:ck?pu/ck*100:0,
+      cpa:pu?s/pu:0,roas:s?pv/s:0,custoPf:pf?s/pf:0};};
+  const pctMeta=DADOS.metaVendas?nV/DADOS.metaVendas*100:0;
+  const corV=nV>=DADOS.metaVendas?'green':nV>=DADOS.metaVendas*0.6?'yellow':'red';
+  const corR=status(M.roasImp,BENCH.roas);
+
+  const card=(t,v,s,st)=>`<div class="card"><span class="stripe s-${st||'accent'}"></span>
+    <div class="card-t">${t}</div><div class="card-v">${v}</div><div class="card-s">${s||''}</div></div>`;
+  document.getElementById('kpis-venda').innerHTML=[
+    card('Ingressos vendidos',intf(nV),`meta ${DADOS.metaVendas} · ${pctMeta.toFixed(0)}%`,corV),
+    card('Faturamento',brl(fat),'vendas pagas · '+fonteV,'green'),
+    card('Ticket médio',nV?brl(M.ticket):'—','por ingresso','accent'),
+    card('Lucro líquido',brl(M.lucro),'faturamento − invest. total',M.lucro>0?'green':'red'),
+  ].join('');
+  document.getElementById('kpis-inv').innerHTML=[
+    card('Investimento campanha',brl(T.spend),'gasto Meta (sem imposto)','accent'),
+    card(`Imposto ${(DADOS.impostoPct*100).toFixed(2)}%`,brl(imposto),'sobre o gasto','accent'),
+    card('Investimento TOTAL',brl(investTotal),'campanha + imposto','accent'),
+    card('ROAS campanha',dec(M.roasCamp)+'x','faturamento ÷ gasto',status(M.roasCamp,BENCH.roas)),
+    card('ROAS c/ imposto',dec(M.roasImp)+'x','÷ invest. total · alvo '+DADOS.roasAlvo+'x',corR),
+    card('CPA c/ imposto',nV?brl(investTotal/nV):'—','custo por ingresso','accent'),
+  ].join('');
+
+  // Verba do lançamento (soma a janela do LANÇAMENTO selecionado — independe do filtro manual de dia)
+  const diasLanc=diasDe(curL.camp).filter(d=>within(d.date,curL.de,curL.ate));
+  const gastoAll=sum(diasLanc,'spend'), investAll=gastoAll*(1+DADOS.impostoPct);
+  const impAll=gastoAll*DADOS.impostoPct;
+  // Verba = orçamento DIÁRIO ativo (puxado da conta: campanha+conjunto ACTIVE) × dias do lançamento
+  const nDiasLanc=curL?Math.round((new Date(curL.ate+'T00:00:00')-new Date(curL.de+'T00:00:00'))/864e5)+1:0;
+  const orcDia=+DADOS.orcamentoDiario||0;
+  // Verba: valor planejado do lançamento (curL.verba); se não houver, cai no automático orçamento diário ativo × dias
+  const verbaManual=(curL&&+curL.verba>0)?+curL.verba:0;
+  const verbaTot=verbaManual||orcDia*nDiasLanc;
+  const verbaSub=verbaManual?'verba planejada do lançamento':(orcDia?`${brl(orcDia)}/dia × ${nDiasLanc} dias (ativos da conta)`:'sem orçamento definido');
+  const pctVerba=verbaTot?investAll/verbaTot*100:0, saldo=verbaTot-investAll;
+  const corVb=pctVerba>=90?'#dc2626':pctVerba>=70?'#f59e0b':'#16a34a';
+  document.getElementById('verba').innerHTML=
+    `<div class="vgrid">`+
+    card('Verba total',verbaTot?brl(verbaTot):'—',verbaSub,'accent')+
+    card('Investimento campanha',brl(gastoAll),'sem imposto (acumulado)','accent')+
+    card('Imposto '+(DADOS.impostoPct*100).toFixed(2)+'%',brl(impAll),'sobre o gasto','accent')+
+    card('Consumido (c/ imposto)',brl(investAll),verbaTot?pctVerba.toFixed(1)+'% da verba':'—',pctVerba>=90?'red':pctVerba>=70?'yellow':'green')+
+    card('Saldo restante',verbaTot?brl(saldo):'—',verbaTot?(100-pctVerba).toFixed(1)+'% disponível':'defina orçamento na conta',saldo>0?'green':'red')+
+    `</div><div class="vbar"><span style="width:${Math.min(Math.max(pctVerba,0),100).toFixed(1)}%;background:${corVb}"></span><b>${orcDia?brl(orcDia)+'/dia · ':''}${pctVerba.toFixed(1)}% consumido · ${brl(investAll)} de ${brl(verbaTot)}</b></div>`;
+
+  // Funil
+  const steps=[['Impressões',T.impressions,null],['Alcance',T.reach,null],
+    ['Cliques no link',T.linkClicks,{l:'CTR',v:M.ctr,b:BENCH.ctr}],
+    ['LP Views',T.lpViews,{l:'Connect',v:M.fluxo,b:BENCH.fluxo}],
+    ['Checkout iniciado',T.initiateCheckout,{l:'Conv.Pág',v:M.convPag,b:BENCH.convPag}],
+    ['Compras (Meta)',T.purchasesMeta,{l:'Conv.Chk',v:M.convChk,b:BENCH.convChk}]];
+  const base=steps[0][1]||1;
+  document.getElementById('funil').innerHTML=steps.map((s,i)=>{
+    const w=Math.max(s[1]/base*100,2), conv=s[2]?`<span class="pill p-${status(s[2].v,s[2].b)}">${s[2].l} ${fmt(s[2].v,s[2].b.fmt)}</span>`:'';
+    return `<div class="fstep"><div class="flabel"><span>${s[0]} ${conv}</span><b>${intf(s[1])}</b></div>
+      <div class="fbar"><span style="width:${w.toFixed(1)}%"></span></div>
+      <div class="fpct">${(s[1]/base*100).toFixed(1)}% do topo</div></div>`;
+  }).join('');
+
+  // Criativos que vendem (agrega por ad_name no período, só compra>0)
+  const agC={};
+  cria.forEach(c=>{const k=c.ad_name;(agC[k]=agC[k]||{ad_name:k,spend:0,impressions:0,link_clicks:0,lpv:0,purchases:0,video_view:0,thruplay:0,permalink:c.permalink});
+    ['spend','impressions','link_clicks','lpv','purchases','video_view','thruplay'].forEach(f=>agC[k][f]+=(+c[f]||0));});
+  const vendedores=Object.values(agC).filter(c=>c.purchases>0).sort((a,b)=>b.purchases-a.purchases);
+  document.getElementById('criativos').innerHTML=`<table><thead><tr><th>Criativo</th><th>Gasto</th><th>Compras</th><th>Custo/Venda</th><th>Cliques</th><th>LPV</th><th>Vídeo</th><th>Post</th></tr></thead><tbody>`+
+    (vendedores.map(c=>{const cpaC=c.purchases?c.spend/c.purchases:null;
+      return `<tr><td class="camp">${c.ad_name}</td><td>${brl(c.spend)}</td><td><b>${intf(c.purchases)}</b></td>`+
+      (cpaC!=null?`<td style="font-weight:700;color:${clr[status(cpaC,BENCH.cpa)]}">${brl(cpaC)}</td>`:`<td style="color:#94a3b8">—</td>`)+
+      `<td>${intf(c.link_clicks)}</td><td>${intf(c.lpv)}</td><td>${intf(c.video_view)}</td><td>${c.permalink?`<a href="${c.permalink}" target="_blank">ver</a>`:'—'}</td></tr>`;}).join('')
+     || `<tr><td colspan="8" style="color:#94a3b8">nenhum criativo com venda no período</td></tr>`)+`</tbody></table>
+     <div class="card-s" style="margin-top:8px">Custo/Venda = gasto ÷ compras · só criativos com venda, ordenado por vendas.</div>`;
+
+  // Tabela de etapas (benchmark + semáforo)
+  const rows=[['Etapa 1 · Anúncio'],
+    ['CPM',M.cpm,BENCH.cpm,'Custo do leilão'],['CTR (link)',M.ctr,BENCH.ctr,'Atratividade do criativo'],
+    ['CPC (link)',M.cpc,BENCH.cpc,'Custo de entrada no funil'],['Frequência',M.freq,BENCH.freq,'Saturação'],
+    ['Visitas ao perfil',T.profileVisits,{dir:'gray',fmt:'int',label:'—'},'Interesse no perfil'],
+    ['Custo/visita perfil',M.custoVisita,{dir:'gray',fmt:'money',label:'—'},'Gasto ÷ visitas'],
+    ['Etapa 2 · Página de vendas'],
+    ['Connect (Fluxo)',M.fluxo,BENCH.fluxo,'LP Views ÷ Cliques'],['Custo por LP View',M.custoLp,BENCH.custoLp,'Custo do prospect'],
+    ['Etapa 3 · Checkout iniciado'],
+    ['Checkout iniciado',M.convPag,BENCH.convPag,'Checkouts ÷ LP Views'],['Custo por checkout',M.custoIc,BENCH.custoIc,'Previsor de CPA'],
+    ['Conversão de página',M.convCompraPag,BENCH.convCompraPag,'Compras ÷ LP Views'],
+    ['Etapa 4 · Resultado'],
+    ['Conv. do checkout',M.convChk,BENCH.convChk,'Compras ÷ Checkouts'],['CPA (custo/compra)',M.cpa,BENCH.cpa,'vs. ticket do produto'],
+    ['ROAS campanha',M.roasCamp,BENCH.roas,'Faturamento ÷ Gasto']];
+  document.getElementById('stage').innerHTML=rows.map(r=>{
+    if(r.length===1)return `<tr><td colspan="5" class="stage-tag">${r[0]}</td></tr>`;
+    const st=status(r[1],r[2]);
+    return `<tr><td>${r[0]}</td><td>${fmt(r[1],r[2].fmt||'dec')}</td><td style="color:#94a3b8">${r[2].label||'—'}</td>
+      <td><span class="dot" style="background:${clr[st]}"></span>${lbl[st]}</td><td style="color:#94a3b8">${r[3]}</td></tr>`;
+  }).join('');
+
+  // Campanhas (agrega por nome no período)
+  const agK={};
+  camps.forEach(c=>{const k=c.campaign;(agK[k]=agK[k]||{campaign:k,spend:0,impressions:0,reach:0,link_clicks:0,lpv:0,checkout:0,purchases:0,purchase_value:0,profile_visits:0});
+    ['spend','impressions','reach','link_clicks','lpv','checkout','purchases','purchase_value','profile_visits'].forEach(f=>agK[k][f]+=(+c[f]||0));});
+  const cs=Object.values(agK).sort((a,b)=>b.spend-a.spend);
+  const nd='<td style="color:#94a3b8">—</td>';
+  document.getElementById('camp').innerHTML=`<table><thead><tr><th>Campanha</th><th>Gasto</th><th>Compras</th><th>Custo/Compra</th><th>ROAS</th><th>CPM</th><th>CTR</th><th>CPC</th><th>Freq</th><th>Connect</th><th>Custo/LPV</th><th>Conv.Pág</th><th>Custo/Chk</th><th>Conv.Chk</th><th>Impr.</th><th>Cliques</th><th>LPV</th><th>Chk</th></tr></thead><tbody>`+
+    (cs.map(c=>{const m=met(c);
+      return `<tr><td class="camp">${c.campaign.replace('[GGD][VENDAS][INGRESSO][LC01]','…')}</td>`+
+        `<td>${brl(c.spend)}</td><td><b>${intf(c.purchases)}</b></td>`+
+        (c.purchases?mc(m.cpa,BENCH.cpa,'money'):nd)+
+        (c.purchases?mc(m.roas,BENCH.roas,'dec'):nd)+
+        mc(m.cpm,BENCH.cpm,'money')+mc(m.ctr,BENCH.ctr,'pct')+mc(m.cpc,BENCH.cpc,'money')+
+        mc(m.freq,BENCH.freq,'dec')+mc(m.fluxo,BENCH.fluxo,'pct')+
+        (c.lpv?mc(m.custoLp,BENCH.custoLp,'money'):nd)+(c.lpv?mc(m.convPag,BENCH.convPag,'pct'):nd)+
+        (c.checkout?`<td>${brl(m.custoIc)}</td>`:nd)+(c.checkout?mc(m.convChk,BENCH.convChk,'pct'):nd)+
+        `<td>${intf(c.impressions)}</td><td>${intf(c.link_clicks)}</td><td>${intf(c.lpv)}</td><td>${intf(c.checkout)}</td></tr>`;}).join('')
+     || `<tr><td colspan="18" style="color:#94a3b8">sem campanhas no período</td></tr>`)+`</tbody></table>
+     <div class="card-s" style="margin-top:8px">Diagnóstico completo por campanha · Custo/Compra e ROAS = Meta · cada métrica colorida pelo benchmark (verde saudável · amarelo atenção · vermelho crítico)</div>`;
+
+  // ===== Teste de página (agrupa por NOMENCLATURA DA CAMPANHA — nome da página) =====
+  // link de destino de cada página: puxado do ANÚNCIO (dim link do Windsor).
+  // Por campanha, escolhe o link com maior gasto (a página que aquela campanha testa).
+  const linkByCamp={};
+  (DADOS.paginas||[]).filter(d=>within(d.date,de,ate)).forEach(r=>{
+    const cm=r.campaign||''; if(!cm||!r.link)return;
+    const b=(linkByCamp[cm]=linkByCamp[cm]||{}); b[r.link]=(b[r.link]||0)+(+r.spend||0);});
+  const bestLink=cm=>{const b=linkByCamp[cm]; return b?(Object.keys(b).sort((x,y)=>b[y]-b[x])[0]||''):'';};
+  const agP={};
+  camps.forEach(c=>{const p=pageInfo(c.campaign);
+    const a=agP[p.key]||(agP[p.key]={key:p.key,nome:p.nome,tag:p.tag,link:p.link||bestLink(c.campaign),
+      spend:0,impressions:0,link_clicks:0,lpv:0,checkout:0,purchases:0,purchase_value:0});
+    ['spend','impressions','link_clicks','lpv','checkout','purchases','purchase_value'].forEach(f=>a[f]+=(+c[f]||0));});
+  const pages=Object.values(agP).sort((a,b)=>b.spend-a.spend);
+  const pmet=o=>({abertura:o.link_clicks?o.lpv/o.link_clicks*100:0,
+    convPag:o.lpv?o.checkout/o.lpv*100:0, custoLp:o.lpv?o.spend/o.lpv:0,
+    cpa:o.purchases?o.spend/o.purchases:0, roas:o.spend?o.purchase_value/o.spend:0});
+  const MIN_LPV=80; // abaixo disso a conversão ainda é ruído estatístico
+  document.getElementById('teste-pagina-cards').innerHTML = pages.map(p=>{
+    const m=pmet(p), small=p.lpv<MIN_LPV, st=status(m.convPag,BENCH.convPag);
+    return `<div class="card"><span class="stripe s-${st}"></span>
+      <div class="card-t">${p.nome}${p.tag?' · '+p.tag:''}${small?' ⚠️':''}</div>
+      <div class="card-v">${pct(m.convPag)}</div>
+      <div class="card-s">conv. de página (checkout ÷ LPV)</div>
+      <div class="card-s" style="margin-top:6px;color:#475569">abertura ${pct(m.abertura)} · custo/LPV ${brl(m.custoLp)}<br>${intf(p.purchases)} compra(s) · CPA ${p.purchases?brl(m.cpa):'—'}</div>
+      ${p.link?`<div class="card-s" style="margin-top:4px"><a href="${p.link}" target="_blank">ver página ↗</a></div>`:''}
+    </div>`;
+  }).join('') || `<div class="card"><div class="card-s">nenhuma campanha de teste de página no período</div></div>`;
+  document.getElementById('teste-pagina').innerHTML=
+    `<table><thead><tr><th>Página</th><th>Invest.</th><th>Cliques</th><th>LPV</th><th>Taxa abertura</th><th>Checkout</th><th>Conv. página</th><th>Compras</th><th>Custo/LPV</th><th>CPA</th><th>ROAS</th><th>Ver</th></tr></thead><tbody>`+
+    (pages.map(p=>{const m=pmet(p), small=p.lpv<MIN_LPV;
+      return `<tr><td style="font-weight:700">${p.nome}${p.tag?` <span class="card-s">${p.tag}</span>`:''}${small?` <span class="pill p-gray">amostra pequena</span>`:''}</td>`+
+        `<td>${brl(p.spend)}</td><td>${intf(p.link_clicks)}</td><td>${intf(p.lpv)}</td>`+
+        mc(m.abertura,BENCH.fluxo,'pct')+`<td>${intf(p.checkout)}</td>`+mc(m.convPag,BENCH.convPag,'pct')+
+        `<td><b>${intf(p.purchases)}</b></td>`+
+        (p.lpv?mc(m.custoLp,BENCH.custoLp,'money'):nd)+(p.purchases?mc(m.cpa,BENCH.cpa,'money'):nd)+
+        (p.purchases?`<td>${dec(m.roas)}x</td>`:nd)+
+        `<td>${p.link?`<a href="${p.link}" target="_blank">↗</a>`:'—'}</td></tr>`;}).join('')
+     || `<tr><td colspan="12" style="color:#94a3b8">nenhuma campanha de teste de página no período</td></tr>`)+
+    `</tbody></table>
+     <div class="card-s" style="margin-top:8px">Taxa de abertura = LPV ÷ cliques (connect) · Conv. de página = checkout iniciado ÷ LPV · células coloridas pelo benchmark (verde saudável · amarelo atenção · vermelho crítico). <b>⚠️ Amostra pequena</b> = menos de ${MIN_LPV} LPV: leia a conversão com cautela até acumular volume.</div>`;
+
+  // gráfico diário (vendas + gasto)
+  const dd=[...new Set([...dias.map(d=>d.date),...vendas.map(v=>v.date)])].sort();
+  const vpd=dd.map(x=>vendas.filter(v=>v.date===x).length);
+  const gpd=dd.map(x=>{const d=dias.find(z=>z.date===x);return d?+d.spend:0;});
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('cd'),{data:{labels:dd.map(x=>x.slice(5)),
+    datasets:[{type:'bar',label:'Vendas',data:vpd,backgroundColor:'#6366f1',yAxisID:'y'},
+      {type:'line',label:'Gasto (R$)',data:gpd,borderColor:'#16a34a',yAxisID:'y1'}]},
+    options:{maintainAspectRatio:false,responsive:true,scales:{y:{position:'left',beginAtZero:true,ticks:{precision:0}},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false}}}}});
+
+  document.getElementById('fresumo').textContent=`${dd.length} dia(s) · ${nV} venda(s)`;
+
+  // Produto Principal (Formação) — seção com filtro de período PRÓPRIO (independe do lançamento)
+  renderFormacao();
+}
+// ===== Seção Produto Principal (Formação Completa) — filtro de período PRÓPRIO =====
+const MESABBR=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const isPrincipalF=v=>/(forma[çc][ãa]o|mentoria|m[eé]todo|acompanhamento|premium|avan[çc]ad)/i.test(v.produto||'');
+const vendasAll=()=>(LIVE_VENDAS||DADOS.vendas||[]);
+function buildFMeses(){
+  const el=document.getElementById('fmeses'); if(!el)return;
+  const yms=[...new Set(vendasAll().filter(isPrincipalF).map(v=>(v.date||'').slice(0,7)).filter(Boolean))].sort();
+  el.innerHTML=yms.map(ym=>{const p=ym.split('-');return `<button onclick="setFMes('${ym}')">${MESABBR[+p[1]-1]}/${p[0].slice(2)}</button>`;}).join(' ');
+}
+function setF(k){ if(k==='tudo'){document.getElementById('fde').value='';document.getElementById('fate').value='';} renderFormacao(); }
+function setFMes(ym){
+  const p=ym.split('-').map(Number);
+  document.getElementById('fde').value=ym+'-01';
+  document.getElementById('fate').value=ym+'-'+String(new Date(p[0],p[1],0).getDate()).padStart(2,'0');
+  renderFormacao();
+}
+function renderFormacao(){
+  const card=(t,v,s,st)=>`<div class="card"><span class="stripe s-${st||'accent'}"></span><div class="card-t">${t}</div><div class="card-v">${v}</div><div class="card-s">${s||''}</div></div>`;
+  const allV=vendasAll();
+  const de=document.getElementById('fde').value||'', ate=document.getElementById('fate').value||'';
+  const inR=d=>(!de||d>=de)&&(!ate||d<=ate);
+  const fc=allV.filter(v=>isPrincipalF(v)&&inR(v.date||''));
+  const menorAll=allV.filter(v=>!isPrincipalF(v));
+  const emailsMenor=new Set(menorAll.map(v=>(v.email||'').trim().toLowerCase()).filter(Boolean));
+  const compradoresMenor=emailsMenor.size;
+  const esteira=fc.filter(v=>emailsMenor.has((v.email||'').trim().toLowerCase()));
+  const nF=fc.length, fatF=sum(fc,'valor'), nEst=esteira.length, fatEst=sum(esteira,'valor'), nOutras=nF-nEst;
+  const ticketF=nF?fatF/nF:0, taxaAsc=compradoresMenor?nEst/compradoresMenor*100:0;
+  const pctEstF=nF?nEst/nF*100:0, pctOutF=nF?nOutras/nF*100:0;
+  const fAllFat=sum(allV.filter(isPrincipalF),'valor'), fatTotalAll=fAllFat+sum(menorAll,'valor');
+  const pctF=fatTotalAll?fAllFat/fatTotalAll*100:0;
+  const rotulo=(de||ate)?`${de?de.split('-').reverse().join('/'):'início'} → ${ate?ate.split('-').reverse().join('/'):'hoje'}`:'todas as vendas';
+  const rz=document.getElementById('fcresumo'); if(rz)rz.textContent=`${rotulo} · ${nF} compra(s)`;
+  document.getElementById('kpis-principal').innerHTML=[
+    card('Vendas no período',intf(nF),brl(fatF)+' bruto','green'),
+    card('Via esteira do lançamento',intf(nEst),brl(fatEst)+' · '+pctEstF.toFixed(0)+'% do ticket maior','accent'),
+    card('Taxa de ascensão',nF?pct(taxaAsc):'—',nEst+' de '+compradoresMenor+' compradores da Imersão','green'),
+    card('Ticket maior',nF?brl(ticketF):'—','vs. Imersão (ticket menor)','accent'),
+  ].join('');
+  document.getElementById('fc-origem').innerHTML=`
+    <div class="card-s" style="margin-bottom:2px">Via esteira do lançamento — ${nEst} venda(s)</div>
+    <div class="vbar" style="margin:0 0 12px"><span style="width:${pctEstF}%;background:linear-gradient(90deg,#6366f1,#818cf8)"></span><b>${pctEstF.toFixed(0)}%</b></div>
+    <div class="card-s" style="margin-bottom:2px">Outras origens (orgânico / e-mail / direto) — ${nOutras} venda(s)</div>
+    <div class="vbar"><span style="width:${pctOutF}%;background:#cbd5e1"></span><b>${pctOutF.toFixed(0)}%</b></div>
+    <div class="card-s" style="margin-top:10px">No período: <b>${nF}</b> venda(s) · ${brl(fatF)}. Ticket maior = <b>${pctF.toFixed(0)}%</b> do faturamento total (todo o período · ${brl(fatTotalAll)}).</div>`;
+  const nomeComprador=v=>(v.nome||(v.email||'').split('@')[0]||'—');
+  // Anúncio de origem: cruza o comprador do ticket maior c/ a venda de ENTRADA (Imersão) dele por
+  // e-mail e pega o utm_content(={{ad.name}}). Fallback p/ o grupo (utm_medium) enquanto não flui.
+  const origemMap={};
+  menorAll.forEach(v=>{
+    const e=(v.email||'').trim().toLowerCase(); if(!e)return;
+    const ad=(v.utm_content||'').trim(), grp=(v.utm_medium||'').trim();
+    const rank=ad?2:(grp?1:0); const cur=origemMap[e];
+    if(!cur||rank>cur.rank) origemMap[e]={ad,grp,rank};
+  });
+  const origemAd=email=>{
+    const o=origemMap[(email||'').trim().toLowerCase()];
+    if(!o||!o.rank) return '<span style="color:#94a3b8">— sem UTM</span>';
+    if(o.ad) return `<b>${o.ad}</b>`;
+    return `<span title="grupo/conjunto — anúncio exato só com utm_content">${o.grp} <span style="color:#94a3b8">(grupo)</span></span>`;
+  };
+  const esteiraRows=esteira.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''))
+    .map(v=>`<tr><td>${nomeComprador(v)}</td><td>${origemAd(v.email)}</td><td>${(v.date||'').split('-').reverse().join('/')}</td><td>${brl(v.valor)}</td></tr>`).join('');
+  document.getElementById('fc-esteira').innerHTML= nEst?
+    `<table><thead><tr><th>Aluno</th><th>Anúncio de origem</th><th>Compra ticket maior</th><th>Valor</th></tr></thead><tbody>${esteiraRows}</tbody></table>`
+    :`<div class="card-s">Sem compras da esteira (Imersão → ticket maior) no período.</div>`;
+  // dia a dia (dentro do range)
+  const fByDate={};
+  fc.forEach(v=>{const d=v.date||''; if(!d)return; (fByDate[d]=fByDate[d]||{q:0,f:0}); fByDate[d].q++; fByDate[d].f+=(+v.valor||0);});
+  const fDates=Object.keys(fByDate).sort();
+  let fim=ate||(fDates.length?fDates[fDates.length-1]:''); if(!ate){(DADOS.dias||[]).forEach(d=>{if(d.date>fim)fim=d.date;});}
+  const ini=de||(fDates.length?fDates[0]:fim);
+  const eachDay=(a,b)=>{const out=[];if(!a||!b)return out;let cur=new Date(a+'T00:00:00'),end=new Date(b+'T00:00:00');
+    while(cur<=end){out.push(cur.toISOString().slice(0,10));cur.setDate(cur.getDate()+1);}return out;};
+  const span=eachDay(ini,fim);
+  const fq=span.map(d=>(fByDate[d]||{q:0}).q);
+  let acc=0,accF=0;
+  const linhasDia=fDates.map(d=>{acc+=fByDate[d].q;accF+=fByDate[d].f;
+    return `<tr><td>${d.split('-').reverse().join('/')}</td><td>${fByDate[d].q}</td><td>${brl(fByDate[d].f)}</td><td style="color:#64748b">${acc} · ${brl(accF)}</td></tr>`;}).join('');
+  document.getElementById('fc-diario').innerHTML= fDates.length?
+    `<table><thead><tr><th>Dia</th><th>Vendas</th><th>Bruto</th><th>Acumulado</th></tr></thead><tbody>${linhasDia}</tbody></table>`
+    :`<div class="card-s">Sem vendas do ticket maior no período selecionado (ainda não há produto de ascensão).</div>`;
+  if(chartF)chartF.destroy();
+  const ctxF=document.getElementById('fccd');
+  if(ctxF&&span.length){chartF=new Chart(ctxF,{type:'bar',
+    data:{labels:span.map(d=>d.slice(8,10)+'/'+d.slice(5,7)),datasets:[{label:'Vendas ticket maior',data:fq,backgroundColor:'#6366f1',borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y+' venda(s) · '+brl((fByDate[span[c.dataIndex]]||{f:0}).f)}}},
+      scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:16}}}}});}
+}
+function applyLanc(L){
+  curL=L;
+  const de=document.getElementById('de'),ate=document.getElementById('ate');
+  de.min=ate.min=L.de; de.max=ate.max=L.ate; de.value=L.de; ate.value=L.ate;
+  const ev=new Date(L.evento+'T00:00:00');
+  document.getElementById('dias-ev').textContent=Math.max(0,Math.round((ev-new Date())/864e5));
+  document.getElementById('lancchip').textContent=L.nome;
+  render();
+}
+function setRange(k){
+  const de=document.getElementById('de'),ate=document.getElementById('ate');
+  if(k==='hoje'){const t=(maxD<curL.ate?maxD:curL.ate);de.value=t;ate.value=t;}
+  else{de.value=curL.de;ate.value=curL.ate;}
+  render();
+}
+// init
+document.getElementById('sub').textContent=`Controle diário · Vendas HeroSpark × Investimento Meta (c/ imposto ${(DADOS.impostoPct*100).toFixed(2)}%) · atualizado ${DADOS.gerado}`;
+const sel=document.getElementById('lancamento');
+sel.innerHTML=LS.map((L,i)=>`<option value="${i}">${L.nome} · ${L.de.slice(8)}/${L.de.slice(5,7)}–${L.ate.slice(8)}/${L.ate.slice(5,7)}</option>`).join('');
+sel.value=String(Math.max(0,LS.length-1));
+sel.addEventListener('change',()=>applyLanc(LS[+sel.value]));
+document.getElementById('de').addEventListener('change',render);
+document.getElementById('ate').addEventListener('change',render);
+applyLanc(curL);
+buildFMeses();
+// vendas ao vivo: busca o CSV no navegador na hora e a cada 60s (fallback: dados embutidos)
+async function tickLive(){
+  const el=document.getElementById('live');
+  // sem CSV publicado (webhook HeroSpark ainda não plugado) não há o que buscar
+  if(!DADOS.csvUrl){el.textContent='⏳ vendas HeroSpark ainda não plugadas';el.style.color='#b45309';return;}
+  const v=await fetchVendasLive();
+  if(v){LIVE_VENDAS=v; el.textContent='🟢 vendas ao vivo · '+new Date().toLocaleTimeString('pt-BR'); el.style.color='#16a34a'; buildFMeses(); render();}
+  else{el.textContent='📄 dados do último ciclo'; el.style.color='#94a3b8';}
+}
+tickLive(); setInterval(tickLive,60000);
+</script></body></html>
