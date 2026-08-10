@@ -241,6 +241,13 @@
       que três dias se passem sem que um único byte mude. Isso é a assinatura de um <strong>arquivo
       estático salvo em disco</strong>, servido sempre igual, e não de um export vivo do banco de dados.
     </p>
+    <p>
+      <strong>3. O próprio Merchant Center registra o mesmo padrão.</strong> No painel do Google, a
+      busca do feed roda todo dia às 07:00 e o resultado é sempre idêntico:
+      <strong>23.647 produtos atualizados e 0 novos produtos adicionados</strong> — repetido dia após
+      dia. Em um e-commerce ativo, nenhum produto novo entrando no catálogo por meses é o mesmo
+      sintoma visto do outro lado.
+    </p>
     <p class="verdict bad">
       Consequência: mesmo que o custom_label_4 tenha sido implementado corretamente no sistema, ele
       não aparece no arquivo — porque o arquivo não está sendo regerado. E o mesmo vale para preço,
@@ -271,6 +278,13 @@
       no pior cenário — o Google interpreta a resposta como catálogo vazio e produtos saem do ar
       nos anúncios. É um risco de queda de faturamento que não depende de nada que fazemos na gestão.
     </p>
+    <div class="ok-note" style="margin-top:14px">
+      <strong>Ainda não aconteceu — e é por isso que dá para tratar com calma.</strong> Conferimos o
+      histórico de buscas no Merchant Center: as 9 últimas (de 2 a 10 de agosto, todas às 07:00)
+      foram bem-sucedidas, sem nenhuma falha. O 404 ainda não pegou a janela em que o Google busca.
+      Mas com quase 1 em cada 5 requisições falhando, é questão de tempo — e o custo de arrumar
+      agora é muito menor do que o de descobrir com os produtos fora do ar.
+    </div>
   </div>
 
   <div class="cause two">
@@ -289,6 +303,27 @@
       são tratados como se devessem ter GTIN — o que gera avisos de identificador ausente e pode
       limitar o alcance deles nos anúncios.
     </p>
+    <p>
+      <strong>Este ponto não é interpretação nossa.</strong> O próprio Merchant Center sinaliza
+      exatamente isso na tela de detalhes do feed, com o mesmo número de produtos afetados — é hoje
+      o <em>único</em> problema de arquivo que o Google aponta nessa fonte de dados:
+    </p>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0">
+      <table style="margin:0">
+        <thead><tr><th>Itens que precisam de atenção</th><th>Como corrigir</th><th style="text-align:right">Produtos afetados</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>⚠️ O atributo não tem namespace.</td>
+            <td>O atributo fornecido "identifier_exists" não inclui um namespace.</td>
+            <td class="num">12.913</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">
+        Reprodução do aviso exibido em Merchant Center → Fontes de dados → Feed do dia 25/04/2025,
+        consultado em 10/08/2026. Os nomes de atributos, fora esse, aparecem como "Todos reconhecidos".
+      </p>
+    </div>
   </div>
 
   <div class="cause two">
