@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Roma Aviamentos — Feed do Google Shopping: status da solicitação</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roma Aviamentos — Feed do Google Shopping: resolvido, com 2 pendências</title>
 <style>
   :root{
     --ink:#1a1c22; --muted:#5c6270; --line:#e6e8ee; --bg:#f6f7f9; --card:#fff;
@@ -70,6 +70,9 @@
   ul.clean{margin:8px 0;padding-left:20px}
   ul.clean li{margin:5px 0}
   .note{background:#fff8e6;border:1px solid #f0e2b8;border-radius:12px;padding:14px 18px;font-size:14px}
+  .alert{background:var(--redbg);border:1px solid #f3c4bd;border-left:4px solid var(--red);
+    border-radius:12px;padding:16px 20px;font-size:14.5px;margin:18px 0}
+  .alert .t{font-weight:700;color:var(--red);font-size:15px;margin-bottom:6px}
   .ok-note{background:var(--greenbg);border:1px solid #bfe3cf;border-radius:12px;padding:14px 18px;font-size:14px}
   footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
   @media (max-width:640px){
@@ -84,12 +87,12 @@
 <header>
   <div class="wrap">
     <div class="kicker">Gio Growth Digital · Feed de Produtos</div>
-    <h1>Feed do Google Shopping — status da solicitação</h1>
-    <div class="sub">O que foi pedido, o que chegou ao arquivo público e o que segue em aberto.</div>
+    <h1>Feed do Google Shopping — resolvido</h1>
+    <div class="sub">O endereço novo destravou o problema de fundo. Restam dois ajustes de formato.</div>
     <div class="meta">
-      <span>📅 10 de agosto de 2026</span>
+      <span>📅 11 de agosto de 2026 · <strong>atualização</strong></span>
       <span>👤 Para: Diogo — Octopus</span>
-      <span>🌐 romaaviamentos.com.br/octopus/sync/102/gosh.xml</span>
+      <span>🌐 sub1.lojcomm.com.br/octopus/feed/102/gosh.xml</span>
     </div>
   </div>
 </header>
@@ -98,355 +101,206 @@
 
   <div class="card">
     <p class="lead">
-      Em julho enviamos uma planilha e um briefing pedindo a inclusão do campo
-      <strong>custom_label_4</strong> (curva ABC) no feed de produtos do Google Shopping. No dia
-      <strong>3 de agosto</strong> recebemos a informação de que a alteração tinha sido feita.
-      Conferimos o arquivo público em <strong>3, 7 e 10 de agosto</strong>: em nenhuma das três
-      checagens a alteração apareceu.
+      <strong>Funcionou.</strong> O endereço novo enviado hoje —
+      <code>https://sub1.lojcomm.com.br/octopus/feed/102/gosh.xml</code> — resolveu de uma vez os três
+      problemas que vínhamos apontando desde 3 de agosto: o arquivo voltou a ser regerado, o erro 404
+      intermitente desapareceu e o <strong>custom_label_4</strong> finalmente chegou ao XML.
     </p>
     <p class="lead">
-      O ponto central deste relatório não é a tag em si — é o que descobrimos ao investigar:
-      <strong>o arquivo XML servido no endereço público não muda desde 17 de março de 2026</strong>.
-      Ele é entregue byte a byte idêntico, o que indica que a alteração pode ter sido feita
-      corretamente no sistema, mas <strong>o arquivo não está sendo regerado</strong>. Enquanto isso
-      não for resolvido, nenhuma mudança de catálogo — preço, estoque, campo novo — chega ao Google.
+      A hipótese que levantamos no relatório anterior se confirmou: a implementação estava feita, mas
+      o arquivo servido no endereço antigo era estático e não era regerado desde março — por isso nada
+      aparecia. Trocado o endereço, tudo apareceu de uma vez. Este documento registra o que validamos
+      e os <strong>dois ajustes de formato</strong> que ainda faltam.
     </p>
+  </div>
+
+  <div class="ok-note">
+    <strong>Verificação de 11/08/2026.</strong> Baixamos o arquivo novo e conferimos item por item:
+    <strong>24.504 produtos</strong> (eram 23.647), 37,0 MB, cabeçalho
+    <code>last-modified: 11 Aug 2026 07:53</code> — a data do próprio dia. O
+    <code>custom_label_4</code> está presente em <strong>100% dos itens</strong>, com o namespace
+    <code>g:</code> correto. E o endereço respondeu <strong>200 nas 24 requisições</strong> que fizemos,
+    sem um único erro.
   </div>
 
   <div class="kpis">
-    <div class="kpi bad">
-      <div class="n">0</div>
-      <div class="l">tags <code>custom_label</code> encontradas nos 23.647 produtos</div>
+    <div class="kpi ok">
+      <div class="n">24.504</div>
+      <div class="l">produtos com <code>custom_label_4</code> — eram 0</div>
     </div>
-    <div class="kpi bad">
-      <div class="n">146 dias</div>
-      <div class="l">sem atualização do arquivo (last-modified: 17/03/2026)</div>
+    <div class="kpi ok">
+      <div class="n">Hoje</div>
+      <div class="l">data de geração do arquivo — estava travada em 17/03</div>
+    </div>
+    <div class="kpi ok">
+      <div class="n">0%</div>
+      <div class="l">de erro 404 em 24 requisições — era 18,8%</div>
     </div>
     <div class="kpi warn">
-      <div class="n">18,2%</div>
-      <div class="l">das requisições ao feed retornam erro 404</div>
-    </div>
-    <div class="kpi warn">
-      <div class="n">12.913</div>
-      <div class="l">produtos com tag fora do padrão do Google</div>
+      <div class="n">2</div>
+      <div class="l">ajustes de formato ainda em aberto</div>
     </div>
   </div>
 
-  <h2>1. O que foi solicitado</h2>
+  <h2>1. Antes e depois</h2>
 
   <table>
     <thead>
-      <tr><th style="width:22%">Item</th><th style="width:44%">O que pedimos</th><th>Para quê</th></tr>
+      <tr><th style="width:30%">O que medimos</th><th style="width:32%">Endereço antigo <span class="tag t-gray">até 11/08</span></th><th>Endereço novo <span class="tag t-green">11/08</span></th></tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>custom_label_4</strong><br><span class="tag t-gray">jul/2026</span></td>
-        <td>Incluir a tag <code>&lt;g:custom_label_4&gt;</code> em cada produto do <code>gosh.xml</code>,
-            com o valor da curva ABC (A, B ou C), conforme a planilha de-para <code>id → curva</code>
-            que enviamos junto com o briefing.</td>
-        <td>Sem esse campo não é possível separar os produtos por relevância comercial dentro do
-            Google Shopping. É o que permite dar lance maior nos produtos que mais vendem e cortar
-            investimento nos que não vendem — hoje o orçamento é distribuído de forma cega.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="note">
-    <strong>Observação sobre o de-para:</strong> a planilha original foi enviada em julho. Se for
-    necessário reenviá-la para a implementação, avisar que geramos uma versão atualizada — a curva ABC
-    é recalculada com os dados de vendas mais recentes.
-  </div>
-
-  <h2>2. O que encontramos no arquivo público</h2>
-
-  <p>
-    Baixamos o <code>gosh.xml</code> diretamente do endereço público em três datas distintas e
-    analisamos o conteúdo completo (30,4 MB, 23.647 produtos).
-  </p>
-
-  <table>
-    <thead>
-      <tr><th style="width:16%">Data</th><th style="width:26%">Tamanho / produtos</th><th style="width:26%">Tags <code>custom_label</code></th><th>Resultado</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>03/08/2026</td>
-        <td>23.647 produtos</td>
-        <td class="num">0</td>
-        <td><span class="tag t-red">Não localizado</span></td>
+        <td><strong>Data de geração</strong><br><code>last-modified</code></td>
+        <td><span class="tag t-red">17/03/2026</span> — 147 dias parado</td>
+        <td><span class="tag t-green">11/08/2026 07:53</span> — do próprio dia</td>
       </tr>
       <tr>
-        <td>07/08/2026</td>
-        <td>30.455.907 bytes · 23.647 produtos</td>
-        <td class="num">0</td>
-        <td><span class="tag t-red">Não localizado</span></td>
+        <td><strong>Estabilidade</strong><br>respostas HTTP</td>
+        <td><span class="tag t-red">18,8% de erro 404</span><br>12 falhas em 64 requisições</td>
+        <td><span class="tag t-green">24 de 24 responderam 200</span><br>nenhuma falha</td>
       </tr>
       <tr>
-        <td>10/08/2026</td>
-        <td>30.455.907 bytes · 23.647 produtos</td>
-        <td class="num">0</td>
-        <td><span class="tag t-red">Não localizado</span></td>
+        <td><strong><code>custom_label_4</code></strong><br>a solicitação original</td>
+        <td><span class="tag t-red">0 produtos</span></td>
+        <td><span class="tag t-green">24.504 produtos</span> — com namespace <code>g:</code></td>
+      </tr>
+      <tr>
+        <td><strong>Produtos no catálogo</strong></td>
+        <td>23.647 — congelado</td>
+        <td><span class="tag t-green">24.504</span> — +857</td>
+      </tr>
+      <tr>
+        <td><strong><code>product_type</code></strong></td>
+        <td>23.315 preenchidos · categorias genéricas</td>
+        <td><span class="tag t-green">24.216 preenchidos</span> · 636 tipos distintos</td>
+      </tr>
+      <tr>
+        <td><strong><code>age_group</code></strong></td>
+        <td><span class="tag t-red">"Adulto"</span> em 10 produtos — inválido</td>
+        <td><span class="tag t-green"><code>adult</code> / <code>kids</code></span> em 14.378 — correto</td>
+      </tr>
+      <tr>
+        <td><strong><code>identifier_exists</code></strong></td>
+        <td><span class="tag t-red">12.913 sem namespace</span></td>
+        <td><span class="tag t-amber">10.966 sem namespace</span> — segue em aberto</td>
+      </tr>
+      <tr>
+        <td><strong><code>gender</code></strong></td>
+        <td>vazio em 99,9%</td>
+        <td><span class="tag t-amber">"Unissex" em 14.473</span> — valor não aceito</td>
       </tr>
     </tbody>
   </table>
 
   <p>
-    A busca foi feita por <code>custom_label</code> em qualquer índice (0 a 4) e em qualquer formato,
-    com e sem o prefixo de namespace <code>g:</code>. Nenhuma ocorrência no arquivo inteiro.
+    Confirmação pelo lado do Google: no Merchant Center, a busca de hoje às 07:00 processou os 24.504
+    produtos e registrou <strong>"Novos produtos adicionados: 73"</strong>. Nos meses anteriores esse
+    número era <strong>0 todos os dias</strong> — era exatamente o congelamento visto do outro lado. O
+    painel também mostra "Nomes de atributos: todos reconhecidos".
   </p>
 
-  <h3>Estrutura atual de cada produto</h3>
-  <p>Estas são todas as tags presentes hoje, com a contagem em quantos dos 23.647 produtos aparecem:</p>
+  <h2>2. O que ainda falta</h2>
 
-  <table>
-    <thead>
-      <tr><th style="width:34%">Tag</th><th style="width:20%">Produtos</th><th>Situação</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code>id</code>, <code>title</code>, <code>description</code>, <code>link</code></td><td class="num">23.647</td><td><span class="tag t-green">OK</span></td></tr>
-      <tr><td><code>g:image_link</code>, <code>g:availability</code>, <code>g:price</code>, <code>g:sale_price</code></td><td class="num">23.647</td><td><span class="tag t-green">OK</span></td></tr>
-      <tr><td><code>g:brand</code>, <code>g:mpn</code>, <code>g:condition</code>, <code>g:google_product_category</code></td><td class="num">23.647</td><td><span class="tag t-green">OK</span></td></tr>
-      <tr><td><code>g:product_type</code></td><td class="num">23.315</td><td><span class="tag t-green">OK</span> — 332 vazios (1,4%)</td></tr>
-      <tr><td><code>g:item_group_id</code></td><td class="num">18.892</td><td><span class="tag t-green">OK</span> — variações</td></tr>
-      <tr><td><code>g:gtin</code></td><td class="num">10.734</td><td><span class="tag t-green">OK</span> — só quem tem código de barras</td></tr>
-      <tr><td><code>g:color</code> / <code>g:size</code></td><td class="num">1.627 / 1.093</td><td><span class="tag t-gray">Parcial</span> — não bloqueia</td></tr>
-      <tr><td><code>g:gender</code> / <code>g:age_group</code></td><td class="num">21 / 10</td><td><span class="tag t-amber">Presente mas vazio e inválido</span></td></tr>
-      <tr><td><code>identifier_exists</code></td><td class="num">12.913</td><td><span class="tag t-red">Fora do padrão</span> — sem namespace</td></tr>
-      <tr><td><code>g:custom_label_0..4</code></td><td class="num">0</td><td><span class="tag t-red">Ausente</span> — é o que foi solicitado</td></tr>
-    </tbody>
-  </table>
+  <p>São dois ajustes de formato. Nenhum deles bloqueia o feed hoje, mas os dois limitam desempenho.</p>
 
-  <h2>3. A causa provável: o arquivo está congelado</h2>
-
-  <div class="cause">
-    <h3>Duas evidências independentes apontam para o mesmo ponto</h3>
-    <p>
-      <strong>1. O cabeçalho HTTP diz que o arquivo é de março.</strong> O servidor responde
-      <code>last-modified: Tue, 17 Mar 2026 02:05:07 GMT</code> — ou seja, 146 dias sem alteração.
-      Se o XML fosse gerado dinamicamente a cada requisição, essa data acompanharia o dia de hoje.
-    </p>
-    <p>
-      <strong>2. O conteúdo é idêntico byte a byte entre as checagens.</strong> Comparamos a
-      assinatura digital (MD5) dos downloads de 07/08 e 10/08:
-    </p>
-    <pre><span class="c"># download de 07/08/2026</span>
-69b2824cb30c58279df261a17386ec1d  <span class="c">(30.455.907 bytes)</span>
-
-<span class="c"># download de 10/08/2026</span>
-69b2824cb30c58279df261a17386ec1d  <span class="c">(30.455.907 bytes)</span>
-
-<span class="c"># → assinaturas iguais = arquivo rigorosamente idêntico</span></pre>
-    <p>
-      Em um catálogo de 23.647 produtos com preço e estoque em movimento, é praticamente impossível
-      que três dias se passem sem que um único byte mude. Isso é a assinatura de um <strong>arquivo
-      estático salvo em disco</strong>, servido sempre igual, e não de um export vivo do banco de dados.
-    </p>
-    <p>
-      <strong>3. O próprio Merchant Center registra o mesmo padrão.</strong> No painel do Google, a
-      busca do feed roda todo dia às 07:00 e o resultado é sempre idêntico:
-      <strong>23.647 produtos atualizados e 0 novos produtos adicionados</strong> — repetido dia após
-      dia. Em um e-commerce ativo, nenhum produto novo entrando no catálogo por meses é o mesmo
-      sintoma visto do outro lado.
-    </p>
-    <p class="verdict bad">
-      Consequência: mesmo que o custom_label_4 tenha sido implementado corretamente no sistema, ele
-      não aparece no arquivo — porque o arquivo não está sendo regerado. E o mesmo vale para preço,
-      estoque e qualquer produto novo cadastrado desde 17 de março.
-    </p>
-  </div>
-
-  <h2>4. Achados adicionais</h2>
-
-  <p>
-    Estes pontos não faziam parte da solicitação original, mas apareceram na investigação e afetam
-    diretamente o desempenho do Shopping. Registramos aqui para entrarem na mesma frente de trabalho.
-  </p>
-
-  <div class="cause two">
-    <h3>4.1 — O feed retorna erro 404 em cerca de 1 a cada 5 requisições</h3>
-    <p>
-      Testamos o endereço 44 vezes ao longo de 7 e 10 de agosto: <strong>8 respostas retornaram
-      404</strong> (18,2%). O erro não é uma falha de rede — o servidor devolve uma página HTML de
-      1.790 bytes com o título "Nenhum resultado encontrado", em vez do XML.
-    </p>
-    <pre><span class="c"># 24 requisições consecutivas em 10/08</span>
-<span class="g">HTTP 200</span> → 21 vezes  <span class="c">(XML completo, 30,4 MB)</span>
-<span class="r">HTTP 404</span> → 3 vezes   <span class="c">(página HTML "Nenhum resultado encontrado")</span></pre>
-    <p>
-      <strong>Por que isso é grave:</strong> o Google Merchant Center busca esse arquivo uma vez por
-      dia, às 07:00. Se a busca cair em uma das requisições com erro, ou o feed do dia falha, ou —
-      no pior cenário — o Google interpreta a resposta como catálogo vazio e produtos saem do ar
-      nos anúncios. É um risco de queda de faturamento que não depende de nada que fazemos na gestão.
-    </p>
-    <div class="ok-note" style="margin-top:14px">
-      <strong>Ainda não aconteceu — e é por isso que dá para tratar com calma.</strong> Conferimos o
-      histórico de buscas no Merchant Center: as 9 últimas (de 2 a 10 de agosto, todas às 07:00)
-      foram bem-sucedidas, sem nenhuma falha. O 404 ainda não pegou a janela em que o Google busca.
-      Mas com quase 1 em cada 5 requisições falhando, é questão de tempo — e o custo de arrumar
-      agora é muito menor do que o de descobrir com os produtos fora do ar.
-    </div>
-  </div>
-
-  <div class="cause two">
-    <h3>4.2 — 12.913 produtos com a tag <code>identifier_exists</code> fora do padrão</h3>
-    <p>
-      Os produtos sem código de barras (54,6% do catálogo) trazem a tag escrita sem o prefixo de
-      namespace que a especificação do Google exige:
-    </p>
-    <pre><span class="c">Como está hoje:</span>
+  <ol class="plan">
+    <li>
+      <div class="h"><strong>Corrigir o <code>identifier_exists</code></strong> <span class="tag t-amber">Prioridade</span></div>
+      <p>
+        Afeta <strong>10.966 produtos</strong> (caiu de 12.913, porque mais produtos passaram a ter
+        GTIN). Falta o prefixo de namespace e o valor está em formato não aceito:
+      </p>
+      <pre><span class="c">Como está hoje:</span>
 <span class="r">&lt;identifier_exists&gt;FALSE&lt;/identifier_exists&gt;</span>
 
 <span class="c">Como o Google especifica:</span>
 <span class="g">&lt;g:identifier_exists&gt;no&lt;/g:identifier_exists&gt;</span></pre>
-    <p>
-      Sem o <code>g:</code>, o Google simplesmente ignora a tag. Na prática, esses 12.913 produtos
-      são tratados como se devessem ter GTIN — o que gera avisos de identificador ausente e pode
-      limitar o alcance deles nos anúncios.
-    </p>
-    <p>
-      <strong>Este ponto não é interpretação nossa.</strong> O próprio Merchant Center sinaliza
-      exatamente isso na tela de detalhes do feed, com o mesmo número de produtos afetados — é hoje
-      o <em>único</em> problema de arquivo que o Google aponta nessa fonte de dados:
-    </p>
-    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0">
-      <table style="margin:0">
-        <thead><tr><th>Itens que precisam de atenção</th><th>Como corrigir</th><th style="text-align:right">Produtos afetados</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>⚠️ O atributo não tem namespace.</td>
-            <td>O atributo fornecido "identifier_exists" não inclui um namespace.</td>
-            <td class="num">12.913</td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">
-        Reprodução do aviso exibido em Merchant Center → Fontes de dados → Feed do dia 25/04/2025,
-        consultado em 10/08/2026. Os nomes de atributos, fora esse, aparecem como "Todos reconhecidos".
-      </p>
-    </div>
-  </div>
-
-  <div class="cause two">
-    <h3>4.3 — <code>gender</code> e <code>age_group</code> presentes, porém vazios e em português</h3>
-    <p>
-      As duas tags aparecem em todos os 23.647 produtos, mas o conteúdo está vazio em 99,9% deles.
-      Nos poucos preenchidos, os valores estão em português — e o Google só aceita a lista fechada
-      em inglês:
-    </p>
-    <table>
-      <thead><tr><th style="width:24%">Tag</th><th style="width:26%">Preenchidos</th><th style="width:22%">Valores atuais</th><th>Valores aceitos pelo Google</th></tr></thead>
-      <tbody>
-        <tr><td><code>g:gender</code></td><td>21 de 23.647 (0,09%)</td><td>Unissex, Feminino</td><td><code>male</code>, <code>female</code>, <code>unisex</code></td></tr>
-        <tr><td><code>g:age_group</code></td><td>10 de 23.647 (0,04%)</td><td>Adulto</td><td><code>newborn</code>, <code>infant</code>, <code>toddler</code>, <code>kids</code>, <code>adult</code></td></tr>
-      </tbody>
-    </table>
-    <p>
-      Não é um item bloqueante — para a maior parte de aviamentos essas tags nem se aplicam. Mas do
-      jeito que está, a tag vazia não agrega nada e os poucos valores preenchidos são descartados.
-      Vale definir: ou preencher com os valores válidos onde faz sentido, ou omitir a tag.
-    </p>
-  </div>
-
-  <h2>5. O que está em aberto</h2>
-
-  <p>Em ordem de prioridade — do que mais impacta faturamento para o que é ajuste fino.</p>
-
-  <ol class="plan">
-    <li>
-      <div class="h"><strong>Estabilizar o endereço do feed</strong> <span class="tag t-red">Crítico</span></div>
       <p>
-        Eliminar o 404 intermitente em <code>/octopus/sync/102/gosh.xml</code>. O endereço precisa
-        responder 200 com o XML em 100% das requisições — é dele que o Google depende diariamente
-        para manter os produtos no ar.
+        Sem o <code>g:</code>, o Google ignora a tag e trata esses produtos como se devessem ter código
+        de barras. <strong>Este é hoje o único problema de arquivo que o próprio Merchant Center aponta
+        nessa fonte de dados</strong> — com exatamente esse número de produtos afetados.
       </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Como validamos:</b> 30 requisições consecutivas, todas com resposta 200</div>
+      <div class="who"><b>Como validamos:</b> nenhuma ocorrência de <code>&lt;identifier_exists&gt;</code> sem o <code>g:</code></div>
     </li>
     <li>
-      <div class="h"><strong>Voltar a regerar o arquivo</strong> <span class="tag t-red">Crítico</span></div>
+      <div class="h"><strong>Trocar <code>Unissex</code> por <code>unisex</code> no <code>gender</code></strong> <span class="tag t-gray">Ajuste fino</span></div>
       <p>
-        Confirmar se o <code>gosh.xml</code> é gerado a cada requisição ou é um arquivo salvo em
-        disco. Se for arquivo, precisamos saber qual rotina o regera, com que frequência, e por que
-        ela não roda desde 17/03/2026. Enquanto isso não voltar, preço e estoque anunciados no
-        Google seguem defasados em quase 5 meses.
+        A tag passou a vir preenchida em <strong>14.473 produtos</strong>, o que é um avanço — mas com
+        o valor <code>Unissex</code>, em português e com maiúscula. O Google só aceita a lista fechada
+        <code>male</code>, <code>female</code>, <code>unisex</code>, em inglês e minúsculo; qualquer
+        outro valor é descartado.
       </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Como validamos:</b> <code>last-modified</code> passa a acompanhar a data do dia</div>
-    </li>
-    <li>
-      <div class="h"><strong>Incluir o <code>custom_label_4</code></strong> <span class="tag t-amber">Solicitação original</span></div>
-      <p>Adicionar a tag em cada produto, dentro do bloco <code>&lt;item&gt;</code>, no formato:</p>
-      <pre><span class="c">&lt;item&gt;</span>
-  ...
-  <span class="g">&lt;g:custom_label_4&gt;A&lt;/g:custom_label_4&gt;</span>
-<span class="c">&lt;/item&gt;</span></pre>
       <p>
-        O valor (A, B ou C) vem do de-para <code>id → curva</code> da planilha. Produtos que não
-        estiverem na planilha podem sair sem a tag — não é necessário preencher com vazio.
+        Vale notar que o <code>age_group</code> <strong>já saiu correto</strong> nesta versão
+        (<code>adult</code> e <code>kids</code>) — é aplicar o mesmo tratamento no <code>gender</code>.
       </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Como validamos:</b> buscar <code>custom_label_4</code> no XML e conferir a contagem por valor</div>
-    </li>
-    <li>
-      <div class="h"><strong>Corrigir o <code>identifier_exists</code></strong> <span class="tag t-amber">Importante</span></div>
-      <p>
-        Acrescentar o prefixo <code>g:</code> na abertura e no fechamento da tag, e usar o valor
-        <code>no</code> em minúsculo, nos 12.913 produtos afetados.
-      </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Como validamos:</b> nenhuma ocorrência de <code>identifier_exists</code> sem o <code>g:</code></div>
-    </li>
-    <li>
-      <div class="h"><strong>Definir <code>gender</code> e <code>age_group</code></strong> <span class="tag t-gray">Ajuste fino</span></div>
-      <p>
-        Preencher com os valores em inglês da lista do Google nos produtos em que o atributo se
-        aplica, ou omitir a tag nos demais. Tag vazia não tem efeito.
-      </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Prioridade:</b> baixa, pode ir junto com os itens acima</div>
-    </li>
-    <li>
-      <div class="h"><strong>Preencher o <code>product_type</code> dos 332 restantes</strong> <span class="tag t-gray">Ajuste fino</span></div>
-      <p>
-        Seguindo a convenção hierárquica que o catálogo já usa muito bem — por exemplo
-        <code>Lãs e Fios Tricô &gt; Fio Náutico</code>. São só 1,4% do catálogo.
-      </p>
-      <div class="who"><b>Responsável:</b> Octopus · <b>Prioridade:</b> baixa</div>
+      <div class="who"><b>Como validamos:</b> os valores distintos de <code>g:gender</code> no XML são só male, female ou unisex</div>
     </li>
   </ol>
 
-  <h2>6. Como conferir antes de dar como concluído</h2>
+  <div class="note">
+    <strong>Dois pontos menores, sem urgência:</strong> o <code>google_product_category</code> está
+    vazio em 9.970 produtos — não é crítico, porque o Google atribui a categoria automaticamente; e o
+    <code>availability</code> vem como <code>in stock</code> em 100% dos 24.504 itens, o que vale
+    conferir se reflete o estoque real ou é um valor fixo. Anunciar produto esgotado gera clique pago
+    sem venda.
+  </div>
 
-  <p>
-    Para evitar novo desencontro, seguem os comandos exatos que usamos na validação. Rodam em
-    qualquer terminal e levam menos de um minuto:
-  </p>
+  <h2>3. Uma dúvida sobre o critério da curva ABC</h2>
+
+  <div class="cause two">
+    <p>
+      O <code>custom_label_4</code> chegou com a distribuição <strong>Curva A: 8.961 · Curva B: 4.030 ·
+      Curva C: 11.513</strong>. Cruzamos esses rótulos com o faturamento real registrado no Google Ads
+      nos últimos 90 dias (1.075 produtos com venda, R$ 172.969) e os cortes não coincidem: dos produtos
+      que concentram 80% do faturamento em anúncios, <strong>71% foram marcados como Curva A</strong> —
+      e outros 239 produtos de baixo giro em anúncios também entraram como A.
+    </p>
+    <p>
+      Isso não é um erro: é provável que a curva tenha sido calculada sobre o faturamento da loja
+      inteira, e não sobre o de-para que enviamos, que considerava só as vendas vindas de anúncios. As
+      duas leituras são legítimas — só precisamos saber qual foi usada para calibrar as campanhas.
+      <strong>Pergunta objetiva:</strong> qual base gerou os rótulos A/B/C? Se for a loja inteira,
+      seguimos com ela; se preferir, reenviamos o de-para atualizado do Google Ads.
+    </p>
+  </div>
+
+  <h2>4. Como conferir</h2>
+
+  <p>Os comandos que usamos, agora apontando para o endereço novo:</p>
 
   <pre><span class="c"># 1. Baixar o feed</span>
-curl -s -L -o feed.xml "https://www.romaaviamentos.com.br/octopus/sync/102/gosh.xml"
+curl -sS -o feed.xml "https://sub1.lojcomm.com.br/octopus/feed/102/gosh.xml"
 
-<span class="c"># 2. Conferir se veio o XML mesmo (esperado: ~30 MB, não 1.790 bytes)</span>
-wc -c &lt; feed.xml
-
-<span class="c"># 3. Contar produtos (esperado hoje: 23.647)</span>
+<span class="c"># 2. Contar produtos (esperado: ~24.500)</span>
 grep -c "&lt;item&gt;" feed.xml
 
-<span class="c"># 4. Conferir o custom_label_4 (esperado: milhares, hoje: 0)</span>
-grep -o "custom_label_4" feed.xml | wc -l
+<span class="c"># 3. Data de geração (esperado: a data do dia)</span>
+curl -sSI "https://sub1.lojcomm.com.br/octopus/feed/102/gosh.xml" | grep -i last-modified
 
-<span class="c"># 5. Conferir a data de geração (esperado: hoje, hoje: 17/03/2026)</span>
-curl -sI -L "https://www.romaaviamentos.com.br/octopus/sync/102/gosh.xml" | grep -i last-modified
+<span class="c"># 4. identifier_exists — esperado: 0 na primeira linha, milhares na segunda</span>
+grep -o "&lt;identifier_exists&gt;" feed.xml | wc -l
+grep -o "&lt;g:identifier_exists&gt;" feed.xml | wc -l
 
-<span class="c"># 6. Testar estabilidade — esperado: 200 nas 20 vezes</span>
-for i in $(seq 1 20); do curl -s -o /dev/null -w "%{http_code} " -L \
-  "https://www.romaaviamentos.com.br/octopus/sync/102/gosh.xml"; done</pre>
+<span class="c"># 5. gender — esperado: só male, female ou unisex</span>
+grep -o "&lt;g:gender&gt;[^&lt;]*" feed.xml | sort | uniq -c
+
+<span class="c"># 6. Estabilidade — esperado: 200 nas 20 vezes</span>
+for i in $(seq 1 20); do curl -s -o /dev/null -w "%{http_code} " -I \
+  "https://sub1.lojcomm.com.br/octopus/feed/102/gosh.xml"; done</pre>
 
   <div class="ok-note">
-    <strong>Nossa parte:</strong> assim que os itens 1, 2 e 3 estiverem no ar, validamos o feed no
-    mesmo dia, configuramos a segmentação por curva ABC nas campanhas de Shopping e passamos a
-    direcionar o investimento para os produtos de maior retorno. A campanha já está montada e
-    aguardando apenas esse campo.
+    <strong>Nossa parte, já em andamento:</strong> com o feed vivo e o <code>product_type</code> agora
+    bem mais granular (636 tipos), conseguimos montar a campanha de Shopping segmentada por linha de
+    produto — que estava parada desde julho esperando esse campo. O investimento passa a ser
+    direcionado por linha e por relevância comercial, em vez de distribuído de forma uniforme pelo
+    catálogo inteiro.
   </div>
 
   <footer>
-    Relatório técnico · Gio Growth Digital · 10 de agosto de 2026<br>
-    Fonte: análise direta do arquivo público <code>gosh.xml</code> em 03, 07 e 10/08/2026 ·
-    Merchant Center 6360636 · Contato: giovannarramires@gmail.com
+    Relatório técnico · Gio Growth Digital · atualizado em 11 de agosto de 2026<br>
+    Fonte: análise direta do arquivo <code>gosh.xml</code> nos dois endereços em 03, 07, 10 e 11/08/2026 ·
+    Merchant Center 6360636 · Google Ads 841-012-9672 · Contato: giovannarramires@gmail.com
   </footer>
 </div>
 </body>
