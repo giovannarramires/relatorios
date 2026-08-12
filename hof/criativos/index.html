@@ -1,0 +1,702 @@
+<title>HOF — Criativos EPIC, INSIDERS e EPIC PT (2025–2026)</title>
+<style>
+:root{
+  --ink:#0A1C1A; --paper:#F7F9F7; --card:#FFFFFF; --linha:#DCE4E1;
+  --teal:#0E5F55; --gold:#B4842B; --tijolo:#9E3B2E; --texto:#233A36; --muted:#5C6B68;
+  --sombra:0 1px 2px rgba(10,28,26,.05),0 8px 24px -12px rgba(10,28,26,.12);
+  --disp:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --corpo:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ink:#EAF2F0; --paper:#08110F; --card:#0E1B19; --linha:#1E312D; --teal:#3FB3A2;
+    --gold:#D9A94A; --tijolo:#D2705E; --texto:#C6D6D2; --muted:#88A099;
+    --sombra:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7); }
+}
+:root[data-theme="dark"]{ --ink:#EAF2F0; --paper:#08110F; --card:#0E1B19; --linha:#1E312D; --teal:#3FB3A2;
+  --gold:#D9A94A; --tijolo:#D2705E; --texto:#C6D6D2; --muted:#88A099;
+  --sombra:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7); }
+:root[data-theme="light"]{ --ink:#0A1C1A; --paper:#F7F9F7; --card:#FFFFFF; --linha:#DCE4E1; --teal:#0E5F55;
+  --gold:#B4842B; --tijolo:#9E3B2E; --texto:#233A36; --muted:#5C6B68;
+  --sombra:0 1px 2px rgba(10,28,26,.05),0 8px 24px -12px rgba(10,28,26,.12); }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--texto);font-family:var(--corpo);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 96px}
+h1,h2,h3{color:var(--ink);font-family:var(--disp);font-weight:600;margin:0;text-wrap:balance}
+header.topo{border-bottom:2px solid var(--ink);padding:56px 0 28px;margin-bottom:40px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between}
+.olho{font-family:var(--corpo);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;font-weight:600}
+h1{font-size:clamp(32px,4.6vw,46px);line-height:1.05;letter-spacing:-.015em}
+.sub-t{color:var(--muted);margin:14px 0 0;max-width:58ch}
+.selo{border-left:2px solid var(--teal);padding-left:18px;font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted);font-variant-numeric:tabular-nums}
+.selo b{color:var(--ink);font-family:var(--disp);font-size:24px;display:block;margin-bottom:2px}
+.curso{margin-bottom:72px}
+.curso-cab{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:14px}
+.curso-cab h2{font-size:clamp(26px,3.4vw,36px);line-height:1}
+.curso-tot{text-align:right}
+.tot-l{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tot-v{font-family:var(--disp);font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
+h3.ano{font-size:15px;margin:30px 0 12px;display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;font-family:var(--corpo);
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.ano-d{font-family:var(--mono);font-size:11px;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums}
+.tab-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:2px;background:var(--card);box-shadow:var(--sombra)}
+table{border-collapse:collapse;width:100%;min-width:1020px;font-size:12px}
+th{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px;text-align:right;border-bottom:1px solid var(--linha);white-space:nowrap}
+td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--linha);font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+th.l,td.l{text-align:left} th.c,td.c{text-align:center}
+td.nome{font-family:var(--corpo);font-size:12.5px;color:var(--ink);white-space:normal;min-width:250px;line-height:1.45}
+td.nome em{display:block;font-style:normal;font-size:10px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+td.forte{color:var(--ink);font-weight:600} td.res{color:var(--ink)}
+tbody tr:hover td{background:color-mix(in srgb,var(--teal) 5%,transparent)}
+tfoot td{border-top:2px solid var(--ink);border-bottom:0;color:var(--ink);font-weight:600;background:color-mix(in srgb,var(--teal) 6%,transparent)}
+.fmt{font-family:var(--corpo);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;
+  border-radius:2px;border:1px solid;white-space:nowrap;font-weight:600}
+.f-video{color:var(--tijolo);border-color:color-mix(in srgb,var(--tijolo) 40%,transparent)}
+.f-estatico{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,transparent)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.fcard{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:16px 18px;box-shadow:var(--sombra)}
+.fcard.vence{border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+.fcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.fcard-n{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.fcard-v{font-family:var(--disp);font-size:30px;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.fcard-l{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.fcard-bar{height:5px;background:color-mix(in srgb,var(--linha) 65%,transparent);border-radius:1px;margin:12px 0 8px;overflow:hidden}
+.fcard-bar-in{height:100%;background:color-mix(in srgb,var(--teal) 55%,transparent)}
+.fcard.vence .fcard-bar-in{background:var(--gold)}
+.fcard-d{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.7;font-variant-numeric:tabular-nums}
+@media (max-width:700px){.fgrid{grid-template-columns:1fr}}
+.pin{font-family:var(--corpo);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);
+  border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);padding:1px 6px;border-radius:2px;margin-left:6px;white-space:nowrap}
+a.ver{font-family:var(--corpo);font-size:11px;color:var(--teal);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--teal) 35%,transparent);padding-bottom:1px;white-space:nowrap}
+a.ver:hover{border-bottom-color:var(--teal)}
+a.ver:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+.notas{border-top:2px solid var(--ink);padding-top:26px}
+.notas h3{font-size:18px;margin-bottom:14px}
+.notas ul{margin:0;padding-left:18px;color:var(--muted);max-width:74ch}
+.notas li{margin-bottom:9px} .notas b{color:var(--ink);font-weight:600}
+@media (max-width:880px){ .curso-tot{text-align:left} }
+</style>
+<div class="wrap">
+<header class="topo">
+  <div><p class="olho">Dr. Marcelo Germani · HOF Sem Segredos</p>
+  <h1>Os criativos,<br>um a um</h1>
+  <p class="sub-t">Cada criativo que rodou no EPIC, no INSIDERS e no EPIC Portugal, com o desempenho consolidado e o link para abrir o anúncio no Facebook.</p></div>
+  <div class="selo"><b>126</b>criativos distintos<br>2025 e 2026<br>link direto para cada um</div>
+</header>
+<section class="curso">
+<div class="curso-cab"><div><p class="olho">Brasil</p><h2>EPIC</h2></div>
+<div class="curso-tot"><span class="tot-l">Investido nos criativos</span><span class="tot-v">R$ 33.411,35</span></div></div>
+<h3 class="ano">2025<span class="ano-d">27 criativos · R$ 22.680,03 · 1.443 conversas</span></h3><div class="fgrid"><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">15 criativos</span></div>
+<div class="fcard-v">R$ 15,50</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:59%"></div></div>
+<div class="fcard-d">R$ 13.488,32 · 59% da verba · 870 conversas · CPM R$ 39,85 · CTR 1,06%</div>
+</div><div class="fcard">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">12 criativos</span></div>
+<div class="fcard-v">R$ 16,04</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:41%"></div></div>
+<div class="fcard-d">R$ 9.191,71 · 41% da verba · 573 conversas · CPM R$ 32,15 · CTR 0,84%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD01_CONVITE_EPIC<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 4.160,30</td><td>96.468</td><td>R$ 43,13</td><td>1.266</td>
+<td>1,31%</td><td>R$ 3,29</td><td class="res">328</td><td class="forte">R$ 12,68</td>
+<td class="c"><a class="ver" href="https://fb.me/25wmTv17aqsqUkA" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_VIDEO_CURSO_DIFERENTE<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 3.194,23</td><td>81.780</td><td>R$ 39,06</td><td>871</td>
+<td>1,07%</td><td>R$ 3,67</td><td class="res">184</td><td class="forte">R$ 17,36</td>
+<td class="c"><a class="ver" href="https://fb.me/22xnpbpxoci20BJ" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_CARD_EPIC_AGOSTO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 2.854,31</td><td>95.316</td><td>R$ 29,95</td><td>772</td>
+<td>0,81%</td><td>R$ 3,70</td><td class="res">215</td><td class="forte">R$ 13,28</td>
+<td class="c"><a class="ver" href="https://fb.me/2fkn0axJ8AjWG7p" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_CARD_EPIC_2</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 2.405,65</td><td>63.418</td><td>R$ 37,93</td><td>689</td>
+<td>1,09%</td><td>R$ 3,49</td><td class="res">160</td><td class="forte">R$ 15,04</td>
+<td class="c"><a class="ver" href="https://fb.me/2ibaPe6ndP2YAbX" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD_EPIC_1</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 2.017,00</td><td>48.915</td><td>R$ 41,23</td><td>396</td>
+<td>0,81%</td><td>R$ 5,09</td><td class="res">90</td><td class="forte">R$ 22,41</td>
+<td class="c"><a class="ver" href="https://fb.me/1UWV3jvKPm7asTG" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_GERMANI</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.932,82</td><td>36.874</td><td>R$ 52,42</td><td>373</td>
+<td>1,01%</td><td>R$ 5,18</td><td class="res">100</td><td class="forte">R$ 19,33</td>
+<td class="c"><a class="ver" href="https://fb.me/29wX21gMFMoGn7m" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_VIDEO_EPIC<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.803,42</td><td>69.454</td><td>R$ 25,97</td><td>481</td>
+<td>0,69%</td><td>R$ 3,75</td><td class="res">124</td><td class="forte">R$ 14,54</td>
+<td class="c"><a class="ver" href="https://fb.me/yC0AmsdBMlUjLYB" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CARRO_SUPERE</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 832,76</td><td>38.813</td><td>R$ 21,46</td><td>185</td>
+<td>0,48%</td><td>R$ 4,50</td><td class="res">42</td><td class="forte">R$ 19,83</td>
+<td class="c"><a class="ver" href="https://fb.me/32GOerp4vH0aTVO" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_UNICO_DOUTOR</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 701,46</td><td>15.323</td><td>R$ 45,78</td><td>148</td>
+<td>0,97%</td><td>R$ 4,74</td><td class="res">31</td><td class="forte">R$ 22,63</td>
+<td class="c"><a class="ver" href="https://fb.me/2MXlKfavqgQ2a7F" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_VIDEO_NOVO_TREINAMENTO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 677,52</td><td>18.669</td><td>R$ 36,29</td><td>169</td>
+<td>0,91%</td><td>R$ 4,01</td><td class="res">36</td><td class="forte">R$ 18,82</td>
+<td class="c"><a class="ver" href="https://fb.me/35Ydtrfdd4juvi8" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_CONFERINDO_AGENDA<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 574,94</td><td>8.855</td><td>R$ 64,93</td><td>156</td>
+<td>1,76%</td><td>R$ 3,69</td><td class="res">36</td><td class="forte">R$ 15,97</td>
+<td class="c"><a class="ver" href="https://fb.me/23A2RMYoYKQDJQp" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CARR_EPIC<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 282,67</td><td>9.133</td><td>R$ 30,95</td><td>88</td>
+<td>0,96%</td><td>R$ 3,21</td><td class="res">19</td><td class="forte">R$ 14,88</td>
+<td class="c"><a class="ver" href="https://fb.me/1V81Hgp1eTePPMn" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_CARD_2</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 198,30</td><td>7.583</td><td>R$ 26,15</td><td>81</td>
+<td>1,07%</td><td>R$ 2,45</td><td class="res">12</td><td class="forte">R$ 16,53</td>
+<td class="c"><a class="ver" href="https://fb.me/1ZHJc2fuufp3zxq" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_VIDEO_MARCELO_2 <span class="pin">melhor custo</span></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 189,52</td><td>5.906</td><td>R$ 32,09</td><td>73</td>
+<td>1,24%</td><td>R$ 2,60</td><td class="res">26</td><td class="forte">R$ 7,29</td>
+<td class="c"><a class="ver" href="https://fb.me/1VkEOVwEF1dpg4s" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_EPIC_INFOS_02</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 175,87</td><td>8.171</td><td>R$ 21,52</td><td>64</td>
+<td>0,78%</td><td>R$ 2,75</td><td class="res">13</td><td class="forte">R$ 13,53</td>
+<td class="c"><a class="ver" href="https://fb.me/2tpHwc6CEVt3g9a" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_EPIC_INFOS_01</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 123,06</td><td>5.135</td><td>R$ 23,96</td><td>53</td>
+<td>1,03%</td><td>R$ 2,32</td><td class="res">9</td><td class="forte">R$ 13,67</td>
+<td class="c"><a class="ver" href="https://fb.me/1Ud3IDiOFcL40cx" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_EPIC_MARCELO_2</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 90,36</td><td>2.538</td><td>R$ 35,60</td><td>22</td>
+<td>0,87%</td><td>R$ 4,11</td><td class="res">2</td><td class="forte">R$ 45,18</td>
+<td class="c"><a class="ver" href="https://fb.me/23GiybyFghCKiA5" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_ULTIMODIA_PRATICA</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 84,58</td><td>1.680</td><td>R$ 50,35</td><td>11</td>
+<td>0,65%</td><td>R$ 7,69</td><td class="res">5</td><td class="forte">R$ 16,92</td>
+<td class="c"><a class="ver" href="https://fb.me/2ZmoT3sN3zKG4ou" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_EPIC_MARCELO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 73,23</td><td>1.728</td><td>R$ 42,38</td><td>8</td>
+<td>0,46%</td><td>R$ 9,15</td><td class="res">3</td><td class="forte">R$ 24,41</td>
+<td class="c"><a class="ver" href="https://fb.me/3118ObHTveHAqQf" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_INSCRICOES_ABERTAS</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 69,86</td><td>2.380</td><td>R$ 29,35</td><td>20</td>
+<td>0,84%</td><td>R$ 3,49</td><td class="res">3</td><td class="forte">R$ 23,29</td>
+<td class="c"><a class="ver" href="https://fb.me/2yxyNtiSXxI31ov" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD_1</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 68,64</td><td>2.764</td><td>R$ 24,83</td><td>19</td>
+<td>0,69%</td><td>R$ 3,61</td><td class="res">5</td><td class="forte">R$ 13,73</td>
+<td class="c"><a class="ver" href="https://fb.me/1VNhiGK5VGforXx" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_AGENDA_2</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 43,91</td><td>803</td><td>R$ 54,68</td><td>5</td>
+<td>0,62%</td><td>R$ 8,78</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2eEI6nZEVn84VB3" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CONVITE</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 37,02</td><td>723</td><td>R$ 51,20</td><td>4</td>
+<td>0,55%</td><td>R$ 9,26</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/1VN99H2xi66j5xP" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD10_VIDEO_ULTIMO_DIA_EPIC</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 26,24</td><td>465</td><td>R$ 56,43</td><td>4</td>
+<td>0,86%</td><td>R$ 6,56</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/z00xLFmhTBkvL9g" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_AGENDA</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 25,84</td><td>512</td><td>R$ 50,47</td><td>3</td>
+<td>0,59%</td><td>R$ 8,61</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2kJ2OOnfsWxYyCz" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_VIDEO_MARCELO_1</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 19,82</td><td>460</td><td>R$ 43,09</td><td>3</td>
+<td>0,65%</td><td>R$ 6,61</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/1V4yjAyZD7PwciO" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_VIDEO_CURSO_DIFERENTE_AGOSTO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 16,70</td><td>489</td><td>R$ 34,15</td><td>6</td>
+<td>1,23%</td><td>R$ 2,78</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2wJ3Mehk0LHIQtl" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2025</td><td></td><td>R$ 22.680,03</td><td>624.355</td>
+<td>R$ 36,33</td><td>5.970</td><td>0,96%</td>
+<td>R$ 3,80</td><td>1.443</td><td>R$ 15,72</td><td></td></tr></tfoot></table></div><h3 class="ano">2026<span class="ano-d">32 criativos · R$ 10.731,32 · 336 conversas</span></h3><div class="fgrid"><div class="fcard">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">15 criativos</span></div>
+<div class="fcard-v">R$ 34,90</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:35%"></div></div>
+<div class="fcard-d">R$ 3.768,77 · 35% da verba · 108 conversas · CPM R$ 28,03 · CTR 0,82%</div>
+</div><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">17 criativos</span></div>
+<div class="fcard-v">R$ 30,54</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:65%"></div></div>
+<div class="fcard-d">R$ 6.962,55 · 65% da verba · 228 conversas · CPM R$ 33,85 · CTR 0,98%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD05_AGOSTO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 1.512,72</td><td>25.127</td><td>R$ 60,20</td><td>227</td>
+<td>0,90%</td><td>R$ 6,66</td><td class="res">18</td><td class="forte">R$ 84,04</td>
+<td class="c"><a class="ver" href="https://fb.me/2hRYkNRy24BVTpy" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_VIDEO_NOVO_ABR_26<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.311,53</td><td>43.712</td><td>R$ 30,00</td><td>333</td>
+<td>0,76%</td><td>R$ 3,94</td><td class="res">53</td><td class="forte">R$ 24,75</td>
+<td class="c"><a class="ver" href="https://fb.me/2aW2reuYPgxm8TU" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_VID_EPIC02</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 877,26</td><td>32.189</td><td>R$ 27,25</td><td>216</td>
+<td>0,67%</td><td>R$ 4,06</td><td class="res">25</td><td class="forte">R$ 35,09</td>
+<td class="c"><a class="ver" href="https://fb.me/24eScwBFrIgiYA8" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_RACIOCINIO_CLINICO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 812,56</td><td>10.859</td><td>R$ 74,83</td><td>85</td>
+<td>0,78%</td><td>R$ 9,56</td><td class="res">24</td><td class="forte">R$ 33,86</td>
+<td class="c"><a class="ver" href="https://fb.me/yBvX3NAUTP7mG1B" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_FEED_EPIC_AGOSTO_01 <span class="pin">melhor custo</span></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 784,02</td><td>29.048</td><td>R$ 26,99</td><td>519</td>
+<td>1,79%</td><td>R$ 1,51</td><td class="res">79</td><td class="forte">R$ 9,92</td>
+<td class="c"><a class="ver" href="https://fb.me/268R7xj81FUqO8f" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_CARD02</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 697,85</td><td>23.676</td><td>R$ 29,47</td><td>153</td>
+<td>0,65%</td><td>R$ 4,56</td><td class="res">22</td><td class="forte">R$ 31,72</td>
+<td class="c"><a class="ver" href="https://fb.me/2yWNNWn3L4BriHM" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 523,35</td><td>7.803</td><td>R$ 67,07</td><td>59</td>
+<td>0,76%</td><td>R$ 8,87</td><td class="res">10</td><td class="forte">R$ 52,34</td>
+<td class="c"><a class="ver" href="https://fb.me/1VwC507sMMgf5GT" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_FEED_EPIC_AGOSTO_04</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 517,82</td><td>46.247</td><td>R$ 11,20</td><td>546</td>
+<td>1,18%</td><td>R$ 0,95</td><td class="res">25</td><td class="forte">R$ 20,71</td>
+<td class="c"><a class="ver" href="https://fb.me/26SDXMG3MBxULX1" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_CARD04</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 471,17</td><td>16.384</td><td>R$ 28,76</td><td>120</td>
+<td>0,73%</td><td>R$ 3,93</td><td class="res">18</td><td class="forte">R$ 26,18</td>
+<td class="c"><a class="ver" href="https://fb.me/1VyEpW0AGBWiQzr" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_EPIC_04_0605</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 358,83</td><td>7.849</td><td>R$ 45,72</td><td>67</td>
+<td>0,85%</td><td>R$ 5,36</td><td class="res">13</td><td class="forte">R$ 27,60</td>
+<td class="c"><a class="ver" href="https://fb.me/2m5ghHNWLWWW3eo" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_CARD05_MAIO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 262,02</td><td>10.434</td><td>R$ 25,11</td><td>62</td>
+<td>0,59%</td><td>R$ 4,23</td><td class="res">4</td><td class="forte">R$ 65,50</td>
+<td class="c"><a class="ver" href="https://fb.me/1ZWJQG9sSmcZUwm" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">2026_06_EPIC_REEL_ADS_V04</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 259,85</td><td>14.341</td><td>R$ 18,12</td><td>158</td>
+<td>1,10%</td><td>R$ 1,64</td><td class="res">4</td><td class="forte">R$ 64,96</td>
+<td class="c"><a class="ver" href="https://fb.me/2lwfNt5jjLqk3JO" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">2026_06_EPIC_REEL_ADS_V03</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 258,56</td><td>16.201</td><td>R$ 15,96</td><td>106</td>
+<td>0,65%</td><td>R$ 2,44</td><td class="res">5</td><td class="forte">R$ 51,71</td>
+<td class="c"><a class="ver" href="https://fb.me/28Ps6BjjXQU9oKY" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_CARRO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 254,57</td><td>4.715</td><td>R$ 53,99</td><td>50</td>
+<td>1,06%</td><td>R$ 5,09</td><td class="res">4</td><td class="forte">R$ 63,64</td>
+<td class="c"><a class="ver" href="https://fb.me/1Vct74zOPyjCsrZ" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD07_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 223,36</td><td>2.882</td><td>R$ 77,50</td><td>15</td>
+<td>0,52%</td><td>R$ 14,89</td><td class="res">2</td><td class="forte">R$ 111,68</td>
+<td class="c"><a class="ver" href="https://fb.me/36GLB6bJq8xRUC0" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_CARD04_MAIO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 219,93</td><td>7.867</td><td>R$ 27,96</td><td>49</td>
+<td>0,62%</td><td>R$ 4,49</td><td class="res">5</td><td class="forte">R$ 43,99</td>
+<td class="c"><a class="ver" href="https://fb.me/2VHDUizHk8vyFGQ" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_CIENCIA</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 169,77</td><td>4.255</td><td>R$ 39,90</td><td>34</td>
+<td>0,80%</td><td>R$ 4,99</td><td class="res">4</td><td class="forte">R$ 42,44</td>
+<td class="c"><a class="ver" href="https://fb.me/1TaaIwXhQUdnC0I" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_CONSULTORIO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 141,66</td><td>2.249</td><td>R$ 62,99</td><td>19</td>
+<td>0,84%</td><td>R$ 7,46</td><td class="res">4</td><td class="forte">R$ 35,41</td>
+<td class="c"><a class="ver" href="https://fb.me/1Vur5y6vUfCR42D" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_CARD05</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 137,44</td><td>4.330</td><td>R$ 31,74</td><td>23</td>
+<td>0,53%</td><td>R$ 5,98</td><td class="res">4</td><td class="forte">R$ 34,36</td>
+<td class="c"><a class="ver" href="https://fb.me/1VMr1W9FjdHBAOg" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_ 2026_06_EPIC_REEL_ADS_V02</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 129,86</td><td>2.125</td><td>R$ 61,11</td><td>28</td>
+<td>1,32%</td><td>R$ 4,64</td><td class="res">4</td><td class="forte">R$ 32,47</td>
+<td class="c"><a class="ver" href="https://fb.me/1U66vXu7S6TX51X" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD01</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 123,69</td><td>5.368</td><td>R$ 23,04</td><td>28</td>
+<td>0,52%</td><td>R$ 4,42</td><td class="res">2</td><td class="forte">R$ 61,84</td>
+<td class="c"><a class="ver" href="https://fb.me/29MiNYWmuTiG3Qp" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_ORG</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 105,08</td><td>1.364</td><td>R$ 77,04</td><td>29</td>
+<td>2,13%</td><td>R$ 3,62</td><td class="res">2</td><td class="forte">R$ 52,54</td>
+<td class="c"><a class="ver" href="https://fb.me/2selNbgi0EVLh3D" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">2026_06_EPIC_REEL_ADS_V08</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 86,21</td><td>2.750</td><td>R$ 31,35</td><td>37</td>
+<td>1,35%</td><td>R$ 2,33</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2irpsAG5hObgTnk" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">2026_06_EPIC_REEL_ADS_V07</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 78,48</td><td>3.360</td><td>R$ 23,36</td><td>37</td>
+<td>1,10%</td><td>R$ 2,12</td><td class="res">1</td><td class="forte">R$ 78,48</td>
+<td class="c"><a class="ver" href="https://fb.me/2pxjq7kmZcGjzNY" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_VID_EPIC01</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 70,33</td><td>1.901</td><td>R$ 37,00</td><td>13</td>
+<td>0,68%</td><td>R$ 5,41</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2jcAJ4b9oLXa65q" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_ORG_02</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 66,11</td><td>2.940</td><td>R$ 22,49</td><td>25</td>
+<td>0,85%</td><td>R$ 2,64</td><td class="res">1</td><td class="forte">R$ 66,11</td>
+<td class="c"><a class="ver" href="https://fb.me/21MjHCKz33PQtP1" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">2026_06_EPIC_REEL_ADS_V05</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 61,61</td><td>2.646</td><td>R$ 23,28</td><td>25</td>
+<td>0,94%</td><td>R$ 2,46</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/235YB0MiNp6UD4s" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_FEED_EPIC_AGOSTO_02</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 56,80</td><td>1.603</td><td>R$ 35,43</td><td>9</td>
+<td>0,56%</td><td>R$ 6,31</td><td class="res">1</td><td class="forte">R$ 56,80</td>
+<td class="c"><a class="ver" href="https://fb.me/2fRzVto030pnypE" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CARD03</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 53,82</td><td>2.858</td><td>R$ 18,83</td><td>9</td>
+<td>0,31%</td><td>R$ 5,98</td><td class="res">2</td><td class="forte">R$ 26,91</td>
+<td class="c"><a class="ver" href="https://fb.me/1ULR7OcadA50TyY" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_VIDEO_NOVO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 39,80</td><td>1.493</td><td>R$ 26,66</td><td>14</td>
+<td>0,94%</td><td>R$ 2,84</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/20YTeZ2iSjlP614" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_ 2026_06_EPIC_REEL_ADS_V01</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 33,07</td><td>66</td><td>R$ 501,06</td><td>1</td>
+<td>1,52%</td><td>R$ 33,07</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/1VHn8jk4fPXWRDb" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_VID_UNICO_DOUTOR</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 32,19</td><td>1.508</td><td>R$ 21,35</td><td>16</td>
+<td>1,06%</td><td>R$ 2,01</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2j01EAVYeD0FPYP" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2026</td><td></td><td>R$ 10.731,32</td><td>340.150</td>
+<td>R$ 31,55</td><td>3.112</td><td>0,91%</td>
+<td>R$ 3,45</td><td>336</td><td>R$ 31,94</td><td></td></tr></tfoot></table></div></section><section class="curso">
+<div class="curso-cab"><div><p class="olho">Brasil</p><h2>INSIDERS</h2></div>
+<div class="curso-tot"><span class="tot-l">Investido nos criativos</span><span class="tot-v">R$ 30.110,05</span></div></div>
+<h3 class="ano">2025<span class="ano-d">34 criativos · R$ 24.944,26 · 1.151 conversas</span></h3><div class="fgrid"><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">16 criativos</span></div>
+<div class="fcard-v">R$ 20,98</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:26%"></div></div>
+<div class="fcard-d">R$ 6.607,86 · 26% da verba · 315 conversas · CPM R$ 37,88 · CTR 0,71%</div>
+</div><div class="fcard">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">18 criativos</span></div>
+<div class="fcard-v">R$ 21,93</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:74%"></div></div>
+<div class="fcard-d">R$ 18.336,40 · 74% da verba · 836 conversas · CPM R$ 30,52 · CTR 0,71%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD02_DESPERTE_SEU_POTENCIAL<em>5 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 8.126,99</td><td>218.256</td><td>R$ 37,24</td><td>2.050</td>
+<td>0,94%</td><td>R$ 3,96</td><td class="res">397</td><td class="forte">R$ 20,47</td>
+<td class="c"><a class="ver" href="https://fb.me/2abcKl0Z2VK6V7L" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_INSCRICOES_ABERTAS<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 3.524,43</td><td>147.667</td><td>R$ 23,87</td><td>936</td>
+<td>0,63%</td><td>R$ 3,77</td><td class="res">226</td><td class="forte">R$ 15,59</td>
+<td class="c"><a class="ver" href="https://fb.me/1VevakTlq2CpUcy" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CARR_INSIDERS<em>4 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 2.666,79</td><td>74.171</td><td>R$ 35,95</td><td>464</td>
+<td>0,63%</td><td>R$ 5,75</td><td class="res">78</td><td class="forte">R$ 34,19</td>
+<td class="c"><a class="ver" href="https://fb.me/qx0u6AbQm2LVgaF" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_EDUCADOR_PROFISSIONAL<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.527,47</td><td>44.595</td><td>R$ 34,25</td><td>342</td>
+<td>0,77%</td><td>R$ 4,47</td><td class="res">95</td><td class="forte">R$ 16,08</td>
+<td class="c"><a class="ver" href="https://fb.me/2cn3tPWBlhWeJHx" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_CONVITE_IMPERDIVEL<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.194,72</td><td>31.331</td><td>R$ 38,13</td><td>233</td>
+<td>0,74%</td><td>R$ 5,13</td><td class="res">57</td><td class="forte">R$ 20,96</td>
+<td class="c"><a class="ver" href="https://fb.me/1UN6GVR7tM9VdPE" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_INSTITUCIONAL<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 882,57</td><td>26.087</td><td>R$ 33,83</td><td>157</td>
+<td>0,60%</td><td>R$ 5,62</td><td class="res">53</td><td class="forte">R$ 16,65</td>
+<td class="c"><a class="ver" href="https://fb.me/22bAR0uZqa4gtmq" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_INSTITUCIONAL_INSIDERS<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 775,98</td><td>15.602</td><td>R$ 49,74</td><td>121</td>
+<td>0,78%</td><td>R$ 6,41</td><td class="res">34</td><td class="forte">R$ 22,82</td>
+<td class="c"><a class="ver" href="https://fb.me/26N6s80fKpvIlnz" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_PROFESSOR_EM_HOF<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 636,72</td><td>15.657</td><td>R$ 40,67</td><td>106</td>
+<td>0,68%</td><td>R$ 6,01</td><td class="res">29</td><td class="forte">R$ 21,96</td>
+<td class="c"><a class="ver" href="https://fb.me/2xhQE1unPpkyjjX" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_INSTITUCIONAL_LEGENDADO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 489,21</td><td>12.773</td><td>R$ 38,30</td><td>90</td>
+<td>0,70%</td><td>R$ 5,44</td><td class="res">15</td><td class="forte">R$ 32,61</td>
+<td class="c"><a class="ver" href="https://fb.me/25xUKNfOhqMdCzs" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD07_EDUCADOR_PROFISSIONAL_2</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 475,09</td><td>13.169</td><td>R$ 36,08</td><td>87</td>
+<td>0,66%</td><td>R$ 5,46</td><td class="res">22</td><td class="forte">R$ 21,60</td>
+<td class="c"><a class="ver" href="https://fb.me/1Vgsjone4jV75Ex" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_NEW PARA PROFESSORES DE HOF</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 457,65</td><td>15.055</td><td>R$ 30,40</td><td>79</td>
+<td>0,52%</td><td>R$ 5,79</td><td class="res">10</td><td class="forte">R$ 45,77</td>
+<td class="c"><a class="ver" href="https://fb.me/2g3o4PLXz38rMqz" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_DESPERTE_SEU_POTENCIAL_AGOSTO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 444,50</td><td>16.713</td><td>R$ 26,60</td><td>90</td>
+<td>0,54%</td><td>R$ 4,94</td><td class="res">13</td><td class="forte">R$ 34,19</td>
+<td class="c"><a class="ver" href="https://fb.me/1ULmsAq1noE3ujU" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_INSCRICOES_TURMA_07</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 437,80</td><td>17.861</td><td>R$ 24,51</td><td>105</td>
+<td>0,59%</td><td>R$ 4,17</td><td class="res">17</td><td class="forte">R$ 25,75</td>
+<td class="c"><a class="ver" href="https://fb.me/2gxbSN0Og2hnGy2" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_PROFESSOR_EM_HOF<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 437,03</td><td>13.703</td><td>R$ 31,89</td><td>106</td>
+<td>0,77%</td><td>R$ 4,12</td><td class="res">20</td><td class="forte">R$ 21,85</td>
+<td class="c"><a class="ver" href="https://fb.me/2cDyUpex2MmScA6" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD11_DESPERTE_POTENCIAL_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 355,74</td><td>14.918</td><td>R$ 23,85</td><td>52</td>
+<td>0,35%</td><td>R$ 6,84</td><td class="res">13</td><td class="forte">R$ 27,36</td>
+<td class="c"><a class="ver" href="https://fb.me/2ol5QryoWy15E7t" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD08_INSTITUCIONAL_3</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 317,28</td><td>8.439</td><td>R$ 37,60</td><td>58</td>
+<td>0,69%</td><td>R$ 5,47</td><td class="res">11</td><td class="forte">R$ 28,84</td>
+<td class="c"><a class="ver" href="https://fb.me/2aoF2bntQrVTKZD" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_VIDEO_CURSO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 295,22</td><td>7.105</td><td>R$ 41,55</td><td>46</td>
+<td>0,65%</td><td>R$ 6,42</td><td class="res">9</td><td class="forte">R$ 32,80</td>
+<td class="c"><a class="ver" href="https://fb.me/27vetnTja4CBsbo" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_PROFESSOR_EM_HOF_02<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 276,86</td><td>6.605</td><td>R$ 41,92</td><td>36</td>
+<td>0,55%</td><td>R$ 7,69</td><td class="res">10</td><td class="forte">R$ 27,69</td>
+<td class="c"><a class="ver" href="https://fb.me/27svnnYqvepyeCi" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_SPEAKERS_HOF</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 266,15</td><td>18.376</td><td>R$ 14,48</td><td>83</td>
+<td>0,45%</td><td>R$ 3,21</td><td class="res">9</td><td class="forte">R$ 29,57</td>
+<td class="c"><a class="ver" href="https://fb.me/2ac59o6PpS6wvpM" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_CARR_INSIDERS_AGOSTO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 256,65</td><td>26.311</td><td>R$ 9,75</td><td>93</td>
+<td>0,35%</td><td>R$ 2,76</td><td class="res">3</td><td class="forte">R$ 85,55</td>
+<td class="c"><a class="ver" href="https://fb.me/2hKt5scuBfJfjnk" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_INSTITUCIONAL_2<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 193,79</td><td>4.490</td><td>R$ 43,16</td><td>30</td>
+<td>0,67%</td><td>R$ 6,46</td><td class="res">5</td><td class="forte">R$ 38,76</td>
+<td class="c"><a class="ver" href="https://fb.me/1PTOzuYwRO2hffv" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_DESPERTE_POTENCIAL<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 181,61</td><td>5.310</td><td>R$ 34,20</td><td>18</td>
+<td>0,34%</td><td>R$ 10,09</td><td class="res">3</td><td class="forte">R$ 60,54</td>
+<td class="c"><a class="ver" href="https://fb.me/2KRIItFvNU5fpOY" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_EDUCADOR_PROFISSIONAL_nao_usar</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 126,95</td><td>2.618</td><td>R$ 48,49</td><td>19</td>
+<td>0,73%</td><td>R$ 6,68</td><td class="res">2</td><td class="forte">R$ 63,48</td>
+<td class="c"><a class="ver" href="https://fb.me/1VjZFf1SFHAR0TI" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CONVITE_EH <span class="pin">melhor custo</span></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 106,16</td><td>3.117</td><td>R$ 34,06</td><td>26</td>
+<td>0,83%</td><td>R$ 4,08</td><td class="res">9</td><td class="forte">R$ 11,80</td>
+<td class="c"><a class="ver" href="https://fb.me/22E7SvJIZvNSBbh" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD09_EDUCADOR_QUE_INSPIRA_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 98,26</td><td>3.457</td><td>R$ 28,42</td><td>21</td>
+<td>0,61%</td><td>R$ 4,68</td><td class="res">4</td><td class="forte">R$ 24,57</td>
+<td class="c"><a class="ver" href="https://fb.me/22XtITHltqafHI3" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_EDUCADOR_PROFISSIONAL</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 66,64</td><td>1.085</td><td>R$ 61,42</td><td>15</td>
+<td>1,38%</td><td>R$ 4,44</td><td class="res">1</td><td class="forte">R$ 66,64</td>
+<td class="c"><a class="ver" href="https://fb.me/22x8e9WyvhQqKaA" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_DIFICULDADE_EM_MONTAR_AULAS</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 64,17</td><td>1.258</td><td>R$ 51,01</td><td>5</td>
+<td>0,40%</td><td>R$ 12,83</td><td class="res">1</td><td class="forte">R$ 64,17</td>
+<td class="c"><a class="ver" href="https://fb.me/1V8EQyWdCgzEMgy" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD10_REFERENCIA_EM_HOF</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 56,62</td><td>2.311</td><td>R$ 24,50</td><td>8</td>
+<td>0,35%</td><td>R$ 7,08</td><td class="res">3</td><td class="forte">R$ 18,87</td>
+<td class="c"><a class="ver" href="https://fb.me/2iEyJesaFIjKUnF" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_ANIMACAO_MARCELO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 43,30</td><td>1.425</td><td>R$ 30,39</td><td>3</td>
+<td>0,21%</td><td>R$ 14,43</td><td class="res">1</td><td class="forte">R$ 43,30</td>
+<td class="c"><a class="ver" href="https://fb.me/1Wb3OMkUyguWvhw" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CURSO_PIONEIRO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 39,50</td><td>1.607</td><td>R$ 24,58</td><td>1</td>
+<td>0,06%</td><td>R$ 39,50</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2qlfXXO4PQqMyos" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD07_INSCRICOES_ABERTAS_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 37,42</td><td>906</td><td>R$ 41,30</td><td>3</td>
+<td>0,33%</td><td>R$ 12,47</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/20OTqFhXvsW45cl" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_CARD_INSIDERS_PRETO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 35,68</td><td>1.960</td><td>R$ 18,20</td><td>11</td>
+<td>0,56%</td><td>R$ 3,24</td><td class="res">1</td><td class="forte">R$ 35,68</td>
+<td class="c"><a class="ver" href="https://fb.me/26YKWhIxEdKDrYf" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD09_INSTITUCIONAL_4</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 31,53</td><td>737</td><td>R$ 42,78</td><td>4</td>
+<td>0,54%</td><td>R$ 7,88</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/21Jb9D9XCcCP5vp" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_INSTITUCIONAL_INSIDERS</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 17,78</td><td>613</td><td>R$ 29,00</td><td>3</td>
+<td>0,49%</td><td>R$ 5,93</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2i8rANLfBTTCnJu" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2025</td><td></td><td>R$ 24.944,26</td><td>775.288</td>
+<td>R$ 32,17</td><td>5.501</td><td>0,71%</td>
+<td>R$ 4,53</td><td>1.151</td><td>R$ 21,67</td><td></td></tr></tfoot></table></div><h3 class="ano">2026<span class="ano-d">10 criativos · R$ 5.165,79 · 102 conversas</span></h3><div class="fgrid"><div class="fcard">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">6 criativos</span></div>
+<div class="fcard-v">R$ 83,91</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:34%"></div></div>
+<div class="fcard-d">R$ 1.762,16 · 34% da verba · 21 conversas · CPM R$ 32,97 · CTR 0,61%</div>
+</div><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">4 criativos</span></div>
+<div class="fcard-v">R$ 42,02</div><div class="fcard-l">por conversa</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:66%"></div></div>
+<div class="fcard-d">R$ 3.403,63 · 66% da verba · 81 conversas · CPM R$ 30,79 · CTR 0,72%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD04_INSCRICOES_TURMA_07<em>3 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 1.857,93</td><td>56.030</td><td>R$ 33,16</td><td>432</td>
+<td>0,77%</td><td>R$ 4,30</td><td class="res">37</td><td class="forte">R$ 50,21</td>
+<td class="c"><a class="ver" href="https://fb.me/2la8qIDcq32hbmm" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_SPEAKERS_HOF<em>5 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 1.429,35</td><td>50.480</td><td>R$ 28,32</td><td>339</td>
+<td>0,67%</td><td>R$ 4,22</td><td class="res">44</td><td class="forte">R$ 32,49</td>
+<td class="c"><a class="ver" href="https://fb.me/1QfID4Zh4aiOPnq" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_CURSO_QUE_MAIS_GOSTO_EM_SP — Cópia</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 892,00</td><td>30.670</td><td>R$ 29,08</td><td>180</td>
+<td>0,59%</td><td>R$ 4,96</td><td class="res">10</td><td class="forte">R$ 89,20</td>
+<td class="c"><a class="ver" href="https://fb.me/20TsMzklBvAkNiV" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_CURSO_QUE_MAIS_GOSTO_EM_SP</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 524,37</td><td>13.820</td><td>R$ 37,94</td><td>84</td>
+<td>0,61%</td><td>R$ 6,24</td><td class="res">7</td><td class="forte">R$ 74,91</td>
+<td class="c"><a class="ver" href="https://fb.me/2jJmP8SnzcVljn7" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_2026_06_INSIDERS_REEL_ADS_V02 — Cópia</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 151,21</td><td>3.797</td><td>R$ 39,82</td><td>23</td>
+<td>0,61%</td><td>R$ 6,57</td><td class="res">2</td><td class="forte">R$ 75,61</td>
+<td class="c"><a class="ver" href="https://fb.me/1UgJmJ0CURnbYw8" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_CURSO_PIONEIRO<em>2 campanhas</em></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 75,45</td><td>2.891</td><td>R$ 26,10</td><td>15</td>
+<td>0,52%</td><td>R$ 5,03</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/1UYaSZ08eXZ1CCk" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">[INSIDERS]_VIDEO_03</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 68,49</td><td>1.044</td><td>R$ 65,60</td><td>18</td>
+<td>1,72%</td><td>R$ 3,80</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/25UwnlBc1RLBYCx" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_INSIDERS_SP</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 63,10</td><td>3.057</td><td>R$ 20,64</td><td>9</td>
+<td>0,29%</td><td>R$ 7,01</td><td class="res">2</td><td class="forte">R$ 31,55</td>
+<td class="c"><a class="ver" href="https://fb.me/2l1qIcaGp81Y6F7" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">[INSIDERS]_VIDEO_06</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 62,99</td><td>1.058</td><td>R$ 59,54</td><td>11</td>
+<td>1,04%</td><td>R$ 5,73</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/22fmDr21C0ejizq" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_INSIDER_01_AGOSTO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 40,90</td><td>1.131</td><td>R$ 36,16</td><td>10</td>
+<td>0,88%</td><td>R$ 4,09</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/26dp04itUEe9hmr" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2026</td><td></td><td>R$ 5.165,79</td><td>163.978</td>
+<td>R$ 31,50</td><td>1.121</td><td>0,68%</td>
+<td>R$ 4,61</td><td>102</td><td>R$ 50,64</td><td></td></tr></tfoot></table></div></section><section class="curso">
+<div class="curso-cab"><div><p class="olho">Portugal</p><h2>EPIC</h2></div>
+<div class="curso-tot"><span class="tot-l">Investido nos criativos</span><span class="tot-v">R$ 13.646,84</span></div></div>
+<h3 class="ano">2025<span class="ano-d">21 criativos · R$ 6.868,90 · 325 leads</span></h3><div class="fgrid"><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">5 criativos</span></div>
+<div class="fcard-v">R$ 14,87</div><div class="fcard-l">por lead</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:39%"></div></div>
+<div class="fcard-d">R$ 2.677,37 · 39% da verba · 180 leads · CPM R$ 33,88 · CTR 1,75%</div>
+</div><div class="fcard">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">16 criativos</span></div>
+<div class="fcard-v">R$ 28,91</div><div class="fcard-l">por lead</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:61%"></div></div>
+<div class="fcard-d">R$ 4.191,53 · 61% da verba · 145 leads · CPM R$ 40,43 · CTR 1,21%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD02_ARELUNA <span class="pin">melhor custo</span></td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.110,46</td><td>51.555</td><td>R$ 21,54</td><td>628</td>
+<td>1,22%</td><td>R$ 1,77</td><td class="res">119</td><td class="forte">R$ 9,33</td>
+<td class="c"><a class="ver" href="https://fb.me/1U1dsl3WG7GRyaO" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD07_VID_APRESENTANDO_EPIC</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 1.057,37</td><td>17.674</td><td>R$ 59,83</td><td>457</td>
+<td>2,59%</td><td>R$ 2,31</td><td class="res">53</td><td class="forte">R$ 19,95</td>
+<td class="c"><a class="ver" href="https://fb.me/2gPyw7qKULf3GbL" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_VIVA_A_EXPERIENCIA</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 747,28</td><td>19.319</td><td>R$ 38,68</td><td>259</td>
+<td>1,34%</td><td>R$ 2,89</td><td class="res">32</td><td class="forte">R$ 23,35</td>
+<td class="c"><a class="ver" href="https://fb.me/2rhqrhOwNAjqDjg" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD09_CURSO_PRESENCIAL_07</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 623,61</td><td>14.472</td><td>R$ 43,09</td><td>173</td>
+<td>1,20%</td><td>R$ 3,60</td><td class="res">18</td><td class="forte">R$ 34,65</td>
+<td class="c"><a class="ver" href="https://fb.me/2ehv4n20h2aE8rb" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_VIVA_A_EXPERIENCIA_6</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 551,84</td><td>12.986</td><td>R$ 42,49</td><td>166</td>
+<td>1,28%</td><td>R$ 3,32</td><td class="res">21</td><td class="forte">R$ 26,28</td>
+<td class="c"><a class="ver" href="https://fb.me/1URxsuiVukcyh1Z" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD01</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 399,33</td><td>10.496</td><td>R$ 38,05</td><td>125</td>
+<td>1,19%</td><td>R$ 3,19</td><td class="res">19</td><td class="forte">R$ 21,02</td>
+<td class="c"><a class="ver" href="https://fb.me/29MsKP4unMQRJLg" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_CARD02</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 381,41</td><td>10.600</td><td>R$ 35,98</td><td>133</td>
+<td>1,25%</td><td>R$ 2,87</td><td class="res">16</td><td class="forte">R$ 23,84</td>
+<td class="c"><a class="ver" href="https://fb.me/2qhqOX9VrBlhiUv" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_VID_INSTITUCIONAL</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 356,55</td><td>6.561</td><td>R$ 54,34</td><td>269</td>
+<td>4,10%</td><td>R$ 1,33</td><td class="res">7</td><td class="forte">R$ 50,94</td>
+<td class="c"><a class="ver" href="https://fb.me/1VCYlWJ1T4oIxYL" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD_EPIC_NOVEMBRO</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 327,18</td><td>6.797</td><td>R$ 48,14</td><td>69</td>
+<td>1,02%</td><td>R$ 4,74</td><td class="res">6</td><td class="forte">R$ 54,53</td>
+<td class="c"><a class="ver" href="https://fb.me/1V7E42pnoNbv2yT" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_VIVA_A_EXPERIENCIA_3</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 247,45</td><td>7.000</td><td>R$ 35,35</td><td>78</td>
+<td>1,11%</td><td>R$ 3,17</td><td class="res">11</td><td class="forte">R$ 22,50</td>
+<td class="c"><a class="ver" href="https://fb.me/22oE3n3hinRtWNO" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_CURSO_HOF_04</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 211,76</td><td>4.425</td><td>R$ 47,86</td><td>49</td>
+<td>1,11%</td><td>R$ 4,32</td><td class="res">4</td><td class="forte">R$ 52,94</td>
+<td class="c"><a class="ver" href="https://fb.me/22z9PVq2yYwYd0g" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_VIVA_A_EXPERIENCIA_4</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 188,42</td><td>5.315</td><td>R$ 35,45</td><td>51</td>
+<td>0,96%</td><td>R$ 3,69</td><td class="res">5</td><td class="forte">R$ 37,68</td>
+<td class="c"><a class="ver" href="https://fb.me/1VpMWaCQlO4BQ0s" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_VIVA_A_EXPERIENCIA_2</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 167,67</td><td>3.610</td><td>R$ 46,45</td><td>49</td>
+<td>1,36%</td><td>R$ 3,42</td><td class="res">6</td><td class="forte">R$ 27,95</td>
+<td class="c"><a class="ver" href="https://fb.me/1VAJi9YdYpmjNdH" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_MORA_EM_PORTUGAL</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 137,89</td><td>2.755</td><td>R$ 50,05</td><td>24</td>
+<td>0,87%</td><td>R$ 5,75</td><td class="res">1</td><td class="forte">R$ 137,89</td>
+<td class="c"><a class="ver" href="https://fb.me/1UZgOHbKT5SJosN" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD08_CURSO_PRESENCIAL_06</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 122,07</td><td>2.848</td><td>R$ 42,86</td><td>33</td>
+<td>1,16%</td><td>R$ 3,70</td><td class="res">2</td><td class="forte">R$ 61,03</td>
+<td class="c"><a class="ver" href="https://fb.me/26tFyB10GpM85zI" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD04_HOF_PRESENCIAL</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 85,90</td><td>2.215</td><td>R$ 38,78</td><td>27</td>
+<td>1,22%</td><td>R$ 3,18</td><td class="res">3</td><td class="forte">R$ 28,63</td>
+<td class="c"><a class="ver" href="https://fb.me/2kSbEaEOqH3U2Xr" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD07_INSCRICOES_ABERTAS</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 47,63</td><td>1.137</td><td>R$ 41,89</td><td>21</td>
+<td>1,85%</td><td>R$ 2,27</td><td class="res">1</td><td class="forte">R$ 47,63</td>
+<td class="c"><a class="ver" href="https://fb.me/28L6UJPrbzkyEep" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD05_VIVA_A_EXPERIENCIA_5</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 46,18</td><td>1.512</td><td>R$ 30,54</td><td>13</td>
+<td>0,86%</td><td>R$ 3,55</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2k3owI0W9aZXu2H" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD06_CURSO_HOF_05</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 41,20</td><td>865</td><td>R$ 47,63</td><td>8</td>
+<td>0,92%</td><td>R$ 5,15</td><td class="res">1</td><td class="forte">R$ 41,20</td>
+<td class="c"><a class="ver" href="https://fb.me/2eqeRHay2qowblN" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_ARELUNA</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 15,10</td><td>471</td><td>R$ 32,06</td><td>1</td>
+<td>0,21%</td><td>R$ 15,10</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/26KZzudMewUrMBU" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CURSO_HOF</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 2,60</td><td>83</td><td>R$ 31,33</td><td>1</td>
+<td>1,20%</td><td>R$ 2,60</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/1VuMTHqO5JgC7FS" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2025</td><td></td><td>R$ 6.868,90</td><td>182.696</td>
+<td>R$ 37,60</td><td>2.634</td><td>1,44%</td>
+<td>R$ 2,61</td><td>325</td><td>R$ 21,14</td><td></td></tr></tfoot></table></div><h3 class="ano">2026<span class="ano-d">7 criativos · R$ 6.777,94 · 310 leads</span></h3><div class="fgrid"><div class="fcard">
+<div class="fcard-top"><span class="fmt f-video">Vídeo</span><span class="fcard-n">4 criativos</span></div>
+<div class="fcard-v">R$ 26,13</div><div class="fcard-l">por lead</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:51%"></div></div>
+<div class="fcard-d">R$ 3.422,98 · 51% da verba · 131 leads · CPM R$ 57,90 · CTR 2,00%</div>
+</div><div class="fcard vence">
+<div class="fcard-top"><span class="fmt f-estatico">Estático</span><span class="fcard-n">3 criativos</span></div>
+<div class="fcard-v">R$ 18,74</div><div class="fcard-l">por lead</div>
+<div class="fcard-bar"><div class="fcard-bar-in" style="width:49%"></div></div>
+<div class="fcard-d">R$ 3.354,96 · 49% da verba · 179 leads · CPM R$ 25,35 · CTR 1,02%</div>
+</div></div><div class="tab-wrap"><table><thead><tr><th class="l">Criativo</th><th class="l">Formato</th><th>Investido</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>CPC</th><th>Result.</th><th>Custo/result.</th><th class="c">Ver</th></tr></thead><tbody><tr><td class="l nome">AD02_CARD02 <span class="pin">melhor custo</span></td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 3.009,77</td><td>122.248</td><td>R$ 24,62</td><td>1.284</td>
+<td>1,05%</td><td>R$ 2,34</td><td class="res">171</td><td class="forte">R$ 17,60</td>
+<td class="c"><a class="ver" href="https://fb.me/1UG31BygebxGEWC" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD10_ARELUNA</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 2.597,55</td><td>42.771</td><td>R$ 60,73</td><td>956</td>
+<td>2,24%</td><td>R$ 2,72</td><td class="res">108</td><td class="forte">R$ 24,05</td>
+<td class="c"><a class="ver" href="https://fb.me/2iaqFTsV0iS0LMk" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD_VIDEO_NOVO</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 599,49</td><td>11.314</td><td>R$ 52,99</td><td>164</td>
+<td>1,45%</td><td>R$ 3,66</td><td class="res">18</td><td class="forte">R$ 33,30</td>
+<td class="c"><a class="ver" href="https://fb.me/22an7NiJ4cAus0Z" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD01</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 308,69</td><td>9.731</td><td>R$ 31,72</td><td>65</td>
+<td>0,67%</td><td>R$ 4,75</td><td class="res">8</td><td class="forte">R$ 38,59</td>
+<td class="c"><a class="ver" href="https://fb.me/1ZPFEtTB5cEhTGb" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD02_2026</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 190,89</td><td>4.078</td><td>R$ 46,81</td><td>50</td>
+<td>1,23%</td><td>R$ 3,82</td><td class="res">4</td><td class="forte">R$ 47,72</td>
+<td class="c"><a class="ver" href="https://fb.me/22lPHXL4e3bZ1ne" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD01_CARD10</td>
+<td class="l"><span class="fmt f-estatico">Estático</span></td>
+<td>R$ 36,50</td><td>353</td><td>R$ 103,40</td><td>3</td>
+<td>0,85%</td><td>R$ 12,17</td><td class="res">0</td><td class="forte">—</td>
+<td class="c"><a class="ver" href="https://fb.me/2aKGSClLRJB1N8C" target="_blank" rel="noopener">abrir ↗</a></td></tr><tr><td class="l nome">AD03_FORMACAO_EPIC</td>
+<td class="l"><span class="fmt f-video">Vídeo</span></td>
+<td>R$ 35,05</td><td>953</td><td>R$ 36,78</td><td>11</td>
+<td>1,15%</td><td>R$ 3,19</td><td class="res">1</td><td class="forte">R$ 35,05</td>
+<td class="c"><a class="ver" href="https://fb.me/28OHZSmEtyOHzoA" target="_blank" rel="noopener">abrir ↗</a></td></tr></tbody><tfoot><tr><td class="l">Total 2026</td><td></td><td>R$ 6.777,94</td><td>191.448</td>
+<td>R$ 35,40</td><td>2.533</td><td>1,32%</td>
+<td>R$ 2,68</td><td>310</td><td>R$ 21,86</td><td></td></tr></tfoot></table></div></section>
+<section class="notas">
+  <h3>Como usar</h3>
+  <ul>
+    <li><b>"Abrir ↗"</b> leva ao anúncio publicado no Facebook — dá para ver a peça, a copy e os comentários. O link é o do anúncio que mais investiu daquele criativo. Anúncios pausados ou de campanha encerrada continuam abrindo.</li>
+    <li><b>Um criativo aparece uma vez por ano</b>, com os números somados de todos os conjuntos e campanhas onde rodou. Quando rodou em mais de uma campanha, isso vem marcado embaixo do nome.</li>
+    <li><b>Resultado</b> é conversa iniciada no WhatsApp (EPIC e INSIDERS Brasil) ou lead de formulário (EPIC Portugal e as campanhas de cadastro do INSIDERS).</li>
+    <li><b>"Melhor custo"</b> marca o criativo de menor custo por resultado no ano, considerando só os que trouxeram 3 resultados ou mais — abaixo disso o número é ruído, não sinal.</li>
+    <li><b>Vídeo ou estático</b> não foi deduzido do nome: um criativo entra como <b>vídeo</b> quando o Meta registrou reproduções nele, e como <b>estático</b> quando não registrou nenhuma. Carrossel e imagem única contam juntos como estático. Vale reparar que vários criativos com nome de card são vídeo, e vice-versa — por isso a checagem pelo dado.</li>
+    <li>Em <b>2026</b> a lista traz os criativos que gastaram mais de R$ 30; em <b>2025</b>, todos. Por isso o total desta página é um pouco menor que o do relatório de campanhas em 2026.</li>
+  </ul>
+</section>
+</div>
