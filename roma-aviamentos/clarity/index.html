@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Roma Aviamentos — Comportamento no Site (Clarity)</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec;
+    --accent:#127a63; --accent-soft:#e3f1ec;
+    --red:#c0442e; --red-soft:#fae6e1;
+    --amber:#b07408; --amber-soft:#fbf0d9;
+    --green:#0c7a54; --green-soft:#d6f2e5;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925;
+      --accent:#48c3a0; --accent-soft:#123027;
+      --red:#f08a72; --red-soft:#3a1d16;
+      --amber:#e6b04a; --amber-soft:#33260f;
+      --green:#5fd6a6; --green-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 70px}
+  .mono{font-variant-numeric:tabular-nums}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:66ch}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 34px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft)}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  h2{font-size:20px;font-weight:720;letter-spacing:-.01em;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--accent);color:#04211a;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex:0 0 auto}
+  @media (prefers-color-scheme: dark){h2 .n{color:#04211a}}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0 0 18px 36px}
+  section{margin-top:44px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow);border-top:3px solid var(--accent)}
+  .kpi.warn{border-top-color:var(--amber)} .kpi.bad{border-top-color:var(--red)} .kpi.ok{border-top-color:var(--green)}
+  .kpi .v{font-size:26px;font-weight:780;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+  .kpi .v small{font-size:14px;font-weight:700}
+  .kpi .l{font-size:12.5px;color:var(--ink-soft);margin-top:5px}
+  .kpi .d{font-size:11.5px;font-weight:700;margin-top:8px;display:inline-block;padding:2px 8px;border-radius:999px}
+  .d.up{background:var(--green-soft);color:var(--green)} .d.down{background:var(--red-soft);color:var(--red)} .d.flat{background:var(--line-soft);color:var(--ink-soft)}
+  @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+
+  .lead{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;margin-top:18px;box-shadow:var(--shadow);font-size:14.5px;color:var(--ink-soft)}
+  .lead b{color:var(--ink)}
+  .lead.red{border-left-color:var(--red)} .lead.amber{border-left-color:var(--amber)}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:13.5px}
+  th{background:var(--line-soft);text-align:left;padding:10px 13px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:700}
+  td{padding:10px 13px;border-top:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
+  td.num,th.num{text-align:right}
+  tr.hi td{background:var(--red-soft)}
+  .tbl-wrap{overflow-x:auto}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:760px){.two{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+  .panel h3{font-size:15px;font-weight:700;margin-bottom:2px}
+  .panel .cap{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px}
+
+  .bar{display:grid;grid-template-columns:118px 1fr 62px;align-items:center;gap:9px;margin-bottom:8px;font-size:12.5px}
+  .bar .nm{color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar .bt{height:16px;background:var(--line-soft);border-radius:5px;overflow:hidden}
+  .bar .bt>span{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent),#3aa98c)}
+  .bar .bt>span.alt{background:linear-gradient(90deg,var(--amber),#d99a2b)}
+  .bar .pc{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+  .drow{display:grid;grid-template-columns:40px 1fr 74px;align-items:center;gap:9px;margin-bottom:6px;font-size:12.5px}
+  .drow .p{color:var(--ink-soft);text-align:right}
+  .drow .tk{height:15px;background:var(--line-soft);border-radius:5px;overflow:hidden}
+  .drow .tk>span{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent),#3aa98c)}
+  .drow .tk>span.low{background:linear-gradient(90deg,#c99a4a,#c0442e)}
+  .drow .val{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+  .fold{margin:9px 0 7px 49px;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--red);border-top:2px dashed color-mix(in srgb,var(--red) 45%,transparent);padding-top:6px}
+
+  .funnel{display:flex;flex-direction:column;gap:7px}
+  .fst{display:grid;grid-template-columns:190px 1fr;gap:12px;align-items:center}
+  .fst .fl{font-size:13px;color:var(--ink-soft)}
+  .fst .fl b{color:var(--ink);display:block;font-size:13.5px}
+  .fbar{position:relative;height:34px;background:var(--line-soft);border-radius:8px;overflow:hidden}
+  .fbar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#3aa98c);border-radius:8px}
+  .fbar>span.warn{background:linear-gradient(90deg,var(--amber),#d99a2b)}
+  .fbar>span.bad{background:linear-gradient(90deg,#d1614a,var(--red))}
+  .fbar em{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-style:normal;font-size:12.5px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);font-variant-numeric:tabular-nums}
+  .fdrop{font-size:11.5px;font-weight:700;color:var(--red);margin-left:202px}
+  @media (max-width:760px){.fst{grid-template-columns:1fr}.fdrop{margin-left:0}}
+
+  .find{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:11px;box-shadow:var(--shadow)}
+  .find.crit{border-left-color:var(--red)} .find.warn{border-left-color:var(--amber)} .find.good{border-left-color:var(--green)}
+  .find .hd{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .sev{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:999px}
+  .find.crit .sev{background:var(--red-soft);color:var(--red)}
+  .find.warn .sev{background:var(--amber-soft);color:var(--amber)}
+  .find.good .sev{background:var(--green-soft);color:var(--green)}
+  .find h4{font-size:15px;font-weight:700}
+  .find p{font-size:14px;color:var(--ink-soft)}
+  .find .ev{font-size:12.5px;color:var(--ink-soft);margin-top:8px;padding-top:8px;border-top:1px solid var(--line-soft)}
+  .find .ev b{color:var(--ink)}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px 16px;box-shadow:var(--shadow);position:relative}
+  .step .num{position:absolute;top:-11px;left:16px;background:var(--accent);color:#04211a;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .step h4{font-size:14.5px;font-weight:700;margin:4px 0 6px}
+  .step p{font-size:13.5px;color:var(--ink-soft)}
+  .step .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+  .step .b{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+  .step .b.esf{background:var(--line-soft);color:var(--ink-soft)}
+
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--line-soft);padding:1px 6px;border-radius:5px}
+  footer{margin-top:48px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Roma Aviamentos</p>
+  <h1>🔍 Comportamento no site — Microsoft Clarity</h1>
+  <p class="lede">O que 114 mil visitantes realmente fizeram no site nos últimos 30 dias: onde tocam, até onde rolam, onde travam e onde desistem. Leitura de mapas de calor, fricção e funil — comparada com os 30 dias anteriores.</p>
+
+  <div class="chips">
+    <span class="chip">Período <b>14/07 – 12/08/2026</b></span>
+    <span class="chip">Comparativo <b>14/06 – 13/07/2026</b></span>
+    <span class="chip">Projeto Clarity <b>9xedkcs8x8</b></span>
+    <span class="chip">Amostra <b>114.390 sessões</b></span>
+  </div>
+
+  <!-- 1. PANORAMA -->
+  <section>
+    <h2><span class="n">1</span> Panorama dos 30 dias</h2>
+    <p class="sub">Todos os números já excluem tráfego de robô — o Clarity filtra automaticamente.</p>
+
+    <div class="kpis">
+      <div class="kpi ok">
+        <div class="v mono">114.390</div>
+        <div class="l">Sessões humanas</div>
+        <span class="d up">+14,3% vs 30d anteriores</span>
+      </div>
+      <div class="kpi">
+        <div class="v mono">68.860</div>
+        <div class="l">Usuários únicos · 59,8% novos</div>
+        <span class="d flat">40,2% já conheciam a loja</span>
+      </div>
+      <div class="kpi warn">
+        <div class="v mono">3,02</div>
+        <div class="l">Páginas por sessão</div>
+        <span class="d down">−5,0% (era 3,18)</span>
+      </div>
+      <div class="kpi warn">
+        <div class="v mono">1,2<small> min</small></div>
+        <div class="l">Tempo ativo (de 2,3 min na página)</div>
+        <span class="d flat">metade do tempo é passiva</span>
+      </div>
+    </div>
+
+    <div class="kpis" style="margin-top:13px">
+      <div class="kpi ok">
+        <div class="v mono">469</div>
+        <div class="l">Pedidos concluídos (evento Clarity)</div>
+        <span class="d up">+18,7% (eram 395)</span>
+      </div>
+      <div class="kpi warn">
+        <div class="v mono">0,41<small>%</small></div>
+        <div class="l">Taxa de conversão por sessão</div>
+        <span class="d flat">estável (era 0,40%)</span>
+      </div>
+      <div class="kpi ok">
+        <div class="v mono">11,6<small>%</small></div>
+        <div class="l">Sessões com clique morto</div>
+        <span class="d up">−2,5 pp (era 14,1%)</span>
+      </div>
+      <div class="kpi ok">
+        <div class="v mono">14,2<small>%</small></div>
+        <div class="l">Retornos rápidos (entrou e voltou)</div>
+        <span class="d up">−1,7 pp (era 15,9%)</span>
+      </div>
+    </div>
+
+    <div class="lead">
+      <b>Leitura em uma frase:</b> o site recebeu 14% mais gente e vendeu 19% mais pedidos — o ganho veio de <b>volume</b>, não de eficiência. A taxa de conversão continua travada em 0,41%, e o engajamento por sessão caiu um pouco (menos páginas vistas, menos rolagem). Ou seja: <b>o gargalo não é atrair, é converter</b>.
+    </div>
+  </section>
+
+  <!-- 2. QUEM ENTRA -->
+  <section>
+    <h2><span class="n">2</span> Quem entra — e por qual porta</h2>
+    <p class="sub">85% do site é vivido em um celular, e quase um terço dentro do app do Facebook ou do Instagram.</p>
+
+    <div class="two">
+      <div class="panel">
+        <h3>Dispositivo</h3>
+        <p class="cap">Participação das sessões</p>
+        <div class="bar"><span class="nm">Mobile</span><span class="bt"><span style="width:84.8%"></span></span><span class="pc">84,8%</span></div>
+        <div class="bar"><span class="nm">Desktop (PC)</span><span class="bt"><span style="width:14.2%"></span></span><span class="pc">14,2%</span></div>
+        <div class="bar"><span class="nm">Outros</span><span class="bt"><span style="width:1%"></span></span><span class="pc">1,0%</span></div>
+        <p class="cap" style="margin:14px 0 0">Qualquer decisão de layout, botão ou texto tem que ser tomada olhando o celular primeiro. O desktop é 1 em cada 7 visitas.</p>
+      </div>
+      <div class="panel">
+        <h3>Navegador</h3>
+        <p class="cap">Participação das sessões</p>
+        <div class="bar"><span class="nm">Chrome Mobile</span><span class="bt"><span style="width:32.4%"></span></span><span class="pc">32,4%</span></div>
+        <div class="bar"><span class="nm">App do Facebook</span><span class="bt"><span class="alt" style="width:17.4%"></span></span><span class="pc">17,4%</span></div>
+        <div class="bar"><span class="nm">Safari Mobile</span><span class="bt"><span style="width:12.8%"></span></span><span class="pc">12,8%</span></div>
+        <div class="bar"><span class="nm">App do Instagram</span><span class="bt"><span class="alt" style="width:12.2%"></span></span><span class="pc">12,2%</span></div>
+        <div class="bar"><span class="nm">Chrome Desktop</span><span class="bt"><span style="width:12%"></span></span><span class="pc">12,0%</span></div>
+        <p class="cap" style="margin:14px 0 0"><b>29,6% navegam dentro do app do Meta</b> (navegador embutido) — ambiente mais lento, com mais erro de script e onde o usuário perde o carrinho ao sair do app.</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Origem da sessão</th><th class="num">30d atuais</th><th class="num">30d anteriores</th><th class="num">Variação</th></tr></thead>
+        <tbody>
+          <tr><td>www.romaaviamentos.com.br <span style="color:var(--ink-soft)">(o próprio site)</span></td><td class="num">38.557</td><td class="num">37.030</td><td class="num">+4,1%</td></tr>
+          <tr><td>m.facebook.com</td><td class="num">25.626</td><td class="num">20.719</td><td class="num" style="color:var(--green)">+23,7%</td></tr>
+          <tr><td>www.google.com</td><td class="num">25.317</td><td class="num">23.028</td><td class="num" style="color:var(--green)">+9,9%</td></tr>
+          <tr><td>instagram.com</td><td class="num">7.483</td><td class="num">4.229</td><td class="num" style="color:var(--green)">+77,0%</td></tr>
+          <tr><td>l.instagram.com / l.facebook.com</td><td class="num">3.048</td><td class="num">2.972</td><td class="num">+2,6%</td></tr>
+          <tr><td>linktr.ee</td><td class="num">696</td><td class="num">824</td><td class="num" style="color:var(--red)">−15,5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lead amber">
+      <b>Dois pontos de atenção nessa tabela.</b> (1) O crescimento veio quase todo do <b>Meta</b> (+23,7% Facebook, +77% Instagram) — é o canal que está segurando o tráfego do mês. (2) Um terço das sessões aparece como vindo <b>do próprio site</b>: isso é quebra de sessão (a pessoa volta depois de sair do navegador, ou o rastreamento perde a origem no meio do caminho). Combinado com o alerta de rastreamento já aberto, significa que <b>uma fatia relevante das vendas está sendo creditada como "direto/desconhecido"</b> em vez de ir para o canal que trouxe o cliente.
+    </div>
+  </section>
+
+  <!-- 3. HOME -->
+  <section>
+    <h2><span class="n">3</span> A home: a busca é o site inteiro</h2>
+    <p class="sub">Mapa de toques da home no celular · 59.830 exibições · 72.406 toques registrados</p>
+
+    <div class="two">
+      <div class="panel">
+        <h3>Onde as pessoas tocam</h3>
+        <p class="cap">% de todos os toques da página</p>
+        <div class="bar"><span class="nm">Campo de busca</span><span class="bt"><span style="width:100%"></span></span><span class="pc">15,5%</span></div>
+        <div class="bar"><span class="nm">Botão buscar</span><span class="bt"><span style="width:87%"></span></span><span class="pc">13,5%</span></div>
+        <div class="bar"><span class="nm">Aceite de cookie</span><span class="bt"><span class="alt" style="width:26%"></span></span><span class="pc">4,1%</span></div>
+        <div class="bar"><span class="nm">Campo busca (2)</span><span class="bt"><span style="width:23%"></span></span><span class="pc">3,6%</span></div>
+        <div class="bar"><span class="nm">Label da busca</span><span class="bt"><span style="width:20%"></span></span><span class="pc">3,1%</span></div>
+        <div class="bar"><span class="nm">Banner Novidades</span><span class="bt"><span class="alt" style="width:18%"></span></span><span class="pc">2,8%</span></div>
+        <div class="bar"><span class="nm">Banner Promoções</span><span class="bt"><span class="alt" style="width:18%"></span></span><span class="pc">2,8%</span></div>
+        <div class="bar"><span class="nm">Produtos em destaque</span><span class="bt"><span style="width:8%"></span></span><span class="pc">1,3%</span></div>
+        <div class="bar"><span class="nm">Carrinho (topo)</span><span class="bt"><span style="width:7%"></span></span><span class="pc">1,1%</span></div>
+        <div class="bar"><span class="nm">Menu ☰ (hambúrguer)</span><span class="bt"><span class="alt" style="width:5%"></span></span><span class="pc">1,5%</span></div>
+        <p class="cap" style="margin:14px 0 0"><b>35,7% de todos os toques da home vão para a busca.</b> O menu de categorias recebe <b>1,5%</b> — 24× menos.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Até onde rolam a home</h3>
+        <p class="cap">% de visitantes que alcançam cada altura da página</p>
+        <div class="drow"><span class="p">10%</span><span class="tk"><span style="width:81.9%"></span></span><span class="val">81,9%</span></div>
+        <div class="drow"><span class="p">20%</span><span class="tk"><span style="width:64.2%"></span></span><span class="val">64,2%</span></div>
+        <div class="drow"><span class="p">30%</span><span class="tk"><span style="width:54%"></span></span><span class="val">54,0%</span></div>
+        <div class="fold">metade do público para aqui (35% da página)</div>
+        <div class="drow"><span class="p">40%</span><span class="tk"><span style="width:47.2%"></span></span><span class="val">47,2%</span></div>
+        <div class="drow"><span class="p">50%</span><span class="tk"><span style="width:41.4%"></span></span><span class="val">41,4%</span></div>
+        <div class="drow"><span class="p">60%</span><span class="tk"><span style="width:36%"></span></span><span class="val">36,0%</span></div>
+        <div class="drow"><span class="p">70%</span><span class="tk"><span class="low" style="width:15.5%"></span></span><span class="val">15,5%</span></div>
+        <div class="drow"><span class="p">80%</span><span class="tk"><span class="low" style="width:4.9%"></span></span><span class="val">4,9%</span></div>
+        <div class="drow"><span class="p">100%</span><span class="tk"><span class="low" style="width:1.1%"></span></span><span class="val">1,1%</span></div>
+        <p class="cap" style="margin:14px 0 0">Do 60% para o 70% da página o público cai pela metade (36% → 15,5%). <b>Tudo que estiver depois dos dois terços da home praticamente não existe.</b></p>
+      </div>
+    </div>
+
+    <div class="lead">
+      <b>O que isso quer dizer na prática:</b> o cliente da Roma não navega, ele <b>procura</b>. Chega, digita o nome do aviamento e espera o resultado. A home funciona como uma caixa de busca com banners em volta — e o menu de categorias, que costuma receber muito esforço de organização, é quase ignorado no celular. Isso muda a prioridade: <b>a qualidade do resultado de busca interna vale mais que a estrutura do menu</b>.
+    </div>
+  </section>
+
+  <!-- 4. PRODUTO -->
+  <section>
+    <h2><span class="n">4</span> Página de produto: muita visita, quase nenhuma interação</h2>
+    <p class="sub">Mapa da PDP mais vista do período (Bordado Algodão 11,5cm — 4186) · 2.791 exibições · 569 toques</p>
+
+    <div class="two">
+      <div class="panel">
+        <h3>Densidade de interação</h3>
+        <p class="cap">Toques por exibição de página — quanto maior, mais engajamento</p>
+        <div class="bar"><span class="nm">Carrinho</span><span class="bt"><span style="width:100%"></span></span><span class="pc">2,37</span></div>
+        <div class="bar"><span class="nm">Home</span><span class="bt"><span style="width:51%"></span></span><span class="pc">1,21</span></div>
+        <div class="bar"><span class="nm">Página de produto</span><span class="bt"><span class="alt" style="width:8%"></span></span><span class="pc">0,20</span></div>
+        <p class="cap" style="margin:14px 0 0">A página de produto recebe <b>6× menos toques por visita</b> que a home. A maioria abre, olha e sai sem tocar em nada.</p>
+        <p class="cap" style="margin:10px 0 0">Do total de toques na PDP, o botão <b>Comprar</b> leva 6,3% — o equivalente a <b>~1,3% das visitas da página</b> clicando em comprar.</p>
+      </div>
+      <div class="panel">
+        <h3>Até onde rolam o produto</h3>
+        <p class="cap">% de visitantes que alcançam cada altura</p>
+        <div class="drow"><span class="p">20%</span><span class="tk"><span style="width:93.7%"></span></span><span class="val">93,7%</span></div>
+        <div class="drow"><span class="p">25%</span><span class="tk"><span style="width:88.8%"></span></span><span class="val">88,8%</span></div>
+        <div class="drow"><span class="p">30%</span><span class="tk"><span style="width:75.8%"></span></span><span class="val">75,8%</span></div>
+        <div class="fold">despenque: −53 pontos em um passo</div>
+        <div class="drow"><span class="p">40%</span><span class="tk"><span class="low" style="width:22.8%"></span></span><span class="val">22,8%</span></div>
+        <div class="drow"><span class="p">50%</span><span class="tk"><span class="low" style="width:15.8%"></span></span><span class="val">15,8%</span></div>
+        <div class="drow"><span class="p">70%</span><span class="tk"><span class="low" style="width:7.4%"></span></span><span class="val">7,4%</span></div>
+        <div class="drow"><span class="p">100%</span><span class="tk"><span class="low" style="width:2%"></span></span><span class="val">2,0%</span></div>
+        <p class="cap" style="margin:14px 0 0">Entre 30% e 40% da página some <b>metade do público</b>. Descrição, medidas, produtos relacionados e qualquer prova social que estejam depois disso são vistos por <b>1 em cada 5</b>.</p>
+      </div>
+    </div>
+
+    <div class="lead red">
+      <b>Este é o ponto mais caro do site.</b> A Roma paga mídia para levar gente até a página de produto, e ali a página não faz o trabalho: quase ninguém interage, quase ninguém rola até a descrição, e só ~1,3% clica em comprar. Tudo que ajuda a decidir — foto ampliada, medidas, prazo de entrega, frete, formas de pagamento, "quem comprou também levou" — precisa subir para <b>antes dos 30% da página</b>, junto do botão Comprar.
+    </div>
+  </section>
+
+  <!-- 5. CARRINHO -->
+  <section>
+    <h2><span class="n">5</span> Carrinho: a objeção número um é o frete</h2>
+    <p class="sub">Mapa de toques do carrinho no celular · 5.065 exibições · 12.018 toques</p>
+
+    <div class="two">
+      <div class="panel">
+        <h3>Onde tocam no carrinho</h3>
+        <p class="cap">% de todos os toques da página</p>
+        <div class="bar"><span class="nm">Botão "ok" (modal)</span><span class="bt"><span class="alt" style="width:100%"></span></span><span class="pc">10,2%</span></div>
+        <div class="bar"><span class="nm">Seguir p/ pagamento</span><span class="bt"><span style="width:89%"></span></span><span class="pc">9,1%</span></div>
+        <div class="bar"><span class="nm">Abrir simular frete</span><span class="bt"><span class="alt" style="width:74%"></span></span><span class="pc">7,6%</span></div>
+        <div class="bar"><span class="nm">Botão simular frete</span><span class="bt"><span class="alt" style="width:74%"></span></span><span class="pc">7,6%</span></div>
+        <div class="bar"><span class="nm">Continuar comprando</span><span class="bt"><span style="width:44%"></span></span><span class="pc">4,5%</span></div>
+        <div class="bar"><span class="nm">Campo de CEP</span><span class="bt"><span class="alt" style="width:24%"></span></span><span class="pc">2,5%</span></div>
+        <div class="bar"><span class="nm">Alterar quantidade</span><span class="bt"><span style="width:29%"></span></span><span class="pc">2,9%</span></div>
+        <div class="bar"><span class="nm">Remover item</span><span class="bt"><span style="width:15%"></span></span><span class="pc">1,5%</span></div>
+      </div>
+      <div class="panel">
+        <h3>O que os números contam</h3>
+        <p class="cap">Leitura do comportamento</p>
+        <p style="font-size:14px;color:var(--ink-soft)">Somando <b>abrir o simulador + simular + digitar o CEP</b>, o cálculo de frete recebe <b>17,7% dos toques</b> do carrinho — quase o dobro do botão que leva ao pagamento (9,1%).</p>
+        <p style="font-size:14px;color:var(--ink-soft);margin-top:10px">O clique mais frequente da página é um botão <b>"ok"</b> de janela/aviso (10,2%): antes de seguir, o cliente precisa fechar alguma confirmação. Cada janela extra entre o carrinho e o pagamento custa pedido.</p>
+        <p style="font-size:14px;color:var(--ink-soft);margin-top:10px"><b>4,5% voltam para "continuar comprando"</b> e 1,5% removem item — sinais clássicos de reação ao valor do frete ou de tentativa de atingir um mínimo.</p>
+        <div class="lead amber" style="margin-top:14px;padding:12px 14px;font-size:13.5px">Levar o cálculo de frete <b>para dentro da página de produto</b> resolve as duas pontas: elimina a ida e volta no carrinho e antecipa a objeção antes de o cliente investir tempo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FUNIL -->
+  <section>
+    <h2><span class="n">6</span> Onde o dinheiro escorre — funil do carrinho ao pedido</h2>
+    <p class="sub">Visitas por etapa no período · fonte: páginas e eventos do Clarity</p>
+
+    <div class="panel">
+      <div class="funnel">
+        <div class="fst"><div class="fl"><b>Carrinho</b> /cart</div><div class="fbar"><span style="width:100%"></span><em>5.369</em></div></div>
+        <div class="fdrop">▼ −62,7% — a maior perda absoluta do funil (login/frete no meio do caminho)</div>
+
+        <div class="fst"><div class="fl"><b>Resumo do pedido</b> /summary</div><div class="fbar"><span class="bad" style="width:37.3%"></span><em>2.001</em></div></div>
+        <div class="fdrop">▼ −35,1%</div>
+
+        <div class="fst"><div class="fl"><b>Frete / entrega</b> /checkout/carriers</div><div class="fbar"><span class="warn" style="width:24.2%"></span><em>1.298</em></div></div>
+        <div class="fdrop">▼ −12,2% <span style="color:var(--green)">(etapa saudável)</span></div>
+
+        <div class="fst"><div class="fl"><b>Pagamento</b> /checkout/payment</div><div class="fbar"><span class="warn" style="width:21.2%"></span><em>1.140</em></div></div>
+        <div class="fdrop">▼ −58,9% — <b>59 de cada 100 desistem com o cartão na mão</b></div>
+
+        <div class="fst"><div class="fl"><b>Pedido concluído</b></div><div class="fbar"><span style="width:8.7%"></span><em>469</em></div></div>
+      </div>
+    </div>
+
+    <div class="lead red">
+      <b>Duas hemorragias, em ordem de tamanho.</b><br>
+      <b>1) Carrinho → resumo (−63%, ~3.400 sessões).</b> No caminho estão as telas de identificação: <code>/signin</code> teve 2.302 visitas e <code>/signin/password</code> 2.006 — praticamente todo mundo que sai do carrinho passa por uma parede de login. Só 250 sessões criaram conta e 519 fizeram login: <b>a maioria bate na porta e não entra</b>.<br><br>
+      <b>2) Pagamento → pedido (−59%, ~670 sessões).</b> Essa é a perda mais cara do site, porque é gente decidida, com endereço e frete já escolhidos. Perder 59% aqui aponta para atrito na tela final: recusa/erro de cartão, poucas opções de pagamento visíveis, parcelamento pouco claro ou falha técnica no envio.
+    </div>
+    <div class="lead">
+      <b>Quanto vale consertar:</b> se a etapa de pagamento subir de 41% para 55% de conclusão — patamar normal de e-commerce —, são <b>+160 pedidos por mês</b> sem gastar R$1 a mais de mídia. Se o carrinho→resumo subir de 37% para 45%, entram <b>~430 sessões/mês</b> a mais no checkout.
+    </div>
+  </section>
+
+  <!-- 7. TÉCNICO -->
+  <section>
+    <h2><span class="n">7</span> Saúde técnica: velocidade e erros</h2>
+    <p class="sub">Core Web Vitals medidos nos visitantes reais + erros de JavaScript capturados</p>
+
+    <div class="kpis">
+      <div class="kpi warn"><div class="v mono">77<small>/100</small></div><div class="l">Nota de desempenho</div><span class="d up">era 76</span></div>
+      <div class="kpi warn"><div class="v mono">3,2<small>s</small></div><div class="l">LCP — carregamento do conteúdo principal</div><span class="d up">era 3,4s · meta ≤2,5s</span></div>
+      <div class="kpi ok"><div class="v mono">240<small>ms</small></div><div class="l">INP — resposta ao toque</div><span class="d flat">meta ≤200ms</span></div>
+      <div class="kpi warn"><div class="v mono">0,13</div><div class="l">CLS — layout que pula</div><span class="d flat">meta ≤0,10</span></div>
+    </div>
+
+    <div class="find crit" style="margin-top:18px">
+      <div class="hd"><span class="sev">Piorou</span><h4>Erros de JavaScript quase dobraram</h4></div>
+      <p><b>14,24% das sessões</b> tiveram erro de script (48.893 erros no total), contra 7,91% e 32.408 erros no período anterior.</p>
+      <div class="ev">
+        Composição: <b>39,6%</b> <code>undefined is not an object ('this.target.nodetype')</code> · <b>27,3%</b> <code>script error</code> (era 14,7%) · <b>14,4%</b> <code>postmessage: java object is gone</code> (era 1,1%) · <b>12,7%</b> <code>resizeobserver loop</code> (inofensivo).<br><br>
+        <b>Como ler:</b> o erro que mais cresceu (<code>java object is gone</code>) é típico do navegador embutido do Facebook/Instagram no Android — e o tráfego vindo desses apps subiu no mesmo período, então boa parte do salto é reflexo do mix de canal, não uma quebra nova do site. Já o erro nº1 (<code>this.target.nodetype</code>), com ~19 mil ocorrências, é do próprio site e merece ser levado à LojaComm.
+      </div>
+    </div>
+
+    <div class="find warn">
+      <div class="hd"><span class="sev">Atenção</span><h4>3,2s para o conteúdo principal aparecer — no celular</h4></div>
+      <p>O LCP melhorou (3,4s → 3,2s), mas segue acima da meta de 2,5s. 46,5% dos carregamentos ficam na faixa "precisa melhorar" ou "ruim".</p>
+      <div class="ev">Em um site onde 85% do público é mobile e 30% vem de dentro do app do Meta (ambiente mais lento), cada décimo de segundo aqui é perda de sessão antes mesmo da primeira rolagem. Cruza com o diagnóstico de leilão: <b>página lenta piora índice de qualidade e encarece o clique</b>.</div>
+    </div>
+
+    <div class="find good">
+      <div class="hd"><span class="sev">Melhorou</span><h4>Fricção de clique caiu em todas as frentes</h4></div>
+      <p>Cliques mortos 14,1% → 11,6%; retornos rápidos 15,9% → 14,2%; cliques de raiva 0,13% → 0,11%; rolagem excessiva praticamente zero.</p>
+      <div class="ev">Ainda assim, <b>13.274 sessões</b> tocaram em algo que não respondeu. É o segundo maior gerador de abandono silencioso depois do checkout.</div>
+    </div>
+  </section>
+
+  <!-- 8. BOTS -->
+  <section>
+    <h2><span class="n">8</span> O site tem mais robô do que gente</h2>
+    <p class="sub">Tráfego automatizado detectado e removido pelo Clarity</p>
+
+    <div class="kpis">
+      <div class="kpi bad"><div class="v mono">166.489</div><div class="l">Sessões de bot no período</div><span class="d flat">59,3% de todo o tráfego bruto</span></div>
+      <div class="kpi"><div class="v mono">132.079</div><div class="l">Identificados como raspadores (scrapers)</div><span class="d flat">coleta de preço/catálogo</span></div>
+      <div class="kpi"><div class="v mono">165.319</div><div class="l">Marcados por interação suspeita</div><span class="d flat">navegação não-humana</span></div>
+      <div class="kpi"><div class="v mono">1,46<small>×</small></div><div class="l">Robôs para cada visitante humano</div><span class="d flat">estável vs período anterior</span></div>
+    </div>
+
+    <div class="lead amber">
+      <b>Por que isso importa para o relatório de mídia:</b> o Clarity filtra os robôs, mas o <b>GA4 e a plataforma não filtram do mesmo jeito</b>. Uma parte desses 166 mil acessos entra nos relatórios como "tráfego direto" ou "orgânico", inflando sessões e derrubando artificialmente a taxa de conversão que a gente compara mês a mês. É a explicação mais provável para os picos de tráfego sem venda que já apareceram no diagnóstico anual. <b>A conversão real do site é melhor do que a que o GA4 mostra.</b> O volume de raspadores também sinaliza monitoramento ativo de preço por concorrentes.
+    </div>
+  </section>
+
+  <!-- 9. PLANO -->
+  <section>
+    <h2><span class="n">9</span> Plano de ação — por ordem de retorno</h2>
+    <p class="sub">Tudo abaixo sai direto do que os visitantes fizeram, não de suposição</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <h4>Investigar a tela de pagamento</h4>
+        <p>59% desistem com tudo preenchido. Assistir às gravações de sessões que chegaram em <code>/checkout/payment</code> e não converteram, e listar: erro de cartão, opções de pagamento visíveis, clareza do parcelamento e do Pix.</p>
+        <div class="meta"><span class="b">+160 pedidos/mês</span><span class="b esf">1 dia</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">2</span>
+        <h4>Derrubar a parede de login</h4>
+        <p>Entre carrinho e resumo perdem-se 63%, com 4,3 mil visitas às telas de identificação. Habilitar <b>compra como visitante</b> (ou login só no fim, junto do e-mail do pedido) é a mudança de maior impacto estrutural.</p>
+        <div class="meta"><span class="b">+430 sessões no checkout</span><span class="b esf">depende da LojaComm</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">3</span>
+        <h4>Frete e prazo na página de produto</h4>
+        <p>O cálculo de frete é 17,7% dos toques do carrinho — quase o dobro do botão de pagamento. Subir o simulador (e o valor de frete grátis) para junto do botão Comprar antecipa a objeção.</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">médio</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">4</span>
+        <h4>Reorganizar a página de produto</h4>
+        <p>Metade do público some antes dos 40% da página. Medidas, descrição, formas de pagamento e prova social precisam estar acima disso. Hoje a PDP recebe 0,2 toque por visita — praticamente ninguém interage.</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">médio</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">5</span>
+        <h4>Tratar a busca como vitrine principal</h4>
+        <p>35,7% dos toques da home vão para a busca; o menu recebe 1,5%. Vale auditar termos sem resultado, corrigir sinônimos e erros de digitação ("linha", "lantejoula", "tinta spray") e destacar mais o campo.</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">baixo</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">6</span>
+        <h4>Enxugar o topo da home</h4>
+        <p>Do 60% ao 70% da página o público cai pela metade. O que estiver depois dos dois terços não é visto: mover as categorias e os produtos que mais vendem para os primeiros 30%.</p>
+        <div class="meta"><span class="b">médio impacto</span><span class="b esf">baixo</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">7</span>
+        <h4>Levar os erros de JS à LojaComm</h4>
+        <p>Erro <code>this.target.nodetype</code> aparece em ~19 mil ocorrências e é do próprio site. Abrir chamado junto com o pedido de correção da API de Conversões que já está em aberto.</p>
+        <div class="meta"><span class="b">saúde do site</span><span class="b esf">baixo</span></div>
+      </div>
+
+      <div class="step">
+        <span class="num">8</span>
+        <h4>Ganhar velocidade no mobile</h4>
+        <p>LCP 3,2s contra meta de 2,5s, com 85% de público mobile. Compressão de imagem do banner principal e carregamento tardio do que está abaixo da dobra são os ganhos mais baratos.</p>
+        <div class="meta"><span class="b">qualidade do anúncio</span><span class="b esf">médio</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Giovanna Growth Digital · Relatório de comportamento no site — Microsoft Clarity</span>
+    <span>Dados de 14/07 a 12/08/2026 · gerado em 12/08/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
