@@ -1,0 +1,799 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>INSIDERS — Análise de campanha | GGD</title></head><body><style>
+  :root{
+    --ground:#F7F9F8; --card:#FFFFFF; --card-2:#F1F5F4;
+    --ink:#10201F; --ink-2:#465956; --ink-3:#6E827F;
+    --rule:#DCE5E3; --rule-soft:#EAF0EF;
+    --accent:#008C7E; --ref:#A9660B;
+    --warn:#CF6A55; --crit:#9B1C0F;
+    --accent-wash:#E4F1EF; --crit-wash:#F8E9E6;
+    --display: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --data: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --shadow: 0 1px 2px rgba(16,32,31,.05), 0 8px 24px -16px rgba(16,32,31,.22);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#0C1413; --card:#12191A; --card-2:#182220;
+      --ink:#E7EEEC; --ink-2:#9DAEAB; --ink-3:#7A8D8A;
+      --rule:#23312F; --rule-soft:#1B2624;
+      --accent:#1E9C8C; --ref:#BC861D;
+      --warn:#F0A594; --crit:#D6604A;
+      --accent-wash:#0F2B28; --crit-wash:#2A1512;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C1413; --card:#12191A; --card-2:#182220;
+    --ink:#E7EEEC; --ink-2:#9DAEAB; --ink-3:#7A8D8A;
+    --rule:#23312F; --rule-soft:#1B2624;
+    --accent:#1E9C8C; --ref:#BC861D;
+    --warn:#F0A594; --crit:#D6604A;
+    --accent-wash:#0F2B28; --crit-wash:#2A1512;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+  :root[data-theme="light"]{
+    --ground:#F7F9F8; --card:#FFFFFF; --card-2:#F1F5F4;
+    --ink:#10201F; --ink-2:#465956; --ink-3:#6E827F;
+    --rule:#DCE5E3; --rule-soft:#EAF0EF;
+    --accent:#008C7E; --ref:#A9660B;
+    --warn:#CF6A55; --crit:#9B1C0F;
+    --accent-wash:#E4F1EF; --crit-wash:#F8E9E6;
+    --shadow: 0 1px 2px rgba(16,32,31,.05), 0 8px 24px -16px rgba(16,32,31,.22);
+  }
+
+  body{ background:var(--ground); color:var(--ink); font-family:var(--body);
+        font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:48px 24px 96px; }
+
+  /* ---------- typographic system ---------- */
+  .eyebrow{ font-family:var(--data); font-size:11px; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--ink-3); }
+  h1{ font-family:var(--display); font-weight:600; font-size:clamp(34px,5vw,52px);
+      line-height:1.03; letter-spacing:-.022em; text-wrap:balance; margin:.32em 0 0; }
+  h2{ font-family:var(--display); font-weight:600; font-size:clamp(25px,3.2vw,33px);
+      line-height:1.12; letter-spacing:-.018em; text-wrap:balance; margin:0; }
+  h3{ font-family:var(--body); font-weight:650; font-size:15.5px; letter-spacing:-.006em; margin:0; }
+  p{ margin:0; max-width:66ch; }
+  .lede{ font-size:18px; color:var(--ink-2); margin-top:18px; max-width:62ch; }
+  .num{ font-family:var(--data); font-variant-numeric:tabular-nums; }
+  a{ color:var(--accent); }
+
+  /* ---------- act separators ---------- */
+  .act{ display:flex; align-items:baseline; gap:16px; margin:0 0 28px;
+        padding-top:22px; border-top:2px solid var(--ink); }
+  .act-n{ font-family:var(--data); font-size:11px; letter-spacing:.14em;
+          text-transform:uppercase; color:var(--ink-3); white-space:nowrap; padding-top:4px; }
+  .act-sub{ color:var(--ink-2); font-size:15px; margin-top:8px; max-width:64ch; }
+  section{ margin-top:56px; }
+  .block{ margin-top:36px; }
+  .block-head{ display:flex; align-items:baseline; justify-content:space-between;
+               gap:16px; flex-wrap:wrap; margin-bottom:14px;
+               border-bottom:1px solid var(--rule); padding-bottom:8px; }
+  .block-note{ font-size:13px; color:var(--ink-3); }
+
+  /* ---------- vitals ---------- */
+  .vitals{ display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px;
+           background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden; }
+  .vital{ background:var(--card); padding:16px 16px 15px; display:flex; flex-direction:column; gap:5px; }
+  .vital-k{ font-family:var(--data); font-size:10.5px; letter-spacing:.12em;
+            text-transform:uppercase; color:var(--ink-3); }
+  .vital-v{ font-family:var(--data); font-variant-numeric:tabular-nums;
+            font-size:27px; line-height:1.05; letter-spacing:-.02em; }
+  .vital-c{ font-size:12.5px; color:var(--ink-2); line-height:1.35; }
+  .flag-crit{ color:var(--crit); }
+  .flag-ok{ color:var(--accent); }
+
+  /* ---------- table ---------- */
+  .scroll{ overflow-x:auto; border:1px solid var(--rule); border-radius:10px; background:var(--card); }
+  table{ border-collapse:collapse; width:100%; font-size:14px; min-width:640px; }
+  thead th{ font-family:var(--data); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--ink-3); font-weight:500; text-align:right; padding:12px 14px;
+            border-bottom:1px solid var(--rule); white-space:nowrap; }
+  thead th:first-child{ text-align:left; }
+  tbody td{ padding:12px 14px; text-align:right; border-bottom:1px solid var(--rule-soft);
+            font-family:var(--data); font-variant-numeric:tabular-nums; }
+  tbody td:first-child{ text-align:left; font-family:var(--body); }
+  tbody tr:last-child td{ border-bottom:none; }
+  tr.total td{ background:var(--card-2); font-weight:650; border-top:1px solid var(--rule); }
+  .zero{ color:var(--crit); font-weight:650; }
+
+  /* ---------- funnel steps ---------- */
+  .steps{ display:flex; flex-direction:column; gap:2px; }
+  .step{ background:var(--card); border:1px solid var(--rule); border-radius:8px;
+         padding:14px 16px; display:grid; grid-template-columns:1fr; gap:10px; }
+  .step-top{ display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .step-name{ font-weight:600; font-size:14.5px; }
+  .step-vol{ font-family:var(--data); font-size:12.5px; color:var(--ink-3); }
+  .track{ position:relative; height:22px; background:var(--card-2);
+          border-radius:4px; overflow:hidden; }
+  .fill{ position:absolute; inset:0 auto 0 0; border-radius:0 4px 4px 0; background:var(--accent); }
+  .fill.bad{ background:var(--crit); }
+  .fill.blind{ background:repeating-linear-gradient(135deg, var(--rule) 0 6px, transparent 6px 12px);
+               width:100% !important; }
+  .band{ position:absolute; top:0; bottom:0; border-left:2px solid var(--ref);
+         border-right:2px solid var(--ref); background:color-mix(in srgb, var(--ref) 12%, transparent); }
+  .step-foot{ display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+              font-size:12.5px; color:var(--ink-2); }
+  .rate{ font-family:var(--data); font-variant-numeric:tabular-nums;
+         font-size:15px; font-weight:650; color:var(--ink); }
+  .mkt{ font-family:var(--data); font-size:12px; color:var(--ref); }
+
+  /* ---------- bar chart ---------- */
+  .bars{ display:flex; flex-direction:column; gap:9px; }
+  .bar-row{ display:grid; grid-template-columns:minmax(140px,210px) 1fr auto; gap:14px; align-items:center; }
+  .bar-lab{ font-size:13.5px; color:var(--ink-2); line-height:1.25; }
+  .bar-lab b{ color:var(--ink); font-weight:600; }
+  .bar-track{ height:20px; background:var(--card-2); border-radius:4px; position:relative; }
+  .bar-fill{ height:100%; border-radius:0 4px 4px 0; background:var(--accent); }
+  .bar-fill.ref{ background:var(--ref); }
+  .bar-fill.crit{ background:var(--crit); }
+  .bar-val{ font-family:var(--data); font-variant-numeric:tabular-nums; font-size:13.5px;
+            min-width:74px; text-align:right; }
+  .legend{ display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-2); margin-top:14px; }
+  .key{ display:inline-flex; align-items:center; gap:7px; }
+  .swatch{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+
+  /* ---------- prescription ---------- */
+  .fixes{ display:flex; flex-direction:column; gap:12px; }
+  .fix{ background:var(--card); border:1px solid var(--rule); border-radius:10px;
+        box-shadow:var(--shadow); display:grid; grid-template-columns:auto 1fr; }
+  .fix-stripe{ width:5px; border-radius:10px 0 0 10px; background:var(--warn); }
+  .fix-stripe.crit{ background:var(--crit); }
+  .fix-body{ padding:16px 18px 17px; display:flex; flex-direction:column; gap:9px; }
+  .fix-head{ display:flex; align-items:baseline; gap:11px; flex-wrap:wrap; }
+  .fix-n{ font-family:var(--data); font-size:12px; color:var(--ink-3); }
+  .pill{ font-family:var(--data); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+         padding:3px 8px; border-radius:999px; border:1px solid currentColor; white-space:nowrap; }
+  .pill.crit{ color:var(--crit); background:var(--crit-wash); }
+  .pill.warn{ color:var(--warn); }
+  .fix-why{ font-size:14px; color:var(--ink-2); max-width:70ch; }
+  .fix-why b{ color:var(--ink); font-weight:600; }
+  .evidence{ font-family:var(--data); font-size:12.5px; color:var(--ink-2);
+             background:var(--card-2); border-left:2px solid var(--rule);
+             padding:8px 12px; border-radius:0 6px 6px 0; }
+  .fix-do{ font-size:14px; }
+  .fix-do span{ font-family:var(--data); font-size:10.5px; letter-spacing:.1em;
+                text-transform:uppercase; color:var(--ink-3); margin-right:8px; }
+
+  /* ---------- scenarios ---------- */
+  .scen{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+  .scen-card{ border:1px solid var(--rule); border-radius:10px; padding:18px; background:var(--card); }
+  .scen-card.win{ border-color:var(--accent); background:var(--accent-wash); }
+  .scen-t{ font-family:var(--display); font-size:19px; font-weight:600; letter-spacing:-.01em; }
+  .scen-out{ font-family:var(--data); font-variant-numeric:tabular-nums; font-size:24px;
+             letter-spacing:-.02em; margin-top:10px; }
+  .scen-l{ font-size:13px; color:var(--ink-2); margin-top:6px; }
+  .assump{ font-size:12.5px; color:var(--ink-3); margin-top:12px; padding-top:10px;
+           border-top:1px dashed var(--rule); font-family:var(--data); line-height:1.5; }
+
+  /* ---------- kit de aberturas ---------- */
+  .rule-card{ border:1px solid var(--accent); background:var(--accent-wash);
+              border-radius:10px; padding:18px 20px; margin-bottom:18px; }
+  .rule-t{ font-family:var(--data); font-size:10.5px; letter-spacing:.14em;
+           text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .rule-p{ font-size:14.5px; color:var(--ink-2); max-width:74ch; }
+  .rule-p b{ color:var(--ink); font-weight:650; }
+  .formula{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px;
+            padding-top:14px; border-top:1px dashed var(--rule); }
+  .f-step{ font-size:13.5px; color:var(--ink); }
+  .f-step b{ font-family:var(--data); color:var(--accent); margin-right:5px; }
+  .f-step em{ font-family:var(--data); font-style:normal; font-size:11.5px;
+              color:var(--ink-3); margin-left:6px; }
+  .f-arrow{ color:var(--ink-3); font-size:14px; }
+
+  .kit-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); gap:14px; }
+  .kit-grid.two{ margin-top:14px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
+  .kit-card{ border:1px solid var(--rule); border-radius:10px; background:var(--card);
+             padding:18px; display:flex; flex-direction:column; gap:10px; box-shadow:var(--shadow); }
+  .kit-card.alt{ background:var(--card-2); box-shadow:none; }
+  .kit-eyebrow{ font-family:var(--data); font-size:10.5px; letter-spacing:.14em;
+                text-transform:uppercase; color:var(--ink-3); }
+  .kit-t{ font-family:var(--display); font-size:19px; font-weight:600;
+          letter-spacing:-.012em; line-height:1.15; }
+  .kit-desc{ font-size:13px; color:var(--ink-2); line-height:1.45; }
+  .anchor{ font-family:var(--data); font-size:11.5px; color:var(--ink-2);
+           background:var(--accent-wash); border-radius:6px; padding:7px 10px; }
+  .anchor b{ color:var(--accent); }
+  .kit-list{ list-style:none; padding:0; margin:0; display:flex;
+             flex-direction:column; gap:7px; }
+  .kit-list li{ font-size:13.5px; line-height:1.4; padding-left:13px; position:relative;
+                color:var(--ink); }
+  .kit-list li::before{ content:""; position:absolute; left:0; top:.62em;
+                        width:5px; height:5px; border-radius:50%; background:var(--accent); }
+
+  footer{ margin-top:64px; padding-top:20px; border-top:1px solid var(--rule);
+          font-size:12.5px; color:var(--ink-3); display:flex; justify-content:space-between;
+          gap:16px; flex-wrap:wrap; }
+
+  @media (max-width:640px){
+    .wrap{ padding:32px 16px 64px; }
+    .bar-row{ grid-template-columns:1fr; gap:5px; }
+    .bar-val{ text-align:left; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">HOF Sem Segredos · Dr. Marcelo Germani · conta CA_HOF_PRESENCIAIS</div>
+    <h1>INSIDERS: o funil está cego<br>antes de estar caro.</h1>
+    <p class="lede">Laudo dos 3 primeiros dias no ar (11 a 13/08/2026). Ato I mede o que aconteceu.
+      Ato II lista o que precisa mudar, na ordem em que precisa mudar.</p>
+  </header>
+
+  <!-- ============================= ATO I ============================= -->
+  <section>
+    <div class="act">
+      <div class="act-n">Ato I</div>
+      <div>
+        <h2>Performance</h2>
+        <p class="act-sub">R$&nbsp;965,13 investidos, 5 checkouts iniciados, nenhuma venda registrada.
+          Os números de topo já explicam o resto.</p>
+      </div>
+    </div>
+
+    <div class="vitals">
+      <div class="vital">
+        <div class="vital-k">Investido em 3 dias</div>
+        <div class="vital-v">R$&nbsp;965,13</div>
+        <div class="vital-c">R$&nbsp;500/dia · verba do mês: R$&nbsp;3.000</div>
+      </div>
+      <div class="vital">
+        <div class="vital-k">Compras</div>
+        <div class="vital-v flag-crit">0</div>
+        <div class="vital-c">ticket R$&nbsp;4.187 · ciclo de 7 a 21 dias</div>
+      </div>
+      <div class="vital">
+        <div class="vital-k">Checkouts iniciados</div>
+        <div class="vital-v">5</div>
+        <div class="vital-c">R$&nbsp;193,03 cada</div>
+      </div>
+      <div class="vital">
+        <div class="vital-k">Cliques no link</div>
+        <div class="vital-v">67</div>
+        <div class="vital-c flag-crit">R$&nbsp;14,40 por clique</div>
+      </div>
+      <div class="vital">
+        <div class="vital-k">CPM</div>
+        <div class="vital-v">R$&nbsp;66,40</div>
+        <div class="vital-c">histórico da conta: R$&nbsp;18 a R$&nbsp;54</div>
+      </div>
+      <div class="vital">
+        <div class="vital-k">Visualizações da LP</div>
+        <div class="vital-v flag-crit">0</div>
+        <div class="vital-c">pixel fora do ar — medição cega</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Por campanha</h3>
+        <div class="block-note">11 a 13/08 · dia 13 parcial · fonte: Meta via Windsor</div>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Campanha</th><th>Verba/dia</th><th>Gasto</th><th>Impressões</th>
+              <th>Cliques</th><th>No link</th><th>CTR link</th><th>CPM</th><th>Checkout</th><th>Compras</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>QUENTE ABO · Envolvimento 365d</td>
+              <td>R$&nbsp;200</td><td>375,91</td><td>5.243</td><td>60</td><td>39</td>
+              <td>0,74%</td><td>71,70</td><td>4</td><td class="zero">0</td>
+            </tr>
+            <tr>
+              <td>FRIO CBO · Interesses odonto</td>
+              <td>R$&nbsp;300</td><td>589,22</td><td>9.290</td><td>379</td><td>28</td>
+              <td class="zero">0,30%</td><td>63,42</td><td>1</td><td class="zero">0</td>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <td>R$&nbsp;500</td><td>965,13</td><td>14.533</td><td>439</td><td>67</td>
+              <td>0,46%</td><td>66,40</td><td>5</td><td class="zero">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="block-note" style="margin-top:10px">
+        Os outros 4 conjuntos — LAL clientes, LAL leads, Seguidores/Lista e Broad — não tiveram
+        uma impressão sequer. Rodam 3 criativos dos 11 subidos, todos em vídeo.
+      </p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Onde vaza, degrau a degrau</h3>
+        <div class="block-note">barra&nbsp;=&nbsp;taxa de passagem · marca ocre&nbsp;=&nbsp;faixa de mercado</div>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-top">
+            <div class="step-name">Impressão → clique no link</div>
+            <div class="step-vol num">14.533 → 67</div>
+          </div>
+          <div class="track">
+            <div class="fill bad" style="width:23%"></div>
+            <div class="band" style="left:40%; width:35%"></div>
+          </div>
+          <div class="step-foot">
+            <div><span class="rate">0,46%</span> &nbsp;de CTR de link</div>
+            <div class="mkt">mercado: 0,8% a 1,5%</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-top">
+            <div class="step-name">Clique → chegada na página</div>
+            <div class="step-vol num">67 → não mensurável</div>
+          </div>
+          <div class="track">
+            <div class="fill blind"></div>
+          </div>
+          <div class="step-foot">
+            <div><span class="rate">cego</span> &nbsp;pixel não dispara na LP</div>
+            <div class="mkt">mercado: 70% a 85% chegam</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-top">
+            <div class="step-name">Clique no link → checkout iniciado</div>
+            <div class="step-vol num">67 → 5</div>
+          </div>
+          <div class="track">
+            <div class="fill" style="width:37%"></div>
+          </div>
+          <div class="step-foot">
+            <div><span class="rate">7,5%</span> &nbsp;única etapa saudável</div>
+            <div class="mkt">sem base comparável — amostra de 5</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-top">
+            <div class="step-name">Checkout → compra</div>
+            <div class="step-vol num">5 → 0</div>
+          </div>
+          <div class="track">
+            <div class="fill bad" style="width:0.6%"></div>
+            <div class="band" style="left:44%; width:40%"></div>
+          </div>
+          <div class="step-foot">
+            <div><span class="rate">0%</span> &nbsp;amostra pequena, ainda não é veredicto</div>
+            <div class="mkt">mercado: 10% a 25%</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Os criativos morrem no primeiro segundo</h3>
+        <div class="block-note">3 vídeos somados · 13.837 reproduções</div>
+      </div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bar-lab"><b>Reproduziu</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <div class="bar-val">13.837</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><b>Chegou a 25%</b></div>
+          <div class="bar-track">
+            <div class="bar-fill crit" style="width:2.8%"></div>
+            <div class="band" style="left:15%; width:10%"></div>
+          </div>
+          <div class="bar-val">2,80%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><b>Chegou à metade</b></div>
+          <div class="bar-track"><div class="bar-fill crit" style="width:1.52%"></div></div>
+          <div class="bar-val">1,52%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><b>Chegou a 75%</b></div>
+          <div class="bar-track"><div class="bar-fill crit" style="width:0.9%"></div></div>
+          <div class="bar-val">0,90%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><b>Assistiu até o fim</b></div>
+          <div class="bar-track"><div class="bar-fill crit" style="width:0.68%"></div></div>
+          <div class="bar-val">0,68%</div>
+        </div>
+      </div>
+      <div class="legend">
+        <span class="key"><span class="swatch" style="background:var(--ref)"></span>faixa esperada aos 25%: 15% a 25% das reproduções</span>
+        <span class="key"><span class="swatch" style="background:var(--crit)"></span>abaixo do aceitável</span>
+      </div>
+      <p class="block-note" style="margin-top:12px">
+        Tempo médio assistido: <b style="color:var(--ink)">2 a 3 segundos</b>. Não é problema de oferta,
+        é problema de gancho — a peça não segura ninguém para chegar até a oferta.
+      </p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Contra o mercado</h3>
+        <div class="block-note">INSIDERS = dado da conta · Mercado = faixa de referência, não medição</div>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Métrica</th><th>Mercado</th><th>INSIDERS hoje</th><th>Situação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>CPM</td><td>R$&nbsp;25 a 60</td><td>R$&nbsp;66,40</td><td class="zero">acima</td></tr>
+            <tr><td>CTR de link (frio)</td><td>0,8% a 1,5%</td><td>0,30%</td><td class="zero">1/3 do piso</td></tr>
+            <tr><td>Custo por clique no link</td><td>R$&nbsp;3 a 8</td><td>R$&nbsp;14,40</td><td class="zero">2× o teto</td></tr>
+            <tr><td>Retenção aos 25% do vídeo</td><td>15% a 25%</td><td>2,80%</td><td class="zero">1/5 do piso</td></tr>
+            <tr><td>Custo por conversa qualificada</td><td>R$&nbsp;15 a 60</td><td>não usa esse modelo</td><td>—</td></tr>
+            <tr><td>Checkout → compra</td><td>10% a 25%</td><td>0 de 5</td><td>amostra curta</td></tr>
+            <tr><td>CPA sustentável no ticket R$&nbsp;4.187</td><td>até R$&nbsp;1.000 a 1.400</td><td>sem venda para medir</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="block-note" style="margin-top:12px">
+        O padrão do nicho é funil de duas etapas: conversa ou aplicação primeiro, venda humana depois.
+        Venda direta de R$&nbsp;4 mil no clique frio só sustenta com marca forte, VSL na página e
+        remarketing pesado — nenhuma das três existe aqui hoje.
+      </p>
+      <p class="block-note" style="margin-top:10px">
+        <b style="color:var(--ink)">De onde vem cada coluna:</b> a de INSIDERS é medição da conta, via
+        Meta. A de mercado é faixa de referência para educação de alto ticket em odonto e estética no
+        Brasil — serve para dizer se estamos dentro ou fora da ordem de grandeza, não como meta.
+        Custo de mídia do nicho ninguém publica; o que dá para ver do concorrente é o que ele
+        anuncia, e isso está no bloco abaixo.
+      </p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>O que o nicho está anunciando agora</h3>
+        <div class="block-note">Meta Ad Library · Brasil · anúncios ativos em 13/08/2026</div>
+      </div>
+
+      <div class="scen-card win" style="margin-bottom:18px">
+        <div class="scen-t">Ninguém no Brasil anuncia formação de educadores em HOF</div>
+        <p class="scen-l" style="font-size:14px; max-width:70ch">
+          Varri a categoria pelos termos de docência: não existe um anunciante ativo vendendo
+          "vire professor de harmonização". O INSIDERS não tem concorrente direto — e é justamente
+          por isso que ele é caro. <b style="color:var(--ink)">Categoria vazia é demanda não formada</b>:
+          o mercado de HOF acorda querendo dominar técnica e faturar mais, não querendo dar aula.
+          Vender R$&nbsp;4.187 no clique para um desejo que ainda não existe é o cenário mais caro
+          possível, e ajuda a explicar o CTR de link de 0,30% na fria.
+        </p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Anunciante</th><th>O que vende</th><th>Como capta</th><th>No ar desde</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Clinic Cursos</td><td>Curso e residência (técnica)</td>
+              <td>+10.000 alunos formados · prática com pacientes modelo · parcelamento no anúncio</td>
+              <td>dez/25 · 8 meses</td>
+            </tr>
+            <tr>
+              <td>Facial Academy</td><td>Facial Class, plataforma de ensino</td>
+              <td>Aula gratuita · comentário "class10" que dispara DM · depoimentos</td>
+              <td>abr/25 · 16 meses</td>
+            </tr>
+            <tr>
+              <td>IOA Ponta Grossa</td><td>Cursos, posicionamento premium</td>
+              <td>"Novo padrão de ensino", estrutura premium</td>
+              <td>jul/25 · 13 meses</td>
+            </tr>
+            <tr>
+              <td>Iamac Recife</td><td>Residência presencial</td>
+              <td>"Inscrições abertas", "garanta sua vaga"</td>
+              <td>out/25 · 9 meses</td>
+            </tr>
+            <tr>
+              <td>MasterPós</td><td>Pós-graduação em HOF</td>
+              <td>"Torne-se especialista", aula prática em paciente real</td>
+              <td>jun/26 · 2 meses</td>
+            </tr>
+            <tr>
+              <td>New Face Institute</td><td>Cursos de HOF</td>
+              <td>Institucional segmentado por profissão</td>
+              <td>jun/26 · 2 meses</td>
+            </tr>
+            <tr>
+              <td>Dra. Laís Silveira</td><td>Mentoria de negócio para clínica</td>
+              <td>"Pare de ser executora, seja dona" — vizinho conceitual do INSIDERS</td>
+              <td>mar/26 · 5 meses</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="block-note" style="margin-top:12px">
+        <b style="color:var(--ink)">Nenhum deles vende no clique.</b> Todos, sem exceção, colocam uma
+        etapa antes do checkout: aula gratuita, comentário que abre DM, inscrição, matrícula ou
+        captação pelo perfil. Anúncio velho é anúncio vencedor — Facial Academy mantém criativo no ar
+        há 16 meses e a Clinic Cursos roda a mesma copy em muitas variações ao mesmo tempo.
+      </p>
+
+      <div class="block" style="margin-top:26px">
+        <div class="block-head">
+          <h3>Matriz de mensagem — eles × INSIDERS</h3>
+          <div class="block-note">as alavancas que o nicho usa</div>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr><th>Alavanca</th><th>O nicho usa</th><th>INSIDERS usa</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Prova social numérica</td><td>Quase todos</td><td class="zero">não</td></tr>
+              <tr><td>Depoimento de aluno</td><td>Facial Academy, Clinic Cursos</td><td class="zero">não</td></tr>
+              <tr><td>Prática com paciente real</td><td>Argumento central do nicho</td><td>existe no EPIC, não é usado</td></tr>
+              <tr><td>Parcelamento no criativo</td><td>Clinic Cursos</td><td>só na página, no fim</td></tr>
+              <tr><td>Isca antes da venda</td><td>Todos</td><td class="zero">não</td></tr>
+              <tr><td>Escassez com data</td><td>"Inscrições abertas", "garanta sua vaga"</td><td>"20 primeiros", sem data</td></tr>
+              <tr><td>Autoridade científica do dono</td><td>Usada com força pelos professores-marca</td><td class="zero">não usada</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="block-note" style="margin-top:12px">
+          A última linha é a mais cara: <b style="color:var(--ink)">único PhD em Harmonização Orofacial
+          do Brasil, speaker AMWC Mônaco, speaker Galderma, livro best-seller</b>. Nenhum concorrente
+          pode copiar isso, e hoje não aparece nem no criativo nem na página.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= ATO II ============================= -->
+  <section>
+    <div class="act">
+      <div class="act-n">Ato II</div>
+      <div>
+        <h2>O que ajustar</h2>
+        <p class="act-sub">Em ordem de prioridade. Os três primeiros valem para hoje —
+          enquanto eles não forem resolvidos, verba a mais só compra dado cego.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Agora, hoje</h3>
+        <div class="block-note">3 itens · todos bloqueiam os demais</div>
+      </div>
+      <div class="fixes">
+
+        <div class="fix">
+          <div class="fix-stripe crit"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">01</span>
+              <h3>O pixel não está na página de vendas</h3>
+              <span class="pill crit">Crítico</span>
+            </div>
+            <p class="fix-why">Abri a LP hoje e conferi ao vivo: <b>fbq indefinido</b>, nenhuma chamada
+              para o servidor do Meta. Era exatamente o gate que a gente combinou antes de ligar.
+              Sem ele: zero visualização de página, zero público de remarketing sendo formado e
+              nenhuma forma de saber se a venda veio do anúncio.</p>
+            <div class="evidence">drgermani.kpages.online/lancamento-insiders → typeof fbq = "undefined" · 0 requests para facebook.com/tr</div>
+            <p class="fix-do"><span>Fazer</span>Carol cola o snippet oficial do Meta no &lt;head&gt; da Klickpages
+              e publica. Depois, cadastrar o pixel 521397457593837 no produto INSIDERS na Hotmart
+              com evento de <b>compra aprovada</b>.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe crit"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">02</span>
+              <h3>Otimizar por Compra é impossível nessa verba</h3>
+              <span class="pill crit">Crítico</span>
+            </div>
+            <p class="fix-why">Os dois conjuntos pedem o evento Compra. Para sair de aprendizado, o Meta
+              quer <b>50 compras por semana em cada conjunto</b> — no ticket de R$&nbsp;4.187 isso é
+              R$&nbsp;209.350 de faturamento semanal. Com R$&nbsp;3 mil no mês, os conjuntos vão morrer
+              em "Aprendizagem", e é isso que está inflando o CPM.</p>
+            <div class="evidence">promoted_object: custom_event_type PURCHASE · adset_learning_stage_info: LEARNING · CPM R$ 66,40 vs R$ 19,52 do melhor caso da conta</div>
+            <p class="fix-do"><span>Fazer</span>Voltar ao modelo de conversa no WhatsApp, que custa
+              R$&nbsp;45 a 50 nessa conta, ou segurar a campanha até o pixel estar de pé. Otimizar por
+              visualização de página, sem pixel, seria otimizar por nada.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe crit"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">03</span>
+              <h3>Toda venda entra na Hotmart sem origem</h3>
+              <span class="pill crit">Crítico</span>
+            </div>
+            <p class="fix-why">Os botões da página levam para o checkout carregando só
+              <b>hotfeature=51</b> — sem UTM, sem sck. Se uma venda acontecer amanhã, ela não terá
+              anúncio, conjunto nem campanha atrelados.</p>
+            <div class="evidence">href dos CTAs: pay.hotmart.com/G107050424E?hotfeature=51 — UTM da URL não é repassada</div>
+            <p class="fix-do"><span>Fazer</span>Script de repasse de query string nos links da LP, ou
+              fixar sck por criativo direto no destino do anúncio.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Esta semana</h3>
+        <div class="block-note">7 itens · ganho de eficiência assim que o topo destravar</div>
+      </div>
+      <div class="fixes">
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">04</span>
+              <h3>O anúncio abre por um desejo que o mercado ainda não tem</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">Varri a Biblioteca de Anúncios: <b>ninguém no Brasil anuncia formação de
+              educadores em HOF</b>. Sem concorrente, mas também sem demanda pronta — o nicho quer
+              dominar técnica e faturar mais, não dar aula. O criativo precisa entrar por onde a dor
+              já existe (autoridade, palco, sair da disputa por preço na cadeira) e só então nomear a
+              formação de educadores.</p>
+            <div class="evidence">Meta Ad Library BR · 13/08/2026 · nenhum anunciante ativo vendendo docência em HOF</div>
+            <p class="fix-do"><span>Fazer</span>Reescrever os ganchos por esse ângulo e copiar o gatilho
+              que a Facial Academy usa há 16 meses: comentário com palavra-chave que abre DM. Custa
+              pouco e resolve de quebra a falta de público de remarketing.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">05</span>
+              <h3>Não tem um único criativo estático no ar</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">O dado da própria conta é direto: no EPIC de agosto, estático custou
+              <b>R$&nbsp;15,02</b> por conversa e vídeo custou <b>R$&nbsp;97,93</b>. A INSIDERS subiu
+              só com vídeo.</p>
+            <p class="fix-do"><span>Fazer</span>Subir uma leva de estáticos e deixar um vídeo de controle.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">06</span>
+              <h3>O gancho dos vídeos não segura 3 segundos</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">2,8% chegam a 25% do vídeo, contra 15% a 25% esperados. E o argumento mais
+              forte do cliente não está sendo usado: <b>único PhD em Harmonização Orofacial do Brasil,
+              speaker AMWC Mônaco, speaker Galderma, livro best-seller</b>.</p>
+            <p class="fix-do"><span>Fazer</span>Refazer os 3 primeiros segundos nesta ordem: nomear o
+              público, dar a credencial, prometer a pauta. Os nove roteiros estão no documento à parte.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">07</span>
+              <h3>Quatro dos seis conjuntos não entregaram nada</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">As LAL de clientes e de leads somam <b>2,4 milhões de pessoas</b> e estão
+              paradas. E como o conjunto Seguidores/Lista não rodou, <b>o teste A/B do quente não existe</b> —
+              o que está no ar é um público só.</p>
+            <p class="fix-do"><span>Fazer</span>Ligar as LAL e o segundo conjunto do quente junto com a
+              nova leva de criativo.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">08</span>
+              <h3>93% dos cliques da fria não vão para o link</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">A fria mostra CTR total de 4,08%, que parece ótimo — mas só
+              <b>28 dos 379 cliques</b> foram no link. O resto é "ver mais", curtida e visita ao perfil.
+              É verba comprando engajamento, não visita.</p>
+            <p class="fix-do"><span>Fazer</span>Encurtar a legenda para matar o "ver mais" e levar a
+              chamada para dentro da peça.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">09</span>
+              <h3>A página não vende R$ 4.187</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">Li a página inteira: lista de módulos, o que está incluso, preço e garantia.
+              Falta tudo que sustenta high ticket — <b>nenhum depoimento, nenhum vídeo de vendas,
+              nenhuma prova social</b>, e as credenciais do Dr. Marcelo resumidas a duas frases genéricas.
+              A imersão presencial no Co.Space da Galderma, provavelmente o maior gatilho da oferta,
+              está no rodapé sem data, sem foto e sem detalhe.</p>
+            <p class="fix-do"><span>Fazer</span>Autoridade no topo, um depoimento de ex-aluno, bloco do
+              presencial com data e foto, e um FAQ com as objeções de preço e de tempo.</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-stripe"></div>
+          <div class="fix-body">
+            <div class="fix-head">
+              <span class="fix-n">10</span>
+              <h3>O público quente está queimando rápido</h3>
+              <span class="pill warn">Ajustar</span>
+            </div>
+            <p class="fix-why">O VIDEO_06 já bateu <b>frequência 2,05 em 3 dias</b>. R$&nbsp;200/dia em um
+              único público, com um criativo dominando a entrega, satura em pouco mais de uma semana.</p>
+            <p class="fix-do"><span>Fazer</span>Distribuir a verba entre mais conjuntos e alternar criativo
+              antes da frequência passar de 3.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div>GGD · dados de 11 a 13/08/2026, dia 13 parcial · Meta Ads via Windsor · LP verificada no navegador em 13/08</div>
+    <div class="num">conta 479768193433776 · pixel 521397457593837</div>
+  </footer>
+</div>
+
+<style>
+  @page { size: A4; margin: 12mm 11mm 14mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff !important; font-size: 14px; }
+  .wrap { max-width: 100% !important; padding: 0 !important; }
+
+  /* nada de elemento partido no meio da página */
+  .vital, .step, .fix, .kit-card, .script, .rule-card, .howto,
+  .scen-card, .bar-row, .line, tr { break-inside: avoid; page-break-inside: avoid; }
+  .scroll, table { break-inside: auto; }
+  /* o bloco pode quebrar ENTRE cartões — só o cartão é indivisível.
+     Travar o bloco inteiro empurrava seções grandes e deixava título órfão. */
+  h1, h2, h3, .seg-t, .script-head, .act, .block-head, .howto { break-after: avoid; page-break-after: avoid; }
+  .act, .seg { break-before: page; page-break-before: always; }
+  header + .act, header + .seg, .wrap > .act:first-of-type { break-before: auto; page-break-before: auto; }
+  section:first-of-type .act { break-before: auto; page-break-before: auto; }
+
+  /* tabelas: cabeçalho repete quando quebra */
+  thead { display: table-header-group; }
+  .scroll { overflow: visible !important; }
+  table { min-width: 0 !important; width: 100%; font-size: 11.5px; table-layout: auto; }
+  thead th, tbody td { padding: 8px 5px; }
+  thead th:first-child, tbody td:first-child { min-width: 96px; padding-left: 10px; }
+  thead th:last-child, tbody td:last-child { padding-right: 10px; }
+
+  /* 6 cartões em 2 linhas de 3 — sem célula órfã com fundo vazio */
+  .vitals { grid-template-columns: repeat(3, 1fr) !important; }
+  .kit-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .kit-grid.two { grid-template-columns: repeat(2, 1fr) !important; }
+
+  h1 { font-size: 34px !important; }
+  h2, .seg-t { font-size: 25px !important; }
+  .lede { font-size: 15.5px !important; }
+  .say { font-size: 16px !important; }
+  footer { break-inside: avoid; }
+</style>
+</body></html>

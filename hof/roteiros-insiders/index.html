@@ -1,0 +1,467 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>INSIDERS — Roteiros para gravação | GGD</title></head><body><style>
+  :root{
+    --ground:#F7F9F8; --card:#FFFFFF; --card-2:#F1F5F4;
+    --ink:#10201F; --ink-2:#465956; --ink-3:#6E827F;
+    --rule:#DCE5E3; --rule-soft:#EAF0EF;
+    --accent:#008C7E; --ref:#A9660B;
+    --accent-wash:#E4F1EF;
+    --display: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --data: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --shadow: 0 1px 2px rgba(16,32,31,.05), 0 10px 30px -20px rgba(16,32,31,.3);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#0C1413; --card:#12191A; --card-2:#182220;
+      --ink:#E7EEEC; --ink-2:#9DAEAB; --ink-3:#7A8D8A;
+      --rule:#23312F; --rule-soft:#1B2624;
+      --accent:#1E9C8C; --ref:#BC861D; --accent-wash:#0F2B28;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -20px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C1413; --card:#12191A; --card-2:#182220;
+    --ink:#E7EEEC; --ink-2:#9DAEAB; --ink-3:#7A8D8A;
+    --rule:#23312F; --rule-soft:#1B2624;
+    --accent:#1E9C8C; --ref:#BC861D; --accent-wash:#0F2B28;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -20px rgba(0,0,0,.9);
+  }
+  :root[data-theme="light"]{
+    --ground:#F7F9F8; --card:#FFFFFF; --card-2:#F1F5F4;
+    --ink:#10201F; --ink-2:#465956; --ink-3:#6E827F;
+    --rule:#DCE5E3; --rule-soft:#EAF0EF;
+    --accent:#008C7E; --ref:#A9660B; --accent-wash:#E4F1EF;
+    --shadow: 0 1px 2px rgba(16,32,31,.05), 0 10px 30px -20px rgba(16,32,31,.3);
+  }
+
+  body{ background:var(--ground); color:var(--ink); font-family:var(--body);
+        font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:900px; margin:0 auto; padding:44px 22px 88px; }
+
+  .eyebrow{ font-family:var(--data); font-size:11px; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--ink-3); }
+  h1{ font-family:var(--display); font-weight:600; font-size:clamp(32px,4.6vw,46px);
+      line-height:1.05; letter-spacing:-.022em; text-wrap:balance; margin:.3em 0 0; }
+  .lede{ font-size:17px; color:var(--ink-2); margin:16px 0 0; max-width:62ch; }
+  p{ margin:0; }
+
+  .howto{ margin-top:30px; border:1px solid var(--accent); background:var(--accent-wash);
+          border-radius:10px; padding:18px 20px; }
+  .howto-t{ font-family:var(--data); font-size:10.5px; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--accent); margin-bottom:9px; }
+  .howto ul{ margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px;
+             font-size:14.5px; color:var(--ink-2); max-width:72ch; }
+  .howto b{ color:var(--ink); font-weight:650; }
+
+  .seg{ margin-top:52px; padding-top:20px; border-top:2px solid var(--ink);
+        display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .seg-n{ font-family:var(--data); font-size:11px; letter-spacing:.14em;
+          text-transform:uppercase; color:var(--ink-3); }
+  .seg-t{ font-family:var(--display); font-size:clamp(23px,3vw,30px); font-weight:600;
+          letter-spacing:-.018em; }
+  .seg-d{ font-size:14px; color:var(--ink-2); margin-top:8px; max-width:70ch; }
+
+  .script{ margin-top:20px; background:var(--card); border:1px solid var(--rule);
+           border-radius:12px; box-shadow:var(--shadow); overflow:hidden; }
+  .script-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+                padding:15px 20px; border-bottom:1px solid var(--rule); background:var(--card-2); }
+  .script-n{ font-family:var(--data); font-size:12px; color:var(--accent); font-weight:600; }
+  .script-t{ font-family:var(--display); font-size:19px; font-weight:600; letter-spacing:-.012em; }
+  .script-dur{ font-family:var(--data); font-size:11.5px; color:var(--ink-3); margin-left:auto; }
+
+  .line{ display:grid; grid-template-columns:96px 1fr; gap:18px;
+         padding:15px 20px; border-bottom:1px solid var(--rule-soft); align-items:start; }
+  .line:last-of-type{ border-bottom:none; }
+  .tc{ font-family:var(--data); font-size:11px; line-height:1.5; }
+  .tc b{ display:block; color:var(--accent); font-weight:600; letter-spacing:.06em;
+         text-transform:uppercase; font-size:9.5px; margin-bottom:3px; }
+  .tc span{ color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .say{ font-size:17.5px; line-height:1.5; letter-spacing:-.005em; }
+  .say.open{ font-weight:650; }
+  .say em{ font-style:normal; background:var(--accent-wash); color:var(--ink);
+           padding:1px 5px; border-radius:4px; box-decoration-break:clone;
+           -webkit-box-decoration-break:clone; }
+  .note{ font-size:12.5px; color:var(--ink-3); margin-top:7px; font-family:var(--data);
+         line-height:1.5; }
+  .note b{ color:var(--ink-2); font-weight:500; }
+
+  footer{ margin-top:60px; padding-top:18px; border-top:1px solid var(--rule);
+          font-size:12.5px; color:var(--ink-3); }
+
+  @media (max-width:620px){
+    .wrap{ padding:30px 15px 60px; }
+    .line{ grid-template-columns:1fr; gap:6px; }
+    .tc b{ display:inline; margin-right:8px; }
+    .say{ font-size:16.5px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">INSIDERS · Dr. Marcelo Germani · roteiros de captação</div>
+    <h1>Nove aberturas,<br>três públicos diferentes.</h1>
+    <p class="lede">Vídeos de 15 a 20 segundos. Cada um fala com um estágio diferente de quem
+      ensina — ou quer ensinar — harmonização. O miolo muda pouco; o que muda de verdade
+      é para quem a primeira frase é dirigida.</p>
+  </header>
+
+  <div class="howto">
+    <div class="howto-t">Antes de gravar</div>
+    <ul>
+      <li><b>Sem introdução.</b> Nada de "fala, pessoal", vinheta ou logo. A primeira palavra
+        já é a do roteiro, com o rosto em cena.</li>
+      <li><b>A palavra destacada aparece escrita na tela</b> no primeiro frame — boa parte
+        assiste sem som, e é ela que faz a pessoa entender que o vídeo é com ela.</li>
+      <li><b>Dita direto, quase seca</b>, sem pausa dramática antes. A pausa vem depois.</li>
+      <li><b>Um vídeo por roteiro.</b> Gravar os nove de uma vez, na mesma luz e na mesma
+        roupa, ajuda a comparar depois.</li>
+      <li><b>Enquadramento vertical</b>, olhando para a câmera. Vale gravar o miolo uma vez
+        e regravar só as aberturas, se render mais rápido.</li>
+    </ul>
+  </div>
+
+  <!-- ================= SEGMENTO 1 ================= -->
+  <div class="seg">
+    <div class="seg-n">Segmento 1</div>
+    <div class="seg-t">Quer ser professor</div>
+  </div>
+  <p class="seg-d">Clínico bom, que admira quem ensina e acha que ainda não tem bagagem.
+    A dor dele é legitimidade. Aqui não se usa a palavra "professor" — ele ainda não se vê
+    assim — e não se fala de grandes palcos, que soam distantes demais.</p>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">01</span>
+      <span class="script-t">Esperar estar pronto</span>
+      <span class="script-dur">≈18s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–2s</span></div>
+      <div>
+        <p class="say open"><em>Dentista de harmonização:</em> você já pensou em dar aula
+          e achou que não tinha bagagem?</p>
+        <p class="note"><b>Tela:</b> "DENTISTA DE HARMONIZAÇÃO" em caixa alta, grande, no primeiro frame.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>2–5s</span></div>
+      <div class="say">Sou Marcelo Germani, único PhD em Harmonização Orofacial do Brasil.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>5–15s</span></div>
+      <div class="say">Todo mundo que ensina hoje começou antes de se sentir pronto. O que separa
+        não é tempo de cadeira: é ter método para organizar o que você já sabe. E enquanto você
+        espera estar pronto, alguém com metade da sua técnica está formando a sua turma.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>15–18s</span></div>
+      <div>
+        <p class="say">Comenta INSIDERS que eu te mostro por onde começa.</p>
+        <p class="note"><b>Alternativa:</b> "O link está aqui embaixo" — se o destino for a página.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">02</span>
+      <span class="script-t">O corredor do congresso</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–3s</span></div>
+      <div>
+        <p class="say open"><em>Dentista de HOF:</em> você já explicou uma técnica para um colega
+          no corredor de um congresso?</p>
+        <p class="note"><b>Tela:</b> "DENTISTA DE HOF". <b>Cena:</b> se houver imagem de corredor de evento, entra aqui.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>3–6s</span></div>
+      <div class="say">Sou Marcelo Germani, PhD e palestrante da Galderma.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>6–16s</span></div>
+      <div class="say">Se você já explicou, você já dá aula. Só não cobrou por isso. A diferença
+        entre esse favor de corredor e um curso que te paga não é conhecimento — é estrutura.
+        Como organizar o conteúdo, como montar a aula, como transformar isso em produto.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te explico como.</div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">03</span>
+      <span class="script-t">Dez anos de consultório</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–3s</span></div>
+      <div>
+        <p class="say open"><em>Dentista de harmonização que quer ensinar:</em> dez anos de
+          consultório não é o que te legitima.</p>
+        <p class="note"><b>Tela:</b> "QUER ENSINAR HARMONIZAÇÃO?" no primeiro frame.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>3–6s</span></div>
+      <div class="say">Sou Marcelo Germani, único PhD da área no Brasil.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>6–16s</span></div>
+      <div class="say">Eu já vi profissional com vinte anos de cadeira que não consegue explicar
+        o que faz. E gente com cinco anos lotando turma. Não é tempo que faz professor, é método:
+        existe uma forma de construir aula que faz o aluno entender, aplicar e voltar.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te mando esse caminho.</div>
+    </div>
+  </div>
+
+  <!-- ================= SEGMENTO 2 ================= -->
+  <div class="seg">
+    <div class="seg-n">Segmento 2</div>
+    <div class="seg-t">Já dá aula, mas inseguro</div>
+  </div>
+  <p class="seg-d">Já ensina e tem medo de ser descoberto. Aqui a chamada é pela posse — "sua aula",
+    "seus alunos" — e não pelo título, porque quem é inseguro raramente se apresenta como professor.
+    Nunca dizer "aprenda a dar aula": ele já dá.</p>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">04</span>
+      <span class="script-t">A hora das perguntas</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–3s</span></div>
+      <div>
+        <p class="say open"><em>Na sua aula,</em> quando abrem para perguntas, dá um frio na barriga.</p>
+        <p class="note"><b>Tela:</b> "NA SUA AULA…" no primeiro frame. Afirmação, não pergunta.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>3–6s</span></div>
+      <div class="say">Sou Marcelo Germani, quinze artigos publicados e único PhD da área no Brasil.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>6–16s</span></div>
+      <div class="say">Esse frio não é falta de técnica. É falta de base para sustentar o que você
+        fala. Quando a aula está apoiada em artigo, a pergunta difícil deixa de ser ameaça e vira
+        chance de mostrar profundidade. Achar, ler e escolher o artigo certo é habilidade — e se aprende.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te mostro como faço isso.</div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">05</span>
+      <span class="script-t">Artigo ou "eu faço assim"</span>
+      <span class="script-dur">≈18s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–4s</span></div>
+      <div>
+        <p class="say open"><em>Sua aula</em> é baseada em artigo ou em "eu faço assim e dá certo"?</p>
+        <p class="note"><b>Tela:</b> "ARTIGO OU 'EU FAÇO ASSIM'?" — a pergunta escrita segura sozinha.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>4–7s</span></div>
+      <div class="say">Sou Marcelo Germani, PhD e speaker da Galderma.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>7–15s</span></div>
+      <div class="say">Os dois funcionam na sala de aula. Só um funciona quando te questionam — e
+        no grupo do aluno, na banca, no congresso, você vai ser questionado. Experiência clínica é
+        ponto de partida. Evidência é o que te sustenta em pé.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>15–18s</span></div>
+      <div class="say">Comenta INSIDERS que eu te explico a diferença na prática.</div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">06</span>
+      <span class="script-t">Demonstração ao vivo</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–3s</span></div>
+      <div>
+        <p class="say open"><em>Na sua aula,</em> a parte que mais te dá medo é a demonstração ao vivo.</p>
+        <p class="note"><b>Tela:</b> "NA SUA AULA…". <b>Cena:</b> imagem de live injection entra no miolo, não na abertura.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>3–6s</span></div>
+      <div class="say">Sou Marcelo Germani, único PhD em Harmonização Orofacial do Brasil.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>6–16s</span></div>
+      <div class="say">Eu já fiz centenas delas e te garanto: não é talento, é preparação.
+        Equipamento posicionado antes, roteiro do que falar em cada etapa, plano para quando o
+        paciente reage diferente do esperado. Quem improvisa sua. Quem tem checklist ensina.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te mando a minha checklist.</div>
+    </div>
+  </div>
+
+  <!-- ================= SEGMENTO 3 ================= -->
+  <div class="seg">
+    <div class="seg-n">Segmento 3</div>
+    <div class="seg-t">É professor e quer palco grande</div>
+  </div>
+  <p class="seg-d">Estabelecido, tem turma, sabe ensinar. A dor é teto de projeção: vê gente com
+    menos conteúdo em palco maior. Nada aqui pode sugerir que ele precisa aprender a ensinar —
+    e é o único segmento onde a imersão presencial na Galderma vale ser citada, porque funciona
+    como status.</p>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">07</span>
+      <span class="script-t">Menos conteúdo, palco maior</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–4s</span></div>
+      <div>
+        <p class="say open"><em>Professor de harmonização:</em> cansou de ver gente com menos
+          conteúdo em palco maior que o seu?</p>
+        <p class="note"><b>Tela:</b> "PROFESSOR DE HARMONIZAÇÃO". <b>Cena:</b> abrir com imagem de palco cheio, se houver.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>4–7s</span></div>
+      <div class="say">Sou Marcelo Germani, speaker da Galderma e do AMWC em Mônaco.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>7–16s</span></div>
+      <div class="say">Não é o melhor conteúdo que sobe no palco. É o mais bem construído.
+        Quem organiza a fala, monta narrativa e apresenta com clareza é chamado de novo no ano
+        seguinte. Conteúdo bom mal apresentado simplesmente não circula.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te mostro como se constrói isso.</div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">08</span>
+      <span class="script-t">Quantos congressos te chamaram</span>
+      <span class="script-dur">≈19s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–4s</span></div>
+      <div>
+        <p class="say open"><em>Professor de HOF:</em> você sabe ensinar. Mas quantos congressos
+          te chamaram esse ano?</p>
+        <p class="note"><b>Tela:</b> "PROFESSOR DE HOF". A segunda frase é a que incomoda — dizer sem suavizar.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>4–7s</span></div>
+      <div class="say">Sou Marcelo Germani, único PhD da área no Brasil e palestrante em Mônaco.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>7–16s</span></div>
+      <div class="say">O convite não chega por acaso. Ele chega quando existe um nome associado a
+        um tema, com produção que comprova: publicação, conteúdo, posicionamento. Eu montei isso de
+        propósito, e é um caminho que dá para ensinar.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>16–19s</span></div>
+      <div class="say">Comenta INSIDERS que eu te conto o caminho.</div>
+    </div>
+  </div>
+
+  <div class="script">
+    <div class="script-head">
+      <span class="script-n">09</span>
+      <span class="script-t">A turma de vinte</span>
+      <span class="script-dur">≈20s</span>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Abertura</b><span>0–4s</span></div>
+      <div>
+        <p class="say open"><em>Sua turma</em> tem vinte alunos. E o palco do congresso continua
+          com outro nome.</p>
+        <p class="note"><b>Tela:</b> "SUA TURMA TEM 20 ALUNOS" — número grande, na cara.</p>
+      </div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Credencial</b><span>4–7s</span></div>
+      <div class="say">Sou Marcelo Germani, PhD, speaker da Galderma e autor do Movement.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Miolo</b><span>7–17s</span></div>
+      <div class="say">A distância entre as duas coisas é menor do que parece — e não é técnica.
+        É arquitetura: como você estrutura o que ensina, como documenta e como se posiciona.
+        Os vinte alunos viram duzentos quando o método sai da sua cabeça e vira sistema.</div>
+    </div>
+    <div class="line">
+      <div class="tc"><b>Chamada</b><span>17–20s</span></div>
+      <div>
+        <p class="say">Comenta INSIDERS. Os vinte primeiros vão comigo para o Co.Space da Galderma.</p>
+        <p class="note"><b>Só neste segmento.</b> Nos outros dois, a imersão presencial ainda não significa nada.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Nove roteiros · GGD para HOF Sem Segredos · agosto de 2026 ·
+    o miolo pode ser regravado uma vez só; o que precisa mudar em cada peça é a abertura.
+  </footer>
+</div>
+
+<style>
+  @page { size: A4; margin: 12mm 11mm 14mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff !important; font-size: 14px; }
+  .wrap { max-width: 100% !important; padding: 0 !important; }
+
+  /* nada de elemento partido no meio da página */
+  .vital, .step, .fix, .kit-card, .script, .rule-card, .howto,
+  .scen-card, .bar-row, .line, tr { break-inside: avoid; page-break-inside: avoid; }
+  .scroll, table { break-inside: auto; }
+  /* o bloco pode quebrar ENTRE cartões — só o cartão é indivisível.
+     Travar o bloco inteiro empurrava seções grandes e deixava título órfão. */
+  h1, h2, h3, .seg-t, .script-head, .act, .block-head, .howto { break-after: avoid; page-break-after: avoid; }
+  .act, .seg { break-before: page; page-break-before: always; }
+  header + .act, header + .seg, .wrap > .act:first-of-type { break-before: auto; page-break-before: auto; }
+  section:first-of-type .act { break-before: auto; page-break-before: auto; }
+
+  /* tabelas: cabeçalho repete quando quebra */
+  thead { display: table-header-group; }
+  .scroll { overflow: visible !important; }
+  table { min-width: 0 !important; width: 100%; font-size: 11.5px; table-layout: auto; }
+  thead th, tbody td { padding: 8px 5px; }
+  thead th:first-child, tbody td:first-child { min-width: 96px; padding-left: 10px; }
+  thead th:last-child, tbody td:last-child { padding-right: 10px; }
+
+  /* 6 cartões em 2 linhas de 3 — sem célula órfã com fundo vazio */
+  .vitals { grid-template-columns: repeat(3, 1fr) !important; }
+  .kit-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .kit-grid.two { grid-template-columns: repeat(2, 1fr) !important; }
+
+  h1 { font-size: 34px !important; }
+  h2, .seg-t { font-size: 25px !important; }
+  .lede { font-size: 15.5px !important; }
+  .say { font-size: 16px !important; }
+  footer { break-inside: avoid; }
+</style>
+</body></html>
