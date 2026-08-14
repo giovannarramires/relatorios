@@ -114,7 +114,7 @@ footer{margin-top:28px;font-size:12.5px;color:var(--cinza);text-align:center}
       <li><b>Faturamento por plataforma</b> é o valor de conversão que cada plataforma se atribui (Meta e Google contam a mesma venda quando os dois participam) — por isso a soma passa do faturamento real do site.</li>
       <li><b>Real (site)</b> vem da Nuvemshop e é a fonte da verdade: são os <b>pedidos pagos</b> (pagamento confirmado), mesmo critério do relatório mensal. O <b>ROAS real</b> usa faturamento do site ÷ investimento total.</li>
       <li><b>Custo por venda</b> = investimento ÷ vendas da própria plataforma; no total, investimento total ÷ pedidos reais.</li>
-      <li>Investimento é o valor de mídia. O Meta ainda cobra <b id="imp"></b> de impostos (COFINS/PIS/ISS) sobre o valor cobrado — mostrado à parte no card de investimento.</li>
+      <li>Investimento é o valor de mídia. O Meta ainda cobra <b id="imp"></b> de impostos (COFINS/PIS/ISS) sobre o valor cobrado — mostrado à parte no card de investimento e <b>já somado</b> no ROAS real e no custo por venda real, que é o custo que a operação tem de verdade.</li>
       <li>Google conta conversões com casas decimais (modelo de atribuição), por isso vendas do Google podem sair quebradas.</li>
     </ul>
   </div>
@@ -164,16 +164,22 @@ function linhas(){
   });
 }
 function soma(L){
-  const t = {spendM:0,spendG:0,recM:0,recG:0,venM:0,venG:0,recS:0,pedS:0,temSite:false,invS:0,ultSite:null};
+  const t = {spendM:0,spendG:0,recM:0,recG:0,venM:0,venG:0,recS:0,pedS:0,temSite:false,invS:0,spendMS:0,ultSite:null};
   L.forEach(r => {
     t.spendM += r.m.spend||0; t.spendG += r.g.spend||0;
     t.recM += r.m.receita||0; t.recG += r.g.receita||0;
     t.venM += r.m.vendas||0;  t.venG += r.g.vendas||0;
     if (r.s) { t.recS += r.s.receita||0; t.pedS += r.s.pedidos||0; t.temSite = true;
-              t.invS += r.inv; t.ultSite = r.dt; }
+              t.invS += r.inv; t.spendMS += r.m.spend||0; t.ultSite = r.dt; }
   });
   t.inv = t.spendM + t.spendG; t.rec = t.recM + t.recG; t.ven = t.venM + t.venG;
   return t;
+}
+
+function custoReal(t){
+  // O que a operacao custa de verdade: midia + o imposto que o Meta cobra por cima
+  // (COFINS/PIS/ISS). So os dias que tem dado do site, pra comparar o mesmo periodo.
+  return t.invS + t.spendMS * D.imposto_meta;
 }
 
 function defasagem(t){
@@ -193,10 +199,10 @@ function kpis(t){
      hint:'+ ' + brl(imp) + ' de impostos Meta'},
     {lab:'Faturamento real (site)', val: t.temSite ? brl(t.recS) : '—',
      hint: t.temSite ? nInt(t.pedS) + ' pedidos na Nuvemshop' + defasagem(t) : 'aguardando leitura da Nuvemshop'},
-    {lab:'ROAS real', val: t.temSite ? roas(t.recS, t.invS) : '—',
-     hint:'faturamento do site ÷ investimento dos mesmos dias'},
-    {lab:'Custo por venda real', val: t.temSite ? cpv(t.invS, t.pedS) : '—',
-     hint:'investimento ÷ pedidos do site, mesmos dias'},
+    {lab:'ROAS real', val: t.temSite ? roas(t.recS, custoReal(t)) : '—',
+     hint:'faturamento do site ÷ investimento + imposto, mesmos dias'},
+    {lab:'Custo por venda real', val: t.temSite ? cpv(custoReal(t), t.pedS) : '—',
+     hint:'investimento + imposto ÷ pedidos do site'},
     {lab:'Faturamento nas plataformas', val:brl(t.rec), dark:true,
      hint:'Meta + Google (há sobreposição)'},
     {lab:'Vendas nas plataformas', val:n1(t.ven), dark:true,
@@ -248,7 +254,7 @@ function tabela(L, t){
       '<td class="sep">'+brl0(g.spend)+'</td><td>'+brl0(g.receita)+'</td><td>'+n1(g.vendas)+'</td><td>'+roas(g.receita,g.spend)+'</td>' +
       '<td class="sep">'+brl0(r.inv)+'</td><td>'+n1(r.ven)+'</td><td>'+(r.ven?brl0(r.inv/r.ven):'—')+'</td>';
     if (site) h += s
-      ? '<td class="sep">'+brl0(s.receita)+'</td><td>'+nInt(s.pedidos)+'</td><td>'+roas(s.receita,r.inv)+'</td>'
+      ? '<td class="sep">'+brl0(s.receita)+'</td><td>'+nInt(s.pedidos)+'</td><td>'+roas(s.receita, r.inv + (r.m.spend||0)*D.imposto_meta)+'</td>'
       : '<td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td>';
     h += '</tr>';
   });
