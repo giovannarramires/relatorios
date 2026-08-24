@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Diagnóstico de prontidão para lançamento — PMC / Projeto Meu Consultório, Giuliana Marketing em Odontologia.">
+<meta property="og:title" content="Prontidão do PMC">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
+<style>html{-webkit-text-size-adjust:100%}img,svg{max-width:100%}</style>
+<title>Prontidão do PMC</title>
+<style>
+  :root{
+    --ground:#FBFCFD; --surface:#F1F5F7; --surface-2:#E7EEF1; --line:#D4DEE3;
+    --ink:#0E161C; --ink-2:#37474F; --muted:#697A85;
+    --accent:#0D6A72; --accent-soft:#DFEFF0; --accent-line:#9CCBCD;
+    --crit:#A32A20; --crit-soft:#F7E4E1;
+    --warn:#8A5800; --warn-soft:#F8EEDA;
+    --ok:#1B6A4C; --ok-soft:#DFF0E7;
+    --display:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+    --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --col:74ch;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#0B1114; --surface:#121B20; --surface-2:#1A252B; --line:#26343B;
+      --ink:#E9F0F3; --ink-2:#B7C6CD; --muted:#879AA4;
+      --accent:#57C4C8; --accent-soft:#103136; --accent-line:#2C5C61;
+      --crit:#EE9088; --crit-soft:#331916;
+      --warn:#DDA745; --warn-soft:#2E2413;
+      --ok:#63C79B; --ok-soft:#122C22;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0B1114; --surface:#121B20; --surface-2:#1A252B; --line:#26343B;
+    --ink:#E9F0F3; --ink-2:#B7C6CD; --muted:#879AA4;
+    --accent:#57C4C8; --accent-soft:#103136; --accent-line:#2C5C61;
+    --crit:#EE9088; --crit-soft:#331916;
+    --warn:#DDA745; --warn-soft:#2E2413;
+    --ok:#63C79B; --ok-soft:#122C22;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased; margin:0;
+  }
+  .wrap{max-width:var(--col); margin:0 auto; padding:0 22px 96px; display:flex; flex-direction:column; gap:64px}
+
+  /* ---- header ---- */
+  header.doc{padding:64px 0 0; display:flex; flex-direction:column; gap:18px}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin:0;
+  }
+  h1{
+    font-family:var(--display); font-weight:600; font-size:44px; line-height:1.08;
+    letter-spacing:-.015em; text-wrap:balance; margin:0; color:var(--ink);
+  }
+  .standfirst{font-size:19px; line-height:1.55; color:var(--ink-2); margin:0; max-width:60ch}
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:8px 20px; font-family:var(--mono); font-size:12px;
+    color:var(--muted); border-top:1px solid var(--line); padding-top:14px;
+  }
+  .meta-row b{font-weight:500; color:var(--ink-2)}
+
+  /* ---- verdict ---- */
+  .verdict{
+    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+    padding:26px 28px; display:flex; flex-direction:column; gap:16px;
+  }
+  .verdict h2{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0; font-weight:600;
+  }
+  .verdict p{margin:0; font-size:17.5px; line-height:1.55}
+  .verdict p strong{font-weight:650}
+
+  .gauge{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:2px; background:var(--line); border:1px solid var(--line)}
+  .gauge div{background:var(--surface); padding:16px 18px; display:flex; flex-direction:column; gap:6px}
+  .gauge .lbl{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+  .gauge .val{font-family:var(--display); font-size:21px; line-height:1.15; font-weight:600}
+  .g-ok .val{color:var(--ok)} .g-warn .val{color:var(--warn)} .g-crit .val{color:var(--crit)}
+  .gauge .note{font-size:13.5px; color:var(--ink-2); line-height:1.45}
+
+  /* ---- sections ---- */
+  section{display:flex; flex-direction:column; gap:22px}
+  h2.sec{
+    font-family:var(--display); font-size:29px; font-weight:600; letter-spacing:-.01em;
+    margin:0; text-wrap:balance; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  h3{
+    font-family:var(--body); font-size:16px; font-weight:650; letter-spacing:-.005em;
+    margin:0; color:var(--ink);
+  }
+  p{margin:0}
+  .block{display:flex; flex-direction:column; gap:12px}
+  .lede{color:var(--ink-2)}
+  em{font-style:italic; color:var(--ink-2)}
+
+  /* ---- tables ---- */
+  .scroller{overflow-x:auto; border:1px solid var(--line)}
+  table{border-collapse:collapse; width:100%; font-size:15px; min-width:460px; background:var(--surface)}
+  th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  thead th{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; background:var(--surface-2); white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+  .flag{color:var(--crit); font-weight:600}
+  .dim{color:var(--muted)}
+
+  /* ---- risk cards ---- */
+  .risks{display:flex; flex-direction:column; gap:2px; background:var(--line); border:1px solid var(--line)}
+  .risk{background:var(--surface); padding:18px 20px 18px 22px; display:flex; flex-direction:column; gap:7px; border-left:3px solid var(--line)}
+  .risk.r-crit{border-left-color:var(--crit)}
+  .risk.r-warn{border-left-color:var(--warn)}
+  .risk .tag{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; font-weight:600;
+    display:inline-block; padding:2px 7px; border-radius:2px; align-self:flex-start;
+  }
+  .r-crit .tag{background:var(--crit-soft); color:var(--crit)}
+  .r-warn .tag{background:var(--warn-soft); color:var(--warn)}
+  .risk p{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+  .risk p b{color:var(--ink); font-weight:600}
+
+  /* ---- checklist ---- */
+  .group{display:flex; flex-direction:column; gap:12px}
+  .group-head{
+    font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; display:flex; align-items:center; gap:10px;
+  }
+  .group-head::after{content:""; flex:1; height:1px; background:var(--accent-line)}
+  ul.check{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
+  ul.check li{
+    position:relative; padding-left:26px;
+    font-size:15.5px; line-height:1.55; color:var(--ink-2);
+  }
+  ul.check li::before{
+    content:""; position:absolute; left:0; top:.45em;
+    width:13px; height:13px; border:1.5px solid var(--accent-line);
+    border-radius:2px; background:var(--ground);
+  }
+  ul.check li b{color:var(--ink); font-weight:600}
+
+  /* ---- phases ---- */
+  .phases{display:flex; flex-direction:column; gap:2px; background:var(--line); border:1px solid var(--line)}
+  .phase{background:var(--surface); padding:20px 22px; display:grid; grid-template-columns:auto 1fr; gap:0 18px}
+  .phase .n{
+    font-family:var(--mono); font-size:12px; font-weight:600; color:var(--accent);
+    background:var(--accent-soft); border:1px solid var(--accent-line);
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:50%;
+  }
+  .phase .head{display:flex; flex-wrap:wrap; align-items:baseline; gap:5px 12px}
+  .phase .head h3{font-size:17px}
+  .phase .when{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em}
+  .phase .body{grid-column:2; display:flex; flex-direction:column; gap:11px; padding-top:9px}
+  .phase .body p{font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+  .spec{display:flex; flex-direction:column; gap:6px; font-size:14.5px; line-height:1.5}
+  .spec .row{display:grid; grid-template-columns:minmax(88px,auto) 1fr; gap:12px; align-items:start}
+  .spec .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding-top:3px}
+  .spec .v{color:var(--ink-2)}
+  code{
+    font-family:var(--mono); font-size:.88em; background:var(--surface-2); color:var(--ink);
+    padding:1px 5px; border-radius:2px; border:1px solid var(--line); white-space:nowrap;
+  }
+
+  /* ---- questions ---- */
+  ol.q{margin:0; padding:0 0 0 1.3em; display:flex; flex-direction:column; gap:10px; font-size:15.5px; line-height:1.55; color:var(--ink-2)}
+  ol.q li::marker{font-family:var(--mono); font-size:13px; color:var(--accent)}
+  ol.q li b{color:var(--ink); font-weight:600}
+
+  footer{border-top:1px solid var(--line); padding-top:18px; font-family:var(--mono); font-size:11.5px; color:var(--muted); line-height:1.7}
+
+  @media (max-width:560px){
+    body{font-size:16px}
+    h1{font-size:33px}
+    h2.sec{font-size:24px}
+    .phase{grid-template-columns:1fr; gap:12px}
+    .phase .body{grid-column:1}
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <p class="eyebrow">Diagnóstico de prontidão · Tráfego pago</p>
+  <h1>PMC — Projeto Meu Consultório</h1>
+  <p class="standfirst">Leitura do perfil <b>@giulianamarketing</b>, da oferta e da página de vendas, para decidir o que precisa estar de pé antes de ligar verba num lançamento.</p>
+  <div class="meta-row">
+    <span><b>Analisado em</b> 21 ago 2026</span>
+    <span><b>Fontes</b> perfil, últimos posts, bio, 3 links, LP do PMC</span>
+    <span><b>Base</b> 50,1 mil (@giulianamarketing) + 102 mil (@giulianaodonto)</span>
+  </div>
+</header>
+
+<div class="verdict">
+  <h2>Veredito</h2>
+  <p><strong>A promessa existe e é boa — mas não está no Instagram.</strong> Ela está na página de vendas, três cliques abaixo do perfil. Quem chega no perfil hoje não descobre o que é vendido, nem para quem.</p>
+  <p>A matéria-prima do lançamento é forte: dor específica, autoridade real e uma lista quente já formada. O que não sustenta tráfego pago hoje é a camada de comunicação em volta — bio, avatar e página. São ajustes de dias, não de meses.</p>
+  <div class="gauge">
+    <div class="g-ok">
+      <span class="lbl">Autoridade e audiência</span>
+      <span class="val">Pronto</span>
+      <span class="note">152 mil seguidores somados, dentista atuante, palestrante confirmada CRO-MG, podcast próprio, comunidade no WhatsApp.</span>
+    </div>
+    <div class="g-warn">
+      <span class="lbl">Oferta e promessa</span>
+      <span class="val">Ajustar</span>
+      <span class="note">A promessa certa já foi escrita — só está no lugar errado e disputa espaço com outras nove ofertas.</span>
+    </div>
+    <div class="g-crit">
+      <span class="lbl">Avatar e página</span>
+      <span class="val">Bloqueia</span>
+      <span class="note">Quatro públicos concorrentes e uma LP sem rastreamento, sem prova e com dois preços. Não ligar verba antes de resolver.</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2 class="sec">O que ela entrega: declarado × real</h2>
+  <p class="lede">Três camadas da mesma marca prometem três coisas diferentes.</p>
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Camada</th><th>O que está escrito</th><th>O que a pessoa entende</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Nome e @</b></td>
+          <td>@giulianamarketing — "Giuliana Marketing em Odontologia"</td>
+          <td>Ensina dentista a fazer <b>marketing</b></td>
+        </tr>
+        <tr>
+          <td><b>Bio</b></td>
+          <td>"Dentista, CEO de Jaleco · A mente por trás do @giulianaodonto · Direção para os Docs que não sabem por onde começar · Seja Aluno"</td>
+          <td class="flag">Nada — não há promessa nem destino</td>
+        </tr>
+        <tr>
+          <td><b>Produto (PMC)</b></td>
+          <td>"Sair da pop e do convênio não é impossível, Doc" — posicionamento, precificação, consultório próprio</td>
+          <td>Entrega <b>carreira e negócio</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="block">
+    <h3>O descolamento</h3>
+    <p class="lede">Marketing é <b>um dos cinco módulos</b> do PMC. A marca inteira está batizada com o módulo menos central do produto. Quem chega achando que vai aprender a postar encontra um método sobre sair do convênio — e quem procurava sair do convênio não pesquisa por "marketing".</p>
+  </div>
+  <div class="block">
+    <h3>A promessa, quando aparece, funciona</h3>
+    <p class="lede">"Sair da POP e do convênio" é dor concreta, dita no vocabulário exato do avatar. O reforço da LP — <em>reconhecimento, remuneração e estabilidade</em> — completa bem. O problema é puramente de posição: essa frase só aparece depois de perfil → link → escolher entre três destinos → abrir a página. No perfil, promessa zero.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">Para quem ela fala</h2>
+  <p class="lede">O feed e a esteira atendem hoje quatro avatares — e dois deles se anulam.</p>
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Avatar</th><th>Onde aparece</th><th>Quer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Recém-formado sem rumo</b></td><td>Palestra "Formei, e agora?!"</td><td>Direção de carreira</td></tr>
+        <tr><td><b>Preso em POP/convênio</b></td><td>PMC — o produto principal</td><td class="flag">Sair do emprego</td></tr>
+        <tr><td><b>Dono de consultório</b></td><td>Posts de agenda, automação, gestão</td><td>Captar e organizar</td></tr>
+        <tr><td><b>Clínico querendo técnica</b></td><td>Curso de clareamento, alinhadores, brocas</td><td>Procedimento</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="block">
+    <h3>A contradição que trava o criativo</h3>
+    <p class="lede">A esteira oferece <b>"Modelo para Currículo"</b> ao lado de <b>"sair da POP para ter o próprio consultório"</b>. Um avatar quer ser contratado; o outro quer largar o emprego. Não existe criativo que fale com os dois — e o algoritmo do Meta vai otimizar para quem responder mais barato, que é sempre o de menor intenção de compra.</p>
+    <p class="lede">Ao todo são <b>dez ofertas</b> no link da bio: PMC, Cards Educativos 2.0, modelo de currículo, 101 ideias de post, e-book de redes sociais, curso de clareamento de outra escola, podcast em duas plataformas, indicação de software e grupo de WhatsApp. Sem escada de preço, sem ordem, sem hierarquia visível.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">O que o feed diz sobre a base</h2>
+  <p class="lede">Posts públicos mais recentes, com curtidas sobre a base de 50,1 mil seguidores.</p>
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Post</th><th>Tipo</th><th class="num">Curtidas</th><th class="num">% da base</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>6B Invent — sequência de brocas</td><td>Publi de equipamento</td><td class="num">3.245</td><td class="num">6,5%</td></tr>
+        <tr><td>Dental Speed — cupom</td><td>Publi de loja</td><td class="num">946</td><td class="num">1,9%</td></tr>
+        <tr><td>Clínico geral pode fazer alinhadores?</td><td>Autoral, clínico</td><td class="num">192</td><td class="num">0,38%</td></tr>
+        <tr><td>Simples Dental — Alexa</td><td>Publi de software</td><td class="num">141</td><td class="num">0,28%</td></tr>
+        <tr><td>Automatizar tarefas do consultório</td><td class="dim">Negócio + publi</td><td class="num">61</td><td class="num flag">0,12%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="block">
+    <h3>A leitura</h3>
+    <p class="lede">O que engaja é produto clínico. O conteúdo de <b>negócio</b> — exatamente o que o PMC vende — é o que menos performa, com uma diferença de <b>50 vezes</b> entre o topo e a base da tabela. E quase todo CTA do feed é <em>"comenta X que eu te mando o link"</em> apontando para produto de terceiro.</p>
+    <p class="lede">Isso não é defeito do conteúdo: é um modelo de monetização por publi, que funciona bem no que se propõe. O ponto é que ele treinou a audiência a esperar cupom, não a comprar uma mentoria de milhares de reais. Na janela do lançamento, os dois modelos competem pelo mesmo espaço.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">Riscos que quebram o lançamento</h2>
+  <div class="risks">
+    <div class="risk r-crit">
+      <span class="tag">Bloqueia verba</span>
+      <p><b>LP hospedada em my.canva.site.</b> Sem domínio próprio, sem Pixel nem CAPI confiáveis, sem checkout claro. Sem evento de conversão, a campanha otimiza no escuro e não há como medir CAC nem alimentar públicos de remarketing.</p>
+    </div>
+    <div class="risk r-crit">
+      <span class="tag">Bloqueia verba</span>
+      <p><b>Dois preços na mesma página.</b> "VALOR R$ 1.500,00" e, logo abaixo, "TOTAL: 3.100" sem ancoragem que explique a diferença. A dúvida de preço é a objeção mais cara de resolver depois do clique.</p>
+    </div>
+    <div class="risk r-crit">
+      <span class="tag">Bloqueia verba</span>
+      <p><b>Zero prova na página.</b> Nenhum depoimento com número, nenhum antes e depois de aluna, nenhuma contagem de turmas. Para um ticket de milhares de reais vendido para quem hoje ganha por procedimento em convênio, prova não é enfeite — é o argumento.</p>
+    </div>
+    <div class="risk r-warn">
+      <span class="tag">Corrigir antes</span>
+      <p><b>Duas marcas no mesmo feed.</b> O @giulianaodonto (102 mil) é o perfil de paciente. Mas o @giulianamarketing vem postando caso clínico, resina, canal e brocas — conteúdo do outro perfil. Isso confunde o seguidor e polui o sinal que o algoritmo usa para achar o público certo.</p>
+    </div>
+    <div class="risk r-warn">
+      <span class="tag">Corrigir antes</span>
+      <p><b>Bio sem promessa.</b> É a peça de maior tráfego e a mais fraca: "direção para quem não sabe por onde começar" não nomeia destino, dor nem resultado. Todo clique de anúncio que passar pelo perfil perde força ali.</p>
+    </div>
+    <div class="risk r-warn">
+      <span class="tag">Corrigir antes</span>
+      <p><b>Método sem nome próprio.</b> Os cinco módulos são descritos genericamente. Um lançamento precisa de mecanismo nomeado — é o que separa "mais um curso" de "o método que tira você da POP".</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">O que ajustar antes da verba</h2>
+
+  <div class="group">
+    <p class="group-head">Decisão dela — antes de tudo</p>
+    <ul class="check">
+      <li><b>Escolher um avatar:</b> dentista formado há 1 a 5 anos, preso em POP ou convênio, que quer o próprio consultório. Currículo e clareamento saem do escopo do lançamento — não precisam ser apagados, só não é isso que a campanha vende.</li>
+      <li><b>Nomear o mecanismo</b> do PMC e fixar <b>um preço único</b> com ancoragem que se sustente.</li>
+      <li><b>Segurar publi na janela do lançamento.</b> Cada publi de terceiro compete diretamente com a venda dela e reforça o comportamento de cupom na base.</li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <p class="group-head">Comunicação — 3 a 5 dias</p>
+    <ul class="check">
+      <li><b>Subir a promessa para o perfil:</b> nome, bio e destaque fixo. "Sair da POP e do convênio" precisa ser a primeira linha que a pessoa lê.</li>
+      <li><b>Separar clínico de B2B:</b> caso de paciente volta para o @giulianaodonto. O @giulianamarketing passa a falar só com dentista sobre carreira, consultório e dinheiro.</li>
+      <li><b>Gravar prova:</b> dois ou três depoimentos em vídeo de alunas que saíram da POP, com faturamento antes e depois. Isso vira criativo e vira página.</li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <p class="group-head">Estrutura</p>
+    <ul class="check">
+      <li><b>LP em domínio próprio</b> com Pixel + CAPI, eventos <code>Lead</code> e <code>Purchase</code> padrão, e checkout único.</li>
+      <li><b>UTMs com macros</b> em todos os anúncios, para o relatório separar campanha, conjunto e criativo sem trabalho manual.</li>
+      <li><b>Públicos personalizados</b> montados antes de abrir: engajamento dos dois perfis, visualização de vídeo, visitantes da LP e lista de alunos para o LAL.</li>
+      <li><b>Ativar o Grupo Black do WhatsApp</b> como destino da captação — é o ativo mais barato e mais quente que ela já tem.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">Cenário de metas</h2>
+  <p class="lede">Números ilustrativos para dimensionar a verba — dependem das respostas da seção seguinte. Considerando o ticket cheio de R$ 3.100.</p>
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Indicador</th><th class="num">Meta</th><th>Como se sustenta</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads no grupo</td><td class="num">1.000</td><td>Base para 2% de conversão de lista</td></tr>
+        <tr><td>CPL</td><td class="num">R$ 10 a 15</td><td>Faixa realista para B2B odonto com público quente disponível</td></tr>
+        <tr><td>Verba de captação</td><td class="num">R$ 10 a 15 mil</td><td>~70% do investimento total vai para captação de lista</td></tr>
+        <tr><td>Conversão lista → venda</td><td class="num">1 a 3%</td><td>Faixa típica de lançamento com lista quente</td></tr>
+        <tr><td>Vendas</td><td class="num">20</td><td>2% de 1.000 leads</td></tr>
+        <tr><td>Faturamento</td><td class="num">R$ 62 mil</td><td>20 × R$ 3.100</td></tr>
+        <tr><td>CAC teto</td><td class="num">R$ 930</td><td>30% do ticket — acima disso, corta escala no frio</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede">Se o preço praticado for R$ 1.500 e não R$ 3.100, o CAC teto cai para <b>R$ 450</b> e a estrutura muda: menos escala no frio, mais peso em remarketing e em conteúdo orgânico de aquecimento.</p>
+</section>
+
+<section>
+  <h2 class="sec">O que preciso saber antes de montar a campanha</h2>
+  <ol class="q">
+    <li><b>Quantas alunas o PMC já teve</b> e qual é o preço praticado de verdade hoje — R$ 1.500 ou R$ 3.100?</li>
+    <li><b>Já houve lançamento antes?</b> Faturamento, verba investida e conversão, se existir registro.</li>
+    <li><b>Quantas pessoas estão no Grupo Black</b> do WhatsApp e com que frequência ela fala com elas?</li>
+    <li><b>Existe depoimento em vídeo</b> de aluna que saiu da POP, com números? Se não existir, precisa entrar na produção da semana 1.</li>
+    <li><b>Há contrato de publi</b> com entregas obrigatórias que a impeça de segurar posts na janela do lançamento?</li>
+    <li><b>Qual a data-alvo</b> da abertura de carrinho? Ela define se o cronograma acima cabe ou se começamos por uma versão enxuta.</li>
+  </ol>
+</section>
+
+<footer>
+  GGD · Diagnóstico de prontidão para lançamento — PMC / Projeto Meu Consultório<br>
+  Baseado em conteúdo público do perfil, da bio, dos links e da página de vendas em 21 ago 2026.
+</footer>
+
+</div>
+
+</body>
+</html>
