@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Briefing Rugido do Leão</title>
+<style>
+  :root {
+    --ground: #EEEFE9;
+    --surface: #F7F8F3;
+    --field: #FFFFFF;
+    --ink: #1C1F1A;
+    --ink-soft: #43483E;
+    --muted: #6B6F63;
+    --line: #D4D7CA;
+    --line-soft: #E1E3D8;
+    --accent: #8F6410;
+    --moss: #2F4636;
+    --star: #7A4A0C;
+    --star-bg: #EFE6D2;
+    --bar: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E;
+      --surface: #1C1A15;
+      --field: #211E18;
+      --ink: #E9E4D7;
+      --ink-soft: #C7C1B1;
+      --muted: #948D7D;
+      --line: #38342A;
+      --line-soft: #2A261D;
+      --accent: #D8A63F;
+      --moss: #8FAE97;
+      --star: #E0B463;
+      --star-bg: #2A2115;
+      --bar: #1A1712;
+    }
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 180px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 36px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, "Palatino Linotype", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 62ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+
+  .howto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .howto div { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .howto b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .howto span { font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+
+  .whobox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .whobox label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .whobox input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 11px;
+  }
+  .whobox input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 66ch; }
+  .read { margin-top: 56px; }
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-top: 0;
+  }
+  .finding { background: var(--surface); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .finding h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+  .finding p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+
+  .blocks { margin-top: 70px; }
+  section.block {
+    display: grid;
+    grid-template-columns: 214px 1fr;
+    gap: 44px;
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  section.block:first-of-type { border-top: 2px solid var(--ink); }
+  .block-head { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .block-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    color: var(--accent);
+  }
+  .block-head h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-why { font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 26ch; margin: 0; }
+  .block-count {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul.qs { list-style: none; margin: 0; padding: 0; }
+  ul.qs > li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 84px;
+    align-items: start;
+    column-gap: 8px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  ul.qs > li:first-child { padding-top: 4px; }
+  ul.qs > li:last-child { border-bottom: 0; }
+  .qn {
+    grid-column: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding-top: 5px;
+  }
+  li[data-filled="1"] .qn { color: var(--moss); font-weight: 700; }
+  .q { grid-column: 2; max-width: 62ch; }
+  .q > p { margin: 0; color: var(--ink); }
+  .q > p.note {
+    margin-top: 7px;
+    padding-left: 13px;
+    border-left: 2px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .tag {
+    grid-column: 3;
+    justify-self: end;
+    margin-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+    background: var(--star-bg);
+    border-radius: 2px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+  li.key .qn { color: var(--star); font-weight: 700; }
+  li.key[data-filled="1"] .qn { color: var(--moss); }
+  li.key .q > p:first-child { font-weight: 600; }
+
+  textarea.ans {
+    display: block;
+    width: 100%;
+    margin-top: 11px;
+    min-height: 46px;
+    resize: vertical;
+    overflow: hidden;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  textarea.ans::placeholder { color: var(--muted); opacity: 0.75; }
+  textarea.ans:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  textarea.ans[data-filled="1"] { border-left: 3px solid var(--moss); }
+
+  .savebar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 20;
+    background: var(--bar);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.10);
+  }
+  .savebar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 13px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .progress { flex: 1 1 200px; min-width: 170px; display: flex; flex-direction: column; gap: 6px; }
+  .progress .pline {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress .track { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .progress .fill { height: 100%; width: 0%; background: var(--moss); transition: width 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) { .progress .fill { transition: none; } }
+
+  #status { font-size: 14.5px; color: var(--muted); }
+  #status[data-tone="ok"] { color: var(--moss); }
+
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.primary { color: #F7F8F3; background: var(--moss); border-color: var(--moss); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #14120E; } }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+
+  @media (max-width: 860px) {
+    body { font-size: 16.5px; }
+    .wrap { padding: 0 20px 210px; }
+    header.top { padding-top: 44px; }
+    h1 { max-width: none; }
+    section.block { grid-template-columns: 1fr; gap: 18px; padding: 26px 0 30px; }
+    .block-head { position: static; }
+    .block-why { max-width: 58ch; }
+    ul.qs > li { grid-template-columns: 32px minmax(0, 1fr); column-gap: 10px; row-gap: 5px; }
+    .qn { grid-column: 1; grid-row: 1; }
+    .tag { grid-column: 2; grid-row: 1; justify-self: start; margin-top: 3px; }
+    .q { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+    .savebar-inner { padding: 11px 20px; gap: 10px; }
+    .btns { width: 100%; }
+    .btns button { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap"><div id="root"></div></div>
+
+<div class="savebar">
+  <div class="savebar-inner">
+    <div class="progress">
+      <div class="pline"><span id="pcount">—</span><span id="pmode"></span></div>
+      <div class="track"><div class="fill" id="pfill"></div></div>
+    </div>
+    <span id="status">&nbsp;</span>
+    <div class="btns">
+      <button type="button" id="download">Baixar respostas</button>
+      <button type="button" id="copy" class="primary">Copiar para enviar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "ggd-briefing-rugido-do-leao-v1";
+
+  var BLOCKS = [
+    {
+      n: "01", title: "Os números do negócio",
+      why: "Sem isso não existe meta de mídia, só chute.",
+      qs: [
+        { id: "q01", key: true, q: "Qual o faturamento médio dos últimos seis meses e como ele se divide entre banho e tosa, clínica e dermatologia, hotelzinho, day care, festas e venda de produtos?" },
+        { id: "q02", q: "Qual o ticket médio de cada um desses serviços e qual deles dá a melhor margem?", note: "O que mais fatura quase nunca é o que mais lucra. É a margem que decide para onde a verba vai." },
+        { id: "q03", q: "Quantos clientes ativos vocês têm hoje e quantos deles voltam todo mês?" },
+        { id: "q04", q: "Existe pacote, mensalidade ou plano de assinatura? Se não existe, já pensaram nisso?" },
+        { id: "q05", key: true, q: "Quanto vocês conseguem investir em mídia por mês e por quantos meses aguentam antes de precisar de retorno?" },
+        { id: "q06", key: true, q: "O que precisa ter acontecido até dezembro para vocês olharem e dizerem que valeu a pena? Em número." }
+      ]
+    },
+    {
+      n: "02", title: "Capacidade e operação",
+      why: "Não adianta gerar procura que a operação não absorve.",
+      qs: [
+        { id: "q07", q: "Quantos banhos e tosas cabem por dia? Quantas consultas? Quantas vagas no hotelzinho e no day care?" },
+        { id: "q08", key: true, q: "Qual a ocupação real hoje, em porcentagem? Qual dia da semana e qual horário ficam vazios?", note: "É para o horário ocioso que a mídia empurra primeiro — enche o que já está pago." },
+        { id: "q09", q: "Se a procura dobrar em trinta dias, o que quebra primeiro: a agenda, o banho, a equipe ou o WhatsApp?" },
+        { id: "q10", q: "Quantas pessoas na equipe e quem faz o quê?" },
+        { id: "q11", q: "Existe leva e traz? Até quais bairros?" },
+        { id: "q12", q: "Atendem qual porte? Gatos? Há restrição de raça, idade ou temperamento?" }
+      ]
+    },
+    {
+      n: "03", title: "A dermatologia",
+      why: "É o serviço que mais diferencia e provavelmente o que mais paga.",
+      qs: [
+        { id: "q13", key: true, q: "Quem é a veterinária dermatologista — nome, CRMV, formação e especialização — e ela é sócia ou parceira?" },
+        { id: "q14", q: "Quantos dias e quais horários ela atende aí? Atende em outro lugar também?" },
+        { id: "q15", q: "Quantas consultas dermatológicas acontecem por mês hoje e quanto isso representa do faturamento?" },
+        { id: "q16", key: true, q: "Qual o caminho completo de um paciente dermatológico: consulta, exames, retornos, banhos terapêuticos, medicação. Quanto isso soma e por quantos meses dura?", note: "É o número mais importante do projeto: define quanto podemos pagar para conquistar um paciente novo." },
+        { id: "q17", q: "Quais são os cinco casos que mais chegam — atopia, otite, alergia alimentar, dermatite por pulga, seborreia?" },
+        { id: "q18", q: "De onde vêm esses pacientes hoje: indicação de outro veterinário, do próprio banho e tosa da casa, ou de fora?" },
+        { id: "q19", q: "Vocês recebem encaminhamento de outras clínicas? Existe alguma relação formal com veterinários generalistas da cidade?", note: "Canal barato e quase sempre subaproveitado: o clínico geral não trata pele, ele encaminha." },
+        { id: "q20", q: "O que a dermatologista de vocês resolve que mais ninguém em Rio Preto resolve?" }
+      ]
+    },
+    {
+      n: "04", title: "O pet solto, sem gaiola",
+      why: "Diferencial forte só vira anúncio quando vira prova.",
+      qs: [
+        { id: "q21", key: true, q: "Contem na prática como os cães ficam soltos: separação por porte e temperamento, quantos por turno, quem supervisiona, o que acontece na hora do banho." },
+        { id: "q22", q: "Existe avaliação ou dia de teste antes de aceitar um cão novo no convívio?" },
+        { id: "q23", key: true, q: "Tem câmera? O tutor consegue acompanhar ao vivo ou recebe vídeo do dia?", note: "Se existe, é argumento de venda, não detalhe de operação — e vale uma campanha inteira em cima disso." },
+        { id: "q24", q: "O que acontece se dois cães se estranharem? Existe protocolo, termo assinado pelo tutor, seguro?" },
+        { id: "q25", key: true, q: "Vocês têm vídeo e foto do espaço com os cães soltos que possamos usar em anúncio? Existe autorização de uso de imagem assinada pelos tutores?" },
+        { id: "q26", q: "Quem já é cliente percebe isso como diferencial ou nem sabe que é diferente? O que eles elogiam sem serem perguntados?" }
+      ]
+    },
+    {
+      n: "05", title: "Quem é o cliente",
+      why: "Persona de verdade sai da agenda de vocês, não da nossa cabeça.",
+      qs: [
+        { id: "q27", q: "Descrevam o melhor cliente de vocês: onde mora, qual a raça do cão, quanto gasta por mês, com que frequência aparece." },
+        { id: "q28", key: true, q: "Quais os cinco bairros de onde vem mais gente? Tem alguém que atravessa a cidade para ir aí?", note: "Define o raio de mídia. Se as pessoas atravessam a cidade pela dermatologia, o raio da clínica é maior que o do banho." },
+        { id: "q29", q: "Quais raças aparecem mais?", note: "Dermatologia tem raça: shih tzu, bulldog francês, golden, pug. Isso muda criativo e segmentação." },
+        { id: "q30", key: true, q: "Qual a objeção número um de quem pede orçamento e não fecha: preço, distância, desconfiança com o cão solto, ou outra coisa?" },
+        { id: "q31", q: "Por que um cliente deixa de ser cliente? O que costuma acontecer antes de ele sumir?" }
+      ]
+    },
+    {
+      n: "06", title: "Como o cliente chega hoje",
+      why: "Precisamos saber o que já funciona antes de somar mídia paga.",
+      qs: [
+        { id: "q32", key: true, q: "Quantos contatos novos vocês recebem por semana e por onde: WhatsApp, Direct, telefone, gente que entra na loja?" },
+        { id: "q33", key: true, q: "Alguém pergunta “como você chegou até a gente?” e anota a resposta em algum lugar?", note: "Sem isso, nenhum relatório de resultado é confiável. Se ninguém anota hoje, começamos a anotar na primeira semana." },
+        { id: "q34", q: "Já anunciaram alguma vez? Onde, quanto gastaram, o que aconteceu?" },
+        { id: "q35", q: "Existe Gerenciador de Negócios do Meta e conta de anúncios no CNPJ de vocês? Quem tem acesso hoje — vocês ou algum prestador antigo?" },
+        { id: "q36", q: "O perfil do Google (Google Meu Negócio) está verificado? Quantas avaliações e qual a nota?", note: "Para negócio local, esse perfil costuma trazer mais gente que o Instagram — e é de graça." },
+        { id: "q37", q: "Para onde leva o link da bio hoje, quem controla esse link, e existe site ou agendamento online por trás dele?", note: "Se for um agregador de links, dá para medir clique. Se for WhatsApp direto, precisamos de um link com marcação para separar o que veio do perfil e o que veio de anúncio." },
+        { id: "q38", q: "O WhatsApp é Business? Quem responde, em quanto tempo, e existe mensagem pronta, catálogo e etiquetas?" },
+        { id: "q39", key: true, q: "Qual sistema vocês usam para agenda e caixa — Simples Vet, Vetus, planilha? Dá para extrair relatório de lá?" }
+      ]
+    },
+    {
+      n: "07", title: "Regras, marca e limites",
+      why: "Publicidade veterinária tem regra própria. Melhor mapear antes de criar.",
+      qs: [
+        { id: "q40", q: "Podemos divulgar preço? Existe tabela pública?" },
+        { id: "q41", key: true, q: "Quem é o responsável técnico e qual CRMV precisa aparecer nas peças?" },
+        { id: "q42", key: true, q: "O que o CRMV já orientou vocês sobre o que pode e o que não pode na comunicação?", note: "Promessa de cura, desconto em serviço médico e antes/depois de paciente têm restrição. Precisamos saber o que já foi orientado antes de escrever qualquer copy." },
+        { id: "q43", q: "Existe manual de marca? Logo em vetor, tipografia, cores oficiais?" },
+        { id: "q44", q: "Quem produz o conteúdo hoje — vocês, agência, freelancer? Isso continua?" },
+        { id: "q45", q: "Tem alguma coisa que nunca pode ser dita ou mostrada?" },
+        { id: "q46", q: "Quais concorrentes de Rio Preto vocês respeitam e com quais não querem ser comparadas?" }
+      ]
+    },
+    {
+      n: "08", title: "Calendário e sazonalidade",
+      why: "Verba boa é verba na hora certa.",
+      qs: [
+        { id: "q47", q: "Quais os meses mais fortes e mais fracos do ano, por serviço?", note: "Férias enchem o hotelzinho, calor enche a dermatologia. Queremos o calendário de vocês, não o do setor." },
+        { id: "q48", q: "Quais datas já são fixas na casa: aniversário da loja, festas pet, campanhas de vacina, feriados?" },
+        { id: "q49", q: "Que promoção já foi feita? Qual funcionou e qual só queimou margem?" },
+        { id: "q50", key: true, q: "Tem alguma novidade planejada para os próximos seis meses: serviço novo, reforma, contratação, segunda unidade?" }
+      ]
+    }
+  ];
+
+  var FINDINGS = [
+    { h: "O link da bio só aparece no celular", p: "Pelo app o link existe e funciona; no navegador do computador ele não é exibido — aparece apenas o Threads. Como quase todo o tráfego é mobile, o impacto é pequeno, mas precisamos saber para onde esse link leva e se dá para medir quem clicou." },
+    { h: "A categoria do perfil está como criador de conteúdo", p: "Consta “Criador(a) de conteúdo digital”, e não pet shop ou clínica veterinária. Isso enfraquece o perfil na busca e nas sugestões locais do Instagram. É ajuste de dois minutos." },
+    { h: "A dermatologia é o ativo mais forte", p: "Os posts educativos assinados pela dermatologista — dermatite atópica, dermatite actínica, nebulização, gripe canina — já constroem autoridade. É o material que melhor se transforma em anúncio." },
+    { h: "Sete destaques, sete serviços", p: "Day Care, Consultório, Banho Terapêutico, Tosa, Hotelzinho, Banhos e Festas Pet. A operação é ampla, o que significa que a mídia vai ter que eleger um carro-chefe em vez de anunciar tudo ao mesmo tempo." },
+    { h: "O “sem gaiola” quase não aparece", p: "No que dá para ver do feed, o maior diferencial da casa não é o gancho principal de nenhum post. Queremos entender se foi escolha ou se nunca foi tratado como argumento de venda." },
+    { h: "Cadência boa, alcance pequeno", p: "301 posts em cerca de um ano é constância real. Mas 3.549 seguidores para uma cidade de 480 mil habitantes mostram um perfil que cresce por quem já conhece a casa, não por quem ainda não conhece." }
+  ];
+
+  var TOTAL = 0;
+  for (var i = 0; i < BLOCKS.length; i++) TOTAL += BLOCKS[i].qs.length;
+
+  var STATE = { answers: {}, who: "", updated: "" };
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        STATE.answers = parsed.answers || {};
+        STATE.who = parsed.who || "";
+        STATE.updated = parsed.updated || "";
+      }
+    }
+  } catch (e) {}
+
+  var root = document.getElementById("root");
+  var statusEl = document.getElementById("status");
+  var pcount = document.getElementById("pcount");
+  var pfill = document.getElementById("pfill");
+  var pmode = document.getElementById("pmode");
+  var saveTimer = null;
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function answered(id) {
+    var v = STATE.answers[id];
+    return !!(v && String(v).trim().length);
+  }
+
+  function blockDone(b) {
+    var n = 0;
+    for (var i = 0; i < b.qs.length; i++) if (answered(b.qs[i].id)) n++;
+    return n;
+  }
+
+  function fmt(iso) {
+    try {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      var pad = function (x) { return x < 10 ? "0" + x : "" + x; };
+      return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " às " + pad(d.getHours()) + "h" + pad(d.getMinutes());
+    } catch (e) { return ""; }
+  }
+
+  function render() {
+    var h = [];
+
+    h.push('<header class="top">');
+    h.push('<div class="eyebrow">Rugido do Leão × GGD · início de projeto</div>');
+    h.push('<h1>O que precisamos saber do <em>Rugido do Leão</em></h1>');
+    h.push('<p class="standfirst">Este é o formulário de partida do projeto de marketing. São cinquenta perguntas em oito blocos, respondidas aqui mesmo nesta página. Não precisa responder tudo de uma vez nem na ordem — as marcadas como essenciais são as que travam o planejamento se ficarem em branco.</p>');
+    h.push('<div class="howto">');
+    h.push('<div><b>Como responder</b><span>Escreva direto no campo abaixo de cada pergunta. Resposta curta serve; “não sei” também é resposta útil.</span></div>');
+    h.push('<div><b>Salva sozinho</b><span>O texto fica guardado neste navegador conforme você escreve. Pode fechar e voltar depois, no mesmo aparelho.</span></div>');
+    h.push('<div><b>Quando terminar</b><span>Clique em <strong>Copiar para enviar</strong> na barra de baixo e cole no WhatsApp da GGD — ou use <strong>Baixar respostas</strong> e mande o arquivo.</span></div>');
+    h.push('</div>');
+    h.push('<div class="whobox"><label for="who">Quem está respondendo</label>');
+    h.push('<input id="who" type="text" placeholder="Nome de quem preencheu" value="' + esc(STATE.who || "") + '"></div>');
+    h.push('</header>');
+
+    h.push('<div class="read"><div class="section-title"><div class="eyebrow">Antes de começar</div>');
+    h.push('<h2>O que já observamos no perfil de vocês</h2>');
+    h.push('<p>Leitura rápida do Instagram, feita antes desta conversa. Nada aqui é conclusão fechada — são pontos para confirmar com vocês.</p></div>');
+    h.push('<div class="findings">');
+    for (var f = 0; f < FINDINGS.length; f++) {
+      h.push('<div class="finding"><h3>' + esc(FINDINGS[f].h) + '</h3><p>' + esc(FINDINGS[f].p) + '</p></div>');
+    }
+    h.push('</div></div>');
+
+    h.push('<div class="blocks">');
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      h.push('<section class="block"><div class="block-head">');
+      h.push('<div class="block-num">BLOCO ' + esc(bl.n) + '</div>');
+      h.push('<h2>' + esc(bl.title) + '</h2>');
+      h.push('<p class="block-why">' + esc(bl.why) + '</p>');
+      h.push('<div class="block-count" data-bcount="' + b + '">' + blockDone(bl) + ' de ' + bl.qs.length + ' respondidas</div>');
+      h.push('</div><ul class="qs">');
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var num = it.id.replace("q", "");
+        var full = answered(it.id) ? "1" : "0";
+        h.push('<li class="' + (it.key ? "key" : "") + '" data-filled="' + full + '">');
+        h.push('<span class="qn">' + esc(num) + '</span>');
+        h.push('<div class="q"><p>' + esc(it.q) + '</p>');
+        if (it.note) h.push('<p class="note">' + esc(it.note) + '</p>');
+        h.push('<textarea class="ans" id="' + it.id + '" data-id="' + it.id + '" data-filled="' + full + '" rows="1" placeholder="Resposta de vocês…">' + esc(STATE.answers[it.id] || "") + '</textarea>');
+        h.push('</div>');
+        if (it.key) h.push('<span class="tag">essencial</span>');
+        h.push('</li>');
+      }
+      h.push('</ul></section>');
+    }
+    h.push('</div>');
+
+    h.push('<footer>As observações do início vêm de leitura do perfil público em 28 de agosto de 2026 e podem estar incompletas — o que se vê de fora quase sempre tem explicação de dentro. Qualquer coisa que não couber nos campos, mande junto por WhatsApp.</footer>');
+
+    root.innerHTML = h.join("");
+    autosizeAll();
+    updateProgress();
+    if (STATE.updated) setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+  }
+
+  function autosize(t) {
+    t.style.height = "auto";
+    t.style.height = (t.scrollHeight + 2) + "px";
+  }
+  function autosizeAll() {
+    var list = root.querySelectorAll("textarea.ans");
+    for (var i = 0; i < list.length; i++) autosize(list[i]);
+  }
+
+  function countAnswered() {
+    var n = 0;
+    for (var b = 0; b < BLOCKS.length; b++) {
+      for (var q = 0; q < BLOCKS[b].qs.length; q++) if (answered(BLOCKS[b].qs[q].id)) n++;
+    }
+    return n;
+  }
+
+  function updateProgress() {
+    var n = countAnswered();
+    pcount.textContent = n + " de " + TOTAL + " respondidas";
+    pfill.style.width = Math.round((n / TOTAL) * 100) + "%";
+    var counters = root.querySelectorAll("[data-bcount]");
+    for (var i = 0; i < counters.length; i++) {
+      var idx = parseInt(counters[i].getAttribute("data-bcount"), 10);
+      counters[i].textContent = blockDone(BLOCKS[idx]) + " de " + BLOCKS[idx].qs.length + " respondidas";
+    }
+    pmode.textContent = n ? Math.round((n / TOTAL) * 100) + "%" : "";
+  }
+
+  function setStatus(msg, tone) {
+    statusEl.textContent = msg;
+    if (tone) statusEl.setAttribute("data-tone", tone);
+    else statusEl.removeAttribute("data-tone");
+  }
+
+  function persist() {
+    STATE.updated = new Date().toISOString();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(STATE));
+      setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+    } catch (e) {
+      setStatus("Não deu para salvar neste navegador. Copie as respostas antes de fechar.", null);
+    }
+  }
+
+  function schedulePersist() {
+    setStatus("Salvando…");
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 700);
+  }
+
+  function buildText() {
+    var out = [];
+    out.push("BRIEFING — PET STORE RUGIDO DO LEÃO");
+    out.push("Respondido por: " + (STATE.who || "não informado"));
+    out.push("Data: " + fmt(new Date().toISOString()));
+    out.push("Respondidas: " + countAnswered() + " de " + TOTAL);
+    out.push("");
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      out.push("=== BLOCO " + bl.n + " — " + bl.title.toUpperCase() + " ===");
+      out.push("");
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var v = STATE.answers[it.id];
+        out.push(it.id.replace("q", "") + ". " + it.q);
+        out.push("R: " + (v && String(v).trim() ? String(v).trim() : "(em branco)"));
+        out.push("");
+      }
+    }
+    return out.join("\n");
+  }
+
+  root.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains("ans")) {
+      autosize(t);
+      var filled = t.value.trim().length ? "1" : "0";
+      t.setAttribute("data-filled", filled);
+      var li = t.closest("li");
+      if (li) li.setAttribute("data-filled", filled);
+      STATE.answers[t.getAttribute("data-id")] = t.value;
+      updateProgress();
+      schedulePersist();
+    } else if (t && t.id === "who") {
+      STATE.who = t.value;
+      schedulePersist();
+    }
+  });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var txt = buildText();
+    var done = function () { setStatus("Respostas copiadas. Agora é só colar no WhatsApp.", "ok"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done)["catch"](function () { fallbackCopy(txt, done); });
+    } else {
+      fallbackCopy(txt, done);
+    }
+  });
+
+  function fallbackCopy(txt, done) {
+    var ta = document.createElement("textarea");
+    ta.value = txt;
+    ta.setAttribute("readonly", "readonly");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); done(); }
+    catch (e) { setStatus("Não deu para copiar. Use o botão Baixar respostas.", null); }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    var blob = new Blob([buildText()], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "briefing-rugido-do-leao.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    setStatus("Arquivo baixado. Mande para a GGD por WhatsApp ou e-mail.", "ok");
+  });
+
+  window.addEventListener("beforeunload", function () {
+    if (saveTimer) { clearTimeout(saveTimer); persist(); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
