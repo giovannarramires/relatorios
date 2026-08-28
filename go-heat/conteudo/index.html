@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Auditoria do Instagram da Go Heat contra os concorrentes de Rio Preto, com a grade de conteúdo e as pautas propostas.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥊</text></svg>">
+<title>O que falta no perfil da Go Heat</title>
+<style>
+  :root{
+    --ground:#FBF8F4;
+    --surface:#FFFFFF;
+    --surface-2:#F3ECE4;
+    --ink:#1B1412;
+    --ink-2:#5C4F49;
+    --ink-3:#8A7B73;
+    --line:#E4D9CE;
+    --accent:#6E1512;
+    --accent-soft:#A8332C;
+    --gold:#B8860F;
+    --gold-soft:#E0A51C;
+    --ok:#2F6B4F;
+    --warn:#9A5B08;
+    --bad:#96231C;
+    --shadow:0 1px 2px rgba(27,20,18,.05),0 8px 24px -12px rgba(27,20,18,.18);
+    --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#141010;
+      --surface:#1D1817;
+      --surface-2:#262020;
+      --ink:#F4EDE7;
+      --ink-2:#C4B6AE;
+      --ink-3:#96867E;
+      --line:#332A28;
+      --accent:#E8756B;
+      --accent-soft:#C4534A;
+      --gold:#E0A51C;
+      --gold-soft:#F0C14E;
+      --ok:#6FBF95;
+      --warn:#E0A051;
+      --bad:#F08078;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141010;
+    --surface:#1D1817;
+    --surface-2:#262020;
+    --ink:#F4EDE7;
+    --ink-2:#C4B6AE;
+    --ink-3:#96867E;
+    --line:#332A28;
+    --accent:#E8756B;
+    --accent-soft:#C4534A;
+    --gold:#E0A51C;
+    --gold-soft:#F0C14E;
+    --ok:#6FBF95;
+    --warn:#E0A051;
+    --bad:#F08078;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px 96px}
+
+  header.top{
+    border-bottom:3px solid var(--accent);
+    padding:56px 0 28px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  h1{
+    font-family:var(--display);
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.025em;
+    font-weight:800;
+    text-transform:uppercase;
+    margin:0;
+    text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .standfirst{font-size:19px;color:var(--ink-2);max-width:62ch;margin:0}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+
+  .placar{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);
+    margin:36px 0 8px;box-shadow:var(--shadow);
+  }
+  .placar div{background:var(--surface);padding:18px 18px 16px}
+  .placar .n{
+    font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.02em;
+    display:block;line-height:1.1;font-variant-numeric:tabular-nums;
+  }
+  .placar .n.alto{color:var(--ok)}
+  .placar .n.baixo{color:var(--bad)}
+  .placar .l{font-size:13px;color:var(--ink-2);display:block;margin-top:6px;line-height:1.4}
+
+  section{margin-top:64px}
+  h2{
+    font-family:var(--display);
+    font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:var(--accent);
+    margin:0 0 6px;
+    padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+  h3{
+    font-family:var(--display);
+    font-size:24px;letter-spacing:-.015em;font-weight:800;
+    margin:34px 0 8px;text-wrap:balance;
+  }
+  h4{font-size:17px;font-weight:700;margin:24px 0 4px}
+  p{margin:12px 0;max-width:68ch}
+  a{color:var(--accent);text-underline-offset:3px}
+  strong{font-weight:700}
+  .lead{font-size:18px;color:var(--ink-2);margin-top:18px}
+
+  .tabelaBox{overflow-x:auto;margin:22px 0;border:1px solid var(--line);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;background:var(--surface);font-size:15px;min-width:560px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;background:var(--surface-2);
+  }
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:14px}
+  tbody tr:last-child td{border-bottom:none}
+  .up{color:var(--ok);font-weight:700}
+  .down{color:var(--bad);font-weight:700}
+
+  /* etiqueta de trilha */
+  .tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:2px 7px;border:1px solid currentColor;white-space:nowrap;vertical-align:2px;
+  }
+  .tag.luta{color:var(--accent)}
+  .tag.musc{color:var(--gold)}
+  .tag.todas{color:var(--ink-3)}
+
+  .buraco{
+    border-left:3px solid var(--accent);
+    background:var(--surface);
+    padding:16px 20px;margin:14px 0;box-shadow:var(--shadow);
+  }
+  .buraco h4{margin:0 0 4px;font-family:var(--display);font-size:19px;letter-spacing:-.01em;text-transform:uppercase}
+  .buraco p{margin:6px 0 0;font-size:15.5px;color:var(--ink-2)}
+  .buraco .fix{margin-top:10px;font-size:14.5px;color:var(--ink);padding-top:10px;border-top:1px dashed var(--line)}
+  .fix b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px}
+
+  .grade{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0;box-shadow:var(--shadow)}
+  .pilar{background:var(--surface);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .peso{
+    font-family:var(--display);font-weight:800;font-size:26px;color:var(--accent);
+    font-variant-numeric:tabular-nums;min-width:56px;line-height:1.2;
+  }
+  .peso small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-3);font-weight:400;text-transform:uppercase}
+  .pilar h4{margin:0 0 2px;text-transform:uppercase;font-family:var(--display);letter-spacing:.01em;font-size:17px}
+  .pilar p{margin:0;font-size:15px;color:var(--ink-2)}
+
+  ol.pautas{counter-reset:p;list-style:none;padding:0;margin:20px 0;display:grid;gap:10px}
+  ol.pautas li{
+    counter-increment:p;
+    background:var(--surface);border:1px solid var(--line);
+    padding:14px 18px 14px 52px;position:relative;font-size:15.5px;
+  }
+  ol.pautas li::before{
+    content:counter(p,decimal-leading-zero);
+    position:absolute;left:16px;top:14px;
+    font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.05em;
+  }
+  ol.pautas li b{display:block;font-size:16px;margin-bottom:2px}
+  ol.pautas li span{color:var(--ink-2)}
+
+  ul.check{list-style:none;padding:0;margin:16px 0;display:grid;gap:8px}
+  ul.check li{padding-left:26px;position:relative;font-size:16px}
+  ul.check li::before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700}
+
+  .nota{background:var(--surface-2);border:1px solid var(--line);padding:16px 20px;margin:24px 0;font-size:15px;color:var(--ink-2)}
+  .nota b{color:var(--ink)}
+
+  footer{
+    margin-top:72px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:12px;color:var(--ink-3);line-height:1.7;
+  }
+  @media (max-width:620px){
+    body{font-size:16px}
+    .pilar{grid-template-columns:1fr;gap:6px}
+    .peso{font-size:20px}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Go Heat · Instagram orgânico · 28 ago 2026</div>
+  <h1>O feed anuncia a academia.<br><em>Quem compra quer ver o treino acontecendo.</em></h1>
+  <p class="standfirst">Auditei o @goheat.academia e os perfis com quem ele divide a praça em Rio Preto. O conteúdo não está ruim — está tudo no mesmo registro: peça de anúncio. E o próprio perfil já mostra, em views, o que o público quer assistir: sala de musculação e tatame, gente treinando de verdade.</p>
+  <div class="meta">15,6 mil seguidores · 317 posts · 48 publicações nos últimos ~115 dias (≈3/semana)</div>
+</header>
+
+<div class="placar">
+  <div><span class="n baixo">1.600</span><span class="l">Views na mediana dos 20 reels mais recentes — 10% dos seguidores</span></div>
+  <div><span class="n alto">36.100</span><span class="l">Views no reel sobre Jiu-Jitsu, com o professor de kimono</span></div>
+  <div><span class="n alto">8.379</span><span class="l">Views no melhor vídeo de musculação — treino de uma aluna</span></div>
+  <div><span class="n baixo">1.300</span><span class="l">Views médias nos vídeos que anunciam os 5 dias grátis</span></div>
+</div>
+
+<section>
+  <h2>O diagnóstico</h2>
+  <p class="lead">O perfil está fazendo o trabalho do anúncio, e não o trabalho do perfil. Dos últimos 48 posts, a esmagadora maioria é peça publicitária: arte com headline grande ou a mesma pessoa falando para a câmera sobre a oferta dos 5 dias. Funciona como criativo pago — inclusive é de lá que saiu o FACHADA_C. Não funciona como conteúdo.</p>
+
+  <p>A prova está dentro da própria conta. Separei os 20 reels mais recentes por tipo de conteúdo — e o corte <strong>não</strong> é luta contra musculação. É <strong>treino real contra peça de anúncio</strong>. As duas trilhas ganham da oferta com folga:</p>
+
+  <div class="tabelaBox">
+  <table>
+    <thead>
+      <tr><th>Conteúdo</th><th>Trilha</th><th class="num">Views</th><th class="num">× a oferta</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>“Você é apaixonado pelo Jiu-Jitsu?”</td><td><span class="tag luta">Luta</span></td><td class="num up">36.100</td><td class="num up">28×</td></tr>
+      <tr><td>Aluna no Muay Thai, professor corrigindo o jab</td><td><span class="tag luta">Luta</span></td><td class="num up">21.800</td><td class="num up">17×</td></tr>
+      <tr><td>“Um dos meus treinos favoritos”, com aluna</td><td><span class="tag musc">Musculação</span></td><td class="num up">8.379</td><td class="num up">6×</td></tr>
+      <tr><td>Treino para glúteos, parte 1</td><td><span class="tag musc">Musculação</span></td><td class="num up">6.181</td><td class="num up">5×</td></tr>
+      <tr><td>Treino no tatame, sem locução</td><td><span class="tag luta">Luta</span></td><td class="num up">4.546</td><td class="num up">3×</td></tr>
+      <tr><td>Treino para glúteos, parte 2</td><td><span class="tag musc">Musculação</span></td><td class="num up">2.211</td><td class="num">2×</td></tr>
+      <tr><td>“A academia Go Heat surtou” (oferta)</td><td><span class="tag todas">Oferta</span></td><td class="num down">1.253</td><td class="num">—</td></tr>
+      <tr><td>“Ei, você de São José do Rio Preto” (oferta)</td><td><span class="tag todas">Oferta</span></td><td class="num down">1.090</td><td class="num">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Mesma conta, mesmo mês, mesma audiência. <strong>Luta puxa alcance</strong> — é o tema com mais apelo para quem ainda não conhece a academia. <strong>Musculação puxa volume</strong> — é o serviço que a maior parte das pessoas vai comprar, e mesmo com pouquíssimos vídeos já entrega 5 a 6 vezes o que a oferta entrega. As duas precisam de espaço fixo na grade: uma abre a porta, a outra vende o que está dentro.</p>
+
+  <h3>O que os vizinhos fazem</h3>
+
+  <p><strong>Sport Combat</strong> (@sportcombatrp, 31 mil seguidores, 2.014 posts) tem <strong>mediana de 14,9 mil views</strong> por reel — quase 10× a da Go Heat. O topo passa de 900 mil, sempre com o mesmo padrão: técnica e defesa pessoal com utilidade real. Boa parte é curadoria — vídeo de um criador de luta, comentado pela conta. E os posts institucionais deles (aviso de feriado, tabela de horário) fazem de 548 a 1.900. <em>Mesmo padrão da Go Heat: oferta não roda, utilidade roda.</em></p>
+
+  <p>O feed deles também é fisicamente diferente: turma inteira posando depois do treino, aula desfocada em movimento, graduação de faixa, professor marcando aluno. Nada disso é produzido — e é o que sustenta a comunidade que a Go Heat ainda não construiu.</p>
+
+  <p><strong>Bio Ritmo</strong>, no outro flanco, organiza o perfil por <em>Squad, Embaixadores, Inaugurações, Grand Opening</em>. Pilares de pertencimento e evento, para um público de musculação. Nenhum dos dois gasta o feed anunciando promoção o tempo todo.</p>
+
+  <div class="nota">
+    <b>Vantagem que ninguém dos dois tem:</b> a Go Heat é a única da praça que entrega musculação premium, lutas e kids na mesma casa. Hoje o feed não conta essa história — mostra as coisas separadas, e principalmente mostra a promoção. O aluno que entra pela musculação e experimenta o Muay Thai é o que mais dificilmente cancela.
+  </div>
+</section>
+
+<section>
+  <h2>Os cinco buracos</h2>
+
+  <div class="buraco">
+    <h4>1. Não existe aluno no perfil</h4>
+    <p>Em 48 publicações praticamente não aparece um aluno real com nome, história ou resultado — nem da sala de musculação, nem do tatame. Quem aparece é sempre a mesma pessoa da casa, vendendo. Academia é decisão social: a pessoa quer saber quem treina ali e se vai se sentir em casa.</p>
+    <p class="fix"><b>Como resolver</b>A matéria-prima já existe e está parada: na aba “marcados” tem atleta da casa competindo (Xtreme Competições, Arnold Sports), aluno postando jiu-jitsu, parceiro e a Amanda Arantes. Repostar isso é conteúdo de graça — e é prova social vinda de terceiro, a que mais converte.</p>
+  </div>
+
+  <div class="buraco">
+    <h4>2. Não existe conteúdo de utilidade</h4>
+    <p>Quase nada ensina alguma coisa. Não tem o erro comum no agachamento, não tem como montar a semana de treino, não tem um golpe explicado, não tem defesa pessoal para mulher, não tem “como começar do zero aos 40”. É o pilar que gera salvamento e compartilhamento — e o que leva o perfil para fora da própria base de seguidores.</p>
+    <p class="fix"><b>Como resolver</b>Um vídeo por semana de 30–40s com um professor, alternando musculação e luta: um exercício, um erro, uma correção. Custo zero, gravado na hora da aula.</p>
+  </div>
+
+  <div class="buraco">
+    <h4>3. Os professores são invisíveis</h4>
+    <p>A Go Heat vende musculação, Muay Thai, Jiu-Jitsu e kids — quatro serviços que dependem inteiramente de quem ensina. Nenhum professor tem nome, formação ou rosto associado a uma modalidade. Nem o time de musculação, que é o que mais aluno encosta. O Sport Combat tem um destaque inteiro chamado “Professores”.</p>
+    <p class="fix"><b>Como resolver</b>Uma apresentação por professor (30s: quem é, formação, o que ensina, para quem é a aula dele) e um destaque fixo “Professores”, com a equipe de musculação junto da de luta.</p>
+  </div>
+
+  <div class="buraco">
+    <h4>4. Falta a informação que faz a pessoa mandar mensagem</h4>
+    <p>Não há grade de horários, não há preço nem faixa de preço, não há explicação de como funcionam os 5 dias, nem o que a criança faz no kids. O perfil é a página de destino do anúncio de Direct: quem clica olha o perfil <em>antes</em> de decidir puxar conversa. Sem essas respostas, parte do tráfego pago morre em silêncio.</p>
+    <p class="fix"><b>Como resolver</b>Destaques fixos: <strong>HORÁRIOS</strong> (grade das modalidades), <strong>PLANOS</strong>, <strong>5 DIAS</strong> (passo a passo), <strong>ESTRUTURA</strong>, <strong>DEPOIMENTOS</strong>. Hoje são só quatro: Localização, Musculação, Lutas e Kids.</p>
+  </div>
+
+  <div class="buraco">
+    <h4>5. Ritmo baixo e volume concentrado em oferta</h4>
+    <p>Cerca de 3 posts por semana, contra a rotina diária do concorrente de luta. E, com pouco volume, quase toda a frequência é gasta em promoção — o que faz o perfil parecer um outdoor.</p>
+    <p class="fix"><b>Como resolver</b>5 posts/semana e stories todo dia. Corte de aula é o formato mais barato que existe: o professor grava 20 segundos da aula que já está acontecendo — vale igual na sala de musculação e no tatame.</p>
+  </div>
+
+  <div class="nota">
+    <b>Sobre a bio:</b> o endereço está correto (Av. Pres. Juscelino K. de Oliveira, 3761), e o botão “Contato” do perfil comercial já leva direto ao WhatsApp — não precisa de link. O que dá para melhorar é o texto: “mais que um treino, uma experiência” não diz o que a academia vende. Quem cai ali vindo do anúncio precisa ler, em uma linha, <strong>musculação, Muay Thai, Jiu-Jitsu, kids e os 5 dias para experimentar</strong>.
+  </div>
+</section>
+
+<section>
+  <h2>A grade que eu proponho</h2>
+  <p class="lead">Cinco pilares por semana, com musculação e luta dividindo o espaço em partes iguais. A oferta continua existindo — mas com teto, e sempre depois de conteúdo que dá algo em troca.</p>
+
+  <div class="grade">
+    <div class="pilar">
+      <div class="peso">2×<small>semana</small></div>
+      <div>
+        <h4>Treino real</h4>
+        <p><strong>Uma de musculação, uma de luta.</strong> Corte do treino acontecendo: série pesada no aparelho, aluno batendo no aparador, rolagem no tatame. Sem arte, sem headline. É o que já faz de 4 a 20 mil views.</p>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="peso">1×<small>semana</small></div>
+      <div>
+        <h4>Técnica e utilidade</h4>
+        <p><strong>Alterna a trilha toda semana.</strong> Um professor ensina uma coisa só: execução de um exercício, um erro comum de postura, um golpe, defesa pessoal feminina. Ganha salvamento e alcance fora da base.</p>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="peso">1×<small>semana</small></div>
+      <div>
+        <h4>Gente da casa</h4>
+        <p>Professor, aluno da semana, atleta que competiu, aluno de musculação que mudou o corpo ou a rotina, criança do kids evoluindo. É o pilar que a Go Heat tem de sobra na vida real e zero no feed.</p>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="peso">1×<small>semana</small></div>
+      <div>
+        <h4>Casa e cidade</h4>
+        <p>Estrutura, equipamento novo, o painel de LED, bastidor, Rio Preto, parceria local. Sustenta o posicionamento premium sem precisar dizer “premium” — e é onde a musculação aparece pelo que a academia investiu nela.</p>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="peso">≤20%<small>do total</small></div>
+      <div>
+        <h4>Oferta</h4>
+        <p>Os 5 dias, plano, condição. Uma por semana no feed, o resto nos stories — onde promoção não custa alcance do perfil inteiro.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nota">
+    <b>Stories, todo dia, 3 a 5 caixas.</b> Treino do dia, uma marcação repostada, uma dúvida respondida (caixinha de perguntas), o rosto de um professor e o CTA. Story não disputa alcance com o feed e é onde a objeção de preço e horário morre antes de virar mensagem não respondida.
+  </div>
+</section>
+
+<section>
+  <h2>Doze pautas prontas pra gravar essa semana</h2>
+  <p class="lead">Seis de cada lado, mais as que valem para a academia inteira.</p>
+  <ol class="pautas">
+    <li><b>“3 erros que todo mundo comete no primeiro mês de musculação” <span class="tag musc">Musculação</span></b><span>Professor, 40 segundos, aparelho por aparelho. O tema de maior busca de quem está começando.</span></li>
+    <li><b>“Seu primeiro dia no Muay Thai vai ser assim” <span class="tag luta">Luta</span></b><span>Filma a aula de iniciante de verdade, do vestiário à bandagem. Ataca o medo de passar vergonha, que é o que trava o iniciante.</span></li>
+    <li><b>“Como montar sua semana de treino” <span class="tag musc">Musculação</span></b><span>Divisão de treino para quem vai 3, 4 ou 5 vezes por semana. Conteúdo que a pessoa salva e volta pra ver.</span></li>
+    <li><b>“Mulher, esse é o golpe que você precisa saber” <span class="tag luta">Luta</span></b><span>Defesa pessoal prática. O reel “Ei, mulher” já mostrou que o tema anda no perfil.</span></li>
+    <li><b>Execução comentada de um exercício <span class="tag musc">Musculação</span></b><span>Agachamento, remada, desenvolvimento. Um por semana, com o professor corrigindo um aluno de verdade — não uma demonstração perfeita.</span></li>
+    <li><b>Graduação, campeonato, conquista <span class="tag luta">Luta</span></b><span>Troca de faixa, atleta que competiu, foto da turma. É o post que gera marcação em massa — o Sport Combat vive disso.</span></li>
+    <li><b>Aluno da semana <span class="tag todas">Todas</span></b><span>Nome, quanto tempo treina, o que mudou. Alterna sala e tatame. Uma pessoa por semana, sem produção.</span></li>
+    <li><b>Apresentação de professor <span class="tag todas">Todas</span></b><span>Um por semana até fechar a equipe inteira, musculação incluída. Vira o destaque “Professores”.</span></li>
+    <li><b>“O que seu filho aprende aqui que não é luta” <span class="tag todas">Kids</span></b><span>Disciplina, rotina, respeito. Fala com a mãe, que é quem decide e quem paga.</span></li>
+    <li><b>“Quanto custa treinar na Go Heat” <span class="tag todas">Todas</span></b><span>Transparência de faixa de preço. Reduz o choque que hoje mata o fechamento na aula experimental.</span></li>
+    <li><b>“Como funcionam os 5 dias” <span class="tag todas">Todas</span></b><span>Passo a passo real: chega, fala com quem, faz o quê, precisa levar o quê, pode usar tudo?</span></li>
+    <li><b>Tour da estrutura em 30 segundos <span class="tag todas">Todas</span></b><span>Sem locução vendendo: só a câmera andando pela academia cheia no horário de pico, da sala de musculação ao tatame. É o argumento “tudo em um” sem precisar falar.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Por que isso é problema de mídia, não só de social</h2>
+  <p>Em julho o funil fechou assim: 240 mensagens → 121 agendamentos → 86 presenças → <strong>14 matrículas</strong>. A mídia e a pré-venda estão ótimas (50% de mensagem para agendamento, 71% de presença). O gargalo é o fechamento: <strong>16,3%</strong> contra um piso de mercado de 40%.</p>
+  <p>Conteúdo orgânico ataca exatamente essa etapa. A pessoa que chega na aula experimental já tendo visto os professores, a turma, alunos parecidos com ela e o preço chega decidida. A que só viu um anúncio de “5 dias grátis” chega para experimentar de graça. <strong>Levar o fechamento de 16% para 40% dobraria as matrículas com a mesma verba</strong> — de 14 para cerca de 34, com o CAC caindo de R$142 para cerca de R$59.</p>
+
+  <h3>O que eu faria primeiro</h3>
+  <ul class="check">
+    <li>Criar os destaques HORÁRIOS, PROFESSORES, PLANOS e 5 DIAS, com musculação e luta lado a lado.</li>
+    <li>Reescrever a bio dizendo o que a academia vende, em uma linha.</li>
+    <li>Combinar com a academia a rotina de gravação: cada professor manda 2 vídeos por semana no grupo, um da sala e um do tatame. Sem isso, nada aqui acontece.</li>
+    <li>Rodar 4 semanas com a grade nova e comparar a mediana de views e a taxa de fechamento contra agosto.</li>
+    <li>Pegar os 2 melhores orgânicos do mês e subir como criativo pago — treino real costuma bater peça publicitária no leilão.</li>
+  </ul>
+</section>
+
+<footer>
+  Levantamento feito em 28/08/2026 a partir dos perfis públicos @goheat.academia, @sportcombatrp e @bioritmo.<br>
+  Views coletadas dos 20 reels mais recentes de cada perfil; dados de funil vindos do relatório Go Heat de julho/2026.<br>
+  GGD · Gio Growth Digital
+</footer>
+
+</div>
+</body>
+</html>
