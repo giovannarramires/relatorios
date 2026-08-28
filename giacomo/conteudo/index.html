@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papada em Cinco Blocos · GGD</title>
+<meta name="description" content="Plano de conteúdo de lipo de papada para o Dr. Giacomo, em cinco blocos.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+<style>
+  :root {
+    --ground: #F4F5F4;
+    --surface: #FFFFFF;
+    --surface-2: #EAEDEB;
+    --ink: #151C1E;
+    --ink-soft: #3C494B;
+    --muted: #667577;
+    --rule: #D9DEDB;
+    --accent: #0F6E78;
+    --accent-ink: #0B5259;
+    --accent-wash: #DFEBEB;
+    --yes: #1D6B4F;
+    --yes-wash: #E1EFE7;
+    --no: #99551F;
+    --no-wash: #F2E7DC;
+    --shadow: 0 1px 2px rgba(21,28,30,.06), 0 8px 24px rgba(21,28,30,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1315; --surface: #151C1E; --surface-2: #1B2426;
+      --ink: #E7ECEA; --ink-soft: #C3CDCC; --muted: #8B9B9C; --rule: #263133;
+      --accent: #55BEC6; --accent-ink: #7FD3D9; --accent-wash: #14292C;
+      --yes: #6FC79C; --yes-wash: #14251D;
+      --no: #D89A62; --no-wash: #2A211A;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1315; --surface: #151C1E; --surface-2: #1B2426;
+    --ink: #E7ECEA; --ink-soft: #C3CDCC; --muted: #8B9B9C; --rule: #263133;
+    --accent: #55BEC6; --accent-ink: #7FD3D9; --accent-wash: #14292C;
+    --yes: #6FC79C; --yes-wash: #14251D;
+    --no: #D89A62; --no-wash: #2A211A;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.62; margin: 0;
+    padding: 0 clamp(18px, 5vw, 56px) 110px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+
+  .mono {
+    font-family: "SF Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace;
+    font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .serif { font-family: Superclarendon, Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif; }
+
+  header.masthead {
+    border-bottom: 2px solid var(--ink);
+    padding: clamp(48px, 8vw, 88px) 0 26px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .eyebrow { color: var(--accent-ink); }
+  h1 {
+    font-family: Superclarendon, Charter, "Iowan Old Style", Georgia, serif;
+    font-weight: 700; font-size: clamp(2.3rem, 6.4vw, 4rem);
+    line-height: 1.02; letter-spacing: -.025em; margin: 0; text-wrap: balance;
+  }
+  .standfirst { font-size: clamp(1.05rem, 2.2vw, 1.22rem); color: var(--ink-soft); max-width: 62ch; margin: 0; }
+
+  /* ---- blocos ---- */
+  .bloco { padding: clamp(44px, 6vw, 72px) 0 0; }
+  .bloco + .bloco { border-top: 1px solid var(--rule); }
+  .bloco-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; }
+  .tag {
+    align-self: flex-start;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--surface); background: var(--accent);
+    padding: 5px 11px; border-radius: 2px;
+  }
+  h2 {
+    font-family: Superclarendon, Charter, Georgia, serif; font-weight: 700;
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem); line-height: 1.12;
+    letter-spacing: -.018em; margin: 0; text-wrap: balance;
+  }
+  .mission { color: var(--muted); max-width: 66ch; margin: 0; font-size: .97rem; }
+  h3 {
+    font-family: Superclarendon, Charter, Georgia, serif; font-weight: 700;
+    font-size: 1.1rem; margin: 0 0 2px; letter-spacing: -.005em;
+  }
+  h4 {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: .72rem; letter-spacing: .11em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 10px; font-weight: 500;
+  }
+  p { margin: 0; max-width: 68ch; }
+  .lede { color: var(--ink-soft); }
+  .stack { display: flex; flex-direction: column; gap: 22px; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow);
+  }
+  .handle { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: .9rem; color: var(--accent-ink); }
+  .stat { color: var(--muted); }
+  .card ul, .plain ul { margin: 0; padding-left: 1.05em; display: flex; flex-direction: column; gap: 8px; }
+  .card li, .plain li { color: var(--ink-soft); }
+  .verdict { border-top: 1px solid var(--rule); padding-top: 12px; font-size: .95rem; }
+
+  .hooks {
+    background: var(--surface-2); border-left: 3px solid var(--accent);
+    padding: 20px 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .hooks p { font-family: Superclarendon, Charter, Georgia, serif; font-size: 1.02rem; }
+  .hooks .src { color: var(--muted); }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 540px; font-size: .95rem; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: .7rem;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+    background: var(--surface-2); font-weight: 500;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--accent-ink); font-weight: 600; }
+  td.q { font-weight: 600; }
+
+  .bank { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+  .item {
+    display: grid; grid-template-columns: 44px minmax(0,1fr) 200px;
+    gap: 4px 18px; padding: 16px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
+  }
+  .item .idx { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .item .hook { font-family: Superclarendon, Charter, Georgia, serif; font-weight: 700; font-size: 1.04rem; line-height: 1.32; }
+  .item .note { grid-column: 2; color: var(--muted); font-size: .9rem; }
+  .item .fmt { color: var(--ink-soft); font-size: .87rem; }
+  @media (max-width: 720px) {
+    .item { grid-template-columns: 34px minmax(0,1fr); }
+    .item .fmt, .item .note { grid-column: 2; }
+  }
+  .pillar {
+    display: inline-block; font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent-ink); background: var(--accent-wash);
+    padding: 4px 9px; border-radius: 2px;
+  }
+
+  ul.check { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--ink-soft); }
+  ul.check li::before { content: "□"; color: var(--accent); font-size: 1.1rem; line-height: 1.4; }
+
+  /* pode / não pode */
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .yes, .no {
+    border-radius: 3px; padding: 20px 22px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .yes { background: var(--yes-wash); border-left: 3px solid var(--yes); }
+  .no  { background: var(--no-wash);  border-left: 3px solid var(--no); }
+  .yes .mono { color: var(--yes); }
+  .no .mono { color: var(--no); }
+  .yes ul, .no ul { margin: 0; padding-left: 1.05em; display: flex; flex-direction: column; gap: 9px; color: var(--ink-soft); font-size: .96rem; }
+
+  .callout {
+    background: var(--no-wash); border-left: 3px solid var(--no);
+    padding: 18px 22px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .callout .mono { color: var(--no); }
+  .callout p { color: var(--ink-soft); }
+
+  .panel {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 22px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  footer { padding-top: 44px; margin-top: 40px; border-top: 1px solid var(--rule); color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mono eyebrow">GGD Growth Digital · para Dr. Giacomo</div>
+    <h1>Papada em Cinco Blocos</h1>
+    <p class="standfirst">O plano de conteúdo para os primeiros 30 dias do perfil, dividido em cinco entregas. Cada bloco funciona sozinho: leia, execute, e só então passe para o próximo.</p>
+    <div class="mono" style="color:var(--muted)">28 de agosto de 2026 · versão 1</div>
+  </header>
+
+  <!-- ============ BLOCO 1 ============ -->
+  <section class="bloco">
+    <div class="bloco-head">
+      <span class="tag">Bloco 1</span>
+      <h2>O que já funciona nesse mercado</h2>
+      <p class="mission">Antes de escrever qualquer roteiro, olhamos quem já vive de conteúdo sobre papada. Dois perfis, dois modelos diferentes — e um deles é o seu.</p>
+    </div>
+    <div class="stack">
+      <div class="cards">
+        <article class="card">
+          <div>
+            <span class="handle">@drrafaelevaristo</span><br>
+            <span class="mono stat">473 mil seguidores</span>
+            <h3 style="margin-top:6px">É esse o modelo</h3>
+          </div>
+          <ul>
+            <li><strong>Uma promessa só na bio:</strong> "Resolvo a papada e rejuvenesço o pescoço." Não lista procedimentos. Quem chega entende em 3 segundos o que ele faz.</li>
+            <li><strong>Quem aparece na capa é a paciente</strong>, não ele. O protagonista é o resultado e a reação de quem se vê no espelho.</li>
+            <li><strong>Toda capa tem uma frase</strong> em caixa de texto branca, no primeiro quadro, em cima de um rosto real.</li>
+            <li><strong>Ele mostra emoção de verdade:</strong> paciente chorando ao se ver pela primeira vez.</li>
+            <li><strong>Acompanha uma paciente do começo ao fim</strong> e transforma em série, com destaque próprio no perfil.</li>
+            <li><strong>Destaques organizados pela cabeça de quem chega:</strong> Comece aqui · Dúvidas · Depoimentos · Mulheres · Homens.</li>
+          </ul>
+          <p class="verdict">O perfil inteiro responde a uma pergunta só, repetida de quarenta jeitos diferentes. É isso que faz o algoritmo entender pra quem entregar.</p>
+        </article>
+
+        <article class="card">
+          <div>
+            <span class="handle">@drgustavo.andrade</span><br>
+            <span class="mono stat">15,1 mil seguidores</span>
+            <h3 style="margin-top:6px">Daqui a gente pega a parte visual</h3>
+          </div>
+          <ul>
+            <li><strong>Deu nome à própria técnica</strong> e carimba esse nome em todo resultado. Deixa de ser "uma cirurgia" e vira o método dele.</li>
+            <li><strong>Foto de resultado sempre igual:</strong> perfil, fundo preto, mesma luz, mesma distância. A grade inteira fica coerente e profissional.</li>
+            <li><strong>Números na bio</strong> como credencial: quantidade de cirurgias feitas e registro no conselho.</li>
+            <li><strong>Usa a recuperação como conteúdo:</strong> "4 dias", "antes / 90 dias". A linha do tempo é o que convence.</li>
+            <li>Ele também é cirurgião-dentista — a prova de que o caminho da autoridade em cirurgia facial pela odontologia funciona.</li>
+          </ul>
+          <p class="verdict">Metade do perfil dele é voltada para cursos. Essa parte a gente não copia — a menos que você queira, lá na frente, ensinar também.</p>
+        </article>
+      </div>
+
+      <div class="hooks">
+        <div class="mono src">Frases reais que abrem os vídeos do Rafael — é esse o tom</div>
+        <p>"Você faria uma cirurgia para corrigir isso?"</p>
+        <p>"Por que não fez lipo de papada logo?"</p>
+        <p>"Imagina se eu tivesse feito lipo de papada…"</p>
+        <p>"Ela achou que precisava de um lifting facial. Estava errada…"</p>
+        <p>"Eu vim tirar a papada rapidinho."</p>
+      </div>
+
+      <p class="lede"><strong>O que isso vira no seu perfil:</strong> a força emocional e a estrutura do Rafael, somadas ao padrão de imagem e ao nome próprio de técnica do Gustavo.</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 2 ============ -->
+  <section class="bloco">
+    <div class="bloco-head">
+      <span class="tag">Bloco 2</span>
+      <h2>As 12 perguntas que o perfil precisa responder</h2>
+      <p class="mission">Esse é o esqueleto de tudo. Enquanto essas respostas não estiverem publicadas, quem chega no perfil não tem como decidir — e some.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Pergunta</th><th>Por que ela importa</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="q">O que é lipo de papada</td><td>Muita gente não sabe que existe uma cirurgia só para isso.</td></tr>
+          <tr><td class="num">2</td><td class="q">Para quem é — e para quem não é</td><td>Dizer "não" atrai o paciente certo e evita consulta perdida.</td></tr>
+          <tr><td class="num">3</td><td class="q">"Sou magra e tenho papada"</td><td>A dor mais mal atendida do assunto. É o conteúdo que mais gera conversa.</td></tr>
+          <tr><td class="num">4</td><td class="q">Emagrecer resolve?</td><td>É o que adia a decisão por anos: "vou fazer dieta primeiro".</td></tr>
+          <tr><td class="num">5</td><td class="q">Tem anestesia? Eu durmo?</td><td>Medo número 1. Precisa ser dito com todas as letras.</td></tr>
+          <tr><td class="num">6</td><td class="q">Dói? Como é o dia da cirurgia?</td><td>Mostrar o passo a passo tira o medo melhor que qualquer promessa.</td></tr>
+          <tr><td class="num">7</td><td class="q">Pós-operatório: malha, inchaço, repouso</td><td>Medo número 2, e a pergunta prática que trava a marcação.</td></tr>
+          <tr><td class="num">8</td><td class="q">É definitivo? E se eu engordar?</td><td>É o que sustenta o valor do procedimento.</td></tr>
+          <tr><td class="num">9</td><td class="q">A cicatriz aparece?</td><td>Resolve-se com um único close de paciente aos 60 dias.</td></tr>
+          <tr><td class="num">10</td><td class="q">Lipo × lifting × bichectomia × enzima</td><td>Mostra que você sabe indicar, não que vende um procedimento só.</td></tr>
+          <tr><td class="num">11</td><td class="q">Onde, com quem, com que equipe</td><td>Procedimento caro exige prova de estrutura. Bastidor resolve.</td></tr>
+          <tr><td class="num">12</td><td class="q">Como funciona a avaliação</td><td>Transforma interesse em passo concreto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 3 ============ -->
+  <section class="bloco">
+    <div class="bloco-head">
+      <span class="tag">Bloco 3</span>
+      <h2>Os 20 conteúdos, com a frase de abertura pronta</h2>
+      <p class="mission">Reels de 30 a 60 segundos. A frase entre aspas é a primeira coisa que você fala e também o texto que aparece no primeiro quadro. Logo abaixo do banco está o padrão de gravação.</p>
+    </div>
+
+    <div class="stack">
+      <div>
+        <span class="pillar">Explicar</span>
+        <div class="bank" style="margin-top:12px">
+          <div class="item"><span class="idx">01</span><span class="hook">"Papada não é gordura a mais. É gordura no lugar errado."</span><span class="fmt">30s · você falando</span><span class="note">Abre o assunto. Vai fixado no topo do perfil.</span></div>
+          <div class="item"><span class="idx">02</span><span class="hook">"Você é magra e tem papada? O problema não é o seu peso."</span><span class="fmt">45s · você falando</span><span class="note">O conteúdo mais forte da lista.</span></div>
+          <div class="item"><span class="idx">03</span><span class="hook">"Ela emagreceu 12 kg. A papada continuou. Por quê?"</span><span class="fmt">45s · caso real</span><span class="note">Derruba o "vou fazer dieta primeiro".</span></div>
+          <div class="item"><span class="idx">04</span><span class="hook">"O teste de 5 segundos que diz se o seu caso é lipo ou lifting."</span><span class="fmt">50s · demonstração</span><span class="note">Gera comentário e salvamento.</span></div>
+          <div class="item"><span class="idx">05</span><span class="hook">"Enzima de papada funciona? A resposta honesta."</span><span class="fmt">35s · você falando</span><span class="note">Autoridade vem de contrariar o que vende fácil.</span></div>
+          <div class="item"><span class="idx">06</span><span class="hook">"Existem 3 tipos de papada. Só um resolve com lipo."</span><span class="fmt">Carrossel · 5 cards</span><span class="note">Conteúdo de salvar e voltar depois.</span></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="pillar">Tirar o medo</span>
+        <div class="bank" style="margin-top:12px">
+          <div class="item"><span class="idx">07</span><span class="hook">"Tem anestesia geral? Eu durmo? Vou sentir dor?"</span><span class="fmt">40s · no centro cirúrgico</span><span class="note">Gravar no local, de jaleco. O cenário é metade do argumento.</span></div>
+          <div class="item"><span class="idx">08</span><span class="hook">"O que acontece nas primeiras 48 horas."</span><span class="fmt">45s · linha do tempo</span><span class="note">Hora a hora, com legenda de dias na tela.</span></div>
+          <div class="item"><span class="idx">09</span><span class="hook">"Quantos dias eu fico sem trabalhar?"</span><span class="fmt">30s · resposta direta</span><span class="note">A pergunta prática que destrava a marcação.</span></div>
+          <div class="item"><span class="idx">10</span><span class="hook">"Cadê a cicatriz?"</span><span class="fmt">20s · close aos 60 dias</span><span class="note">Sem narração. Só a imagem responde.</span></div>
+          <div class="item"><span class="idx">11</span><span class="hook">"E se eu engordar depois? Volta?"</span><span class="fmt">35s · você falando</span><span class="note">Sustenta o preço.</span></div>
+          <div class="item"><span class="idx">12</span><span class="hook">"Quem NÃO pode fazer lipo de papada."</span><span class="fmt">40s · você falando</span><span class="note">Dizer não é o que mais gera confiança.</span></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="pillar">Provar</span>
+        <div class="bank" style="margin-top:12px">
+          <div class="item"><span class="idx">13</span><span class="hook">"Ela achou que precisava de um lifting. Estava errada."</span><span class="fmt">40s · caso real</span><span class="note">Abre com a objeção e vira a chave no meio.</span></div>
+          <div class="item"><span class="idx">14</span><span class="hook">"Dia 1, dia 7, dia 30, dia 90."</span><span class="fmt">40s · mesma paciente</span><span class="note">Exige a disciplina de foto descrita mais abaixo.</span></div>
+          <div class="item"><span class="idx">15</span><span class="hook">"Ela viu o resultado pela primeira vez."</span><span class="fmt">30s · sem narração</span><span class="note">Só a reação. É o formato de maior alcance.</span></div>
+          <div class="item"><span class="idx">16</span><span class="hook">Uma paciente acompanhada em 5 episódios</span><span class="fmt">Série · avaliação → véspera → cirurgia → 7 dias → 90 dias</span><span class="note">Vira destaque próprio. É o ativo mais valioso do ano.</span></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="pillar">Bastidor e convite</span>
+        <div class="bank" style="margin-top:12px">
+          <div class="item"><span class="idx">17</span><span class="hook">"O que eu checo antes de dizer sim para uma paciente."</span><span class="fmt">50s · consultório</span><span class="note">Mostra critério, atrai o paciente certo.</span></div>
+          <div class="item"><span class="idx">18</span><span class="hook">"Um dia de cirurgias comigo."</span><span class="fmt">60s · bastidor com a equipe</span><span class="note">Prova de estrutura e de volume.</span></div>
+          <div class="item"><span class="idx">19</span><span class="hook">"Como funciona a avaliação, em 3 passos."</span><span class="fmt">30s + story fixo</span><span class="note">Vai para o destaque "Comece aqui".</span></div>
+          <div class="item"><span class="idx">20</span><span class="hook">"Sua papada tem solução? Manda uma foto de perfil no direct."</span><span class="fmt">20s · convite direto</span><span class="note">Já chega com a foto que você precisa ver.</span></div>
+        </div>
+      </div>
+
+      <!-- COMO GRAVAR -->
+      <div class="panel">
+        <h3>Como gravar para ficar bom</h3>
+        <p class="lede">Nada aqui exige equipe nem equipamento. Exige repetir sempre igual — é a repetição que faz o perfil parecer profissional.</p>
+
+        <div class="grid2">
+          <div class="field">
+            <h4>Ângulo — o mais importante</h4>
+            <div class="plain"><ul>
+              <li><strong>Câmera na altura dos olhos.</strong> Nunca de baixo para cima: esse ângulo achata o pescoço e cria sombra embaixo do queixo. Justamente no assunto que você resolve, é o pior lugar possível.</li>
+              <li><strong>Enquadramento do peito para cima.</strong> Seu rosto ocupa cerca de um terço da tela, com espaço sobrando em cima para a frase caber sem cobrir você.</li>
+              <li><strong>Vertical sempre</strong> (9:16). Gravar já na vertical, nunca virar depois.</li>
+              <li><strong>Olhe para a lente</strong>, não para a sua imagem na tela. É o que faz parecer conversa, e não apresentação.</li>
+            </ul></div>
+          </div>
+
+          <div class="field">
+            <h4>Luz e som</h4>
+            <div class="plain"><ul>
+              <li><strong>Janela na frente do rosto</strong>, nunca atrás. Janela atrás transforma você em silhueta.</li>
+              <li><strong>Fuja de luz de teto direto em cima</strong> — ela joga sombra embaixo do queixo.</li>
+              <li><strong>Celular a no máximo um metro</strong>, ou fone com microfone. Áudio ruim derruba mais vídeo do que imagem ruim.</li>
+              <li><strong>Ambiente sem eco.</strong> Sala com sofá e cortina rende melhor que sala vazia.</li>
+              <li><strong>Sempre o mesmo canto da clínica.</strong> Constância vale mais que produção cara.</li>
+            </ul></div>
+          </div>
+
+          <div class="field">
+            <h4>A abertura</h4>
+            <div class="plain"><ul>
+              <li><strong>Nos 2 primeiros segundos</strong> você já disse a frase. Sem "oi, gente, tudo bem?" — isso custa o vídeo inteiro.</li>
+              <li>A mesma frase entra <strong>escrita no primeiro quadro</strong>, em caixa de texto.</li>
+              <li>Deixe folga em cima e embaixo: a interface do Instagram cobre as bordas e come a legenda.</li>
+            </ul></div>
+          </div>
+
+          <div class="field">
+            <h4>Ritmo</h4>
+            <div class="plain"><ul>
+              <li><strong>De 30 a 60 segundos.</strong> Corte todas as pausas — o corte seco é o que segura quem assiste.</li>
+              <li><strong>Grave três tomadas</strong> da mesma fala e fique com a melhor. Sai mais rápido do que tentar acertar de primeira.</li>
+              <li>Um vídeo, uma ideia. Se deu vontade de emendar outro assunto, virou o próximo vídeo.</li>
+            </ul></div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--rule); padding-top:16px">
+          <h4>Foto de paciente — o padrão que não pode variar</h4>
+          <div class="plain"><ul>
+            <li><strong>Perfil exato de 90°</strong>, ombros retos, olhando para o horizonte, boca fechada, sem sorrir.</li>
+            <li><strong>Fundo liso e escuro</strong>, sempre o mesmo, sempre no mesmo canto da sala.</li>
+            <li><strong>Marque no chão com fita</strong> onde a pessoa fica em pé, e deixe o celular sempre na mesma altura. É o que garante que o "depois" seja comparável com o "antes".</li>
+            <li><strong>Sem filtro.</strong> Sem maquiagem — ou com maquiagem nas duas fotos, nunca só numa.</li>
+            <li>Sem essa disciplina não existe linha do tempo nem antes/depois. E é justamente esse o conteúdo que mais traz paciente.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 4 ============ -->
+  <section class="bloco">
+    <div class="bloco-head">
+      <span class="tag">Bloco 4</span>
+      <h2>As quatro primeiras semanas</h2>
+      <p class="mission">Três Reels por semana, mais stories quase todo dia. A ordem importa: primeiro o assunto passa a existir, depois o medo cai, depois a prova entra, e só então vem o convite.</p>
+    </div>
+
+    <div class="stack">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Semana</th><th>Missão</th><th>Reels</th><th>Stories</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1</td><td class="q">Fazer o assunto existir</td><td>01 · 02 · 07</td><td>Bastidor de consultório e a caixinha de perguntas aberta</td></tr>
+            <tr><td class="num">2</td><td class="q">Derrubar a objeção</td><td>03 · 09 · 13</td><td>Respostas da caixinha em vídeo, um caso em andamento</td></tr>
+            <tr><td class="num">3</td><td class="q">Provar</td><td>14 · 10 · 17</td><td>Episódios da paciente acompanhada, prints de depoimento</td></tr>
+            <tr><td class="num">4</td><td class="q">Convidar</td><td>04 · 15 · 20</td><td>Agenda do mês e como marcar avaliação</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:6px">A caixinha de perguntas</h3>
+        <p class="lede" style="margin-bottom:18px">Ela serve para <strong>descobrir pauta</strong>, não para atender paciente. Tudo que for individual sai da caixinha e vai para o direct.</p>
+
+        <div class="split">
+          <div class="yes">
+            <div class="mono">Funciona bem</div>
+            <ul>
+              <li>"Qual é a sua maior dúvida sobre papada?"</li>
+              <li>"O que mais te dá medo numa cirurgia?"</li>
+              <li>"Você já tentou de tudo para a papada? O quê?"</li>
+              <li>"O que você quer que eu explique no próximo vídeo?"</li>
+              <li><strong>Responda em vídeo, não em texto.</strong> Cada resposta vira um story — e as melhores viram Reels.</li>
+            </ul>
+          </div>
+
+          <div class="no">
+            <div class="mono">Não faça</div>
+            <ul>
+              <li><strong>Avaliar caso pela caixinha.</strong> "Olha minha foto e diz se tenho jeito" não se responde em público — é avaliação clínica e é exposição de outra pessoa. Resposta padrão: "isso eu vejo em consulta, me chama no direct".</li>
+              <li><strong>Dar preço.</strong> Preço solto vira comparação e mata a conversa. Faixa e convite para avaliação, no privado.</li>
+              <li><strong>Prometer resultado.</strong> "Vou ficar igual a ela?" não se responde com promessa.</li>
+              <li><strong>Falar de paciente identificável</strong> sem autorização assinada.</li>
+              <li><strong>Perguntas de sim ou não.</strong> Não geram pauta nenhuma.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 5 ============ -->
+  <section class="bloco">
+    <div class="bloco-head">
+      <span class="tag">Bloco 5</span>
+      <h2>Antes de ligar o tráfego</h2>
+      <p class="mission">O anúncio traz a pessoa até o perfil. Quem convence é o perfil. Por isso essa lista vem antes do primeiro real investido — e não depois.</p>
+    </div>
+
+    <div class="stack">
+      <ul class="check">
+        <li>Bio com uma promessa só, mais a cidade onde você atende.</li>
+        <li>Quatro destaques montados: <strong>Comece aqui · Dúvidas · Depoimentos · Pós-operatório</strong>.</li>
+        <li>No mínimo 9 publicações no ar — a primeira tela do perfil precisa estar cheia quando alguém chegar.</li>
+        <li>O canto de gravação definido e o padrão de foto do Bloco 3 combinado com a equipe.</li>
+        <li>Termo de autorização de imagem assinado pelos pacientes, guardado.</li>
+        <li>WhatsApp Business configurado, com saudação e respostas rápidas.</li>
+        <li>Alguém responsável por responder em até 5 minutos no horário comercial.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="mono">Uma decisão que é sua</div>
+        <p>Antes e depois em publicidade é restrito pela resolução do <strong>CFO</strong>. Nas plataformas de anúncio esse tipo de imagem já não é bloqueio, mas o risco perante o conselho é seu. Nossa recomendação: usar antes/depois no perfil e nos destaques, e nos anúncios trabalhar com depoimento, com a sua fala e com a reação da paciente — que funcionam igual ou melhor. Precisamos do seu aval por escrito de qualquer forma.</p>
+      </div>
+
+      <div class="callout">
+        <div class="mono">O que nunca entra numa peça</div>
+        <p>Promessa de resultado, superlativo ("o melhor", "o único"), preço como chamariz e sorteio de procedimento. Vale tanto para o conselho quanto para a política das plataformas.</p>
+      </div>
+
+      <div class="panel">
+        <h3>O que precisamos de você para começar</h3>
+        <div class="plain"><ul>
+          <li>Número do CRO, para entrar na bio.</li>
+          <li>Cidade da clínica e até onde você atende — paciente viaja para você?</li>
+          <li>Valor do procedimento e condição de parcelamento.</li>
+          <li>O WhatsApp que vai receber os contatos, e quem responde.</li>
+          <li>Acesso à conta de anúncio e ao gerenciador, ou o aval para criarmos.</li>
+          <li>Quanto você pretende investir por mês em mídia.</li>
+          <li>Os casos que você já tem com autorização de imagem assinada — é o que destrava a semana 3.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mono">GGD Growth Digital · Papada em Cinco Blocos · v1</footer>
+</div>
+</body>
+</html>
