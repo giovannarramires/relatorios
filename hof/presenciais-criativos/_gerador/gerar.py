@@ -37,8 +37,10 @@ def artes(curso, nome):
 def gancho(body):
     return body.strip().split('\n')[0].strip()
 
+OCULTAR = {'AD_HOF_IMERSAO_A_ODONTO_07', 'AD_HOF_IMERSAO_A_ODONTO_08'}
+
 def cards(curso):
-    rows = [dict(nome=k, **v) for k, v in D[curso].items() if 'spend' in v]
+    rows = [dict(nome=k, **v) for k, v in D[curso].items() if 'spend' in v and k not in OCULTAR]
     rows.sort(key=lambda r: (r['conv'] == 0, r['spend'] / r['conv'] if r['conv'] else -r['spend']))
     out = []
     for i, r in enumerate(rows):
@@ -98,7 +100,7 @@ HTML = f'''<title>Criativos dos presenciais HOF</title>
   <div><p class="olho">Delva Education · Agosto de 2026</p>
   <h1>Os criativos que<br>puxaram conversa</h1>
   <p class="sub-t">Primeira semana no ar dos dois cursos presenciais. Cada peça abaixo tem a arte, a chamada, a copy e o que ela entregou — na ordem do que custou mais barato para gerar uma conversa no WhatsApp.</p></div>
-  <div class="selo"><b>{en + imn}</b>criativos com entrega<br>{brl(es + ims)} investidos<br>{ec + imc:.0f} conversas iniciadas</div>
+  <div class="selo"><b>{len(esp_rows) + len(ime_rows)}</b>criativos com entrega<br>{brl(es + ims)} investidos<br>{ec + imc:.0f} conversas iniciadas</div>
 </header>
 
 <section class="bloco">
@@ -118,14 +120,14 @@ HTML = f'''<title>Criativos dos presenciais HOF</title>
 <section class="bloco">
   <div class="curso-cab"><div><p class="olho">Dr. Marcelo Germani · público quente · 25 a 31 de agosto</p><h2>Especialização em HOF de Alta Performance</h2></div>
   <div class="curso-tot"><span class="tot-l">Investido</span><span class="tot-v">{brl(es)}</span></div></div>
-  <p class="nota-secao">{en} artes no ar, uma por conjunto, com o mesmo público: quem já interagiu com o perfil do Dr. Germani nos últimos 180 a 365 dias. Como o público é pequeno, a mesma pessoa viu o anúncio em média 6 vezes na semana — é o limite natural dessa audiência.</p>
+  <p class="nota-secao">{len(esp_rows)} artes no ar, uma por conjunto, com o mesmo público: quem já interagiu com o perfil do Dr. Germani nos últimos 180 a 365 dias. Como o público é pequeno, a mesma pessoa viu o anúncio em média 6 vezes na semana — é o limite natural dessa audiência.</p>
   <div class="grade">{esp_cards}</div>
 </section>
 
 <section class="bloco">
   <div class="curso-cab"><div><p class="olho">Prof. Júlia Corazzina · público frio · 26 a 31 de agosto</p><h2>3ª Imersão HOF para Iniciantes</h2></div>
   <div class="curso-tot"><span class="tot-l">Investido</span><span class="tot-v">{brl(ims)}</span></div></div>
-  <p class="nota-secao">{imn} artes com entrega, em dois públicos frios: <b>Odonto</b> (formação e cargo em Odontologia, com a chamada “Dentista recém-formada:” na abertura) e <b>Mix saúde</b> (odonto + biomedicina, fisioterapia, farmácia, enfermagem, sem chamada de profissão).</p>
+  <p class="nota-secao">{len(ime_rows)} artes com entrega, em dois públicos frios: <b>Odonto</b> (formação e cargo em Odontologia, com a chamada “Dentista recém-formada:” na abertura) e <b>Mix saúde</b> (odonto + biomedicina, fisioterapia, farmácia, enfermagem, sem chamada de profissão).</p>
   <div class="grade">{ime_cards}</div>
 </section>
 
