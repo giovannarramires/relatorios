@@ -5,7 +5,9 @@ Fonte: dados.json (dump da Graph API, nível anúncio, date_preset=maximum)."""
 import json, os, html, re
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-D = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dados.json')))
+G = os.path.dirname(os.path.abspath(__file__))
+D = json.load(open(os.path.join(G, 'dados.json')))
+PROP = json.load(open(os.path.join(G, 'propostas.json')))
 
 def brl(v):
     return ('R$ ' + f'{v:,.2f}').replace(',', 'X').replace('.', ',').replace('X', '.')
@@ -91,7 +93,38 @@ ime_cards, ime_rows = cards('IMERSAO')
 es, ec, ecpc, en = totais('ESPEC')
 ims, imc, imcpc, imn = totais('IMERSAO')
 
-CSS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'estilo.css')).read()
+props = '\n'.join(f'''
+<article class="prop">
+  <a class="prop-img" href="/criativos/hof-presencial-set26/FEED_{p['arq']}.jpg" target="_blank" rel="noopener">
+    <img src="/criativos/hof-presencial-set26/FEED_{p['arq']}.jpg" alt="{html.escape(p['nome'])}" loading="lazy" width="900" height="900">
+  </a>
+  <div class="prop-top"><span class="t-n">{p['n']} · {html.escape(p['curso'])}</span><span class="prop-pub">{html.escape(p['publico'])}</span></div>
+  <h4>{html.escape(p['nome'])}</h4>
+  <p class="prop-base">{html.escape(p['base'])}</p>
+  <pre class="prop-copy">{html.escape(p['copy'])}</pre>
+  <p class="prop-meta"><b>Título:</b> {html.escape(p['titulo'])} · <b>Descrição:</b> {html.escape(p['desc'])} · <b>Eixo:</b> {html.escape(p['eixo'])}</p>
+  <p class="prop-links"><a class="ver" href="/criativos/hof-presencial-set26/FEED_{p['arq']}.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a> <a class="ver" href="/criativos/hof-presencial-set26/STORY_{p['arq']}.jpg" target="_blank" rel="noopener">Abrir story 9:16</a></p>
+  <p class="prop-obs">{html.escape(p['obs'])}</p>
+</article>''' for p in PROP)
+
+CSS = open(os.path.join(G, 'estilo.css')).read() + '''
+.props{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.prop{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:0 0 20px;box-shadow:var(--sombra);overflow:hidden}
+.prop>*:not(.prop-img){margin-left:22px;margin-right:22px}
+.prop-img{display:block;background:#0b0b0c}
+.prop-img img{width:100%;height:auto;display:block}
+.prop-top{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.prop-pub{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:right}
+.prop h4{font-size:17px;margin-bottom:8px;line-height:1.25}
+.prop-base{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5}
+.prop-copy{white-space:pre-wrap;font-family:var(--corpo);font-size:13px;color:var(--texto);line-height:1.55;
+  background:color-mix(in srgb,var(--teal) 5%,transparent);border-left:2px solid color-mix(in srgb,var(--teal) 35%,transparent);padding:14px 16px;margin:0 0 12px}
+.prop-meta{margin:0 0 8px;font-size:12px;color:var(--muted)}
+.prop-meta b{color:var(--ink)}
+.prop-links{margin:0 0 10px;display:flex;gap:14px;flex-wrap:wrap}
+.prop-obs{margin:0;font-size:12px;color:var(--gold);line-height:1.5}
+@media (max-width:820px){.props{grid-template-columns:1fr}}
+'''
 
 HTML = f'''<title>Criativos dos presenciais HOF</title>
 <style>{CSS}</style>
@@ -161,19 +194,9 @@ HTML = f'''<title>Criativos dos presenciais HOF</title>
 </section>
 
 <section class="bloco">
-  <div class="curso-cab"><div><p class="olho">Próximo lote</p><h2>O que vamos testar em cima do que funcionou</h2></div></div>
-  <div class="testes">
-    <div class="tcard"><span class="t-n">01</span><h4>Caso de intercorrência</h4><p>Continuação direta da peça de melhor volume: o resultado que migrou, a assimetria que apareceu no terceiro mês, o paciente que sumiu. Termina em “o que você faria?”.</p><span class="t-eixo">Eixo: medo do erro clínico</span></div>
-    <div class="tcard"><span class="t-n">02</span><h4>Antes e depois de planejamento</h4><p>Não o rosto do paciente — o plano. Mostrar como um especialista avalia o mesmo rosto que o generalista só “preenche”.</p><span class="t-eixo">Eixo: domínio técnico</span></div>
-    <div class="tcard"><span class="t-n">03</span><h4>O que mudou em cinco anos</h4><p>Lista curta do que virou obsoleto na HOF. Sequência natural da peça de melhor CTR.</p><span class="t-eixo">Eixo: defasagem técnica</span></div>
-    <div class="tcard"><span class="t-n">04</span><h4>Credencial em números</h4><p>Doutorado, publicações, palestras internacionais, alunos formados — a autoridade dita em dados, não em adjetivo.</p><span class="t-eixo">Eixo: autoridade exclusiva</span></div>
-    <div class="tcard"><span class="t-n">05</span><h4>Vídeo do professor falando</h4><p>Toda a conta é imagem estática hoje. Trinta segundos do Dr. Germani com o mesmo gancho da peça campeã é o teste de formato mais óbvio que ainda não fizemos.</p><span class="t-eixo">Formato novo</span></div>
-    <div class="tcard"><span class="t-n">06</span><h4>Depoimento de aluno em atendimento</h4><p>Prova social vinda de quem já fez, falando de segurança clínica — não de “curso incrível”.</p><span class="t-eixo">Eixo: segurança</span></div>
-    <div class="tcard"><span class="t-n">07</span><h4>“A consulta trava antes da agulha”</h4><p>Versão para iniciantes do gancho de decisão clínica que foi o melhor do público frio.</p><span class="t-eixo">Iniciantes</span></div>
-    <div class="tcard"><span class="t-n">08</span><h4>Chamada por profissão, uma a uma</h4><p>“Dentista recém-formada”, “Biomédica esteta”, “Fisioterapeuta dermatofuncional” — uma peça para cada, em vez de um anúncio genérico para o público misto.</p><span class="t-eixo">Iniciantes</span></div>
-    <div class="tcard"><span class="t-n">09</span><h4>Bastidor do hands-on</h4><p>Foto real da turma anterior aplicando, com supervisão. Sustenta a promessa de “você não vai só observar”.</p><span class="t-eixo">Prova</span></div>
-    <div class="tcard"><span class="t-n">10</span><h4>Contagem de vagas</h4><p>Urgência real, com número de vagas restantes, para entrar só na reta final — depois que os ganchos de dor já aqueceram o público.</p><span class="t-eixo">Fechamento</span></div>
-  </div>
+  <div class="curso-cab"><div><p class="olho">Para aprovação</p><h2>As dez próximas peças</h2></div></div>
+  <p class="nota-secao">Todas construídas em cima dos ganchos que geraram conversa na primeira semana — e nenhuma repete os que zeraram. <b>As dez já estão montadas</b>, em 1:1 para o feed e 9:16 para stories e reels, seguindo a identidade de cada curso. É aprovar e subir.</p>
+  <div class="props">{props}</div>
 </section>
 
 <section class="notas">
