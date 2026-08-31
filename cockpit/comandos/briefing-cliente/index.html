@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Comando — Briefing inicial de cliente (GGD)</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --accent:#127a63; --accent-soft:#e3f1ec;
+    --code-bg:#0f1613; --code-ink:#dfe7e2;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --accent:#48c3a0; --accent-soft:#123027;
+      --code-bg:#0a110e; --code-ink:#d3ddd7;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:clamp(22px,4vw,48px) clamp(16px,4vw,32px) 60px}
+  .back{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent);text-decoration:none;margin-bottom:18px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(23px,4vw,32px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15px;color:var(--ink-soft);max-width:64ch;margin-bottom:8px}
+  .how{font-size:13.5px;color:var(--ink-soft);max-width:64ch;margin-bottom:14px}
+  .how b{color:var(--ink)}
+  .ref{font-size:13px;color:var(--ink-soft);max-width:64ch;margin-bottom:22px}
+  .ref a{color:var(--accent);font-weight:600}
+
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--line-soft);padding:3px 10px;border-radius:999px}
+  button{font:inherit;font-size:14px;font-weight:650;cursor:pointer;border:none;border-radius:10px;padding:10px 18px;background:var(--accent);color:#fff;transition:opacity .12s ease, transform .08s ease}
+  button:hover{opacity:.92}
+  button:active{transform:translateY(1px)}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  button.ok{background:#0c7a54}
+
+  .codewrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+  textarea{width:100%;height:62vh;min-height:360px;resize:vertical;border:none;outline:none;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:2}
+  footer{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="https://relatorios.giogrowthdigital.com.br/cockpit/">← Cockpit</a>
+  <p class="eyebrow">GGD · Comando reutilizável</p>
+  <h1>Briefing inicial — cliente novo</h1>
+  <p class="lede">Comando pronto pra gerar o briefing de partida de qualquer cliente que entrar: 8 blocos de perguntas que mudam decisão de mídia, respondidas na própria página, publicadas em <b>/{slug}/briefing/</b>.</p>
+  <p class="how">Como usar: clique em <b>Copiar comando</b>, abra um <b>chat novo</b> do Claude Code na máquina, cole, e no fim da mensagem escreva o cliente (nome, segmento e Instagram). Sem cliente informado, ele gera o modelo geral em <b>/briefing-modelo/</b>.</p>
+  <p class="ref">Molde de referência (o primeiro feito): <a href="https://relatorios.giogrowthdigital.com.br/rugido-do-leao/briefing/">Pet Store Rugido do Leão</a>.</p>
+
+  <div class="bar">
+    <span class="tag">Faz do zero ao publicado · sem checkpoint</span>
+    <button id="copy">Copiar comando</button>
+  </div>
+
+  <div class="codewrap">
+    <textarea id="cmd" readonly spellcheck="false">Voce vai criar o BRIEFING INICIAL de um cliente novo da GGD: a pagina de perguntas que a gente manda pro cliente responder antes de comecar a operacao de midia. Leia tudo antes de agir e execute do inicio ao fim sem parar pra pedir validacao.
+
+Referencia do padrao (leia primeiro, e o molde que a Gio aprovou):
+~/Library/GGD/relatorios/rugido-do-leao/briefing/index.html
+No ar em https://relatorios.giogrowthdigital.com.br/rugido-do-leao/briefing/
+
+## PASSO 0 — dados do cliente
+No fim deste comando eu escrevi o cliente (nome, segmento, Instagram e/ou site, e o que ja sei do negocio).
+- Se eu NAO escrevi nenhum cliente: gere o MODELO GERAL, com as perguntas neutras servindo qualquer segmento, e publique em /briefing-modelo/. Nesse caso pule o Passo 1.
+- Se faltar so o slug, deduza do nome (minusculo, sem acento, com hifen) e siga.
+- Nao invente NADA sobre o cliente. O que voce nao sabe, vira pergunta.
+
+## PASSO 1 — leitura previa (obrigatorio quando tem cliente)
+Abra o Instagram e o site do cliente no Chrome (skill claude-in-chrome) e levante de 4 a 6 observacoes REAIS, verificaveis, que virem o bloco "O que ja observamos no perfil de voces".
+Procure especificamente: link na bio e pra onde leva; categoria do perfil; destaques (mostram as linhas de servico); o que o conteudo mais fala; numero de seguidores x tamanho da cidade; se o diferencial do negocio aparece ou nao na comunicacao.
+Regras: escreva so o que voce VIU. Se nao conseguiu ver, diga isso na observacao em vez de deduzir. Cada observacao tem um titulo curto em negrito e 2 a 3 frases. Nada de elogio vazio nem critica gratuita — cada uma precisa render uma decisao ou uma pergunta.
+
+## PASSO 2 — montar as perguntas
+Oito blocos, sempre nesta ordem:
+01 Os numeros do negocio
+02 Capacidade e operacao
+03 O carro-chefe (o servico ou produto que mais diferencia e mais paga)
+04 A prova do diferencial
+05 Quem e o cliente
+06 Como o cliente chega hoje
+07 Regras, marca e limites
+08 Calendario e sazonalidade
+
+Cada bloco leva um subtitulo de UMA linha dizendo por que ele existe (ex: "Sem isso nao existe meta de midia, so chute." / "Nao adianta gerar procura que a operacao nao absorve." / "Diferencial forte so vira anuncio quando vira prova.").
+
+Perguntas ancora, que entram SEMPRE (adapte a redacao ao negocio, nao copie seco):
+01 - faturamento medio dos ultimos 6 meses e como divide entre as linhas de receita [essencial]
+01 - ticket medio e margem de cada linha (o que mais fatura quase nunca e o que mais lucra)
+01 - quantos clientes ativos e quantos recompram no mes
+01 - existe recorrencia, pacote, plano ou assinatura
+01 - quanto da pra investir em midia por mes e por quantos meses aguenta antes de precisar de retorno [essencial]
+01 - o que precisa ter acontecido ate <mes-alvo> pra valer a pena, EM NUMERO [essencial]
+02 - capacidade instalada (quanto cabe por dia / por semana / em estoque)
+02 - ocupacao real hoje em %, e qual dia e horario ficam vazios [essencial]
+02 - se a procura dobrar em 30 dias, o que quebra primeiro
+02 - tamanho da equipe e quem faz o que
+02 - area de atendimento, entrega ou raio
+03 - quem executa o carro-chefe: nome, formacao, registro profissional, e se e socio ou parceiro [essencial]
+03 - quanto o carro-chefe representa do faturamento hoje
+03 - o caminho COMPLETO de um cliente nesse servico (etapas, retornos, recompra), quanto soma no fim e por quanto tempo dura [essencial — e o numero mais importante: define quanto da pra pagar por cliente novo]
+03 - os cinco pedidos ou casos que mais chegam
+03 - de onde vem esses clientes hoje
+03 - existe indicacao ou parceria formal com quem atende o mesmo publico antes de voces
+04 - como o diferencial funciona NA PRATICA, passo a passo [essencial]
+04 - existe prova disponivel: video, foto, numero, depoimento — e autorizacao de uso de imagem [essencial]
+04 - o que pode dar errado nesse diferencial e qual o protocolo
+04 - quem ja e cliente percebe isso como diferencial ou nem sabe
+05 - descreva o melhor cliente: onde mora, perfil, quanto gasta, com que frequencia
+05 - os cinco bairros/regioes de onde vem mais gente, e se alguem atravessa a cidade [essencial]
+05 - a objecao numero um de quem pede orcamento e nao fecha [essencial]
+05 - por que um cliente deixa de ser cliente
+06 - quantos contatos novos por semana e por qual canal [essencial]
+06 - alguem pergunta "como voce chegou ate a gente" e ANOTA a resposta [essencial]
+06 - ja anunciou antes: onde, quanto gastou, o que aconteceu
+06 - existe Gerenciador de Negocios do Meta e conta de anuncios no CNPJ, e quem tem acesso hoje
+06 - perfil do Google verificado, quantas avaliacoes e qual a nota
+06 - pra onde leva o link da bio, tem site, tem agendamento online
+06 - WhatsApp Business: quem responde, em quanto tempo, tem mensagem pronta
+06 - qual sistema de agenda/caixa e se da pra extrair relatorio dele [essencial]
+07 - pode divulgar preco, existe tabela publica
+07 - responsavel tecnico e registro que precisa aparecer nas pecas, quando a categoria exigir [essencial se for area regulada]
+07 - o que o conselho de classe ou a plataforma ja orientou sobre a comunicacao [essencial se for area regulada]
+07 - existe manual de marca, logo em vetor
+07 - quem produz conteudo hoje e se continua
+07 - o que nunca pode ser dito ou mostrado
+07 - concorrentes que respeitam e aqueles com quem nao querem ser comparados
+08 - meses fortes e fracos do ano, por linha de receita
+08 - datas ja fixas na casa
+08 - promocao que ja fizeram: o que funcionou e o que so queimou margem
+08 - novidade planejada pros proximos 6 meses [essencial]
+
+Adapte ao segmento (troque o que nao faz sentido, some o que falta):
+- e-commerce: capacidade vira estoque, frete, prazo, curva A de SKU, devolucao
+- clinica/consultorio: capacidade vira agenda, no-show, convenio, conselho de classe
+- servico local: raio de deslocamento, horario ocioso, sazonalidade da semana
+- infoproduto/lancamento: esteira de produtos, perpetuo x lancamento, ticket da esteira inteira
+- B2B/atacado: ciclo de venda, pedido minimo, vendedor, tabela por volume
+
+Regras de escrita (foi isso que fez o molde funcionar):
+- toda pergunta precisa mudar uma DECISAO de midia. Se a resposta nao muda nada no plano, corte.
+- pergunta de numero exige numero: diga "em %", "em R$", "quantos por dia".
+- nunca pergunte o que voce descobre sozinho (seguidores, categoria do perfil, preco publico, endereco).
+- linguagem de conversa, tratando por "voces". Zero jargao de agencia: nada de ICP, proposta de valor, dores, jornada.
+- abaixo da pergunta, quando o cliente nao adivinha o motivo, coloque UMA frase explicando por que ela existe. Nao coloque nota em pergunta obvia.
+- marque de 10 a 14 perguntas como ESSENCIAIS no total, nunca mais que isso. Essencial = sem ela o plano nao sai.
+- 45 a 55 perguntas no total. Numeradas de 01 em diante, em sequencia continua entre os blocos.
+
+## PASSO 3 — a pagina
+Documento unico, HTML + CSS + JS inline. Sem CDN, sem fonte externa, sem framework.
+- Paleta: puxe da marca do cliente (olhe a logo e o feed). Duas cores da marca + um neutro com leve vies da cor de destaque. Defina tokens no :root e faca tema claro E escuro (@media prefers-color-scheme: dark), sempre por token — nunca cor solta dentro do media query.
+- Tipografia: serif com personalidade nos titulos, via stack local ("Iowan Old Style","Hoefler Text",Palatino,"Palatino Linotype",Georgia,serif); sans do sistema no texto; mono nos rotulos, numeros e etiquetas.
+- Estrutura: cabecalho com titulo e explicacao de como responder; bloco "O que ja observamos"; os 8 blocos; rodape curto.
+- Cada bloco: cabecalho a esquerda (numero do bloco, titulo, subtitulo, contador "X de Y respondidas") em position:sticky, e as perguntas a direita. No celular vira coluna unica e o cabecalho perde o sticky.
+- Cada pergunta e uma linha de tres colunas: [numero] [pergunta + nota + campo] [etiqueta "essencial" alinhada a direita], com filete separando as linhas. A etiqueta NUNCA no meio do texto — coluna propria, senao desalinha tudo.
+- Campo de resposta: textarea que cresce sozinho conforme digita, borda esquerda verde quando preenchido.
+- Barra fixa no rodape: barra de progresso "X de Y respondidas", status do salvamento, botao "Baixar respostas" e botao "Copiar para enviar".
+- Salvamento: localStorage com chave ggd-briefing-<slug>-v1, debounce de 700ms, com o carimbo "Salvo neste aparelho em dd/mm às HHhMM". Deixe claro no cabecalho que fica salvo no navegador e que no fim precisa clicar em copiar ou baixar pra mandar pra gente.
+- Exportacao (copiar e baixar .txt): cabecalho com quem respondeu, data e contagem, depois bloco a bloco no formato "N. pergunta" / "R: resposta" (ou "(em branco)").
+- <meta name="robots" content="noindex, nofollow"> no head.
+- Acessibilidade: foco visivel em campo e botao, prefers-reduced-motion respeitado, contraste que funciona nos dois temas.
+- NAO caia no visual generico de IA: nada de fundo creme com serif e terracota, nada de gradiente roxo, nada de emoji como marcador de secao, nada de card com cantos muito arredondados e barrinha colorida.
+
+## PASSO 4 — publicar
+- Arquivo em ~/Library/GGD/relatorios/<slug>/briefing/index.html
+- Use git -C ~/Library/GGD/relatorios (nunca cd).
+- Antes: git fetch origin + git rebase --autostash origin/main.
+- git add SO o caminho novo (nunca -A), commit descritivo, e push com laco de retry: 5 tentativas, git pull --rebase --autostash entre elas.
+- Validar de verdade: curl na URL https://relatorios.giogrowthdigital.com.br/<slug>/briefing/ ate responder 200 COM o nome do cliente no corpo. O Cloudflare Pages leva de 30s a 2min. Nao diga que publicou antes de o curl confirmar.
+
+## PASSO 5 — plugar no hub do cliente
+Se o cliente ja tiver hub (/{slug}/central/), adicione um card "Briefing inicial" no cards[] dele em ~/Library/GGD/ggd-automacoes/hubs/hubs.json, rode python3 gen_hubs.py <slug> e publique o relatorios. Se ainda nao tiver hub, so avise no resumo.
+
+## O QUE NAO FAZER
+- Nao invente numero, nome, CRMV/CNPJ, preco ou fato do cliente.
+- Nao coloque dado fiscal, contrato, senha ou PDF de NF na pagina (o repo do site e publico).
+- Nao encha de pergunta pra parecer completo: pergunta que nao muda decisao e ruido.
+- Nao mande o cliente responder por e-mail/formulario externo: a resposta e na propria pagina.
+
+## AO FINAL
+Me devolva, em texto curto:
+1. a URL publicada e o status do curl;
+2. quantas perguntas, quantas essenciais;
+3. as 3 perguntas que voce acha que o cliente vai ter mais dificuldade de responder, pra eu preparar a reuniao;
+4. o que voce viu no perfil que merece virar acao na primeira semana.
+E atualize a memoria: se ainda nao existir, crie um memory "briefing inicial de cliente (padrao)" descrevendo o esquema /{slug}/briefing/, as regras de escrita das perguntas e este comando; adicione o ponteiro no MEMORY.md. Se ja existir, so acrescente o cliente novo.
+
+CLIENTE: </textarea>
+  </div>
+
+  <footer>GGD · comando reutilizável · criado em 31/08/2026 · molde: Rugido do Leão</footer>
+</div>
+
+<script>
+  var btn = document.getElementById('copy');
+  var ta = document.getElementById('cmd');
+  btn.addEventListener('click', function(){
+    var txt = ta.value;
+    function done(){
+      btn.textContent = '✓ Copiado';
+      btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent = 'Copiar comando'; btn.classList.remove('ok'); }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ ta.focus(); ta.select(); done(); });
+    } else {
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      done();
+    }
+  });
+</script>
+</body>
+</html>
