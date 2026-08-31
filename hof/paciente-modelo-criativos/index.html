@@ -1,0 +1,532 @@
+<title>Paciente modelo — criativos</title>
+<style>:root{
+  --ink:#0A1C1A; --paper:#F7F9F7; --card:#FFFFFF; --linha:#DCE4E1;
+  --teal:#0E5F55; --gold:#B4842B; --tijolo:#9E3B2E; --texto:#233A36; --muted:#5C6B68;
+  --sombra:0 1px 2px rgba(10,28,26,.05),0 8px 24px -12px rgba(10,28,26,.12);
+  --disp:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --corpo:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --ink:#EAF2F0; --paper:#08110F; --card:#0E1B19; --linha:#1E312D; --teal:#3FB3A2;
+    --gold:#D9A94A; --tijolo:#D2705E; --texto:#C6D6D2; --muted:#88A099;
+    --sombra:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7); }
+}
+:root[data-theme="dark"]{ --ink:#EAF2F0; --paper:#08110F; --card:#0E1B19; --linha:#1E312D; --teal:#3FB3A2;
+  --gold:#D9A94A; --tijolo:#D2705E; --texto:#C6D6D2; --muted:#88A099;
+  --sombra:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7); }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--texto);font-family:var(--corpo);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 96px}
+h1,h2,h3,h4{color:var(--ink);font-family:var(--disp);font-weight:600;margin:0;text-wrap:balance}
+header.topo{border-bottom:2px solid var(--ink);padding:56px 0 28px;margin-bottom:44px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between}
+.olho{font-family:var(--corpo);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;font-weight:600}
+h1{font-size:clamp(32px,4.6vw,46px);line-height:1.05;letter-spacing:-.015em}
+.sub-t{color:var(--muted);margin:14px 0 0;max-width:60ch}
+.selo{border-left:2px solid var(--teal);padding-left:18px;font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted);font-variant-numeric:tabular-nums}
+.selo b{color:var(--ink);font-family:var(--disp);font-size:26px;display:block;margin-bottom:2px}
+.bloco{margin-bottom:72px}
+.curso-cab{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:14px;margin-bottom:20px}
+.curso-cab h2{font-size:clamp(24px,3.2vw,34px);line-height:1.05}
+.curso-tot{text-align:right}
+.tot-l{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tot-v{font-family:var(--disp);font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
+.nota-secao{color:var(--muted);max-width:78ch;margin:0 0 22px}
+.destaques{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.dcard{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:16px 18px;box-shadow:var(--sombra)}
+.dcard b{display:block;font-family:var(--disp);font-size:29px;color:var(--ink);line-height:1.1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.d-l{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.d-d{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5;display:block}
+.texto p{max-width:78ch;color:var(--texto)}
+.texto b{color:var(--ink)}
+p.regra{border-left:2px solid var(--gold);padding:2px 0 2px 18px;color:var(--texto)}
+.grade{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.cr{background:var(--card);border:1px solid var(--linha);border-radius:2px;box-shadow:var(--sombra);display:flex;overflow:hidden}
+.cr.vence{border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
+.cr.zero{opacity:.82}
+.cr-img{flex:0 0 190px;display:block;background:color-mix(in srgb,var(--linha) 40%,transparent)}
+.cr-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cr-corpo{padding:16px 18px;min-width:0;flex:1}
+.cr-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.cr-id{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pin{font-family:var(--corpo);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);
+  border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.cr.zero .pin{color:var(--muted);border-color:var(--linha)}
+.cr h4{font-size:17px;line-height:1.25;margin-bottom:6px}
+.cr-gancho{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.5}
+.cr-num{display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);padding:10px 0;margin-bottom:10px}
+.cr-num div{min-width:64px}
+.cr-num b{display:block;font-family:var(--disp);font-size:17px;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.2}
+.cr-num span{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cr-links{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+a.ver{font-family:var(--corpo);font-size:11.5px;color:var(--teal);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--teal) 35%,transparent);padding-bottom:1px;white-space:nowrap}
+a.ver:hover{border-bottom-color:var(--teal)}
+a.ver:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+.cr-copy summary{font-size:11.5px;color:var(--teal);cursor:pointer}
+.cr-copy pre{white-space:pre-wrap;font-family:var(--corpo);font-size:12.5px;color:var(--texto);background:color-mix(in srgb,var(--teal) 5%,transparent);
+  border-left:2px solid color-mix(in srgb,var(--teal) 35%,transparent);padding:12px 14px;margin:10px 0 0;line-height:1.55}
+.eixos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.eixo{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:20px 22px;box-shadow:var(--sombra)}
+.eixo.bom{border-top:3px solid var(--teal)}
+.eixo.ruim{border-top:3px solid var(--tijolo)}
+.eixo h3{font-size:17px;margin-bottom:12px}
+.eixo ul{margin:0;padding-left:18px}
+.eixo li{margin-bottom:11px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.eixo b{color:var(--ink)}
+.testes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tcard{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:18px 20px;box-shadow:var(--sombra);position:relative}
+.t-n{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
+.tcard h4{font-size:17px;margin:6px 0 8px}
+.tcard p{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.t-eixo{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.notas{border-top:2px solid var(--ink);padding-top:26px}
+.notas h3{font-size:18px;margin-bottom:14px}
+.notas ul{margin:0;padding-left:18px;color:var(--muted);max-width:80ch}
+.notas li{margin-bottom:9px} .notas b{color:var(--ink);font-weight:600}
+@media (max-width:980px){.destaques{grid-template-columns:1fr 1fr}}
+@media (max-width:820px){.grade,.eixos,.testes{grid-template-columns:1fr}.curso-tot{text-align:left}}
+@media (max-width:560px){.cr{flex-direction:column}.cr-img{flex:none;aspect-ratio:1}.destaques{grid-template-columns:1fr}}
+
+.ressalva{margin:0 0 12px;font-size:12.5px;color:var(--tijolo);border-left:2px solid color-mix(in srgb,var(--tijolo) 45%,transparent);padding-left:10px;line-height:1.45}
+.props{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.prop{background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:20px 22px;box-shadow:var(--sombra)}
+.prop-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.prop-pub{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:right}
+.prop h4{font-size:17px;margin-bottom:8px;line-height:1.25}
+.prop-base{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.5}
+.prop-arte{margin:0 0 12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.prop-arte b,.prop-meta b{color:var(--ink)}
+.prop-copy{white-space:pre-wrap;font-family:var(--corpo);font-size:13px;color:var(--texto);line-height:1.55;
+  background:color-mix(in srgb,var(--teal) 5%,transparent);border-left:2px solid color-mix(in srgb,var(--teal) 35%,transparent);padding:14px 16px;margin:0 0 12px}
+.prop-meta{margin:0 0 8px;font-size:12px;color:var(--muted)}
+.prop-obs{margin:0;font-size:12px;color:var(--gold);line-height:1.5}
+@media (max-width:820px){.props{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<header class="topo">
+  <div><p class="olho">HOF Paciente Modelo · São José do Rio Preto · Agosto de 2026</p>
+  <h1>Sete peças novas<br>e o que elas ensinaram</h1>
+  <p class="sub-t">Lote de criativos que entrou no ar em 27 de agosto, o resultado de cada um em cinco dias de veiculação e as dez próximas peças propostas — construídas em cima do que deu certo.</p></div>
+  <div class="selo"><b>R$ 5,78</b>por conversa nas duas campeãs<br>contra R$ 8,12 do melhor anúncio antigo<br>29% mais barato</div>
+</header>
+
+<section class="bloco">
+  <div class="curso-cab"><div><p class="olho">Resumo</p><h2>O que aconteceu</h2></div>
+  <div class="curso-tot"><span class="tot-l">Investido no lote novo</span><span class="tot-v">R$ 187,83</span></div></div>
+  <div class="destaques">
+    <div class="dcard"><span class="d-l">Cartaz “Procura-se”</span><b>R$ 5,86</b><span class="d-d">11 conversas · CTR 3.63%</span></div>
+    <div class="dcard"><span class="d-l">Checklist “Você se encaixa?”</span><b>R$ 5,69</b><span class="d-d">11 conversas · CTR 4.33%</span></div>
+    <div class="dcard"><span class="d-l">Melhor anúncio antigo, no mesmo período</span><b>R$ 8,12</b><span class="d-d">22 conversas · R$ 178,68</span></div>
+    <div class="dcard"><span class="d-l">Lote novo inteiro</span><b>R$ 7,83</b><span class="d-d">24 conversas · 7 peças</span></div>
+  </div>
+  <div class="texto">
+    <p>O lote testou sete conceitos diferentes de uma vez. Dois deles bateram com folga tudo o que a conta tinha até agora: o <b>cartaz de convite</b> e o <b>checklist de autoqualificação</b> — os únicos que não usam “antes e depois” como argumento principal.</p>
+    <p>E não é só preço. Das 11 conversas abertas pelo cartaz, <b>10 viraram diálogo de verdade</b>, com resposta do outro lado. Historicamente o problema dessa conta é justamente o oposto: gente que abre a conversa e some.</p>
+    <p class="regra">A leitura: <b>o paciente não responde ao resultado, responde ao convite.</b> Antes e depois mostra o que a clínica sabe fazer. Cartaz de seleção diz o que a pessoa precisa fazer agora — e é isso que abre conversa.</p>
+  </div>
+</section>
+
+<section class="bloco">
+  <div class="curso-cab"><div><p class="olho">27 a 31 de agosto · campanha por pin de bairro</p><h2>As sete peças, uma a uma</h2></div></div>
+  <p class="nota-secao">Na ordem de desempenho. Cada peça rodou em seu próprio conjunto, com arte 1:1 no feed e 9:16 em stories e reels, sempre com destino WhatsApp.</p>
+  <div class="grade">
+<article class="cr vence">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_08_CARTAZ_EDITAL.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_08_CARTAZ_EDITAL.jpg" alt="CARTAZ_EDITAL" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Cartaz Edital</span><span class="pin">Campeã do lote</span></div>
+    <h4>Chamar no WhatsApp</h4>
+    <p class="cr-gancho">PROCURA-SE: paciente modelo em São José do Rio Preto.</p>
+    <div class="cr-num">
+      <div><b>R$ 5,86</b><span>por conversa</span></div>
+      <div><b>11</b><span>conversas</span></div>
+      <div><b>R$ 64,48</b><span>investido</span></div>
+      <div><b>3.63%</b><span>CTR</span></div>
+      <div><b>10 de 11 responderam</b><span>continuaram a conversa</span></div>
+    </div>
+    
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_08_CARTAZ_EDITAL.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_08_CARTAZ_EDITAL.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>PROCURA-SE: paciente modelo em São José do Rio Preto.
+
+O que é: você recebe atendimento de harmonização orofacial durante um curso prático, com plano individual e procedimento conduzido pelo Dr. Marcelo Germani — primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+O que pedimos: que você more em Rio Preto ou região e aceite o registro fotográfico do caso.
+
+As vagas são limitadas pelo número de alunos da turma. Chame no WhatsApp para entrar na seleção.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr vence">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_09_CHECKLIST.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_09_CHECKLIST.jpg" alt="CHECKLIST" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Checklist</span><span class="pin">Campeã do lote</span></div>
+    <h4>Ver se tenho vaga</h4>
+    <p class="cr-gancho">Você se encaixa?</p>
+    <div class="cr-num">
+      <div><b>R$ 5,69</b><span>por conversa</span></div>
+      <div><b>11</b><span>conversas</span></div>
+      <div><b>R$ 62,62</b><span>investido</span></div>
+      <div><b>4.33%</b><span>CTR</span></div>
+      <div><b>6 de 11 responderam</b><span>continuaram a conversa</span></div>
+    </div>
+    
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_09_CHECKLIST.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_09_CHECKLIST.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>Você se encaixa?
+
+✓ Mora em São José do Rio Preto ou região
+✓ Tem entre 25 e 60 anos
+✓ Aceita registro fotográfico do antes e depois
+
+Se marcou os quatro, você pode ser paciente modelo do próximo curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e confirme sua vaga.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_07_PERFIL_MANDIBULA.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_07_PERFIL_MANDIBULA.jpg" alt="PERFIL_MANDIBULA" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Perfil Mandibula</span><span class="pin">Pouca conversa</span></div>
+    <h4>Quero avaliar meu perfil</h4>
+    <p class="cr-gancho">Você já reparou que a foto de frente engana?</p>
+    <div class="cr-num">
+      <div><b>R$ 16,17</b><span>por conversa</span></div>
+      <div><b>1</b><span>conversas</span></div>
+      <div><b>R$ 16,17</b><span>investido</span></div>
+      <div><b>2.81%</b><span>CTR</span></div>
+      <div><b>1 de 1 responderam</b><span>continuaram a conversa</span></div>
+    </div>
+    
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_07_PERFIL_MANDIBULA.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_07_PERFIL_MANDIBULA.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>Você já reparou que a foto de frente engana?
+
+De perfil aparece o que a gente não vê no espelho: o ângulo da mandíbula, a projeção do queixo e a linha do pescoço. É esse conjunto que dá (ou tira) definição do rosto.
+
+Este é o antes e depois de um paciente modelo atendido em curso prático em São José do Rio Preto, com o Dr. Marcelo Germani, primeiro Doutor (PhD) em HOF do Brasil.
+
+Quer saber como está o seu perfil? Chame no WhatsApp.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_05_LINHA_DO_TEMPO.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_05_LINHA_DO_TEMPO.jpg" alt="LINHA_DO_TEMPO" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Linha Do Tempo</span><span class="pin">Pouca conversa</span></div>
+    <h4>Quero ser acompanhado</h4>
+    <p class="cr-gancho">Harmonização orofacial não é um dia de aplicação. É um protocolo.</p>
+    <div class="cr-num">
+      <div><b>R$ 17,96</b><span>por conversa</span></div>
+      <div><b>1</b><span>conversas</span></div>
+      <div><b>R$ 17,96</b><span>investido</span></div>
+      <div><b>2.63%</b><span>CTR</span></div>
+      <div><b>1 de 1 responderam</b><span>continuaram a conversa</span></div>
+    </div>
+    
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_05_LINHA_DO_TEMPO.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_05_LINHA_DO_TEMPO.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>Harmonização orofacial não é um dia de aplicação. É um protocolo.
+
+Essas quatro fotos são do mesmo paciente: no dia do primeiro atendimento, 15 dias depois, aos 5 meses e aos 6 meses. Cada etapa foi planejada — e é isso que separa um rosto harmonizado de um rosto &quot;preenchido&quot;.
+
+Estamos selecionando pacientes modelo em São José do Rio Preto para acompanhamento em curso prático com o Dr. Marcelo Germani, primeiro Doutor (PhD) em HOF do Brasil.
+
+Chame no WhatsApp para ser avaliado.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr zero">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_01_AB_HOMEM.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_01_AB_HOMEM.jpg" alt="AB_HOMEM" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Ab Homem</span><span class="pin">Sem teste justo</span></div>
+    <h4>Vaga para paciente modelo · Rio Preto</h4>
+    <p class="cr-gancho">Homem também faz harmonização — e o que mais muda não é o rosto &quot;cheio&quot;, é o contorno.</p>
+    <div class="cr-num">
+      <div><b>—</b><span>por conversa</span></div>
+      <div><b>0</b><span>conversas</span></div>
+      <div><b>R$ 13,52</b><span>investido</span></div>
+      <div><b>2.33%</b><span>CTR</span></div>
+      <div><b>—</b><span>continuaram a conversa</span></div>
+    </div>
+    <p class="ressalva">Peça masculina entregue só para mulheres — o conjunto foi montado com gênero feminino. Teste inválido.</p>
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_01_AB_HOMEM.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_01_AB_HOMEM.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>Homem também faz harmonização — e o que mais muda não é o rosto &quot;cheio&quot;, é o contorno.
+
+Queixo, mandíbula e papada: essas três coisas mudam a linha do rosto inteiro, sem deixar cara de &quot;fiz procedimento&quot;.
+
+Estamos selecionando pacientes modelo em São José do Rio Preto para o próximo curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e veja se você tem perfil. Resultados variam de pessoa para pessoa.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr zero">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_03_FAIXA_45MAIS.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_03_FAIXA_45MAIS.jpg" alt="FAIXA_45MAIS" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Faixa 45Mais</span><span class="pin">Sem teste justo</span></div>
+    <h4>Vaga para paciente modelo 45+</h4>
+    <p class="cr-gancho">Depois dos 45, o problema quase nunca é a ruga.</p>
+    <div class="cr-num">
+      <div><b>—</b><span>por conversa</span></div>
+      <div><b>0</b><span>conversas</span></div>
+      <div><b>R$ 6,45</b><span>investido</span></div>
+      <div><b>2.86%</b><span>CTR</span></div>
+      <div><b>—</b><span>continuaram a conversa</span></div>
+    </div>
+    <p class="ressalva">Recebeu R$ 6,45 de mídia num público de 25 a 65 anos. Não chegou a ter teste.</p>
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_03_FAIXA_45MAIS.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_03_FAIXA_45MAIS.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>Depois dos 45, o problema quase nunca é a ruga.
+
+É o rosto perder sustentação: o canto da boca desce, o sulco marca, o contorno some. Creme não devolve estrutura — e é aí que a harmonização entra, com plano e não com &quot;aplicar aqui e ali&quot;.
+
+Estamos selecionando pacientes modelo acima de 45 anos em São José do Rio Preto para o próximo curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e veja se você se encaixa.</pre></details>
+    </div>
+  </div>
+</article>
+
+<article class="cr zero">
+  <a class="cr-img" href="/criativos/hof-paciente-modelo/FEED_02_HERO_MULHER_JOVEM.jpg" target="_blank" rel="noopener"><img src="/criativos/hof-paciente-modelo/FEED_02_HERO_MULHER_JOVEM.jpg" alt="HERO_MULHER_JOVEM" loading="lazy" width="900" height="900"></a>
+  <div class="cr-corpo">
+    <div class="cr-top"><span class="cr-id">Hero Mulher Jovem</span><span class="pin">Sem teste justo</span></div>
+    <h4>Quero minha avaliação</h4>
+    <p class="cr-gancho">&quot;Mas eu não quero ficar com cara de quem fez.&quot;</p>
+    <div class="cr-num">
+      <div><b>—</b><span>por conversa</span></div>
+      <div><b>0</b><span>conversas</span></div>
+      <div><b>R$ 6,63</b><span>investido</span></div>
+      <div><b>2.47%</b><span>CTR</span></div>
+      <div><b>—</b><span>continuaram a conversa</span></div>
+    </div>
+    <p class="ressalva">Recebeu R$ 6,63 e 81 impressões. Não chegou a ter teste.</p>
+    <div class="cr-links">
+      <a class="ver" href="/criativos/hof-paciente-modelo/FEED_02_HERO_MULHER_JOVEM.jpg" target="_blank" rel="noopener">Abrir arte 1:1</a>
+      <a class="ver" href="/criativos/hof-paciente-modelo/STORY_02_HERO_MULHER_JOVEM.jpg" target="_blank" rel="noopener">Abrir story 9:16</a>
+      <details class="cr-copy"><summary>Ver a copy completa</summary><pre>&quot;Mas eu não quero ficar com cara de quem fez.&quot;
+
+É a frase que mais escutamos. E é exatamente por isso que o plano começa pelo contorno, não pelo volume: quando a estrutura do rosto é respeitada, ninguém percebe o procedimento — percebe você.
+
+Estamos selecionando pacientes modelo em Rio Preto para o próximo curso prático do Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp para saber se você tem perfil.</pre></details>
+    </div>
+  </div>
+</article></div>
+</section>
+
+<section class="bloco">
+  <div class="curso-cab"><div><p class="olho">Antes de tirar conclusão</p><h2>O que este teste ainda não respondeu</h2></div></div>
+  <div class="eixos">
+    <div class="eixo bom"><h3>Já dá para afirmar</h3><ul>
+      <li><b>Formato de convite ganha de antes e depois</b> na abertura de conversa — as duas peças de seleção somam quase todo o resultado do lote.</li>
+      <li><b>Autoqualificação melhora o CTR</b>: o checklist teve o maior índice de cliques de toda a conta no período.</li>
+      <li><b>O cartaz traz gente que responde</b>, não só gente que clica. É a melhor proporção de conversa continuada que já medimos aqui.</li>
+    </ul></div>
+    <div class="eixo ruim"><h3>Ainda em aberto</h3><ul>
+      <li><b>A peça masculina nunca foi testada.</b> Ela rodou dentro de um conjunto configurado só para mulheres. O conceito não foi reprovado — ele não foi julgado.</li>
+      <li><b>As peças 45+ e mulher jovem receberam cerca de R$ 6 cada.</b> É pouco para qualquer leitura; ambas voltam no próximo lote com verba e faixa etária próprias.</li>
+      <li><b>Antes e depois pode não estar errado, e sim mal endereçado.</b> A peça de perfil e mandíbula teve bom CTR e trouxe conversa — só que ao custo de R$ 16,17 por conversa. Vale rodar de novo dentro do formato de convite.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="bloco">
+  <div class="curso-cab"><div><p class="olho">Para aprovação</p><h2>As dez próximas peças</h2></div></div>
+  <p class="nota-secao">Todas partem do mesmo mecanismo das duas campeãs: <b>convite claro, critério explícito e um passo único a dar</b>. Nenhuma traz data nem valor na arte ou na copy — preço e agenda continuam só na conversa do WhatsApp. Assim que os conceitos forem aprovados, as artes são produzidas em 1:1 e 9:16.</p>
+  <div class="props">
+<article class="prop">
+  <div class="prop-top"><span class="t-n">01</span><span class="prop-pub">Amplo 25–60, Rio Preto + 50 km</span></div>
+  <h4>EDITAL COM VAGAS CONTADAS</h4>
+  <p class="prop-base">Nasce do cartaz “Procura-se”, a peça mais barata do lote (R$ 5,86 por conversa).</p>
+  <p class="prop-arte"><b>Arte:</b> Cartaz tipográfico igual ao vencedor, com o número de vagas em corpo gigante no centro e três miniaturas de resultado no rodapé.</p>
+  <pre class="prop-copy">PROCURA-SE: 6 pacientes modelo em São José do Rio Preto.
+
+São 6 vagas porque é esse o número de casos que a turma acompanha do começo ao fim. Cada paciente recebe avaliação, plano individual e procedimento conduzido pelo Dr. Marcelo Germani — primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+O que pedimos: morar em Rio Preto ou região e aceitar o registro fotográfico do caso.
+
+Quando as vagas forem preenchidas, a seleção fecha. Chame no WhatsApp para entrar.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Entrar na seleção · <b>Descrição:</b> Vagas contadas · Rio Preto</p>
+  <p class="prop-obs">O número de vagas precisa ser o real da turma — confirmar com a clínica antes de subir.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">02</span><span class="prop-pub">Amplo 25–60 + remarketing de quem engajou</span></div>
+  <h4>QUEM NÃO PODE SER PACIENTE MODELO</h4>
+  <p class="prop-base">Inversão do checklist, a peça de melhor CTR do lote (4,33%).</p>
+  <p class="prop-arte"><b>Arte:</b> Mesma diagramação do checklist, com marcas de exclusão em vez de confirmação.</p>
+  <pre class="prop-copy">Quem NÃO pode ser paciente modelo:
+
+✗ Quem não mora em São José do Rio Preto ou região
+✗ Quem não aceita registro fotográfico do antes e depois
+✗ Quem quer resolver no mesmo dia, sem avaliação
+✗ Quem está grávida ou amamentando
+
+Se nenhuma dessas é o seu caso, você pode se candidatar ao próximo curso prático conduzido pelo Dr. Marcelo Germani — primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e confirme se você tem perfil.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Ver se tenho perfil · <b>Descrição:</b> Seleção aberta · Rio Preto</p>
+  <p class="prop-obs">Filtra antes da conversa: menos lead para a equipe descartar.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">03</span><span class="prop-pub">Amplo 28–60, Rio Preto + 50 km</span></div>
+  <h4>VAGA POR REGIÃO DO ROSTO</h4>
+  <p class="prop-base">Cruza o formato de edital com o único antes/depois que gerou conversa (perfil e mandíbula).</p>
+  <p class="prop-arte"><b>Arte:</b> Cartaz dividido em três blocos, um para cada tipo de caso, com um par antes/depois pequeno em cada.</p>
+  <pre class="prop-copy">Procuramos pacientes modelo para três tipos de caso em São José do Rio Preto:
+
+· Contorno de mandíbula e papada
+· Sustentação do terço médio — sulco e canto da boca
+· Proporção de lábios e sorriso
+
+Cada caso é planejado individualmente e conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e diga o que te incomoda no seu rosto — a equipe te diz em qual caso você se encaixa. Resultados variam de pessoa para pessoa.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Ver em qual caso me encaixo · <b>Descrição:</b> Três tipos de caso · Rio Preto</p>
+  <p class="prop-obs">Serve também como leitura de demanda: mostra qual queixa aparece mais na conversa.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">04</span><span class="prop-pub">Remarketing de engajados + frio 30–55</span></div>
+  <h4>“SE É CURSO, QUEM VAI MEXER NO MEU ROSTO?”</h4>
+  <p class="prop-base">A objeção número um de quem lê “paciente modelo”. O conceito foi desenhado no lote anterior e nunca chegou a rodar.</p>
+  <p class="prop-arte"><b>Arte:</b> Fundo escuro, a pergunta entre aspas em corpo grande, credencial do professor listada abaixo.</p>
+  <pre class="prop-copy">“Se é curso, quem vai mexer no meu rosto?”
+
+Pergunta justa — e a resposta é a razão de existir essa seleção.
+
+Quem conduz é o Dr. Marcelo Germani: primeiro Doutor (PhD) em Harmonização Orofacial do Brasil, palestrante internacional, autor de artigos científicos e do livro Movement.
+
+O plano do seu rosto é feito por ele, e o procedimento acontece com ele conduzindo, do começo ao fim.
+
+Estamos selecionando pacientes modelo em São José do Rio Preto. Chame no WhatsApp para falar com a equipe.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Falar com a equipe · <b>Descrição:</b> Quem conduz o atendimento</p>
+  <p class="prop-obs">É a peça que sustenta todas as outras — se a objeção não cai, a conversa não avança.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">05</span><span class="prop-pub">Amplo 25–60</span></div>
+  <h4>O QUE VOCÊ RECEBE × O QUE PEDIMOS</h4>
+  <p class="prop-base">O que fez o cartaz funcionar foi ser um contrato claro. Esta peça leva isso ao extremo.</p>
+  <p class="prop-arte"><b>Arte:</b> Duas colunas lado a lado, dourado de um lado, branco do outro.</p>
+  <pre class="prop-copy">Ser paciente modelo é uma troca — e ela é clara desde o começo.
+
+Você recebe: avaliação individual, plano de harmonização feito para o seu rosto e procedimento conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Pedimos: que você more em Rio Preto ou região, esteja disponível na data do curso prático e aceite o registro fotográfico do caso.
+
+Se a troca faz sentido pra você, chame no WhatsApp.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Quero ser avaliado · <b>Descrição:</b> Como funciona a troca</p>
+  <p class="prop-obs">Transparência reduz a desistência entre a conversa e a avaliação.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">06</span><span class="prop-pub">Amplo 25–60 + remarketing de conversa iniciada e não respondida</span></div>
+  <h4>A SELEÇÃO EM TRÊS PASSOS</h4>
+  <p class="prop-base">Tira o atrito de quem não sabe o que acontece depois de chamar no WhatsApp.</p>
+  <p class="prop-arte"><b>Arte:</b> Numeração 1-2-3 em corpo grande, uma linha por etapa.</p>
+  <pre class="prop-copy">Como funciona a seleção de paciente modelo:
+
+1. Você chama no WhatsApp e conta o que te incomoda no seu rosto.
+2. A equipe avalia se o seu caso encaixa nos casos que a turma vai acompanhar.
+3. Encaixando, você recebe a data do atendimento e o plano feito para o seu rosto.
+
+A etapa de avaliação é sem compromisso. O curso prático é conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil, em São José do Rio Preto.
+
+Chame no WhatsApp para começar pelo passo 1.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Começar pelo passo 1 · <b>Descrição:</b> Avaliação sem compromisso</p>
+  <p class="prop-obs">Boa candidata a remarketing de quem abriu conversa e não respondeu.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">07</span><span class="prop-pub">Homens 28–55, Rio Preto + 50 km</span></div>
+  <h4>EDITAL MASCULINO</h4>
+  <p class="prop-base">O antes/depois masculino nunca foi testado de verdade: rodou em conjunto de mulheres. Agora vai no formato que ganhou e no público certo.</p>
+  <p class="prop-arte"><b>Arte:</b> Cartaz de edital com antes/depois masculino de perfil, mesma tipografia da peça vencedora.</p>
+  <pre class="prop-copy">PROCURA-SE: paciente modelo homem, em São José do Rio Preto.
+
+Homem também faz harmonização — e o que mais muda não é o rosto “cheio”, é o contorno. Queixo, mandíbula e papada mudam a linha do rosto inteiro, sem deixar cara de quem fez procedimento.
+
+O atendimento acontece durante curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e veja se você tem perfil. Resultados variam de pessoa para pessoa.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Entrar na seleção · <b>Descrição:</b> Paciente modelo · Rio Preto</p>
+  <p class="prop-obs">Só vale a leitura se rodar em conjunto exclusivo de homens.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">08</span><span class="prop-pub">Mulheres 45–65, Rio Preto + 50 km</span></div>
+  <h4>EDITAL 45+</h4>
+  <p class="prop-base">Mesmo caso do masculino: a peça 45+ recebeu R$ 6 de mídia dentro de um público de 25 a 65. Nunca teve teste.</p>
+  <p class="prop-arte"><b>Arte:</b> Cartaz de edital com antes/depois de paciente acima de 45, faixa etária destacada.</p>
+  <pre class="prop-copy">PROCURA-SE: pacientes modelo acima de 45 anos, em São José do Rio Preto.
+
+Depois dos 45 o problema quase nunca é a ruga. É o rosto perder sustentação: o canto da boca desce, o sulco marca, o contorno some. Creme não devolve estrutura.
+
+O atendimento acontece durante curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil, com plano individual para cada caso.
+
+Chame no WhatsApp e veja se você se encaixa. Resultados variam de pessoa para pessoa.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Ver se tenho perfil · <b>Descrição:</b> Seleção 45+ · Rio Preto</p>
+  <p class="prop-obs">Rodar com faixa etária fechada em 45–65, sem misturar com o público amplo.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">09</span><span class="prop-pub">Amplo 25–60 + remarketing</span></div>
+  <h4>DEPOIMENTO DE QUEM JÁ FOI PACIENTE MODELO</h4>
+  <p class="prop-base">Prova social dentro do formato de convite — responde a objeção com a voz do paciente, não da clínica.</p>
+  <p class="prop-arte"><b>Arte:</b> Foto da paciente com a frase em destaque e o crédito do atendimento.</p>
+  <pre class="prop-copy">“Entrei achando que ia ser tratada como cobaia. Saí tratada como paciente.”
+
+É o que a gente mais escuta de quem participa como paciente modelo: a avaliação é individual, o plano é do seu rosto e o procedimento acontece com o Dr. Marcelo Germani conduzindo — primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Estamos selecionando novos pacientes em São José do Rio Preto.
+
+Chame no WhatsApp para ser avaliado.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Quero ser avaliado · <b>Descrição:</b> Quem já passou pela seleção</p>
+  <p class="prop-obs">Depende de depoimento real, com autorização de uso de imagem e de fala. Sem isso, não sobe.</p>
+</article>
+
+<article class="prop">
+  <div class="prop-top"><span class="t-n">10</span><span class="prop-pub">Amplo 25–60</span></div>
+  <h4>VOCÊ NÃO PRECISA SABER O NOME DO PROCEDIMENTO</h4>
+  <p class="prop-base">Derruba a barreira de entrada da conversa — o mesmo mecanismo que fez o checklist funcionar: a pessoa entende que se qualifica.</p>
+  <p class="prop-arte"><b>Arte:</b> Tipografia pura, sem foto, com a frase principal ocupando a peça inteira.</p>
+  <pre class="prop-copy">Você não precisa chegar sabendo o nome do procedimento.
+
+Muita gente adia porque acha que precisa saber se o caso é preenchimento, bioestimulador ou toxina. Não precisa. Basta saber o que te incomoda quando você se olha no espelho — o resto é o plano que resolve.
+
+Estamos selecionando pacientes modelo em São José do Rio Preto para o próximo curso prático conduzido pelo Dr. Marcelo Germani, primeiro Doutor (PhD) em Harmonização Orofacial do Brasil.
+
+Chame no WhatsApp e diga só o que te incomoda.</pre>
+  <p class="prop-meta"><b>Título do anúncio:</b> Dizer o que me incomoda · <b>Descrição:</b> Avaliação sem compromisso</p>
+  <p class="prop-obs">Também é a peça mais barata de produzir: não depende de foto de paciente.</p>
+</article></div>
+</section>
+
+<section class="notas">
+  <h3>Notas</h3>
+  <ul>
+    <li><b>Conversa iniciada</b> é a pessoa que abriu o WhatsApp e mandou a primeira mensagem. <b>Conversa continuada</b> é quando houve resposta depois disso — o indicador mais próximo de qualidade de contato que a plataforma entrega.</li>
+    <li>Período: <b>27 a 31 de agosto de 2026</b>, cinco dias. A comparação com os anúncios antigos usa exatamente a mesma janela, para não misturar sazonalidade.</li>
+    <li>As peças rodaram por bairro, com direcionamento por ponto no mapa em regiões de Rio Preto, e não por raio ao redor de shopping — mudança feita em agosto para melhorar a qualidade do contato.</li>
+    <li>Uso de imagem dos pacientes das peças atuais: autorizado. As propostas que dependem de foto nova ou de depoimento só entram no ar com a mesma autorização assinada.</li>
+    <li>Fonte: Meta Ads, nível de anúncio. Fechamento em 31 de agosto de 2026.</li>
+  </ul>
+</section>
+</div>
