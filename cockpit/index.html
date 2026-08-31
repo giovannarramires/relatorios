@@ -49,6 +49,14 @@
   .logbar label{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
   .logbar select{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;cursor:pointer}
   footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
+  /* --- meus dados (CNPJ etc) --- */
+  .meus{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:linear-gradient(90deg,#16202e,#1a1d24);border:1px solid #2f4463;border-radius:12px;padding:12px 16px;margin-bottom:20px}
+  .meus .lbl{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .meus .val{font-size:20px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+  .meus .raz{color:var(--mut);font-size:12px}
+  .cp{padding:7px 12px;border-radius:8px;border:1px solid #35507a;background:#243042;color:#cfe3ff;font-size:12px;font-weight:600;cursor:pointer}
+  .cp:hover{background:#2c3b52}
+  .cp.ok{background:rgba(46,204,113,.18);border-color:var(--verde);color:var(--verde)}
   #app{display:none}
 </style>
 </head>
@@ -72,6 +80,18 @@
     </div>
     <div class="sub" id="atualizado"></div>
   </header>
+  <div class="meus">
+    <div>
+      <div class="lbl">Meu CNPJ</div>
+      <div class="val" id="meuCnpj">—</div>
+      <div class="raz" id="meuRaz"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-left:auto;flex-wrap:wrap">
+      <button class="cp" data-cp="fmt">Copiar CNPJ</button>
+      <button class="cp" data-cp="num">Copiar só números</button>
+      <button class="cp" data-cp="raz">Copiar razão social</button>
+    </div>
+  </div>
   <div class="kpis" id="kpis"></div>
   <section>
     <h2>🚀 Acessos rápidos — dashboards</h2>
@@ -139,6 +159,25 @@
 </div>
 
 <script>
+// ---------- meus dados (fixos, editar aqui) ----------
+const MEUS_DADOS = { cnpj: "54.109.181/0001-18", razao: "GIOVANNA RODRIGUES RAMIRES LTDA - ME", fantasia: "GIO GROWTH DIGITAL" };
+(function(){
+  const so = MEUS_DADOS.cnpj.replace(/\D/g,'');
+  document.getElementById('meuCnpj').textContent = MEUS_DADOS.cnpj;
+  const r = document.getElementById('meuRaz');
+  if (MEUS_DADOS.razao) r.textContent = MEUS_DADOS.razao + (MEUS_DADOS.fantasia ? ' · ' + MEUS_DADOS.fantasia : ''); else r.remove();
+  document.querySelectorAll('.cp').forEach(b=>{
+    if(b.dataset.cp==='raz' && !MEUS_DADOS.razao){ b.remove(); return; }
+    b.addEventListener('click', async ()=>{
+      const v = b.dataset.cp==='num' ? so : (b.dataset.cp==='raz' ? MEUS_DADOS.razao : MEUS_DADOS.cnpj);
+      try{ await navigator.clipboard.writeText(v); }
+      catch(e){ const t=document.createElement('textarea'); t.value=v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+      const antes=b.textContent; b.textContent='✓ copiado'; b.classList.add('ok');
+      setTimeout(()=>{ b.textContent=antes; b.classList.remove('ok'); }, 1400);
+    });
+  });
+})();
+
 // ---------- cripto (AES-256-GCM + PBKDF2, compatível com o gerador do n8n) ----------
 const b64ToBytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
 async function deriveKey(pw, salt){
