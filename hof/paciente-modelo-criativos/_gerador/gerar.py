@@ -154,8 +154,8 @@ HTML = f'''<title>Paciente modelo — criativos</title>
 </section>
 
 <section class="bloco">
-  <div class="curso-cab"><div><p class="olho">Para aprovação</p><h2>As dez próximas peças</h2></div></div>
-  <p class="nota-secao">Todas partem do mesmo mecanismo das duas campeãs: <b>convite claro, critério explícito e um passo único a dar</b>. Nenhuma traz data nem valor na arte ou na copy — preço e agenda continuam só na conversa do WhatsApp. <b>As dez já estão montadas</b>, em 1:1 para o feed e 9:16 para stories e reels: é só aprovar e subir.</p>
+  <div class="curso-cab"><div><p class="olho">Para aprovação</p><h2>As próximas peças</h2></div></div>
+  <p class="nota-secao">Todas partem do mesmo mecanismo das duas campeãs: <b>convite claro, critério explícito e um passo único a dar</b>. Nenhuma traz data nem valor na arte ou na copy — preço e agenda continuam só na conversa do WhatsApp. <b>Já estão montadas</b>, em 1:1 para o feed e 9:16 para stories e reels: é só aprovar e subir.</p>
   <div class="props">{props}</div>
 </section>
 
