@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acompanhamento de Resultado — Agosto · Roma Aviamentos</title>
+<style>
+  :root{
+    --primary:#1a1a2e; --accent:#e94560; --green:#00c897; --yellow:#f5a623;
+    --blue:#4a90d9; --purple:#9b59b6; --bg:#f4f6f9; --card:#fff; --text:#2c3e50;
+    --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .header{background:var(--primary);padding:30px 40px;color:#fff;}
+  .header h1{font-size:22px;font-weight:700;letter-spacing:-.5px;}
+  .header p{color:#8899aa;font-size:12.5px;margin-top:6px;}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 24px 60px;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+  .section h2{font-size:16px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px;}
+  .section .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px;}
+  .bar{width:4px;height:19px;border-radius:3px;display:inline-block;}
+  p.lead{font-size:14px;}
+  .kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;}
+  .kpi{flex:1;min-width:150px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px 18px;text-align:center;}
+  .kpi .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+  .kpi .v{font-size:22px;font-weight:800;margin-top:4px;}
+  .kpi .s{font-size:11px;color:var(--muted);margin-top:3px;}
+  .kpi.hero{background:#eef7f3;border-color:#bfe9dc;}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);border-bottom:2px solid var(--border);padding:10px 8px;}
+  thead th.r,tbody td.r{text-align:right;}
+  tbody td{padding:11px 8px;border-bottom:1px solid var(--border);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.total td{font-weight:800;background:#f8fafc;border-top:2px solid var(--border);}
+  .tag{font-size:11px;color:var(--muted);}
+  .roas{font-weight:700;color:var(--green);}
+  .note{font-size:13px;background:#eef7f3;border-left:4px solid var(--green);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .warn{font-size:13px;background:#fdf4e7;border-left:4px solid var(--yellow);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .warn b{color:#b5790f;}
+  .blue-note{font-size:13px;background:#eef3fb;border-left:4px solid var(--blue);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:6px;}
+  .step{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .step .num{font-size:12px;font-weight:800;color:var(--accent);}
+  .step b{display:block;font-size:13px;margin:4px 0 5px;}
+  .step span{font-size:12px;color:var(--muted);}
+  .foot-note{font-size:11.5px;color:var(--muted);margin-top:12px;}
+  .footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:30px;}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#eef7f3;color:#0a8f6e;margin-left:8px;vertical-align:middle;}
+  @media print{body{background:#fff;} .section{box-shadow:none;break-inside:avoid;}}
+  @media(max-width:560px){table{font-size:12px;} thead th,tbody td{padding:8px 5px;}}
+</style>
+
+<style>
+  .monthbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:30;}
+  .monthbar .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-right:4px;}
+  .monthbar a{font-size:12.5px;font-weight:700;color:var(--text);text-decoration:none;padding:5px 14px;border-radius:20px;border:1px solid var(--border);transition:.15s;}
+  .monthbar a:hover{background:#f4f6f9;}
+  .monthbar a.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+  @media print{.monthbar{display:none;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Acompanhamento de Resultado — Agosto 2026</h1>
+  <p>Roma Aviamentos · Gestão GGD · Período: 01 a 31 de agosto de 2026 (mês fechado) · Comparativos: julho/2026 e agosto/2025 · Atualizado em 01/09/2026</p>
+</div>
+<div class="monthbar"><span class="lab">Mês de referência</span><a href="../acompanhamento-julho/">Julho 2026</a><a href="../acompanhamento-agosto/" class="active">Agosto 2026</a></div>
+
+<div class="wrap">
+
+<!-- RESUMO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--accent)"></span> O mês em um parágrafo</h2>
+  <div class="sub">O que aconteceu com o faturamento e com a mídia</div>
+  <p class="lead">Agosto fechou em <strong>R$ 231.038,59</strong> de faturamento (produto + frete, fonte Octopus),
+  com <strong>1.028 pedidos</strong>. É <strong>-8,8% sobre julho</strong>
+  e <strong>-23,7% sobre agosto do ano passado</strong>.
+  O detalhe que explica o mês: <strong>vendemos mais pedidos que em julho</strong> (+3,0%),
+  mas cada pedido veio <strong>-12,6% menor</strong> — o ticket médio caiu de
+  R$ 235,10 para R$ 205,45. Não foi falta de cliente; foi o valor de cada compra.</p>
+  <div class="kpi-row">
+    <div class="kpi hero"><div class="l">Faturamento (Octopus)</div><div class="v">R$ 231.038,59</div><div class="s"><span style="color:var(--accent);font-weight:700">▼ 8,8%</span> vs. julho</div></div>
+    <div class="kpi"><div class="l">Pedidos</div><div class="v">1.028</div><div class="s"><span style="color:var(--green);font-weight:700">▲ 3,0%</span> vs. julho</div></div>
+    <div class="kpi"><div class="l">Ticket médio</div><div class="v">R$ 205,45</div><div class="s"><span style="color:var(--accent);font-weight:700">▼ 12,6%</span> vs. julho</div></div>
+    <div class="kpi"><div class="l">Mídia investida</div><div class="v">R$ 10.420,33</div><div class="s"><span style="color:var(--green);font-weight:700">▲ 19,5%</span> vs. julho</div></div>
+    <div class="kpi"><div class="l">Retorno real (MER)</div><div class="v">22,2x</div><div class="s">julho: 29,1x</div></div>
+  </div>
+  <div class="warn">⚠️ <b>O alerta do mês:</b> a mídia subiu +19,5% e o faturamento caiu -8,8%.
+  Ou seja: <b>os R$ 1.697 a mais que entraram em anúncio não trouxeram venda nova</b> — trouxeram pedido menor.
+  O retorno real por real investido caiu de 29,1x para 22,2x. É o sinal mais importante deste relatório.</div>
+</div>
+
+<!-- COMPARATIVO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--blue)"></span> Agosto/26 × Julho/26 × Agosto/25</h2>
+  <div class="sub">Mesma medida nas três colunas: mês fechado, coluna Total do Octopus</div>
+  <table>
+    <thead><tr><th>Indicador</th><th class="r">Agosto 2026</th><th class="r">Julho 2026</th><th class="r">vs. julho</th><th class="r">Agosto 2025</th><th class="r">vs. ano anterior</th></tr></thead>
+    <tbody>
+      <tr><td><b>Faturamento</b></td><td class="r"><b>R$ 231.038,59</b></td><td class="r">R$ 253.453,38</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 8,8%</span></td><td class="r">R$ 302.751,66</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 23,7%</span></td></tr>
+      <tr><td>Pedidos</td><td class="r"><b>1.028</b></td><td class="r">998</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 3,0%</span></td><td class="r">1.259</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 18,3%</span></td></tr>
+      <tr><td>Ticket médio</td><td class="r"><b>R$ 205,45</b></td><td class="r">R$ 235,10</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 12,6%</span></td><td class="r">R$ 217,97</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 5,7%</span></td></tr>
+      <tr><td>Frete cobrado</td><td class="r">R$ 19.836,42</td><td class="r">R$ 18.818,83</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 5,4%</span></td><td class="r">R$ 28.326,00</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 30,0%</span></td></tr>
+      <tr><td>Mídia investida</td><td class="r">R$ 10.420,33</td><td class="r">R$ 8.723,42</td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 19,5%</span></td><td class="r">R$ 7.462,43</td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 39,6%</span></td></tr>
+      <tr><td>Mídia sobre o faturamento</td><td class="r">4,51%</td><td class="r">3,44%</td><td class="r">—</td><td class="r">2,46%</td><td class="r">—</td></tr>
+      <tr class="total"><td>Retorno real (MER)</td><td class="r">22,2x</td><td class="r">29,1x</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 23,7%</span></td><td class="r">40,6x</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 45,3%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="blue-note">ℹ️ <b>Como ler a última linha:</b> em agosto de 2025, cada R$ 1 de anúncio convivia com 40,6x de faturamento da loja.
+  Hoje são 22,2x. Isso <b>não</b> quer dizer que o anúncio piorou pela metade — quer dizer que a loja hoje depende
+  muito mais da mídia para vender do que dependia um ano atrás: a mídia saiu de 2,46% para 4,51% do faturamento.</div>
+</div>
+
+<!-- HISTÓRICO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--purple)"></span> Agosto ao longo de 4 anos</h2>
+  <div class="sub">Mesmo mês, mesma medida — quatro anos de agosto no Octopus</div>
+  <table>
+    <thead><tr><th>Mês</th><th class="r">Faturamento</th><th class="r">Pedidos</th><th class="r">Ticket médio</th><th class="r">vs. ano anterior</th></tr></thead>
+    <tbody><tr><td><b>Agosto 2023</b></td><td class="r">R$ 420.144,16</td><td class="r">2.075</td><td class="r">R$ 181,27</td><td class="r">—</td></tr><tr><td><b>Agosto 2024</b></td><td class="r">R$ 339.478,02</td><td class="r">1.606</td><td class="r">R$ 187,39</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 19,2%</span></td></tr><tr><td><b>Agosto 2025</b></td><td class="r">R$ 302.751,66</td><td class="r">1.259</td><td class="r">R$ 217,97</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 10,8%</span></td></tr><tr><td><b>Agosto 2026</b></td><td class="r">R$ 231.038,59</td><td class="r">1.028</td><td class="r">R$ 205,45</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 23,7%</span></td></tr></tbody>
+  </table>
+  <div style="margin-top:18px"><canvas id="cAnos" height="110"></canvas></div>
+  <div class="warn">⚠️ <b>A tendência não começou este mês.</b> Agosto cai todo ano desde 2023:
+  R$ 420.144,16 → R$ 339.478,02 → R$ 302.751,66 → R$ 231.038,59.
+  Em três anos o faturamento de agosto encolheu 45% e os pedidos
+  50%.
+  <b>O que subiu foi o ticket</b> (R$ 181,27 → R$ 205,45): a loja vende para menos gente,
+  mas cada compra ficou maior. O problema estrutural é <b>volume de comprador</b>, não valor da cesta.</div>
+</div>
+
+<!-- META -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--blue)"></span> Meta Ads (Facebook / Instagram)</h2>
+  <div class="sub">Conta Roma_Aviamentos · agosto/2026 fechado · R$ 4.408,31 investidos</div>
+  <table>
+    <thead><tr><th>Campanha</th><th class="r">Investido</th><th class="r">Compras</th><th class="r">Receita atribuída</th><th class="r">Retorno</th></tr></thead>
+    <tbody>
+      <tr><td><b>Catálogo — Remarketing (CBO)</b></td><td class="r">R$ 1.282,08</td><td class="r">416</td><td class="r">R$ 73.277,05</td><td class="r"><span class="roas">57,2x</span></td></tr><tr><td><b>Catálogo — São Paulo (ABO)</b></td><td class="r">R$ 1.196,02</td><td class="r">258</td><td class="r">R$ 27.237,10</td><td class="r"><span class="roas">22,8x</span></td></tr><tr><td><b>Catálogo — Prospecção (CBO)</b></td><td class="r">R$ 1.011,19</td><td class="r">228</td><td class="r">R$ 30.213,29</td><td class="r"><span class="roas">29,9x</span></td></tr><tr><td><b>Catálogo — Remarketing Nordeste</b></td><td class="r">R$ 313,77</td><td class="r">140</td><td class="r">R$ 15.567,89</td><td class="r"><span class="roas">49,6x</span></td></tr><tr><td><b>Reconhecimento Norte/Nordeste</b></td><td class="r">R$ 191,28</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr><tr><td><b>Aquisição (CBO) — nova em ago</b></td><td class="r">R$ 136,78</td><td class="r">11</td><td class="r">R$ 701,62</td><td class="r"><span class="roas">5,1x</span></td></tr><tr><td><b>Catálogo — TOP10 Artesanato</b></td><td class="r">R$ 105,28</td><td class="r">27</td><td class="r">R$ 4.600,54</td><td class="r"><span class="roas">43,7x</span></td></tr><tr><td><b>Alcance</b></td><td class="r">R$ 100,76</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr><tr><td><b>Reconhecimento São Paulo</b></td><td class="r">R$ 48,19</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr><tr><td><b>Catálogo — TOP10 Produção</b></td><td class="r">R$ 17,68</td><td class="r">4</td><td class="r">R$ 260,60</td><td class="r"><span class="roas">14,7x</span></td></tr><tr><td><b>Catálogo — TOP10 Lingerie</b></td><td class="r">R$ 5,28</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr>
+      <tr class="total"><td>Total Meta</td><td class="r">R$ 4.408,31</td><td class="r">1.084</td><td class="r">R$ 151.858,09</td><td class="r">34,4x</td></tr>
+    </tbody>
+  </table>
+  <div class="note">✅ <b>O catálogo continua carregando a conta:</b> as quatro campanhas de catálogo somam
+  R$ 3.803,06 e 1.042 das 1.084 compras do mês.
+  O <b>remarketing</b> é disparado o melhor uso do dinheiro: R$ 1.282,08 devolveram R$ 73.277,05 (57,2x).</div>
+  <div class="blue-note">ℹ️ <b>Contra julho:</b> +6,8% de verba e +7,4% de compras,
+  mas -12,5% de receita atribuída — mesma história do faturamento real: mais pedido, pedido menor.
+  Contra agosto/25 a conta quase dobrou de tamanho (+90,5% de verba, +181,6% de compras).</div>
+  <div class="warn">⚠️ <b>Campanha de aquisição não decolou:</b> a nova campanha de prospecção de agosto gastou R$ 136,78
+  e trouxe 701,62 de receita (5,1x) em 11 compras. Enquanto ela não sustentar,
+  a conta segue dependendo de remarketing — ou seja, de gente que <b>já</b> conhecia a loja.</div>
+</div>
+
+<!-- GOOGLE -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--yellow)"></span> Google Ads</h2>
+  <div class="sub">Conta Varejo 841-012-9672 · agosto/2026 fechado · R$ 6.012,02 investidos</div>
+  <table>
+    <thead><tr><th>Campanha</th><th class="r">Investido</th><th class="r">Conversões</th><th class="r">Receita atribuída</th><th class="r">Retorno</th></tr></thead>
+    <tbody>
+      <tr><td><b>Shopping</b></td><td class="r">R$ 3.319,00</td><td class="r">326</td><td class="r">R$ 49.833,33</td><td class="r"><span class="roas" style="color:var(--green)">15,0x</span></td></tr><tr><td><b>Performance Max</b></td><td class="r">R$ 1.282,31</td><td class="r">153</td><td class="r">R$ 33.780,10</td><td class="r"><span class="roas" style="color:var(--green)">26,3x</span></td></tr><tr><td><b>Busca — Institucional #3</b></td><td class="r">R$ 1.274,11</td><td class="r">159</td><td class="r">R$ 39.031,99</td><td class="r"><span class="roas" style="color:var(--green)">30,6x</span></td></tr><tr><td><b>Shopping — Curva-A-Real TOP84</b></td><td class="r">R$ 136,60</td><td class="r">2</td><td class="r">R$ 89,81</td><td class="r"><span class="roas" style="color:var(--accent)">0,7x</span></td></tr>
+      <tr class="total"><td>Total Google</td><td class="r">R$ 6.012,02</td><td class="r">640</td><td class="r">R$ 122.735,23</td><td class="r">20,4x</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ <b>Onde entrou a verba nova e onde ela rendeu menos:</b> o Google subiu +30,8%
+  (de R$ 4.597,26 para R$ 6.012,02) e devolveu só +7,9% de receita.
+  O retorno caiu de 24,8x para 20,4x.
+  O <b>Shopping</b> concentra 55% da verba a 15,0x, enquanto
+  <b>Institucional</b> (30,6x) e <b>PMax</b> (26,3x) rendem o dobro com menos dinheiro.</div>
+  <div class="note">✅ <b>Ação clara:</b> a Curva-A-Real TOP84 gastou R$ 136,60 para 0,66x — pausar.
+  E vale mover verba do Shopping geral para Institucional e PMax, que estão entregando 2x mais por real.</div>
+  <div class="blue-note">ℹ️ <b>Contra agosto/25:</b> +16,8% de verba e -19,9% de receita —
+  o Google perdeu eficiência no ano (29,8x → 20,4x), com
+  -18,8% de conversões.</div>
+</div>
+
+<!-- PREVISÃO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--green)"></span> Previsibilidade — Setembro 2026</h2>
+  <div class="sub">O que três setembros de histórico no Octopus permitem projetar</div>
+  <table>
+    <thead><tr><th>Ano</th><th class="r">Agosto</th><th class="r">Setembro</th><th class="r">Setembro × Agosto</th><th class="r">Pedidos ago → set</th></tr></thead>
+    <tbody>
+      <tr><td><b>2023</b></td><td class="r">R$ 420.144,16</td><td class="r">R$ 340.164,98</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 19,0%</span></td><td class="r">2.075 → 1.731</td></tr>
+      <tr><td><b>2024</b></td><td class="r">R$ 339.478,02</td><td class="r">R$ 368.476,63</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 8,5%</span></td><td class="r">1.606 → 1.733</td></tr>
+      <tr><td><b>2025</b></td><td class="r">R$ 302.751,66</td><td class="r">R$ 336.062,98</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 11,0%</span></td><td class="r">1.259 → 1.349</td></tr>
+      <tr class="total"><td>2026</td><td class="r">R$ 231.038,59</td><td class="r">projeção abaixo</td><td class="r">—</td><td class="r">1.028 → ?</td></tr>
+    </tbody>
+  </table>
+  <div class="kpi-row">
+    <div class="kpi"><div class="l">Conservador</div><div class="v" style="color:var(--muted)">R$ 231,0 mil</div><div class="s">agosto se repete, sem sazonalidade</div></div>
+    <div class="kpi hero"><div class="l">Cenário base</div><div class="v" style="color:#0a8f6e">R$ 253,6 mil</div><div class="s">média de 2024 e 2025 (+9,8%)</div></div>
+    <div class="kpi"><div class="l">Otimista</div><div class="v" style="color:var(--blue)">R$ 256,5 mil</div><div class="s">repete o padrão de 2025 (+11,0%)</div></div>
+  </div>
+  <div style="margin-top:20px"><canvas id="cPrev" height="110"></canvas></div>
+  <div class="note">✅ <b>Duas contas independentes chegam ao mesmo lugar.</b> Pela sazonalidade (setembro subiu 8,5% em 2024 e 11,0% em 2025),
+  setembro/26 fica em torno de <b>R$ 253,6 mil</b>. Pelo outro caminho — manter contra setembro/25 o mesmo gap de
+  -23,7% que agosto registrou — o resultado é <b>R$ 256,5 mil</b>.
+  Os dois métodos convergem na faixa de <b>R$ 253,6 mil a R$ 256,5 mil</b>. É esse o número para trabalhar.</div>
+  <div class="warn">⚠️ <b>O que pode derrubar a projeção:</b> 2023 mostra que setembro nem sempre sobe (caiu 19,0% naquele ano).
+  E há um risco concreto no caminho: <b>a conta do Meta ficou sem saldo no fim de agosto</b> e a verba diária foi cortada nos últimos dias do mês.
+  Se a recarga não acontecer no começo de setembro, o cenário conservador (R$ 231,0 mil) passa a ser o mais provável —
+  a projeção pressupõe mídia rodando o mês inteiro.</div>
+  <div class="blue-note">ℹ️ <b>O que muda a projeção para cima:</b> (1) mover verba do Shopping geral para Institucional e PMax,
+  que rendem o dobro por real; (2) fazer a campanha de aquisição funcionar — hoje a conta vive de remarketing;
+  (3) atacar o ticket médio, que caiu -12,6% em um mês e é a causa direta da queda de agosto.</div>
+</div>
+
+<!-- PRÓXIMOS PASSOS -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--yellow)"></span> Próximos passos</h2>
+  <div class="sub">Prioridade por impacto sobre o faturamento de setembro</div>
+  <div class="steps">
+    <div class="step"><div class="num">01</div><b>Garantir saldo da conta de anúncios</b><span>A verba foi cortada no fim de agosto por falta de saldo. Sem mídia rodando o mês inteiro, nenhuma projeção se sustenta. É a primeira coisa.</span></div>
+    <div class="step"><div class="num">02</div><b>Pausar a Curva-A-Real TOP84</b><span>R$ 136,60 para 0,66x de retorno. Dinheiro parado que pode ir para PMax.</span></div>
+    <div class="step"><div class="num">03</div><b>Realocar verba dentro do Google</b><span>Institucional (30,6x) e PMax (26,3x) rendem o dobro do Shopping (15,0x) e recebem menos.</span></div>
+    <div class="step"><div class="num">04</div><b>Atacar o ticket médio</b><span>Caiu -12,6% em um mês. Kits, frete grátis por faixa de valor e sugestão de produto no carrinho são as alavancas.</span></div>
+    <div class="step"><div class="num">05</div><b>Fazer a aquisição funcionar</b><span>A conta do Meta hoje vive de remarketing. Sem público novo entrando, o remarketing seca — e ele é quem entrega 48% da receita.</span></div>
+    <div class="step"><div class="num">06</div><b>Preparar outubro e Black Friday</b><span>Outubro e novembro são historicamente os meses fortes do ano. O planejamento precisa começar em setembro.</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  Fontes: Sistema Octopus (faturamento — coluna Total, produto + frete, mês fechado) · Meta Ads (conta Roma_Aviamentos) e Google Ads (conta Varejo) via Windsor.ai.<br>
+  Comparativos de julho/2026 e agosto/2025 na mesma janela. Projeção de setembro a partir dos setembros de 2023, 2024 e 2025 no Octopus.<br>
+  Roma Aviamentos · Gestão GGD · leitura de 01/09/2026.
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  const fmt = v => 'R$ ' + (v/1000).toFixed(0) + ' mil';
+  new Chart(document.getElementById('cAnos'), {
+    type:'bar',
+    data:{labels:['Ago 2023','Ago 2024','Ago 2025','Ago 2026'],
+      datasets:[{label:'Faturamento de agosto',
+        data:[420144,339478,302752,231039],
+        backgroundColor:['#9b59b6','#4a90d9','#f5a623','#e94560'],borderRadius:6}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
+      scales:{y:{ticks:{callback:fmt},grid:{color:'#eef1f5'}},x:{grid:{display:false}}}}
+  });
+  new Chart(document.getElementById('cPrev'), {
+    type:'bar',
+    data:{labels:['Julho 2026\n(real)','Agosto 2026\n(real)','Setembro 2026\n(conservador)','Setembro 2026\n(base)','Setembro 2026\n(otimista)'],
+      datasets:[{label:'Faturamento',
+        data:[253453,231039,231039,253617,256459],
+        backgroundColor:['#4a90d9','#e94560','#c9ced6','#00c897','#7fd4bd'],borderRadius:6}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
+      scales:{y:{ticks:{callback:fmt},grid:{color:'#eef1f5'}},x:{grid:{display:false}}}}
+  });
+</script>
+</body>
+</html>
