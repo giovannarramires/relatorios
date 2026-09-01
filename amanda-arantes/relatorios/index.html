@@ -140,6 +140,17 @@
   .mes{display:none}
   .mes.on{display:block}
 
+  /* PDF (Chrome headless --print-to-pdf): sem a barra de meses e com os fundos
+     coloridos preservados. Abra a URL com #<mes> para escolher o mês impresso. */
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .monthbar{display:none !important}
+    section{break-inside:auto}
+    .creative,.winner,.followers,.ins,.teste-col{break-inside:avoid}
+    /* o card "solo" é alto demais: se não puder quebrar, sobra meia página em branco */
+    .creatives.solo .creative{break-inside:auto}
+  }
+
   @media(max-width:900px){
     .kpis{grid-template-columns:repeat(2,1fr)}
     .winner{grid-template-columns:1fr}
@@ -345,7 +356,7 @@
       <div class="insights">
         <div class="ins"><div class="ins-i">💛</div><div><h4>A campanha de perfil ficou 26% mais barata</h4><p>“Amor de Mãe” trouxe <b>10.443 visitas ao perfil</b> — 32% a mais que em julho — gastando R$ 15 a menos. O custo por visita caiu de R$ 0,08 para <b>R$ 0,06</b>. Maternidade e vida real seguem sendo o que traz o público certo.</p></div></div>
         <div class="ins"><div class="ins-i">🎬</div><div><h4>Impulsionar pelo botão custa caro</h4><p>O mesmo vídeo entregue pela campanha estruturada custou <b>5,7x menos por impressão</b> e <b>10,8x menos por play</b>. Foram 27.460 plays por R$ 223 contra 4.978 plays por R$ 436 no botão. É por aqui que o media kit cresce sem aumentar verba.</p></div></div>
-        <div class="ins"><div class="ins-i">📈</div><div><h4>Custo por seguidor voltou a cair</h4><p>Fechou o mês em <b>R$ 0,73</b> (julho: R$ 0,76) e a segunda quinzena em <b>R$ 0,65</b>. A conta ganhou <b>{num(AGO_NOVOS)} seguidores novos</b> e passou dos 57,9 mil.</p></div></div>
+        <div class="ins"><div class="ins-i">📈</div><div><h4>Custo por seguidor voltou a cair</h4><p>Fechou o mês em <b>R$ 0,73</b> (julho: R$ 0,76) e a segunda quinzena em <b>R$ 0,65</b>. A conta ganhou <b>1.772 seguidores novos</b> e passou dos 57,9 mil.</p></div></div>
         <div class="ins"><div class="ins-i">🪩</div><div><h4>Carrossel não gera número de vídeo</h4><p>O post em carrossel consumiu R$ 38,05 e fez 6 plays de 3s — carrossel não roda como vídeo. Para a frente de media kit, só entram posts em vídeo.</p></div></div>
       </div>
       <div class="proximos">
