@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dr. Giácomo Trojan — Reconhecimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef2f7;--surface:#fff;--border:#e3e8ef;--text:#101a26;--text-2:#4a5768;--text-3:#93a1b3;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow:0 4px 12px rgba(0,0,0,.08);
+--shadow-lg:0 10px 30px rgba(0,0,0,.13);--radius:14px;
+--c1:#123c5a;--c2:#2f8f8a;--c3:#d4a24c;--ink:#08192b;
+--ok:#0f8a5f;--wait:#b07d10;--bad:#c0392b;--off:#8593a5}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.brandstrip{background:var(--ink);color:#fff;text-align:center;font-family:'Space Grotesk',sans-serif;
+font-weight:700;letter-spacing:5px;font-size:12px;padding:7px 0;text-transform:uppercase}
+.brandstrip span{color:var(--c3)}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 135%);padding:0 32px;min-height:78px;
+display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:100;
+box-shadow:0 4px 20px rgba(0,0,0,.22);flex-wrap:wrap}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.logo{width:50px;height:50px;border-radius:13px;background:var(--ink);display:flex;align-items:center;
+justify-content:center;font-family:'Space Grotesk',sans-serif;border:2px solid rgba(255,255,255,.35);flex-shrink:0}
+.logo b{color:#fff;font-size:21px}
+.header-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.6px}
+.header-sub{font-size:11.5px;color:rgba(255,255,255,.86);letter-spacing:.3px;margin-top:2px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;
+padding:7px 15px;border-radius:20px;font-size:12.5px;font-weight:700;white-space:nowrap;margin:12px 0}
+.container{max-width:1280px;margin:0 auto;padding:20px 32px 44px}
+.watermark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;
+color:var(--text-3);text-align:right;text-transform:uppercase;opacity:.6;margin:2px 0 14px}
+.watermark span{color:var(--c2)}
+.aviso{display:flex;gap:14px;align-items:flex-start;background:#fff8e6;border:1px solid #f0dca8;
+border-left:5px solid var(--c3);border-radius:12px;padding:15px 18px;margin-bottom:18px;
+font-size:13.5px;line-height:1.55;color:#5d4a1c}
+.aviso span{font-size:20px;line-height:1}
+.hero{background:linear-gradient(135deg,var(--ink) 0%,var(--c1) 92%,var(--c2) 165%);border-radius:18px;
+padding:22px 26px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero::after{content:'🦷';position:absolute;right:22px;bottom:-18px;font-size:100px;opacity:.07}
+.hero-label{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;
+font-size:12px;color:var(--c3);font-weight:700;margin-bottom:14px}
+.hero-label span{color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.3px;text-transform:none}
+.hero-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.hero-box{flex:1;min-width:158px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+border-radius:12px;padding:15px 18px}
+.hero-box.total{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5)}
+.hb-l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:7px}
+.hb-v{font-size:25px;font-weight:900;letter-spacing:-.5px}
+.hb-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px}
+.hero-op{align-self:center;font-size:24px;font-weight:300;color:rgba(255,255,255,.45)}
+.section-header{display:flex;align-items:baseline;gap:10px;margin:30px 0 14px;flex-wrap:wrap}
+.section-tag{width:4px;height:20px;background:var(--c2);border-radius:3px;align-self:center}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.section-hint{font-size:11.5px;color:var(--text-3)}
+.section-hint b{color:var(--c2)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);
+border-top:3px solid var(--c2)}
+.kpi.destaque{border-top-color:var(--c3)}
+.kpi-l{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);font-weight:700}
+.kpi-v{font-family:'Space Grotesk',sans-serif;font-size:29px;font-weight:700;letter-spacing:-.6px;margin:8px 0 4px}
+.kpi-s{font-size:11.5px;color:var(--text-2);line-height:1.45}
+.grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+.card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:13.5px;text-transform:uppercase;letter-spacing:.8px;
+color:var(--text-2);margin-bottom:4px}
+.card .cap{font-size:11.5px;color:var(--text-3);margin-bottom:16px}
+.ret-linha{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.ret-rot{width:40px;font-size:12px;font-weight:700;color:var(--text-2);flex-shrink:0}
+.ret-trilho{flex:1;height:16px;background:#eef2f7;border-radius:8px;overflow:hidden}
+.ret-barra{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.ret-val{width:104px;text-align:right;font-size:12.5px;font-weight:700;flex-shrink:0}
+.ret-val em{display:block;font-style:normal;font-size:11px;font-weight:600;color:var(--text-3)}
+.mini{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mini div{background:#f6f8fb;border-radius:10px;padding:12px 14px}
+.mini b{display:block;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:2px}
+.mini span{font-size:11.5px;color:var(--text-2)}
+.st-row{display:grid;grid-template-columns:76px minmax(150px,1.1fr) 2fr auto;gap:12px;align-items:center;
+padding:11px 0;border-bottom:1px solid var(--border);font-size:13px}
+.st-row:last-child{border-bottom:0}
+.st-row.filho{padding-left:18px} .st-row.neto{padding-left:36px}
+.st-tipo{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);font-weight:700}
+.st-nome{font-weight:700;word-break:break-word}
+.st-meta{font-size:11.5px;color:var(--text-2);line-height:1.5}
+.pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;color:#fff}
+.pill.ok{background:var(--ok)} .pill.wait{background:var(--wait)}
+.pill.bad{background:var(--bad)} .pill.off{background:var(--off)}
+.cri-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.cri-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;
+display:flex;flex-direction:column}
+.cri-capa{position:relative;display:block;background:#08192b;aspect-ratio:9/16;max-height:420px;overflow:hidden}
+.cri-capa img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.cri-capa:hover img{transform:scale(1.04)}
+.cri-capa .play{position:absolute;inset:0;margin:auto;width:62px;height:62px;border-radius:50%;
+background:rgba(255,255,255,.92);color:var(--c1);font-size:23px;display:flex;align-items:center;
+justify-content:center;padding-left:5px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.cri-capa .ver{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(8,25,43,.9));
+color:#fff;font-size:12.5px;font-weight:700;padding:26px 14px 12px;text-align:center}
+.cri-video{width:100%;aspect-ratio:9/16;max-height:420px;background:#000;display:block}
+.sem-capa{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-3);font-size:12px}
+.cri-info{padding:15px 17px 16px;display:flex;flex-direction:column;gap:9px}
+.cri-topo{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.cri-nome{font-weight:700;font-size:13px;line-height:1.35;word-break:break-word}
+.cri-sub{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;margin-top:-6px}
+.cri-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.cri-nums div{background:#f6f8fb;border-radius:9px;padding:9px 10px;font-size:10.5px;color:var(--text-2);line-height:1.3}
+.cri-nums span{display:block;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.cri-links{font-size:11.5px;color:var(--text-3)}
+.cri-links a{color:var(--c2);font-weight:700;text-decoration:none}
+.cri-links a:hover{text-decoration:underline}
+.graf{width:100%;height:auto}
+.gv{font-size:11px;font-weight:700;fill:var(--text-2);text-anchor:middle;font-family:'Inter',sans-serif}
+.gx{font-size:11px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.leg{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-3);margin-top:6px;flex-wrap:wrap}
+.ldot{width:11px;height:11px;border-radius:3px;display:inline-block}
+.ldot.bar{background:var(--c1)} .ldot.lin{background:var(--c3);border-radius:50%;margin-left:12px}
+.tab-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:760px}
+th{background:#f6f8fb;padding:11px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--text-3);font-weight:700;white-space:nowrap}
+th.l,td.l{text-align:left} th.d,td.d{text-align:right;font-weight:700}
+td{padding:11px 12px;text-align:right;border-bottom:1px solid var(--border)}
+td.l em{display:block;font-style:normal;font-size:11px;color:var(--text-3);margin-top:2px}
+tbody tr:hover{background:#f9fbfd}
+.vazio{padding:26px;text-align:center;color:var(--text-3);font-size:13px;background:#f6f8fb;border-radius:12px;line-height:1.6}
+.rodape{margin-top:34px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;
+color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:980px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}
+.hero-op{display:none}}
+@media(max-width:620px){.container{padding:16px 16px 34px}.header{padding:0 18px}
+.kpi-grid{grid-template-columns:1fr}.st-row{grid-template-columns:1fr auto;gap:6px}
+.st-tipo{grid-column:1/-1}.st-meta{grid-column:1/-1}}
+</style></head><body>
+<div class="brandstrip">GIO <span>GROWTH</span> DIGITAL</div>
+<div class="header">
+  <div class="header-left">
+    <div class="logo"><b>GG</b></div>
+    <div><div class="header-title">DR. GIÁCOMO TROJAN</div>
+    <div class="header-sub">Reconhecimento · topo de funil · Meta Ads</div></div>
+  </div>
+  <div class="header-badge">no ar desde 01/09 · dados até 01/set</div>
+</div>
+<div class="container">
+<div class="watermark">GIO <span>GROWTH</span> DIGITAL</div>
+<div class="aviso"><span>⏳</span><div>
+          <b>Aguardando a primeira entrega.</b> Os números ainda estão zerados porque a campanha ainda não teve entrega no período.
+          A estrutura abaixo já é a que está no ar de verdade, lida da conta agora.</div></div>
+
+<div class="hero">
+  <div class="hero-label">Investimento <span>— o que saiu do caixa no período</span></div>
+  <div class="hero-row">
+    <div class="hero-box"><div class="hb-l">Mídia</div><div class="hb-v">R$ 0,00</div>
+      <div class="hb-s">o que foi para o leilão do Meta</div></div>
+    <div class="hero-op">+</div>
+    <div class="hero-box"><div class="hb-l">Imposto (13,83%)</div><div class="hb-v">R$ 0,00</div>
+      <div class="hb-s">ISS + IOF sobre a mídia</div></div>
+    <div class="hero-op">=</div>
+    <div class="hero-box total"><div class="hb-l">Total pago</div><div class="hb-v">R$ 0,00</div>
+      <div class="hb-s">0 dia(s) com entrega</div></div>
+  </div>
+</div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Alcance — o que a campanha existe para fazer</span>
+  <span class="section-hint">campanha de reconhecimento se mede por <b>quanta gente nova viu</b>, e por quanto custou cada mil</span></div>
+<div class="kpi-grid">
+  <div class="kpi destaque"><div class="kpi-l">Pessoas alcançadas</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">pessoas diferentes que viram o Dr. pelo menos uma vez</div></div>
+  <div class="kpi"><div class="kpi-l">Impressões</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">quantas vezes o anúncio apareceu na tela</div></div>
+  <div class="kpi"><div class="kpi-l">Frequência</div>
+    <div class="kpi-v">—
+      </div>
+    <div class="kpi-s">quantas vezes a mesma pessoa viu</div></div>
+  <div class="kpi"><div class="kpi-l">Custo por mil alcançadas</div>
+    <div class="kpi-v">R$ 0,00</div>
+    <div class="kpi-s">CPM (por mil impressões): R$ 0,00</div></div>
+</div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">O vídeo que está rodando</span>
+  <span class="section-hint">clique na capa para <b>ver o criativo</b> — e veja até onde as pessoas assistem</span></div>
+<div class="grid-2">
+  <div class="cri-grid"><div class="cri-card">
+          <a class="cri-capa" href="https://www.instagram.com/p/DcwdQIvsG3v/" target="_blank" rel="noopener"><img src="criativos/ad_se_seu_medo_pele_retirada.jpg" alt="AD_SE_SEU_MEDO_PELE_RETIRADA" loading="lazy"><span class="play">▶</span><span class="ver">ver o vídeo ↗</span></a>
+          <div class="cri-info">
+            <div class="cri-topo">
+              <div class="cri-nome">AD_SE_SEU_MEDO_PELE_RETIRADA</div>
+              <span class="pill ok">Ativo</span>
+            </div>
+            <div class="cri-sub">VIDEO · 42s</div>
+            <div class="cri-nums">
+              <div><span>0</span>pessoas alcançadas</div>
+              <div><span>0</span>viram 3s</div>
+              <div><span>0</span>ThruPlay</div>
+              <div><span>—</span>foram até o fim</div>
+              <div><span>R$ 0,00</span>investido</div>
+              <div><span>R$ 0,00</span>CPM</div>
+            </div>
+            <div class="cri-links"><a href="https://www.instagram.com/p/DcwdQIvsG3v/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_919457674111008" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120250880860110737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
+          </div></div></div>
+  <div class="card">
+    <h3>Retenção do vídeo</h3>
+    <div class="cap">de cada 100 que começaram a ver, quantas continuaram</div>
+    <div class="vazio">Ainda sem reproduções — o vídeo aparece aqui assim que a campanha começar a entregar.</div>
+    <div class="mini" style="margin-top:18px">
+      <div><b>0</b><span>ThruPlay (15s ou até o fim)</span></div>
+      <div><b>0,0s</b><span>tempo médio assistido</span></div>
+      <div><b>R$ 0,00</b><span>custo por ThruPlay</span></div>
+      <div><b>—</b><span>das impressões viraram 3s de vídeo</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Reconhecimento virou ação?</span>
+  <span class="section-hint">topo de funil não vende — mas deixa rastro: <b>engajamento, perfil e conversa</b></span></div>
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-l">Engajamento com o post</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">0 reações · 0 comentários ·
+      0 compart. · 0 salvos</div></div>
+  <div class="kpi"><div class="kpi-l">Visitas ao perfil</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">gente que foi conhecer o @drgiacomogtrojan</div></div>
+  <div class="kpi"><div class="kpi-l">Cliques / CTR</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">CTR 0,0% ·
+      0 no link</div></div>
+  <div class="kpi destaque"><div class="kpi-l">Conversas iniciadas</div>
+    <div class="kpi-v">0</div>
+    <div class="kpi-s">a campanha de alcance não otimiza por conversa — o que vier aqui é bônus</div></div>
+</div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Dia a dia</span>
+  <span class="section-hint">barra = gente nova por dia · linha = <b>frequência acumulada</b> (o freio da campanha)</span></div>
+<div class="card"><div class="vazio">O gráfico começa no primeiro dia de entrega.</div></div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Desempenho por anúncio</span></div>
+<div class="card"><div class="vazio">A tabela por anúncio aparece no primeiro dia de entrega.</div></div>
+
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Como a campanha está montada</span>
+  <span class="section-hint">lido da conta <b>agora</b> — status, público e verba de verdade</span></div>
+<div class="card"><div class="st-row">
+          <span class="st-tipo">Campanha</span>
+          <span class="st-nome">[GGD][ALCANCE][TOPO_FUNIL]</span>
+          <span class="st-meta">Reconhecimento</span>
+          <span class="pill ok">Ativo</span></div>
+<div class="st-row filho">
+              <span class="st-tipo">Conjunto</span>
+              <span class="st-nome">GEO_38_64_FEM</span>
+              <span class="st-meta">Balneário Camboriú · mulheres 38–64 ·
+                 R$ 10,00/dia · otimiza por
+                 <b>Impressões</b> · segmentação manual</span>
+              <span class="pill ok">Ativo</span></div>
+<div class="st-row neto">
+                  <span class="st-tipo">Anúncio</span>
+                  <span class="st-nome">AD_SE_SEU_MEDO_PELE_RETIRADA</span>
+                  <span class="st-meta"></span>
+                  <span class="pill ok">Ativo</span></div></div>
+
+<div class="rodape">
+  <span>Conta Meta 595009265656090 · atualizado em 01/09/2026</span>
+  <span>Gio Growth Digital</span>
+</div>
+</div></body></html>
