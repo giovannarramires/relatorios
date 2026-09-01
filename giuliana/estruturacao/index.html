@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Giuliana Marketing — Estruturação da operação de tráfego · 01/09/2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --accent:#127a63; --accent-soft:#e3f1ec;
+    --warn:#b4551d; --warn-soft:#fdf0e5;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --accent:#48c3a0; --accent-soft:#123027;
+      --warn:#e6a54a; --warn-soft:#33260f;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(25px,4.2vw,36px);letter-spacing:-.02em;line-height:1.12;margin-bottom:12px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:68ch;margin-bottom:10px}
+  .who{font-size:13px;color:var(--ink-soft);margin-bottom:26px}
+  .who b{color:var(--ink)}
+
+  /* índice */
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:30px}
+  .toc p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:10px}
+  .toc ol{margin-left:18px;font-size:13.5px;color:var(--ink-soft);columns:2;column-gap:28px}
+  .toc li{margin-bottom:5px;break-inside:avoid}
+  .toc a{color:var(--ink-soft);text-decoration:none}
+  .toc a:hover{color:var(--accent)}
+  @media(max-width:620px){.toc ol{columns:1}}
+
+  /* stat tiles */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-bottom:32px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 17px}
+  .stat .v{font-size:26px;font-weight:760;letter-spacing:-.02em;line-height:1.1;color:var(--accent)}
+  .stat .l{font-size:12.5px;color:var(--ink-soft);margin-top:5px;line-height:1.35}
+
+  h2.sec{font-size:19px;font-weight:720;letter-spacing:-.015em;margin:34px 0 6px;padding-top:8px;display:flex;align-items:center;gap:10px}
+  h2.sec .n{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:800;flex:none}
+  .sec-lede{font-size:14px;color:var(--ink-soft);margin-bottom:14px;max-width:70ch}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:14px}
+  .card h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--ink-soft);margin-bottom:8px}
+  .card p:last-child{margin-bottom:0}
+  .card b{color:var(--ink)}
+  ul.inner{margin:6px 0 4px 20px;font-size:14px;color:var(--ink-soft)}
+  ul.inner li{margin-bottom:7px}
+  ul.inner b{color:var(--ink)}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px;font-size:13.5px}
+  th{text-align:left;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);padding:10px 14px;border-bottom:1px solid var(--line);background:var(--line-soft)}
+  td{padding:10px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--ink);font-weight:650}
+  .scroll{overflow-x:auto;margin-bottom:16px}
+  .scroll table{margin-bottom:0}
+  code{background:var(--line-soft);border-radius:5px;padding:1px 6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--ink)}
+
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .ok{color:#0c7a54;background:#d6f2e5}
+  .next{color:var(--warn);background:var(--warn-soft)}
+  @media (prefers-color-scheme: dark){.ok{color:#7ff0c2;background:#12362a}}
+
+  /* timeline */
+  .tl{position:relative;margin:6px 0 20px;padding-left:26px}
+  .tl:before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-item{position:relative;margin-bottom:18px}
+  .tl-item:before{content:"";position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+  .tl-item h4{font-size:14.5px;font-weight:700;margin-bottom:4px}
+  .tl-item p{font-size:13.5px;color:var(--ink-soft)}
+  .tl-item .st{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:3px}
+
+  /* antes x depois */
+  .ba{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px}
+  .ba .t{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:4px}
+  .ba .b1{font-size:14px;color:var(--ink-soft)}
+  .ba .b2{font-size:14px;color:var(--ink);font-weight:650}
+  .ba .arw{color:var(--accent);font-size:20px;font-weight:700}
+  .ba-h{font-size:14.5px;font-weight:700;grid-column:1/-1;margin-bottom:2px}
+  @media(max-width:620px){.ba{grid-template-columns:1fr}.ba .arw{transform:rotate(90deg);justify-self:start}}
+
+  .note{font-size:13px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:14px}
+  .note b{color:var(--ink)}
+  .warnbox{background:var(--warn-soft);border:1px solid color-mix(in srgb, var(--warn) 35%, var(--line));border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);margin-bottom:14px}
+  .warnbox b{color:var(--warn)}
+
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:16px}
+  .lk{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;text-decoration:none}
+  .lk:hover{border-color:var(--accent)}
+  .lk .ic{font-size:19px}
+  .lk h3{font-size:14.5px;font-weight:700;color:var(--ink);margin:6px 0 4px}
+  .lk p{font-size:12.5px;color:var(--ink-soft)}
+
+  dl.gloss{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:6px 20px}
+  dl.gloss div{padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  dl.gloss div:last-child{border-bottom:none}
+  dl.gloss dt{font-size:13.5px;font-weight:700;margin-bottom:3px}
+  dl.gloss dd{font-size:13.5px;color:var(--ink-soft)}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Gio Growth Digital · Giuliana Marketing</div>
+  <h1>Estruturação da operação de tráfego</h1>
+  <p class="lede">Relatório do trabalho executado em <b>1º de setembro de 2026</b> — o dia de abertura da operação. O objetivo do dia era um só: deixar a base pronta para que cada real investido em anúncio seja medido até a venda, antes de qualquer verba entrar no ar.</p>
+  <p class="who">Produto: <b>Mapa da Criação de Conteúdo para Dentistas</b> · Página: <b>www.giulianamarketing.com.br</b> · Checkout: <b>Hubla</b></p>
+
+  <div class="toc">
+    <p>Neste relatório</p>
+    <ol>
+      <li><a href="#resumo">Resumo do dia</a></li>
+      <li><a href="#diagnostico">Ponto de partida</a></li>
+      <li><a href="#linha">Linha do tempo do trabalho</a></li>
+      <li><a href="#acessos">Governança e acessos</a></li>
+      <li><a href="#rastreamento">Rastreamento criado</a></li>
+      <li><a href="#funil">O funil de medição</a></li>
+      <li><a href="#correcoes">Correções aplicadas</a></li>
+      <li><a href="#validacao">Como validamos</a></li>
+      <li><a href="#materiais">Materiais entregues</a></li>
+      <li><a href="#proximos">Próximos passos</a></li>
+      <li><a href="#glossario">Glossário</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <h2 class="sec" id="resumo"><span class="n">1</span>Resumo do dia</h2>
+  <p class="sec-lede">Em um único dia a operação saiu de <b>zero medição</b> para um funil rastreado ponta a ponta — da visita na página até a compra aprovada no checkout.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="v">7</div><div class="l">ativos digitais organizados e sob gestão</div></div>
+    <div class="stat"><div class="v">2</div><div class="l">ferramentas de medição criadas do zero (GTM e GA4)</div></div>
+    <div class="stat"><div class="v">6</div><div class="l">etapas do funil mapeadas e atribuídas</div></div>
+    <div class="stat"><div class="v">8&nbsp;meses</div><div class="l">é o tempo que o pixel estava sem registrar — voltou a funcionar hoje</div></div>
+    <div class="stat"><div class="v">3</div><div class="l">falhas técnicas encontradas e corrigidas</div></div>
+    <div class="stat"><div class="v">100%</div><div class="l">dos eventos validados em teste real no navegador</div></div>
+  </div>
+
+  <div class="note">
+    <b>Em uma frase:</b> a estrutura de medição está pronta e comprovadamente funcionando. O que segue em aberto são decisões de negócio e a montagem das campanhas — nada mais depende de código.
+  </div>
+
+  <!-- 2 -->
+  <h2 class="sec" id="diagnostico"><span class="n">2</span>Ponto de partida</h2>
+  <p class="sec-lede">Antes de montar qualquer coisa, fizemos o levantamento completo do que existia. É o passo que evita investir verba em uma estrutura que não consegue provar retorno.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>O que checamos</th><th>Como estava em 01/09</th><th>Por que isso importa</th></tr></thead>
+    <tbody>
+      <tr><td>Landing page</td><td>Página em HTML estático, sem nenhum código de medição instalado — nem Pixel da Meta, nem Google Analytics, nem gerenciador de tags</td><td>Sem código na página, nenhuma visita chega às plataformas: não há como criar público nem otimizar anúncio</td></tr>
+      <tr><td>Checkout (Hubla)</td><td>Sem pixel configurado na oferta</td><td>Sem isso a compra não volta para a Meta e o anúncio nunca aprende quem compra</td></tr>
+      <tr><td>Pixel principal</td><td>Sem registrar eventos desde 28/12/2025</td><td>O histórico de aprendizado da conta estava parado</td></tr>
+      <tr><td>Pixel secundário</td><td>Sem uso desde agosto/2024</td><td>Dois pixels na mesma estrutura geram dúvida sobre onde o dado está</td></tr>
+      <tr><td>Gerenciador de Negócios</td><td>Nenhuma agência ou parceiro vinculado</td><td>Sem acesso formal, a gestão dependeria de senhas compartilhadas — risco de segurança</td></tr>
+      <tr><td>Domínio</td><td><code>giulianamarketing.com.br</code> já verificado ✅</td><td>Único item que já estava pronto — é o que garante a propriedade do site dentro da Meta</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 3 -->
+  <h2 class="sec" id="linha"><span class="n">3</span>Linha do tempo do trabalho</h2>
+  <p class="sec-lede">A sequência do dia, na ordem em que foi executada.</p>
+
+  <div class="tl">
+    <div class="tl-item">
+      <div class="st">Etapa 1</div>
+      <h4>Mapeamento dos ativos e entrada da agência como parceira</h4>
+      <p>Levantamento de tudo que existe no Gerenciador de Negócios — contas de anúncio, Página, Instagram, pixels e domínio — e vínculo formal da Gio Growth Digital como parceira, com acesso aos ativos necessários para a gestão.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 2</div>
+      <h4>Auditoria técnica da página e do checkout</h4>
+      <p>Leitura do código da landing page e do fluxo de compra até a Hubla. Foi aí que se confirmou a ausência total de rastreamento e o pixel parado desde dezembro.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 3</div>
+      <h4>Criação do Google Tag Manager e do Google Analytics 4</h4>
+      <p>Container e propriedade criados do zero, no fuso de São Paulo e com moeda em real, com as tags de medição já montadas e publicadas dentro do container.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 4</div>
+      <h4>Desenho do funil de medição</h4>
+      <p>Definição de qual etapa é medida pela página e qual é medida pelo checkout, para que nenhuma venda seja contada duas vezes.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 5</div>
+      <h4>Guia de instalação entregue ao time</h4>
+      <p>Documento próprio, publicado com os códigos prontos e o passo a passo, para o desenvolvedor da página e para a configuração da Hubla.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 6</div>
+      <h4>Instalação concluída pelo time e conferida por nós</h4>
+      <p>O desenvolvedor colou o container e o ajuste do botão de compra; a Hubla foi configurada com pixel e API de Conversões. Conferimos item por item na fonte, não por relato.</p>
+    </div>
+    <div class="tl-item">
+      <div class="st">Etapa 7</div>
+      <h4>Correção de três pontos e validação final</h4>
+      <p>Pixel conectado à conta correta, valor do produto acertado na medição e teste real no navegador confirmando cada evento.</p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <h2 class="sec" id="acessos"><span class="n">4</span>Governança e acessos</h2>
+  <p class="sec-lede">Todos os ativos permanecem <b>de propriedade da Giuliana</b>. A agência entra como parceira — modelo em que o acesso pode ser concedido e revogado a qualquer momento, sem troca de senha e sem perda de histórico.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Ativo</th><th>Identificação</th><th>Situação</th></tr></thead>
+    <tbody>
+      <tr><td>Conta de anúncio principal</td><td>CA01 - Marketing Digital 2024 · <code>912256333622697</code></td><td><span class="pill ok">em gestão</span> ativa, com meio de pagamento válido</td></tr>
+      <tr><td>Conta de anúncio secundária</td><td>Marketing GIULIANA · <code>559010416218341</code></td><td><span class="pill ok">compartilhada</span> reserva</td></tr>
+      <tr><td>Página do Facebook</td><td>Giuliana Marketing</td><td><span class="pill ok">acesso total</span></td></tr>
+      <tr><td>Instagram</td><td>@giulianamarketing</td><td><span class="pill ok">acesso total</span></td></tr>
+      <tr><td>Domínio</td><td>giulianamarketing.com.br</td><td><span class="pill ok">verificado</span></td></tr>
+      <tr><td>Pixel principal</td><td>Pixel de Giuliana Sueyoshi · <code>260219322254560</code></td><td><span class="pill ok">acesso total</span> ativo</td></tr>
+      <tr><td>Pixel legado</td><td>BM01 - Giuliana Sueyoshi · <code>2401048460080162</code></td><td><span class="pill ok">acesso total</span> mantido por histórico</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note"><b>Decisão tomada:</b> a veiculação será feita pela <b>CA01</b>, que já possui meio de pagamento ativo e histórico de gasto na plataforma — conta com histórico costuma ter entrega mais estável do que uma conta nova.</p>
+
+  <!-- 5 -->
+  <h2 class="sec" id="rastreamento"><span class="n">5</span>Rastreamento criado</h2>
+  <p class="sec-lede">Toda a medição passa a viver dentro de um único gerenciador de tags. Na prática isso significa que qualquer ajuste futuro é feito por nós, sem precisar mexer no código do site de novo.</p>
+
+  <div class="card">
+    <h3>Google Tag Manager — <code>GTM-W3TGGSDG</code></h3>
+    <p>Container criado do zero e publicado, com as tags de medição da Meta e do Google já configuradas dentro dele. O site carrega apenas este container: o pixel e o Analytics saem por dentro, sem código solto na página.</p>
+  </div>
+  <div class="card">
+    <h3>Google Analytics 4 — <code>G-2D8NVQESKW</code></h3>
+    <p>Propriedade nova, configurada em fuso de <b>São Paulo</b> e moeda em <b>real</b>, com o fluxo de dados da landing page. É a segunda fonte de leitura: enquanto o pixel serve para a Meta otimizar, o Analytics serve para vocês enxergarem o comportamento na página.</p>
+  </div>
+  <div class="card">
+    <h3>API de Conversões na Hubla</h3>
+    <p>A compra passa a ser enviada à Meta <b>pelo servidor do checkout</b>, e não pelo navegador, com o registro apenas de pedidos <b>aprovados</b> e com o valor realmente pago. É o método mais confiável hoje: não é afetado por bloqueador de anúncio nem por restrição de navegador.</p>
+  </div>
+
+  <!-- 6 -->
+  <h2 class="sec" id="funil"><span class="n">6</span>O funil de medição</h2>
+  <p class="sec-lede">Cada etapa da jornada tem <b>uma única fonte responsável</b> por registrá-la. Esse cuidado evita o erro mais comum em contas mal configuradas: o mesmo passo ser contado duas vezes e inflar o resultado aparente.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Etapa da jornada</th><th>O que representa</th><th>Quem registra</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Visita</td><td>Alguém abriu a página</td><td>Página · GTM</td><td><span class="pill ok">no ar</span></td></tr>
+      <tr><td>Interesse</td><td>Visualizou a oferta</td><td>Página · GTM</td><td><span class="pill ok">no ar</span></td></tr>
+      <tr><td>Intenção</td><td>Clicou no botão de compra</td><td>Página · GTM</td><td><span class="pill ok">no ar</span></td></tr>
+      <tr><td>Início de checkout</td><td>Começou a preencher os dados</td><td>Checkout · Hubla</td><td><span class="pill ok">no ar</span></td></tr>
+      <tr><td>Oferta adicional</td><td>Aceitou o item extra do checkout</td><td>Checkout · Hubla</td><td><span class="pill ok">no ar</span></td></tr>
+      <tr><td>Compra</td><td>Pagamento aprovado, com o valor pago</td><td>Checkout · Hubla (servidor)</td><td><span class="pill ok">no ar</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note"><b>Por que a compra é o evento mais importante:</b> é ele que ensina o algoritmo da Meta a procurar mais pessoas parecidas com quem já comprou. Sem esse retorno, o anúncio otimiza por clique — e clique barato não paga a conta.</p>
+
+  <!-- 7 -->
+  <h2 class="sec" id="correcoes"><span class="n">7</span>Correções aplicadas</h2>
+  <p class="sec-lede">Três pontos que, se tivessem passado despercebidos, custariam verba e tempo de aprendizado depois de a campanha estar no ar.</p>
+
+  <div class="ba">
+    <div class="ba-h">1. O pixel estava vinculado à conta errada</div>
+    <div><div class="t">Antes</div><div class="b1">O pixel que recebe os dados do site e do checkout estava ligado apenas à conta secundária. Na conta que vai veicular, só aparecia o pixel antigo, parado desde agosto/2024.</div></div>
+    <div class="arw">→</div>
+    <div><div class="t">Depois</div><div class="b2">Pixel ativo conectado à conta de veiculação. Já é possível selecioná-lo no anúncio e otimizar por compra.</div></div>
+  </div>
+
+  <div class="ba">
+    <div class="ba-h">2. Valor do produto divergente na medição</div>
+    <div><div class="t">Antes</div><div class="b1">As etapas do meio do funil enviavam <b>R$ 33,36</b>, enquanto a venda efetiva chega por <b>R$ 29,90</b>.</div></div>
+    <div class="arw">→</div>
+    <div><div class="t">Depois</div><div class="b2">Valor unificado em R$ 29,90 em toda a medição — o retorno sobre investimento passa a ser lido com o número real.</div></div>
+  </div>
+
+  <div class="ba">
+    <div class="ba-h">3. A origem do anúncio se perdia no clique</div>
+    <div><div class="t">Antes</div><div class="b1">O botão de compra apontava para um link fixo: quem chegava por um anúncio perdia essa identificação ao ir para o checkout.</div></div>
+    <div class="arw">→</div>
+    <div><div class="t">Depois</div><div class="b2">A origem é repassada ao checkout. Cada venda passa a dizer qual anúncio a gerou — é o que permite cortar o que não paga e escalar o que vende.</div></div>
+  </div>
+
+  <!-- 8 -->
+  <h2 class="sec" id="validacao"><span class="n">8</span>Como validamos</h2>
+  <p class="sec-lede">Nada foi dado como pronto por relato. Cada item foi testado na origem, no dia.</p>
+
+  <ul class="inner">
+    <li><b>Teste real no navegador:</b> abrimos a página como um visitante, percorremos o caminho até o botão de compra e confirmamos que visita, visualização da oferta e clique foram registrados — os três com resposta de sucesso da Meta.</li>
+    <li><b>Identificação da origem:</b> simulamos uma chegada vinda de anúncio e confirmamos que os parâmetros chegam ao checkout, com os identificadores de clique e de visitante capturados.</li>
+    <li><b>Container publicado:</b> conferimos o arquivo que o site realmente carrega — as tags, o valor corrigido e a condição do botão de compra estão todos na versão no ar.</li>
+    <li><b>Pixel reativado:</b> o último registro de evento saiu de <b>28/12/2025</b> para <b>01/09/2026</b>. A estrutura voltou a receber dados.</li>
+    <li><b>Checkout:</b> confirmamos na Hubla o pixel, a chave da API de Conversões e os eventos ligados, incluindo a compra restrita a pedidos aprovados.</li>
+  </ul>
+
+  <!-- 9 -->
+  <h2 class="sec" id="materiais"><span class="n">9</span>Materiais entregues</h2>
+  <div class="links">
+    <a class="lk" href="../central/">
+      <div class="ic">🗂️</div>
+      <h3>Central do cliente</h3>
+      <p>Registro de propriedade de todos os ativos — gerenciador, contas, Página, Instagram, domínio e pixels, com identificação de cada um.</p>
+    </a>
+    <a class="lk" href="../instalacao/">
+      <div class="ic">🧩</div>
+      <h3>Guia de instalação</h3>
+      <p>Documento técnico entregue ao desenvolvedor, com os códigos prontos, o funil evento a evento e a lista de conferência.</p>
+    </a>
+  </div>
+  <p class="note">A central funciona também como <b>prova de propriedade</b>: em caso de perda de acesso, invasão ou clonagem de gerenciador, é dela que sai a documentação de qual é o legítimo.</p>
+
+  <!-- 10 -->
+  <h2 class="sec" id="proximos"><span class="n">10</span>Próximos passos</h2>
+  <p class="sec-lede">A parte técnica está concluída. O que segue são decisões e a construção da campanha.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>#</th><th>Passo</th><th>Responsável</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>Conferência final de duplicidade</b> — validar no monitor de eventos da Meta se a etapa de intenção é registrada uma única vez, mantendo a leitura do funil limpa</td><td>Gio Growth Digital</td></tr>
+      <tr><td>2</td><td><b>Definir o limite de gasto da conta</b> — trava de segurança que garante que a conta nunca ultrapasse o teto combinado</td><td>Giuliana + GGD</td></tr>
+      <tr><td>3</td><td><b>Verificação do negócio no Gerenciador</b> — libera limites maiores e dá mais estabilidade à conta a médio prazo</td><td>Giuliana</td></tr>
+      <tr><td>4</td><td><b>Montagem das campanhas</b> — uma frente de aquisição, para alcançar dentistas que ainda não conhecem o material, e uma frente de retomada, para quem já demonstrou interesse. A definição operacional faz parte do trabalho de gestão e é apresentada na reunião de abertura, com revisão a cada ciclo</td><td>Gio Growth Digital</td></tr>
+      <tr><td>5</td><td><b>Primeira leitura de resultado</b> — com o rastreamento no ar desde o primeiro dia, o relatório já nasce com dados de verdade</td><td>Gio Growth Digital</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="warnbox">
+    <b>Vale registrar:</b> o material criativo em vídeo já foi recebido e está em análise. A montagem da campanha é feita <b>pausada</b>, para revisão conjunta antes de qualquer verba entrar no ar.
+  </div>
+
+  <!-- 11 -->
+  <h2 class="sec" id="glossario"><span class="n">11</span>Glossário</h2>
+  <p class="sec-lede">Os termos usados neste relatório, em português claro.</p>
+  <dl class="gloss">
+    <div><dt>Pixel</dt><dd>Pequeno código instalado no site que avisa a Meta o que aconteceu ali — quem visitou, quem clicou, quem comprou. É o que permite ao anúncio aprender e ao relatório mostrar retorno.</dd></div>
+    <div><dt>Gerenciador de tags (GTM)</dt><dd>Painel que concentra todos os códigos de medição do site. Com ele instalado, qualquer alteração futura é feita no painel, sem precisar mexer no código da página.</dd></div>
+    <div><dt>Google Analytics 4</dt><dd>Ferramenta de leitura de comportamento no site: quantas pessoas entraram, de onde vieram, até onde foram.</dd></div>
+    <div><dt>API de Conversões</dt><dd>Envio da compra direto do servidor do checkout para a Meta, em vez de depender do navegador do comprador. Mais confiável, porque não é bloqueado por extensões nem por restrições de privacidade.</dd></div>
+    <div><dt>Gerenciador de Negócios</dt><dd>O “cofre” da Meta, onde ficam Página, Instagram, contas de anúncio e pixels. É ele que define quem é o dono de cada ativo.</dd></div>
+    <div><dt>Verificação de domínio</dt><dd>Prova, dentro da Meta, de que o site pertence ao negócio. Sem isso há limitação no uso do próprio site em anúncios.</dd></div>
+    <div><dt>Parceria de agência</dt><dd>Modelo de acesso em que a agência trabalha nos ativos sem se tornar dona deles. O acesso é concedido e revogado a qualquer momento, sem troca de senha.</dd></div>
+    <div><dt>Otimizar por compra</dt><dd>Instruir o algoritmo a buscar pessoas com maior chance de comprar, e não apenas de clicar. Só funciona quando a compra volta corretamente para a plataforma.</dd></div>
+  </dl>
+
+  <footer>
+    <span>Gio Growth Digital · relatório de 01/09/2026 · Giuliana Marketing</span>
+    <a href="../central/">central do cliente →</a>
+  </footer>
+</div>
+</body>
+</html>
