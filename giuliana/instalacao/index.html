@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Giuliana Sueyoshi — Instalação do rastreamento</title>
+<title>giulianamarketing.com.br — Guia de instalação do rastreamento</title>
 <style>
   :root{
     --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
@@ -23,49 +23,67 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
   .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
   h1{font-size:clamp(25px,4.2vw,36px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
-  .lede{font-size:15.5px;color:var(--ink-soft);max-width:64ch;margin-bottom:26px}
-  .ids{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
-  .chip{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft)}
-  .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:66ch;margin-bottom:8px}
+  .who{font-size:13px;color:var(--ink-soft);margin-bottom:24px}
+  .who b{color:var(--ink)}
+  table.ids{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:30px;font-size:14px}
+  table.ids td{padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  table.ids tr:last-child td{border-bottom:none}
+  table.ids td:first-child{color:var(--ink-soft);width:210px;font-weight:600}
+  table.ids code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;color:var(--ink);font-size:13.5px}
   .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px}
-  .step h2{font-size:17px;font-weight:720;letter-spacing:-.01em;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .step h2{font-size:17.5px;font-weight:720;letter-spacing:-.01em;margin-bottom:8px;display:flex;align-items:center;gap:10px}
   .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:800;flex:none}
+  .tagline{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
   .step p{font-size:14px;color:var(--ink-soft);margin-bottom:10px}
-  .step p b{color:var(--ink)}
+  .step p b,.step li b{color:var(--ink)}
   ol.inner,ul.inner{margin:6px 0 12px 20px;font-size:14px;color:var(--ink-soft)}
-  ol.inner li,ul.inner li{margin-bottom:6px}
-  ol.inner b,ul.inner b{color:var(--ink)}
+  ol.inner li,ul.inner li{margin-bottom:7px}
   pre{background:var(--line-soft);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font-size:12px;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);white-space:pre;margin-bottom:8px}
   .copy{border:1px solid var(--line);background:var(--card);color:var(--accent);font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;cursor:pointer;margin-bottom:14px}
   .copy:hover{border-color:var(--accent)}
-  .warn{background:var(--warn-soft);border:1px solid color-mix(in srgb, var(--warn) 35%, var(--line));border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);margin-bottom:16px}
+  .warn{background:var(--warn-soft);border:1px solid color-mix(in srgb, var(--warn) 35%, var(--line));border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);margin-bottom:14px}
   .warn b{color:var(--warn)}
+  table.funil{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:12px}
+  table.funil th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding:8px 10px;border-bottom:1px solid var(--line)}
+  table.funil td{padding:9px 10px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+  table.funil td:first-child{color:var(--ink);font-weight:650;white-space:nowrap}
+  table.funil tr:last-child td{border-bottom:none}
+  .tag-ok{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#0c7a54;background:#d6f2e5}
+  .tag-dev{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:var(--warn);background:var(--warn-soft)}
+  @media (prefers-color-scheme: dark){.tag-ok{color:#7ff0c2;background:#12362a}}
   .note{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
   .note b{color:var(--ink)}
   footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   footer a{color:var(--accent);text-decoration:none;font-weight:600}
   code{background:var(--line-soft);border-radius:5px;padding:1px 5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+  h3.sub{font-size:14px;font-weight:700;margin:16px 0 8px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">Giuliana Sueyoshi · rastreamento</div>
-  <h1>Instalação do GTM, do pixel e do GA4</h1>
-  <p class="lede">Hoje a LP e o checkout não têm nenhum código de rastreamento: o Meta não recebe nem visita nem compra, então não dá para otimizar campanha por conversão nem montar público de remarketing. Este é o passo a passo para ligar tudo. As tags já estão montadas e publicadas — falta colar o container na página e configurar o checkout.</p>
+  <div class="eyebrow">giulianamarketing.com.br · rastreamento</div>
+  <h1>Guia de instalação — Google Tag Manager, Pixel da Meta e GA4</h1>
+  <p class="lede">Documento para quem cuida do código da página. Hoje a landing page e o checkout não têm nenhum código de rastreamento instalado: nenhuma visita, nenhum clique e nenhuma compra chega ao Meta ou ao Google. Sem isso não é possível otimizar campanha por compra nem montar público de remarketing.</p>
+  <p class="who">O container do GTM, o pixel e o GA4 <b>já estão criados e publicados</b> — as tags estão prontas dentro do container. O que falta é <b>colar dois trechos de código na página</b> e fazer <b>um pequeno ajuste no botão de compra</b>. Leva menos de 15 minutos.</p>
 
-  <div class="ids">
-    <span class="chip">GTM <b>GTM-W3TGGSDG</b></span>
-    <span class="chip">Pixel Meta <b>260219322254560</b></span>
-    <span class="chip">GA4 <b>G-2D8NVQESKW</b></span>
-  </div>
+  <table class="ids">
+    <tr><td>Site</td><td><code>https://www.giulianamarketing.com.br/</code> (HTML estático, hospedado na Vercel)</td></tr>
+    <tr><td>Google Tag Manager</td><td><code>GTM-W3TGGSDG</code></td></tr>
+    <tr><td>Pixel da Meta</td><td><code>260219322254560</code> — já configurado dentro do GTM, não precisa colar separado</td></tr>
+    <tr><td>Google Analytics 4</td><td><code>G-2D8NVQESKW</code> — também já dentro do GTM, não precisa colar o gtag</td></tr>
+    <tr><td>Checkout</td><td><code>https://pay.hub.la/tPsBe5j64aEwb9HflhJn</code> (Hubla)</td></tr>
+    <tr><td>Produto</td><td>Mapa da Criação de Conteúdo para Dentistas — R$ 33,36 (6x R$ 5,56)</td></tr>
+  </table>
 
   <div class="step">
-    <h2><span class="num">1</span> Colar o GTM na LP (Vercel)</h2>
-    <p>A página <b>www.giulianamarketing.com.br</b> é um HTML estático publicado na Vercel. Abra o arquivo <code>index.html</code> do projeto e cole os dois trechos abaixo.</p>
-    <p><b>A)</b> logo depois da tag <code>&lt;head&gt;</code>, o mais alto possível:</p>
+    <h2><span class="num">1</span> Colar o GTM na landing page</h2>
+    <div class="tagline">o que o desenvolvedor faz · obrigatório</div>
+    <p>São dois trechos, os dois na mesma página. Não é preciso instalar o pixel nem o GA4 à parte: os dois já saem por dentro do container.</p>
+    <h3 class="sub">A) O mais alto possível dentro do <code>&lt;head&gt;</code></h3>
     <pre id="c1">&lt;!-- Google Tag Manager --&gt;
 &lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -74,52 +92,91 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-W3TGGSDG');&lt;/script&gt;
 &lt;!-- End Google Tag Manager --&gt;</pre>
     <button class="copy" data-t="c1">copiar código do &lt;head&gt;</button>
-    <p><b>B)</b> logo depois da tag <code>&lt;body&gt;</code>:</p>
+    <h3 class="sub">B) Logo depois da abertura do <code>&lt;body&gt;</code></h3>
     <pre id="c2">&lt;!-- Google Tag Manager (noscript) --&gt;
 &lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3TGGSDG"
 height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
 &lt;!-- End Google Tag Manager (noscript) --&gt;</pre>
     <button class="copy" data-t="c2">copiar código do &lt;body&gt;</button>
-    <p>Depois é só fazer o deploy. Com isso, a LP passa a disparar <b>PageView</b> e <b>ViewContent</b> no pixel, <b>InitiateCheckout</b> quando alguém clica no botão de compra, e o <b>GA4</b> de tráfego — tudo já configurado dentro do container.</p>
   </div>
 
   <div class="step">
-    <h2><span class="num">2</span> Pixel + CAPI no checkout da Hubla</h2>
-    <p>O checkout <code>pay.hub.la/tPsBe5j64aEwb9HflhJn</code> está sem pixel. Na Hubla, o rastreamento fica no <b>produto</b>, não na página de vendas:</p>
+    <h2><span class="num">2</span> Fazer o botão de compra repassar a origem do anúncio</h2>
+    <div class="tagline">o que o desenvolvedor faz · obrigatório</div>
+    <div class="warn"><b>Problema atual:</b> o botão “Quero garantir” aponta para um link fixo do checkout. Quando alguém chega pelo anúncio com <code>?utm_source=...&amp;fbclid=...</code>, esses parâmetros <b>morrem no clique</b> — o checkout não recebe nada e fica impossível saber qual anúncio gerou a venda.</div>
+    <p>A correção é copiar a query string da página para os links do checkout. Cole este trecho <b>antes do fechamento do <code>&lt;/body&gt;</code></b>:</p>
+    <pre id="c3">&lt;script&gt;
+(function(){
+  function repassarParametros(){
+    var qs = window.location.search;
+    if (!qs || qs.length &lt; 2) return;
+    var params = qs.substring(1);
+    var links = document.querySelectorAll('a[href*="pay.hub.la"]');
+    for (var i = 0; i &lt; links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (href.indexOf('utm_') !== -1) continue;
+      links[i].setAttribute('href', href + (href.indexOf('?') !== -1 ? '&amp;' : '?') + params);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', repassarParametros);
+  } else {
+    repassarParametros();
+  }
+})();
+&lt;/script&gt;</pre>
+    <button class="copy" data-t="c3">copiar script de UTM</button>
+    <p>Depois disso, abrir <code>www.giulianamarketing.com.br/?utm_source=teste</code>, clicar no botão e conferir se o <code>?utm_source=teste</code> chegou na URL do checkout.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">3</span> O funil completo — onde cada evento nasce</h2>
+    <div class="tagline">referência · nada a fazer aqui</div>
+    <p>A otimização das campanhas é por <b>compra</b>, então o funil precisa estar inteiro: visita → conteúdo visto → intenção de compra → checkout iniciado → compra. Metade dos eventos sai da página (via GTM) e a outra metade sai do checkout da Hubla — é assim porque o checkout roda em outro domínio, onde o nosso GTM não é carregado.</p>
+    <table class="funil">
+      <tr><th>Evento</th><th>Onde dispara</th><th>Por quem</th><th>Status</th></tr>
+      <tr><td>PageView</td><td>Landing page</td><td>GTM · pixel base</td><td><span class="tag-ok">pronto no GTM</span></td></tr>
+      <tr><td>ViewContent</td><td>Landing page</td><td>GTM · pixel base</td><td><span class="tag-ok">pronto no GTM</span></td></tr>
+      <tr><td>AddToCart</td><td>Clique no botão de compra</td><td>GTM · acionador de clique em link para pay.hub.la</td><td><span class="tag-ok">pronto no GTM</span></td></tr>
+      <tr><td>add_to_cart (GA4)</td><td>Clique no botão de compra</td><td>GTM · evento do GA4</td><td><span class="tag-ok">pronto no GTM</span></td></tr>
+      <tr><td>InitiateCheckout</td><td>Checkout, ao começar a preencher</td><td>Hubla · pixel + CAPI</td><td><span class="tag-dev">configurar na Hubla</span></td></tr>
+      <tr><td>AddToCart (order bump)</td><td>Checkout, ao aceitar o bump</td><td>Hubla · pixel + CAPI</td><td><span class="tag-dev">configurar na Hubla</span></td></tr>
+      <tr><td>Purchase</td><td>Checkout, pagamento aprovado</td><td>Hubla · CAPI (servidor)</td><td><span class="tag-dev">configurar na Hubla</span></td></tr>
+    </table>
+    <p>Por isso o <b>InitiateCheckout não é disparado pela página</b>: quem dispara é a Hubla, quando a pessoa realmente começa a preencher o formulário. Se a página também mandasse, o evento seria contado duas vezes e a otimização ficaria distorcida.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">4</span> Pixel e CAPI dentro da Hubla</h2>
+    <div class="tagline">quem tem acesso ao painel da Hubla</div>
     <ol class="inner">
-      <li>Entrar na Hubla → produto <b>Mapa da Criação de Conteúdo para Dentistas</b> → aba <b>Pixels de Rastreamento</b>.</li>
-      <li>Adicionar o pixel <b>260219322254560</b> e colar o <b>token de CAPI</b> (gerado no Gerenciador de Eventos do Meta, em Configurações do conjunto de dados → API de Conversões).</li>
-      <li>Nos eventos, usar a <b>“Recomendação da Hubla”</b>: ViewContent, InitiateCheckout (ao começar a preencher), AddToCart (order bump) e Purchase (só aprovado, valor total pago).</li>
-      <li>Salvar e conferir se aparece “Pixel editado com sucesso”.</li>
+      <li>Hubla → produto <b>Mapa da Criação de Conteúdo para Dentistas</b> → aba <b>Pixels de Rastreamento</b> (não é em Configurações).</li>
+      <li>Adicionar o pixel <b>260219322254560</b>.</li>
+      <li>Colar o <b>token da API de Conversões</b>, gerado no Gerenciador de Eventos da Meta → conjunto de dados do pixel → Configurações → API de Conversões → “Gerar token de acesso”.</li>
+      <li>Em eventos, usar a <b>“Recomendação da Hubla”</b>: ViewContent, InitiateCheckout (ao começar a preencher), AddToCart (order bump) e Purchase (somente aprovado, valor total pago).</li>
+      <li>Salvar e conferir a mensagem de sucesso.</li>
     </ol>
-    <p>Sem esse passo não existe evento de <b>compra</b> — e sem compra o Meta não tem o que otimizar.</p>
+    <p>Sem esse passo <b>não existe evento de compra</b> — e sem compra o Meta não tem por onde otimizar.</p>
   </div>
 
   <div class="step">
-    <h2><span class="num">3</span> Anunciar direto no checkout, com UTM</h2>
-    <div class="warn"><b>Atenção:</b> a LP não repassa <code>utm_*</code> nem <code>fbclid</code> para o checkout — o botão de compra é um link fixo. Se o anúncio mandar para a LP, não dá para saber qual criativo vendeu.</div>
-    <p>Enquanto o link não for corrigido, os anúncios de venda devem apontar para o checkout já com as macros:</p>
-    <pre id="c3">https://pay.hub.la/tPsBe5j64aEwb9HflhJn?utm_source=meta&amp;utm_medium=paid&amp;utm_campaign={{campaign.name}}&amp;utm_content={{ad.name}}&amp;utm_term={{adset.name}}</pre>
-    <button class="copy" data-t="c3">copiar URL do checkout</button>
-    <p>Alternativa melhor no médio prazo: ajustar o botão da LP para repassar a query string, aí o anúncio pode ir para a página de vendas sem perder a origem.</p>
-  </div>
-
-  <div class="step">
-    <h2><span class="num">4</span> Conferência depois de publicar</h2>
+    <h2><span class="num">5</span> Conferência depois de publicar</h2>
+    <div class="tagline">checklist final</div>
     <ul class="inner">
-      <li>Abrir a LP e ver se o <b>Gerenciador de Eventos</b> do pixel 260219322254560 registra PageView e ViewContent.</li>
-      <li>Clicar no botão de compra e confirmar o <b>InitiateCheckout</b>.</li>
-      <li>Fazer uma <b>compra de teste</b> para validar o Purchase pela CAPI da Hubla (é o único jeito, o evento sai do servidor).</li>
-      <li>No Gerenciador de Eventos, checar a <b>lista de permissão de domínios</b> do pixel: se estiver ativa, incluir <code>giulianamarketing.com.br</code> e <code>pay.hub.la</code>, senão o evento de navegador é descartado.</li>
-      <li>No GA4, ver o relatório <b>Tempo real</b> com a visita de teste.</li>
+      <li>Abrir a página e confirmar, no <b>Gerenciador de Eventos</b> da Meta, o PageView e o ViewContent chegando no pixel 260219322254560.</li>
+      <li>Clicar no botão de compra e ver o <b>AddToCart</b> aparecer.</li>
+      <li>Conferir se a URL do checkout chegou com os parâmetros <code>utm_*</code>.</li>
+      <li>Fazer uma <b>compra de teste</b> — é a única forma de validar o Purchase, porque ele sai do servidor da Hubla.</li>
+      <li>No pixel, checar a <b>lista de permissão de domínios</b> (Gerenciador de Eventos → Configurações do conjunto de dados → Permissões de tráfego). Se estiver ativa, incluir <code>giulianamarketing.com.br</code> e <code>pay.hub.la</code>, senão os eventos do navegador são descartados sem aviso.</li>
+      <li>No GA4, ver a visita de teste no relatório <b>Tempo real</b>.</li>
     </ul>
   </div>
 
-  <p class="note"><b>O que já está pronto:</b> container <b>GTM-W3TGGSDG</b> (conta [GGD][GIULIANA]) publicado com as 3 tags; pixel <b>260219322254560</b> e o legado 2401048460080162 compartilhados com a BM_Gio_Growth_Digital; propriedade GA4 <b>G-2D8NVQESKW</b> criada com fuso de São Paulo e moeda em real; domínio giulianamarketing.com.br verificado na BM da cliente.</p>
+  <p class="note"><b>Resumo do que precisa ser feito na página:</b> colar o GTM no <code>&lt;head&gt;</code> e no <code>&lt;body&gt;</code> (passo 1) e adicionar o script que repassa a query string para o checkout (passo 2). É só isso do lado do código — todo o resto do rastreamento é configuração e já está pronto ou é feita no painel da Hubla. Qualquer dúvida sobre as tags, o container é o <b>GTM-W3TGGSDG</b>, conta <b>[GGD][GIULIANA]</b>.</p>
 
   <footer>
-    <span>Gio Growth Digital · atualizado em 01/09/2026</span>
-    <a href="../central/">← voltar para a central</a>
+    <span>Gio Growth Digital · documento atualizado em 01/09/2026</span>
+    <a href="../central/">central do cliente →</a>
   </footer>
 </div>
 <script>
