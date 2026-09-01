@@ -169,13 +169,30 @@
   <p class="sec-h">Rastreamento &amp; códigos de instalação</p>
   <div class="track">
     <div class="track-ids">
-    <div class="tid"><span class="tk">Pixel Meta</span> <code>260219322254560</code><button class="cp" data-copy="260219322254560">copiar</button> <span class="tnote">(&quot;Pixel de Giuliana Sueyoshi&quot; — último evento em 28/12/2025; hoje o Events Manager marca &quot;não está recebendo eventos&quot;. A LP giulianamarketing.com.br é HTML estático SEM pixel/GTM/GA4 e o checkout pay.hub.la também está sem pixel — instalar nos dois antes de subir tráfego. Pixel legado na mesma BM: &quot;BM01 - Giuliana Sueyoshi&quot; 2401048460080162 (último evento ago/2024, sem uso).)</span></div>
-    <div class="tid"><span class="tk">GTM</span> <span class="miss">sem GTM — a LP é uma página estática escrita à mão, sem contêiner.</span></div>
+    <div class="tid"><span class="tk">Pixel Meta</span> <code>260219322254560</code><button class="cp" data-copy="260219322254560">copiar</button> <span class="tnote">(&quot;Pixel de Giuliana Sueyoshi&quot; - ultimo evento em 28/12/2025; o Events Manager marca &quot;nao esta recebendo eventos&quot;. O pixel ja esta montado dentro do GTM-W3TGGSDG (PageView + ViewContent na LP e InitiateCheckout no clique do CTA), so falta instalar o GTM na pagina. O checkout pay.hub.la tambem esta sem pixel - configurar pixel + token de CAPI na aba &quot;Pixels de Rastreamento&quot; da oferta na Hubla. Pixel legado na mesma BM: &quot;BM01 - Giuliana Sueyoshi&quot; 2401048460080162 (ago/2024, sem uso).)</span></div>
+    <div class="tid"><span class="tk">GTM</span> <code>GTM-W3TGGSDG</code><button class="cp" data-copy="GTM-W3TGGSDG">copiar</button> <span class="tnote">(conta [GGD][GIULIANA] criada em 01/09/2026 (conta 6374521902 / conteiner 262899996). Versao 1 publicada com 2 tags: &quot;[META] Pixel Base - PageView + ViewContent&quot; (All Pages) e &quot;[META] Clique CTA Checkout - InitiateCheckout&quot; (acionador Click URL contem pay.hub.la). FALTA colar o snippet do GTM na LP (hospedada na Vercel) - sem isso nada dispara.)</span></div>
     <div class="tid"><span class="tk">GA4</span> <span class="miss">sem GA4.</span></div>
     <div class="tid"><span class="tk">Token CAPI</span> <a class="genbtn" href="https://business.facebook.com/events_manager2/list/dataset/260219322254560/settings" target="_blank" rel="noopener">🔑 Gerar token da CAPI →</a> <span class="tnote">(Events Manager → Configurações → API de Conversões)</span></div>
     </div>
     <details class="codes">
     <summary>&lt;/&gt; Ver códigos de instalação — copiar e mandar pro cliente</summary>
+    <div class="code-card">
+      <div class="code-hd"><b>GTM — cole no &lt;head&gt; (o mais alto possível)</b><button class="cpre">copiar código</button></div>
+      <pre>&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W3TGGSDG');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</pre>
+    </div>
+    <div class="code-card">
+      <div class="code-hd"><b>GTM — cole logo após abrir o &lt;body&gt;</b><button class="cpre">copiar código</button></div>
+      <pre>&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3TGGSDG"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</pre>
+    </div>
     <div class="code-card">
       <div class="code-hd"><b>Meta Pixel — cole no &lt;head&gt;</b><button class="cpre">copiar código</button></div>
       <pre>&lt;!-- Meta Pixel Code --&gt;
