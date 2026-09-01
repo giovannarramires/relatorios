@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Giuliana Sueyoshi — Instalação do rastreamento</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --accent:#127a63; --accent-soft:#e3f1ec;
+    --warn:#b4551d; --warn-soft:#fdf0e5;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --accent:#48c3a0; --accent-soft:#123027;
+      --warn:#e6a54a; --warn-soft:#33260f;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(25px,4.2vw,36px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:64ch;margin-bottom:26px}
+  .ids{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft)}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .step h2{font-size:17px;font-weight:720;letter-spacing:-.01em;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:800;flex:none}
+  .step p{font-size:14px;color:var(--ink-soft);margin-bottom:10px}
+  .step p b{color:var(--ink)}
+  ol.inner,ul.inner{margin:6px 0 12px 20px;font-size:14px;color:var(--ink-soft)}
+  ol.inner li,ul.inner li{margin-bottom:6px}
+  ol.inner b,ul.inner b{color:var(--ink)}
+  pre{background:var(--line-soft);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font-size:12px;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);white-space:pre;margin-bottom:8px}
+  .copy{border:1px solid var(--line);background:var(--card);color:var(--accent);font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;cursor:pointer;margin-bottom:14px}
+  .copy:hover{border-color:var(--accent)}
+  .warn{background:var(--warn-soft);border:1px solid color-mix(in srgb, var(--warn) 35%, var(--line));border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);margin-bottom:16px}
+  .warn b{color:var(--warn)}
+  .note{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .note b{color:var(--ink)}
+  footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+  code{background:var(--line-soft);border-radius:5px;padding:1px 5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Giuliana Sueyoshi · rastreamento</div>
+  <h1>Instalação do GTM, do pixel e do GA4</h1>
+  <p class="lede">Hoje a LP e o checkout não têm nenhum código de rastreamento: o Meta não recebe nem visita nem compra, então não dá para otimizar campanha por conversão nem montar público de remarketing. Este é o passo a passo para ligar tudo. As tags já estão montadas e publicadas — falta colar o container na página e configurar o checkout.</p>
+
+  <div class="ids">
+    <span class="chip">GTM <b>GTM-W3TGGSDG</b></span>
+    <span class="chip">Pixel Meta <b>260219322254560</b></span>
+    <span class="chip">GA4 <b>G-2D8NVQESKW</b></span>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">1</span> Colar o GTM na LP (Vercel)</h2>
+    <p>A página <b>www.giulianamarketing.com.br</b> é um HTML estático publicado na Vercel. Abra o arquivo <code>index.html</code> do projeto e cole os dois trechos abaixo.</p>
+    <p><b>A)</b> logo depois da tag <code>&lt;head&gt;</code>, o mais alto possível:</p>
+    <pre id="c1">&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W3TGGSDG');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</pre>
+    <button class="copy" data-t="c1">copiar código do &lt;head&gt;</button>
+    <p><b>B)</b> logo depois da tag <code>&lt;body&gt;</code>:</p>
+    <pre id="c2">&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3TGGSDG"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</pre>
+    <button class="copy" data-t="c2">copiar código do &lt;body&gt;</button>
+    <p>Depois é só fazer o deploy. Com isso, a LP passa a disparar <b>PageView</b> e <b>ViewContent</b> no pixel, <b>InitiateCheckout</b> quando alguém clica no botão de compra, e o <b>GA4</b> de tráfego — tudo já configurado dentro do container.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">2</span> Pixel + CAPI no checkout da Hubla</h2>
+    <p>O checkout <code>pay.hub.la/tPsBe5j64aEwb9HflhJn</code> está sem pixel. Na Hubla, o rastreamento fica no <b>produto</b>, não na página de vendas:</p>
+    <ol class="inner">
+      <li>Entrar na Hubla → produto <b>Mapa da Criação de Conteúdo para Dentistas</b> → aba <b>Pixels de Rastreamento</b>.</li>
+      <li>Adicionar o pixel <b>260219322254560</b> e colar o <b>token de CAPI</b> (gerado no Gerenciador de Eventos do Meta, em Configurações do conjunto de dados → API de Conversões).</li>
+      <li>Nos eventos, usar a <b>“Recomendação da Hubla”</b>: ViewContent, InitiateCheckout (ao começar a preencher), AddToCart (order bump) e Purchase (só aprovado, valor total pago).</li>
+      <li>Salvar e conferir se aparece “Pixel editado com sucesso”.</li>
+    </ol>
+    <p>Sem esse passo não existe evento de <b>compra</b> — e sem compra o Meta não tem o que otimizar.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">3</span> Anunciar direto no checkout, com UTM</h2>
+    <div class="warn"><b>Atenção:</b> a LP não repassa <code>utm_*</code> nem <code>fbclid</code> para o checkout — o botão de compra é um link fixo. Se o anúncio mandar para a LP, não dá para saber qual criativo vendeu.</div>
+    <p>Enquanto o link não for corrigido, os anúncios de venda devem apontar para o checkout já com as macros:</p>
+    <pre id="c3">https://pay.hub.la/tPsBe5j64aEwb9HflhJn?utm_source=meta&amp;utm_medium=paid&amp;utm_campaign={{campaign.name}}&amp;utm_content={{ad.name}}&amp;utm_term={{adset.name}}</pre>
+    <button class="copy" data-t="c3">copiar URL do checkout</button>
+    <p>Alternativa melhor no médio prazo: ajustar o botão da LP para repassar a query string, aí o anúncio pode ir para a página de vendas sem perder a origem.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">4</span> Conferência depois de publicar</h2>
+    <ul class="inner">
+      <li>Abrir a LP e ver se o <b>Gerenciador de Eventos</b> do pixel 260219322254560 registra PageView e ViewContent.</li>
+      <li>Clicar no botão de compra e confirmar o <b>InitiateCheckout</b>.</li>
+      <li>Fazer uma <b>compra de teste</b> para validar o Purchase pela CAPI da Hubla (é o único jeito, o evento sai do servidor).</li>
+      <li>No Gerenciador de Eventos, checar a <b>lista de permissão de domínios</b> do pixel: se estiver ativa, incluir <code>giulianamarketing.com.br</code> e <code>pay.hub.la</code>, senão o evento de navegador é descartado.</li>
+      <li>No GA4, ver o relatório <b>Tempo real</b> com a visita de teste.</li>
+    </ul>
+  </div>
+
+  <p class="note"><b>O que já está pronto:</b> container <b>GTM-W3TGGSDG</b> (conta [GGD][GIULIANA]) publicado com as 3 tags; pixel <b>260219322254560</b> e o legado 2401048460080162 compartilhados com a BM_Gio_Growth_Digital; propriedade GA4 <b>G-2D8NVQESKW</b> criada com fuso de São Paulo e moeda em real; domínio giulianamarketing.com.br verificado na BM da cliente.</p>
+
+  <footer>
+    <span>Gio Growth Digital · atualizado em 01/09/2026</span>
+    <a href="../central/">← voltar para a central</a>
+  </footer>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.t).innerText;
+    navigator.clipboard.writeText(t).then(function(){
+      var o=b.textContent; b.textContent='copiado ✓';
+      setTimeout(function(){b.textContent=o;},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
