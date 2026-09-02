@@ -33,6 +33,8 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
   .chip{padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:13px;cursor:pointer;white-space:nowrap}
   .chip .g{font-size:11px;opacity:.75;margin-left:6px}
+  .chip .pb{font-size:10px;padding:1px 7px;border-radius:20px;margin-left:6px;background:rgba(167,139,250,.16);color:#c4b5fd}
+  .chip .pb.pf{background:rgba(46,204,113,.14);color:#6ee7a8}
   .chip:hover{border-color:#3d4450;color:var(--txt)}
   .chip.on{background:rgba(74,158,255,.16);border-color:var(--azul);color:#cfe3ff;font-weight:600}
   .tblwrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
@@ -160,8 +162,11 @@ function kpis(){
 function chips(){
   const ns = Object.entries(DB.nichos).sort((a,b)=>b[1].gasto-a[1].gasto);
   NICHO = NICHO || ns[0][0];
-  document.getElementById('chips').innerHTML = ns.map(([n,d])=>
-    `<div class="chip ${n===NICHO?'on':''}" data-n="${esc(n)}">${esc(n)}<span class="g">${brl(d.gasto)}</span></div>`).join('');
+  document.getElementById('chips').innerHTML = ns.map(([n,d])=>{
+    const [nome, pub] = n.split(' · ');
+    return `<div class="chip ${n===NICHO?'on':''}" data-n="${esc(n)}">${esc(nome)}`+
+      (pub?`<span class="pb ${pub==='profissional'?'pf':''}">${esc(pub)}</span>`:'')+
+      `<span class="g">${brl(d.gasto)}</span></div>`;}).join('');
   document.querySelectorAll('#chips .chip').forEach(c=>c.onclick=()=>{NICHO=c.dataset.n; chips(); painel();});
 }
 
@@ -177,7 +182,9 @@ function receita(d){
   const bl = Object.entries(d.baseline_broad||{}).sort((a,b)=>b[1].gasto-a[1].gasto);
 
   return `<div class="card receita">
-    <h3>Cliente novo de ${esc(NICHO)} — comece por aqui</h3>
+    <h3>Cliente novo de ${esc(NICHO.split(' · ')[0])} — comece por aqui</h3>
+    <div class="por" style="margin-bottom:2px">anunciando para <b>${esc(NICHO.split(' · ')[1]||'—')}</b>
+      — público-alvo diferente é biblioteca diferente: os interesses não se aproveitam entre um e outro</div>
     <div class="por">Destilado de ${brl(d.gasto)} de mídia em ${d.clientes.length} cliente(s): ${esc(d.clientes.join(', '))}</div>
     <div class="grid2">
       <div class="blk"><div class="bt">Combo que melhor performou</div><ul>${
