@@ -556,12 +556,20 @@
   .monthbar a:hover{background:rgba(191,106,69,0.18);}
   .monthbar a.active{background:var(--terracota);color:#fff;}
   @media print{ .monthbar{display:none !important;} }
-  #s-visao .kpi-card-lg{padding:12px 16px}
-  #s-visao .kpi-card-lg .kpi-val{font-size:clamp(20px,2.4vw,28px);margin:5px 0 4px}
+  #s-visao .grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  #s-visao .kpi-card-lg{padding:10px 12px}
+  #s-visao .kpi-card-lg .kpi-label{font-size:9px;letter-spacing:.05em;line-height:1.25}
+  #s-visao .kpi-card-lg .kpi-val{font-size:clamp(15px,1.55vw,20px);margin:5px 0 0;white-space:nowrap}
   #s-visao .kpi-card-lg .kpi-delta{font-size:10.5px;line-height:1.35}
   #s-visao thead th{padding:6px 10px}
   #s-visao tbody td{padding:5px 10px}
   #s-visao .note{padding:7px 12px;font-size:10.5px;line-height:1.42}
+  #s-publicos tbody td{padding:3px 8px} #s-publicos thead th{padding:5px 8px}
+  #s-ads tbody td{padding:2.5px 7px;white-space:nowrap} #s-ads thead th{padding:5px 7px}
+  #s-ads tbody td:first-child{white-space:normal;line-height:1.15}
+  #s-ads tbody td small{font-size:8.5px}
+  #s-termos tbody td{padding:3.5px 8px} #s-termos thead th{padding:5px 8px}
+  #s-ads .duas{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
   .body-pad{flex:1;padding:16px 40px 70px;overflow:auto;justify-content:safe center}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -598,7 +606,7 @@
       <p>Mês fechado · comparação com julho/26 e agosto/25 em número e em % · Shopify + Meta + Google + Pinterest</p>
     </div>
     <div class="body-pad" style="display:flex;flex-direction:column;gap:11px">
-      <div class="grid3">
+      <div class="grid6">
         <div class="kpi-card-lg">
           <div class="kpi-label">Faturamento real (Shopify)</div>
           <div class="kpi-val">R$ 52.242,29</div>
@@ -607,9 +615,21 @@
           <div class="kpi-label">Investimento em campanhas</div>
           <div class="kpi-val">R$ 10.602,99</div>
         </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Total de pedidos</div>
+          <div class="kpi-val">134</div>
+        </div>
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">Taxa de recorrência</div>
+          <div class="kpi-val">17,69%</div>
+        </div>
         <div class="kpi-card-lg verde">
-          <div class="kpi-label">ROAS real (MER)</div>
+          <div class="kpi-label">ROAS campanhas</div>
           <div class="kpi-val">4,93x</div>
+        </div>
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">ROAS com imposto</div>
+          <div class="kpi-val">4,50x</div>
         </div>
       </div>
       <table style="font-size:11.5px">
@@ -715,51 +735,6 @@
     </div>
   </section>
 
-  <!-- 4 · MER × ATRIBUÍDO -->
-  <section class="slide" style="background:var(--bege-claro)">
-    <div class="slide-header">
-      <h1>ROAS real (MER) × ROAS atribuído</h1>
-      <p>O que a loja registrou × o que as plataformas reivindicam · agosto/2026</p>
-    </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:16px">
-      <div class="grid3">
-        <div class="kpi-card-lg verde">
-          <div class="kpi-label">ROAS real (MER)</div>
-          <div class="kpi-val">4,93x</div>
-          <div class="kpi-delta sans" style="color:var(--text-muted)">faturamento Shopify ÷ campanhas (R$ 10.602,99) · com o imposto do Meta: 4,50x</div>
-        </div>
-        <div class="kpi-card-lg">
-          <div class="kpi-label">ROAS atribuído consolidado</div>
-          <div class="kpi-val">4,49x</div>
-          <div class="kpi-delta sans" style="color:var(--text-muted)">Meta 4,07x · Google 4,92x · Pinterest 10,28x</div>
-        </div>
-        <div class="kpi-card-lg ocre">
-          <div class="kpi-label">Faturamento que ninguém reivindicou</div>
-          <div class="kpi-val">R$ 4.623,05</div>
-          <div class="kpi-delta sans" style="color:var(--text-muted)">9% do caixa · nenhuma plataforma reclamou</div>
-        </div>
-      </div>
-      <table>
-        <thead><tr><th>Medida</th><th>Valor</th><th>O que ela diz</th></tr></thead>
-        <tbody>
-          <tr><td>Faturamento real da loja</td><td><strong>R$ 52.242,29</strong></td><td>Tudo que entrou, de qualquer origem — inclusive orgânico, direto e recompra.</td></tr>
-          <tr><td>Receita atribuída Meta</td><td>R$ 29.446,61</td><td>56% do faturamento total da loja. Janela 7 dias de clique / 1 dia de visualização.</td></tr>
-          <tr><td>Receita atribuída Google</td><td>R$ 15.088,63</td><td>29% do faturamento total. Modelo data-driven.</td></tr>
-          <tr><td>Receita atribuída Pinterest</td><td>R$ 3.084,00</td><td>6% do faturamento total. Janela 30/30, a mais generosa das três.</td></tr>
-          <tr class="total-row"><td>Soma atribuída</td><td>R$ 47.619,24</td><td>91% do caixa — as três plataformas juntas reivindicam quase todo o faturamento.</td></tr>
-        </tbody>
-      </table>
-      <div class="note">
-        <strong>Por que os dois números importam:</strong> o MER de 4,93x é o retorno que aparece no banco — nenhuma plataforma pode inflá-lo.
-        O ROAS atribuído serve para decidir <em>dentro</em> de cada canal (qual campanha e qual criativo), não para somar.
-        Neste mês a soma atribuída (R$ 47.619,24) ficou <strong>abaixo</strong> do faturamento real (R$ 52.242,29) —
-        as três plataformas juntas reivindicam 91% do caixa. Isso é bom sinal: significa
-        pouca sobreposição entre elas. O slide seguinte mostra, canal a canal, quanto disso o Shopify de fato credita a cada uma.
-      </div>
-    </div>
-  </section>
-
-  <!-- DE ONDE VIERAM AS VENDAS -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header" style="background:var(--verde)">
       <h1>De onde vieram as vendas</h1>
@@ -836,6 +811,67 @@
     </div>
   </section>
 
+  <!-- META · INVESTIMENTO E IMPOSTOS -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Investimento &amp; Impostos</h1>
+      <p>Agosto 2026 &nbsp;|&nbsp; alíquota efetiva 13,83% sobre o gasto de campanha</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;height:calc(100% - 84px);padding:14px 36px 32px;overflow:auto">
+      <div class="s6-kpis">
+        <div class="kpi-card-lg verde"><div class="kpi-label">Investimento (mídia)</div><div class="kpi-val">R$ 7.235,89</div></div>
+        <div class="kpi-card-lg verde"><div class="kpi-label">Receita atribuída</div><div class="kpi-val">R$ 29.446,61</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">ROAS</div><div class="kpi-val">4,07x</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">CPA · 76 compras</div><div class="kpi-val">R$ 95,21</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;min-height:0">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="section-title">Resumo de investimento</div>
+        <div style="background:var(--card-bg);border-radius:14px;padding:20px 26px;border-left:5px solid var(--verde)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Investimento em campanhas</div>
+          <div style="font-size:34px;font-weight:800;color:var(--verde);line-height:1">R$ 7.235,89</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">Subtotal — o que virou anúncio no ar, sem impostos</div>
+        </div>
+        <div style="background:var(--card-bg);border-radius:14px;padding:20px 26px;border-left:5px solid var(--vermelho)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Total de impostos</div>
+          <div style="font-size:34px;font-weight:800;color:var(--vermelho);line-height:1">R$ 1.000,72</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">COFINS + PIS + ISS — 13,83% sobre o subtotal</div>
+        </div>
+        <div style="background:var(--terracota);border-radius:14px;padding:20px 26px;border-left:5px solid var(--ocre)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:6px">Total pago (campanhas + impostos)</div>
+          <div style="font-size:38px;font-weight:800;color:#fff;line-height:1">R$ 8.236,61</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px">Valor debitado da conta — incluindo todos os tributos</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="section-title">Detalhamento dos impostos</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--terracota);color:#fff">
+            <th style="padding:9px 14px;text-align:left;border-radius:8px 0 0 0">Imposto</th>
+            <th style="padding:9px 14px;text-align:center">Alíquota</th>
+            <th style="padding:9px 14px;text-align:right;border-radius:0 8px 0 0">Valor (R$)</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--card-bg)"><td style="padding:10px 14px;font-weight:600">COFINS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">7,60%</td><td style="padding:10px 14px;text-align:right;font-weight:700">625,98</td></tr>
+            <tr style="background:rgba(0,0,0,0.04)"><td style="padding:10px 14px;font-weight:600">PIS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">1,65%</td><td style="padding:10px 14px;text-align:right;font-weight:700">135,90</td></tr>
+            <tr style="background:var(--card-bg)"><td style="padding:10px 14px;font-weight:600">ISS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">2,90%</td><td style="padding:10px 14px;text-align:right;font-weight:700">238,83</td></tr>
+            <tr style="background:var(--terracota);color:#fff;font-weight:800"><td style="padding:10px 14px;border-radius:0 0 0 8px">Total de impostos</td><td style="padding:10px 14px;text-align:center">13,83%*</td><td style="padding:10px 14px;text-align:right;border-radius:0 0 8px 0">1.000,72</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="font-size:10.5px">* As alíquotas incidem <strong>por dentro</strong>, sobre o valor da fatura (R$ 8.236,61) — o que dá os mesmos <strong>13,83% efetivos</strong> sobre o gasto de campanha usados em junho e julho.</div>
+        <div style="background:var(--card-bg);border-radius:10px;padding:14px 18px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Composição do gasto total</div>
+          <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;gap:2px">
+            <div style="background:var(--verde);flex:7235;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">87,8% — Campanhas</div>
+            <div style="background:var(--vermelho);flex:1000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">12,2% — Impostos</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px"><span>R$ 7.235,89</span><span>R$ 1.000,72</span></div>
+        </div>
+        <div class="note warn" style="font-size:10.5px"><strong>Julho para comparar:</strong> campanhas R$ 7.802,31 + impostos R$ 1.079,06 = R$ 8.881,37 pagos. Agosto gastou <strong>R$ 644,76 a menos</strong> no total e trouxe <strong>R$ 10.589,92 a mais</strong> de receita atribuída.</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 5 · META POR CAMPANHA -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
@@ -864,11 +900,50 @@
     </div>
   </section>
 
+  <!-- META · TODOS OS PÚBLICOS -->
+  <section class="slide" id="s-publicos" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Todos os Públicos do Mês</h1>
+      <p>18 públicos (conjuntos) trabalhados · CA - Santosha #2 · agosto/2026</p>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:9px;padding:12px 40px 60px;overflow:auto">
+      <div class="section-title" style="color:var(--terracota)">Investimento por público — ordenado por verba</div>
+      <table style="font-size:11px"><thead><tr><th>Público (conjunto)</th><th>Campanha</th><th style="text-align:right">Invest.</th><th style="text-align:center">Cliques</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th><th style="text-align:right">CPA</th></tr></thead><tbody><tr><td><strong>MIX_FRIO_MAT_VIDEO</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 2.374,40</td><td style="text-align:center">1.302</td><td style="text-align:center">30</td><td style="text-align:right">R$ 14.466,22</td><td style="text-align:center;color:var(--verde-ok)"><strong>6,09x</strong></td><td style="text-align:right">R$ 79,15</td></tr><tr><td><strong>ADV_SP</strong></td><td><small style="color:var(--verde)">VIDEO_CATÁLOGO PF</small></td><td style="text-align:right">R$ 2.198,87</td><td style="text-align:center">2.132</td><td style="text-align:center">31</td><td style="text-align:right">R$ 9.544,03</td><td style="text-align:center;color:var(--verde-ok)"><strong>4,34x</strong></td><td style="text-align:right">R$ 70,93</td></tr><tr><td><strong>MIX_FRIO_REELS_STORIES</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 520,28</td><td style="text-align:center">232</td><td style="text-align:center">6</td><td style="text-align:right">R$ 2.760,93</td><td style="text-align:center;color:var(--verde-ok)"><strong>5,31x</strong></td><td style="text-align:right">R$ 86,71</td></tr><tr><td><strong>RMKT_3_ENGAJOU_SOCIAL</strong></td><td><small style="color:var(--verde)">RMKT CBO</small></td><td style="text-align:right">R$ 351,34</td><td style="text-align:center">318</td><td style="text-align:center">3</td><td style="text-align:right">R$ 1.242,60</td><td style="text-align:center;color:var(--verde-ok)"><strong>3,54x</strong></td><td style="text-align:right">R$ 117,11</td></tr><tr><td><strong>MIX_FRIO_SP</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 338,85</td><td style="text-align:center">112</td><td style="text-align:center">1</td><td style="text-align:right">R$ 617,40</td><td style="text-align:center;color:var(--vermelho)"><strong>1,82x</strong></td><td style="text-align:right">R$ 338,85</td></tr><tr><td><strong>[ST][MIX_30D]</strong></td><td><small style="color:var(--verde)">DISTRIB. VVIEW</small></td><td style="text-align:right">R$ 300,12</td><td style="text-align:center">338</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>MIX_FRIO</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 295,94</td><td style="text-align:center">86</td><td style="text-align:center">2</td><td style="text-align:right">R$ 411,00</td><td style="text-align:center;color:var(--vermelho)"><strong>1,39x</strong></td><td style="text-align:right">R$ 147,97</td></tr><tr><td><strong>ADV</strong></td><td><small style="color:var(--verde)">CATÁLOGO PF</small></td><td style="text-align:right">R$ 211,04</td><td style="text-align:center">225</td><td style="text-align:center">2</td><td style="text-align:right">R$ 306,43</td><td style="text-align:center;color:var(--vermelho)"><strong>1,45x</strong></td><td style="text-align:right">R$ 105,52</td></tr><tr><td><strong>RMKT_2_VISITOU_SITE</strong></td><td><small style="color:var(--verde)">RMKT CBO</small></td><td style="text-align:right">R$ 129,53</td><td style="text-align:center">144</td><td style="text-align:center">1</td><td style="text-align:right">R$ 98,00</td><td style="text-align:center;color:var(--vermelho)"><strong>0,76x</strong></td><td style="text-align:right">R$ 129,53</td></tr><tr><td><strong>MIX_LAL_VIDEO_ST_REELS</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 114,85</td><td style="text-align:center">73</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>MIX_LAL</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 107,49</td><td style="text-align:center">42</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>Post IG — “quando a gente fala que…”</strong></td><td><small style="color:var(--verde)">SEGUIDORES</small></td><td style="text-align:right">R$ 91,56</td><td style="text-align:center">323</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>RMKT_1_DPA_PREMIUM</strong></td><td><small style="color:var(--verde)">RMKT CBO</small></td><td style="text-align:right">R$ 81,52</td><td style="text-align:center">14</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>[ADVANTAGE][EX_SEGUIDORES]</strong></td><td><small style="color:var(--verde)">SEGUIDORES</small></td><td style="text-align:right">R$ 66,25</td><td style="text-align:center">586</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>[ST][MIX_QUENTE_90D]</strong></td><td><small style="color:var(--verde)">DISTRIB. VVIEW</small></td><td style="text-align:right">R$ 21,56</td><td style="text-align:center">28</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>[ST][MIX_60D]</strong></td><td><small style="color:var(--verde)">DISTRIB. VVIEW</small></td><td style="text-align:right">R$ 20,78</td><td style="text-align:center">9</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>LAL1_COMPRADORAS_EX_SEGUIDORAS</strong></td><td><small style="color:var(--verde)">SEGUIDORES LAL</small></td><td style="text-align:right">R$ 11,51</td><td style="text-align:center">83</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>MIX_QUENTE</strong></td><td><small style="color:var(--verde)">JUL_TESTE</small></td><td style="text-align:right">R$ 0,00</td><td style="text-align:center">0</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr></tbody></table>
+      <div class="note" style="margin-top:2px;font-size:11px">
+        <strong>18 públicos no mês · 8 geraram venda</strong> (R$ 7.235,89 investidos → 76 compras).
+        Dois públicos concentram <strong>63% da verba e 80% da receita</strong>: MIX_FRIO_MAT_VIDEO (6,09x) e ADV_SP (4,34x) —
+        os dois rodando vídeo de tapete para público frio. Em julho eram 30 públicos para o mesmo dinheiro;
+        <strong>a conta ficou mais concentrada e mais rentável</strong>.
+        Verba sem retorno em agosto: DISTRIB. VVIEW (R$ 342,46) e SEGUIDORES (R$ 169,32) — são campanhas de topo,
+        medidas por alcance e seguidor, não por venda.
+      </div>
+    </div>
+  </section>
+
+  <!-- META · TODOS OS ANÚNCIOS -->
+  <section class="slide" id="s-ads" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Todos os Anúncios do Mês</h1>
+      <p>30 criativos veiculados · 8 com venda · CA - Santosha #2 · agosto/2026</p>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:12px 40px 60px;overflow:auto">
+      <div class="section-title" style="color:var(--terracota)">Investimento por anúncio — ordenado por verba</div>
+      <div class="duas"><table style="font-size:9.5px"><thead><tr><th>Anúncio</th><th>Conjunto</th><th style="text-align:right">Invest.</th><th style="text-align:center">Cliques</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th><th style="text-align:right">CPA</th></tr></thead><tbody><tr><td><strong>AD14_VID_MATS_VENCEDOR</strong></td><td><small style="color:var(--verde)">MIX_FRIO_MAT_VIDEO</small></td><td style="text-align:right">R$ 2.374,40</td><td style="text-align:center">1.302</td><td style="text-align:center">30</td><td style="text-align:right">R$ 14.466,22</td><td style="text-align:center;color:var(--verde-ok)"><strong>6,09x</strong></td><td style="text-align:right">R$ 79,15</td></tr><tr><td><strong>AD_TESTE (vídeo catálogo)</strong></td><td><small style="color:var(--verde)">ADV_SP</small></td><td style="text-align:right">R$ 2.198,87</td><td style="text-align:center">2.132</td><td style="text-align:center">31</td><td style="text-align:right">R$ 9.544,03</td><td style="text-align:center;color:var(--verde-ok)"><strong>4,34x</strong></td><td style="text-align:right">R$ 70,93</td></tr><tr><td><strong>FEEDBACK_MATRAVEL</strong></td><td><small style="color:var(--verde)">MIX_FRIO_REELS_STORIES</small></td><td style="text-align:right">R$ 520,28</td><td style="text-align:center">232</td><td style="text-align:center">6</td><td style="text-align:right">R$ 2.760,93</td><td style="text-align:center;color:var(--verde-ok)"><strong>5,31x</strong></td><td style="text-align:right">R$ 86,71</td></tr><tr><td><strong>RMKT_DEPOIMENTO_MATRAVEL</strong></td><td><small style="color:var(--verde)">RMKT_3_ENGAJOU_SOCIAL</small></td><td style="text-align:right">R$ 349,01</td><td style="text-align:center">314</td><td style="text-align:center">3</td><td style="text-align:right">R$ 1.242,60</td><td style="text-align:center;color:var(--verde-ok)"><strong>3,56x</strong></td><td style="text-align:right">R$ 116,34</td></tr><tr><td><strong>CARTAS_FLOW</strong></td><td><small style="color:var(--verde)">MIX_FRIO</small></td><td style="text-align:right">R$ 295,94</td><td style="text-align:center">86</td><td style="text-align:center">2</td><td style="text-align:right">R$ 411,00</td><td style="text-align:center;color:var(--vermelho)"><strong>1,39x</strong></td><td style="text-align:right">R$ 147,97</td></tr><tr><td><strong>CATALOGO_TODOS_PRODUTOS</strong></td><td><small style="color:var(--verde)">ADV</small></td><td style="text-align:right">R$ 211,04</td><td style="text-align:center">225</td><td style="text-align:center">2</td><td style="text-align:right">R$ 306,43</td><td style="text-align:center;color:var(--vermelho)"><strong>1,45x</strong></td><td style="text-align:right">R$ 105,52</td></tr><tr><td><strong>FEEDBACK_MATOSHAS_CARROSSEL_SP</strong></td><td><small style="color:var(--verde)">MIX_FRIO_SP</small></td><td style="text-align:right">R$ 139,88</td><td style="text-align:center">50</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>RMKT_DPA_CATALOGO</strong></td><td><small style="color:var(--verde)">RMKT_2_VISITOU_SITE</small></td><td style="text-align:right">R$ 129,53</td><td style="text-align:center">144</td><td style="text-align:center">1</td><td style="text-align:right">R$ 98,00</td><td style="text-align:center;color:var(--vermelho)"><strong>0,76x</strong></td><td style="text-align:right">R$ 129,53</td></tr><tr><td><strong>AD02_RAZOES_MATOSHA_DISTR</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 116,41</td><td style="text-align:center">160</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>VIDEO_MATRAVEL_COFFEE_15OFF</strong></td><td><small style="color:var(--verde)">MIX_LAL_VIDEO_ST_REELS</small></td><td style="text-align:right">R$ 114,85</td><td style="text-align:center">73</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>CUPOM_YOGA_SP</strong></td><td><small style="color:var(--verde)">MIX_FRIO_SP</small></td><td style="text-align:right">R$ 113,90</td><td style="text-align:center">30</td><td style="text-align:center">1</td><td style="text-align:right">R$ 617,40</td><td style="text-align:center;color:var(--verde-ok)"><strong>5,42x</strong></td><td style="text-align:right">R$ 113,90</td></tr><tr><td><strong>[MATRAVEL_COFFEE_15OFF][MULTIFORMATO]</strong></td><td><small style="color:var(--verde)">MIX_LAL</small></td><td style="text-align:right">R$ 107,49</td><td style="text-align:center">42</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD_NOFLOW_NOSOL</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 94,08</td><td style="text-align:center">65</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>Post IG — “quando a gente fala que…”</strong></td><td><small style="color:var(--verde)">SEGUIDORES</small></td><td style="text-align:right">R$ 91,56</td><td style="text-align:center">323</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>DECOR_POSTERES_CARROSSEL_SP</strong></td><td><small style="color:var(--verde)">MIX_FRIO_SP</small></td><td style="text-align:right">R$ 85,07</td><td style="text-align:center">32</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr></tbody></table><table style="font-size:9.5px"><thead><tr><th>Anúncio</th><th>Conjunto</th><th style="text-align:right">Invest.</th><th style="text-align:center">Cliques</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th><th style="text-align:right">CPA</th></tr></thead><tbody><tr><td><strong>RMKT_DPA_PREMIUM</strong></td><td><small style="color:var(--verde)">RMKT_1_DPA_PREMIUM</small></td><td style="text-align:right">R$ 81,52</td><td style="text-align:center">14</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>Post IG — “nosso amado flow da manhã…”</strong></td><td><small style="color:var(--verde)">[ADVANTAGE][EX_SEGUIDORES]</small></td><td style="text-align:right">R$ 66,25</td><td style="text-align:center">586</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD07_CARTASFFLOW_NOITE_SONHOS</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 42,88</td><td style="text-align:center">23</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD03_FEEDBACK_MATS_DISTR</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 24,01</td><td style="text-align:center">51</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD02_LAVAR_MAT</strong></td><td><small style="color:var(--verde)">[ST][MIX_QUENTE_90D]</small></td><td style="text-align:right">R$ 21,39</td><td style="text-align:center">28</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD_NOFLOW_NOSOL</strong></td><td><small style="color:var(--verde)">[ST][MIX_60D]</small></td><td style="text-align:right">R$ 20,78</td><td style="text-align:center">9</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD04_CARR_FEEDBACKS</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 14,27</td><td style="text-align:center">30</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD_FEEDBACK_MATRAVEL_PERFIL</strong></td><td><small style="color:var(--verde)">LAL1_COMPRADORAS</small></td><td style="text-align:right">R$ 11,51</td><td style="text-align:center">83</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD10_VIAJANDO_CARTAS_FLOW</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 5,54</td><td style="text-align:center">3</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD01_CARR_CONHECA_MATOSHA</strong></td><td><small style="color:var(--verde)">[ST][MIX_30D]</small></td><td style="text-align:right">R$ 2,93</td><td style="text-align:center">6</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>RMKT_VIDEO_MAT</strong></td><td><small style="color:var(--verde)">RMKT_3_ENGAJOU_SOCIAL</small></td><td style="text-align:right">R$ 2,28</td><td style="text-align:center">4</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD08_ASANAS</strong></td><td><small style="color:var(--verde)">[ST][MIX_QUENTE_90D]</small></td><td style="text-align:right">R$ 0,16</td><td style="text-align:center">0</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>RMKT_CARTAS_FLOW</strong></td><td><small style="color:var(--verde)">RMKT_3_ENGAJOU_SOCIAL</small></td><td style="text-align:right">R$ 0,05</td><td style="text-align:center">0</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>AD06_DIAS_IGUAIS_FLOW</strong></td><td><small style="color:var(--verde)">[ST][MIX_QUENTE_90D]</small></td><td style="text-align:right">R$ 0,01</td><td style="text-align:center">0</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr><tr><td><strong>CARTASANAS</strong></td><td><small style="color:var(--verde)">MIX_QUENTE</small></td><td style="text-align:right">R$ 0,00</td><td style="text-align:center">0</td><td style="text-align:center"><span style="color:var(--text-muted)">0</span></td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td><td style="text-align:center;color:var(--text-muted)">&mdash;</td><td style="text-align:right"><span style="color:var(--text-muted)">&mdash;</span></td></tr></tbody></table></div>
+      <div class="note" style="margin-top:2px;font-size:11px">
+        <strong>A conta vive de dois criativos:</strong> AD14_VID_MATS_VENCEDOR e AD_TESTE somam R$ 4.573,27 (63% da verba)
+        e R$ 24.010,25 (82% da receita). O terceiro colocado, FEEDBACK_MATRAVEL, tem o melhor equilíbrio da lista (5,31x com R$ 520,28).
+        <strong>O risco é de concentração</strong> — se o AD14 fadigar, a conta inteira sente. Por isso setembro entra com repertório novo
+        na mesma linha que já provou: vídeo de tapete em uso + depoimento de cliente.
+      </div>
+    </div>
+  </section>
+
+
   <!-- 6 · META POR ANÚNCIO -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
-      <h1>Meta Ads — desempenho por anúncio</h1>
-      <p>Onde o dinheiro virou venda · 8 anúncios com compra · agosto/2026</p>
+      <h1>Meta Ads — Anúncios que venderam</h1>
+      <p>Os 8 criativos com compra, com a peça clicável · agosto/2026</p>
     </div>
     <div class="body-pad" style="display:flex;flex-direction:column;gap:12px">
       <table>
@@ -896,40 +971,48 @@
   </section>
 
   <!-- 7 · FUNIL META -->
-  <section class="slide" style="background:var(--bege-claro)">
+  <!-- META · FUNIL E BENCHMARKS -->
+  <section class="slide" id="s-funil" style="background:var(--bege-claro)">
     <div class="slide-header">
-      <h1>Meta Ads — funil de conversão</h1>
-      <p>Do clique à compra · agosto/2026 · CA - Santosha #2</p>
+      <h1>Meta Ads — Funil de Conversão &amp; Benchmarks</h1>
+      <p>Do clique à compra · agosto/2026 · comparado ao nicho yoga / wellness</p>
     </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
-      <table>
-        <thead><tr><th>Etapa</th><th>Agosto/26</th><th>Passagem</th><th>Julho/26</th><th>Comparação</th></tr></thead>
-        <tbody>
-          <tr><td>Cliques no anúncio</td><td><strong>6.047</strong></td><td>—</td><td>8.039</td><td><span class="down">▼ 25%</span></td></tr>
-          <tr><td>Chegaram na página (LPV)</td><td><strong>3.350</strong></td><td>55,4%</td><td>4.112</td><td><span class="down">▼ 19%</span></td></tr>
-          <tr><td>Adicionaram ao carrinho</td><td><strong>380</strong></td><td>11,3%</td><td>381</td><td><span class="down">▼ 0%</span></td></tr>
-          <tr><td>Iniciaram o checkout</td><td><strong>162</strong></td><td>42,6%</td><td>154</td><td><span class="up">▲ 5%</span></td></tr>
-          <tr class="total-row"><td>Compraram</td><td>76</td><td>46,9%</td><td>69</td><td><span class="up">▲ 10%</span></td></tr>
-        </tbody>
-      </table>
-      <div class="grid2">
-        <div class="note">
-          <strong>A maior oportunidade está na velocidade do site.</strong> 55,4% de quem clica no anúncio
-          chega a carregar a página. Os 44,6% restantes desistem durante o carregamento — não é o anúncio
-          nem o público, é o tempo que a página leva para abrir no celular. Ganhar tempo aqui é ganho direto de venda.
+    <div class="body-pad" style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:20px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div class="section-title" style="color:var(--terracota)">Funil Meta Ads — agosto 2026</div>
+        <div style="background:var(--terracota);border-radius:10px;padding:9px 16px;width:100%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Cliques no link</div><div style="font-size:9.5px;opacity:.85">CTR 2,16% · topo do funil</div></div><div style="font-size:20px;font-weight:800">6.047</div></div><div style="background:var(--terracota2);border-radius:10px;padding:9px 16px;width:70%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Chegaram na página (LPV)</div><div style="font-size:9.5px;opacity:.85">55,4% dos cliques</div></div><div style="font-size:20px;font-weight:800">3.350</div></div><div style="background:var(--ocre);border-radius:10px;padding:9px 16px;width:52%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Adição ao carrinho</div><div style="font-size:9.5px;opacity:.85">11,3% de quem chegou</div></div><div style="font-size:20px;font-weight:800">380</div></div><div style="background:var(--verde);border-radius:10px;padding:9px 16px;width:38%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Início de checkout</div><div style="font-size:9.5px;opacity:.85">42,6% do carrinho</div></div><div style="font-size:20px;font-weight:800">162</div></div><div style="background:var(--verde2);border-radius:10px;padding:9px 16px;width:26%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Compras finalizadas</div><div style="font-size:9.5px;opacity:.85">46,9% do checkout · CPA R$ 95,21</div></div><div style="font-size:20px;font-weight:800">76</div></div>
+        <div class="note" style="font-size:10.5px">
+          <strong>Conversão total (clique → compra): 1,26%.</strong> Em julho era 0,86% —
+          o funil inteiro passou a converter <strong>+46%</strong> com 25% menos cliques.
         </div>
-        <div class="note">
-          <strong>Do carrinho para baixo, o funil melhorou:</strong> 42,6% de carrinho→checkout
-          (julho: 40,4%) e 46,9% de checkout→compra
-          (julho: 44,8%). Quem chega ao fim está fechando mais.
+        <div class="note warn" style="font-size:10.5px">
+          <strong>O gargalo continua sendo a página:</strong> 44,6% de quem clica não chega a ver a loja carregada.
+          São ~2.700 cliques pagos por mês que morrem no carregamento — o maior ganho disponível para setembro.
         </div>
       </div>
-      <div class="note">
-        <strong>Custos:</strong> CPM R$ 25,85 · CPC R$ 1,20 · CPA R$ 95,21 ·
-        alcance de 75.541 pessoas (<span class="down">▼ 13%</span> vs. julho).
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="section-title" style="color:var(--terracota)">Benchmarks — nicho yoga / wellness (Meta Ads)</div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--terracota);color:#fff">
+            <th style="padding:7px 10px;text-align:left">Métrica</th>
+            <th style="padding:7px 10px;text-align:center">Santosha ago/26</th>
+            <th style="padding:7px 10px;text-align:center">Benchmark</th>
+            <th style="padding:7px 10px;text-align:center">Status</th>
+            <th style="padding:7px 10px;text-align:center">Julho</th>
+          </tr></thead>
+          <tbody><tr><td style="padding:6px 10px;font-weight:600">CTR (link)</td><td style="padding:6px 10px;text-align:center;font-weight:700">2,16%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,5 – 2,2%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Topo da faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,09%</td></tr><tr><td style="padding:6px 10px;font-weight:600">CPM</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 25,85</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 11 – 17</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--vermelho);font-weight:700">🔴 Acima (leilão)</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 20,26</td></tr><tr><td style="padding:6px 10px;font-weight:600">CPC (link)</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 1,20</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 0,70 – 1,10</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--amarelo);font-weight:700">⚠️ Pouco acima</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 0,97</td></tr><tr><td style="padding:6px 10px;font-weight:600">Add to Cart (dos cliques)</td><td style="padding:6px 10px;text-align:center;font-weight:700">6,28%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">4 – 8%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">4,74%</td></tr><tr><td style="padding:6px 10px;font-weight:600">CVR clique → compra</td><td style="padding:6px 10px;text-align:center;font-weight:700">1,26%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,2 – 2,0%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Entrou na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">0,86%</td></tr><tr><td style="padding:6px 10px;font-weight:600">Abandono carrinho → checkout</td><td style="padding:6px 10px;text-align:center;font-weight:700">57,4%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">65 – 75%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Melhor que a faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">59,6%</td></tr><tr><td style="padding:6px 10px;font-weight:600">ROAS (atribuído Meta)</td><td style="padding:6px 10px;text-align:center;font-weight:700">4,07x</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,5 – 3,5x</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Acima da faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,42x</td></tr><tr><td style="padding:6px 10px;font-weight:600">CPA</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 95,21</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 60 – 130</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 113,08</td></tr><tr><td style="padding:6px 10px;font-weight:600">Frequência</td><td style="padding:6px 10px;text-align:center;font-weight:700">3,71</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,0 – 3,5</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--amarelo);font-weight:700">⚠️ Pouco acima</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">4,42</td></tr></tbody>
+        </table>
+        <div class="note warn" style="font-size:10.5px">
+          <strong>Leitura:</strong> das 9 métricas, <strong>6 estão na faixa ou acima</strong> — em julho eram 4.
+          A virada foi na <strong>conversão clique→compra</strong> (0,86% → 1,26%), que era o ponto fraco e entrou no benchmark.
+          O que segue fora é o <strong>custo de mídia</strong>: CPM R$ 25,85 contra R$ 11–17 do nicho.
+          Isso é leilão mais caro, não ineficiência nossa — e está sendo pago com folga pelo ROAS de 4,07x.
+          A frequência caiu de 4,42 para 3,71: menos repetição no mesmo público que em julho.
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- 8 · GOOGLE -->
   <section class="slide" style="background:var(--bege-claro)">
@@ -937,7 +1020,13 @@
       <h1>Google Ads — por campanha</h1>
       <p>Conta Santosha 853-596-5913 · R$ 3.067,10 · 42,9 conversões · agosto/2026</p>
     </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:12px">
+      <div class="s6-kpis">
+        <div class="kpi-card-lg verde"><div class="kpi-label">Investimento</div><div class="kpi-val">R$ 3.067,10</div></div>
+        <div class="kpi-card-lg verde"><div class="kpi-label">Receita atribuída</div><div class="kpi-val">R$ 15.088,63</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">ROAS</div><div class="kpi-val">4,92x</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">CPA · 42,9 conversões</div><div class="kpi-val">R$ 71,44</div></div>
+      </div>
       <table>
         <thead><tr><th>Campanha</th><th>Tipo</th><th>Investimento</th><th>Conversões</th><th>Receita</th><th>CPA</th><th>ROAS</th></tr></thead>
         <tbody>
@@ -963,6 +1052,48 @@
       </div>
     </div>
   </section>
+
+  <!-- GOOGLE · PALAVRAS-CHAVE E TERMOS -->
+  <section class="slide" id="s-termos" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Google Ads — Palavras-chave &amp; Termos de Pesquisa</h1>
+      <p>O que as pessoas realmente digitaram · 115 termos com gasto · agosto/2026</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="section-title" style="color:var(--terracota)">Termos que venderam</div>
+        <table style="font-size:10.5px">
+          <thead><tr><th>Termo pesquisado</th><th>Campanha</th><th style="text-align:right">Gasto</th>
+          <th style="text-align:center">Cliques</th><th style="text-align:center">Conv.</th>
+          <th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead>
+          <tbody><tr><td><strong>santosha</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 35,88</td><td style="text-align:center">34</td><td style="text-align:center">3</td><td style="text-align:right">R$ 859,60</td><td style="text-align:center;color:var(--verde-ok)"><strong>24,0x</strong></td></tr><tr><td><strong>tapete yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 109,31</td><td style="text-align:center">20</td><td style="text-align:center">2</td><td style="text-align:right">R$ 1.133,70</td><td style="text-align:center;color:var(--verde-ok)"><strong>10,4x</strong></td></tr><tr><td><strong>santosha</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 119,56</td><td style="text-align:center">68</td><td style="text-align:center">4</td><td style="text-align:right">R$ 448,70</td><td style="text-align:center;color:var(--verde-ok)"><strong>3,8x</strong></td></tr><tr><td><strong>tapete yoga pu</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 33,45</td><td style="text-align:center">6</td><td style="text-align:center">1</td><td style="text-align:right">R$ 623,20</td><td style="text-align:center;color:var(--verde-ok)"><strong>18,6x</strong></td></tr><tr><td><strong>tapete yoga borracha natural</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 7,71</td><td style="text-align:center">4</td><td style="text-align:center">1</td><td style="text-align:right">R$ 530,10</td><td style="text-align:center;color:var(--verde-ok)"><strong>68,8x</strong></td></tr><tr><td><strong>tapete yoga aveludado</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 6,31</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:right">R$ 558,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>88,4x</strong></td></tr><tr><td><strong>yoga mat</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 6,77</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:right">R$ 558,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>82,4x</strong></td></tr><tr><td><strong>tapete de yoga viagem</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 5,80</td><td style="text-align:center">2</td><td style="text-align:center">0,50</td><td style="text-align:right">R$ 179,55</td><td style="text-align:center;color:var(--verde-ok)"><strong>31,0x</strong></td></tr><tr><td><strong>santosha yoga</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 14,91</td><td style="text-align:center">8</td><td style="text-align:center">1</td><td style="text-align:right">R$ 93,10</td><td style="text-align:center;color:var(--verde-ok)"><strong>6,2x</strong></td></tr><tr><td><strong>tapete yoga viagem</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 13,36</td><td style="text-align:center">3</td><td style="text-align:center">0,25</td><td style="text-align:right">R$ 89,78</td><td style="text-align:center;color:var(--verde-ok)"><strong>6,7x</strong></td></tr><tr><td><strong>tapete yoga antiderrapante</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 4,99</td><td style="text-align:center">1</td><td style="text-align:center">0,48</td><td style="text-align:right">R$ 67,05</td><td style="text-align:center;color:var(--verde-ok)"><strong>13,4x</strong></td></tr><tr><td><strong>toalha antiderrapante yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 8,99</td><td style="text-align:center">1</td><td style="text-align:center">0,48</td><td style="text-align:right">R$ 67,05</td><td style="text-align:center;color:var(--verde-ok)"><strong>7,5x</strong></td></tr></tbody>
+        </table>
+        <div class="note" style="font-size:10.5px">
+          <strong>Quem paga a conta é “tapete”.</strong> Os termos com a palavra tapete somam
+          R$ 189,92 de gasto e R$ 3.248,43 de receita — <strong>17,1x</strong>. É o produto que o mercado procura pelo nome.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="section-title" style="color:var(--terracota)">Onde o dinheiro saiu sem venda</div>
+        <table style="font-size:10.5px">
+          <thead><tr><th>Termo pesquisado</th><th>Campanha</th><th style="text-align:right">Gasto</th>
+          <th style="text-align:center">Cliques</th><th style="text-align:center">Conv.</th></tr></thead>
+          <tbody><tr><td><strong>tapete de yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 105,29</td><td style="text-align:center">27</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>tapete yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 49,57</td><td style="text-align:center">12</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>yoga mat alo</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 47,22</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>mat travel</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 34,78</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>mat yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 29,90</td><td style="text-align:center">5</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>yoga mat</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 29,50</td><td style="text-align:center">5</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>tapete de yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 24,57</td><td style="text-align:center">8</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 24,57</td><td style="text-align:center">5</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>santosha yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 22,60</td><td style="text-align:center">8</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>cartas yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 21,40</td><td style="text-align:center">3</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>bloquinhos de yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 20,75</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>travel yoga mat</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 19,25</td><td style="text-align:center">2</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>yoga block</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 17,66</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>tapete ginastica yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 17,17</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr><tr><td><strong>mat de yoga antideslizante</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 14,62</td><td style="text-align:center">1</td><td style="text-align:center;color:var(--vermelho)">0</td></tr></tbody>
+        </table>
+        <div class="note warn" style="font-size:10.5px">
+          <strong>Três correções para setembro:</strong>
+          <strong>1)</strong> a Institucional está comprando a própria marca — “santosha” custou lá
+          <strong>R$ 119,56 por 4 vendas</strong> (R$ 29,89 cada) contra <strong>R$ 11,96</strong> na campanha de Marca:
+          negativar os termos de marca na Institucional joga essa busca para a campanha 2,5x mais barata.
+          <strong>2)</strong> marcas de concorrentes (yoga mat alo, ekomat, yogateria, kaiut, jade…) consumiram
+          <strong>R$ 131,49 com zero venda</strong> — vão para a lista de negativas.
+          <strong>3)</strong> “tapete de yoga” no Shopping levou R$ 105,29 sem converter: é o termo mais genérico e mais
+          disputado da categoria; entra em lance separado, não no mesmo grupo dos termos que vendem.
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- PINTEREST -->
   <section class="slide" style="background:var(--bege-claro)">
@@ -1110,6 +1241,58 @@
         (2) subir a verba da campanha MARCA no Google, hoje a 25,4x com 3,7% da verba;
         (3) recuperar sessões — o topo do funil caiu -35,9% contra ago/25 e é o que limita o volume.
       </div>
+    </div>
+  </section>
+
+  <section class="slide" id="smkt">
+    <div class="slide-header" style="background:var(--verde)"><h1>Mercado &amp; Concorrência — foi o mercado ou a marca?</h1><p>Google Trends · Meta Ad Library · Leilão do Google · pesquisa de pesquisa de julho/2026</p></div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:14px 40px 70px;overflow:auto">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="kpi-card" style="border-left-color:var(--terracota)"><div class="kpi-label">Concorrência (Meta Ad Library)</div><div style="font-size:14px;color:var(--marrom);margin-top:6px;font-family:'Trebuchet MS',sans-serif">Yogateria <strong>~140 anúncios ativos</strong> (escalando) · Yogini ~160. Rivais investindo mais → CPM <strong>+33%</strong> pra todos.</div></div>
+        <div class="kpi-card" style="border-left-color:var(--ocre)"><div class="kpi-label">Nosso leilão no Google</div><div style="font-size:14px;color:var(--marrom);margin-top:6px;font-family:'Trebuchet MS',sans-serif">Presença <strong class="up">17,7% → 35,4%</strong> · perda por rank 75%→65% · por verba 13%→2%. Ganhamos espaço.</div></div>
+      </div>
+      <div>
+        <div class="section-title">Leilão do Google — Jul/2025 × Jul/2026</div>
+        <table style="font-size:12px"><thead><tr><th>Métrica</th><th>Jul/2025</th><th>Jul/2026</th><th>Leitura</th></tr></thead><tbody>
+          <tr><td>Presença no leilão (impression share)</td><td>17,7%</td><td><span class="up">35,4%</span></td><td>Dobrou — apareceu mais</td></tr>
+          <tr><td>Perda por Ad Rank</td><td>75,1%</td><td><span class="up">64,7%</span></td><td>Perdeu menos p/ rivais</td></tr>
+          <tr><td>Perda por orçamento</td><td>13,3%</td><td><span class="up">2,0%</span></td><td>Não faltou verba</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="sconc">
+    <div class="slide-header" style="background:var(--verde)"><h1>Pesquisa de Mercado — Maiores Concorrentes</h1><p>Lojas de yoga BR · Instagram · Meta Ad Library · oferta &amp; canais · Julho/Ago 2026</p></div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:14px 40px 70px;overflow:auto">
+      <table style="font-size:11.5px">
+        <thead class="thead-verde"><tr><th>Concorrente</th><th>Instagram</th><th>Posicionamento</th><th>Ads ativos*</th><th>Oferta / gancho principal</th><th>Canais</th></tr></thead>
+        <tbody><tr><td><strong>Yogateria</strong></td><td>~247k</td><td>Líder de mercado · preço &amp; escala · tapete "pra vida"</td><td style="text-align:center">~140</td><td>Frete grátis &gt;R$300 · VSL de fundador · "150 mil clientes" · produtos-gancho baratos</td><td>Site + ML + farmácias + revendedores + afiliados</td></tr><tr><td><strong>Yogini</strong></td><td>~86k</td><td>Moda inspirada em yoga · 7 lojas físicas</td><td style="text-align:center">~160</td><td><strong>60% off + 10% 1ª compra</strong> (oferta mais forte) · cashback 10%</td><td>Site + lojas físicas</td></tr><tr><td><strong>Ekomat</strong></td><td>~44k</td><td>Premium sustentável · embaixadores/professores</td><td style="text-align:center">~10</td><td>Cupom EKOMAT10 (10%) · clube Satsanga (assinatura)</td><td>Site</td></tr><tr><td><strong>Om Joy</strong></td><td>~27k</td><td>Preço &amp; variedade · estúdios</td><td style="text-align:center">—</td><td>Pix com desconto · parcelamento 12x</td><td>Site + Amazon + Shopee</td></tr><tr><td><strong>Yoga House</strong></td><td>baixo</td><td>Curadoria (Manduka / Liforme)</td><td style="text-align:center">—</td><td>Parcelamento 12x</td><td>Site</td></tr><tr><td><strong>Yogi Buda</strong></td><td>~2,9k</td><td>Personalização · nicho</td><td style="text-align:center">—</td><td>Produto de entrada R$ 129</td><td>Site</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:10px;color:var(--text-muted);font-family:'Trebuchet MS',sans-serif">* Anúncios ativos na Meta Ad Library (BR) — Yogateria/Yogini verificados jul/26; demais no último levantamento. Seguidores IG de referência (jul/26).</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:2px">
+        <div class="note" style="border-left-color:var(--verde-ok)"><strong style="color:var(--verde-ok)">🟢 Onde a Santosha ganha (defender)</strong><br>Identidade <strong>yoga + arte autoral</strong> (Yogateria só imita com a linha Leela) · ecossistema <strong>app Sanflow + Retiro</strong> que nenhum concorrente tem · tapete lavável de verdade + arte.</div>
+        <div class="note warn"><strong>🔴 O que eles fazem melhor (atacar)</strong><br>1) <strong>Oferta no copy</strong> (10% 1ª compra / frete) — todos que anunciam usam · 2) parcelamento &amp; Pix visíveis na vitrine · 3) reviews/prova social numérica · 4) VSL de fundadora · 5) produtos-gancho baratos p/ aquisição.</div>
+      </div>
+      <div class="note" style="font-size:12px"><strong>Leitura:</strong> o nicho é liderado por <strong>Yogateria</strong> (escala/preço) e pressionado por <strong>Yogini</strong> (oferta agressiva + moda). A Santosha compete por <strong>diferenciação</strong> (arte + ecossistema), não por preço — mas perde vendas fáceis por <strong>não anunciar oferta</strong>. Fechar esse gap é o caminho de maior ROAS no curto prazo.</div>
+    </div>
+  </section>
+
+  <section class="slide" id="spreco">
+    <div class="slide-header" style="background:var(--ocre)"><h1>Preço de Tapete — Santosha × Concorrentes</h1><p>Tapete de yoga: piso (entrada) × topo (premium) · frete grátis · alavancas de conversão · Ago/2026</p></div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding:16px 40px 70px;overflow:auto">
+      <table style="font-size:12.5px">
+        <thead class="thead-ocre"><tr><th>Loja</th><th>Tapete — entrada</th><th>Tapete — topo/premium</th><th>Frete grátis</th><th>Alavanca de conversão</th></tr></thead>
+        <tbody><tr><td><strong>Yogateria</strong></td><td>R$ 175</td><td>R$ 495</td><td style="text-align:center">&gt; R$ 300</td><td>Cupom 10% · VSL de fundador · milhares de reviews</td></tr><tr><td><strong>Yogini</strong></td><td>R$ 289</td><td>R$ 429</td><td style="text-align:center">—</td><td>10% 1ª compra + cashback 10%</td></tr><tr><td><strong>Ekomat</strong></td><td>R$ 299</td><td>R$ 549</td><td style="text-align:center">&gt; R$ 500</td><td>Cupom 10% (quiz) · reviews visíveis ★4,4–4,9</td></tr>
+          <tr style="background:var(--terracota);color:#fff"><td><strong>Santosha</strong></td><td><strong>R$ 378</strong> (MATravel)</td><td><strong>R$ 558</strong> (Matosha)</td><td style="text-align:center">&gt; R$ 350</td><td style="color:#ffe"><strong>nenhuma anunciada</strong> (sem cupom/parcelamento/reviews visíveis)</td></tr>
+        </tbody>
+      </table>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="note warn"><strong>🔎 O que os preços dizem</strong><br>A Santosha tem o <strong>maior piso de preço do grupo</strong> (R$ 378 vs R$ 175–299 dos concorrentes) — posicionamento <strong>premium por arte autoral</strong>. No topo (R$ 558) empata com o Pro da Ekomat (R$ 549).</div>
+        <div class="note" style="border-left-color:var(--vermelho)"><strong>⚠️ O risco do preço alto sem alavanca</strong><br>É a <strong>única</strong> sem cupom de 1ª compra, parcelamento/Pix em destaque ou reviews visíveis. Preço premium <strong>exige mais prova e oferta</strong> pra converter — coerente com a conversão em 0,77%.</div>
+      </div>
+      <div class="note" style="font-size:12px;border-left-color:var(--verde)"><strong>Recomendação:</strong> manter o preço premium (é diferenciação real), mas <strong>adicionar as alavancas</strong> que os concorrentes usam — cupom de 1ª compra, parcelamento/Pix visível na vitrine e reviews nas coleções. É o caminho de maior impacto em conversão sem baixar preço. <em>(Obs.: 2 SKUs de MATravel estavam esgotados na coleta — repor.)</em></div>
     </div>
   </section>
 
