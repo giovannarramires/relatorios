@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Biblioteca de Públicos — GGD</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#1a1d24; --line:#2a2e37; --txt:#e8eaed; --mut:#9aa0aa;
+    --verde:#2ecc71; --amarelo:#f1c40f; --vermelho:#e74c3c; --azul:#4a9eff; --roxo:#a78bfa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,Segoe UI,Roboto,sans-serif;padding:24px;max-width:1360px;margin:0 auto}
+  #lock{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:50}
+  #lock .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px;width:340px;max-width:90%;text-align:center}
+  #lock h1{font-size:20px;margin-bottom:6px} #lock h1 span{color:var(--azul)}
+  #lock p{color:var(--mut);font-size:13px;margin-bottom:20px}
+  #lock input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:15px;margin-bottom:12px}
+  #lock button{width:100%;padding:12px;border:none;border-radius:10px;background:var(--azul);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+  #lock .err{color:var(--vermelho);font-size:13px;min-height:18px;margin-top:8px}
+  #app{display:none}
+  header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  h1.top{font-size:22px;font-weight:700} h1.top span{color:var(--azul)}
+  .sub{color:var(--mut);font-size:13px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .kpi .n{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpi .l{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+  section{margin-bottom:26px}
+  h2{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  h2 small{text-transform:none;letter-spacing:0;font-weight:400;color:#6d737d}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .chip{padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:13px;cursor:pointer;white-space:nowrap}
+  .chip .g{font-size:11px;opacity:.75;margin-left:6px}
+  .chip:hover{border-color:#3d4450;color:var(--txt)}
+  .chip.on{background:rgba(74,158,255,.16);border-color:var(--azul);color:#cfe3ff;font-weight:600}
+  .tblwrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:700px}
+  th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;background:var(--card);position:sticky;top:0}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tag{display:inline-block;padding:1px 8px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.3px}
+  .t-int{background:rgba(74,158,255,.14);color:#8cc4ff}
+  .t-com{background:rgba(167,139,250,.14);color:#c4b5fd}
+  .t-car{background:rgba(46,204,113,.14);color:#6ee7a8}
+  .t-out{background:rgba(154,160,170,.14);color:var(--mut)}
+  .win{color:var(--verde);font-weight:600}
+  .lose{color:var(--vermelho);font-weight:600}
+  .warn{color:var(--amarelo)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+  .receita{background:linear-gradient(90deg,#16202e,#1a1d24);border:1px solid #2f4463}
+  .receita h3{font-size:15px;margin-bottom:4px}
+  .receita .por{color:var(--mut);font-size:12px;margin-bottom:12px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  .blk .bt{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  .blk ul{list-style:none;font-size:13px;line-height:1.7}
+  .blk li:before{content:"▸ ";color:var(--azul)}
+  .busca{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;margin-bottom:12px}
+  .nota{color:#6d737d;font-size:12px;line-height:1.6;border-left:2px solid var(--line);padding-left:12px;margin-top:8px}
+  .abas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;border-bottom:1px solid var(--line)}
+  .aba{padding:9px 15px;font-size:13px;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .aba.on{color:var(--txt);border-bottom-color:var(--azul);font-weight:600}
+  .cli{color:var(--mut);font-size:11px}
+  footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
+  a{color:var(--azul);text-decoration:none}
+  .cp{padding:3px 8px;border-radius:6px;border:1px solid #35507a;background:#243042;color:#cfe3ff;font-size:10px;cursor:pointer}
+  .cp.ok{background:rgba(46,204,113,.18);border-color:var(--verde);color:var(--verde)}
+  .vazio{color:var(--mut);padding:16px;font-size:13px}
+</style>
+</head>
+<body>
+<div id="lock"><div class="box">
+  <h1>Biblioteca de <span>Públicos</span></h1>
+  <p>uso interno GGD</p>
+  <input id="pw" type="password" placeholder="senha" autofocus>
+  <button id="go">Abrir</button>
+  <div class="err" id="err"></div>
+</div></div>
+
+<div id="app">
+  <header>
+    <div>
+      <h1 class="top">Biblioteca de <span>Públicos</span> GGD</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="sub"><a href="../cockpit/">← Cockpit</a></div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>Busca global <small>— esse interesse já rodou em algum cliente nosso?</small></h2>
+    <input class="busca" id="q" placeholder="ex.: botox, enfermagem, yoga, dentista, corrida…">
+    <div id="qres"></div>
+  </section>
+
+  <section>
+    <h2>Nicho</h2>
+    <div class="chips" id="chips"></div>
+    <div id="painel"></div>
+  </section>
+
+  <footer id="rod"></footer>
+</div>
+
+<script>
+const b64ToBytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+async function deriveKey(pw, salt){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
+    km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+}
+async function loadData(pw){
+  const blob = await (await fetch('./data.json?t=' + Date.now())).json();
+  const key = await deriveKey(pw, b64ToBytes(blob.salt));
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64ToBytes(blob.iv)}, key, b64ToBytes(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+let DB=null, NICHO=null, ABA='combos';
+const brl = n => 'R$ ' + (n||0).toLocaleString('pt-BR',{maximumFractionDigits:0});
+const brl2 = n => (n==null?'—':'R$ ' + Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}));
+const nfmt = n => (n||0).toLocaleString('pt-BR',{maximumFractionDigits:0});
+const esc = s => String(s??'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+// busca sem acento: quem digita "cirurgiao" tem que achar "Cirurgião"
+const norm = s => String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const tagcls = t => t==='Interesse'?'t-int':(t==='Comportamento'?'t-com':(t==='Cargo'||t==='Setor'?'t-car':'t-out'));
+
+// resultado principal de uma linha (o de maior gasto)
+const rprin = l => (l.resultados && l.resultados[0]) || null;
+// baseline broad do nicho para aquele tipo de resultado
+const base = (nicho, tipo) => (DB.nichos[nicho].baseline_broad||{})[tipo] || null;
+
+// veredito: custo do publico vs custo do broad no MESMO nicho e MESMO tipo
+function vs(nicho, r){
+  if(!r) return '';
+  const b = base(nicho, r.tipo);
+  if(!b || !b.custo || !r.custo) return '<span class="cli">sem broad p/ comparar</span>';
+  const d = (r.custo/b.custo - 1)*100;
+  const cls = d < -10 ? 'win' : (d > 10 ? 'lose' : 'warn');
+  const sinal = d>0?'+':'';
+  return `<span class="${cls}">${sinal}${d.toFixed(0)}% vs broad</span>`;
+}
+
+function kpis(){
+  const ns = Object.entries(DB.nichos);
+  const gasto = ns.reduce((s,[,n])=>s+n.gasto,0);
+  const segs  = ns.reduce((s,[,n])=>s+n.segmentacoes.length,0);
+  const salv  = ns.reduce((s,[,n])=>s+n.publicos_salvos.length,0);
+  const cust  = ns.reduce((s,[,n])=>s+n.customaudiences.length,0);
+  document.getElementById('kpis').innerHTML = [
+    [ns.length,'Nichos'], [Object.keys(DB.clientes).length,'Clientes'],
+    [nfmt(segs),'Segmentações mapeadas'], [brl(gasto),'Mídia analisada'],
+    [nfmt(salv),'Públicos salvos'], [nfmt(cust),'Públicos personalizados']
+  ].map(([n,l])=>`<div class="kpi"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+}
+
+function chips(){
+  const ns = Object.entries(DB.nichos).sort((a,b)=>b[1].gasto-a[1].gasto);
+  NICHO = NICHO || ns[0][0];
+  document.getElementById('chips').innerHTML = ns.map(([n,d])=>
+    `<div class="chip ${n===NICHO?'on':''}" data-n="${esc(n)}">${esc(n)}<span class="g">${brl(d.gasto)}</span></div>`).join('');
+  document.querySelectorAll('#chips .chip').forEach(c=>c.onclick=()=>{NICHO=c.dataset.n; chips(); painel();});
+}
+
+// ---- receita do nicho: o que subir num cliente novo -----------------------
+function receita(d){
+  const combos = d.combos.filter(c=>c.gasto>=300 && c.resultados.length);
+  const melhorPorTipo = {};
+  combos.forEach(c=>{ const r=c.resultados[0];
+    if(!melhorPorTipo[r.tipo] || r.custo < melhorPorTipo[r.tipo].r.custo) melhorPorTipo[r.tipo]={c,r}; });
+  const tops = d.segmentacoes.filter(l=>l.gasto>=300).slice(0,10);
+  const rmkt = {};
+  d.customaudiences.forEach(c=>{ const k=c.tipo||'OUTRO'; rmkt[k]=(rmkt[k]||0)+1; });
+  const bl = Object.entries(d.baseline_broad||{}).sort((a,b)=>b[1].gasto-a[1].gasto);
+
+  return `<div class="card receita">
+    <h3>Cliente novo de ${esc(NICHO)} — comece por aqui</h3>
+    <div class="por">Destilado de ${brl(d.gasto)} de mídia em ${d.clientes.length} cliente(s): ${esc(d.clientes.join(', '))}</div>
+    <div class="grid2">
+      <div class="blk"><div class="bt">Combo que melhor performou</div><ul>${
+        Object.entries(melhorPorTipo).slice(0,3).map(([t,{c,r}])=>
+          `<li><b>${t}</b> a ${brl2(r.custo)} — ${esc(c.itens.slice(0,6).join(', '))}${c.itens.length>6?` <span class="cli">+${c.itens.length-6}</span>`:''} <span class="cli">(${brl(c.gasto)})</span></li>`
+        ).join('') || '<li class="cli">sem combo com gasto relevante</li>'}</ul></div>
+      <div class="blk"><div class="bt">Interesses mais rodados</div><ul>${
+        tops.slice(0,6).map(l=>`<li>${esc(l.nome)} <span class="cli">${brl(l.gasto)}</span></li>`).join('') || '<li class="cli">—</li>'}</ul></div>
+      <div class="blk"><div class="bt">Referência: broad / Advantage+ no nicho</div><ul>${
+        bl.slice(0,4).map(([t,v])=>`<li>${t}: <b>${brl2(v.custo)}</b> <span class="cli">(${nfmt(v.n)} em ${brl(v.gasto)})</span></li>`).join('') || '<li class="cli">nunca rodamos broad aqui</li>'}
+        </ul><div class="nota">Público segmentado só se paga se bater esse número.</div></div>
+      <div class="blk"><div class="bt">Remarketing que a casa monta nesse nicho</div><ul>${
+        Object.entries(rmkt).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>`<li>${esc(k)} <span class="cli">${v} público(s)</span></li>`).join('') || '<li class="cli">—</li>'}</ul></div>
+    </div>
+  </div>`;
+}
+
+function tblCombos(d){
+  const rows = d.combos.filter(c=>c.gasto>0).slice(0,60);
+  if(!rows.length) return '<div class="tblwrap"><div class="vazio">sem combo com gasto na janela</div></div>';
+  return `<div class="tblwrap"><table><thead><tr>
+    <th>Combo (o conjunto como foi ao ar)</th><th>Itens</th><th>Gasto</th><th>Resultado</th><th>Custo</th><th>vs broad</th><th>Cliente</th></tr></thead><tbody>${
+    rows.map(c=>{ const r=c.resultados[0];
+      return `<tr><td style="white-space:normal;max-width:520px">${esc(c.itens.join(' + '))}</td>
+      <td class="num">${c.n_itens}</td><td class="num">${brl(c.gasto)}</td>
+      <td>${r?`${nfmt(r.n)} ${r.tipo}`:'<span class="cli">sem resultado</span>'}</td>
+      <td class="num">${r?brl2(r.custo):'—'}</td><td>${vs(NICHO,r)}</td>
+      <td class="cli">${esc(c.clientes.join(', '))}</td></tr>`;}).join('')}</tbody></table></div>
+    <div class="nota">Combo = o conjunto inteiro de segmentações do adset. É a única linha em que o custo é
+    100% honesto, porque foi exatamente isso que foi ao ar.</div>`;
+}
+
+function tblSeg(d){
+  const rows = d.segmentacoes.filter(l=>l.gasto>0);
+  if(!rows.length) return '<div class="tblwrap"><div class="vazio">nada rodado</div></div>';
+  return `<div class="tblwrap"><table><thead><tr>
+    <th>Segmentação</th><th>Tipo</th><th>Gasto</th><th>Resultado</th><th>Custo</th><th>vs broad</th>
+    <th>Prova isolada</th><th>Empilh.</th><th>Clientes</th></tr></thead><tbody>${
+    rows.map(l=>{ const r=rprin(l); const i=(l.isolado||[])[0];
+      return `<tr><td style="white-space:normal;max-width:300px">${esc(l.nome)}</td>
+      <td><span class="tag ${tagcls(l.tipo)}">${esc(l.tipo)}</span></td>
+      <td class="num">${brl(l.gasto)}</td>
+      <td>${r?`${nfmt(r.n)} ${r.tipo}`:'<span class="cli">—</span>'}</td>
+      <td class="num">${r?brl2(r.custo):'—'}</td><td>${vs(NICHO,r)}</td>
+      <td>${i?`<span class="win">${brl2(i.custo)}</span> <span class="cli">${nfmt(i.n)} ${i.tipo} · ${brl(i.gasto)}</span>`:'<span class="cli">nunca testado sozinho</span>'}</td>
+      <td class="num">${l.empilhamento}</td>
+      <td class="cli">${esc(l.clientes.join(', '))}</td></tr>`;}).join('')}</tbody></table></div>
+    <div class="nota"><b>Como ler:</b> a Meta não diz qual item do conjunto trouxe o resultado — num conjunto com
+    10 interesses, os 10 recebem o gasto inteiro e aparecem com o mesmo custo. "Empilh." é a média de itens do
+    conjunto: quanto maior, menos a linha prova. <b>Prova isolada</b> é o que aquele item fez sozinho (ou com no
+    máximo 1 companheiro): essa sim é evidência.</div>`;
+}
+
+function tblSalvos(d){
+  if(!d.publicos_salvos.length) return '<div class="tblwrap"><div class="vazio">nenhum público salvo nesse nicho</div></div>';
+  return `<div class="tblwrap"><table><thead><tr>
+    <th>Público salvo</th><th>Cliente</th><th>Tamanho</th><th>Geo</th><th>Idade</th><th>Gên.</th><th>Segmentações</th></tr></thead><tbody>${
+    d.publicos_salvos.map(p=>`<tr>
+      <td style="white-space:normal;max-width:280px">${esc(p.nome)}</td>
+      <td class="cli">${esc(p.cliente)}</td>
+      <td class="num">${p.tamanho?nfmt(p.tamanho):'—'}</td>
+      <td class="cli" style="white-space:normal;max-width:180px">${esc(p.geo||'—')}</td>
+      <td class="cli">${esc(p.idade)}</td><td class="cli">${esc(p.genero)}</td>
+      <td style="white-space:normal;max-width:420px" class="cli">${esc((p.itens||[]).join(' · ')||'aberto')}</td>
+    </tr>`).join('')}</tbody></table></div>
+    <div class="nota">Segmentações já montadas e salvas nas contas — dá pra clonar em conta nova sem remontar na mão.</div>`;
+}
+
+function tblCustom(d){
+  if(!d.customaudiences.length) return '<div class="tblwrap"><div class="vazio">nenhum público personalizado</div></div>';
+  return `<div class="tblwrap"><table><thead><tr>
+    <th>Público personalizado</th><th>Cliente</th><th>Origem</th><th>Tamanho</th><th>Retenção</th><th>Atualizado</th></tr></thead><tbody>${
+    d.customaudiences.map(c=>`<tr>
+      <td style="white-space:normal;max-width:380px">${esc(c.nome)}</td>
+      <td class="cli">${esc(c.cliente)}</td><td><span class="tag t-out">${esc(c.tipo||'—')}</span></td>
+      <td class="num">${c.tamanho?nfmt(c.tamanho):'—'}</td>
+      <td class="num cli">${c.retencao||'—'}</td><td class="cli">${esc(c.atualizado||'—')}</td>
+    </tr>`).join('')}</tbody></table></div>
+    <div class="nota">O valor aqui não é o público em si (é da conta do cliente) e sim a <b>receita de remarketing</b>:
+    quais janelas e origens a casa usa nesse nicho.</div>`;
+}
+
+function painel(){
+  const d = DB.nichos[NICHO];
+  const abas = [['combos','Combos que foram ao ar'],['seg','Segmentações'],
+                ['salvos','Públicos salvos'],['custom','Remarketing / personalizados']];
+  document.getElementById('painel').innerHTML = receita(d) +
+    `<div class="abas">${abas.map(([k,l])=>`<div class="aba ${k===ABA?'on':''}" data-a="${k}">${l}</div>`).join('')}</div>
+     <div id="conteudo"></div>`;
+  document.querySelectorAll('.aba').forEach(a=>a.onclick=()=>{ABA=a.dataset.a; painel();});
+  document.getElementById('conteudo').innerHTML =
+    ABA==='combos'?tblCombos(d):ABA==='seg'?tblSeg(d):ABA==='salvos'?tblSalvos(d):tblCustom(d);
+}
+
+// ---- busca global --------------------------------------------------------
+function busca(q){
+  const alvo = document.getElementById('qres');
+  q = norm((q||'').trim());
+  if(q.length < 3){ alvo.innerHTML=''; return; }
+  const hits=[];
+  Object.entries(DB.nichos).forEach(([n,d])=>{
+    d.segmentacoes.forEach(l=>{ if(norm(l.nome).includes(q)){
+      const r=rprin(l); hits.push({n,nome:l.nome,tipo:l.tipo,gasto:l.gasto,r,cli:l.clientes,emp:l.empilhamento}); }});
+  });
+  if(!hits.length){ alvo.innerHTML='<div class="tblwrap"><div class="vazio">nunca rodamos nada com esse nome</div></div>'; return; }
+  hits.sort((a,b)=>b.gasto-a.gasto);
+  alvo.innerHTML = `<div class="tblwrap"><table><thead><tr>
+    <th>Segmentação</th><th>Nicho</th><th>Gasto</th><th>Resultado</th><th>Custo</th><th>vs broad</th><th>Empilh.</th><th>Clientes</th>
+    </tr></thead><tbody>${hits.slice(0,40).map(h=>`<tr>
+      <td style="white-space:normal;max-width:280px">${esc(h.nome)} <span class="tag ${tagcls(h.tipo)}">${esc(h.tipo)}</span></td>
+      <td class="cli">${esc(h.n)}</td><td class="num">${brl(h.gasto)}</td>
+      <td>${h.r?`${nfmt(h.r.n)} ${h.r.tipo}`:'<span class="cli">—</span>'}</td>
+      <td class="num">${h.r?brl2(h.r.custo):'—'}</td>
+      <td>${(()=>{const b=(DB.nichos[h.n].baseline_broad||{})[h.r?h.r.tipo:'']; if(!b||!h.r||!h.r.custo) return '<span class="cli">—</span>';
+        const dd=(h.r.custo/b.custo-1)*100; return `<span class="${dd<-10?'win':(dd>10?'lose':'warn')}">${dd>0?'+':''}${dd.toFixed(0)}%</span>`;})()}</td>
+      <td class="num">${h.emp}</td><td class="cli">${esc(h.cli.join(', '))}</td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="nota">${hits.length} ocorrência(s)${hits.length>40?' — mostrando as 40 de maior gasto':''}.</div>`;
+}
+
+// ---- boot ----------------------------------------------------------------
+async function abrir(){
+  const pw = document.getElementById('pw').value;
+  const err = document.getElementById('err');
+  err.textContent = 'abrindo…';
+  try{ DB = await loadData(pw); }
+  catch(e){ err.textContent = 'senha incorreta'; return; }
+  document.getElementById('lock').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('sub').textContent =
+    `janela ${DB.janela.since} → ${DB.janela.until} · gerado em ${DB.gerado_em}`;
+  document.getElementById('rod').textContent = `Biblioteca de Públicos GGD · gerada de ${DB.janela.since} a ${DB.janela.until}`;
+  kpis(); chips(); painel();
+  document.getElementById('q').addEventListener('input', e=>busca(e.target.value));
+}
+document.getElementById('go').onclick = abrir;
+document.getElementById('pw').addEventListener('keydown', e=>{ if(e.key==='Enter') abrir(); });
+</script>
+</body>
+</html>
