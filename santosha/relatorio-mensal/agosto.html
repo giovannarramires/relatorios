@@ -544,7 +544,7 @@
     .nav, .hint { display: none !important; }
   }
 
-  .monthbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:1200;
+  .monthbar{position:fixed;top:12px;right:16px;left:auto;transform:none;z-index:1200;
     display:flex;align-items:center;gap:6px;background:rgba(242,235,223,0.95);
     backdrop-filter:blur(8px);padding:5px 8px 5px 14px;border-radius:30px;
     border:1px solid rgba(191,106,69,0.35);box-shadow:0 2px 12px rgba(61,39,24,0.15);
@@ -556,6 +556,12 @@
   .monthbar a:hover{background:rgba(191,106,69,0.18);}
   .monthbar a.active{background:var(--terracota);color:#fff;}
   @media print{ .monthbar{display:none !important;} }
+  #s-visao .kpi-card-lg{padding:12px 16px}
+  #s-visao .kpi-card-lg .kpi-val{font-size:clamp(20px,2.4vw,28px);margin:5px 0 4px}
+  #s-visao .kpi-card-lg .kpi-delta{font-size:10.5px;line-height:1.35}
+  #s-visao thead th{padding:6px 10px}
+  #s-visao tbody td{padding:5px 10px}
+  #s-visao .note{padding:7px 12px;font-size:10.5px;line-height:1.42}
   .body-pad{flex:1;padding:16px 40px 70px;overflow:auto;justify-content:safe center}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -585,128 +591,120 @@
     </div>
   </section>
 
-  <!-- 2 · VISÃO GERAL -->
-  <section class="slide" style="background:var(--bege-claro)">
+  <!-- 2 · VISÃO GERAL + COMPARATIVO -->
+  <section class="slide" id="s-visao" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Visão Geral — Agosto 2026</h1>
-      <p>Faturamento real (Shopify) × investimento em mídia · mês fechado</p>
+      <p>Mês fechado · comparação com julho/26 e agosto/25 em número e em % · Shopify + Meta + Google + Pinterest</p>
     </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:11px">
       <div class="grid3">
         <div class="kpi-card-lg">
           <div class="kpi-label">Faturamento real (Shopify)</div>
           <div class="kpi-val">R$ 52.242,29</div>
-          <div class="kpi-delta"><span class="up">▲ 52%</span> vs. julho &nbsp;·&nbsp; <span class="down">▼ 9%</span> vs. ago/25</div>
+          <div class="kpi-delta"><span class="up">▲ R$ 17.876,45 (52%)</span> vs. julho (R$ 34.365,84)<br>
+          <span class="down">▼ R$ 5.388,32 (9%)</span> vs. ago/25 (R$ 57.630,61)</div>
         </div>
         <div class="kpi-card-lg ocre">
-          <div class="kpi-label">Investimento em mídia</div>
+          <div class="kpi-label">Investimento em campanhas</div>
           <div class="kpi-val">R$ 10.602,99</div>
-          <div class="kpi-delta">20,3% do faturamento &nbsp;·&nbsp; <span class="up">▼ 15%</span> vs. julho</div>
+          <div class="kpi-delta"><span class="up">▼ R$ 1.910,23 (15%)</span> vs. julho (R$ 12.513,22)<br>
+          + R$ 1.000,72 de imposto Meta = <strong>R$ 11.603,71</strong> pagos (22,2% do faturamento)</div>
         </div>
         <div class="kpi-card-lg verde">
           <div class="kpi-label">ROAS real (MER)</div>
           <div class="kpi-val">4,93x</div>
-          <div class="kpi-delta">julho 2,75x &nbsp;·&nbsp; ago/25 4,91x</div>
+          <div class="kpi-delta"><span class="up">▲ 2,18x</span> vs. julho (2,75x) · ago/25 4,91x<br>
+          Com imposto: <strong>4,50x</strong> (julho 2,53x)</div>
         </div>
       </div>
-      <div class="grid4">
-        <div class="kpi-card"><div class="kpi-label">Pedidos</div><div class="kpi-val">134</div><div class="kpi-delta"><span class="up">▲ 18%</span> vs. julho</div></div>
-        <div class="kpi-card"><div class="kpi-label">Ticket médio</div><div class="kpi-val">R$ 380,23</div><div class="kpi-delta"><span class="up">▲ 33%</span> vs. julho</div></div>
-        <div class="kpi-card"><div class="kpi-label">Sessões</div><div class="kpi-val">9.919</div><div class="kpi-delta"><span class="down">▼ 24%</span> vs. julho</div></div>
-        <div class="kpi-card"><div class="kpi-label">Conversão da loja</div><div class="kpi-val">1,35%</div><div class="kpi-delta"><span class="up">▲ 55%</span> vs. julho</div></div>
-      </div>
-      <div class="note">
-        <strong>A leitura do mês:</strong> a loja faturou R$ 52.242,29 — <strong>+52,0% sobre julho</strong> —
-        com <strong>menos</strong> visita (-24,4%) e <strong>menos</strong> verba (-15,3%).
-        Todo o crescimento veio de dentro: o ticket médio subiu +32,7% e a conversão da loja subiu +55,4%.
-        É o oposto do que o diagnóstico dos 90 dias apontava — lá a queda era justamente de ticket.
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · COMPARATIVO -->
-  <section class="slide" style="background:var(--bege-claro)">
-    <div class="slide-header">
-      <h1>Agosto/26 × Julho/26 × Agosto/25</h1>
-      <p>Mesma janela (mês fechado) nas três colunas · Shopify + Meta + Google</p>
-    </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
-      <table>
+      <table style="font-size:11.5px">
         <thead><tr>
           <th>Indicador</th><th>Agosto 2026</th><th>Julho 2026</th><th>vs. mês anterior</th><th>Agosto 2025</th><th>vs. ano anterior</th>
         </tr></thead>
         <tbody>
-          <tr><td><strong>Faturamento da loja</strong></td><td><strong>R$ 52.242,29</strong></td><td>R$ 34.365,84</td><td><span class="up">▲ 52%</span></td><td>R$ 57.630,61</td><td><span class="down">▼ 9%</span></td></tr>
-          <tr><td>Pedidos</td><td><strong>134</strong></td><td>114</td><td><span class="up">▲ 18%</span></td><td>219</td><td><span class="down">▼ 39%</span></td></tr>
-          <tr><td>Ticket médio</td><td><strong>R$ 380,23</strong></td><td>R$ 286,64</td><td><span class="up">▲ 33%</span></td><td>R$ 263,74</td><td><span class="up">▲ 44%</span></td></tr>
-          <tr><td>Sessões</td><td>9.919</td><td>13.116</td><td><span class="down">▼ 24%</span></td><td>15.481</td><td><span class="down">▼ 36%</span></td></tr>
-          <tr><td>Conversão da loja</td><td><strong>1,35%</strong></td><td>0,87%</td><td><span class="up">▲ 55%</span></td><td>1,41%</td><td><span class="down">▼ 5%</span></td></tr>
-          <tr><td>Investimento em mídia</td><td>R$ 10.602,99</td><td>R$ 12.513,22</td><td><span class="up">▼ 15%</span></td><td>R$ 11.735,58</td><td><span class="up">▼ 10%</span></td></tr>
-          <tr><td>Mídia sobre o faturamento</td><td>20,3%</td><td>36,4%</td><td>—</td><td>20,4%</td><td>—</td></tr>
-          <tr class="total-row"><td>ROAS real (MER)</td><td>4,93x</td><td>2,75x</td><td><span class="up">▲ 79%</span></td><td>4,91x</td><td><span class="up">▲ 0%</span></td></tr>
+          <tr><td><strong>Faturamento da loja</strong></td><td><strong>R$ 52.242,29</strong></td><td>R$ 34.365,84</td><td><span class="up">▲ R$ 17.876,45 · 52%</span></td><td>R$ 57.630,61</td><td><span class="down">▼ R$ 5.388,32 · 9%</span></td></tr>
+          <tr><td>Pedidos</td><td><strong>134</strong></td><td>114</td><td><span class="up">▲ 20 pedidos · 18%</span></td><td>219</td><td><span class="down">▼ 85 pedidos · 39%</span></td></tr>
+          <tr><td>Ticket médio</td><td><strong>R$ 380,23</strong></td><td>R$ 286,64</td><td><span class="up">▲ R$ 93,59 · 33%</span></td><td>R$ 263,74</td><td><span class="up">▲ R$ 116,49 · 44%</span></td></tr>
+          <tr><td>Sessões</td><td>9.919</td><td>13.116</td><td><span class="down">▼ 3.197 · 24%</span></td><td>15.481</td><td><span class="down">▼ 5.562 · 36%</span></td></tr>
+          <tr><td>Conversão da loja</td><td><strong>1,35%</strong></td><td>0,87%</td><td><span class="up">▲ 0,48 p.p. · 55%</span></td><td>1,41%</td><td><span class="down">▼ 0,06 p.p. · 5%</span></td></tr>
+          <tr><td>Investimento em campanhas</td><td>R$ 10.602,99</td><td>R$ 12.513,22</td><td><span class="up">▼ R$ 1.910,23 · 15%</span></td><td>R$ 11.735,58</td><td><span class="up">▼ R$ 1.132,59 · 10%</span></td></tr>
+          <tr><td>Imposto Meta (13,83%)</td><td>R$ 1.000,72</td><td>R$ 1.079,06</td><td><span class="up">▼ R$ 78,34 · 7%</span></td><td>—</td><td>—</td></tr>
+          <tr><td><strong>Total pago (campanhas + imposto)</strong></td><td><strong>R$ 11.603,71</strong></td><td>R$ 13.592,28</td><td><span class="up">▼ R$ 1.988,57 · 15%</span></td><td>—</td><td>—</td></tr>
+          <tr class="total-row"><td>ROAS real (MER)</td><td>4,93x</td><td>2,75x</td><td><span class="up">▲ 2,18x · 79%</span></td><td>4,91x</td><td><span class="up">▲ 0,02x</span></td></tr>
         </tbody>
       </table>
-      <div class="note warn" style="font-size:10.5px">
-        <strong>Régua das colunas:</strong> agosto/26 e julho/26 somam <strong>Meta + Google + Pinterest</strong>.
-        A coluna de agosto/2025 traz <strong>Meta + Google</strong> — os dois canais com histórico completo nos dois anos.
-      </div>
       <div class="grid2">
         <div class="note">
-          <strong>Contra julho: virada clara.</strong> Faturamento +52,0% e MER de 2,75x para 4,93x.
-          Cada real de mídia devolveu R$ 2,18 a mais em faturamento do que no mês passado.
+          <strong>Contra julho: virada clara.</strong> R$ 17.876,45 a mais de faturamento com R$ 1.910,23 a menos
+          de verba e 3.197 visitas a menos. O crescimento veio de dentro: ticket +R$ 93,59 e conversão +0,48 p.p.
+          Cada real de mídia devolveu R$ 2,18 a mais do que no mês passado.
         </div>
         <div class="note warn">
-          <strong>Contra agosto do ano passado: ainda abaixo.</strong> -9,3% de faturamento, com -38,8% de pedidos.
-          O que segura a conta é o ticket: +44,2% — vendemos para menos gente, mas cada compra vale muito mais.
-          O gap de volume está no topo do funil: -35,9% de sessões.
+          <strong>Contra agosto do ano passado: ainda abaixo.</strong> R$ 5.388,32 a menos de faturamento, com 85 pedidos a menos.
+          O que segura a conta é o ticket: +R$ 116,49 por pedido — vendemos para menos gente, mas cada compra vale muito mais.
+          O gap de volume está no topo: 5.562 sessões a menos.
         </div>
+      </div>
+      <div class="note warn" style="font-size:10.5px">
+        <strong>Régua das colunas:</strong> agosto/26 e julho/26 somam <strong>Meta + Google + Pinterest</strong>.
+        Agosto/2025 traz <strong>Meta + Google</strong> — os dois canais com histórico completo nos dois anos; o imposto de 2025 não foi levantado, por isso as duas linhas de imposto ficam sem comparativo anual.
       </div>
     </div>
   </section>
 
-  <!-- 4 · PLATAFORMAS -->
+  <!-- 3 · PLATAFORMAS -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Faturamento e ROAS por plataforma</h1>
-      <p>Receita atribuída dentro de cada plataforma · agosto/2026 fechado</p>
+      <p>O que foi campanha e o que foi imposto · receita atribuída dentro de cada plataforma · agosto/2026 fechado</p>
     </div>
-    <div class="body-pad" style="display:flex;flex-direction:column;gap:16px">
-      <table>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
+      <table style="font-size:11.5px">
         <thead><tr>
-          <th>Plataforma</th><th>Investimento</th><th>% inv.</th><th>Faturamento</th>
-          <th>% fat.</th><th>Compras</th><th>CPA</th><th>ROAS</th>
+          <th>Plataforma</th><th>Campanhas</th><th>Imposto (NF)</th><th>Total pago</th>
+          <th>Faturamento</th><th>Compras</th><th>CPA pago</th><th>ROAS campanhas</th><th>ROAS pago</th>
         </tr></thead>
         <tbody>
           <tr>
       <td><strong>Meta Ads</strong></td>
-      <td>R$ 7.235,89</td><td>68,2%</td>
-      <td>R$ 29.446,61</td><td>61,8%</td>
+      <td>R$ 7.235,89</td><td>R$ 1.000,72</td><td><strong>R$ 8.236,61</strong></td>
+      <td>R$ 29.446,61</td>
       <td>76</td>
-      <td>R$ 95,21</td>
+      <td>R$ 108,38</td>
       <td><strong style="color:var(--terracota)">4,07x</strong></td>
+      <td>3,58x</td>
     </tr><tr>
       <td><strong>Google Ads</strong></td>
-      <td>R$ 3.067,10</td><td>28,9%</td>
-      <td>R$ 15.088,63</td><td>31,7%</td>
+      <td>R$ 3.067,10</td><td>—</td><td><strong>R$ 3.067,10</strong></td>
+      <td>R$ 15.088,63</td>
       <td>42,9</td>
       <td>R$ 71,44</td>
       <td><strong style="color:var(--terracota)">4,92x</strong></td>
+      <td>4,92x</td>
     </tr><tr>
       <td><strong>Pinterest Ads</strong></td>
-      <td>R$ 300,00</td><td>2,8%</td>
-      <td>R$ 3.084,00</td><td>6,5%</td>
+      <td>R$ 300,00</td><td>—</td><td><strong>R$ 300,00</strong></td>
+      <td>R$ 3.084,00</td>
       <td>12</td>
       <td>R$ 25,00</td>
       <td><strong style="color:var(--terracota)">10,28x</strong></td>
+      <td>10,28x</td>
     </tr>
-          <tr class="total-row"><td>TOTAL</td><td>R$ 10.602,99</td><td>100%</td><td>R$ 47.619,24</td><td>100%</td>
-          <td>131</td><td>R$ 80,98</td><td>4,49x</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>R$ 10.602,99</td><td>R$ 1.000,72</td><td>R$ 11.603,71</td>
+          <td>R$ 47.619,24</td><td>131</td><td>R$ 88,58</td><td>4,49x</td><td>4,10x</td></tr>
         </tbody>
       </table>
+      <div class="note warn" style="font-size:10.5px">
+        <strong>Campanha × imposto:</strong> só o Meta emite NF com os tributos discriminados — COFINS 7,60% + PIS 1,65% + ISS 2,90% =
+        <strong>13,83% sobre o gasto de campanhas</strong>. Google Ads e Pinterest não trazem imposto em NF separada, então campanhas e total pago são o mesmo valor.
+        Da verba total do mês, <strong>R$ 10.602,99 viraram anúncio no ar</strong> e <strong>R$ 1.000,72 foram imposto</strong>.
+        Faturamento por plataforma é atribuído por ela mesma — não somar com a receita real da loja (R$ 52.242,29 no Shopify).
+      </div>
       <div class="grid2">
         <div class="note">
-          <strong>O Meta segue sendo o motor:</strong> 68% da verba e 62% da receita atribuída.
-          O ROAS do Meta subiu de 2,42x em julho para 4,07x, com -7,3% de verba.
+          <strong>O Meta segue sendo o motor:</strong> 68% da verba de campanha (71% do total pago, porque o imposto é só dele)
+          e 62% da receita atribuída. O ROAS do Meta subiu de 2,42x em julho para 4,07x, com -7,3% de verba.
         </div>
         <div class="note">
           <strong>O Google entregou mais com menos:</strong> -28,1% de investimento e +34,2% de receita —
@@ -721,7 +719,7 @@
     </div>
   </section>
 
-  <!-- 5 · MER × ATRIBUÍDO -->
+  <!-- 4 · MER × ATRIBUÍDO -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>ROAS real (MER) × ROAS atribuído</h1>
@@ -732,7 +730,7 @@
         <div class="kpi-card-lg verde">
           <div class="kpi-label">ROAS real (MER)</div>
           <div class="kpi-val">4,93x</div>
-          <div class="kpi-delta sans" style="color:var(--text-muted)">faturamento Shopify ÷ mídia total</div>
+          <div class="kpi-delta sans" style="color:var(--text-muted)">faturamento Shopify ÷ campanhas (R$ 10.602,99) · com o imposto do Meta: 4,50x</div>
         </div>
         <div class="kpi-card-lg">
           <div class="kpi-label">ROAS atribuído consolidado</div>
@@ -842,7 +840,7 @@
     </div>
   </section>
 
-  <!-- 6 · META POR CAMPANHA -->
+  <!-- 5 · META POR CAMPANHA -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Meta Ads — por campanha</h1>
@@ -870,7 +868,7 @@
     </div>
   </section>
 
-  <!-- 7 · META POR ANÚNCIO -->
+  <!-- 6 · META POR ANÚNCIO -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Meta Ads — desempenho por anúncio</h1>
@@ -901,7 +899,7 @@
     </div>
   </section>
 
-  <!-- 8 · FUNIL META -->
+  <!-- 7 · FUNIL META -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Meta Ads — funil de conversão</h1>
@@ -937,7 +935,7 @@
     </div>
   </section>
 
-  <!-- 9 · GOOGLE -->
+  <!-- 8 · GOOGLE -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Google Ads — por campanha</h1>
@@ -1005,7 +1003,7 @@
     </div>
   </section>
 
-  <!-- 10 · LOJA -->
+  <!-- 9 · LOJA -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Shopify — a loja em agosto</h1>
@@ -1066,7 +1064,7 @@
     </div>
   </section>
 
-  <!-- 11 · PREVISÃO SETEMBRO -->
+  <!-- 10 · PREVISÃO SETEMBRO -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header" style="background:var(--verde)">
       <h1>Previsibilidade — Setembro 2026</h1>
@@ -1119,7 +1117,7 @@
     </div>
   </section>
 
-  <!-- 12 · PRÓXIMOS PASSOS -->
+  <!-- 11 · PRÓXIMOS PASSOS -->
   <section class="slide" style="background:var(--bege-claro)">
     <div class="slide-header">
       <h1>Próximos passos</h1>
@@ -1149,7 +1147,7 @@
     </div>
   </section>
 
-  <!-- 13 · ENCERRAMENTO -->
+  <!-- 12 · ENCERRAMENTO -->
   <section class="slide" style="background:var(--bege);flex-direction:row">
     <div class="capa-stripe"></div>
     <div class="capa-stripe-thin"></div>
