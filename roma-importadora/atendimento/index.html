@@ -113,6 +113,20 @@
   .split{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   @media(max-width:820px){.split{grid-template-columns:1fr;}}
   .big{font-size:34px; font-weight:800; letter-spacing:-1px;}
+  .check{background:#fff; border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin-bottom:9px; display:flex; gap:12px; align-items:flex-start;}
+  .check .cx{flex:0 0 22px; height:22px; border-radius:5px; border:2px solid var(--green); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; margin-top:1px;}
+  .check .ct{font-size:13px; color:#41505d;}
+  .check .ct b{color:var(--text); display:block; font-size:14px; margin-bottom:2px;}
+  .msg{background:#e7ffdb; border:1px solid #c5eab3; border-radius:12px; border-top-left-radius:3px; padding:13px 16px; font-size:13px; color:#1f2c33; margin:8px 0; max-width:560px; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,.06);}
+  .msg .who{font-size:10px; text-transform:uppercase; letter-spacing:1px; font-weight:800; color:#128C7E; margin-bottom:6px;}
+  .fase{background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:14px;}
+  .fase .hd{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .fase .tempo{background:var(--wa); color:#fff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:20px; white-space:nowrap;}
+  .fase h3{font-size:16px;}
+  .fase p{font-size:13px; color:#41505d; margin-bottom:6px;}
+  .erro{background:#fff6f6; border:1px solid #ffd4d9; border-radius:10px; padding:14px 18px; margin-bottom:9px; font-size:13px; color:#41505d;}
+  .erro b{color:var(--red); display:block; margin-bottom:3px; font-size:14px;}
+
 </style>
 
 </head>
@@ -272,9 +286,94 @@
     </div>
   </div>
 
+
   <!-- 6 -->
   <div class="section">
-    <div class="section-title">6 · O que a GGD faz em paralelo</div>
+    <div class="section-title">6 · O roteiro do atendimento — o que a pessoa faz, na prática</div>
+    <div class="banner" style="margin-bottom:16px;">
+      <div class="k">Para quem é esta parte</div>
+      <div class="t">A seção anterior é <b>configuração</b> — mexe uma vez e fica pronta. Esta é o <b>dia a dia de quem atende</b>.
+      É o roteiro que transforma uma conversa de WhatsApp em pedido, e vale tanto para o lojista que chega às 9h
+      quanto para o que chega às 22h. <b>Nenhum item aqui depende de anúncio</b>: depende de quem responde.</div>
+    </div>
+
+    <h4 style="font-size:15px; margin:22px 0 12px;">Os quatro momentos de uma conversa que vira pedido</h4>
+
+    <div class="fase">
+      <div class="hd"><span class="tempo">até 5 min</span><h3>1 · Responder e identificar quem é</h3></div>
+      <p>Velocidade é o fator que mais pesa: <b>quem responde primeiro cota primeiro</b>. Mas responder rápido não é mandar preço rápido.
+      Antes de qualquer tabela, três perguntas definem o resto da conversa — e cabem em uma única mensagem.</p>
+      <div class="msg"><div class="who">Modelo — primeira resposta</div>
+      Oi! Aqui é a Roma Importadora 👋<br>
+      Pra eu te mandar certinho o que você precisa: <b>seu nome</b>, você é de <b>qual cidade</b> e trabalha com <b>que tipo de loja</b>
+      (armarinho, ateliê, costura, artesanato)?<br>
+      Assim já te mando a tabela do seu segmento e as condições de atacado.</div>
+      <div class="note"><b>Por que a cidade importa:</b> muda o frete, muda a expectativa de prazo e muda a chance de ele vir até o Brás. É a pergunta que mais qualifica e a que mais se esquece de fazer.</div>
+    </div>
+
+    <div class="fase">
+      <div class="hd"><span class="tempo">mesma conversa</span><h3>2 · Mandar o que resolve, não a lista inteira</h3></div>
+      <p>Mandar o catálogo completo é a forma mais rápida de perder o lojista: ele não sabe por onde começar e some.
+      Com as respostas do passo 1, o atendente envia <b>só a linha do segmento dele</b>, com as condições explícitas.</p>
+      <div class="msg"><div class="who">Modelo — envio de tabela</div>
+      Perfeito, {nome}! Pra armarinho o que mais sai é isso aqui 👇 <i>(catálogo do segmento)</i><br><br>
+      • Pedido mínimo: <b>R$ ___</b><br>
+      • Formas de pagamento: <b>___</b><br>
+      • Prazo de envio: <b>___</b> · Frete para <b>{cidade}</b>: <b>___</b><br><br>
+      Quer que eu monte um orçamento com as quantidades que você precisa?</div>
+      <div class="note">Pedido mínimo, pagamento, prazo e frete <b>na primeira mensagem de preço</b>. Cada um desses que fica faltando vira uma ida e volta — e cada ida e volta é uma chance de o lojista ir procurar outro fornecedor.</div>
+    </div>
+
+    <div class="fase">
+      <div class="hd"><span class="tempo">antes de encerrar</span><h3>3 · Fechar com um próximo passo marcado</h3></div>
+      <p>Conversa que termina em "qualquer coisa me chama" morre ali. Toda conversa precisa terminar com <b>data, quantidade ou compromisso</b> —
+      alguma coisa concreta para retomar depois.</p>
+      <div class="msg"><div class="who">Modelo — fechamento</div>
+      Fechado, {nome}! Deixo o orçamento reservado até <b>{data}</b>.<br>
+      Te chamo na {dia da semana} pra confirmar, pode ser? Se você precisar antecipar, é só me mandar aqui. 😊</div>
+    </div>
+
+    <div class="fase">
+      <div class="hd"><span class="tempo">24h e 72h</span><h3>4 · Fazer o follow-up — duas vezes, sempre</h3></div>
+      <p>É o passo que mais se perde e o que mais devolve pedido. O lojista que pediu tabela e sumiu <b>não disse não</b> —
+      ele está tocando a própria loja. Duas retomadas, com espaçamento, resolvem boa parte.</p>
+      <div class="msg"><div class="who">Modelo — 24h depois</div>
+      Oi {nome}, tudo bem? Passando pra saber se ficou alguma dúvida na tabela que te mandei.<br>
+      Se quiser, eu já separo as peças e te falo o prazo certinho.</div>
+      <div class="msg"><div class="who">Modelo — 72h depois (último toque)</div>
+      {nome}, chegou reposição das linhas que você olhou 👀<br>
+      Se ainda fizer sentido pra sua loja, me avisa que eu garanto pelo preço da tabela que te passei.</div>
+      <div class="note">Depois do segundo toque sem resposta, marcar como <b>"sumiu"</b> e parar. O registro vale mais que a insistência: é ele que vai mostrar, no fim do mês, quantos leads morreram nessa etapa.</div>
+    </div>
+
+    <h4 style="font-size:15px; margin:26px 0 12px;">O que não pode faltar — checklist de implantação</h4>
+
+    <div class="check"><div class="cx">1</div><div class="ct"><b>Um dono por turno</b>Nome e sobrenome de quem responde o WhatsApp em cada faixa de horário. Sem dono, o lead fica esperando "alguém" atender.</div></div>
+    <div class="check"><div class="cx">2</div><div class="ct"><b>Resposta automática fora do horário, com as 3 perguntas</b>Não basta avisar que está fechado — tem que <b>coletar nome, cidade e segmento</b> enquanto o lojista ainda está com o celular na mão.</div></div>
+    <div class="check"><div class="cx">3</div><div class="ct"><b>Catálogo separado por segmento</b>Armarinho, ateliê, costura, artesanato. Pronto para enviar em um clique, sem alguém montar na hora.</div></div>
+    <div class="check"><div class="cx">4</div><div class="ct"><b>Condições comerciais escritas</b>Pedido mínimo, formas de pagamento, prazo de envio e política de frete. Se cada atendente responde de um jeito, a operação não escala.</div></div>
+    <div class="check"><div class="cx">5</div><div class="ct"><b>Mensagens-modelo salvas na ferramenta</b>As quatro acima, como respostas rápidas. Ninguém escreve bem às 8h da manhã com quinze conversas abertas.</div></div>
+    <div class="check"><div class="cx">6</div><div class="ct"><b>Etiqueta de origem e de desfecho</b>De qual anúncio veio · cotou / comprou / sumiu. É o que torna o retorno mensurável.</div></div>
+    <div class="check"><div class="cx">7</div><div class="ct"><b>Uma rotina de follow-up no fim do dia</b>15 minutos revisando quem cotou e não voltou. É o hábito mais barato de toda a lista.</div></div>
+
+    <h4 style="font-size:15px; margin:26px 0 12px;">Os quatro erros que matam a venda já paga</h4>
+
+    <div class="erro"><b>Demorar mais de 30 minutos para a primeira resposta</b>No atacado, o lojista manda mensagem para três fornecedores ao mesmo tempo. A ordem de chegada decide.</div>
+    <div class="erro"><b>Mandar preço antes de saber quem é</b>Sem cidade e segmento, o preço vira número solto — e número solto o concorrente cobre.</div>
+    <div class="erro"><b>Deixar o lojista sem próximo passo</b>"Qualquer coisa me chama" transfere a responsabilidade para quem tem menos motivo para voltar.</div>
+    <div class="erro"><b>Não retomar quem cotou</b>Quem pediu tabela é o lead mais quente que existe. Sem follow-up, ele foi pago e devolvido de graça ao mercado.</div>
+
+    <div class="banner gd" style="margin-top:18px;">
+      <div class="k">✔ Em uma frase</div>
+      <div class="t">Nada nesta seção depende de verba, de anúncio ou da GGD.
+      <b>Depende de responder rápido, perguntar antes de precificar, terminar com um próximo passo e retomar duas vezes.</b>
+      É esse roteiro que decide o que acontece com os 362 contatos que a campanha entrega todo mês.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-title">7 · O que a GGD faz em paralelo</div>
     <div class="tw">
       <table>
         <thead><tr><th>Ação na conta</th><th>Para quê</th></tr></thead>
@@ -290,7 +389,7 @@
 
   <!-- 7 -->
   <div class="section">
-    <div class="section-title">7 · O que precisamos saber de vocês</div>
+    <div class="section-title">8 · O que precisamos saber de vocês</div>
     <div class="perg"><b>1 · Quantas pessoas atendem o WhatsApp hoje, e em que horário?</b>Define se o gargalo é de pessoas, de ferramenta ou de organização da fila.</div>
     <div class="perg"><b>2 · O número 96197-8519 está dentro da Zenvia como número oficial, ou roda no aplicativo comum?</b>É o que determina o que dá para automatizar imediatamente.</div>
     <div class="perg"><b>3 · O telefone do perfil do Google cai onde — na loja, num ramal, num celular?</b>A queda de agosto começou no dia 10 e vale cerca de 1,4 lojista por dia.</div>
@@ -299,7 +398,7 @@
 
   <!-- 8 -->
   <div class="section">
-    <div class="section-title">8 · O tamanho da oportunidade</div>
+    <div class="section-title">9 · O tamanho da oportunidade</div>
     <div class="split">
       <div class="box" style="border-left:4px solid var(--green);">
         <div class="lbl" style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:800;">Recuperável sem verba nova</div>
