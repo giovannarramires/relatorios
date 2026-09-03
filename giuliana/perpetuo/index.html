@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Perpétuo — Giuliana Sueyoshi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef2f7;--surface:#fff;--border:#e3e8ef;--text:#101a26;--text-2:#4a5768;--text-3:#93a1b3;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 10px 30px rgba(0,0,0,.13);
+--radius:14px;--c1:#0d4f57;--c2:#12857f;--c3:#d4a24c;--ink:#071f24;
+--ok:#0f8a5f;--bad:#c0392b;--off:#8593a5}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.brandstrip{background:var(--ink);color:#fff;text-align:center;font-family:'Space Grotesk',sans-serif;
+font-weight:700;letter-spacing:5px;font-size:12px;padding:7px 0;text-transform:uppercase}
+.brandstrip span{color:var(--c3)}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 135%);padding:0 32px;min-height:78px;
+display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:100;
+box-shadow:0 4px 20px rgba(0,0,0,.22);flex-wrap:wrap}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.logo{width:50px;height:50px;border-radius:13px;background:var(--ink);display:flex;align-items:center;
+justify-content:center;font-family:'Space Grotesk',sans-serif;border:2px solid rgba(255,255,255,.35)}
+.logo b{color:#fff;font-size:21px}
+.header-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.6px}
+.header-sub{font-size:11.5px;color:rgba(255,255,255,.86);margin-top:2px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;
+padding:7px 15px;border-radius:20px;font-size:12.5px;font-weight:700;white-space:nowrap;margin:12px 0}
+.tabs{position:sticky;top:78px;z-index:99;background:rgba(238,242,247,.96);backdrop-filter:blur(6px);
+border-bottom:1px solid var(--border);padding:11px 32px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs-rot{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);
+font-weight:700;margin-right:4px}
+.tab{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--text-2);cursor:pointer;
+background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 16px;
+transition:all .15s;text-transform:capitalize}
+.tab:hover{border-color:var(--c2);color:var(--c1)}
+.tab.on{background:var(--c1);border-color:var(--c1);color:#fff;box-shadow:var(--shadow-sm)}
+.container{max-width:1280px;margin:0 auto;padding:20px 32px 44px}
+.watermark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;
+color:var(--text-3);text-align:right;text-transform:uppercase;opacity:.6;margin:2px 0 14px}
+.watermark span{color:var(--c2)}
+.hero{background:linear-gradient(135deg,var(--ink) 0%,var(--c1) 92%,var(--c2) 165%);border-radius:18px;
+padding:22px 26px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero::after{content:'🦷';position:absolute;right:24px;bottom:-16px;font-size:96px;opacity:.07}
+.hero-label{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;
+font-size:12px;color:var(--c3);font-weight:700;margin-bottom:14px}
+.hero-label span{color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.3px;text-transform:none}
+.hero-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.hero-box{flex:1;min-width:158px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+border-radius:12px;padding:15px 18px}
+.hero-box.total{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5)}
+.hero-box.roas .hb-v{color:var(--c3);font-size:30px}
+.hero-box.roas{min-width:180px}
+.hb-l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:7px}
+.hb-v{font-size:25px;font-weight:900;letter-spacing:-.5px}
+.hb-v small{font-size:13px;font-weight:700;opacity:.75}
+.hb-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px}
+.hero-op{align-self:center;font-size:24px;font-weight:300;color:rgba(255,255,255,.45)}
+.section-header{display:flex;align-items:baseline;gap:10px;margin:30px 0 14px;flex-wrap:wrap}
+.section-tag{width:4px;height:20px;background:var(--c2);border-radius:3px;align-self:center}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.section-hint{font-size:11.5px;color:var(--text-3)}
+.grupo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.grupo{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);
+border-top:4px solid var(--pc)}
+.grupo-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
+.grupo-nome{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;color:var(--pc)}
+.grupo-sub{font-size:11px;color:var(--text-3);margin-top:3px}
+.grupo-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.grupo-kpis div{background:#f6f8fb;border-radius:10px;padding:11px 13px;font-size:11.5px;color:var(--text-2)}
+.grupo-kpis span{display:block;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--text)}
+.grupo-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--text-3);margin-top:2px}
+.grupo-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 14px;margin-top:12px;font-size:11.5px;color:var(--text-2)}
+.grupo-mini b{color:var(--text)}
+.nota{margin-top:12px;background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:10px 12px;
+font-size:11.5px;line-height:1.5;color:#5d4a1c}
+.nota.alerta{background:#fdecea;border-color:#f3c2bd;color:#8c2d22}
+.card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:13.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2)}
+.card .cap{font-size:11.5px;color:var(--text-3);margin:4px 0 16px}
+.leitura-teste{background:#eef7f6;border:1px solid #cbe4e1;border-radius:10px;padding:11px 14px;
+font-size:12.5px;color:#20524e;margin:0 0 12px}
+.leitura-teste b{color:#0d4f57}
+.falta{margin-top:14px}
+.falta-l{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:7px;margin-top:12px}
+.falta-l li{background:#f6f8fb;border-radius:9px;padding:9px 12px;font-size:12px;color:var(--text-2)}
+.falta-l b{color:var(--text)} .falta-l span{color:var(--text-3);font-size:11px}
+.falta-l b.agora{color:var(--ok);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+.falta-l b.depois{color:var(--text-3);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+.grid-funil{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.fx{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.fx-r{width:70px;font-size:12px;font-weight:700;color:var(--text-2);flex-shrink:0}
+.fx-t{flex:1;height:16px;background:#eef2f7;border-radius:8px;overflow:hidden}
+.fx-b{height:100%;border-radius:8px;opacity:.85}
+.fx-v{width:120px;text-align:right;font-size:12.5px;font-weight:700;flex-shrink:0}
+.fx-v em{display:block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--text-3)}
+.graf{width:100%;height:auto}
+.gy{font-size:10.5px;fill:var(--text-3);text-anchor:end;font-family:'Inter',sans-serif}
+.gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start;font-family:'Inter',sans-serif}
+.gx{font-size:10px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.gx2{font-size:9.5px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.gv{font-size:11px;font-weight:700;fill:var(--text-2);text-anchor:middle;font-family:'Inter',sans-serif}
+.leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--text-2);margin-top:10px;flex-wrap:wrap}
+.leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.tab-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px}
+th{background:#f6f8fb;padding:11px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--text-3);font-weight:700;white-space:nowrap}
+th.l,td.l{text-align:left} th.d,td.d{text-align:right;font-weight:700}
+td{padding:11px 12px;text-align:right;border-bottom:1px solid var(--border);vertical-align:top}
+td.l em{display:block;font-style:normal;font-size:11px;color:var(--text-3);margin-top:2px}
+td.l em.q{color:var(--text-2);font-weight:600}
+td.l a{color:var(--c1);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(13,79,87,.25)}
+td.l a:hover{color:var(--c2);border-bottom-color:var(--c2)}
+td.l a .ext{font-size:11px;color:var(--text-3)}
+tbody tr:hover{background:#f9fbfd}
+tbody tr.sem td{color:var(--text-3)}
+.pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.pill.ok{background:var(--ok)} .pill.off{background:var(--off)}
+.vazio{padding:26px;text-align:center;color:var(--text-3);font-size:13px;background:#f6f8fb;border-radius:12px}
+.leitura{background:var(--surface);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow-sm);
+font-size:13px;line-height:1.65;color:var(--text-2)}
+.leitura li{margin:0 0 9px 18px} .leitura b{color:var(--text)}
+.rodape{margin-top:34px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--text-3);line-height:1.7}
+@media(max-width:760px){.container{padding:16px} .header{padding:0 16px} .tabs{top:0;position:static;padding:11px 16px}
+.grupo-kpis{grid-template-columns:1fr}}
+</style></head><body>
+<div class="brandstrip">Gio <span>Growth Digital</span></div>
+<div class="header">
+  <div class="header-left"><div class="logo"><b>GS</b></div>
+    <div><div class="header-title">Perpétuo — Mapa da Criação de Conteúdo</div>
+      <div class="header-sub">Giuliana Sueyoshi · conta 912256333622697 · oferta R$ 29,90 no checkout Hubla</div></div></div>
+  <div class="header-badge">Atualizado em 3 de set</div>
+</div>
+<div class="tabs"><span class="tabs-rot">Período</span><button class="tab on" data-p="total">Tudo</button><button class="tab" data-p="2026-09">setembro/26</button></div>
+<div class="container">
+  <div class="watermark">Relatório <span>GGD</span></div>
+  <section class="periodo" data-p="total">
+  
+<div class="hero">
+  <div class="hero-label">Perpétuo — Mapa da Criação de Conteúdo <span>· todo o período (1 de set a 3 de set)</span></div>
+  <div class="hero-row">
+    <div class="hero-box"><div class="hb-l">Investido (mídia)</div><div class="hb-v">R$ 357,01</div>
+      <div class="hb-s">R$ 406,38 com imposto (13,83%)</div></div>
+    <div class="hero-op">→</div>
+    <div class="hero-box"><div class="hb-l">Vendas</div><div class="hb-v">32</div>
+      <div class="hb-s">171 visitas na página · 18,7% viraram venda</div></div>
+    <div class="hero-op">=</div>
+    <div class="hero-box"><div class="hb-l">Receita</div><div class="hb-v">R$ 965,65</div>
+      <div class="hb-s">ticket médio R$ 30,18 · oferta R$ 29,90</div></div>
+    <div class="hero-box total roas"><div class="hb-l">ROAS</div>
+      <div class="hb-v">2,38x</div>
+      <div class="hb-s">sobre a mídia com imposto · acima do ponto de equilíbrio (1,00x)</div></div>
+  </div>
+  <div class="hero-row" style="margin-top:12px">
+    <div class="hero-box"><div class="hb-l">No ar agora</div><div class="hb-v">R$ 280<small>/dia</small></div>
+      <div class="hb-s">7 conjuntos ativos · 2 campanhas</div></div>
+    <div class="hero-box"><div class="hb-l">Últimos 7 dias</div><div class="hb-v">32<small> vendas</small></div>
+      <div class="hb-s">R$ 357,01 investidos · custo/venda R$ 11,16</div></div>
+    <div class="hero-box"><div class="hb-l">3 de set</div><div class="hb-v">11<small> vendas</small></div>
+      <div class="hb-s">R$ 115,05 investidos · custo/venda R$ 10,46</div></div>
+    <div class="hero-box"><div class="hb-l">Custo por venda</div><div class="hb-v">R$ 11,16</div>
+      <div class="hb-s">R$ 12,70 com imposto · ticket de R$ 30,18</div></div></div>
+</div>
+  
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Frio × Quente</div>
+    <div class="section-hint">duas campanhas, os mesmos criativos — a diferença é só o público</div></div>
+  <div class="grupo-grid">
+<div class="grupo" style="--pc:#c9663c">
+  <div class="grupo-top">
+    <div><div class="grupo-nome">Quente</div>
+      <div class="grupo-sub">remarketing — seguidores do IG + envolvimento · mulheres 25–40</div></div>
+    <span class="pill ok">no ar · R$ 160/dia</span>
+  </div>
+  <div class="grupo-kpis">
+    <div><span>R$ 185,96</span>investido<em>52,1% da verba</em></div>
+    <div><span>18</span>vendas<em>94 visitas na página</em></div>
+    <div><span>R$ 10,33</span>CPA<em>R$ 11,76 c/ imposto</em></div>
+    <div><span>2,57x</span>ROAS<em>R$ 543,59 de receita</em></div>
+  </div>
+  <div class="grupo-mini">
+    <div>CPM <b>R$ 24,47</b></div><div>CTR link <b>1,36%</b></div>
+    <div>CPC link <b>R$ 1,81</b></div><div>Página→venda <b>19,1%</b></div>
+  </div>
+</div>
+<div class="grupo" style="--pc:#12857f">
+  <div class="grupo-top">
+    <div><div class="grupo-nome">Frio</div>
+      <div class="grupo-sub">prospecção — interesse faculdade de odontologia + cargos · mulheres 25–40</div></div>
+    <span class="pill ok">no ar · R$ 120/dia</span>
+  </div>
+  <div class="grupo-kpis">
+    <div><span>R$ 171,05</span>investido<em>47,9% da verba</em></div>
+    <div><span>14</span>vendas<em>77 visitas na página</em></div>
+    <div><span>R$ 12,22</span>CPA<em>R$ 13,91 c/ imposto</em></div>
+    <div><span>2,17x</span>ROAS<em>R$ 422,06 de receita</em></div>
+  </div>
+  <div class="grupo-mini">
+    <div>CPM <b>R$ 25,97</b></div><div>CTR link <b>1,46%</b></div>
+    <div>CPC link <b>R$ 1,78</b></div><div>Página→venda <b>18,2%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Teste de criativo — por gancho</div>
+    <div class="section-hint">frio + quente somados · 1 conjunto = 1 criativo, então o gasto é isolado</div></div>
+  <div class="cap leitura-teste"><b>Promessa de resultado</b> é o melhor gancho até agora: 20 vendas a R$ 7,99 cada · <b>Autoridade + consequência</b> já gastou R$ 54,71 sem nenhuma venda.</div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Gancho</th><th>Status</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>Promessa de resultado</b>
+    <em>VIDEO_AD3 · "quer aumentar o número de pacientes" · <a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">ver o anúncio <span class="ext">↗</span></a></em>
+    <em class="q">Frio 11v / R$ 79 · Quente 9v / R$ 80</em></td>
+  <td><span class="pill ok">2 no ar</span></td>
+  <td class="d">R$ 159,76</td><td>1,87%</td><td>95</td>
+  <td class="d">20</td>
+  <td>R$ 7,99</td>
+  <td class="d">3,32x</td></tr><tr>
+  <td class="l"><b>Prova social</b>
+    <em>VIDEO_AD1 · lê depoimento de compradora · <a href="https://www.instagram.com/p/Dcw4mQ0gJLk/" target="_blank" rel="noopener">ver o anúncio <span class="ext">↗</span></a></em>
+    <em class="q">Frio 3v / R$ 65 · Quente 9v / R$ 77</em></td>
+  <td><span class="pill ok">1 no ar</span></td>
+  <td class="d">R$ 142,54</td><td>1,48%</td><td>67</td>
+  <td class="d">12</td>
+  <td>R$ 11,88</td>
+  <td class="d">2,23x</td></tr><tr>
+  <td class="l"><b>Autoridade + consequência</b>
+    <em>ESTATICO_AD3 · matéria do g1 · não é ser melhor, é ser visto</em>
+    <em class="q">Frio 0v / R$ 26 · Quente 0v / R$ 28</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td class="d">R$ 54,71</td><td>0,39%</td><td>7</td>
+  <td class="d">0</td>
+  <td>—</td>
+  <td class="d">0,00x</td></tr></tbody></table></div>
+  <div class="card falta"><h3>Ainda sem venda medida — 7 de 10 ganchos</h3><ul class="falta-l"><li><b class="agora">no ar em 1</b> <b>Call-out puro</b> <span>(VIDEO_AD2 — "Dentista,")</span></li><li><b class="agora">no ar em 1</b> <b>Curiosidade</b> <span>(VIDEO_AD4 — "Doc, você não sabe…")</span></li><li><b class="depois">pausado</b> <b>Comparação</b> <span>(VIDEO_AD5 — "por que alguns dentistas…")</span></li><li><b class="depois">pausado</b> <b>Dor — tempo</b> <span>(VIDEO_AD6 — "se você perde mais tempo…")</span></li><li><b class="depois">pausado</b> <b>Preço</b> <span>(ESTATICO_AD1 — âncora De R$199,90 → R$29,90)</span></li><li><b class="agora">no ar em 1</b> <b>Dor — bloqueio criativo</b> <span>(ESTATICO_AD2 — "trava na hora de criar?")</span></li><li><b class="agora">no ar em 1</b> <b>O que vem na caixa</b> <span>(ESTATICO_AD4 — checklist dos entregáveis)</span></li></ul><div class="cap" style="margin:10px 0 0">Cada conjunto sobe a R$ 40/dia por público. 4 já estão no ar e ainda sem impressão — se continuar assim amanhã, conferir se o anúncio saiu da revisão.</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Investimento e vendas por dia</div>
+    <div class="section-hint">2 dias com entrega em todo o período</div></div>
+  <div class="card"><svg viewBox="0 0 1180 300" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="52" y1="266.0" x2="1134" y2="266.0" stroke="#e3e8ef"/><text x="44" y="270.0" class="gy">R$ 0</text><line x1="52" y1="203.5" x2="1134" y2="203.5" stroke="#e3e8ef"/><text x="44" y="207.5" class="gy">R$ 60</text><line x1="52" y1="141.0" x2="1134" y2="141.0" stroke="#e3e8ef"/><text x="44" y="145.0" class="gy">R$ 121</text><line x1="52" y1="78.5" x2="1134" y2="78.5" stroke="#e3e8ef"/><text x="44" y="82.5" class="gy">R$ 181</text><line x1="52" y1="16.0" x2="1134" y2="16.0" stroke="#e3e8ef"/><text x="44" y="20.0" class="gy">R$ 242</text><rect x="299.5" y="138.3" width="46.0" height="127.7" fill="#c9663c" rx="2"><title>02/09 — Quente: R$ 123,60</title></rect><rect x="299.5" y="16.0" width="46.0" height="122.3" fill="#12857f" rx="2"><title>02/09 — Frio: R$ 118,36</title></rect><rect x="840.5" y="201.6" width="46.0" height="64.4" fill="#c9663c" rx="2"><title>03/09 — Quente: R$ 62,36</title></rect><rect x="840.5" y="147.1" width="46.0" height="54.4" fill="#12857f" rx="2"><title>03/09 — Frio: R$ 52,69</title></rect><polyline points="322.5,16.0 863.5,135.0" fill="none" stroke="#d4a24c" stroke-width="2.2"/><circle cx="322.5" cy="16.0" r="3.5" fill="#d4a24c"><title>02/09: 21 vendas</title></circle><circle cx="863.5" cy="135.0" r="3.5" fill="#d4a24c"><title>03/09: 11 vendas</title></circle><text x="1142" y="270.0" class="gy2">0</text><text x="1142" y="207.5" class="gy2">5</text><text x="1142" y="145.0" class="gy2">10</text><text x="1142" y="82.5" class="gy2">16</text><text x="1142" y="20.0" class="gy2">21</text><text x="322.5" y="288" class="gx">02/09</text><text x="863.5" y="288" class="gx">03/09</text></svg>
+    <div class="leg"><span><i style="background:#c9663c"></i>Quente</span><span><i style="background:#12857f"></i>Frio</span>
+      <span><i style="background:#d4a24c;border-radius:50%"></i>vendas/dia (eixo direito)</span></div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada público</div>
+    <div class="section-hint">a barra mostra quanto passou do degrau anterior — é onde o funil estrangula</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Quente</h3>
+  <div class="cap">alcance → cliques → página → comprar → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#c9663c"></div></div><div class="fx-v">3.867<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,66% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.7%;background:#c9663c"></div></div><div class="fx-v">103<em>2,7% de alcance</em></div></div><div class="fx" title="visualizações da landing page · 2,43% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:91.3%;background:#c9663c"></div></div><div class="fx-v">94<em>91,3% de cliques</em></div></div><div class="fx" title="clicaram no botão de comprar da LP (AddToCart) · 0,49% do alcance"><div class="fx-r">Comprar</div><div class="fx-t"><div class="fx-b" style="width:20.2%;background:#c9663c"></div></div><div class="fx-v">19<em>20,2% de página</em></div></div><div class="fx" title="vendas confirmadas · 0,47% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:94.7%;background:#c9663c"></div></div><div class="fx-v">18<em>94,7% de comprar</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Comprar</b> — passa 20,2% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Checkout</b> — a Hubla subnotifica esse evento (chega a marcar menos checkouts do que vendas), então a etapa não mede nada; não é queda.</div>
+</div>
+<div class="card">
+  <h3>Funil — Frio</h3>
+  <div class="cap">alcance → cliques → página → comprar → checkout → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#12857f"></div></div><div class="fx-v">3.311<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,90% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.9%;background:#12857f"></div></div><div class="fx-v">96<em>2,9% de alcance</em></div></div><div class="fx" title="visualizações da landing page · 2,33% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:80.2%;background:#12857f"></div></div><div class="fx-v">77<em>80,2% de cliques</em></div></div><div class="fx" title="clicaram no botão de comprar da LP (AddToCart) · 0,57% do alcance"><div class="fx-r">Comprar</div><div class="fx-t"><div class="fx-b" style="width:24.7%;background:#12857f"></div></div><div class="fx-v">19<em>24,7% de página</em></div></div><div class="fx" title="iniciaram o checkout na Hubla · 0,42% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:73.7%;background:#12857f"></div></div><div class="fx-v">14<em>73,7% de comprar</em></div></div><div class="fx" title="vendas confirmadas · 0,42% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#12857f"></div></div><div class="fx-v">14<em>100,0% de checkout</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Comprar</b> — passa 24,7% de quem chegou no degrau anterior.</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Campanhas</div>
+    <div class="section-hint">números de todo o período · status e verba/dia são de agora</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Campanha</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th><th>Receita</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>GIULIANA_MAPACONTEUDO_QUENTE_SET26</b><em>Quente</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 160/dia</td>
+  <td class="d">R$ 185,96</td><td>94</td>
+  <td class="d">18</td><td>R$ 10,33</td>
+  <td>R$ 543,59</td><td class="d">2,57x</td></tr><tr>
+  <td class="l"><b>GIULIANA_MAPACONTEUDO_FRIO_TESTECRIATIVO_SET26</b><em>Frio</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 120/dia</td>
+  <td class="d">R$ 171,05</td><td>77</td>
+  <td class="d">14</td><td>R$ 12,22</td>
+  <td>R$ 422,06</td><td class="d">2,17x</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Conjuntos</div>
+    <div class="section-hint">um conjunto por criativo, mais os que estão no ar sem entrega</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Conjunto</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD3</b><em>Frio</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 79,34</td><td>52</td>
+  <td class="d">11</td>
+  <td>R$ 7,21</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_VIDEO_AD3</b><em>Quente</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 80,42</td><td>43</td>
+  <td class="d">9</td>
+  <td>R$ 8,94</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_VIDEO_AD1</b><em>Quente</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 77,11</td><td>47</td>
+  <td class="d">9</td>
+  <td>R$ 8,57</td></tr><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD1</b><em>Frio</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 65,43</td><td>22</td>
+  <td class="d">3</td>
+  <td>R$ 21,81</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD3</b><em>Quente</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 28,43</td><td>4</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_ESTATICO_AD3</b><em>Frio</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 26,28</td><td>3</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr class="sem">
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD2</b><em>Frio · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD4</b><em>Frio · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD2</b><em>Quente · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD4</b><em>Quente · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Ranking de criativos</div>
+    <div class="section-hint">top 20 por vendas em todo o período · o mesmo criativo aparece uma vez no frio e outra no quente</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Anúncio</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">VIDEO_AD3 <span class="ext">↗</span></a><em>Frio · Promessa de resultado · abrir no Instagram</em></td>
+  <td class="d">R$ 79,34</td><td>2,13%</td><td>52</td>
+  <td class="d">11</td>
+  <td>R$ 7,21</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/Dcw4mQ0gJLk/" target="_blank" rel="noopener">VIDEO_AD1 <span class="ext">↗</span></a><em>Quente · Prova social · abrir no Instagram</em></td>
+  <td class="d">R$ 77,11</td><td>1,66%</td><td>45</td>
+  <td class="d">9</td>
+  <td>R$ 8,57</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">VIDEO_AD3 <span class="ext">↗</span></a><em>Quente · Promessa de resultado · abrir no Instagram</em></td>
+  <td class="d">R$ 80,42</td><td>1,62%</td><td>43</td>
+  <td class="d">9</td>
+  <td>R$ 8,94</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/Dcw4eb9gwMb/" target="_blank" rel="noopener">VIDEO_AD1 <span class="ext">↗</span></a><em>Frio · Prova social · abrir no Instagram</em></td>
+  <td class="d">R$ 65,43</td><td>1,24%</td><td>22</td>
+  <td class="d">3</td>
+  <td>R$ 21,81</td></tr><tr>
+  <td class="l"><b>ESTATICO_AD3</b><em>Frio · Autoridade + consequência</em></td>
+  <td class="d">R$ 26,28</td><td>0,43%</td><td>3</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ESTATICO_AD3</b><em>Quente · Autoridade + consequência</em></td>
+  <td class="d">R$ 28,43</td><td>0,36%</td><td>4</td>
+  <td class="d">0</td>
+  <td>—</td></tr></tbody></table></div>
+</section><section class="periodo" data-p="2026-09" hidden>
+  
+<div class="hero">
+  <div class="hero-label">Perpétuo — Mapa da Criação de Conteúdo <span>· setembro/26 (02/09 a 03/09)</span></div>
+  <div class="hero-row">
+    <div class="hero-box"><div class="hb-l">Investido (mídia)</div><div class="hb-v">R$ 357,01</div>
+      <div class="hb-s">R$ 406,38 com imposto (13,83%)</div></div>
+    <div class="hero-op">→</div>
+    <div class="hero-box"><div class="hb-l">Vendas</div><div class="hb-v">32</div>
+      <div class="hb-s">171 visitas na página · 18,7% viraram venda</div></div>
+    <div class="hero-op">=</div>
+    <div class="hero-box"><div class="hb-l">Receita</div><div class="hb-v">R$ 965,65</div>
+      <div class="hb-s">ticket médio R$ 30,18 · oferta R$ 29,90</div></div>
+    <div class="hero-box total roas"><div class="hb-l">ROAS</div>
+      <div class="hb-v">2,38x</div>
+      <div class="hb-s">sobre a mídia com imposto · acima do ponto de equilíbrio (1,00x)</div></div>
+  </div>
+  <div class="hero-row" style="margin-top:12px">
+    <div class="hero-box"><div class="hb-l">No ar agora</div><div class="hb-v">R$ 280<small>/dia</small></div>
+      <div class="hb-s">7 conjuntos ativos · 2 campanhas</div></div>
+    <div class="hero-box"><div class="hb-l">Últimos 7 dias</div><div class="hb-v">32<small> vendas</small></div>
+      <div class="hb-s">R$ 357,01 investidos · custo/venda R$ 11,16</div></div>
+    <div class="hero-box"><div class="hb-l">3 de set</div><div class="hb-v">11<small> vendas</small></div>
+      <div class="hb-s">R$ 115,05 investidos · custo/venda R$ 10,46</div></div>
+    <div class="hero-box"><div class="hb-l">Custo por venda</div><div class="hb-v">R$ 11,16</div>
+      <div class="hb-s">R$ 12,70 com imposto · ticket de R$ 30,18</div></div></div>
+</div>
+  
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Frio × Quente</div>
+    <div class="section-hint">duas campanhas, os mesmos criativos — a diferença é só o público</div></div>
+  <div class="grupo-grid">
+<div class="grupo" style="--pc:#c9663c">
+  <div class="grupo-top">
+    <div><div class="grupo-nome">Quente</div>
+      <div class="grupo-sub">remarketing — seguidores do IG + envolvimento · mulheres 25–40</div></div>
+    <span class="pill ok">no ar · R$ 160/dia</span>
+  </div>
+  <div class="grupo-kpis">
+    <div><span>R$ 185,96</span>investido<em>52,1% da verba</em></div>
+    <div><span>18</span>vendas<em>94 visitas na página</em></div>
+    <div><span>R$ 10,33</span>CPA<em>R$ 11,76 c/ imposto</em></div>
+    <div><span>2,57x</span>ROAS<em>R$ 543,59 de receita</em></div>
+  </div>
+  <div class="grupo-mini">
+    <div>CPM <b>R$ 24,47</b></div><div>CTR link <b>1,36%</b></div>
+    <div>CPC link <b>R$ 1,81</b></div><div>Página→venda <b>19,1%</b></div>
+  </div>
+</div>
+<div class="grupo" style="--pc:#12857f">
+  <div class="grupo-top">
+    <div><div class="grupo-nome">Frio</div>
+      <div class="grupo-sub">prospecção — interesse faculdade de odontologia + cargos · mulheres 25–40</div></div>
+    <span class="pill ok">no ar · R$ 120/dia</span>
+  </div>
+  <div class="grupo-kpis">
+    <div><span>R$ 171,05</span>investido<em>47,9% da verba</em></div>
+    <div><span>14</span>vendas<em>77 visitas na página</em></div>
+    <div><span>R$ 12,22</span>CPA<em>R$ 13,91 c/ imposto</em></div>
+    <div><span>2,17x</span>ROAS<em>R$ 422,06 de receita</em></div>
+  </div>
+  <div class="grupo-mini">
+    <div>CPM <b>R$ 25,97</b></div><div>CTR link <b>1,46%</b></div>
+    <div>CPC link <b>R$ 1,78</b></div><div>Página→venda <b>18,2%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Teste de criativo — por gancho</div>
+    <div class="section-hint">frio + quente somados · 1 conjunto = 1 criativo, então o gasto é isolado</div></div>
+  <div class="cap leitura-teste"><b>Promessa de resultado</b> é o melhor gancho até agora: 20 vendas a R$ 7,99 cada · <b>Autoridade + consequência</b> já gastou R$ 54,71 sem nenhuma venda.</div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Gancho</th><th>Status</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>Promessa de resultado</b>
+    <em>VIDEO_AD3 · "quer aumentar o número de pacientes" · <a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">ver o anúncio <span class="ext">↗</span></a></em>
+    <em class="q">Frio 11v / R$ 79 · Quente 9v / R$ 80</em></td>
+  <td><span class="pill ok">2 no ar</span></td>
+  <td class="d">R$ 159,76</td><td>1,87%</td><td>95</td>
+  <td class="d">20</td>
+  <td>R$ 7,99</td>
+  <td class="d">3,32x</td></tr><tr>
+  <td class="l"><b>Prova social</b>
+    <em>VIDEO_AD1 · lê depoimento de compradora · <a href="https://www.instagram.com/p/Dcw4mQ0gJLk/" target="_blank" rel="noopener">ver o anúncio <span class="ext">↗</span></a></em>
+    <em class="q">Frio 3v / R$ 65 · Quente 9v / R$ 77</em></td>
+  <td><span class="pill ok">1 no ar</span></td>
+  <td class="d">R$ 142,54</td><td>1,48%</td><td>67</td>
+  <td class="d">12</td>
+  <td>R$ 11,88</td>
+  <td class="d">2,23x</td></tr><tr>
+  <td class="l"><b>Autoridade + consequência</b>
+    <em>ESTATICO_AD3 · matéria do g1 · não é ser melhor, é ser visto</em>
+    <em class="q">Frio 0v / R$ 26 · Quente 0v / R$ 28</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td class="d">R$ 54,71</td><td>0,39%</td><td>7</td>
+  <td class="d">0</td>
+  <td>—</td>
+  <td class="d">0,00x</td></tr></tbody></table></div>
+  <div class="card falta"><h3>Ainda sem venda medida — 7 de 10 ganchos</h3><ul class="falta-l"><li><b class="agora">no ar em 1</b> <b>Call-out puro</b> <span>(VIDEO_AD2 — "Dentista,")</span></li><li><b class="agora">no ar em 1</b> <b>Curiosidade</b> <span>(VIDEO_AD4 — "Doc, você não sabe…")</span></li><li><b class="depois">pausado</b> <b>Comparação</b> <span>(VIDEO_AD5 — "por que alguns dentistas…")</span></li><li><b class="depois">pausado</b> <b>Dor — tempo</b> <span>(VIDEO_AD6 — "se você perde mais tempo…")</span></li><li><b class="depois">pausado</b> <b>Preço</b> <span>(ESTATICO_AD1 — âncora De R$199,90 → R$29,90)</span></li><li><b class="agora">no ar em 1</b> <b>Dor — bloqueio criativo</b> <span>(ESTATICO_AD2 — "trava na hora de criar?")</span></li><li><b class="agora">no ar em 1</b> <b>O que vem na caixa</b> <span>(ESTATICO_AD4 — checklist dos entregáveis)</span></li></ul><div class="cap" style="margin:10px 0 0">Cada conjunto sobe a R$ 40/dia por público. 4 já estão no ar e ainda sem impressão — se continuar assim amanhã, conferir se o anúncio saiu da revisão.</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Investimento e vendas por dia</div>
+    <div class="section-hint">2 dias com entrega em setembro/26</div></div>
+  <div class="card"><svg viewBox="0 0 1180 300" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="52" y1="266.0" x2="1134" y2="266.0" stroke="#e3e8ef"/><text x="44" y="270.0" class="gy">R$ 0</text><line x1="52" y1="203.5" x2="1134" y2="203.5" stroke="#e3e8ef"/><text x="44" y="207.5" class="gy">R$ 60</text><line x1="52" y1="141.0" x2="1134" y2="141.0" stroke="#e3e8ef"/><text x="44" y="145.0" class="gy">R$ 121</text><line x1="52" y1="78.5" x2="1134" y2="78.5" stroke="#e3e8ef"/><text x="44" y="82.5" class="gy">R$ 181</text><line x1="52" y1="16.0" x2="1134" y2="16.0" stroke="#e3e8ef"/><text x="44" y="20.0" class="gy">R$ 242</text><rect x="299.5" y="138.3" width="46.0" height="127.7" fill="#c9663c" rx="2"><title>02/09 — Quente: R$ 123,60</title></rect><rect x="299.5" y="16.0" width="46.0" height="122.3" fill="#12857f" rx="2"><title>02/09 — Frio: R$ 118,36</title></rect><rect x="840.5" y="201.6" width="46.0" height="64.4" fill="#c9663c" rx="2"><title>03/09 — Quente: R$ 62,36</title></rect><rect x="840.5" y="147.1" width="46.0" height="54.4" fill="#12857f" rx="2"><title>03/09 — Frio: R$ 52,69</title></rect><polyline points="322.5,16.0 863.5,135.0" fill="none" stroke="#d4a24c" stroke-width="2.2"/><circle cx="322.5" cy="16.0" r="3.5" fill="#d4a24c"><title>02/09: 21 vendas</title></circle><circle cx="863.5" cy="135.0" r="3.5" fill="#d4a24c"><title>03/09: 11 vendas</title></circle><text x="1142" y="270.0" class="gy2">0</text><text x="1142" y="207.5" class="gy2">5</text><text x="1142" y="145.0" class="gy2">10</text><text x="1142" y="82.5" class="gy2">16</text><text x="1142" y="20.0" class="gy2">21</text><text x="322.5" y="288" class="gx">02/09</text><text x="863.5" y="288" class="gx">03/09</text></svg>
+    <div class="leg"><span><i style="background:#c9663c"></i>Quente</span><span><i style="background:#12857f"></i>Frio</span>
+      <span><i style="background:#d4a24c;border-radius:50%"></i>vendas/dia (eixo direito)</span></div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada público</div>
+    <div class="section-hint">a barra mostra quanto passou do degrau anterior — é onde o funil estrangula</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Quente</h3>
+  <div class="cap">alcance → cliques → página → comprar → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#c9663c"></div></div><div class="fx-v">3.867<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,66% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.7%;background:#c9663c"></div></div><div class="fx-v">103<em>2,7% de alcance</em></div></div><div class="fx" title="visualizações da landing page · 2,43% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:91.3%;background:#c9663c"></div></div><div class="fx-v">94<em>91,3% de cliques</em></div></div><div class="fx" title="clicaram no botão de comprar da LP (AddToCart) · 0,49% do alcance"><div class="fx-r">Comprar</div><div class="fx-t"><div class="fx-b" style="width:20.2%;background:#c9663c"></div></div><div class="fx-v">19<em>20,2% de página</em></div></div><div class="fx" title="vendas confirmadas · 0,47% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:94.7%;background:#c9663c"></div></div><div class="fx-v">18<em>94,7% de comprar</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Comprar</b> — passa 20,2% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Checkout</b> — a Hubla subnotifica esse evento (chega a marcar menos checkouts do que vendas), então a etapa não mede nada; não é queda.</div>
+</div>
+<div class="card">
+  <h3>Funil — Frio</h3>
+  <div class="cap">alcance → cliques → página → comprar → checkout → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#12857f"></div></div><div class="fx-v">3.311<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,90% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.9%;background:#12857f"></div></div><div class="fx-v">96<em>2,9% de alcance</em></div></div><div class="fx" title="visualizações da landing page · 2,33% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:80.2%;background:#12857f"></div></div><div class="fx-v">77<em>80,2% de cliques</em></div></div><div class="fx" title="clicaram no botão de comprar da LP (AddToCart) · 0,57% do alcance"><div class="fx-r">Comprar</div><div class="fx-t"><div class="fx-b" style="width:24.7%;background:#12857f"></div></div><div class="fx-v">19<em>24,7% de página</em></div></div><div class="fx" title="iniciaram o checkout na Hubla · 0,42% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:73.7%;background:#12857f"></div></div><div class="fx-v">14<em>73,7% de comprar</em></div></div><div class="fx" title="vendas confirmadas · 0,42% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#12857f"></div></div><div class="fx-v">14<em>100,0% de checkout</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Comprar</b> — passa 24,7% de quem chegou no degrau anterior.</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Campanhas</div>
+    <div class="section-hint">números de setembro/26 · status e verba/dia são de agora</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Campanha</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th><th>Receita</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>GIULIANA_MAPACONTEUDO_QUENTE_SET26</b><em>Quente</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 160/dia</td>
+  <td class="d">R$ 185,96</td><td>94</td>
+  <td class="d">18</td><td>R$ 10,33</td>
+  <td>R$ 543,59</td><td class="d">2,57x</td></tr><tr>
+  <td class="l"><b>GIULIANA_MAPACONTEUDO_FRIO_TESTECRIATIVO_SET26</b><em>Frio</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 120/dia</td>
+  <td class="d">R$ 171,05</td><td>77</td>
+  <td class="d">14</td><td>R$ 12,22</td>
+  <td>R$ 422,06</td><td class="d">2,17x</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Conjuntos</div>
+    <div class="section-hint">um conjunto por criativo, mais os que estão no ar sem entrega</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Conjunto</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD3</b><em>Frio</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 79,34</td><td>52</td>
+  <td class="d">11</td>
+  <td>R$ 7,21</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_VIDEO_AD3</b><em>Quente</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 80,42</td><td>43</td>
+  <td class="d">9</td>
+  <td>R$ 8,94</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_VIDEO_AD1</b><em>Quente</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 77,11</td><td>47</td>
+  <td class="d">9</td>
+  <td>R$ 8,57</td></tr><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD1</b><em>Frio</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 65,43</td><td>22</td>
+  <td class="d">3</td>
+  <td>R$ 21,81</td></tr><tr>
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD3</b><em>Quente</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 28,43</td><td>4</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_ESTATICO_AD3</b><em>Frio</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 26,28</td><td>3</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr class="sem">
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD2</b><em>Frio · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>FRIO_ODONTO_MULHER_25A40_VIDEO_AD4</b><em>Frio · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD2</b><em>Quente · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>QUENTE_ENVOLV_MULHER_25A40_ESTATICO_AD4</b><em>Quente · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 40/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Ranking de criativos</div>
+    <div class="section-hint">top 20 por vendas em setembro/26 · o mesmo criativo aparece uma vez no frio e outra no quente</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Anúncio</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Página</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">VIDEO_AD3 <span class="ext">↗</span></a><em>Frio · Promessa de resultado · abrir no Instagram</em></td>
+  <td class="d">R$ 79,34</td><td>2,13%</td><td>52</td>
+  <td class="d">11</td>
+  <td>R$ 7,21</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/Dcw4mQ0gJLk/" target="_blank" rel="noopener">VIDEO_AD1 <span class="ext">↗</span></a><em>Quente · Prova social · abrir no Instagram</em></td>
+  <td class="d">R$ 77,11</td><td>1,66%</td><td>45</td>
+  <td class="d">9</td>
+  <td>R$ 8,57</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DcwstPCACt4/" target="_blank" rel="noopener">VIDEO_AD3 <span class="ext">↗</span></a><em>Quente · Promessa de resultado · abrir no Instagram</em></td>
+  <td class="d">R$ 80,42</td><td>1,62%</td><td>43</td>
+  <td class="d">9</td>
+  <td>R$ 8,94</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/Dcw4eb9gwMb/" target="_blank" rel="noopener">VIDEO_AD1 <span class="ext">↗</span></a><em>Frio · Prova social · abrir no Instagram</em></td>
+  <td class="d">R$ 65,43</td><td>1,24%</td><td>22</td>
+  <td class="d">3</td>
+  <td>R$ 21,81</td></tr><tr>
+  <td class="l"><b>ESTATICO_AD3</b><em>Frio · Autoridade + consequência</em></td>
+  <td class="d">R$ 26,28</td><td>0,43%</td><td>3</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ESTATICO_AD3</b><em>Quente · Autoridade + consequência</em></td>
+  <td class="d">R$ 28,43</td><td>0,36%</td><td>4</td>
+  <td class="d">0</td>
+  <td>—</td></tr></tbody></table></div>
+</section>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Como ler estes números</div></div>
+  <div class="leitura"><ul>
+    <li><b>Vendas e receita</b> vêm do pixel <code>260219322254560</code> na janela padrão (7 dias de clique / 1 dia de visualização). O <i>Purchase</i> é enviado pela Hubla por CAPI com o valor efetivamente pago, então o ticket médio pode passar de R$ 29,90 quando entra order bump.</li>
+    <li><b>ROAS</b> é calculado sobre a mídia <b>com imposto</b> (13,83%), não sobre o valor bruto do Meta.</li>
+    <li><b>CPC e CTR são sempre de LINK</b> (<code>inline_link_clicks</code>): contam só quem clicou para sair do anúncio e ir para a página — não entram curtida, comentário, ver mais, clique no perfil. Dão pior (e mais honesto) que o CTR geral do Gerenciador.</li>
+    <li><b>Checkout iniciado sai do funil quando a medição não fecha.</b> A Hubla dispara <i>InitiateCheckout</i> de menos — já houve anúncio com 8 checkouts e 9 vendas —, e <i>AddPaymentInfo</i> ela não manda. Onde a etapa vale menos que a de baixo, ela é removida e vira nota: é falha de medição, não queda de funil.</li>
+    <li><b>1 conjunto = 1 criativo</b> e as campanhas estão em ABO com divisão de verba desligada — por isso o gasto de cada gancho é isolado e a comparação da tabela de ganchos é válida.</li>
+    <li><b>Duas regras automáticas cortam sozinhas</b>, de 30 em 30 minutos, no nível do anúncio: gasto acumulado acima de R$&nbsp;30 sem nenhuma venda, e custo por clique no link acima de R$&nbsp;10 (com trava de R$&nbsp;20 de amostra). Criativo que sumir do ar sem ninguém ter mexido provavelmente foi cortado por elas.</li>
+    <li>O <b>período</b> muda tudo o que está acima — hero, públicos, ganchos, funis e tabelas. Status e verba/dia são sempre de agora, porque descrevem o que está no ar hoje.</li>
+  </ul></div>
+
+  <div class="rodape">
+    Fonte: Graph API do Meta (conta 912256333622697), período 1 de set a 3 de set.
+    Atualizado automaticamente às 08h27 e 18h27 (BRT). Vendas e receita são o que o pixel enxerga —
+    o faturamento oficial é o da Hubla.
+  </div>
+</div>
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.tab');
+  var blocos = document.querySelectorAll('.periodo');
+  function abrir(p) {
+    tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.p === p); });
+    blocos.forEach(function (b) { b.hidden = b.dataset.p !== p; });
+    if (location.hash.slice(1) !== p) history.replaceState(null, '', '#' + p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { abrir(t.dataset.p); }); });
+  function doHash(comScroll) {
+    var p = location.hash.slice(1);
+    if (p && document.querySelector('.periodo[data-p="' + p + '"]')) {
+      abrir(p);
+      if (!comScroll) window.scrollTo({ top: 0 });
+    }
+  }
+  window.addEventListener('hashchange', function () { doHash(true); });
+  doHash(false);
+})();
+</script>
+</body></html>
