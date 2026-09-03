@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha — As cartas voltam a anunciar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bege:#F2EBDF; --bege-claro:#FAF6F1; --creme:#F5EDE0;
+    --terracota:#BF6A45; --terracota2:#A85A38;
+    --verde:#6B7C5C; --verde2:#556347; --ocre:#C89640;
+    --marrom:#3D2718; --marrom2:#2A1A0E;
+    --branco:#FFFFFF; --muted:rgba(61,39,24,.58); --linha:rgba(61,39,24,.14);
+    --verde-ok:#2E6E35; --vermelho:#B02A2A;
+  }
+  body{background:var(--bege-claro);color:var(--marrom);font-family:Karla,'Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.68;padding:0 20px 90px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto}
+  .col{max-width:64ch}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance}
+  h1{font-size:clamp(2.3rem,6vw,3.4rem);font-weight:600;line-height:1.06;letter-spacing:-.015em;color:var(--marrom2)}
+  h2{font-size:clamp(1.45rem,3.2vw,1.95rem);font-weight:600;line-height:1.18}
+  h3{font-size:1.1rem;font-weight:600}
+  .eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota2);font-weight:700}
+  header{padding:70px 0 38px;border-bottom:2px solid var(--terracota);display:flex;flex-direction:column;gap:18px}
+  .dek{font-size:1.14rem;color:var(--muted);max-width:60ch}
+  section{padding:48px 0;border-bottom:1px solid var(--linha);display:flex;flex-direction:column;gap:22px}
+  section:last-of-type{border-bottom:none}
+  .head{display:flex;flex-direction:column;gap:8px}
+  .stack{display:flex;flex-direction:column;gap:14px}
+  strong{font-weight:700}
+  .num{font-variant-numeric:tabular-nums}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .kpi{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:5px}
+  .kpi .v{font-family:Fraunces,serif;font-size:1.7rem;font-weight:600;color:var(--terracota2);font-variant-numeric:tabular-nums;line-height:1.1}
+  .kpi .l{font-size:.85rem;color:var(--muted);line-height:1.45}
+
+  .tablewrap{overflow-x:auto;background:var(--branco);border:1px solid var(--linha);border-radius:10px}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:.93rem}
+  th,td{padding:12px 15px;text-align:right;border-bottom:1px solid var(--linha);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;background:var(--creme)}
+  tbody td{font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:none}
+  tr.alto td{background:rgba(200,150,64,.13)}
+  tr.baixo td{color:var(--muted)}
+  td.ok{color:var(--verde-ok);font-weight:700}
+  td.ruim{color:var(--vermelho);font-weight:700}
+  tfoot td{font-weight:700;background:var(--creme)}
+
+  .duas{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:700px){.duas{grid-template-columns:1fr}}
+  .box{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px}
+  .box.on{border-left:5px solid var(--verde)}
+  .box.off{border-left:5px solid var(--terracota)}
+  .box h3{font-family:Karla,sans-serif;font-size:1rem;font-weight:700}
+  .box ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:8px;font-size:.95rem;color:var(--muted)}
+  .box ul li::marker{color:var(--ocre)}
+
+  .criativos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+  .card{background:var(--branco);border:1px solid var(--linha);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .card img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;display:block;background:var(--creme)}
+  .card .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card .tag{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--verde2)}
+  .card .t{font-family:Fraunces,serif;font-size:1.05rem;font-weight:600;line-height:1.25}
+  .card .d{font-size:.88rem;color:var(--muted);flex:1}
+  .card a.btn{display:inline-block;text-align:center;background:var(--terracota);color:#fff;text-decoration:none;font-weight:700;font-size:.86rem;padding:10px 14px;border-radius:7px}
+  .card a.btn:hover{background:var(--terracota2)}
+  .card a.btn:focus-visible{outline:3px solid var(--ocre);outline-offset:2px}
+
+  .destaque{background:var(--creme);border-left:5px solid var(--ocre);border-radius:0 10px 10px 0;padding:20px 22px;font-size:1rem}
+  ul.plain{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:10px}
+  ul.plain li::marker{color:var(--terracota)}
+  .passos{display:flex;flex-direction:column;gap:12px}
+  .passo{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+  .passo .n{width:30px;height:30px;border-radius:50%;background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;font-family:Karla,sans-serif}
+  .passo p{font-size:.97rem}
+  footer{padding:40px 0 0;font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Santosha por aí · setembro 2026</p>
+  <h1>As cartas voltam a anunciar</h1>
+  <p class="dek">Fizemos uma varredura de tudo o que rodou de Cartasflow e Cartasanas em 2026 — o que estava no ar, quanto foi investido em cada mês, o que saiu do ar e por quê. Este documento mostra o que encontramos e o que já colocamos de pé para retomar.</p>
+</header>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">O resumo</p>
+    <h2>As cartas foram o produto que melhor respondeu a anúncio no começo do ano — e saíram do ar sem nunca terem sido avaliadas</h2>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span class="v">R$ 64,3 mil</span><span class="l">em vendas geradas por anúncios de cartas em 2026</span></div>
+    <div class="kpi"><span class="v">R$ 16,1 mil</span><span class="l">investidos nesses anúncios no mesmo período</span></div>
+    <div class="kpi"><span class="v">212</span><span class="l">vendas atribuídas a essas campanhas no ano</span></div>
+    <div class="kpi"><span class="v">5,5x</span><span class="l">de retorno em janeiro — o melhor da conta naquele mês</span></div>
+  </div>
+  <p class="col" style="color:var(--muted);font-size:.9rem">Dados do Meta Ads, de 1º de janeiro a 3 de setembro de 2026, considerando todos os anúncios de Cartasflow, Cartasanas e Cartasprana.</p>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">Mês a mês</p>
+    <h2>Quando investimos e o que voltou</h2>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Mês</th><th>Investido</th><th>Vendas</th><th>Faturamento</th><th>Retorno</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr class="alto"><td>Janeiro</td><td>2.503</td><td>48</td><td>13.797</td><td class="ok">5,5x</td><td>no ar, forte</td></tr>
+        <tr class="alto"><td>Fevereiro</td><td>3.229</td><td>48</td><td>11.962</td><td>3,7x</td><td>no ar, forte</td></tr>
+        <tr><td>Março</td><td>2.222</td><td>38</td><td>11.413</td><td class="ok">5,1x</td><td>no ar</td></tr>
+        <tr><td>Abril</td><td>3.137</td><td>38</td><td>14.112</td><td>4,5x</td><td>no ar</td></tr>
+        <tr><td>Maio</td><td>1.686</td><td>22</td><td>8.044</td><td>4,8x</td><td>última fase boa</td></tr>
+        <tr class="baixo"><td>Junho</td><td>319</td><td>0</td><td>0</td><td>—</td><td>saiu do ar</td></tr>
+        <tr><td>Julho</td><td>1.620</td><td>16</td><td>4.633</td><td>2,9x</td><td>peça isolada</td></tr>
+        <tr class="baixo"><td>Agosto</td><td>459</td><td>2</td><td>411</td><td class="ruim">0,9x</td><td>peça antiga, sozinha</td></tr>
+        <tr class="baixo"><td>Setembro</td><td>0</td><td>0</td><td>0</td><td>—</td><td>nada no ar</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>16.142</td><td>212</td><td>64.371</td><td>4,0x</td><td>—</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="col" style="color:var(--muted);font-size:.9rem">Valores em reais. “Retorno” = quantos reais em vendas cada real investido trouxe, na medição do Meta.</p>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">O que rodava × o que não rodava</p>
+    <h2>A receita que funcionava</h2>
+  </div>
+  <div class="duas">
+    <div class="box on">
+      <h3>✔ O que estava sendo feito (jan–mai)</h3>
+      <ul>
+        <li>Anúncios <strong>só de cartas</strong>, com peça própria — não misturados na vitrine geral da loja.</li>
+        <li>Público <strong>quente</strong>: quem já seguia, via os conteúdos ou tinha visitado o perfil.</li>
+        <li>Formato <strong>Stories e Reels</strong>, que era onde as cartas performavam melhor.</li>
+        <li><strong>Várias versões da mesma peça</strong> no ar ao mesmo tempo: vídeo narrado, depoimento, GIF, carrossel.</li>
+        <li>Campanha mirando <strong>número de vendas</strong> — o que dá espaço a um produto de ticket médio.</li>
+        <li>Motivos de compra no anúncio: <strong>cupom e brinde</strong> (o manual de sequências).</li>
+      </ul>
+    </div>
+    <div class="box off">
+      <h3>✕ O que deixou de ser feito (jun em diante)</h3>
+      <ul>
+        <li>A conta foi reorganizada para <strong>recuperar o ticket médio</strong>, que havia caído de R$ 369 para R$ 272 — decisão certa, e funcionou: agosto fechou em R$ 388.</li>
+        <li>Nesse movimento, a verba foi concentrada nos <strong>tapetes premium</strong>, e as campanhas que carregavam as cartas foram encerradas.</li>
+        <li>As cartas passaram a aparecer <strong>só dentro da vitrine automática</strong>, onde disputam espaço com produtos de R$ 558 — e perdem.</li>
+        <li><strong>Nenhuma peça nova de cartas foi produzida desde fevereiro.</strong> As de julho e agosto eram as mesmas de janeiro.</li>
+        <li>Em agosto sobrou <strong>um único anúncio de carta</strong>, antigo, dentro de uma campanha desenhada para vender tapete — e o resultado dele não representa o produto.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="destaque col">
+    <strong>Em resumo:</strong> não houve uma decisão de parar de anunciar as cartas. Elas nunca tiveram campanha própria — sempre foram um anúncio dentro de campanhas maiores. Quando essas campanhas foram encerradas para corrigir o ticket médio, as cartas saíram junto, sem passar por avaliação.
+  </div>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">O que a loja mostra</p>
+    <h2>Mesmo sem anúncio, as cartas continuam entre os produtos mais vendidos</h2>
+  </div>
+  <div class="col stack">
+    <p>Esse é o dado que nos fez propor a retomada. Em <strong>junho</strong>, sem nenhuma venda vinda de anúncio de cartas, as Cartasanas e as Cartasflow foram o <strong>1º e o 2º produto do mês</strong>, somando R$ 10.975 — quase um quarto do faturamento. Em <strong>agosto</strong>, com toda a mídia apontada para os tapetes, ainda ficaram em 5º e 6º, com R$ 5.881.</p>
+    <p>Some a isso o estoque: as três cartas estão <strong>disponíveis no site</strong> (Cartasanas R$ 308, Cartasflow R$ 218, Cartasprana R$ 88), enquanto parte da linha de tapetes segue esgotada. Existe procura viva por um produto que a mídia parou de alimentar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">Já está pronto</p>
+    <h2>O que subimos esta semana</h2>
+  </div>
+  <div class="col stack">
+    <p>Montamos uma <strong>campanha exclusiva das cartas</strong>, separada das campanhas de tapete — para que o produto não dispute verba com item de ticket alto e possa ser medido pelo que ele é.</p>
+  </div>
+  <div class="duas">
+    <div class="box on">
+      <h3>Público quente · R$ 35/dia</h3>
+      <ul>
+        <li>Quem já seguiu, engajou ou visitou o perfil nos últimos 180 dias — cerca de <strong>60 mil pessoas</strong>.</li>
+        <li>Stories, Reels e Feed, no Instagram e no Facebook.</li>
+        <li>É a receita que rendeu o melhor resultado do ano em janeiro e fevereiro.</li>
+      </ul>
+    </div>
+    <div class="box on">
+      <h3>Públicos semelhantes · R$ 25/dia</h3>
+      <ul>
+        <li>Pessoas parecidas com <strong>quem já comprou</strong> e com as clientes de maior valor.</li>
+        <li>Entrega automática, para o algoritmo achar compradoras novas.</li>
+        <li>É o braço de aquisição — traz gente nova para a marca.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="destaque col"><strong>Investimento total: R$ 60 por dia</strong> (cerca de R$ 1.800 no mês), com a meta de manter o custo por venda em torno de R$ 55 — foi o custo que as cartas tiveram em janeiro.</div>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">Os anúncios</p>
+    <h2>As quatro peças que voltam ao ar</h2>
+  </div>
+  <div class="col stack">
+    <p>Escolhemos as peças com melhor histórico de venda — duas de Cartasflow e duas de Cartasanas. Elas voltam <strong>pelos posts originais</strong>, ou seja, com todas as curtidas e comentários já acumulados, em vez de começarem do zero. Clique em cada uma para ver o anúncio completo.</p>
+  </div>
+  <div class="criativos">
+
+    <div class="card">
+      <img src="../../criativos/santosha/cartas/AD01_FLOW.jpg" alt="Cartasflow: carta que leva à aula guiada no YouTube">
+      <div class="body">
+        <span class="tag">Cartasflow</span>
+        <span class="t">A carta que vira aula guiada</span>
+        <span class="d">Vídeo mostrando o QR da carta abrindo a prática no YouTube. Histórico: <strong>37 vendas e R$ 10.570</strong> com R$ 1.520 investidos.</span>
+        <a class="btn" href="https://fb.me/22lsL4rIE9W0NtD" target="_blank" rel="noopener">Ver o anúncio ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../../criativos/santosha/cartas/AD02_CARTAS_FLOW.jpg" alt="Cartasflow: nem todos os dias são iguais">
+      <div class="body">
+        <span class="tag">Cartasflow</span>
+        <span class="t">Nem todos os dias são iguais</span>
+        <span class="d">Vídeo dos flows ilustrados, carta a carta. Histórico: <strong>17 vendas e R$ 6.065</strong> com R$ 848 investidos — o melhor retorno do ano.</span>
+        <a class="btn" href="https://fb.me/2jB5CwnbyjtEtH1" target="_blank" rel="noopener">Ver o anúncio ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../../criativos/santosha/cartas/AD03_CARTASANAS_BRINDE.jpg" alt="Cartasanas com brinde do manual de sequências">
+      <div class="body">
+        <span class="tag">Cartasanas</span>
+        <span class="t">Compre e ganhe o Manual de Sequências</span>
+        <span class="d">A oferta com brinde — 120 cartas mais o e-book de 59 páginas. Histórico: <strong>14 vendas e R$ 5.457</strong> com R$ 1.064 investidos.</span>
+        <a class="btn" href="https://fb.me/2HUdGv0cyy3iEyB" target="_blank" rel="noopener">Ver o anúncio ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../../criativos/santosha/cartas/AD04_CARTASANAS_POSTURA.jpg" alt="Cartasanas: efeitos físicos e emocionais de cada postura">
+      <div class="body">
+        <span class="tag">Cartasanas</span>
+        <span class="t">O que está atrás de cada carta</span>
+        <span class="d">Demonstração dos efeitos físicos e emocionais de cada postura. Histórico: <strong>10 vendas e R$ 3.239</strong> com R$ 541 investidos.</span>
+        <a class="btn" href="https://fb.me/2fpzspA6duFEAr4" target="_blank" rel="noopener">Ver o anúncio ↗</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="col" style="color:var(--muted);font-size:.9rem">Uma quinta peça ficou de fora: ela levava para uma página de produto que hoje não existe mais no site. Se quiserem essa versão de volta, refazemos com o link atualizado.</p>
+</section>
+
+<section>
+  <div class="head col">
+    <p class="eyebrow">Próximos passos</p>
+    <h2>Como vamos conduzir</h2>
+  </div>
+  <div class="passos col">
+    <div class="passo"><span class="n">1</span><p><strong>Primeira semana no ar.</strong> Acompanhamento diário do custo por venda, com o alvo de R$ 55. Se ficar acima disso e não corrigir, ajustamos público antes de mexer em verba.</p></div>
+    <div class="passo"><span class="n">2</span><p><strong>Peças novas até o fim de setembro.</strong> As atuais são de janeiro e já rodaram bastante. Vamos gravar três novas — uma delas mostrando a carta em uso na prática, que é o formato que mais converteu.</p></div>
+    <div class="passo"><span class="n">3</span><p><strong>Outubro é o mês de reforçar.</strong> Na série histórica da conta, outubro é mês de presente: o ticket sobe. Carta é um presente de valor acessível, e é onde queremos as campanhas maduras.</p></div>
+    <div class="passo"><span class="n">4</span><p><strong>Pinterest de volta na sequência.</strong> A campanha de baralhos por lá teve ótimo retorno em junho e está parada por saldo. Vale retomar assim que houver aporte definido para o canal.</p></div>
+  </div>
+</section>
+
+<footer class="col">
+  <p>Relatório preparado pela GGD · dados do Meta Ads e do relatório mensal da loja · 3 de setembro de 2026.</p>
+  <p>Qualquer dúvida sobre os números ou sobre as peças, é só chamar.</p>
+</footer>
+
+</div>
+</body>
+</html>
