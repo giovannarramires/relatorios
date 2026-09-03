@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rugido do Leão — Triagem</title>
+<style>
+
+  :root {
+    --ground: #EEEFE9; --surface: #F7F8F3; --field: #FFFFFF;
+    --ink: #1C1F1A; --ink-soft: #43483E; --muted: #6B6F63;
+    --line: #D4D7CA; --line-soft: #E1E3D8;
+    --accent: #8F6410; --moss: #2F4636; --star: #7A4A0C; --star-bg: #EFE6D2;
+    --ok: #2F5E3E; --ok-bg: #E3EDE4;
+    --warn: #8A6410; --warn-bg: #F3EAD4;
+    --gap: #8E3A2A; --gap-bg: #F4E2DD;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E; --surface: #1C1A15; --field: #211E18;
+      --ink: #E9E4D7; --ink-soft: #C7C1B1; --muted: #948D7D;
+      --line: #38342A; --line-soft: #2A261D;
+      --accent: #D8A63F; --moss: #8FAE97; --star: #E0B463; --star-bg: #2A2115;
+      --ok: #8FBF9C; --ok-bg: #1B2A20;
+      --warn: #DDB25A; --warn-bg: #2A2115;
+      --gap: #E09B86; --gap-bg: #2E1B16;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.58; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 140px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--moss);
+  }
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 30px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(34px, 5.4vw, 54px); line-height: 1.05;
+    letter-spacing: -0.015em; margin: 0; max-width: 19ch; text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 64ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+  .meta-line {
+    display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.06em; color: var(--muted);
+  }
+
+  section { padding-top: 62px; }
+  .section-title { display: flex; flex-direction: column; gap: 7px; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 26px; }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(24px, 3.2vw, 33px); line-height: 1.14; margin: 0; letter-spacing: -0.01em;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 68ch; }
+
+  h3 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: 21px; margin: 34px 0 10px; letter-spacing: -0.005em;
+  }
+  p { max-width: 70ch; }
+  .lead { font-size: 17.5px; color: var(--ink-soft); }
+  strong { font-weight: 620; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .cards > div { background: var(--surface); padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .cards b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); font-weight: 500;
+  }
+  .cards span { font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+
+  .bignum { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin: 4px 0 26px; }
+  .bignum > div { background: var(--surface); padding: 22px 20px; display: flex; flex-direction: column; gap: 4px; }
+  .bignum .v { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
+  .bignum .k { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .bignum .s { font-size: 13.5px; color: var(--ink-soft); line-height: 1.4; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 20px; font-size: 15.5px; }
+  .tscroll { overflow-x: auto; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.total td { border-top: 1px solid var(--line); border-bottom: none; font-weight: 620; }
+
+  .pill { display: inline-block; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; white-space: nowrap; }
+  .p-ok { background: var(--ok-bg); color: var(--ok); }
+  .p-warn { background: var(--warn-bg); color: var(--warn); }
+  .p-gap { background: var(--gap-bg); color: var(--gap); }
+  .p-ess { background: var(--star-bg); color: var(--star); }
+
+  .bar { display: flex; height: 30px; border: 1px solid var(--line); margin: 6px 0 12px; overflow: hidden; }
+  .bar div { display: flex; align-items: center; justify-content: center; font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; }
+  .bar .b-ok { background: var(--ok-bg); color: var(--ok); }
+  .bar .b-warn { background: var(--warn-bg); color: var(--warn); }
+  .bar .b-gap { background: var(--gap-bg); color: var(--gap); }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13.5px; color: var(--muted); margin-bottom: 30px; }
+  .legend span { display: flex; align-items: center; gap: 7px; }
+  .sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  .qblock { border: 1px solid var(--line); background: var(--surface); margin-bottom: 22px; }
+  .qhead { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+  .qhead b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 18px; font-weight: 600; }
+  .qhead .why { font-size: 13.5px; color: var(--muted); }
+  .qrow { display: grid; grid-template-columns: 42px 1fr 118px; gap: 14px; padding: 13px 20px; border-bottom: 1px solid var(--line-soft); align-items: start; }
+  .qrow:last-child { border-bottom: none; }
+  .qrow .n { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); padding-top: 3px; }
+  .qrow .q { font-size: 15px; font-weight: 600; margin: 0 0 3px; }
+  .qrow .a { font-size: 14.5px; color: var(--ink-soft); margin: 0; max-width: 66ch; }
+  .qrow .f { font-size: 13.5px; color: var(--gap); margin: 5px 0 0; max-width: 66ch; }
+  .qrow .st { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; padding-top: 2px; }
+
+  .finding { border-left: 3px solid var(--accent); padding: 2px 0 2px 20px; margin: 30px 0; }
+  .finding h3 { margin-top: 0; }
+
+  .phase { border: 1px solid var(--line); background: var(--surface); margin-bottom: 20px; }
+  .phase > .ph { padding: 17px 22px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+  .phase .ph .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+  .phase .ph b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 21px; font-weight: 600; }
+  .phase .ph .when { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--muted); margin-left: auto; }
+  .phase .pb { padding: 18px 22px 20px; }
+  .phase .pb p { margin: 0 0 12px; }
+  .phase ul { margin: 0 0 12px; padding-left: 20px; }
+  .phase li { margin-bottom: 7px; max-width: 68ch; }
+  .spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 14px; }
+  .spec > div { background: var(--field); padding: 13px 16px; display: flex; flex-direction: column; gap: 3px; }
+  .spec b { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .spec span { font-size: 14.5px; color: var(--ink); }
+
+  .callout { border: 1px solid var(--line); background: var(--star-bg); padding: 22px 24px; margin: 30px 0; }
+  .callout p { margin: 0; max-width: 72ch; }
+  .callout .eyebrow { color: var(--star); margin-bottom: 8px; display: block; }
+
+  footer { margin-top: 80px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px 100px; }
+    .qrow { grid-template-columns: 32px 1fr; }
+    .qrow .st { grid-column: 2; flex-direction: row; }
+  }
+
+  /* --- triagem --- */
+  .verdict { border: 1px solid var(--line); background: var(--surface); padding: 30px 32px; margin: 8px 0 10px; }
+  .verdict .eyebrow { display: block; margin-bottom: 12px; }
+  .verdict p { font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif; font-size: clamp(20px, 2.7vw, 26px); line-height: 1.34; margin: 0 0 14px; max-width: 40ch; letter-spacing: -0.008em; }
+  .verdict p:last-child { margin-bottom: 0; font-family: inherit; font-size: 16.5px; line-height: 1.55; color: var(--ink-soft); max-width: 68ch; letter-spacing: 0; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin: 6px 0 24px; }
+  .twocol > div { background: var(--surface); padding: 22px 22px 24px; }
+  .twocol h4 { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; margin: 0 0 14px; font-weight: 500; }
+  .twocol .red h4 { color: var(--gap); }
+  .twocol .green h4 { color: var(--ok); }
+  .twocol ul { margin: 0; padding-left: 18px; }
+  .twocol li { margin-bottom: 11px; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+  .twocol li b { color: var(--ink); font-weight: 620; }
+  .twocol li:last-child { margin-bottom: 0; }
+
+  .gate { border: 1px solid var(--line); background: var(--field); margin: 18px 0 6px; }
+  .gate > div { padding: 16px 22px; border-bottom: 1px solid var(--line-soft); display: grid; grid-template-columns: 30px 1fr; gap: 14px; align-items: start; }
+  .gate > div:last-child { border-bottom: none; }
+  .gate .k { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); padding-top: 2px; }
+  .gate p { margin: 0; font-size: 15.5px; max-width: 66ch; }
+  .gate p b { font-weight: 620; }
+  .gate .who { font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 4px; display: block; }
+
+  .scen { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 6px; }
+  .scen > div { background: var(--surface); padding: 22px; }
+  .scen b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 19px; font-weight: 600; display: block; margin-bottom: 8px; }
+  .scen p { margin: 0; font-size: 15px; color: var(--ink-soft); max-width: none; }
+
+  @media (max-width: 720px) { .twocol { grid-template-columns: 1fr; } }
+</style></head><body><div class="wrap">
+<header class="top">
+  <div class="eyebrow">Gio Growth Digital · Uso interno · Não enviar ao cliente</div>
+  <h1>Rugido do Leão<br><em>triagem de entrada</em></h1>
+  <p class="standfirst">Avaliação de um cliente em prospecção: se vale pegar, em que formato, sob qual condição — e em que ponto vale dizer não.</p>
+  <div class="meta-line">
+    <span>Briefing respondido por Thais Leão · 31/08/2026</span>
+    <span>Análise 03/09/2026</span>
+    <span>Status: em triagem</span>
+  </div>
+</header>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Veredito</div>
+    <h2>Negócio bom, momento errado</h2>
+  </div>
+
+  <div class="verdict">
+    <span class="eyebrow">Recomendação</span>
+    <p>Não recusar. E não entrar como gestão mensal cheia agora.</p>
+    <p>O negócio tem fundamento — margem, ociosidade e diferencial real. O que não existe ainda é a base para sustentar gestão de tráfego recorrente, nem a maturidade de decisão para acompanhá-la. A entrada correta é um degrau menor, pago, de escopo fechado — e condicionada a uma conversa com a sócia que não participou do briefing.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">O nó</div>
+    <h2>Ele só cabe no modelo depois de dobrar</h2>
+    <p>Esta é a razão principal para não entrar com gestão recorrente agora, e ela é aritmética, não impressão.</p>
+  </div>
+
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Item</th><th class="num">Valor</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>Faturamento estimado</td><td class="num">~R$ 11.700/mês</td><td>Reconstruído por capacidade; não confirmado por eles</td></tr>
+      <tr><td>Verba de mídia que a meta exige</td><td class="num">R$ 1.200/mês</td><td>~R$ 40/dia</td></tr>
+      <tr><td>Fee de gestão</td><td class="num">~R$ 1.000 a 1.500</td><td>Faixa da casa para o porte</td></tr>
+      <tr class="total"><td>Marketing total</td><td class="num">~R$ 2.400/mês</td><td><b>~20% do faturamento</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="bignum">
+    <div><span class="k">Saudável para serviço local</span><span class="v">5 a 10%</span><span class="s">do faturamento em marketing</span></div>
+    <div><span class="k">Onde este cliente cairia</span><span class="v">~20%</span><span class="s">o dobro do teto confortável</span></div>
+    <div><span class="k">Faturamento para caber a 10%</span><span class="v">R$ 24 mil</span><span class="s">exatamente o dobro do atual</span></div>
+  </div>
+
+  <p><strong>A armadilha:</strong> ele precisa do resultado para poder pagar pelo serviço que traz o resultado. Enquanto não dobrar, todo mês o marketing será a maior linha de custo variável da casa — e a primeira a ser questionada quando a curva demorar.</p>
+
+  <p>Some o detalhe que todo cliente dessa faixa percebe por conta própria no segundo ou terceiro mês: <strong>ele paga mais pela gestão do que pela mídia.</strong> Não existe forma confortável de sustentar essa proporção por muito tempo sem resultado já visível.</p>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Leitura</div>
+    <h2>Os sinais, separados</h2>
+    <p>Todos saem das respostas do próprio briefing, não de suposição sobre o mercado.</p>
+  </div>
+
+  <div class="twocol">
+    <div class="red">
+      <h4>Vermelhos — pesam agora</h4>
+      <ul>
+        <li><b>Urgência sem verba definida.</b> Não responderam quanto podem investir; escreveram "precisamos de retorno com urgência". Isso é ausência de planejamento, não objeção de preço. E urgência somada a um mês inteiro de arrumação é a receita da frustração no mês 2.</li>
+        <li><b>Quem respondeu não é quem decide.</b> A Thais preencheu as cinquenta. A Carla, sócia e dermatologista, tem cinco das sete respostas que travam o projeto. Enquanto ela não aparecer, a conversa não aconteceu com o cliente — aconteceu com metade dele.</li>
+        <li><b>Expectativa não calibrada por nós.</b> "Dobrar o faturamento" em quatro meses foi definido antes de existir verba, medição, perfil do Google ou material liberado. Aceitar o projeto é assinar embaixo de uma meta que não foi nossa.</li>
+        <li><b>Maturidade de gestão baixa.</b> Não sabem o faturamento em reais, não sabem o retorno do serviço mais nobre, não registram origem de cliente. Seremos cobradas por um resultado que eles ainda não têm como enxergar.</li>
+        <li><b>Necessidade adjacente fora do escopo.</b> Sem manual de marca, sem site, sem termo de imagem assinado, conteúdo produzido por elas mesmas. Tudo isso cai no nosso colo e não está em contrato de tráfego.</li>
+      </ul>
+    </div>
+    <div class="green">
+      <h4>Verdes — e são reais</h4>
+      <ul>
+        <li><b>70% de ociosidade com estrutura já paga.</b> Crescer não exige obra nem contratação — elas mesmas responderam que, se a procura dobrar, nada quebra. Resultado aparece rápido e limpo se o topo encher.</li>
+        <li><b>Diferencial genuíno e comunicável.</b> Pet solto separado por porte e temperamento, sem sedativo, com câmera e avaliação na recepção. Nenhum concorrente da cidade comunica esse conjunto.</li>
+        <li><b>Dermatologista sócia.</b> Ativo raro, ticket alto, tratamento longo. É o que dá teto de crescimento ao negócio.</li>
+        <li><b>Canais gratuitos intocados.</b> O perfil do Google provavelmente rende antes do primeiro real de mídia — chance de provar valor já na primeira semana.</li>
+        <li><b>Nunca anunciaram.</b> Sem passivo de agência anterior, sem comparação injusta, e qualquer trabalho bem feito vira ganho visível.</li>
+        <li><b>Simples Vet dá relatório.</b> Dá para medir de verdade, o que nem todo cliente desse porte permite.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">A proposta de entrada</div>
+    <h2>Degrau de fundação, 30 dias, escopo fechado</h2>
+    <p>Sem mídia. Preço baixo. Entrega objetiva e verificável.</p>
+  </div>
+
+  <p>O escopo é exatamente a base que a gestão precisaria construir de qualquer jeito, e que hoje não existe:</p>
+
+  <ul>
+    <li>Google Meu Negócio verificado, categorizado, com fotos e rotina de avaliações</li>
+    <li>Instagram com categoria corrigida e link da bio medível</li>
+    <li>Registro de origem do cliente ligado no Simples Vet</li>
+    <li>Gerenciador de Negócios e conta de anúncios criados no CNPJ</li>
+    <li>Termo de uso de imagem em circulação na recepção</li>
+    <li>Levantamento dos números que faltam, inclusive o retorno do paciente dermatológico</li>
+  </ul>
+
+  <p><strong>Por que este formato resolve os três problemas ao mesmo tempo:</strong></p>
+
+  <div class="cards">
+    <div><b>Entrega valor real</b><span>O perfil do Google sozinho costuma render mais que a mídia inicial num negócio local. Ganho visível sem depender de verba nem de prazo de aprendizado.</span></div>
+    <div><b>Constrói a base</b><span>Nada aqui é trabalho jogado fora. É pré-requisito da gestão, feito antes e cobrado à parte em vez de absorvido de graça no mês 1.</span></div>
+    <div><b>Filtra o cliente</b><span>Quem não paga o degrau pequeno nunca sustentaria o recorrente. O teste custa pouco para os dois lados e revela cedo.</span></div>
+  </div>
+
+  <p style="margin-top:22px">A gestão recorrente entra <strong>depois</strong> — com o cliente já medindo origem, já tendo visto entrega, e com a verba definida por um número, não por uma expressão de urgência.</p>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">O filtro</div>
+    <h2>A reunião com a Carla é o teste</h2>
+    <p>Antes de qualquer proposta, marcar exigindo a presença dela. O critério de corte é objetivo e não depende de intuição.</p>
+  </div>
+
+  <div class="gate">
+    <div><span class="k">05</span><p><b>Quanto podem investir em mídia por mês, em reais.</b> Um número. Se a resposta continuar sendo "precisamos de retorno com urgência", não há projeto.<span class="who">Thais e Carla</span></p></div>
+    <div><span class="k">16</span><p><b>Quanto soma e quanto dura o tratamento de um paciente dermatológico.</b> É o número que define o teto do investimento por paciente novo — e o serviço que sustenta o crescimento.<span class="who">Carla</span></p></div>
+    <div><span class="k">01</span><p><b>Faturamento mensal em reais.</b> Para confirmar ou derrubar a estimativa de R$ 11,7 mil sobre a qual toda a análise se apoia.<span class="who">Thais</span></p></div>
+    <div><span class="k">35–37</span><p><b>Gerenciador de Negócios, conta de anúncios, Google Meu Negócio e link da bio.</b> Sem acesso não existe execução, e sem saber o estado do perfil do Google não se aproveita o canal mais barato disponível.<span class="who">Carla</span></p></div>
+    <div><span class="k">41</span><p><b>Número do CRMV da Carla Stefani Martins.</b> Obrigatório em qualquer peça. Trava toda a criação.<span class="who">Carla</span></p></div>
+    <div><span class="k">42</span><p><b>O que o conselho já orientou sobre comunicação.</b> Promessa de resultado, desconto em serviço médico e antes/depois de paciente têm restrição.<span class="who">Carla</span></p></div>
+    <div><span class="k">08</span><p><b>Qual dia e qual horário ficam vazios.</b> Responderam qual é o mais cheio. É o ocioso que a mídia enche primeiro.<span class="who">Thais</span></p></div>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">Critério de corte</span>
+    <p><strong>Se a Carla não aparecer na reunião, ou aparecer sem os números, o cliente não está pronto.</strong> Não é falta de boa vontade — é sinal de que a decisão não está madura e de que a cobrança pelo resultado virá sem a base para sustentá-lo. Nesse caso, o correto é agradecer, deixar a porta aberta e revisitar em três a seis meses. O custo desse filtro é uma reunião; o custo de ignorá-lo é um trimestre.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Depois da reunião</div>
+    <h2>Os dois desfechos</h2>
+  </div>
+
+  <div class="scen">
+    <div>
+      <b>Se avançar</b>
+      <p>Proposta do degrau de fundação, trinta dias, escopo fechado e preço baixo. Ao fim dele, com base montada e números na mão, reavaliamos a gestão recorrente com a verba já definida e a meta recalibrada por nós — não herdada de um "dobrar o faturamento" que ninguém calculou.</p>
+    </div>
+    <div>
+      <b>Se não avançar</b>
+      <p>Encerrar com clareza e sem desgaste. Entregar a leitura do briefing como cortesia — ela já tem valor por si — e deixar registrado que a porta segue aberta. Cliente que amadurece costuma voltar, e volta com a decisão pronta e sem a urgência que hoje é o maior risco do projeto.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Base da análise</div>
+    <h2>Onde o briefing está apoiado</h2>
+    <p>Cinquenta perguntas respondidas. Nem toda resposta fecha uma pergunta.</p>
+  </div>
+
+  <div class="bignum">
+    <div><span class="k">Fechado</span><span class="v">26</span><span class="s">dá para agir com o que veio</span></div>
+    <div><span class="k">Incompleto</span><span class="v">17</span><span class="s">falta o número ou o detalhe</span></div>
+    <div><span class="k">Em aberto</span><span class="v">7</span><span class="s">não souberam responder</span></div>
+    <div><span class="k">Essenciais fechadas</span><span class="v">7 de 17</span><span class="s">menos da metade</span></div>
+  </div>
+
+  <p>O detalhamento pergunta a pergunta, com o que falta em cada uma, está no documento do cliente: <a href="../plano/" style="color:var(--accent)">relatorios.giogrowthdigital.com.br/rugido-do-leao/plano/</a></p>
+</section>
+
+<footer>
+  Gio Growth Digital · Documento interno de triagem · Não compartilhar com o cliente · 03/09/2026
+</footer>
+
+</div>
+</body>
+</html>
