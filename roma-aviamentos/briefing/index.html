@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Briefing Roma Aviamentos</title>
+<style>
+  :root {
+    --ground: #EEEFE9;
+    --surface: #F7F8F3;
+    --field: #FFFFFF;
+    --ink: #1C1F1A;
+    --ink-soft: #43483E;
+    --muted: #6B6F63;
+    --line: #D4D7CA;
+    --line-soft: #E1E3D8;
+    --accent: #8F6410;
+    --moss: #2F4636;
+    --star: #7A4A0C;
+    --star-bg: #EFE6D2;
+    --bar: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E;
+      --surface: #1C1A15;
+      --field: #211E18;
+      --ink: #E9E4D7;
+      --ink-soft: #C7C1B1;
+      --muted: #948D7D;
+      --line: #38342A;
+      --line-soft: #2A261D;
+      --accent: #D8A63F;
+      --moss: #8FAE97;
+      --star: #E0B463;
+      --star-bg: #2A2115;
+      --bar: #1A1712;
+    }
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 180px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 36px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, "Palatino Linotype", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 62ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+
+  .howto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .howto div { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .howto b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .howto span { font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+
+  .whobox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .whobox label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .whobox input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 11px;
+  }
+  .whobox input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 66ch; }
+  .read { margin-top: 56px; }
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-top: 0;
+  }
+  .finding { background: var(--surface); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .finding h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+  .finding p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+
+  .blocks { margin-top: 70px; }
+  section.block {
+    display: grid;
+    grid-template-columns: 214px 1fr;
+    gap: 44px;
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  section.block:first-of-type { border-top: 2px solid var(--ink); }
+  .block-head { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .block-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    color: var(--accent);
+  }
+  .block-head h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-why { font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 26ch; margin: 0; }
+  .block-count {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul.qs { list-style: none; margin: 0; padding: 0; }
+  ul.qs > li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 84px;
+    align-items: start;
+    column-gap: 8px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  ul.qs > li:first-child { padding-top: 4px; }
+  ul.qs > li:last-child { border-bottom: 0; }
+  .qn {
+    grid-column: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding-top: 5px;
+  }
+  li[data-filled="1"] .qn { color: var(--moss); font-weight: 700; }
+  .q { grid-column: 2; max-width: 62ch; }
+  .q > p { margin: 0; color: var(--ink); }
+  .q > p.note {
+    margin-top: 7px;
+    padding-left: 13px;
+    border-left: 2px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .tag {
+    grid-column: 3;
+    justify-self: end;
+    margin-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+    background: var(--star-bg);
+    border-radius: 2px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+  li.key .qn { color: var(--star); font-weight: 700; }
+  li.key[data-filled="1"] .qn { color: var(--moss); }
+  li.key .q > p:first-child { font-weight: 600; }
+
+  textarea.ans {
+    display: block;
+    width: 100%;
+    margin-top: 11px;
+    min-height: 46px;
+    resize: vertical;
+    overflow: hidden;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  textarea.ans::placeholder { color: var(--muted); opacity: 0.75; }
+  textarea.ans:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  textarea.ans[data-filled="1"] { border-left: 3px solid var(--moss); }
+
+  .savebar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 20;
+    background: var(--bar);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.10);
+  }
+  .savebar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 13px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .progress { flex: 1 1 200px; min-width: 170px; display: flex; flex-direction: column; gap: 6px; }
+  .progress .pline {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress .track { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .progress .fill { height: 100%; width: 0%; background: var(--moss); transition: width 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) { .progress .fill { transition: none; } }
+
+  #status { font-size: 14.5px; color: var(--muted); }
+  #status[data-tone="ok"] { color: var(--moss); }
+
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.primary { color: #F7F8F3; background: var(--moss); border-color: var(--moss); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #14120E; } }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+
+  @media (max-width: 860px) {
+    body { font-size: 16.5px; }
+    .wrap { padding: 0 20px 210px; }
+    header.top { padding-top: 44px; }
+    h1 { max-width: none; }
+    section.block { grid-template-columns: 1fr; gap: 18px; padding: 26px 0 30px; }
+    .block-head { position: static; }
+    .block-why { max-width: 58ch; }
+    ul.qs > li { grid-template-columns: 32px minmax(0, 1fr); column-gap: 10px; row-gap: 5px; }
+    .qn { grid-column: 1; grid-row: 1; }
+    .tag { grid-column: 2; grid-row: 1; justify-self: start; margin-top: 3px; }
+    .q { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+    .savebar-inner { padding: 11px 20px; gap: 10px; }
+    .btns { width: 100%; }
+    .btns button { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap"><div id="root"></div></div>
+
+<div class="savebar">
+  <div class="savebar-inner">
+    <div class="progress">
+      <div class="pline"><span id="pcount">—</span><span id="pmode"></span></div>
+      <div class="track"><div class="fill" id="pfill"></div></div>
+    </div>
+    <span id="status">&nbsp;</span>
+    <div class="btns">
+      <button type="button" id="download">Baixar respostas</button>
+      <button type="button" id="copy" class="primary">Copiar para enviar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "ggd-briefing-roma-aviamentos-v1";
+
+  var BLOCKS = [
+    {
+      n: "01", title: "Quem responde pelo quê",
+      why: "Projeto sem dono vira sugestão. Precisamos saber a quem pedir cada coisa — e quem cobra.",
+      qs: [
+        { id: "q01", key: true, q: "Quem são as pessoas da casa hoje e o que cada uma faz? Pode ser em lista: loja do Brás, site, importadora, estoque e expedição, compras, atendimento, financeiro, conteúdo." },
+        { id: "q02", key: true, q: "Quem é o dono do e-commerce dentro da empresa — a pessoa que acorda pensando na venda do site? Se não existe, quem chega mais perto?", note: "Sem essa pessoa, tudo o que a gente propuser volta para a sua mesa e trava aí." },
+        { id: "q03", q: "Quem responde o WhatsApp e o Direct, em qual horário, e essa pessoa faz mais alguma coisa além disso?" },
+        { id: "q04", q: "Quem tira as fotos e faz os posts hoje: gente de dentro, freelancer ou agência?" },
+        { id: "q05", q: "Quem cadastra produto novo no site (foto, título, descrição, preço) e quanto tempo leva entre a mercadoria chegar e estar vendável?", note: "Esse prazo decide se conseguimos anunciar novidade ou só o que já está velho no catálogo." },
+        { id: "q06", q: "Quem decide preço e quem pode autorizar desconto, cupom ou frete grátis sem falar com você?" },
+        { id: "q07", q: "O que hoje só anda se passar por você? E o que você gostaria de parar de decidir?" },
+        { id: "q08", q: "Se a venda do site dobrar em sessenta dias, qual pessoa ou setor estoura primeiro?" }
+      ]
+    },
+    {
+      n: "02", title: "Os números que só vocês têm",
+      why: "De mídia eu já tenho tudo. O que falta é o que só aparece no caixa de vocês.",
+      qs: [
+        { id: "q09", key: true, q: "Como o faturamento se divide hoje entre loja do Brás, site, atacado/importadora, marketplaces e venda por WhatsApp? Em porcentagem ou em reais." },
+        { id: "q10", key: true, q: "Qual a margem de cada linha — linha e crochê, fitas, botões, artesanato, festa, natal, bijuteria? Onde vocês ganham dinheiro de verdade?", note: "Hoje a mídia empurra o que vende. Com a margem na mão, ela passa a empurrar o que lucra." },
+        { id: "q11", q: "Qual o valor de pedido abaixo do qual vocês perdem dinheiro, considerando embalagem, separação e o frete que vocês bancam?" },
+        { id: "q12", key: true, q: "Quanto um cliente do site compra ao longo de um ano: quantos pedidos e quanto no total?", note: "É o número mais importante de todos — é ele que define quanto podemos pagar para conquistar um cliente novo." },
+        { id: "q13", q: "Quantos clientes compraram nos últimos doze meses e quantos compraram mais de uma vez?" },
+        { id: "q14", q: "Vocês vendem em marketplace (Shopee, Mercado Livre, Amazon)? Quanto fatura e o que sobra depois da comissão?" },
+        { id: "q15", q: "Existe linha em que vocês são importadores ou exclusivos, que ninguém mais tem no Brasil?", note: "Exclusividade é a coisa mais fácil de transformar em anúncio, em página e em busca do Google." },
+        { id: "q16", q: "O que encalha e o que some do estoque? Tem capital parado em alguma linha?" },
+        { id: "q17", key: true, q: "Qual número de faturamento você quer ver no site daqui a doze meses e qual é o teto de investimento por mês para chegar lá?" }
+      ]
+    },
+    {
+      n: "03", title: "O que já foi feito um dia",
+      why: "Antes de inventar coisa nova, quero recuperar o que já funcionou e morreu no meio do caminho.",
+      qs: [
+        { id: "q18", key: true, q: "Nos últimos anos, o que trouxe venda de verdade e hoje não é mais feito? Agência anterior, e-mail, catálogo, feira, representante, influenciadora, live, cupom, parceria, marketplace.", note: "É a pergunta mais valiosa desta página. Coisa que já deu certo volta muito mais rápido do que coisa nova." },
+        { id: "q19", q: "Por que cada uma dessas coisas parou: faltou gente, faltou dinheiro, brigou com fornecedor, ou só se perdeu no meio?" },
+        { id: "q20", q: "Já teve e-mail marketing? Qual ferramenta, quantas pessoas na lista e quando foi o último envio?" },
+        { id: "q21", q: "Já teve lista ou disparo de WhatsApp para clientes? Quantos contatos e quem disparava?" },
+        { id: "q22", q: "Já trabalharam com artesãs, professoras de crochê ou influenciadoras? Como foi o acerto e o que deu?", note: "No seu nicho quem ensina é quem vende. Quero saber se já tentaram e o que deu errado antes de propor de novo." },
+        { id: "q23", q: "Qual foi a maior promoção que vocês já fizeram e o que ela deu — em venda e em margem?" },
+        { id: "q24", q: "O que vocês pararam de fazer porque dava trabalho demais, mesmo dando resultado?" },
+        { id: "q25", q: "E o que já foi tentado que você não quer mais ouvir falar?" }
+      ]
+    },
+    {
+      n: "04", title: "O que está no ar hoje",
+      why: "Quero separar o que é rotina de verdade do que é “a gente faz quando dá”.",
+      qs: [
+        { id: "q26", key: true, q: "Hoje, o que é feito toda semana sem falhar, além dos anúncios? Quem faz e em que dia?" },
+        { id: "q27", q: "Quantos posts e stories por semana, e quem decide o assunto? Existe planejamento ou é decidido no dia?" },
+        { id: "q28", q: "Quantas conversas de WhatsApp vocês recebem por dia, quanto demora a primeira resposta e o que acontece com quem escreve fora do horário?" },
+        { id: "q29", q: "Alguém acompanha quem perguntou e não comprou? Existe algum retorno depois, ou a conversa simplesmente morre?" },
+        { id: "q30", q: "Quem já comprou recebe alguma coisa depois: agradecimento, novidade, cupom, aviso de reposição?" },
+        { id: "q31", q: "Existe conteúdo além do Instagram — blog, receita, passo a passo, YouTube, Pinterest, TikTok? Está ativo ou parado?", note: "No artesanato, Pinterest e YouTube trazem gente comprando por anos. Se já existe alguma coisa, a gente aproveita em vez de começar do zero." },
+        { id: "q32", q: "A loja do Brás e o site conversam? Quem compra na loja vira cliente do site, e o contrário?" },
+        { id: "q33", q: "Quem entra na loja física é lojista, artesã ou consumidora final? Mudou nos últimos anos?" }
+      ]
+    },
+    {
+      n: "05", title: "O que já existe e ninguém usa",
+      why: "Quase toda empresa tem dinheiro parado em base de cliente e em foto guardada.",
+      qs: [
+        { id: "q34", key: true, q: "Vocês conseguem exportar a base de clientes com nome, e-mail, telefone, o que comprou e quando? De qual sistema ela sai?", note: "É essa base que faz remarketing barato, público semelhante e recuperação de cliente. Sem ela, pagamos caro por gente que já é nossa." },
+        { id: "q35", q: "No cadastro do site ou da loja existe autorização para mandar mensagem e e-mail? Alguém guarda esse aceite?" },
+        { id: "q36", q: "Quanta foto e vídeo próprios de produto vocês têm hoje? Alguém fotografa dentro da empresa ou é tudo do fornecedor?" },
+        { id: "q37", q: "Vocês recebem foto de cliente com a peça pronta? Existe autorização para usar em anúncio?", note: "No artesanato a peça pronta da cliente vende mais que a foto do produto na embalagem." },
+        { id: "q38", q: "Algum fornecedor ou marca oferece material, verba de propaganda ou ação em conjunto?" },
+        { id: "q39", q: "O que os clientes elogiam sem serem perguntados? E do que reclamam sempre?" },
+        { id: "q40", q: "O que a Roma tem que nenhum concorrente tem, e como vocês contam isso hoje para quem não conhece?" }
+      ]
+    },
+    {
+      n: "06", title: "A casa aguenta crescer?",
+      why: "Não adianta acender procura que a operação não entrega. É aqui que se define até onde dá para escalar.",
+      qs: [
+        { id: "q41", key: true, q: "Quantos pedidos por dia o site faz hoje e quantos vocês conseguiriam separar e despachar sem contratar ninguém?" },
+        { id: "q42", q: "Em quanto tempo o pedido sai depois de pago, qual o prazo médio de entrega e quantos atrasam por semana?" },
+        { id: "q43", q: "Quantos produtos ficam sem estoque, quem repõe e em quanto tempo?", note: "Anunciar produto que acaba é a forma mais rápida de queimar verba e irritar cliente." },
+        { id: "q44", q: "Como funciona o frete hoje: quem paga, existe frete grátis a partir de algum valor, e vocês têm liberdade para mexer nisso?", note: "O frete é a objeção número um do carrinho de vocês — dá para ver isso nos cliques do site." },
+        { id: "q45", q: "Quantas trocas e devoluções por mês, e por qual motivo?" },
+        { id: "q46", q: "O que vocês não conseguem atender hoje mesmo que a gente traga o cliente: pedido grande, prazo curto, corte por metragem, personalização, atacado misto?" }
+      ]
+    },
+    {
+      n: "07", title: "Sistemas, dados e acessos",
+      why: "Toda ação que a gente propuser vai depender de mexer em algum desses lugares.",
+      qs: [
+        { id: "q47", key: true, q: "Quando vocês pedem uma mudança no site, para quem vai o pedido, quanto tempo demora e o que já foi negado?", note: "O prazo do site define a ordem do projeto: o que depende de fila entra antes, o que não depende começa já." },
+        { id: "q48", q: "Qual sistema controla estoque e pedido, e ele conversa com o site em tempo real?" },
+        { id: "q49", q: "Alguém aí consegue mexer no site para instalar um código ou mudar o texto de uma página, ou é sempre chamado para a plataforma?" },
+        { id: "q50", q: "Quem tem a senha de quê: site, redes, Google, e-mail marketing, marketplaces? Existe essa lista em algum lugar?", note: "Se um acesso morre com uma pessoa que sai, o projeto para. A gente organiza isso com vocês." },
+        { id: "q51", q: "Existe verba separada para ferramenta (e-mail, WhatsApp, automação, recuperação)? De quanto por mês?" }
+      ]
+    },
+    {
+      n: "08", title: "Rotina, decisão e calendário",
+      why: "É aqui que se resolve a falta de direcionamento e de cobrança que te incomoda hoje.",
+      qs: [
+        { id: "q52", key: true, q: "Como você quer ser cobrada e como quer nos cobrar: reunião fixa, relatório, grupo de WhatsApp? Com que frequência e em qual dia?" },
+        { id: "q53", q: "Além de você, quem precisa aprovar campanha, preço e peça — e quanto tempo leva uma aprovação hoje?" },
+        { id: "q54", q: "Quando a gente precisar de uma coisa da equipe (foto, texto, lista, ajuste no site), com quem falamos direto? Você autoriza a gente cobrar essa pessoa?" },
+        { id: "q55", key: true, q: "Quais são os meses fortes e fracos, por linha? O que acontece em janeiro, no meio do ano e em novembro e dezembro?" },
+        { id: "q56", q: "Quando vocês compram e recebem o estoque de Natal e de festa junina?", note: "Para vender no Natal, o anúncio precisa estar no ar em outubro — e o estoque, antes disso." },
+        { id: "q57", q: "Tem novidade prevista para os próximos seis meses: loja nova, coleção, marca própria, troca de plataforma, contratação?" },
+        { id: "q58", key: true, q: "Se em noventa dias a gente entregasse uma coisa só, muito bem feita, qual você quer que seja?" }
+      ]
+    }
+  ];
+
+  var FINDINGS = [
+    { h: "A venda não caiu — o custo é que subiu", p: "Entre julho e agosto o investimento em mídia praticamente dobrou e o faturamento do site ficou no mesmo lugar. A sensação de “não está vendendo” é real, mas o problema é margem, não demanda. Por isso as perguntas daqui falam de custo, margem e capacidade, e não de anúncio." },
+    { h: "Oito em cada dez visitas são de celular, e a primeira coisa que a pessoa faz é buscar", p: "Mais de um terço de todos os toques do site vão para a caixa de busca; o menu leva 1,5%. Quem chega já sabe o que quer. Isso muda a prioridade: busca interna e página de produto valem mais que reorganizar menu." },
+    { h: "O carrinho perde gente em dois lugares certos", p: "De cada dez pessoas que colocam produto no carrinho, seis somem antes do resumo — a maioria trava na tela de login — e das que chegam ao pagamento, mais da metade não conclui. Consertar só a tela de pagamento vale mais de cem pedidos por mês sem gastar um real a mais em mídia." },
+    { h: "A objeção número um é o frete", p: "Dentro do carrinho, simular frete recebe quase o dobro de cliques do botão de pagar. Antes de qualquer campanha nova, precisamos saber quanta liberdade vocês têm para mexer em frete e em pedido mínimo." },
+    { h: "A marca já está ganha; produto ainda não", p: "Quando alguém busca “Roma Aviamentos”, vocês aparecem. Quando alguém busca o produto sem citar a marca, a fatia de vocês ainda é pequena — e é aí que mora o crescimento." },
+    { h: "De mídia, a gente já sabe tudo", p: "Campanha por campanha, dia por dia, conta por conta, isso está mapeado e não vamos ocupar seu tempo com isso. As perguntas desta página são de propósito as que nenhum painel responde: gente, processo, margem, histórico e capacidade." }
+  ];
+
+  var NEXT = [
+    { h: "Estrutura e donos", p: "Blocos 01 e 08 viram o desenho de quem faz o quê, com dia da semana, responsável e cobrança. Sem isso, plano vira sugestão." },
+    { h: "Para onde vai a verba", p: "Blocos 02 e 06 decidem qual linha recebe mídia. Margem e capacidade de despacho definem o teto real de crescimento, não o ROAS." },
+    { h: "O que volta do passado", p: "Bloco 03 costuma devolver duas ou três frentes que já funcionaram e foram abandonadas. É o crescimento mais barato que existe." },
+    { h: "O que já é seu e está parado", p: "Blocos 05 e 07 destravam base de clientes, recuperação de carrinho e pós-venda: cada frente entregue com a mensagem escrita, quem envia, com que frequência e como conferimos se está no ar." }
+  ];
+
+  var TOTAL = 0;
+  for (var i = 0; i < BLOCKS.length; i++) TOTAL += BLOCKS[i].qs.length;
+
+  var STATE = { answers: {}, who: "", updated: "" };
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        STATE.answers = parsed.answers || {};
+        STATE.who = parsed.who || "";
+        STATE.updated = parsed.updated || "";
+      }
+    }
+  } catch (e) {}
+
+  var root = document.getElementById("root");
+  var statusEl = document.getElementById("status");
+  var pcount = document.getElementById("pcount");
+  var pfill = document.getElementById("pfill");
+  var pmode = document.getElementById("pmode");
+  var saveTimer = null;
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function answered(id) {
+    var v = STATE.answers[id];
+    return !!(v && String(v).trim().length);
+  }
+
+  function blockDone(b) {
+    var n = 0;
+    for (var i = 0; i < b.qs.length; i++) if (answered(b.qs[i].id)) n++;
+    return n;
+  }
+
+  function fmt(iso) {
+    try {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      var pad = function (x) { return x < 10 ? "0" + x : "" + x; };
+      return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " às " + pad(d.getHours()) + "h" + pad(d.getMinutes());
+    } catch (e) { return ""; }
+  }
+
+  function render() {
+    var h = [];
+
+    h.push('<header class="top">');
+    h.push('<div class="eyebrow">Roma × GGD · desenho do projeto digital</div>');
+    h.push('<h1>O que precisamos saber da <em>Roma</em></h1>');
+    h.push('<p class="standfirst">Este é o ponto de partida do projeto digital da Roma. Não é questionário de cliente novo: de anúncio, site e busca a gente já sabe o que precisava saber. São cinquenta e oito perguntas, em oito blocos, sobre o que nenhum painel mostra — gente, processo, margem, histórico e capacidade. Responda direto nesta página, na ordem que quiser. As marcadas como essenciais são as que travam o planejamento se ficarem em branco.</p>');
+    h.push('<div class="howto">');
+    h.push('<div><b>Como responder</b><span>Escreva direto no campo abaixo de cada pergunta. Resposta curta serve; “não sei” e “ninguém faz isso” também são respostas úteis.</span></div>');
+    h.push('<div><b>Salva sozinho</b><span>O texto fica guardado neste navegador conforme você escreve. Pode fechar e voltar depois, no mesmo aparelho.</span></div>');
+    h.push('<div><b>Quando terminar</b><span>Clique em <strong>Copiar para enviar</strong> na barra de baixo e cole no WhatsApp da Giovanna — ou use <strong>Baixar respostas</strong> e mande o arquivo.</span></div>');
+    h.push('</div>');
+    h.push('<div class="whobox"><label for="who">Quem está respondendo</label>');
+    h.push('<input id="who" type="text" placeholder="Nome de quem preencheu" value="' + esc(STATE.who || "") + '"></div>');
+    h.push('</header>');
+
+    h.push('<div class="read"><div class="section-title"><div class="eyebrow">Antes de começar</div>');
+    h.push('<h2>O que a gente já sabe — e por isso não pergunta</h2>');
+    h.push('<p>Isto aqui sai dos dados que já acompanhamos: mídia, site, comportamento de quem navega e busca no Google. Está aqui para você entender de onde vêm as perguntas de baixo — e para a gente não gastar seu tempo perguntando o que já dá para ver.</p></div>');
+    h.push('<div class="findings">');
+    for (var f = 0; f < FINDINGS.length; f++) {
+      h.push('<div class="finding"><h3>' + esc(FINDINGS[f].h) + '</h3><p>' + esc(FINDINGS[f].p) + '</p></div>');
+    }
+    h.push('</div></div>');
+
+    h.push('<div class="blocks">');
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      h.push('<section class="block"><div class="block-head">');
+      h.push('<div class="block-num">BLOCO ' + esc(bl.n) + '</div>');
+      h.push('<h2>' + esc(bl.title) + '</h2>');
+      h.push('<p class="block-why">' + esc(bl.why) + '</p>');
+      h.push('<div class="block-count" data-bcount="' + b + '">' + blockDone(bl) + ' de ' + bl.qs.length + ' respondidas</div>');
+      h.push('</div><ul class="qs">');
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var num = it.id.replace("q", "");
+        var full = answered(it.id) ? "1" : "0";
+        h.push('<li class="' + (it.key ? "key" : "") + '" data-filled="' + full + '">');
+        h.push('<span class="qn">' + esc(num) + '</span>');
+        h.push('<div class="q"><p>' + esc(it.q) + '</p>');
+        if (it.note) h.push('<p class="note">' + esc(it.note) + '</p>');
+        h.push('<textarea class="ans" id="' + it.id + '" data-id="' + it.id + '" data-filled="' + full + '" rows="1" placeholder="Resposta de vocês…">' + esc(STATE.answers[it.id] || "") + '</textarea>');
+        h.push('</div>');
+        if (it.key) h.push('<span class="tag">essencial</span>');
+        h.push('</li>');
+      }
+      h.push('</ul></section>');
+    }
+    h.push('</div>');
+
+    h.push('<div class="read"><div class="section-title"><div class="eyebrow">Depois daqui</div>');
+    h.push('<h2>O que a gente monta com essas respostas</h2>');
+    h.push('<p>Cada bloco alimenta uma parte do plano. A entrega não é uma lista de ideias soltas: é frente por frente, com dono, com o que vai ser dito, com que frequência e como conferimos que está funcionando.</p></div>');
+    h.push('<div class="findings">');
+    for (var nx = 0; nx < NEXT.length; nx++) {
+      h.push('<div class="finding"><h3>' + esc(NEXT[nx].h) + '</h3><p>' + esc(NEXT[nx].p) + '</p></div>');
+    }
+    h.push('</div></div>');
+
+    h.push('<footer>Página feita para a Roma Aviamentos em setembro de 2026. As leituras do topo vêm dos dados de mídia, do comportamento do site e da busca do Google e podem estar incompletas — o que se vê de fora quase sempre tem explicação de dentro. Qualquer coisa que não couber nos campos, mande junto por WhatsApp.</footer>');
+
+    root.innerHTML = h.join("");
+    autosizeAll();
+    updateProgress();
+    if (STATE.updated) setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+  }
+
+  function autosize(t) {
+    t.style.height = "auto";
+    t.style.height = (t.scrollHeight + 2) + "px";
+  }
+  function autosizeAll() {
+    var list = root.querySelectorAll("textarea.ans");
+    for (var i = 0; i < list.length; i++) autosize(list[i]);
+  }
+
+  function countAnswered() {
+    var n = 0;
+    for (var b = 0; b < BLOCKS.length; b++) {
+      for (var q = 0; q < BLOCKS[b].qs.length; q++) if (answered(BLOCKS[b].qs[q].id)) n++;
+    }
+    return n;
+  }
+
+  function updateProgress() {
+    var n = countAnswered();
+    pcount.textContent = n + " de " + TOTAL + " respondidas";
+    pfill.style.width = Math.round((n / TOTAL) * 100) + "%";
+    var counters = root.querySelectorAll("[data-bcount]");
+    for (var i = 0; i < counters.length; i++) {
+      var idx = parseInt(counters[i].getAttribute("data-bcount"), 10);
+      counters[i].textContent = blockDone(BLOCKS[idx]) + " de " + BLOCKS[idx].qs.length + " respondidas";
+    }
+    pmode.textContent = n ? Math.round((n / TOTAL) * 100) + "%" : "";
+  }
+
+  function setStatus(msg, tone) {
+    statusEl.textContent = msg;
+    if (tone) statusEl.setAttribute("data-tone", tone);
+    else statusEl.removeAttribute("data-tone");
+  }
+
+  function persist() {
+    STATE.updated = new Date().toISOString();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(STATE));
+      setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+    } catch (e) {
+      setStatus("Não deu para salvar neste navegador. Copie as respostas antes de fechar.", null);
+    }
+  }
+
+  function schedulePersist() {
+    setStatus("Salvando…");
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 700);
+  }
+
+  function buildText() {
+    var out = [];
+    out.push("BRIEFING — ROMA AVIAMENTOS");
+    out.push("Respondido por: " + (STATE.who || "não informado"));
+    out.push("Data: " + fmt(new Date().toISOString()));
+    out.push("Respondidas: " + countAnswered() + " de " + TOTAL);
+    out.push("");
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      out.push("=== BLOCO " + bl.n + " — " + bl.title.toUpperCase() + " ===");
+      out.push("");
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var v = STATE.answers[it.id];
+        out.push(it.id.replace("q", "") + ". " + it.q);
+        out.push("R: " + (v && String(v).trim() ? String(v).trim() : "(em branco)"));
+        out.push("");
+      }
+    }
+    return out.join("\n");
+  }
+
+  root.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains("ans")) {
+      autosize(t);
+      var filled = t.value.trim().length ? "1" : "0";
+      t.setAttribute("data-filled", filled);
+      var li = t.closest("li");
+      if (li) li.setAttribute("data-filled", filled);
+      STATE.answers[t.getAttribute("data-id")] = t.value;
+      updateProgress();
+      schedulePersist();
+    } else if (t && t.id === "who") {
+      STATE.who = t.value;
+      schedulePersist();
+    }
+  });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var txt = buildText();
+    var done = function () { setStatus("Respostas copiadas. Agora é só colar no WhatsApp.", "ok"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done)["catch"](function () { fallbackCopy(txt, done); });
+    } else {
+      fallbackCopy(txt, done);
+    }
+  });
+
+  function fallbackCopy(txt, done) {
+    var ta = document.createElement("textarea");
+    ta.value = txt;
+    ta.setAttribute("readonly", "readonly");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); done(); }
+    catch (e) { setStatus("Não deu para copiar. Use o botão Baixar respostas.", null); }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    var blob = new Blob([buildText()], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "briefing-roma-aviamentos.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    setStatus("Arquivo baixado. Mande para a GGD por WhatsApp ou e-mail.", "ok");
+  });
+
+  window.addEventListener("beforeunload", function () {
+    if (saveTimer) { clearTimeout(saveTimer); persist(); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
