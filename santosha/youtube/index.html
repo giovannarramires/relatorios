@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Por que aparece anuncio nos videos do canal da Santosha no YouTube e o que da para fazer.">
+<title>Anúncios no canal da Santosha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --marrom:#3D2718;
+    --terracota:#BF6A45;
+    --ocre:#C89640;
+    --verde:#6B7C5C;
+    --verde-ok:#2E6E35;
+    --vermelho:#B02A2A;
+    --bege-claro:#FAF6F1;
+    --bege:#F2EBDF;
+    --creme:#F5EDE0;
+
+    --paper:var(--bege-claro);
+    --surface:#FFFFFF;
+    --surface-2:var(--bege);
+    --ink:var(--marrom);
+    --ink-2:#5C4433;
+    --muted:#8A7460;
+    --line:#E3D9C9;
+    --line-2:#D2C4AE;
+
+    --accent:var(--terracota);
+    --accent-ink:#9E5334;
+    --accent-wash:#F7E9E1;
+
+    --leaf:var(--verde);
+    --leaf-ink:#4F6042;
+    --leaf-wash:#E9EDE3;
+
+    --gold:#8A6410;
+    --gold-wash:#F7EEDC;
+
+    --alert:#8F2020;
+    --alert-wash:#F7E4E1;
+
+    --shadow:0 1px 2px rgba(61,39,24,.06), 0 10px 28px -20px rgba(61,39,24,.45);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1B130E;
+      --surface:#241A13;
+      --surface-2:#2E221A;
+      --ink:#F3EAE0;
+      --ink-2:#D6C6B5;
+      --muted:#A08D79;
+      --line:#3A2C22;
+      --line-2:#4C3A2C;
+
+      --accent:#E39670;
+      --accent-ink:#F0B190;
+      --accent-wash:#38241A;
+
+      --leaf:#A8BC95;
+      --leaf-ink:#BCCDAA;
+      --leaf-wash:#232C1D;
+
+      --gold:#E0B65E;
+      --gold-wash:#33270F;
+
+      --alert:#EC9483;
+      --alert-wash:#3A1E19;
+
+      --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 28px -20px rgba(0,0,0,.9);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --paper:#1B130E;
+    --surface:#241A13;
+    --surface-2:#2E221A;
+    --ink:#F3EAE0;
+    --ink-2:#D6C6B5;
+    --muted:#A08D79;
+    --line:#3A2C22;
+    --line-2:#4C3A2C;
+
+    --accent:#E39670;
+    --accent-ink:#F0B190;
+    --accent-wash:#38241A;
+
+    --leaf:#A8BC95;
+    --leaf-ink:#BCCDAA;
+    --leaf-wash:#232C1D;
+
+    --gold:#E0B65E;
+    --gold-wash:#33270F;
+
+    --alert:#EC9483;
+    --alert-wash:#3A1E19;
+
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 28px -20px rgba(0,0,0,.9);
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Karla",-apple-system,"Trebuchet MS",sans-serif;
+    font-size:17.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:43rem;
+    margin:0 auto;
+    padding:clamp(2rem,6vw,4rem) clamp(1.1rem,5vw,2rem) 5rem;
+    display:flex;
+    flex-direction:column;
+    gap:3rem;
+  }
+
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-variation-settings:"SOFT" 40}
+
+  .eyebrow{
+    font-family:"Karla",sans-serif;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    margin:0;
+  }
+
+  h1{
+    font-size:clamp(2rem,6vw,2.9rem);
+    line-height:1.08;
+    font-weight:600;
+    letter-spacing:-.015em;
+    margin:.75rem 0 0;
+    text-wrap:balance;
+  }
+
+  .dek{margin:1rem 0 0;font-size:1.1rem;color:var(--ink-2);max-width:34rem}
+
+  header{border-bottom:2px solid var(--line);padding-bottom:2rem}
+
+  h2{font-size:1.5rem;font-weight:600;line-height:1.2;margin:0;letter-spacing:-.01em;text-wrap:balance}
+  h3{font-size:1.05rem;font-weight:600;margin:0}
+  p{margin:0}
+
+  section{display:flex;flex-direction:column;gap:1.05rem}
+  .section-head{display:flex;flex-direction:column;gap:.4rem}
+
+  .path{
+    font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    font-size:.8em;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:.12em .45em;
+    white-space:nowrap;
+    color:var(--ink);
+  }
+  .path i{font-style:normal;color:var(--muted);padding:0 .1em}
+
+  /* diagnostico do canal */
+  .verdict{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:4px solid var(--accent);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:clamp(1.2rem,4vw,1.8rem);
+    display:flex;
+    flex-direction:column;
+    gap:1.2rem;
+  }
+  .facts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));
+    gap:1rem;
+    padding-bottom:1.2rem;
+    border-bottom:1px solid var(--line);
+  }
+  .fact{display:flex;flex-direction:column;gap:.15rem}
+  .fact .n{
+    font-family:"Fraunces",Georgia,serif;
+    font-size:1.75rem;
+    font-weight:600;
+    line-height:1;
+    color:var(--accent-ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .fact .l{font-size:.82rem;color:var(--muted);line-height:1.35}
+  .verdict .conclusao{font-size:1.05rem}
+
+  /* cartoes */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:11px;
+    padding:clamp(1.05rem,3.5vw,1.4rem);
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    box-shadow:var(--shadow);
+  }
+  .card.leaf{border-left:3px solid var(--leaf)}
+  .card.gold{border-left:3px solid var(--ocre)}
+
+  .chip{
+    display:inline-block;
+    font-family:"Karla",sans-serif;
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.24em .65em;
+    border-radius:999px;
+    align-self:flex-start;
+  }
+  .chip.leaf{background:var(--leaf-wash);color:var(--leaf-ink)}
+  .chip.gold{background:var(--gold-wash);color:var(--gold)}
+  .chip.acc{background:var(--accent-wash);color:var(--accent-ink)}
+
+  ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.8rem;counter-reset:s}
+  ol.steps li{display:grid;grid-template-columns:1.65rem 1fr;gap:.8rem;align-items:start;counter-increment:s;font-size:1rem}
+  ol.steps li::before{
+    content:counter(s);
+    font-family:"JetBrains Mono",monospace;
+    font-size:.76rem;
+    color:var(--accent-ink);
+    background:var(--accent-wash);
+    border-radius:6px;
+    height:1.65rem;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:.1rem;
+  }
+  ol.steps li .sub{display:block;font-size:.9rem;color:var(--muted);margin-top:.15rem}
+
+  ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.75rem;font-size:1rem}
+  ul.plain li{display:grid;grid-template-columns:.55rem 1fr;gap:.75rem;align-items:start}
+  ul.plain li::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:var(--line-2);margin-top:.62rem}
+
+  .note{border-radius:9px;padding:.85rem 1rem;font-size:.95rem;display:flex;flex-direction:column;gap:.3rem}
+  .note .tag{font-family:"Karla",sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .note.warn{background:var(--alert-wash)}
+  .note.warn .tag{color:var(--alert)}
+  .note.calm{background:var(--leaf-wash)}
+  .note.calm .tag{color:var(--leaf-ink)}
+
+  .rec{
+    background:var(--accent-wash);
+    border-radius:11px;
+    padding:clamp(1.05rem,3.5vw,1.4rem);
+    display:flex;flex-direction:column;gap:.6rem;
+  }
+  .rec h3{color:var(--accent-ink)}
+
+  footer{border-top:1px solid var(--line);padding-top:1.4rem;font-size:.9rem;color:var(--muted);display:flex;flex-direction:column;gap:.5rem}
+
+  b,strong{font-weight:600;color:var(--ink)}
+  a{color:var(--accent-ink);text-underline-offset:2px}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Santosha · Gio Growth Digital</p>
+    <h1>Por que aparece anúncio nos vídeos do canal</h1>
+    <p class="dek">Vocês não monetizam o canal, mas o YouTube exibe publicidade nos vídeos mesmo assim. Fomos verificar de onde vem — e o que dá (e o que não dá) para fazer a respeito.</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>O caso do canal de vocês</h2>
+      <p style="color:var(--ink-2);font-size:1rem">Olhamos o canal <b>@santoshaporai</b> em 4 de setembro de 2026.</p>
+    </div>
+
+    <div class="verdict">
+      <div class="facts">
+        <div class="fact"><span class="n">460</span><span class="l">inscritos hoje</span></div>
+        <div class="fact"><span class="n">1.000</span><span class="l">mínimo exigido para monetizar</span></div>
+        <div class="fact"><span class="n">21</span><span class="l">vídeos publicados</span></div>
+      </div>
+      <p class="conclusao">Com 460 inscritos, o canal ainda não atinge o requisito de entrada do Programa de Parcerias do YouTube — ou seja, <b>ele não é monetizado</b>. E é justamente aí que está a explicação: <b>quando o canal não é monetizado, o YouTube não oferece nenhuma configuração para desligar os anúncios.</b> Não existe esse botão para vocês hoje.</p>
+      <div class="note calm">
+        <span class="tag">Confirmação rápida</span>
+        <p>Se quiser conferir por dentro: <span class="path">youtube.com/studio <i>›</i> Ganhos</span>. Se a tela mostrar os requisitos em vez de um painel de receita, está confirmado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Por que o YouTube exibe anúncio sem vocês ganharem nada</h2>
+    </div>
+    <p>Desde <b>novembro de 2020</b>, os Termos de Serviço do YouTube permitem que a plataforma exiba publicidade em <b>qualquer vídeo</b>, inclusive de canais que estão fora do Programa de Parcerias. Nesses casos a receita fica inteiramente com o YouTube: o canal não recebe nada e também não pode impedir a exibição.</p>
+    <p>Vale dizer com todas as letras porque a pergunta costuma voltar: <b>não adianta procurar a opção escondida nas configurações.</b> Ela não existe para canais fora do programa. Quem promete resolver isso com um ajuste no Studio está enganado.</p>
+  </section>
+
+  <section>
+    <div class="card leaf">
+      <span class="chip leaf">Boa notícia</span>
+      <h3>Na loja, isso não acontece</h3>
+      <p>Verificamos as páginas da <b>santoshaporai.com.br</b>: os vídeos que rodam no site são <b>arquivos hospedados no próprio Shopify</b>, não vídeos incorporados do YouTube. A única vez que a palavra "YouTube" aparece no código da loja é dentro do app de avaliações, num campo que oferece ao cliente colar um link — nada que exiba anúncio.</p>
+      <p>Ou seja: <b>ninguém vê publicidade dentro da loja de vocês.</b> O anúncio aparece só para quem assiste pelo YouTube. Isso reduz bastante o tamanho do problema, porque a vitrine de venda está preservada.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>O que dá para fazer</h2>
+      <p style="color:var(--ink-2);font-size:1rem">Três caminhos possíveis, do mais indicado ao menos.</p>
+    </div>
+
+    <div class="rec">
+      <span class="chip acc">Recomendação</span>
+      <h3>Conviver com o anúncio no canal e manter o vídeo importante fora dele</h3>
+      <p>Os vídeos do canal hoje são de marca e de produto — a apresentação das Cartasanas, a história do Matosha. Para esse tipo de conteúdo, o anúncio antes do play incomoda, mas não quebra nada: quem chega ali já veio atrás de vocês.</p>
+      <p>Se em algum momento um vídeo passar a ter função comercial direta — vídeo de venda, aula de um produto pago, conteúdo de área de membros — aí sim vale hospedar fora do YouTube. Para esses casos, <b>Vimeo</b> (plano pago) ou <b>Wistia</b> entregam player limpo, sem anúncio nenhum, e ainda deixam vocês escolherem em quais sites o vídeo pode ser assistido.</p>
+    </div>
+
+    <ul class="plain">
+      <li><b>Entrar no Programa de Parcerias quando o canal crescer.</b> A partir de 1.000 inscritos e das horas de exibição exigidas, o canal se qualifica — e aí a lógica vira: como o anúncio vai rodar de qualquer forma, ao menos a receita passa a ser de vocês, com o controle de desligar em quais vídeos quiser.</li>
+      <li><b>Tirar tudo do YouTube.</b> É possível, mas custa alcance: o canal é um ponto de descoberta gratuito e os vídeos aparecem na busca. Só compensa se o conteúdo for exclusivo de cliente pagante.</li>
+      <li><b>YouTube Premium.</b> Quem assiste com Premium não vê anúncio nenhum. É por isso que às vezes vocês não veem publicidade no próprio vídeo, mas quem está assistindo vê.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="card gold">
+      <span class="chip gold">Vale conferir</span>
+      <h3>Alguns anúncios podem não ser do YouTube</h3>
+      <p>Se um vídeo usa música ou trilha de terceiros — e em vídeo de yoga isso é quase regra — o dono da faixa pode ter feito uma reivindicação de direitos autorais. Nesse caso <b>é ele quem está exibindo o anúncio</b>, e não o YouTube. Vale a pena checar, porque essa parte tem solução:</p>
+      <ol class="steps">
+        <li>Abra <span class="path">youtube.com/studio <i>›</i> Conteúdo <i>›</i> Vídeos</span> e olhe a coluna <b>Restrições</b>.</li>
+        <li>Se aparecer "Reivindicação de direitos autorais", passe o mouse e clique em <b>Ver detalhes</b>.<span class="sub">O Studio mostra qual trecho foi reivindicado e por quem.</span></li>
+        <li>Resolva pela ferramenta do próprio Studio: <b>remover a música</b> (ele retira só o áudio reivindicado), <b>substituir por uma faixa do acervo gratuito</b> ou <b>cortar o trecho</b>.<span class="sub">A alteração leva algumas horas para ser processada.</span></li>
+      </ol>
+      <div class="note warn">
+        <span class="tag">Cuidado</span>
+        <p>Existe a opção de <b>contestar</b> a reivindicação, mas use apenas se vocês tiverem licença da música. Contestação sem direito de uso pode virar um <b>strike</b>, e três strikes derrubam o canal.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Levantamento feito em 04/09/2026 a partir do canal público @santoshaporai e do código das páginas da loja. A confirmação do status de monetização e de eventuais reivindicações é feita dentro do YouTube Studio, com o login de vocês.</p>
+    <p>Qualquer dúvida, é só chamar a gente.</p>
+  </footer>
+
+</div>
+</body>
+</html>
