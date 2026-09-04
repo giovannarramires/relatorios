@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roma Importadora — Manual da Zenvia: do contato ao pedido</title>
+<style>
+  :root{
+    --accent:#e4002b; --red:#e4002b; --green:#00b874; --yellow:#f5a623; --blue:#4a90d9;
+    --meta:#0866FF; --google:#34A853; --wa:#25D366; --card-bg:#fff; --bg:#f4f6f9;
+    --text:#22303c; --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.5;}
+  .container{max-width:1040px; margin:0 auto; padding:28px 24px;}
+  .hero{background:linear-gradient(135deg,#1a0006,#3d0010,#7a0016); color:#fff; padding:46px 24px;}
+  .hero-inner{max-width:1040px; margin:0 auto;}
+  .hero .tag{font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#ff8ba0; font-weight:800; margin-bottom:12px;}
+  .hero h1{font-size:31px; font-weight:800; margin-bottom:10px; letter-spacing:-.5px;}
+  .hero .sub{font-size:15px; color:#ffd7de; max-width:820px;}
+  .hero .meta{font-size:11px; color:#e39aa8; margin-top:18px; letter-spacing:.3px;}
+  /* seletor de mês */
+  .monthbar{position:sticky; top:0; z-index:20; background:rgba(244,246,249,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); padding:12px 0;}
+  .monthbar-inner{max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .monthbar .lab{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-right:2px;}
+  .mbtn{border:1px solid var(--border); background:#fff; color:var(--muted); font-weight:800; font-size:13.5px; padding:8px 18px; border-radius:30px; cursor:pointer; transition:all .15s; letter-spacing:.3px;}
+  .mbtn:hover{border-color:#f2a9b5; color:var(--accent);}
+  .mbtn.active{background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 3px 10px rgba(228,0,43,.28);}
+  .mpanel{display:none;} .mpanel.show{display:block;}
+  .section{margin-bottom:40px;}
+  .section-title{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border);}
+  .section-title span{color:var(--accent);}
+  .monthtag{display:inline-block; background:#fff3f4; color:#e4002b; border:1px solid #ffd0d6; font-size:10px; font-weight:800; padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle;}
+  .cards{display:grid; gap:15px; margin-bottom:8px;}
+  .c5{grid-template-columns:repeat(5,1fr);} .c4{grid-template-columns:repeat(4,1fr);} .c3{grid-template-columns:repeat(3,1fr);} .c2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:16px 18px; border-left:4px solid var(--muted);}
+  .card.green{border-left-color:var(--green);} .card.red{border-left-color:var(--accent);}
+  .card.blue{border-left-color:var(--blue);} .card.yellow{border-left-color:var(--yellow);}
+  .card.meta{border-left-color:var(--meta);} .card.google{border-left-color:var(--google);} .card.wa{border-left-color:var(--wa);}
+  .card .lbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; margin-bottom:6px;}
+  .card .val{font-size:23px; font-weight:800;}
+  .card .val.sm{font-size:18px;}
+  .card .foot{font-size:11px; color:var(--muted); margin-top:5px;}
+  .delta{font-size:11px; font-weight:800; margin-top:4px;}
+  .delta.up{color:#00a374;} .delta.down{color:#e4002b;} .delta.flat{color:var(--muted);}
+  .banner{background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:14px; padding:22px 26px; color:#fff; margin-bottom:20px;}
+  .banner.rd{background:linear-gradient(135deg,#3d0010,#7a0016);}
+  .banner.gd{background:linear-gradient(135deg,#0b3d2e,#12684a);}
+  .banner .k{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#9fb0c0; margin-bottom:8px; font-weight:800;}
+  .banner.rd .k{color:#ff9aab;} .banner.gd .k{color:#8ff0cf;}
+  .banner .t{font-size:16px; font-weight:500; line-height:1.6;}
+  .banner .t b{font-weight:800;}
+  .tw{background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{background:#f7f8fa; text-align:left; padding:10px 13px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:800; white-space:nowrap;}
+  td{padding:10px 13px; border-top:1px solid var(--border); white-space:nowrap;}
+  .r{text-align:right;} .b{font-weight:700;}
+  tr.win td{background:#f2fcf8;} tr.lose td{background:#fff6f6;}
+  .note{font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5;}
+  td a.vlink{color:var(--meta); font-weight:700; text-decoration:none; font-size:11px; border:1px solid #cfe0ff; background:#f2f7ff; padding:2px 8px; border-radius:6px; white-space:nowrap;}
+  td a.vlink:hover{background:#e2eeff; text-decoration:none;}
+  td .adname{font-weight:700; display:block; margin-bottom:4px;}
+  .chart-box{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px;}
+  .chart-box h4{font-size:13px; margin-bottom:14px; color:#333; font-weight:700;}
+  .chart-wrap{position:relative; height:300px;}
+  .act{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:12px; display:flex; gap:16px; align-items:flex-start;}
+  .act .num{flex:0 0 auto; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px; background:var(--blue);}
+  .act.crit .num{background:var(--accent);} .act.hi .num{background:var(--yellow);} .act.md .num{background:var(--green);}
+  .act .body{flex:1;}
+  .act h3{font-size:15px; margin-bottom:5px;}
+  .act p{font-size:13px; color:#444; line-height:1.6;}
+  .pill{display:inline-block; font-size:10px; font-weight:800; padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle;}
+  .p-red{background:#fff3f4; color:#e4002b; border:1px solid #ffd0d6;}
+  .p-amber{background:#fff8e6; color:#c07800; border:1px solid #ffe0a0;}
+  .p-green{background:#e8faf4; color:#00a374; border:1px solid #b9f0dd;}
+  .p-blue{background:#eef5fc; color:#2a6db0; border:1px solid #cfe3f7;}
+  .badge{display:inline-block; font-size:10px; font-weight:800; padding:2px 8px; border-radius:6px;}
+  .bg-win{background:#e8faf4; color:#00a374;} .bg-lose{background:#fff3f4; color:#e4002b;} .bg-mid{background:#fff8e6; color:#c07800;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .box{background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 20px;}
+  .box h4{font-size:14px; margin-bottom:10px; color:#333;}
+  .box ul{margin:0 0 0 18px;} .box li{font-size:13px; color:#444; margin-bottom:7px; line-height:1.5;}
+  .lp{display:flex; gap:20px; align-items:flex-start; background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px;}
+  .lp .diag{flex:1;}
+  .funnel{background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px 22px;}
+  .fstep{display:flex; align-items:center; gap:14px; padding:10px 0;}
+  .fstep .bar{height:34px; border-radius:8px; display:flex; align-items:center; padding:0 14px; color:#fff; font-weight:800; font-size:14px; white-space:nowrap;}
+  .fstep .desc{font-size:12.5px; color:#555;}
+  .foot{text-align:center; font-size:11px; color:var(--muted); padding:24px; border-top:1px solid var(--border); margin-top:20px;}
+  @media(max-width:820px){ .c5,.c4,.c3{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} .lp{flex-direction:column;} }
+</style>
+<style>
+  .path{display:inline-block;background:#f2f4f7;border:1px solid var(--border);border-radius:6px;padding:2px 8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#33445c;white-space:normal;}
+  .msg{background:#f0fff7;border:1px solid #b9f0dd;border-left:4px solid var(--wa);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.65;color:#1c3b30;margin:10px 0;white-space:pre-line;}
+  .msg .cap{display:block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#0f7a56;margin-bottom:6px;}
+  .chk{list-style:none;margin:0;}
+  .chk li{position:relative;padding-left:26px;font-size:13px;color:#444;margin-bottom:8px;line-height:1.55;}
+  .chk li:before{content:"";position:absolute;left:0;top:2px;width:15px;height:15px;border:2px solid var(--border);border-radius:4px;}
+  .tagchip{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0;border:1px solid;}
+  .t-lojista{background:#e8faf4;color:#00875a;border-color:#b9f0dd;}
+  .t-consumidor{background:#f2f4f7;color:#5a6b7d;border-color:#dfe4ea;}
+  .t-cliente{background:#eef5fc;color:#2a6db0;border-color:#cfe3f7;}
+  .t-novo{background:#fff8e6;color:#b07800;border-color:#ffe0a0;}
+  .t-cotando{background:#fff3e6;color:#c05a00;border-color:#ffd4a8;}
+  .t-pagto{background:#f3ecff;color:#6b3fc0;border-color:#ddd0f7;}
+  .t-comprou{background:#e8faf4;color:#00875a;border-color:#8fe3c4;}
+  .t-sumiu{background:#fff3f4;color:#e4002b;border-color:#ffd0d6;}
+  .t-meta{background:#eef4ff;color:#0866FF;border-color:#cfe0ff;}
+  .t-google{background:#eefaf0;color:#1e8e3e;border-color:#c6ecd0;}
+  .t-org{background:#f7f2ff;color:#7a4fbf;border-color:#e4d8fa;}
+  .nav{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:26px;}
+  .nav a{display:inline-block;font-size:12.5px;font-weight:700;color:#33445c;text-decoration:none;border:1px solid var(--border);border-radius:20px;padding:5px 12px;margin:0 6px 6px 0;}
+  .nav a:hover{border-color:var(--accent);color:var(--accent);}
+  .lead{font-size:13.5px;color:#444;line-height:1.7;margin-bottom:14px;}
+  .why{background:#fffdf5;border:1px solid #ffe8a8;border-left:4px solid var(--yellow);border-radius:10px;padding:12px 16px;font-size:12.5px;color:#5b4a1a;line-height:1.6;margin-top:12px;}
+  h4.sub{font-size:14px;margin:22px 0 10px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">Roma Importadora · Operação de atendimento</div>
+    <h1>Zenvia na prática: do contato ao pedido</h1>
+    <div class="sub">Manual de configuração e rotina da Zenvia para o time da Roma — como classificar cada lojista, medir a resposta, saber qual anúncio virou venda e usar a ferramenta como CRM. <b>Tudo com o que já está contratado</b>, sem software novo e sem aumentar verba.</div>
+    <div class="meta">Elaborado pela GGD · setembro de 2026 &nbsp;|&nbsp; Complemento do documento "O caminho do lead: do anúncio ao pedido"</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="nav">
+    <a href="#antes">0 · Antes de começar</a>
+    <a href="#fundacao">1 · Fundação</a>
+    <a href="#classificacao">2 · Classificação</a>
+    <a href="#desfecho">3 · Desfecho</a>
+    <a href="#crm">4 · CRM</a>
+    <a href="#origem">5 · Origem do lead</a>
+    <a href="#automacao">6 · Fora do horário</a>
+    <a href="#rotina">7 · Rotina e metas</a>
+    <a href="#implantacao">8 · Implantação</a>
+    <a href="#erros">9 · Erros que derrubam</a>
+    <a href="#mapa">10 · Mapa de menus</a>
+  </div>
+  <!-- ================= 0 · ANTES ================= -->
+  <div class="section" id="antes">
+    <div class="section-title"><span>0 · Antes de começar</span> — 5 minutos que evitam retrabalho <span class="monthtag">faça primeiro</span></div>
+
+    <div class="banner">
+      <div class="k">Por que este manual existe</div>
+      <div class="t">Em agosto a campanha entregou <b>362 contatos a R$ 9,03</b> — o mês mais barato da conta. Só que <b>ninguém consegue dizer quantos viraram pedido</b>: o WhatsApp está num aparelho, o telefone do Google em outro, e nenhuma conversa sai marcada. A Zenvia já está contratada e resolve os três problemas — <b>fila com dono, classificação e relatório</b>. O que falta é configurar e combinar como o time usa.</div>
+    </div>
+
+    <h4 class="sub">Descubra em qual tela vocês estão</h4>
+    <p class="lead">A Zenvia tem dois ambientes com nomes de menu diferentes. Tudo aqui funciona nos dois — muda só o caminho. Abra a plataforma e olhe o menu da esquerda:</p>
+    <div class="grid2">
+      <div class="box">
+        <h4>Zenvia Customer Cloud (o mais novo)</h4>
+        <ul>
+          <li>O menu mostra <b>Atendimento comercial</b>, <b>Contatos</b>, <b>Análises</b>, <b>Campanhas</b></li>
+          <li>As conversas ficam em <span class="path">Atendimento comercial &gt; Caixa de atendimento</span></li>
+          <li>É o ambiente que a Zenvia está usando para todos os clientes novos</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Zenvia Conversion (o anterior, ex-Sirena)</h4>
+        <ul>
+          <li>O menu mostra <b>Lista de Contatos</b>, <b>Canais de atendimento</b>, <b>Relatórios</b></li>
+          <li>As etiquetas ficam em <span class="path">Configurações &gt; Configuração da conta &gt; Gerenciar etiquetas</span></li>
+          <li>Tem uma vantagem: mostra o <b>anúncio de origem</b> em coluna própria (veja a seção 5)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 class="sub">Anote estas quatro informações antes de mexer em qualquer coisa</h4>
+    <div class="box">
+      <ul class="chk">
+        <li><b>Qual plano está contratado</b> (Starter, Specialist ou Pro) — o plano define se dá para etiquetar em massa e quantos usuários entram.</li>
+        <li><b>Quem é o Admin da conta</b> — só os perfis <b>Operator</b> e <b>Admin</b> configuram grupos, atribuição e regras. O perfil <b>Agent</b> só atende.</li>
+        <li><b>Quais canais já estão conectados</b> — WhatsApp (11) 96197-8519, Instagram, Facebook, e-mail. O telefone do Google (11) 91633-9778 provavelmente <b>não</b> está.</li>
+        <li><b>Quantas pessoas vão atender</b> e em que horário cada uma — isso define o grupo e a escala.</li>
+      </ul>
+      <div class="why"><b>Por que isso primeiro:</b> criar grupo novo e mudar hierarquia depende do suporte da Zenvia (não é auto-serviço). Descobrir isso no meio da implantação custa dias.</div>
+    </div>
+  </div>
+
+  <!-- ================= 1 · FUNDAÇÃO ================= -->
+  <div class="section" id="fundacao">
+    <div class="section-title"><span>1 · Fundação</span> — sete ajustes que se fazem uma vez só</div>
+    <p class="lead">Tudo abaixo está em <span class="path">Atendimento comercial &gt; Configurações</span>. Feito uma vez, vale para sempre. Tempo total: cerca de <b>40 minutos</b>.</p>
+
+    <div class="act crit">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Grupo de atendimento <span class="pill p-red">base de tudo</span></h3>
+        <p>Crie o grupo <b>COMERCIAL</b> e coloque nele o canal de WhatsApp dos anúncios e todos os atendentes. Um grupo só, no começo — só divida (COMERCIAL / PÓS-VENDA) quando houver gente sobrando.<br>
+        <span class="path">Atendimento comercial &gt; Configurações &gt; Grupos de atendimento</span> · lá dá para atribuir canais ao grupo, convidar usuários e ver a estrutura da empresa.</p>
+      </div>
+    </div>
+
+    <div class="act crit">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>Horário de expediente <span class="pill p-red">define o "fora do horário"</span></h3>
+        <p>Informe o horário real da loja, com o intervalo do almoço. É esse horário que faz a plataforma saber quando disparar a mensagem de ausência e que <b>tira o tempo fora do expediente do cálculo de primeira resposta</b> — sem isso, a métrica de velocidade fica errada.<br>
+        <span class="path">Configurações &gt; Configurações gerais &gt; Horários de expediente &gt; Gerenciar</span> — habilite os dias, preencha "De" e "Até", use <b>Adicionar horários</b> para o intervalo, e Salvar.</p>
+      </div>
+    </div>
+
+    <div class="act hi">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Mensagem de ausência <span class="pill p-amber">recupera 147 contatos/mês</span></h3>
+        <p>No grupo, clique nos <b>três pontos &gt; Definir mensagem de ausência</b> e escolha <b>Fora do horário de atendimento</b>. Até 1024 caracteres. O texto sugerido está na seção 6.<br>
+        <span class="path">Configurações &gt; Grupos de atendimento &gt; ⋮ &gt; Definir mensagem de ausência</span><br>
+        <b>Atenção:</b> se o grupo tiver mais de um canal, a mensagem vale para todos; se todos os canais forem removidos do grupo, a configuração se perde.</p>
+      </div>
+    </div>
+
+    <div class="act hi">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Atribuição de contatos — quem pega o lead <span class="pill p-amber">fim do "achei que alguém tinha respondido"</span></h3>
+        <p>Em <span class="path">Configurações &gt; Grupos de atendimento &gt; ⋮ &gt; Atribuição de contatos</span> existem três modos:</p>
+        <div class="tw" style="margin:10px 0;">
+          <table>
+            <thead><tr><th>Modo</th><th>Como funciona</th><th>Para a Roma</th></tr></thead>
+            <tbody>
+              <tr><td class="b" style="white-space:normal;">Manual</td><td style="white-space:normal;">Todos são notificados ao mesmo tempo e qualquer um assume da lista "Na fila"</td><td style="white-space:normal;">Vira bagunça com 2+ atendentes: dois respondem o mesmo lojista</td></tr>
+              <tr class="win"><td class="b" style="white-space:normal;">Manual + Radar</td><td style="white-space:normal;">O primeiro agente tem exclusividade por X minutos; se não atender, o contato é liberado para os outros, um a um</td><td style="white-space:normal;"><b>Recomendado.</b> 5 min de exclusividade + 1 min por novo agente. Ninguém fica sem dono e nada some</td></tr>
+              <tr><td class="b" style="white-space:normal;">Automática</td><td style="white-space:normal;">O sistema entrega um contato por vez, do mais antigo para o mais novo, e só manda outro quando o atual termina</td><td style="white-space:normal;">Bom para operação grande com fila constante; hoje ainda não é o caso</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Na mesma tela existe o <b>tempo de reatribuição</b> — por quanto tempo o lojista volta a cair com o mesmo vendedor depois de um atendimento encerrado. Sugestão para a Roma: <b>30 dias</b>. O lojista que voltou para fechar o pedido fala com quem já cotou com ele.</p>
+        <div class="why"><b>Detalhe que confunde:</b> o Radar é desligado automaticamente se a caixa do grupo estiver marcada como <b>compartilhada</b>. Se quiser Radar, desmarque o compartilhamento.</div>
+      </div>
+    </div>
+
+    <div class="act md">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>Regras do grupo: urgente, atrasado e limite de fila <span class="pill p-green">é o que pinta o painel de vermelho</span></h3>
+        <p><span class="path">Configurações &gt; Grupos de atendimento &gt; ⋮ &gt; Configuração de grupo</span>. Sugestão para a Roma: <b>urgente = 5 minutos</b>, <b>atrasado = 15 minutos</b>, <b>limite da fila = 10 contatos</b>. Marque também <b>Exibir atendimentos na fila</b>, para todo mundo enxergar o que está esperando.</p>
+        <p>Esses três números não são enfeite: são eles que alimentam as cores do relatório <b>Visão Geral</b> e a contagem do Monitor da operação. Sem eles, "estamos atendendo rápido" continua sendo opinião.</p>
+      </div>
+    </div>
+
+    <div class="act md">
+      <div class="num">6</div>
+      <div class="body">
+        <h3>Nome do atendente aparecendo na mensagem <span class="pill p-green">1 minuto</span></h3>
+        <p>Em <span class="path">Configurações &gt; Configurações gerais</span>, habilite a exibição do nome do agente (só o primeiro nome já basta). O lojista passa a saber com quem está falando mesmo com vários atendentes no mesmo número — é o que mantém a sensação de atendimento pessoal depois de sair do celular único.</p>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="num">7</div>
+      <div class="body">
+        <h3>Um número só <span class="pill p-blue">contínua</span></h3>
+        <p>Hoje são duas portas: o WhatsApp dos anúncios <b>(11) 96197-8519</b> e o telefone do perfil no Google <b>(11) 91633-9778</b>, em aparelhos e mãos diferentes. Enquanto forem dois, nenhum relatório fecha. O caminho é levar os dois para a mesma caixa da Zenvia — a GGD ajusta a conta do Google assim que a Roma confirmar qual número fica.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ================= 2 · CLASSIFICAÇÃO ================= -->
+  <div class="section" id="classificacao">
+    <div class="section-title"><span>2 · Classificação</span> — as etiquetas da Roma <span class="monthtag">o coração do controle</span></div>
+
+    <div class="banner rd">
+      <div class="k">A regra que faz etiqueta funcionar</div>
+      <div class="t"><b>Poucas, obrigatórias e sem sinônimo.</b> Etiqueta que cada atendente cria do seu jeito ("lojista", "Lojista", "cliente loja") não classifica nada — só polui. O padrão abaixo tem <b>11 etiquetas em 3 famílias</b>, e toda conversa sai com <b>uma de cada</b>.</div>
+    </div>
+
+    <h4 class="sub">O padrão sugerido</h4>
+    <div class="grid2">
+      <div class="box">
+        <h4>PERFIL — quem é (escolha 1)</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:10px;">Define se vale tempo do comercial. Aplicada na primeira resposta, depois de saber se tem CNPJ.</p>
+        <span class="tagchip t-lojista">LOJISTA</span>
+        <span class="tagchip t-consumidor">CONSUMIDOR</span>
+        <span class="tagchip t-cliente">JA-CLIENTE</span>
+        <ul style="margin:10px 0 0 18px;">
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>LOJISTA</b> — tem CNPJ e compra para revender. É o público que a campanha paga para trazer.</li>
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>CONSUMIDOR</b> — pessoa física, quer 1 unidade. Não é erro da campanha, é filtro do atendimento.</li>
+          <li style="font-size:12.5px;"><b>JA-CLIENTE</b> — já comprou antes. Muda o discurso e não deve entrar na conta de cliente novo.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>ETAPA — onde está (escolha 1, e substitua conforme anda)</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:10px;">É o funil. A etiqueta anterior sai quando a nova entra — nunca acumula duas.</p>
+        <span class="tagchip t-novo">NOVO</span>
+        <span class="tagchip t-cotando">COTANDO</span>
+        <span class="tagchip t-pagto">AGUARDANDO-PAGTO</span>
+        <span class="tagchip t-comprou">COMPROU</span>
+        <span class="tagchip t-sumiu">SUMIU</span>
+        <ul style="margin:10px 0 0 18px;">
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>NOVO</b> — chegou e ainda não foi qualificado.</li>
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>COTANDO</b> — recebeu tabela/lista e está decidindo.</li>
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>AGUARDANDO-PAGTO</b> — fechou o pedido, falta pagar.</li>
+          <li style="font-size:12.5px;margin-bottom:5px;"><b>COMPROU</b> — pedido pago. <b>É esta etiqueta que vira o número do mês.</b></li>
+          <li style="font-size:12.5px;"><b>SUMIU</b> — parou de responder há mais de 7 dias. Vira lista de retomada.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:16px;">
+      <h4>ORIGEM — de onde veio (escolha 1, e nunca mais mude)</h4>
+      <span class="tagchip t-meta">ADS-META</span>
+      <span class="tagchip t-google">ADS-GOOGLE</span>
+      <span class="tagchip t-org">ORGANICO</span>
+      <p style="font-size:12.5px;color:#555;margin-top:8px;">Aplicada uma única vez, no primeiro atendimento. <b>ADS-META</b> quando a conversa chega com o cabeçalho do anúncio (veja a seção 5), <b>ADS-GOOGLE</b> quando veio por ligação ou pelo WhatsApp do perfil do Google, <b>ORGANICO</b> para indicação, cliente de balcão e quem já tinha o número. É essa etiqueta que permite dizer quanto do faturamento veio de mídia paga.</p>
+    </div>
+
+    <h4 class="sub">Como criar as etiquetas</h4>
+    <div class="grid2">
+      <div class="box">
+        <h4>No Customer Cloud</h4>
+        <ul>
+          <li>Vá em <span class="path">Contatos &gt; Base de contatos</span> e clique em <b>Criar etiquetas</b></li>
+          <li>Clique em <b>+ Nova etiqueta</b>, escolha <b>cor e nome</b> e confirme na marca de seleção</li>
+          <li>Para aplicar: abra o contato e use o campo <b>Etiquetas</b>. As etiquetas aparecem para o agente durante a conversa</li>
+          <li>Etiquetar vários de uma vez (botão <b>Etiquetar</b> no topo da lista) existe a partir do plano <b>Specialist</b> — no Starter é um a um</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>No Conversion</h4>
+        <ul>
+          <li>Vá em <span class="path">Configurações &gt; Configuração da conta &gt; Gerenciar etiquetas</span></li>
+          <li>Defina <b>nome, cor e o grupo</b> que pode usar aquela etiqueta, e clique em <b>Criar etiqueta</b></li>
+          <li>Para aplicar: clique no nome/foto do contato, escolha a etiqueta e salve — o contato passa a aparecer com a cor</li>
+          <li>Na tela <b>Contatos</b> dá para filtrar por etiqueta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="why" style="margin-top:14px;"><b>Combine as cores com o significado:</b> verde para o que avança (LOJISTA, COMPROU), vermelho para o que morre (SUMIU), cinza para fora do alvo (CONSUMIDOR). O supervisor bate o olho na fila e entende o dia inteiro sem abrir conversa.</div>
+
+    <h4 class="sub">O que faz a classificação desmoronar</h4>
+    <div class="box">
+      <ul style="margin-left:18px;">
+        <li style="font-size:13px;color:#444;margin-bottom:7px;"><b>Cada atendente criando a sua.</b> Trave a criação: só o Admin cria etiqueta nova, e só depois de combinar em reunião.</li>
+        <li style="font-size:13px;color:#444;margin-bottom:7px;"><b>Etiqueta demais.</b> Acima de ~15, ninguém marca direito. Se precisar de detalhe (segmento da loja, por exemplo), use campo da ficha, não etiqueta.</li>
+        <li style="font-size:13px;color:#444;margin-bottom:7px;"><b>Etiqueta que ninguém lê.</b> Se um marcador não é usado em nenhum filtro ou relatório, ele não existe — apague.</li>
+        <li style="font-size:13px;color:#444;"><b>Deixar para marcar no fim do dia.</b> Marque durante a conversa. O que fica para depois vira estimativa, e estimativa não fecha conta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= 3 · DESFECHO ================= -->
+  <div class="section" id="desfecho">
+    <div class="section-title"><span>3 · Desfecho</span> — motivos de fechamento, onde a venda vira número</div>
+    <p class="lead">Etiqueta diz <b>onde o lojista está</b>. O motivo de fechamento diz <b>como aquela conversa terminou</b> — e é ele que alimenta um relatório pronto, sem ninguém precisar contar na mão.</p>
+
+    <div class="grid2">
+      <div class="box">
+        <h4>Criar os motivos</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:10px;"><span class="path">Atendimento comercial &gt; Configurações &gt; Configurações gerais &gt; Motivos de fechamento &gt; Gerenciar &gt; Criar motivo de fechamento</span> (informe o motivo e o grupo).</p>
+        <ul>
+          <li><b>Venda fechada</b> — pedido pago</li>
+          <li><b>Cotou e não fechou</b> — recebeu preço e não voltou</li>
+          <li><b>Preço / pedido mínimo</b> — travou no valor</li>
+          <li><b>Sem estoque</b> — a Roma não tinha o item</li>
+          <li><b>Não é lojista (sem CNPJ)</b> — fora do público</li>
+          <li><b>Fora da área / frete</b> — inviável pela logística</li>
+          <li><b>Não respondeu</b> — sumiu antes de cotar</li>
+          <li><b>Engano / duplicado</b> — mesmo lojista em duas conversas</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>O relatório que sai disso</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:10px;"><span class="path">Análises &gt; Atendimento comercial &gt; Motivos de fechamento</span> — filtros de hoje, ontem, 7 dias, 30 dias, este mês, mês passado ou período personalizado. Tudo exportável em CSV.</p>
+        <ul>
+          <li><b>Total de contatos</b> por motivo</li>
+          <li><b>Conversas</b> encerradas por aquele motivo</li>
+          <li><b>Tempo até fechar</b> (mediana, considerando o horário de trabalho)</li>
+          <li><b>Evolução no tempo</b> — o gráfico que mostra se "sem estoque" está crescendo, por exemplo</li>
+        </ul>
+        <div class="why"><b>É este relatório que responde a pergunta do investimento:</b> "Venda fechada" dividido pelo total de contatos do mês é a taxa de conversão da operação. Com ela, o custo por contato de R$ 9,03 vira custo por cliente.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:10px;">Regra de operação: <b>nenhuma conversa é encerrada sem motivo de fechamento</b>. Duas semanas assim e a Roma passa a ter, pela primeira vez, a conta completa do funil sem depender de memória de vendedor.</div>
+  </div>
+  <!-- ================= 4 · CRM ================= -->
+  <div class="section" id="crm">
+    <div class="section-title"><span>4 · Usando a Zenvia como CRM</span> — a ficha do lojista</div>
+    <p class="lead">Etiqueta e motivo de fechamento organizam o <b>fluxo</b>. O CRM é a <b>memória</b>: o dado que fica depois que a conversa fecha e permite vender de novo para quem já comprou — que é o cliente mais barato que existe.</p>
+
+    <div class="grid2">
+      <div class="box">
+        <h4>O que precisa estar preenchido em cada lojista</h4>
+        <ul class="chk">
+          <li><b>Nome e sobrenome</b> de quem compra (não "cliente WhatsApp")</li>
+          <li><b>Telefone</b> no formato +55 11 9xxxx-xxxx</li>
+          <li><b>Empresa</b> — razão social ou nome da loja, na seção <b>Empresas</b> da ficha</li>
+          <li><b>CNPJ</b> — em campo extra</li>
+          <li><b>Cidade e UF</b> — na seção <b>Endereços</b>; serve para frete e para campanha regional</li>
+          <li><b>Tipo de loja</b> — armarinho, ateliê, costura, artesanato</li>
+          <li><b>Data e valor do primeiro pedido</b> — em campos extras</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Onde isso mora no Customer Cloud</h4>
+        <ul>
+          <li><b>Dados do contato:</b> nome, telefones, e-mail, aniversário e perfil do Instagram</li>
+          <li><b>Empresas e departamentos:</b> vincula a pessoa à loja — é o que permite ver todo o histórico da mesma empresa mesmo quando muda o comprador</li>
+          <li><b>Endereços:</b> usado depois para segmentar campanha por cidade</li>
+          <li><b>Campos extras:</b> até <b>100 por organização</b>, criados a partir da importação de CSV com mapeamento de colunas. É aqui que entram CNPJ, tipo de loja e valor do primeiro pedido</li>
+          <li><b>Listas de contatos:</b> agrupamentos como "Lojistas ativos", "Cotou e não fechou", "Compraram em 2026"</li>
+        </ul>
+        <p style="font-size:12.5px;color:#555;margin-top:8px;">Caminho: <span class="path">Contatos &gt; Base de contatos &gt; Adicionar contatos</span> (manual ou <b>Importar de um arquivo</b>) e, no contato, <span class="path">⋮ &gt; Editar contato</span>.</p>
+      </div>
+    </div>
+
+    <h4 class="sub">O atalho: não digite, importe</h4>
+    <div class="box">
+      <p style="font-size:13px;color:#444;line-height:1.65;">A Roma já tem a base de clientes no sistema de pedidos. Em vez de o comercial preencher ficha a ficha, exporte do ERP um CSV com <b>telefone + nome + CNPJ + cidade + tipo de loja + data e valor do último pedido</b> e importe em <span class="path">Contatos &gt; Base de contatos &gt; Adicionar contatos &gt; Importar de um arquivo</span>, mapeando cada coluna para um campo extra. Em uma tarde, toda conversa nova passa a abrir <b>já sabendo se aquele número é cliente antigo, o que ele compra e quando comprou pela última vez</b>.</p>
+      <div class="why"><b>O que isso destrava depois:</b> lista de quem não compra há 90 dias para uma campanha de retomada por WhatsApp (com modelo de mensagem aprovado), e uma base própria de compradores para a GGD usar como público de mídia — hoje inexistente.</div>
+    </div>
+  </div>
+
+  <!-- ================= 5 · ORIGEM ================= -->
+  <div class="section" id="origem">
+    <div class="section-title"><span>5 · Origem do lead</span> — saber qual anúncio virou pedido</div>
+
+    <div class="banner gd">
+      <div class="k">A boa notícia</div>
+      <div class="t">Os anúncios da Roma são de <b>clique para o WhatsApp</b>. Nesse formato, a Meta manda junto com a primeira mensagem <b>qual anúncio o lojista clicou</b> — título, texto, imagem, ID e link. <b>O dado já chega</b>; o que falta é olhar para ele e registrar.</div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="box">
+        <h4>No Conversion — vem em coluna</h4>
+        <ul>
+          <li>Em <span class="path">Lista de Contatos</span>, clique no ícone de <b>Colunas</b> (canto superior direito) e habilite <b>Título da publicação</b>, <b>Meio</b> e <b>Campanha</b></li>
+          <li><b>Título da publicação</b> = o anúncio; <b>Meio</b> = "ctwa" (clique para WhatsApp); <b>Campanha</b> = o número da campanha</li>
+          <li>Em <b>Filtros</b>, filtre por <b>Título da publicação</b> para ver todos os contatos de um mesmo anúncio</li>
+          <li>Dentro da conversa, o cabeçalho traz <b>ID, origem (Meta), data, título, corpo, URL e imagem</b> do anúncio</li>
+          <li>Em <span class="path">Relatórios &gt; Canais de Conversação</span> dá para comparar os canais</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>No Customer Cloud</h4>
+        <ul>
+          <li>As conversas vindas de anúncio caem direto na <b>Caixa de atendimento comercial</b> com o cartão do anúncio no início</li>
+          <li>O menu <b>Anúncios</b> mostra desempenho (alcance, cliques, atendimentos iniciados, vendas e taxa de conversão), mas <b>só das publicações turbinadas dentro da própria Zenvia</b> — hoje as campanhas da Roma são criadas no Gerenciador da Meta, então não aparecem ali</li>
+          <li>Por isso o registro prático é a <b>etiqueta ORIGEM</b> aplicada pelo atendente na primeira resposta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:12px;">Combinado prático: o atendente olha o cabeçalho da conversa, aplica <b>ADS-META</b> e segue. Quem chega por ligação ou pelo WhatsApp do perfil do Google recebe <b>ADS-GOOGLE</b>. No fechamento do mês, a GGD cruza essas etiquetas com o investimento de cada canal — e aí sim aparece <b>qual criativo trouxe pedido</b>, e não apenas qual trouxe conversa.</div>
+  </div>
+
+  <!-- ================= 6 · FORA DO HORÁRIO ================= -->
+  <div class="section" id="automacao">
+    <div class="section-title"><span>6 · Fora do horário e respostas prontas</span> — 147 contatos por mês esperando</div>
+    <p class="lead">Em agosto, <b>44% das conversas</b> chegaram com a loja fechada — 147 contatos já pagos pela campanha. Às 22h entraram mais conversas do que às 15h. Não dá para atender de madrugada, mas dá para <b>não perder</b>.</p>
+
+    <h4 class="sub">6.1 · Mensagem de ausência (faz hoje, leva 10 minutos)</h4>
+    <div class="msg"><span class="cap">Modelo — fora do horário</span>Oi! Aqui é a Roma Importadora 👋
+Nosso atendimento é de segunda a sexta, das 8h às 16h30 (e sábado até as 12h).
+
+Já deixo adiantado pra você não esperar: me manda seu nome, a cidade e o tipo de loja que você tem (armarinho, ateliê, costura, artesanato) — e o que você está procurando.
+
+Amanhã cedo já te respondo com a tabela do seu segmento e as condições de atacado. 💛</div>
+    <p style="font-size:12.5px;color:#555;">Por que funciona: responde em segundos, informa o horário e <b>já qualifica</b>. No dia seguinte o lojista entra na fila com nome, cidade e necessidade — em vez de sumir.</p>
+
+    <h4 class="sub">6.2 · Triagem automatizada (o passo seguinte)</h4>
+    <div class="box">
+      <p style="font-size:13px;color:#444;line-height:1.65;">A Zenvia permite ligar uma <b>triagem automatizada</b> antes do atendente humano: o contato responde a duas ou três perguntas e é encaminhado ao grupo certo; se não houver ninguém disponível, a conversa é encerrada com aviso. Para a Roma, a triagem ideal pergunta <b>CNPJ (sim/não)</b>, <b>cidade</b> e <b>tipo de loja</b> — e já separa consumidor final de lojista antes de consumir tempo do comercial. Ative em <span class="path">Atendimento comercial &gt; Configurações</span>, na opção de triagem automatizada.</p>
+    </div>
+
+    <h4 class="sub">6.3 · Respostas rápidas — as 6 mensagens que a Roma mais repete</h4>
+    <p style="font-size:12.5px;color:#555;margin-bottom:10px;">Crie em <span class="path">Configurações &gt; Configurações gerais &gt; Respostas rápidas &gt; Criar resposta rápida</span> (nome do template + mensagem, com variáveis como o nome do contato).</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Atalho</th><th>Quando usar</th><th>O que resolve</th></tr></thead>
+        <tbody>
+          <tr><td class="b" style="white-space:normal;">/boasvindas</td><td style="white-space:normal;">Primeira resposta no horário comercial</td><td style="white-space:normal;">Qualifica em uma mensagem: nome, cidade, tipo de loja</td></tr>
+          <tr><td class="b" style="white-space:normal;">/minimo</td><td style="white-space:normal;">"Qual o pedido mínimo?"</td><td style="white-space:normal;">A dúvida nº 1 do lojista novo — hoje respondida de jeitos diferentes</td></tr>
+          <tr><td class="b" style="white-space:normal;">/catalogo</td><td style="white-space:normal;">"O que vocês têm?"</td><td style="white-space:normal;">Manda o catálogo/linhas em PDF sem digitar nada</td></tr>
+          <tr><td class="b" style="white-space:normal;">/pagamento</td><td style="white-space:normal;">Formas de pagamento e frete</td><td style="white-space:normal;">Padroniza condição e evita promessa errada</td></tr>
+          <tr><td class="b" style="white-space:normal;">/endereco</td><td style="white-space:normal;">"Onde vocês ficam?"</td><td style="white-space:normal;">R. José Kauer, 162 — Brás, com horário e link do mapa</td></tr>
+          <tr class="win"><td class="b" style="white-space:normal;">/retomada</td><td style="white-space:normal;">24h depois de mandar preço sem resposta</td><td style="white-space:normal;">O follow-up que hoje ninguém faz — é onde mora a venda perdida</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="why" style="margin-top:12px;"><b>Limite importante:</b> resposta rápida só funciona em <b>conversa já aberta</b>. Para <b>iniciar</b> uma conversa (ou reabrir depois de 24h sem resposta do cliente) é preciso um <b>modelo de mensagem aprovado pela Meta</b> — cadastrado na Zenvia. Vale ter dois prontos: um de retomada de cotação e um de novidade/coleção.</div>
+  </div>
+  <!-- ================= 7 · ROTINA ================= -->
+  <div class="section" id="rotina">
+    <div class="section-title"><span>7 · Rotina e metas</span> — o que olhar, quando e o que fazer com isso</div>
+
+    <div class="grid2">
+      <div class="box">
+        <h4>Todo dia — 5 minutos, de manhã e no fim da tarde</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:8px;"><span class="path">Atendimento comercial &gt; Visão Geral</span></p>
+        <ul>
+          <li><b>Contatos esperando</b> — barra verde é quem espera menos que o tempo "urgente"; <b>vermelha é quem passou do "atrasado"</b>. Fim do dia com barra vermelha = venda perdida amanhã</li>
+          <li><b>Tempo de primeira resposta</b> — média dos últimos 7 dias, já descontado o fora de expediente</li>
+          <li><b>Agentes</b> — atendimentos aceitos, pendentes, em aberto e a demora até iniciar, nas últimas 24h</li>
+          <li>No pico da manhã (8h às 11h), o <b>Monitor da operação</b> mostra a fila em tempo real</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Toda semana — 15 minutos, na segunda</h4>
+        <p style="font-size:12.5px;color:#555;margin-bottom:8px;"><span class="path">Análises &gt; Atendimento comercial</span></p>
+        <ul>
+          <li><b>Motivos de fechamento (7 dias)</b> — quantas vendas, quantos "cotou e não fechou", quantos "sem estoque"</li>
+          <li><b>Performance da operação</b> — volume por grupo e por agente</li>
+          <li>Pergunta da semana: <b>o que mais matou venda</b> — preço, estoque ou demora? Cada resposta tem um dono diferente</li>
+          <li>Puxe a lista de <b>SUMIU</b> e mande o /retomada</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 class="sub">Todo mês, até o dia 5 — os quatro números que vão para a GGD</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Número</th><th>De onde tirar</th><th>Para que serve</th></tr></thead>
+        <tbody>
+          <tr class="win"><td class="b" style="white-space:normal;">Clientes novos no mês</td><td style="white-space:normal;">Etiqueta COMPROU + motivo "Venda fechada", descontando JA-CLIENTE</td><td style="white-space:normal;">Custo por cliente novo (hoje só temos custo por contato)</td></tr>
+          <tr><td class="b" style="white-space:normal;">Pedidos vindos de WhatsApp/telefone</td><td style="white-space:normal;">Relatório de motivos de fechamento (CSV)</td><td style="white-space:normal;">Taxa de conversão real da operação</td></tr>
+          <tr><td class="b" style="white-space:normal;">Ticket médio do primeiro pedido</td><td style="white-space:normal;">ERP, cruzando com os contatos do mês</td><td style="white-space:normal;">Quanto vale cada lojista conquistado</td></tr>
+          <tr class="win"><td class="b" style="white-space:normal;">Quanto a Roma aceita pagar por cliente novo</td><td style="white-space:normal;">Decisão da diretoria</td><td style="white-space:normal;">Vira o CPA-alvo acordado, escrito no relatório mensal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="sub">As metas para começar</h4>
+    <div class="cards c4" style="margin-top:4px;">
+      <div class="card green"><div class="lbl">Primeira resposta</div><div class="val">≤ 5 min</div><div class="foot">no horário comercial</div></div>
+      <div class="card blue"><div class="lbl">Quem chegou fora do horário</div><div class="val">≤ 12h</div><div class="foot">respondido na manhã seguinte</div></div>
+      <div class="card yellow"><div class="lbl">Fila no fim do dia</div><div class="val">0</div><div class="foot">nenhum contato "atrasado"</div></div>
+      <div class="card meta"><div class="lbl">Conversas classificadas</div><div class="val">100%</div><div class="foot">etiqueta + motivo de fechamento</div></div>
+    </div>
+    <div class="note" style="margin-top:10px;">A meta de 5 minutos não é exagero de agência: no atacado, <b>quem responde primeiro cota primeiro</b>. O lojista pede preço para três fornecedores na mesma manhã.</div>
+  </div>
+
+  <!-- ================= 8 · IMPLANTAÇÃO ================= -->
+  <div class="section" id="implantacao">
+    <div class="section-title"><span>8 · Implantação</span> — duas semanas, sem parar a operação</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Quando</th><th>O que fazer</th><th>Quem</th><th>Pronto quando</th></tr></thead>
+        <tbody>
+          <tr><td class="b" style="white-space:normal;">Dia 1</td><td style="white-space:normal;">Levantar plano, perfis, canais conectados e quem atende (seção 0)</td><td style="white-space:normal;">Roma + suporte Zenvia</td><td style="white-space:normal;">As 4 respostas anotadas</td></tr>
+          <tr class="win"><td class="b" style="white-space:normal;">Dia 1</td><td style="white-space:normal;">Horário de expediente + mensagem de ausência no ar</td><td style="white-space:normal;">Admin da conta</td><td style="white-space:normal;">Mensagem chega ao mandar um "oi" às 21h</td></tr>
+          <tr><td class="b" style="white-space:normal;">Dia 2</td><td style="white-space:normal;">Criar as 11 etiquetas e os 8 motivos de fechamento</td><td style="white-space:normal;">Admin</td><td style="white-space:normal;">Todos aparecem na tela do atendente</td></tr>
+          <tr><td class="b" style="white-space:normal;">Dia 2</td><td style="white-space:normal;">Atribuição Radar (5 min / 1 min) + regras do grupo (5 / 15 / 10)</td><td style="white-space:normal;">Admin</td><td style="white-space:normal;">Contato novo "toca" para um agente por vez</td></tr>
+          <tr><td class="b" style="white-space:normal;">Dia 3</td><td style="white-space:normal;">Treinar o time: 30 minutos com o roteiro de atendimento e as etiquetas</td><td style="white-space:normal;">Roma (com apoio da GGD)</td><td style="white-space:normal;">Todos sabem marcar sem perguntar</td></tr>
+          <tr><td class="b" style="white-space:normal;">Dias 3 a 5</td><td style="white-space:normal;">Cadastrar as 6 respostas rápidas e 2 modelos de mensagem para aprovação</td><td style="white-space:normal;">Roma</td><td style="white-space:normal;">Atendente responde dúvida básica em 1 clique</td></tr>
+          <tr><td class="b" style="white-space:normal;">Semana 2</td><td style="white-space:normal;">Importar a base de clientes do ERP (CSV com campos extras)</td><td style="white-space:normal;">Roma</td><td style="white-space:normal;">Conversa abre mostrando histórico do lojista</td></tr>
+          <tr><td class="b" style="white-space:normal;">Semana 2</td><td style="white-space:normal;">Ligar triagem automatizada e avaliar unificação do número do Google</td><td style="white-space:normal;">Roma + GGD</td><td style="white-space:normal;">Uma caixa só, com origem registrada</td></tr>
+          <tr class="win"><td class="b" style="white-space:normal;">Fim da semana 2</td><td style="white-space:normal;">Primeira leitura de Motivos de fechamento e ajuste do que estiver mal marcado</td><td style="white-space:normal;">Roma + GGD</td><td style="white-space:normal;">O relatório já mostra vendas do período</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================= 9 · ERROS ================= -->
+  <div class="section" id="erros">
+    <div class="section-title"><span>9 · Os erros que derrubam projetos assim</span></div>
+    <div class="grid2">
+      <div class="box">
+        <h4>Na configuração</h4>
+        <ul>
+          <li><b>Horário de expediente errado</b> — quebra a mensagem de ausência e falseia o tempo de resposta</li>
+          <li><b>Caixa compartilhada + Radar</b> — o Radar é desligado sozinho; escolha um dos dois</li>
+          <li><b>Vários grupos cedo demais</b> — lead cai no grupo errado e ninguém assume</li>
+          <li><b>Remover todos os canais de um grupo</b> — a mensagem de ausência configurada se perde</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>No dia a dia</h4>
+        <ul>
+          <li><b>Encerrar conversa sem motivo de fechamento</b> — o relatório do mês nasce furado</li>
+          <li><b>Atender pelo celular por fora</b> — conversa fora da plataforma não existe para o relatório</li>
+          <li><b>Etiqueta acumulada</b> (COTANDO + COMPROU no mesmo contato) — o funil deixa de fechar</li>
+          <li><b>Deixar o lead sem dono</b> — sem atribuição, "todo mundo responde" vira "ninguém respondeu"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 10 · MAPA ================= -->
+  <div class="section" id="mapa">
+    <div class="section-title"><span>10 · Mapa rápido</span> — onde fica cada coisa</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>O que você quer fazer</th><th>Caminho no Customer Cloud</th></tr></thead>
+        <tbody>
+          <tr><td class="b" style="white-space:normal;">Atender / ver a fila</td><td style="white-space:normal;">Atendimento comercial &gt; Caixa de atendimento</td></tr>
+          <tr><td class="b" style="white-space:normal;">Horário, respostas rápidas, motivos de fechamento, nome do agente</td><td style="white-space:normal;">Atendimento comercial &gt; Configurações &gt; Configurações gerais</td></tr>
+          <tr><td class="b" style="white-space:normal;">Grupos, mensagem de ausência, atribuição, regras (urgente/atrasado/fila)</td><td style="white-space:normal;">Atendimento comercial &gt; Configurações &gt; Grupos de atendimento &gt; ⋮</td></tr>
+          <tr><td class="b" style="white-space:normal;">Criar e aplicar etiquetas</td><td style="white-space:normal;">Contatos &gt; Base de contatos &gt; Criar etiquetas</td></tr>
+          <tr><td class="b" style="white-space:normal;">Ficha do lojista, empresa, endereço e campos extras</td><td style="white-space:normal;">Contatos &gt; Base de contatos &gt; (contato) &gt; Editar contato</td></tr>
+          <tr><td class="b" style="white-space:normal;">Importar base do ERP</td><td style="white-space:normal;">Contatos &gt; Base de contatos &gt; Adicionar contatos &gt; Importar de um arquivo</td></tr>
+          <tr><td class="b" style="white-space:normal;">Fila, tempo de primeira resposta e produtividade</td><td style="white-space:normal;">Atendimento comercial &gt; Visão Geral</td></tr>
+          <tr><td class="b" style="white-space:normal;">Quantas conversas viraram venda</td><td style="white-space:normal;">Análises &gt; Atendimento comercial &gt; Motivos de fechamento</td></tr>
+          <tr><td class="b" style="white-space:normal;">Acompanhar a operação em tempo real</td><td style="white-space:normal;">Atendimento comercial &gt; Monitor da operação</td></tr>
+          <tr><td class="b" style="white-space:normal;">Ver de qual anúncio veio o contato (Conversion)</td><td style="white-space:normal;">Lista de Contatos &gt; Colunas &gt; Título da publicação / Meio / Campanha</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="banner gd" style="margin-top:22px;">
+      <div class="k">O que a GGD faz do outro lado</div>
+      <div class="t">Programação de anúncios e verba concentrada nas campanhas que trazem lojista, leitura mensal de custo por contato e — assim que as etiquetas e os motivos de fechamento estiverem rodando — <b>custo por cliente novo por canal e por criativo</b>. A partir daí a decisão de verba deixa de ser sobre conversa e passa a ser sobre pedido.</div>
+    </div>
+
+    <div class="note" style="margin-top:14px;">Referências oficiais usadas neste manual (Central de Ajuda da Zenvia): configurações gerais e grupos de atendimento comercial, mensagem de ausência, atribuição de contatos (Radar), regras e parâmetros do grupo, etiquetas no Customer Cloud e no Conversion, motivos de fechamento e suas análises, relatório Visão Geral, campos extras da ficha de contato e anúncios de clique para mensagem. Os caminhos de menu podem variar conforme o plano e o perfil de acesso.</div>
+  </div>
+
+  <div class="foot">
+    Roma Importadora · Manual de operação da Zenvia — do contato ao pedido<br>
+    Elaborado por GGD · setembro de 2026 · complementa <a href="../atendimento/" style="color:var(--accent);font-weight:700;">O caminho do lead: do anúncio ao pedido</a>
+  </div>
+</div>
+
+</body>
+</html>
