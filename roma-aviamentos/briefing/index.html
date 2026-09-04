@@ -356,7 +356,7 @@
 (function () {
   "use strict";
 
-  var KEY = "ggd-briefing-roma-aviamentos-v1";
+  var KEY = "ggd-briefing-roma-aviamentos-v2";
 
   var BLOCKS = [
     {
@@ -366,103 +366,104 @@
         { id: "q01", key: true, q: "Quem são as pessoas da casa hoje e o que cada uma faz? Pode ser em lista: loja do Brás, site, estoque e expedição, compras, atendimento, financeiro, conteúdo." },
         { id: "q02", key: true, q: "Quem é o dono do e-commerce dentro da empresa — a pessoa que acorda pensando na venda do site? Se não existe, quem chega mais perto?", note: "Sem essa pessoa, tudo o que a gente propuser volta para a sua mesa e trava aí." },
         { id: "q03", q: "Quem responde o WhatsApp e o Direct, em qual horário, e essa pessoa faz mais alguma coisa além disso?" },
-        { id: "q04", q: "Quem tira as fotos e faz os posts hoje: gente de dentro, freelancer ou agência?" },
-        { id: "q05", q: "Quem cadastra produto novo no site (foto, título, descrição, preço) e quanto tempo leva entre a mercadoria chegar e estar vendável?", note: "Esse prazo decide se conseguimos anunciar novidade ou só o que já está velho no catálogo." },
-        { id: "q06", q: "Quem decide preço e quem pode autorizar desconto, cupom ou frete grátis sem falar com você?" },
-        { id: "q07", q: "O que hoje só anda se passar por você? E o que você gostaria de parar de decidir?" },
-        { id: "q08", q: "Se a venda do site dobrar em sessenta dias, qual pessoa ou setor estoura primeiro?" }
+        { id: "q04", q: "Quem desenha a estratégia de conteúdo — quem decide quais fotos serão tiradas e o que vai ser postado?" },
+        { id: "q05", q: "E quem executa: quem tira as fotos e quem publica os posts?" },
+        { id: "q06", q: "Quem cadastra produto novo no site (foto, título, descrição, preço) e quanto tempo leva entre a mercadoria chegar e estar vendável?", note: "Esse prazo decide se conseguimos anunciar novidade ou só o que já está velho no catálogo." },
+        { id: "q07", q: "Quem decide preço e quem pode autorizar desconto, cupom ou frete grátis sem falar com você?" },
+        { id: "q08", q: "O que hoje só anda se passar por você? E o que você gostaria de parar de decidir?" },
+        { id: "q09", q: "Se a venda do site dobrar em sessenta dias, qual pessoa ou setor estoura primeiro?" }
       ]
     },
     {
       n: "02", title: "Os números que só vocês têm",
       why: "De mídia eu já tenho tudo. O que falta é o que só aparece no caixa de vocês.",
       qs: [
-        { id: "q09", key: true, q: "Como o faturamento se divide hoje entre loja do Brás, site, marketplaces e venda por WhatsApp? Em porcentagem ou em reais." },
-        { id: "q10", key: true, q: "Qual a margem de cada linha — linha e crochê, fitas, botões, artesanato, festa, natal, bijuteria? Onde vocês ganham dinheiro de verdade?", note: "Hoje a mídia empurra o que vende. Com a margem na mão, ela passa a empurrar o que lucra." },
-        { id: "q11", q: "Qual o valor de pedido abaixo do qual vocês perdem dinheiro, considerando embalagem, separação e o frete que vocês bancam?" },
-        { id: "q12", key: true, q: "Quanto um cliente do site compra ao longo de um ano: quantos pedidos e quanto no total?", note: "É o número mais importante de todos — é ele que define quanto podemos pagar para conquistar um cliente novo." },
-        { id: "q13", q: "Quantos clientes compraram nos últimos doze meses e quantos compraram mais de uma vez?" },
-        { id: "q14", q: "Vocês vendem em marketplace (Shopee, Mercado Livre, Amazon)? Quanto fatura e o que sobra depois da comissão?" },
-        { id: "q15", q: "Existe linha exclusiva de vocês, que nenhum concorrente tem?", note: "Exclusividade é a coisa mais fácil de transformar em anúncio, em página e em busca do Google." },
-        { id: "q16", q: "O que encalha e o que some do estoque? Tem capital parado em alguma linha?" },
-        { id: "q17", key: true, q: "Qual número de faturamento você quer ver no site daqui a doze meses e qual é o teto de investimento por mês para chegar lá?" }
+        { id: "q10", key: true, q: "Como o faturamento se divide hoje entre loja do Brás, site, marketplaces e venda por WhatsApp? Em porcentagem ou em reais." },
+        { id: "q11", key: true, q: "Qual a margem de cada linha — linha e crochê, fitas, botões, artesanato, festa, natal, bijuteria? Onde vocês ganham dinheiro de verdade?", note: "Hoje a mídia empurra o que vende. Com a margem na mão, ela passa a empurrar o que lucra." },
+        { id: "q12", q: "Qual o valor de pedido abaixo do qual vocês perdem dinheiro, considerando embalagem, separação e o frete que vocês bancam?" },
+        { id: "q13", key: true, q: "Quanto um cliente do site compra ao longo de um ano: quantos pedidos e quanto no total?", note: "É o número mais importante de todos — é ele que define quanto podemos pagar para conquistar um cliente novo." },
+        { id: "q14", q: "Quantos clientes compraram nos últimos doze meses e quantos compraram mais de uma vez?" },
+        { id: "q15", q: "Vocês vendem em marketplace (Shopee, Mercado Livre, Amazon)? Quanto fatura e o que sobra depois da comissão?" },
+        { id: "q16", q: "Existe linha exclusiva de vocês, que nenhum concorrente tem?", note: "Exclusividade é a coisa mais fácil de transformar em anúncio, em página e em busca do Google." },
+        { id: "q17", q: "O que encalha e o que some do estoque? Tem capital parado em alguma linha?" },
+        { id: "q18", key: true, q: "Qual número de faturamento você quer ver no site daqui a doze meses e qual é o teto de investimento por mês para chegar lá?" }
       ]
     },
     {
       n: "03", title: "O que já foi feito um dia",
       why: "Antes de inventar coisa nova, quero recuperar o que já funcionou e morreu no meio do caminho.",
       qs: [
-        { id: "q18", key: true, q: "Nos últimos anos, o que trouxe venda de verdade e hoje não é mais feito? Agência anterior, e-mail, catálogo, feira, representante, influenciadora, live, cupom, parceria, marketplace.", note: "É a pergunta mais valiosa desta página. Coisa que já deu certo volta muito mais rápido do que coisa nova." },
-        { id: "q19", q: "Por que cada uma dessas coisas parou: faltou gente, faltou dinheiro, brigou com fornecedor, ou só se perdeu no meio?" },
-        { id: "q20", q: "Já teve e-mail marketing? Qual ferramenta, quantas pessoas na lista e quando foi o último envio?" },
-        { id: "q21", q: "Já teve lista ou disparo de WhatsApp para clientes? Quantos contatos e quem disparava?" },
-        { id: "q22", q: "Já trabalharam com artesãs, professoras de crochê ou influenciadoras? Como foi o acerto e o que deu?", note: "No seu nicho quem ensina é quem vende. Quero saber se já tentaram e o que deu errado antes de propor de novo." },
-        { id: "q23", q: "Qual foi a maior promoção que vocês já fizeram e o que ela deu — em venda e em margem?" },
-        { id: "q24", q: "O que vocês pararam de fazer porque dava trabalho demais, mesmo dando resultado?" },
-        { id: "q25", q: "E o que já foi tentado que você não quer mais ouvir falar?" }
+        { id: "q19", key: true, q: "Nos últimos anos, o que trouxe venda de verdade e hoje não é mais feito? Agência anterior, e-mail, catálogo, feira, representante, influenciadora, live, cupom, parceria, marketplace.", note: "É a pergunta mais valiosa desta página. Coisa que já deu certo volta muito mais rápido do que coisa nova." },
+        { id: "q20", q: "Por que cada uma dessas coisas parou: faltou gente, faltou dinheiro, brigou com fornecedor, ou só se perdeu no meio?" },
+        { id: "q21", q: "Já teve e-mail marketing? Qual ferramenta, quantas pessoas na lista e quando foi o último envio?" },
+        { id: "q22", q: "Já teve lista ou disparo de WhatsApp para clientes? Quantos contatos e quem disparava?" },
+        { id: "q23", q: "Já trabalharam com artesãs, professoras de crochê ou influenciadoras? Como foi o acerto e o que deu?", note: "No seu nicho quem ensina é quem vende. Quero saber se já tentaram e o que deu errado antes de propor de novo." },
+        { id: "q24", q: "Qual foi a maior promoção que vocês já fizeram e o que ela deu — em venda e em margem?" },
+        { id: "q25", q: "O que vocês pararam de fazer porque dava trabalho demais, mesmo dando resultado?" },
+        { id: "q26", q: "E o que já foi tentado que você não quer mais ouvir falar?" }
       ]
     },
     {
       n: "04", title: "O que está no ar hoje",
       why: "Quero separar o que é rotina de verdade do que é “a gente faz quando dá”.",
       qs: [
-        { id: "q26", key: true, q: "Hoje, o que é feito toda semana sem falhar, além dos anúncios? Quem faz e em que dia?" },
-        { id: "q27", q: "Quantos posts e stories por semana, e quem decide o assunto? Existe planejamento ou é decidido no dia?" },
-        { id: "q28", q: "Quantas conversas de WhatsApp vocês recebem por dia, quanto demora a primeira resposta e o que acontece com quem escreve fora do horário?" },
-        { id: "q29", q: "Alguém acompanha quem perguntou e não comprou? Existe algum retorno depois, ou a conversa simplesmente morre?" },
-        { id: "q30", q: "Quem já comprou recebe alguma coisa depois: agradecimento, novidade, cupom, aviso de reposição?" },
-        { id: "q31", q: "Existe conteúdo além do Instagram — blog, receita, passo a passo, YouTube, Pinterest, TikTok? Está ativo ou parado?", note: "No artesanato, Pinterest e YouTube trazem gente comprando por anos. Se já existe alguma coisa, a gente aproveita em vez de começar do zero." },
-        { id: "q32", q: "A loja do Brás e o site conversam? Quem compra na loja vira cliente do site, e o contrário?" },
-        { id: "q33", q: "Quem entra na loja física hoje: artesã, costureira, professora de crochê, consumidora final? Mudou nos últimos anos?" }
+        { id: "q27", key: true, q: "Hoje, o que é feito toda semana sem falhar, além dos anúncios? Quem faz e em que dia?" },
+        { id: "q28", q: "Quantos posts e stories por semana, e quem decide o assunto? Existe planejamento ou é decidido no dia?" },
+        { id: "q29", q: "Quantas conversas de WhatsApp vocês recebem por dia, quanto demora a primeira resposta e o que acontece com quem escreve fora do horário?" },
+        { id: "q30", q: "Alguém acompanha quem perguntou e não comprou? Existe algum retorno depois, ou a conversa simplesmente morre?" },
+        { id: "q31", q: "Quem já comprou recebe alguma coisa depois: agradecimento, novidade, cupom, aviso de reposição?" },
+        { id: "q32", q: "Existe conteúdo além do Instagram — blog, receita, passo a passo, YouTube, Pinterest, TikTok? Está ativo ou parado?", note: "No artesanato, Pinterest e YouTube trazem gente comprando por anos. Se já existe alguma coisa, a gente aproveita em vez de começar do zero." },
+        { id: "q33", q: "A loja do Brás e o site conversam? Quem compra na loja vira cliente do site, e o contrário?" },
+        { id: "q34", q: "Quem entra na loja física hoje: artesã, costureira, professora de crochê, consumidora final? Mudou nos últimos anos?" }
       ]
     },
     {
       n: "05", title: "O que já existe e ninguém usa",
       why: "Quase toda empresa tem dinheiro parado em base de cliente e em foto guardada.",
       qs: [
-        { id: "q34", key: true, q: "Vocês conseguem exportar a base de clientes com nome, e-mail, telefone, o que comprou e quando? De qual sistema ela sai?", note: "É essa base que faz remarketing barato, público semelhante e recuperação de cliente. Sem ela, pagamos caro por gente que já é nossa." },
-        { id: "q35", q: "No cadastro do site ou da loja existe autorização para mandar mensagem e e-mail? Alguém guarda esse aceite?" },
-        { id: "q36", q: "Quanta foto e vídeo próprios de produto vocês têm hoje? Alguém fotografa dentro da empresa ou é tudo do fornecedor?" },
-        { id: "q37", q: "Vocês recebem foto de cliente com a peça pronta? Existe autorização para usar em anúncio?", note: "No artesanato a peça pronta da cliente vende mais que a foto do produto na embalagem." },
-        { id: "q38", q: "Algum fornecedor ou marca oferece material, verba de propaganda ou ação em conjunto?" },
-        { id: "q39", q: "O que os clientes elogiam sem serem perguntados? E do que reclamam sempre?" },
-        { id: "q40", q: "O que a Roma tem que nenhum concorrente tem, e como vocês contam isso hoje para quem não conhece?" }
+        { id: "q35", key: true, q: "Vocês conseguem exportar a base de clientes com nome, e-mail, telefone, o que comprou e quando? De qual sistema ela sai?", note: "É essa base que faz remarketing barato, público semelhante e recuperação de cliente. Sem ela, pagamos caro por gente que já é nossa." },
+        { id: "q36", q: "No cadastro do site ou da loja existe autorização para mandar mensagem e e-mail? Alguém guarda esse aceite?" },
+        { id: "q37", q: "Quanta foto e vídeo próprios de produto vocês têm hoje? Alguém fotografa dentro da empresa ou é tudo do fornecedor?" },
+        { id: "q38", q: "Vocês recebem foto de cliente com a peça pronta? Existe autorização para usar em anúncio?", note: "No artesanato a peça pronta da cliente vende mais que a foto do produto na embalagem." },
+        { id: "q39", q: "Algum fornecedor ou marca oferece material, verba de propaganda ou ação em conjunto?" },
+        { id: "q40", q: "O que os clientes elogiam sem serem perguntados? E do que reclamam sempre?" },
+        { id: "q41", q: "O que a Roma tem que nenhum concorrente tem, e como vocês contam isso hoje para quem não conhece?" }
       ]
     },
     {
       n: "06", title: "A casa aguenta crescer?",
       why: "Não adianta acender procura que a operação não entrega. É aqui que se define até onde dá para escalar.",
       qs: [
-        { id: "q41", key: true, q: "Quantos pedidos por dia o site faz hoje e quantos vocês conseguiriam separar e despachar sem contratar ninguém?" },
-        { id: "q42", q: "Em quanto tempo o pedido sai depois de pago, qual o prazo médio de entrega e quantos atrasam por semana?" },
-        { id: "q43", q: "Quantos produtos ficam sem estoque, quem repõe e em quanto tempo?", note: "Anunciar produto que acaba é a forma mais rápida de queimar verba e irritar cliente." },
-        { id: "q44", q: "Como funciona o frete hoje: quem paga, existe frete grátis a partir de algum valor, e vocês têm liberdade para mexer nisso?", note: "O frete é a objeção número um do carrinho de vocês — dá para ver isso nos cliques do site." },
-        { id: "q45", q: "Quantas trocas e devoluções por mês, e por qual motivo?" },
-        { id: "q46", q: "O que vocês não conseguem atender hoje mesmo que a gente traga o cliente: pedido grande, prazo curto, corte por metragem, personalização, quantidade alta de um mesmo item?" }
+        { id: "q42", key: true, q: "Quantos pedidos por dia o site faz hoje e quantos vocês conseguiriam separar e despachar sem contratar ninguém?" },
+        { id: "q43", q: "Em quanto tempo o pedido sai depois de pago, qual o prazo médio de entrega e quantos atrasam por semana?" },
+        { id: "q44", q: "Quantos produtos ficam sem estoque, quem repõe e em quanto tempo?", note: "Anunciar produto que acaba é a forma mais rápida de queimar verba e irritar cliente." },
+        { id: "q45", q: "Como funciona o frete hoje: quem paga, existe frete grátis a partir de algum valor, e vocês têm liberdade para mexer nisso?", note: "O frete é a objeção número um do carrinho de vocês — dá para ver isso nos cliques do site." },
+        { id: "q46", q: "Quantas trocas e devoluções por mês, e por qual motivo?" },
+        { id: "q47", q: "O que vocês não conseguem atender hoje mesmo que a gente traga o cliente: pedido grande, prazo curto, corte por metragem, personalização, quantidade alta de um mesmo item?" }
       ]
     },
     {
       n: "07", title: "Sistemas, dados e acessos",
       why: "Toda ação que a gente propuser vai depender de mexer em algum desses lugares.",
       qs: [
-        { id: "q47", key: true, q: "Quando vocês pedem uma mudança no site, para quem vai o pedido, quanto tempo demora e o que já foi negado?", note: "O prazo do site define a ordem do projeto: o que depende de fila entra antes, o que não depende começa já." },
-        { id: "q48", q: "Qual sistema controla estoque e pedido, e ele conversa com o site em tempo real?" },
-        { id: "q49", q: "Alguém aí consegue mexer no site para instalar um código ou mudar o texto de uma página, ou é sempre chamado para a plataforma?" },
-        { id: "q50", q: "Quem tem a senha de quê: site, redes, Google, e-mail marketing, marketplaces? Existe essa lista em algum lugar?", note: "Se um acesso morre com uma pessoa que sai, o projeto para. A gente organiza isso com vocês." },
-        { id: "q51", q: "Existe verba separada para ferramenta (e-mail, WhatsApp, automação, recuperação)? De quanto por mês?" }
+        { id: "q48", key: true, q: "Quando vocês pedem uma mudança no site, para quem vai o pedido, quanto tempo demora e o que já foi negado?", note: "O prazo do site define a ordem do projeto: o que depende de fila entra antes, o que não depende começa já." },
+        { id: "q49", q: "Qual sistema controla estoque e pedido, e ele conversa com o site em tempo real?" },
+        { id: "q50", q: "Alguém aí consegue mexer no site para instalar um código ou mudar o texto de uma página, ou é sempre chamado para a plataforma?" },
+        { id: "q51", q: "Quem tem a senha de quê: site, redes, Google, e-mail marketing, marketplaces? Existe essa lista em algum lugar?", note: "Se um acesso morre com uma pessoa que sai, o projeto para. A gente organiza isso com vocês." },
+        { id: "q52", q: "Existe verba separada para ferramenta (e-mail, WhatsApp, automação, recuperação)? De quanto por mês?" }
       ]
     },
     {
       n: "08", title: "Rotina, decisão e calendário",
       why: "É aqui que se resolve a falta de direcionamento e de cobrança que te incomoda hoje.",
       qs: [
-        { id: "q52", key: true, q: "Como você quer ser cobrada e como quer nos cobrar: reunião fixa, relatório, grupo de WhatsApp? Com que frequência e em qual dia?" },
-        { id: "q53", q: "Além de você, quem precisa aprovar campanha, preço e peça — e quanto tempo leva uma aprovação hoje?" },
-        { id: "q54", q: "Quando a gente precisar de uma coisa da equipe (foto, texto, lista, ajuste no site), com quem falamos direto? Você autoriza a gente cobrar essa pessoa?" },
-        { id: "q55", key: true, q: "Quais são os meses fortes e fracos, por linha? O que acontece em janeiro, no meio do ano e em novembro e dezembro?" },
-        { id: "q56", q: "Quando vocês compram e recebem o estoque de Natal e de festa junina?", note: "Para vender no Natal, o anúncio precisa estar no ar em outubro — e o estoque, antes disso." },
-        { id: "q57", q: "Tem novidade prevista para os próximos seis meses: loja nova, coleção, marca própria, troca de plataforma, contratação?" },
-        { id: "q58", key: true, q: "Se em noventa dias a gente entregasse uma coisa só, muito bem feita, qual você quer que seja?" }
+        { id: "q53", key: true, q: "Como você quer ser cobrada e como quer nos cobrar: reunião fixa, relatório, grupo de WhatsApp? Com que frequência e em qual dia?" },
+        { id: "q54", q: "Além de você, quem precisa aprovar campanha, preço e peça — e quanto tempo leva uma aprovação hoje?" },
+        { id: "q55", q: "Quando a gente precisar de uma coisa da equipe (foto, texto, lista, ajuste no site), com quem falamos direto? Você autoriza a gente cobrar essa pessoa?" },
+        { id: "q56", key: true, q: "Quais são os meses fortes e fracos, por linha? O que acontece em janeiro, no meio do ano e em novembro e dezembro?" },
+        { id: "q57", q: "Quando vocês compram e recebem o estoque de Natal e de festa junina?", note: "Para vender no Natal, o anúncio precisa estar no ar em outubro — e o estoque, antes disso." },
+        { id: "q58", q: "Tem novidade prevista para os próximos seis meses: loja nova, coleção, marca própria, troca de plataforma, contratação?" },
+        { id: "q59", key: true, q: "Se em noventa dias a gente entregasse uma coisa só, muito bem feita, qual você quer que seja?" }
       ]
     }
   ];
@@ -537,7 +538,7 @@
     h.push('<header class="top">');
     h.push('<div class="eyebrow">Roma × GGD · desenho do projeto digital</div>');
     h.push('<h1>O que precisamos saber da <em>Roma</em></h1>');
-    h.push('<p class="standfirst">Este é o ponto de partida do projeto digital da Roma. Não é questionário de cliente novo: de anúncio, site e busca a gente já sabe o que precisava saber. São cinquenta e oito perguntas, em oito blocos, sobre o que nenhum painel mostra — gente, processo, margem, histórico e capacidade. Responda direto nesta página, na ordem que quiser. As marcadas como essenciais são as que travam o planejamento se ficarem em branco.</p>');
+    h.push('<p class="standfirst">Este é o ponto de partida do projeto digital da Roma. Não é questionário de cliente novo: de anúncio, site e busca a gente já sabe o que precisava saber. São cinquenta e nove perguntas, em oito blocos, sobre o que nenhum painel mostra — gente, processo, margem, histórico e capacidade. Responda direto nesta página, na ordem que quiser. As marcadas como essenciais são as que travam o planejamento se ficarem em branco.</p>');
     h.push('<div class="howto">');
     h.push('<div><b>Como responder</b><span>Escreva direto no campo abaixo de cada pergunta. Resposta curta serve; “não sei” e “ninguém faz isso” também são respostas úteis.</span></div>');
     h.push('<div><b>Salva sozinho</b><span>O texto fica guardado neste navegador conforme você escreve. Pode fechar e voltar depois, no mesmo aparelho.</span></div>');
