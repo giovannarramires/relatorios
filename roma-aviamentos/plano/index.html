@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Plano de Trabalho — Roma</title>
+<style>
+  :root {
+    --ground: #EEEFE9;
+    --surface: #F7F8F3;
+    --field: #FFFFFF;
+    --ink: #1C1F1A;
+    --ink-soft: #43483E;
+    --muted: #6B6F63;
+    --line: #D4D7CA;
+    --line-soft: #E1E3D8;
+    --accent: #8F6410;
+    --moss: #2F4636;
+    --star: #7A4A0C;
+    --star-bg: #EFE6D2;
+    --bar: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E;
+      --surface: #1C1A15;
+      --field: #211E18;
+      --ink: #E9E4D7;
+      --ink-soft: #C7C1B1;
+      --muted: #948D7D;
+      --line: #38342A;
+      --line-soft: #2A261D;
+      --accent: #D8A63F;
+      --moss: #8FAE97;
+      --star: #E0B463;
+      --star-bg: #2A2115;
+      --bar: #1A1712;
+    }
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 180px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 36px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, "Palatino Linotype", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 62ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+
+  .howto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .howto div { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .howto b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .howto span { font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+
+  .whobox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .whobox label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .whobox input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 11px;
+  }
+  .whobox input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 66ch; }
+  .read { margin-top: 56px; }
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-top: 0;
+  }
+  .finding { background: var(--surface); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .finding h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+  .finding p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+
+  .blocks { margin-top: 70px; }
+  section.block {
+    display: grid;
+    grid-template-columns: 214px 1fr;
+    gap: 44px;
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  section.block:first-of-type { border-top: 2px solid var(--ink); }
+  .block-head { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .block-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    color: var(--accent);
+  }
+  .block-head h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-why { font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 26ch; margin: 0; }
+  .block-count {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul.qs { list-style: none; margin: 0; padding: 0; }
+  ul.qs > li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 84px;
+    align-items: start;
+    column-gap: 8px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  ul.qs > li:first-child { padding-top: 4px; }
+  ul.qs > li:last-child { border-bottom: 0; }
+  .qn {
+    grid-column: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding-top: 5px;
+  }
+  li[data-filled="1"] .qn { color: var(--moss); font-weight: 700; }
+  .q { grid-column: 2; max-width: 62ch; }
+  .q > p { margin: 0; color: var(--ink); }
+  .q > p.note {
+    margin-top: 7px;
+    padding-left: 13px;
+    border-left: 2px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .tag {
+    grid-column: 3;
+    justify-self: end;
+    margin-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+    background: var(--star-bg);
+    border-radius: 2px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+  li.key .qn { color: var(--star); font-weight: 700; }
+  li.key[data-filled="1"] .qn { color: var(--moss); }
+  li.key .q > p:first-child { font-weight: 600; }
+
+  textarea.ans {
+    display: block;
+    width: 100%;
+    margin-top: 11px;
+    min-height: 46px;
+    resize: vertical;
+    overflow: hidden;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  textarea.ans::placeholder { color: var(--muted); opacity: 0.75; }
+  textarea.ans:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  textarea.ans[data-filled="1"] { border-left: 3px solid var(--moss); }
+
+  .savebar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 20;
+    background: var(--bar);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.10);
+  }
+  .savebar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 13px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .progress { flex: 1 1 200px; min-width: 170px; display: flex; flex-direction: column; gap: 6px; }
+  .progress .pline {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress .track { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .progress .fill { height: 100%; width: 0%; background: var(--moss); transition: width 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) { .progress .fill { transition: none; } }
+
+  #status { font-size: 14.5px; color: var(--muted); }
+  #status[data-tone="ok"] { color: var(--moss); }
+
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.primary { color: #F7F8F3; background: var(--moss); border-color: var(--moss); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #14120E; } }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+
+  @media (max-width: 860px) {
+    body { font-size: 16.5px; }
+    .wrap { padding: 0 20px 210px; }
+    header.top { padding-top: 44px; }
+    h1 { max-width: none; }
+    section.block { grid-template-columns: 1fr; gap: 18px; padding: 26px 0 30px; }
+    .block-head { position: static; }
+    .block-why { max-width: 58ch; }
+    ul.qs > li { grid-template-columns: 32px minmax(0, 1fr); column-gap: 10px; row-gap: 5px; }
+    .qn { grid-column: 1; grid-row: 1; }
+    .tag { grid-column: 2; grid-row: 1; justify-self: start; margin-top: 3px; }
+    .q { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+    .savebar-inner { padding: 11px 20px; gap: 10px; }
+    .btns { width: 100%; }
+    .btns button { flex: 1 1 auto; }
+  }
+</style>
+<style>
+  table.g { width:100%; border-collapse:collapse; margin-top:18px; font-size:15.5px; }
+  table.g th, table.g td { border:1px solid var(--line); padding:11px 13px; vertical-align:top; text-align:left; }
+  table.g th { background:var(--surface); font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+  table.g td.who { color:var(--accent); font-weight:600; }
+  .tbwrap { overflow-x:auto; }
+  .gap { display:inline-block; border-bottom:1px dashed var(--accent); color:var(--muted); font-style:italic; min-width:96px; }
+  .week { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1px; background:var(--line-soft); border:1px solid var(--line); margin-top:18px; }
+  .day { background:var(--surface); padding:16px 18px; }
+  .day b { display:block; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); margin-bottom:9px; }
+  .day ul { margin:0; padding-left:17px; }
+  .day li { font-size:14.5px; line-height:1.5; color:var(--ink-soft); margin-bottom:5px; }
+  section.blk { margin-top:74px; }
+  section.blk > h2 { font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif; font-size:clamp(25px,3.4vw,34px); margin:6px 0 10px; letter-spacing:-.01em; }
+  section.blk > p.lead { max-width:66ch; color:var(--ink-soft); margin:0; }
+  .note2 { margin-top:14px; padding:14px 18px; background:var(--surface); border-left:3px solid var(--accent); font-size:15px; color:var(--ink-soft); }
+  .pill { display:inline-block; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border:1px solid var(--line); color:var(--muted); margin-left:6px; }
+  .pill.auto { color:var(--moss); border-color:var(--moss); }
+  .pill.humano { color:var(--star); border-color:var(--star); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<div class="eyebrow">Roma × GGD · como o trabalho vai funcionar</div>
+<h1>O plano de <em>rotina</em> da Roma</h1>
+<p class="standfirst">Este documento é o esqueleto do trabalho: quem faz o quê, em que dia, com qual ferramenta e como a gente confere que aconteceu. Ele nasce antes das respostas do briefing de propósito — o que está marcado como <span class="gap">sai do briefing</span> é exatamente o que só vocês podem preencher. O resto já está de pé.</p>
+<div class="howto">
+<div><b>O que é</b><span>Uma rotina de marketing que roda sem depender de ninguém lembrar. Cada linha tem dono, dia e forma de conferir.</span></div>
+<div><b>O que não é</b><span>Não é lista de ideias. Nada entra aqui sem responsável e sem um jeito simples de saber se foi feito.</span></div>
+<div><b>Onde ficam as mensagens</b><span>Os textos prontos de cada régua estão no documento <strong>Estratégia de WhatsApp</strong> — este aqui trata de quem opera e como se controla.</span></div>
+</div></header>
+<section class="blk"><div class="eyebrow">01</div><h2>Quem faz o quê</h2>
+<p class="lead">Cinco frentes. Cada uma precisa de um nome — não de um setor. Onde está em branco, é porque a resposta vem de vocês.</p>
+<div class="tbwrap"><table class="g"><tr><th>Frente</th><th>Dono</th><th>O que faz na prática</th><th>Quando</th><th>Como a gente confere</th></tr>
+<tr><td>Conteúdo — o que vai ser dito</td><td class="who"><span class="gap">sai do briefing</span></td><td>Define a pauta da semana a partir do que chegou de mercadoria e do calendário; entrega o assunto de cada peça.</td><td>Toda semana, no mesmo dia</td><td>A pauta da semana existe até segunda-feira, escrita em algum lugar que todos veem.</td></tr>
+<tr><td>Produção — foto, vídeo e arte</td><td class="who"><span class="gap">sai do briefing</span></td><td>Fotografa o que entrou, grava o vídeo curto, monta o banner. Recebe a pauta pronta e não decide assunto.</td><td>Um dia fixo de produção</td><td>O número combinado de peças da semana está entregue.</td></tr>
+<tr><td>Publicação e site</td><td class="who"><span class="gap">sai do briefing</span></td><td>Posta, troca o banner da home, ajusta a vitrine, cadastra o produto novo com foto e descrição.</td><td>Diário para post; semanal para banner</td><td>O banner da semana está no ar e o produto novo está vendável.</td></tr>
+<tr><td>Atendimento (Zenvia)</td><td class="who"><span class="gap">sai do briefing</span></td><td>Responde, etiqueta a conversa, registra o desfecho e dispara as réguas que não são automáticas.</td><td>Todo dia, em horário declarado</td><td>Toda conversa fechada tem etiqueta de desfecho.</td></tr>
+<tr><td>Estoque e reposição</td><td class="who"><span class="gap">sai do briefing</span></td><td>Avisa o que chegou, o que acabou e o que volta — é quem alimenta tudo com novidade.</td><td>Assim que a mercadoria entra</td><td>Existe um aviso de mercadoria nova; ninguém descobre por acaso.</td></tr>
+<tr><td>Nós (GGD)</td><td class="who">Giovanna</td><td>Direção do que vai ser trabalhado, desenho das réguas, acompanhamento dos números e a cobrança da rotina.</td><td>Semana a semana</td><td>O relatório combinado chega no dia combinado.</td></tr>
+</table></div>
+<div class="note2">A pergunta que decide esta tabela é a do briefing: <strong>quem é o dono do e-commerce dentro da empresa</strong>. Sem essa pessoa, todas as linhas acima voltam para a mesa da Rose — que é exatamente o problema de hoje.</div>
+</section>
+<section class="blk"><div class="eyebrow">02</div><h2>A semana da casa</h2>
+<p class="lead">Uma grade fixa vale mais que um plano bonito. Os dias abaixo são a proposta de partida — o dia certo de cada faixa sai da resposta de vocês sobre qual dia funciona melhor.</p>
+<div class="week">
+<div class="day"><b>Segunda</b><ul><li>Pauta da semana definida</li><li>Lista do que chegou de mercadoria</li><li>Conferência dos números da semana anterior</li></ul></div>
+<div class="day"><b>Terça</b><ul><li>Dia de produção: fotos e vídeos</li><li>Banner da semana montado</li></ul></div>
+<div class="day"><b>Quarta</b><ul><li>Banner novo no ar</li><li>Produtos novos publicados</li><li>Régua de reposição do dia</li></ul></div>
+<div class="day"><b>Quinta</b><ul><li>Conteúdo de ensinar (passo a passo, dica)</li><li>Peça pronta de cliente publicada</li></ul></div>
+<div class="day"><b>Sexta</b><ul><li>Novidade da semana para a base</li><li>Fila do atendimento zerada antes do fim do dia</li></ul></div>
+<div class="day"><b>Sábado</b><ul><li>Só atendimento, sem produção</li></ul></div>
+<div class="day"><b>Todo dia</b><ul><li>Responder no prazo combinado</li><li>Etiquetar a conversa e registrar o desfecho</li><li>Publicar o que estava programado</li></ul></div>
+</div>
+<div class="note2">O tamanho desta grade não é escolha nossa: ela é do tamanho do que a casa consegue produzir por semana <em>em semana cheia</em>. É por isso que essa é uma das perguntas essenciais do briefing.</div>
+</section>
+<section class="blk"><div class="eyebrow">03</div><h2>As réguas dentro da Zenvia</h2>
+<p class="lead">As mensagens já estão escritas. O que falta é decidir, régua por régua, o que a Zenvia faz sozinha e o que uma pessoa faz na mão — e qual etiqueta prova que aconteceu.</p>
+<div class="tbwrap"><table class="g"><tr><th>Régua</th><th>Como roda</th><th>O que a Zenvia precisa ter</th><th>Etiqueta</th><th>Depende de</th></tr>
+<tr><td>Boas-vindas e triagem</td><td>Automático <span class="pill auto">robô</span></td><td>Mensagem de primeira conversa com duas ou três opções curtas e envio para a fila certa.</td><td>origem: whatsapp</td><td>Nada — dá para ligar hoje.</td></tr>
+<tr><td>Fora do horário</td><td>Automático <span class="pill auto">robô</span></td><td>Resposta automática com o horário real de atendimento e o prazo de retorno.</td><td>fora-horario</td><td>Vocês declararem o horário verdadeiro.</td></tr>
+<tr><td>Quem perguntou e não fechou</td><td>Humano com lembrete <span class="pill humano">pessoa</span></td><td>Etiqueta “cotou” + tarefa de retorno em 24h e em 72h.</td><td>cotou · comprou · sumiu</td><td>Alguém assumir a fila.</td></tr>
+<tr><td>Pós-compra</td><td>Automático <span class="pill auto">robô</span></td><td>Confirmação, envio com rastreio e o toque de três dias depois da entrega.</td><td>pos-compra</td><td>Ligar o pedido do site à Zenvia.</td></tr>
+<tr><td>Reposição por ciclo</td><td>Automático com revisão <span class="pill auto">robô</span></td><td>Lista de quem comprou a linha X há N dias, com os itens dela.</td><td>reposicao</td><td>Export de pedidos do sistema.</td></tr>
+<tr><td>Carrinho e checkout abandonado</td><td>Automático <span class="pill auto">robô</span></td><td>Receber do site o aviso de carrinho parado.</td><td>carrinho</td><td>A plataforma mandar esse aviso — é a única fila técnica.</td></tr>
+<tr><td>Voltou ao estoque</td><td>Automático <span class="pill auto">robô</span></td><td>Lista de quem pediu aviso do produto que estava esgotado.</td><td>voltou-estoque</td><td>O “avise-me” existir no site.</td></tr>
+<tr><td>Cliente grande</td><td>Humano <span class="pill humano">pessoa</span></td><td>Lista curta, atendimento nominal, sem automação.</td><td>vip</td><td>Vocês definirem o corte.</td></tr>
+</table></div>
+<div class="note2">A ordem importa: as quatro primeiras não dependem de ninguém de fora e podem começar já. As que dependem do site entram depois, na fila da plataforma — por isso o briefing pergunta quanto tempo demora um pedido de mudança lá.</div>
+</section>
+<section class="blk"><div class="eyebrow">04</div><h2>Como se controla</h2>
+<p class="lead">Seis números por semana. Quem preenche é quem faz — e cada número tem um limite que, quando estoura, obriga alguém a agir.</p>
+<div class="tbwrap"><table class="g"><tr><th>Número</th><th>De onde sai</th><th>Quem preenche</th><th>Quando acende a luz</th></tr>
+<tr><td>Conversas recebidas na semana</td><td>Relatório da Zenvia</td><td>Atendimento</td><td>Cai duas semanas seguidas.</td></tr>
+<tr><td>Tempo até a primeira resposta</td><td>Relatório da Zenvia</td><td>Atendimento</td><td>Passa do prazo que vocês mesmos definirem.</td></tr>
+<tr><td>Conversas com desfecho registrado</td><td>Etiquetas da Zenvia</td><td>Atendimento</td><td>Menos de 80% etiquetadas — sem isso nada é medível.</td></tr>
+<tr><td>Pedidos que vieram do WhatsApp</td><td>Registro do atendimento</td><td>Atendimento</td><td>Fica em zero: ou não vende, ou não anota.</td></tr>
+<tr><td>Peças publicadas × peças combinadas</td><td>A grade da semana</td><td>Conteúdo</td><td>Duas semanas seguidas abaixo do combinado.</td></tr>
+<tr><td>Pedidos do site na semana</td><td>Sistema da loja</td><td>Quem cuida do site</td><td>Cai sem explicação de estoque ou de data.</td></tr>
+</table></div>
+<div class="note2">Nenhum desses números exige ferramenta nova. Todos existem hoje — só não são olhados juntos, no mesmo dia, pelas mesmas pessoas. É essa reunião curta, uma vez por semana, que substitui a sensação de “não sei o que está acontecendo”.</div>
+</section>
+<section class="blk"><div class="eyebrow">05</div><h2>O que trava até vocês responderem</h2>
+<p class="lead">Para ser honesto sobre onde este plano ainda está em branco:</p>
+<div class="findings">
+<div class="finding"><h3>Os nomes</h3><p>Cada linha da tabela de responsabilidade precisa de uma pessoa. Enquanto for “o time”, ninguém faz.</p></div>
+<div class="finding"><h3>O tamanho da semana</h3><p>Quantas fotos, vídeos e posts a casa sustenta em semana cheia — é o que define a grade.</p></div>
+<div class="finding"><h3>O que a Zenvia já tem ligado</h3><p>Fila, etiquetas, respostas rápidas, relatórios: o que resolveria metade disso costuma já estar pago e desligado.</p></div>
+<div class="finding"><h3>O teto de mensagens</h3><p>Quantas mensagens por semana vocês consideram demais para a cliente. A régua se ajusta a esse teto, não ao contrário.</p></div>
+<div class="finding"><h3>A margem por linha</h3><p>Sem ela, a rotina empurra o que mais vende em vez do que mais lucra.</p></div>
+<div class="finding"><h3>O dia da reunião</h3><p>A rotina só existe de verdade quando tem um dia e uma hora com nome.</p></div>
+</div></section>
+<footer>Documento de trabalho da Roma Aviamentos, setembro de 2026 — versão inicial, feita antes das respostas do briefing. As mensagens de cada régua estão no documento de Estratégia de WhatsApp. Qualquer linha aqui pode mudar depois das respostas: o que não muda é a regra de que nada entra sem dono, sem dia e sem forma de conferir.</footer>
+</div>
+</body>
+</html>
