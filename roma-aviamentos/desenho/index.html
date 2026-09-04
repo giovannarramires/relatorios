@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>O desenho do projeto — Roma</title>
+<style>
+  :root {
+    --ground:#EEEFE9; --surface:#F7F8F3; --field:#FFFFFF; --ink:#1C1F1A; --ink-soft:#43483E;
+    --muted:#6B6F63; --line:#D4D7CA; --line-soft:#E1E3D8; --accent:#8F6410; --moss:#2F4636;
+    --star:#7A4A0C; --star-bg:#EFE6D2; --bar:#FFFFFF; --red:#8A2E21; --red-bg:#F3E3DF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#14120E; --surface:#1C1A15; --field:#211E18; --ink:#E9E4D7; --ink-soft:#C7C1B1;
+      --muted:#948D7D; --line:#38342A; --line-soft:#2A261D; --accent:#D8A63F; --moss:#8FAE97;
+      --star:#E0B463; --star-bg:#2A2115; --bar:#1A1712; --red:#E0897A; --red-bg:#2C1A16;
+    }
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:17px; line-height:1.58; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 32px 120px; }
+  .eyebrow {
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:11.5px;
+    letter-spacing:.17em; text-transform:uppercase; color:var(--moss);
+  }
+  header.top { display:flex; flex-direction:column; gap:20px; padding:72px 0 36px; }
+  h1 {
+    font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif; font-weight:600;
+    font-size:clamp(34px,5.4vw,54px); line-height:1.05; letter-spacing:-.015em; margin:0;
+    max-width:20ch; text-wrap:balance;
+  }
+  h1 em { font-style:italic; color:var(--accent); }
+  .standfirst { max-width:64ch; font-size:18.5px; color:var(--ink-soft); margin:0; }
+  .howto {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1px;
+    background:var(--line-soft); border:1px solid var(--line); margin-top:6px;
+  }
+  .howto div { background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:5px; }
+  .howto b {
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:10.5px;
+    letter-spacing:.13em; text-transform:uppercase; color:var(--accent); font-weight:500;
+  }
+  .howto span { font-size:15px; line-height:1.45; color:var(--ink-soft); }
+
+  .section-title { display:flex; flex-direction:column; gap:7px; padding-bottom:18px; border-bottom:2px solid var(--ink); }
+  .section-title h2 { font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif; font-size:27px; font-weight:600; letter-spacing:-.012em; margin:0; }
+  .section-title p { margin:0; font-size:15.5px; color:var(--muted); max-width:68ch; }
+  .read { margin-top:60px; }
+  .findings { display:grid; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); border-top:0; }
+  .finding { background:var(--surface); padding:22px 22px 24px; display:flex; flex-direction:column; gap:8px; }
+  .finding h3 { margin:0; font-size:16.5px; font-weight:700; color:var(--ink); }
+  .finding p { margin:0; font-size:15.5px; line-height:1.55; color:var(--ink-soft); }
+  .finding .big { font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:31px; line-height:1; color:var(--accent); }
+
+  .blocks { margin-top:70px; }
+  section.block { display:grid; grid-template-columns:214px 1fr; gap:44px; padding:34px 0 38px; border-top:1px solid var(--line); align-items:start; }
+  section.block:first-of-type { border-top:2px solid var(--ink); }
+  .block-head { position:sticky; top:24px; display:flex; flex-direction:column; gap:8px; }
+  .block-num { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:11.5px; letter-spacing:.17em; color:var(--accent); }
+  .block-head h2 { font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif; font-size:24px; font-weight:600; line-height:1.14; letter-spacing:-.012em; margin:0; text-wrap:balance; }
+  .block-why { font-size:14px; line-height:1.5; color:var(--muted); max-width:26ch; margin:0; }
+
+  .trio { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1px; background:var(--line-soft); border:1px solid var(--line); }
+  .trio > div { background:var(--surface); padding:18px 20px 20px; display:flex; flex-direction:column; gap:7px; }
+  .trio b { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; font-weight:500; }
+  .trio .t-hoje b { color:var(--red); }
+  .trio .t-faz b { color:var(--accent); }
+  .trio .t-vai b { color:var(--moss); }
+  .trio p { margin:0; font-size:15px; line-height:1.5; color:var(--ink-soft); }
+  .trio ul { margin:0; padding-left:16px; }
+  .trio li { font-size:15px; line-height:1.5; color:var(--ink-soft); margin-bottom:6px; }
+  .trio li:last-child { margin-bottom:0; }
+  .trava { margin-top:14px; padding:12px 16px; background:var(--star-bg); border-left:3px solid var(--star); font-size:14.5px; line-height:1.5; color:var(--ink-soft); }
+  .trava b { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--star); display:block; margin-bottom:4px; }
+
+  section.blk { margin-top:78px; }
+  section.blk > h2 { font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif; font-size:clamp(25px,3.4vw,34px); margin:6px 0 12px; letter-spacing:-.01em; }
+  section.blk > p.lead { max-width:68ch; color:var(--ink-soft); margin:0; }
+
+  .tbwrap { overflow-x:auto; margin-top:20px; }
+  table.g { width:100%; border-collapse:collapse; font-size:15px; min-width:640px; }
+  table.g th, table.g td { border:1px solid var(--line); padding:11px 13px; vertical-align:top; text-align:left; }
+  table.g th { background:var(--surface); font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+  table.g td.who { color:var(--accent); font-weight:600; white-space:nowrap; }
+  table.g td strong { color:var(--ink); }
+
+  .frente { border:1px solid var(--line); background:var(--surface); margin-top:22px; }
+  .frente-top { display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; padding:18px 22px 14px; border-bottom:1px solid var(--line); }
+  .frente-top .fn { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11.5px; letter-spacing:.17em; color:var(--accent); }
+  .frente-top h3 { margin:0; font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:22px; font-weight:600; letter-spacing:-.01em; flex:1 1 auto; }
+  .frente-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--line-soft); }
+  .frente-grid > div { background:var(--surface); padding:16px 20px 18px; }
+  .frente-grid b { display:block; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:500; }
+  .frente-grid p { margin:0; font-size:15px; line-height:1.5; color:var(--ink-soft); }
+  .msg { margin:0; padding:14px 18px; background:var(--field); border-top:1px solid var(--line); font-size:15px; line-height:1.55; color:var(--ink-soft); font-style:italic; }
+  .msg span { font-style:normal; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:6px; font-style:normal; }
+
+  .pill { display:inline-block; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border:1px solid var(--line); color:var(--muted); }
+  .pill.auto { color:var(--moss); border-color:var(--moss); }
+  .pill.humano { color:var(--star); border-color:var(--star); }
+  .pill.ja { color:var(--moss); border-color:var(--moss); }
+
+  ol.contra { list-style:none; margin:22px 0 0; padding:0; counter-reset:c; }
+  ol.contra > li { counter-increment:c; display:grid; grid-template-columns:38px minmax(0,1fr); gap:14px; padding:20px 0 22px; border-bottom:1px solid var(--line-soft); }
+  ol.contra > li::before { content:counter(c,decimal-leading-zero); font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:12.5px; color:var(--red); padding-top:3px; font-variant-numeric:tabular-nums; }
+  ol.contra h4 { margin:0 0 8px; font-size:16.5px; font-weight:700; color:var(--ink); max-width:60ch; }
+  ol.contra p { margin:0; font-size:15.5px; line-height:1.55; color:var(--ink-soft); max-width:70ch; }
+  ol.contra p + p { margin-top:8px; }
+  .versus { display:block; margin:9px 0; padding-left:14px; border-left:2px solid var(--line); font-size:15px; color:var(--muted); }
+  .versus i { color:var(--ink-soft); font-style:normal; }
+  .ask { margin-top:9px; font-size:15px; color:var(--moss); font-weight:600; }
+
+  .ponte { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1px; background:var(--line-soft); border:1px solid var(--line); margin-top:22px; }
+  .ponte > div { background:var(--surface); padding:20px; display:flex; flex-direction:column; gap:6px; }
+  .ponte .n { font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:27px; line-height:1.05; color:var(--accent); }
+  .ponte .lab { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); }
+  .ponte .d { font-size:14.5px; line-height:1.45; color:var(--ink-soft); }
+
+  .note2 { margin-top:18px; padding:15px 19px; background:var(--surface); border-left:3px solid var(--accent); font-size:15px; line-height:1.55; color:var(--ink-soft); }
+  .note2 b { color:var(--ink); }
+
+  .fases { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1px; background:var(--line-soft); border:1px solid var(--line); margin-top:22px; }
+  .fase { background:var(--surface); padding:18px 20px 20px; }
+  .fase b { display:block; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .fase ul { margin:0; padding-left:17px; }
+  .fase li { font-size:14.5px; line-height:1.5; color:var(--ink-soft); margin-bottom:7px; }
+
+  footer { margin-top:70px; padding-top:22px; border-top:1px solid var(--line); font-size:14.5px; line-height:1.55; color:var(--muted); max-width:74ch; }
+
+  @media (max-width:860px) {
+    body { font-size:16.5px; }
+    .wrap { padding:0 20px 90px; }
+    header.top { padding-top:44px; }
+    h1 { max-width:none; }
+    section.block { grid-template-columns:1fr; gap:18px; padding:28px 0 30px; }
+    .block-head { position:static; }
+    .block-why { max-width:58ch; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Roma × GGD · projeto digital · setembro de 2026</p>
+  <h1>Onde a Roma <em>está</em> e para onde ela vai</h1>
+  <p class="standfirst">Este documento nasce das 63 respostas que vocês deram no briefing, cruzadas com o que a medição do site já mostrava. Ele tem três partes: o retrato de cada área da casa hoje, o que muda em cada uma, e as quatro frentes que começam agora — sem depender de contratar ninguém e sem depender de ninguém de fora.</p>
+  <div class="howto">
+    <div><b>De onde vem</b><span>63 de 74 respostas do briefing + 30 dias de medição de comportamento no site.</span></div>
+    <div><b>O que não é</b><span>Não é lista de ideias. Nenhuma linha entra sem dono, sem dia e sem forma de conferir.</span></div>
+    <div><b>O que ainda falta</b><span>11 respostas em branco e 12 pontos para confirmar — todos listados no fim, com o nome de quem responde.</span></div>
+    <div><b>O alvo declarado</b><span>R$ 300 mil por mês no site em doze meses. Foi a Roma que disse o número; o plano é construído para ele.</span></div>
+  </div>
+</header>
+
+<div class="read">
+  <div class="section-title">
+    <p class="eyebrow">O ponto de partida</p>
+    <h2>Três coisas que as respostas deixaram claras</h2>
+    <p>Antes de qualquer plano, isto é o que o briefing disse — e o que ele disse sem querer dizer.</p>
+  </div>
+  <div class="findings">
+    <div class="finding">
+      <h3>O problema é de dono, não de ferramenta</h3>
+      <p>Três perguntas diferentes receberam a mesma resposta. O que só anda passando por você: <i>“tudo”</i>. O que já deu venda e parou: <i>“liderança ruim”</i>. Por que parou: <i>“faltou competência do líder”</i>.</p>
+      <p>A pergunta era sobre canal, e a resposta veio sobre gente — duas vezes. Por isso todo este plano é desenhado para <b>não depender de contratar ninguém novo</b>.</p>
+    </div>
+    <div class="finding">
+      <h3>O que resolveria já está pago</h3>
+      <p>Dá para exportar a base de clientes: <b>sim</b>. Existe autorização para mandar mensagem: <b>sim</b>. Dá para disparar em massa pela Zenvia: <b>sim</b>. Quem já comprou recebe alguma coisa depois: <b>não</b>.</p>
+      <p>Base, permissão e canal existem e estão parados. Não falta ferramenta — falta ligar.</p>
+    </div>
+    <div class="finding">
+      <h3>A casa cresce em visita, não em pedido</h3>
+      <p class="big">0,41%</p>
+      <p>De cada mil pessoas que entram no site, quatro compram. O mês passado cresceu <b>por volume de visita</b>, não por eficiência: mais gente entrando, a mesma fatia comprando.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blocks">
+  <div class="section-title" style="margin-bottom:0;">
+    <p class="eyebrow">Parte 1</p>
+    <h2>Área por área: onde estamos, o que muda, para onde vai</h2>
+    <p>Nove frentes da casa. Em cada uma, o retrato de hoje é número medido ou resposta de vocês — não é impressão nossa.</p>
+  </div>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">01</p>
+      <h2>Gente e decisão</h2>
+      <p class="block-why">É a área que trava todas as outras. Enquanto tudo voltar para uma mesa só, nada roda sozinho.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>O dono do e-commerce é o dono da empresa. Não existe um responsável operacional pelo site.</li>
+            <li>“Tudo” só anda passando por você.</li>
+            <li>Uma pessoa só cadastra produto, escreve os textos e é a única que mexe no site.</li>
+            <li>As senhas de tudo estão com outra pessoa.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Cada uma das cinco frentes ganha <b>um nome</b>, não um setor.</li>
+            <li>Uma reunião curta por semana, sempre no mesmo dia, com seis números na mesa.</li>
+            <li>Segunda pessoa treinada para cadastrar produto — hoje o site inteiro depende de uma agenda só.</li>
+            <li>Lista escrita de quem tem a senha de quê.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Decisão do dia a dia acontece sem passar por você; você decide o que muda de rumo, não o que já foi combinado.</li>
+            <li>Nenhuma frente com “o time” no lugar do nome.</li>
+            <li>Férias de qualquer pessoa não congela o site.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>A lista de quem faz o quê ficou em branco no briefing. Nós montamos um rascunho com os nomes que apareceram nas outras respostas — Jessica, Miriam, Isabela, Joice, Hudson, Rosi, Vitor, Carla, Diogo e Marcelo — e devolvemos só para vocês confirmarem.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">02</p>
+      <h2>O site: da visita ao pedido</h2>
+      <p class="block-why">É onde está o dinheiro mais barato da casa: gente que já entrou, já escolheu e desistiu no fim.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li><b>114 mil visitas por mês</b> e 469 pedidos: 0,41% de conversão.</li>
+            <li>Do carrinho para o resumo do pedido perdem-se <b>63%</b> — a maior parte trava na exigência de entrar com login.</li>
+            <li>Da tela de pagamento para o pedido pago perdem-se outros <b>59%</b>.</li>
+            <li>85 em cada 100 acessos são pelo celular.</li>
+            <li>No carrinho, o clique número um é <b>simular frete</b> — quase o dobro do botão de pagar.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Comprar sem precisar criar conta (ou criar a conta depois do pedido, não antes).</li>
+            <li>Frete visível na página do produto, não só lá no carrinho.</li>
+            <li>Revisar a tela de pagamento: é onde a maior parte do dinheiro escorre.</li>
+            <li>Melhorar a busca interna do site — <b>36% de todos os toques</b> vão para a caixa de busca, e só 1,5% para o menu.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Pagamento saindo de 41% para 55% de aproveitamento = <b>+160 pedidos por mês</b>, sem uma visita a mais.</li>
+            <li>Conversão de 0,41% para 0,60% — patamar normal para loja com catálogo grande.</li>
+            <li>A busca do site vira vitrine, e não uma caixa que devolve “nenhum resultado”.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>Saber a fila da plataforma: quando vocês pedem uma mudança no site, para quem vai, quanto demora e o que já foi negado. Essa pergunta ficou como “não entendi” — e é ela que define o que entra primeiro no plano. Vamos refazer em outras palavras.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">03</p>
+      <h2>Catálogo e cadastro</h2>
+      <p class="block-why">O maior sortimento do mercado é o diferencial da Roma — e hoje ele é cadastrado por uma pessoa só, sem padrão.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li><b>50 produtos novos por mês</b>, cadastrados por uma única pessoa.</li>
+            <li>Os textos do site são escritos por essa mesma pessoa e <b>não existe um padrão</b> — foi vocês que disseram.</li>
+            <li>Parte do catálogo tem nome ilegível (do tipo <i>cordao-trancado-c_20m---1026</i>) e marca preenchida errada.</li>
+            <li>Trocas e devoluções: <i>“muitas, esse é um problema sério”</i>.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Um modelo de ficha de produto: título, medida, composição, o que dá para fazer com ele, foto com escala.</li>
+            <li>Prioridade para os produtos que mais vendem — não o catálogo inteiro de uma vez.</li>
+            <li>Medida e quantidade no título, que é onde nasce boa parte da devolução.</li>
+            <li>Segunda pessoa habilitada a cadastrar.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Devolução deixa de ser “muitas” e passa a ser um número acompanhado toda semana, com motivo.</li>
+            <li>Produto novo fica vendável no mesmo dia em que a mercadoria entra.</li>
+            <li>O sortimento vira argumento de venda escrito, e não só um fato que a casa sabe.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>Quantas trocas e devoluções por mês, e por qual motivo. Sem o motivo, não dá para saber se é foto, medida, descrição ou entrega — e cada um desses tem uma correção diferente.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">04</p>
+      <h2>Atendimento — a Zenvia</h2>
+      <p class="block-why">É a área com maior retorno imediato: a ferramenta está paga, as conversas já chegam, e quase metade delas cai no vazio.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>Cerca de <b>50 conversas por dia</b>. Atendimento das 8h às 18h, com uma pessoa.</li>
+            <li><b>44% das conversas chegam com a loja fechada.</b> Às 22h entram mais conversas do que às 15h, 16h ou 17h.</li>
+            <li>Quem pergunta e não compra: ninguém acompanha — a pergunta ficou em branco.</li>
+            <li>Existem <b>dois números</b> de WhatsApp em uso, sem consolidação.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Resposta automática fora do horário que já coleta nome, cidade e o que a pessoa procura.</li>
+            <li>Fila com dono e primeira resposta dentro de um prazo declarado.</li>
+            <li>Etiqueta obrigatória de desfecho: cotou · comprou · sumiu.</li>
+            <li>Retorno de quem cotou e não fechou, em 24h e em 72h.</li>
+            <li>Unificar os dois números em um só.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Nenhuma conversa da madrugada amanhece sem resposta.</li>
+            <li>Mais de 80% das conversas com desfecho registrado — sem isso, nada é medível.</li>
+            <li>Passa a existir um número de “pedidos que vieram do WhatsApp”, que hoje não existe.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>A pergunta mais importante deste bloco ficou em branco: <b>o que já está ligado na Zenvia e o que nunca foi usado</b> — fila, etiquetas, respostas rápidas, robô de primeira mensagem, módulo de vendas, relatórios. Na maioria das casas, o recurso que resolveria metade disso já está pago e desligado. Resolve-se em vinte minutos de tela compartilhada com a Carla.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">05</p>
+      <h2>Base de clientes e recompra</h2>
+      <p class="block-why">É a maior oportunidade do projeto inteiro, e a mais barata: falar com quem já comprou uma vez.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>A base é exportável, com o que a pessoa comprou e quando. A autorização para mandar mensagem existe.</li>
+            <li>Existe e-mail marketing e existe lista de WhatsApp — <i>“mas trabalha mal”</i>.</li>
+            <li><b>Quem comprou não recebe nada depois.</b> Nem agradecimento, nem novidade, nem aviso de reposição.</li>
+            <li>Ninguém sabe quanto um cliente compra ao longo de um ano — <i>“nunca levantaram isso”</i>.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Nós levantamos o número de recompra a partir da base exportada — não precisa de vocês.</li>
+            <li>Régua de reposição por ciclo: quem comprou a linha X há N dias recebe o aviso na hora certa.</li>
+            <li>Pós-compra em três toques: confirmação, rastreio e um contato três dias depois de entregue.</li>
+            <li>Resgate de quem parou de comprar.</li>
+            <li>Tudo dentro do teto que vocês mesmos deram: <b>1 a 2 mensagens por semana</b>.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Passa a existir o número de quantos clientes voltam — hoje ele não existe.</li>
+            <li>Uma parte do faturamento do mês deixa de depender de gente nova entrando no site.</li>
+            <li>A cliente que some passa a ser resgatada em vez de simplesmente perdida.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>Nada trava.</b> Esta frente não depende de resposta nenhuma, nem da plataforma, nem de contratar. É a primeira a subir.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">06</p>
+      <h2>Conteúdo e produção</h2>
+      <p class="block-why">A casa produz bem e rápido. O que falta não é capacidade — é pauta com destino.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>Uma pessoa decide o assunto, três executam. Banner novo fica pronto no mesmo dia.</li>
+            <li>As fotos do site são atualizadas todos os dias.</li>
+            <li>Tem gente disposta a aparecer em vídeo — <i>“sempre”</i> — e existe orçamento para produção.</li>
+            <li>Mas: <i>“nada estratégico”</i> é feito toda semana sem falhar.</li>
+            <li>Vocês <b>não recebem foto de cliente com a peça pronta</b>.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Grade fixa de semana: pauta na segunda, produção na terça, banner novo na quarta.</li>
+            <li>Pedir a foto da peça pronta ao cliente, com autorização de uso — é o conteúdo mais barato e mais convincente que existe no ramo.</li>
+            <li>Usar o vídeo com rosto: quem já topa aparecer é o ativo mais mal aproveitado da casa.</li>
+            <li>Conteúdo de ensinar, não só de vitrine.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Existe uma pauta escrita toda segunda que todos veem.</li>
+            <li>Peça de cliente publicada toda semana.</li>
+            <li>O que é produzido tem destino: alimenta a régua de mensagem e a página do produto, não só o feed.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>Quanto a casa produz por semana <b>sem sofrer</b> — quantas fotos, quantos vídeos, quantos posts em semana cheia, não no melhor dia. É esse número que define o tamanho da grade. Ficou em branco.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">07</p>
+      <h2>Estoque, frete e expedição</h2>
+      <p class="block-why">Vocês mesmos disseram: a cliente escolhe pela entrega rápida. É aqui que essa promessa se cumpre ou se quebra.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>O pedido do site sai em <b>cerca de 3 dias</b> depois de pago.</li>
+            <li><b>O cliente paga o frete</b>, e não existe frete grátis a partir de valor nenhum.</li>
+            <li>Abaixo de <b>R$ 30</b> o pedido dá prejuízo.</li>
+            <li>Reposição de produto sem estoque leva de 1 a 2 dias.</li>
+            <li>No carrinho, simular frete é o clique mais apertado de todos.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Atacar o prazo de saída: 3 dias é o que separa vocês da promessa de entrega rápida que a própria cliente valoriza.</li>
+            <li>Testar frete grátis a partir de um valor calculado — não como promoção, mas como <b>elevador de carrinho</b> acima do ponto de prejuízo.</li>
+            <li>Mostrar o prazo real na página do produto, antes do carrinho.</li>
+            <li>“Avise-me quando chegar” para o que está sem estoque.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Pedido saindo em 1 dia útil.</li>
+            <li>Valor médio de pedido subindo por causa do degrau de frete, e não por desconto.</li>
+            <li>Ruptura deixa de ser venda perdida e vira lista de espera.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>Quantos pedidos por dia a expedição consegue separar e despachar <b>sem contratar ninguém</b>. Vocês responderam o volume atual, mas não o teto — e é o teto que diz até onde dá para crescer antes de a casa estourar.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">08</p>
+      <h2>Ser achado por quem não conhece a Roma</h2>
+      <p class="block-why">Quem procura “Roma” acha. Quem procura o produto, não.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>Quem busca o nome da loja encontra em primeiro lugar. Isso está resolvido.</li>
+            <li>Quem busca <b>passamanaria</b>: a Roma aparece quase 5 mil vezes por mês e recebe <b>17 cliques</b>.</li>
+            <li>Quatro endereços diferentes do site disputam essa mesma palavra entre si.</li>
+            <li>As páginas de categoria do site <b>não têm nenhum produto</b> no código — a vitrine só aparece depois, no navegador.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Eleger uma página oficial por assunto e fazer as outras apontarem para ela.</li>
+            <li>Pedir à plataforma que os produtos apareçam no código da página de categoria.</li>
+            <li>Texto de categoria e nome de produto legível.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>A Roma deixa de ser “um site que fala de passamanaria” e vira “uma loja de passamanaria” para quem busca.</li>
+            <li>Entrada de gente nova sem depender só de quem já conhece a marca.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>Essa frente depende inteiramente da plataforma. É a que entra por último — e por isso o pedido tem que ser aberto cedo.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="block-num">09</p>
+      <h2>Números e controle</h2>
+      <p class="block-why">A sensação de “não sei o que está acontecendo” não se resolve com relatório grande. Resolve-se com seis números no mesmo dia.</p>
+    </div>
+    <div>
+      <div class="trio">
+        <div class="t-hoje"><b>Hoje</b>
+          <ul>
+            <li>Não se sabe quanto um cliente compra ao longo de um ano.</li>
+            <li>Não se sabe quantos clientes voltaram a comprar.</li>
+            <li>A margem é dada como igual em todas as linhas.</li>
+            <li>O desfecho da conversa é registrado “no sistema”, mas não é olhado.</li>
+          </ul>
+        </div>
+        <div class="t-faz"><b>O que muda</b>
+          <ul>
+            <li>Seis números por semana, sempre os mesmos, cada um com um limite que obriga alguém a agir: conversas recebidas · tempo até a primeira resposta · conversas com desfecho · pedidos vindos do WhatsApp · peças publicadas × combinadas · pedidos do site.</li>
+            <li>Nós levantamos recompra e valor por cliente a partir da base.</li>
+            <li>Um dia fixo por semana para olhar os seis juntos.</li>
+          </ul>
+        </div>
+        <div class="t-vai"><b>Para onde vai</b>
+          <ul>
+            <li>Nenhum desses números exige ferramenta nova — todos já existem, só não são olhados juntos.</li>
+            <li>Decisão de semana passa a ser tomada por número, não por sensação.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="trava"><b>O que falta</b>A margem por linha. Enquanto ela for “igual em tudo”, a casa vai continuar empurrando o que mais vende em vez do que mais lucra — e essas duas coisas quase nunca são a mesma.</div>
+    </div>
+  </section>
+</div>
+
+<section class="blk">
+  <p class="eyebrow">Parte 2</p>
+  <h2>As quatro frentes que começam agora</h2>
+  <p class="lead">Estas quatro não dependem da plataforma, não dependem de contratar e não dependem das respostas que ficaram em branco. Todas rodam dentro da Zenvia e do sistema que vocês já pagam. As mensagens de cada uma já estão escritas no documento de estratégia de WhatsApp.</p>
+
+  <div class="frente">
+    <div class="frente-top"><span class="fn">FRENTE 01</span><h3>Quem já comprou volta</h3><span class="pill auto">automático</span><span class="pill ja">começa já</span></div>
+    <div class="frente-grid">
+      <div><b>O que roda</b><p>Pós-compra em três toques (confirmação, rastreio, contato três dias depois de entregue) e aviso de reposição por ciclo: quem comprou determinada linha há um tempo recebe o lembrete na hora em que aquele material costuma acabar.</p></div>
+      <div><b>Quem opera</b><p>Atendimento dispara; nós montamos a lista a partir do export da base e desenhamos a régua.</p></div>
+      <div><b>Cadência</b><p>Dentro do teto que vocês deram: no máximo 1 a 2 mensagens por semana para a mesma pessoa.</p></div>
+      <div><b>Como se confere</b><p>Etiqueta <i>pos-compra</i> e <i>reposicao</i> na conversa, e o número de pedidos vindos do WhatsApp na planilha da semana.</p></div>
+    </div>
+    <p class="msg"><span>Por que esta é a primeira</span>É a única frente em que a base, a autorização e o canal já existem e estão os três parados ao mesmo tempo. Não há nada a destravar — só a ligar.</p>
+  </div>
+
+  <div class="frente">
+    <div class="frente-top"><span class="fn">FRENTE 02</span><h3>Quem perguntou e sumiu</h3><span class="pill humano">pessoa com lembrete</span><span class="pill ja">começa já</span></div>
+    <div class="frente-grid">
+      <div><b>O que roda</b><p>Toda conversa recebe etiqueta de desfecho — cotou, comprou ou sumiu. Quem ficou em “cotou” gera uma tarefa de retorno em 24h e outra em 72h.</p></div>
+      <div><b>Quem opera</b><p>Quem atende. É trabalho humano, com lembrete automático — não dá para automatizar a resposta de uma cotação.</p></div>
+      <div><b>Cadência</b><p>Dois toques por cotação e para. Sem terceiro.</p></div>
+      <div><b>Como se confere</b><p>Percentual de conversas com desfecho registrado. Abaixo de 80%, acende a luz: sem etiqueta, nada disso é medível.</p></div>
+    </div>
+    <p class="msg"><span>O número que ela move</span>Hoje a conversa que não fecha simplesmente morre — a pergunta sobre isso ficou em branco no briefing, o que já é a resposta. Cada cotação recuperada é venda que a casa já tinha pago para conseguir.</p>
+  </div>
+
+  <div class="frente">
+    <div class="frente-top"><span class="fn">FRENTE 03</span><h3>As 44% que chegam com a loja fechada</h3><span class="pill auto">automático</span><span class="pill ja">começa já</span></div>
+    <div class="frente-grid">
+      <div><b>O que roda</b><p>Resposta automática fora do horário que não só avisa o horário: já pergunta nome, cidade e o que a pessoa procura, e deixa a conversa pronta na fila da manhã seguinte.</p></div>
+      <div><b>Quem opera</b><p>Configuração é da Zenvia, uma vez. Depois roda sozinha. A fila da manhã é do atendimento.</p></div>
+      <div><b>Cadência</b><p>Todo dia, das 18h às 8h, e nos fins de semana.</p></div>
+      <div><b>Como se confere</b><p>Etiqueta <i>fora-horario</i> e a contagem de quantas dessas conversas viraram atendimento no dia seguinte.</p></div>
+    </div>
+    <p class="msg"><span>O tamanho do problema</span>De 335 conversas medidas no mês, <b>147 chegaram com a loja fechada</b>. Às 22h entram mais conversas do que às três da tarde. Hoje elas encontram silêncio.</p>
+  </div>
+
+  <div class="frente">
+    <div class="frente-top"><span class="fn">FRENTE 04</span><h3>Padrão de cadastro e o gargalo de uma pessoa só</h3><span class="pill humano">pessoa</span></div>
+    <div class="frente-grid">
+      <div><b>O que roda</b><p>Um modelo de ficha de produto — título com medida, composição, uso, foto com escala — aplicado primeiro nos produtos que mais vendem. E uma segunda pessoa treinada para cadastrar.</p></div>
+      <div><b>Quem opera</b><p>Quem cadastra hoje, com o modelo pronto nas mãos. Nós escrevemos o modelo e as primeiras fichas.</p></div>
+      <div><b>Cadência</b><p>Os 50 produtos novos do mês já entram no padrão; o catálogo antigo entra por prioridade de venda.</p></div>
+      <div><b>Como se confere</b><p>Número de devoluções por mês e o motivo de cada uma. É esse número que prova se o padrão está funcionando.</p></div>
+    </div>
+    <p class="msg"><span>Por que ela entra junto</span>Vocês disseram duas coisas na mesma página: que as devoluções são “muitas” e “um problema sério”, e que os textos do site não têm padrão. Descrição sem padrão vende o produto errado — e o produto errado volta.</p>
+  </div>
+</section>
+
+<section class="blk">
+  <p class="eyebrow">Parte 3</p>
+  <h2>A ponte até os R$ 300 mil por mês</h2>
+  <p class="lead">Vocês deram o alvo: no mínimo R$ 300 mil por mês no site, com a observação de que já estiveram perto. Este é o caminho aritmético até lá — sem depender de trazer mais gente para o site, que é a parte cara.</p>
+  <div class="ponte">
+    <div><span class="lab">Ponto de partida</span><span class="n">0,41%</span><span class="d">Conversão de hoje: 114 mil visitas, 469 pedidos no mês.</span></div>
+    <div><span class="lab">Alavanca 1 — checkout</span><span class="n">+160</span><span class="d">Pedidos por mês só levando a tela de pagamento de 41% para 55% de aproveitamento. Nenhuma visita nova.</span></div>
+    <div><span class="lab">Alavanca 2 — recompra</span><span class="n">0 → ?</span><span class="d">Hoje nenhum cliente é reativado. Este número não existe ainda — vamos criá-lo a partir da base.</span></div>
+    <div><span class="lab">Alavanca 3 — carrinho</span><span class="n">R$ 30</span><span class="d">Degrau de frete acima do ponto de prejuízo que vocês informaram, para subir o valor médio do pedido.</span></div>
+  </div>
+  <div class="note2"><b>A conta honesta:</b> as três alavancas mexem em partes diferentes do mesmo funil, então elas se somam de verdade — mas nenhuma delas sozinha leva o site de onde está até R$ 300 mil. O que fecha a diferença é a terceira, a recompra, e ela é justamente a que a casa nunca ligou. Por isso a Frente 01 é a primeira.</div>
+</section>
+
+<section class="blk">
+  <p class="eyebrow">Parte 4</p>
+  <h2>O que precisamos confirmar antes de fechar os números</h2>
+  <p class="lead">Doze pontos em que as respostas do briefing conversam entre si de um jeito que não fecha, ou em que falta o número. Nenhum deles trava as quatro frentes acima — mas todos travam o dimensionamento: sem eles, não dá para dizer com honestidade quanto cada frente vale.</p>
+
+  <ol class="contra">
+    <li>
+      <h4>O marketplace apareceu com 300 pedidos por dia e 0% do faturamento</h4>
+      <span class="versus">Na divisão do faturamento: <i>“60% loja, 40% site”</i> — marketplace não foi citado.<br>Nos pedidos por dia: <i>“marketplace uns 300 e site 30”</i>.</span>
+      <p>Trezentos pedidos por dia não cabem em zero por cento do faturamento. Ou o marketplace está embutido no “site”, ou a divisão precisa de um terceiro pedaço.</p>
+      <p class="ask">Como fica a divisão com os três: loja, site e marketplace?</p>
+    </li>
+    <li>
+      <h4>Quantos pedidos o site faz por dia, de verdade</h4>
+      <span class="versus">Vocês responderam <i>30 por dia</i> — o que dá cerca de 900 por mês.<br>A medição do site registra <i>469 pedidos</i> no mês.</span>
+      <p>É quase o dobro de diferença. Provavelmente os 30 incluem o marketplace, ou o mês medido pegou um período mais fraco. Precisamos do número que sai do sistema de vocês.</p>
+      <p class="ask">Dá para tirar do sistema o total de pedidos do site nos últimos três meses?</p>
+    </li>
+    <li>
+      <h4>Margem igual em todos os produtos</h4>
+      <p>Botão, fita, linha de crochê, laço de Natal e bijuteria com a mesma margem seria uma exceção no mercado inteiro. É mais provável que a margem por linha nunca tenha sido separada.</p>
+      <p class="ask">Se não estiver separada hoje, não tem problema — mas precisamos saber, porque é ela que decide o que o site empurra.</p>
+    </li>
+    <li>
+      <h4>A cliente quer entrega rápida — e o pedido sai em três dias</h4>
+      <span class="versus">Sobre promoção: <i>“promoção não é prioridade, clientes focam muito na entrega rápida”</i>.<br>Sobre expedição: <i>“varia muito, site uns 3 dias”</i>. E o cliente paga o frete.</span>
+      <p>Vocês identificaram corretamente o que a cliente valoriza, e é exatamente onde a operação está mais fraca. Isso não é uma crítica — é a maior oportunidade do documento, porque a casa já sabe qual é o critério de escolha da cliente.</p>
+      <p class="ask">O que impede o pedido de sair em um dia: separação, transportadora ou coleta?</p>
+    </li>
+    <li>
+      <h4>“Muitas” devoluções, sem número e sem motivo</h4>
+      <p>Foi a única resposta do briefing inteiro em que vocês usaram a palavra “sério”. Mas sem quantidade e sem motivo não dá para saber se a correção é na foto, na medida, na descrição ou no prazo — e cada uma custa uma coisa diferente.</p>
+      <p class="ask">Quantas por mês, e os três motivos mais comuns?</p>
+    </li>
+    <li>
+      <h4>Dezembro fraco</h4>
+      <span class="versus"><i>“Dezembro e janeiro somente que é fraco”</i> — e o estoque de Natal é comprado quatro meses antes.</span>
+      <p>Isso faz todo sentido se a cliente de vocês é quem <b>produz</b> e não quem consome: em dezembro ela já está vendendo o que fez, não comprando material. Se for isso, o pico da Roma é agosto a outubro — ou seja, é agora — e o plano precisa nascer neste mês, não em janeiro.</p>
+      <p class="ask">Confirma que a maior parte da clientela compra para revender ou produzir?</p>
+    </li>
+    <li>
+      <h4>“O marketing é bom” e “nada estratégico é feito toda semana”</h4>
+      <span class="versus">Sobre o que é feito toda semana sem falhar: <i>“nada estratégico”</i>.<br>Sobre posts e stories: <i>“marketing é bom”</i>.</span>
+      <p>As duas coisas podem ser verdade ao mesmo tempo — execução boa, sem rumo definido. É exatamente o diagnóstico que o resto do briefing sustenta, e é o que a grade fixa de semana resolve.</p>
+    </li>
+    <li>
+      <h4>Elogios acima das críticas, e devoluções “muitas”</h4>
+      <p>Quem elogia e quem devolve normalmente não são a mesma pessoa. Vale saber <b>o que</b> elogiam — se for atendimento e variedade, é isso que precisa estar escrito na página do produto e na primeira mensagem do WhatsApp.</p>
+      <p class="ask">O que os clientes elogiam com mais frequência, na palavra deles?</p>
+    </li>
+    <li>
+      <h4>Loja e site conversam — e o cliente da loja sempre volta</h4>
+      <span class="versus">Sobre loja e site conversarem: <i>“sim”</i>.<br>Sobre quem entra na loja: <i>“não, loja física o cliente sempre volta”</i>.</span>
+      <p>Não ficou claro se quem compra no Brás vira cliente do site. Se hoje não vira, essa é uma porta de entrada pronta e gratuita: são pessoas que já confiam na Roma.</p>
+      <p class="ask">Quem compra na loja física entra na mesma base de cadastro do site?</p>
+    </li>
+    <li>
+      <h4>Sobre artesãs e influenciadoras: a resposta foi “não temos espaço físico”</h4>
+      <p>A pergunta era sobre parceria — como foi o acerto e o que deu. A resposta foi sobre estrutura. Hoje quase nenhuma parceria com artesã ou professora de crochê acontece presencialmente: a peça é feita na casa dela, com material de vocês.</p>
+      <p class="ask">Já houve alguma parceria desse tipo? Se sim, como foi o acerto?</p>
+    </li>
+    <li>
+      <h4>Fotos de cliente com a peça pronta: “não”</h4>
+      <p>Num ramo em que a cliente compra material para fazer alguma coisa, a foto do que ela fez é a prova de venda mais forte que existe — e é de graça. Hoje vocês não recebem nenhuma.</p>
+      <p class="ask">Nunca chegou nenhuma, ou chega e não é guardada?</p>
+    </li>
+    <li>
+      <h4>“Quando pedimos mudança no site” — não entendi</h4>
+      <p>A pergunta ficou mal escrita da nossa parte. O que precisamos saber é simples: quando vocês querem mudar alguma coisa no site que a equipe não consegue mexer sozinha, <b>para quem vocês ligam e quanto tempo demora</b>?</p>
+      <p class="ask">É esse prazo que define o que entra primeiro no plano e o que entra depois.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="blk">
+  <p class="eyebrow">Parte 5</p>
+  <h2>As onze respostas que ficaram em branco</h2>
+  <p class="lead">Nem todas são para a mesma pessoa. Separamos por quem consegue responder mais rápido — quatro delas nem precisam de vocês.</p>
+  <div class="tbwrap">
+    <table class="g">
+      <thead><tr><th>Quem responde</th><th>O que falta</th><th>Por que importa</th></tr></thead>
+      <tbody>
+        <tr><td class="who">Rose e Marcelo</td><td><strong>Quem faz o quê na casa</strong> — a lista de pessoas e funções (loja, site, estoque, compras, atendimento, financeiro, conteúdo).</td><td>É a tabela que sustenta o plano inteiro. Montamos o rascunho com os nomes que apareceram; basta corrigir.</td></tr>
+        <tr><td class="who">Rose e Marcelo</td><td><strong>Quanto a casa produz por semana sem sofrer</strong> — fotos, vídeos e posts em semana cheia.</td><td>É o número que define o tamanho da grade da semana. Sem ele, a grade vira promessa que não se cumpre.</td></tr>
+        <tr><td class="who">Rose e Marcelo</td><td><strong>Os assuntos que não podem faltar</strong> — linhas ou temas que devem aparecer toda semana.</td><td>Sem isso a pauta fica ao sabor do que chegou de mercadoria.</td></tr>
+        <tr><td class="who">Rose e Marcelo</td><td><strong>Qual dia da semana funciona melhor</strong> para foto, banner, mensagem e a conversa fixa.</td><td>A rotina só existe de verdade quando tem dia e hora com nome.</td></tr>
+        <tr><td class="who">Rose e Marcelo</td><td><strong>O que parou de ser feito por dar trabalho demais</strong>, mesmo dando resultado — e <strong>o que não se quer mais ouvir falar</strong>.</td><td>Evita que a gente proponha exatamente aquilo que já cansou a casa.</td></tr>
+        <tr><td class="who">Carla</td><td><strong>O que já está ligado na Zenvia e o que nunca foi usado</strong>: fila, etiquetas, respostas rápidas, robô de primeira mensagem, módulo de vendas, relatórios.</td><td>A mais importante das onze. Na maioria das casas, o recurso que resolveria metade do problema já está pago e desligado.</td></tr>
+        <tr><td class="who">Carla</td><td><strong>O que mais atrapalha quem atende</strong>: repetir a mesma resposta, procurar produto, consultar estoque na mão, achar conversa antiga.</td><td>Define quais respostas rápidas e atalhos valem a pena montar primeiro.</td></tr>
+        <tr><td class="who">Carla</td><td><strong>O que acontece com quem escreve fora do horário</strong>, hoje, na prática.</td><td>É a Frente 03. Precisamos saber o que a pessoa recebe hoje, se é que recebe alguma coisa.</td></tr>
+        <tr><td class="who">Hudson</td><td><strong>O site aceita pop-up, faixa de aviso no topo, cupom automático e “avise-me quando chegar”?</strong> Quais desses já existem?</td><td>Define quais réguas dependem da plataforma e quais podem começar sem ela.</td></tr>
+        <tr><td class="who">Hudson</td><td><strong>Para quem vai o pedido de mudança no site e quanto demora.</strong></td><td>É a fila que define a ordem do plano.</td></tr>
+        <tr><td class="who">GGD</td><td><strong>Quanto um cliente compra ao longo de um ano e quantos voltaram a comprar.</strong></td><td>Não precisamos incomodar ninguém: sai da base exportada. É o número mais importante do projeto e nós levantamos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="blk">
+  <p class="eyebrow">Parte 6</p>
+  <h2>A ordem das coisas</h2>
+  <p class="lead">O que começa sem depender de ninguém, o que depende de uma conversa curta, e o que depende da plataforma — que é sempre a fila mais lenta e por isso precisa ser aberta primeiro, mesmo entrando por último.</p>
+  <div class="fases">
+    <div class="fase"><b>Já — não depende de resposta</b>
+      <ul>
+        <li>Levantamento de recompra e valor por cliente a partir da base exportada.</li>
+        <li>Desenho da régua de pós-compra e de reposição por ciclo.</li>
+        <li>Modelo de ficha de produto e as primeiras fichas escritas.</li>
+        <li>Rascunho da tabela de quem faz o quê, para vocês corrigirem.</li>
+      </ul>
+    </div>
+    <div class="fase"><b>Depois de uma conversa de 20 minutos</b>
+      <ul>
+        <li>Com a Carla: o que a Zenvia já tem ligado — e as Frentes 02 e 03 sobem no mesmo dia.</li>
+        <li>Com o Hudson: o que o site aceita e qual é a fila de mudanças.</li>
+        <li>Com vocês: os nomes de cada frente e o dia fixo da semana.</li>
+      </ul>
+    </div>
+    <div class="fase"><b>Fila da plataforma — abrir agora</b>
+      <ul>
+        <li>Compra sem obrigar a criar conta.</li>
+        <li>Aviso de carrinho parado chegando na Zenvia.</li>
+        <li>“Avise-me quando chegar” nos produtos sem estoque.</li>
+        <li>Produtos aparecendo no código das páginas de categoria.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note2">A fila da plataforma é a única coisa aqui que não está sob o controle de vocês nem sob o nosso. Por isso ela é a primeira a ser pedida, mesmo sendo a última a entregar. Tudo o mais nesta página acontece dentro de casa, com o que já está pago.</div>
+</section>
+
+<footer>
+  Documento de trabalho da Roma Aviamentos — setembro de 2026. Construído sobre as 63 respostas do briefing e sobre 30 dias de medição de comportamento no site. As mensagens de cada régua estão no documento de Estratégia de WhatsApp; a divisão de responsabilidades e a grade da semana estão no Plano de Trabalho. Qualquer linha aqui muda quando as onze respostas que faltam chegarem — o que não muda é a regra de que nada entra sem dono, sem dia e sem forma de conferir.
+</footer>
+
+</div>
+</body>
+</html>
