@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Como identificar de onde vem o anuncio nos seus videos do YouTube e o que da para fazer em cada caso.">
+<title>Vídeo sem anúncio no YouTube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@500;600&display=swap">
+
+<style>
+  :root{
+    --paper:#F6F7F4;
+    --surface:#FFFFFF;
+    --surface-2:#EDEFEA;
+    --ink:#10151C;
+    --ink-2:#3A4640;
+    --muted:#6B7A73;
+    --line:#DCE0D9;
+    --line-2:#C6CDC3;
+
+    --accent:#1B6B4A;
+    --accent-ink:#125037;
+    --accent-wash:#E2EDE6;
+
+    --amber:#8A5E0C;
+    --amber-wash:#F4EBD9;
+    --brick:#A63423;
+    --brick-wash:#F6E3DF;
+
+    --shadow:0 1px 2px rgba(16,21,28,.05), 0 8px 24px -18px rgba(16,21,28,.35);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1311;
+      --surface:#161C1A;
+      --surface-2:#1E2624;
+      --ink:#EBEFEA;
+      --ink-2:#BFC9C2;
+      --muted:#8B968E;
+      --line:#2A3330;
+      --line-2:#3A4440;
+
+      --accent:#6FC79B;
+      --accent-ink:#8FD8B2;
+      --accent-wash:#172E25;
+
+      --amber:#D8AC5C;
+      --amber-wash:#2C2417;
+      --brick:#E58A76;
+      --brick-wash:#2E1B18;
+
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --paper:#0E1311;
+    --surface:#161C1A;
+    --surface-2:#1E2624;
+    --ink:#EBEFEA;
+    --ink-2:#BFC9C2;
+    --muted:#8B968E;
+    --line:#2A3330;
+    --line-2:#3A4440;
+
+    --accent:#6FC79B;
+    --accent-ink:#8FD8B2;
+    --accent-wash:#172E25;
+
+    --amber:#D8AC5C;
+    --amber-wash:#2C2417;
+    --brick:#E58A76;
+    --brick-wash:#2E1B18;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:44rem;
+    margin:0 auto;
+    padding:clamp(2rem,6vw,4.5rem) clamp(1.1rem,5vw,2rem) 5rem;
+    display:flex;
+    flex-direction:column;
+    gap:3.25rem;
+  }
+
+  h1,h2,h3,.eyebrow,.chip,.step-n,.path,.tag{font-family:"Gabarito",system-ui,-apple-system,"Segoe UI",sans-serif}
+
+  .eyebrow{
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0;
+  }
+
+  h1{
+    font-size:clamp(2.1rem,6.4vw,3.1rem);
+    line-height:1.06;
+    font-weight:700;
+    letter-spacing:-.02em;
+    margin:.7rem 0 0;
+    text-wrap:balance;
+  }
+
+  .dek{
+    margin:1rem 0 0;
+    font-size:1.14rem;
+    color:var(--ink-2);
+    max-width:36rem;
+  }
+
+  header{border-bottom:1px solid var(--line);padding-bottom:2.25rem}
+
+  h2{
+    font-size:1.55rem;
+    font-weight:600;
+    letter-spacing:-.015em;
+    line-height:1.2;
+    margin:0;
+    text-wrap:balance;
+  }
+
+  h3{
+    font-size:1.06rem;
+    font-weight:600;
+    letter-spacing:-.005em;
+    margin:0;
+  }
+
+  p{margin:0}
+
+  section{display:flex;flex-direction:column;gap:1.1rem}
+
+  .section-head{display:flex;flex-direction:column;gap:.45rem}
+
+  /* caminho de menu — o que se clica, literalmente */
+  .path{
+    font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:.82em;
+    font-weight:500;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:.12em .45em;
+    white-space:nowrap;
+    color:var(--ink);
+  }
+  .path i{font-style:normal;color:var(--muted);padding:0 .12em}
+
+  /* diagnóstico */
+  .diag{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:clamp(1.1rem,3.5vw,1.6rem);
+    display:flex;
+    flex-direction:column;
+    gap:1.15rem;
+  }
+  .q{display:flex;flex-direction:column;gap:.5rem}
+  .q + .q{border-top:1px dashed var(--line-2);padding-top:1.15rem}
+  .q-label{
+    font-family:"Gabarito",system-ui,sans-serif;
+    font-size:.7rem;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+  }
+  .q p{font-size:1rem}
+  .branch{
+    display:flex;
+    flex-direction:column;
+    gap:.35rem;
+    font-size:.95rem;
+    color:var(--ink-2);
+    padding-left:.9rem;
+    border-left:2px solid var(--line-2);
+  }
+  .branch b{font-weight:500;color:var(--ink);font-family:"Gabarito",sans-serif;font-size:.92rem}
+
+  /* cenários */
+  .case{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .case-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:.55rem .8rem;
+    padding:1.05rem clamp(1.1rem,3.5vw,1.5rem);
+    border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .case-head h2{font-size:1.28rem}
+  .case-body{
+    padding:clamp(1.1rem,3.5vw,1.5rem);
+    display:flex;
+    flex-direction:column;
+    gap:1.2rem;
+  }
+
+  .chip{
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.22em .6em;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .chip.go{background:var(--accent-wash);color:var(--accent-ink)}
+  .chip.stop{background:var(--amber-wash);color:var(--amber)}
+  .chip.fix{background:var(--brick-wash);color:var(--brick)}
+
+  .case.go{border-left:3px solid var(--accent)}
+  .case.stop{border-left:3px solid var(--amber)}
+  .case.fix{border-left:3px solid var(--brick)}
+
+  /* passos */
+  ol.steps{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:.85rem;
+    counter-reset:s;
+  }
+  ol.steps li{
+    display:grid;
+    grid-template-columns:1.7rem 1fr;
+    gap:.85rem;
+    align-items:start;
+    counter-increment:s;
+    font-size:1rem;
+  }
+  ol.steps li::before{
+    content:counter(s);
+    font-family:"JetBrains Mono",monospace;
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--accent-ink);
+    background:var(--accent-wash);
+    border-radius:6px;
+    height:1.7rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:.1rem;
+  }
+  ol.steps li .sub{
+    display:block;
+    font-size:.9rem;
+    color:var(--muted);
+    margin-top:.15rem;
+  }
+
+  ul.plain{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+    font-size:1rem;
+  }
+  ul.plain li{
+    display:grid;
+    grid-template-columns:.6rem 1fr;
+    gap:.75rem;
+    align-items:start;
+  }
+  ul.plain li::before{
+    content:"";
+    width:.4rem;height:.4rem;
+    border-radius:50%;
+    background:var(--line-2);
+    margin-top:.62rem;
+  }
+
+  /* avisos */
+  .note{
+    border-radius:9px;
+    padding:.85rem 1rem;
+    font-size:.95rem;
+    display:flex;
+    flex-direction:column;
+    gap:.3rem;
+  }
+  .note .tag{
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .note.warn{background:var(--brick-wash);color:var(--ink)}
+  .note.warn .tag{color:var(--brick)}
+  .note.tip{background:var(--accent-wash);color:var(--ink)}
+  .note.tip .tag{color:var(--accent-ink)}
+  .note.hold{background:var(--amber-wash);color:var(--ink)}
+  .note.hold .tag{color:var(--amber)}
+
+  /* falas prontas */
+  .say{
+    display:flex;
+    flex-direction:column;
+    gap:.9rem;
+  }
+  .say blockquote{
+    margin:0;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:3px solid var(--line-2);
+    border-radius:0 9px 9px 0;
+    padding:.9rem 1.1rem;
+    font-size:1rem;
+    font-style:italic;
+    color:var(--ink);
+  }
+  .say .who{
+    font-family:"Gabarito",sans-serif;
+    font-style:normal;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    display:block;
+    margin-bottom:.4rem;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:1.5rem;
+    font-size:.9rem;
+    color:var(--muted);
+  }
+
+  b,strong{font-weight:500;color:var(--ink)}
+
+  a{color:var(--accent-ink);text-decoration-thickness:1px;text-underline-offset:2px}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+  @media (prefers-reduced-motion:no-preference){
+    .case,.diag{transition:box-shadow .2s ease}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Gio Growth Digital</p>
+    <h1>Tirar o anúncio do seu vídeo no YouTube</h1>
+    <p class="dek">Se aparece publicidade nos seus vídeos e você não quer monetizá-los, o primeiro passo é descobrir <b>de onde o anúncio está vindo</b>. São três origens possíveis, e só em uma delas existe um botão para desligar — esta página mostra como identificar a sua e o que fazer em cada caso.</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>Comece pelo diagnóstico</h2>
+      <p style="color:var(--ink-2);font-size:1rem">Duas perguntas dentro do <span class="path">YouTube Studio</span>. Faça as duas antes de mexer em qualquer configuração.</p>
+    </div>
+
+    <div class="diag">
+      <div class="q">
+        <span class="q-label">Pergunta 1 · O canal é monetizado?</span>
+        <p>Entre em <span class="path">youtube.com/studio</span> e abra <span class="path">Ganhos</span> no menu da esquerda.</p>
+        <div class="branch">
+          <span><b>Aparece painel de receita, RPM, gráfico de ganhos</b> → seu canal está no Programa de Parcerias. Vá para <a href="#monetizado">canal monetizado</a>.</span>
+          <span><b>Aparece "requisitos" ou "inscreva-se quando atingir 1.000 inscritos"</b> → o canal está fora do programa. Vá para <a href="#sem-monetizacao">canal sem monetização</a>.</span>
+        </div>
+      </div>
+
+      <div class="q">
+        <span class="q-label">Pergunta 2 · Tem reivindicação nos vídeos?</span>
+        <p>Vale nos dois casos acima. Abra <span class="path">Conteúdo <i>›</i> Vídeos</span> e olhe a coluna <b>Restrições</b>.</p>
+        <div class="branch">
+          <span><b>Aparece "Reivindicação de direitos autorais"</b> → o anúncio pode ser de terceiro, e não do seu canal. Resolva primeiro a <a href="#reivindicacao">reivindicação</a>, senão o resto não faz efeito.</span>
+          <span><b>Coluna vazia ou "Nenhum"</b> → siga apenas pelo resultado da pergunta 1.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="monetizado" class="case go">
+    <div class="case-head">
+      <h2>Canal monetizado</h2>
+      <span class="chip go">Tem solução</span>
+    </div>
+    <div class="case-body">
+      <p>Aqui existe o botão. Dá para desligar todos os vídeos de uma vez, em minutos, sem sair do programa.</p>
+
+      <div>
+        <h3 style="margin-bottom:.7rem">Desligar nos vídeos que já estão no ar</h3>
+        <ol class="steps">
+          <li>Abra <span class="path">youtube.com/studio</span> e confirme que está no canal certo.<span class="sub">Clique no avatar, canto superior direito → Trocar conta. Se você administra mais de um canal, é aqui que costuma haver confusão.</span></li>
+          <li>Menu da esquerda → <span class="path">Conteúdo</span>, aba <b>Vídeos</b>.</li>
+          <li>No rodapé da lista, aumente a quantidade de itens por página para <b>50</b>.<span class="sub">Menos páginas, menos vezes repetindo o processo.</span></li>
+          <li>Marque a caixinha de seleção no <b>cabeçalho da tabela</b>, à esquerda de "Vídeo".<span class="sub">Isso seleciona a página inteira, não o canal inteiro — você vai precisar repetir em cada página.</span></li>
+          <li>Na barra que aparece no topo, clique em <span class="path">Editar</span> → <span class="path">Monetização</span>.</li>
+          <li>Escolha <b>Desativada</b> e clique em <span class="path">Atualizar vídeos</span>. Confirme.</li>
+          <li>Confira na coluna <b>Monetização</b>: o ícone deve ficar apagado em todos.<span class="sub">Se algum continuar ligado, provavelmente é um vídeo com reivindicação — veja o terceiro caso.</span></li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:.7rem">Deixar desligado nos próximos uploads</h3>
+        <ul class="plain">
+          <li>No Studio, vá em <span class="path">Configurações <i>›</i> Padrões de upload <i>›</i> Monetização</span> e deixe como <b>Desativada</b>.</li>
+          <li>Sem esse ajuste, cada vídeo novo sobe monetizado de novo e o anúncio volta a aparecer.</li>
+        </ul>
+      </div>
+
+      <div class="note warn">
+        <span class="tag">Atenção</span>
+        <p>No fim da página <span class="path">Ganhos</span> existe um botão <b>"Sair do Programa de Parcerias do YouTube"</b>. <b>Não clique nele.</b> Para voltar, o canal precisa se reinscrever e cumprir todos os requisitos (1.000 inscritos e horas de exibição) do zero. Desligar a monetização dos vídeos resolve do mesmo jeito e é reversível a qualquer momento.</p>
+      </div>
+
+      <div class="note tip">
+        <span class="tag">Um vídeo só</span>
+        <p>Se você quer desligar apenas em um: <span class="path">Conteúdo</span> → clique no vídeo → aba <span class="path">Monetização</span> → <b>Desativada</b> → <b>Salvar</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sem-monetizacao" class="case stop">
+    <div class="case-head">
+      <h2>Canal sem monetização</h2>
+      <span class="chip stop">Não existe a opção</span>
+    </div>
+    <div class="case-body">
+      <p>Esta é a parte que costuma surpreender: <b>o YouTube não oferece configuração para desligar.</b> Desde novembro de 2020, os Termos de Serviço da plataforma permitem que ela exiba anúncios em qualquer vídeo, inclusive de canais que estão fora do Programa de Parcerias. Nesses casos a receita fica inteiramente com o YouTube — o canal não recebe nada e também não pode impedir a exibição.</p>
+
+      <p>Não adianta procurar a opção escondida nas configurações; ela não existe. O que existe são três caminhos:</p>
+
+      <ul class="plain">
+        <li><b>Trocar a hospedagem dos vídeos.</b> Se o conteúdo é de um curso, uma área de membros ou uma página do seu site, plataformas como <b>Vimeo</b> (plano pago) ou <b>Wistia</b> entregam player limpo, sem nenhum anúncio, e ainda permitem restringir onde o vídeo pode ser assistido. É a solução mais direta na maioria dos casos.</li>
+        <li><b>Entrar no Programa de Parcerias.</b> Se o canal já atende aos requisitos: como o anúncio será exibido de qualquer forma, ao menos a receita passa a ser sua — e você ganha o controle para desligar onde quiser.</li>
+        <li><b>YouTube Premium.</b> Quem assiste com Premium não vê anúncio nenhum. É por isso que às vezes você não vê publicidade no próprio vídeo, mas quem está assistindo vê.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="reivindicacao" class="case fix">
+    <div class="case-head">
+      <h2>Reivindicação de direitos autorais</h2>
+      <span class="chip fix">Resolver na origem</span>
+    </div>
+    <div class="case-body">
+      <p>Se o vídeo usa música, trilha ou trecho de terceiros, o dono desse conteúdo pode ter feito uma reivindicação — e nesse caso <b>é ele quem está exibindo o anúncio</b>, mesmo que o seu canal não seja monetizado. Desligar a monetização não remove esse tipo de anúncio.</p>
+
+      <ol class="steps">
+        <li>Em <span class="path">Conteúdo <i>›</i> Vídeos</span>, passe o mouse na coluna <b>Restrições</b> do vídeo e clique em <b>Ver detalhes</b>.</li>
+        <li>Veja o que foi reivindicado e em qual trecho — o Studio marca o intervalo exato na linha do tempo.</li>
+        <li>Escolha a saída:<span class="sub"><b>Remover música</b> (o Studio retira só o áudio reivindicado) · <b>Substituir por uma faixa do acervo gratuito</b> · <b>Cortar o trecho</b> · <b>Contestar</b>, apenas se você tiver licença ou direito de uso comprovável.</span></li>
+        <li>Salve e aguarde. A alteração leva <b>algumas horas</b> para ser processada; a reivindicação não desaparece na hora.</li>
+      </ol>
+
+      <div class="note warn">
+        <span class="tag">Cuidado</span>
+        <p>Contestar sem ter direito de uso pode gerar um <b>strike</b> de direitos autorais, e três strikes derrubam o canal. Na dúvida, remova ou substitua o áudio — é mais rápido e não tem risco.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Ficou alguma dúvida sobre qual é o seu caso? Fale com a sua gestora — a gente verifica no Studio junto com você.</p>
+  </footer>
+
+</div>
+</body>
+</html>
