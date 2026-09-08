@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rugido do Leão — Plano de conteúdo</title>
+<style>
+  :root {
+    --ground: #EEEFE9; --surface: #F7F8F3; --field: #FFFFFF;
+    --ink: #1C1F1A; --ink-soft: #43483E; --muted: #6B6F63;
+    --line: #D4D7CA; --line-soft: #E1E3D8;
+    --accent: #8F6410; --moss: #2F4636; --star: #7A4A0C; --star-bg: #EFE6D2;
+    --ok: #2F5E3E; --ok-bg: #E3EDE4;
+    --warn: #8A6410; --warn-bg: #F3EAD4;
+    --gap: #8E3A2A; --gap-bg: #F4E2DD;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E; --surface: #1C1A15; --field: #211E18;
+      --ink: #E9E4D7; --ink-soft: #C7C1B1; --muted: #948D7D;
+      --line: #38342A; --line-soft: #2A261D;
+      --accent: #D8A63F; --moss: #8FAE97; --star: #E0B463; --star-bg: #2A2115;
+      --ok: #8FBF9C; --ok-bg: #1B2A20;
+      --warn: #DDB25A; --warn-bg: #2A2115;
+      --gap: #E09B86; --gap-bg: #2E1B16;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.58; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 140px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--moss);
+  }
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 30px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(34px, 5.4vw, 54px); line-height: 1.05;
+    letter-spacing: -0.015em; margin: 0; max-width: 19ch; text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 64ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+  .meta-line {
+    display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.06em; color: var(--muted);
+  }
+
+  section { padding-top: 62px; }
+  .section-title { display: flex; flex-direction: column; gap: 7px; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 26px; }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(24px, 3.2vw, 33px); line-height: 1.14; margin: 0; letter-spacing: -0.01em;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 68ch; }
+
+  h3 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600; font-size: 21px; margin: 34px 0 10px; letter-spacing: -0.005em;
+  }
+  p { max-width: 70ch; }
+  .lead { font-size: 17.5px; color: var(--ink-soft); }
+  strong { font-weight: 620; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .cards > div { background: var(--surface); padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .cards b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); font-weight: 500;
+  }
+  .cards span { font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+
+  .bignum { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin: 4px 0 26px; }
+  .bignum > div { background: var(--surface); padding: 22px 20px; display: flex; flex-direction: column; gap: 4px; }
+  .bignum .v { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
+  .bignum .k { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .bignum .s { font-size: 13.5px; color: var(--ink-soft); line-height: 1.4; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 20px; font-size: 15.5px; }
+  .tscroll { overflow-x: auto; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.total td { border-top: 1px solid var(--line); border-bottom: none; font-weight: 620; }
+
+  .pill { display: inline-block; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; white-space: nowrap; }
+  .p-ok { background: var(--ok-bg); color: var(--ok); }
+  .p-warn { background: var(--warn-bg); color: var(--warn); }
+  .p-gap { background: var(--gap-bg); color: var(--gap); }
+  .p-ess { background: var(--star-bg); color: var(--star); }
+
+  .bar { display: flex; height: 30px; border: 1px solid var(--line); margin: 6px 0 12px; overflow: hidden; }
+  .bar div { display: flex; align-items: center; justify-content: center; font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; }
+  .bar .b-ok { background: var(--ok-bg); color: var(--ok); }
+  .bar .b-warn { background: var(--warn-bg); color: var(--warn); }
+  .bar .b-gap { background: var(--gap-bg); color: var(--gap); }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13.5px; color: var(--muted); margin-bottom: 30px; }
+  .legend span { display: flex; align-items: center; gap: 7px; }
+  .sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  .qblock { border: 1px solid var(--line); background: var(--surface); margin-bottom: 22px; }
+  .qhead { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+  .qhead b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 18px; font-weight: 600; }
+  .qhead .why { font-size: 13.5px; color: var(--muted); }
+  .qrow { display: grid; grid-template-columns: 42px 1fr 118px; gap: 14px; padding: 13px 20px; border-bottom: 1px solid var(--line-soft); align-items: start; }
+  .qrow:last-child { border-bottom: none; }
+  .qrow .n { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); padding-top: 3px; }
+  .qrow .q { font-size: 15px; font-weight: 600; margin: 0 0 3px; }
+  .qrow .a { font-size: 14.5px; color: var(--ink-soft); margin: 0; max-width: 66ch; }
+  .qrow .f { font-size: 13.5px; color: var(--gap); margin: 5px 0 0; max-width: 66ch; }
+  .qrow .st { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; padding-top: 2px; }
+
+  .finding { border-left: 3px solid var(--accent); padding: 2px 0 2px 20px; margin: 30px 0; }
+  .finding h3 { margin-top: 0; }
+
+  .phase { border: 1px solid var(--line); background: var(--surface); margin-bottom: 20px; }
+  .phase > .ph { padding: 17px 22px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+  .phase .ph .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+  .phase .ph b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 21px; font-weight: 600; }
+  .phase .ph .when { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--muted); margin-left: auto; }
+  .phase .pb { padding: 18px 22px 20px; }
+  .phase .pb p { margin: 0 0 12px; }
+  .phase ul { margin: 0 0 12px; padding-left: 20px; }
+  .phase li { margin-bottom: 7px; max-width: 68ch; }
+  .spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 14px; }
+  .spec > div { background: var(--field); padding: 13px 16px; display: flex; flex-direction: column; gap: 3px; }
+  .spec b { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .spec span { font-size: 14.5px; color: var(--ink); }
+
+  .callout { border: 1px solid var(--line); background: var(--star-bg); padding: 22px 24px; margin: 30px 0; }
+  .callout p { margin: 0; max-width: 72ch; }
+  .callout .eyebrow { color: var(--star); margin-bottom: 8px; display: block; }
+
+  footer { margin-top: 80px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px 100px; }
+    .qrow { grid-template-columns: 32px 1fr; }
+    .qrow .st { grid-column: 2; flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<style>
+  .pauta { border: 1px solid var(--line); background: var(--field); margin-bottom: 14px; }
+  .pauta .ph2 { display: flex; gap: 12px; align-items: baseline; padding: 14px 18px 12px; border-bottom: 1px solid var(--line-soft); }
+  .pauta .ph2 .num { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--accent); padding-top: 3px; }
+  .pauta .ph2 b { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 18px; font-weight: 600; line-height: 1.25; }
+  .pauta .pb2 { padding: 14px 18px 16px; }
+  .pauta .pb2 p { margin: 0 0 10px; font-size: 15.5px; }
+  .pauta .pb2 p:last-child { margin-bottom: 0; }
+  .rot { border-left: 2px solid var(--line); padding-left: 14px; margin: 12px 0; font-size: 15px; color: var(--ink-soft); font-style: italic; max-width: 62ch; }
+  .lab { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px; }
+  .naopode { border: 1px solid var(--line); background: var(--gap-bg); padding: 20px 22px; margin: 26px 0; }
+  .naopode p { margin: 0 0 10px; max-width: 70ch; }
+  .naopode p:last-child { margin-bottom: 0; }
+  .naopode .eyebrow { color: var(--gap); margin-bottom: 10px; display: block; }
+  ul.limpa { margin: 0 0 14px; padding-left: 20px; }
+  ul.limpa li { margin-bottom: 8px; max-width: 68ch; }
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Gio Growth Digital · Plano de conteúdo</div>
+  <h1>O que vamos <em>publicar</em> — e o que precisamos gravar</h1>
+  <p class="standfirst">Quatro fases, nesta ordem, para levar quem nunca ouviu falar de vocês até o agendamento. Cada fase faz um trabalho específico na cabeça do tutor. No fim, a campanha de agendamento de banho e tosa.</p>
+  <div class="meta-line">
+    <span>Rugido do Leão</span><span>São José do Rio Preto · SP</span><span>Primeiros 30 dias</span><span>Sem verba de mídia até a Fase 4</span>
+  </div>
+</header>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">A régua</div>
+    <h2>Quatro fases e uma campanha</h2>
+    <p>Cada fase responde a uma pergunta diferente que o tutor faz — e ele faz nessa ordem. Pular uma delas é o que faz conteúdo bonito não virar cliente.</p>
+  </div>
+
+  <div class="cards">
+    <div><b>Fase 1 · Descoberta</b><span>“Nunca ouvi falar.” Existir, ter rosto e ter endereço.</span></div>
+    <div><b>Fase 2 · Oportunidade</b><span>“Banho é tudo igual.” A fase que muda o critério de escolha. É aqui que a autoridade se constrói.</span></div>
+    <div><b>Fase 3 · Espaço</b><span>“Será que é verdade?” A prova física do que foi dito na fase anterior.</span></div>
+    <div><b>Fase 4 · Serviço</b><span>“Como funciona?” Tirar o atrito prático que trava o primeiro agendamento.</span></div>
+    <div><b>Campanha</b><span>“Quero marcar.” Mídia paga chamando para o primeiro banho, no dia e no horário que estão vazios.</span></div>
+  </div>
+
+  <h3>Por que nesta ordem, e por que banho e tosa</h3>
+  <p>Ninguém agenda com quem não conhece — e ninguém troca de pet shop sem antes ter um motivo para achar que o de hoje não serve. Por isso a Fase 2 é a mais importante das quatro: é ela que dá ao tutor uma pergunta que ele nunca fez sobre o lugar onde deixa o animal. As fases 3 e 4 só existem para provar e destravar o que a 2 abriu.</p>
+  <p>E a oferta é <strong>banho e tosa</strong> por um motivo simples: day care, hotelzinho e dermatologia são decisões de confiança. Ninguém deixa o cachorro dormir fora, ou entrega o tratamento de pele dele, para uma casa em que nunca pisou. O banho é a única porta em que o tutor arrisca pouco — duas horas, valor conhecido — e sai de lá tendo visto tudo. <strong>Todo o resto se vende depois, para quem já entrou.</strong></p>
+
+  <div class="callout">
+    <span class="eyebrow">O que isso significa na prática</span>
+    <p>Nas quatro semanas, <strong>nenhuma publicação anuncia preço de banho.</strong> Preço de banho atrai quem escolhe por preço — que é exatamente o cliente que vocês disseram perder por preço. O que vende aqui não é o banho mais barato: é o banho que ninguém mais na cidade faz assim.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Fase 1 · Semana 1</div>
+    <h2>Descoberta</h2>
+    <p>O tutor está pensando: <em>“nunca ouvi falar dessa casa.”</em> O trabalho aqui é existir, ter rosto e ficar claro onde vocês ficam. É a fase mais curta e a mais fácil de gravar.</p>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">01</span><b>Quem somos, em quarenta segundos</b></div>
+    <div class="pb2">
+      <p>As duas na recepção, juntas. Nome, o que é a casa, há quanto tempo, e o que vocês fazem: banho e tosa, day care, hotelzinho e dermatologia.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“A gente é o Rugido do Leão. Somos duas veterinárias, e este aqui é o lugar onde a gente cuida do pet do jeito que gostaria que cuidassem do nosso.”</p>
+      <p><span class="lab">Como gravar</span>Celular apoiado, na altura do peito, as duas em pé lado a lado. Luz da janela batendo no rosto.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">02</span><b>Aqui quem cuida do seu pet é veterinária</b></div>
+    <div class="pb2">
+      <p>Ponto que a maioria dos pet shops não tem e que quase ninguém comunica: a casa tem duas veterinárias, e uma delas é dermatologista. Não é um balcão com banhista — é supervisão técnica o dia inteiro.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“Na maioria dos lugares, quem recebe o seu cachorro não é veterinário. Aqui somos nós duas.”</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">03</span><b>Onde ficamos e até onde vamos buscar</b></div>
+    <div class="pb2">
+      <p>Endereço, referência do bairro e o leva e traz — até quais regiões vocês atendem. Muita gente da zona sul já atravessa a cidade para chegar aí; quem não sabe disso não se dá o trabalho.</p>
+      <p><span class="lab">Pendência</span>Precisamos da lista de bairros do leva e traz antes de gravar esta.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">04</span><b>Um dia aqui dentro</b></div>
+    <div class="pb2">
+      <p>Sem fala. Cenas curtas da rotina coladas: a porta abrindo, o cão chegando, a água, a escova, o secador, o cão saindo cheiroso. Trilha por cima.</p>
+      <p><span class="lab">Como gravar</span>Dez a quinze clipes de três a cinco segundos cada, gravados ao longo de um dia normal. Não precisa de roteiro — precisa de quantidade.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Fase 2 · Semana 2</div>
+    <h2>Oportunidade</h2>
+    <p>O tutor está pensando: <em>“banho é tudo igual, eu levo no mais perto de casa.”</em> Esta é a fase que desmonta essa frase — e é o coração do trabalho de autoridade. Cada publicação aqui entrega ao tutor uma pergunta que ele nunca fez sobre o lugar onde deixa o animal.</p>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">Regra desta fase</span>
+    <p>Nunca citar, nomear ou alfinetar outro pet shop — além de ser deselegante, o conselho trata concorrência desleal como infração ética. A pergunta é sempre feita <strong>sobre o cuidado</strong>, nunca sobre o concorrente: “onde o seu cachorro fica enquanto espera?”, e não “sabe o que fazem no lugar X?”.</p>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">05</span><b>Onde seu cachorro fica enquanto espera o banho?</b></div>
+    <div class="pb2">
+      <p>A pergunta central de toda a estratégia. O tutor deixa o pet e vai embora — ele nunca viu o que acontece nas três horas seguintes. Explicar que existem casas onde o animal espera preso numa caixa, e que aqui ele espera solto, num espaço supervisionado.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“Você já parou pra pensar onde o seu cachorro fica nas três horas entre você deixar ele e ele entrar no banho?”</p>
+      <p><span class="lab">Como gravar</span>Falada por uma de vocês, e no meio do vídeo corta para a imagem real do espaço com os cães soltos. A fala levanta a dúvida, a imagem responde.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">06</span><b>Por que não usamos sedativo</b></div>
+    <div class="pb2">
+      <p>Com a Carla, e é a peça mais forte da fase. Sedar para facilitar a tosa é uma prática que existe, o tutor raramente é avisado, e ele tem o direito de perguntar. Aqui não se usa — e o motivo é técnico, não comercial.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“Se o seu cachorro voltou de um banho muito quieto, muito mole, vale perguntar o que foi usado nele. Aqui a gente não seda para tosar, e eu te explico por quê.”</p>
+      <p><span class="lab">Cuidado</span>Falar do risco de forma técnica e serena, sem dramatizar e sem sugerir que todo mundo faz isso. Quem fala é a veterinária, não a vendedora.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">07</span><b>Separar por tamanho não basta — a gente separa por temperamento</b></div>
+    <div class="pb2">
+      <p>Dois cães do mesmo porte podem não se dar. Um idoso não quer conviver com filhote elétrico. Explicar que a separação aqui é por porte <em>e</em> por temperamento, e que quem observa isso são vocês, o dia inteiro.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“Colocar cachorro do mesmo tamanho junto não quer dizer que eles vão se dar bem. Tamanho é o começo — o que importa mesmo é o temperamento.”</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">08</span><b>A gente pode dizer não para um cachorro</b></div>
+    <div class="pb2">
+      <p>Contraintuitivo e por isso funciona: vocês avaliam o animal na recepção e já recusaram. Isso não é rigidez, é o motivo pelo qual os outros pets ficam seguros. É o argumento que transforma exigência em cuidado.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“A gente já mandou cachorro embora. E é justamente por isso que o seu pode ficar solto aqui dentro.”</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">09</span><b>Coceira não é normal</b></div>
+    <div class="pb2">
+      <p>Educativo, com a Carla. Shih tzu e spitz — as duas raças que mais aparecem aí — são das que mais dão problema de pele. Dermatite, otite e alergia alimentar são os três quadros que mais chegam. Ensinar o tutor a reconhecer os sinais: coceira que não passa, lambedura de pata, cheiro na orelha, cabeça balançando.</p>
+      <p><span class="lab">Cuidado</span>Educação, nunca promessa. Nada de “cura”, “100%” ou “definitivo”. Usar “auxilia”, “ajuda a controlar”, “tem tratamento”. E a peça precisa sair identificada com o nome e o CRMV da responsável técnica.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Fase 3 · Semana 3</div>
+    <h2>Espaço</h2>
+    <p>O tutor está pensando: <em>“será que é verdade mesmo?”</em> Nesta fase quase não se fala — se mostra. É a semana em que a câmera trabalha mais que o roteiro, e é a que mais gera mensagem no WhatsApp.</p>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">10</span><b>O tour</b></div>
+    <div class="pb2">
+      <p>A peça principal da estratégia inteira. Um vídeo só, de um minuto a um minuto e meio, andando pela casa e narrando: a recepção onde o pet é avaliado, o espaço onde ele fica solto, a separação dos grupos, onde acontece o banho, onde o pet já limpo espera, onde dormem os hóspedes.</p>
+      <p><span class="lab">Como gravar</span>Uma pessoa filma andando devagar, outra narra. Grave duas ou três vezes inteiro em vez de tentar acertar de primeira — a terceira sempre sai melhor.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">11</span><b>Solto de verdade</b></div>
+    <div class="pb2">
+      <p>Sem narração: os cães circulando, se cheirando, deitados, brincando. Trinta segundos de imagem real do que a Fase 2 prometeu. É o vídeo que responde sozinho a pauta 05.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">12</span><b>A câmera</b></div>
+    <div class="pb2">
+      <p>Mostrar a tela, ao vivo, com os animais aparecendo nela. Explicar que o tutor pode pedir foto e vídeo do pet a qualquer momento do dia e vocês mandam.</p>
+      <p class="rot"><span class="lab">Abertura sugerida</span>“Ficou com saudade no meio do dia? Manda mensagem que a gente te manda o vídeo dele agora.”</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">13</span><b>Quem já tomou banho não volta pra fila</b></div>
+    <div class="pb2">
+      <p>Detalhe pequeno que diz muito sobre o padrão da casa: o animal limpo fica separado de quem ainda vai entrar. Ninguém sai daqui sujo de novo por descuido de organização.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">14</span><b>Onde dormem os hóspedes</b></div>
+    <div class="pb2">
+      <p>Mostra o hotelzinho sem vendê-lo. Planta a semente de dezembro em quem entrou pelo banho — e é para essas pessoas que a campanha de reserva de fim de ano vai falar em novembro.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Fase 4 · Semana 4</div>
+    <h2>Serviço</h2>
+    <p>O tutor está pensando: <em>“tudo bem, mas como funciona?”</em> Esta fase existe para tirar do caminho as dúvidas práticas que fazem alguém adiar o primeiro agendamento — e roda em paralelo com a campanha.</p>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">15</span><b>Do momento em que ele chega até a hora de buscar</b></div>
+    <div class="pb2">
+      <p>O passo a passo completo, na ordem: chegada, avaliação na recepção, para qual grupo ele vai, o banho, a secagem, onde espera, a entrega. Tirar todo o mistério.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">16</span><b>A primeira vez do seu pet aqui</b></div>
+    <div class="pb2">
+      <p>Fala direto com quem vai agendar pela primeira vez: o que trazer, o que vocês perguntam, quanto tempo dura a avaliação, e o que acontece se ele não se adaptar ao grupo. Reduz o medo de estrear.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">17</span><b>Quanto tempo demora</b></div>
+    <div class="pb2">
+      <p>Pergunta prática que todo mundo faz no WhatsApp e ninguém responde publicamente. Responder no conteúdo economiza atendimento e aumenta agendamento.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">18</span><b>A gente busca e leva</b></div>
+    <div class="pb2">
+      <p>Como funciona o leva e traz, até onde vai e como é cobrado. Para quem mora longe, é isso que transforma “gostei” em “dá pra fazer”.</p>
+    </div>
+  </div>
+
+  <div class="pauta">
+    <div class="ph2"><span class="num">19</span><b>Como agendar</b></div>
+    <div class="pb2">
+      <p>Encerra a sequência apontando para o WhatsApp, com o dia e o horário que estão vazios na agenda oferecidos como os melhores para vir com calma.</p>
+      <p><span class="lab">Pendência</span>Precisamos saber qual dia e qual horário ficam vazios. Vocês disseram qual é o mais cheio (sexta); é o oposto disso que a campanha vai encher.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Depois das quatro fases</div>
+    <h2>A campanha de agendamento de banho e tosa</h2>
+    <p>Entra quando as quatro fases já estiverem publicadas — porque aí quem clicar no anúncio encontra um perfil que já prova tudo o que o anúncio promete. Antes disso, o anúncio manda gente para um perfil vazio.</p>
+  </div>
+
+  <h3>O que a campanha diz</h3>
+  <p>Ela não anuncia preço nem desconto. Ela repete, em vinte segundos, a pergunta da Fase 2 e responde com a imagem da Fase 3: <strong>onde o seu cachorro fica enquanto espera o banho? Aqui, solto, separado por temperamento, sem sedativo, com veterinária olhando e câmera no espaço.</strong> E chama para agendar no WhatsApp.</p>
+
+  <h3>Para quem ela fala</h3>
+  <ul class="limpa">
+    <li>Tutores da zona sul, região dos Damhas e condomínios — o perfil que já prova que atravessa a cidade para chegar aí, e não um raio genérico em volta da loja</li>
+    <li>Com prioridade para tutores de raças pequenas de pelo, que são as que mais aparecem na casa e as que mais precisam de banho frequente</li>
+    <li>Oferecendo o dia e o horário ociosos da agenda, não o horário que já está cheio</li>
+  </ul>
+
+  <h3>O que precisa estar pronto antes de subir</h3>
+  <ul class="limpa">
+    <li><strong>Gerenciador de Negócios e conta de anúncios no CNPJ de vocês</strong> — sem isso não existe campanha</li>
+    <li><strong>Link da bio apontando para o WhatsApp de forma medível</strong> — senão não se sabe o que veio do anúncio e o que veio do perfil</li>
+    <li><strong>Registro de origem de cada cliente novo</strong>, anotado no Simples Vet desde a primeira semana. Hoje isso não é feito, e sem isso nenhum relatório de resultado se sustenta</li>
+    <li><strong>Termo de uso de imagem assinado</strong> pelos tutores, para que pet de cliente possa aparecer</li>
+    <li><strong>Perfil do Instagram na categoria certa</strong> — hoje está como “Criador(a) de conteúdo digital”, e não como pet shop ou serviço veterinário</li>
+  </ul>
+
+  <div class="callout">
+    <span class="eyebrow">Sobre promoção de primeira visita</span>
+    <p>O conselho <strong>permite</strong> promoção em banho e tosa — desconto no primeiro banho, pacote com preço especial e brinde são citados como aceitáveis no Manual de Publicidade do CFMV, porque higiene não é ato médico. Se quisermos usar isso, dá. Mas a recomendação é que a oferta <strong>não seja o argumento principal</strong> do anúncio, e sim um empurrão no fim — o argumento é o cuidado. E ela nunca pode ser amarrada a consulta, vacina ou exame: juntar os dois lados é venda casada.</p>
+  </div>
+
+  <h3>Como saberemos se funcionou</h3>
+  <p>Não pelo alcance nem pelas curtidas. Por três números: quantas pessoas chamaram no WhatsApp, quantas agendaram o primeiro banho, e — o que mais importa — <strong>quantas dessas voltaram e subiram de degrau</strong> para day care, hotelzinho ou consulta de pele nos meses seguintes. É essa terceira linha que paga o projeto até dezembro.</p>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Produção</div>
+    <h2>Dois dias de gravação resolvem o mês inteiro</h2>
+    <p>Ninguém consegue gravar todo dia, e não precisa. Tudo o que está acima cabe em dois dias — um sem falar e um falando. O resto do mês é só publicar.</p>
+  </div>
+
+  <div class="phase">
+    <div class="ph"><span class="tag">Dia 1</span> <b>Imagem, sem fala</b> <span class="when">um dia normal de movimento</span></div>
+    <div class="pb">
+      <p>O objetivo do dia é sair com muito material bruto. Não precisa ficar bonito na hora: precisa existir.</p>
+      <ul>
+        <li>O tour da casa inteiro, gravado três vezes</li>
+        <li>Os cães soltos circulando — pelo menos três minutos corridos, de ângulos diferentes</li>
+        <li>A separação dos grupos, mostrando que são espaços distintos</li>
+        <li>A tela da câmera com os animais aparecendo nela</li>
+        <li>O banho acontecendo: água, espuma, secador, escova, pente</li>
+        <li>A recepção: chegada, avaliação, entrega</li>
+        <li>Detalhes em plano fechado: pata, focinho, água caindo, pelo secando</li>
+        <li>Onde dormem os hóspedes, arrumado</li>
+      </ul>
+      <p style="margin-bottom:0">Regra do dia: <strong>grave mais do que parece necessário.</strong> Sobra de imagem vira publicação; falta de imagem vira semana sem publicar.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph"><span class="tag">Dia 2</span> <b>As falas</b> <span class="when">manhã, com a casa mais calma</span></div>
+    <div class="pb">
+      <p>Todas as pautas faladas de uma vez, uma atrás da outra, com uma troca de roupa no meio para não parecer que foi tudo no mesmo dia.</p>
+      <ul>
+        <li><strong>Com as duas juntas:</strong> pautas 01 e 02</li>
+        <li><strong>Com a Carla:</strong> pautas 06 (sedativo) e 09 (coceira) — são as duas de autoridade técnica</li>
+        <li><strong>Com a Thais:</strong> pautas 05, 07, 08, 15, 16, 17, 18 e 19</li>
+        <li><strong>Narração do tour:</strong> pauta 10, gravada andando</li>
+      </ul>
+      <p style="margin-bottom:0">São cerca de doze falas curtas. Com o roteiro em mãos, o dia inteiro não passa de três horas.</p>
+    </div>
+  </div>
+
+  <h3>Como gravar — seis regras que resolvem noventa por cento</h3>
+  <ul class="limpa">
+    <li><strong>Celular em pé, na vertical.</strong> Tudo é feito para o feed e para os stories.</li>
+    <li><strong>A luz vem da frente, nunca de trás.</strong> Fique de frente para a janela. Janela atrás transforma vocês em silhueta.</li>
+    <li><strong>Perto para o som.</strong> O celular a um metro do rosto. Áudio ruim derruba um vídeo bom; imagem ruim, não.</li>
+    <li><strong>Apoie o celular</strong> em qualquer coisa firme. Vídeo tremido cansa em cinco segundos.</li>
+    <li><strong>Três segundos a mais</strong> no começo e no fim de cada gravação, em silêncio. É o que dá margem para o corte.</li>
+    <li><strong>Limpe a lente antes de começar.</strong> É o defeito mais comum e o mais bobo.</li>
+  </ul>
+  <p>Errou a frase? Não apague. Respire e comece a frase de novo, na mesma gravação — o corte resolve.</p>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Limites</div>
+    <h2>O que não pode entrar</h2>
+    <p>Publicidade veterinária tem regra própria, e ela é mais rígida do lado clínico do que do lado da higiene. O detalhamento está no Guia de Publicidade Veterinária que acompanha este documento.</p>
+  </div>
+
+  <div class="naopode">
+    <span class="eyebrow">Antes de publicar, confira</span>
+    <p><strong>Pet de cliente só aparece com o termo assinado.</strong> Autorização prévia, expressa e por escrito, dizendo para que serve. Enquanto ninguém assinar, gravamos o espaço, a equipe e os hóspedes cujos tutores já autorizaram.</p>
+    <p><strong>Nada de garantia de resultado.</strong> “Cura”, “100%”, “definitivo”, “resolve de vez” estão vedados. Use “auxilia”, “ajuda a controlar”, “tem tratamento”.</p>
+    <p><strong>Nenhuma menção a concorrente</strong> — nem pelo nome, nem por indireta, nem “os melhores da cidade”, nem “os mais baratos”. Concorrência desleal é infração ética.</p>
+    <p><strong>Promoção só do lado da higiene.</strong> Banho, tosa, day care, hotelzinho e produtos aceitam desconto, pacote e brinde. Consulta, vacina e exame podem ter preço divulgado de forma discreta, mas <strong>nunca</strong> com desconto, brinde, sorteio ou “grátis” — e nunca amarrados a uma promoção de banho.</p>
+    <p><strong>Antes e depois de caso clínico fica fora por enquanto.</strong> É permitido, mas de risco alto: exige caráter educativo, nada de filtro que realce a diferença e nada de imagem de sofrimento.</p>
+    <p><strong>Nome e CRMV da responsável técnica na bio do perfil.</strong> É obrigatório, e hoje falta — sem isso, todo conteúdo clínico fica irregular.</p>
+    <p style="margin-bottom:0"><strong>Cuidado ao repostar cliente.</strong> Repostar um story dizendo “fizeram milagre, ficou curado” faz de vocês as autoras da promessa. Se for repostar, prefira o elogio ao atendimento e ao cuidado.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Calendário</div>
+    <h2>As quatro semanas</h2>
+    <p>Três publicações por semana, sempre nos mesmos dias, mais os stories da rotina. Constância vale mais que volume.</p>
+  </div>
+
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Semana</th><th>Fase</th><th>Publicações</th><th>O que acontece em paralelo</th></tr></thead>
+    <tbody>
+      <tr><td>Semana 1</td><td>Descoberta</td><td>Pautas 01, 02 e 04</td><td>Categoria do Instagram corrigida, link da bio, perfil do Google. Termo de imagem começa a circular na recepção.</td></tr>
+      <tr><td>Semana 2</td><td>Oportunidade</td><td>Pautas 05, 06 e 07</td><td>Registro de origem do cliente começa a ser anotado. Gerenciador e conta de anúncios criados no CNPJ.</td></tr>
+      <tr><td>Semana 3</td><td>Espaço</td><td>Pautas 10, 11 e 12</td><td>Rotina de avaliações no Google com os clientes atuais.</td></tr>
+      <tr><td>Semana 4</td><td>Serviço</td><td>Pautas 15, 16 e 19</td><td><strong>A campanha de agendamento sobe.</strong></td></tr>
+      <tr class="total"><td>Reserva</td><td>—</td><td>Pautas 03, 08, 09, 13, 14, 17 e 18</td><td>Entram nas semanas seguintes ou substituem qualquer pauta travada por pendência.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <div class="eyebrow">Próximo passo</div>
+    <h2>O que precisamos de vocês para começar</h2>
+    <p>Cinco coisas. Nenhuma delas custa dinheiro.</p>
+  </div>
+
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>O que</th><th>Por que</th><th>Com quem</th></tr></thead>
+    <tbody>
+      <tr><td>Nome e número do CRMV da responsável técnica</td><td>Vai na bio do perfil e é obrigatório para qualquer conteúdo clínico. Como são duas veterinárias, precisamos saber qual delas assina.</td><td>Carla</td></tr>
+      <tr><td>Termo de uso de imagem circulando na recepção</td><td>É o que libera pet de cliente no conteúdo. Cada dia sem isso é um dia de material bom que não pode ser usado.</td><td>Thais</td></tr>
+      <tr><td>Acesso ao Instagram e ao perfil do Google</td><td>Para corrigir a categoria, arrumar a bio e ligar o link medível do WhatsApp.</td><td>Carla</td></tr>
+      <tr><td>Qual dia e qual horário ficam <em>vazios</em></td><td>É a agenda ociosa que a campanha enche primeiro. Vocês disseram qual é o mais cheio; falta o contrário.</td><td>Thais</td></tr>
+      <tr><td>Até quais bairros vai o leva e traz</td><td>Define o raio da campanha e destrava a pauta 03.</td><td>Thais</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">E as duas datas</span>
+    <p>Assim que vocês escolherem <strong>o dia de gravação de imagem e o dia de gravação das falas</strong>, marcamos. Com esses dois dias no calendário, o mês inteiro de publicação está resolvido.</p>
+  </div>
+</section>
+
+<footer>
+  Gio Growth Digital · Plano de conteúdo e gravação preparado para o Rugido do Leão · 08/09/2026. Acompanha o diagnóstico do briefing e o Guia de Publicidade Veterinária.
+</footer>
+
+</div>
+
+</body>
+</html>
