@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Do Alcance ao Perfil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8;
+  --surface:#FFFFFF;
+  --ink:#141F26;
+  --muted:#5B6D77;
+  --line:#DCE4E5;
+  --accent:#0E6B61;
+  --accent-soft:#E1EFEC;
+  --warm:#A9662F;
+  --warm-soft:#F5E9DE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519;
+    --surface:#161F25;
+    --ink:#E6EDEF;
+    --muted:#94A6B0;
+    --line:#263239;
+    --accent:#4FC2B1;
+    --accent-soft:#12312D;
+    --warm:#D6935C;
+    --warm-soft:#33241A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519;
+  --surface:#161F25;
+  --ink:#E6EDEF;
+  --muted:#94A6B0;
+  --line:#263239;
+  --accent:#4FC2B1;
+  --accent-soft:#12312D;
+  --warm:#D6935C;
+  --warm-soft:#33241A;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 24px 96px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+/* ---- cabeçalho ---- */
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+/* ---- seções ---- */
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:"Karla",sans-serif;font-weight:700;
+  font-size:17px;margin:0;letter-spacing:-.005em;
+}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- painel de números ---- */
+.kpis{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:26px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---- lista de achados ---- */
+.findings{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.mark{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.finding p{margin-top:6px;color:var(--muted);font-size:16px}
+.finding .verdict{
+  display:inline-block;margin-top:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);
+  padding:4px 9px;border-radius:2px;
+}
+
+/* ---- tabela do plano ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+td.money{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tfoot td{
+  border-top:2px solid var(--line);font-weight:700;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+/* ---- destaque / pedido ---- */
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  align-self:flex-start;word-break:break-word;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Do alcance ao perfil</h1>
+    <p class="dek">O que os oito primeiros dias de campanha mostraram em Balneário Camboriú, e a estrutura que entra no ar agora.</p>
+    <p class="meta">1 a 8 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>Os oito primeiros dias</h2>
+    <p class="lead">A primeira campanha foi de reconhecimento: mostrar seu trabalho para mulheres de 38 a 64 anos em Balneário Camboriú, sem pedir nada em troca. O objetivo era medir o que prende atenção.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="num">18.356</span><span class="lbl">pessoas diferentes alcançadas</span></div>
+      <div class="kpi"><span class="num">51.507</span><span class="lbl">exibições dos vídeos</span></div>
+      <div class="kpi"><span class="num">645</span><span class="lbl">assistiram de verdade, não de passagem</span></div>
+      <div class="kpi"><span class="num">R$ 138</span><span class="lbl">investidos no período, com impostos</span></div>
+    </div>
+    <p>Custou <strong>R$ 6,62</strong> para alcançar cada mil pessoas — um número muito bom para a região. A cidade inteira tem cerca de 150 mil habitantes: em oito dias falamos com uma fatia real do seu público local.</p>
+  </section>
+
+  <section>
+    <h2>O que os números ensinaram</h2>
+    <div class="findings">
+
+      <div class="finding">
+        <span class="mark">01</span>
+        <div>
+          <h3>O vídeo longo venceu o curto</h3>
+          <p>O caso da Débora tem 1 minuto e 52 segundos. O vídeo sobre não retirar a pele tem 42 segundos. O longo prendeu <strong>407 pessoas</strong> contra 238 do curto — e gastou 21% menos para isso. Quarenta e oito pessoas assistiram aos 112 segundos inteiros.</p>
+          <span class="verdict">A Débora continua no ar</span>
+        </div>
+      </div>
+
+      <div class="finding">
+        <span class="mark">02</span>
+        <div>
+          <h3>O vídeo curto já cansou a cidade</h3>
+          <p>Ele apareceu em média 2,2 vezes para a mesma pessoa e ficou mais que o dobro mais caro por pessoa que realmente assistiu. Em uma cidade do tamanho de Balneário isso acontece rápido. Ele sai de cena e volta depois, com público novo.</p>
+          <span class="verdict">Pausado</span>
+        </div>
+      </div>
+
+      <div class="finding">
+        <span class="mark">03</span>
+        <div>
+          <h3>Reconhecimento não leva ninguém até você</h3>
+          <p>Em 51 mil exibições, nenhuma visita ao seu perfil foi registrada. Não é falha: campanha de reconhecimento é feita para ser vista, não para gerar ação. Só que agora precisamos da etapa seguinte — levar essa gente até o seu Instagram.</p>
+          <span class="verdict">É o que muda agora</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>A estrutura que entra no ar</h2>
+    <p>Cinco frentes, cada uma com um vídeo só, para sabermos exatamente qual funciona. Todos os vídeos já existem no seu perfil — nada precisa ser gravado.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Frente</th><th scope="col">Vídeo</th><th scope="col">Por dia</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Visitas ao perfil<span class="what">Leva a pessoa até o seu Instagram</span></td>
+            <td>Vania, “já tinha tentado outras técnicas”</td>
+            <td class="money">R$ 10</td>
+          </tr>
+          <tr>
+            <td>Visitas ao perfil</td>
+            <td>Karina, contorno em 7 dias</td>
+            <td class="money">R$ 10</td>
+          </tr>
+          <tr>
+            <td>Visitas ao perfil</td>
+            <td>Karina, “a melhor decisão da minha vida”</td>
+            <td class="money">R$ 10</td>
+          </tr>
+          <tr>
+            <td>Conversa<span class="what">Abre o chat direto do anúncio</span></td>
+            <td>“Sou magra, por que tenho papada?”</td>
+            <td class="money">R$ 12</td>
+          </tr>
+          <tr>
+            <td>Reconhecimento<span class="what">Segue rodando, com o vencedor</span></td>
+            <td>Débora, resultado em 7 dias</td>
+            <td class="money">R$ 8</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">Investimento diário</td><td class="money">R$ 50</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p>São cerca de <strong>R$ 1.500 por mês</strong> em mídia. Abaixo de R$ 10 por dia cada vídeo demora o dobro do tempo para provar se funciona, então esse é o piso para termos leitura em duas semanas.</p>
+  </section>
+
+  <section>
+    <h2>Por que perfil primeiro, e não anúncio para quem já viu</h2>
+    <p class="lead">A conversa mais barata que existe é com quem já conhece você. Só que, para o anúncio encontrar essas pessoas, o grupo precisa ter tamanho.</p>
+    <p>Hoje, quem visitou seu perfil ou interagiu com os anúncios <strong>nos últimos 60 dias e mora em Balneário</strong> não chega a mil pessoas — pouco demais para uma campanha entregar. Seu Instagram tem 33,4 mil seguidores, mas eles estão espalhados pelo Brasil, herança do seu trabalho em Campinas e da parte de implantes.</p>
+    <p>As três campanhas de visita ao perfil existem para resolver isso: cada real gasto ali aumenta o grupo de mulheres de Balneário que conhecem seu trabalho. <strong>Em quatro a seis semanas</strong> esse público deve ter tamanho para sustentar a etapa seguinte — falar de novo, e com oferta, só com quem já demonstrou interesse. É quando a conta costuma ficar mais eficiente.</p>
+  </section>
+
+  <section>
+    <h2>Uma coisa depende de você</h2>
+    <div class="callout">
+      <h3>Conectar o WhatsApp Business à sua Página</h3>
+      <p>O número cadastrado na Página do Facebook (47 99218-7863) está como conta pessoal do WhatsApp. Com conta pessoal o Meta não permite que o anúncio abra a conversa direto no WhatsApp.</p>
+      <p>Enquanto isso, o anúncio de conversa entra pelo <strong>Direct do Instagram</strong> — funciona, mas o WhatsApp costuma converter melhor para clínica, e sua equipe já atende por lá. Assim que o número virar WhatsApp Business e for conectado à Página, refazemos essa campanha para o WhatsApp.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Acompanhe quando quiser</h2>
+    <div class="panel">
+      <p>O painel atualiza sozinho todo dia de manhã, com investimento, alcance, quantas pessoas assistiram a cada vídeo e até que ponto assistiram.</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/">relatorios.giogrowthdigital.com.br/giacomo</a>
+    </div>
+  </section>
+
+  <footer>
+    Preparado por GGD Growth Digital · 8 de setembro de 2026
+  </footer>
+
+</div>
+</body>
+</html>
