@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Criativos Playbook Burnout · Lote 07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F4F6F6;
+  --surface:#FFFFFF;
+  --surface-2:#EDF0F0;
+  --ink:#14181B;
+  --ink-2:#4A5459;
+  --ink-3:#77838A;
+  --line:#D6DCDD;
+  --line-strong:#B9C3C5;
+  --petrol:#0F4C5C;
+  --petrol-soft:#E2EDF0;
+  --amber:#A85C22;
+  --amber-soft:#F6E9DC;
+  --olive:#4C6B36;
+  --shadow:0 1px 2px rgba(20,24,27,.05), 0 8px 24px -16px rgba(20,24,27,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1214;
+    --surface:#171B1E;
+    --surface-2:#1F2427;
+    --ink:#E8ECED;
+    --ink-2:#A7B2B6;
+    --ink-3:#7C878C;
+    --line:#2A3135;
+    --line-strong:#3C4549;
+    --petrol:#68B4C6;
+    --petrol-soft:#12303A;
+    --amber:#DD9257;
+    --amber-soft:#33221430;
+    --olive:#8FB16C;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1214;
+  --surface:#171B1E;
+  --surface-2:#1F2427;
+  --ink:#E8ECED;
+  --ink-2:#A7B2B6;
+  --ink-3:#7C878C;
+  --line:#2A3135;
+  --line-strong:#3C4549;
+  --petrol:#68B4C6;
+  --petrol-soft:#12303A;
+  --amber:#DD9257;
+  --amber-soft:#33221430;
+  --olive:#8FB16C;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size:16.5px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(18px,4vw,40px) 96px}
+h1,h2,h3{font-family:"Newsreader", Georgia, serif;font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3.1rem);line-height:1.08;letter-spacing:-.015em}
+h2{font-size:clamp(1.4rem,3vw,1.75rem);line-height:1.2}
+h3{font-size:1.12rem;line-height:1.3}
+p{margin:0}
+a{color:var(--petrol)}
+
+.eyebrow{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.mono{font-family:"IBM Plex Mono", ui-monospace, monospace;font-variant-numeric:tabular-nums}
+
+/* ---- cabeçalho ---- */
+header.top{display:flex;flex-direction:column;gap:18px;padding-bottom:34px;border-bottom:2px solid var(--ink)}
+.top .meta{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline}
+.lede{font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.5;color:var(--ink-2);max-width:62ch}
+.lede em{font-style:italic;color:var(--ink)}
+
+/* ---- placar ---- */
+.placar{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px;
+}
+.placar div{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.placar .n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:1.5rem;font-weight:600;line-height:1;color:var(--ink)}
+.placar .n small{font-size:.85rem;font-weight:400;color:var(--ink-3)}
+.placar .l{font-size:.78rem;color:var(--ink-3);line-height:1.35}
+
+section{margin-top:clamp(44px,7vw,72px)}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.rule{height:1px;background:var(--line-strong);margin:14px 0 0}
+
+/* ---- achados ---- */
+.achados{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line)}
+.achado{background:var(--surface);padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.achado .cifra{
+  font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  font-size:1.32rem;font-weight:600;color:var(--petrol);white-space:nowrap;
+  padding-top:1px;min-width:5.4em
+}
+.achado .cifra.warn{color:var(--amber)}
+.achado h3{margin-bottom:3px}
+.achado p{color:var(--ink-2);font-size:.95rem}
+
+/* ---- tabela ---- */
+.tabela-box{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem}
+th,td{text-align:right;padding:9px 14px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--surface-2);border-bottom:1px solid var(--line-strong)
+}
+tbody td{font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;color:var(--ink-2)}
+tbody td:first-child{font-family:"Public Sans",sans-serif;color:var(--ink);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+tr.destaque td{background:var(--petrol-soft)}
+tr.destaque td:first-child::after{content:"campeã";font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-left:8px;vertical-align:1px}
+.tag-f{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase}
+
+/* ---- fichas ---- */
+.fichas{display:flex;flex-direction:column;gap:18px}
+.ficha{
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--petrol);
+  box-shadow:var(--shadow);
+}
+.ficha.novo{border-left-color:var(--amber)}
+.ficha-head{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+.ficha-cod{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cod{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:500;letter-spacing:.02em;
+  background:var(--surface-2);color:var(--ink-2);padding:3px 8px;border:1px solid var(--line)
+}
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;border:1px solid currentColor
+}
+.chip.video{color:var(--petrol)}
+.chip.esta{color:var(--olive)}
+.chip.novo{color:var(--amber)}
+.chip.pronto{color:var(--olive);border-style:solid;background:color-mix(in srgb, var(--olive) 12%, transparent)}
+.ficha-body{padding:18px 22px 22px;display:flex;flex-direction:column;gap:16px}
+
+.gancho{
+  background:var(--surface-2);border-left:2px solid var(--line-strong);
+  padding:13px 16px;display:flex;flex-direction:column;gap:5px
+}
+.gancho p{font-family:"Newsreader",Georgia,serif;font-size:1.1rem;line-height:1.38;color:var(--ink)}
+.gancho p::before{content:"“"}
+.gancho p::after{content:"”"}
+
+.bloco{display:flex;flex-direction:column;gap:7px}
+.bloco > .eyebrow{margin-bottom:1px}
+ol.roteiro{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+ol.roteiro li{display:grid;grid-template-columns:4.6em 1fr;gap:12px;font-size:.94rem;color:var(--ink-2);align-items:baseline}
+ol.roteiro li span{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em
+}
+ul.simples{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px;font-size:.94rem;color:var(--ink-2)}
+
+.porque{font-size:.92rem;color:var(--ink-2);border-top:1px dashed var(--line-strong);padding-top:13px}
+.porque strong{color:var(--ink);font-weight:500}
+.porque .num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--petrol);font-weight:500}
+
+.copy-sug{
+  font-size:.92rem;color:var(--ink-2);background:var(--surface-2);padding:13px 16px;
+  border:1px solid var(--line);white-space:pre-line;line-height:1.55
+}
+
+/* ---- galeria de artes ---- */
+.entregue{border-left-color:var(--olive)}
+.galeria{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));align-items:start}
+.galeria figure{margin:0;display:flex;flex-direction:column;gap:7px}
+.galeria img,.tira img{width:100%;height:auto;display:block;border:1px solid var(--line)}
+.galeria figcaption,.tira figcaption{
+  font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-3)
+}
+.tira{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.tira figure{margin:0;flex:0 0 200px;display:flex;flex-direction:column;gap:7px;scroll-snap-align:start}
+.aviso{
+  font-size:.86rem;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);
+  border-left:2px solid var(--amber);padding:11px 14px
+}
+.aviso strong{color:var(--ink);font-weight:500}
+
+a.ampliar{display:block;line-height:0;position:relative;transition:transform .12s ease}
+a.ampliar:hover{transform:translateY(-2px)}
+a.ampliar:focus-visible{outline:2px solid var(--petrol);outline-offset:3px}
+.baixar{
+  display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  border:1px solid var(--line);background:var(--surface);padding:20px 22px
+}
+.baixar h3{font-size:1rem;margin-bottom:4px}
+.baixar ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.baixar a{
+  font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--petrol);
+  text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:2px
+}
+.baixar a:hover{border-bottom-color:var(--petrol)}
+.baixar p{font-size:.82rem;color:var(--ink-3)}
+
+/* ---- copies ---- */
+.copies{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.copy-card{background:var(--surface);border:1px solid var(--line);padding:18px 20px;display:flex;flex-direction:column;gap:11px}
+.copy-card h3{font-size:1rem}
+.copy-card .txt{font-size:.9rem;color:var(--ink-2);white-space:pre-line;line-height:1.55}
+
+/* ---- nota final ---- */
+.nota{
+  border:1px solid var(--line-strong);background:var(--amber-soft);
+  padding:22px 24px;display:flex;flex-direction:column;gap:10px
+}
+.nota h2{font-size:1.25rem}
+.nota p{color:var(--ink-2);font-size:.96rem;max-width:66ch}
+.nota strong{color:var(--ink)}
+
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:560px){
+  .achado{grid-template-columns:1fr;gap:6px}
+  .achado .cifra{min-width:0}
+  ol.roteiro li{grid-template-columns:1fr;gap:2px}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="meta">
+    <span class="eyebrow">Playbook do Reclamante · Burnout</span>
+    <span class="eyebrow">Lote 07 · 10 de setembro de 2026</span>
+  </div>
+  <h1>10 criativos novos para aprovação</h1>
+  <p class="lede">Tudo que está aqui saiu do que a conta já provou entre <span class="mono">junho</span> e <span class="mono">setembro</span>: <em>R$ 13.392 de mídia, 510 vendas, 20 peças no ar</em>. Nenhuma ideia é chute — cada ficha diz de qual número ela nasceu. <em>Os três criativos estáticos já vêm com a arte final</em> — os de vídeo trazem o roteiro para gravação.</p>
+
+  <div class="placar">
+    <div><span class="n">R$ 21,50</span><span class="l">CPA das peças em <strong>vídeo</strong> (Ticto + Kiwify)</span></div>
+    <div><span class="n">R$ 28,59</span><span class="l">CPA das peças <strong>estáticas</strong>, mesmo ticket</span></div>
+    <div><span class="n">1,33<small>%</small></span><span class="l">CTR de link do vídeo · estático faz 0,86%</span></div>
+    <div><span class="n">1</span><span class="l">copy diferente entre as 20 peças — o texto nunca foi testado</span></div>
+    <div><span class="n">11</span><span class="l">artes <strong>já finalizadas</strong>, prontas para subir</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Ponto de partida</span>
+    <h2>O que os três meses de dado já ensinaram</h2>
+  </div>
+
+  <div class="achados">
+    <div class="achado">
+      <span class="cifra">25% +barato</span>
+      <div>
+        <h3>Vídeo do Felipe falando bate estático em tudo</h3>
+        <p>R$ 21,50 de CPA contra R$ 28,59, e clique de link 55% mais frequente. Por isso 7 das 10 propostas são vídeo — e todas com ele em cena, não animação.</p>
+      </div>
+    </div>
+    <div class="achado">
+      <span class="cifra">R$ 20,35</span>
+      <div>
+        <h3>A peça campeã é sobre a NR-1</h3>
+        <p>O <span class="mono">AD03_VIDEO_LT</span> é a única peça com volume de verdade (R$ 2.971 e 146 vendas) e abre com “A NR-1 transformou…”. Assunto de norma nova, específico, com data. Esse é o filão.</p>
+      </div>
+    </div>
+    <div class="achado">
+      <span class="cifra warn">R$ 77,55</span>
+      <div>
+        <h3>Card de texto em fundo preto engana</h3>
+        <p>O <span class="mono">AD01_ESTA_LT</span> tem o melhor CTR entre os estáticos (1,59%) e o pior CPA da conta. Puxa clique curioso que não compra. Os ganchos dele são bons — o formato é que está errado, e é o que estas fichas corrigem.</p>
+      </div>
+    </div>
+    <div class="achado">
+      <span class="cifra">R$ 26,93</span>
+      <div>
+        <h3>Entre os estáticos, quem mostra o produto ganha</h3>
+        <p>O mockup do livro com preço riscado (<span class="mono">AD05_ESTA_LT</span>) levou R$ 2.235 e vendeu 83 vezes com CTR baixo, de 0,76%. Clica menos gente, e a gente certa.</p>
+      </div>
+    </div>
+    <div class="achado">
+      <span class="cifra">0 testes</span>
+      <div>
+        <h3>As 20 peças rodam a mesma copy e o mesmo título</h3>
+        <p>Palavra por palavra, do primeiro anúncio ao último. É uma variável inteira que a conta nunca mexeu — por isso vão três copies novas no fim deste documento.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="sec-head" style="margin-top:26px">
+    <span class="eyebrow">Base de comparação</span>
+    <h2>As peças que já rodaram</h2>
+  </div>
+  <div class="tabela-box">
+    <table>
+      <thead>
+        <tr><th>Peça</th><th>Formato</th><th>Investido</th><th>Vendas</th><th>CPA</th><th>CTR link</th></tr>
+      </thead>
+      <tbody>
+        <tr class="destaque"><td>AD03_VIDEO_LT</td><td class="tag-f">vídeo</td><td>R$ 2.971</td><td>146</td><td>R$ 20,35</td><td>1,20%</td></tr>
+        <tr><td>AD05_ESTA_LT</td><td class="tag-f">estático</td><td>R$ 2.235</td><td>83</td><td>R$ 26,93</td><td>0,76%</td></tr>
+        <tr><td>AD06_ESTA_LT</td><td class="tag-f">estático</td><td>R$ 1.597</td><td>57</td><td>R$ 28,02</td><td>0,74%</td></tr>
+        <tr><td>AD03_ESTA_LT</td><td class="tag-f">estático</td><td>R$ 846</td><td>31</td><td>R$ 27,27</td><td>0,92%</td></tr>
+        <tr><td>AD06_VIDEO_LT</td><td class="tag-f">vídeo</td><td>R$ 752</td><td>27</td><td>R$ 27,86</td><td>1,61%</td></tr>
+        <tr><td>AD02_VIDEO_LT</td><td class="tag-f">vídeo</td><td>R$ 631</td><td>21</td><td>R$ 30,07</td><td>1,30%</td></tr>
+        <tr><td>AD04_VIDEO_LT</td><td class="tag-f">vídeo</td><td>R$ 334</td><td>13</td><td>R$ 25,67</td><td>1,48%</td></tr>
+        <tr><td>AD01_ESTA_LT</td><td class="tag-f">estático</td><td>R$ 310</td><td>4</td><td>R$ 77,55</td><td>1,59%</td></tr>
+        <tr><td>AD02_ESTA_LT</td><td class="tag-f">estático</td><td>R$ 124</td><td>3</td><td>R$ 41,44</td><td>1,47%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.82rem;color:var(--ink-3);margin-top:10px">Recorte de 01/06 a 10/09/2026, vendas do pixel. Peças da Hubla ficaram fora desta tabela porque o ticket lá era R$ 29,90 e o CPA não é comparável.</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">As propostas · em ordem de prioridade</span>
+    <h2>Fichas de produção</h2>
+    <p style="color:var(--ink-2);font-size:.95rem;max-width:64ch">Cada uma vira <strong>um conjunto só dela</strong>, com R$ 30/dia de entrada. Todo vídeo é gravado na vertical (9:16), com legenda queimada, sem vinheta e sem logo nos primeiros 3 segundos.</p>
+  </div>
+
+  <div class="fichas">
+
+    <!-- 1 -->
+    <article class="ficha">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">01 · AD07_VIDEO_NR1_QUESITOS</span>
+          <span class="chip video">vídeo · 35s</span>
+        </div>
+        <h3>A NR-1 mudou, os seus quesitos não</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>A NR-1 mudou tudo em ação de burnout — e o quesito que você mandou pro perito ontem é o mesmo de 2019.</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–3s</span>Gancho já falando, close no rosto, sem “oi, tudo bem”.</li>
+            <li><span>3–12s</span>O que mudou na prática: risco psicossocial virou obrigação de gestão do empregador, com documento que precisa existir.</li>
+            <li><span>12–24s</span>A virada: dá pra exigir na inicial documento que antes não existia — e se a empresa não tiver, isso joga a favor do reclamante.</li>
+            <li><span>24–32s</span>“Eu escrevi os quesitos que perguntam exatamente isso, prontos pra modelar.”</li>
+            <li><span>32–35s</span>Fecha: R$ 19,90, toque no link.</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que esta primeiro:</strong> é a derivada direta da campeã. O <span class="num">AD03_VIDEO_LT</span> levou <span class="num">R$ 2.971</span> a <span class="num">R$ 20,35</span> de CPA falando de NR-1 — o único assunto da conta com volume comprovado. Aqui a gente muda o roteiro e mantém o filão.</p>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="ficha">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">02 · AD08_VIDEO_ERRO_PERICIA</span>
+          <span class="chip video">vídeo · 40s</span>
+        </div>
+        <h3>Os três erros que entregam a perícia pra defesa</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Tem um erro que faz o perito escrever “quadro multifatorial” no laudo — e aí sua ação já era.</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–4s</span>Gancho. Close, tom de quem está contando um bastidor.</li>
+            <li><span>4–14s</span>Erro 1: quesito genérico, que deixa o perito responder o que quiser.</li>
+            <li><span>14–24s</span>Erro 2: não instruir o processo com a prova de jornada, meta e cobrança antes da perícia.</li>
+            <li><span>24–33s</span>Erro 3: entrar na audiência sem roteiro de pergunta pra testemunha sobre o ambiente.</li>
+            <li><span>33–40s</span>“Os três estão resolvidos dentro do Playbook. R$ 19,90.”</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que:</strong> lista numerada falada é o formato que segura retenção em vídeo de nicho técnico, e o assunto “multifatorialidade” já provou que prende — foi o gancho de maior CTR entre os estáticos (<span class="num">1,47%</span>).</p>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="ficha">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">03 · AD09_VIDEO_MULTIFATORIALIDADE</span>
+          <span class="chip video">vídeo · 30s</span>
+        </div>
+        <h3>O gancho que mais clicou, agora em vídeo</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Você sabe por que a defesa ganha tanto caso de burnout com a tese da multifatorialidade?</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–4s</span>A pergunta, palavra por palavra igual ao card que já rodou.</li>
+            <li><span>4–10s</span>A resposta desconfortável: porque a maior parte dos advogados não sabe enfrentar isso tecnicamente.</li>
+            <li><span>10–22s</span>Como se enfrenta: concausa, artigo 21 da Lei 8.213, e a pergunta que quebra o argumento no laudo.</li>
+            <li><span>22–30s</span>“Está tudo escrito e pronto pra usar no Playbook.”</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que:</strong> o <span class="num">AD02_ESTA_LT</span> tem CTR de <span class="num">1,47%</span> e CPA de <span class="num">R$ 41,44</span> — o gancho funciona, o formato não. Estamos levando um texto que já provou atenção para o formato que já provou venda.</p>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="ficha">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">04 · AD10_VIDEO_G1_REACAO</span>
+          <span class="chip video">vídeo · 30s</span>
+        </div>
+        <h3>Reação à notícia do g1</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Afastamento por burnout subiu 823% em quatro anos. Sabe o que isso significa pra quem é trabalhista?</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–3s</span>Print da matéria do g1 ocupando a tela inteira, com o número em destaque.</li>
+            <li><span>3–8s</span>Corta pro Felipe, o print encolhe pro canto e fica lá.</li>
+            <li><span>8–20s</span>A leitura: 823 casos em 2021 viraram 7.595 em 2025. Essa demanda vai bater na porta do escritório.</li>
+            <li><span>20–30s</span>“A pergunta é se você vai estar pronto pra conduzir ou vai improvisar. R$ 19,90.”</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que:</strong> a notícia como prova de terceiro já funcionou parada — o <span class="num">AD03_ESTA_LT</span> vendeu 31 vezes a <span class="num">R$ 27,27</span>. Nunca foi testada em vídeo, que é o formato mais barato da conta.</p>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="ficha">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">05 · AD11_VIDEO_DEPOIMENTO_TELA</span>
+          <span class="chip video">vídeo · 30s</span>
+        </div>
+        <h3>Prova social com o print na tela</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Recebi essa mensagem de um colega que usou o material numa audiência semana passada.</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–4s</span>Felipe segurando o celular, gancho falado.</li>
+            <li><span>4–18s</span>Três prints reais de WhatsApp ou comentário aparecem grandes na tela, um de cada vez, com trecho grifado — ele lê em voz alta.</li>
+            <li><span>18–26s</span>“São advogados como você que pagaram menos de vinte reais por isso.”</li>
+            <li><span>26–30s</span>CTA.</li>
+          </ol>
+        </div>
+        <div class="bloco">
+          <span class="eyebrow">O que precisamos de vocês</span>
+          <ul class="simples">
+            <li>3 prints de mensagem de quem comprou (pode ter o nome borrado).</li>
+            <li>Se houver algum caso com sentença favorável, esse é o print de ouro.</li>
+          </ul>
+        </div>
+        <p class="porque"><strong>Por que:</strong> o <span class="num">AD02_VIDEO_LT</span> já tenta isso — abre com “veja só esse feedback” — e faz CTR de <span class="num">1,30%</span>, mas o depoimento é só falado. Com a prova na tela, o mesmo gancho fica muito mais forte.</p>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="ficha novo">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">06 · AD12_VIDEO_FOLHEANDO</span>
+          <span class="chip video">vídeo · 25s</span>
+          <span class="chip novo">formato inédito</span>
+        </div>
+        <h3>Mostrar o material por dentro</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Isso aqui é literalmente o que você recebe por dezenove e noventa. Deixa eu te mostrar.</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–3s</span>Gravação de tela: o PDF já aberto, rolando.</li>
+            <li><span>3–10s</span>Para no sumário. Voz do Felipe por cima, sem aparecer.</li>
+            <li><span>10–18s</span>Para em duas páginas fortes: um quesito pericial escrito e a refutação de uma alegação de defesa. Zoom no texto.</li>
+            <li><span>18–25s</span>“Sem aula, sem curso, sem gravação. É documento pronto pra usar hoje.”</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que:</strong> hoje só <span class="num">30%</span> de quem chega na página inicia o checkout. Quem já viu o material antes de clicar chega decidido — e essa é a peça que mais deve ajudar nesse ponto.</p>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="ficha entregue">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">07 · AD13_CARROSSEL_POR_DENTRO</span>
+          <span class="chip esta">carrossel · 7 cards</span>
+          <span class="chip novo">formato inédito</span>
+          <span class="chip pronto">arte pronta</span>
+        </div>
+        <h3>Seis páginas reais, uma por card</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="bloco">
+          <span class="eyebrow">Sequência dos cards</span>
+          <ol class="roteiro">
+            <li><span>card 1</span>Capa: “O que tem dentro do Playbook — página por página”.</li>
+            <li><span>card 2</span>Checklist de triagem do caso.</li>
+            <li><span>card 3</span>Estrutura da petição inicial.</li>
+            <li><span>card 4</span>Quesitos periciais.</li>
+            <li><span>card 5</span>Refutação das 9 alegações de defesa.</li>
+            <li><span>card 6</span>Roteiro de audiência + preço com âncora e CTA.</li>
+          </ol>
+        </div>
+        <div class="bloco">
+          <span class="eyebrow">Arte final · 1080×1080</span>
+          <div class="tira">
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_1_capa.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_1_capa.jpg" alt="card 1 · capa"></a><figcaption>card 1 · capa</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_2_checklist.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_2_checklist.jpg" alt="card 2 · triagem"></a><figcaption>card 2 · triagem</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_3_peticao.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_3_peticao.jpg" alt="card 3 · petição"></a><figcaption>card 3 · petição</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_4_quesitos.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_4_quesitos.jpg" alt="card 4 · quesitos"></a><figcaption>card 4 · quesitos</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_5_refutacao.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_5_refutacao.jpg" alt="card 5 · refutação"></a><figcaption>card 5 · refutação</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_6_roteiro.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_6_roteiro.jpg" alt="card 6 · audiência"></a><figcaption>card 6 · audiência</figcaption></figure>
+          <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/card_7_oferta.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/card_7_oferta.jpg" alt="card 7 · oferta"></a><figcaption>card 7 · oferta</figcaption></figure>
+          </div>
+        </div>
+        <p class="aviso">As folhas são <strong>representação</strong> — cabeçalho legível e corpo em linhas. Não simulei texto jurídico do material. Com o PDF em mãos, troco por print real das páginas.</p>
+        <p class="porque"><strong>Por que:</strong> a conta nunca rodou carrossel — só imagem única e vídeo. É o formato que mais espaço dá pra mostrar entrega, e a peça de lista de entregáveis (<span class="num">AD06_ESTA_LT</span>) já é a segunda em volume, com 57 vendas.</p>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="ficha entregue">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">08 · AD14_ESTA_NR1_ANCORA</span>
+          <span class="chip esta">estático</span>
+          <span class="chip pronto">arte pronta</span>
+        </div>
+        <h3>O estático que mais vendeu, com a manchete da campeã</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="bloco">
+          <span class="eyebrow">O que muda</span>
+          <ul class="simples">
+            <li>Mesmo layout do <strong>AD05_ESTA_LT</strong>: mockup do livro, fundo de biblioteca, “De R$ 199,90 por R$ 19,90”.</li>
+            <li>Headline nova: <strong>“A NR-1 mudou a ação de burnout. Seu material já está atualizado?”</strong></li>
+            <li>Selo no canto: <strong>atualizado para a NR-1 · riscos psicossociais</strong>.</li>
+          </ul>
+        </div>
+        <div class="bloco">
+          <span class="eyebrow">Arte final</span>
+          <div class="galeria">
+            <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/AD14_ESTA_NR1_ANCORA.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/AD14_ESTA_NR1_ANCORA.jpg" alt="AD14 feed"></a><figcaption>feed · 1080×1080</figcaption></figure>
+            <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/AD14_ESTA_NR1_ANCORA_story.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/AD14_ESTA_NR1_ANCORA_story.jpg" alt="AD14 story"></a><figcaption>story · 1080×1920</figcaption></figure>
+          </div>
+        </div>
+        <p class="porque"><strong>Por que:</strong> esse layout levou <span class="num">R$ 2.235</span> e vendeu <span class="num">83</span> vezes. Trocando só a manchete pelo assunto que o vídeo campeão provou, o teste isola exatamente uma variável.</p>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="ficha entregue">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">09 · AD15_ESTA_9_ALEGACOES</span>
+          <span class="chip esta">estático</span>
+          <span class="chip pronto">arte pronta</span>
+        </div>
+        <h3>As 9 alegações da defesa, listadas na cara</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="bloco">
+          <span class="eyebrow">Composição</span>
+          <ul class="simples">
+            <li>Título: <strong>“As 9 alegações que a defesa usa em ação de burnout”</strong>.</li>
+            <li>As nove listadas, curtas, numeradas — cada uma com um X vermelho pequeno.</li>
+            <li>Faixa embaixo: <strong>“As nove estão refutadas, com fundamento, dentro do Playbook — R$ 19,90”</strong>.</li>
+            <li>Foto do Felipe de palestra no canto, como no AD06 que já roda.</li>
+          </ul>
+        </div>
+        <div class="bloco">
+          <span class="eyebrow">Arte final</span>
+          <div class="galeria">
+            <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/AD15_ESTA_9_ALEGACOES.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/AD15_ESTA_9_ALEGACOES.jpg" alt="AD15 feed"></a><figcaption>feed · 1080×1080</figcaption></figure>
+            <figure><a class="ampliar" href="../../criativos/felipe-lt-set26/alta/AD15_ESTA_9_ALEGACOES_story.jpg" target="_blank" rel="noopener"><img loading="lazy" src="../../criativos/felipe-lt-set26/web/AD15_ESTA_9_ALEGACOES_story.jpg" alt="AD15 story"></a><figcaption>story · 1080×1920</figcaption></figure>
+          </div>
+        </div>
+        <p class="aviso">As nove alegações vieram das <strong>teses de defesa mais comuns</strong> em ação de Burnout, não do texto do material. Se a lista do Playbook usa outra redação, é só mandar — troco as nove linhas e regero a arte.</p>
+        <p class="porque"><strong>Por que:</strong> a peça de lista (<span class="num">AD06_ESTA_LT</span>) fez 57 vendas a <span class="num">R$ 28,02</span> prometendo a refutação. Esta abre a caixa: mostra o problema inteiro e cobra vinte reais pela resposta.</p>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="ficha novo">
+      <div class="ficha-head">
+        <div class="ficha-cod">
+          <span class="cod">10 · AD16_VIDEO_HONORARIO</span>
+          <span class="chip video">vídeo · 30s</span>
+          <span class="chip novo">ângulo inédito</span>
+        </div>
+        <h3>A conta do honorário</h3>
+      </div>
+      <div class="ficha-body">
+        <div class="gancho"><span class="eyebrow">Primeiros 3 segundos</span><p>Quanto fecha uma ação de burnout bem conduzida, com dano moral e pensionamento? Agora compara com dezenove reais.</p></div>
+        <div class="bloco">
+          <span class="eyebrow">Roteiro</span>
+          <ol class="roteiro">
+            <li><span>0–5s</span>A pergunta do honorário, direto.</li>
+            <li><span>5–15s</span>A conta na tela, em número grande: o valor de uma condenação típica contra R$ 19,90.</li>
+            <li><span>15–24s</span>“O que separa uma coisa da outra não é talento, é ter o quesito certo na hora certa.”</li>
+            <li><span>24–30s</span>CTA.</li>
+          </ol>
+        </div>
+        <p class="porque"><strong>Por que:</strong> todas as 20 peças no ar vendem <em>material</em>. Nenhuma vende <em>retorno</em>. É o ângulo com maior chance de trazer um público que os outros criativos não alcançam — e o que precisa de mais atenção jurídica na hora de aprovar o número que vai na tela.</p>
+        <div class="bloco">
+          <span class="eyebrow">Decisão de vocês</span>
+          <ul class="simples">
+            <li>Qual faixa de valor pode ir na tela sem promessa de resultado? Sem isso, a peça não sobe.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Bônus · nunca testado</span>
+    <h2>Três copies para o texto do anúncio</h2>
+    <p style="color:var(--ink-2);font-size:.95rem;max-width:64ch">As 20 peças no ar usam o mesmo texto e o mesmo título, do primeiro anúncio ao último. Trocar a copy custa zero de produção e é a variável mais barata que existe pra testar.</p>
+  </div>
+
+  <div class="copies">
+    <div class="copy-card">
+      <span class="eyebrow">Copy A · norma nova</span>
+      <h3>Atualização</h3>
+      <p class="txt">A NR-1 colocou risco psicossocial dentro da obrigação legal do empregador.
+
+Isso muda o que dá pra pedir, provar e perguntar numa ação de Burnout — e a maioria dos escritórios ainda trabalha com o modelo antigo.
+
+O Playbook do Reclamante já está atualizado: checklist de triagem, petição inicial, quesitos periciais, roteiro de audiência e a refutação das teses de defesa.
+
+R$ 19,90. Toque em "Saiba mais".</p>
+    </div>
+    <div class="copy-card">
+      <span class="eyebrow">Copy B · o erro</span>
+      <h3>Diagnóstico</h3>
+      <p class="txt">Você não perde ação de Burnout por falta de tese. Perde por quesito genérico.
+
+Quando o quesito é aberto, o perito responde "quadro multifatorial" — e a defesa ganha sem fazer esforço.
+
+No Playbook estão os quesitos escritos, a refutação das 9 alegações mais usadas pela defesa e o roteiro de perguntas de audiência.
+
+Pronto pra modelar e usar no próximo processo. R$ 19,90.</p>
+    </div>
+    <div class="copy-card">
+      <span class="eyebrow">Copy C · demanda</span>
+      <h3>Mercado</h3>
+      <p class="txt">Os afastamentos por Burnout saíram de 823 para 7.595 em quatro anos, segundo a Previdência Social.
+
+Essa demanda já está batendo na porta do seu escritório. A pergunta é se ela vai encontrar você preparado.
+
+O Playbook do Reclamante entrega o processo inteiro pronto: da triagem do caso à audiência.
+
+R$ 19,90 — menos que o almoço de hoje.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="nota">
+    <span class="eyebrow">Transparência</span>
+    <h2>Criativo novo ajuda, mas o gargalo hoje é a página</h2>
+    <p>De cada 10 pessoas que clicam no anúncio, cerca de 8 chegam a ver a página de vendas — e só <strong>3 iniciam o checkout</strong>. É aí que o funil perde mais gente, não no criativo.</p>
+    <p>Estes 10 criativos atacam o topo: trazem clique mais barato e mais qualificado, e três deles (<span class="mono">AD12</span>, <span class="mono">AD13</span> e <span class="mono">AD15</span>) foram desenhados de propósito pra já mostrar o material antes do clique, o que tende a melhorar essa passagem. Mas se quiserem o próximo salto de CPA depois deste lote, o trabalho é na página de vendas.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Arquivos</span>
+    <h2>Baixar as artes em alta</h2>
+    <p style="color:var(--ink-2);font-size:.95rem;max-width:64ch">Todas em JPG, prontas para subir no Gerenciador. Clicar em qualquer arte da página também abre o arquivo original.</p>
+  </div>
+  <div class="baixar">
+    <div>
+      <h3>AD14 · âncora NR-1</h3>
+      <ul>
+        <li><a href="../../criativos/felipe-lt-set26/alta/AD14_ESTA_NR1_ANCORA.jpg" target="_blank" rel="noopener">feed 1080×1080 ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/AD14_ESTA_NR1_ANCORA_story.jpg" target="_blank" rel="noopener">story 1080×1920 ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>AD15 · as 9 alegações</h3>
+      <ul>
+        <li><a href="../../criativos/felipe-lt-set26/alta/AD15_ESTA_9_ALEGACOES.jpg" target="_blank" rel="noopener">feed 1080×1080 ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/AD15_ESTA_9_ALEGACOES_story.jpg" target="_blank" rel="noopener">story 1080×1920 ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>AD13 · carrossel</h3>
+      <ul>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_1_capa.jpg" target="_blank" rel="noopener">1 · capa ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_2_checklist.jpg" target="_blank" rel="noopener">2 · triagem ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_3_peticao.jpg" target="_blank" rel="noopener">3 · petição ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_4_quesitos.jpg" target="_blank" rel="noopener">4 · quesitos ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_5_refutacao.jpg" target="_blank" rel="noopener">5 · refutação ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_6_roteiro.jpg" target="_blank" rel="noopener">6 · audiência ↗</a></li>
+        <li><a href="../../criativos/felipe-lt-set26/alta/card_7_oferta.jpg" target="_blank" rel="noopener">7 · oferta ↗</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Gio Growth Digital · Playbook do Reclamante em Ações de Burnout</span>
+  <span class="mono">10/09/2026</span>
+  <span>Dados: Meta Ads, 01/06 a 10/09/2026</span>
+</footer>
+
+</div>
+</body>
+</html>
