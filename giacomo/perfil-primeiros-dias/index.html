@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Os Primeiros Cliques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8;
+  --surface:#FFFFFF;
+  --ink:#141F26;
+  --muted:#5B6D77;
+  --line:#DCE4E5;
+  --accent:#0E6B61;
+  --accent-soft:#E1EFEC;
+  --warm:#A9662F;
+  --warm-soft:#F5E9DE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519;
+    --surface:#161F25;
+    --ink:#E6EDEF;
+    --muted:#94A6B0;
+    --line:#263239;
+    --accent:#4FC2B1;
+    --accent-soft:#12312D;
+    --warm:#D6935C;
+    --warm-soft:#33241A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519;
+  --surface:#161F25;
+  --ink:#E6EDEF;
+  --muted:#94A6B0;
+  --line:#263239;
+  --accent:#4FC2B1;
+  --accent-soft:#12312D;
+  --warm:#D6935C;
+  --warm-soft:#33241A;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 24px 96px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+/* ---- cabeçalho ---- */
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+/* ---- seções ---- */
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:"Karla",sans-serif;font-weight:700;
+  font-size:17px;margin:0;letter-spacing:-.005em;
+}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- painel de números ---- */
+.kpis{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:26px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---- lista de achados ---- */
+.findings{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.mark{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.finding p{margin-top:6px;color:var(--muted);font-size:16px}
+.finding .verdict{
+  display:inline-block;margin-top:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);
+  padding:4px 9px;border-radius:2px;
+}
+
+/* ---- tabela do plano ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+td.money{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tfoot td{
+  border-top:2px solid var(--line);font-weight:700;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+/* ---- destaque / pedido ---- */
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  align-self:flex-start;word-break:break-word;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Os primeiros cliques</h1>
+    <p class="dek">Três dias depois de ligar a estrutura nova, o comportamento de quem vê os anúncios mudou: as pessoas começaram a sair do vídeo e ir até o seu perfil.</p>
+    <p class="meta">9 a 11 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>O que mudou em três dias</h2>
+    <p class="lead">No relatório anterior o diagnóstico era claro: em oito dias e 51 mil exibições, nenhuma visita ao seu perfil. A campanha de reconhecimento entrega atenção, não ação. A estrutura nova entrou no ar na noite de 8 de setembro, e a resposta veio no primeiro dia.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="num">87</span><span class="lbl">pessoas saíram do anúncio e foram ao seu Instagram</span></div>
+      <div class="kpi"><span class="num">R$ 0,95</span><span class="lbl">custo médio de cada uma dessas visitas</span></div>
+      <div class="kpi"><span class="num">1</span><span class="lbl">conversa aberta no Direct pelo anúncio</span></div>
+      <div class="kpi"><span class="num">R$ 159</span><span class="lbl">investidos nos três dias, com impostos</span></div>
+    </div>
+    <p>Para efeito de comparação: nos oito dias anteriores esse número era <strong>zero</strong>, com quase o mesmo investimento diário. Não é que o público mudou — mudou o pedido que o anúncio faz a ele. A cada 100 exibições dos novos vídeos, cerca de <strong>duas</strong> viram clique para o seu perfil — na campanha de reconhecimento, que continua no ar, esse clique simplesmente não existe: ela não tem para onde levar.</p>
+  </section>
+
+  <section>
+    <h2>Qual vídeo está puxando mais gente</h2>
+    <p>Cada vídeo roda sozinho, com a mesma verba e o mesmo público, justamente para que a comparação seja limpa. Depois de três dias já há uma ordem — ainda provisória, mas consistente nos três dias.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Vídeo</th><th scope="col">Visitas ao perfil</th><th scope="col">Custo por visita</th><th scope="col">Tempo médio assistido</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Karina, “a melhor decisão da minha vida”<span class="what">Depoimento falado, olhando para a câmera</span></td>
+            <td class="money">37</td><td class="money">R$ 0,78</td><td class="money">4 s</td>
+          </tr>
+          <tr>
+            <td>Karina, contorno em 7 dias<span class="what">Antes e depois com uma semana</span></td>
+            <td class="money">26</td><td class="money">R$ 1,01</td><td class="money">4 s</td>
+          </tr>
+          <tr>
+            <td>Vania, “já tinha tentado outras técnicas”<span class="what">Quebra a objeção de quem já tentou e não resolveu</span></td>
+            <td class="money">24</td><td class="money">R$ 1,14</td><td class="money">2 s</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Três frentes de visita ao perfil</td><td class="money">87</td><td class="money">R$ 0,95</td><td class="money">—</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p>O depoimento falado da Karina lidera em duas coisas ao mesmo tempo: traz mais gente e traz mais barato. O vídeo da Vania é o mais caro e também o que segura menos tempo na tela — dois sinais que costumam andar juntos. Se a diferença se mantiver até o fim da semana, a verba dele passa para o vencedor e entra outro vídeo do seu acervo no lugar.</p>
+  </section>
+
+  <section>
+    <h2>As outras duas frentes</h2>
+    <div class="findings">
+
+      <div class="finding">
+        <span class="mark">01</span>
+        <div>
+          <h3>A conversa pelo Direct abriu, e custou caro</h3>
+          <p>O vídeo “sou magra, por que tenho papada?” abriu <strong>uma conversa</strong> em três dias, a R$ 35,59. Está dentro da faixa que projetamos para o início (R$ 18 a R$ 45), mas no teto dela. Essa frente é a única em que o Instagram cobra caro para aparecer — R$ 49,85 por mil exibições, contra R$ 2,35 da campanha de reconhecimento —, porque pedir conversa é o pedido mais difícil que existe. Também é a que mais prende: quem assiste fica em média 5 segundos, o maior tempo de todos os vídeos no ar.</p>
+          <span class="verdict">Segue no ar, em observação</span>
+        </div>
+      </div>
+
+      <div class="finding">
+        <span class="mark">02</span>
+        <div>
+          <h3>O reconhecimento continua sendo o metro quadrado mais barato</h3>
+          <p>O caso da Débora alcançou mais <strong>5.744 pessoas</strong> nesses três dias por R$ 21,64, com 127 assistindo de verdade — R$ 0,17 cada. É o vídeo que apresenta seu trabalho para quem nunca ouviu falar, e é ele que alimenta as outras frentes. Por isso fica no ar mesmo sem gerar clique.</p>
+          <span class="verdict">Mantido a R$ 8 por dia</span>
+        </div>
+      </div>
+
+      <div class="finding">
+        <span class="mark">03</span>
+        <div>
+          <h3>Ninguém está vendo o mesmo anúncio demais</h3>
+          <p>Cada pessoa viu os vídeos novos, em média, 1,1 a 1,2 vez. É o oposto do que aconteceu com o vídeo curto que saiu de cena, que chegou a 2,2. Traduzindo: ainda há gente nova para alcançar em Balneário, e nenhuma frente precisa de troca de criativo por cansaço agora.</p>
+          <span class="verdict">Sem saturação</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>O placar que realmente importa agora</h2>
+    <p class="lead">A meta destas três semanas não é venda — é <strong>tamanho de público</strong>. Cada visita ao seu perfil entra em um grupo que o Instagram guarda por 60 dias, e é esse grupo que vai receber a campanha seguinte, a que fala com quem já demonstrou interesse.</p>
+    <p>Hoje, esse grupo, filtrado só por quem mora em Balneário, ainda aparece como “menos de mil pessoas” — que é o piso que o Meta mostra e o mínimo que ele exige para entregar um anúncio. Em três dias somamos 87 pessoas. Mantido esse ritmo, o grupo cruza a linha de mil em torno de quatro a seis semanas, como previsto. É esse o gatilho para ligar a etapa de remarketing, e não uma data no calendário.</p>
+    <div class="panel">
+      <h3>Como saber que chegou a hora</h3>
+      <p>Acompanhamos esse número toda semana. Quando o público de Balneário sair do piso, avisamos e ligamos a campanha que já está montada e pausada esperando por ele.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Continua dependendo de você</h2>
+    <div class="callout">
+      <h3>Conectar o WhatsApp Business à sua Página</h3>
+      <p>O pedido do relatório anterior segue de pé. O número da Página (47 99218-7863) está como conta pessoal do WhatsApp, e por isso o anúncio de conversa entra hoje pelo Direct do Instagram.</p>
+      <p>Com três dias de dado já dá para dizer por que isso importa: a conversa pelo Direct saiu a R$ 35,59, e em clínica o WhatsApp costuma abrir conversa mais barata e com mais gente respondendo — sua equipe já atende por lá. Assim que o número virar WhatsApp Business e for conectado à Página, refazemos essa campanha para o WhatsApp.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Acompanhe quando quiser</h2>
+    <div class="panel">
+      <p>O painel atualiza sozinho todo dia de manhã, com investimento, alcance, quantas pessoas assistiram a cada vídeo e até que ponto assistiram.</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo">relatorios.giogrowthdigital.com.br/giacomo</a>
+    </div>
+    <div class="panel">
+      <p>Relatório anterior, com os oito primeiros dias e a montagem da estrutura:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/relatorio-setembro/">Do alcance ao perfil · 1 a 8 de setembro</a>
+    </div>
+  </section>
+
+  <footer>Preparado por GGD Growth Digital · 11 de setembro de 2026</footer>
+
+</div>
+</body>
+</html>
