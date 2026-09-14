@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Dois Roteiros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8;
+  --surface:#FFFFFF;
+  --ink:#141F26;
+  --muted:#5B6D77;
+  --line:#DCE4E5;
+  --accent:#0E6B61;
+  --accent-soft:#E1EFEC;
+  --warm:#A9662F;
+  --warm-soft:#F5E9DE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519;
+    --surface:#161F25;
+    --ink:#E6EDEF;
+    --muted:#94A6B0;
+    --line:#263239;
+    --accent:#4FC2B1;
+    --accent-soft:#12312D;
+    --warm:#D6935C;
+    --warm-soft:#33241A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519;
+  --surface:#161F25;
+  --ink:#E6EDEF;
+  --muted:#94A6B0;
+  --line:#263239;
+  --accent:#4FC2B1;
+  --accent-soft:#12312D;
+  --warm:#D6935C;
+  --warm-soft:#33241A;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 24px 96px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+/* ---- cabeçalho ---- */
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+/* ---- seções ---- */
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:"Karla",sans-serif;font-weight:700;
+  font-size:17px;margin:0;letter-spacing:-.005em;
+}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- painel de números ---- */
+.kpis{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:26px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---- lista de achados ---- */
+.findings{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.mark{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.finding p{margin-top:6px;color:var(--muted);font-size:16px}
+.finding .verdict{
+  display:inline-block;margin-top:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);
+  padding:4px 9px;border-radius:2px;
+}
+
+/* ---- tabela do plano ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+td.money{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tfoot td{
+  border-top:2px solid var(--line);font-weight:700;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+/* ---- destaque / pedido ---- */
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  align-self:flex-start;word-break:break-word;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Dois roteiros para gravar</h1>
+    <p class="dek">Tudo o que precisa ser falado, na ordem, com o tempo de cada trecho. Feitos para anúncio: os dois terminam pedindo o agendamento da avaliação.</p>
+    <p class="meta">14 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>Por que estes dois</h2>
+    <p class="lead">Os cinco vídeos no ar hoje são posts que já existiam no perfil. Eles apresentam o trabalho e levam gente ao Instagram — o que está funcionando, a R$ 0,97 por visita. O que nenhum deles faz é <strong>pedir o agendamento</strong>, porque não foram gravados para isso.</p>
+    <p>Os dados de duas semanas apontaram exatamente o que grava melhor nesta conta: <strong>o Dr. falando olhando para a câmera</strong>. O depoimento falado é o vídeo mais barato da conta (R$ 0,78 por visita) e o que segura mais tempo de tela. Os dois roteiros abaixo seguem essa fórmula.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="num">2</span><span class="lbl">gravações, feitas no mesmo dia</span></div>
+      <div class="kpi"><span class="num">~2 min</span><span class="lbl">de material bruto no total</span></div>
+      <div class="kpi"><span class="num">4</span><span class="lbl">semanas de anúncio que elas rendem</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Antes de gravar</h2>
+    <div class="findings">
+      <div class="finding">
+        <span class="mark">01</span>
+        <div>
+          <h3>Enquadramento e luz</h3>
+          <p>Celular na vertical, na altura dos olhos — nunca de baixo para cima. Janela ou luz de frente, nunca atrás. Enquadre do peito para cima, com espaço acima da cabeça. Fundo do consultório de sempre, sem gente passando.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">02</span>
+        <div>
+          <h3>Como falar</h3>
+          <p>Olhando para a lente, não para a tela. Ritmo de conversa, como se explicasse para uma paciente sentada à sua frente — não é aula. Se errar, respire e repita a frase inteira; a edição corta depois. Grave cada bloco separado, é mais fácil do que acertar tudo de uma vez.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">03</span>
+        <div>
+          <h3>Os primeiros três segundos decidem</h3>
+          <p>A primeira frase é a que segura ou perde a pessoa. Comece por ela, sem “oi, tudo bem, aqui é o Dr.” — a apresentação vem depois, quando ela já resolveu ficar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roteiro 1 · “Emagreceu e a papada continuou”</h2>
+    <p class="lead">Para quem ainda não sabe que tem indicação. Explica por que dieta e academia não resolvem aquela região, e chama para a avaliação. Duração alvo: <strong>50 a 60 segundos</strong>.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="money">0–5 s</td>
+            <td>“Se você emagreceu, fechou a boca, treinou — e a papada continuou aí, o problema provavelmente não é o seu peso.”</td>
+            <td>Rosto, plano fechado. Sem trilha.<span class="what">É o trecho mais importante do vídeo.</span></td>
+          </tr>
+          <tr>
+            <td class="money">5–20 s</td>
+            <td>“Existe uma gordura embaixo do queixo que não responde a dieta. Ela é localizada, tem comportamento próprio, e é por isso que tanta gente magra tem papada. Não é falta de esforço. É anatomia.”</td>
+            <td>Mesmo plano. Pode apontar a região com a mão.</td>
+          </tr>
+          <tr>
+            <td class="money">20–38 s</td>
+            <td>“Tem três sinais que aparecem quase sempre: o contorno do queixo some nas fotos de lado; você repara mais na papada quando olha para baixo, no celular; e mesmo quando o corpo afina, a região continua igual. Se os três te descrevem, muito provavelmente é gordura submentoniana.”</td>
+            <td>Mesmo plano.<span class="what">Falar os três em ritmo de lista, com pausa entre eles.</span></td>
+          </tr>
+          <tr>
+            <td class="money">38–50 s</td>
+            <td>“O que a avaliação define é se o seu caso é de gordura, de pele, de músculo — ou de mais de um. Cada um desses pede uma conduta diferente, e é isso que eu preciso ver antes de dizer qualquer coisa sobre o seu caso.”</td>
+            <td>Mesmo plano.<span class="what">É a frase que protege você e qualifica quem chega.</span></td>
+          </tr>
+          <tr>
+            <td class="money">50–58 s</td>
+            <td>“Se você quer saber em qual desses grupos você está, me chama aqui pelo direct com a palavra <strong>avaliação</strong> que a minha equipe organiza o seu horário.”</td>
+            <td>Mesmo plano, um tom mais direto.<span class="what">Chamada única. Não misture “segue”, “salva” e “chama”.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roteiro 2 · “Vai doer? Como é o dia e os sete dias depois”</h2>
+    <p class="lead">Para quem já sabe que tem indicação e trava no medo — é a objeção que mais aparece nos comentários e nas conversas. Duração alvo: <strong>70 a 80 segundos</strong>.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="money">0–6 s</td>
+            <td>“A pergunta que eu mais recebo não é sobre o resultado. É: doutor, vai doer? Então deixa eu te contar como é o dia, do começo ao fim.”</td>
+            <td>Rosto, plano fechado.</td>
+          </tr>
+          <tr>
+            <td class="money">6–25 s</td>
+            <td>“Você chega, a gente marca a região com você sentado, e o procedimento é feito com anestesia local. Você fica acordada, conversando comigo. O que se sente é a pressão do movimento, não dor. Dura em torno de uma hora, e você vai embora andando, no mesmo dia.”</td>
+            <td>Mesmo plano.<span class="what">Ajuste o tempo real do seu protocolo se for diferente.</span></td>
+          </tr>
+          <tr>
+            <td class="money">25–50 s</td>
+            <td>“Nos primeiros dias você usa uma malha de compressão — é o que mais incomoda, e é o que mais ajuda. Inchaço e roxo fazem parte, aparecem no segundo e no terceiro dia e vão embora sozinhos. A maioria das minhas pacientes volta a trabalhar entre o terceiro e o quinto dia, e a região continua se ajustando por algumas semanas depois disso.”</td>
+            <td>Mesmo plano.</td>
+          </tr>
+          <tr>
+            <td class="money">50–65 s</td>
+            <td>“E eu não vou te prometer resultado por vídeo. Cada rosto responde de um jeito, e o que define é o que eu encontro na avaliação: quanto é gordura, como está a pele, como está o músculo.”</td>
+            <td>Mesmo plano, tom mais baixo.<span class="what">Trecho obrigatório. É o que mantém a peça dentro das regras do conselho.</span></td>
+          </tr>
+          <tr>
+            <td class="money">65–78 s</td>
+            <td>“Se o seu freio era o medo da dor e da recuperação, me chama aqui no direct com a palavra <strong>avaliação</strong>. A gente conversa sobre o seu caso com o rosto na frente, que é do único jeito que dá para conversar de verdade.”</td>
+            <td>Mesmo plano.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que não pode entrar na fala</h2>
+    <p>Quem responde pela publicidade é o profissional, e a fiscalização é do conselho de odontologia. Estes quatro pontos derrubam uma peça — e alguns deles também fazem o Meta reprovar o anúncio:</p>
+    <div class="findings">
+      <div class="finding"><span class="mark">01</span><div><h3>Prometer resultado</h3><p>Nada de “você vai ficar com o contorno definido”, “resultado garantido” ou “em 7 dias você vai estar assim”. Fale do processo e da avaliação, nunca do resultado que a pessoa terá.</p></div></div>
+      <div class="finding"><span class="mark">02</span><div><h3>Preço, desconto e prazo</h3><p>Nenhum valor, parcelamento, condição especial ou “últimas vagas” na fala. Isso vale para procedimento clínico; a conversa sobre valores acontece na avaliação.</p></div></div>
+      <div class="finding"><span class="mark">03</span><div><h3>Superlativo e comparação</h3><p>“O melhor”, “o mais moderno”, “o único que faz assim”, ou qualquer referência a como outros profissionais trabalham. Diga o que <em>você</em> faz, sem comparar.</p></div></div>
+      <div class="finding"><span class="mark">04</span><div><h3>Falar em nome de paciente</h3><p>Se aparecer imagem ou caso de paciente, precisa do termo de autorização assinado guardado — inclusive para os vídeos que já estão no ar.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como mandar para a gente</h2>
+    <div class="panel">
+      <p>Grave os blocos separados, no formato vertical, e mande os arquivos originais — não reencaminhe pelo WhatsApp comprimido, e não precisa editar nada. A edição, as legendas e o corte para cada formato são por nossa conta.</p>
+      <p>Assim que os dois chegarem, eles entram no ar em até 48 horas, dentro da mesma verba de R$ 50 por dia. Nenhuma frente atual precisa sair para isso: o vídeo de menor desempenho cede o lugar.</p>
+    </div>
+    <div class="panel">
+      <p>Relatório desta semana, com os números que embasaram estes roteiros:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/perfil-primeiros-dias/">Os primeiros cliques · 9 a 13 de setembro</a>
+    </div>
+  </section>
+
+  <footer>Preparado por GGD Growth Digital · 14 de setembro de 2026</footer>
+
+</div>
+</body>
+</html>
