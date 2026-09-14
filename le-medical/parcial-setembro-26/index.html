@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>LE Medical · Parcial de Setembro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F7FAFE;
+    --surface:#FFFFFF;
+    --gelo:#EEF4FD;
+    --ink:#403838;
+    --ink-soft:#6E6669;
+    --line:#DCE6F5;
+    --azul:#4A7FC7;
+    --azul-claro:#A4C9FA;
+    --pos:#4E9C7A;
+    --aten:#C9A24B;
+    --shadow:0 1px 2px rgba(64,56,56,.04), 0 8px 24px rgba(74,127,199,.07);
+    --r:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#17161A;
+      --surface:#201E23;
+      --gelo:#262A33;
+      --ink:#EEF4FD;
+      --ink-soft:#A8A2A6;
+      --line:#34323A;
+      --azul:#8FB6EC;
+      --azul-claro:#4A7FC7;
+      --pos:#6FBF9B;
+      --aten:#D9BC72;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#17161A;
+    --surface:#201E23;
+    --gelo:#262A33;
+    --ink:#EEF4FD;
+    --ink-soft:#A8A2A6;
+    --line:#34323A;
+    --azul:#8FB6EC;
+    --azul-claro:#4A7FC7;
+    --pos:#6FBF9B;
+    --aten:#D9BC72;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:48px 24px 80px; display:flex; flex-direction:column; gap:40px}
+  h1,h2,h3{font-family:Nunito, Inter, sans-serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(30px,4.4vw,42px); font-weight:800; line-height:1.15; letter-spacing:-.01em}
+  h2{font-size:22px; font-weight:800}
+  h3{font-size:17px; font-weight:700}
+  p{margin:0}
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--azul); font-family:Inter,sans-serif;
+  }
+  .lead{font-size:18px; color:var(--ink-soft); max-width:62ch}
+
+  header.top{display:flex; flex-direction:column; gap:14px}
+  .marca{display:flex; align-items:center; gap:12px}
+  .disco{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--azul-claro); display:grid; place-items:center; flex:none;
+  }
+  .disco svg{width:20px;height:20px}
+  .marca b{font-family:Nunito,sans-serif; font-weight:800; font-size:17px}
+  .marca span{color:var(--ink-soft); font-size:14px}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  /* painel de números */
+  .painel{padding:28px; display:flex; flex-direction:column; gap:24px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:22px}
+  .kpi{display:flex; flex-direction:column; gap:4px}
+  .kpi .rot{font-size:13px; color:var(--ink-soft)}
+  .kpi .val{
+    font-family:Nunito,sans-serif; font-weight:800; font-size:30px; line-height:1.1;
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+  }
+  .kpi .val.destaque{color:var(--azul)}
+  .kpi .nota{font-size:12.5px; color:var(--ink-soft)}
+  .barra{height:1px; background:var(--line)}
+
+  /* faixa de destaque */
+  .faixa{
+    background:var(--gelo); border-radius:var(--r); padding:22px 24px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .faixa .num{font-family:Nunito,sans-serif; font-weight:800; font-size:34px; color:var(--azul); line-height:1.1; font-variant-numeric:tabular-nums}
+
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px}
+  .tabela-wrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+  th,td{padding:13px 16px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left}
+  thead th{
+    font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--gelo);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.total td{font-weight:600; background:color-mix(in srgb, var(--gelo) 55%, transparent)}
+  td .up{color:var(--pos); font-weight:600}
+  .cap{font-size:13px; color:var(--ink-soft)}
+
+  ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+  ul.lista li{display:flex; gap:12px; align-items:flex-start}
+  ul.lista li .marc{
+    width:8px;height:8px;border-radius:50%;background:var(--azul-claro);
+    margin-top:9px; flex:none;
+  }
+  ul.lista li b{font-weight:600}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+  .bloco{padding:24px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--ink-soft)}
+  .bloco p strong{color:var(--ink); font-weight:600}
+
+  footer{
+    border-top:1px solid var(--line); padding-top:22px;
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size:13px; color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .wrap{padding:32px 18px 56px; gap:32px}
+    .painel{padding:22px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="marca">
+      <span class="disco" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 3v6a4 4 0 0 0 8 0V3"></path>
+          <path d="M10 13v3a5 5 0 0 0 10 0v-2"></path>
+          <circle cx="20" cy="11" r="2"></circle>
+        </svg>
+      </span>
+      <div>
+        <b>LE Medical</b> <span>· acompanhamento de mídia</span>
+      </div>
+    </div>
+    <p class="eyebrow">Parcial de setembro · 1 a 13 de setembro de 2026</p>
+    <h1>Os primeiros 13 dias de setembro renderam R$&nbsp;535 mil com R$&nbsp;22 mil de mídia</h1>
+    <p class="lead">Um retrato do mês antes do fechamento, para vocês acompanharem enquanto ainda dá tempo de aproveitar. Os valores de faturamento vêm da própria loja — pedidos com pagamento confirmado — e não da estimativa das plataformas.</p>
+  </header>
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Investimento em mídia</span>
+          <span class="val">R$ 22.496</span>
+          <span class="nota">Meta R$ 15.434 · Google R$ 7.062</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Faturamento da loja</span>
+          <span class="val">R$ 535.721</span>
+          <span class="nota">678 pedidos pagos</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Retorno sobre a mídia</span>
+          <span class="val destaque">23,8×</span>
+          <span class="nota">R$ 23,81 de venda por real investido</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por pedido</span>
+          <span class="val">R$ 33,18</span>
+          <span class="nota">ticket médio de R$ 790</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Visitantes trazidos pela mídia</span>
+          <span class="val">35.424</span>
+          <span class="nota">R$ 0,64 por visita</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Visitantes que compraram</span>
+          <span class="val">1,91%</span>
+          <span class="nota">em agosto, 1,58%</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Ritmo diário</span>
+          <span class="val">R$ 41.209</span>
+          <span class="nota">média de faturamento por dia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">O número da quinzena</p>
+    <div class="faixa">
+      <span class="num">R$ 23,81 por real investido</span>
+      <p>É o melhor retorno dos últimos três meses na mesma janela de dias: julho fez 21,26× e agosto, 16,39×. Chegar a setembro com um terço da verba de agosto e ainda assim manter 678 pedidos mostra que a conta está comprando venda mais barata — o custo por pedido caiu de R$ 51,57 (agosto) para R$ 33,18.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como setembro se compara</h2>
+    <p class="cap">Sempre a mesma janela — do dia 1 ao dia 13 — para a comparação ser justa.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Período</th><th>Investimento</th><th>Faturamento</th><th>Retorno</th><th>Pedidos</th><th>Custo/pedido</th></tr>
+        </thead>
+        <tbody>
+          <tr class="total"><td>1–13 de setembro/26</td><td>R$ 22.496</td><td>R$ 535.721</td><td><span class="up">23,81×</span></td><td>678</td><td>R$ 33,18</td></tr>
+          <tr><td>1–13 de agosto/26</td><td>R$ 59.822</td><td>R$ 980.486</td><td>16,39×</td><td>1.160</td><td>R$ 51,57</td></tr>
+          <tr><td>1–13 de julho/26</td><td>R$ 21.477</td><td>R$ 456.650</td><td>21,26×</td><td>531</td><td>R$ 40,45</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Julho é a comparação mais direta, porque teve praticamente o mesmo tamanho de verba: com R$ 1.019 a mais de investimento, setembro entregou <strong>147 pedidos e R$ 79 mil a mais</strong>.</p>
+  </section>
+
+  <section>
+    <h2>Setembro do ano passado, no mesmo ponto</h2>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>1 a 13 de setembro</th><th>Investimento</th><th>Vendas atribuídas</th><th>Retorno</th></tr>
+        </thead>
+        <tbody>
+          <tr class="total"><td>2026</td><td>R$ 22.496</td><td>R$ 578.239</td><td><span class="up">25,7×</span></td></tr>
+          <tr><td>2025</td><td>R$ 19.502</td><td>R$ 418.933</td><td>21,5×</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Com 15% mais investimento, as plataformas registram <strong>38% mais vendas</strong> que no mesmo período do ano passado. Aqui usamos o número das plataformas, que é o que existe para 2025 — por isso ele aparece um pouco diferente do faturamento da loja acima.</p>
+  </section>
+
+  <section>
+    <h2>O que cada canal está fazendo</h2>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>Meta — Instagram e Facebook</h3>
+        <p><strong>R$ 15.434 investidos · 547 compras · 28,6× de retorno.</strong> É o canal que puxa o resultado do mês. O custo por compra caiu de R$ 37,05 em agosto para <strong>R$ 28,22</strong>, e o custo para aparecer mil vezes para o público segue entre os mais baratos do ano.</p>
+        <p>O remarketing — quem já visitou a loja ou interagiu com o perfil — está devolvendo <strong>48,6× </strong>com uma fatia pequena da verba, sinal de que o topo do funil está alimentando bem a base de gente pronta para comprar.</p>
+      </div>
+      <div class="card bloco">
+        <h3>Google — Busca e Shopping</h3>
+        <p><strong>R$ 7.062 investidos · 179 conversões · 19,4× de retorno.</strong> A campanha institucional, de quem busca a LE Medical pelo nome, é a mais eficiente da conta: <strong>47,9×</strong>. Ela já aparece em praticamente 100% dessas buscas.</p>
+        <p>Nas campanhas de produto (Shopping e PMax) existe hoje mais procura do que a verba do mês consegue cobrir — voltamos a esse ponto no plano das próximas semanas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que fizemos até aqui</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Concentramos a verba nos primeiros 20 dias.</b> Outubro traz a eleição, quando o custo de anunciar sobe em todas as plataformas. Antecipar a entrega para setembro compra o mesmo alcance mais barato.</span></li>
+      <li><span class="marc"></span><span><b>Reforçamos o que já vendia e enxugamos o que não vendia.</b> No dia 9 remanejamos verba das campanhas de menor retorno para as três frentes mais eficientes — a de catálogo, a de público aberto e a de remarketing.</span></li>
+      <li><span class="marc"></span><span><b>Separamos kits e produtos avulsos no Shopping</b>, para enxergar quanto cada um vende e conseguir decidir onde colocar verba com segurança.</span></li>
+      <li><span class="marc"></span><span><b>Preparamos 10 criativos novos</b> para testar mensagens diferentes, um por vez, sem risco para as campanhas que já performam.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>As próximas duas semanas</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Até o dia 20</b>, mantemos o ritmo atual de investimento — é a janela mais barata do mês.</span></li>
+      <li><span class="marc"></span><span><b>De 21 a 27</b>, reduzimos gradualmente, e <b>de 28 a 30</b> seguramos a prospecção de público novo, mantendo o remarketing de pé. A véspera do primeiro turno é o pico de custo do trimestre.</span></li>
+      <li><span class="marc"></span><span><b>Há espaço de crescimento no Google.</b> Nas campanhas de produto, a procura por estetoscópio hoje é maior do que a verba alocada consegue atender. É a conversa que queremos ter com vocês para outubro.</span></li>
+      <li><span class="marc"></span><span><b>Uma oportunidade fora da mídia:</b> nestes 13 dias, <b>R$ 83 mil</b> em pedidos chegaram a ser fechados na loja mas não tiveram o pagamento confirmado — em geral cartão recusado. Recuperar uma parte disso por WhatsApp, oferecendo Pix, não custa nada em mídia e vale mais do que qualquer ajuste de campanha.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="faixa">
+      <p class="eyebrow">Projeção para o fechamento</p>
+      <span class="num">R$ 1,1 a 1,2 milhão</span>
+      <p>Mantido o plano de verba já aprovado — cerca de R$ 50 mil no mês, com a redução programada na última semana — setembro deve fechar entre R$ 1,1 e R$ 1,2 milhão de faturamento, com retorno na casa de 22× a 24×.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital</span>
+    <span>Dados de 1 a 13 de setembro de 2026 · faturamento apurado na loja, pedidos com pagamento confirmado</span>
+  </footer>
+
+</div>
+</body>
+</html>
