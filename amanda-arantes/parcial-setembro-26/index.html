@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Amanda Arantes · Parcial de Setembro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --nude:#e7d3c4; --nude-soft:#f6ece5; --sand:#c9a58a; --cocoa:#8a6551;
+    --deep:#4a3528; --ink:#3a2c22; --gold:#b98d5f; --cream:#fbf7f3; --line:#eaddd2;
+    --surface:#ffffff;
+    --pos:#7a8f6a;
+    --shadow:0 1px 2px rgba(74,53,40,.04), 0 10px 30px rgba(138,101,81,.08);
+    --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Jost',sans-serif; background:var(--cream); color:var(--ink);
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif; text-wrap:balance}
+  h1{font-size:clamp(34px,5vw,52px); font-weight:600; line-height:1.1; color:var(--deep); letter-spacing:.2px}
+  h2{font-size:30px; font-weight:600; color:var(--deep)}
+  h3{font-size:21px; font-weight:600; color:var(--deep)}
+
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px 88px; display:flex; flex-direction:column; gap:52px}
+
+  .hero{
+    background:linear-gradient(135deg,#f6ece5 0%,#e7d3c4 55%,#d9bda8 100%);
+    padding:76px 24px 66px; text-align:center; position:relative; overflow:hidden; margin-bottom:8px;
+  }
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.55),transparent 45%);pointer-events:none}
+  .hero-in{max-width:820px; margin:0 auto; position:relative}
+  .hero .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:11.5px;color:var(--cocoa);font-weight:500;margin-bottom:22px}
+  .hero .sub{font-size:19px;color:var(--cocoa);margin-top:18px;font-weight:300;max-width:60ch;margin-left:auto;margin-right:auto}
+  .hero .period{display:inline-block;margin-top:28px;padding:9px 26px;border:1px solid var(--sand);border-radius:40px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:rgba(255,255,255,.4)}
+
+  .eyebrow{font-size:11.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa)}
+
+  section{display:flex; flex-direction:column; gap:20px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  .painel{padding:32px; display:flex; flex-direction:column; gap:26px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:26px}
+  .kpi{display:flex; flex-direction:column; gap:3px}
+  .kpi .rot{font-size:13px; color:var(--cocoa); letter-spacing:.02em}
+  .kpi .val{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:38px; line-height:1.05; color:var(--deep); font-variant-numeric:tabular-nums}
+  .kpi .val.destaque{color:var(--gold)}
+  .kpi .nota{font-size:12.5px; color:var(--cocoa); opacity:.9}
+  .barra{height:1px; background:var(--line)}
+
+  .faixa{background:var(--nude-soft); border:1px solid var(--line); border-radius:var(--r); padding:28px 30px; display:flex; flex-direction:column; gap:10px}
+  .faixa .num{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:42px; color:var(--deep); line-height:1.05; font-variant-numeric:tabular-nums}
+  .faixa p{color:var(--cocoa)}
+
+  .tabela-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow)}
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px}
+  th,td{padding:14px 18px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left}
+  thead th{font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--cocoa); background:var(--nude-soft)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.destaque td{background:rgba(231,211,196,.28); font-weight:500}
+  td .up{color:var(--pos); font-weight:500}
+  .cap{font-size:13.5px; color:var(--cocoa)}
+
+  ul.lista{list-style:none; display:flex; flex-direction:column; gap:16px}
+  ul.lista li{display:flex; gap:14px; align-items:flex-start}
+  ul.lista li .marc{width:7px;height:7px;border-radius:50%;background:var(--sand);margin-top:11px;flex:none}
+  ul.lista li b{font-weight:500; color:var(--deep)}
+  ul.lista li span{color:var(--cocoa)}
+  ul.lista li b + span, ul.lista li > span > b{color:var(--deep)}
+  ul.lista li > span{color:var(--cocoa)}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px}
+  .bloco{padding:28px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--cocoa)}
+  .bloco p strong{color:var(--deep); font-weight:500}
+
+  footer{border-top:1px solid var(--line); padding-top:26px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--cocoa)}
+
+  @media (max-width:600px){
+    .wrap{padding:0 18px 60px; gap:40px}
+    .painel{padding:24px}
+    .hero{padding:56px 20px 48px}
+  }
+  @media print{
+    body{background:#fff}
+    .hero{background:linear-gradient(135deg,#f6ece5,#e7d3c4)!important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .card,.faixa,.tabela-wrap,thead th,tbody tr.destaque td{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">Amanda Arantes · acompanhamento de mídia</p>
+    <h1>1.355 seguidores novos em 14 dias, a R$&nbsp;0,57 cada</h1>
+    <p class="sub">Um retrato de setembro antes do fechamento — para você acompanhar enquanto ainda dá tempo de aproveitar o mês.</p>
+    <span class="period">1 a 14 de setembro de 2026</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Investimento</span>
+          <span class="val">R$ 772</span>
+          <span class="nota">R$ 55,12 por dia</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Seguidores novos</span>
+          <span class="val">1.355</span>
+          <span class="nota">o dobro de agosto na mesma janela</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por seguidor</span>
+          <span class="val destaque">R$ 0,57</span>
+          <span class="nota">era R$ 0,83 em agosto</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Perfil em 14/09</span>
+          <span class="val">58.898</span>
+          <span class="nota">saldo de +984 no mês</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Pessoas alcançadas</span>
+          <span class="val">94.552</span>
+          <span class="nota">+81% vs. agosto</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Visualizações de 3s</span>
+          <span class="val">117.789</span>
+          <span class="nota">R$ 6,55 por mil</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Assistiram até o fim</span>
+          <span class="val">10.742</span>
+          <span class="nota">+138% vs. agosto</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo para aparecer mil vezes</span>
+          <span class="val">R$ 6,43</span>
+          <span class="nota">era R$ 8,98 em agosto</span>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Os 1.355 são seguidores <strong>novos</strong>, que começaram a seguir no período. O saldo de +984 já desconta quem deixou de seguir no mesmo intervalo — o movimento normal de qualquer perfil desse tamanho.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">O número da quinzena</p>
+    <div class="faixa">
+      <span class="num">R$ 0,57 por seguidor</span>
+      <p>É o custo mais baixo dos últimos quatro meses. Contra a mesma janela de agosto, o seguidor ficou <strong>32% mais barato</strong>; contra julho, <strong>44%</strong>. E não foi só eficiência: com 40% mais verba, o mês trouxe <strong>o dobro de seguidores</strong> — 1.355 contra 660.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como setembro se compara</h2>
+    <p class="cap">Sempre do dia 1 ao dia 14, nos três meses, para a comparação ser justa.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Período</th><th>Investimento</th><th>Seguidores novos</th><th>Custo por seguidor</th><th>Alcance</th><th>Visualizações 3s</th></tr>
+        </thead>
+        <tbody>
+          <tr class="destaque"><td>1–14 de setembro/26</td><td>R$ 772</td><td>1.355</td><td><span class="up">R$ 0,57</span></td><td>94.552</td><td>117.789</td></tr>
+          <tr><td>1–14 de agosto/26</td><td>R$ 550</td><td>660</td><td>R$ 0,83</td><td>52.108</td><td>60.551</td></tr>
+          <tr><td>1–14 de julho/26</td><td>R$ 620</td><td>608</td><td>R$ 1,02</td><td>66.582</td><td>81.212</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Julho é a comparação mais direta em tamanho de verba: com <strong>R$ 152 a mais</strong>, setembro trouxe <strong>747 seguidores a mais</strong> e alcançou 28 mil pessoas a mais.</p>
+  </section>
+
+  <section>
+    <h2>A mudança que fez a diferença</h2>
+    <p class="cap">Até agosto, os vídeos iam ao ar pelo botão “impulsionar” do próprio Instagram. Em setembro passamos a subi-los como campanha montada por fora, com o público e os lugares de exibição escolhidos por nós.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Mesmo mês, dois jeitos</th><th>Investimento</th><th>Alcance</th><th>Visualizações 3s</th><th>Custo por mil visualizações</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pelo botão “impulsionar” (2 posts)</td><td>R$ 177</td><td>7.645</td><td>9.442</td><td>R$ 18,76</td></tr>
+          <tr class="destaque"><td>Campanha montada (5 vídeos)</td><td>R$ 365</td><td>61.195</td><td>77.900</td><td><span class="up">R$ 4,68</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Com o dobro da verba, a campanha montada entregou <strong>8 vezes mais visualizações</strong> e alcançou <strong>8 vezes mais gente</strong>. Os dois posts no botão foram desligados no dia 10 — é dinheiro que voltou para os vídeos que rendem.</p>
+  </section>
+
+  <section>
+    <h2>Como cada vídeo se saiu</h2>
+    <p class="cap">Do dia 1 ao 14. Na semana de 11 a 14 todos rodaram com a mesma verba, para a comparação ser limpa.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Vídeo</th><th>Investimento</th><th>Alcance</th><th>Visualizações 3s</th><th>Custo por mil</th><th>Viram até o fim</th></tr>
+        </thead>
+        <tbody>
+          <tr class="destaque"><td>Hot girl o’clock</td><td>R$ 141</td><td>22.857</td><td>25.742</td><td><span class="up">R$ 5,48</span></td><td>4.033</td></tr>
+          <tr class="destaque"><td>Elra coming soon</td><td>R$ 25</td><td>4.826</td><td>5.185</td><td><span class="up">R$ 4,75</span></td><td>1.009</td></tr>
+          <tr><td>Soul 70s</td><td>R$ 145</td><td>28.216</td><td>38.891</td><td>R$ 3,72</td><td>2.224</td></tr>
+          <tr><td>Um dia perfeito</td><td>R$ 30</td><td>4.283</td><td>4.652</td><td>R$ 6,39</td><td>655</td></tr>
+          <tr><td>Murau turquesa</td><td>R$ 25</td><td>3.231</td><td>3.430</td><td>R$ 7,30</td><td>380</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Os dois destacados são os que seguem no ar. <strong>Hot girl o’clock</strong> é o que mais prende: de cada 100 pessoas que veem o vídeo começar, 87 ficam nos 3 primeiros segundos, e ele tem o maior número de gente assistindo até o fim. O <strong>Soul 70s</strong> compra visualização muito barata, mas é o que menos segura quem começou a assistir — por isso saiu da escala. E uma surpresa: o <strong>Murau turquesa</strong>, que foi um dos maiores virais orgânicos do perfil, foi o mais caro no anúncio. Viral no orgânico nem sempre se repete no pago.</p>
+  </section>
+
+  <section>
+    <h2>Uma leitura honesta do número</h2>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>De onde vêm os seguidores</h3>
+        <p>As visitas ao perfil vindas de anúncio <strong>caíram</strong> nesta quinzena (3.638 contra 5.538 em agosto), mas os seguidores <strong>dobraram</strong>. Ou seja: a conta de “R$ 0,57 por seguidor” não é mérito só da campanha que leva ao perfil.</p>
+        <p>Boa parte veio do alcance dos vídeos — <strong>94 mil pessoas</strong> viram você neste período — e do seu conteúdo orgânico. As duas frentes se alimentam, e é por isso que elas ficam ligadas ao mesmo tempo.</p>
+      </div>
+      <div class="card bloco">
+        <h3>O ponto de atenção</h3>
+        <p>O criativo da campanha de perfil é de <strong>maio</strong> e está ficando mais caro: a visita ao perfil passou de R$ 0,051 para <strong>R$ 0,063</strong>. É o desgaste natural de um anúncio que já rodou quatro meses.</p>
+        <p>Já preparamos um sucessor, mas o Meta mudou a regra do formato de “visita ao perfil” e travou a criação de anúncios novos nesse objetivo. Estamos tratando isso com o suporte — enquanto isso, o anúncio atual segue entregando normalmente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que fizemos até aqui</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Tiramos os vídeos do botão “impulsionar”.</b> Passaram a ser campanha montada, com público e posicionamento escolhidos — é a mudança que multiplicou por 8 a visualização por real investido.</span></li>
+      <li><span class="marc"></span><span><b>Demos verba própria para cada vídeo.</b> Antes, um único vídeo levava quase toda a verba e os outros ficavam sem número nenhum. Agora cada um tem o seu — o que importa para o media kit, porque nenhum post fica “vazio”.</span></li>
+      <li><span class="marc"></span><span><b>Testamos os cinco em condição igual</b> entre os dias 11 e 14, mesma verba para todos, e no dia 15 concentramos no <b>Hot girl o’clock</b> e no <b>Elra coming soon</b>, os dois que mais seguram a audiência.</span></li>
+      <li><span class="marc"></span><span><b>Desligamos o que não estava rendendo:</b> os dois posts no botão, no dia 10, e os três vídeos mais caros, no dia 15.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>As próximas duas semanas</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Ajustamos o ritmo para fechar o mês no valor combinado.</b> A quinzena rodou acima do planejado — foi a fase de teste, e valeu. Daqui em diante a diária cai para cerca de <b>R$ 26,65</b>, e setembro fecha em <b>R$ 1.200</b>.</span></li>
+      <li><span class="marc"></span><span><b>Seguem no ar três frentes:</b> a campanha que leva ao perfil e os dois vídeos campeões. É a configuração mais eficiente que a conta já teve.</span></li>
+      <li><span class="marc"></span><span><b>Vamos escolher o próximo vídeo pelo critério novo:</b> quem prende nos primeiros segundos, não quem teve mais alcance orgânico. O teste desta quinzena mostrou que as duas coisas não andam juntas.</span></li>
+      <li><span class="marc"></span><span><b>Em paralelo, tratamos com o Meta</b> a liberação do formato de visita ao perfil, para podermos renovar o criativo que está no ar desde maio.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="faixa">
+      <p class="eyebrow">Projeção para o fechamento</p>
+      <span class="num">cerca de 2.100 seguidores novos</span>
+      <p>Mantido o plano de R$ 1.200 no mês, setembro deve fechar em torno de <strong>2.100 seguidores novos</strong> — contra 1.820 em agosto e 1.563 em julho, com investimento parecido. O perfil deve terminar o mês perto de <strong>59,4 mil seguidores</strong>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital</span>
+    <span>Dados de 1 a 14 de setembro de 2026 · Meta Ads e Instagram Insights</span>
+  </footer>
+
+</div>
+</body>
+</html>
