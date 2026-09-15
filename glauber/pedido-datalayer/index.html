@@ -221,7 +221,7 @@
     background:var(--surface-sunk);
     border-radius:3px;
     padding:.1em .36em;
-    word-break:break-word;
+    overflow-wrap:anywhere;
     color:var(--ink);
   }
 
@@ -364,14 +364,16 @@
     gap:.8rem;
     max-width:38rem;
   }
+  ol.steps li > span{min-width:0;}
   ol.steps li{
     counter-increment:step;
-    display:grid;
-    grid-template-columns:1.55rem 1fr;
+    display:flex;
+    align-items:flex-start;
     gap:.8rem;
   }
   ol.steps li::before{
     content:counter(step);
+    flex:none;
     font-family:"IBM Plex Mono",ui-monospace,monospace;
     font-size:.72rem;
     color:var(--accent);
@@ -509,9 +511,9 @@
     <div class="body">
       <h2>Como conferir que funcionou</h2>
       <ol class="steps">
-        <li>Abrir a página com o console do navegador aberto e enviar o formulário com dados de teste.</li>
-        <li>No console, rodar <code>dataLayer</code> e procurar um item com <code>event: "ggd_lead_aula_terca"</code> junto dos três campos preenchidos.</li>
-        <li>Com a extensão <em>Meta Pixel Helper</em> instalada, deve aparecer um evento <strong>Lead</strong> com o nome de conteúdo <code>AULA_TERCA_NERVUS</code> — esse é o sinal de que a tag certa disparou.</li>
+        <li><span>Abrir a página com o console do navegador aberto e enviar o formulário com dados de teste.</span></li>
+        <li><span>No console, rodar <code>dataLayer</code> e procurar um item com <code>event: "ggd_lead_aula_terca"</code> junto dos três campos preenchidos.</span></li>
+        <li><span>Com a extensão <em>Meta Pixel Helper</em> instalada, deve aparecer um evento <strong>Lead</strong> com o nome de conteúdo <code>AULA_TERCA_NERVUS</code> — esse é o sinal de que a tag certa disparou.</span></li>
       </ol>
       <p>Se o <code>dataLayer</code> mostrar o item mas o Pixel Helper não acusar o evento, o problema está do nosso lado, no Gerenciador de Tags — é só avisar que resolvemos.</p>
     </div>
