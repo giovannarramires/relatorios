@@ -81,6 +81,51 @@
   .bloco p{font-size:15px; color:var(--cocoa)}
   .bloco p strong{color:var(--deep); font-weight:500}
 
+
+  /* galeria de videos — thumb clicavel que abre o post no Instagram */
+  .videos{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:20px}
+  .vcard{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+    text-decoration:none; color:inherit; transition:transform .18s, box-shadow .18s;
+  }
+  .vcard:hover{transform:translateY(-3px); box-shadow:0 2px 4px rgba(74,53,40,.06), 0 16px 36px rgba(138,101,81,.16)}
+  .vthumb{position:relative; aspect-ratio:9/16; background:var(--nude-soft); overflow:hidden}
+  .vthumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .vthumb .play{
+    position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+    background:linear-gradient(to top, rgba(58,44,34,.34), transparent 42%);
+  }
+  .vthumb .play svg{width:42px;height:42px; filter:drop-shadow(0 2px 8px rgba(0,0,0,.4)); opacity:.94}
+  .selo{
+    position:absolute; top:11px; left:11px; z-index:2;
+    background:rgba(251,247,243,.94); color:var(--deep); border-radius:40px;
+    padding:4px 11px; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:500;
+  }
+  .selo.off{background:rgba(58,44,34,.62); color:#fbf7f3}
+  .vbody{padding:16px 17px 18px; display:flex; flex-direction:column; gap:12px; flex:1}
+  .vbody h3{font-size:18px; line-height:1.2}
+  .vnums{display:flex; flex-direction:column; gap:5px; font-size:13px; color:var(--cocoa)}
+  .vnums div{display:flex; justify-content:space-between; gap:10px; font-variant-numeric:tabular-nums}
+  .vnums b{font-weight:500; color:var(--deep)}
+  .vnums .forte b{color:var(--gold)}
+  .vlink{
+    margin-top:auto; padding-top:11px; border-top:1px solid var(--line);
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--sand);
+    display:flex; align-items:center; gap:6px;
+  }
+  .vcard:hover .vlink{color:var(--cocoa)}
+
+
+  /* o video da campanha de perfil — thumb ao lado do texto */
+  .perfil-card{display:grid; grid-template-columns:150px 1fr; gap:24px; padding:24px; align-items:start}
+  .perfil-card .pthumb{position:relative; aspect-ratio:9/16; border-radius:12px; overflow:hidden; background:var(--nude-soft)}
+  .perfil-card .pthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .perfil-card .ptxt{display:flex; flex-direction:column; gap:12px}
+  .perfil-card .ptxt p{font-size:15px; color:var(--cocoa)}
+  .perfil-card .ptxt p strong{color:var(--deep); font-weight:500}
+  @media (max-width:560px){ .perfil-card{grid-template-columns:110px 1fr; gap:16px; padding:18px} }
+
   footer{border-top:1px solid var(--line); padding-top:26px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--cocoa)}
 
   @media (max-width:600px){
@@ -205,22 +250,117 @@
 
   <section>
     <h2>Como cada vídeo se saiu</h2>
-    <p class="cap">Do dia 1 ao 14. Na semana de 11 a 14 todos rodaram com a mesma verba, para a comparação ser limpa. “Visualizações” são as de pelo menos 3 segundos; “até o fim”, quem assistiu o vídeo inteiro.</p>
-    <div class="tabela-wrap">
-      <table>
-        <thead>
-          <tr><th>Vídeo</th><th>Investido</th><th>Alcance</th><th>Visualizações</th><th>Custo/mil</th><th>Até o fim</th></tr>
-        </thead>
-        <tbody>
-          <tr class="destaque"><td>Hot girl o’clock</td><td>R$ 141</td><td>22.857</td><td>25.742</td><td><span class="up">R$ 5,48</span></td><td>4.033</td></tr>
-          <tr class="destaque"><td>Elra coming soon</td><td>R$ 25</td><td>4.826</td><td>5.185</td><td><span class="up">R$ 4,75</span></td><td>1.009</td></tr>
-          <tr><td>Soul 70s</td><td>R$ 145</td><td>28.216</td><td>38.891</td><td>R$ 3,72</td><td>2.224</td></tr>
-          <tr><td>Um dia perfeito</td><td>R$ 30</td><td>4.283</td><td>4.652</td><td>R$ 6,39</td><td>655</td></tr>
-          <tr><td>Murau turquesa</td><td>R$ 25</td><td>3.231</td><td>3.430</td><td>R$ 7,30</td><td>380</td></tr>
-        </tbody>
-      </table>
+    <p class="cap">Do dia 1 ao 14. Na semana de 11 a 14 todos rodaram com a mesma verba, para a comparação ser limpa. “Visualizações” são as de pelo menos 3 segundos. <strong>Clique em qualquer capa para abrir o post no Instagram.</strong></p>
+    <div class="videos">
+      <a class="vcard" href="https://www.instagram.com/p/DcwlSYsgT_B/" target="_blank" rel="noopener">
+        <div class="vthumb">
+          <span class="selo">no ar</span>
+          <img src="thumbs/hot-girl.jpg" alt="Capa do vídeo Hot girl o’clock" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+        </div>
+        <div class="vbody">
+          <h3>Hot girl o’clock</h3>
+          <div class="vnums">
+            <div><span>Investido</span><b>R$ 141</b></div>
+            <div><span>Alcance</span><b>22.857</b></div>
+            <div><span>Visualizações</span><b>25.742</b></div>
+            <div class="custo forte"><span>Custo por mil</span><b>R$ 5,48</b></div>
+            <div><span>Viram até o fim</span><b>4.033</b></div>
+          </div>
+          <span class="vlink">Ver no Instagram →</span>
+        </div>
+      </a>
+      <a class="vcard" href="https://www.instagram.com/p/Dc4kMOpgviE/" target="_blank" rel="noopener">
+        <div class="vthumb">
+          <span class="selo">no ar</span>
+          <img src="thumbs/elra.jpg" alt="Capa do vídeo Elra coming soon" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+        </div>
+        <div class="vbody">
+          <h3>Elra coming soon</h3>
+          <div class="vnums">
+            <div><span>Investido</span><b>R$ 25</b></div>
+            <div><span>Alcance</span><b>4.826</b></div>
+            <div><span>Visualizações</span><b>5.185</b></div>
+            <div class="custo forte"><span>Custo por mil</span><b>R$ 4,75</b></div>
+            <div><span>Viram até o fim</span><b>1.009</b></div>
+          </div>
+          <span class="vlink">Ver no Instagram →</span>
+        </div>
+      </a>
+      <a class="vcard" href="https://www.instagram.com/p/DcTh9IbAr5j/" target="_blank" rel="noopener">
+        <div class="vthumb">
+          <span class="selo off">pausado</span>
+          <img src="thumbs/soul-70s.jpg" alt="Capa do vídeo Soul 70s" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+        </div>
+        <div class="vbody">
+          <h3>Soul 70s</h3>
+          <div class="vnums">
+            <div><span>Investido</span><b>R$ 145</b></div>
+            <div><span>Alcance</span><b>28.216</b></div>
+            <div><span>Visualizações</span><b>38.891</b></div>
+            <div class="custo"><span>Custo por mil</span><b>R$ 3,72</b></div>
+            <div><span>Viram até o fim</span><b>2.224</b></div>
+          </div>
+          <span class="vlink">Ver no Instagram →</span>
+        </div>
+      </a>
+      <a class="vcard" href="https://www.instagram.com/p/DcwgK_NgRTg/" target="_blank" rel="noopener">
+        <div class="vthumb">
+          <span class="selo off">pausado</span>
+          <img src="thumbs/dia-perfeito.jpg" alt="Capa do vídeo Um dia perfeito" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+        </div>
+        <div class="vbody">
+          <h3>Um dia perfeito</h3>
+          <div class="vnums">
+            <div><span>Investido</span><b>R$ 30</b></div>
+            <div><span>Alcance</span><b>4.283</b></div>
+            <div><span>Visualizações</span><b>4.652</b></div>
+            <div class="custo"><span>Custo por mil</span><b>R$ 6,39</b></div>
+            <div><span>Viram até o fim</span><b>655</b></div>
+          </div>
+          <span class="vlink">Ver no Instagram →</span>
+        </div>
+      </a>
+      <a class="vcard" href="https://www.instagram.com/p/DcwiQ1uACTx/" target="_blank" rel="noopener">
+        <div class="vthumb">
+          <span class="selo off">pausado</span>
+          <img src="thumbs/murau.jpg" alt="Capa do vídeo Murau turquesa" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+        </div>
+        <div class="vbody">
+          <h3>Murau turquesa</h3>
+          <div class="vnums">
+            <div><span>Investido</span><b>R$ 25</b></div>
+            <div><span>Alcance</span><b>3.231</b></div>
+            <div><span>Visualizações</span><b>3.430</b></div>
+            <div class="custo"><span>Custo por mil</span><b>R$ 7,30</b></div>
+            <div><span>Viram até o fim</span><b>380</b></div>
+          </div>
+          <span class="vlink">Ver no Instagram →</span>
+        </div>
+      </a>
     </div>
-    <p class="cap">Os dois destacados são os que seguem no ar. <strong>Hot girl o’clock</strong> é o que mais prende: de cada 100 pessoas que veem o vídeo começar, 87 ficam nos 3 primeiros segundos, e ele tem o maior número de gente assistindo até o fim. O <strong>Soul 70s</strong> compra visualização muito barata, mas é o que menos segura quem começou a assistir — por isso saiu da escala. E uma surpresa: o <strong>Murau turquesa</strong>, que foi um dos maiores virais orgânicos do perfil, foi o mais caro no anúncio. Viral no orgânico nem sempre se repete no pago.</p>
+    <p class="cap">Os dois marcados como “no ar” são os que seguem rodando. <strong>Hot girl o’clock</strong> é o que mais prende: de cada 100 pessoas que veem o vídeo começar, 87 ficam nos 3 primeiros segundos, e ele tem o maior número de gente assistindo até o fim. O <strong>Soul 70s</strong> compra visualização muito barata, mas é o que menos segura quem começou a assistir — por isso saiu da escala. E uma surpresa: o <strong>Murau turquesa</strong>, que foi um dos maiores virais orgânicos do perfil, foi o mais caro no anúncio. Viral no orgânico nem sempre se repete no pago.</p>
+  </section>
+
+  <section>
+    <h2>O vídeo que leva gente ao seu perfil</h2>
+    <p class="cap">Esta é a outra frente da conta — e é ela que responde pelo custo por seguidor.</p>
+    <a class="card perfil-card" href="https://www.instagram.com/p/DYMns5aACAV/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+      <div class="pthumb">
+        <img src="thumbs/amor-de-mae.jpg" alt="Capa do vídeo que roda na campanha de perfil" loading="lazy">
+        <span class="play"><svg viewBox="0 0 24 24" fill="rgba(251,247,243,.92)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.6 6.1 5.2 3.5a.5.5 0 0 1 0 .8l-5.2 3.5a.5.5 0 0 1-.8-.4V8.5a.5.5 0 0 1 .8-.4Z"/></svg></span>
+      </div>
+      <div class="ptxt">
+        <h3>Amor de mãe</h3>
+        <p><strong>R$ 230 investidos · 28.208 pessoas alcançadas · R$ 0,063 por visita ao perfil.</strong> É o vídeo que está no ar desde <strong>11 de maio</strong> — quatro meses, o mais longevo da conta, e o que mais traz gente nova para o seu perfil.</p>
+        <p>Ele tem uma vantagem que nenhum outro tem: as <strong>57 mil curtidas</strong> acumuladas no post fazem o anúncio ser mais barato de entregar. Por isso ele resiste tanto tempo. Mas já está encarecendo, e é por isso que queremos um sucessor.</p>
+        <span class="vlink">Ver no Instagram →</span>
+      </div>
+    </a>
   </section>
 
   <section>
