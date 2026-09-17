@@ -122,6 +122,16 @@
   details .in{padding:0 16px 14px}
   details .in p:last-child{margin-bottom:0}
 
+  figure.shot{margin:14px 0 6px;border:1px solid var(--line);background:var(--surface);max-width:100%}
+  figure.shot.narrow{max-width:600px}
+  figure.shot a{display:block;cursor:zoom-in}
+  figure.shot img{display:block;width:100%;height:auto}
+  figure.shot figcaption{font-size:13px;line-height:1.5;color:var(--ink-soft);padding:9px 12px;border-top:1px solid var(--line-soft)}
+  figure.shot b.n{display:inline-flex;width:18px;height:18px;border-radius:50%;background:#E4572E;color:#fff;
+    font-size:11px;font-weight:700;align-items:center;justify-content:center;margin:0 3px 0 6px;vertical-align:1px}
+  figure.shot b.n:first-child{margin-left:0}
+  .shot-note{font-size:12.5px;color:var(--muted);margin:14px 0 0}
+
   footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
     font-size:12.5px;color:var(--muted)}
   footer p{max-width:none;font-size:12.5px}
@@ -149,7 +159,8 @@
     h2{font-size:17pt}
     section{padding-top:20pt}
     .sect-head,h3{break-after:avoid}
-    .box,.lead,.mail,ol.steps>li,.check label{break-inside:avoid}
+    .box,.lead,.mail,.check label,figure.shot{break-inside:avoid}
+    figure.shot a{cursor:default}
     button,.actions,.toast{display:none!important}
     details{border:none}
     details .in{display:block}
@@ -184,6 +195,7 @@
     <h2>Antes de começar</h2>
     <p>Quatro coisas que evitam a maior parte dos problemas.</p>
   </div>
+  <p class="shot-note">As imagens deste guia são prints reais do Meta, com os botões marcados por números que batem com os passos. Na tela de vocês, o nome e os itens do Rugido do Leão aparecem no lugar. Cliquem na imagem para ver em tamanho grande.</p>
 
   <ol class="steps">
     <li><b>Façam pelo computador</b>, no navegador. O aplicativo do celular esconde parte das opções que vamos usar.</li>
@@ -221,12 +233,12 @@
   <table>
     <thead><tr><th>Item</th><th>Para que eu uso</th><th>Nível</th></tr></thead>
     <tbody>
-      <tr><td class="q">Portfólio empresarial</td><td>É a porta de entrada. Sem ele, não dá para liberar o resto de forma segura.</td><td><span class="pill">Controle total</span></td></tr>
-      <tr><td class="q">Página do Facebook</td><td>Todo anúncio sai em nome da Página. Também respondo comentários dos anúncios.</td><td><span class="pill">Controle total</span></td></tr>
-      <tr><td class="q">Instagram</td><td>Para o anúncio aparecer com o @ de vocês e para ver o que funciona no perfil.</td><td><span class="pill">Controle total</span></td></tr>
-      <tr><td class="q">Conta de anúncios</td><td>Onde as campanhas são criadas, pausadas e medidas.</td><td><span class="pill">Controle total</span></td></tr>
-      <tr><td class="q">WhatsApp</td><td>Para o anúncio de banho e tosa abrir a conversa direto no WhatsApp da loja.</td><td><span class="pill">Controle total</span></td></tr>
-      <tr><td class="q">Conjunto de dados (pixel)</td><td>Mede quem veio do anúncio. <b>Se não existir, não precisam criar</b> — eu crio depois.</td><td><span class="pill opt">Se existir</span></td></tr>
+      <tr><td class="q">Portfólio empresarial</td><td>É a porta de entrada. Sem ele, não dá para liberar o resto de forma segura.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Página do Facebook</td><td>Todo anúncio sai em nome da Página. Também respondo comentários dos anúncios.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Instagram</td><td>Para o anúncio aparecer com o @ de vocês e para ver o que funciona no perfil.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Conta de anúncios</td><td>Onde as campanhas são criadas, pausadas e medidas.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">WhatsApp</td><td>Para o anúncio de banho e tosa abrir a conversa direto no WhatsApp da loja.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Pixel</td><td>Mede quem veio do anúncio. <b>Se não existir, não precisam criar</b> — eu crio depois.</td><td><span class="pill opt">Se existir</span></td></tr>
     </tbody>
   </table>
   </div>
@@ -255,6 +267,7 @@
       <span class="hint">O Meta manda um e-mail de confirmação para esse endereço. Cliquem no link antes de seguir.</span>
     </li>
   </ol>
+  <figure class="shot narrow"><a href="img/etapa1-portfolio.jpg" target="_blank" rel="noopener"><img src="img/etapa1-portfolio.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Aqui fica o nome do portfólio que está aberto. Clicando nele, aparece a lista dos portfólios que a pessoa logada tem.</figcaption></figure>
 
   <div class="box alert">
     <span class="eyebrow">Se a Página já estiver no portfólio de outra pessoa</span>
@@ -271,12 +284,14 @@
 
   <ol class="steps">
     <li>Com o portfólio selecionado, cliquem na <b>engrenagem</b> <span class="ui">Configurações</span>, no menu da esquerda, lá embaixo.</li>
-    <li>No menu de configurações, abram <span class="ui">Contas</span> → <span class="ui">Páginas</span>. Se a Página do Rugido do Leão já estiver na lista, sigam adiante. Se não, cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma Página</span> e escolham a de vocês.</li>
+    <li>No menu de configurações, abram <span class="ui">Contas</span> → <span class="ui">Páginas</span>. Se a Página do Rugido do Leão já estiver na lista, sigam adiante. Se não, cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma Página do Facebook existente</span> e escolham a de vocês.
+      <span class="hint">No mesmo menu aparece "Criar uma nova Página do Facebook". Não usem essa opção: a Página de vocês já existe.</span></li>
     <li>Ainda em <span class="ui">Contas</span>, abram <span class="ui">Contas do Instagram</span> → <span class="ui">+ Adicionar</span>. Vai abrir o login do Instagram: entrem com o @ da loja e autorizem.
       <span class="hint">Aqui sim vocês digitam a senha do Instagram — mas é na tela do próprio Meta, só vocês veem.</span></li>
     <li>Para o WhatsApp: abram <span class="ui">Contas</span> → <span class="ui">Contas do WhatsApp</span> → <span class="ui">+ Adicionar</span> e sigam as telas com o número da loja. O Meta manda um código para esse número.
       <span class="hint">Se vocês usam o <b>aplicativo WhatsApp Business</b> no celular e essa opção complicar, tem um caminho mais simples: no app, <span class="ui">Configurações</span> → <span class="ui">Ferramentas comerciais</span> → <span class="ui">Facebook e Instagram</span> → conectar à Página. Isso já basta para o anúncio abrir conversa no WhatsApp. O app continua funcionando igual.</span></li>
   </ol>
+  <figure class="shot"><a href="img/etapa2-contas.jpg" target="_blank" rel="noopener"><img src="img/etapa2-contas.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Engrenagem de Configurações <b class="n">2</b>Páginas e o botão Adicionar <b class="n">3</b>Contas do Instagram <b class="n">4</b>Contas do WhatsApp. Nas telas do Instagram e do WhatsApp, o botão Adicionar fica no mesmo lugar.</figcaption></figure>
 </section>
 
 <section>
@@ -297,13 +312,15 @@
     <li>Se forem criar, preencham assim:
       <ul>
         <li><b>Nome:</b> Rugido do Leão</li>
-        <li><b>Fuso horário:</b> (GMT-03:00) America/Sao_Paulo</li>
+        <li><b>Fuso horário:</b> (GMT-03:00) America/Sao_Paulo — depois aparece como "Horário de São Paulo"</li>
         <li><b>Moeda:</b> Real brasileiro (BRL)</li>
         <li>Quando perguntar para quem é a conta, marquem <b>"Meu portfólio empresarial"</b> (a própria empresa).</li>
       </ul>
     </li>
-    <li><b>Forma de pagamento:</b> na conta de anúncios, abram <span class="ui">Faturamento e pagamentos</span> (ou <span class="ui">Configurações de pagamento</span>) e cadastrem o cartão ou o Pix da empresa. <b>Isso fica com vocês</b> — eu não cadastro nem altero pagamento.</li>
+    <li><b>Forma de pagamento:</b> cliquem na conta de anúncios da lista, abram a aba <span class="ui">Payment methods</span> (é assim, em inglês, mesmo com o Meta em português) e cliquem em <span class="ui">Adicionar forma de pagamento</span>. Cadastrem o cartão ou o Pix da empresa. <b>Isso fica com vocês</b> — eu não cadastro nem altero pagamento.</li>
   </ol>
+
+  <figure class="shot"><a href="img/etapa3-conta-anuncios.jpg" target="_blank" rel="noopener"><img src="img/etapa3-conta-anuncios.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Contas de anúncios e o botão Adicionar <b class="n">2</b>Moeda e fuso horário: conferir se está BRL e Horário de São Paulo <b class="n">3</b>Aba de pagamento e o botão para cadastrar o cartão ou o Pix.</figcaption></figure>
 
   <div class="box stop">
     <span class="eyebrow">Atenção ao fuso e à moeda</span>
@@ -314,27 +331,31 @@
 <section>
   <div class="sect-head">
     <span class="eyebrow">Etapa 4 de 4</span>
-    <h2>Me convidar com controle total</h2>
-    <p>É aqui que o acesso é liberado de fato. Uma tela para o e-mail, outra para escolher os itens.</p>
+    <h2>Me convidar com acesso total</h2>
+    <p>É aqui que o acesso é liberado de fato. O convite tem quatro telas: Inserir email, Conceder acesso, Atribuir ativos e Analisar.</p>
   </div>
 
   <ol class="steps">
     <li>Em <span class="ui">Configurações</span>, abram <span class="ui">Usuários</span> → <span class="ui">Pessoas</span> e cliquem no botão azul <span class="ui">+ Convidar pessoas</span>.
-      <span class="hint">Em algumas contas o botão aparece como "Adicionar pessoas". É o mesmo.</span></li>
-    <li>Colem o e-mail <b id="addr2">carregando…</b> no campo de endereço.</li>
-    <li>No tipo de acesso ao portfólio, escolham <b>Controle total</b>.
-      <span class="hint">Em contas mais antigas o nome é "Acesso de administrador". Se houver opções avançadas de finanças, podem deixar desmarcadas.</span></li>
-    <li>Cliquem em <span class="ui">Avançar</span>. Vai abrir a tela de <b>atribuir ativos</b>, com os tipos na coluna da esquerda. Em cada um abaixo, marquem o item do Rugido do Leão e liguem a chave <b>Controle total</b>:
+      <figure class="shot"><a href="img/etapa4-1-pessoas.jpg" target="_blank" rel="noopener"><img src="img/etapa4-1-pessoas.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Usuários → Pessoas <b class="n">2</b>Convidar pessoas</figcaption></figure></li>
+    <li>Colem o e-mail <b id="addr2">carregando…</b> no campo e apertem <b>Enter</b>: o e-mail vira uma etiqueta com um "x". Depois, <span class="ui">Avançar</span>.
+      <span class="hint">Deixem a chave "Acesso temporário" desligada.</span>
+      <figure class="shot narrow"><a href="img/etapa4-2-email.jpg" target="_blank" rel="noopener"><img src="img/etapa4-2-email.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>O e-mail já virou etiqueta <b class="n">2</b>Avançar</figcaption></figure></li>
+    <li>Na tela <b>Conceder acesso</b>, em <b>Acesso total</b>, liguem a chave <b>Gerenciar</b> (ela fica azul). Depois, <span class="ui">Avançar</span>.
+      <span class="hint">Não precisam abrir "Ver opções avançadas".</span>
+      <figure class="shot narrow"><a href="img/etapa4-3-acesso-total.jpg" target="_blank" rel="noopener"><img src="img/etapa4-3-acesso-total.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Acesso total com a chave Gerenciar ligada <b class="n">2</b>Avançar</figcaption></figure></li>
+    <li>Na tela <b>Atribuir ativos</b>, a coluna da esquerda lista os tipos. Em cada tipo abaixo: cliquem nele, marquem o item do Rugido do Leão na coluna do meio e, na coluna da direita, <b>rolem até o fim</b> e liguem a chave <b>Tudo</b>, em <b>Acesso total</b>:
       <ul>
-        <li><span class="ui">Páginas</span> → a Página do Rugido do Leão</li>
+        <li><span class="ui">Páginas do Facebook</span> → a Página do Rugido do Leão</li>
         <li><span class="ui">Contas de anúncios</span> → a conta do Rugido do Leão</li>
         <li><span class="ui">Contas do Instagram</span> → o @ da loja</li>
         <li><span class="ui">Contas do WhatsApp</span> → o número da loja (se aparecer)</li>
-        <li><span class="ui">Conjuntos de dados</span> → o pixel (só se já existir)</li>
+        <li><span class="ui">Pixels</span> → o pixel (só se já existir)</li>
       </ul>
       <span class="hint">Se algum tipo não aparecer na lista, é porque aquele item não foi colocado no portfólio na Etapa 2 — dá para voltar lá, adicionar e depois me atribuir.</span>
+      <figure class="shot"><a href="img/etapa4-4-ativos.jpg" target="_blank" rel="noopener"><img src="img/etapa4-4-ativos.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Tipo escolhido <b class="n">2</b>O item do Rugido do Leão marcado <b class="n">3</b>Acesso total: ligar a chave Tudo <b class="n">4</b>Repetir para os outros tipos. No exemplo a chave aparece apagada; no portfólio de vocês ela liga normalmente.</figcaption></figure>
     </li>
-    <li>Cliquem em <span class="ui">Revisar</span> e depois em <span class="ui">Enviar convite</span>. O convite chega no meu e-mail e eu aceito do meu lado.</li>
+    <li>Cliquem em <span class="ui">Avançar</span>. Na última tela, <b>Analisar</b>, confiram se estão lá o meu e-mail e todos os itens, e enviem o convite. Ele chega no meu e-mail e eu aceito do meu lado.</li>
   </ol>
 
   <div class="box">
@@ -358,7 +379,7 @@
     <label><input type="checkbox" data-k="whatsapp"><span><b>WhatsApp conectado</b><i>Etapa 2 — pelo portfólio ou pelo app WhatsApp Business</i></span></label>
     <label><input type="checkbox" data-k="conta"><span><b>Conta de anúncios em reais, fuso de São Paulo</b><i>Etapa 3</i></span></label>
     <label><input type="checkbox" data-k="pagamento"><span><b>Forma de pagamento cadastrada</b><i>Etapa 3 — cartão ou Pix da empresa</i></span></label>
-    <label><input type="checkbox" data-k="convite"><span><b>Convite enviado com controle total em todos os itens</b><i>Etapa 4</i></span></label>
+    <label><input type="checkbox" data-k="convite"><span><b>Convite enviado com acesso total em todos os itens</b><i>Etapa 4</i></span></label>
   </div>
   <div class="actions">
     <button class="copy" id="btnResumo">Copiar mensagem para o WhatsApp</button>
@@ -393,7 +414,7 @@
     <summary>O convite por e-mail deu erro (plano B)</summary>
     <div class="in">
       <p>Dá para liberar o acesso para o portfólio da minha empresa em vez do meu e-mail. O resultado é o mesmo.</p>
-      <p>Em <span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Parceiros</span> → <span class="ui">+ Adicionar</span> → <span class="ui">Conceder a um parceiro acesso aos seus ativos</span>, informem o ID do portfólio <b>196876879225865</b> (Gio Growth Digital) e marquem os mesmos itens da Etapa 4 com controle total.</p>
+      <p>Em <span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Parceiros</span> → <span class="ui">+ Adicionar</span> → <span class="ui">Conceder a um parceiro acesso aos seus ativos</span>, informem o ID do portfólio <b>196876879225865</b> (Gio Growth Digital) e marquem os mesmos itens da Etapa 4 com acesso total.</p>
       <div class="actions"><button class="copy ghost" data-copy="bm">Copiar ID do portfólio</button></div>
     </div>
   </details>
@@ -405,7 +426,7 @@
 
 <footer>
   <p>Gio Growth Digital · Guia preparado para o Rugido do Leão · 17/09/2026</p>
-  <p>Os nomes dos menus seguem o Meta Business Suite de setembro de 2026. O Meta muda rótulos com frequência; se algum botão estiver com nome diferente, o caminho continua o mesmo — e é só me mandar um print.</p>
+  <p>Prints e nomes dos menus conferidos no Meta Business Suite em 17/09/2026. O Meta muda rótulos com frequência; se algum botão estiver com nome diferente, o caminho continua o mesmo — e é só me mandar um print.</p>
 </footer>
 
 </div>
