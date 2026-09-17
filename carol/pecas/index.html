@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Peças da Imersão Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;--warm:#A9662F;--warm-soft:#F5E9DE}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 20px 96px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+.narrow{max-width:760px}
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px;max-width:780px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:clamp(38px,6.2vw,60px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:60ch}
+.meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+section{display:flex;flex-direction:column;gap:20px}
+h2{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:30px;line-height:1.18;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h3{font-family:"Karla",sans-serif;font-weight:700;font-size:18px;margin:0}
+p{margin:0;max-width:68ch}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.code{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--accent);margin:0}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px;font-size:15.5px}
+.how strong{display:block;margin-bottom:4px}
+.how a{color:var(--accent);font-weight:700}
+.indices{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 36px}
+.indice{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
+.indice a{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.indice a:hover{color:var(--accent)}
+.indice .i{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);min-width:30px}
+.legendas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.legenda{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.legenda pre{white-space:pre-wrap;font-family:"Karla",sans-serif;font-size:15px;line-height:1.55;margin:6px 0 0;color:var(--ink)}
+.peca{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:32px;border-top:2px solid var(--ink);padding-top:28px}
+.peca-art{display:flex;flex-direction:column;gap:8px}
+.mock{font-size:12px;color:var(--muted)}
+.art{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:4px;overflow:hidden;background:#1b1b1b center/cover no-repeat;color:#fff;box-shadow:0 1px 0 var(--line)}
+.art.full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,16,.15) 0%,rgba(10,14,16,.05) 35%,rgba(10,14,16,.82) 78%)}
+.art-tag{position:absolute;top:14px;left:14px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:#F4EDE4;color:#1d2a30;padding:4px 8px;border-radius:2px}
+.art-tag.dark{position:static;display:inline-block;background:#1d2a30;color:#F4EDE4;margin-bottom:10px}
+.art-text{position:absolute;left:18px;right:18px;bottom:44px;z-index:2}
+.art-t{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;line-height:1.08;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.art-a{font-size:13.5px;line-height:1.4;margin-top:8px;opacity:.92}
+.art-foot{position:absolute;left:18px;right:18px;bottom:14px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.art.split{background:#F4EDE4;color:#1d2a30;display:grid;grid-template-rows:auto 1fr}
+.art.split .art-top{padding:18px 18px 12px}
+.art.split .art-t{font-size:24px}
+.art.split .art-img{background:center 25%/cover no-repeat}
+.art.split .art-foot{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.peca-info{display:flex;flex-direction:column;gap:12px}
+dl{margin:0;display:grid;grid-template-columns:130px 1fr;gap:8px 16px;border-top:1px solid var(--line);padding-top:12px}
+dt{font-size:13px;color:var(--muted);padding-top:2px}
+dd{margin:0;font-size:15.5px}
+dd.big{font-family:"Fraunces",Georgia,serif;font-size:21px;line-height:1.25}
+.slides h4{margin:0 0 4px;font-size:13px;color:var(--muted);font-weight:500}
+.slides ol{margin:0;padding-left:22px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.porque{background:var(--accent-soft);border-radius:3px;padding:12px 14px;font-size:15px;max-width:none}
+.video{border-top:2px solid var(--ink);padding-top:28px;display:flex;flex-direction:column;gap:16px}
+.vhead{display:flex;flex-direction:column;gap:2px}
+.vhead h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px}
+.vmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.vmeta div{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.vmeta .k{font-size:12px;color:var(--muted)}
+.vmeta .v{font-size:14.5px;line-height:1.45}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;background:var(--surface);border:1px solid var(--line)}
+th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15.5px}
+td.t{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap;color:var(--accent)}
+td.f{width:55%}
+td.s{color:var(--muted);font-size:14px}
+.leg{font-size:13.5px;color:var(--muted)}
+.callout{background:var(--warm-soft);border-left:3px solid var(--warm);padding:22px 24px;border-radius:0 3px 3px 0;display:flex;flex-direction:column;gap:12px}
+.callout h3{color:var(--warm)}
+.callout ul,.callout ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:76ch}
+.check{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.check ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+footer{border-top:1px solid var(--line);padding-top:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+@media (max-width:720px){
+  .peca{grid-template-columns:1fr}
+  .peca-art{max-width:340px}
+  dl{grid-template-columns:1fr;gap:2px}
+  dt{padding-top:8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dra. Caroline Baima · Imersão Prática: Dominando Cicatrizes de Acne</p>
+    <h1>20 peças para produzir</h1>
+    <p class="dek">Dez estáticos e dez vídeos para os anúncios da Imersão Prática. Cada frase sai da fala da própria Dra. Caroline na gravação da Imersão, cada formato sai do que já vendeu na conta e do que os cursos de cicatriz de acne estão anunciando hoje.</p>
+    <p class="meta">17 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>De onde vêm estas peças</h2>
+    <div class="how">
+      <div><strong>A fala da Dra. na Imersão.</strong>Lemos a gravação inteira, manhã e tarde. Os títulos e as falas dos roteiros usam as frases que ela já disse ao vivo, só com a pontuação ajustada. Nada foi inventado.</div>
+      <div><strong>O que os concorrentes fazem, e o que ninguém diz.</strong>Os formatos seguem as <a href="../referencias/">referências de anúncio</a>: “exclusivo para médicos” na peça, caso clínico em forma de pergunta, aula dentro do anúncio. E entram os ângulos que nenhum curso de cicatriz usa: quem tem cicatriz, tratar sem laser de CO2 e os erros do próprio médico.</div>
+      <div><strong>O que já funciona na conta.</strong>Transcrevemos os vídeos que rodaram este ano. O que mais vendeu abre por um erro que vem antes da técnica (vídeo 039), e o estático campeão diz que autoridade é saber quando usar cada técnica (083). Os dois viraram E01, E06 e V01. O que não vendeu (“por que você encaminha” e “resultado sem intercorrência”) ficou de fora.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As 20 peças</h2>
+    <div class="indices">
+      <div><h3>Estáticos</h3><ul class="indice"><li><a href="#E01"><span class="i">E01</span>A técnica não é a estratégia</a></li><li><a href="#E02"><span class="i">E02</span>Sem laser de CO2</a></li><li><a href="#E03"><span class="i">E03</span>Eu tenho cicatriz</a></li><li><a href="#E04"><span class="i">E04</span>Cicatriz fideliza mais que botox</a></li><li><a href="#E05"><span class="i">E05</span>O maior preditor de mancha</a></li><li><a href="#E06"><span class="i">E06</span>Os 5 erros (carrossel)</a></li><li><a href="#E07"><span class="i">E07</span>Ice pick, boxcar ou rolling? (carrossel)</a></li><li><a href="#E08"><span class="i">E08</span>Fósforo no terreno seco</a></li><li><a href="#E09"><span class="i">E09</span>O paciente não valoriza o que não entende</a></li><li><a href="#E10"><span class="i">E10</span>A professora na frente</a></li></ul></div>
+      <div><h3>Vídeos</h3><ul class="indice"><li><a href="#V01"><span class="i">V01</span>O erro que vem antes da técnica</a></li><li><a href="#V02"><span class="i">V02</span>Eu tenho cicatriz</a></li><li><a href="#V03"><span class="i">V03</span>Você não precisa ter laser de CO2</a></li><li><a href="#V04"><span class="i">V04</span>O botox vinte</a></li><li><a href="#V05"><span class="i">V05</span>O erro do sétimo dia</a></li><li><a href="#V06"><span class="i">V06</span>A pergunta do mosquito</a></li><li><a href="#V07"><span class="i">V07</span>O paciente entende pelo que está pagando?</a></li><li><a href="#V08"><span class="i">V08</span>Passei por isso, você não passará</a></li><li><a href="#V09"><span class="i">V09</span>Caso difícil é oportunidade</a></li><li><a href="#V10"><span class="i">V10</span>Grau 4 não vira grau 1</a></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Antes de gravar</h2>
+    <div class="how">
+      <div><strong>Enquadramento e luz.</strong>Celular na vertical, na altura dos olhos. Luz de frente, nunca atrás. Do peito para cima, com espaço acima da cabeça. Grave em 9:16; a edição tira a versão de feed.</div>
+      <div><strong>Fale com um colega.</strong>Olhando para a lente, no tom de quem explica para outro médico no corredor do congresso. Se errar, respire e repita a frase inteira; a edição corta depois.</div>
+      <div><strong>Os três primeiros segundos.</strong>Comece direto pela primeira frase do roteiro, sem “oi, tudo bem”. É ela que segura quem é médico e filtra quem não é.</div>
+      <div><strong>“Exclusivo para médicos” no primeiro quadro.</strong>No Meta não dá para escolher médico como público. Quem separa é a própria peça, e todos os vídeos e artes abrem com isso escrito.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As três legendas</h2>
+    <p>Cada peça usa uma das três. É de propósito: com a legenda igual, o que muda entre os anúncios é só a arte ou o vídeo, e fica fácil ver qual peça vende.</p>
+    <div class="legendas">
+    <div class="legenda"><p class="code">Legenda A</p><h3>A legenda que já vende</h3><pre>TOQUE EM &quot;SAIBA MAIS&quot; — MAIS SEGURANÇA NO TRATAMENTO DE CICATRIZES DE ACNE.
+
+Chega de depender apenas de protocolos genéricos para conduzir pacientes com cicatrizes de acne. Na Imersão Prática: Dominando Cicatrizes de Acne, você vai entender como:
+
+✅ Avaliar melhor cada tipo de cicatriz
+✅ Usar Laser CO2 com mais segurança
+✅ Associar múltiplas técnicas no tratamento
+✅ Evitar decisões automáticas
+✅ Planejar casos com mais previsibilidade
+
+Um dia inteiro com a Dra. Caroline Baima, online e exclusivo para médicos.
+
+👉 Toque em SAIBA MAIS e participe.</pre></div>
+    <div class="legenda"><p class="code">Legenda B</p><h3>Medo de manchar</h3><pre>Dermatologista, a hipercromia pós-inflamatória não se trata quando aparece. A gente se antecipa a ela desde o primeiro encontro com o paciente.
+
+Na Imersão Prática: Dominando Cicatrizes de Acne, a Dra. Caroline Baima mostra como classificar o risco de cada paciente, preparar a pele e conduzir o pós para tratar cicatriz com mais segurança, inclusive em fototipo alto e com melasma.
+
+Online e exclusivo para médicos.
+👉 Toque em SAIBA MAIS e participe.</pre></div>
+    <div class="legenda"><p class="code">Legenda C</p><h3>A história dela</h3><pre>Ela tem cicatriz de acne, trata cicatriz de acne há 10 anos e conta os erros que já cometeu para você não repetir.
+
+Na Imersão Prática: Dominando Cicatrizes de Acne, a Dra. Caroline Baima, professora de dermatologia, mostra como avaliar, associar técnicas e acompanhar cada caso.
+
+Online e exclusivo para médicos.
+👉 Toque em SAIBA MAIS e participe.</pre></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>10 estáticos</h2>
+    <p>A prévia mostra a ideia de composição com as fotos da Dra. O designer faz a arte final nas cores da marca.</p>
+  </section>
+
+  <article class="peca" id="E01">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_00.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">A técnica não é a estratégia.</p><p class="art-a">Cicatriz não começa pela técnica. Começa pela decisão clínica.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E01</p>
+      <h3>A técnica não é a estratégia</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">A técnica não é a estratégia.</dd>
+        <dt>Texto de apoio</dt><dd>Cicatriz não começa pela técnica. Começa pela decisão clínica.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> É a irmã do estático que mais vendeu na conta (083: “Autoridade não vem de conhecer mais técnicas”), com a Dra. de touca e máscara, só que agora com a frase exata dela na Imersão. Use a mesma legenda A para ver se a arte nova supera a campeã.</p>
+    </div>
+  </article>
+  <article class="peca" id="E02">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_62.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Você não está limitado ao laser de CO2.</p><p class="art-a">Tecnologia é ferramenta. Ela não substitui o seu raciocínio.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E02</p>
+      <h3>Sem laser de CO2</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Você não está limitado ao laser de CO2.</dd>
+        <dt>Texto de apoio</dt><dd>Tecnologia é ferramenta. Ela não substitui o seu raciocínio.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Os dois cursos de cicatriz que anunciam hoje colocam o laser na vitrine (Dr. Felipe Ribeiro e Amanda Dezontini). Nenhum anúncio fala com o médico que não tem laser, e esse ângulo nunca foi usado na conta.</p>
+    </div>
+  </article>
+  <article class="peca" id="E03">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">Eu tenho cicatriz de acne.</p><p class="art-a">“Se você observar meu rosto mais de perto, você vai ver.” Por isso ela sabe o valor que esse tratamento tem.</p></div>
+          <div class="art-img" style="background-image:url('img/cb_26.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E03</p>
+      <h3>Eu tenho cicatriz</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Eu tenho cicatriz de acne.</dd>
+        <dt>Texto de apoio</dt><dd>“Se você observar meu rosto mais de perto, você vai ver.” Por isso ela sabe o valor que esse tratamento tem.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Nenhum dos mais de 300 anúncios de cicatriz de acne que lemos usa a história de quem vive o problema, e nenhum vídeo da conta conta isso. É a autoridade que só ela tem.</p>
+    </div>
+  </article>
+  <article class="peca" id="E04">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_36.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Cicatriz de acne fideliza mais do que botox.</p><p class="art-a">O paciente vem pela cicatriz, você monta o plano, e ele não tem mais por que procurar outro lugar.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E04</p>
+      <h3>Cicatriz fideliza mais que botox</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Cicatriz de acne fideliza mais do que botox.</dd>
+        <dt>Texto de apoio</dt><dd>O paciente vem pela cicatriz, você monta o plano, e ele não tem mais por que procurar outro lugar.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Leva para o estático a ideia do vídeo 033 (“botox tem em todo lugar, tratamento de cicatriz não”), que voltou a vender nas versões novas de setembro.</p>
+    </div>
+  </article>
+  <article class="peca" id="E05">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">O maior preditor de uma nova hipercromia é uma hipercromia prévia.</p><p class="art-a">Antes do buraquinho, olhe o fototipo, o histórico de mancha e o melasma.</p></div>
+          <div class="art-img" style="background-image:url('img/cb_72.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E05</p>
+      <h3>O maior preditor de mancha</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">O maior preditor de uma nova hipercromia é uma hipercromia prévia.</dd>
+        <dt>Texto de apoio</dt><dd>Antes do buraquinho, olhe o fototipo, o histórico de mancha e o melasma.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda B</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> É o medo que trava o médico (a Amanda Dezontini vende “protocolos seguros para fototipos altos”). Aqui é a Dra. ensinando uma regra de verdade, com cara de aula, e serve de ponte para o Protocolo Pele Segura.</p>
+    </div>
+  </article>
+  <article class="peca" id="E06">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_03.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">5 erros que comprometem o tratamento da cicatriz de acne</p><p class="art-a">Salve para revisar antes do próximo paciente.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne · arraste →</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E06</p>
+      <h3>Os 5 erros (carrossel)</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">5 erros que comprometem o tratamento da cicatriz de acne</dd>
+        <dt>Texto de apoio</dt><dd>Salve para revisar antes do próximo paciente.</dd>
+        <dt>Formato</dt><dd>Carrossel 4:5 (feed) · capa também em 9:16</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl><div class="slides"><h4>Cards seguintes</h4><ol><li>Escolher a técnica antes de classificar a cicatriz.</li><li>Achar que o laser de CO2 é o principal tratamento.</li><li>Associar técnicas sem estratégia: associação não é somar de forma aleatória.</li><li>Pensar na hipercromia só depois que ela acontece.</li><li>Vender sessão, e não a sua condução.</li><li>Último card: “Na Imersão Prática, a Dra. Caroline mostra como evitar cada um.” + Saiba mais.</li></ol></div>
+      <p class="porque"><strong>Por que esta peça:</strong> O vídeo que mais vendeu na conta (039) abre pelo erro que acontece antes da técnica. O carrossel entrega os cinco, como aula dentro do anúncio, formato que o Dr. Felipe usa (“O paciente chega assim”).</p>
+    </div>
+  </article>
+  <article class="peca" id="E07">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_09.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Ice pick, boxcar ou rolling? A classificação muda a conduta.</p><p class="art-a">Use ilustração própria de cada tipo, nunca foto de paciente.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne · arraste →</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E07</p>
+      <h3>Ice pick, boxcar ou rolling? (carrossel)</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Ice pick, boxcar ou rolling? A classificação muda a conduta.</dd>
+        <dt>Texto de apoio</dt><dd>Use ilustração própria de cada tipo, nunca foto de paciente.</dd>
+        <dt>Formato</dt><dd>Carrossel 4:5 (feed) · capa também em 9:16</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl><div class="slides"><h4>Cards seguintes</h4><ol><li>Ice pick: em V, o orifício pequenininho na superfície, mas muito profundo.</li><li>Boxcar: base em entalhe, mais arredondada; lembra cicatriz de catapora.</li><li>Rolling: ondulação na pele, causada pelas traves de fibrose.</li><li>A maior parte dos pacientes tem um componente misto.</li><li>Não dá para achar que o que melhora um rolling vai melhorar um ice pick.</li><li>Último card: “Classificar, associar e acompanhar: o passo a passo na Imersão Prática.” + Saiba mais.</li></ol></div>
+      <p class="porque"><strong>Por que esta peça:</strong> A Dra. Núcia Pires abre o curso dela pela classificação; aqui vai a da Dra. Caroline, com as palavras que ela usou. Em vídeo de estúdio esse assunto não vendeu (lote de agosto); em carrossel de conteúdo ainda não foi testado.</p>
+    </div>
+  </article>
+  <article class="peca" id="E08">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">Procedimento em pele sem preparo é fósforo no terreno seco.</p><p class="art-a">Barreira comprometida e melanócito ligado: o procedimento vira gatilho de mancha.</p></div>
+          <div class="art-img" style="background-image:url('img/cb_52.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E08</p>
+      <h3>Fósforo no terreno seco</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Procedimento em pele sem preparo é fósforo no terreno seco.</dd>
+        <dt>Texto de apoio</dt><dd>Barreira comprometida e melanócito ligado: o procedimento vira gatilho de mancha.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda B</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Analogia visual que para a rolagem e fala do medo que a Imersão resolve. Ninguém entre os concorrentes usa.</p>
+    </div>
+  </article>
+  <article class="peca" id="E09">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_18.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">O paciente não valoriza aquilo que ele não entende.</p><p class="art-a">Não venda sessão. Venda o tratamento, a condução, o raciocínio.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E09</p>
+      <h3>O paciente não valoriza o que não entende</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">O paciente não valoriza aquilo que ele não entende.</dd>
+        <dt>Texto de apoio</dt><dd>Não venda sessão. Venda o tratamento, a condução, o raciocínio.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> É o assunto do vídeo 040 (“o paciente entende pelo que está pagando?”), a versão nova que melhor começou em setembro. Ainda não existe em estático, e aqui vai sem nenhum valor em dinheiro na arte.</p>
+    </div>
+  </article>
+  <article class="peca" id="E10">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/cb_02.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">10 anos tratando cicatriz de acne.</p><p class="art-a">Dermatologista, professora de dermatologia da UFPI, mestre pela Fiocruz e preceptora da residência médica desde 2016.</p></div>
+          <span class="art-foot">Imersão Prática · Dominando Cicatrizes de Acne</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E10</p>
+      <h3>A professora na frente</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">10 anos tratando cicatriz de acne.</dd>
+        <dt>Texto de apoio</dt><dd>Dermatologista, professora de dermatologia da UFPI, mestre pela Fiocruz e preceptora da residência médica desde 2016.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Nos cursos que anunciam hoje, quem vende é a trajetória de quem ensina (o Dr. Felipe usa livro, congresso e o Hospital Saint-Louis). Esta é a peça de autoridade da série.</p>
+    </div>
+  </article>
+
+  <section>
+    <h2>10 vídeos</h2>
+    <p>A coluna “O que falar” é a fala, palavra por palavra. Cada vídeo pode ser gravado em blocos separados.</p>
+  </section>
+
+  <article class="video" id="V01">
+    <div class="vhead"><p class="code">V01</p><h3>O erro que vem antes da técnica</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">35 a 45 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Público frio de médicos. É a nova versão do vídeo que mais vendeu na conta (039).</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Consultório, blazer branco, olhando para a lente, como no 039. Legenda palavra por palavra.</span></div>
+      <div><span class="k">Referência</span><span class="v">Vídeo 039 da conta: abre por um erro que acontece antes da escolha da técnica.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“O primeiro erro no tratamento da cicatriz de acne é escolher a técnica antes de classificar a cicatriz.”</td><td class='s'>O ERRO QUE VEM ANTES DA TÉCNICA · exclusivo para médicos</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“Se você colocou na prateleira da sua clínica que laser de CO2 é o seu tratamento padrão de cicatriz, ou que microagulhamento é o seu tratamento padrão, você está vendendo o procedimento. Você não está avaliando o paciente.”</td><td class='s'>Legenda na tela. Corte curto de mãos com o aparelho, sem rosto.</td></tr><tr><td class='t'>18–30 s</td><td class='f'>“A classificação muda a conduta. Não dá para achar que a mesma coisa que melhora um rolling scar vai melhorar um ice pick.”</td><td class='s'>ICE PICK ≠ ROLLING</td></tr><tr><td class='t'>30–42 s</td><td class='f'>“Você trata o paciente, e não a cicatriz. Na Imersão Prática eu mostro como classificar, associar e acompanhar. É exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V02">
+    <div class="vhead"><p class="code">V02</p><h3>Eu tenho cicatriz</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Frio e remarketing. É a história mais forte da gravação e nunca foi usada em anúncio.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, mais perto da câmera, tom de conversa. Pode ser uma tomada só, sem cortes de procedimento.</span></div>
+      <div><span class="k">Referência</span><span class="v">Nenhum dos mais de 300 anúncios de cicatriz de acne na Biblioteca conta a história de quem tem cicatriz.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–5 s</td><td class='f'>“Eu tenho cicatriz de acne. Eu convivo até hoje com a acne da mulher adulta.”</td><td class='s'>Sem texto. Só o rosto dela.</td></tr><tr><td class='t'>5–20 s</td><td class='f'>“Se você observar meu rosto mais de perto, você vai ver. Com a maquiagem, dá para disfarçar. Na residência, todo mundo treinou laser em mim, microagulhamento.”</td><td class='s'>“TODO MUNDO TREINOU LASER EM MIM”</td></tr><tr><td class='t'>20–35 s</td><td class='f'>“A melhora que eu tive com as cicatrizes me trouxe uma segurança que eu não consigo mensurar. Dói em mim, porque eu tenho cicatriz. Então eu sei o valor que esse tratamento tem.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>35–50 s</td><td class='f'>“Hoje eu tenho 10 anos tratando cicatriz de acne. E é isso que eu ensino na Imersão Prática: Dominando Cicatrizes de Acne. Online e exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V03">
+    <div class="vhead"><p class="code">V03</p><h3>Você não precisa ter laser de CO2</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">40 a 50 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico que acha que só trata cicatriz quem tem laser.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Em pé no consultório. Na parte das técnicas, cortes de mãos e instrumentos, sem rosto de paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dr. Felipe Ribeiro e Amanda Dezontini: o laser de CO2 é a vitrine dos dois cursos.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Você não está limitado a tratar cicatriz de acne só se tiver laser de CO2.”</td><td class='s'>SEM LASER DE CO2?</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“O laser de CO2 é uma tecnologia consagrada e entrega muito resultado em cicatriz de acne. Mas ele não é o melhor laser para todos os tipos de cicatriz. Não tem bala de prata.”</td><td class='s'>NÃO TEM BALA DE PRATA</td></tr><tr><td class='t'>18–32 s</td><td class='f'>“Tecnologia é ferramenta. Ela não vai substituir o seu raciocínio. Ácido tricloroacético pontuado, tunelização, microagulhamento, peelings: tem muita coisa para fazer sem precisar de tecnologia.”</td><td class='s'>Nome de cada técnica aparecendo na tela.</td></tr><tr><td class='t'>32–45 s</td><td class='f'>“Vamos aprender quais técnicas você já tem no seu consultório e colocar em prática. É isso que eu mostro na Imersão Prática, exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V04">
+    <div class="vhead"><p class="code">V04</p><h3>O botox vinte</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico que vive de botox e preenchimento. Continua a ideia do vídeo 033, que voltou a vender em setembro.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, contando como uma história. Sem nome nem detalhe que identifique a paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Vídeo 033 da conta: “Botox tem em todo lugar. Tratamento efetivo de cicatriz de acne tem em todo lugar? Não tem.”</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–5 s</td><td class='f'>“Uma paciente me encontrou num evento e contou que estava há dois anos sem vir na clínica.”</td><td class='s'>“BOTOX VINTE FAZ EM QUALQUER LUGAR”</td></tr><tr><td class='t'>5–20 s</td><td class='f'>“Ela tinha feito botox em uns três lugares diferentes. E ela me disse: botox vinte faz em qualquer lugar. Eu fiquei com aquilo na cabeça. Você quer ser o médico que faz só o botox vinte?”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>20–35 s</td><td class='f'>“Cicatriz de acne fideliza muito mais do que outros procedimentos estéticos, como botox, como preenchimento. O paciente vem por cicatriz, você monta o plano de tratamento, e ele não tem mais por que procurar outro lugar.”</td><td class='s'>CICATRIZ FIDELIZA</td></tr><tr><td class='t'>35–48 s</td><td class='f'>“Na Imersão Prática eu mostro como conduzir esse paciente do começo ao fim. É exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V05">
+    <div class="vhead"><p class="code">V05</p><h3>O erro do sétimo dia</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem tem medo de manchar o paciente. Serve também de porta para o Protocolo Pele Segura.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, tom de confissão. Sem foto de paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Amanda Dezontini vende “protocolos seguros para fototipos altos”; aqui a Dra. responde com experiência própria.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Esse erro eu já cometi. E eu não quero que você cometa.”</td><td class='s'>O ERRO DO SÉTIMO DIA</td></tr><tr><td class='t'>4–20 s</td><td class='f'>“No medo de o paciente manchar, com sete dias de pós-operatório, ainda com muito eritema, eu comecei um ácido forte. Só que aquilo ainda era um eritema pós-inflamatório.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>20–32 s</td><td class='f'>“Irritou ainda mais. E eu acabei gerando uma hipercromia pós-inflamatória por conta da dermatite que eu causei.”</td><td class='s'>“A DERMATITE QUE EU CAUSEI”</td></tr><tr><td class='t'>32–42 s</td><td class='f'>“O que eu deveria ter feito? Creme de barreira, para estabilizar a pele. Se ainda tem eritema, tenha calma.”</td><td class='s'>TENHA CALMA · ESTABILIZE A PELE</td></tr><tr><td class='t'>42–52 s</td><td class='f'>“Na Imersão Prática eu mostro como prevenir a mancha antes, durante e depois do procedimento. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V06">
+    <div class="vhead"><p class="code">V06</p><h3>A pergunta do mosquito</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Conteúdo técnico que se salva. Bom para quem ainda não conhece a Dra.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, com as três faixas de risco aparecendo na tela, como uma aula curta.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dr. Felipe Ribeiro: o caso clínico em forma de pergunta (“O paciente chega assim”).</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Antes de tratar cicatriz, eu faço uma pergunta simples para o paciente.”</td><td class='s'>A PERGUNTA DO MOSQUITO</td></tr><tr><td class='t'>4–15 s</td><td class='f'>“Quando o mosquito te pica, você fica muito vermelho e fica manchado? Quando a espinha some, fica uma manchinha?”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>15–30 s</td><td class='f'>“Se ele já tem esse histórico, ele já tem um alto risco de hipercromia. O maior preditor de uma nova hipercromia é uma hipercromia prévia.”</td><td class='s'>RISCO BAIXO · MÉDIO · ALTO</td></tr><tr><td class='t'>30–42 s</td><td class='f'>“Fazer o procedimento numa pele assim, sem preparo, é como jogar um fósforo no terreno seco.”</td><td class='s'>FÓSFORO NO TERRENO SECO</td></tr><tr><td class='t'>42–52 s</td><td class='f'>“Na Imersão Prática eu mostro como classificar esse risco e preparar a pele. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V07">
+    <div class="vhead"><p class="code">V07</p><h3>O paciente entende pelo que está pagando?</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">40 a 50 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico que já trata e compete por preço de sessão. Nova versão do 040, que melhor começou em setembro.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Consultório, blazer branco, como no 040. Sem nenhum valor em dinheiro na tela.</span></div>
+      <div><span class="k">Referência</span><span class="v">Vídeo 040 da conta: “O paciente entende pelo que ele está pagando?”</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“O paciente não vai valorizar aquilo que ele não entende.”</td><td class='s'>O PACIENTE ENTENDE PELO QUE ESTÁ PAGANDO?</td></tr><tr><td class='t'>4–20 s</td><td class='f'>“Se ele liga para a sua clínica perguntando quanto é uma sessão de microagulhamento, ele está comparando procedimento. E vender procedimento isolado é muito ruim, porque você vira uma commodity.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>20–32 s</td><td class='f'>“Em vez de vender uma sessão de laser, uma sessão de microagulhamento: venda o tratamento, venda a condução, venda o raciocínio.”</td><td class='s'>VENDA A CONDUÇÃO</td></tr><tr><td class='t'>32–40 s</td><td class='f'>“Explique o plano de tratamento. E aí você mostra, e você se cala.”</td><td class='s'>“VOCÊ MOSTRA E SE CALA”</td></tr><tr><td class='t'>40–48 s</td><td class='f'>“Na Imersão Prática eu mostro como montar e apresentar esse plano. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V08">
+    <div class="vhead"><p class="code">V08</p><h3>Passei por isso, você não passará</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">35 a 45 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem já faz TCA CROSS ou quer começar. Mostra a professora que conta o que deu errado.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, com um palito de dente na mão para mostrar a dica. Sem paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Nenhum concorrente fala dos próprios erros; é o gancho “aprenda com os meus erros” da gravação.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“A primeira vez que o ácido transbordou da cicatriz, eu fiquei apavorada.”</td><td class='s'>EU FIQUEI APAVORADA</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“Eu fui pingar a gotinha do ácido e transbordou para fora da cicatriz. Inflamou, fez uma lesão. No final deu tudo certo, mas eu fiquei apavorada.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>18–28 s</td><td class='f'>“Passei por isso, você não passará. Vai por mim: aplica com palitinho de dente.”</td><td class='s'>Close no palito de dente.</td></tr><tr><td class='t'>28–40 s</td><td class='f'>“Tudo o que eu já vivi, você pode pular. Em vez de aprender com o seu erro, você aprende com os meus. Imersão Prática, exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V09">
+    <div class="vhead"><p class="code">V09</p><h3>Caso difícil é oportunidade</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">40 a 50 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico experiente que foge dos casos complexos.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Em pé, plano médio, tom firme.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dra. Núcia Pires: “Poucos profissionais dominam de verdade”, dito como desafio ao colega.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Caso difícil é oportunidade.”</td><td class='s'>CASO DIFÍCIL É OPORTUNIDADE</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“O paciente complexo geralmente já fez tratamento em outro lugar, já se decepcionou, ou já piorou o melasma. A oportunidade mora justamente ali, no caso difícil.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>18–32 s</td><td class='f'>“Quando você passa a enfrentar o paciente mais difícil, você ocupa um espaço que pouca gente ocupa. Eu não consigo chegar no topo de nenhuma área se eu não estiver disposta a enfrentar os casos difíceis.”</td><td class='s'>“UM ESPAÇO QUE POUCA GENTE OCUPA”</td></tr><tr><td class='t'>32–44 s</td><td class='f'>“Quanto mais a gente vivencia os casos, mais seguro fica para tratar. Na Imersão Prática eu mostro o caminho. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V10">
+    <div class="vhead"><p class="code">V10</p><h3>Grau 4 não vira grau 1</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">40 a 50 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico que perde paciente por expectativa desalinhada.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, com os quatro graus aparecendo na tela em ilustração, sem foto de paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dr. Felipe Ribeiro e Dra. Núcia Pires ensinam técnica; nenhum anúncio fala de alinhar a expectativa do paciente.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“O seu paciente precisa ouvir isso antes de começar.”</td><td class='s'>GRAU 4 NÃO VIRA GRAU 1</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“Ele vai sair de um grau 4 e não vai pular para um grau 1. Ele vai chegar no grau 3, e depois progredir para o grau 2. Isso precisa estar claro para o paciente.”</td><td class='s'>4 → 3 → 2</td></tr><tr><td class='t'>18–30 s</td><td class='f'>“Grau 2 é a cicatriz que, a 50 centímetros, dá para disfarçar com maquiagem ou com a barba. É o meu caso.”</td><td class='s'>GRAU 2 · DISFARÇA COM MAQUIAGEM</td></tr><tr><td class='t'>30–38 s</td><td class='f'>“Se depende de colágeno, eu não posso garantir que um paciente vai ter o resultado igual ao outro.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>38–46 s</td><td class='f'>“Na Imersão Prática eu mostro como classificar a gravidade e apresentar o plano. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+
+  <section class="narrow">
+    <div class="callout">
+      <h3>O que não entra nas peças</h3>
+      <p>A Dra. assina como médica, então os anúncios seguem a régua da publicidade médica (Resolução CFM 2.336/2023), mesmo sendo para vender curso a outros médicos.</p>
+      <ul><li><strong>Promessa de dinheiro.</strong> Nada de “um dos tratamentos mais rentáveis”, “retorno de mais do dobro no primeiro tratamento” ou “faturamento”, mesmo sendo falas reais da Imersão. E nenhum valor em dinheiro na tela.</li><li><strong>Garantia de resultado ou de risco zero.</strong> Nada de “resultado sem intercorrências”, “você não precisa evitar procedimento”, “melhora de 70%” ou “em um ano você consegue estar voando nesse tema”. Nos vídeos da conta, a promessa de “resultado sem intercorrência” não vendeu.</li><li><strong>Dose, fórmula e marca.</strong> Dose de ácido tranexâmico, fórmulas e nomes de produto ficam dentro do curso, nunca no anúncio.</li><li><strong>Foto, vídeo ou depoimento de paciente</strong>, antes e depois e qualquer detalhe que identifique alguém. Nos cortes de procedimento, só mãos, aparelho e pele em close, sem rosto.</li><li><strong>Comparação com outras profissões.</strong> “Exclusivo para médicos” entra; a lista de profissões e as falas sobre não médicos ficam de fora.</li><li><strong>“Por que você encaminha?” como gancho de abertura.</strong> Já rodou na conta (“assuma esse paciente”) e não vendeu.</li><li><strong>“9 anos de laser de CO2” e “método patenteado”.</strong> Na gravação as duas falas se contradizem. Usar só “10 anos tratando cicatriz de acne”.</li></ul>
+    </div>
+  </section>
+
+  <section class="narrow">
+    <div class="check">
+      <h3>Para confirmar com a Dra. Caroline antes de publicar</h3>
+      <ol><li>Se ela topa contar a própria cicatriz num anúncio (E03 e V02), e o grau: na gravação ela diz grau 3 antes e grau 2 hoje.</li><li>Se ela topa contar os erros dela (V05 e V08).</li><li>A história da paciente do “botox vinte” (V04), contada sem nenhum detalhe que a identifique.</li><li>O nome, a data e o valor da próxima turma. A edição de 19/09 é depois de amanhã; as legendas e os últimos quadros esperam a data nova.</li><li>Os cortes de procedimento para os vídeos: só mãos, aparelho e pele em close, ou autorização por escrito do paciente.</li><li>O cargo atual para a peça de autoridade (E10): professora de dermatologia da UFPI e preceptora da residência.</li></ol>
+    </div>
+  </section>
+
+  <footer>Base: gravação da Imersão Prática de agosto de 2026 (manhã e tarde), anúncios da conta em 2026 e Biblioteca de Anúncios da Meta, consultada em 17 de setembro de 2026. &nbsp;·&nbsp; GGD Growth Digital</footer>
+</div>
+</body>
+</html>
