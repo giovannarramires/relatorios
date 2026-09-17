@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Guia de Acessos — Sua Empresa</title>
+<style>
+  :root {
+    --ground:#FFFFFF; --surface:#F7F8F3; --ink:#1C1F1A; --ink-soft:#43483E; --muted:#6B6F63;
+    --line:#D4D7CA; --line-soft:#E6E8DD; --accent:#8F6410; --moss:#2F4636;
+    --ok:#2F5E3E; --ok-bg:#EAF2EB; --ok-line:#BBD3C0;
+    --no:#8E3A2A; --no-bg:#F8EAE6; --no-line:#E2BFB6;
+    --warn:#8A6410; --warn-bg:#F6EFDD;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:0 34px 60px;overflow-wrap:break-word}
+
+  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:10.5px;
+    letter-spacing:.17em;text-transform:uppercase;color:var(--moss)}
+  h1{font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif;font-weight:600;
+    font-size:40px;line-height:1.06;margin:14px 0 0;letter-spacing:-.015em;max-width:20ch}
+  h1 em{font-style:italic;color:var(--accent)}
+  .standfirst{font-size:16.5px;color:var(--ink-soft);max-width:62ch;margin:14px 0 0}
+  header.top{padding:46px 0 26px;border-bottom:2px solid var(--ink)}
+  .meta-line{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:16px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
+
+  h2{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:26px;
+    line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
+  h3{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:19px;
+    margin:26px 0 8px}
+  section{padding-top:38px}
+  .sect-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+  .sect-head p{margin:0;color:var(--muted);font-size:14.5px;max-width:66ch}
+  .sect-head .eyebrow{display:block;margin-bottom:6px;color:var(--accent)}
+  p{max-width:68ch;margin:0 0 12px}
+  a{color:var(--accent)}
+
+  /* e-mail em destaque */
+  .mail{border:2px solid var(--ink);background:var(--surface);padding:20px 22px;margin:26px 0 0;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+  .mail .eyebrow{display:block;margin-bottom:6px}
+  .mail .addr{font-family:ui-monospace,Menlo,monospace;font-size:20px;font-weight:600;
+    word-break:break-all;color:var(--ink)}
+  button.copy{font:inherit;font-size:13.5px;font-weight:600;background:var(--ink);color:#fff;
+    border:0;padding:10px 16px;cursor:pointer;white-space:nowrap}
+  button.copy:hover{background:var(--moss)}
+  button.copy.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  button.copy.ghost:hover{background:var(--ink);color:#fff}
+
+  .lead{background:var(--surface);border-left:3px solid var(--accent);padding:18px 22px;margin:0 0 18px}
+  .lead p{margin:0;max-width:64ch}
+  .lead p+p{margin-top:10px}
+
+  .tscroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 16px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line)}
+  td.q{font-weight:600;width:24%}
+  .pill{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:10px;
+    letter-spacing:.06em;padding:2px 7px;background:var(--ok-bg);color:var(--ok);
+    border:1px solid var(--ok-line);white-space:nowrap}
+  .pill.opt{background:var(--warn-bg);color:var(--warn);border-color:#DFC98F}
+
+  .pn{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 20px}
+  .pn>div{border:1px solid;padding:16px 18px}
+  .pn .yes{background:var(--ok-bg);border-color:var(--ok-line)}
+  .pn .no{background:var(--no-bg);border-color:var(--no-line)}
+  .pn h4{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;margin:0 0 10px;font-weight:600}
+  .pn .yes h4{color:var(--ok)} .pn .no h4{color:var(--no)}
+  .pn ul{margin:0;padding-left:17px}
+  .pn li{margin-bottom:8px;font-size:14px;line-height:1.45}
+  .pn li:last-child{margin-bottom:0}
+
+  .box{border:1px solid var(--line);background:var(--surface);padding:18px 22px;margin:18px 0}
+  .box .eyebrow{display:block;margin-bottom:8px}
+  .box p:last-child{margin-bottom:0}
+  .box.alert{background:var(--warn-bg);border-color:#DFC98F}
+  .box.alert .eyebrow{color:var(--warn)}
+  .box.stop{background:var(--no-bg);border-color:var(--no-line)}
+  .box.stop .eyebrow{color:var(--no)}
+
+  /* passo a passo */
+  ol.steps{counter-reset:c;list-style:none;padding:0;margin:10px 0 0}
+  ol.steps>li{counter-increment:c;position:relative;padding:12px 0 12px 44px;
+    border-bottom:1px solid var(--line-soft);max-width:none}
+  ol.steps>li:last-child{border-bottom:none}
+  ol.steps>li::before{content:counter(c);position:absolute;left:0;top:12px;width:27px;height:27px;
+    background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600}
+  ol.steps b{font-weight:650}
+  ol.steps ul{margin:8px 0 0;padding-left:18px}
+  ol.steps ul li{margin-bottom:5px;font-size:14.5px}
+  .ui{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#EFEFE6;
+    border:1px solid var(--line);padding:1px 6px;white-space:nowrap}
+  .hint{display:block;color:var(--muted);font-size:13.5px;margin-top:5px}
+
+  /* checklist final */
+  .check{border:1px solid var(--line);margin:14px 0 18px}
+  .check label{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;
+    padding:13px 16px;border-bottom:1px solid var(--line-soft);cursor:pointer}
+  .check label:last-child{border-bottom:none}
+  .check input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--moss);cursor:pointer}
+  .check label.done{background:var(--ok-bg)}
+  .check label.done span b{text-decoration:line-through;text-decoration-color:var(--ok-line)}
+  .check span i{display:block;font-style:normal;color:var(--muted);font-size:13px;margin-top:2px}
+  .progress{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);margin:0 0 6px}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .toast{font-size:13px;color:var(--ok);margin-top:8px;min-height:1.2em}
+
+  details{border:1px solid var(--line);margin:10px 0;background:var(--ground)}
+  details summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;position:relative;padding-right:40px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";position:absolute;right:16px;top:10px;font-size:20px;color:var(--accent)}
+  details[open] summary::after{content:"–"}
+  details .in{padding:0 16px 14px}
+  details .in p:last-child{margin-bottom:0}
+
+  figure.shot{margin:14px 0 6px;border:1px solid var(--line);background:var(--surface);max-width:100%}
+  figure.shot.narrow{max-width:600px}
+  figure.shot a{display:block;cursor:zoom-in}
+  figure.shot img{display:block;width:100%;height:auto}
+  figure.shot figcaption{font-size:13px;line-height:1.5;color:var(--ink-soft);padding:9px 12px;border-top:1px solid var(--line-soft)}
+  figure.shot b.n{display:inline-flex;width:18px;height:18px;border-radius:50%;background:#E4572E;color:#fff;
+    font-size:11px;font-weight:700;align-items:center;justify-content:center;margin:0 3px 0 6px;vertical-align:1px}
+  figure.shot b.n:first-child{margin-left:0}
+  .shot-note{font-size:12.5px;color:var(--muted);margin:14px 0 0}
+
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted)}
+  footer p{max-width:none;font-size:12.5px}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px 48px}
+    h1{font-size:31px}
+    h2{font-size:22px}
+    .pn{grid-template-columns:1fr}
+    .mail .addr{font-size:16px}
+    ol.steps>li{padding-left:38px}
+    .ui{white-space:normal}
+    .eyebrow{letter-spacing:.1em}
+    td.q{width:auto}
+    th,td{padding:9px 7px}
+    .pill{white-space:normal;letter-spacing:0}
+  }
+
+  @page{size:A4;margin:15mm 14mm 16mm}
+  @media print{
+    body{font-size:10.5pt;line-height:1.45}
+    .wrap{max-width:none;padding:0}
+    header.top{padding-top:0}
+    h1{font-size:30pt}
+    h2{font-size:17pt}
+    section{padding-top:20pt}
+    .sect-head,h3{break-after:avoid}
+    .box,.lead,.mail,.check label,figure.shot{break-inside:avoid}
+    figure.shot a{cursor:default}
+    button,.actions,.toast{display:none!important}
+    details{border:none}
+    details .in{display:block}
+    a{text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Gio Growth Digital · Guia preparado para a Sua Empresa</div>
+  <h1>Como liberar os <em>acessos</em> para a gente começar</h1>
+  <p class="standfirst">O passo a passo completo para vocês me darem acesso ao Meta (Página do Facebook, Instagram, conta de anúncios e WhatsApp), ao Google Ads, ao Google Meu Negócio (o perfil no Maps) e ao Google Tag Manager — sem passar senha e sem perder o controle de nada.</p>
+  <div class="meta-line">
+    <span>Leva de 40 a 50 minutos</span>
+    <span>Fazer no computador</span>
+    <span>Documento de 17/09/2026</span>
+  </div>
+
+  <div class="mail">
+    <div>
+      <span class="eyebrow">O e-mail que recebe o acesso</span>
+      <div class="addr" id="addr">carregando…</div>
+    </div>
+    <button class="copy" data-copy="mail">Copiar e-mail</button>
+  </div>
+</header>
+
+<section>
+  <div class="sect-head">
+    <h2>Antes de começar</h2>
+    <p>Três coisas que evitam a maior parte dos problemas.</p>
+  </div>
+  <p class="shot-note">As imagens deste guia são prints reais das telas, com os botões marcados por números que batem com os passos. Na tela de vocês, o nome e os itens da Sua Empresa aparecem no lugar. Cliquem na imagem para ver em tamanho grande.</p>
+
+  <ol class="steps">
+    <li><b>Façam pelo computador</b>, no navegador. Os aplicativos do celular escondem parte das opções que vamos usar.</li>
+    <li><b>Quem faz é quem administra as contas</b> da Sua Empresa (Meta, Google Ads, Google Meu Negócio e Google Tag Manager). Se alguma conta foi criada no perfil pessoal de uma de vocês, é essa pessoa que precisa estar logada naquela parte.</li>
+    <li><b>Sigam a ordem das partes</b> e marquem a conferência no fim da página conforme forem terminando — dá para parar e continuar depois, a marcação fica salva neste navegador.</li>
+  </ol>
+
+  <div class="pn">
+    <div class="yes">
+      <h4>O que continua com vocês</h4>
+      <ul>
+        <li>A <b>propriedade</b> de todas as contas</li>
+        <li>O <b>cartão de pagamento</b> dos anúncios, no nome da empresa</li>
+        <li>O poder de <b>remover meu acesso</b> a qualquer momento, em poucos cliques</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>O que eu nunca vou pedir</h4>
+      <ul>
+        <li><b>Senha</b> de nenhuma conta: Facebook, Instagram, WhatsApp e Google</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 1 de 4 · Meta</span>
+    <h2>O que vocês vão liberar no Meta</h2>
+    <p>No Meta, tudo mora dentro de uma "pasta" da empresa chamada <b>portfólio empresarial</b> (o antigo Gerenciador de Negócios). Eu recebo acesso a essa pasta e a cada item dentro dela.</p>
+  </div>
+
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Item</th><th>Para que eu uso</th><th>Nível</th></tr></thead>
+    <tbody>
+      <tr><td class="q">Portfólio empresarial</td><td>É a porta de entrada. Sem ele, não dá para liberar o resto de forma segura.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Página do Facebook</td><td>Todo anúncio sai em nome da Página. Também respondo comentários dos anúncios.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Instagram</td><td>Para o anúncio aparecer com o @ de vocês e para ver o que funciona no perfil.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Conta de anúncios</td><td>Onde as campanhas são criadas, pausadas e medidas.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">WhatsApp</td><td>Para o anúncio abrir a conversa direto no WhatsApp da empresa.</td><td><span class="pill">Acesso total</span></td></tr>
+      <tr><td class="q">Pixel</td><td>Mede quem veio do anúncio. <b>Se não existir, não precisam criar</b> — eu crio depois.</td><td><span class="pill opt">Se existir</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box">
+    <span class="eyebrow">Dois cuidados antes de mexer no Meta</span>
+    <p><b>O Instagram precisa ser conta profissional</b> (tipo "Empresa" ou "Criador"). No app do Instagram: <span class="ui">Configurações</span> → <span class="ui">Tipo de conta e ferramentas</span>. Se aparecer a opção "Mudar para conta profissional", ainda não é — é só trocar.</p>
+    <p><b>Deixem a verificação em duas etapas ligada</b> no Facebook de quem vai fazer. O Meta costuma pedir isso antes de liberar as configurações da empresa.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Meta · Etapa 1 de 4</span>
+    <h2>Conferir (ou criar) o portfólio empresarial</h2>
+    <p>Muita empresa já tem um e não sabe. Vale olhar antes de criar outro.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Entrem em <a href="https://business.facebook.com" target="_blank" rel="noopener">business.facebook.com</a> logadas no Facebook de quem administra a Página.</li>
+    <li>No canto de cima, à esquerda, aparece o nome de um portfólio. Cliquem nele para ver a lista.
+      <ul>
+        <li><b>Aparece "Sua Empresa" (ou nome parecido)?</b> Ótimo, já existe. Selecionem e pulem para a Etapa 2.</li>
+        <li><b>Não aparece nada da empresa?</b> Sigam o passo 3.</li>
+      </ul>
+    </li>
+    <li>Cliquem em <span class="ui">Criar um portfólio empresarial</span> e preencham:
+      <ul>
+        <li><b>Nome do portfólio:</b> Sua Empresa</li>
+        <li><b>Seu nome</b> e o <b>e-mail comercial</b> de vocês (o da empresa, não o meu)</li>
+      </ul>
+      <span class="hint">O Meta manda um e-mail de confirmação para esse endereço. Cliquem no link antes de seguir.</span>
+    </li>
+  </ol>
+  <figure class="shot narrow"><a href="img/meta-etapa1-portfolio.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa1-portfolio.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Aqui fica o nome do portfólio que está aberto. Clicando nele, aparece a lista dos portfólios que a pessoa logada tem.</figcaption></figure>
+
+  <div class="box alert">
+    <span class="eyebrow">Se a Página já estiver no portfólio de outra pessoa</span>
+    <p>Acontece quando uma agência ou um conhecido criou a Página no passado. Nesse caso <b>não criem Página nova</b>: me avisem antes, que eu mostro como pedir a Página de volta sem perder seguidores nem avaliações.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Meta · Etapa 2 de 4</span>
+    <h2>Colocar a Página, o Instagram e o WhatsApp dentro do portfólio</h2>
+    <p>Só dá para me liberar o que está dentro da pasta da empresa.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Com o portfólio selecionado, cliquem na <b>engrenagem</b> <span class="ui">Configurações</span>, no menu da esquerda, lá embaixo.</li>
+    <li>No menu de configurações, abram <span class="ui">Contas</span> → <span class="ui">Páginas</span>. Se a Página da Sua Empresa já estiver na lista, sigam adiante. Se não, cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma Página do Facebook existente</span> e escolham a de vocês.
+      <span class="hint">No mesmo menu aparece "Criar uma nova Página do Facebook". Não usem essa opção: a Página de vocês já existe.</span></li>
+    <li>Ainda em <span class="ui">Contas</span>, abram <span class="ui">Contas do Instagram</span> → <span class="ui">+ Adicionar</span>. Vai abrir o login do Instagram: entrem com o @ da empresa e autorizem.
+      <span class="hint">Aqui sim vocês digitam a senha do Instagram — mas é na tela do próprio Meta, só vocês veem.</span></li>
+    <li>Para o WhatsApp: abram <span class="ui">Contas</span> → <span class="ui">Contas do WhatsApp</span> → <span class="ui">+ Adicionar</span> e sigam as telas com o número da empresa. O Meta manda um código para esse número.
+      <span class="hint">Se vocês usam o <b>aplicativo WhatsApp Business</b> no celular e essa opção complicar, tem um caminho mais simples: no app, <span class="ui">Configurações</span> → <span class="ui">Ferramentas comerciais</span> → <span class="ui">Facebook e Instagram</span> → conectar à Página. Isso já basta para o anúncio abrir conversa no WhatsApp. O app continua funcionando igual.</span></li>
+  </ol>
+  <figure class="shot"><a href="img/meta-etapa2-contas.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa2-contas.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Engrenagem de Configurações <b class="n">2</b>Páginas e o botão Adicionar <b class="n">3</b>Contas do Instagram <b class="n">4</b>Contas do WhatsApp. Nas telas do Instagram e do WhatsApp, o botão Adicionar fica no mesmo lugar.</figcaption></figure>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Meta · Etapa 3 de 4</span>
+    <h2>Conferir (ou criar) a conta de anúncios</h2>
+    <p>É onde o dinheiro dos anúncios é gasto — e onde fica o cartão de vocês.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Em <span class="ui">Configurações</span>, abram <span class="ui">Contas</span> → <span class="ui">Contas de anúncios</span>.
+      <ul>
+        <li><b>Já tem uma conta da Sua Empresa na lista?</b> Pulem para o passo 3.</li>
+        <li><b>Vocês já impulsionaram post pelo Instagram ou pela Página?</b> Então existe uma conta, mesmo que não apareça aqui. Cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma conta de anúncios</span> e ela deve aparecer para escolher.</li>
+        <li><b>Nunca anunciaram?</b> Cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Criar uma nova conta de anúncios</span>.</li>
+      </ul>
+    </li>
+    <li>Se forem criar, preencham assim:
+      <ul>
+        <li><b>Nome:</b> Sua Empresa</li>
+        <li><b>Fuso horário:</b> (GMT-03:00) America/Sao_Paulo — depois aparece como "Horário de São Paulo"</li>
+        <li><b>Moeda:</b> Real brasileiro (BRL)</li>
+        <li>Quando perguntar para quem é a conta, marquem <b>"Meu portfólio empresarial"</b> (a própria empresa).</li>
+      </ul>
+    </li>
+    <li><b>Forma de pagamento:</b> cliquem na conta de anúncios da lista, abram a aba <span class="ui">Payment methods</span> (é assim, em inglês, mesmo com o Meta em português) e cliquem em <span class="ui">Adicionar forma de pagamento</span>. Cadastrem o cartão ou o Pix da empresa. <b>Isso fica com vocês</b> — eu não cadastro nem altero pagamento.</li>
+  </ol>
+
+  <figure class="shot"><a href="img/meta-etapa3-conta-anuncios.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa3-conta-anuncios.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Contas de anúncios e o botão Adicionar <b class="n">2</b>Moeda e fuso horário: conferir se está BRL e Horário de São Paulo <b class="n">3</b>Aba de pagamento e o botão para cadastrar o cartão ou o Pix.</figcaption></figure>
+
+  <div class="box stop">
+    <span class="eyebrow">Atenção ao fuso e à moeda</span>
+    <p>Depois de criada, a conta <b>não deixa trocar</b> fuso horário nem moeda. Se sair em dólar ou com o fuso errado, o único jeito é abrir outra conta. Confiram antes de clicar em criar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Meta · Etapa 4 de 4</span>
+    <h2>Me convidar com acesso total</h2>
+    <p>É aqui que o acesso é liberado de fato. O convite tem quatro telas: Inserir email, Conceder acesso, Atribuir ativos e Analisar.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Em <span class="ui">Configurações</span>, abram <span class="ui">Usuários</span> → <span class="ui">Pessoas</span> e cliquem no botão azul <span class="ui">+ Convidar pessoas</span>.
+      <figure class="shot"><a href="img/meta-etapa4-1-pessoas.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa4-1-pessoas.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Usuários → Pessoas <b class="n">2</b>Convidar pessoas</figcaption></figure></li>
+    <li>Colem o e-mail <b id="addr2">carregando…</b> no campo e apertem <b>Enter</b>: o e-mail vira uma etiqueta com um "x". Depois, <span class="ui">Avançar</span>.
+      <span class="hint">Deixem a chave "Acesso temporário" desligada.</span>
+      <figure class="shot narrow"><a href="img/meta-etapa4-2-email.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa4-2-email.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>O e-mail já virou etiqueta <b class="n">2</b>Avançar</figcaption></figure></li>
+    <li>Na tela <b>Conceder acesso</b>, em <b>Acesso total</b>, liguem a chave <b>Gerenciar</b> (ela fica azul). Depois, <span class="ui">Avançar</span>.
+      <span class="hint">Não precisam abrir "Ver opções avançadas".</span>
+      <figure class="shot narrow"><a href="img/meta-etapa4-3-acesso-total.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa4-3-acesso-total.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Acesso total com a chave Gerenciar ligada <b class="n">2</b>Avançar</figcaption></figure></li>
+    <li>Na tela <b>Atribuir ativos</b>, a coluna da esquerda lista os tipos. Em cada tipo abaixo: cliquem nele, marquem o item da Sua Empresa na coluna do meio e, na coluna da direita, <b>rolem até o fim</b> e liguem a chave <b>Tudo</b>, em <b>Acesso total</b>:
+      <ul>
+        <li><span class="ui">Páginas do Facebook</span> → a Página da Sua Empresa</li>
+        <li><span class="ui">Contas de anúncios</span> → a conta da Sua Empresa</li>
+        <li><span class="ui">Contas do Instagram</span> → o @ da empresa</li>
+        <li><span class="ui">Contas do WhatsApp</span> → o número da empresa (se aparecer)</li>
+        <li><span class="ui">Pixels</span> → o pixel (só se já existir)</li>
+      </ul>
+      <span class="hint">Se algum tipo não aparecer na lista, é porque aquele item não foi colocado no portfólio na Etapa 2 — dá para voltar lá, adicionar e depois me atribuir.</span>
+      <figure class="shot"><a href="img/meta-etapa4-4-ativos.jpg" target="_blank" rel="noopener"><img src="img/meta-etapa4-4-ativos.jpg" alt="Exemplo da tela do Meta" loading="lazy"></a><figcaption><b class="n">1</b>Tipo escolhido <b class="n">2</b>O item da Sua Empresa marcado <b class="n">3</b>Acesso total: ligar a chave Tudo <b class="n">4</b>Repetir para os outros tipos. No exemplo a chave aparece apagada; no portfólio de vocês ela liga normalmente.</figcaption></figure>
+    </li>
+    <li>Cliquem em <span class="ui">Avançar</span>. Na última tela, <b>Analisar</b>, confiram se estão lá o meu e-mail e todos os itens, e enviem o convite. Ele chega no meu e-mail e eu aceito do meu lado.</li>
+  </ol>
+
+  <div class="box">
+    <span class="eyebrow">O convite fica "pendente" por um tempo</span>
+    <p>Até eu aceitar, meu nome aparece como <b>pendente</b> na lista de pessoas. É normal. O convite vence em alguns dias; se isso acontecer, é só clicar no meu nome e reenviar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 2 de 4 · Google Ads</span>
+    <h2>Google Ads</h2>
+    <p>É onde ficam os anúncios na busca do Google, no YouTube e no Maps. Leva uns 10 minutos.</p>
+  </div>
+
+  <div class="box">
+    <span class="eyebrow">Ainda não têm conta de Google Ads?</span>
+    <p><b>Não criem.</b> Me avisem que eu crio pela central da agência, já no nome da Sua Empresa, e mando o convite para vocês. Aí só falta cadastrar a forma de pagamento (passo 6).</p>
+  </div>
+
+  <ol class="steps">
+    <li>Entrem em <a href="https://ads.google.com" target="_blank" rel="noopener">ads.google.com</a> com a conta Google que é dona do Google Ads. No canto de cima, à direita, aparece o <b>número da conta</b> (10 dígitos, tipo 123-456-7890). <b>Me mandem esse número</b> — é por ele que eu conecto a conta à central da agência.</li>
+    <li>No menu da esquerda, cliquem em <span class="ui">Adm.</span> (a engrenagem), depois em <span class="ui">Acesso e segurança</span>, abram a aba <span class="ui">Usuários</span> e cliquem no botão azul <span class="ui">+</span>.
+      <figure class="shot"><a href="img/gads-1.jpg" target="_blank" rel="noopener"><img src="img/gads-1.jpg" alt="Exemplo da tela do Google Ads" loading="lazy"></a><figcaption><b class="n">1</b>Adm. <b class="n">2</b>Acesso e segurança <b class="n">3</b>Aba Usuários <b class="n">4</b>Botão + &nbsp;·&nbsp; No canto de cima, à direita, fica o número da conta.</figcaption></figure></li>
+    <li>Colem o meu e-mail, deixem a data de expiração em <b>Nunca</b> e marquem o nível de acesso <b>Adm.</b>
+      <figure class="shot"><a href="img/gads-2.jpg" target="_blank" rel="noopener"><img src="img/gads-2.jpg" alt="Exemplo da tela do Google Ads" loading="lazy"></a><figcaption><b class="n">5</b>Meu e-mail <b class="n">6</b>Nível de acesso Adm.</figcaption></figure></li>
+    <li>No fim do formulário, cliquem em <span class="ui">Enviar convite</span>.
+      <span class="hint">Se a conta tiver mais de um administrador, o botão aparece como <b>Solicitar aprovação</b>: cliquem nele e aprovem pelo e-mail que o Google manda para os administradores.</span>
+      <figure class="shot narrow"><a href="img/gads-3.jpg" target="_blank" rel="noopener"><img src="img/gads-3.jpg" alt="Exemplo da tela do Google Ads" loading="lazy"></a><figcaption><b class="n">7</b>O botão de enviar (no exemplo, "Solicitar aprovação")</figcaption></figure></li>
+    <li>Depois que eu conectar a conta à central da agência, chega um <b>pedido de vínculo</b>. Ele aparece em <span class="ui">Acesso e segurança</span> → aba <span class="ui">Administradores</span>: é só <b>aceitar</b>.
+      <span class="hint">Esse passo só acontece depois do meu pedido. Eu aviso quando mandar.</span>
+      <figure class="shot"><a href="img/gads-4.jpg" target="_blank" rel="noopener"><img src="img/gads-4.jpg" alt="Exemplo da tela do Google Ads" loading="lazy"></a><figcaption>Aba Administradores: o pedido da agência aparece nesta lista para aceitar.</figcaption></figure></li>
+    <li><b>Forma de pagamento:</b> no menu da esquerda, <span class="ui">Faturamento</span> → cadastrem o cartão ou o Pix da empresa. <b>Isso fica com vocês</b> — eu não cadastro nem altero pagamento.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 3 de 4 · Google Meu Negócio</span>
+    <h2>Google Meu Negócio (o perfil no Maps)</h2>
+    <p>É o perfil que aparece no Google Maps e na busca quando alguém procura Sua Empresa. Leva uns 5 minutos.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Entrem no Google com o <b>Gmail que é dono do perfil</b> e pesquisem <a href="https://www.google.com/search?q=meu+perfil+da+empresa" target="_blank" rel="noopener">meu perfil da empresa</a> (ou o nome da empresa). Deve aparecer o quadro <b>"Sua empresa no Google"</b> — ele só aparece para quem administra o perfil.
+      <span class="hint">Se não aparecer, é outra conta Google. Troquem de conta na foto do canto de cima e pesquisem de novo.</span></li>
+    <li>Nos <b>três pontinhos</b>, ao lado de "Força do perfil", cliquem em <span class="ui">Configurações do Perfil da Empresa</span>.
+      <figure class="shot narrow"><a href="img/gbp-1.jpg" target="_blank" rel="noopener"><img src="img/gbp-1.jpg" alt="Exemplo da tela do Google" loading="lazy"></a><figcaption><b class="n">2</b>Os três pontinhos do quadro "Sua empresa no Google". Os números do perfil estão desfocados no exemplo.</figcaption></figure>
+      <figure class="shot narrow"><a href="img/gbp-2.jpg" target="_blank" rel="noopener"><img src="img/gbp-2.jpg" alt="Exemplo da tela do Google" loading="lazy"></a><figcaption><b class="n">2</b>Configurações do Perfil da Empresa</figcaption></figure></li>
+    <li>Abram <span class="ui">Pessoas e acesso</span>.
+      <figure class="shot narrow"><a href="img/gbp-3.jpg" target="_blank" rel="noopener"><img src="img/gbp-3.jpg" alt="Exemplo da tela do Google" loading="lazy"></a><figcaption><b class="n">3</b>Pessoas e acesso</figcaption></figure></li>
+    <li>Cliquem em <span class="ui">Adicionar</span>.
+      <figure class="shot narrow"><a href="img/gbp-4.jpg" target="_blank" rel="noopener"><img src="img/gbp-4.jpg" alt="Exemplo da tela do Google" loading="lazy"></a><figcaption><b class="n">4</b>Adicionar. Abaixo aparece quem já tem acesso (desfocado no exemplo).</figcaption></figure></li>
+    <li>Colem o meu e-mail, escolham <b>Proprietário</b> e cliquem em <span class="ui">Convidar</span>.
+      <span class="hint">Vocês continuam como <b>proprietário principal</b>: a propriedade do perfil não muda. "Proprietário" é o que me deixa conectar o perfil ao Google Ads e cuidar das avaliações.</span>
+      <figure class="shot narrow"><a href="img/gbp-5.jpg" target="_blank" rel="noopener"><img src="img/gbp-5.jpg" alt="Exemplo da tela do Google" loading="lazy"></a><figcaption><b class="n">5</b>Meu e-mail <b class="n">6</b>Proprietário <b class="n">7</b>Convidar</figcaption></figure></li>
+  </ol>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 4 de 4 · Google Tag Manager</span>
+    <h2>Google Tag Manager</h2>
+    <p>É onde ficam instalados os códigos que medem o site (pixel do Meta, Google Analytics, Google Ads). Leva uns 5 minutos.</p>
+  </div>
+
+  <div class="box">
+    <span class="eyebrow">Não sabem se o site tem Tag Manager?</span>
+    <p>Podem pular esta parte e me avisar. Eu confiro pelo próprio site e, se não tiver, eu crio depois.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Entrem em <a href="https://tagmanager.google.com" target="_blank" rel="noopener">tagmanager.google.com</a> com a conta Google que criou o Tag Manager, cliquem no endereço do site e abram a aba <span class="ui">Administrador</span>.</li>
+    <li>Na coluna da esquerda, <b>CONTA</b>, cliquem em <span class="ui">Gerenciamento de usuários</span>.
+      <span class="hint">A coluna da direita, CONTÊINER, também tem um "Gerenciamento de usuários". Usem o da esquerda: ele libera a conta inteira.</span>
+      <figure class="shot"><a href="img/gtm-1.jpg" target="_blank" rel="noopener"><img src="img/gtm-1.jpg" alt="Exemplo da tela do Tag Manager" loading="lazy"></a><figcaption><b class="n">1</b>Aba Administrador <b class="n">2</b>Gerenciamento de usuários, na coluna CONTA</figcaption></figure></li>
+    <li>Cliquem no botão azul <span class="ui">+</span>, no canto de cima, e depois em <span class="ui">Adicionar usuários</span>.
+      <figure class="shot"><a href="img/gtm-2.jpg" target="_blank" rel="noopener"><img src="img/gtm-2.jpg" alt="Exemplo da tela do Tag Manager" loading="lazy"></a><figcaption><b class="n">3</b>O botão + e a opção Adicionar usuários</figcaption></figure></li>
+    <li>Na tela <b>Enviar convites</b>: colem o meu e-mail e apertem Enter, marquem <b>Administrador</b> e cliquem na linha do site, em "Permissões do contêiner".
+      <figure class="shot"><a href="img/gtm-3.jpg" target="_blank" rel="noopener"><img src="img/gtm-3.jpg" alt="Exemplo da tela do Tag Manager" loading="lazy"></a><figcaption><b class="n">4</b>Meu e-mail <b class="n">5</b>Administrador <b class="n">6</b>A linha do site <b class="n">8</b>Convidar — só no fim, depois do passo 7</figcaption></figure></li>
+    <li>Marquem <b>Publicação</b> — as outras três marcam sozinhas — e cliquem em <span class="ui">Concluir</span>. De volta à tela anterior, cliquem em <span class="ui">Convidar</span>, no canto de cima.
+      <figure class="shot narrow"><a href="img/gtm-4.jpg" target="_blank" rel="noopener"><img src="img/gtm-4.jpg" alt="Exemplo da tela do Tag Manager" loading="lazy"></a><figcaption><b class="n">6</b>Publicação (as outras marcam juntas) <b class="n">7</b>Concluir. Depois, <b>Convidar</b> na tela anterior.</figcaption></figure></li>
+  </ol>
+</section>
+
+
+<section>
+  <div class="sect-head">
+    <h2>Conferência final</h2>
+    <p>Marquem conforme forem terminando. Quando acabar, o botão monta a mensagem pronta para mandar no WhatsApp.</p>
+  </div>
+
+  <p class="progress" id="progress">0 concluídos</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-k="meta_insta_pro"><span><b>Instagram é conta profissional</b><i>Empresa ou Criador</i></span></label>
+    <label><input type="checkbox" data-k="meta_portfolio"><span><b>Portfólio empresarial existe</b><i>Meta · Etapa 1</i></span></label>
+    <label><input type="checkbox" data-k="meta_pagina"><span><b>Página do Facebook dentro do portfólio</b><i>Meta · Etapa 2</i></span></label>
+    <label><input type="checkbox" data-k="meta_instagram"><span><b>Instagram dentro do portfólio</b><i>Meta · Etapa 2</i></span></label>
+    <label><input type="checkbox" data-k="meta_whatsapp"><span><b>WhatsApp conectado</b><i>Meta · Etapa 2 — pelo portfólio ou pelo app WhatsApp Business</i></span></label>
+    <label><input type="checkbox" data-k="meta_conta"><span><b>Conta de anúncios em reais, fuso de São Paulo</b><i>Meta · Etapa 3</i></span></label>
+    <label><input type="checkbox" data-k="meta_pagamento"><span><b>Forma de pagamento cadastrada</b><i>Meta · Etapa 3 — cartão ou Pix da empresa</i></span></label>
+    <label><input type="checkbox" data-k="meta_convite"><span><b>Convite enviado com acesso total em todos os itens</b><i>Meta · Etapa 4</i></span></label>
+    <label><input type="checkbox" data-k="gads_numero"><span><b>Google Ads: número da conta enviado</b><i>Google Ads · passo 1 — ou "não temos conta"</i></span></label>
+    <label><input type="checkbox" data-k="gads_convite"><span><b>Google Ads: convite enviado como Adm.</b><i>Google Ads · passos 2 a 4</i></span></label>
+    <label><input type="checkbox" data-k="gads_pagamento"><span><b>Google Ads: forma de pagamento cadastrada</b><i>Google Ads · passo 6</i></span></label>
+    <label><input type="checkbox" data-k="gbp_convite"><span><b>Google Meu Negócio: convite enviado como Proprietário</b><i>Google Meu Negócio · passo 5</i></span></label>
+    <label><input type="checkbox" data-k="gtm_convite"><span><b>Tag Manager: convite enviado (Administrador + Publicação)</b><i>Google Tag Manager · passo 5 — ou "não temos Tag Manager"</i></span></label>
+  </div>
+  <div class="actions">
+    <button class="copy" id="btnResumo">Copiar mensagem para o WhatsApp</button>
+    <button class="copy ghost" id="btnLimpar">Desmarcar tudo</button>
+  </div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <h2>Se travar em algum ponto</h2>
+    <p>Os problemas que mais aparecem e o que fazer com cada um.</p>
+  </div>
+  <h3>Meta</h3>
+  <details>
+    <summary>Não aparece a engrenagem de Configurações</summary>
+    <div class="in"><p>A pessoa logada não é administradora daquele portfólio. Confiram se estão no portfólio certo (nome no canto de cima, à esquerda) ou se quem deve fazer é outra de vocês.</p></div>
+  </details>
+  <details>
+    <summary>O Meta pede verificação em duas etapas antes de continuar</summary>
+    <div class="in"><p>No Facebook de quem está fazendo: <span class="ui">Central de contas</span> → <span class="ui">Senha e segurança</span> → <span class="ui">Autenticação de dois fatores</span>. Ativem pelo SMS ou por aplicativo, voltem ao portfólio e tentem de novo.</p></div>
+  </details>
+  <details>
+    <summary>O Instagram não aparece para adicionar</summary>
+    <div class="in"><p>Quase sempre é porque ainda é conta pessoal. Troquem para profissional no app (ver "Antes de começar") e tentem de novo. Se já for profissional, confiram se estão entrando com o @ certo na tela de login que abre.</p></div>
+  </details>
+  <details>
+    <summary>Diz que a Página ou a conta de anúncios já pertence a outro portfólio</summary>
+    <div class="in"><p>Não criem nada novo e não removam nada. Me mandem um print dessa tela que eu resolvo com vocês — dá para pedir o item de volta preservando o histórico.</p></div>
+  </details>
+  <details>
+    <summary>O convite por e-mail deu erro (plano B)</summary>
+    <div class="in">
+      <p>Dá para liberar o acesso para o portfólio da minha empresa em vez do meu e-mail. O resultado é o mesmo.</p>
+      <p>Em <span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Parceiros</span> → <span class="ui">+ Adicionar</span> → <span class="ui">Conceder a um parceiro acesso aos seus ativos</span>, informem o ID do portfólio <b>196876879225865</b> (Gio Growth Digital) e marquem os mesmos itens da Etapa 4 com acesso total.</p>
+      <div class="actions"><button class="copy ghost" data-copy="bm">Copiar ID do portfólio</button></div>
+    </div>
+  </details>
+  <details>
+    <summary>Como tirar meu acesso, se um dia precisarem</summary>
+    <div class="in"><p><span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Pessoas</span> → cliquem no meu nome → <span class="ui">Remover</span>. O acesso cai na hora, em todos os itens.</p></div>
+  </details>
+  <h3>Google Ads</h3>
+  <details>
+    <summary>No Google Ads não aparece "Acesso e segurança"</summary>
+    <div class="in"><p>A conta Google aberta não é administradora. Troquem de conta na foto do canto de cima. Se a conta foi criada por uma agência antiga, me avisem: dá para pedir o acesso de volta ou eu crio uma conta nova no nome de vocês.</p></div>
+  </details>
+  <details>
+    <summary>Não acham o pedido de vínculo da agência</summary>
+    <div class="in"><p>Ele só aparece depois que eu mando o pedido. Olhem em Adm. → Acesso e segurança → aba Administradores; se não estiver lá, me avisem que eu reenvio.</p></div>
+  </details>
+  <h3>Google Meu Negócio</h3>
+  <details>
+    <summary>O quadro "Sua empresa no Google" não aparece</summary>
+    <div class="in"><p>A conta Google aberta não é a que administra o perfil. Troquem de conta (foto no canto de cima) e pesquisem de novo. Se ninguém lembrar qual Gmail criou o perfil, me avisem: dá para pedir o acesso pelo próprio Google.</p></div>
+  </details>
+  <details>
+    <summary>Aparece que o perfil é gerenciado por outra pessoa</summary>
+    <div class="in"><p>Alguém de fora (uma agência antiga, um conhecido) ficou como dono. Não criem outro perfil — perfil duplicado perde as avaliações. Me mandem um print dessa tela que eu mostro como recuperar.</p></div>
+  </details>
+  <h3>Google Tag Manager</h3>
+  <details>
+    <summary>No Tag Manager não aparece "Gerenciamento de usuários"</summary>
+    <div class="in"><p>A conta Google aberta não é administradora. Confiram se estão no Gmail que criou o Tag Manager ou peçam para quem montou o site (desenvolvedor, agência antiga) liberar o acesso seguindo esta mesma parte.</p></div>
+  </details>
+</section>
+
+<footer>
+  <p>Gio Growth Digital · Guia preparado para a Sua Empresa · 17/09/2026</p>
+  <p>Prints e nomes dos menus conferidos em Meta Business Suite (17/09/2026), Google Ads (17/09/2026), Perfil da Empresa no Google (17/09/2026) e Google Tag Manager (17/09/2026). As empresas mudam nomes de botões com frequência; se algum estiver diferente, o caminho continua o mesmo — e é só me mandar um print.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // e-mail montado aqui para a borda do site não embaralhar o endereço
+  var MAIL = ['giovannarramires','gmail.com'].join('@');
+  var BM = '196876879225865';
+  document.getElementById('addr').textContent = MAIL;
+  document.getElementById('addr2').textContent = MAIL;
+
+  var toast = document.getElementById('toast');
+  function aviso(t){ toast.textContent = t; clearTimeout(aviso._t); aviso._t = setTimeout(function(){ toast.textContent=''; }, 3500); }
+  function copiar(txt, btn, ok){
+    function feito(){ if(btn){ var o=btn.textContent; btn.textContent='Copiado ✓'; setTimeout(function(){ btn.textContent=o; },1800);} if(ok) aviso(ok); }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(txt).then(feito, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); feito(); }catch(e){ aviso('Não consegui copiar — selecione o texto e copie manualmente.'); }
+      document.body.removeChild(ta);
+    }
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){ copiar(b.dataset.copy==='bm' ? BM : MAIL, b); });
+  });
+
+  // checklist salvo neste navegador
+  var KEY = 'ggd-acessos-acessos-modelo-v1', estado = {};
+  try { estado = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { estado = {}; }
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  function render(){
+    var n = 0;
+    boxes.forEach(function(cb){ cb.parentNode.classList.toggle('done', cb.checked); if(cb.checked) n++; });
+    document.getElementById('progress').textContent = n + ' de ' + boxes.length + ' concluídos';
+  }
+  boxes.forEach(function(cb){
+    cb.checked = !!estado[cb.dataset.k];
+    cb.addEventListener('change', function(){
+      estado[cb.dataset.k] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(estado)); } catch(e) {}
+      render();
+    });
+  });
+  render();
+
+  document.getElementById('btnResumo').addEventListener('click', function(){
+    var feitos = [], faltam = [];
+    boxes.forEach(function(cb){
+      var t = cb.parentNode.querySelector('b').textContent;
+      (cb.checked ? feitos : faltam).push(t);
+    });
+    var msg = 'Oi, Gio! Acessos da Sua Empresa:\n\n';
+    if (feitos.length) msg += 'Feito:\n' + feitos.map(function(t){ return '✅ ' + t; }).join('\n') + '\n';
+    if (faltam.length) msg += '\nAinda falta:\n' + faltam.map(function(t){ return '⏳ ' + t; }).join('\n') + '\n';
+    if (!faltam.length) msg += '\nConvite enviado para ' + MAIL + '. Pode aceitar!';
+    copiar(msg, this, 'Mensagem copiada. É só colar no WhatsApp.');
+  });
+  document.getElementById('btnLimpar').addEventListener('click', function(){
+    estado = {}; boxes.forEach(function(cb){ cb.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    render();
+  });
+})();
+</script>
+</body>
+</html>
