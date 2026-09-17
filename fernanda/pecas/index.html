@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Peças da Imersão Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;--warm:#A9662F;--warm-soft:#F5E9DE}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 20px 96px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+.narrow{max-width:760px}
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px;max-width:780px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:clamp(38px,6.2vw,60px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:60ch}
+.meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+section{display:flex;flex-direction:column;gap:20px}
+h2{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:30px;line-height:1.18;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h3{font-family:"Karla",sans-serif;font-weight:700;font-size:18px;margin:0}
+p{margin:0;max-width:68ch}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.code{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--accent);margin:0}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px;font-size:15.5px}
+.how strong{display:block;margin-bottom:4px}
+.how a{color:var(--accent);font-weight:700}
+.indices{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 36px}
+.indice{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
+.indice a{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.indice a:hover{color:var(--accent)}
+.indice .i{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);min-width:30px}
+.legendas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.legenda{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.legenda pre{white-space:pre-wrap;font-family:"Karla",sans-serif;font-size:15px;line-height:1.55;margin:6px 0 0;color:var(--ink)}
+.peca{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:32px;border-top:2px solid var(--ink);padding-top:28px}
+.peca-art{display:flex;flex-direction:column;gap:8px}
+.mock{font-size:12px;color:var(--muted)}
+.art{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:4px;overflow:hidden;background:#1b1b1b center/cover no-repeat;color:#fff;box-shadow:0 1px 0 var(--line)}
+.art.full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,16,.15) 0%,rgba(10,14,16,.05) 35%,rgba(10,14,16,.82) 78%)}
+.art-tag{position:absolute;top:14px;left:14px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:#F4EDE4;color:#1d2a30;padding:4px 8px;border-radius:2px}
+.art-tag.dark{position:static;display:inline-block;background:#1d2a30;color:#F4EDE4;margin-bottom:10px}
+.art-text{position:absolute;left:18px;right:18px;bottom:44px;z-index:2}
+.art-t{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;line-height:1.08;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.art-a{font-size:13.5px;line-height:1.4;margin-top:8px;opacity:.92}
+.art-foot{position:absolute;left:18px;right:18px;bottom:14px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.art.split{background:#F4EDE4;color:#1d2a30;display:grid;grid-template-rows:auto 1fr}
+.art.split .art-top{padding:18px 18px 12px}
+.art.split .art-t{font-size:24px}
+.art.split .art-img{background:center 25%/cover no-repeat}
+.art.split .art-foot{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.peca-info{display:flex;flex-direction:column;gap:12px}
+dl{margin:0;display:grid;grid-template-columns:130px 1fr;gap:8px 16px;border-top:1px solid var(--line);padding-top:12px}
+dt{font-size:13px;color:var(--muted);padding-top:2px}
+dd{margin:0;font-size:15.5px}
+dd.big{font-family:"Fraunces",Georgia,serif;font-size:21px;line-height:1.25}
+.slides h4{margin:0 0 4px;font-size:13px;color:var(--muted);font-weight:500}
+.slides ol{margin:0;padding-left:22px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.porque{background:var(--accent-soft);border-radius:3px;padding:12px 14px;font-size:15px;max-width:none}
+.video{border-top:2px solid var(--ink);padding-top:28px;display:flex;flex-direction:column;gap:16px}
+.vhead{display:flex;flex-direction:column;gap:2px}
+.vhead h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px}
+.vmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.vmeta div{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.vmeta .k{font-size:12px;color:var(--muted)}
+.vmeta .v{font-size:14.5px;line-height:1.45}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;background:var(--surface);border:1px solid var(--line)}
+th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15.5px}
+td.t{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap;color:var(--accent)}
+td.f{width:55%}
+td.s{color:var(--muted);font-size:14px}
+.leg{font-size:13.5px;color:var(--muted)}
+.callout{background:var(--warm-soft);border-left:3px solid var(--warm);padding:22px 24px;border-radius:0 3px 3px 0;display:flex;flex-direction:column;gap:12px}
+.callout h3{color:var(--warm)}
+.callout ul,.callout ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:76ch}
+.check{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.check ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+footer{border-top:1px solid var(--line);padding-top:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+@media (max-width:720px){
+  .peca{grid-template-columns:1fr}
+  .peca-art{max-width:340px}
+  dl{grid-template-columns:1fr;gap:2px}
+  dt{padding-top:8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dra. Fernanda Fiori · Imersão Prática Botox com Segurança Médica</p>
+    <h1>20 peças para produzir</h1>
+    <p class="dek">Dez estáticos e dez vídeos para os anúncios da Imersão Prática. Cada frase sai da fala da própria Dra. Fernanda na Imersão de 29 de agosto, e cada formato sai do que está funcionando hoje nos anúncios de curso de toxina e harmonização facial.</p>
+    <p class="meta">17 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>De onde vêm estas peças</h2>
+    <div class="how">
+      <div><strong>A fala da Dra. na Imersão.</strong>Lemos a gravação inteira, manhã e tarde. Os títulos e as falas dos roteiros usam as frases que ela já disse ao vivo, só com a pontuação ajustada. Nada foi inventado.</div>
+      <div><strong>O que funciona no mercado.</strong>Os formatos seguem os padrões das <a href="../referencias/">referências de anúncio</a>: “exclusivo para médicos” escrito na peça, o raciocínio no lugar do ponto, o medo dito com as palavras do médico, aula de verdade dentro do anúncio e o método com nome.</div>
+      <div><strong>O que já funciona na conta.</strong>O ângulo “o paciente já é seu” é o que mais trouxe inscrição até hoje. Ele abre as duas listas (E02 e V01), agora com a frase exata dela.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As 20 peças</h2>
+    <div class="indices">
+      <div><h3>Estáticos</h3><ul class="indice"><li><a href="#E01"><span class="i">E01</span>Botox seguro não é ponto decorado</a></li><li><a href="#E02"><span class="i">E02</span>O paciente já é seu</a></li><li><a href="#E03"><span class="i">E03</span>O telefone que toca</a></li><li><a href="#E04"><span class="i">E04</span>Não é falta de mão</a></li><li><a href="#E05"><span class="i">E05</span>Naturalidade não é usar pouco</a></li><li><a href="#E06"><span class="i">E06</span>Os 7 erros (carrossel)</a></li><li><a href="#E07"><span class="i">E07</span>MIDAS em 5 letras (carrossel)</a></li><li><a href="#E08"><span class="i">E08</span>Mais um mapa não resolve</a></li><li><a href="#E09"><span class="i">E09</span>A professora na frente</a></li><li><a href="#E10"><span class="i">E10</span>A sobrancelha engana</a></li></ul></div>
+      <div><h3>Vídeos</h3><ul class="indice"><li><a href="#V01"><span class="i">V01</span>O paciente já é seu</a></li><li><a href="#V02"><span class="i">V02</span>A médica que eu tinha vergonha de ser</a></li><li><a href="#V03"><span class="i">V03</span>O telefone no fim de semana</a></li><li><a href="#V04"><span class="i">V04</span>Não é a sua mão</a></li><li><a href="#V05"><span class="i">V05</span>Naturalidade não é usar pouco</a></li><li><a href="#V06"><span class="i">V06</span>O teste da caneta</a></li><li><a href="#V07"><span class="i">V07</span>A ruga corta a seta</a></li><li><a href="#V08"><span class="i">V08</span>Já fez curso e continua inseguro?</a></li><li><a href="#V09"><span class="i">V09</span>MIDAS em 60 segundos</a></li><li><a href="#V10"><span class="i">V10</span>Eu comecei atendendo convênio</a></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Antes de gravar</h2>
+    <div class="how">
+      <div><strong>Enquadramento e luz.</strong>Celular na vertical, na altura dos olhos. Luz de frente, nunca atrás. Do peito para cima, com espaço acima da cabeça. Grave em 9:16; a edição tira a versão de feed.</div>
+      <div><strong>Fale com um colega.</strong>Olhando para a lente, no tom de quem explica para outro médico no corredor do congresso. Se errar, respire e repita a frase inteira; a edição corta depois.</div>
+      <div><strong>Os três primeiros segundos.</strong>Comece direto pela primeira frase do roteiro, sem “oi, tudo bem”. É ela que segura quem é médico e filtra quem não é.</div>
+      <div><strong>“Exclusivo para médicos” no primeiro quadro.</strong>No Meta não dá para escolher médico como público. Quem separa é a própria peça, e todos os vídeos e artes abrem com isso escrito.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As três legendas</h2>
+    <p>Cada peça usa uma das três. É de propósito: com a legenda igual, o que muda entre os anúncios é só a arte ou o vídeo, e fica fácil ver qual peça vende.</p>
+    <div class="legendas">
+    <div class="legenda"><p class="code">Legenda A</p><h3>Tese</h3><pre>Doutor(a), botox seguro não é ponto decorado.
+
+Na Imersão Prática Botox com Segurança Médica, a Dra. Fernanda Fiori, dermatologista há 14 anos, mostra o raciocínio que vem antes da agulha: como avaliar a face em repouso, em movimento e durante a fala, como alinhar a expectativa do paciente e como decidir cada ponto em vez de copiar um mapa.
+
+Online e exclusiva para médicos.
+Toque em Saiba mais e garanta a sua vaga.</pre></div>
+    <div class="legenda"><p class="code">Legenda B</p><h3>Medo e insegurança</h3><pre>Você aplica e fica esperando o telefone tocar?
+
+O médico seguro não é o que acredita que nada vai dar errado. É o que sabe prevenir, reconhecer e conduzir. Na Imersão Prática Botox com Segurança Médica, a Dra. Fernanda Fiori mostra o processo de avaliação que tira a toxina do improviso.
+
+Online e exclusiva para médicos.
+Toque em Saiba mais e garanta a sua vaga.</pre></div>
+    <div class="legenda"><p class="code">Legenda C</p><h3>Conteúdo para salvar</h3><pre>Salve para revisar antes do próximo paciente.
+
+Isso é um pedaço do que a Dra. Fernanda Fiori, dermatologista há 14 anos, ensina na Imersão Prática Botox com Segurança Médica: o raciocínio que vem antes do ponto.
+
+Online e exclusiva para médicos.
+Toque em Saiba mais e garanta a sua vaga.</pre></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>10 estáticos</h2>
+    <p>A prévia mostra a ideia de composição com as fotos da Dra. O designer faz a arte final nas cores da marca.</p>
+  </section>
+
+  <article class="peca" id="E01">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_18.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Botox seguro não é ponto decorado.</p><p class="art-a">É raciocínio. Segurança não começa na agulha: começa na sua decisão.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E01</p>
+      <h3>Botox seguro não é ponto decorado</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Botox seguro não é ponto decorado.</dd>
+        <dt>Texto de apoio</dt><dd>É raciocínio. Segurança não começa na agulha: começa na sua decisão.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> É a tese da Imersão numa frase só. No mercado, a peça que funciona desse jeito é a frase-tese do MedCof Derma (“Resultado natural em injetáveis não é sorte. É planejamento anatômico.”).</p>
+    </div>
+  </article>
+  <article class="peca" id="E02">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">O paciente já é seu.</p><p class="art-a">Ele pede botox, você trava e encaminha. Quantos você já deixou ir por insegurança?</p></div>
+          <div class="art-img" style="background-image:url('img/ff_41.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E02</p>
+      <h3>O paciente já é seu</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">O paciente já é seu.</dd>
+        <dt>Texto de apoio</dt><dd>Ele pede botox, você trava e encaminha. Quantos você já deixou ir por insegurança?</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> É o ângulo que mais trouxe inscrição para a Imersão até hoje, agora com a frase exata que a Dra. usou ao vivo. Conversa com o “O caso que você ainda não aceita”, do MedCof.</p>
+    </div>
+  </article>
+  <article class="peca" id="E03">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_17.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Você aplica e reza para o telefone não tocar?</p><p class="art-a">O médico seguro não é o que acredita que nada vai dar errado. É o que sabe prevenir, reconhecer e conduzir.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E03</p>
+      <h3>O telefone que toca</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Você aplica e reza para o telefone não tocar?</dd>
+        <dt>Texto de apoio</dt><dd>O médico seguro não é o que acredita que nada vai dar errado. É o que sabe prevenir, reconhecer e conduzir.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda B</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Dá nome ao medo com as palavras do médico, como a Facial Academy faz (“Receio de entregar um lábio artificial demais?”). A foto dela olhando o celular conta a história sem precisar de mais texto.</p>
+    </div>
+  </article>
+  <article class="peca" id="E04">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">Não é falta de mão.</p><p class="art-a">Para uma seringa de toxina, mão não é o que decide. O que decide é saber por que o ponto está ali.</p></div>
+          <div class="art-img" style="background-image:url('img/ff_38.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E04</p>
+      <h3>Não é falta de mão</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Não é falta de mão.</dd>
+        <dt>Texto de apoio</dt><dd>Para uma seringa de toxina, mão não é o que decide. O que decide é saber por que o ponto está ali.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda B</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Derruba a crença que mais trava quem está começando. A Odonto Partners abre o curso de entrada pelo mesmo caminho (“não precisa ser sinônimo de insegurança”).</p>
+    </div>
+  </article>
+  <article class="peca" id="E05">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_03.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Naturalidade não é usar pouco.</p><p class="art-a">Usar pouco só tem uma certeza: vai durar pouco. E meia unidade no lugar errado pode ser catastrófica.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E05</p>
+      <h3>Naturalidade não é usar pouco</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Naturalidade não é usar pouco.</dd>
+        <dt>Texto de apoio</dt><dd>Usar pouco só tem uma certeza: vai durar pouco. E meia unidade no lugar errado pode ser catastrófica.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Contraria o que o médico iniciante acredita, e é isso que para a rolagem. É o gancho de erro, como a abertura “Erro comum no botox do canto dos olhos”, da Marina Carvalho.</p>
+    </div>
+  </article>
+  <article class="peca" id="E06">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_13.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Os 7 erros que deixam a toxina imprevisível</p><p class="art-a">Salve para revisar antes do próximo paciente.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica · arraste →</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E06</p>
+      <h3>Os 7 erros (carrossel)</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Os 7 erros que deixam a toxina imprevisível</dd>
+        <dt>Texto de apoio</dt><dd>Salve para revisar antes do próximo paciente.</dd>
+        <dt>Formato</dt><dd>Carrossel 4:5 (feed) · capa também em 9:16</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl><div class="slides"><h4>Cards seguintes</h4><ol><li>Sair marcando sem investigar a queixa.</li><li>Avaliar só na contração máxima.</li><li>Ignorar a face em repouso e durante a fala.</li><li>Tratar uma região como se fosse isolada.</li><li>Tratar marcas diferentes como se fossem equivalentes.</li><li>Aplicar sem alinhar a expectativa do paciente.</li><li>Não documentar o antes.</li><li>Último card: “Na Imersão Prática, a Dra. Fernanda mostra como evitar cada um.” + Saiba mais.</li></ol></div>
+      <p class="porque"><strong>Por que esta peça:</strong> Aula de verdade dentro do anúncio: é o formato que fica mais tempo no ar no mercado (o vídeo de anatomia da Facial Academy está há 524 dias; o mapa dos músculos da Embella, há 346).</p>
+    </div>
+  </article>
+  <article class="peca" id="E07">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_09.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">Antes do ponto, cinco letras: MIDAS</p><p class="art-a">O passo a passo da Dra. Fernanda Fiori.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica · arraste →</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E07</p>
+      <h3>MIDAS em 5 letras (carrossel)</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Antes do ponto, cinco letras: MIDAS</dd>
+        <dt>Texto de apoio</dt><dd>O passo a passo da Dra. Fernanda Fiori.</dd>
+        <dt>Formato</dt><dd>Carrossel 4:5 (feed) · capa também em 9:16</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl><div class="slides"><h4>Cards seguintes</h4><ol><li>M · Mapear a dinâmica muscular.</li><li>I · Interpretar a anatomia do que você está vendo.</li><li>D · Definir o desejo do paciente.</li><li>A · Atuar com exatidão, sem tiro no escuro.</li><li>S · Saber a profundidade exata.</li><li>Último card: “O ponto é consequência da avaliação.” + Saiba mais.</li></ol></div>
+      <p class="porque"><strong>Por que esta peça:</strong> Os grandes nomes vendem um método com nome (MD Codes, do Mauricio de Maio; Matemática da Beleza®, da Bravo Academy). A Dra. já tem o dela, e ele ainda não apareceu em nenhum anúncio.</p>
+    </div>
+  </article>
+  <article class="peca" id="E08">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">Mais um mapa não resolve.</p><p class="art-a">Se você já fez curso e continua inseguro, talvez não falte informação. Falta um processo de avaliação.</p></div>
+          <div class="art-img" style="background-image:url('img/ff_05.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E08</p>
+      <h3>Mais um mapa não resolve</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">Mais um mapa não resolve.</dd>
+        <dt>Texto de apoio</dt><dd>Se você já fez curso e continua inseguro, talvez não falte informação. Falta um processo de avaliação.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda B</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Fala com quem já comprou outro curso e se frustrou, o público mais quente que existe. Mesmo raciocínio do MedCof (“A diferença entre o médico que aplica e o que planeja”).</p>
+    </div>
+  </article>
+  <article class="peca" id="E09">
+    <div class="peca-art">
+        <div class="art full" style="background-image:url('img/ff_06.jpg')">
+          <span class="art-tag">Exclusivo para médicos</span>
+          <div class="art-text"><p class="art-t">14 anos de dermatologia. Nenhum ponto decorado.</p><p class="art-a">Formada pela UFG, com residência no Hospital das Clínicas da UFG. Na Imersão Prática, ela mostra o raciocínio que usa todos os dias no consultório.</p></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E09</p>
+      <h3>A professora na frente</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">14 anos de dermatologia. Nenhum ponto decorado.</dd>
+        <dt>Texto de apoio</dt><dd>Formada pela UFG, com residência no Hospital das Clínicas da UFG. Na Imersão Prática, ela mostra o raciocínio que usa todos os dias no consultório.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda A</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Nas marcas grandes, quem vende é o rosto de quem ensina (a Dra. Gabriela Piovesan, o Dr. Ziroldo na arte da Unifaz). Esta é a peça de autoridade da série.</p>
+    </div>
+  </article>
+  <article class="peca" id="E10">
+    <div class="peca-art">
+        <div class="art split">
+          <div class="art-top"><span class="art-tag dark">Exclusivo para médicos</span><p class="art-t">A sobrancelha não é referência para marcar toxina.</p><p class="art-a">Em paciente jovem, ela pode estar dentro da órbita. Nesse perfil, marcar pela sobrancelha aumenta o risco de complicação. A referência é o osso.</p></div>
+          <div class="art-img" style="background-image:url('img/ff_16.jpg')"></div>
+          <span class="art-foot">Imersão Prática · Botox com Segurança Médica</span>
+        </div>
+      <p class="mock">Prévia de referência para o designer, não é a arte final.</p>
+    </div>
+    <div class="peca-info">
+      <p class="code">E10</p>
+      <h3>A sobrancelha engana</h3>
+      <dl>
+        <dt>Título na arte</dt><dd class="big">A sobrancelha não é referência para marcar toxina.</dd>
+        <dt>Texto de apoio</dt><dd>Em paciente jovem, ela pode estar dentro da órbita. Nesse perfil, marcar pela sobrancelha aumenta o risco de complicação. A referência é o osso.</dd>
+        <dt>Formato</dt><dd>4:5 (feed) + 9:16 (stories e reels)</dd>
+        <dt>Legenda</dt><dd>Legenda C</dd>
+      </dl>
+      <p class="porque"><strong>Por que esta peça:</strong> Erro anatômico no título, como a Facial Academy faz (“Evite erro anatômico”). Use ilustração própria da órbita ou a foto da Dra.; não use foto de paciente.</p>
+    </div>
+  </article>
+
+  <section>
+    <h2>10 vídeos</h2>
+    <p>A coluna “O que falar” é a fala, palavra por palavra. Cada vídeo pode ser gravado em blocos separados.</p>
+  </section>
+
+  <article class="video" id="V01">
+    <div class="vhead"><p class="code">V01</p><h3>O paciente já é seu</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">50 a 60 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Médico que já atende e ainda encaminha o botox. É o ângulo que mais trouxe inscrição até hoje.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Consultório, sentada, olhando para a lente. Sem trilha no começo.</span></div>
+      <div><span class="k">Referência</span><span class="v">Thiago Pimenta: sentado, de jaleco, falando direto, sem arte.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“O paciente já está na sua cadeira. Ele já é seu.”</td><td class='s'>O PACIENTE JÁ É SEU · exclusivo para médicos</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“Aí ele fala que quer fazer botox… e você trava. Encaminha. E ele vai fazer com outro profissional.”</td><td class='s'>Plano fechado. Pausa curta depois de “você trava”.</td></tr><tr><td class='t'>18–35 s</td><td class='f'>“Eu sei o que é isso. Eu já olhei para o rosto do paciente e pensei: meu Deus, para onde eu vou? O que me tirou dali não foi decorar mais ponto. Foi ter um processo de avaliação.”</td><td class='s'>Legenda na tela, palavra por palavra.</td></tr><tr><td class='t'>35–50 s</td><td class='f'>“Na Imersão Prática eu mostro esse processo: como avaliar a face em repouso, em movimento e falando, e como decidir o ponto em vez de copiar.”</td><td class='s'>Pode cortar para foto dela atendendo.</td></tr><tr><td class='t'>50–58 s</td><td class='f'>“Se você é médico e quer parar de encaminhar o botox que já é seu, toque em Saiba mais e garanta sua vaga na próxima turma.”</td><td class='s'>IMERSÃO PRÁTICA · online · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V02">
+    <div class="vhead"><p class="code">V02</p><h3>A médica que eu tinha vergonha de ser</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">60 a 75 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Público quente (quem já viu a Dra. ou já esteve numa Imersão). É a história mais forte da gravação e nunca foi usada.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, tom de confissão, mais baixo e mais lento. Pode ser gravado numa tomada só.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dra. Gabriela Piovesan: “No começo, qualquer resultado já é vitória…”, em tom de conversa.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–5 s</td><td class='f'>“Tem uma médica que eu fui e que hoje eu tenho vergonha de ter sido.”</td><td class='s'>Sem texto. Só o rosto.</td></tr><tr><td class='t'>5–25 s</td><td class='f'>“Eu tirava a foto da paciente e falava: não repara, mas eu vou pôr o defeito em você. E listava tudo: a têmpora, o olho, a pálpebra. Eu não inventava defeito. Mas eu era uma metralhadora.”</td><td class='s'>“EU ERA UMA METRALHADORA”</td></tr><tr><td class='t'>25–42 s</td><td class='f'>“E sabe o que aconteceu? Eu fechava orçamento maior. Parecia que estava funcionando. Só que não tinha encantamento. Muita paciente nunca mais voltou.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>42–55 s</td><td class='f'>“Aquela médica não existe mais. Hoje eu primeiro entendo, depois explico. Técnica sem uma boa consulta não fideliza ninguém.”</td><td class='s'>“PRIMEIRO ENTENDA, DEPOIS EXPLIQUE”</td></tr><tr><td class='t'>55–65 s</td><td class='f'>“Não cometa os erros que eu cometi. Na Imersão Prática eu mostro a técnica e a consulta. É online e exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V03">
+    <div class="vhead"><p class="code">V03</p><h3>O telefone no fim de semana</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">50 a 60 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem já aplica e vive com medo de intercorrência.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Começa com o celular na mão dela, virado para a câmera. Depois, sentada, olhando para a lente.</span></div>
+      <div><span class="k">Referência</span><span class="v">João Pithon: a complicação vira conteúdo (“Sinais de alerta pós angioedema”, no ar há 203 dias).</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Quando eu comecei, se a minha secretária me ligasse no fim de semana, meu coração vinha parar na boca.”</td><td class='s'>Close no celular tocando → rosto dela.</td></tr><tr><td class='t'>4–20 s</td><td class='f'>“Eu fazia o botox e ficava rezando para ninguém ligar. Muito médico vive assim: faz, e reza para o mapa que decorou ser o que aquele paciente precisava.”</td><td class='s'>“VOCÊ APLICA E REZA?”</td></tr><tr><td class='t'>20–38 s</td><td class='f'>“O médico seguro não é aquele que acredita que nada vai dar errado. É o que previne o que dá para prevenir, reconhece cedo o que acontece e sabe conduzir.”</td><td class='s'>Três palavras aparecendo: PREVENIR · RECONHECER · CONDUZIR</td></tr><tr><td class='t'>38–50 s</td><td class='f'>“Segurança não começa na agulha. Começa na sua decisão. E quando você não sabe por que escolheu aquela dose, qualquer número é uma aposta.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>50–58 s</td><td class='f'>“Na Imersão Prática eu mostro esse raciocínio. Online, exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V04">
+    <div class="vhead"><p class="code">V04</p><h3>Não é a sua mão</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem ainda não aplica e acha que não tem jeito.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Primeira parte falando para a câmera; segunda parte mostrando o apoio da mão em manequim ou nela mesma. Sem paciente.</span></div>
+      <div><span class="k">Referência</span><span class="v">Julliano Setti: técnica mostrada em manequim (“mostro em manequim uma técnica segura e prática”).</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Você acha que é inseguro com botox porque falta mão?”</td><td class='s'>NÃO É A SUA MÃO</td></tr><tr><td class='t'>4–18 s</td><td class='f'>“Muita gente acha que falta prática. Pior: acha que falta mão. Mas para pegar uma seringa desse tamanho, com uma agulha desse tamanho, mão não é o que decide.”</td><td class='s'>Ela mostra a seringa para a câmera.</td></tr><tr><td class='t'>18–35 s</td><td class='f'>“Quem está começando treme, e tudo bem. Eu estou sempre fazendo um tripezinho com o dedo ou com a mão. Apoia, aplica, inclina.”</td><td class='s'>Close na mão apoiada. Texto: APOIA · APLICA · INCLINA</td></tr><tr><td class='t'>35–47 s</td><td class='f'>“O que decide é saber por que aquele ponto está ali. Sem isso, você aplica e torce.”</td><td class='s'>Volta para o rosto dela.</td></tr><tr><td class='t'>47–55 s</td><td class='f'>“É isso que eu ensino na Imersão Prática, exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V05">
+    <div class="vhead"><p class="code">V05</p><h3>Naturalidade não é usar pouco</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">30 a 40 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Todo médico que aplica “fraquinho” achando que é mais seguro.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Em pé, plano médio, ritmo rápido. Texto grande na tela o tempo todo.</span></div>
+      <div><span class="k">Referência</span><span class="v">Marina Carvalho: gancho de erro escrito sobre o vídeo (“Erro comum no botox do canto dos olhos”).</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–3 s</td><td class='f'>“Usar pouco não deixa o botox mais natural.”</td><td class='s'>USAR POUCO NÃO É NATURAL</td></tr><tr><td class='t'>3–15 s</td><td class='f'>“Usar pouco só tem uma certeza: vai durar pouco. E meia unidade no lugar errado pode ser catastrófica.”</td><td class='s'>“MEIA UNIDADE NO LUGAR ERRADO”</td></tr><tr><td class='t'>15–30 s</td><td class='f'>“O que deixa natural é modular o músculo, não fazer ele parar. Musculatura diferente, conduta diferente.”</td><td class='s'>MODULAR ≠ PARALISAR</td></tr><tr><td class='t'>30–38 s</td><td class='f'>“Quer entender como decidir isso em cada paciente? Imersão Prática, exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+  <article class="video" id="V06">
+    <div class="vhead"><p class="code">V06</p><h3>O teste da caneta</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Conteúdo técnico que se salva. Bom para quem ainda não conhece a Dra.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Demonstração nela mesma, como na Imersão, ou com alguém da equipe que autorize a imagem.</span></div>
+      <div><span class="k">Referência</span><span class="v">Facial Academy: aula curta de anatomia como anúncio (no ar há 524 dias).</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Antes de aplicar no frontal, faz esse teste. Leva cinco segundos.”</td><td class='s'>O TESTE DA CANETA · antes do frontal</td></tr><tr><td class='t'>4–22 s</td><td class='f'>“Paciente de olhos fechados. Eu coloco uma caneta na linha da sobrancelha e peço: abre os olhos. Se a sobrancelha sobe para abrir o olho, é sinal vermelho.”</td><td class='s'>Passo 1, 2 e 3 na tela, conforme ela faz.</td></tr><tr><td class='t'>22–38 s</td><td class='f'>“Essa paciente usa o frontal para compensar. Se você tira essa força, ela vai sentir um peso enorme na pálpebra, como se não conseguisse abrir os olhos direito.”</td><td class='s'>SINAL VERMELHO</td></tr><tr><td class='t'>38–48 s</td><td class='f'>“É para aquele caso em que você não tem certeza. Esse é o tipo de raciocínio, antes do ponto, que eu mostro na Imersão Prática.”</td><td class='s'>Volta para o rosto dela.</td></tr><tr><td class='t'>48–55 s</td><td class='f'>“Salva esse vídeo. E se você é médico, toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V07">
+    <div class="vhead"><p class="code">V07</p><h3>A ruga corta a seta</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">45 a 55 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Conteúdo técnico com cara de aula. Mostra o jeito de pensar da Dra.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Desenhando num tablet ou num quadro, com a voz dela por cima e o rosto aparecendo no começo e no fim.</span></div>
+      <div><span class="k">Referência</span><span class="v">Dra. Gabriela Piovesan: explica a técnica desenhando no tablet por cima da foto.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Essa ruga é de músculo ou é de travesseiro? Tem um jeito simples de saber.”</td><td class='s'>A RUGA CORTA A SETA</td></tr><tr><td class='t'>4–25 s</td><td class='f'>“Todo músculo tem uma direção de movimento. Desenha a seta desse movimento. A ruga que ele forma corta essa seta. O frontal sobe: a ruga da testa é horizontal. O corrugador puxa para o centro: a ruga é vertical.”</td><td class='s'>Desenho das setas e das rugas, sem foto de paciente.</td></tr><tr><td class='t'>25–40 s</td><td class='f'>“Se a ruga não corta a seta de nenhum músculo daquela região, ela é ruga de travesseiro. E toxina sozinha não resolve.”</td><td class='s'>SLEEP LINE: SÓ TOXINA NÃO RESOLVE</td></tr><tr><td class='t'>40–48 s</td><td class='f'>“Nem toda ruga é indicação. Saber explicar isso na consulta também é segurança.”</td><td class='s'>Rosto dela.</td></tr><tr><td class='t'>48–55 s</td><td class='f'>“Na Imersão Prática eu mostro a avaliação completa. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V08">
+    <div class="vhead"><p class="code">V08</p><h3>Já fez curso e continua inseguro?</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">50 a 60 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem já comprou outro curso de toxina e ainda trava.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Sentada, olhando para a lente, tom de quem conversa com um colega.</span></div>
+      <div><span class="k">Referência</span><span class="v">MedCof Derma: “A diferença entre o médico que aplica e o que planeja.”</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Você já fez curso de botox e continua inseguro?”</td><td class='s'>JÁ FEZ CURSO E CONTINUA INSEGURO?</td></tr><tr><td class='t'>4–20 s</td><td class='f'>“Tem médico que já fez um monte de curso e está fazendo outro. Por quê? Porque continua inseguro. Já anotou dose, já salvou mapa, já viu aula. E na frente do paciente, não funciona.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>20–35 s</td><td class='f'>“Talvez não te falte informação. Você pode ter mil mapas decorados na cabeça. O que falta é organização: um processo de investigação.”</td><td class='s'>“MIL MAPAS DECORADOS NA CABEÇA”</td></tr><tr><td class='t'>35–48 s</td><td class='f'>“Eu posso padronizar o processo de avaliação. O que eu não posso padronizar são as pessoas. É com esse processo que você personaliza cada paciente.”</td><td class='s'>PADRONIZA O PROCESSO · PERSONALIZA O PACIENTE</td></tr><tr><td class='t'>48–56 s</td><td class='f'>“Na Imersão Prática eu mostro esse processo desde o começo. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda B</p>
+  </article>
+  <article class="video" id="V09">
+    <div class="vhead"><p class="code">V09</p><h3>MIDAS em 60 segundos</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">50 a 60 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Apresenta o método com nome. Serve para a Imersão hoje e para o Método Botox de Midas depois.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Em pé, com cada letra aparecendo grande ao lado dela. Pode cortar para fotos dela atendendo.</span></div>
+      <div><span class="k">Referência</span><span class="v">Mauricio de Maio (MD Codes) e Bravo Academy (Matemática da Beleza®): o método tem nome e aparece em toda peça.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–4 s</td><td class='f'>“Antes de qualquer ponto de botox, eu passo por cinco letras.”</td><td class='s'>MIDAS</td></tr><tr><td class='t'>4–40 s</td><td class='f'>“M: mapear a dinâmica muscular. I: interpretar o que você está vendo, a anatomia. D: definir o desejo do paciente. A: atuar com exatidão, no músculo que você quer, sem tiro no escuro. S: saber a profundidade exata.”</td><td class='s'>Uma letra por vez, grande, com a palavra embaixo.</td></tr><tr><td class='t'>40–50 s</td><td class='f'>“O ponto é só uma consequência da avaliação. É por isso que eu não ensino mapa. Eu ensino esse passo a passo.”</td><td class='s'>O PONTO É CONSEQUÊNCIA</td></tr><tr><td class='t'>50–58 s</td><td class='f'>“Na Imersão Prática eu mostro o MIDAS na prática. Exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda C</p>
+  </article>
+  <article class="video" id="V10">
+    <div class="vhead"><p class="code">V10</p><h3>Eu comecei atendendo convênio</h3></div>
+    <div class="vmeta">
+      <div><span class="k">Duração</span><span class="v">50 a 60 segundos</span></div>
+      <div><span class="k">Para quem</span><span class="v">Quem ainda está no plantão ou no convênio e quer começar na estética.</span></div>
+      <div><span class="k">Como gravar</span><span class="v">Abre com ela no consultório de hoje; fotos dela atendendo no meio.</span></div>
+      <div><span class="k">Referência</span><span class="v">Unifaz e Dra. Gabriela Piovesan: quem ensina aparece na frente e conta de onde veio.</span></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead>
+      <tbody><tr><td class='t'>0–5 s</td><td class='f'>“Quando aparecia um botox no meu consultório, eu soltava fogos de artifício.”</td><td class='s'>EU COMECEI ATENDENDO CONVÊNIO</td></tr><tr><td class='t'>5–22 s</td><td class='f'>“Eu comecei num consultório pequeno, numa cidade vizinha de Goiânia, atendendo basicamente convênio e pouquíssima estética. Eu sou um pouco como você: queria aplicar toxina com segurança, entregar resultado natural e ser reconhecida pelo meu trabalho.”</td><td class='s'>Legenda na tela.</td></tr><tr><td class='t'>22–38 s</td><td class='f'>“Foram 14 anos de dermatologia, muito estudo, congresso e treinamento fora do Brasil. E a toxina foi a minha porta de entrada.”</td><td class='s'>Fotos dela atendendo.</td></tr><tr><td class='t'>38–50 s</td><td class='f'>“Se a Fernanda de dez anos atrás soubesse o que eu sei hoje, o caminho teria sido muito mais curto. É isso que eu quero fazer por você: encurtar essa curva.”</td><td class='s'>“ENCURTAR ESSA CURVA”</td></tr><tr><td class='t'>50–58 s</td><td class='f'>“A Imersão Prática é online e exclusiva para médicos. Toque em Saiba mais.”</td><td class='s'>IMERSÃO PRÁTICA · exclusiva para médicos</td></tr></tbody>
+    </table></div>
+    <p class="leg">Legenda A</p>
+  </article>
+
+  <section class="narrow">
+    <div class="callout">
+      <h3>O que não entra nas peças</h3>
+      <p>A Dra. assina como médica, então os anúncios seguem a régua da publicidade médica (Resolução CFM 2.336/2023), mesmo sendo para vender curso a outros médicos.</p>
+      <ul><li><strong>Promessa de dinheiro.</strong> Nada de “ganha o dobro”, “o preço de um plantão” ou “liberdade financeira”, mesmo sendo falas reais da Imersão.</li><li><strong>Garantia de que nada vai dar errado.</strong> Nada de “ninguém vai te ligar por complicação” ou “você fecha os olhos e marca”. A promessa é mais segurança e processo, não risco zero.</li><li><strong>Dose, diluição e marca de toxina.</strong> Ficam dentro do curso, nunca no anúncio.</li><li><strong>Imagem de paciente sem autorização por escrito</strong>, antes e depois de paciente e nome de pessoa famosa.</li><li><strong>Comparação com outras profissões</strong> (“o dentista do lado”, “o fisioterapeuta do lado”) e crítica à marcação de outro profissional.</li><li><strong>Pressa com data inventada.</strong> Data e condição só se forem as da turma que estiver aberta.</li></ul>
+    </div>
+  </section>
+
+  <section class="narrow">
+    <div class="check">
+      <h3>Para confirmar com a Dra. Fernanda antes de publicar</h3>
+      <ol><li>O tempo de carreira: na Imersão ela diz “dermatologista há 14 anos” e, mais adiante, “15 anos de profissão”. As peças usam 14.</li><li>A redação oficial do MIDAS. A letra A aparece como “aplicar de forma pontual” de manhã e “atuar com exatidão” à tarde. As peças usam a da tarde.</li><li>Se ela quer contar a história da “metralhadora” (V02) num anúncio.</li><li>O nome oficial, a data e o valor do ingresso da próxima turma, para a legenda e o último card.</li><li>Autorização da paciente na foto de atendimento usada no E04 e em qualquer demonstração com outra pessoa (V06).</li></ol>
+    </div>
+  </section>
+
+  <footer>Base: gravação da Imersão Prática de 29/08/2026 (manhã e tarde) e Biblioteca de Anúncios da Meta, consultada em 17 de setembro de 2026. &nbsp;·&nbsp; GGD Growth Digital</footer>
+</div>
+</body>
+</html>
