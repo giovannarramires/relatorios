@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Criativos Novos · Imersão Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;--warm:#A9662F;--warm-soft:#F5E9DE}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 20px 96px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+.narrow{max-width:760px}
+header.top{padding-top:64px;display:flex;flex-direction:column;gap:20px;max-width:800px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(36px,6vw,58px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:62ch}
+.metaline{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+section{display:flex;flex-direction:column;gap:22px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:30px;line-height:1.15;margin:0;text-wrap:balance}
+h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:24px;line-height:1.2;margin:0}
+p{margin:0;max-width:70ch}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.tres{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.tres div{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.tres h3{font-family:"Karla",sans-serif;font-size:17px;font-weight:700}
+.tres ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+.regras{background:var(--warm-soft);border-left:3px solid var(--warm);padding:22px 24px;border-radius:0 3px 3px 0}
+.regras ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.regras h3{font-family:"Karla",sans-serif;font-size:17px;font-weight:700;color:var(--warm)}
+.gal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.gal a{text-decoration:none;display:flex;flex-direction:column;gap:6px}
+.gal img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:3px;border:1px solid var(--line);display:block}
+.gal span{font-size:13px;color:var(--muted);line-height:1.3}
+.est{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:32px;border-top:2px solid var(--ink);padding-top:28px}
+.arte img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;display:block;box-shadow:0 1px 0 var(--line)}
+.info{display:flex;flex-direction:column;gap:14px;min-width:0}
+.cod{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.baixar{display:flex;flex-wrap:wrap;gap:8px 20px}
+.baixar a{color:var(--accent);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--accent)}
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0}
+.campos div{background:var(--surface);padding:10px 14px}
+.campos dt{font-size:12px;color:var(--muted)}
+.campos dd{margin:2px 0 0;font-weight:700;font-size:15px}
+.leg{background:var(--surface);border:1px solid var(--line);border-radius:3px}
+.leghead{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.leghead button{font:inherit;font-weight:700;color:var(--accent);background:var(--accent-soft);border:0;border-radius:2px;padding:4px 10px;cursor:pointer}
+.leg pre{margin:0;padding:14px;white-space:pre-wrap;font-family:"Karla",sans-serif;font-size:15.5px;line-height:1.55}
+.pq{font-size:15.5px;color:var(--muted)}
+.pq strong{color:var(--ink)}
+.conf{font-size:15px;background:var(--warm-soft);padding:8px 12px;border-radius:2px}
+.indice{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 28px;border-top:1px solid var(--line)}
+.indice a{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.indice .i{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent)}
+.indice .n{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap}
+.vid{border-top:2px solid var(--ink);padding-top:28px;display:flex;flex-direction:column;gap:16px}
+.vid header{display:flex;flex-direction:column;gap:6px}
+.meta{display:flex;gap:8px;flex-wrap:wrap}
+.meta span{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:2px}
+.cena{font-size:16px}
+.gancho{background:var(--ink);color:var(--bg);border-radius:4px;padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.gl{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.gt{font-size:15px;opacity:.85}
+.gf{font-family:"Fraunces",Georgia,serif;font-size:24px;line-height:1.25}
+.tabwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px}
+th{text-align:left;font-size:12px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line);padding:6px 10px}
+td{border-bottom:1px solid var(--line);padding:10px;vertical-align:top}
+td.t{font-family:"IBM Plex Mono",monospace;font-size:12.5px;white-space:nowrap;color:var(--accent)}
+td.c{color:var(--muted);font-size:14.5px;width:32%}
+.guia{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.guia div{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px;font-size:15.5px}
+.guia strong{display:block;margin-bottom:4px}
+.check{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+footer{border-top:1px solid var(--line);padding-top:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+@media (max-width:760px){
+  .est{grid-template-columns:1fr}
+  .arte img{max-width:420px}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Dr. Glauber Voltan · Imersão Prática</p>
+    <h1>10 estáticos e 10 vídeos para a Imersão Prática</h1>
+    <p class="dek">Peças novas para US de Nervos Periféricos, montadas a partir de três coisas: o que já vendeu (e o que não vendeu) na conta, o que os maiores cursos de exame para médicos mantêm no ar e o que o Dr. Glauber ensina, com as frases e os casos dele. Os estáticos estão prontos em 4:5 e 9:16. Os vídeos vêm com roteiro para gravar.</p>
+    <p class="metaline">17 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>O que guiou as peças</h2>
+    <div class="tres">
+      <div><h3>O que a conta já mostrou</h3><ul>
+        <li>O vídeo com ele falando para a câmera é o que mais vende: o V01_002 fez 30 compras desde maio e continua sendo o melhor de setembro.</li>
+        <li>Entre os estáticos, venceram o escuro com imagem de ultrassom (49 compras) e o claro com foto e frase de dor (“Chega de terminar o laudo pensando…”).</li>
+        <li>As peças com data e “últimos dias” gastaram R$ 470 e não venderam nada.</li>
+        <li>O mosaico 2×2 de ultrassom já está em 14 artes da Biblioteca de Casos Clínicos. As peças novas não usam.</li>
+      </ul></div>
+      <div><h3>O que o mercado mantém no ar</h3><ul>
+        <li>Caso clínico em forma de pergunta (Dra. Renata Teixeira, Cardiopapers, DeuLaudo).</li>
+        <li>Trecho curto de aula, sem data, que dura meses (Dra. Claudia Fontan, Nexus).</li>
+        <li>O laudo como assunto: 55 dos 386 anúncios lidos.</li>
+        <li>Frase grande sobre a foto do professor e a profissão chamada na primeira linha.</li>
+      </ul></div>
+      <div><h3>O que ele ensina</h3><ul>
+        <li>Frases literais da Imersão e das 70 aulas gravadas.</li>
+        <li>Casos dele sem dado de paciente: o nervo dentro da hérnia, o bloqueio no ramo errado, a epicondilite que era nervo.</li>
+        <li>O Método MARCAR, o critério de assimetria e as regras de bolso.</li>
+        <li>A história de origem, que nunca foi para anúncio.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="narrow">
+    <div class="regras">
+      <h3>Regras que valem para todas as peças</h3>
+      <ul>
+        <li><strong>Sem “ao vivo”, data, dia da semana, “ingresso” ou “vaga”</strong>, nem na arte nem no texto. Nos vídeos, isso também vale para a fala.</li>
+        <li><strong>Preço só na arte 10</strong> e na descrição (“100% online | De R$ 997 por R$ 97”). Se o preço da página mudar, só essa arte precisa ser refeita.</li>
+        <li><strong>Sem superlativo, percentual de acerto diagnóstico ou promessa de renda.</strong> A Resolução CFM 2.336/2023 veda, e o Meta reprova promessa financeira.</li>
+        <li><strong>Título e registro:</strong> as artes usam “Diagnóstico por imagem (CBR) · Doutorado FMRP-USP”, que é como ele se apresenta. Antes de subir, confirmar se entra o CRM (e o RQE) na peça.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Os 10 estáticos</h2>
+    <p>Cada peça tem arte 4:5 para o feed e 9:16 para stories e reels, com o texto dentro da área segura. A numeração segue a da conta: de IMG01_116 a IMG01_125 estão livres.</p>
+    <div class="gal"><a href="#IMG01_116"><img src="img/IMG01_116_feed.jpg" alt="Pediram X. Era Y." loading="lazy"><span>Pediram X. Era Y.</span></a><a href="#IMG01_117"><img src="img/IMG01_117_feed.jpg" alt="Teste A × B" loading="lazy"><span>Teste A × B</span></a><a href="#IMG01_118"><img src="img/IMG01_118_feed.jpg" alt="Somos médicos" loading="lazy"><span>Somos médicos</span></a><a href="#IMG01_119"><img src="img/IMG01_119_feed.jpg" alt="Laudo invisível" loading="lazy"><span>Laudo invisível</span></a><a href="#IMG01_120"><img src="img/IMG01_120_feed.jpg" alt="Aparelho ruim" loading="lazy"><span>Aparelho ruim</span></a><a href="#IMG01_121"><img src="img/IMG01_121_feed.jpg" alt="Regra de bolso" loading="lazy"><span>Regra de bolso</span></a><a href="#IMG01_122"><img src="img/IMG01_122_feed.jpg" alt="Bloqueio certo" loading="lazy"><span>Bloqueio certo</span></a><a href="#IMG01_123"><img src="img/IMG01_123_feed.jpg" alt="Sempre esteve na tela" loading="lazy"><span>Sempre esteve na tela</span></a><a href="#IMG01_124"><img src="img/IMG01_124_feed.jpg" alt="Método MARCAR" loading="lazy"><span>Método MARCAR</span></a><a href="#IMG01_125"><img src="img/IMG01_125_feed.jpg" alt="Oferta direta" loading="lazy"><span>Oferta direta</span></a></div>
+  </section>
+
+    <article class="est" id="IMG01_116">
+      <a class="arte" href="img/IMG01_116_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_116_feed.jpg" alt="Arte IMG01_116: Pediram X. Era Y." loading="lazy"></a>
+      <div class="info">
+        <p class="cod">01 · GV_CAPTACAO_FEED_IMG01_116</p>
+        <h3>Pediram X. Era Y.</h3>
+        <p class="baixar"><a href="img/IMG01_116_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_116_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>O nervo que o pedido não citou</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Pediram ultrassom de partes moles por um nódulo doloroso no tornozelo.
+
+Na varredura, era uma hérnia muscular, e o nervo fibular superficial estava dentro dela.
+
+O pedido não falava de nervo. O raciocínio precisou falar.
+
+Na Imersão Prática, o Dr. Glauber Voltan mostra como sair do exame que só responde o pedido para a consulta que resolve o caso, do ajuste do aparelho ao laudo.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Caso clínico em forma de história é o formato que a Dra. Renata Teixeira, a DeuLaudo e a Cardiopapers mantêm no ar. O caso é dele (aula da Imersão, parte da tarde), sem dado de paciente.</p>
+        <p class="conf"><strong>Conferir antes de subir:</strong> Confirmar com o Glauber se pode citar o caso (é de aula, sem identificação).</p>
+      </div>
+    </article>
+    <article class="est" id="IMG01_117">
+      <a class="arte" href="img/IMG01_117_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_117_feed.jpg" alt="Arte IMG01_117: Teste A × B" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">02 · GV_CAPTACAO_FEED_IMG01_117</p>
+        <h3>Teste A × B</h3>
+        <p class="baixar"><a href="img/IMG01_117_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_117_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Qual está alterado: A ou B?</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Nervo A: 9 mm² de um lado e 9 mm² do outro.
+Nervo B: 8 mm² de um lado e 5 mm² do outro.
+
+Os dois cabem na tabela. O que merece atenção é o B: a diferença entre os lados passa de 2,5 mm². Assimetria pesa mais do que o número isolado.
+
+Olhar só o número engana. Na Imersão Prática você aprende a medir, comparar e raciocinar sem virar refém da tabela.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> É o formato “paciente A × paciente B” da Dra. Renata Teixeira (“Qual desses fetos tem restrição de crescimento?”) aplicado ao critério que o Glauber mais repete: assimetria acima de 2,5.</p>
+        <p class="conf"><strong>Conferir antes de subir:</strong> Conferir os valores (9/9 e 8/5 mm²) com o Glauber antes de subir.</p>
+      </div>
+    </article>
+    <article class="est" id="IMG01_118">
+      <a class="arte" href="img/IMG01_118_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_118_feed.jpg" alt="Arte IMG01_118: Somos médicos" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">03 · GV_CAPTACAO_FEED_IMG01_118</p>
+        <h3>Somos médicos</h3>
+        <p class="baixar"><a href="img/IMG01_118_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_118_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Do exame à consulta</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Nós não somos operadores de ultrassom. Somos médicos.”
+
+O exame de nervo começa antes do transdutor: na pergunta, na queixa, no território que dói. É isso que transforma um exame em consulta.
+
+Na Imersão Prática, o Dr. Glauber Voltan ensina o ultrassom de nervos periféricos como ferramenta de raciocínio clínico, do aparelho ao laudo.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Frase grande sobre a foto do professor é o padrão do Marcelo Farani (17 artes) e da CepExpert. A frase é literal da Imersão e é a tese central dele.</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_119">
+      <a class="arte" href="img/IMG01_119_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_119_feed.jpg" alt="Arte IMG01_119: Laudo invisível" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">04 · GV_CAPTACAO_FEED_IMG01_119</p>
+        <h3>Laudo invisível</h3>
+        <p class="baixar"><a href="img/IMG01_119_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_119_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>O laudo que trabalha por você</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Laudo bom não é laudo longo.
+
+É o que diz o que você viu, onde mediu, com o que comparou e o que isso muda para quem pediu. O laudo genérico some na pilha, e o nome de quem assina some junto.
+
+Na Imersão Prática, você vê como o Dr. Glauber Voltan estrutura o laudo de ultrassom de nervos periféricos.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> “O laudo como assunto” aparece em 55 dos 386 anúncios lidos (Fetalmed, Renata Teixeira, João Paulo Queiroz). A conta já mostrou que a dor do laudo vende: “Chega de terminar o laudo pensando…” teve CPA de R$ 170.</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_120">
+      <a class="arte" href="img/IMG01_120_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_120_feed.jpg" alt="Arte IMG01_120: Aparelho ruim" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">05 · GV_CAPTACAO_FEED_IMG01_120</p>
+        <h3>Aparelho ruim</h3>
+        <p class="baixar"><a href="img/IMG01_120_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_120_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Antes de trocar de aparelho</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Meu aparelho não é bom o suficiente para nervo.”
+
+Na maioria das vezes, o que falta é ajuste: foco, profundidade, frequência, ganho, preset. O Dr. Glauber começou com um aparelho simples e uma sonda de 3 a 10 MHz.
+
+Na Imersão Prática, o primeiro passo é configurar o aparelho que você já tem para enxergar nervo.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Derruba a objeção número um antes de ela aparecer, como a Vexus (“ainda trava na hora de pegar o aparelho”) e o Túlio Ravelli. A frase é literal do Glauber.</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_121">
+      <a class="arte" href="img/IMG01_121_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_121_feed.jpg" alt="Arte IMG01_121: Regra de bolso" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">06 · GV_CAPTACAO_FEED_IMG01_121</p>
+        <h3>Regra de bolso</h3>
+        <p class="baixar"><a href="img/IMG01_121_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_121_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Túnel do carpo ou hanseníase?</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Nervo mediano espessado. Onde o espessamento começa muda o raciocínio.
+
+Na prega do punho, pense em túnel do carpo. Dois a três dedos antes, pense em hanseníase.
+
+É uma das regras de bolso da Imersão Prática, sempre junto com a clínica: a tabela é o começo do raciocínio, não o fim da decisão.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Aula curta de túnel do carpo é o anúncio mais antigo da Dra. Claudia Fontan (323 dias no ar). Não tem data nem oferta, então não envelhece.</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_122">
+      <a class="arte" href="img/IMG01_122_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_122_feed.jpg" alt="Arte IMG01_122: Bloqueio certo" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">07 · GV_CAPTACAO_FEED_IMG01_122</p>
+        <h3>Bloqueio certo</h3>
+        <p class="baixar"><a href="img/IMG01_122_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_122_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>O nervo certo antes da agulha</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Bloqueio do tibial no túnel do tarso. Mas foi mesmo o tibial?
+
+Em alguns pacientes o tibial se divide antes do túnel. Quem não segue o nervo pelo landmark pode estar bloqueando o plantar medial.
+
+Para médico da dor, anestesista e ortopedista, enxergar o caminho do nervo muda o procedimento.
+
+Imersão Prática: ultrassom de nervos periféricos, do aparelho ao laudo.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Abre a Imersão para quem faz procedimento guiado, público de Ricardo Tunes, Leandro Dini e Cetrus. O caso é do curso prático do Glauber (bifurcação alta do tibial).</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_123">
+      <a class="arte" href="img/IMG01_123_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_123_feed.jpg" alt="Arte IMG01_123: Sempre esteve na tela" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">08 · GV_CAPTACAO_FEED_IMG01_123</p>
+        <h3>Sempre esteve na tela</h3>
+        <p class="baixar"><a href="img/IMG01_123_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_123_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Você já passou pelo tibial</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Se você já fez ultrassom de tornozelo e viu a artéria e as veias tibiais lado a lado, você já passou pelo nervo tibial.
+
+O nervo não aparece para quem procura no escuro. Aparece para quem conhece o caminho, e o caminho é o landmark.
+
+Na Imersão Prática, você aprende o landmark dos principais nervos periféricos.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Mesma lógica da Carevasc: imagem do exame com o nome da estrutura. E conversa com quem já faz ultrassom todo dia e ainda não olha nervo.</p>
+        
+      </div>
+    </article>
+    <article class="est" id="IMG01_124">
+      <a class="arte" href="img/IMG01_124_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_124_feed.jpg" alt="Arte IMG01_124: Método MARCAR" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">09 · GV_CAPTACAO_FEED_IMG01_124</p>
+        <h3>Método MARCAR</h3>
+        <p class="baixar"><a href="img/IMG01_124_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_124_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Método MARCAR em 6 passos</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Do aparelho ao laudo, em 6 passos: o Método MARCAR.
+
+M · Mentalidade médica
+A · Aparelho
+R · Referência anatômica
+C · Caminho do nervo
+A · Aferição
+R · Raciocínio
+
+É a sequência que o Dr. Glauber Voltan usa em ultrassom de nervos periféricos, e a espinha da Imersão Prática.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> Nome para o método é o que separa USPINE, Método POCUS e o RPP da Liberdade Médica do “mais um curso”. O MARCAR já existe e nunca foi para anúncio.</p>
+        <p class="conf"><strong>Conferir antes de subir:</strong> Na abertura da Imersão ele fala “cinco pilares”; o método tem 6 passos. Usar 6.</p>
+      </div>
+    </article>
+    <article class="est" id="IMG01_125">
+      <a class="arte" href="img/IMG01_125_feed.jpg" target="_blank" rel="noopener"><img src="img/IMG01_125_feed.jpg" alt="Arte IMG01_125: Oferta direta" loading="lazy"></a>
+      <div class="info">
+        <p class="cod">10 · GV_CAPTACAO_FEED_IMG01_125</p>
+        <h3>Oferta direta</h3>
+        <p class="baixar"><a href="img/IMG01_125_feed.jpg" target="_blank" rel="noopener">Arte 4:5 (feed) ↗</a> <a href="img/IMG01_125_story.jpg" target="_blank" rel="noopener">Arte 9:16 (stories e reels) ↗</a></p>
+        <dl class="campos">
+          <div><dt>Título</dt><dd>Imersão Prática · US de Nervos</dd></div>
+          <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+          <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+        </dl>
+        <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Imersão Prática: Dominando US de Nervos Periféricos.
+
+Para médicos que querem avaliar, medir e laudar nervos periféricos com mais segurança:
+✅ Configurar o aparelho para nervo
+✅ Achar cada nervo pelo landmark
+✅ Medir e comparar: assimetria e focalização
+✅ Raciocínio em caso real de hanseníase
+✅ Laudo que comunica valor
+
+100% online, com o Dr. Glauber Voltan.
+
+Toque em Saiba mais.</pre></div>
+        <p class="pq"><strong>Por que essa peça:</strong> A única com preço na arte, como as campeãs da conta (NEW_CANVA_LEO_07 e IMG01_086) e o minicurso da Dra. Renata. Sem “ingresso”, “vaga” ou data. É a peça de fechamento para quem já viu as outras.</p>
+        <p class="conf"><strong>Conferir antes de subir:</strong> Se o preço da página mudar, esta arte precisa ser refeita.</p>
+      </div>
+    </article>
+
+  <section>
+    <h2>Os 10 vídeos para gravar</h2>
+    <p>Roteiros de 25 a 75 segundos, na vertical. A maioria é ele falando para a câmera, que é o formato que mais vende na conta; alguns pedem imagem do aparelho como apoio.</p>
+    <div class="guia">
+      <div><strong>Onde e como gravar</strong>Na clínica, com o aparelho ao fundo, como o lote de agosto. Câmera na altura dos olhos, na vertical. Pode ser celular.</div>
+      <div><strong>Os 3 primeiros segundos</strong>Começar direto pela frase do gancho, sem “oi, pessoal”. Gravar o gancho duas vezes, com leituras diferentes, para testar.</div>
+      <div><strong>O que não pode aparecer</strong>Data, dia da semana, “ao vivo”, “ingresso”, “vaga”, preço falado, rosto ou laudo de paciente, nome de colega.</div>
+      <div><strong>Na edição</strong>Legenda queimada grande em todo o vídeo e o texto do gancho no primeiro segundo. Numerar de V01_094 a V01_103.</div>
+    </div>
+    <ol class="indice"><li><a href="#V01_094"><span class="i">01</span>Pediram X. Era Y. (tornozelo)<span class="n">40–45 s</span></a></li><li><a href="#V01_095"><span class="i">02</span>A epicondilite que não era<span class="n">35–40 s</span></a></li><li><a href="#V01_096"><span class="i">03</span>Comecei como paciente (origem)<span class="n">60–75 s</span></a></li><li><a href="#V01_097"><span class="i">04</span>Caixinha: qual aparelho eu compro?<span class="n">30 s</span></a></li><li><a href="#V01_098"><span class="i">05</span>Quem mede é o vídeo<span class="n">35 s</span></a></li><li><a href="#V01_099"><span class="i">06</span>Teste A × B<span class="n">30 s</span></a></li><li><a href="#V01_100"><span class="i">07</span>Respondi a pergunta, mas não resolvi o caso<span class="n">45–50 s</span></a></li><li><a href="#V01_101"><span class="i">08</span>Somos médicos<span class="n">25–30 s</span></a></li><li><a href="#V01_102"><span class="i">09</span>Tem nervo na sua tela<span class="n">40 s</span></a></li><li><a href="#V01_103"><span class="i">10</span>Não tenho demanda<span class="n">35–40 s</span></a></li></ol>
+  </section>
+
+    <article class="vid" id="V01_094">
+      <header>
+        <p class="cod">01 · GV_CAPTACAO_REELS_V01_094</p>
+        <h3>Pediram X. Era Y. (tornozelo)</h3>
+        <p class="meta"><span>40–45 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Sentado ao lado do aparelho, olhando para a câmera. B-roll de varredura no tornozelo.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>PEDIRAM: nódulo no tornozelo</strong></p><p class="gf">“Me pediram um ultrassom de um nódulo no tornozelo.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–15 s</td><td>“Nódulo doloroso, pedido de partes moles. Eu podia medir o nódulo, descrever e passar para o próximo exame.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>15–30 s</td><td>“Mas na varredura era uma hérnia muscular. E dentro dela estava o nervo fibular superficial.”</td><td class='c'>B-roll: transdutor no tornozelo e tela. Texto: ERA: hérnia com o nervo dentro</td></tr><tr><td class='t'>30–40 s</td><td>“O pedido não falava de nervo. Quem conhece o caminho do nervo enxerga o que o pedido não pediu.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>40–45 s</td><td>“É isso que eu ensino na Imersão Prática. Toca em saiba mais.”</td><td class='c'>Texto: Imersão Prática · US de Nervos Periféricos</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>O nervo que o pedido não citou</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Pediram ultrassom de um nódulo no tornozelo. Era uma hérnia com o nervo fibular superficial dentro. O pedido não falava de nervo; o raciocínio precisou falar. Imersão Prática: ultrassom de nervos periféricos, do aparelho ao laudo.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Série “Pediram X, era Y”: caso como pergunta é o formato da Dra. Renata Teixeira e da Cardiopapers. A conta vende melhor com ele falando para a câmera (V01_002 é o campeão de setembro).</p>
+      <p class="conf"><strong>Cuidado:</strong> Não mostrar imagem nem laudo do paciente real. B-roll ilustrativo, em voluntário.</p>
+    </article>
+    <article class="vid" id="V01_095">
+      <header>
+        <p class="cod">02 · GV_CAPTACAO_REELS_V01_095</p>
+        <h3>A epicondilite que não era</h3>
+        <p class="meta"><span>35–40 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Em pé ao lado do aparelho, com a imagem do cotovelo na tela.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>“EPICONDILITE”?</strong></p><p class="gf">“Chegou com laudo de epicondilite lateral. Não era.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–15 s</td><td>“No ultrassom, o tendão estava lá. Mas o ramo cutâneo lateral do antebraço, do lado, estava alterado, com sinal inflamatório no Doppler.”</td><td class='c'>Ele aponta a tela</td></tr><tr><td class='t'>15–28 s</td><td>“Em região onde a hanseníase é comum, eu uso uma regra: ite com ite, mais neuropatia. Inflamou perto do nervo? Olha o nervo.”</td><td class='c'>Texto: ITE + ITE = PENSE EM NEUROPATIA</td></tr><tr><td class='t'>28–35 s</td><td>“Olhar o nervo ao lado do tendão muda o diagnóstico e muda a conduta.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>35–40 s</td><td>“Eu mostro esse raciocínio na Imersão Prática. Toca em saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Não era epicondilite</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Chegou com laudo de epicondilite lateral. O nervo do lado contava outra história. Na Imersão Prática, o Dr. Glauber Voltan ensina a olhar o nervo que está ao lado do tendão.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Mesmo formato de caso curto que dura no ar nos concorrentes; regra de bolso fácil de lembrar e de compartilhar.</p>
+      <p class="conf"><strong>Cuidado:</strong> Não citar a paciente nem de quem é o caso. Sem imagem de lesão de pele.</p>
+    </article>
+    <article class="vid" id="V01_096">
+      <header>
+        <p class="cod">03 · GV_CAPTACAO_REELS_V01_096</p>
+        <h3>Comecei como paciente (origem)</h3>
+        <p class="meta"><span>60–75 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Sentado, fundo da clínica, fala calma e direta. Pode intercalar com fotos antigas de congresso, se houver.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>COMECEI COMO PACIENTE</strong></p><p class="gf">“Eu comecei no ultrassom de nervos como paciente.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–20 s</td><td>“Anos investigando uma dor: plexopatia, atrofia da mão direita. O transdutor começou a cair da minha mão.”</td><td class='c'>Ele falando, plano fechado</td></tr><tr><td class='t'>20–35 s</td><td>“Fui procurar curso de ultrassom de nervos no Brasil. Zero. Achei um congresso mundial de ultrassom neuromuscular fora do país e fui.”</td><td class='c'>Texto: CURSO NO BRASIL: ZERO</td></tr><tr><td class='t'>35–55 s</td><td>“Comecei com um aparelho simples. Fiz doutorado na Faculdade de Medicina de Ribeirão Preto. Hoje são mais de 2.200 exames de nervo.”</td><td class='c'>B-roll: ele no aparelho</td></tr><tr><td class='t'>55–70 s</td><td>“Eu levei mais de 10 anos para organizar esse caminho. Você não precisa. Coloquei o método na Imersão Prática.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>70–75 s</td><td>“Toca em saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Como tudo começou</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>O Dr. Glauber Voltan começou no ultrassom de nervos como paciente, e não encontrou quem ensinasse no Brasil. Mais de 2.200 exames depois, o caminho está organizado na Imersão Prática.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> O vídeo de 74 s (V01_030) é o segundo campeão histórico da conta; história de origem é o ângulo que nunca rodou. Referência: Luís Felipe Lisbôa (“como mudou a minha”).</p>
+      <p class="conf"><strong>Cuidado:</strong> Usar “mais de 2.200 exames” (número mais documentado). Não datar congresso nem doutorado. Não dizer “pioneiro” nem “único”.</p>
+    </article>
+    <article class="vid" id="V01_097">
+      <header>
+        <p class="cod">04 · GV_CAPTACAO_REELS_V01_097</p>
+        <h3>Caixinha: qual aparelho eu compro?</h3>
+        <p class="meta"><span>30 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Formato caixinha de perguntas: pergunta na tela, ele responde para a câmera. Pode ser gravado no celular.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>“Qual aparelho eu preciso pra começar no nervo?”</strong></p><p class="gf">“Essa é a pergunta que eu mais recebo.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–10 s</td><td>“Começa com o que você tem. Eu comecei com um aparelho simples e uma sonda de 3 a 10.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>10–22 s</td><td>“Não tem aparelho ruim. É a mão esquerda que não está funcionando: foco, profundidade, ganho, preset.”</td><td class='c'>B-roll: mão no painel do aparelho</td></tr><tr><td class='t'>22–27 s</td><td>“Máquina top, na mão de quem não tem método, só entrega imagem.”</td><td class='c'>Texto: MÉTODO &gt; MÁQUINA</td></tr><tr><td class='t'>27–30 s</td><td>“Na Imersão Prática, o primeiro passo é configurar o seu aparelho. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Qual aparelho para começar?</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Qual aparelho eu preciso para começar no nervo?” Comece com o que você tem. Na Imersão Prática, o primeiro passo é configurar o aparelho que já está na sua sala.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Caixinha de perguntas é como o João Paulo Queiroz (153 anúncios) e a DeuLaudo gravam barato e em volume. Responde a objeção que mais trava a compra.</p>
+      <p class="conf"><strong>Cuidado:</strong> Não citar marca de aparelho como recomendação.</p>
+    </article>
+    <article class="vid" id="V01_098">
+      <header>
+        <p class="cod">05 · GV_CAPTACAO_REELS_V01_098</p>
+        <h3>Quem mede é o vídeo</h3>
+        <p class="meta"><span>35 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> No aparelho, com a varredura acontecendo na tela.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>VOCÊ CONGELA E MEDE?</strong></p><p class="gf">“Você congela a primeira imagem bonita e mede o nervo? Esse é o erro.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–14 s</td><td>“O nervo muda ao longo do caminho. Se você congela cedo, mede o ponto errado.”</td><td class='c'>Tela: varredura</td></tr><tr><td class='t'>14–26 s</td><td>“Faz a varredura, grava, volta o vídeo, acha o melhor ponto e aí mede. Dentro do epineuro, sem apertar o transdutor.”</td><td class='c'>Mão no transdutor, sem pressão. Texto: DENTRO DO EPINEURO</td></tr><tr><td class='t'>26–31 s</td><td>“Quem mede é o vídeo. A imagem estática só confirma.”</td><td class='c'>Ele para a câmera</td></tr><tr><td class='t'>31–35 s</td><td>“Isso é o A do Método MARCAR, na Imersão Prática. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Quem mede é o vídeo</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Quem mede é o vídeo, não a foto. Na Imersão Prática, o Dr. Glauber Voltan mostra onde e como medir o nervo sem errar o ponto.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Correção de técnica em trecho de aula é o anúncio da Nexus que está no ar há 124 dias. “Erro comum” prende quem já faz ultrassom.</p>
+      
+    </article>
+    <article class="vid" id="V01_099">
+      <header>
+        <p class="cod">06 · GV_CAPTACAO_REELS_V01_099</p>
+        <h3>Teste A × B</h3>
+        <p class="meta"><span>30 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Ele para a câmera; os valores aparecem na tela como gráfico. Pausa de 2 s antes da resposta.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>QUAL ESTÁ ALTERADO?</strong></p><p class="gf">“Dois nervos medianos. Me diz qual está alterado.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–10 s</td><td>“A: nove de um lado, nove do outro. B: oito de um lado, cinco do outro.”</td><td class='c'>Gráfico A e B</td></tr><tr><td class='t'>10–12 s</td><td>“(pausa)”</td><td class='c'>Texto: PENSA AÍ</td></tr><tr><td class='t'>12–24 s</td><td>“Se você foi no maior número, errou. É o B. A diferença entre os lados passa de 2,5. Assimetria pesa mais que o número sozinho.”</td><td class='c'>Destaque no B</td></tr><tr><td class='t'>24–30 s</td><td>“Tabela é o começo do raciocínio, não o fim. Imersão Prática, saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>A ou B?</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Nervo A: 9 e 9 mm². Nervo B: 8 e 5 mm². Qual está alterado? A resposta está na diferença entre os lados, não no maior número. Imersão Prática: ultrassom de nervos periféricos.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Versão em vídeo do estático IMG01_117: quiz A × B da Dra. Renata Teixeira. Mesma legenda, dois formatos.</p>
+      <p class="conf"><strong>Cuidado:</strong> Conferir os valores com o Glauber.</p>
+    </article>
+    <article class="vid" id="V01_100">
+      <header>
+        <p class="cod">07 · GV_CAPTACAO_REELS_V01_100</p>
+        <h3>Respondi a pergunta, mas não resolvi o caso</h3>
+        <p class="meta"><span>45–50 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Sentado, fala direta. B-roll de joelho e fossa poplítea.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>RESPONDI A PERGUNTA. NÃO RESOLVI O CASO.</strong></p><p class="gf">“Eu respondi a pergunta. Mas não resolvi o caso.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–15 s</td><td>“Pediram para avaliar os nervos geniculares. Estavam normais. Era só escrever “geniculares normais” e pronto.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>15–32 s</td><td>“Só que a dor do paciente não cabia nisso. Continuei a varredura e encontrei o que explicava a dor, longe do que foi pedido.”</td><td class='c'>B-roll: varredura</td></tr><tr><td class='t'>32–42 s</td><td>“Laudo bom não é laudo longo. É o que responde quem vai decidir.”</td><td class='c'>Texto: LAUDO BOM ≠ LAUDO LONGO</td></tr><tr><td class='t'>42–50 s</td><td>“Na Imersão Prática eu mostro como sair do laudo genérico para o laudo que comunica valor. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Laudo bom não é laudo longo</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Geniculares normais” respondia o pedido. Não resolvia o caso. Na Imersão Prática, o Dr. Glauber Voltan mostra como construir o laudo que responde a quem vai decidir.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> O laudo é assunto em 55 dos 386 anúncios do mercado e é a dor que já vendeu na conta. Caso e frase são dele.</p>
+      <p class="conf"><strong>Cuidado:</strong> Não citar o colega do caso nem detalhes que identifiquem o paciente.</p>
+    </article>
+    <article class="vid" id="V01_101">
+      <header>
+        <p class="cod">08 · GV_CAPTACAO_REELS_V01_101</p>
+        <h3>Somos médicos</h3>
+        <p class="meta"><span>25–30 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Plano fechado, olhando para a câmera, como o V01_002.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>SOMOS MÉDICOS</strong></p><p class="gf">“Nós não somos operadores de ultrassom. Somos médicos.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>3–12 s</td><td>“O exame de nervo começa antes do transdutor: na pergunta. Onde dói, desde quando, o que formiga.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>12–20 s</td><td>“A foto é só uma pista. Quem entrega o diagnóstico é o raciocínio.”</td><td class='c'>Texto: A FOTO É SÓ UMA PISTA</td></tr><tr><td class='t'>20–30 s</td><td>“De detector de exame, a gente passa a resolver o caso. É isso que eu ensino na Imersão Prática. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Do exame à consulta</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Nós não somos operadores de ultrassom. Somos médicos.” Na Imersão Prática, o ultrassom de nervos periféricos vira ferramenta de raciocínio clínico.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Mesmo enquadramento do campeão de setembro (V01_002, ele falando para a câmera). Versão em vídeo do IMG01_118.</p>
+      
+    </article>
+    <article class="vid" id="V01_102">
+      <header>
+        <p class="cod">09 · GV_CAPTACAO_REELS_V01_102</p>
+        <h3>Tem nervo na sua tela</h3>
+        <p class="meta"><span>40 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Em pé, fala direta; cada especialidade entra como texto na tela.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>TEM NERVO NA SUA TELA</strong></p><p class="gf">“Se você é médico da dor, dermatologista, ortopedista ou radiologista, tem nervo na sua tela todo dia.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>4–15 s</td><td>“O bloqueio que pegou o plantar medial em vez do tibial.”</td><td class='c'>Texto: MÉDICO DA DOR</td></tr><tr><td class='t'>15–24 s</td><td>“A mancha com neuropatia escondida ao lado.”</td><td class='c'>Texto: DERMATOLOGIA</td></tr><tr><td class='t'>24–32 s</td><td>“A “epicondilite” que era o nervo do lado.”</td><td class='c'>Texto: ORTOPEDIA</td></tr><tr><td class='t'>32–40 s</td><td>“O nervo está ao lado de todas as especialidades. Na Imersão Prática eu mostro como enxergar e laudar. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>O nervo está do seu lado</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>Médico da dor, dermatologista, ortopedista, radiologista: o nervo está na sua tela todos os dias. Imersão Prática: ultrassom de nervos periféricos, do aparelho ao laudo.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Chamar a profissão na primeira linha é o padrão de 68 dos 386 anúncios lidos. Como os públicos por cargo não entregam nesta conta, a especialidade entra pela fala, não pela segmentação.</p>
+      <p class="conf"><strong>Cuidado:</strong> Não prometer diagnóstico por especialidade.</p>
+    </article>
+    <article class="vid" id="V01_103">
+      <header>
+        <p class="cod">10 · GV_CAPTACAO_REELS_V01_103</p>
+        <h3>Não tenho demanda</h3>
+        <p class="meta"><span>35–40 s</span><span>vertical 9:16</span></p>
+      </header>
+      <p class="cena"><strong>Cena:</strong> Sentado, tom de conversa.</p>
+      <div class="gancho"><span class="gl">0–3 s · gancho</span><p class="gt">Na tela: <strong>“NÃO TENHO DEMANDA NA MINHA CIDADE”</strong></p><p class="gf">““Não tenho demanda na minha cidade.” Eu ouço isso toda semana.”</p></div>
+      <div class="tabwrap"><table><thead><tr><th>Tempo</th><th>Fala</th><th>Na tela / imagem</th></tr></thead><tbody><tr><td class='t'>4–15 s</td><td>“Eu moro numa cidade de 40 mil habitantes, no interior do Mato Grosso, a 760 km da capital.”</td><td class='c'>Texto: 40 MIL HABITANTES · 760 KM DA CAPITAL</td></tr><tr><td class='t'>15–30 s</td><td>“Demanda de exame de nervo se cria: com laudo que o colega entende e com resposta para o paciente que já passou por vários médicos.”</td><td class='c'>Ele falando</td></tr><tr><td class='t'>30–40 s</td><td>“O encaminhador valoriza quem ajuda ele a pensar. Na Imersão Prática eu mostro como. Saiba mais.”</td><td class='c'>Texto de fechamento</td></tr></tbody></table></div>
+      <dl class="campos">
+        <div><dt>Título</dt><dd>Demanda se cria</dd></div>
+        <div><dt>Descrição</dt><dd>100% online | De R$ 997 por R$ 97</dd></div>
+        <div><dt>Botão</dt><dd>Saiba mais</dd></div>
+      </dl>
+      <div class="leg"><div class="leghead"><span>Texto principal</span><button type="button" data-copy>Copiar</button></div><pre>“Não tenho demanda na minha cidade.” O Dr. Glauber Voltan atende numa cidade de 40 mil habitantes, a 760 km da capital. Demanda de exame de nervo se cria com laudo que ajuda o colega a pensar.</pre></div>
+      <p class="pq"><strong>Por que esse vídeo:</strong> Responde a segunda objeção que ele mais cita. Prova concreta (a cidade dele) no lugar de promessa.</p>
+      <p class="conf"><strong>Cuidado:</strong> Nada de valor de exame, faturamento ou “agenda cheia”: é promessa financeira e o Meta reprova.</p>
+    </article>
+
+  <section class="narrow">
+    <h2>Antes de subir</h2>
+    <ul class="check">
+      <li>Confirmar com o Dr. Glauber os valores do teste A × B (arte 2 e vídeo 6) e se os casos de aula podem ser citados.</li>
+      <li>Definir se entra CRM e RQE nas artes.</li>
+      <li>Subir 1 conjunto para cada anúncio, como no teste de criativos da conta, começando pelos vídeos.</li>
+      <li>Não repetir nome de anúncio: de IMG01_116 a 125 e de V01_094 a 103 estão livres hoje.</li>
+    </ul>
+  </section>
+
+  <footer>Fontes: anúncios da conta do Dr. Glauber (maio a setembro de 2026), Biblioteca de Anúncios da Meta (/glauber/referencias/) e transcrições da Imersão Prática e das aulas gravadas. &nbsp;·&nbsp; GGD Growth Digital</footer>
+</div>
+<script>
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.closest('.leg').querySelector('pre').innerText;
+  navigator.clipboard.writeText(t).then(()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1500)}).catch(()=>{});
+}));
+</script>
+</body>
+</html>
