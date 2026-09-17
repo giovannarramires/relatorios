@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Guia de Acessos do Meta — Rugido do Leão</title>
+<style>
+  :root {
+    --ground:#FFFFFF; --surface:#F7F8F3; --ink:#1C1F1A; --ink-soft:#43483E; --muted:#6B6F63;
+    --line:#D4D7CA; --line-soft:#E6E8DD; --accent:#8F6410; --moss:#2F4636;
+    --ok:#2F5E3E; --ok-bg:#EAF2EB; --ok-line:#BBD3C0;
+    --no:#8E3A2A; --no-bg:#F8EAE6; --no-line:#E2BFB6;
+    --warn:#8A6410; --warn-bg:#F6EFDD;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:0 34px 60px;overflow-wrap:break-word}
+
+  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:10.5px;
+    letter-spacing:.17em;text-transform:uppercase;color:var(--moss)}
+  h1{font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif;font-weight:600;
+    font-size:40px;line-height:1.06;margin:14px 0 0;letter-spacing:-.015em;max-width:20ch}
+  h1 em{font-style:italic;color:var(--accent)}
+  .standfirst{font-size:16.5px;color:var(--ink-soft);max-width:62ch;margin:14px 0 0}
+  header.top{padding:46px 0 26px;border-bottom:2px solid var(--ink)}
+  .meta-line{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:16px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
+
+  h2{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:26px;
+    line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
+  h3{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:19px;
+    margin:26px 0 8px}
+  section{padding-top:38px}
+  .sect-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+  .sect-head p{margin:0;color:var(--muted);font-size:14.5px;max-width:66ch}
+  .sect-head .eyebrow{display:block;margin-bottom:6px;color:var(--accent)}
+  p{max-width:68ch;margin:0 0 12px}
+  a{color:var(--accent)}
+
+  /* e-mail em destaque */
+  .mail{border:2px solid var(--ink);background:var(--surface);padding:20px 22px;margin:26px 0 0;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+  .mail .eyebrow{display:block;margin-bottom:6px}
+  .mail .addr{font-family:ui-monospace,Menlo,monospace;font-size:20px;font-weight:600;
+    word-break:break-all;color:var(--ink)}
+  button.copy{font:inherit;font-size:13.5px;font-weight:600;background:var(--ink);color:#fff;
+    border:0;padding:10px 16px;cursor:pointer;white-space:nowrap}
+  button.copy:hover{background:var(--moss)}
+  button.copy.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  button.copy.ghost:hover{background:var(--ink);color:#fff}
+
+  .lead{background:var(--surface);border-left:3px solid var(--accent);padding:18px 22px;margin:0 0 18px}
+  .lead p{margin:0;max-width:64ch}
+  .lead p+p{margin-top:10px}
+
+  .tscroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 16px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line)}
+  td.q{font-weight:600;width:24%}
+  .pill{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:10px;
+    letter-spacing:.06em;padding:2px 7px;background:var(--ok-bg);color:var(--ok);
+    border:1px solid var(--ok-line);white-space:nowrap}
+  .pill.opt{background:var(--warn-bg);color:var(--warn);border-color:#DFC98F}
+
+  .pn{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 20px}
+  .pn>div{border:1px solid;padding:16px 18px}
+  .pn .yes{background:var(--ok-bg);border-color:var(--ok-line)}
+  .pn .no{background:var(--no-bg);border-color:var(--no-line)}
+  .pn h4{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;margin:0 0 10px;font-weight:600}
+  .pn .yes h4{color:var(--ok)} .pn .no h4{color:var(--no)}
+  .pn ul{margin:0;padding-left:17px}
+  .pn li{margin-bottom:8px;font-size:14px;line-height:1.45}
+  .pn li:last-child{margin-bottom:0}
+
+  .box{border:1px solid var(--line);background:var(--surface);padding:18px 22px;margin:18px 0}
+  .box .eyebrow{display:block;margin-bottom:8px}
+  .box p:last-child{margin-bottom:0}
+  .box.alert{background:var(--warn-bg);border-color:#DFC98F}
+  .box.alert .eyebrow{color:var(--warn)}
+  .box.stop{background:var(--no-bg);border-color:var(--no-line)}
+  .box.stop .eyebrow{color:var(--no)}
+
+  /* passo a passo */
+  ol.steps{counter-reset:c;list-style:none;padding:0;margin:10px 0 0}
+  ol.steps>li{counter-increment:c;position:relative;padding:12px 0 12px 44px;
+    border-bottom:1px solid var(--line-soft);max-width:70ch}
+  ol.steps>li:last-child{border-bottom:none}
+  ol.steps>li::before{content:counter(c);position:absolute;left:0;top:12px;width:27px;height:27px;
+    background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600}
+  ol.steps b{font-weight:650}
+  ol.steps ul{margin:8px 0 0;padding-left:18px}
+  ol.steps ul li{margin-bottom:5px;font-size:14.5px}
+  .ui{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#EFEFE6;
+    border:1px solid var(--line);padding:1px 6px;white-space:nowrap}
+  .hint{display:block;color:var(--muted);font-size:13.5px;margin-top:5px}
+
+  /* checklist final */
+  .check{border:1px solid var(--line);margin:14px 0 18px}
+  .check label{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;
+    padding:13px 16px;border-bottom:1px solid var(--line-soft);cursor:pointer}
+  .check label:last-child{border-bottom:none}
+  .check input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--moss);cursor:pointer}
+  .check label.done{background:var(--ok-bg)}
+  .check label.done span b{text-decoration:line-through;text-decoration-color:var(--ok-line)}
+  .check span i{display:block;font-style:normal;color:var(--muted);font-size:13px;margin-top:2px}
+  .progress{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);margin:0 0 6px}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .toast{font-size:13px;color:var(--ok);margin-top:8px;min-height:1.2em}
+
+  details{border:1px solid var(--line);margin:10px 0;background:var(--ground)}
+  details summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;position:relative;padding-right:40px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";position:absolute;right:16px;top:10px;font-size:20px;color:var(--accent)}
+  details[open] summary::after{content:"–"}
+  details .in{padding:0 16px 14px}
+  details .in p:last-child{margin-bottom:0}
+
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted)}
+  footer p{max-width:none;font-size:12.5px}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px 48px}
+    h1{font-size:31px}
+    h2{font-size:22px}
+    .pn{grid-template-columns:1fr}
+    .mail .addr{font-size:16px}
+    ol.steps>li{padding-left:38px}
+    .ui{white-space:normal}
+    .eyebrow{letter-spacing:.1em}
+    td.q{width:auto}
+    th,td{padding:9px 7px}
+    .pill{white-space:normal;letter-spacing:0}
+  }
+
+  @page{size:A4;margin:15mm 14mm 16mm}
+  @media print{
+    body{font-size:10.5pt;line-height:1.45}
+    .wrap{max-width:none;padding:0}
+    header.top{padding-top:0}
+    h1{font-size:30pt}
+    h2{font-size:17pt}
+    section{padding-top:20pt}
+    .sect-head,h3{break-after:avoid}
+    .box,.lead,.mail,ol.steps>li,.check label{break-inside:avoid}
+    button,.actions,.toast{display:none!important}
+    details{border:none}
+    details .in{display:block}
+    a{text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Gio Growth Digital · Guia preparado para o Rugido do Leão</div>
+  <h1>Como liberar o acesso do <em>Meta</em> para a gente começar</h1>
+  <p class="standfirst">O passo a passo completo para vocês me darem acesso à Página do Facebook, ao Instagram, à conta de anúncios e ao WhatsApp — sem passar senha e sem perder o controle de nada.</p>
+  <div class="meta-line">
+    <span>Leva de 20 a 30 minutos</span>
+    <span>Fazer no computador</span>
+    <span>Documento de 17/09/2026</span>
+  </div>
+
+  <div class="mail">
+    <div>
+      <span class="eyebrow">O e-mail que recebe o acesso</span>
+      <div class="addr" id="addr">carregando…</div>
+    </div>
+    <button class="copy" data-copy="mail">Copiar e-mail</button>
+  </div>
+</header>
+
+<section>
+  <div class="sect-head">
+    <h2>Antes de começar</h2>
+    <p>Quatro coisas que evitam a maior parte dos problemas.</p>
+  </div>
+
+  <ol class="steps">
+    <li><b>Façam pelo computador</b>, no navegador. O aplicativo do celular esconde parte das opções que vamos usar.</li>
+    <li><b>Quem faz é quem administra a Página do Facebook e o Instagram</b> do Rugido do Leão. Se a Página foi criada pelo perfil pessoal de uma de vocês, é essa pessoa que precisa estar logada.
+      <span class="hint">Se nenhuma de vocês tem certeza, o passo 1 da Etapa 1 mostra isso.</span></li>
+    <li><b>O Instagram precisa ser conta profissional</b> (tipo "Empresa" ou "Criador"). No app do Instagram: <span class="ui">Configurações</span> → <span class="ui">Tipo de conta e ferramentas</span>. Se aparecer a opção "Mudar para conta profissional", ainda não é — é só trocar.</li>
+    <li><b>Deixem a verificação em duas etapas ligada</b> no Facebook de quem vai fazer. O Meta costuma pedir isso antes de liberar as configurações da empresa.</li>
+  </ol>
+
+  <div class="pn">
+    <div class="yes">
+      <h4>O que continua com vocês</h4>
+      <ul>
+        <li>A <b>propriedade</b> da Página, do Instagram e da conta de anúncios</li>
+        <li>O <b>cartão de pagamento</b> dos anúncios, no nome da empresa</li>
+        <li>O poder de <b>remover meu acesso</b> a qualquer momento, com dois cliques</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>O que eu nunca vou pedir</h4>
+      <ul>
+        <li><b>Senha</b> do Facebook, do Instagram ou do WhatsApp</li>
+        <li><b>Código</b> que chegar por SMS ou e-mail</li>
+        <li>Número do <b>cartão</b> de vocês</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <h2>O que vocês vão liberar</h2>
+    <p>No Meta, tudo mora dentro de uma "pasta" da empresa chamada <b>portfólio empresarial</b> (o antigo Gerenciador de Negócios). Eu recebo acesso a essa pasta e a cada item dentro dela.</p>
+  </div>
+
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Item</th><th>Para que eu uso</th><th>Nível</th></tr></thead>
+    <tbody>
+      <tr><td class="q">Portfólio empresarial</td><td>É a porta de entrada. Sem ele, não dá para liberar o resto de forma segura.</td><td><span class="pill">Controle total</span></td></tr>
+      <tr><td class="q">Página do Facebook</td><td>Todo anúncio sai em nome da Página. Também respondo comentários dos anúncios.</td><td><span class="pill">Controle total</span></td></tr>
+      <tr><td class="q">Instagram</td><td>Para o anúncio aparecer com o @ de vocês e para ver o que funciona no perfil.</td><td><span class="pill">Controle total</span></td></tr>
+      <tr><td class="q">Conta de anúncios</td><td>Onde as campanhas são criadas, pausadas e medidas.</td><td><span class="pill">Controle total</span></td></tr>
+      <tr><td class="q">WhatsApp</td><td>Para o anúncio de banho e tosa abrir a conversa direto no WhatsApp da loja.</td><td><span class="pill">Controle total</span></td></tr>
+      <tr><td class="q">Conjunto de dados (pixel)</td><td>Mede quem veio do anúncio. <b>Se não existir, não precisam criar</b> — eu crio depois.</td><td><span class="pill opt">Se existir</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Etapa 1 de 4</span>
+    <h2>Conferir (ou criar) o portfólio empresarial</h2>
+    <p>Muita empresa já tem um e não sabe. Vale olhar antes de criar outro.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Entrem em <a href="https://business.facebook.com" target="_blank" rel="noopener">business.facebook.com</a> logadas no Facebook de quem administra a Página.</li>
+    <li>No canto de cima, à esquerda, aparece o nome de um portfólio. Cliquem nele para ver a lista.
+      <ul>
+        <li><b>Aparece "Rugido do Leão" (ou nome parecido)?</b> Ótimo, já existe. Selecionem e pulem para a Etapa 2.</li>
+        <li><b>Não aparece nada da empresa?</b> Sigam o passo 3.</li>
+      </ul>
+    </li>
+    <li>Cliquem em <span class="ui">Criar um portfólio empresarial</span> e preencham:
+      <ul>
+        <li><b>Nome do portfólio:</b> Rugido do Leão</li>
+        <li><b>Seu nome</b> e o <b>e-mail comercial</b> de vocês (o da loja, não o meu)</li>
+      </ul>
+      <span class="hint">O Meta manda um e-mail de confirmação para esse endereço. Cliquem no link antes de seguir.</span>
+    </li>
+  </ol>
+
+  <div class="box alert">
+    <span class="eyebrow">Se a Página já estiver no portfólio de outra pessoa</span>
+    <p>Acontece quando uma agência ou um conhecido criou a Página no passado. Nesse caso <b>não criem Página nova</b>: me avisem antes, que eu mostro como pedir a Página de volta sem perder seguidores nem avaliações.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Etapa 2 de 4</span>
+    <h2>Colocar a Página, o Instagram e o WhatsApp dentro do portfólio</h2>
+    <p>Só dá para me liberar o que está dentro da pasta da empresa.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Com o portfólio selecionado, cliquem na <b>engrenagem</b> <span class="ui">Configurações</span>, no menu da esquerda, lá embaixo.</li>
+    <li>No menu de configurações, abram <span class="ui">Contas</span> → <span class="ui">Páginas</span>. Se a Página do Rugido do Leão já estiver na lista, sigam adiante. Se não, cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma Página</span> e escolham a de vocês.</li>
+    <li>Ainda em <span class="ui">Contas</span>, abram <span class="ui">Contas do Instagram</span> → <span class="ui">+ Adicionar</span>. Vai abrir o login do Instagram: entrem com o @ da loja e autorizem.
+      <span class="hint">Aqui sim vocês digitam a senha do Instagram — mas é na tela do próprio Meta, só vocês veem.</span></li>
+    <li>Para o WhatsApp: abram <span class="ui">Contas</span> → <span class="ui">Contas do WhatsApp</span> → <span class="ui">+ Adicionar</span> e sigam as telas com o número da loja. O Meta manda um código para esse número.
+      <span class="hint">Se vocês usam o <b>aplicativo WhatsApp Business</b> no celular e essa opção complicar, tem um caminho mais simples: no app, <span class="ui">Configurações</span> → <span class="ui">Ferramentas comerciais</span> → <span class="ui">Facebook e Instagram</span> → conectar à Página. Isso já basta para o anúncio abrir conversa no WhatsApp. O app continua funcionando igual.</span></li>
+  </ol>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Etapa 3 de 4</span>
+    <h2>Conferir (ou criar) a conta de anúncios</h2>
+    <p>É onde o dinheiro dos anúncios é gasto — e onde fica o cartão de vocês.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Em <span class="ui">Configurações</span>, abram <span class="ui">Contas</span> → <span class="ui">Contas de anúncios</span>.
+      <ul>
+        <li><b>Já tem uma conta do Rugido do Leão na lista?</b> Pulem para o passo 3.</li>
+        <li><b>Vocês já impulsionaram post pelo Instagram ou pela Página?</b> Então existe uma conta, mesmo que não apareça aqui. Cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Adicionar uma conta de anúncios</span> e ela deve aparecer para escolher.</li>
+        <li><b>Nunca anunciaram?</b> Cliquem em <span class="ui">+ Adicionar</span> → <span class="ui">Criar uma nova conta de anúncios</span>.</li>
+      </ul>
+    </li>
+    <li>Se forem criar, preencham assim:
+      <ul>
+        <li><b>Nome:</b> Rugido do Leão</li>
+        <li><b>Fuso horário:</b> (GMT-03:00) America/Sao_Paulo</li>
+        <li><b>Moeda:</b> Real brasileiro (BRL)</li>
+        <li>Quando perguntar para quem é a conta, marquem <b>"Meu portfólio empresarial"</b> (a própria empresa).</li>
+      </ul>
+    </li>
+    <li><b>Forma de pagamento:</b> na conta de anúncios, abram <span class="ui">Faturamento e pagamentos</span> (ou <span class="ui">Configurações de pagamento</span>) e cadastrem o cartão ou o Pix da empresa. <b>Isso fica com vocês</b> — eu não cadastro nem altero pagamento.</li>
+  </ol>
+
+  <div class="box stop">
+    <span class="eyebrow">Atenção ao fuso e à moeda</span>
+    <p>Depois de criada, a conta <b>não deixa trocar</b> fuso horário nem moeda. Se sair em dólar ou com o fuso errado, o único jeito é abrir outra conta. Confiram antes de clicar em criar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Etapa 4 de 4</span>
+    <h2>Me convidar com controle total</h2>
+    <p>É aqui que o acesso é liberado de fato. Uma tela para o e-mail, outra para escolher os itens.</p>
+  </div>
+
+  <ol class="steps">
+    <li>Em <span class="ui">Configurações</span>, abram <span class="ui">Usuários</span> → <span class="ui">Pessoas</span> e cliquem no botão azul <span class="ui">+ Convidar pessoas</span>.
+      <span class="hint">Em algumas contas o botão aparece como "Adicionar pessoas". É o mesmo.</span></li>
+    <li>Colem o e-mail <b id="addr2">carregando…</b> no campo de endereço.</li>
+    <li>No tipo de acesso ao portfólio, escolham <b>Controle total</b>.
+      <span class="hint">Em contas mais antigas o nome é "Acesso de administrador". Se houver opções avançadas de finanças, podem deixar desmarcadas.</span></li>
+    <li>Cliquem em <span class="ui">Avançar</span>. Vai abrir a tela de <b>atribuir ativos</b>, com os tipos na coluna da esquerda. Em cada um abaixo, marquem o item do Rugido do Leão e liguem a chave <b>Controle total</b>:
+      <ul>
+        <li><span class="ui">Páginas</span> → a Página do Rugido do Leão</li>
+        <li><span class="ui">Contas de anúncios</span> → a conta do Rugido do Leão</li>
+        <li><span class="ui">Contas do Instagram</span> → o @ da loja</li>
+        <li><span class="ui">Contas do WhatsApp</span> → o número da loja (se aparecer)</li>
+        <li><span class="ui">Conjuntos de dados</span> → o pixel (só se já existir)</li>
+      </ul>
+      <span class="hint">Se algum tipo não aparecer na lista, é porque aquele item não foi colocado no portfólio na Etapa 2 — dá para voltar lá, adicionar e depois me atribuir.</span>
+    </li>
+    <li>Cliquem em <span class="ui">Revisar</span> e depois em <span class="ui">Enviar convite</span>. O convite chega no meu e-mail e eu aceito do meu lado.</li>
+  </ol>
+
+  <div class="box">
+    <span class="eyebrow">O convite fica "pendente" por um tempo</span>
+    <p>Até eu aceitar, meu nome aparece como <b>pendente</b> na lista de pessoas. É normal. O convite vence em alguns dias; se isso acontecer, é só clicar no meu nome e reenviar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <h2>Conferência final</h2>
+    <p>Marquem conforme forem terminando. Quando acabar, o botão monta a mensagem pronta para mandar no WhatsApp.</p>
+  </div>
+
+  <p class="progress" id="progress">0 de 8 concluídos</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-k="insta_pro"><span><b>Instagram é conta profissional</b><i>Empresa ou Criador</i></span></label>
+    <label><input type="checkbox" data-k="portfolio"><span><b>Portfólio empresarial existe</b><i>Etapa 1</i></span></label>
+    <label><input type="checkbox" data-k="pagina"><span><b>Página do Facebook dentro do portfólio</b><i>Etapa 2</i></span></label>
+    <label><input type="checkbox" data-k="instagram"><span><b>Instagram dentro do portfólio</b><i>Etapa 2</i></span></label>
+    <label><input type="checkbox" data-k="whatsapp"><span><b>WhatsApp conectado</b><i>Etapa 2 — pelo portfólio ou pelo app WhatsApp Business</i></span></label>
+    <label><input type="checkbox" data-k="conta"><span><b>Conta de anúncios em reais, fuso de São Paulo</b><i>Etapa 3</i></span></label>
+    <label><input type="checkbox" data-k="pagamento"><span><b>Forma de pagamento cadastrada</b><i>Etapa 3 — cartão ou Pix da empresa</i></span></label>
+    <label><input type="checkbox" data-k="convite"><span><b>Convite enviado com controle total em todos os itens</b><i>Etapa 4</i></span></label>
+  </div>
+  <div class="actions">
+    <button class="copy" id="btnResumo">Copiar mensagem para o WhatsApp</button>
+    <button class="copy ghost" id="btnLimpar">Desmarcar tudo</button>
+  </div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="sect-head">
+    <h2>Se travar em algum ponto</h2>
+    <p>Os problemas que mais aparecem e o que fazer com cada um.</p>
+  </div>
+
+  <details>
+    <summary>Não aparece a engrenagem de Configurações</summary>
+    <div class="in"><p>A pessoa logada não é administradora daquele portfólio. Confiram se estão no portfólio certo (nome no canto de cima, à esquerda) ou se quem deve fazer é outra de vocês.</p></div>
+  </details>
+  <details>
+    <summary>O Meta pede verificação em duas etapas antes de continuar</summary>
+    <div class="in"><p>No Facebook de quem está fazendo: <span class="ui">Central de contas</span> → <span class="ui">Senha e segurança</span> → <span class="ui">Autenticação de dois fatores</span>. Ativem pelo SMS ou por aplicativo, voltem ao portfólio e tentem de novo.</p></div>
+  </details>
+  <details>
+    <summary>O Instagram não aparece para adicionar</summary>
+    <div class="in"><p>Quase sempre é porque ainda é conta pessoal. Troquem para profissional no app (ver "Antes de começar") e tentem de novo. Se já for profissional, confiram se estão entrando com o @ certo na tela de login que abre.</p></div>
+  </details>
+  <details>
+    <summary>Diz que a Página ou a conta de anúncios já pertence a outro portfólio</summary>
+    <div class="in"><p>Não criem nada novo e não removam nada. Me mandem um print dessa tela que eu resolvo com vocês — dá para pedir o item de volta preservando o histórico.</p></div>
+  </details>
+  <details>
+    <summary>O convite por e-mail deu erro (plano B)</summary>
+    <div class="in">
+      <p>Dá para liberar o acesso para o portfólio da minha empresa em vez do meu e-mail. O resultado é o mesmo.</p>
+      <p>Em <span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Parceiros</span> → <span class="ui">+ Adicionar</span> → <span class="ui">Conceder a um parceiro acesso aos seus ativos</span>, informem o ID do portfólio <b>196876879225865</b> (Gio Growth Digital) e marquem os mesmos itens da Etapa 4 com controle total.</p>
+      <div class="actions"><button class="copy ghost" data-copy="bm">Copiar ID do portfólio</button></div>
+    </div>
+  </details>
+  <details>
+    <summary>Como tirar meu acesso, se um dia precisarem</summary>
+    <div class="in"><p><span class="ui">Configurações</span> → <span class="ui">Usuários</span> → <span class="ui">Pessoas</span> → cliquem no meu nome → <span class="ui">Remover</span>. O acesso cai na hora, em todos os itens.</p></div>
+  </details>
+</section>
+
+<footer>
+  <p>Gio Growth Digital · Guia preparado para o Rugido do Leão · 17/09/2026</p>
+  <p>Os nomes dos menus seguem o Meta Business Suite de setembro de 2026. O Meta muda rótulos com frequência; se algum botão estiver com nome diferente, o caminho continua o mesmo — e é só me mandar um print.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // e-mail montado aqui para a borda do site não embaralhar o endereço
+  var MAIL = ['giovannarramires','gmail.com'].join('@');
+  var BM = '196876879225865';
+  document.getElementById('addr').textContent = MAIL;
+  document.getElementById('addr2').textContent = MAIL;
+
+  var toast = document.getElementById('toast');
+  function aviso(t){ toast.textContent = t; clearTimeout(aviso._t); aviso._t = setTimeout(function(){ toast.textContent=''; }, 3500); }
+  function copiar(txt, btn, ok){
+    function feito(){ if(btn){ var o=btn.textContent; btn.textContent='Copiado ✓'; setTimeout(function(){ btn.textContent=o; },1800);} if(ok) aviso(ok); }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(txt).then(feito, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); feito(); }catch(e){ aviso('Não consegui copiar — selecione o texto e copie manualmente.'); }
+      document.body.removeChild(ta);
+    }
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){ copiar(b.dataset.copy==='bm' ? BM : MAIL, b); });
+  });
+
+  // checklist salvo neste navegador
+  var KEY = 'ggd-acessos-rugido-v1', estado = {};
+  try { estado = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { estado = {}; }
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  function render(){
+    var n = 0;
+    boxes.forEach(function(cb){ cb.parentNode.classList.toggle('done', cb.checked); if(cb.checked) n++; });
+    document.getElementById('progress').textContent = n + ' de ' + boxes.length + ' concluídos';
+  }
+  boxes.forEach(function(cb){
+    cb.checked = !!estado[cb.dataset.k];
+    cb.addEventListener('change', function(){
+      estado[cb.dataset.k] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(estado)); } catch(e) {}
+      render();
+    });
+  });
+  render();
+
+  document.getElementById('btnResumo').addEventListener('click', function(){
+    var feitos = [], faltam = [];
+    boxes.forEach(function(cb){
+      var t = cb.parentNode.querySelector('b').textContent;
+      (cb.checked ? feitos : faltam).push(t);
+    });
+    var msg = 'Oi, Gio! Acessos do Meta do Rugido do Leão:\n\n';
+    if (feitos.length) msg += 'Feito:\n' + feitos.map(function(t){ return '✅ ' + t; }).join('\n') + '\n';
+    if (faltam.length) msg += '\nAinda falta:\n' + faltam.map(function(t){ return '⏳ ' + t; }).join('\n') + '\n';
+    if (!faltam.length) msg += '\nConvite enviado para ' + MAIL + '. Pode aceitar!';
+    copiar(msg, this, 'Mensagem copiada. É só colar no WhatsApp.');
+  });
+  document.getElementById('btnLimpar').addEventListener('click', function(){
+    estado = {}; boxes.forEach(function(cb){ cb.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    render();
+  });
+})();
+</script>
+</body>
+</html>
