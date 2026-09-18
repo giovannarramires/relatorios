@@ -76,6 +76,12 @@
   ul.lista li{display:flex; gap:12px; align-items:flex-start}
   ul.lista li .marc{width:8px;height:8px;border-radius:50%;background:var(--teal-claro); margin-top:9px; flex:none}
   ul.lista li b{font-weight:600}
+  .btn{display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
+    background:var(--teal); color:#fff; text-decoration:none; font-weight:600; font-size:15px;
+    padding:14px 22px; border-radius:12px; box-shadow:var(--shadow)}
+  .btn:hover{filter:brightness(1.07)}
+  .btn svg{width:18px;height:18px;flex:none}
+  a{color:var(--teal)}
   footer{border-top:1px solid var(--line); padding-top:22px; display:flex; justify-content:space-between;
     gap:16px; flex-wrap:wrap; font-size:13px; color:var(--ink-soft)}
   @media (max-width:640px){
@@ -84,7 +90,13 @@
     .barcell{display:none}
     thead th.barcol{display:none}
   }
-</style>
+
+  .botao{display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
+    background:var(--teal); color:#fff; text-decoration:none; font-weight:600; font-size:15px;
+    padding:13px 22px; border-radius:12px; box-shadow:var(--shadow); transition:filter .15s}
+  .botao:hover{filter:brightness(1.08)}
+  .botao svg{width:18px;height:18px;flex:none}
+  </style>
 </head>
 <body>
 <div class="wrap">
@@ -221,9 +233,14 @@
           <span class="nota">entregue, mas ainda sem recibo emitido</span>
         </div>
       </div>
+      <a class="botao" href="https://drive.google.com/open?id=1fND8zGxP5iseF2tCZukAVn5vyPGhKpwG" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+        Abrir os 103 recibos emitidos pela Meta
+      </a>
+      <p class="sub2">Pasta no Google Drive, separada por janela de período, com o índice em planilha (data, nº da fatura, valor de campanha, imposto e total de cada documento). São os recibos originais que a Meta emite a cada cobrança — nada foi editado.</p>
       <ul class="lista">
         <li><span class="marc"></span><span>Os recibos de cobrança só são emitidos quando a conta atinge o limite de pagamento — por isso um recibo cobre vários dias e nunca coincide com as janelas acima. A conferência é feita pelo <b>total</b>: campanha cobrada nos recibos + o que ainda não foi cobrado = o gasto do período.</span></li>
-        <li><span class="marc"></span><span>A conta só começou a entregar em <b>15 de maio</b>: de 1º de abril a 14 de maio não houve gasto, por isso a primeira janela (65 dias) tem média diária baixa.</span></li><li><span class="marc"></span><span>Entre os 103 documentos há <b>9 cobranças recusadas pelo cartão</b> (R$ 11.962,04), que o Meta reprocessou em seguida. Elas aparecem no extrato do banco como tentativa, mas <b>não são gasto</b> — estão marcadas com <i>_FALHA</i> no nome do arquivo e fora de todas as somas.</span></li>
+        <li><span class="marc"></span><span>A conta só começou a entregar em <b>15 de maio</b>: de 1º de abril a 14 de maio não houve gasto, por isso a primeira janela (65 dias) tem média diária baixa.</span></li><li><span class="marc"></span><span>Entre os 103 documentos há <b>9 cobranças recusadas pelo cartão</b> (R$ 11.962,04), que o Meta reprocessou em seguida. Elas aparecem no extrato do banco como tentativa, mas <b>não são gasto</b> — estão marcadas com <i>_RECUSADA</i> no nome do arquivo e ficam fora de todas as somas.</span></li>
         <li><span class="marc"></span><span>O imposto não é acrescentado por fora: a Meta cobra PIS (1,65%), COFINS (7,60%) e ISS (2,90%) <b>por dentro</b> do valor cobrado — 12,15% do total, o que equivale a 13,83% sobre a mídia.</span></li>
       </ul>
     </div>
