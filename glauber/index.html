@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Glauber — Controle Diário · Funil de Vendas | GGD</title>
+<title>Dr. Glauber — Visão Geral | GGD</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
@@ -17,336 +17,226 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5;padding:28px 20px 60px}
   .wrap{max-width:1180px;margin:0 auto}
-  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:26px}
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px}
   header.top h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
   header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
   .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--mut);font-size:11px;padding:3px 9px;border-radius:20px;margin-right:6px}
   h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);margin:34px 0 14px;font-weight:600}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
   .card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
   .card .val{font-size:27px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
   .card .foot{font-size:12px;color:var(--mut);margin-top:6px}
   .card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
   .s-green{background:var(--green)} .s-yellow{background:var(--yellow)} .s-red{background:var(--red)} .s-accent{background:var(--accent)} .s-gray{background:var(--gray)}
-  .funnel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
-  .frow{display:flex;align-items:center;gap:14px;padding:9px 0}
-  .frow .name{width:150px;font-size:13px;color:var(--txt);flex-shrink:0}
-  .frow .barwrap{flex:1;background:var(--panel2);border-radius:6px;height:30px;position:relative;overflow:hidden}
-  .frow .bar{height:100%;background:linear-gradient(90deg,#2f6fd0,#4f9cff);border-radius:6px;display:flex;align-items:center;padding-left:12px}
-  .frow .barnum{font-size:13px;font-weight:600;color:#fff;white-space:nowrap}
-  .frow .conv{width:150px;text-align:right;font-size:12px;color:var(--mut);flex-shrink:0}
-  .frow .conv b{font-size:14px}
-  .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600;margin-left:6px}
+  .var{font-weight:600} .v-up{color:var(--green)} .v-down{color:var(--red)} .v-flat{color:var(--mut)}
+  .frentes{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+  .frente{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;display:flex;flex-direction:column}
+  .frente h3{font-size:17px;font-weight:700;letter-spacing:-.2px}
+  .frente .desc{color:var(--mut);font-size:12px;margin-top:3px;margin-bottom:16px}
+  .frente .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px;margin-bottom:14px}
+  .frente .grid div .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .frente .grid div .v{font-size:19px;font-weight:700;margin-top:3px;letter-spacing:-.3px}
+  .frente .grid div .c{font-size:11px;color:var(--mut);margin-top:2px}
+  .frente .barra{height:6px;border-radius:4px;background:var(--panel2);overflow:hidden;margin-bottom:12px}
+  .frente .barra i{display:block;height:100%}
+  .frente .rodape{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
+  .frente .rodape a{font-size:13px;font-weight:600}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
   .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)} .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
-  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
-  thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-  tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
-  tbody tr:hover{background:#141a24}
-  .num{text-align:right;font-variant-numeric:tabular-nums}
-  .metric-name{font-weight:600}
-  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
-  .d-green{background:var(--green)} .d-yellow{background:var(--yellow)} .d-red{background:var(--red)} .d-gray{background:var(--gray)}
-  .bench{color:var(--mut);font-size:12px}
-  .stage-tag{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;padding:14px 12px 4px;font-weight:700}
   .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .leitura{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;font-size:13.5px}
+  .leitura p{margin:7px 0} .leitura b{color:var(--txt)}
   footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12px}
-  footer ul{margin:8px 0 0 18px} footer li{margin:4px 0}
-  a{color:var(--accent);text-decoration:none}
-  @media(max-width:640px){.frow .name{width:92px}.frow .conv{width:110px}}
+  footer ul{margin:8px 0 0 18px} footer li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  @media(max-width:520px){.frente .grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <div id="ggd-abas"></div>
+
   <header class="top">
     <div>
-      <h1>Dr. Glauber — Controle Diário · Funil de Vendas</h1>
-      <div class="sub">Meta Ads · conta <code>702387911807956</code> (CA 01 - Dr. Glauber) · @ecovoltan</div>
+      <h1>Visão geral — <span id="mes">—</span></h1>
+      <div class="sub">Tudo o que está rodando para o Dr. Glauber, num lugar só. Cada frente tem a aba com o dash completo.</div>
     </div>
     <div>
       <span class="badge" id="periodo">Período: —</span>
-      <span class="badge">Janela: 1 dia no clique</span>
-      <span class="badge">Fonte: Meta Pixel (Windsor)</span>
+      <span class="badge">Fonte: Meta Ads</span>
     </div>
   </header>
 
-  <h2 class="sec">1 · Resumo Executivo</h2>
-  <div class="cards" id="scorecards"></div>
+  <h2 class="sec">1 · O mês somado</h2>
+  <div class="cards" id="placar"></div>
 
-  <h2 class="sec">2 · Funil de Perda — onde o balde está furando</h2>
-  <div class="funnel" id="funnel"></div>
+  <h2 class="sec">2 · Cada frente</h2>
+  <div class="frentes" id="frentes"></div>
 
-  <h2 class="sec">3 · Diagnóstico por Etapa (semáforo vs. benchmark)</h2>
-  <table id="stagetable">
-    <thead><tr>
-      <th>Métrica</th><th class="num">Valor</th><th>Benchmark ideal</th><th>Status</th><th>Leitura</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
+  <h2 class="sec">3 · Dia a dia — investimento e faturamento (tudo somado)</h2>
+  <div class="chartbox"><canvas id="grafico" height="105"></canvas></div>
 
-  <h2 class="sec">4 · Lucro Líquido &amp; Investimento (dia a dia)</h2>
-  <div class="chartbox"><canvas id="chartLucro" height="110"></canvas></div>
-
-  <h2 class="sec">5 · Ranking por Campanha (só VENDA) — funil completo</h2>
-  <div style="overflow-x:auto">
-  <table id="camptable" style="min-width:1500px">
-    <thead><tr>
-      <th>Campanha</th><th>Púb.</th>
-      <th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th><th class="num">CTR</th><th class="num">CPC</th><th class="num">Freq.</th>
-      <th class="num">LP Views</th><th class="num">Fluxo</th><th class="num">Custo/LP</th>
-      <th class="num">Checkouts</th><th class="num">Conv.Pág</th><th class="num">Custo/Chk</th>
-      <th class="num">Compras</th><th class="num">Conv.Chk</th><th class="num">CPA</th>
-      <th class="num">Faturam.</th><th class="num">Lucro</th><th class="num">ROAS</th>
-      <th class="num">Perfil</th><th class="num">Custo/Perfil</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
-  </div>
-
-  <h2 class="sec">6 · Criativos que geraram vendas — custo por ação</h2>
-  <div style="overflow-x:auto">
-  <table id="cretable" style="min-width:1080px">
-    <thead><tr>
-      <th>Criativo</th>
-      <th class="num">Gasto</th><th class="num">Cliques</th><th class="num">Vendas</th>
-      <th class="num">Custo/Clique</th><th class="num">Custo/Venda</th>
-      <th class="num">Custo/View 3s</th><th class="num">Custo/ThruPlay 15s</th><th class="num">Custo/View 25%</th>
-      <th>Anúncio</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
-  </div>
+  <h2 class="sec">4 · Leitura</h2>
+  <div class="leitura" id="leitura"></div>
 
   <footer>
-    <b>Notas técnicas &amp; ressalvas</b>
+    <b>Como este resumo é montado</b>
     <ul>
-      <li><b>Produto base R$ 97 + upsells.</b> O ticket base é R$ 97, mas há order bumps/upsells de alto valor (vendas de ~R$ 5.000) que elevam o faturamento — por isso o ticket médio realizado fica bem acima de R$ 97. É esse fundo de funil que faz o ROAS fechar mesmo com CPA acima do valor do produto. Benchmark de CPA calibrado no produto R$ 97 (verde &lt; R$ 40, crítico &gt; R$ 80).</li>
-      <li><b>Campanha de tráfego excluída.</b> O funil ignora a campanha <code>[TRAFEGO][EVENTO_PRESENCIAL][JORNADA_MATOGROSSENSE]</code> (objetivo tráfego, evento presencial) — nunca somar com o funil de VENDA (regra L4).</li>
-      <li><b>Subnotificação do Pixel.</b> Dados via Meta Pixel/Windsor sofrem subnotificação pós-iOS14 (15–40%). Validar paridade semanal com a plataforma de vendas.</li>
-      <li><b>Atribuição atrasada.</b> Dias com faturamento e pouco/nenhum gasto = conversões de cliques anteriores (boleto/Pix). O faturamento do dia nem sempre pertence ao gasto do dia.</li>
-      <li><b>Frequência/Alcance.</b> No total, alcance é a soma por campanha (há sobreposição de pessoas entre campanhas); leia a frequência total como aproximação e prefira a análise por campanha.</li>
-      <li><b>Criativos (seção 6).</b> Lista <b>apenas os criativos que geraram pelo menos 1 venda</b> no período; cada linha soma o mesmo anúncio em todos os conjuntos/campanhas onde ele roda (agregado por nome do criativo). O link <i>ver criativo&nbsp;↗</i> abre o post real no Instagram. Métricas de vídeo: <b>View 3s</b> = reproduções de 3&nbsp;segundos; <b>ThruPlay 15s</b> = reproduzido até 15s ou até o fim; <b>View 25%</b> = assistiu 25% do vídeo. Criativos de imagem não têm views de vídeo (aparece “—”).</li>
+      <li><b>Período.</b> Do dia 1º do mês até hoje. A comparação é com o <i>mesmo pedaço</i> do mês passado (<span id="periodoAnt">—</span>) — comparar um mês pela metade com um mês inteiro daria uma queda que não existe.</li>
+      <li><b>De onde vêm os números.</b> Direto da API do Meta, incluindo o dia de hoje. Na conta 01 entram só as campanhas de VENDA (a campanha de tráfego do evento presencial fica de fora).</li>
+      <li><b>Tickets diferentes.</b> A Biblioteca é um produto de R$ 97; a conta 01 vende a esteira, com ticket realizado bem maior. Por isso o CPA das duas frentes não se compara — cada aba tem a régua certa do seu produto.</li>
+      <li><b>Subnotificação do Pixel.</b> O Meta deixa de registrar parte das vendas (15–40% pós-iOS14). A verdade do faturamento é a HeroSpark.</li>
     </ul>
-    <div style="margin-top:12px">GGD · Gio Growth Digital — atualização automática 3×/dia (06h · 14h · 20h). Gerado com dados de <span id="gerado">—</span>.</div>
   </footer>
-
 </div>
 
 <script>
-/* ============================================================
-   DADOS — gerados automaticamente pelo gerar_dash_glauber.py
-   ============================================================ */
-const META = {"periodo": "últimos 30 dias (19/08 – 17/09/2026)", "gerado": "18/09/2026"};
-const T = {"spend": 14813.06, "impressions": 203275.0, "reach": 59617.0, "linkClicks": 1851.0, "lpViews": 1113.0, "initiateCheckout": 160.0, "purchases": 49.0, "revenue": 8623.98, "profileVisits": 513.0};
-const DAILY = [["19/08", 1125.95, 485.0], ["20/08", 1199.85, 491.0], ["21/08", 407.15, 0.0], ["22/08", 851.05, 588.0], ["23/08", 662.11, 491.0], ["24/08", 598.39, 491.0], ["25/08", 486.5, 97.0], ["26/08", 809.48, 982.0], ["27/08", 787.63, 394.0], ["28/08", 1043.16, 1670.98], ["29/08", 1137.17, 1176.0], ["30/08", 847.66, 588.0], ["31/08", 263.23, 0.0], ["01/09", 263.36, 0.0], ["02/09", 281.61, 97.0], ["03/09", 248.31, 0.0], ["04/09", 524.73, 97.0], ["05/09", 199.58, 97.0], ["06/09", 0.0, 0.0], ["08/09", 0.0, 97.0], ["09/09", 185.36, 0.0], ["10/09", 462.94, 97.0], ["11/09", 304.31, 0.0], ["12/09", 761.69, 0.0], ["13/09", 364.97, 394.0], ["14/09", 371.29, 0.0], ["15/09", 377.5, 194.0], ["16/09", 131.79, 0.0], ["17/09", 116.29, 97.0]];
-const CAMPS = [["ABO · V1 V2 · 1008", "—", 7383.61, 86636, 20325, 848, 390, 70, 23, 4013.0, 241], ["CBO · PQ · 02 · pg02", "Quente", 3038.8, 57435, 8319, 490, 418, 60, 17, 3440.98, 116], ["ABO · FRIO · V2 · 0409", "—", 1442.47, 16555, 11074, 163, 110, 11, 3, 291.0, 52], ["ABO · IMG SET26 · 0909", "—", 1135.25, 17096, 8215, 144, 68, 4, 1, 97.0, 47], ["🟡ABO · IMG SET26 · 1209", "—", 1125.07, 15863, 4280, 130, 61, 7, 4, 685.0, 40], ["ABO · PF · V1 V2", "Frio", 372.7, 3428, 2774, 30, 23, 2, 0, 0.0, 10], ["CBO · PF · 02 · pg02", "Frio", 315.16, 6262, 4630, 46, 43, 6, 1, 97.0, 7]];
-const CRE = [["GV_CAPTACAO_FEED_V01_002", 3038.8, 490, 17, 1048, 328, 510, "https://www.instagram.com/p/DbV3Q4OgWU8/"], ["FF_PG_CAPTACAO_FEED_IMG01_086_290702", 1821.5, 181, 9, 0, 0, 0, "https://www.instagram.com/p/DboNzZfANJ8/"], ["GV_CAPTACAO_FEED_V01_087", 832.1, 113, 3, 1797, 633, 629, "https://www.instagram.com/p/DclpcXDAoIF/"], ["GV_CAPTACAO_FEED_V01_086", 792.77, 92, 2, 1534, 555, 555, "https://www.instagram.com/p/DclpcaSgHve/"], ["GV_CAPTACAO_FEED_IMG01_087", 730.45, 69, 1, 0, 0, 0, "https://www.instagram.com/p/DcTlmPSAQY1/"], ["🟡GV_CAPTACAO_FEED_IMG01_102_0909", 581.74, 73, 1, 0, 0, 0, "https://www.instagram.com/p/DdETpXhgD0l/"], ["GV_CAPTACAO_FEED_V01_030_0409", 580.08, 65, 2, 1135, 392, 351, "https://www.instagram.com/p/Dc3904wAh8g/"], ["GV_CAPTACAO_FEED_IMG01_086", 539.53, 52, 1, 0, 0, 0, "https://www.instagram.com/p/DcTl0utABKs/"], ["GV_CAPTACAO_FEED_V01_030", 536.96, 147, 4, 1249, 590, 553, "https://www.instagram.com/p/DboNzcigSyt/"], ["GV_CAPTACAO_FEED_V01_093", 426.83, 60, 1, 710, 400, 424, "https://www.instagram.com/p/DcjTEUNA3Rz/"], ["FF_PG_CAPTACAO_FEED_IMG01_086_290701", 332.21, 30, 1, 0, 0, 0, "https://www.instagram.com/p/DboNzZfANJ8/"], ["GV_CAPTACAO_NEW_CANVA_LEO_07", 315.16, 46, 1, 30, 1, 0, "https://www.instagram.com/p/DbV5i3agu5z/"], ["GV_CAPTACAO_FEED_V01_002_0409", 310.79, 42, 1, 908, 307, 441, "https://www.instagram.com/p/Dc390AcA4k4/"], ["🟡GV_CAPTACAO_FEED_IMG01_107_1209", 246.43, 33, 2, 0, 0, 0, "https://www.instagram.com/p/DdM--Hagmgs/"], ["🟡GV_CAPTACAO_FEED_IMG01_108_1209", 237.06, 22, 1, 0, 0, 0, "https://www.instagram.com/p/DdM--oNAIFF/"], ["GV_CAPTACAO_FEED_V01_092", 192.12, 32, 1, 565, 298, 322, "https://www.instagram.com/p/DcjTD7bA5u8/"], ["🟡GV_CAPTACAO_FEED_IMG01_114_1209", 172.26, 17, 1, 0, 0, 0, "https://www.instagram.com/p/DdM_Befgn3b/"]];
+const META = {"mes": "setembro/26", "periodo": "01/09 – 18/09/2026", "periodoAnterior": "01/08 – 18/08", "gerado": "18/09/2026"};
+const FRENTES = [{"titulo": "Biblioteca · Perpétuo", "subtitulo": "conta CA_GLAUBER_LT · low ticket R$ 97", "link": "perpetuo/", "ticket": 97.0, "atual": {"gasto": 72.88, "impressoes": 1336, "cliques_link": 14, "checkouts": 10, "compras": 0, "receita": 0.0}, "anterior": {"gasto": 0.0, "impressoes": 0, "cliques_link": 0, "checkouts": 0, "compras": 0, "receita": 0.0}, "foraDoAr": []}, {"titulo": "Conta 01 · Imersão e esteira", "subtitulo": "conta CA 01 · campanhas de VENDA", "link": "funil/", "ticket": 627.0, "atual": {"gasto": 4681.85, "impressoes": 67404, "cliques_link": 569, "checkouts": 46, "compras": 9, "receita": 1170.0}, "anterior": {"gasto": 15252.26, "impressoes": 202577, "cliques_link": 1770, "checkouts": 192, "compras": 57, "receita": 7335.97}, "foraDoAr": []}];
+const TOTAL = {"gasto": 4754.73, "impressoes": 68740, "cliques_link": 583, "checkouts": 56, "compras": 9, "receita": 1170.0};
+const TOTAL_ANT = {"gasto": 15252.26, "impressoes": 202577, "cliques_link": 1770, "checkouts": 192, "compras": 57, "receita": 7335.97};
+const DIAS = [["01/09", 263.36, 0.0], ["02/09", 281.61, 97.0], ["03/09", 248.31, 0.0], ["04/09", 524.73, 97.0], ["05/09", 199.58, 97.0], ["06/09", 0.0, 0.0], ["08/09", 0.0, 97.0], ["09/09", 185.36, 0.0], ["10/09", 462.94, 97.0], ["11/09", 304.31, 0.0], ["12/09", 761.69, 0.0], ["13/09", 364.97, 394.0], ["14/09", 371.29, 0.0], ["15/09", 377.5, 194.0], ["16/09", 131.79, 0.0], ["17/09", 156.13, 97.0], ["18/09", 121.16, 0.0]];
 
 
-/* ============================================================
-   BENCHMARKS  (Low Ticket — produto base R$ 97)
-   ============================================================ */
-const BENCH = {
-  cpm:     {dir:'down', ideal:22,   crit:35,   fmt:'money', label:'R$ 12–22'},
-  ctr:     {dir:'up',   ideal:1.2,  crit:0.7,  fmt:'pct',   label:'> 1,2%'},
-  cpc:     {dir:'down', ideal:1.5,  crit:2.5,  fmt:'money', label:'< R$ 1,50'},
-  freq:    {dir:'down', ideal:3.0,  crit:4.0,  fmt:'dec',   label:'< 3,0'},
-  fluxo:   {dir:'up',   ideal:85,   crit:70,   fmt:'pct',   label:'> 85%'},
-  custoLp: {dir:'down', ideal:3,    crit:6,    fmt:'money', label:'< R$ 3,00'},
-  convPag: {dir:'up',   ideal:18,   crit:10,   fmt:'pct',   label:'> 18%'},
-  custoIc: {dir:'gray', label:'—'},
-  convChk: {dir:'up',   ideal:45,   crit:30,   fmt:'pct',   label:'> 45%'},
-  cpa:     {dir:'down', ideal:40,   crit:80,   fmt:'money', label:'< R$ 40 (prod. R$ 97)'},
-  roas:    {dir:'up',   ideal:3.5,  crit:1.5,  fmt:'dec',   label:'> 3,5 (mín. 2,0)'}
-};
+const brl = v => ((v||0) < 0 ? "−R$ " : "R$ ") + Math.abs(v||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const brl0 = v => ((v||0) < 0 ? "−R$ " : "R$ ") + Math.abs(v||0).toLocaleString("pt-BR",{maximumFractionDigits:0});
+const int = v => (v||0).toLocaleString("pt-BR");
+const dec = v => (v||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const div = (a,b) => (b>0 ? a/b : 0);
 
-const brl = v => "R$ " + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pct = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
-const dec = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const intf= v => (v||0).toLocaleString('pt-BR');
-const fmt = (v,f)=> f==='money'?brl(v): f==='pct'?pct(v): f==='dec'?dec(v): intf(v);
+document.getElementById("mes").textContent = META.mes;
+document.getElementById("periodo").textContent = "Período: " + META.periodo + " · atualizado em " + META.gerado;
+document.getElementById("periodoAnt").textContent = META.periodoAnterior;
 
-function status(val,b){
-  if(!b || b.dir==='gray') return 'gray';
-  if(b.dir==='up')   return val>=b.ideal?'green': val<=b.crit?'red':'yellow';
-  return val<=b.ideal?'green': val>=b.crit?'red':'yellow';
+/* variação vs mesmo pedaço do mês passado; maiorEhMelhor inverte a cor */
+function variacao(agora, antes, maiorEhMelhor){
+  if(!antes){ return '<span class="var v-flat">novo</span>'; }
+  const p = ((agora - antes) / antes) * 100;
+  const bom = maiorEhMelhor ? p >= 0 : p <= 0;
+  const cls = Math.abs(p) < 1 ? "v-flat" : (bom ? "v-up" : "v-down");
+  const sinal = p >= 0 ? "+" : "";
+  return '<span class="var ' + cls + '">' + sinal + p.toLocaleString("pt-BR",{maximumFractionDigits:0}) + '%</span>';
 }
 
-const M = {
-  cpm:     T.impressions? T.spend/T.impressions*1000 : 0,
-  ctr:     T.impressions? T.linkClicks/T.impressions*100 : 0,
-  cpc:     T.linkClicks? T.spend/T.linkClicks : 0,
-  freq:    T.reach? T.impressions/T.reach : 0,
-  fluxo:   T.linkClicks? T.lpViews/T.linkClicks*100 : 0,
-  custoLp: T.lpViews? T.spend/T.lpViews : 0,
-  convPag: T.lpViews? T.initiateCheckout/T.lpViews*100 : 0,
-  custoIc: T.initiateCheckout? T.spend/T.initiateCheckout : 0,
-  convChk: T.initiateCheckout? T.purchases/T.initiateCheckout*100 : 0,
-  cpa:     T.purchases? T.spend/T.purchases : 0,
-  roas:    T.spend? T.revenue/T.spend : 0,
-  lucro:   T.revenue - T.spend,
-  ticket:  T.purchases? T.revenue/T.purchases : 0,
-  custoVisita: T.profileVisits? T.spend/T.profileVisits : 0
-};
+// ---------- 1. Placar do mês ----------
+const roas = div(TOTAL.receita, TOTAL.gasto);
+const roasAnt = div(TOTAL_ANT.receita, TOTAL_ANT.gasto);
+const cpa = div(TOTAL.gasto, TOTAL.compras);
+const cpaAnt = div(TOTAL_ANT.gasto, TOTAL_ANT.compras);
+const lucro = (TOTAL.receita||0) - (TOTAL.gasto||0);
 
-document.getElementById('periodo').textContent = "Período: "+META.periodo;
-document.getElementById('gerado').textContent = META.gerado;
-const roasSt = status(M.roas,BENCH.roas);
-const cards = [
-  {lbl:"Investimento",  val:brl(T.spend),   foot:"Gasto no período",           st:"accent"},
-  {lbl:"Faturamento",   val:brl(T.revenue), foot:"Valor de conversão (Pixel)", st:"accent"},
-  {lbl:"Lucro Líquido", val:brl(M.lucro),   foot:"Faturamento − Gasto",        st:M.lucro>0?"green":"red"},
-  {lbl:"ROAS",          val:dec(M.roas)+"x",foot:"Retorno · ideal > 3,5",      st:roasSt},
-  {lbl:"Compras",       val:intf(T.purchases),foot:"Ticket médio "+brl(M.ticket), st:"accent"},
-  {lbl:"CPA",           val:brl(M.cpa),     foot:"Custo por compra · prod. R$ 97", st:status(M.cpa,BENCH.cpa)},
-  {lbl:"Visitas ao Perfil",val:intf(T.profileVisits),foot:"Custo/visita "+brl(M.custoVisita), st:"accent"}
-];
-document.getElementById('scorecards').innerHTML = cards.map(c=>`
-  <div class="card"><span class="stripe s-${c.st}"></span>
-    <div class="lbl">${c.lbl}</div><div class="val">${c.val}</div><div class="foot">${c.foot}</div>
-  </div>`).join('');
+document.getElementById("placar").innerHTML = [
+  {lbl:"Investido", val:brl(TOTAL.gasto), foot:variacao(TOTAL.gasto, TOTAL_ANT.gasto, true) + " vs mês passado", cls:"accent"},
+  {lbl:"Faturamento", val:brl(TOTAL.receita), foot:variacao(TOTAL.receita, TOTAL_ANT.receita, true) + " vs mês passado", cls:TOTAL.receita>0?"green":"gray"},
+  {lbl:"Resultado", val:brl(lucro), foot:lucro>=0 ? "faturou mais do que gastou" : "gastou mais do que faturou", cls:lucro>0?"green":"red"},
+  {lbl:"ROAS", val:dec(roas)+"x", foot:variacao(roas, roasAnt, true) + " vs mês passado", cls:roas>=2?"green":(roas>=1?"yellow":"red")},
+  {lbl:"Vendas", val:int(TOTAL.compras), foot:variacao(TOTAL.compras, TOTAL_ANT.compras, true) + " vs mês passado", cls:TOTAL.compras>0?"green":"gray"},
+  {lbl:"CPA médio", val:TOTAL.compras?brl(cpa):"—", foot:TOTAL.compras&&TOTAL_ANT.compras ? variacao(cpa, cpaAnt, false) + " vs mês passado" : "—", cls:"gray"},
+].map(c => '<div class="card"><div class="stripe s-'+c.cls+'"></div><div class="lbl">'+c.lbl+
+  '</div><div class="val">'+c.val+'</div><div class="foot">'+c.foot+'</div></div>').join("");
 
-const steps = [
-  {name:"Impressões",  val:T.impressions,     conv:null},
-  {name:"Cliques link",val:T.linkClicks,      conv:{lbl:"CTR",   v:M.ctr,   b:BENCH.ctr}},
-  {name:"Visualiz. LP",val:T.lpViews,         conv:{lbl:"Fluxo", v:M.fluxo, b:BENCH.fluxo}},
-  {name:"Checkouts",   val:T.initiateCheckout,conv:{lbl:"Conv.Pág",v:M.convPag,b:BENCH.convPag}},
-  {name:"Compras",     val:T.purchases,       conv:{lbl:"Conv.Chk",v:M.convChk,b:BENCH.convChk}}
-];
-const maxV = steps[0].val || 1;
-document.getElementById('funnel').innerHTML = steps.map(s=>{
-  const w = Math.max((s.val/maxV*100),2.4);
-  let conv='';
-  if(s.conv){ const st=status(s.conv.v,s.conv.b);
-    conv=`<div class="conv">${s.conv.lbl} <span class="pill p-${st}">${fmt(s.conv.v,s.conv.b.fmt)}</span></div>`;
-  } else conv=`<div class="conv"></div>`;
-  return `<div class="frow">
-      <div class="name">${s.name}</div>
-      <div class="barwrap"><div class="bar" style="width:${w}%"><span class="barnum">${intf(s.val)}</span></div></div>
-      ${conv}</div>`;
-}).join('');
-
-const rows = [
-  {stage:"Etapa 1 · Anúncio"},
-  {k:"CPM",                     v:M.cpm,     b:BENCH.cpm,     read:"Custo do leilão"},
-  {k:"CTR (link)",              v:M.ctr,     b:BENCH.ctr,     read:"Atratividade do criativo"},
-  {k:"CPC (link)",              v:M.cpc,     b:BENCH.cpc,     read:"Custo de entrada no funil"},
-  {k:"Frequência",              v:M.freq,    b:BENCH.freq,    read:"Saturação (aprox.)"},
-  {k:"Visitas ao Perfil",       v:T.profileVisits, b:{dir:'gray',fmt:'int',label:'—'}, read:"Interesse gerado no perfil (@ecovoltan)"},
-  {k:"Custo por Visita ao Perfil",v:M.custoVisita, b:{dir:'gray',fmt:'money',label:'—'}, read:"Gasto ÷ visitas ao perfil"},
-  {stage:"Etapa 2 · Página de Vendas"},
-  {k:"Fluxo de Tráfego (Connect)",v:M.fluxo, b:BENCH.fluxo,   read:"LP Views ÷ Cliques"},
-  {k:"Custo por LP View",       v:M.custoLp, b:BENCH.custoLp, read:"Custo do prospect qualificado"},
-  {stage:"Etapa 3 · Checkout"},
-  {k:"Conv. da Página",         v:M.convPag, b:BENCH.convPag, read:"Checkouts ÷ LP Views · copy/oferta"},
-  {k:"Custo por Checkout",      v:M.custoIc, b:BENCH.custoIc, read:"Previsor de CPA"},
-  {stage:"Etapa 4 · Resultado"},
-  {k:"Conv. do Checkout",       v:M.convChk, b:BENCH.convChk, read:"Compras ÷ Checkouts · pagamento"},
-  {k:"CPA (custo por compra)",  v:M.cpa,     b:BENCH.cpa,     read:"vs. ticket do produto"},
-  {k:"ROAS",                    v:M.roas,    b:BENCH.roas,    read:"Faturamento ÷ Gasto"}
-];
-const tb = document.querySelector('#stagetable tbody');
-tb.innerHTML = rows.map(r=>{
-  if(r.stage) return `<tr><td colspan="5" class="stage-tag">${r.stage}</td></tr>`;
-  const st=status(r.v,r.b);
-  const stTxt={green:"Saudável",yellow:"Atenção",red:"Crítico",gray:"—"}[st];
-  return `<tr>
-    <td class="metric-name">${r.k}</td>
-    <td class="num">${fmt(r.v,r.b.fmt||'dec')}</td>
-    <td class="bench">${r.b.label||'—'}</td>
-    <td><span class="dot d-${st}"></span>${stTxt}</td>
-    <td class="bench">${r.read}</td></tr>`;
-}).join('');
-
-new Chart(document.getElementById('chartLucro'),{
-  type:'bar',
-  data:{ labels:DAILY.map(d=>d[0]),
-    datasets:[
-      {type:'bar',label:'Investimento',data:DAILY.map(d=>d[1]),backgroundColor:'#33405a',borderRadius:3,order:2},
-      {type:'line',label:'Faturamento',data:DAILY.map(d=>d[2]),borderColor:'#4f9cff',backgroundColor:'#4f9cff',tension:.3,order:1,pointRadius:2},
-      {type:'line',label:'Lucro Líquido',data:DAILY.map(d=>d[2]-d[1]),borderColor:'#2ec27e',backgroundColor:'#2ec27e',tension:.3,order:0,pointRadius:2,borderWidth:2}
-    ]},
-  options:{responsive:true,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{labels:{color:'#8b98a9',boxWidth:12}},
-      tooltip:{callbacks:{label:c=>c.dataset.label+': '+brl(c.parsed.y)}}},
-    scales:{x:{ticks:{color:'#8b98a9',maxRotation:0,autoSkip:true},grid:{color:'#1c2330'}},
-      y:{ticks:{color:'#8b98a9',callback:v=>'R$'+v.toLocaleString('pt-BR')},grid:{color:'#1c2330'}}}}
+// Número comprido (ex.: "−R$ 3.584,73") não cabe em 27px na largura do card e
+// quebra em duas linhas: encolhe a fonte em vez de deixar quebrar.
+document.querySelectorAll(".card .val").forEach(function(el){
+  var n = el.textContent.trim().length;
+  if(n > 13) el.style.fontSize = "20px";
+  else if(n > 10) el.style.fontSize = "23px";
 });
 
-const ct = document.querySelector('#camptable tbody');
-const campRows = CAMPS.map(c=>{
-  const [name,pub,spend,impr,reach,lc,lpv,ic,pur,rev,pv]=c;
-  return {
-    name, pub, spend, impr, pv, lpv, ic, pur, rev,
-    cpm:     impr? spend/impr*1000 : 0,
-    ctr:     impr? lc/impr*100 : 0,
-    cpc:     lc? spend/lc : 0,
-    freq:    reach? impr/reach : 0,
-    fluxo:   lc? lpv/lc*100 : 0,
-    custoLp: lpv? spend/lpv : 0,
-    convPag: lpv? ic/lpv*100 : 0,
-    custoIc: ic? spend/ic : 0,
-    convChk: ic? pur/ic*100 : 0,
-    cpa:     pur? spend/pur : null,
-    lucro:   rev - spend,
-    roas:    spend? rev/spend : 0,
-    custoPv: pv? spend/pv : 0
-  };
-}).sort((a,b)=>b.spend-a.spend);
-ct.innerHTML = campRows.map(r=>{
-  const cpmSt=status(r.cpm,BENCH.cpm), ctrSt=status(r.ctr,BENCH.ctr), cpcSt=status(r.cpc,BENCH.cpc),
-        frSt=status(r.freq,BENCH.freq), fSt=status(r.fluxo,BENCH.fluxo), clpSt=status(r.custoLp,BENCH.custoLp),
-        pSt=status(r.convPag,BENCH.convPag), ckSt=status(r.convChk,BENCH.convChk), rSt=status(r.roas,BENCH.roas);
-  const dt=(s)=>`<span class="dot d-${s}"></span>`;
-  return `<tr>
-    <td class="metric-name">${r.name}</td>
-    <td>${r.pub}</td>
-    <td class="num">${brl(r.spend)}</td>
-    <td class="num">${intf(r.impr)}</td>
-    <td class="num">${dt(cpmSt)}${brl(r.cpm)}</td>
-    <td class="num">${dt(ctrSt)}${pct(r.ctr)}</td>
-    <td class="num">${dt(cpcSt)}${brl(r.cpc)}</td>
-    <td class="num">${dt(frSt)}${dec(r.freq)}</td>
-    <td class="num">${intf(r.lpv)}</td>
-    <td class="num">${dt(fSt)}${pct(r.fluxo)}</td>
-    <td class="num">${dt(clpSt)}${brl(r.custoLp)}</td>
-    <td class="num">${intf(r.ic)}</td>
-    <td class="num">${dt(pSt)}${pct(r.convPag)}</td>
-    <td class="num">${brl(r.custoIc)}</td>
-    <td class="num">${intf(r.pur)}</td>
-    <td class="num">${dt(ckSt)}${pct(r.convChk)}</td>
-    <td class="num">${r.cpa!=null?dt(status(r.cpa,BENCH.cpa))+brl(r.cpa):'—'}</td>
-    <td class="num">${brl(r.rev)}</td>
-    <td class="num">${brl(r.lucro)}</td>
-    <td class="num">${dt(rSt)}${dec(r.roas)}x</td>
-    <td class="num">${intf(r.pv)}</td>
-    <td class="num">${brl(r.custoPv)}</td></tr>`;
-}).join('');
+// ---------- 2. Cada frente ----------
+document.getElementById("frentes").innerHTML = FRENTES.map(f => {
+  const a = f.atual, b = f.anterior;
+  const fRoas = div(a.receita, a.gasto), fCpa = div(a.gasto, a.compras);
+  const fatia = div(a.gasto, TOTAL.gasto) * 100;
 
-/* ---- Seção 6 · Criativos (custo por ação, agregado por anúncio) ---- */
-const ctc = document.querySelector('#cretable tbody');
-const dash = '<span style="color:var(--mut)">—</span>';
-const cst  = (spend,q) => q ? brl(spend/q) : dash;
-if(!CRE.length){
-  ctc.innerHTML = `<tr><td colspan="10" style="color:var(--mut);text-align:center;padding:18px">Nenhum criativo com venda registrada nesta atualização.</td></tr>`;
-} else {
-  ctc.innerHTML = CRE.map(c=>{
-    const [name,spend,clk,pur,v3,v15,v25,link]=c;
-    const anc = link ? `<a href="${link}" target="_blank" rel="noopener">ver criativo ↗</a>` : dash;
-    return `<tr>
-      <td class="metric-name">${name}</td>
-      <td class="num">${brl(spend)}</td>
-      <td class="num">${intf(clk)}</td>
-      <td class="num">${intf(pur)}</td>
-      <td class="num">${cst(spend,clk)}</td>
-      <td class="num">${cst(spend,pur)}</td>
-      <td class="num">${cst(spend,v3)}</td>
-      <td class="num">${cst(spend,v15)}</td>
-      <td class="num">${cst(spend,v25)}</td>
-      <td>${anc}</td></tr>`;
-  }).join('');
-}
+  let selo = '<span class="pill p-gray">sem venda ainda</span>';
+  if(f.foraDoAr.length){
+    selo = '<span class="pill p-red">' + f.foraDoAr.length + ' anúncio(s) fora do ar</span>';
+  } else if(a.compras > 0){
+    selo = fRoas >= 1
+      ? '<span class="pill p-green">ROAS ' + dec(fRoas) + 'x</span>'
+      : '<span class="pill p-yellow">ROAS ' + dec(fRoas) + 'x</span>';
+  } else if(a.gasto > 0){
+    selo = '<span class="pill p-yellow">rodando, sem venda</span>';
+  }
+
+  const corBarra = a.compras>0 && fRoas>=1 ? "var(--green)" : (a.gasto>0 ? "var(--yellow)" : "var(--gray)");
+
+  return '<div class="frente">'
+    + '<h3>' + f.titulo + '</h3><div class="desc">' + f.subtitulo + '</div>'
+    + '<div class="grid">'
+    +   '<div><div class="k">Investido</div><div class="v">' + brl0(a.gasto) + '</div><div class="c">' + fatia.toLocaleString("pt-BR",{maximumFractionDigits:0}) + '% da verba</div></div>'
+    +   '<div><div class="k">Faturamento</div><div class="v">' + brl0(a.receita) + '</div><div class="c">' + variacao(a.receita, b.receita, true) + '</div></div>'
+    +   '<div><div class="k">Vendas</div><div class="v">' + int(a.compras) + '</div><div class="c">' + variacao(a.compras, b.compras, true) + '</div></div>'
+    +   '<div><div class="k">CPA</div><div class="v">' + (a.compras?brl0(fCpa):"—") + '</div><div class="c">produto ' + brl0(f.ticket) + '</div></div>'
+    +   '<div><div class="k">Checkouts</div><div class="v">' + int(a.checkouts) + '</div><div class="c">' + (a.checkouts?brl(div(a.gasto,a.checkouts)):"—") + ' cada</div></div>'
+    +   '<div><div class="k">ROAS</div><div class="v">' + (a.receita?dec(fRoas)+"x":"—") + '</div><div class="c">' + (a.gasto?(a.receita-a.gasto>=0?"no positivo":"no negativo"):"sem gasto") + '</div></div>'
+    + '</div>'
+    + '<div class="barra"><i style="width:' + Math.max(2,Math.min(100,fatia)) + '%;background:' + corBarra + '"></i></div>'
+    + '<div class="rodape">' + selo + '<a href="' + f.link + '">abrir o dash completo →</a></div>'
+    + '</div>';
+}).join("");
+
+// ---------- 3. Gráfico ----------
+new Chart(document.getElementById("grafico"), {
+  data:{
+    labels: DIAS.map(d=>d[0]),
+    datasets:[
+      {type:"bar", label:"Investido", data:DIAS.map(d=>d[1]), backgroundColor:"#2f6fd0", borderRadius:4},
+      {type:"bar", label:"Faturamento", data:DIAS.map(d=>d[2]), backgroundColor:"#2ec27e", borderRadius:4},
+    ]},
+  options:{
+    responsive:true, maintainAspectRatio:true,
+    plugins:{legend:{labels:{color:"#8b98a9",boxWidth:12}},
+             tooltip:{callbacks:{label:c=>c.dataset.label+": "+brl(c.parsed.y)}}},
+    scales:{x:{ticks:{color:"#8b98a9"},grid:{color:"#2a3441"}},
+            y:{ticks:{color:"#8b98a9",callback:v=>"R$ "+v},grid:{color:"#2a3441"},beginAtZero:true}}
+  }
+});
+
+// ---------- 4. Leitura automática ----------
+(function(){
+  const linhas = [];
+  const paga = FRENTES.filter(f => f.atual.compras > 0 && div(f.atual.receita, f.atual.gasto) >= 1);
+  const gasta = [...FRENTES].sort((x,y) => y.atual.gasto - x.atual.gasto)[0];
+
+  if(paga.length){
+    linhas.push('<p><b>Quem está pagando a conta:</b> ' + paga.map(f=>f.titulo).join(", ")
+      + '. Somando tudo, o mês está ' + (lucro>=0 ? 'no positivo em ' + brl(lucro) : 'no negativo em ' + brl(Math.abs(lucro)))
+      + ' (ROAS ' + dec(roas) + 'x).</p>');
+  } else {
+    linhas.push('<p><b>Nenhuma frente fechou no positivo ainda neste mês.</b> Investido ' + brl(TOTAL.gasto)
+      + ' contra ' + brl(TOTAL.receita) + ' de faturamento registrado pelo Meta.</p>');
+  }
+
+  if(gasta){
+    linhas.push('<p><b>Onde o dinheiro está indo:</b> ' + gasta.titulo + ' levou '
+      + (div(gasta.atual.gasto, TOTAL.gasto)*100).toLocaleString("pt-BR",{maximumFractionDigits:0})
+      + '% da verba do mês.</p>');
+  }
+
+  const novas = FRENTES.filter(f => f.atual.gasto > 0 && !f.anterior.gasto);
+  if(novas.length){
+    linhas.push('<p><b>Estreou neste mês:</b> ' + novas.map(f=>f.titulo).join(", ")
+      + '. Campanha nova precisa acumular conversão antes de ser julgada — leia a aba dela antes de concluir qualquer coisa.</p>');
+  }
+
+  const travadas = FRENTES.filter(f => f.foraDoAr.length);
+  if(travadas.length){
+    linhas.push('<p><b>Atenção:</b> ' + travadas.map(f => f.titulo + ' (' + f.foraDoAr.length + ')').join(", ")
+      + ' com anúncio em análise ou reprovado dentro de conjunto ativo — é verba parada.</p>');
+  }
+
+  const caiu = TOTAL_ANT.gasto > 0 && TOTAL.gasto < TOTAL_ANT.gasto * 0.6;
+  if(caiu){
+    linhas.push('<p><b>O investimento caiu bastante</b> em relação ao mesmo pedaço do mês passado ('
+      + brl(TOTAL.gasto) + ' contra ' + brl(TOTAL_ANT.gasto) + '). Se não foi decisão de verba, vale conferir se alguma campanha parou sozinha.</p>');
+  }
+  document.getElementById("leitura").innerHTML = linhas.join("");
+})();
 </script>
+<script src="abas.js"></script>
 </body>
 </html>
