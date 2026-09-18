@@ -48,6 +48,25 @@
   .logbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
   .logbar label{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
   .logbar select{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;cursor:pointer}
+  .logbar input[type=search]{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#12141a;color:var(--txt);font-size:14px;min-width:230px;flex:1}
+  .logcount{color:var(--mut);font-size:12px}
+  .btnmini{padding:8px 12px;border-radius:10px;border:1px solid #35507a;background:#243042;color:#cfe3ff;font-size:13px;font-weight:600;cursor:pointer}
+  .btnmini:hover{background:#2c3b52}
+  /* --- diario de bordo: timeline --- */
+  .p-concluido{background:rgba(46,204,113,.15);color:var(--verde)}
+  .daygrp{margin-bottom:20px}
+  .dayhead{position:sticky;top:0;z-index:3;background:var(--bg);padding:8px 0;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+  .dayhead .bar{flex:1;height:1px;background:var(--line)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .card .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .card .cli{font-size:15px;font-weight:700}
+  .card .dt{color:var(--mut);font-size:12px;font-variant-numeric:tabular-nums}
+  .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(74,158,255,.14);color:var(--azul)}
+  .card .txt{font-size:14px;line-height:1.7;color:#d3d6dd;white-space:pre-wrap;overflow-wrap:anywhere;max-width:92ch}
+  .card .txt.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .maisbtn{margin-top:8px;background:none;border:none;color:var(--azul);font-size:12px;font-weight:600;cursor:pointer;padding:0}
+  .vazio{color:var(--mut);padding:16px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  mark{background:rgba(241,196,15,.32);color:inherit;border-radius:3px;padding:0 1px}
   footer{color:var(--mut);font-size:11px;text-align:center;margin-top:30px}
   /* --- meus dados (CNPJ etc) --- */
   .meus{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:linear-gradient(90deg,#16202e,#1a1d24);border:1px solid #2f4463;border-radius:12px;padding:12px 16px;margin-bottom:20px}
@@ -156,8 +175,13 @@
     <div class="logbar">
       <label for="logFiltro">Dia:</label>
       <select id="logFiltro"></select>
+      <label for="logCliente">Cliente:</label>
+      <select id="logCliente"></select>
+      <input id="logBusca" type="search" placeholder="Buscar no texto (campanha, ID, palavra)…">
+      <button class="btnmini" id="logExpandir">Expandir tudo</button>
+      <span class="logcount" id="logCount"></span>
     </div>
-    <div class="tblwrap"><table id="log"></table></div>
+    <div id="log"></div>
   </section>
   <footer>Cockpit GGD · snapshot criptografado · atualizado pelo n8n às 08h</footer>
 </div>
@@ -237,18 +261,95 @@ function build(data){
   ].map(([l,n,c])=>`<div class="kpi"><div class="n" style="color:${c}">${n}</div><div class="l">${l}</div></div>`).join('');
   render('clientes',cli);
   render('saude',saudeHoje.length?saudeHoje:sau.slice(-10));
-  // --- diário de bordo com filtro por data ---
-  const diasLog=[...new Set(log.map(l=>l.Data).filter(Boolean))].sort().reverse();
-  const sel=document.getElementById('logFiltro');
-  sel.innerHTML='<option value="__all__">Todos os dias</option>'+
-    diasLog.map(d=>`<option value="${d}">${d}</option>`).join('');
-  const pintaLog=()=>{
-    const v=sel.value;
-    const filt=(v==='__all__'?log:log.filter(l=>l.Data===v));
-    render('log',filt.slice().reverse());
+  // --- diário de bordo: timeline de cards, com filtro por dia/cliente e busca ---
+  const esc = v => String(v??'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  // escapa e depois transforma URL em link (devolve o & de verdade no href)
+  const txtHtml = v => esc(v).replace(/https?:\/\/[^\s<]+/g, m=>{
+    const t=m.replace(/[.,;)]+$/,''), trail=m.slice(t.length);
+    const href=t.replace(/&amp;/g,'&');
+    const label=t.replace(/^https?:\/\//,''), short=label.length>46?label.slice(0,46)+'…':label;
+    return `<a href="${href}" target="_blank" rel="noopener" style="color:#7cc4ff">${short} ↗</a>`+trail;
+  });
+  const destaca = (html,q)=>{
+    const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+    return html.split(/(<[^>]*>)/).map(p=>p.startsWith('<')?p:p.replace(re,'<mark>$1</mark>')).join('');
   };
-  sel.value=diasLog.length?diasLog[0]:'__all__';  // abre no dia mais recente
-  sel.onchange=pintaLog;
+  const fmtDia = d=>{
+    const [a,m,di]=String(d).split('-');
+    if(!di) return String(d);
+    const sem=['domingo','segunda','terça','quarta','quinta','sexta','sábado'][new Date(+a,+m-1,+di).getDay()];
+    return `${di}/${m} · ${sem}`;
+  };
+
+  const selDia=document.getElementById('logFiltro');
+  const selCli=document.getElementById('logCliente');
+  const inpBusca=document.getElementById('logBusca');
+  const btnExp=document.getElementById('logExpandir');
+  const elLog=document.getElementById('log');
+  const elCount=document.getElementById('logCount');
+  let tudoAberto=false;
+
+  const diasLog=[...new Set(log.map(l=>l.Data).filter(Boolean))].sort().reverse();
+  const clisLog=[...new Set(log.map(l=>l.Cliente).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const hojeISO=(()=>{const n=new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');})();
+  // linhas com data futura (coisa agendada) nao podem roubar o "mais recente"
+  const diasPassados=diasLog.filter(d=>d<=hojeISO);
+  const diaTopo=diasPassados[0]||diasLog[0];
+  selDia.innerHTML='<option value="__hoje__">Mais recente'+(diaTopo?' ('+fmtDia(diaTopo)+')':'')+'</option>'+
+    '<option value="__7__">Últimos 7 dias</option>'+
+    '<option value="__all__">Todos os dias</option>'+
+    diasLog.map(d=>`<option value="${d}">${fmtDia(d)}${d>hojeISO?' · agendado':''}</option>`).join('');
+  selCli.innerHTML='<option value="__all__">Todos</option>'+
+    clisLog.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+
+  const filtrar=()=>{
+    const vd=selDia.value, vc=selCli.value, q=inpBusca.value.trim().toLowerCase();
+    let rows=log.filter(l=>l.Data);
+    if(vd==='__hoje__') rows=rows.filter(l=>l.Data===diaTopo);
+    else if(vd==='__7__'){ const set=new Set(diasPassados.slice(0,7)); rows=rows.filter(l=>set.has(l.Data)); }
+    else if(vd!=='__all__') rows=rows.filter(l=>l.Data===vd);
+    if(vc!=='__all__') rows=rows.filter(l=>l.Cliente===vc);
+    if(q) rows=rows.filter(l=>Object.values(l).join(' ').toLowerCase().includes(q));
+    return rows;
+  };
+
+  const pintaLog=()=>{
+    const rows=filtrar(), q=inpBusca.value.trim();
+    elCount.textContent = rows.length ? rows.length+(rows.length>1?' registros':' registro') : '';
+    if(!rows.length){ elLog.innerHTML='<div class="vazio">Nada encontrado com esses filtros.</div>'; return; }
+    const porDia={};
+    rows.forEach(r=>{ (porDia[r.Data]=porDia[r.Data]||[]).push(r); });
+    elLog.innerHTML=Object.keys(porDia).sort().reverse().map(d=>{
+      const itens=porDia[d].slice().reverse().map(r=>{
+        let corpo=txtHtml(r['O que foi feito']||'');
+        if(q) corpo=destaca(corpo,q);
+        return `<div class="card">
+          <div class="head">
+            <span class="cli">${esc(r.Cliente||'—')}</span>
+            ${r.Categoria?`<span class="tag">${esc(r.Categoria)}</span>`:''}
+            ${r.Status?pill(r.Status):''}
+            <span class="dt" style="margin-left:auto">${esc(r.Data)}</span>
+          </div>
+          <div class="txt${tudoAberto?'':' clamp'}">${corpo}</div>
+          <button class="maisbtn">${tudoAberto?'ler menos ▲':'ler mais ▼'}</button>
+        </div>`;
+      }).join('');
+      const n=porDia[d].length;
+      return `<div class="daygrp"><div class="dayhead">${fmtDia(d)}${d>hojeISO?' · agendado':''}<span class="bar"></span>${n}${n>1?' registros':' registro'}</div>${itens}</div>`;
+    }).join('');
+    // só mostra "ler mais" onde o texto realmente estoura as 4 linhas
+    elLog.querySelectorAll('.card').forEach(c=>{
+      const t=c.querySelector('.txt'), b=c.querySelector('.maisbtn');
+      if(!tudoAberto && t.scrollHeight<=t.clientHeight+2){ t.classList.remove('clamp'); b.remove(); return; }
+      b.onclick=()=>{ const fechado=t.classList.toggle('clamp'); b.textContent=fechado?'ler mais ▼':'ler menos ▲'; };
+    });
+  };
+
+  selDia.onchange=pintaLog;
+  // escolher um cliente = querer o histórico dele, não só o dia de hoje
+  selCli.onchange=()=>{ if(selCli.value!=='__all__' && selDia.value==='__hoje__') selDia.value='__all__'; pintaLog(); };
+  let tBusca; inpBusca.oninput=()=>{ clearTimeout(tBusca); tBusca=setTimeout(pintaLog,180); };
+  btnExp.onclick=()=>{ tudoAberto=!tudoAberto; btnExp.textContent=tudoAberto?'Recolher tudo':'Expandir tudo'; pintaLog(); };
   pintaLog();
   document.getElementById('atualizado').textContent='snapshot de '+(data.gerado_em||'—');
 }
