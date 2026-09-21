@@ -521,6 +521,12 @@ const TC = {
   HSS:          {color:'#EA580C', icon:'🔒', desc:'HOF Sem Segredos'},
   INTENSIVE:    {color:'#0D9488', icon:'⚡', desc:'Intensive Presencial'},
   OUTROS:       {color:'#6B7280', icon:'📌', desc:'Outros'},
+  'IMERSÃO ONE':       {color:'#84CC16', icon:'🚀', desc:'Imersão Iniciantes — ONE'},
+  'ESPECIALIZAÇÃO OFF':{color:'#06B6D4', icon:'🎯', desc:'Especialização — OFF'},
+  'ELEVATE PORTO':     {color:'#A16207', icon:'🇵🇹', desc:'Elevate Porto'},
+  'FULL FACE':         {color:'#DB2777', icon:'💉', desc:'Full Face'},
+  'SSN (fora GGD)':    {color:'#94A3B8', icon:'🔻', desc:'Campanha de fora da GGD'},
+  'FORA DA GGD':       {color:'#94A3B8', icon:'🔻', desc:'Campanha de fora da GGD'},
 };
 
 let RAW;
@@ -554,9 +560,21 @@ function tipoTotal(tipo) {
 }
 
 function allTipos() {
-  return Object.keys(TC).filter(t => {
-    if (activeAcc === 'all') return Object.values(RAW).some(a => a[t]);
-    return !!RAW[activeAcc]?.[t];
+  // As frentes saem do PROPRIO DADO, nao de uma lista escrita a mao aqui.
+  // Ate 21/09/2026 isso era Object.keys(TC): frente nova (IMERSAO ONE,
+  // ESPECIALIZACAO OFF, ELEVATE PORTO) entrava no enc-data e NUNCA era
+  // desenhada na tela. A TC agora so da cor, icone e descricao — quem nao
+  // estiver nela aparece igual, com o visual padrao.
+  const fonte = activeAcc === 'all'
+    ? Object.values(RAW).flatMap(a => Object.keys(a))
+    : Object.keys(RAW[activeAcc] || {});
+  const ordem = Object.keys(TC);
+  return [...new Set(fonte)].sort((a, b) => {
+    const ia = ordem.indexOf(a), ib = ordem.indexOf(b);
+    if (ia !== -1 && ib !== -1) return ia - ib;   // conhecidas: ordem da TC
+    if (ia !== -1) return -1;
+    if (ib !== -1) return 1;
+    return a.localeCompare(b, 'pt-BR');           // novas: alfabetica
   });
 }
 
@@ -757,7 +775,7 @@ function renderTable() {
 
   // Badge
   document.getElementById('table-tipo-badge').innerHTML = activeTipo
-    ? `<span style="background:${TC[activeTipo]?.color+'22'};color:${TC[activeTipo]?.color};padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer" onclick="toggleTipo('${activeTipo}')">✕ Limpar filtro</span>`
+    ? `<span style="background:${(TC[activeTipo]?.color||'#999')+'22'};color:${TC[activeTipo]?.color||'#999'};padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer" onclick="toggleTipo('${activeTipo}')">✕ Limpar filtro</span>`
     : '';
 
   let grandSpend = 0;
