@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roma Importadora — Cadastro de lojista na /aviamentos</title>
+<meta name="description" content="O que precisa mudar na página /aviamentos para medir o cadastro de lojista que chega pelo Google Ads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#f6f4f5;
+    --surface:#ffffff;
+    --surface-2:#faf7f8;
+    --ink:#1f191b;
+    --ink-2:#6b6065;
+    --line:#e5dee0;
+    --line-strong:#cfc4c8;
+    --roma:#e4002b;
+    --granada:#7a0016;
+    --granada-soft:#fff3f4;
+    --amber:#9a6200;
+    --amber-soft:#fdf6e7;
+    --ok:#00794f;
+    --ok-soft:#e8faf4;
+    --shadow:0 1px 2px rgba(31,25,27,.06), 0 8px 24px -16px rgba(31,25,27,.35);
+    --display:'Archivo', 'Segoe UI', -apple-system, sans-serif;
+    --body:'Source Sans 3', 'Segoe UI', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#141011;
+      --surface:#1c1618;
+      --surface-2:#221b1e;
+      --ink:#f0e9eb;
+      --ink-2:#a79ba0;
+      --line:#2e2528;
+      --line-strong:#463a3e;
+      --roma:#ff5670;
+      --granada:#ff90a4;
+      --granada-soft:#2c1015;
+      --amber:#e0a94a;
+      --amber-soft:#2a2112;
+      --ok:#6fc9a3;
+      --ok-soft:#12291f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141011; --surface:#1c1618; --surface-2:#221b1e;
+    --ink:#f0e9eb; --ink-2:#a79ba0; --line:#2e2528; --line-strong:#463a3e;
+    --roma:#ff5670; --granada:#ff90a4; --granada-soft:#2c1015;
+    --amber:#e0a94a; --amber-soft:#2a2112; --ok:#6fc9a3; --ok-soft:#12291f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.9);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding-inline:20px;}
+
+  /* ---------- topo ---------- */
+  .hero{background:linear-gradient(150deg,#26000a 0%,#4d0010 45%,#7a0016 100%); color:#fff;}
+  .hero .wrap{padding-block:44px 40px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:#ffa9b8; margin:0 0 16px;
+  }
+  .hero h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(28px,5.4vw,40px);
+    line-height:1.14; letter-spacing:-.02em; text-wrap:balance; margin:0 0 14px; color:#fff;
+  }
+  .hero p{margin:0; max-width:60ch; color:#f6d6dc; font-size:17.5px;}
+  .stamp{
+    margin-top:26px; padding-top:16px; border-top:1px solid rgba(255,255,255,.18);
+    font-family:var(--mono); font-size:12px; color:#e0a2ae; letter-spacing:.02em;
+  }
+
+  /* ---------- seções ---------- */
+  section{padding-block:38px;}
+  section + section{border-top:1px solid var(--line);}
+  h2{
+    font-family:var(--display); font-weight:600; font-size:25px; letter-spacing:-.015em;
+    margin:0 0 6px; text-wrap:balance;
+  }
+  h2 + .lede{margin:0 0 26px; color:var(--ink-2); max-width:62ch;}
+  h3{font-family:var(--display); font-weight:600; font-size:18.5px; margin:0 0 6px; letter-spacing:-.01em;}
+  p{margin:0 0 16px; max-width:66ch;}
+  p:last-child{margin-bottom:0;}
+  strong{font-weight:600;}
+  code{
+    font-family:var(--mono); font-size:.88em; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:4px; padding:1px 5px; white-space:nowrap;
+  }
+  a{color:var(--roma);}
+
+  /* ---------- pedido em 3 ---------- */
+  .asks{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:4px;}
+  .ask{
+    background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--granada);
+    border-radius:3px; padding:18px 18px 16px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .ask .n{
+    font-family:var(--mono); font-size:12px; color:var(--granada); letter-spacing:.1em;
+  }
+  .ask p{font-size:15.5px; color:var(--ink-2); margin:0;}
+  .ask .who{
+    margin-top:auto; padding-top:12px; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-2); letter-spacing:.04em; text-transform:uppercase;
+  }
+
+  /* ---------- lista de achados ---------- */
+  .findings{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
+  .findings li{background:var(--surface); padding:16px 18px; display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:start;}
+  .findings .what{font-family:var(--mono); font-size:12.5px; color:var(--ink-2); line-height:1.5; word-break:break-word;}
+  .findings .says{margin:0; font-size:16px;}
+
+  /* ---------- tabela de intenção ---------- */
+  .intent{display:flex; flex-direction:column; gap:14px; margin-bottom:22px;}
+  .row{display:grid; grid-template-columns:1fr 54px; gap:14px; align-items:baseline;}
+  .row .lab{font-size:16px;}
+  .row .lab em{font-style:normal; color:var(--ink-2); font-size:14.5px; display:block; font-family:var(--mono); letter-spacing:-.01em; margin-top:2px;}
+  .row .pct{font-family:var(--mono); font-size:16px; font-variant-numeric:tabular-nums; text-align:right; font-weight:500;}
+  .bar{grid-column:1 / -1; height:7px; background:var(--surface-2); border:1px solid var(--line); border-radius:99px; overflow:hidden;}
+  .bar span{display:block; height:100%; background:var(--granada);}
+  .bar.b-2 span{background:var(--line-strong);}
+  .bar.b-3 span{background:var(--ok);}
+  .bar.b-4 span{background:var(--line-strong); opacity:.6;}
+
+  /* ---------- citação da página ---------- */
+  .quote{
+    background:var(--surface); border-left:3px solid var(--roma); border-radius:0 3px 3px 0;
+    padding:16px 20px; margin:0 0 22px;
+  }
+  .quote .k{font-family:var(--mono); font-size:11.5px; color:var(--ink-2); letter-spacing:.1em; text-transform:uppercase;}
+  .quote .v{font-family:var(--display); font-size:21px; font-weight:600; margin-top:4px; letter-spacing:-.01em;}
+
+  .gaps{list-style:none; margin:0 0 22px; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:10px 22px;}
+  .gaps li{padding-left:20px; position:relative; color:var(--ink-2); font-size:16px;}
+  .gaps li::before{content:"—"; position:absolute; left:0; color:var(--roma); font-family:var(--mono);}
+
+  /* ---------- passos ---------- */
+  .steps{display:flex; flex-direction:column; gap:0; counter-reset:step;}
+  .step{
+    display:grid; grid-template-columns:40px 1fr; gap:18px;
+    padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .step:first-child{border-top:1px solid var(--line);}
+  .step .num{
+    counter-increment:step; font-family:var(--mono); font-size:13px; font-weight:500;
+    color:var(--roma); padding-top:3px;
+  }
+  .step .num::before{content:counter(step,decimal-leading-zero);}
+  .step p{font-size:16px; color:var(--ink-2);}
+  .tag{
+    display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; padding:2px 8px; border-radius:99px; vertical-align:2px; margin-left:8px;
+  }
+  .tag-site{background:var(--granada-soft); color:var(--granada); border:1px solid currentColor;}
+  .tag-ggd{background:var(--ok-soft); color:var(--ok); border:1px solid currentColor;}
+  .tag-both{background:var(--amber-soft); color:var(--amber); border:1px solid currentColor;}
+
+  /* ---------- tabela ---------- */
+  .tablebox{overflow-x:auto; border:1px solid var(--line); border-radius:3px; background:var(--surface);}
+  table{border-collapse:collapse; width:100%; font-size:15.5px; min-width:520px;}
+  th,td{text-align:left; padding:12px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-2); font-weight:400; background:var(--surface-2);
+  }
+  tr:last-child td{border-bottom:0;}
+  td.mono{font-family:var(--mono); font-size:13.5px;}
+
+  /* ---------- divisão de responsabilidade ---------- */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .col{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:20px; box-shadow:var(--shadow);}
+  .col h3{margin-bottom:12px;}
+  .col ul{margin:0; padding-left:18px; color:var(--ink-2); font-size:16px;}
+  .col li{margin-bottom:7px;}
+  .col li:last-child{margin-bottom:0;}
+  .col.site{border-top:3px solid var(--granada);}
+  .col.ggd{border-top:3px solid var(--ok);}
+
+  /* ---------- perguntas ---------- */
+  .qs{list-style:none; margin:0; padding:0; counter-reset:q; display:flex; flex-direction:column; gap:12px;}
+  .qs li{
+    background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:16px 18px; display:grid; grid-template-columns:26px 1fr; gap:14px;
+  }
+  .qs li::before{
+    counter-increment:q; content:counter(q); font-family:var(--mono); font-size:13px;
+    color:var(--roma); padding-top:2px;
+  }
+  .qs .q{font-weight:600;}
+  .qs .why{color:var(--ink-2); font-size:15.5px; margin-top:2px;}
+
+  footer{border-top:1px solid var(--line); background:var(--surface-2);}
+  footer .wrap{padding-block:26px; font-family:var(--mono); font-size:12px; color:var(--ink-2); letter-spacing:.02em;}
+
+  @media (max-width:720px){
+    body{font-size:16.5px;}
+    .asks,.split,.gaps{grid-template-columns:1fr;}
+    .findings li{grid-template-columns:1fr; gap:6px;}
+    .step{grid-template-columns:28px 1fr; gap:12px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Roma Importadora · documento técnico</p>
+    <h1>Medir o cadastro de lojista que chega pelo Google</h1>
+    <p>A página <strong>/aviamentos</strong> já está no ar recebendo o investimento de Google Ads. Faltam três ajustes no site para que cada cadastro aberto seja devolvido ao Google — e o investimento passe a ser dirigido a quem abre cadastro, não a quem só passa pela página.</p>
+    <p class="stamp">Gio Growth Digital · 21 de setembro de 2026 · para o time de site e plataforma da Roma</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>O pedido, em três itens</h2>
+  <p class="lede">Nenhum deles muda o visual da página. Os três juntos são o que liga a página ao Google Ads.</p>
+  <div class="asks">
+    <article class="ask">
+      <p class="n">A</p>
+      <h3>Publicar o GTM na página</h3>
+      <p>Incluir o container <code>GTM-5MG6J25C</code> — o mesmo que já roda na loja — no <code>&lt;head&gt;</code> da <code>/aviamentos</code>.</p>
+      <p class="who">Site · ~10 minutos</p>
+    </article>
+    <article class="ask">
+      <p class="n">B</p>
+      <h3>Tirar o cadastro do iframe</h3>
+      <p>O botão “Quero me cadastrar” passa a abrir a página de cadastro direto, levando os parâmetros da campanha.</p>
+      <p class="who">Site · ajuste no link</p>
+    </article>
+    <article class="ask">
+      <p class="n">C</p>
+      <h3>Informar a URL de conclusão</h3>
+      <p>Qual endereço o navegador mostra depois que o lojista envia o cadastro com sucesso.</p>
+      <p class="who">Site · uma resposta</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Por que os três são necessários</h2>
+  <p class="lede">O que encontramos ao ler o código da página publicada, em 21/09.</p>
+  <ul class="findings">
+    <li>
+      <span class="what">/aviamentos</span>
+      <p class="says">Não carrega nenhuma tag de medição — nem GTM, nem Google Analytics. É a única página que o anúncio entrega, e hoje ela não registra visita nem origem.</p>
+    </li>
+    <li>
+      <span class="what">login e cadastro</span>
+      <p class="says">Abrem dentro de <code>&lt;iframe&gt;</code> (<code>/my-account/login</code> e <code>/loja/cadastro_layout.php</code>). Visualmente fica dentro da página, tecnicamente é outro documento.</p>
+    </li>
+    <li>
+      <span class="what">GTM-5MG6J25C<br>G-ECS7TGYZQ9</span>
+      <p class="says">Existem e funcionam — mas só dentro do cadastro, não na página que recebe o anúncio.</p>
+    </li>
+    <li>
+      <span class="what">identificador do clique</span>
+      <p class="says">O Google carimba cada clique com um código na URL (<code>gclid</code>). Como não há tag na página, esse código não é guardado; e o iframe não enxerga a URL da página que o contém, então ele também não chega ao cadastro.</p>
+    </li>
+    <li>
+      <span class="what">consequência</span>
+      <p class="says">Um lojista pode se cadastrar hoje vindo de um anúncio e o Google nunca saber. Sem esse retorno, o sistema de lances não tem como aprender quem vale a pena buscar.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Quem chega na página hoje</h2>
+  <p class="lede">Distribuição dos cliques com termo de busca identificado nos últimos 30 dias, na conta de Google Ads da Importadora.</p>
+
+  <div class="intent">
+    <div class="row">
+      <span class="lab">Procura a loja física<em>“aviamentos no brás”, “armarinhos na 25 de março”</em></span>
+      <span class="pct">50%</span>
+      <span class="bar"><span style="width:50%"></span></span>
+    </div>
+    <div class="row">
+      <span class="lab">Procura a Roma pelo nome<em>“roma aviamentos”, endereço, telefone</em></span>
+      <span class="pct">14%</span>
+      <span class="bar b-2"><span style="width:14%"></span></span>
+    </div>
+    <div class="row">
+      <span class="lab">Procura fornecedor para revender<em>“atacado”, “fornecedor”, “distribuidora”, “para revenda”</em></span>
+      <span class="pct">10%</span>
+      <span class="bar b-3"><span style="width:10%"></span></span>
+    </div>
+    <div class="row">
+      <span class="lab">Produto ou bairro específico<em>“loja de zíper”, “linha de crochê”, “aviamentos guarulhos”</em></span>
+      <span class="pct">26%</span>
+      <span class="bar b-4"><span style="width:26%"></span></span>
+    </div>
+  </div>
+
+  <p>Metade de quem chega quer saber <strong>onde fica a loja</strong>, e os 10% que procuram fornecedor são exatamente o público do cadastro. A página atende melhor aos dois quando responde, logo no início, as perguntas comerciais de quem compra para revender — e mantém endereço e horário visíveis para quem vai até o Brás.</p>
+  <p>Assim que a medição do cadastro estiver de pé, conseguimos dirigir o investimento para a fatia de fornecedor e reduzir o que hoje se espalha pelas outras intenções. Esse ajuste é nosso; ele só não é possível enquanto o cadastro não for medido.</p>
+</section>
+
+<section>
+  <h2>A página e a proposta de julho</h2>
+  <p class="lede">A chamada atual conversa com quem já conhece a Roma; quem chega de busca ainda não conhece.</p>
+
+  <div class="quote">
+    <p class="k">Chamada atual da página</p>
+    <p class="v">“Conheça nossas marcas”</p>
+  </div>
+
+  <p>É um convite de navegação, não uma proposta comercial. Quem pesquisou “fornecedor de aviamentos para revenda” precisa, nos primeiros segundos, saber se pode comprar — e o botão de maior destaque na primeira tela hoje é <strong>“Explore”</strong>, que rola o carrossel de marcas. O convite para se cadastrar só aparece depois de seis seções.</p>
+
+  <p>As seis marcas próprias (Sanding, Xikky, Princess, Agulhas Violin, RomaBond, Fofurinha) são um ativo forte para quem já é cliente, mas quase não têm procura no Google — ninguém busca pelo nome delas. Elas rendem mais como prova de portfólio, abaixo da proposta comercial, do que como abertura.</p>
+
+  <p>Estas perguntas, que todo lojista faz antes de abrir cadastro, ainda não estão respondidas na página:</p>
+  <ul class="gaps">
+    <li>Qual o pedido mínimo?</li>
+    <li>Qual o prazo de entrega?</li>
+    <li>Como funciona o frete?</li>
+    <li>Quais formas de pagamento?</li>
+    <li>Precisa de CNPJ ativo?</li>
+    <li>Atende todo o Brasil?</li>
+  </ul>
+
+  <p>Em julho a GGD entregou três versões de landing page para esta frente, com a chamada “Compre aviamentos direto da importadora” e um caminho curto de contato. A recomendação é retomar aquele material: a estrutura já está pronta e validada, e é a mesma que sustenta a medição descrita abaixo.</p>
+</section>
+
+<section>
+  <h2>Como fica o rastreamento</h2>
+  <p class="lede">Ordem de execução. Cada etapa depende da anterior.</p>
+
+  <div class="steps">
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>GTM no <code>&lt;head&gt;</code> da /aviamentos <span class="tag tag-site">site</span></h3>
+        <p>É o que permite guardar a origem da visita no próprio domínio da Roma. Sem esta etapa, nenhuma das seguintes funciona.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>Cadastro fora do iframe <span class="tag tag-site">site</span></h3>
+        <p>O botão “Quero me cadastrar” vira link direto para a página de cadastro, preservando os parâmetros da URL. Se a Roma preferir manter o visual embutido, a alternativa é a página de cadastro avisar a página principal quando o envio for concluído (<code>postMessage</code>) — funciona, mas dá mais trabalho e falha mais.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>URL de conclusão identificada <span class="tag tag-site">site</span></h3>
+        <p>Precisamos do endereço exato que aparece depois do envio bem-sucedido. Com ele, criamos o disparo da conversão. O caminho mais rápido: alguém da Roma faz um cadastro de teste e nos envia o endereço da tela final.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>Conversão “Cadastro enviado” publicada <span class="tag tag-ggd">GGD</span></h3>
+        <p>Criamos a ação de conversão no Google Ads e o disparo no GTM. A partir daí cada cadastro aparece ligado ao anúncio, à palavra buscada e ao aparelho que o lojista usou.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>Cadastro aprovado devolvido ao Google <span class="tag tag-both">site + GGD</span></h3>
+        <p>A loja exige aprovação do cadastro antes de liberar a compra. O cadastro enviado é só a intenção; quem vale é o lojista aprovado. Com um relatório periódico de aprovados (data, e-mail e telefone), devolvemos essa informação ao Google e o investimento passa a perseguir <strong>lojista aprovado</strong>, não formulário preenchido.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="num"></span>
+      <div>
+        <h3>Caminho curto de contato <span class="tag tag-both">site + GGD</span></h3>
+        <p>O cadastro completo pede cerca de vinte campos, senha e endereço de entrega e cobrança — é o certo para quem já decidiu comprar, e é muito para quem acabou de conhecer a Roma. Um caminho curto (nome, WhatsApp, CNPJ, segmento e cidade) abre a conversa; o cadastro completo vem depois, com o lojista já atendido. Foi assim na proposta de julho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>As três conversões e o que cada uma faz</h2>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr><th>Conversão</th><th>Quando dispara</th><th>Papel</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cadastro enviado</strong></td>
+          <td class="mono">tela de conclusão do cadastro</td>
+          <td>Principal. É o que o Google usa para aprender e distribuir o investimento.</td>
+        </tr>
+        <tr>
+          <td><strong>Contato por WhatsApp</strong></td>
+          <td class="mono">clique no botão de conversa</td>
+          <td>Principal, se o caminho curto for aberto na página.</td>
+        </tr>
+        <tr>
+          <td><strong>Cadastro aprovado</strong></td>
+          <td class="mono">relatório de aprovados da loja</td>
+          <td>Enviada depois, por fora do site. É o que separa lojista de curioso.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Quem faz o quê</h2>
+  <div class="split">
+    <div class="col site">
+      <h3>Time da Roma / plataforma</h3>
+      <ul>
+        <li>Publicar o GTM no <code>&lt;head&gt;</code> da /aviamentos</li>
+        <li>Transformar o botão de cadastro em link direto</li>
+        <li>Informar a URL da tela de conclusão</li>
+        <li>Avaliar o caminho curto de contato</li>
+        <li>Enviar o relatório de cadastros aprovados</li>
+        <li>Confirmar pedido mínimo, prazo, frete e pagamento para entrar na página</li>
+      </ul>
+    </div>
+    <div class="col ggd">
+      <h3>Gio Growth Digital</h3>
+      <ul>
+        <li>Criar as ações de conversão no Google Ads</li>
+        <li>Montar os disparos dentro do GTM</li>
+        <li>Configurar a devolução dos aprovados ao Google</li>
+        <li>Organizar a medição da conta em torno do cadastro</li>
+        <li>Dirigir o investimento para a intenção de fornecedor</li>
+        <li>Acompanhar custo por cadastro e por lojista aprovado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>O que precisamos de resposta</h2>
+  <ol class="qs">
+    <li><div><p class="q">Quem publica o GTM no <code>&lt;head&gt;</code> da /aviamentos — a Roma ou a plataforma?</p><p class="why">É a etapa que destrava todas as outras.</p></div></li>
+    <li><div><p class="q">Qual é a URL que aparece quando um cadastro é concluído com sucesso?</p><p class="why">Um cadastro de teste feito por vocês responde em dois minutos. Não fizemos o teste do nosso lado para não criar um registro que alguém teria que aprovar ou apagar depois.</p></div></li>
+    <li><div><p class="q">O botão “Quero me cadastrar” pode abrir a página de cadastro direto, sem iframe?</p><p class="why">Se não puder, seguimos pelo aviso entre as páginas — só avisem para a gente escolher o caminho certo.</p></div></li>
+    <li><div><p class="q">Pedido mínimo, prazo de entrega, frete e formas de pagamento: quais são os oficiais?</p><p class="why">São as respostas que fazem o lojista decidir abrir cadastro.</p></div></li>
+  </ol>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">Gio Growth Digital · Roma Importadora · documento técnico de rastreamento · 21/09/2026</div>
+</footer>
+
+</body>
+</html>
