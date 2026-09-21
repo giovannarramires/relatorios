@@ -177,6 +177,17 @@ footer{
 .vlink:hover{background:var(--accent-soft)}
 .vlink::after{content:" ↗";font-size:.85em;opacity:.7;border:0}
 .tipnote{font-size:14.5px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* tabela larga (retenção): escapa da coluna de 720px em telas grandes */
+.tablewrap.wide{width:min(100%, 1060px)}
+@media (min-width:1100px){
+  .tablewrap.wide{width:1060px;margin-left:calc(360px - 530px)}
+}
+.tablewrap.wide table{min-width:860px}
+.tablewrap.wide th:first-child,.tablewrap.wide td:first-child{min-width:230px}
+.tablewrap.wide td.money{white-space:nowrap}
+.tablewrap.wide td.money .what{white-space:nowrap}
+.tablewrap.wide thead th{line-height:1.3}
 </style>
 
 <style>
@@ -269,10 +280,10 @@ dl.gloss dd{margin:2px 0 0;color:var(--muted);font-size:15.5px;max-width:66ch}
     <h2>Quanto tempo as pessoas realmente ficam</h2>
     <p class="lead">Este é o quadro que mostra <strong>que tipo de vídeo o seu público gosta de consumir</strong>. Para cada peça, quantas pessoas chegaram a um quarto, à metade, a três quartos e ao fim — e quanto tempo de tela cada uma dessas marcas representa, já que um quarto de um vídeo de 22 segundos são 6 segundos e um quarto de um de 1 min 39 são 25.</p>
     <p class="tipnote">Toque no nome de qualquer vídeo para abri-lo no Instagram.</p>
-    <div class="tablewrap">
+    <div class="tablewrap wide">
       <table>
         <thead>
-          <tr><th scope="col">Vídeo</th><th scope="col">Chegou a 25%</th><th scope="col">Chegou a 50%</th><th scope="col">Chegou a 75%</th><th scope="col">Assistiu até o fim</th><th scope="col">Terminou depois de engatar</th></tr>
+          <tr><th scope="col">Vídeo</th><th scope="col">Chegou a 25%</th><th scope="col">Chegou a 50%</th><th scope="col">Chegou a 75%</th><th scope="col">Assistiu<br>até o fim</th><th scope="col">Terminou depois<br>de engatar</th></tr>
         </thead>
         <tbody>
           <tr><td><a class="vlink" href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">Um novo método de lipo de papada</a><span class="what">1 min 39 s · narrativa com desfecho</span></td><td class="money">186<span class="what">25 s · 5,9%</span></td><td class="money">115<span class="what">49 s · 3,7%</span></td><td class="money">91<span class="what">1 min 14 s · 2,9%</span></td><td class="money">75<span class="what">1 min 39 s · 2,4%</span></td><td class="money">40%</td></tr>
