@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Roma Aviamentos · O catálogo no Google</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#FAF7F8;
+    --surface:#FFFFFF;
+    --gelo:#F4EDEF;
+    --ink:#1F1A1C;
+    --ink-soft:#6B6166;
+    --line:#E8DDE1;
+    --vinho:#7A1220;
+    --vinho-claro:#A8324A;
+    --antes:#9AA0AD;
+    --pos:#1E8E5A;
+    --shadow:0 1px 2px rgba(31,26,28,.04), 0 8px 24px rgba(122,18,32,.07);
+    --r:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#1A1618;
+      --surface:#231E21;
+      --gelo:#2C2528;
+      --ink:#F6EFF1;
+      --ink-soft:#AFA3A8;
+      --line:#3A3236;
+      --vinho:#E08A9B;
+      --vinho-claro:#C4576B;
+      --antes:#7D828E;
+      --pos:#6FBF9B;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#1A1618;
+    --surface:#231E21;
+    --gelo:#2C2528;
+    --ink:#F6EFF1;
+    --ink-soft:#AFA3A8;
+    --line:#3A3236;
+    --vinho:#E08A9B;
+    --vinho-claro:#C4576B;
+    --antes:#7D828E;
+    --pos:#6FBF9B;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:48px 24px 80px; display:flex; flex-direction:column; gap:40px}
+  h1,h2,h3{font-family:Nunito, Inter, sans-serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(30px,4.4vw,42px); font-weight:800; line-height:1.15; letter-spacing:-.01em}
+  h2{font-size:22px; font-weight:800}
+  h3{font-size:17px; font-weight:700}
+  p{margin:0}
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--vinho); font-family:Inter,sans-serif;
+  }
+  .lead{font-size:18px; color:var(--ink-soft); max-width:62ch}
+
+  header.top{display:flex; flex-direction:column; gap:14px}
+  .marca{display:flex; align-items:center; gap:12px}
+  .disco{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--vinho); display:grid; place-items:center; flex:none;
+  }
+  .disco svg{width:19px;height:19px}
+  .marca b{font-family:Nunito,sans-serif; font-weight:800; font-size:17px}
+  .marca span{color:var(--ink-soft); font-size:14px}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  .painel{padding:28px; display:flex; flex-direction:column; gap:24px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:22px}
+  .kpi{display:flex; flex-direction:column; gap:4px}
+  .kpi .rot{font-size:13px; color:var(--ink-soft)}
+  .kpi .val{
+    font-family:Nunito,sans-serif; font-weight:800; font-size:30px; line-height:1.1;
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+  }
+  .kpi .val.destaque{color:var(--vinho)}
+  .kpi .nota{font-size:12.5px; color:var(--ink-soft)}
+  .barra{height:1px; background:var(--line)}
+
+  .faixa{
+    background:var(--gelo); border-radius:var(--r); padding:22px 24px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .faixa .num{font-family:Nunito,sans-serif; font-weight:800; font-size:clamp(26px,3.6vw,34px); color:var(--vinho); line-height:1.15; font-variant-numeric:tabular-nums}
+
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px}
+  .tabela-wrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+  th,td{padding:13px 16px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left; white-space:normal}
+  thead th{
+    font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--gelo);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td .up{color:var(--pos); font-weight:600}
+  .cap{font-size:13px; color:var(--ink-soft)}
+
+  /* figura de barras antes x depois */
+  figure.grafico{margin:0; padding:26px; display:flex; flex-direction:column; gap:20px}
+  figure.grafico figcaption{font-size:13px; color:var(--ink-soft); order:3}
+  .legenda{display:flex; gap:18px; flex-wrap:wrap; font-size:13px; color:var(--ink-soft)}
+  .legenda span{display:inline-flex; align-items:center; gap:7px}
+  .chave{width:11px;height:11px;border-radius:3px;flex:none}
+  .chave.a{background:var(--antes)}
+  .chave.d{background:var(--vinho)}
+  .grupos{display:flex; flex-direction:column; gap:22px}
+  .grupo{display:flex; flex-direction:column; gap:9px}
+  .grupo>.tit{font-size:14px; font-weight:600}
+  .linha{display:grid; grid-template-columns:76px 1fr; gap:12px; align-items:center}
+  .linha .quando{font-size:12.5px; color:var(--ink-soft)}
+  .trilho{display:flex; align-items:center; gap:10px}
+  .fill{height:16px; border-radius:0 4px 4px 0; flex:none}
+  .fill.a{background:var(--antes)}
+  .fill.d{background:var(--vinho)}
+  .valor{font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+  ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+  ul.lista li{display:flex; gap:12px; align-items:flex-start}
+  ul.lista li .marc{
+    width:8px;height:8px;border-radius:50%;background:var(--vinho-claro);
+    margin-top:9px; flex:none;
+  }
+  ul.lista li b{font-weight:600}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+  .bloco{padding:24px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--ink-soft)}
+  .bloco p strong{color:var(--ink); font-weight:600}
+
+  footer{
+    border-top:1px solid var(--line); padding-top:22px;
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size:13px; color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .wrap{padding:32px 18px 56px; gap:32px}
+    .painel, figure.grafico{padding:22px}
+    .linha{grid-template-columns:64px 1fr; gap:10px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="marca">
+      <span class="disco" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9h18"></path>
+          <path d="M5 9V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"></path>
+          <path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"></path>
+          <path d="M10 13h4"></path>
+        </svg>
+      </span>
+      <div>
+        <b>Roma Aviamentos</b> <span>· acompanhamento de mídia</span>
+      </div>
+    </div>
+    <p class="eyebrow">O catálogo no Google · setembro de 2026</p>
+    <h1>3.177 produtos que a loja vende hoje voltaram para a vitrine do Google</h1>
+    <p class="lead">Encontramos o catálogo que o Google lia parado numa cópia antiga, religamos na versão viva da loja e colocamos as promoções do site dentro dos anúncios. Esta página conta o que achamos, o que fizemos e o que já mudou nos primeiros dias.</p>
+  </header>
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Produtos que voltaram para a vitrine</span>
+          <span class="val destaque">3.177</span>
+          <span class="nota">1.332 deles entre os mais vendidos da loja</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Produtos fora de linha que saíram do ar</span>
+          <span class="val">2.293</span>
+          <span class="nota">não eram mais vendidos e ainda apareciam</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Produtos com o preço acertado</span>
+          <span class="val">15.281</span>
+          <span class="nota">apareciam acima do que a loja cobra hoje</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Produtos mostrando o desconto do Pix</span>
+          <span class="val">24.503</span>
+          <span class="nota">antes o desconto não aparecia em nenhum</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Catálogo aprovado e no ar</span>
+          <span class="val">99,7%</span>
+          <span class="nota">27.393 de 27.465 produtos</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Produtos com selo de oferta</span>
+          <span class="val">3.493</span>
+          <span class="nota">as promoções do site agora aparecem no Google</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Avisos de preço em aberto</span>
+          <span class="val">4</span>
+          <span class="nota">eram 802 na semana passada</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">O ponto da quinzena</p>
+    <div class="faixa">
+      <span class="num">O Google voltou a enxergar a loja de hoje</span>
+      <p>O catálogo que alimenta os anúncios de produto era lido de um endereço que tinha sido desativado — e o Google seguia usando a última cópia que tinha guardado, de março. Tudo o que entrou na loja depois disso ficava invisível para quem pesquisava, e o que saiu de linha continuava aparecendo. Desde 18 de setembro o Google lê o catálogo do dia, todo dia.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que a gente encontrou</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>3.177 produtos nunca apareciam.</b> Produtos que entraram na loja de março para cá — entre eles 1.332 dos mais vendidos — não estavam na vitrine do Google porque a cópia antiga não os conhecia.</span></li>
+      <li><span class="marc"></span><span><b>2.293 produtos fora de linha seguiam anunciados.</b> Quem clicava chegava em página de produto que a loja não vende mais.</span></li>
+      <li><span class="marc"></span><span><b>15.281 produtos apareciam com preço acima do da loja.</b> O valor ficava, em média, 4,4% acima do que o site cobra hoje — e no Google a comparação de preço acontece <em>antes</em> do clique.</span></li>
+      <li><span class="marc"></span><span><b>O desconto do Pix não aparecia.</b> O preço com Pix, que a loja mostra em toda a vitrine, não chegava ao anúncio.</span></li>
+      <li><span class="marc"></span><span><b>As promoções do site também não.</b> As campanhas de fitas, miçangas, pérolas, utensílios e outras 16 rodavam no site, mas o anúncio mostrava o preço cheio.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O que a gente fez</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Religamos o catálogo na versão viva da loja</b>, no dia 18 de setembro. Na primeira leitura entraram os 3.177 produtos que faltavam.</span></li>
+      <li><span class="marc"></span><span><b>Mudamos o horário da leitura diária</b> das 7h para as 9h. O arquivo do dia fica pronto por volta das 7h50 — no horário antigo o Google chegava cedo demais e pegava o do dia anterior.</span></li>
+      <li><span class="marc"></span><span><b>Criamos um robô que leva as promoções do site para o Google.</b> Ele visita as páginas de promoção da loja todo dia, confere preço por preço e publica o valor promocional no anúncio, com selo de oferta. Quando a promoção acaba, o preço volta sozinho no dia seguinte.</span></li>
+      <li><span class="marc"></span><span><b>Reescrevemos títulos e marcas de 20,5 mil produtos</b> para o Google, que é como ele decide para qual busca cada produto aparece.</span></li>
+      <li><span class="marc"></span><span><b>Colocamos um vigia de plantão.</b> Todo dia ele confere se o catálogo foi atualizado, se não encolheu, se continua no ar e se o Pix está lá. Qualquer coisa fora do lugar, a gente é avisada no mesmo dia — não depende mais de alguém desconfiar.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O que já mudou</h2>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>No catálogo do Google</th><th>Antes</th><th>Agora</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Produtos da loja de hoje na vitrine</td><td>faltavam 3.177</td><td><span class="up">no ar</span></td></tr>
+          <tr><td>Produtos fora de linha anunciados</td><td>2.293</td><td><span class="up">0</span></td></tr>
+          <tr><td>Produtos mostrando o desconto do Pix</td><td>1</td><td><span class="up">24.503</span></td></tr>
+          <tr><td>Produtos com o preço de promoção do site</td><td>0</td><td><span class="up">3.493</span></td></tr>
+          <tr><td>Avisos de preço a corrigir</td><td>802</td><td><span class="up">4</span></td></tr>
+          <tr><td>Catálogo aprovado e no ar</td><td>—</td><td><span class="up">99,7%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Leitura de 21 de setembro, três dias depois da mudança.</p>
+  </section>
+
+  <section>
+    <h2>E na vitrine, o que isso deu</h2>
+    <figure class="grafico card">
+      <div class="legenda">
+        <span><i class="chave a" aria-hidden="true"></i> 11 a 13 de setembro — antes</span>
+        <span><i class="chave d" aria-hidden="true"></i> 18 a 20 de setembro — depois</span>
+      </div>
+      <div class="grupos">
+        <div class="grupo">
+          <span class="tit">Vezes que os produtos apareceram</span>
+          <div class="linha">
+            <span class="quando">Antes</span>
+            <span class="trilho"><span class="fill a" style="width:54.9%"></span><span class="valor">9.475</span></span>
+          </div>
+          <div class="linha">
+            <span class="quando">Depois</span>
+            <span class="trilho"><span class="fill d" style="width:72%"></span><span class="valor">12.416</span></span>
+          </div>
+        </div>
+        <div class="grupo">
+          <span class="tit">Visitas que vieram desses anúncios</span>
+          <div class="linha">
+            <span class="quando">Antes</span>
+            <span class="trilho"><span class="fill a" style="width:69.2%"></span><span class="valor">322</span></span>
+          </div>
+          <div class="linha">
+            <span class="quando">Depois</span>
+            <span class="trilho"><span class="fill d" style="width:72%"></span><span class="valor">335</span></span>
+          </div>
+        </div>
+        <div class="grupo">
+          <span class="tit">Investimento no período</span>
+          <div class="linha">
+            <span class="quando">Antes</span>
+            <span class="trilho"><span class="fill a" style="width:72%"></span><span class="valor">R$ 125,64</span></span>
+          </div>
+          <div class="linha">
+            <span class="quando">Depois</span>
+            <span class="trilho"><span class="fill d" style="width:70.8%"></span><span class="valor">R$ 123,54</span></span>
+          </div>
+        </div>
+      </div>
+      <figcaption>Campanha de Shopping — a vitrine de produtos do Google, a única que depende inteiramente do catálogo. Comparação entre dois trios de dias iguais (sexta, sábado e domingo), para ser justa. Cada par tem escala própria; os números estão ao lado de cada barra.</figcaption>
+    </figure>
+    <p class="cap">Com praticamente a mesma verba, os produtos da Roma <strong>apareceram 31% mais vezes</strong> e o custo de cada visita caiu de R$ 0,39 para R$ 0,37. Venda demora mais dias para amadurecer no Google — a leitura completa entra no relatório do mês.</p>
+  </section>
+
+  <section>
+    <h2>O que fica rodando sozinho</h2>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>As promoções entram e saem no automático</h3>
+        <p>O robô roda toda noite. No fim de semana, <strong>dois produtos entraram em promoção e três saíram</strong> — e o preço acompanhou nos dois sentidos, sem ninguém mexer. Quem sai da promoção volta ao preço normal com o desconto do Pix preservado.</p>
+      </div>
+      <div class="card bloco">
+        <h3>O catálogo é conferido todo dia</h3>
+        <p>Nos três primeiros dias o Google leu o catálogo do dia certinho, no horário novo, e o vigia não teve nada a reclamar. <strong>Se o catálogo travar de novo, a gente descobre no mesmo dia</strong> — e não depois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que seguimos acompanhando</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Os produtos novos amadurecendo.</b> O Google leva de 24 a 72 horas para reprocessar um catálogo desse tamanho. Os 3.177 que entraram estão ganhando histórico agora — é neles que esperamos o ganho aparecer em venda nas próximas semanas.</span></li>
+      <li><span class="marc"></span><span><b>O ritmo das promoções.</b> Seguimos conferindo, campanha a campanha, se o preço do anúncio é exatamente o que a pessoa encontra na loja.</span></li>
+      <li><span class="marc"></span><span><b>A leitura fechada de setembro</b>, com o efeito disso tudo em visitas e vendas, entra no relatório do mês.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital</span>
+    <span>Leitura de 21 de setembro de 2026 · dados de vitrine até 20 de setembro</span>
+  </footer>
+
+</div>
+</body>
+</html>
