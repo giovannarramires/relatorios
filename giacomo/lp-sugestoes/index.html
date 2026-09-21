@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Quatro caminhos para a sua página de captação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8; --surface:#FFFFFF; --ink:#141F26; --muted:#5B6D77;
+  --line:#DCE4E5; --accent:#0E6B61; --accent-soft:#E1EFEC; --track:#E9EEEF;
+  --warm:#A9662F; --warm-soft:#F5E9DE; --phone:#0E1519;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519; --surface:#161F25; --ink:#E6EDEF; --muted:#94A6B0;
+    --line:#263239; --accent:#4FC2B1; --accent-soft:#12312D; --track:#1E2A31;
+    --warm:#D6935C; --warm-soft:#33241A; --phone:#05090B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519; --surface:#161F25; --ink:#E6EDEF; --muted:#94A6B0;
+  --line:#263239; --accent:#4FC2B1; --accent-soft:#12312D; --track:#1E2A31;
+  --warm:#D6935C; --warm-soft:#33241A; --phone:#05090B;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.65; margin:0; padding:0 24px 96px;
+}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{font-family:"Karla",sans-serif;font-weight:700;font-size:17px;margin:0}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- cartão de proposta ---- */
+.prop{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:0;overflow:hidden;
+}
+.prop-head{
+  display:flex;gap:16px;align-items:baseline;
+  padding:24px 26px 0;flex-wrap:wrap;
+}
+.num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.1em;color:var(--accent);
+  background:var(--accent-soft);padding:5px 10px;border-radius:2px;
+  align-self:center;
+}
+.prop-head h3{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;
+  font-size:24px;line-height:1.15;letter-spacing:-.01em;
+}
+.prop-body{
+  display:grid;grid-template-columns:1fr 320px;gap:28px;
+  padding:18px 26px 26px;align-items:start;
+}
+@media (max-width:760px){.prop-body{grid-template-columns:1fr}}
+.prop-text{display:flex;flex-direction:column;gap:16px;min-width:0}
+.tagline{font-size:17.5px;color:var(--ink)}
+.why{color:var(--muted);font-size:16px}
+.spec{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.spec div{
+  display:grid;grid-template-columns:104px 1fr;gap:0 14px;
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:15.5px;
+}
+.spec dt,.spec .k{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding-top:3px;
+}
+.spec .v{min-width:0}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+.steps li::marker{color:var(--accent)}
+.ask{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:14px 18px;border-radius:0 3px 3px 0;font-size:15.5px;
+}
+.ask strong{color:var(--warm)}
+
+/* ---- mockup de celular ---- */
+.phone-wrap{display:flex;flex-direction:column;gap:10px;align-items:center}
+.phone{
+  width:300px;max-width:100%;border:9px solid var(--phone);border-radius:34px;
+  background:#FFFFFF;overflow:hidden;box-shadow:0 12px 30px rgba(20,31,38,.16);
+  color:#141F26;
+}
+.notch{height:22px;background:var(--phone);position:relative}
+.notch::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);
+  top:5px;width:78px;height:12px;background:#000;border-radius:8px;
+}
+.screen{font-size:11px;line-height:1.45;font-family:"Karla",sans-serif}
+.s-hero{padding:18px 16px 16px;color:#fff}
+.s-hero .kicker{
+  font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.82;margin:0 0 8px;
+}
+.s-hero h4{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:19px;
+  line-height:1.13;margin:0 0 8px;letter-spacing:-.01em;
+}
+.s-hero p{font-size:10.5px;opacity:.9;margin:0;max-width:none}
+.cta{
+  display:block;margin-top:12px;text-align:center;font-weight:700;font-size:11px;
+  padding:9px 10px;border-radius:5px;background:#fff;color:#0E6B61;
+}
+.cta.solid{background:#0E6B61;color:#fff}
+.cta.warm{background:#A9662F;color:#fff}
+.s-body{padding:14px 16px;background:#fff}
+.s-body h5{
+  font-family:"Karla",sans-serif;font-weight:700;font-size:11.5px;margin:0 0 7px;color:#141F26;
+}
+.s-body p{font-size:10px;color:#5B6D77;margin:0 0 9px;max-width:none}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{
+  font-size:9px;padding:4px 8px;border-radius:99px;
+  background:#E1EFEC;color:#0E6B61;font-weight:700;
+}
+.chip.w{background:#F5E9DE;color:#A9662F}
+.qa{border-top:1px solid #DCE4E5;padding:7px 0;font-size:10px;display:flex;justify-content:space-between;gap:8px;color:#141F26}
+.qa span:last-child{color:#5B6D77}
+.tl{display:flex;flex-direction:column;gap:0;margin:2px 0 10px}
+.tl div{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:6px 0;border-top:1px solid #DCE4E5;font-size:9.5px}
+.tl b{font-family:"IBM Plex Mono",monospace;font-size:9px;color:#0E6B61}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.card2{border:1px solid #DCE4E5;border-radius:4px;padding:8px;font-size:9px;color:#5B6D77}
+.card2 b{display:block;font-size:10px;color:#141F26;margin-bottom:3px}
+.ph-note{font-size:12.5px;color:var(--muted);text-align:center;max-width:300px}
+.imgbox{
+  height:64px;border-radius:5px;background:linear-gradient(135deg,#DCE4E5,#EDF2F2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:8.5px;color:#5B6D77;margin-bottom:9px;text-align:center;padding:0 8px;
+}
+.stat{display:flex;gap:10px;margin-bottom:10px}
+.stat div{flex:1;background:#F6F8F8;border-radius:4px;padding:8px}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:14px;color:#0E6B61;line-height:1}
+.stat span{font-size:8.5px;color:#5B6D77;display:block;margin-top:3px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+.panel{
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;
+  padding:24px;display:flex;flex-direction:column;gap:12px;
+}
+.panel p{font-size:16px}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;align-self:flex-start;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.small{font-size:14.5px;color:var(--muted)}
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Quatro caminhos para a sua página</h1>
+    <p class="dek">Quatro propostas de página de captação, cada uma entrando por uma porta diferente da cabeça da paciente. A ideia é escolher uma para começar.</p>
+    <p class="meta">Sugestão da GGD &nbsp;·&nbsp; 21 de setembro de 2026</p>
+  </header>
+
+  <section>
+    <h2>Por que uma página agora</h2>
+    <p class="lead">Hoje o anúncio leva a paciente direto para o Instagram ou para a conversa. Funciona para quem já está decidida — mas a maioria chega com dúvida, e dúvida precisa de um lugar para ser respondida antes de virar mensagem.</p>
+    <p>O estudo de mercado que fizemos mostrou uma coisa que muda o desenho dessa página: <strong>nenhum cirurgião plástico da sua região comunica papada</strong>. Quem aparece quando alguém pesquisa o assunto em Balneário são clínicas de estética vendendo a versão sem corte, por um terço do preço. Então a página não precisa disputar com colega de especialidade. Ela precisa responder, com clareza e sem atacar ninguém, <strong>quando o procedimento sem corte não resolve</strong> — e mostrar que existe alguém na cidade que opera isso todos os dias.</p>
+    <p>As quatro propostas abaixo já nascem com esse enquadramento. Todas seguem as mesmas regras que combinamos para os vídeos: sem promessa de resultado, sem preço, sem superlativo, sem falar em nome de paciente.</p>
+  </section>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <div class="prop">
+      <div class="prop-head">
+        <span class="num">01</span>
+        <h3>“Sou magra e tenho papada”</h3>
+      </div>
+      <div class="prop-body">
+        <div class="prop-text">
+          <p class="tagline">A página entra pela <strong>dor</strong>, não pelo procedimento. Quem tem papada sem estar acima do peso passa anos achando que a culpa é dela — e essa é a única página da região que fala com ela.</p>
+          <p class="why">É o conteúdo que você mesmo já identificou como o mais forte da sua lista. A mulher que se reconhece na primeira linha lê a página inteira e chega na conversa já sabendo que o caso dela tem solução.</p>
+          <div class="spec">
+            <div><span class="k">Para quem</span><span class="v">Mulher de 38 a 64 que não está acima do peso e nunca entendeu a própria papada</span></div>
+            <div><span class="k">Ela sai</span><span class="v">Sabendo que existe papada genética, de postura e de flacidez — e qual é a dela</span></div>
+            <div><span class="k">Conversão</span><span class="v">Três perguntas rápidas e o WhatsApp abre já com o caso dela escrito</span></div>
+            <div><span class="k">Risco</span><span class="v">Baixo. Não promete nada, só explica</span></div>
+          </div>
+          <ol class="steps">
+            <li>Título que é a frase dela, não a sua</li>
+            <li>Os três tipos de papada, em três blocos curtos</li>
+            <li>Por que emagrecer não resolve esse caso</li>
+            <li>Como é a avaliação, em uma frase</li>
+            <li>Três perguntas → WhatsApp</li>
+          </ol>
+          <p class="ask"><strong>Precisamos de você:</strong> um vídeo de 40 segundos explicando por que magra tem papada. Nada mais.</p>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="s-hero" style="background:#0E6B61">
+                <p class="kicker">Balneário Camboriú</p>
+                <h4>Você é magra e tem papada?</h4>
+                <p>O problema pode não ser o seu peso. Existem três tipos de papada — e só um melhora com dieta.</p>
+                <span class="cta">Descobrir qual é o meu caso</span>
+              </div>
+              <div class="s-body">
+                <h5>Os três tipos</h5>
+                <div class="chips"><span class="chip">Gordura</span><span class="chip">Flacidez</span><span class="chip">Anatomia do queixo</span></div>
+                <p>Cada um tem uma indicação diferente. Um deles não melhora com nenhuma dieta — e é o mais comum em quem é magra.</p>
+                <div class="imgbox">vídeo de 40s · Dr. Giácomo explicando</div>
+                <h5>Três perguntas, 30 segundos</h5>
+                <div class="qa"><span>Você está no seu peso?</span><span>sim / não</span></div>
+                <div class="qa"><span>Aparece mais de perfil?</span><span>sim / não</span></div>
+                <div class="qa"><span>Já tentou dieta e continuou?</span><span>sim / não</span></div>
+                <span class="cta solid">Ver o que isso significa</span>
+              </div>
+            </div>
+          </div>
+          <p class="ph-note">Prévia de como fica no celular</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <div class="prop">
+      <div class="prop-head">
+        <span class="num">02</span>
+        <h3>Enzima ou cirurgia — a resposta honesta</h3>
+      </div>
+      <div class="prop-body">
+        <div class="prop-text">
+          <p class="tagline">A página que <strong>ninguém na região tem coragem de fazer</strong>: comparar as duas opções lado a lado e dizer, com honestidade, em que caso cada uma resolve.</p>
+          <p class="why">É a resposta direta ao que o mercado faz hoje. Quem pesquisa papada em Balneário encontra primeiro clínicas de estética anunciando a aplicação sem corte. Essa página não briga com elas — ela explica a diferença, e quem precisa de cirurgia se identifica sozinha. Autoridade aqui vem de contrariar o que vende fácil.</p>
+          <div class="spec">
+            <div><span class="k">Para quem</span><span class="v">Quem já pesquisou, viu preço baixo em outro lugar e ficou em dúvida</span></div>
+            <div><span class="k">Ela sai</span><span class="v">Entendendo que são produtos diferentes, não versões caras e baratas do mesmo</span></div>
+            <div><span class="k">Conversão</span><span class="v">“Qual resolve o meu caso” → avaliação presencial</span></div>
+            <div><span class="k">Risco</span><span class="v">Médio. A comparação precisa ser técnica e generosa, nunca depreciativa</span></div>
+          </div>
+          <ol class="steps">
+            <li>Tabela honesta: o que cada uma faz, em quantas sessões, o que ela não faz</li>
+            <li>“Quando a enzima é a melhor escolha” — dito por você</li>
+            <li>“Quando ela não resolve” — o caso com flacidez e excesso de pele</li>
+            <li>Sua formação e onde você opera</li>
+            <li>Avaliação presencial</li>
+          </ol>
+          <p class="ask"><strong>Precisamos de você:</strong> a sua posição técnica escrita ou gravada sobre a enzimática — o que você diz no consultório quando a paciente pergunta.</p>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="s-hero" style="background:#141F26">
+                <p class="kicker">A pergunta que todo mundo faz</p>
+                <h4>Enzima de papada funciona?</h4>
+                <p>Funciona — em alguns casos. Em outros, não muda nada. A diferença não é preço, é o tipo de papada.</p>
+                <span class="cta">Ver a comparação</span>
+              </div>
+              <div class="s-body">
+                <div class="cards2">
+                  <div class="card2"><b>Sem corte</b>3 a 5 sessões · age na gordura superficial · não trata pele sobrando</div>
+                  <div class="card2"><b>Cirúrgica</b>uma vez · trata gordura profunda e contorno · centro cirúrgico</div>
+                </div>
+                <h5>Quando a enzima é a melhor escolha</h5>
+                <p>Pouca gordura, pele firme, paciente jovem. Nesses casos ela entrega — e eu digo isso na consulta.</p>
+                <h5>Quando ela não resolve</h5>
+                <p>Quando existe flacidez ou a gordura está abaixo do músculo. Nenhuma quantidade de sessões alcança ali.</p>
+                <div class="imgbox">vídeo · “a resposta honesta”, 35s</div>
+                <span class="cta solid">Descobrir qual é o meu caso</span>
+              </div>
+            </div>
+          </div>
+          <p class="ph-note">Prévia de como fica no celular</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <div class="prop">
+      <div class="prop-head">
+        <span class="num">03</span>
+        <h3>Os sete dias — tudo o que acontece</h3>
+      </div>
+      <div class="prop-body">
+        <div class="prop-text">
+          <p class="tagline">A página que tira o <strong>medo</strong>. Anestesia, dor e pós-operatório são as duas maiores travas da decisão — e quase sempre elas não viram pergunta, viram silêncio.</p>
+          <p class="why">Mostrar o passo a passo hora a hora tira o medo melhor do que qualquer promessa. É também a página mais fácil de manter no ar por muito tempo, porque não depende de oferta nem de data: ela responde uma dúvida que toda paciente tem, sempre.</p>
+          <div class="spec">
+            <div><span class="k">Para quem</span><span class="v">Quem já decidiu que quer, mas adia por medo do procedimento e do pós</span></div>
+            <div><span class="k">Ela sai</span><span class="v">Sabendo o dia da cirurgia hora a hora e quantos dias fica sem trabalhar</span></div>
+            <div><span class="k">Conversão</span><span class="v">“Quero marcar minha avaliação” com a agenda em vista</span></div>
+            <div><span class="k">Risco</span><span class="v">Baixo. É informação, não promessa</span></div>
+          </div>
+          <ol class="steps">
+            <li>Linha do tempo: da chegada ao sétimo dia</li>
+            <li>Anestesia explicada com todas as letras</li>
+            <li>Malha, inchaço, repouso — o que ninguém conta</li>
+            <li>Bastidor: o centro cirúrgico e a equipe</li>
+            <li>Avaliação presencial</li>
+          </ol>
+          <p class="ask"><strong>Precisamos de você:</strong> autorização para gravar um vídeo curto dentro do centro cirúrgico, de jaleco. O cenário é metade do argumento.</p>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="s-hero" style="background:#A9662F">
+                <p class="kicker">Sem surpresa, sem susto</p>
+                <h4>O que acontece nos sete dias</h4>
+                <p>Da hora que você chega à hora de voltar ao trabalho — contado por quem opera.</p>
+                <span class="cta">Ver o dia a dia</span>
+              </div>
+              <div class="s-body">
+                <div class="tl">
+                  <div><b>dia 0</b><span>Chegada, anestesia, procedimento. Você não sente nada e acorda no mesmo dia.</span></div>
+                  <div><b>dia 1</b><span>Malha compressiva. Inchaço aparece — é esperado e não é complicação.</span></div>
+                  <div><b>dia 3</b><span>Pico do inchaço. Muita gente se assusta aqui sem precisar.</span></div>
+                  <div><b>dia 7</b><span>Retorno ao trabalho na maioria dos casos, com a malha por baixo.</span></div>
+                </div>
+                <h5>E a anestesia?</h5>
+                <p>Respondo com todas as letras no vídeo, porque esse é o medo número um.</p>
+                <div class="imgbox">vídeo · gravado no centro cirúrgico</div>
+                <span class="cta warm">Marcar minha avaliação</span>
+              </div>
+            </div>
+          </div>
+          <p class="ph-note">Prévia de como fica no celular</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <div class="prop">
+      <div class="prop-head">
+        <span class="num">04</span>
+        <h3>O guia da papada — material para baixar</h3>
+      </div>
+      <div class="prop-body">
+        <div class="prop-text">
+          <p class="tagline">Em vez de pedir a conversa de cara, a página <strong>entrega um material</strong> e pede só o contato. Quem baixa já demonstrou interesse real — e você fala com ela depois, sem pressa.</p>
+          <p class="why">É o formato mais elaborado que existe hoje na sua região: um colega de Itajaí roda revistas digitais por procedimento, com casos reais, há mais de três meses — sinal de que funciona ali. A diferença é que nenhuma dessas revistas é sobre papada. O espaço está aberto.</p>
+          <div class="spec">
+            <div><span class="k">Para quem</span><span class="v">Quem está pesquisando há meses e ainda não quer falar com ninguém</span></div>
+            <div><span class="k">Ela sai</span><span class="v">Com um material seu no celular e o seu nome na cabeça</span></div>
+            <div><span class="k">Conversão</span><span class="v">Nome e WhatsApp em troca do guia; a conversa vem depois</span></div>
+            <div><span class="k">Risco</span><span class="v">Maior. Exige o material pronto e casos com autorização por escrito</span></div>
+          </div>
+          <ol class="steps">
+            <li>Capa do guia e o que tem dentro</li>
+            <li>As perguntas que ele responde, listadas</li>
+            <li>Quem escreveu — você, sua formação, onde opera</li>
+            <li>Formulário curto: nome e WhatsApp</li>
+            <li>Conversa em outro momento, com o material já lido</li>
+          </ol>
+          <p class="ask"><strong>Precisamos de você:</strong> o conteúdo do guia (podemos montar a partir dos seus vídeos) e, se entrar antes e depois, o <strong>termo de imagem assinado</strong> de cada paciente.</p>
+        </div>
+
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="s-hero" style="background:#1E3A36">
+                <p class="kicker">Material gratuito</p>
+                <h4>Tudo sobre lipo de papada, em 12 perguntas</h4>
+                <p>O que é, para quem é, como é o dia, o pós e o que esperar. Escrito por quem opera em Balneário Camboriú.</p>
+                <span class="cta">Receber o guia</span>
+              </div>
+              <div class="s-body">
+                <div class="stat">
+                  <div><b>12</b><span>perguntas respondidas</span></div>
+                  <div><b>7</b><span>minutos de leitura</span></div>
+                </div>
+                <h5>O que tem dentro</h5>
+                <div class="chips">
+                  <span class="chip">Para quem é</span><span class="chip">Anestesia</span>
+                  <span class="chip">Os 7 dias</span><span class="chip w">É definitivo?</span>
+                  <span class="chip w">Cicatriz</span>
+                </div>
+                <div class="imgbox">capa do guia</div>
+                <h5>Receber agora</h5>
+                <div class="qa"><span>Seu nome</span><span></span></div>
+                <div class="qa"><span>Seu WhatsApp</span><span></span></div>
+                <span class="cta solid">Quero o guia</span>
+              </div>
+            </div>
+          </div>
+          <p class="ph-note">Prévia de como fica no celular</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Comparando os quatro</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Caminho</th><th scope="col">Entra pela</th><th scope="col">Quem chega</th><th scope="col">Para subir precisa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01 · Sou magra e tenho papada</strong></td>
+            <td>Identificação<span class="what">“isso é sobre mim”</span></td>
+            <td>Volume maior, decisão mais lenta</td>
+            <td>Um vídeo de 40 segundos</td>
+          </tr>
+          <tr>
+            <td><strong>02 · Enzima ou cirurgia</strong></td>
+            <td>Dúvida de comparação<span class="what">“vale a pena pagar mais?”</span></td>
+            <td>Menos gente, muito mais qualificada</td>
+            <td>Sua posição técnica sobre a enzimática</td>
+          </tr>
+          <tr>
+            <td><strong>03 · Os sete dias</strong></td>
+            <td>Medo<span class="what">“vou dormir? vou ficar parada?”</span></td>
+            <td>Quem já quer e está adiando</td>
+            <td>Gravar dentro do centro cirúrgico</td>
+          </tr>
+          <tr>
+            <td><strong>04 · O guia</strong></td>
+            <td>Curiosidade<span class="what">“quero entender antes de falar”</span></td>
+            <td>Contato sem conversa imediata</td>
+            <td>O guia montado e termo de imagem</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que sugerimos</h2>
+    <div class="callout">
+      <h3>Começar pela 02, com a 01 logo atrás</h3>
+      <p>A <strong>02 (enzima ou cirurgia)</strong> é a que ocupa o espaço vazio do mercado. Hoje a paciente da sua região é apresentada à papada por quem vende a versão sem corte — e chega na sua consulta comparando preço de coisas diferentes. Essa página resolve a objeção antes da conversa, e é a única das quatro que nenhum concorrente tem.</p>
+      <p>A <strong>01 (sou magra e tenho papada)</strong> traz mais gente e alimenta o público que a gente vem construindo desde setembro. As duas conversam bem: a primeira atrai, a segunda qualifica.</p>
+      <p>A <strong>03</strong> entra quando houver autorização para gravar no centro cirúrgico. A <strong>04</strong> é a mais completa, mas depende do guia pronto e das autorizações de imagem — fica como terceiro passo.</p>
+    </div>
+    <p class="small">Todas as páginas seguem as regras que já combinamos: sem promessa de resultado, sem preço, sem superlativo e sem falar em nome de paciente. Antes e depois só entra com termo de imagem assinado.</p>
+  </section>
+
+  <section>
+    <h2>Enquanto isso</h2>
+    <div class="panel">
+      <p>O estudo de mercado que embasa estas propostas — preço por capital, a sua região e quem anuncia o quê — está aqui:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/mercado/">relatorios.giogrowthdigital.com.br/giacomo/mercado</a>
+      <p>E o painel da conta atualiza sozinho todo dia de manhã:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/">relatorios.giogrowthdigital.com.br/giacomo</a>
+    </div>
+  </section>
+
+  <footer>
+    Preparado por GGD Growth Digital · 21 de setembro de 2026
+  </footer>
+
+</div>
+</body>
+</html>
