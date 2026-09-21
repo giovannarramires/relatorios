@@ -263,7 +263,7 @@ tfoot td{font-weight:900;font-size:12.5px;color:var(--text)!important;background
 const MES_FOCO = 7;      // 1=Jan … 12=Dez  (mês do relatório)
 const ANO_FOCO = 2026;
 const PARCIAL  = false;   // true se o mês ainda não fechou
-const DATA_ATUALIZACAO = '14/09/2026';
+const DATA_ATUALIZACAO = '21/09/2026';
 const HISTORICO = [
   {rotulo:'Janeiro/2026', arq:'janeiro-2026.html'},
   {rotulo:'Fevereiro/2026', arq:'fevereiro-2026.html'},
@@ -291,13 +291,13 @@ const D25 = {
   clicks_all:[1433,981,1130,909,1374,1044,1103,1628,1285,1374,1984,1215]
 };
 const D26 = {
-  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,1993.87,2688.1,980.88],
-  clicks:[824,650,727,499,1049,1337,1098,1554,548],
-  msgs:[267,204,202,153,244,327,240,321,88],
-  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,8.31,8.37,11.15],
-  impressions:[253806,208105,209673,109652,169719,168756,151913,155879,54699],
-  reach:[94688,74770,76137,34167,43790,59008,50562,47351,24232],
-  clicks_all:[2236,1558,1853,1323,2409,3201,2417,2812,930]
+  spend:[1701.94,1506.79,2091.56,1999.03,2315.29,2604.93,1993.87,2688.1,1459.84],
+  clicks:[824,650,727,499,1049,1337,1098,1554,774],
+  msgs:[267,204,202,153,244,327,240,321,142],
+  cpm:[6.37,7.39,10.35,13.07,9.49,7.97,8.31,8.37,10.28],
+  impressions:[253806,208105,209673,109652,169719,168756,151913,155879,76678],
+  reach:[94688,74770,76137,34167,43790,59008,50562,47351,28836],
+  clicks_all:[2236,1558,1853,1323,2409,3201,2417,2812,1354]
 };
 // ===== ANÚNCIOS por mês (ordenados por investimento) =====
 const ADS_BY_MONTH = {
@@ -418,7 +418,7 @@ const ADS_BY_MONTH = {
     {name:'AD_PENSADA PRA VC', spend:545.27, clicks:166, msgs:52, cpm:10.49, url:'https://www.instagram.com/p/DbqGgz2Mb8m/'},
     {name:'AD_QUEM_NAO_QUER_BUMBUM', spend:179.35, clicks:34, msgs:7, cpm:25.62, url:'https://www.instagram.com/p/DbnnrxqM8rV/'},
     {name:'AD_JIU', spend:50.83, clicks:28, msgs:3, cpm:16.94, url:'https://www.instagram.com/p/DbqGfsPsdXT/'},
-    {name:'Novo anúncio de Engajamento', spend:48.5, clicks:19, msgs:2, cpm:24.25, url:'https://www.instagram.com/p/DcONBExs1cg/'},
+    {name:'AD_5_DIAS_VIDEO', spend:48.5, clicks:19, msgs:2, cpm:24.25, url:'https://www.instagram.com/p/DcONBExs1cg/'},
     {name:'[GGD][FACHADA_C]', spend:22.54, clicks:4, msgs:2, cpm:11.27, url:'https://www.instagram.com/p/Db5uBxuMStn/'},
     {name:'[GGD][5DIAS_AULA_EXPERIMENTAL][FITNESS]', spend:18.92, clicks:2, msgs:0, cpm:null, url:'https://www.instagram.com/p/Db86FrksOW8/'},
     {name:'[GGD][5DIAS_AULA_EXPERIMENTAL][ALTA_RENDA]', spend:18.59, clicks:5, msgs:1, cpm:18.59, url:'https://www.instagram.com/p/Db86F6ksFh4/'},
@@ -432,13 +432,22 @@ const ADS_BY_MONTH = {
     {name:'[GGD][FACHADA_A]', spend:10.45, clicks:3, msgs:1, cpm:10.45, url:'https://www.instagram.com/p/Db3ldLuMUA9/'}
   ],
   9:[
-    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:345.25, clicks:269, msgs:43, cpm:8.03, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
-    {name:'AD_CONHEÇA_GO_HEAT', spend:275.23, clicks:139, msgs:24, cpm:11.47, url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
+    {name:'AD05_MUAY_THAI_DE_VERDADE', spend:410.89, clicks:309, msgs:48, cpm:8.56, url:'https://www.instagram.com/p/DY7MzvyDFrk/'},
+    {name:'AD_CONHEÇA_GO_HEAT', spend:333.83, clicks:172, msgs:27, cpm:12.36, url:'https://www.instagram.com/p/DYfBlOrDPtT/'},
     {name:'AD_PENSADA PRA VC', spend:194.43, clicks:95, msgs:16, cpm:12.15, url:'https://www.instagram.com/p/DbqGgz2Mb8m/'},
-    {name:'AD_JIU', spend:121.07, clicks:32, msgs:3, cpm:40.36, url:'https://www.instagram.com/p/DbqGfsPsdXT/'},
+    {name:'AD_JIU', spend:155.27, clicks:35, msgs:4, cpm:38.82, url:'https://www.instagram.com/p/DbqGfsPsdXT/'},
+    {name:'[GGD][5DIAS_SET26][AD01]', spend:71.88, clicks:40, msgs:10, cpm:7.19, url:'https://www.instagram.com/p/DdUGNmpMrR9/'},
+    {name:'[GGD][CARROSSEL][ACADEMIA_DE_GRACA]', spend:69.52, clicks:22, msgs:7, cpm:9.93, url:'https://www.instagram.com/p/DdUiWrBs1R0/'},
+    {name:'[GGD][5DIAS_SET26][AD02]', spend:69.25, clicks:42, msgs:16, cpm:4.33, url:'https://www.instagram.com/p/DdUGN9eMVBx/'},
+    {name:'[GGD][5DIAS_SET26][AD06]', spend:68.04, clicks:36, msgs:10, cpm:6.8, url:'https://www.instagram.com/p/DdUEsJ9M0Ib/'},
     {name:'AD03_NAO_E_PEGADINHA', spend:16.27, clicks:7, msgs:1, cpm:16.27, url:'https://www.instagram.com/p/DdHNf-6sIGJ/'},
     {name:'AD02_5DIAS_TODAS_MODALIDADES', spend:14.66, clicks:5, msgs:1, cpm:14.66, url:'https://www.instagram.com/p/DdHNfykMJfA/'},
-    {name:'AD01_ACADEMIA_SURTOU_5DIAS', spend:13.97, clicks:1, msgs:0, cpm:null, url:'https://www.instagram.com/p/DdHNeu1M3Kf/'}
+    {name:'AD01_ACADEMIA_SURTOU_5DIAS', spend:13.97, clicks:1, msgs:0, cpm:null, url:'https://www.instagram.com/p/DdHNeu1M3Kf/'},
+    {name:'[GGD][CARROSSEL][CONHECA_A_CASA]', spend:10.33, clicks:3, msgs:1, cpm:10.33, url:'https://www.instagram.com/p/DdUiQ8HMhvq/'},
+    {name:'[GGD][5DIAS_SET26][AD04]', spend:10.3, clicks:3, msgs:1, cpm:10.3, url:'https://www.instagram.com/p/DdUEpLHsjz7/'},
+    {name:'[GGD][CARROSSEL][TREINAR_DE_VERDADE]', spend:8.29, clicks:1, msgs:0, cpm:null, url:'https://www.instagram.com/p/DdUiTkWsOMB/'},
+    {name:'[GGD][5DIAS_SET26][AD03]', spend:6.92, clicks:3, msgs:0, cpm:null, url:'https://www.instagram.com/p/DdUEnl6MPur/'},
+    {name:'[GGD][5DIAS_SET26][AD05]', spend:5.99, clicks:0, msgs:0, cpm:null, url:'https://www.instagram.com/p/DdUEqcIs13E/'}
   ]
 };
 // ===== FUNIL OFFLINE (agendamento/presença/fechamento — dados da academia) =====
