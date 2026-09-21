@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Funil do perpétuo · Biblioteca R$ 97 — Dr. Glauber | GGD</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3441;
+    --txt:#e6edf3; --mut:#8b98a9; --accent:#4f9cff;
+    --green:#2ec27e; --greenbg:#12301f; --yellow:#e8b13b; --yellowbg:#332807;
+    --red:#f2545b; --redbg:#331013; --gray:#6b7688; --graybg:#1e2530;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55;padding:28px 20px 60px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px}
+  header.top h1{font-size:23px;font-weight:700;letter-spacing:-.3px}
+  header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--mut);font-size:11px;padding:3px 9px;border-radius:20px;margin-right:6px}
+  h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);margin:36px 0 14px;font-weight:600}
+  p.intro{font-size:14px;color:var(--mut);margin:-4px 0 14px;max-width:820px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;position:relative;overflow:hidden}
+  .card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .card .val{font-size:27px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
+  .card .foot{font-size:12px;color:var(--mut);margin-top:6px}
+  .card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .s-green{background:var(--green)} .s-yellow{background:var(--yellow)} .s-red{background:var(--red)} .s-accent{background:var(--accent)}
+  .tese{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}
+  .tese .bloco{text-align:center}
+  .tese .rot{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut)}
+  .tese .big{font-size:40px;font-weight:700;letter-spacing:-1px;margin:6px 0}
+  .tese .det{font-size:13px;color:var(--mut)}
+  .tese .vs{font-size:13px;color:var(--mut);border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 18px}
+  .aviso{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:10px;padding:16px 18px;font-size:13.5px;margin-top:14px}
+  .aviso b{color:var(--yellow)}
+  .aviso.verde{border-left-color:var(--green)} .aviso.verde b{color:var(--green)}
+  .funnel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+  .frow{display:flex;align-items:center;gap:14px;padding:9px 0}
+  .frow .name{width:170px;font-size:13px;flex-shrink:0}
+  .frow .barwrap{flex:1;background:var(--panel2);border-radius:6px;height:30px;overflow:hidden}
+  .frow .bar{height:100%;background:linear-gradient(90deg,#2f6fd0,#4f9cff);border-radius:6px;display:flex;align-items:center;padding-left:12px;min-width:3px}
+  .frow .barnum{font-size:13px;font-weight:600;color:#fff;white-space:nowrap}
+  .frow .conv{width:170px;text-align:right;font-size:12px;color:var(--mut);flex-shrink:0}
+  .frow .conv b{font-size:14px;color:var(--txt)}
+  .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)}
+  .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+  thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+  tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
+  tbody tr:hover{background:#141a24}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  ol.perg{margin:0 0 0 20px;font-size:14px} ol.perg li{margin:10px 0}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+  footer ul{margin:8px 0 0 18px} footer li{margin:6px 0}
+  a{color:var(--accent);text-decoration:none}
+  @media(max-width:760px){.tese{grid-template-columns:1fr}.tese .vs{border:0;padding:0}.frow .name{width:104px}.frow .conv{width:120px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>Perpétuo da Biblioteca R$ 97 — o funil dos 4 primeiros dias</h1>
+      <div class="sub">Meta Ads · conta 1412926334390157 (CA_GLAUBER_LT) · campanha no ar desde 17/09/2026, 15h · material para o estrategista</div>
+    </div>
+    <div>
+      <span class="badge">Janela fechada: 17/09 – 20/09</span>
+      <span class="badge">7 dias no clique</span>
+      <span class="badge">Fonte: Meta Graph API</span>
+    </div>
+  </header>
+
+  <h2 class="sec">1 · A previsão e o que aconteceu</h2>
+  <p class="intro">A conta que fizemos antes de ligar: como o anúncio cai <b>direto na página de pagamento</b>, cada abertura de checkout vale quase uma visita — e a régua era de <b>1 venda a cada ~30 aberturas</b>. É essa premissa que os 4 primeiros dias testaram.</p>
+  <div class="tese">
+    <div class="bloco">
+      <div class="rot">Previsto</div>
+      <div class="big">1 : 30</div>
+      <div class="det">1 venda a cada 30 aberturas<br>= <b>3,33%</b> de conversão</div>
+    </div>
+    <div class="vs">contra</div>
+    <div class="bloco">
+      <div class="rot">Realizado</div>
+      <div class="big" style="color:var(--red)">1 : 85</div>
+      <div class="det">1 venda em 85 aberturas<br>= <b>1,18%</b> de conversão</div>
+    </div>
+  </div>
+  <div class="aviso">
+    Com a régua prevista, as <b>85 aberturas</b> desses 4 dias teriam virado <b>2,8 vendas</b>. Viraram <b>1</b>.
+    A página está convertendo <b>2,8x menos</b> do que a conta assumia — foi preciso <b>2,8x mais gente</b> na página de pagamento para a mesma venda.
+  </div>
+
+  <h2 class="sec">2 · Placar dos 4 dias</h2>
+  <div class="cards">
+    <div class="card"><div class="stripe s-accent"></div><div class="lbl">Investido</div><div class="val">R$ 448,45</div><div class="foot">3,5 dias de veiculação · teto R$ 120/dia</div></div>
+    <div class="card"><div class="stripe s-yellow"></div><div class="lbl">Faturamento</div><div class="val">R$ 182,00</div><div class="foot">1 venda · ROAS 0,41x</div></div>
+    <div class="card"><div class="stripe s-red"></div><div class="lbl">CPA realizado</div><div class="val">R$ 448,45</div><div class="foot">teto do produto: R$ 70–90</div></div>
+    <div class="card"><div class="stripe s-yellow"></div><div class="lbl">Custo por checkout</div><div class="val">R$ 5,28</div><div class="foot">85 aberturas</div></div>
+    <div class="card"><div class="stripe s-accent"></div><div class="lbl">Custo por visita</div><div class="val">R$ 6,69</div><div class="foot">67 visitas na página</div></div>
+    <div class="card"><div class="stripe s-accent"></div><div class="lbl">CPC no link</div><div class="val">R$ 5,34</div><div class="foot">84 cliques · CTR 1,04% · CPM R$ 55,48</div></div>
+  </div>
+  <div class="aviso">
+    <b>Como ler "checkout aberto" aqui.</b> O anúncio vai direto para o pagamento da HeroSpark, então o evento <code>InitiateCheckout</code> dispara na <b>abertura da página</b> — não é a intenção forte de compra da conta antiga, onde havia página de vendas antes.
+    Repare que houve <b>85 aberturas para 67 visitas</b>: o evento está inflado. Pela visita, que é o número conservador, a conversão é de <b>1,49%</b> — ainda bem abaixo dos 3,33% previstos.
+  </div>
+
+  <h2 class="sec">3 · O funil inteiro, etapa por etapa</h2>
+  <div class="funnel">
+      <div class="frow">
+        <div class="name">Impressões</div>
+        <div class="barwrap"><div class="bar" style="width:100.0%"><span class="barnum">8.083</span></div></div>
+        <div class="conv">&nbsp;</div>
+      </div>
+      <div class="frow">
+        <div class="name">Cliques no link</div>
+        <div class="barwrap"><div class="bar" style="width:1.0392181120870965%"><span class="barnum">84</span></div></div>
+        <div class="conv"><b>1,04%</b> da impressão</div>
+      </div>
+      <div class="frow">
+        <div class="name">Visitas na página</div>
+        <div class="barwrap"><div class="bar" style="width:0.8289001608313745%"><span class="barnum">67</span></div></div>
+        <div class="conv"><b>79,76%</b> do clique</div>
+      </div>
+      <div class="frow">
+        <div class="name">Checkouts abertos</div>
+        <div class="barwrap"><div class="bar" style="width:1.0515897562786094%"><span class="barnum">85</span></div></div>
+        <div class="conv"><b>126,87%</b> da visita</div>
+      </div>
+      <div class="frow">
+        <div class="name">Compras</div>
+        <div class="barwrap"><div class="bar" style="width:0.6%"><span class="barnum">1</span></div></div>
+        <div class="conv"><b>1,18%</b> do checkout</div>
+      </div></div>
+
+
+  <h2 class="sec">4 · Por público × criativo (os 4 conjuntos)</h2>
+  <div style="overflow-x:auto"><table style="min-width:1080px">
+    <thead><tr>
+      <th>Conjunto</th><th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th>
+      <th class="num">CTR link</th><th class="num">Cliques</th><th class="num">CPC</th>
+      <th class="num">Visitas</th><th class="num">Custo/visita</th>
+      <th class="num">Checkouts</th><th class="num">Custo/checkout</th>
+      <th class="num">Vendas</th><th class="num">Conv. chk</th><th class="num">CPA</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b>LAL_RADIO_AD016</b></td>
+        <td class="num">R$ 115,01</td>
+        <td class="num">2.560</td>
+        <td class="num">R$ 44,93</td>
+        <td class="num">1,13%</td>
+        <td class="num">29</td>
+        <td class="num">R$ 3,97</td>
+        <td class="num">22</td>
+        <td class="num">R$ 5,23</td>
+        <td class="num"><b>27</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 4,26</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>LAL_RADIO_AD015</b></td>
+        <td class="num">R$ 113,39</td>
+        <td class="num">1.363</td>
+        <td class="num">R$ 83,19</td>
+        <td class="num">0,66%</td>
+        <td class="num">9</td>
+        <td class="num">R$ 12,60</td>
+        <td class="num">7</td>
+        <td class="num">R$ 16,20</td>
+        <td class="num"><b>12</b></td>
+        <td class="num"><span class="pill p-red">R$ 9,45</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>MED_FISIO_AD016</b> <span class="pill p-green">vendeu</span></td>
+        <td class="num">R$ 110,05</td>
+        <td class="num">2.825</td>
+        <td class="num">R$ 38,96</td>
+        <td class="num">1,38%</td>
+        <td class="num">39</td>
+        <td class="num">R$ 2,82</td>
+        <td class="num">33</td>
+        <td class="num">R$ 3,33</td>
+        <td class="num"><b>40</b></td>
+        <td class="num"><span class="pill p-green">R$ 2,75</span></td>
+        <td class="num">1</td>
+        <td class="num">2,50%</td>
+        <td class="num">R$ 110,05</td>
+      </tr>
+      <tr>
+        <td><b>MED_FISIO_AD015</b></td>
+        <td class="num">R$ 110,00</td>
+        <td class="num">1.335</td>
+        <td class="num">R$ 82,40</td>
+        <td class="num">0,52%</td>
+        <td class="num">7</td>
+        <td class="num">R$ 15,71</td>
+        <td class="num">5</td>
+        <td class="num">R$ 22,00</td>
+        <td class="num"><b>6</b></td>
+        <td class="num"><span class="pill p-red">R$ 18,33</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr></tbody>
+  </table></div>
+
+  <h2 class="sec">5 · Só o público (as duas artes somadas)</h2>
+  <div style="overflow-x:auto"><table style="min-width:1080px">
+    <thead><tr>
+      <th>Público</th><th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th>
+      <th class="num">CTR link</th><th class="num">Cliques</th><th class="num">CPC</th>
+      <th class="num">Visitas</th><th class="num">Custo/visita</th>
+      <th class="num">Checkouts</th><th class="num">Custo/checkout</th>
+      <th class="num">Vendas</th><th class="num">Conv. chk</th><th class="num">CPA</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b>LAL_RADIO</b></td>
+        <td class="num">R$ 228,40</td>
+        <td class="num">3.923</td>
+        <td class="num">R$ 58,22</td>
+        <td class="num">0,97%</td>
+        <td class="num">38</td>
+        <td class="num">R$ 6,01</td>
+        <td class="num">29</td>
+        <td class="num">R$ 7,88</td>
+        <td class="num"><b>39</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 5,86</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>MED_FISIO</b> <span class="pill p-green">vendeu</span></td>
+        <td class="num">R$ 220,05</td>
+        <td class="num">4.160</td>
+        <td class="num">R$ 52,90</td>
+        <td class="num">1,11%</td>
+        <td class="num">46</td>
+        <td class="num">R$ 4,78</td>
+        <td class="num">38</td>
+        <td class="num">R$ 5,79</td>
+        <td class="num"><b>46</b></td>
+        <td class="num"><span class="pill p-green">R$ 4,78</span></td>
+        <td class="num">1</td>
+        <td class="num">2,17%</td>
+        <td class="num">R$ 220,05</td>
+      </tr></tbody>
+  </table></div>
+
+  <h2 class="sec">6 · Só o criativo (os dois públicos somados)</h2>
+  <div style="overflow-x:auto"><table style="min-width:1080px">
+    <thead><tr>
+      <th>Criativo</th><th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th>
+      <th class="num">CTR link</th><th class="num">Cliques</th><th class="num">CPC</th>
+      <th class="num">Visitas</th><th class="num">Custo/visita</th>
+      <th class="num">Checkouts</th><th class="num">Custo/checkout</th>
+      <th class="num">Vendas</th><th class="num">Conv. chk</th><th class="num">CPA</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Arte 016</b> <span class="pill p-green">vendeu</span></td>
+        <td class="num">R$ 225,06</td>
+        <td class="num">5.385</td>
+        <td class="num">R$ 41,79</td>
+        <td class="num">1,26%</td>
+        <td class="num">68</td>
+        <td class="num">R$ 3,31</td>
+        <td class="num">55</td>
+        <td class="num">R$ 4,09</td>
+        <td class="num"><b>67</b></td>
+        <td class="num"><span class="pill p-green">R$ 3,36</span></td>
+        <td class="num">1</td>
+        <td class="num">1,49%</td>
+        <td class="num">R$ 225,06</td>
+      </tr>
+      <tr>
+        <td><b>Arte 015</b></td>
+        <td class="num">R$ 223,39</td>
+        <td class="num">2.698</td>
+        <td class="num">R$ 82,80</td>
+        <td class="num">0,59%</td>
+        <td class="num">16</td>
+        <td class="num">R$ 13,96</td>
+        <td class="num">12</td>
+        <td class="num">R$ 18,62</td>
+        <td class="num"><b>18</b></td>
+        <td class="num"><span class="pill p-red">R$ 12,41</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr></tbody>
+  </table></div>
+
+  <h2 class="sec">7 · Onde o anúncio apareceu</h2>
+  <div style="overflow-x:auto"><table style="min-width:1080px">
+    <thead><tr>
+      <th>Plataforma e posição</th><th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th>
+      <th class="num">CTR link</th><th class="num">Cliques</th><th class="num">CPC</th>
+      <th class="num">Visitas</th><th class="num">Custo/visita</th>
+      <th class="num">Checkouts</th><th class="num">Custo/checkout</th>
+      <th class="num">Vendas</th><th class="num">Conv. chk</th><th class="num">CPA</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b>instagram/feed</b></td>
+        <td class="num">R$ 255,69</td>
+        <td class="num">3.784</td>
+        <td class="num">R$ 67,57</td>
+        <td class="num">0,61%</td>
+        <td class="num">23</td>
+        <td class="num">R$ 11,12</td>
+        <td class="num">19</td>
+        <td class="num">R$ 13,46</td>
+        <td class="num"><b>29</b></td>
+        <td class="num"><span class="pill p-red">R$ 8,82</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>instagram/instagram_stories</b></td>
+        <td class="num">R$ 94,21</td>
+        <td class="num">2.235</td>
+        <td class="num">R$ 42,15</td>
+        <td class="num">0,98%</td>
+        <td class="num">22</td>
+        <td class="num">R$ 4,28</td>
+        <td class="num">19</td>
+        <td class="num">R$ 4,96</td>
+        <td class="num"><b>22</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 4,28</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>instagram/instagram_reels</b></td>
+        <td class="num">R$ 49,34</td>
+        <td class="num">982</td>
+        <td class="num">R$ 50,24</td>
+        <td class="num">2,95%</td>
+        <td class="num">29</td>
+        <td class="num">R$ 1,70</td>
+        <td class="num">20</td>
+        <td class="num">R$ 2,47</td>
+        <td class="num"><b>23</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 2,15</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/feed</b> <span class="pill p-green">vendeu</span></td>
+        <td class="num">R$ 36,81</td>
+        <td class="num">827</td>
+        <td class="num">R$ 44,51</td>
+        <td class="num">1,21%</td>
+        <td class="num">10</td>
+        <td class="num">R$ 3,68</td>
+        <td class="num">9</td>
+        <td class="num">R$ 4,09</td>
+        <td class="num"><b>11</b></td>
+        <td class="num"><span class="pill p-green">R$ 3,35</span></td>
+        <td class="num">1</td>
+        <td class="num">9,09%</td>
+        <td class="num">R$ 36,81</td>
+      </tr>
+      <tr>
+        <td><b>facebook/facebook_reels</b></td>
+        <td class="num">R$ 7,38</td>
+        <td class="num">108</td>
+        <td class="num">R$ 68,33</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/facebook_stories</b></td>
+        <td class="num">R$ 2,69</td>
+        <td class="num">30</td>
+        <td class="num">R$ 89,66</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/facebook_reels_overlay</b></td>
+        <td class="num">R$ 0,97</td>
+        <td class="num">57</td>
+        <td class="num">R$ 17,02</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/marketplace</b></td>
+        <td class="num">R$ 0,59</td>
+        <td class="num">24</td>
+        <td class="num">R$ 24,58</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/instream_video</b></td>
+        <td class="num">R$ 0,33</td>
+        <td class="num">5</td>
+        <td class="num">R$ 66,00</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/facebook_notification</b></td>
+        <td class="num">R$ 0,20</td>
+        <td class="num">3</td>
+        <td class="num">R$ 66,66</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/right_hand_column</b></td>
+        <td class="num">R$ 0,14</td>
+        <td class="num">19</td>
+        <td class="num">R$ 7,37</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/facebook_profile_feed</b></td>
+        <td class="num">R$ 0,10</td>
+        <td class="num">4</td>
+        <td class="num">R$ 25,00</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>facebook/search</b></td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">5</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0,00%</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num">0</td>
+        <td class="num">R$ 0,00</td>
+        <td class="num"><b>0</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 0,00</span></td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+      </tr></tbody>
+  </table></div>
+
+  <h2 class="sec">8 · Dia a dia</h2>
+  <div style="overflow-x:auto"><table style="min-width:1080px">
+    <thead><tr>
+      <th>Dia</th><th class="num">Gasto</th><th class="num">Impr.</th><th class="num">CPM</th>
+      <th class="num">CTR link</th><th class="num">Cliques</th><th class="num">CPC</th>
+      <th class="num">Visitas</th><th class="num">Custo/visita</th>
+      <th class="num">Checkouts</th><th class="num">Custo/checkout</th>
+      <th class="num">Vendas</th><th class="num">Conv. chk</th><th class="num">CPA</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b>2026-09-17</b></td>
+        <td class="num">R$ 39,79</td>
+        <td class="num">856</td>
+        <td class="num">R$ 46,48</td>
+        <td class="num">1,29%</td>
+        <td class="num">11</td>
+        <td class="num">R$ 3,62</td>
+        <td class="num">5</td>
+        <td class="num">R$ 7,96</td>
+        <td class="num"><b>7</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 5,68</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>2026-09-18</b></td>
+        <td class="num">R$ 100,06</td>
+        <td class="num">1.795</td>
+        <td class="num">R$ 55,74</td>
+        <td class="num">0,84%</td>
+        <td class="num">15</td>
+        <td class="num">R$ 6,67</td>
+        <td class="num">14</td>
+        <td class="num">R$ 7,15</td>
+        <td class="num"><b>14</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 7,15</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>2026-09-19</b></td>
+        <td class="num">R$ 143,62</td>
+        <td class="num">2.534</td>
+        <td class="num">R$ 56,68</td>
+        <td class="num">1,14%</td>
+        <td class="num">29</td>
+        <td class="num">R$ 4,95</td>
+        <td class="num">23</td>
+        <td class="num">R$ 6,24</td>
+        <td class="num"><b>33</b></td>
+        <td class="num"><span class="pill p-yellow">R$ 4,35</span></td>
+        <td class="num">0</td>
+        <td class="num">0,00%</td>
+        <td class="num">—</td>
+      </tr>
+      <tr>
+        <td><b>2026-09-20</b> <span class="pill p-green">vendeu</span></td>
+        <td class="num">R$ 164,98</td>
+        <td class="num">2.898</td>
+        <td class="num">R$ 56,93</td>
+        <td class="num">1,00%</td>
+        <td class="num">29</td>
+        <td class="num">R$ 5,69</td>
+        <td class="num">25</td>
+        <td class="num">R$ 6,60</td>
+        <td class="num"><b>31</b></td>
+        <td class="num"><span class="pill p-green">R$ 5,32</span></td>
+        <td class="num">1</td>
+        <td class="num">3,23%</td>
+        <td class="num">R$ 164,98</td>
+      </tr></tbody>
+  </table></div>
+
+  <h2 class="sec">9 · O que precisaria acontecer para fechar em CPA R$ 90</h2>
+  <p class="intro">Com R$ 448,45 gastos, o teto de R$ 90 pedia <b>5 vendas</b> — saíram 1. O CPA é o custo por checkout dividido pela conversão da página, então só há dois caminhos, e eles se multiplicam:</p>
+
+  <div style="overflow-x:auto"><table style="min-width:620px">
+    <thead><tr><th>Custo por checkout ↓ / conversão da página →</th><th class="num">1,18%</th><th class="num">2,00%</th><th class="num">3,00%</th><th class="num">5,00%</th></tr></thead>
+    <tbody><tr><td><b>R$ 5,28</b> <span class='pill p-gray'>hoje</span></td><td class="num"><span class="pill p-red">R$ 448,80</span></td><td class="num"><span class="pill p-red">R$ 264,00</span></td><td class="num"><span class="pill p-red">R$ 176,00</span></td><td class="num"><span class="pill p-yellow">R$ 105,60</span></td></tr><tr><td><b>R$ 4,00</b></td><td class="num"><span class="pill p-red">R$ 340,00</span></td><td class="num"><span class="pill p-red">R$ 200,00</span></td><td class="num"><span class="pill p-yellow">R$ 133,33</span></td><td class="num"><span class="pill p-green">R$ 80,00</span></td></tr><tr><td><b>R$ 3,00</b></td><td class="num"><span class="pill p-red">R$ 255,00</span></td><td class="num"><span class="pill p-yellow">R$ 150,00</span></td><td class="num"><span class="pill p-yellow">R$ 100,00</span></td><td class="num"><span class="pill p-green">R$ 60,00</span></td></tr><tr><td><b>R$ 2,75</b></td><td class="num"><span class="pill p-red">R$ 233,75</span></td><td class="num"><span class="pill p-yellow">R$ 137,50</span></td><td class="num"><span class="pill p-yellow">R$ 91,67</span></td><td class="num"><span class="pill p-green">R$ 55,00</span></td></tr></tbody>
+  </table></div>
+  <div class="aviso verde">
+    O melhor conjunto já entrega checkout a <b>R$ 2,75</b>. Com esse custo de tráfego, bastaria a página converter <b>3%</b> para o CPA ficar dentro do teto.
+    Ou seja: <b>o tráfego já tem o número; falta a página.</b> Fechar a conta só com mídia exigiria checkout a R$ 1,06, que não existe nesse leilão.
+  </div>
+
+  <h2 class="sec">10 · A venda que saiu</h2>
+  <div class="aviso verde">
+    Dia 20/09, conjunto <b>MED_FISIO_AD016</b>, posição <b>feed do Facebook</b>. Valor registrado: <b>R$ 182,00</b> — que é exatamente <b>R$ 97 (produto) + R$ 19 + R$ 19 + R$ 47 (os três order bumps)</b>.
+    O comprador levou tudo. Se isso se repetir, o <b>ticket realizado do low ticket é bem maior que R$ 97</b>, e o teto de CPA pode subir junto. É o primeiro dado que temos sobre isso — ainda é uma venda só.
+  </div>
+
+  <h2 class="sec">11 · O que pedimos ao estrategista</h2>
+  <ol class="perg">
+    <li><b>A régua de 1:30 vem de onde?</b> Se veio de outro checkout (com página de vendas antes, ou sem CPF e endereço obrigatórios), ela não se aplica aqui e o plano precisa ser refeito com 1,18%–1,49%.</li>
+    <li><b>O KPI da Biblioteca é o CPA dela ou o total de compras da conta?</b> Se a Biblioteca existe para criar comprador novo que depois sobe para a Imersão, o teto de R$ 70–90 é a régua errada e precisamos combinar outra.</li>
+    <li><b>O atrito do checkout é negociável?</b> Cronômetro de 15 minutos, CPF e endereço com CEP obrigatórios até no Pix. É aí que mora a diferença entre 1,18% e 3%.</li>
+    <li><b>O ticket com bumps entra na conta?</b> A única venda saiu a R$ 182. Se o ticket médio realizado for esse, o CPA teto muda de patamar.</li>
+  </ol>
+
+  <footer>
+    <b>Como estes números foram apurados</b>
+    <ul>
+      <li><b>Janela fechada 17/09–20/09</b>, direto da Graph API da conta CA_GLAUBER_LT. O dia 21 ficou de fora de propósito: dia parcial distorce a leitura.</li>
+      <li><b>Atribuição de 7 dias no clique.</b> A venda de um dia pode ter vindo do clique de outro — por isso o dia a dia serve para ritmo de entrega, não para julgar criativo.</li>
+      <li><b>Subnotificação.</b> O Meta perde de 15% a 40% dos eventos pós-iOS 14. A verdade das vendas é o painel da HeroSpark; aqui a leitura é comparativa (um conjunto contra o outro), que a subnotificação não distorce.</li>
+      <li><b>Campanha nova.</b> Os conjuntos ainda estão em aprendizado. Público e criativo só se julgam com folga depois de ~30 aberturas por conjunto — o que só o MED_FISIO_AD016 já tem.</li>
+      <li>Dash vivo, atualizado todo dia: <a href="https://relatorios.giogrowthdigital.com.br/glauber/perpetuo/">relatorios.giogrowthdigital.com.br/glauber/perpetuo/</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>
