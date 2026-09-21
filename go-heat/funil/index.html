@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Go Heat · Funil de Setembro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --ground:#FBF7F4;
+    --surface:#FFFFFF;
+    --ink:#1B1211;
+    --ink-soft:#6B5A56;
+    --line:#E5D8D1;
+    --brand:#7A1220;
+    --brand-soft:#F3E2E2;
+    --ember:#C0601C;
+    --ember-soft:#FAEADC;
+    --good:#2F6B4F;
+    --warn:#9A6A0B;
+    --shadow:0 1px 2px rgba(27,18,17,.04), 0 8px 24px rgba(122,18,32,.07);
+    --r:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#141010;
+      --surface:#1D1716;
+      --ink:#F3E9E5;
+      --ink-soft:#B5A29C;
+      --line:#332827;
+      --brand:#E0697A;
+      --brand-soft:#2E1A1D;
+      --ember:#E8994F;
+      --ember-soft:#2C2018;
+      --good:#6FBF95;
+      --warn:#D9AC4E;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141010;
+    --surface:#1D1716;
+    --ink:#F3E9E5;
+    --ink-soft:#B5A29C;
+    --line:#332827;
+    --brand:#E0697A;
+    --brand-soft:#2E1A1D;
+    --ember:#E8994F;
+    --ember-soft:#2C2018;
+    --good:#6FBF95;
+    --warn:#D9AC4E;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Archivo, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:48px 24px 80px; display:flex; flex-direction:column; gap:40px}
+  h1,h2,h3{font-family:Archivo, sans-serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(28px,4.2vw,40px); font-weight:800; line-height:1.15; letter-spacing:-.02em}
+  h2{font-size:22px; font-weight:800; letter-spacing:-.01em}
+  h3{font-size:17px; font-weight:700}
+  p{margin:0}
+  .num-mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--brand);
+  }
+  .lead{font-size:18px; color:var(--ink-soft); max-width:62ch}
+
+  header.top{display:flex; flex-direction:column; gap:14px}
+  .marca{display:flex; align-items:center; gap:12px}
+  .disco{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--brand); display:grid; place-items:center; flex:none;
+  }
+  .disco svg{width:19px;height:19px}
+  .marca b{font-weight:800; font-size:17px}
+  .marca span{color:var(--ink-soft); font-size:14px}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  .painel{padding:28px; display:flex; flex-direction:column; gap:24px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:22px}
+  .kpi{display:flex; flex-direction:column; gap:4px}
+  .kpi .rot{font-size:13px; color:var(--ink-soft)}
+  .kpi .val{
+    font-family:"IBM Plex Mono", monospace; font-weight:600; font-size:28px; line-height:1.1;
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+  }
+  .kpi .val.destaque{color:var(--brand)}
+  .kpi .nota{font-size:12.5px; color:var(--ink-soft)}
+  .barra{height:1px; background:var(--line)}
+
+  .faixa{
+    background:var(--brand-soft); border-radius:var(--r); padding:22px 24px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .faixa.quente{background:var(--ember-soft)}
+  .faixa .num{
+    font-family:"IBM Plex Mono", monospace; font-weight:600; font-size:clamp(26px,3.4vw,32px);
+    color:var(--brand); line-height:1.15; font-variant-numeric:tabular-nums;
+  }
+  .faixa.quente .num{color:var(--ember)}
+
+  /* ---- funil em barras ---- */
+  .funil{padding:28px; display:flex; flex-direction:column; gap:22px}
+  .etapa{display:flex; flex-direction:column; gap:7px}
+  .etapa .topo{display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap}
+  .etapa .nome{font-weight:700; font-size:15px}
+  .etapa .nome small{display:block; font-weight:400; font-size:12.5px; color:var(--ink-soft); letter-spacing:0}
+  .etapa .cifra{font-size:13px; color:var(--ink-soft); white-space:nowrap}
+  .trilho{display:flex; align-items:center; gap:12px}
+  .fill{
+    height:26px; background:var(--brand);
+    border-radius:3px 5px 5px 3px; min-width:5px;
+  }
+  .etapa .valor{
+    font-family:"IBM Plex Mono", monospace; font-weight:600; font-size:20px;
+    font-variant-numeric:tabular-nums; white-space:nowrap; line-height:1;
+  }
+  .etapa .taxa{font-size:13px; color:var(--ink-soft); white-space:nowrap}
+  .etapa .taxa b{color:var(--ink); font-weight:600}
+
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px}
+  .tabela-wrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+  th,td{padding:13px 16px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left; white-space:normal}
+  thead th{
+    font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--brand-soft);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.total td{font-weight:600; background:color-mix(in srgb, var(--brand-soft) 45%, transparent)}
+  td .up{color:var(--good); font-weight:600}
+  td .aten{color:var(--warn); font-weight:600}
+  .cap{font-size:13.5px; color:var(--ink-soft)}
+
+  ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+  ul.lista li{display:flex; gap:12px; align-items:flex-start}
+  ul.lista li .marc{
+    width:8px;height:8px;border-radius:50%;background:var(--brand);
+    margin-top:9px; flex:none;
+  }
+  ul.lista li b{font-weight:700}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:18px}
+  .bloco{padding:24px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--ink-soft)}
+  .bloco p strong{color:var(--ink); font-weight:600}
+  .bloco .grande{
+    font-family:"IBM Plex Mono", monospace; font-weight:600; font-size:30px;
+    color:var(--ember); line-height:1.1; font-variant-numeric:tabular-nums;
+  }
+
+  footer{
+    border-top:1px solid var(--line); padding-top:22px;
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size:13px; color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .wrap{padding:32px 18px 56px; gap:32px}
+    .painel,.funil{padding:22px}
+    .etapa .valor{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="marca">
+      <span class="disco" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 9v6M17.5 9v6M6.5 12h11"></path>
+          <path d="M3.5 10.5v3M20.5 10.5v3"></path>
+        </svg>
+      </span>
+      <div>
+        <b>Go Heat</b> <span>· acompanhamento de mídia</span>
+      </div>
+    </div>
+    <p class="eyebrow">Funil de setembro · 1 a 19 de setembro de 2026</p>
+    <h1>134 pessoas chamaram no Direct em 19 dias — 44 vestiram roupa de treino e entraram na academia</h1>
+    <p class="lead">Este é o caminho completo, do anúncio até a matrícula, com a taxa de conversão de cada etapa e o que o mercado de academias entrega em cada uma delas. Serve para enxergar, em números, onde estão as próximas matrículas do mês.</p>
+  </header>
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Investimento em mídia</span>
+          <span class="val">R$ 1.586</span>
+          <span class="nota">19 dias · já com impostos</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Pessoas que chamaram</span>
+          <span class="val destaque">134</span>
+          <span class="nota">R$ 11,83 por conversa</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por aula experimental</span>
+          <span class="val">R$ 36,04</span>
+          <span class="nota">44 aulas no período</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por matrícula</span>
+          <span class="val">R$ 264,26</span>
+          <span class="nota">6 matrículas fechadas</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Pessoas alcançadas</span>
+          <span class="val">74.182</span>
+          <span class="nota">exibições dos anúncios na região</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Cliques nos anúncios</span>
+          <span class="val">1.298</span>
+          <span class="nota">1,75% de quem viu clicou</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Ritmo diário</span>
+          <span class="val">7 por dia</span>
+          <span class="nota">média de conversas novas no Direct</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O caminho completo, etapa por etapa</h2>
+    <p class="cap">Cada barra é o tamanho real da etapa. À direita, a taxa de conversão em relação à etapa imediatamente anterior.</p>
+    <div class="card funil">
+
+      <div class="etapa">
+        <div class="topo">
+          <span class="nome">Conversas no Direct <small>quem viu o anúncio e chamou</small></span>
+          <span class="cifra">R$ 11,83 cada</span>
+        </div>
+        <div class="trilho">
+          <div class="fill" style="width:100%"></div>
+        </div>
+        <div class="topo">
+          <span class="valor">134 pessoas</span>
+          <span class="taxa">ponto de partida do funil</span>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="topo">
+          <span class="nome">Agendamentos <small>marcaram dia e hora da aula</small></span>
+          <span class="cifra">R$ 31,09 cada</span>
+        </div>
+        <div class="trilho">
+          <div class="fill" style="width:38.1%"></div>
+        </div>
+        <div class="topo">
+          <span class="valor">51 agendamentos</span>
+          <span class="taxa"><b>38,1%</b> de quem chamou</span>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="topo">
+          <span class="nome">Aulas experimentais <small>compareceram e treinaram</small></span>
+          <span class="cifra">R$ 36,04 cada</span>
+        </div>
+        <div class="trilho">
+          <div class="fill" style="width:32.8%"></div>
+        </div>
+        <div class="topo">
+          <span class="valor">44 aulas</span>
+          <span class="taxa"><b>86,3%</b> de quem agendou</span>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="topo">
+          <span class="nome">Matrículas <small>viraram aluno da casa</small></span>
+          <span class="cifra">R$ 264,26 cada</span>
+        </div>
+        <div class="trilho">
+          <div class="fill" style="width:4.5%"></div>
+        </div>
+        <div class="topo">
+          <span class="valor">6 matrículas</span>
+          <span class="taxa"><b>13,6%</b> de quem fez a aula</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">O número que mais se destaca no mês</p>
+    <div class="faixa">
+      <span class="num">86,3% de quem agenda realmente aparece</span>
+      <p>No mercado de academias, a aula experimental gratuita é a etapa em que mais gente some: o padrão do setor é <strong>25% a 40% de faltas</strong>, e os estúdios considerados bons ficam abaixo de 25%. A Go Heat perdeu <strong>7 pessoas de 51</strong> — 13,7%. Isso é atendimento de primeira linha: quem fala com a recepção marca, e quem marca vem. Significa que a academia está recebendo praticamente todo o público que a mídia entrega.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como o funil se compara com o mercado</h2>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Etapa</th><th>Go Heat</th><th>Mercado</th><th>Leitura</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Conversa → agendamento</td><td>38,1%</td><td>25% a 40%</td><td><span class="up">no topo da faixa</span></td></tr>
+          <tr><td>Agendamento → comparecimento</td><td>86,3%</td><td>60% a 75%</td><td><span class="up">bem acima</span></td></tr>
+          <tr class="total"><td>Aula experimental → matrícula</td><td>13,6%</td><td>28% a 35%</td><td><span class="aten">maior espaço de ganho</span></td></tr>
+          <tr><td>Conversa → matrícula</td><td>4,5%</td><td>12% a 15%</td><td><span class="aten">consequência da linha acima</span></td></tr>
+          <tr><td>Custo por matrícula</td><td>R$ 264</td><td>R$ 280 a R$ 350</td><td><span class="up">abaixo da média</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Faixas de referência do setor fitness: relatórios de conversão de trial da Glofox, estatísticas de captação de academias 2026 e o CAC médio praticado no mercado brasileiro.</p>
+  </section>
+
+  <section>
+    <h2>Onde estão as próximas matrículas</h2>
+    <p class="lead">As três primeiras etapas do funil já operam em nível de mercado ou acima dele. Isso quer dizer que a conta está entregando gente qualificada e presente — e que o crescimento do mês <strong>não depende de aumentar a verba</strong>, depende do que acontece nos minutos seguintes à aula experimental.</p>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>Com 28% de fechamento</h3>
+        <span class="grande">12 matrículas</span>
+        <p>As mesmas 44 aulas experimentais, no piso do que o mercado entrega. O custo por matrícula cairia para <strong>R$ 132</strong> — metade do atual.</p>
+      </div>
+      <div class="card bloco">
+        <h3>Com 40% de fechamento</h3>
+        <span class="grande">18 matrículas</span>
+        <p>As mesmas 44 aulas, no patamar de academia com processo comercial afiado. Custo por matrícula de <strong>R$ 88</strong>.</p>
+      </div>
+    </div>
+    <div class="faixa quente">
+      <p class="eyebrow">Em uma frase</p>
+      <span class="num">O mês pode triplicar de resultado sem um real a mais de mídia.</span>
+      <p>Triplicar a verba levaria o funil a cerca de 18 matrículas com <strong>R$ 4.750</strong> de investimento. Fechar em 40% as aulas que já estão acontecendo leva ao mesmo lugar com os <strong>R$ 1.586</strong> de hoje. As duas coisas juntas são o plano ideal — mas a segunda vem primeiro, porque é de graça.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que o mercado mostra sobre essa etapa</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>60% das matrículas só saem depois do terceiro contato.</b> A diferença entre a academia que fecha 15% e a que fecha 30% quase nunca é o produto — é a velocidade e a constância do retorno depois da aula. Uma pessoa que treinou e foi embora sem resposta é a matrícula mais barata que existe para recuperar.</span></li>
+      <li><span class="marc"></span><span><b>A proposta feita no dia da aula converte muito mais que a proposta feita depois.</b> Enquanto a pessoa está com a roupa suada e acabou de gostar do treino, ela está no melhor momento de decisão do funil inteiro — sair da academia sem um valor na mão esfria a decisão.</span></li>
+      <li><span class="marc"></span><span><b>Responder em até uma hora muda o jogo no topo.</b> Vale tanto para o Direct quanto para o retorno pós-aula: quem responde primeiro costuma ser quem fecha.</span></li>
+      <li><span class="marc"></span><span><b>Uma condição com prazo curto encurta a decisão.</b> Oferta válida para quem fecha no dia da experimental é a alavanca mais usada pelas academias que estão na faixa de 40%.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O que fizemos na mídia até aqui</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Ampliamos as frentes de anúncio.</b> A conta saiu de 2 para 11 frentes ativas, cada uma falando com um perfil diferente da região — homens, mulheres, pais que querem treinar com os filhos e público misto —, o que aumentou o volume de conversas sem elevar o custo por conversa.</span></li>
+      <li><span class="marc"></span><span><b>Entramos com seis artes novas de aula experimental</b>, cada uma com um convite diferente, para descobrir qual chamada traz mais gente até a porta.</span></li>
+      <li><span class="marc"></span><span><b>Subimos uma linha premium com as fotos da casa.</b> Mostrar a academia de verdade — equipamento, tatame, sala — atrai quem já está comparando onde treinar, e não só quem está curioso.</span></li>
+      <li><span class="marc"></span><span><b>Ajustamos o raio de entrega para o entorno real da academia.</b> Anúncio que aparece para quem mora longe demais gera conversa que nunca vira visita.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>As próximas duas semanas</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Dia 22 fazemos a primeira leitura das frentes novas.</b> Cada uma terá sete dias completos de entrega — é o tempo mínimo para saber quais merecem mais verba e quais saem do ar.</span></li>
+      <li><span class="marc"></span><span><b>Queremos acompanhar a matrícula junto com vocês, semana a semana.</b> Se a recepção registrar quantas aulas aconteceram e quantas fecharam em cada semana, conseguimos ligar a arte do anúncio ao aluno que entrou — e passar a comprar mais do público que fecha, não só do que agenda.</span></li>
+      <li><span class="marc"></span><span><b>Três pautas de mídia espontânea entram ainda em setembro</b>, no trabalho de imprensa que já está desenhado. Matéria na mídia local vira prova social dentro do anúncio e reduz o custo de convencer.</span></li>
+      <li><span class="marc"></span><span><b>Falta um número que só vocês têm:</b> o valor do plano fechado e o tempo médio que o aluno permanece. Com ele, a gente para de olhar custo por matrícula e passa a olhar quanto cada real investido devolve em mensalidade ao longo do ano — que é a conta que realmente importa.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital</span>
+    <span>Dados de 1 a 19 de setembro de 2026 · conversas e investimento apurados na plataforma de anúncios; agendamentos, aulas e matrículas informados pela recepção da Go Heat</span>
+  </footer>
+
+</div>
+</body>
+</html>
