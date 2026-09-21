@@ -106,6 +106,8 @@
     border-radius:3px; padding:18px 18px 16px; box-shadow:var(--shadow);
     display:flex; flex-direction:column; gap:8px;
   }
+  .ask.done{border-top-color:var(--ok);}
+  .ask.done .n{color:var(--ok);}
   .ask .n{
     font-family:var(--mono); font-size:12px; color:var(--granada); letter-spacing:.1em;
   }
@@ -241,11 +243,11 @@
       <p>O botão “Quero me cadastrar” passa a abrir a página de cadastro direto, levando os parâmetros da campanha.</p>
       <p class="who">Site · ajuste no link</p>
     </article>
-    <article class="ask">
-      <p class="n">C</p>
-      <h3>Informar a URL de conclusão</h3>
-      <p>Qual endereço o navegador mostra depois que o lojista envia o cadastro com sucesso.</p>
-      <p class="who">Site · uma resposta</p>
+    <article class="ask done">
+      <p class="n">C · resolvido</p>
+      <h3>URL de conclusão identificada</h3>
+      <p>É a <code>/loja/cadastro_bloqueado.php</code>, e ela já carrega o GTM. Localizada por nós no Google Analytics — não precisa de ninguém.</p>
+      <p class="who">Feito · 21/09</p>
     </article>
   </div>
 </section>
@@ -356,8 +358,9 @@
     <div class="step">
       <span class="num"></span>
       <div>
-        <h3>URL de conclusão identificada <span class="tag tag-site">site</span></h3>
-        <p>Precisamos do endereço exato que aparece depois do envio bem-sucedido. Com ele, criamos o disparo da conversão. O caminho mais rápido: alguém da Roma faz um cadastro de teste e nos envia o endereço da tela final.</p>
+        <h3>URL de conclusão identificada <span class="tag tag-ggd">feito</span></h3>
+        <p>É a <code>/loja/cadastro_bloqueado.php</code> — “Seu cadastro foi feito com sucesso e aguarda a aprovação da empresa”. Localizamos pelo Google Analytics da Importadora, sem precisar abrir um cadastro de teste. Ela já carrega o GTM, então o disparo da conversão é direto.</p>
+        <p><strong>119 lojistas chegaram a essa tela nos últimos 28 dias</strong> — é o volume de cadastro que hoje acontece sem que nenhum canal receba o crédito.</p>
       </div>
     </div>
     <div class="step">
@@ -444,7 +447,7 @@
   <h2>O que precisamos de resposta</h2>
   <ol class="qs">
     <li><div><p class="q">Quem publica o GTM no <code>&lt;head&gt;</code> da /aviamentos — a Roma ou a plataforma?</p><p class="why">É a etapa que destrava todas as outras.</p></div></li>
-    <li><div><p class="q">Qual é a URL que aparece quando um cadastro é concluído com sucesso?</p><p class="why">Um cadastro de teste feito por vocês responde em dois minutos. Não fizemos o teste do nosso lado para não criar um registro que alguém teria que aprovar ou apagar depois.</p></div></li>
+    <li><div><p class="q">O acesso ao GTM da Importadora pode ficar com a GGD?</p><p class="why">Com ele criamos a tag de conversão e o disparo sem ocupar o time de vocês. A URL de conclusão já identificamos: <code>/loja/cadastro_bloqueado.php</code>.</p></div></li>
     <li><div><p class="q">O botão “Quero me cadastrar” pode abrir a página de cadastro direto, sem iframe?</p><p class="why">Se não puder, seguimos pelo aviso entre as páginas — só avisem para a gente escolher o caminho certo.</p></div></li>
     <li><div><p class="q">Pedido mínimo, prazo de entrega, frete e formas de pagamento: quais são os oficiais?</p><p class="why">São as respostas que fazem o lojista decidir abrir cadastro.</p></div></li>
   </ol>
