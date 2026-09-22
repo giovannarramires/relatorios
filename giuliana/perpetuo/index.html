@@ -150,6 +150,8 @@ tr.fora td.l b{text-decoration:line-through}
 td.dia-l{white-space:nowrap}
 td.dia-l em{text-transform:capitalize}
 #d-tab table{min-width:900px}
+#d-tab.alta{max-height:620px;overflow:auto}
+#d-tab.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--border)}
 .dia-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--text-3);
 font-weight:600;margin-top:3px;white-space:nowrap}
 .hoje-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
@@ -1400,6 +1402,7 @@ window.__DIA__ = {"desde":"2026-09-01","ate":"2026-09-22","imposto":0.1383,"tick
       '<th>Página</th><th class="d">Vendas</th><th>CPA</th><th>Receita</th><th class="d">ROAS</th>' +
       '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="10">Nenhum dia no intervalo.</td></tr>') +
       '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
 
     // ---- por gancho ----
     var asel = ADS.filter(function (l) { return setSel[l.data]; });
