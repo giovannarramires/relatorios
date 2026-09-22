@@ -75,6 +75,105 @@ svg{display:block;width:100%;height:auto}
       background:var(--gelo);color:var(--azul)}
 footer{margin-top:28px;font-size:12.5px;color:var(--cinza);text-align:center}
 @media(max-width:640px){h1{font-size:22px}.kpi .val{font-size:22px}}
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
 </style>
 </head>
 <body>
@@ -122,7 +221,40 @@ footer{margin-top:28px;font-size:12.5px;color:var(--cinza);text-align:center}
   <footer>GGD — Gio Growth Digital · dados Meta Ads + Google Ads (Windsor.ai) e Nuvemshop</footer>
 </div>
 
-<script id="dados" type="application/json">{"atualizado": "22/09/2026", "gerado_em": "2026-09-22", "imposto_meta": 0.1383, "meta": [{"date": "2026-07-01", "spend": 1004.74, "impr": 110068.0, "clicks": 1181.0, "lpv": 649.0, "vendas": 32.0, "receita": 34181.92}, {"date": "2026-07-02", "spend": 850.39, "impr": 82239.0, "clicks": 991.0, "lpv": 583.0, "vendas": 25.0, "receita": 13833.3}, {"date": "2026-07-03", "spend": 1121.25, "impr": 126537.0, "clicks": 1244.0, "lpv": 707.0, "vendas": 16.0, "receita": 14492.93}, {"date": "2026-07-04", "spend": 1370.58, "impr": 126520.0, "clicks": 1517.0, "lpv": 874.0, "vendas": 30.0, "receita": 28219.15}, {"date": "2026-07-05", "spend": 1306.66, "impr": 131678.0, "clicks": 1586.0, "lpv": 982.0, "vendas": 35.0, "receita": 31234.75}, {"date": "2026-07-06", "spend": 1068.44, "impr": 151180.0, "clicks": 1331.0, "lpv": 771.0, "vendas": 25.0, "receita": 19399.9}, {"date": "2026-07-07", "spend": 1405.83, "impr": 146013.0, "clicks": 1973.0, "lpv": 1197.0, "vendas": 40.0, "receita": 26085.54}, {"date": "2026-07-08", "spend": 1151.66, "impr": 110979.0, "clicks": 1784.0, "lpv": 1012.0, "vendas": 35.0, "receita": 26634.24}, {"date": "2026-07-09", "spend": 817.88, "impr": 94169.0, "clicks": 1294.0, "lpv": 794.0, "vendas": 44.0, "receita": 37293.09}, {"date": "2026-07-10", "spend": 698.53, "impr": 88057.0, "clicks": 1216.0, "lpv": 716.0, "vendas": 23.0, "receita": 18846.65}, {"date": "2026-07-11", "spend": 670.81, "impr": 86483.0, "clicks": 1299.0, "lpv": 764.0, "vendas": 21.0, "receita": 17234.19}, {"date": "2026-07-12", "spend": 798.92, "impr": 121663.0, "clicks": 1567.0, "lpv": 958.0, "vendas": 27.0, "receita": 23633.68}, {"date": "2026-07-13", "spend": 757.86, "impr": 103147.0, "clicks": 1332.0, "lpv": 841.0, "vendas": 34.0, "receita": 26327.8}, {"date": "2026-07-14", "spend": 771.83, "impr": 87842.0, "clicks": 1200.0, "lpv": 704.0, "vendas": 37.0, "receita": 32303.39}, {"date": "2026-07-15", "spend": 744.26, "impr": 89377.0, "clicks": 1171.0, "lpv": 654.0, "vendas": 34.0, "receita": 27551.23}, {"date": "2026-07-16", "spend": 714.09, "impr": 87351.0, "clicks": 1175.0, "lpv": 694.0, "vendas": 38.0, "receita": 33845.53}, {"date": "2026-07-17", "spend": 1039.5, "impr": 116183.0, "clicks": 1647.0, "lpv": 1034.0, "vendas": 28.0, "receita": 20960.34}, {"date": "2026-07-18", "spend": 922.39, "impr": 104384.0, "clicks": 1677.0, "lpv": 1095.0, "vendas": 24.0, "receita": 21275.85}, {"date": "2026-07-19", "spend": 1019.57, "impr": 133092.0, "clicks": 1914.0, "lpv": 1233.0, "vendas": 42.0, "receita": 35589.84}, {"date": "2026-07-20", "spend": 1092.09, "impr": 147247.0, "clicks": 1870.0, "lpv": 1137.0, "vendas": 33.0, "receita": 29885.28}, {"date": "2026-07-21", "spend": 1168.44, "impr": 139770.0, "clicks": 2061.0, "lpv": 1319.0, "vendas": 27.0, "receita": 24856.01}, {"date": "2026-07-22", "spend": 1065.75, "impr": 124137.0, "clicks": 1787.0, "lpv": 1068.0, "vendas": 18.0, "receita": 14511.01}, {"date": "2026-07-23", "spend": 957.99, "impr": 111676.0, "clicks": 1587.0, "lpv": 972.0, "vendas": 37.0, "receita": 31752.19}, {"date": "2026-07-24", "spend": 1148.6, "impr": 123444.0, "clicks": 1936.0, "lpv": 1169.0, "vendas": 39.0, "receita": 31804.34}, {"date": "2026-07-25", "spend": 1573.7, "impr": 162767.0, "clicks": 2444.0, "lpv": 1568.0, "vendas": 26.0, "receita": 19786.34}, {"date": "2026-07-26", "spend": 1611.39, "impr": 175603.0, "clicks": 2639.0, "lpv": 1767.0, "vendas": 36.0, "receita": 26981.92}, {"date": "2026-07-27", "spend": 1850.18, "impr": 203619.0, "clicks": 2845.0, "lpv": 1772.0, "vendas": 57.0, "receita": 46260.39}, {"date": "2026-07-28", "spend": 1856.34, "impr": 201703.0, "clicks": 2796.0, "lpv": 1697.0, "vendas": 47.0, "receita": 39061.86}, {"date": "2026-07-29", "spend": 1471.04, "impr": 144156.0, "clicks": 2307.0, "lpv": 1507.0, "vendas": 68.0, "receita": 51761.84}, {"date": "2026-07-30", "spend": 1388.94, "impr": 138454.0, "clicks": 2209.0, "lpv": 1361.0, "vendas": 58.0, "receita": 45594.78}, {"date": "2026-07-31", "spend": 1252.58, "impr": 140481.0, "clicks": 2221.0, "lpv": 1259.0, "vendas": 54.0, "receita": 44907.83}, {"date": "2026-08-01", "spend": 1868.09, "impr": 223863.0, "clicks": 3961.0, "lpv": 2399.0, "vendas": 34.0, "receita": 29829.5}, {"date": "2026-08-02", "spend": 1775.01, "impr": 216717.0, "clicks": 3620.0, "lpv": 2142.0, "vendas": 40.0, "receita": 32628.7}, {"date": "2026-08-03", "spend": 1900.24, "impr": 250624.0, "clicks": 3563.0, "lpv": 2085.0, "vendas": 62.0, "receita": 53274.14}, {"date": "2026-08-04", "spend": 1993.56, "impr": 227088.0, "clicks": 3459.0, "lpv": 2253.0, "vendas": 74.0, "receita": 54124.57}, {"date": "2026-08-05", "spend": 1878.03, "impr": 201132.0, "clicks": 3172.0, "lpv": 1753.0, "vendas": 57.0, "receita": 50571.35}, {"date": "2026-08-06", "spend": 1775.38, "impr": 177153.0, "clicks": 2993.0, "lpv": 1773.0, "vendas": 64.0, "receita": 50444.07}, {"date": "2026-08-07", "spend": 1758.75, "impr": 184441.0, "clicks": 2880.0, "lpv": 1729.0, "vendas": 49.0, "receita": 41333.38}, {"date": "2026-08-08", "spend": 1928.07, "impr": 204407.0, "clicks": 3075.0, "lpv": 1851.0, "vendas": 44.0, "receita": 38781.64}, {"date": "2026-08-09", "spend": 1716.37, "impr": 218331.0, "clicks": 3245.0, "lpv": 2054.0, "vendas": 42.0, "receita": 34477.42}, {"date": "2026-08-10", "spend": 2615.45, "impr": 340573.0, "clicks": 4378.0, "lpv": 2569.0, "vendas": 76.0, "receita": 64064.94}, {"date": "2026-08-11", "spend": 3205.06, "impr": 355243.0, "clicks": 5136.0, "lpv": 2963.0, "vendas": 81.0, "receita": 65065.01}, {"date": "2026-08-12", "spend": 2688.42, "impr": 298875.0, "clicks": 4359.0, "lpv": 2502.0, "vendas": 55.0, "receita": 45630.18}, {"date": "2026-08-13", "spend": 2348.43, "impr": 259809.0, "clicks": 4007.0, "lpv": 2343.0, "vendas": 63.0, "receita": 58371.06}, {"date": "2026-08-14", "spend": 2202.08, "impr": 273151.0, "clicks": 4332.0, "lpv": 2661.0, "vendas": 43.0, "receita": 37554.38}, {"date": "2026-08-15", "spend": 1994.47, "impr": 242009.0, "clicks": 4375.0, "lpv": 2761.0, "vendas": 65.0, "receita": 56941.49}, {"date": "2026-08-16", "spend": 2426.81, "impr": 342410.0, "clicks": 5393.0, "lpv": 3362.0, "vendas": 48.0, "receita": 39984.58}, {"date": "2026-08-17", "spend": 2639.92, "impr": 353955.0, "clicks": 4693.0, "lpv": 2835.0, "vendas": 54.0, "receita": 47628.05}, {"date": "2026-08-18", "spend": 2950.34, "impr": 333498.0, "clicks": 5549.0, "lpv": 3394.0, "vendas": 69.0, "receita": 58141.05}, {"date": "2026-08-19", "spend": 3540.84, "impr": 348386.0, "clicks": 5619.0, "lpv": 3628.0, "vendas": 77.0, "receita": 59304.86}, {"date": "2026-08-20", "spend": 3011.04, "impr": 311080.0, "clicks": 5023.0, "lpv": 3235.0, "vendas": 56.0, "receita": 48115.48}, {"date": "2026-08-21", "spend": 4069.93, "impr": 317529.0, "clicks": 4637.0, "lpv": 3194.0, "vendas": 39.0, "receita": 25776.79}, {"date": "2026-08-22", "spend": 1906.06, "impr": 172565.0, "clicks": 3205.0, "lpv": 2147.0, "vendas": 33.0, "receita": 38070.94}, {"date": "2026-08-23", "spend": 1876.37, "impr": 200828.0, "clicks": 3256.0, "lpv": 2231.0, "vendas": 45.0, "receita": 42941.08}, {"date": "2026-08-24", "spend": 2691.13, "impr": 313222.0, "clicks": 4134.0, "lpv": 2736.0, "vendas": 44.0, "receita": 41838.22}, {"date": "2026-08-25", "spend": 3113.51, "impr": 323349.0, "clicks": 4457.0, "lpv": 2916.0, "vendas": 37.0, "receita": 31780.18}, {"date": "2026-08-26", "spend": 2469.2, "impr": 253521.0, "clicks": 3751.0, "lpv": 2418.0, "vendas": 29.0, "receita": 25783.67}, {"date": "2026-08-27", "spend": 2341.0, "impr": 247003.0, "clicks": 3846.0, "lpv": 2418.0, "vendas": 46.0, "receita": 34931.96}, {"date": "2026-08-28", "spend": 2299.7, "impr": 249078.0, "clicks": 4287.0, "lpv": 2767.0, "vendas": 50.0, "receita": 46028.99}, {"date": "2026-08-29", "spend": 1923.98, "impr": 192092.0, "clicks": 3945.0, "lpv": 2637.0, "vendas": 30.0, "receita": 23078.09}, {"date": "2026-08-30", "spend": 1953.08, "impr": 207343.0, "clicks": 4083.0, "lpv": 2777.0, "vendas": 41.0, "receita": 30374.98}, {"date": "2026-08-31", "spend": 1595.51, "impr": 167252.0, "clicks": 3170.0, "lpv": 2034.0, "vendas": 51.0, "receita": 45743.86}, {"date": "2026-09-01", "spend": 1278.29, "impr": 126021.0, "clicks": 2543.0, "lpv": 1684.0, "vendas": 72.0, "receita": 54552.05}, {"date": "2026-09-02", "spend": 1110.57, "impr": 118118.0, "clicks": 2345.0, "lpv": 1499.0, "vendas": 46.0, "receita": 35743.89}, {"date": "2026-09-03", "spend": 1002.03, "impr": 101313.0, "clicks": 2190.0, "lpv": 1333.0, "vendas": 45.0, "receita": 35224.47}, {"date": "2026-09-04", "spend": 1046.89, "impr": 112398.0, "clicks": 2167.0, "lpv": 1391.0, "vendas": 35.0, "receita": 27300.6}, {"date": "2026-09-05", "spend": 992.87, "impr": 89500.0, "clicks": 1701.0, "lpv": 1121.0, "vendas": 38.0, "receita": 30045.95}, {"date": "2026-09-06", "spend": 1148.03, "impr": 114538.0, "clicks": 2174.0, "lpv": 1379.0, "vendas": 27.0, "receita": 21112.87}, {"date": "2026-09-07", "spend": 1287.87, "impr": 140158.0, "clicks": 2259.0, "lpv": 1490.0, "vendas": 44.0, "receita": 34140.3}, {"date": "2026-09-08", "spend": 1023.99, "impr": 110051.0, "clicks": 1829.0, "lpv": 1186.0, "vendas": 40.0, "receita": 34290.82}, {"date": "2026-09-09", "spend": 1318.7, "impr": 136418.0, "clicks": 2193.0, "lpv": 1365.0, "vendas": 32.0, "receita": 25892.33}, {"date": "2026-09-10", "spend": 1294.8, "impr": 129340.0, "clicks": 1982.0, "lpv": 1266.0, "vendas": 38.0, "receita": 29774.35}, {"date": "2026-09-11", "spend": 1129.83, "impr": 113656.0, "clicks": 1782.0, "lpv": 1116.0, "vendas": 38.0, "receita": 34026.54}, {"date": "2026-09-12", "spend": 1252.1, "impr": 119494.0, "clicks": 2129.0, "lpv": 1415.0, "vendas": 43.0, "receita": 35499.05}, {"date": "2026-09-13", "spend": 1548.47, "impr": 166595.0, "clicks": 2836.0, "lpv": 1858.0, "vendas": 49.0, "receita": 43599.99}, {"date": "2026-09-14", "spend": 1349.57, "impr": 150719.0, "clicks": 2384.0, "lpv": 1446.0, "vendas": 36.0, "receita": 29573.51}, {"date": "2026-09-15", "spend": 1652.9, "impr": 168983.0, "clicks": 2444.0, "lpv": 1570.0, "vendas": 35.0, "receita": 29656.57}, {"date": "2026-09-16", "spend": 1692.54, "impr": 150692.0, "clicks": 2291.0, "lpv": 1389.0, "vendas": 40.0, "receita": 29316.52}, {"date": "2026-09-17", "spend": 1535.97, "impr": 136985.0, "clicks": 2110.0, "lpv": 1411.0, "vendas": 31.0, "receita": 26457.53}, {"date": "2026-09-18", "spend": 1498.07, "impr": 137248.0, "clicks": 2108.0, "lpv": 1259.0, "vendas": 32.0, "receita": 24629.77}, {"date": "2026-09-19", "spend": 1370.98, "impr": 131245.0, "clicks": 2204.0, "lpv": 1312.0, "vendas": 22.0, "receita": 15076.25}, {"date": "2026-09-20", "spend": 1199.83, "impr": 133580.0, "clicks": 2081.0, "lpv": 1220.0, "vendas": 32.0, "receita": 28256.7}, {"date": "2026-09-21", "spend": 1808.92, "impr": 214580.0, "clicks": 3033.0, "lpv": 1877.0, "vendas": 33.0, "receita": 23444.26}, {"date": "2026-09-22", "spend": 215.68, "impr": 20348.0, "clicks": 373.0, "lpv": 163.0, "vendas": 1.0, "receita": 939.99}], "google": [{"date": "2026-07-01", "spend": 650.0199, "impr": 32856.0, "clicks": 721.0, "vendas": 23.0116, "receita": 19103.8189}, {"date": "2026-07-02", "spend": 636.1663, "impr": 34675.0, "clicks": 682.0, "vendas": 19.3204, "receita": 16637.6436}, {"date": "2026-07-03", "spend": 656.3039, "impr": 34471.0, "clicks": 686.0, "vendas": 19.9096, "receita": 20441.1006}, {"date": "2026-07-04", "spend": 620.5833, "impr": 29043.0, "clicks": 581.0, "vendas": 16.9622, "receita": 16100.951}, {"date": "2026-07-05", "spend": 541.1007, "impr": 24928.0, "clicks": 510.0, "vendas": 20.6736, "receita": 18693.0433}, {"date": "2026-07-06", "spend": 746.0237, "impr": 27038.0, "clicks": 673.0, "vendas": 23.047, "receita": 20713.6282}, {"date": "2026-07-07", "spend": 759.5946, "impr": 30272.0, "clicks": 629.0, "vendas": 22.6831, "receita": 16296.8308}, {"date": "2026-07-08", "spend": 638.8775, "impr": 32600.0, "clicks": 699.0, "vendas": 23.1748, "receita": 18258.434}, {"date": "2026-07-09", "spend": 631.1039, "impr": 39491.0, "clicks": 780.0, "vendas": 23.415, "receita": 18826.9258}, {"date": "2026-07-10", "spend": 645.5508, "impr": 33136.0, "clicks": 739.0, "vendas": 15.8211, "receita": 15136.3987}, {"date": "2026-07-11", "spend": 622.8196, "impr": 29589.0, "clicks": 733.0, "vendas": 21.5439, "receita": 17374.116}, {"date": "2026-07-12", "spend": 612.4273, "impr": 26903.0, "clicks": 648.0, "vendas": 21.665, "receita": 19576.2329}, {"date": "2026-07-13", "spend": 693.2896, "impr": 31928.0, "clicks": 782.0, "vendas": 40.6111, "receita": 33885.8864}, {"date": "2026-07-14", "spend": 658.8396, "impr": 40444.0, "clicks": 759.0, "vendas": 22.8969, "receita": 18636.4859}, {"date": "2026-07-15", "spend": 904.7693, "impr": 46990.0, "clicks": 958.0, "vendas": 38.4484, "receita": 32364.9369}, {"date": "2026-07-16", "spend": 994.1771, "impr": 50354.0, "clicks": 967.0, "vendas": 36.906, "receita": 32930.1179}, {"date": "2026-07-17", "spend": 1206.2762, "impr": 66526.0, "clicks": 1181.0, "vendas": 32.4096, "receita": 27350.6624}, {"date": "2026-07-18", "spend": 1245.4386, "impr": 55450.0, "clicks": 1063.0, "vendas": 24.2737, "receita": 21351.9054}, {"date": "2026-07-19", "spend": 1396.6686, "impr": 52084.0, "clicks": 1005.0, "vendas": 24.3075, "receita": 21083.2965}, {"date": "2026-07-20", "spend": 2199.0434, "impr": 102802.0, "clicks": 1707.0, "vendas": 35.1211, "receita": 30601.0218}, {"date": "2026-07-21", "spend": 1729.8482, "impr": 96117.0, "clicks": 1526.0, "vendas": 51.1696, "receita": 45030.2757}, {"date": "2026-07-22", "spend": 1598.9612, "impr": 83604.0, "clicks": 1391.0, "vendas": 45.89, "receita": 37517.8945}, {"date": "2026-07-23", "spend": 1526.2454, "impr": 90666.0, "clicks": 1277.0, "vendas": 26.921, "receita": 31083.4223}, {"date": "2026-07-24", "spend": 1414.6432, "impr": 74974.0, "clicks": 1229.0, "vendas": 31.9888, "receita": 27673.8456}, {"date": "2026-07-25", "spend": 1228.9412, "impr": 60260.0, "clicks": 1076.0, "vendas": 26.3521, "receita": 22725.4135}, {"date": "2026-07-26", "spend": 1221.9553, "impr": 57541.0, "clicks": 996.0, "vendas": 26.9156, "receita": 22472.9892}, {"date": "2026-07-27", "spend": 2154.5304, "impr": 82180.0, "clicks": 1624.0, "vendas": 62.0735, "receita": 54531.8319}, {"date": "2026-07-28", "spend": 2020.2703, "impr": 94984.0, "clicks": 1766.0, "vendas": 41.0744, "receita": 33990.1506}, {"date": "2026-07-29", "spend": 1915.9774, "impr": 80633.0, "clicks": 1531.0, "vendas": 40.0956, "receita": 32054.6002}, {"date": "2026-07-30", "spend": 1799.0345, "impr": 87391.0, "clicks": 1527.0, "vendas": 48.2793, "receita": 39548.0964}, {"date": "2026-07-31", "spend": 1521.9645, "impr": 65206.0, "clicks": 1317.0, "vendas": 40.0403, "receita": 35851.7057}, {"date": "2026-08-01", "spend": 1860.9958, "impr": 83061.0, "clicks": 1432.0, "vendas": 34.4448, "receita": 31899.3327}, {"date": "2026-08-02", "spend": 1716.8108, "impr": 75024.0, "clicks": 1327.0, "vendas": 32.9548, "receita": 28825.7206}, {"date": "2026-08-03", "spend": 2364.3714, "impr": 86242.0, "clicks": 1734.0, "vendas": 48.8762, "receita": 38101.523}, {"date": "2026-08-04", "spend": 2567.5878, "impr": 121476.0, "clicks": 2217.0, "vendas": 67.1595, "receita": 58016.4107}, {"date": "2026-08-05", "spend": 2751.1703, "impr": 137760.0, "clicks": 2313.0, "vendas": 59.8448, "receita": 51591.2609}, {"date": "2026-08-06", "spend": 2361.6321, "impr": 107515.0, "clicks": 2083.0, "vendas": 60.835, "receita": 51864.5515}, {"date": "2026-08-07", "spend": 2442.5642, "impr": 105410.0, "clicks": 1939.0, "vendas": 37.304, "receita": 30415.5914}, {"date": "2026-08-08", "spend": 2228.3621, "impr": 75367.0, "clicks": 1583.0, "vendas": 39.5563, "receita": 37867.5015}, {"date": "2026-08-09", "spend": 2294.0766, "impr": 85879.0, "clicks": 1631.0, "vendas": 35.7045, "receita": 26858.6425}, {"date": "2026-08-10", "spend": 3245.7267, "impr": 115877.0, "clicks": 2357.0, "vendas": 68.9358, "receita": 56038.0983}, {"date": "2026-08-11", "spend": 3323.9536, "impr": 137903.0, "clicks": 2581.0, "vendas": 69.639, "receita": 59840.7571}, {"date": "2026-08-12", "spend": 2945.8769, "impr": 118289.0, "clicks": 2462.0, "vendas": 46.1379, "receita": 35031.0247}, {"date": "2026-08-13", "spend": 2268.3089, "impr": 111407.0, "clicks": 2097.0, "vendas": 50.245, "receita": 41506.3344}, {"date": "2026-08-14", "spend": 1772.2735, "impr": 90552.0, "clicks": 1715.0, "vendas": 32.0262, "receita": 25985.371}, {"date": "2026-08-15", "spend": 1533.6441, "impr": 66093.0, "clicks": 1382.0, "vendas": 39.8495, "receita": 33098.7033}, {"date": "2026-08-16", "spend": 1377.9547, "impr": 69275.0, "clicks": 1382.0, "vendas": 37.2809, "receita": 33173.3634}, {"date": "2026-08-17", "spend": 1869.4542, "impr": 92485.0, "clicks": 1795.0, "vendas": 37.449, "receita": 29615.9637}, {"date": "2026-08-18", "spend": 1952.3297, "impr": 108466.0, "clicks": 1876.0, "vendas": 44.5757, "receita": 41843.1557}, {"date": "2026-08-19", "spend": 1865.3034, "impr": 105424.0, "clicks": 1894.0, "vendas": 48.3934, "receita": 36812.7551}, {"date": "2026-08-20", "spend": 1864.7173, "impr": 97827.0, "clicks": 1825.0, "vendas": 34.0633, "receita": 27148.0832}, {"date": "2026-08-21", "spend": 1752.8371, "impr": 90222.0, "clicks": 1705.0, "vendas": 40.5505, "receita": 35765.7749}, {"date": "2026-08-22", "spend": 1623.764, "impr": 87612.0, "clicks": 1548.0, "vendas": 23.5303, "receita": 19113.5662}, {"date": "2026-08-23", "spend": 1554.1297, "impr": 81102.0, "clicks": 1511.0, "vendas": 34.9774, "receita": 29993.5453}, {"date": "2026-08-24", "spend": 1842.2946, "impr": 110077.0, "clicks": 1864.0, "vendas": 30.0999, "receita": 23524.7277}, {"date": "2026-08-25", "spend": 1762.3967, "impr": 101424.0, "clicks": 1765.0, "vendas": 25.3146, "receita": 26129.6888}, {"date": "2026-08-26", "spend": 1750.5454, "impr": 103938.0, "clicks": 1855.0, "vendas": 39.1915, "receita": 30575.7095}, {"date": "2026-08-27", "spend": 2001.4235, "impr": 101087.0, "clicks": 1905.0, "vendas": 32.4961, "receita": 24913.719}, {"date": "2026-08-28", "spend": 1662.313, "impr": 76137.0, "clicks": 1549.0, "vendas": 27.7897, "receita": 23503.8905}, {"date": "2026-08-29", "spend": 1413.4324, "impr": 80270.0, "clicks": 1526.0, "vendas": 33.4258, "receita": 27606.4445}, {"date": "2026-08-30", "spend": 1531.1387, "impr": 83197.0, "clicks": 1527.0, "vendas": 22.5355, "receita": 17090.4954}, {"date": "2026-08-31", "spend": 849.5801, "impr": 33894.0, "clicks": 725.0, "vendas": 19.2646, "receita": 17345.8196}, {"date": "2026-09-01", "spend": 571.0223, "impr": 26765.0, "clicks": 602.0, "vendas": 27.2275, "receita": 19644.1504}, {"date": "2026-09-02", "spend": 549.4654, "impr": 25990.0, "clicks": 578.0, "vendas": 13.9069, "receita": 10892.0856}, {"date": "2026-09-03", "spend": 555.2182, "impr": 23345.0, "clicks": 568.0, "vendas": 15.023, "receita": 11919.7379}, {"date": "2026-09-04", "spend": 530.4526, "impr": 21559.0, "clicks": 548.0, "vendas": 14.9766, "receita": 11405.9139}, {"date": "2026-09-05", "spend": 470.8424, "impr": 20066.0, "clicks": 505.0, "vendas": 11.0269, "receita": 8928.2724}, {"date": "2026-09-06", "spend": 435.7065, "impr": 16201.0, "clicks": 416.0, "vendas": 13.6426, "receita": 9720.4758}, {"date": "2026-09-07", "spend": 523.2173, "impr": 21498.0, "clicks": 467.0, "vendas": 23.1096, "receita": 15240.7378}, {"date": "2026-09-08", "spend": 478.8924, "impr": 25752.0, "clicks": 579.0, "vendas": 13.2608, "receita": 9979.7658}, {"date": "2026-09-09", "spend": 597.2234, "impr": 33617.0, "clicks": 622.0, "vendas": 8.0, "receita": 5697.553}, {"date": "2026-09-10", "spend": 648.6604, "impr": 36681.0, "clicks": 610.0, "vendas": 21.4549, "receita": 19074.3633}, {"date": "2026-09-11", "spend": 586.497, "impr": 37292.0, "clicks": 641.0, "vendas": 16.9861, "receita": 11885.7358}, {"date": "2026-09-12", "spend": 558.8633, "impr": 37364.0, "clicks": 583.0, "vendas": 12.7552, "receita": 12865.9848}, {"date": "2026-09-13", "spend": 555.7079, "impr": 30676.0, "clicks": 578.0, "vendas": 8.1333, "receita": 7522.8336}, {"date": "2026-09-14", "spend": 617.6673, "impr": 31978.0, "clicks": 590.0, "vendas": 12.2396, "receita": 10173.1001}, {"date": "2026-09-15", "spend": 636.5242, "impr": 32739.0, "clicks": 622.0, "vendas": 12.8936, "receita": 9365.4083}, {"date": "2026-09-16", "spend": 634.5162, "impr": 31455.0, "clicks": 597.0, "vendas": 16.2002, "receita": 11123.5203}, {"date": "2026-09-17", "spend": 583.8417, "impr": 34460.0, "clicks": 622.0, "vendas": 15.8979, "receita": 13827.3981}, {"date": "2026-09-18", "spend": 593.0033, "impr": 42012.0, "clicks": 758.0, "vendas": 9.5217, "receita": 8743.1489}, {"date": "2026-09-19", "spend": 575.7262, "impr": 38226.0, "clicks": 716.0, "vendas": 11.7254, "receita": 10635.5658}, {"date": "2026-09-20", "spend": 542.6885, "impr": 36120.0, "clicks": 682.0, "vendas": 7.8608, "receita": 4877.7644}, {"date": "2026-09-21", "spend": 611.5767, "impr": 37148.0, "clicks": 725.0, "vendas": 12.0, "receita": 22068.9}, {"date": "2026-09-22", "spend": 59.635, "impr": 2979.0, "clicks": 67.0, "vendas": 0.0, "receita": 0.0}], "site": [{"date": "2026-07-01", "pedidos": 47.0, "receita": 47787.49}, {"date": "2026-07-02", "pedidos": 37.0, "receita": 28823.2}, {"date": "2026-07-03", "pedidos": 32.0, "receita": 31040.17}, {"date": "2026-07-04", "pedidos": 31.0, "receita": 28498.99}, {"date": "2026-07-05", "pedidos": 39.0, "receita": 32769.9}, {"date": "2026-07-06", "pedidos": 44.0, "receita": 35983.77}, {"date": "2026-07-07", "pedidos": 48.0, "receita": 39087.5}, {"date": "2026-07-08", "pedidos": 49.0, "receita": 39373.11}, {"date": "2026-07-09", "pedidos": 47.0, "receita": 42774.92}, {"date": "2026-07-10", "pedidos": 40.0, "receita": 34978.5}, {"date": "2026-07-11", "pedidos": 27.0, "receita": 23564.94}, {"date": "2026-07-12", "pedidos": 33.0, "receita": 29784.83}, {"date": "2026-07-13", "pedidos": 57.0, "receita": 42182.63}, {"date": "2026-07-14", "pedidos": 63.0, "receita": 52299.29}, {"date": "2026-07-15", "pedidos": 54.0, "receita": 45476.68}, {"date": "2026-07-16", "pedidos": 55.0, "receita": 46906.42}, {"date": "2026-07-17", "pedidos": 45.0, "receita": 33393.48}, {"date": "2026-07-18", "pedidos": 35.0, "receita": 29469.58}, {"date": "2026-07-19", "pedidos": 48.0, "receita": 42875.77}, {"date": "2026-07-20", "pedidos": 58.0, "receita": 51445.59}, {"date": "2026-07-21", "pedidos": 58.0, "receita": 50188.59}, {"date": "2026-07-22", "pedidos": 52.0, "receita": 44044.65}, {"date": "2026-07-23", "pedidos": 53.0, "receita": 54215.37}, {"date": "2026-07-24", "pedidos": 47.0, "receita": 41159.32}, {"date": "2026-07-25", "pedidos": 43.0, "receita": 37198.35}, {"date": "2026-07-26", "pedidos": 47.0, "receita": 35973.45}, {"date": "2026-07-27", "pedidos": 90.0, "receita": 80051.15}, {"date": "2026-07-28", "pedidos": 67.0, "receita": 61154.4}, {"date": "2026-07-29", "pedidos": 76.0, "receita": 66465.76}, {"date": "2026-07-30", "pedidos": 78.0, "receita": 63236.82}, {"date": "2026-07-31", "pedidos": 76.0, "receita": 62741.89}, {"date": "2026-08-01", "pedidos": 49.0, "receita": 43662.01}, {"date": "2026-08-02", "pedidos": 63.0, "receita": 55574.72}, {"date": "2026-08-03", "pedidos": 85.0, "receita": 72519.95}, {"date": "2026-08-04", "pedidos": 112.0, "receita": 89970.57}, {"date": "2026-08-05", "pedidos": 108.0, "receita": 93991.25}, {"date": "2026-08-06", "pedidos": 101.0, "receita": 80898.83}, {"date": "2026-08-07", "pedidos": 79.0, "receita": 67940.09}, {"date": "2026-08-08", "pedidos": 69.0, "receita": 60872.25}, {"date": "2026-08-09", "pedidos": 79.0, "receita": 63969.55}, {"date": "2026-08-10", "pedidos": 108.0, "receita": 94342.52}, {"date": "2026-08-11", "pedidos": 118.0, "receita": 98499.18}, {"date": "2026-08-12", "pedidos": 100.0, "receita": 83308.08}, {"date": "2026-08-13", "pedidos": 89.0, "receita": 74937.27}, {"date": "2026-08-14", "pedidos": 60.0, "receita": 50207.79}, {"date": "2026-08-15", "pedidos": 68.0, "receita": 57150.81}, {"date": "2026-08-16", "pedidos": 65.0, "receita": 57600.7}, {"date": "2026-08-17", "pedidos": 45.0, "receita": 38566.98}, {"date": "2026-08-18", "pedidos": 78.0, "receita": 66578.84}, {"date": "2026-08-19", "pedidos": 90.0, "receita": 67642.11}, {"date": "2026-08-20", "pedidos": 73.0, "receita": 59799.19}, {"date": "2026-08-21", "pedidos": 61.0, "receita": 44401.88}, {"date": "2026-08-22", "pedidos": 45.0, "receita": 39440.82}, {"date": "2026-08-23", "pedidos": 69.0, "receita": 60896.3}, {"date": "2026-08-24", "pedidos": 62.0, "receita": 60659.77}, {"date": "2026-08-25", "pedidos": 64.0, "receita": 51443.37}, {"date": "2026-08-26", "pedidos": 56.0, "receita": 42818.89}, {"date": "2026-08-27", "pedidos": 61.0, "receita": 41586.85}, {"date": "2026-08-28", "pedidos": 61.0, "receita": 52916.67}, {"date": "2026-08-29", "pedidos": 47.0, "receita": 37738.73}, {"date": "2026-08-30", "pedidos": 59.0, "receita": 47362.9}, {"date": "2026-08-31", "pedidos": 64.0, "receita": 58207.85}, {"date": "2026-09-01", "pedidos": 69.0, "receita": 47629.86}, {"date": "2026-09-02", "pedidos": 63.0, "receita": 45029.86}, {"date": "2026-09-03", "pedidos": 59.0, "receita": 47941.17}, {"date": "2026-09-04", "pedidos": 47.0, "receita": 37008.69}, {"date": "2026-09-05", "pedidos": 51.0, "receita": 39946.86}, {"date": "2026-09-06", "pedidos": 42.0, "receita": 32277.82}, {"date": "2026-09-07", "pedidos": 61.0, "receita": 46329.51}, {"date": "2026-09-08", "pedidos": 45.0, "receita": 39375.47}, {"date": "2026-09-09", "pedidos": 60.0, "receita": 47236.11}, {"date": "2026-09-10", "pedidos": 44.0, "receita": 36752.74}, {"date": "2026-09-11", "pedidos": 40.0, "receita": 33248.14}, {"date": "2026-09-12", "pedidos": 47.0, "receita": 37777.69}, {"date": "2026-09-13", "pedidos": 50.0, "receita": 45167.56}, {"date": "2026-09-14", "pedidos": 37.0, "receita": 29888.71}]}</script>
+<h2 style="font-size:17px;font-weight:700;margin:30px 0 4px">📅 Por dia · escolher datas</h2><div style="font-size:12.5px;color:#7b8794;margin-bottom:12px">escolha o intervalo e compare com o que a loja registrou</div>
+<div class="dd" style="--dd-tema:#0b7285;--dd-tema-esc:#10323b;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, ou o dia em que uma das contas ficou parada —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
+  </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Meta × Google</b><em>no período marcado · cada plataforma conta a própria atribuição</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e compras por dia</b>
+    <em>barra = investido · linha = compras do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+</div>
+<script id="dados" type="application/json">{"atualizado": "26/08/2026", "gerado_em": "2026-08-26", "imposto_meta": 0.1383, "meta": [{"date": "2026-07-01", "spend": 1004.74, "impr": 110068.0, "clicks": 1181.0, "lpv": 649.0, "vendas": 32.0, "receita": 34181.92}, {"date": "2026-07-02", "spend": 850.39, "impr": 82239.0, "clicks": 991.0, "lpv": 583.0, "vendas": 25.0, "receita": 13833.3}, {"date": "2026-07-03", "spend": 1121.25, "impr": 126537.0, "clicks": 1244.0, "lpv": 707.0, "vendas": 16.0, "receita": 14492.93}, {"date": "2026-07-04", "spend": 1370.58, "impr": 126520.0, "clicks": 1517.0, "lpv": 874.0, "vendas": 30.0, "receita": 28219.15}, {"date": "2026-07-05", "spend": 1306.66, "impr": 131678.0, "clicks": 1586.0, "lpv": 982.0, "vendas": 35.0, "receita": 31234.75}, {"date": "2026-07-06", "spend": 1068.44, "impr": 151180.0, "clicks": 1331.0, "lpv": 771.0, "vendas": 25.0, "receita": 19399.9}, {"date": "2026-07-07", "spend": 1405.83, "impr": 146013.0, "clicks": 1973.0, "lpv": 1197.0, "vendas": 40.0, "receita": 26085.54}, {"date": "2026-07-08", "spend": 1151.66, "impr": 110979.0, "clicks": 1784.0, "lpv": 1012.0, "vendas": 35.0, "receita": 26634.24}, {"date": "2026-07-09", "spend": 817.88, "impr": 94169.0, "clicks": 1294.0, "lpv": 794.0, "vendas": 44.0, "receita": 37293.09}, {"date": "2026-07-10", "spend": 698.53, "impr": 88057.0, "clicks": 1216.0, "lpv": 716.0, "vendas": 23.0, "receita": 18846.65}, {"date": "2026-07-11", "spend": 670.81, "impr": 86483.0, "clicks": 1299.0, "lpv": 764.0, "vendas": 21.0, "receita": 17234.19}, {"date": "2026-07-12", "spend": 798.92, "impr": 121663.0, "clicks": 1567.0, "lpv": 958.0, "vendas": 27.0, "receita": 23633.68}, {"date": "2026-07-13", "spend": 757.86, "impr": 103147.0, "clicks": 1332.0, "lpv": 841.0, "vendas": 34.0, "receita": 26327.8}, {"date": "2026-07-14", "spend": 771.83, "impr": 87842.0, "clicks": 1200.0, "lpv": 704.0, "vendas": 37.0, "receita": 32303.39}, {"date": "2026-07-15", "spend": 744.26, "impr": 89377.0, "clicks": 1171.0, "lpv": 654.0, "vendas": 34.0, "receita": 27551.23}, {"date": "2026-07-16", "spend": 714.09, "impr": 87351.0, "clicks": 1175.0, "lpv": 694.0, "vendas": 38.0, "receita": 33845.53}, {"date": "2026-07-17", "spend": 1039.5, "impr": 116183.0, "clicks": 1647.0, "lpv": 1034.0, "vendas": 28.0, "receita": 20960.34}, {"date": "2026-07-18", "spend": 922.39, "impr": 104384.0, "clicks": 1677.0, "lpv": 1095.0, "vendas": 24.0, "receita": 21275.85}, {"date": "2026-07-19", "spend": 1019.57, "impr": 133092.0, "clicks": 1914.0, "lpv": 1233.0, "vendas": 42.0, "receita": 35589.84}, {"date": "2026-07-20", "spend": 1092.09, "impr": 147247.0, "clicks": 1870.0, "lpv": 1137.0, "vendas": 33.0, "receita": 29885.28}, {"date": "2026-07-21", "spend": 1168.44, "impr": 139770.0, "clicks": 2061.0, "lpv": 1319.0, "vendas": 27.0, "receita": 24856.01}, {"date": "2026-07-22", "spend": 1065.75, "impr": 124137.0, "clicks": 1787.0, "lpv": 1068.0, "vendas": 18.0, "receita": 14511.01}, {"date": "2026-07-23", "spend": 957.99, "impr": 111676.0, "clicks": 1587.0, "lpv": 972.0, "vendas": 37.0, "receita": 31752.19}, {"date": "2026-07-24", "spend": 1148.6, "impr": 123444.0, "clicks": 1936.0, "lpv": 1169.0, "vendas": 39.0, "receita": 31804.34}, {"date": "2026-07-25", "spend": 1573.7, "impr": 162767.0, "clicks": 2444.0, "lpv": 1568.0, "vendas": 26.0, "receita": 19786.34}, {"date": "2026-07-26", "spend": 1611.39, "impr": 175603.0, "clicks": 2639.0, "lpv": 1767.0, "vendas": 36.0, "receita": 26981.92}, {"date": "2026-07-27", "spend": 1850.18, "impr": 203619.0, "clicks": 2845.0, "lpv": 1772.0, "vendas": 57.0, "receita": 46260.39}, {"date": "2026-07-28", "spend": 1856.34, "impr": 201703.0, "clicks": 2796.0, "lpv": 1697.0, "vendas": 47.0, "receita": 39061.86}, {"date": "2026-07-29", "spend": 1471.04, "impr": 144156.0, "clicks": 2307.0, "lpv": 1507.0, "vendas": 68.0, "receita": 51761.84}, {"date": "2026-07-30", "spend": 1388.94, "impr": 138454.0, "clicks": 2209.0, "lpv": 1361.0, "vendas": 58.0, "receita": 45594.78}, {"date": "2026-07-31", "spend": 1252.58, "impr": 140481.0, "clicks": 2221.0, "lpv": 1259.0, "vendas": 54.0, "receita": 44907.83}, {"date": "2026-08-01", "spend": 1868.09, "impr": 223863.0, "clicks": 3961.0, "lpv": 2399.0, "vendas": 34.0, "receita": 29829.5}, {"date": "2026-08-02", "spend": 1775.01, "impr": 216717.0, "clicks": 3620.0, "lpv": 2142.0, "vendas": 40.0, "receita": 32628.7}, {"date": "2026-08-03", "spend": 1900.24, "impr": 250624.0, "clicks": 3563.0, "lpv": 2085.0, "vendas": 62.0, "receita": 53274.14}, {"date": "2026-08-04", "spend": 1993.56, "impr": 227088.0, "clicks": 3459.0, "lpv": 2253.0, "vendas": 74.0, "receita": 54124.57}, {"date": "2026-08-05", "spend": 1878.03, "impr": 201132.0, "clicks": 3172.0, "lpv": 1753.0, "vendas": 57.0, "receita": 50571.35}, {"date": "2026-08-06", "spend": 1775.38, "impr": 177153.0, "clicks": 2993.0, "lpv": 1773.0, "vendas": 64.0, "receita": 50444.07}, {"date": "2026-08-07", "spend": 1758.75, "impr": 184441.0, "clicks": 2880.0, "lpv": 1729.0, "vendas": 49.0, "receita": 41333.38}, {"date": "2026-08-08", "spend": 1928.07, "impr": 204407.0, "clicks": 3075.0, "lpv": 1851.0, "vendas": 44.0, "receita": 38781.64}, {"date": "2026-08-09", "spend": 1716.37, "impr": 218331.0, "clicks": 3245.0, "lpv": 2054.0, "vendas": 42.0, "receita": 34477.42}, {"date": "2026-08-10", "spend": 2615.45, "impr": 340573.0, "clicks": 4378.0, "lpv": 2569.0, "vendas": 76.0, "receita": 64064.94}, {"date": "2026-08-11", "spend": 3205.06, "impr": 355243.0, "clicks": 5136.0, "lpv": 2963.0, "vendas": 81.0, "receita": 65065.01}, {"date": "2026-08-12", "spend": 2688.42, "impr": 298875.0, "clicks": 4359.0, "lpv": 2502.0, "vendas": 55.0, "receita": 45630.18}, {"date": "2026-08-13", "spend": 2348.43, "impr": 259809.0, "clicks": 4007.0, "lpv": 2343.0, "vendas": 63.0, "receita": 58371.06}, {"date": "2026-08-14", "spend": 2202.08, "impr": 273151.0, "clicks": 4332.0, "lpv": 2661.0, "vendas": 43.0, "receita": 37554.38}, {"date": "2026-08-15", "spend": 1994.47, "impr": 242009.0, "clicks": 4375.0, "lpv": 2761.0, "vendas": 65.0, "receita": 56941.49}, {"date": "2026-08-16", "spend": 2426.81, "impr": 342410.0, "clicks": 5393.0, "lpv": 3362.0, "vendas": 48.0, "receita": 39984.58}, {"date": "2026-08-17", "spend": 2639.92, "impr": 353955.0, "clicks": 4693.0, "lpv": 2835.0, "vendas": 54.0, "receita": 47628.05}, {"date": "2026-08-18", "spend": 2950.34, "impr": 333498.0, "clicks": 5549.0, "lpv": 3394.0, "vendas": 69.0, "receita": 58141.05}, {"date": "2026-08-19", "spend": 3540.84, "impr": 348386.0, "clicks": 5619.0, "lpv": 3628.0, "vendas": 77.0, "receita": 59304.86}, {"date": "2026-08-20", "spend": 3011.04, "impr": 311080.0, "clicks": 5023.0, "lpv": 3235.0, "vendas": 56.0, "receita": 48115.48}, {"date": "2026-08-21", "spend": 4069.93, "impr": 317529.0, "clicks": 4637.0, "lpv": 3194.0, "vendas": 39.0, "receita": 25776.79}, {"date": "2026-08-22", "spend": 1906.06, "impr": 172565.0, "clicks": 3205.0, "lpv": 2147.0, "vendas": 33.0, "receita": 38070.94}, {"date": "2026-08-23", "spend": 1876.37, "impr": 200828.0, "clicks": 3256.0, "lpv": 2231.0, "vendas": 45.0, "receita": 42941.08}, {"date": "2026-08-24", "spend": 2691.1, "impr": 313220.0, "clicks": 4134.0, "lpv": 2736.0, "vendas": 44.0, "receita": 41838.22}, {"date": "2026-08-25", "spend": 3111.95, "impr": 323228.0, "clicks": 4454.0, "lpv": 2916.0, "vendas": 37.0, "receita": 31780.18}, {"date": "2026-08-26", "spend": 253.19, "impr": 20232.0, "clicks": 397.0, "lpv": 222.0, "vendas": 0.0, "receita": 0.0}], "google": [{"date": "2026-07-01", "spend": 650.0199, "impr": 32856.0, "clicks": 721.0, "vendas": 23.0116, "receita": 19103.8189}, {"date": "2026-07-02", "spend": 636.1663, "impr": 34675.0, "clicks": 682.0, "vendas": 19.3204, "receita": 16637.6436}, {"date": "2026-07-03", "spend": 656.3039, "impr": 34471.0, "clicks": 686.0, "vendas": 19.9096, "receita": 20441.1006}, {"date": "2026-07-04", "spend": 620.5833, "impr": 29043.0, "clicks": 581.0, "vendas": 16.9622, "receita": 16100.951}, {"date": "2026-07-05", "spend": 541.1007, "impr": 24928.0, "clicks": 510.0, "vendas": 20.6736, "receita": 18693.0433}, {"date": "2026-07-06", "spend": 746.0237, "impr": 27038.0, "clicks": 673.0, "vendas": 23.047, "receita": 20713.6282}, {"date": "2026-07-07", "spend": 759.5946, "impr": 30272.0, "clicks": 629.0, "vendas": 22.6831, "receita": 16296.8308}, {"date": "2026-07-08", "spend": 638.8775, "impr": 32600.0, "clicks": 699.0, "vendas": 23.1748, "receita": 18258.434}, {"date": "2026-07-09", "spend": 631.1039, "impr": 39491.0, "clicks": 780.0, "vendas": 23.415, "receita": 18826.9258}, {"date": "2026-07-10", "spend": 645.5508, "impr": 33136.0, "clicks": 739.0, "vendas": 15.8211, "receita": 15136.3987}, {"date": "2026-07-11", "spend": 622.8196, "impr": 29589.0, "clicks": 733.0, "vendas": 21.5439, "receita": 17374.116}, {"date": "2026-07-12", "spend": 612.4273, "impr": 26903.0, "clicks": 648.0, "vendas": 21.665, "receita": 19576.2329}, {"date": "2026-07-13", "spend": 693.2896, "impr": 31928.0, "clicks": 782.0, "vendas": 40.6111, "receita": 33885.8864}, {"date": "2026-07-14", "spend": 658.8396, "impr": 40444.0, "clicks": 759.0, "vendas": 22.8969, "receita": 18636.4859}, {"date": "2026-07-15", "spend": 904.7693, "impr": 46990.0, "clicks": 958.0, "vendas": 38.4484, "receita": 32364.9369}, {"date": "2026-07-16", "spend": 994.1771, "impr": 50354.0, "clicks": 967.0, "vendas": 36.906, "receita": 32930.1179}, {"date": "2026-07-17", "spend": 1206.2762, "impr": 66526.0, "clicks": 1181.0, "vendas": 32.4096, "receita": 27350.6624}, {"date": "2026-07-18", "spend": 1245.4386, "impr": 55450.0, "clicks": 1063.0, "vendas": 24.2737, "receita": 21351.9054}, {"date": "2026-07-19", "spend": 1396.6686, "impr": 52084.0, "clicks": 1005.0, "vendas": 24.3075, "receita": 21083.2965}, {"date": "2026-07-20", "spend": 2199.0434, "impr": 102802.0, "clicks": 1707.0, "vendas": 35.1211, "receita": 30601.0218}, {"date": "2026-07-21", "spend": 1729.8482, "impr": 96117.0, "clicks": 1526.0, "vendas": 51.1696, "receita": 45030.2757}, {"date": "2026-07-22", "spend": 1598.9612, "impr": 83604.0, "clicks": 1391.0, "vendas": 45.89, "receita": 37517.8945}, {"date": "2026-07-23", "spend": 1526.2454, "impr": 90666.0, "clicks": 1277.0, "vendas": 26.921, "receita": 31083.4223}, {"date": "2026-07-24", "spend": 1414.6432, "impr": 74974.0, "clicks": 1229.0, "vendas": 31.9888, "receita": 27673.8456}, {"date": "2026-07-25", "spend": 1228.9412, "impr": 60260.0, "clicks": 1076.0, "vendas": 26.3521, "receita": 22725.4135}, {"date": "2026-07-26", "spend": 1221.9553, "impr": 57541.0, "clicks": 996.0, "vendas": 26.9156, "receita": 22472.9892}, {"date": "2026-07-27", "spend": 2154.5304, "impr": 82180.0, "clicks": 1624.0, "vendas": 62.0735, "receita": 54531.8319}, {"date": "2026-07-28", "spend": 2020.2703, "impr": 94984.0, "clicks": 1766.0, "vendas": 41.0744, "receita": 33990.1506}, {"date": "2026-07-29", "spend": 1915.9774, "impr": 80633.0, "clicks": 1531.0, "vendas": 39.8128, "receita": 31772.501}, {"date": "2026-07-30", "spend": 1799.0345, "impr": 87391.0, "clicks": 1527.0, "vendas": 48.2793, "receita": 39548.0964}, {"date": "2026-07-31", "spend": 1521.9645, "impr": 65206.0, "clicks": 1317.0, "vendas": 39.0403, "receita": 34982.0557}, {"date": "2026-08-01", "spend": 1860.9958, "impr": 83061.0, "clicks": 1432.0, "vendas": 34.4448, "receita": 31899.3327}, {"date": "2026-08-02", "spend": 1716.8108, "impr": 75024.0, "clicks": 1327.0, "vendas": 32.2376, "receita": 28673.0918}, {"date": "2026-08-03", "spend": 2364.3714, "impr": 86242.0, "clicks": 1734.0, "vendas": 47.5428, "receita": 37387.5534}, {"date": "2026-08-04", "spend": 2567.5878, "impr": 121476.0, "clicks": 2217.0, "vendas": 65.4812, "receita": 56604.676}, {"date": "2026-08-05", "spend": 2751.1703, "impr": 137760.0, "clicks": 2313.0, "vendas": 56.0032, "receita": 48253.1705}, {"date": "2026-08-06", "spend": 2361.6321, "impr": 107515.0, "clicks": 2083.0, "vendas": 58.6698, "receita": 49868.0963}, {"date": "2026-08-07", "spend": 2442.5642, "impr": 105410.0, "clicks": 1939.0, "vendas": 35.7981, "receita": 29379.4942}, {"date": "2026-08-08", "spend": 2228.3621, "impr": 75367.0, "clicks": 1583.0, "vendas": 39.4689, "receita": 37788.8064}, {"date": "2026-08-09", "spend": 2294.0766, "impr": 85879.0, "clicks": 1631.0, "vendas": 35.3933, "receita": 26523.0675}, {"date": "2026-08-10", "spend": 3245.7267, "impr": 115877.0, "clicks": 2357.0, "vendas": 64.3759, "receita": 52315.6748}, {"date": "2026-08-11", "spend": 3323.9536, "impr": 137903.0, "clicks": 2581.0, "vendas": 61.2674, "receita": 53321.3667}, {"date": "2026-08-12", "spend": 2945.8769, "impr": 118289.0, "clicks": 2462.0, "vendas": 44.1774, "receita": 33302.832}, {"date": "2026-08-13", "spend": 2268.3089, "impr": 111407.0, "clicks": 2097.0, "vendas": 40.9355, "receita": 35052.5012}, {"date": "2026-08-14", "spend": 1772.2735, "impr": 90552.0, "clicks": 1715.0, "vendas": 29.6127, "receita": 23970.7917}, {"date": "2026-08-15", "spend": 1533.6441, "impr": 66093.0, "clicks": 1382.0, "vendas": 39.4989, "receita": 32997.6613}, {"date": "2026-08-16", "spend": 1377.9547, "impr": 69275.0, "clicks": 1382.0, "vendas": 35.7578, "receita": 32624.2066}, {"date": "2026-08-17", "spend": 1869.4542, "impr": 92485.0, "clicks": 1795.0, "vendas": 29.9755, "receita": 25060.7171}, {"date": "2026-08-18", "spend": 1952.3297, "impr": 108466.0, "clicks": 1876.0, "vendas": 33.4159, "receita": 32097.9789}, {"date": "2026-08-19", "spend": 1865.3034, "impr": 105424.0, "clicks": 1894.0, "vendas": 34.9973, "receita": 27218.3013}, {"date": "2026-08-20", "spend": 1864.4448, "impr": 97827.0, "clicks": 1823.0, "vendas": 24.8019, "receita": 22603.8152}, {"date": "2026-08-21", "spend": 1752.8371, "impr": 90222.0, "clicks": 1705.0, "vendas": 30.844, "receita": 26680.5902}, {"date": "2026-08-22", "spend": 1623.764, "impr": 87612.0, "clicks": 1548.0, "vendas": 12.2487, "receita": 10841.501}, {"date": "2026-08-23", "spend": 1554.1297, "impr": 81102.0, "clicks": 1511.0, "vendas": 26.6245, "receita": 24040.8301}, {"date": "2026-08-24", "spend": 1842.2946, "impr": 110077.0, "clicks": 1864.0, "vendas": 17.7629, "receita": 13162.8613}, {"date": "2026-08-25", "spend": 1760.0853, "impr": 101421.0, "clicks": 1765.0, "vendas": 14.2408, "receita": 15337.5896}, {"date": "2026-08-26", "spend": 124.4018, "impr": 6308.0, "clicks": 128.0, "vendas": 2.0, "receita": 1730.62}], "site": [{"date": "2026-07-01", "pedidos": 47.0, "receita": 47787.49}, {"date": "2026-07-02", "pedidos": 37.0, "receita": 28823.2}, {"date": "2026-07-03", "pedidos": 32.0, "receita": 31040.17}, {"date": "2026-07-04", "pedidos": 31.0, "receita": 28498.99}, {"date": "2026-07-05", "pedidos": 39.0, "receita": 32769.9}, {"date": "2026-07-06", "pedidos": 44.0, "receita": 35983.77}, {"date": "2026-07-07", "pedidos": 48.0, "receita": 39087.5}, {"date": "2026-07-08", "pedidos": 49.0, "receita": 39373.11}, {"date": "2026-07-09", "pedidos": 47.0, "receita": 42774.92}, {"date": "2026-07-10", "pedidos": 40.0, "receita": 34978.5}, {"date": "2026-07-11", "pedidos": 27.0, "receita": 23564.94}, {"date": "2026-07-12", "pedidos": 33.0, "receita": 29784.83}, {"date": "2026-07-13", "pedidos": 57.0, "receita": 42182.63}, {"date": "2026-07-14", "pedidos": 63.0, "receita": 52299.29}, {"date": "2026-07-15", "pedidos": 54.0, "receita": 45476.68}, {"date": "2026-07-16", "pedidos": 55.0, "receita": 46906.42}, {"date": "2026-07-17", "pedidos": 45.0, "receita": 33393.48}, {"date": "2026-07-18", "pedidos": 35.0, "receita": 29469.58}, {"date": "2026-07-19", "pedidos": 48.0, "receita": 42875.77}, {"date": "2026-07-20", "pedidos": 58.0, "receita": 51445.59}, {"date": "2026-07-21", "pedidos": 58.0, "receita": 50188.59}, {"date": "2026-07-22", "pedidos": 52.0, "receita": 44044.65}, {"date": "2026-07-23", "pedidos": 53.0, "receita": 54215.37}, {"date": "2026-07-24", "pedidos": 47.0, "receita": 41159.32}, {"date": "2026-07-25", "pedidos": 43.0, "receita": 37198.35}, {"date": "2026-07-26", "pedidos": 47.0, "receita": 35973.45}, {"date": "2026-07-27", "pedidos": 90.0, "receita": 80051.15}, {"date": "2026-07-28", "pedidos": 67.0, "receita": 61154.4}, {"date": "2026-07-29", "pedidos": 76.0, "receita": 66465.76}, {"date": "2026-07-30", "pedidos": 78.0, "receita": 63236.82}, {"date": "2026-07-31", "pedidos": 76.0, "receita": 62741.89}, {"date": "2026-08-01", "pedidos": 49.0, "receita": 43662.01}, {"date": "2026-08-02", "pedidos": 63.0, "receita": 55574.72}, {"date": "2026-08-03", "pedidos": 85.0, "receita": 72519.95}, {"date": "2026-08-04", "pedidos": 112.0, "receita": 89970.57}, {"date": "2026-08-05", "pedidos": 108.0, "receita": 93991.25}, {"date": "2026-08-06", "pedidos": 101.0, "receita": 80898.83}, {"date": "2026-08-07", "pedidos": 79.0, "receita": 67940.09}, {"date": "2026-08-08", "pedidos": 69.0, "receita": 60872.25}, {"date": "2026-08-09", "pedidos": 79.0, "receita": 63969.55}, {"date": "2026-08-10", "pedidos": 108.0, "receita": 94342.52}, {"date": "2026-08-11", "pedidos": 118.0, "receita": 98499.18}, {"date": "2026-08-12", "pedidos": 100.0, "receita": 83308.08}, {"date": "2026-08-13", "pedidos": 89.0, "receita": 74937.27}, {"date": "2026-08-14", "pedidos": 60.0, "receita": 50207.79}, {"date": "2026-08-15", "pedidos": 68.0, "receita": 57150.81}, {"date": "2026-08-16", "pedidos": 65.0, "receita": 57600.7}, {"date": "2026-08-17", "pedidos": 45.0, "receita": 38566.98}, {"date": "2026-08-18", "pedidos": 78.0, "receita": 66578.84}, {"date": "2026-08-19", "pedidos": 90.0, "receita": 67642.11}, {"date": "2026-08-20", "pedidos": 73.0, "receita": 59799.19}, {"date": "2026-08-21", "pedidos": 61.0, "receita": 44401.88}, {"date": "2026-08-22", "pedidos": 45.0, "receita": 39440.82}, {"date": "2026-08-23", "pedidos": 69.0, "receita": 60896.3}, {"date": "2026-08-24", "pedidos": 62.0, "receita": 60659.77}, {"date": "2026-08-25", "pedidos": 64.0, "receita": 51443.37}]}</script>
 <script>
 const D = JSON.parse(document.getElementById('dados').textContent);
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
@@ -317,6 +449,439 @@ function render(){
   kpis(t); plataformas(t); grafico(L, t); tabela(L, t);
 }
 render();
+</script>
+<script>
+window.__DIA__ = {"desde":"2026-07-01","ate":"2026-08-26","imposto":0,"campos":["gasto","impressoes","cliques","lpv","compras","receita"],"met":{"gasto":"gasto","conv":"compras","conv_rot":"Compras atribuídas","conv_rot_curto":"Compras","conv_rot_1":"compras","conv_rot_s":"compra","receita":"receita","receita_rot":"Receita atribuída","etapa":null,"impr":"impressoes","cliq":"cliques"},"eixo":{"ordem":["meta","google"],"defs":{"meta":{"nome":"Meta Ads","cor":"#1877F2","sub":"atribuição do pixel"},"google":{"nome":"Google Ads","cor":"#34A853","sub":"conversões do Ads"}}},"dias":[["2026-07-01","google",650.0199,32856.0,721.0,0,23.0116,19103.8189],["2026-07-01","meta",1004.74,110068.0,1181.0,649.0,32.0,34181.92],["2026-07-02","google",636.1663,34675.0,682.0,0,19.3204,16637.6436],["2026-07-02","meta",850.39,82239.0,991.0,583.0,25.0,13833.3],["2026-07-03","google",656.3039,34471.0,686.0,0,19.9096,20441.1006],["2026-07-03","meta",1121.25,126537.0,1244.0,707.0,16.0,14492.93],["2026-07-04","google",620.5833,29043.0,581.0,0,16.9622,16100.951],["2026-07-04","meta",1370.58,126520.0,1517.0,874.0,30.0,28219.15],["2026-07-05","google",541.1007,24928.0,510.0,0,20.6736,18693.0433],["2026-07-05","meta",1306.66,131678.0,1586.0,982.0,35.0,31234.75],["2026-07-06","google",746.0237,27038.0,673.0,0,23.047,20713.6282],["2026-07-06","meta",1068.44,151180.0,1331.0,771.0,25.0,19399.9],["2026-07-07","google",759.5946,30272.0,629.0,0,22.6831,16296.8308],["2026-07-07","meta",1405.83,146013.0,1973.0,1197.0,40.0,26085.54],["2026-07-08","google",638.8775,32600.0,699.0,0,23.1748,18258.434],["2026-07-08","meta",1151.66,110979.0,1784.0,1012.0,35.0,26634.24],["2026-07-09","google",631.1039,39491.0,780.0,0,23.415,18826.9258],["2026-07-09","meta",817.88,94169.0,1294.0,794.0,44.0,37293.09],["2026-07-10","google",645.5508,33136.0,739.0,0,15.8211,15136.3987],["2026-07-10","meta",698.53,88057.0,1216.0,716.0,23.0,18846.65],["2026-07-11","google",622.8196,29589.0,733.0,0,21.5439,17374.116],["2026-07-11","meta",670.81,86483.0,1299.0,764.0,21.0,17234.19],["2026-07-12","google",612.4273,26903.0,648.0,0,21.665,19576.2329],["2026-07-12","meta",798.92,121663.0,1567.0,958.0,27.0,23633.68],["2026-07-13","google",693.2896,31928.0,782.0,0,40.6111,33885.8864],["2026-07-13","meta",757.86,103147.0,1332.0,841.0,34.0,26327.8],["2026-07-14","google",658.8396,40444.0,759.0,0,22.8969,18636.4859],["2026-07-14","meta",771.83,87842.0,1200.0,704.0,37.0,32303.39],["2026-07-15","google",904.7693,46990.0,958.0,0,38.4484,32364.9369],["2026-07-15","meta",744.26,89377.0,1171.0,654.0,34.0,27551.23],["2026-07-16","google",994.1771,50354.0,967.0,0,36.906,32930.1179],["2026-07-16","meta",714.09,87351.0,1175.0,694.0,38.0,33845.53],["2026-07-17","google",1206.2762,66526.0,1181.0,0,32.4096,27350.6624],["2026-07-17","meta",1039.5,116183.0,1647.0,1034.0,28.0,20960.34],["2026-07-18","google",1245.4386,55450.0,1063.0,0,24.2737,21351.9054],["2026-07-18","meta",922.39,104384.0,1677.0,1095.0,24.0,21275.85],["2026-07-19","google",1396.6686,52084.0,1005.0,0,24.3075,21083.2965],["2026-07-19","meta",1019.57,133092.0,1914.0,1233.0,42.0,35589.84],["2026-07-20","google",2199.0434,102802.0,1707.0,0,35.1211,30601.0218],["2026-07-20","meta",1092.09,147247.0,1870.0,1137.0,33.0,29885.28],["2026-07-21","google",1729.8482,96117.0,1526.0,0,51.1696,45030.2757],["2026-07-21","meta",1168.44,139770.0,2061.0,1319.0,27.0,24856.01],["2026-07-22","google",1598.9612,83604.0,1391.0,0,45.89,37517.8945],["2026-07-22","meta",1065.75,124137.0,1787.0,1068.0,18.0,14511.01],["2026-07-23","google",1526.2454,90666.0,1277.0,0,26.921,31083.4223],["2026-07-23","meta",957.99,111676.0,1587.0,972.0,37.0,31752.19],["2026-07-24","google",1414.6432,74974.0,1229.0,0,31.9888,27673.8456],["2026-07-24","meta",1148.6,123444.0,1936.0,1169.0,39.0,31804.34],["2026-07-25","google",1228.9412,60260.0,1076.0,0,26.3521,22725.4135],["2026-07-25","meta",1573.7,162767.0,2444.0,1568.0,26.0,19786.34],["2026-07-26","google",1221.9553,57541.0,996.0,0,26.9156,22472.9892],["2026-07-26","meta",1611.39,175603.0,2639.0,1767.0,36.0,26981.92],["2026-07-27","google",2154.5304,82180.0,1624.0,0,62.0735,54531.8319],["2026-07-27","meta",1850.18,203619.0,2845.0,1772.0,57.0,46260.39],["2026-07-28","google",2020.2703,94984.0,1766.0,0,41.0744,33990.1506],["2026-07-28","meta",1856.34,201703.0,2796.0,1697.0,47.0,39061.86],["2026-07-29","google",1915.9774,80633.0,1531.0,0,39.8128,31772.501],["2026-07-29","meta",1471.04,144156.0,2307.0,1507.0,68.0,51761.84],["2026-07-30","google",1799.0345,87391.0,1527.0,0,48.2793,39548.0964],["2026-07-30","meta",1388.94,138454.0,2209.0,1361.0,58.0,45594.78],["2026-07-31","google",1521.9645,65206.0,1317.0,0,39.0403,34982.0557],["2026-07-31","meta",1252.58,140481.0,2221.0,1259.0,54.0,44907.83],["2026-08-01","google",1860.9958,83061.0,1432.0,0,34.4448,31899.3327],["2026-08-01","meta",1868.09,223863.0,3961.0,2399.0,34.0,29829.5],["2026-08-02","google",1716.8108,75024.0,1327.0,0,32.2376,28673.0918],["2026-08-02","meta",1775.01,216717.0,3620.0,2142.0,40.0,32628.7],["2026-08-03","google",2364.3714,86242.0,1734.0,0,47.5428,37387.5534],["2026-08-03","meta",1900.24,250624.0,3563.0,2085.0,62.0,53274.14],["2026-08-04","google",2567.5878,121476.0,2217.0,0,65.4812,56604.676],["2026-08-04","meta",1993.56,227088.0,3459.0,2253.0,74.0,54124.57],["2026-08-05","google",2751.1703,137760.0,2313.0,0,56.0032,48253.1705],["2026-08-05","meta",1878.03,201132.0,3172.0,1753.0,57.0,50571.35],["2026-08-06","google",2361.6321,107515.0,2083.0,0,58.6698,49868.0963],["2026-08-06","meta",1775.38,177153.0,2993.0,1773.0,64.0,50444.07],["2026-08-07","google",2442.5642,105410.0,1939.0,0,35.7981,29379.4942],["2026-08-07","meta",1758.75,184441.0,2880.0,1729.0,49.0,41333.38],["2026-08-08","google",2228.3621,75367.0,1583.0,0,39.4689,37788.8064],["2026-08-08","meta",1928.07,204407.0,3075.0,1851.0,44.0,38781.64],["2026-08-09","google",2294.0766,85879.0,1631.0,0,35.3933,26523.0675],["2026-08-09","meta",1716.37,218331.0,3245.0,2054.0,42.0,34477.42],["2026-08-10","google",3245.7267,115877.0,2357.0,0,64.3759,52315.6748],["2026-08-10","meta",2615.45,340573.0,4378.0,2569.0,76.0,64064.94],["2026-08-11","google",3323.9536,137903.0,2581.0,0,61.2674,53321.3667],["2026-08-11","meta",3205.06,355243.0,5136.0,2963.0,81.0,65065.01],["2026-08-12","google",2945.8769,118289.0,2462.0,0,44.1774,33302.832],["2026-08-12","meta",2688.42,298875.0,4359.0,2502.0,55.0,45630.18],["2026-08-13","google",2268.3089,111407.0,2097.0,0,40.9355,35052.5012],["2026-08-13","meta",2348.43,259809.0,4007.0,2343.0,63.0,58371.06],["2026-08-14","google",1772.2735,90552.0,1715.0,0,29.6127,23970.7917],["2026-08-14","meta",2202.08,273151.0,4332.0,2661.0,43.0,37554.38],["2026-08-15","google",1533.6441,66093.0,1382.0,0,39.4989,32997.6613],["2026-08-15","meta",1994.47,242009.0,4375.0,2761.0,65.0,56941.49],["2026-08-16","google",1377.9547,69275.0,1382.0,0,35.7578,32624.2066],["2026-08-16","meta",2426.81,342410.0,5393.0,3362.0,48.0,39984.58],["2026-08-17","google",1869.4542,92485.0,1795.0,0,29.9755,25060.7171],["2026-08-17","meta",2639.92,353955.0,4693.0,2835.0,54.0,47628.05],["2026-08-18","google",1952.3297,108466.0,1876.0,0,33.4159,32097.9789],["2026-08-18","meta",2950.34,333498.0,5549.0,3394.0,69.0,58141.05],["2026-08-19","google",1865.3034,105424.0,1894.0,0,34.9973,27218.3013],["2026-08-19","meta",3540.84,348386.0,5619.0,3628.0,77.0,59304.86],["2026-08-20","google",1864.4448,97827.0,1823.0,0,24.8019,22603.8152],["2026-08-20","meta",3011.04,311080.0,5023.0,3235.0,56.0,48115.48],["2026-08-21","google",1752.8371,90222.0,1705.0,0,30.844,26680.5902],["2026-08-21","meta",4069.93,317529.0,4637.0,3194.0,39.0,25776.79],["2026-08-22","google",1623.764,87612.0,1548.0,0,12.2487,10841.501],["2026-08-22","meta",1906.06,172565.0,3205.0,2147.0,33.0,38070.94],["2026-08-23","google",1554.1297,81102.0,1511.0,0,26.6245,24040.8301],["2026-08-23","meta",1876.37,200828.0,3256.0,2231.0,45.0,42941.08],["2026-08-24","google",1842.2946,110077.0,1864.0,0,17.7629,13162.8613],["2026-08-24","meta",2691.1,313220.0,4134.0,2736.0,44.0,41838.22],["2026-08-25","google",1760.0853,101421.0,1765.0,0,14.2408,15337.5896],["2026-08-25","meta",3111.95,323228.0,4454.0,2916.0,37.0,31780.18],["2026-08-26","google",124.4018,6308.0,128.0,0,2.0,1730.62],["2026-08-26","meta",253.19,20232.0,397.0,222.0,0,0]],"tabelas":[],"extra":{"rotulo":"Loja (real)","campos":[{"k":"receita","rot":"faturamento do site","tipo":"brl"},{"k":"pedidos","rot":"pedidos","tipo":"num"}],"linhas":[["2026-07-01",47787.49,47.0],["2026-07-02",28823.2,37.0],["2026-07-03",31040.17,32.0],["2026-07-04",28498.99,31.0],["2026-07-05",32769.9,39.0],["2026-07-06",35983.77,44.0],["2026-07-07",39087.5,48.0],["2026-07-08",39373.11,49.0],["2026-07-09",42774.92,47.0],["2026-07-10",34978.5,40.0],["2026-07-11",23564.94,27.0],["2026-07-12",29784.83,33.0],["2026-07-13",42182.63,57.0],["2026-07-14",52299.29,63.0],["2026-07-15",45476.68,54.0],["2026-07-16",46906.42,55.0],["2026-07-17",33393.48,45.0],["2026-07-18",29469.58,35.0],["2026-07-19",42875.77,48.0],["2026-07-20",51445.59,58.0],["2026-07-21",50188.59,58.0],["2026-07-22",44044.65,52.0],["2026-07-23",54215.37,53.0],["2026-07-24",41159.32,47.0],["2026-07-25",37198.35,43.0],["2026-07-26",35973.45,47.0],["2026-07-27",80051.15,90.0],["2026-07-28",61154.4,67.0],["2026-07-29",66465.76,76.0],["2026-07-30",63236.82,78.0],["2026-07-31",62741.89,76.0],["2026-08-01",43662.01,49.0],["2026-08-02",55574.72,63.0],["2026-08-03",72519.95,85.0],["2026-08-04",89970.57,112.0],["2026-08-05",93991.25,108.0],["2026-08-06",80898.83,101.0],["2026-08-07",67940.09,79.0],["2026-08-08",60872.25,69.0],["2026-08-09",63969.55,79.0],["2026-08-10",94342.52,108.0],["2026-08-11",98499.18,118.0],["2026-08-12",83308.08,100.0],["2026-08-13",74937.27,89.0],["2026-08-14",50207.79,60.0],["2026-08-15",57150.81,68.0],["2026-08-16",57600.7,65.0],["2026-08-17",38566.98,45.0],["2026-08-18",66578.84,78.0],["2026-08-19",67642.11,90.0],["2026-08-20",59799.19,73.0],["2026-08-21",44401.88,61.0],["2026-08-22",39440.82,45.0],["2026-08-23",60896.3,69.0],["2026-08-24",60659.77,62.0],["2026-08-25",51443.37,64.0]]}};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (D.extra) {
+      var ex = {}, exN = D.extra.campos.length;
+      D.extra.campos.forEach(function (c, i) { ex[c.k] = 0; });
+      D.extra.linhas.forEach(function (l) {
+        if (!setSel[l[0]]) return;
+        D.extra.campos.forEach(function (c, i) { ex[c.k] += l[i + 1] || 0; });
+      });
+      var prim = D.extra.campos[0], resto = D.extra.campos.slice(1);
+      linha2.push('<div class="dd-box"><div class="dd-bl">' + esc(D.extra.rotulo) + '</div>' +
+        '<div class="dd-v">' + (prim.tipo === 'brl' ? brl(ex[prim.k]) : num(ex[prim.k])) + '</div>' +
+        '<div class="dd-s">' + esc(prim.rot) + (resto.length ? ' · ' + resto.map(function (c) {
+          return (c.tipo === 'brl' ? brl(ex[c.k]) : num(ex[c.k])) + ' ' + esc(c.rot);
+        }).join(' · ') : '') + '</div></div>');
+    }
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        if (li && m.conv) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
 </script>
 </body>
 </html>
