@@ -125,6 +125,105 @@
   @media(max-width:820px){.criativos{grid-template-columns:1fr 1fr}.invest-box{grid-template-columns:1fr}}
   @media(max-width:720px){.kpis{grid-template-columns:1fr 1fr}header .marca{font-size:28px}.tabela-scroll{overflow-x:auto}table{min-width:640px}}
   @media(max-width:460px){.kpis{grid-template-columns:1fr}}
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
 </style>
 </head>
 <body>
@@ -138,7 +237,7 @@
 
 <div class="periodo-strip">
   <span class="p1">Meta Ads · Agosto 2026</span>
-  <div class="p2">01/08/2026 a 31/08/2026 &nbsp;·&nbsp; atualizado automaticamente em 21/09/2026</div>
+  <div class="p2">01/08/2026 a 31/08/2026 &nbsp;·&nbsp; atualizado automaticamente em 22/09/2026</div>
 </div>
 
 <div class="wrap">
@@ -341,97 +440,46 @@
     </table></div>
   </div>
 
-  <div class="tag">Criativos</div>
-  <div class="bloco">
-    <div class="bloco-titulo" style="color:var(--teal)">🖼️ Criativos em veiculação</div>
-    <div class="bloco-desc">Ordenados por investimento. Clique para abrir no Instagram.</div>
-    <div class="criativos"><a class="criativo" href="https://www.instagram.com/p/DaK9IBSgQp5/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/d0e984b12cc09ae9.jpg" alt="[GGD][SEG]_AD_NEM_TODO_OLHO_VERMELHO" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Seguidores</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">[GGD][SEG]_AD_NEM_TODO_OLHO_VERMELHO</div>
-        <div class="cr-metricas">
-          <span><b>R$ 265,73</b><i>investido</i></span>
-          <span><b>16.557</b><i>plays 3s</i></span>
-          <span><b>46</b><i>visitas ao perfil</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DbdZYBogGqT/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/2eaea879de63eab9.jpg" alt="AD_CONSULTA_PRIMEIRA_VEZ" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_CONSULTA_PRIMEIRA_VEZ</div>
-        <div class="cr-metricas">
-          <span><b>R$ 110,58</b><i>investido</i></span>
-          <span><b>4.756</b><i>plays 3s</i></span>
-          <span><b>924</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DbdZgO9A1Wm/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/ee916dad491d651c.jpg" alt="AD_RECEBEU_DIAGNO_E_AGORA" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_RECEBEU_DIAGNO_E_AGORA</div>
-        <div class="cr-metricas">
-          <span><b>R$ 95,85</b><i>investido</i></span>
-          <span><b>24.981</b><i>plays 3s</i></span>
-          <span><b>6.458</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DcbKbTPATHb/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/95be7d045ec42936.jpg" alt="AD_TESTE02" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Mensagem</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_TESTE02</div>
-        <div class="cr-metricas">
-          <span><b>R$ 54,89</b><i>investido</i></span>
-          <span><b>0</b><i>plays 3s</i></span>
-          <span><b>7</b><i>conversas</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DcbKVwjAAJp/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/9c42ddcb26381d1a.jpg" alt="AD_DUVIDA_USAR_COLIRIO" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_DUVIDA_USAR_COLIRIO</div>
-        <div class="cr-metricas">
-          <span><b>R$ 41,20</b><i>investido</i></span>
-          <span><b>10.812</b><i>plays 3s</i></span>
-          <span><b>4.211</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DcbKPtBg0ZJ/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/214cc8b7944a4e36.jpg" alt="AD_NEM_TODO_PACIENTE_COM_SUSPEITA" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_NEM_TODO_PACIENTE_COM_SUSPEITA</div>
-        <div class="cr-metricas">
-          <span><b>R$ 36,56</b><i>investido</i></span>
-          <span><b>1.904</b><i>plays 3s</i></span>
-          <span><b>580</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DbA9cBzg1nk/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/49f9ae50f51287de.jpg" alt="AD_COLIRIO_PAROU_FAZER_EFEITO" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_COLIRIO_PAROU_FAZER_EFEITO</div>
-        <div class="cr-metricas">
-          <span><b>R$ 17,40</b><i>investido</i></span>
-          <span><b>3.916</b><i>plays 3s</i></span>
-          <span><b>1.303</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a>
-<a class="criativo" href="https://www.instagram.com/p/DbJO-oKghFj/" target="_blank" rel="noopener" title="Abrir no Instagram"><div class="cr-thumb"><img src="thumbs/79cc1d35ab07bdc0.jpg" alt="AD_ESQUECENDO_PINGAR_COLIRIO" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('sem-img')"><div class="cr-fallback">👁️</div>
-        <span class="cr-badge">Vídeo</span></div>
-      <div class="cr-info">
-        <div class="cr-nome">AD_ESQUECENDO_PINGAR_COLIRIO</div>
-        <div class="cr-metricas">
-          <span><b>R$ 15,62</b><i>investido</i></span>
-          <span><b>3.105</b><i>plays 3s</i></span>
-          <span><b>1.257</b><i>ThruPlays</i></span>
-        </div>
-      </div><span class="cr-link">ver criativo ↗</span></a></div>
-  </div>
 
   <div class="nota">
     <b>Investimento com impostos:</b> a Meta cobra <b>ISS+IOF de 13,83%</b> sobre o valor de mídia — por isso o
     <b>total debitado</b> é maior que o gasto de campanha. Alíquota conferida no faturamento real da conta.
     <br><b>Seguidores:</b> o Meta não reporta novos seguidores por anúncio; usamos <b>visitas ao perfil</b> como proxy.
+  </div><h2 style="font-size:17px;font-weight:700;color:#1a2b3c;margin:34px 0 4px">📅 Por dia · escolher datas</h2><div style="font-size:12.5px;color:#7a8794;margin-bottom:12px">o resto da página é o fechamento do mês; aqui você escolhe o intervalo e vê os dois canais juntos</div>
+<div class="dd" style="--dd-tema:#1877F2;--dd-tema-esc:#123a63;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, ou o dia em que uma das contas ficou parada —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
   </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Meta × Google</b><em>no período marcado · Meta conta conversa no Direct; Google conta lead</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e contatos por dia</b>
+    <em>barra = investido · linha = contatos do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+  <div class="dd-sec"><i></i><b>Campanhas no período</b><em>os dois canais juntos · por contatos no período marcado</em></div>
+  <div class="dd-card dd-wrap" id="d-t-camp"></div>
+</div>
 
   <footer>
     Relatório de <b>Meta Ads</b> · Papo Glaucoma · gerado e atualizado automaticamente toda segunda-feira · <b>GGD — Gio Growth Digital</b><br>
@@ -442,8 +490,8 @@
 <script>
   new Chart(document.getElementById('chartAno'), {
     data: { labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set"], datasets: [
-      { type:'bar', label:'Investimento (R$)', data:[213.32, 658.67, 510.68, 453.0, 658.39, 702.44, 688.49, 824.35, 456.61], backgroundColor:["#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#D69A3C", "#1877F2"], borderRadius:5, yAxisID:'y', order:2 },
-      { type:'line', label:"Plays de vídeo (3s)", data:[3963, 6682, 11564, 22350, 43564, 34609, 46084, 73491, 40836], borderColor:"#1F6FB2",
+      { type:'bar', label:'Investimento (R$)', data:[213.32, 658.67, 510.68, 453.0, 658.39, 702.44, 688.49, 824.35, 501.22], backgroundColor:["#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#1877F2", "#D69A3C", "#1877F2"], borderRadius:5, yAxisID:'y', order:2 },
+      { type:'line', label:"Plays de vídeo (3s)", data:[3963, 6682, 11564, 22350, 43564, 34609, 46084, 73491, 44058], borderColor:"#1F6FB2",
         backgroundColor:'rgba(66,133,244,.10)', borderWidth:2.5, tension:.35, fill:true, pointRadius:3, yAxisID:'y1', order:1 }
     ]},
     options: { responsive:true, maintainAspectRatio:false, interaction:{ mode:'index', intersect:false },
@@ -453,6 +501,425 @@
         y1:{ position:'right', beginAtZero:true, grid:{ drawOnChartArea:false }, title:{ display:true, text:"Plays de vídeo" } }
       } }
   });
+</script>
+<script>
+window.__DIA__ = {"desde":"2026-06-24","ate":"2026-09-22","imposto":0,"campos":["gasto","impressoes","cliques","contatos"],"met":{"gasto":"gasto","conv":"contatos","conv_rot":"Contatos","conv_rot_curto":"Contatos","conv_rot_1":"contatos","conv_rot_s":"contato","receita":null,"etapa":null,"impr":"impressoes","cliq":"cliques"},"eixo":{"ordem":["meta","google"],"defs":{"meta":{"nome":"Meta Ads","cor":"#1877F2","sub":"conversa iniciada no Direct"},"google":{"nome":"Google Ads","cor":"#34A853","sub":"conversão de lead na busca"}}},"dias":[["2026-06-24","google",37.7369,519,51,9],["2026-06-24","meta",22.03,2362,61,1],["2026-06-25","google",44.1593,3912,43,3],["2026-06-25","meta",21.799999999999997,2426,61,0],["2026-06-26","google",40.9612,3218,52,7],["2026-06-26","meta",19.19,2158,44,1],["2026-06-27","google",49.0833,3028,55,9],["2026-06-27","meta",14.299999999999999,1867,49,0],["2026-06-28","google",99.8359,1614,66,15],["2026-06-28","meta",21.08,2756,77,2],["2026-06-29","google",80.8396,740,41,6],["2026-06-29","meta",18.71,3049,84,0],["2026-06-30","google",46.0744,410,21,3],["2026-06-30","meta",19.66,2719,62,0],["2026-07-01","google",53.0484,1095,36,8],["2026-07-01","meta",19.95,3293,74,0],["2026-07-02","google",48.8821,2259,32,8],["2026-07-02","meta",17.94,2932,57,2],["2026-07-03","google",45.3428,2040,29,4],["2026-07-03","meta",17.35,2313,49,0],["2026-07-04","google",33.2861,1623,27,5],["2026-07-04","meta",11.260000000000002,2163,42,1],["2026-07-05","google",25.5575,2361,24,3],["2026-07-05","meta",16.66,3057,56,0],["2026-07-06","google",35.0167,1935,31,4],["2026-07-06","meta",22.48,2897,42,0],["2026-07-07","google",39.8056,1492,46,6],["2026-07-07","meta",21.369999999999997,2751,44,2],["2026-07-08","google",47.9116,956,46,7],["2026-07-08","meta",20.41,2559,32,0],["2026-07-09","google",99.9544,1171,69,6],["2026-07-09","meta",17.69,2123,33,0],["2026-07-10","google",78.7255,2110,51,11],["2026-07-10","meta",15.58,1935,21,0],["2026-07-11","google",52.4758,1635,43,2],["2026-07-11","meta",11.67,1786,19,1],["2026-07-12","google",33.7965,1583,37,3],["2026-07-12","meta",18.76,2491,38,0],["2026-07-13","google",63.7089,1954,63,11],["2026-07-13","meta",19.3,2631,49,1],["2026-07-14","google",48.4333,1348,51,3],["2026-07-14","meta",18.45,2797,54,1],["2026-07-15","google",54.2989,2583,43,7],["2026-07-15","meta",16.71,2526,37,0],["2026-07-16","google",45.9523,4573,38,6],["2026-07-16","meta",17.25,1938,39,1],["2026-07-17","google",48.6048,3210,41,7],["2026-07-17","meta",18.3,2073,36,1],["2026-07-18","google",29.892,710,29,3],["2026-07-18","meta",16.73,2089,34,0],["2026-07-19","google",44.5271,720,46,5],["2026-07-19","meta",20.79,2751,48,1],["2026-07-20","google",86.4104,916,51,6],["2026-07-20","meta",23.369999999999997,3125,72,1],["2026-07-21","google",51.2479,495,31,3],["2026-07-21","meta",27.119999999999997,3134,92,2],["2026-07-22","google",51.4176,728,50,6],["2026-07-22","meta",25.31,2577,64,0],["2026-07-23","google",49.8793,1349,66,3],["2026-07-23","meta",19.63,2454,77,0],["2026-07-24","google",59.329,1683,48,5],["2026-07-24","meta",18.71,2399,63,0],["2026-07-25","google",33.8417,1370,49,4],["2026-07-25","meta",22.450000000000003,2728,84,1],["2026-07-26","google",40.3286,726,42,6],["2026-07-26","meta",27.380000000000003,3257,114,1],["2026-07-27","google",47.140299999999996,6326,58,5],["2026-07-27","meta",31.57,3889,99,0],["2026-07-28","google",72.6988,2810,81,13],["2026-07-28","meta",24.72,2709,88,1],["2026-07-29","google",95.2586,1691,83,5],["2026-07-29","meta",14.19,2495,66,0],["2026-07-30","google",54.734700000000004,2795,43,4],["2026-07-30","meta",15.22,2268,68,1],["2026-07-31","google",43.0665,2682,38,4],["2026-07-31","meta",16.52,2813,85,1],["2026-08-01","google",29.755300000000002,3120,32,1],["2026-08-01","meta",12.420000000000002,2378,57,0],["2026-08-02","google",30.77,1825,36,3],["2026-08-02","meta",19.09,3540,81,1],["2026-08-03","google",21.174100000000003,502,20,2],["2026-08-03","meta",23.060000000000002,3949,112,0],["2026-08-04","google",24.572400000000002,328,22,2],["2026-08-04","meta",26.14,4982,136,0],["2026-08-05","google",99.37629999999999,890,68,13],["2026-08-05","meta",16.92,3189,75,0],["2026-08-06","google",116.9366,513,84,9],["2026-08-06","meta",18.689999999999998,3407,84,0],["2026-08-07","google",78.5668,520,67,2],["2026-08-07","meta",22.89,3452,93,0],["2026-08-08","google",81.8099,643,59,4],["2026-08-08","meta",21.03,3331,86,0],["2026-08-09","google",95.6085,368,51,4],["2026-08-09","meta",29.58,4719,102,0],["2026-08-10","google",85.0722,450,43,7],["2026-08-10","meta",19.36,3704,94,0],["2026-08-11","google",64.4761,396,38,4],["2026-08-11","meta",16.84,3284,81,0],["2026-08-12","google",61.9173,468,38,4],["2026-08-12","meta",25.15,3684,110,0],["2026-08-13","google",68.7717,451,37,3],["2026-08-13","meta",22.009999999999998,3487,101,0],["2026-08-14","google",53.1823,336,28,8],["2026-08-14","meta",20.68,3113,92,0],["2026-08-15","google",6.46,220,5,0],["2026-08-15","meta",19.520000000000003,2933,88,0],["2026-08-16","google",20.5343,323,13,0],["2026-08-16","meta",24.94,4634,112,0],["2026-08-17","google",61.4392,499,29,4],["2026-08-17","meta",22.52,3897,102,0],["2026-08-18","meta",21.729999999999997,3795,93,0],["2026-08-19","meta",23.08,4076,122,0],["2026-08-20","meta",22.19,3508,96,0],["2026-08-21","meta",19.58,3342,86,1],["2026-08-22","meta",19.07,3275,65,0],["2026-08-23","meta",26.42,4632,124,0],["2026-08-24","meta",33.23,4712,81,1],["2026-08-25","meta",35.68,4494,104,3],["2026-08-26","meta",31.37,3708,100,0],["2026-08-27","meta",26.27,3175,81,1],["2026-08-28","meta",22.84,3117,89,0],["2026-08-29","meta",19.85,2925,81,1],["2026-08-30","meta",28.25,5071,108,0],["2026-08-31","meta",33.79,4256,113,0],["2026-09-01","meta",31.61,4166,96,0],["2026-09-02","meta",29.509999999999998,3672,74,0],["2026-09-03","meta",26.229999999999997,3380,80,0],["2026-09-04","meta",23.78,3156,85,0],["2026-09-05","meta",22.18,3489,89,1],["2026-09-06","meta",31.44,4355,116,0],["2026-09-07","meta",29.589999999999996,4087,100,0],["2026-09-08","meta",29.229999999999997,3731,81,0],["2026-09-09","meta",29.54,3754,85,0],["2026-09-10","meta",26.729999999999997,3086,80,0],["2026-09-11","meta",21.94,2596,65,1],["2026-09-12","meta",11.75,2363,67,0],["2026-09-13","meta",12.92,2607,62,0],["2026-09-14","meta",15.39,2924,92,0],["2026-09-15","meta",9.73,2007,42,0],["2026-09-16","meta",16.13,3249,65,0],["2026-09-17","meta",11.14,2562,64,0],["2026-09-18","meta",7.41,1971,40,0],["2026-09-19","meta",6.17,1615,33,0],["2026-09-20","meta",7.65,1920,56,0],["2026-09-21","meta",26.84,3956,115,0],["2026-09-22","meta",13.45,1719,61,0]],"tabelas":[{"id":"camp","chave_rot":"Campanha","top":25,"linhas":[["2026-06-24","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.58,1853,40,0],["2026-06-24","[GGD][MENSAGEM][RJ]","meta",10.45,509,21,1],["2026-06-25","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.86,1880,50,0],["2026-06-25","[GGD][MENSAGEM][RJ]","meta",9.94,546,11,0],["2026-06-26","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.47,1762,31,0],["2026-06-26","[GGD][MENSAGEM][RJ]","meta",7.72,396,13,1],["2026-06-27","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.94,1678,46,0],["2026-06-27","[GGD][MENSAGEM][RJ]","meta",3.36,189,3,0],["2026-06-28","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.04,2479,64,1],["2026-06-28","[GGD][MENSAGEM][RJ]","meta",7.04,277,13,1],["2026-06-29","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.25,2751,81,0],["2026-06-29","[GGD][MENSAGEM][RJ]","meta",5.46,298,3,0],["2026-06-30","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.16,2324,57,0],["2026-06-30","[GGD][MENSAGEM][RJ]","meta",7.5,395,5,0],["2026-07-01","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.69,2872,56,0],["2026-07-01","[GGD][MENSAGEM][RJ]","meta",7.26,421,18,0],["2026-07-02","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.06,2526,51,1],["2026-07-02","[GGD][MENSAGEM][RJ]","meta",6.88,406,6,1],["2026-07-03","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.62,2007,36,0],["2026-07-03","[GGD][MENSAGEM][RJ]","meta",5.73,306,13,0],["2026-07-04","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.14,1950,34,0],["2026-07-04","[GGD][MENSAGEM][RJ]","meta",2.12,213,8,1],["2026-07-05","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.32,2783,50,0],["2026-07-05","[GGD][MENSAGEM][RJ]","meta",4.34,274,6,0],["2026-07-06","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.99,2372,32,0],["2026-07-06","[GGD][MENSAGEM][RJ]","meta",9.49,525,10,0],["2026-07-07","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.75,2272,36,1],["2026-07-07","[GGD][MENSAGEM][RJ]","meta",9.62,479,8,1],["2026-07-08","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.41,2218,23,0],["2026-07-08","[GGD][MENSAGEM][RJ]","meta",8,341,9,0],["2026-07-09","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.96,1825,20,0],["2026-07-09","[GGD][MENSAGEM][RJ]","meta",5.73,298,13,0],["2026-07-10","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.89,1734,16,0],["2026-07-10","[GGD][MENSAGEM][RJ]","meta",3.69,201,5,0],["2026-07-11","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.59,1681,19,0],["2026-07-11","[GGD][MENSAGEM][RJ]","meta",1.08,105,0,1],["2026-07-12","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.32,2182,34,0],["2026-07-12","[GGD][MENSAGEM][RJ]","meta",4.44,309,4,0],["2026-07-13","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.98,2148,38,1],["2026-07-13","[GGD][MENSAGEM][RJ]","meta",7.32,483,11,0],["2026-07-14","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.66,2258,40,0],["2026-07-14","[GGD][MENSAGEM][RJ]","meta",8.79,539,14,1],["2026-07-15","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.36,2103,25,0],["2026-07-15","[GGD][MENSAGEM][RJ]","meta",7.35,423,12,0],["2026-07-16","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.91,1616,29,0],["2026-07-16","[GGD][MENSAGEM][RJ]","meta",6.34,322,10,1],["2026-07-17","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.55,1742,23,0],["2026-07-17","[GGD][MENSAGEM][RJ]","meta",4.75,331,13,1],["2026-07-18","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.76,1853,26,0],["2026-07-18","[GGD][MENSAGEM][RJ]","meta",2.97,236,8,0],["2026-07-19","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",15.58,2408,35,0],["2026-07-19","[GGD][MENSAGEM][RJ]","meta",5.21,343,13,1],["2026-07-20","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.65,2532,45,0],["2026-07-20","[GGD][MENSAGEM][RJ]","meta",6.46,417,12,1],["2026-07-20","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",2.26,176,15,0],["2026-07-21","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.01,2191,61,1],["2026-07-21","[GGD][MENSAGEM][RJ]","meta",8.53,474,14,1],["2026-07-21","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",5.58,469,17,0],["2026-07-22","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.95,1767,37,0],["2026-07-22","[GGD][MENSAGEM][RJ]","meta",8.31,360,12,0],["2026-07-22","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",6.05,450,15,0],["2026-07-23","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.5,1903,60,0],["2026-07-23","[GGD][MENSAGEM][RJ]","meta",4.35,179,7,0],["2026-07-23","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",4.78,372,10,0],["2026-07-24","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",8.99,1848,45,0],["2026-07-24","[GGD][MENSAGEM][RJ]","meta",6.23,254,10,0],["2026-07-24","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",3.49,297,8,0],["2026-07-25","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.32,1616,26,0],["2026-07-25","[GGD][MENSAGEM][RJ]","meta",2.8,179,6,1],["2026-07-25","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",9.33,933,52,0],["2026-07-26","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.27,2327,39,0],["2026-07-26","[GGD][MENSAGEM][RJ]","meta",5.62,244,16,1],["2026-07-26","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",7.49,686,59,0],["2026-07-27","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",17.07,3024,60,0],["2026-07-27","[GGD][MENSAGEM][RJ]","meta",10.03,516,14,0],["2026-07-27","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",4.47,349,25,0],["2026-07-28","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.96,1929,50,0],["2026-07-28","[GGD][MENSAGEM][RJ]","meta",9.19,426,19,1],["2026-07-28","[GGD][CADASTRO][LEAD][CARROSSEL]","meta",4.57,354,19,0],["2026-07-29","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",7.85,2161,57,0],["2026-07-29","[GGD][MENSAGEM][RJ]","meta",6.34,334,9,0],["2026-07-30","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.23,2047,64,0],["2026-07-30","[GGD][MENSAGEM][RJ]","meta",3.99,221,4,1],["2026-07-31","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.05,2595,72,0],["2026-07-31","[GGD][MENSAGEM][RJ]","meta",3.47,218,13,1],["2026-08-01","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.13,2144,51,0],["2026-08-01","[GGD][MENSAGEM][RJ]","meta",3.29,234,6,0],["2026-08-02","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.04,3113,70,0],["2026-08-02","[GGD][MENSAGEM][RJ]","meta",6.05,427,11,1],["2026-08-03","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.73,2796,75,0],["2026-08-03","[GGD][MENSAGEM][RJ]","meta",2.08,119,2,0],["2026-08-03","[GGD][SEGUIDORES][IG][RJ]","meta",7.25,1034,35,0],["2026-08-04","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.28,3061,85,0],["2026-08-04","[GGD][SEGUIDORES][IG][RJ]","meta",11.86,1921,51,0],["2026-08-05","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.88,2272,55,0],["2026-08-05","[GGD][SEGUIDORES][IG][RJ]","meta",6.04,917,20,0],["2026-08-06","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",7.92,2214,44,0],["2026-08-06","[GGD][SEGUIDORES][IG][RJ]","meta",10.77,1193,40,0],["2026-08-07","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.84,2348,45,0],["2026-08-07","[GGD][SEGUIDORES][IG][RJ]","meta",11.05,1104,48,0],["2026-08-08","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.22,2388,52,0],["2026-08-08","[GGD][SEGUIDORES][IG][RJ]","meta",8.81,943,34,0],["2026-08-09","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",15.72,3090,48,0],["2026-08-09","[GGD][SEGUIDORES][IG][RJ]","meta",13.86,1629,54,0],["2026-08-10","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.97,2796,49,0],["2026-08-10","[GGD][SEGUIDORES][IG][RJ]","meta",8.39,908,45,0],["2026-08-11","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.16,2533,45,0],["2026-08-11","[GGD][SEGUIDORES][IG][RJ]","meta",7.68,751,36,0],["2026-08-12","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.69,2556,52,0],["2026-08-12","[GGD][SEGUIDORES][IG][RJ]","meta",12.46,1128,58,0],["2026-08-13","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.69,2404,59,0],["2026-08-13","[GGD][SEGUIDORES][IG][RJ]","meta",9.32,1083,42,0],["2026-08-14","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.49,2046,52,0],["2026-08-14","[GGD][SEGUIDORES][IG][RJ]","meta",9.19,1067,40,0],["2026-08-15","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.56,2178,44,0],["2026-08-15","[GGD][SEGUIDORES][IG][RJ]","meta",8.96,755,44,0],["2026-08-16","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.48,2990,59,0],["2026-08-16","[GGD][SEGUIDORES][IG][RJ]","meta",11.46,1644,53,0],["2026-08-17","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.82,2526,52,0],["2026-08-17","[GGD][SEGUIDORES][IG][RJ]","meta",10.7,1371,50,0],["2026-08-18","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.53,2664,51,0],["2026-08-18","[GGD][SEGUIDORES][IG][RJ]","meta",9.2,1131,42,0],["2026-08-19","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.94,2905,79,0],["2026-08-19","[GGD][SEGUIDORES][IG][RJ]","meta",10.14,1171,43,0],["2026-08-20","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.96,2382,58,0],["2026-08-20","[GGD][SEGUIDORES][IG][RJ]","meta",10.23,1126,38,0],["2026-08-21","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.08,2353,48,1],["2026-08-21","[GGD][SEGUIDORES][IG][RJ]","meta",8.5,989,38,0],["2026-08-22","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.35,1950,24,0],["2026-08-22","[GGD][SEGUIDORES][IG][RJ]","meta",9.72,1325,41,0],["2026-08-23","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.15,2895,65,0],["2026-08-23","[GGD][SEGUIDORES][IG][RJ]","meta",12.27,1737,59,0],["2026-08-24","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",17.06,3217,41,0],["2026-08-24","[GGD][MENSAGEM][RJ]","meta",9.46,438,15,1],["2026-08-24","[GGD][SEGUIDORES][IG][RJ]","meta",6.71,1057,25,0],["2026-08-25","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.76,2509,42,0],["2026-08-25","[GGD][MENSAGEM][RJ]","meta",10.5,538,20,3],["2026-08-25","[GGD][SEGUIDORES][IG][RJ]","meta",11.42,1447,42,0],["2026-08-26","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.3,2378,46,0],["2026-08-26","[GGD][MENSAGEM][RJ]","meta",10,476,15,0],["2026-08-26","[GGD][SEGUIDORES][IG][RJ]","meta",10.07,854,39,0],["2026-08-27","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",8.54,1876,32,0],["2026-08-27","[GGD][MENSAGEM][RJ]","meta",6.98,371,8,1],["2026-08-27","[GGD][SEGUIDORES][IG][RJ]","meta",10.75,928,41,0],["2026-08-28","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.05,2074,40,0],["2026-08-28","[GGD][MENSAGEM][RJ]","meta",2.94,203,10,0],["2026-08-28","[GGD][SEGUIDORES][IG][RJ]","meta",9.85,840,39,0],["2026-08-29","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",8.85,1949,35,0],["2026-08-29","[GGD][MENSAGEM][RJ]","meta",2.12,103,4,1],["2026-08-29","[GGD][SEGUIDORES][IG][RJ]","meta",8.88,873,42,0],["2026-08-30","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.15,3076,47,0],["2026-08-30","[GGD][MENSAGEM][RJ]","meta",3.16,213,13,0],["2026-08-30","[GGD][SEGUIDORES][IG][RJ]","meta",12.94,1782,48,0],["2026-08-31","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",15.51,2799,44,0],["2026-08-31","[GGD][MENSAGEM][RJ]","meta",8.04,519,21,0],["2026-08-31","[GGD][SEGUIDORES][IG][RJ]","meta",10.24,938,48,0],["2026-09-01","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",13.49,3062,53,0],["2026-09-01","[GGD][MENSAGEM][RJ]","meta",10.45,543,15,0],["2026-09-01","[GGD][SEGUIDORES][IG][RJ]","meta",7.67,561,28,0],["2026-09-02","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.54,2615,30,0],["2026-09-02","[GGD][MENSAGEM][RJ]","meta",6.68,175,4,0],["2026-09-02","[GGD][SEGUIDORES][IG][RJ]","meta",12.29,882,40,0],["2026-09-03","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.68,2173,27,0],["2026-09-03","[GGD][MENSAGEM][RJ]","meta",7.2,382,15,0],["2026-09-03","[GGD][SEGUIDORES][IG][RJ]","meta",9.35,825,38,0],["2026-09-04","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.23,2093,42,0],["2026-09-04","[GGD][MENSAGEM][RJ]","meta",4.22,275,13,0],["2026-09-04","[GGD][SEGUIDORES][IG][RJ]","meta",8.33,788,30,0],["2026-09-05","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.27,2502,48,1],["2026-09-05","[GGD][MENSAGEM][RJ]","meta",2.03,154,4,0],["2026-09-05","[GGD][SEGUIDORES][IG][RJ]","meta",8.88,833,37,0],["2026-09-06","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",14.21,3043,51,0],["2026-09-06","[GGD][MENSAGEM][RJ]","meta",4.87,393,14,0],["2026-09-06","[GGD][SEGUIDORES][IG][RJ]","meta",12.36,919,51,0],["2026-09-07","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.42,2640,37,0],["2026-09-07","[GGD][MENSAGEM][RJ]","meta",6.55,537,17,0],["2026-09-07","[GGD][SEGUIDORES][IG][RJ]","meta",10.62,910,46,0],["2026-09-08","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.2,2580,32,0],["2026-09-08","[GGD][MENSAGEM][RJ]","meta",7.59,319,4,0],["2026-09-08","[GGD][SEGUIDORES][IG][RJ]","meta",10.44,832,45,0],["2026-09-09","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.06,2420,37,0],["2026-09-09","[GGD][MENSAGEM][RJ]","meta",8.17,471,12,0],["2026-09-09","[GGD][SEGUIDORES][IG][RJ]","meta",9.31,863,36,0],["2026-09-10","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.35,2146,34,0],["2026-09-10","[GGD][MENSAGEM][RJ]","meta",6.35,298,12,0],["2026-09-10","[GGD][SEGUIDORES][IG][RJ]","meta",9.03,642,34,0],["2026-09-11","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",10.99,1903,33,0],["2026-09-11","[GGD][MENSAGEM][RJ]","meta",3.73,170,6,1],["2026-09-11","[GGD][SEGUIDORES][IG][RJ]","meta",7.22,523,26,0],["2026-09-12","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.75,2363,67,0],["2026-09-13","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",12.92,2607,62,0],["2026-09-14","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",15.39,2924,92,0],["2026-09-15","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",9.73,2007,42,0],["2026-09-16","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",16.13,3249,65,0],["2026-09-17","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",11.14,2562,64,0],["2026-09-18","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",7.41,1971,40,0],["2026-09-19","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",6.17,1615,33,0],["2026-09-20","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",7.65,1920,56,0],["2026-09-21","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",7.03,2252,47,0],["2026-09-21","[GGD][SEGUIDORES][IG][RJ]","meta",8.6,590,25,0],["2026-09-21","[GGD][SEGUIDORES][IG][BR-EX-RJ]","meta",11.21,1114,43,0],["2026-09-22","[GGD][DISTRIBUICAO][VVIEW][RJ]","meta",2.13,721,23,0],["2026-09-22","[GGD][SEGUIDORES][IG][RJ]","meta",4.08,290,8,0],["2026-09-22","[GGD][SEGUIDORES][IG][BR-EX-RJ]","meta",7.24,708,30,0],["2026-06-24","[GGD][LEADS][SEARCH][GLAUCOMA]","google",37.7369,519,51,9],["2026-06-25","[GGD][LEADS][SEARCH][GLAUCOMA]","google",44.1593,3912,43,3],["2026-06-26","[GGD][LEADS][SEARCH][GLAUCOMA]","google",40.9612,3218,52,7],["2026-06-27","[GGD][LEADS][SEARCH][GLAUCOMA]","google",49.0833,3028,55,9],["2026-06-28","[GGD][LEADS][SEARCH][GLAUCOMA]","google",99.8359,1614,66,15],["2026-06-29","[GGD][LEADS][SEARCH][GLAUCOMA]","google",80.8396,740,41,6],["2026-06-30","[GGD][LEADS][SEARCH][GLAUCOMA]","google",46.0744,410,21,3],["2026-07-01","[GGD][LEADS][SEARCH][GLAUCOMA]","google",53.0484,1095,36,8],["2026-07-02","[GGD][LEADS][SEARCH][GLAUCOMA]","google",48.8821,2259,32,8],["2026-07-03","[GGD][LEADS][SEARCH][GLAUCOMA]","google",45.3428,2040,29,4],["2026-07-04","[GGD][LEADS][SEARCH][GLAUCOMA]","google",33.2861,1623,27,5],["2026-07-05","[GGD][LEADS][SEARCH][GLAUCOMA]","google",25.5575,2361,24,3],["2026-07-06","[GGD][LEADS][SEARCH][GLAUCOMA]","google",35.0167,1935,31,4],["2026-07-07","[GGD][LEADS][SEARCH][GLAUCOMA]","google",39.8056,1492,46,6],["2026-07-08","[GGD][LEADS][SEARCH][GLAUCOMA]","google",47.9116,956,46,7],["2026-07-09","[GGD][LEADS][SEARCH][GLAUCOMA]","google",99.9544,1171,69,6],["2026-07-10","[GGD][LEADS][SEARCH][GLAUCOMA]","google",78.7255,2110,51,11],["2026-07-11","[GGD][LEADS][SEARCH][GLAUCOMA]","google",52.4758,1635,43,2],["2026-07-12","[GGD][LEADS][SEARCH][GLAUCOMA]","google",33.7965,1583,37,3],["2026-07-13","[GGD][LEADS][SEARCH][GLAUCOMA]","google",63.7089,1954,63,11],["2026-07-14","[GGD][LEADS][SEARCH][GLAUCOMA]","google",48.4333,1348,51,3],["2026-07-15","[GGD][LEADS][SEARCH][GLAUCOMA]","google",54.2989,2583,43,7],["2026-07-16","[GGD][LEADS][SEARCH][GLAUCOMA]","google",45.9523,4573,38,6],["2026-07-17","[GGD][LEADS][SEARCH][GLAUCOMA]","google",48.6048,3210,41,7],["2026-07-18","[GGD][LEADS][SEARCH][GLAUCOMA]","google",29.892,710,29,3],["2026-07-19","[GGD][LEADS][SEARCH][GLAUCOMA]","google",44.5271,720,46,5],["2026-07-20","[GGD][LEADS][SEARCH][GLAUCOMA]","google",86.4104,913,51,6],["2026-07-21","[GGD][LEADS][SEARCH][GLAUCOMA]","google",51.2479,487,31,3],["2026-07-22","[GGD][LEADS][SEARCH][GLAUCOMA]","google",51.0776,713,48,4],["2026-07-22","[GGD][SEARCH][INSTITUCIONAL]","google",0.34,15,2,2],["2026-07-23","[GGD][LEADS][SEARCH][GLAUCOMA]","google",34.2093,1302,56,2],["2026-07-23","[GGD][SEARCH][INSTITUCIONAL]","google",15.67,47,10,1],["2026-07-24","[GGD][LEADS][SEARCH][GLAUCOMA]","google",44.569,1655,41,5],["2026-07-24","[GGD][SEARCH][INSTITUCIONAL]","google",14.76,28,7,0],["2026-07-25","[GGD][LEADS][SEARCH][GLAUCOMA]","google",30.5717,1349,45,4],["2026-07-25","[GGD][SEARCH][INSTITUCIONAL]","google",3.27,21,4,0],["2026-07-26","[GGD][LEADS][SEARCH][GLAUCOMA]","google",26.4186,702,36,6],["2026-07-26","[GGD][SEARCH][INSTITUCIONAL]","google",13.91,24,6,0],["2026-07-27","[GGD][LEADS][SEARCH][GLAUCOMA]","google",32.9803,6293,52,2],["2026-07-27","[GGD][SEARCH][INSTITUCIONAL]","google",14.16,33,6,3],["2026-07-28","[GGD][LEADS][SEARCH][GLAUCOMA]","google",60.8288,2774,76,12],["2026-07-28","[GGD][SEARCH][INSTITUCIONAL]","google",11.87,36,5,1],["2026-07-29","[GGD][LEADS][SEARCH][GLAUCOMA]","google",86.5286,1676,77,5],["2026-07-29","[GGD][SEARCH][INSTITUCIONAL]","google",8.73,15,6,0],["2026-07-30","[GGD][LEADS][SEARCH][GLAUCOMA]","google",50.5247,2760,40,4],["2026-07-30","[GGD][SEARCH][INSTITUCIONAL]","google",4.21,35,3,0],["2026-07-31","[GGD][LEADS][SEARCH][GLAUCOMA]","google",36.9465,2664,33,4],["2026-07-31","[GGD][SEARCH][INSTITUCIONAL]","google",6.12,18,5,0],["2026-08-01","[GGD][LEADS][SEARCH][GLAUCOMA]","google",25.3153,3100,28,1],["2026-08-01","[GGD][SEARCH][INSTITUCIONAL]","google",4.44,20,4,0],["2026-08-02","[GGD][LEADS][SEARCH][GLAUCOMA]","google",25.23,1811,33,3],["2026-08-02","[GGD][SEARCH][INSTITUCIONAL]","google",5.54,14,3,0],["2026-08-03","[GGD][LEADS][SEARCH][GLAUCOMA]","google",5.0041,468,13,1],["2026-08-03","[GGD][SEARCH][INSTITUCIONAL]","google",16.17,34,7,1],["2026-08-04","[GGD][LEADS][SEARCH][GLAUCOMA]","google",13.5594,290,16,2],["2026-08-04","[GGD][SEARCH][INSTITUCIONAL]","google",11.013,38,6,0],["2026-08-05","[GGD][LEADS][SEARCH][GLAUCOMA]","google",83.1963,848,61,10],["2026-08-05","[GGD][SEARCH][INSTITUCIONAL]","google",16.18,42,7,3],["2026-08-06","[GGD][LEADS][SEARCH][GLAUCOMA]","google",106.8166,482,79,9],["2026-08-06","[GGD][SEARCH][INSTITUCIONAL]","google",10.12,31,5,0],["2026-08-07","[GGD][LEADS][SEARCH][GLAUCOMA]","google",69.0868,479,63,2],["2026-08-07","[GGD][SEARCH][INSTITUCIONAL]","google",9.48,41,4,0],["2026-08-08","[GGD][LEADS][SEARCH][GLAUCOMA]","google",81.4599,627,58,4],["2026-08-08","[GGD][SEARCH][INSTITUCIONAL]","google",0.35,16,1,0],["2026-08-09","[GGD][LEADS][SEARCH][GLAUCOMA]","google",88.4885,354,48,4],["2026-08-09","[GGD][SEARCH][INSTITUCIONAL]","google",7.12,14,3,0],["2026-08-10","[GGD][LEADS][SEARCH][GLAUCOMA]","google",75.6522,415,38,5],["2026-08-10","[GGD][SEARCH][INSTITUCIONAL]","google",9.42,35,5,2],["2026-08-11","[GGD][LEADS][SEARCH][GLAUCOMA]","google",58.9761,359,33,4],["2026-08-11","[GGD][SEARCH][INSTITUCIONAL]","google",5.5,37,5,0],["2026-08-12","[GGD][LEADS][SEARCH][GLAUCOMA]","google",56.8373,434,35,4],["2026-08-12","[GGD][SEARCH][INSTITUCIONAL]","google",5.08,34,3,0],["2026-08-13","[GGD][LEADS][SEARCH][GLAUCOMA]","google",52.5717,410,27,3],["2026-08-13","[GGD][SEARCH][INSTITUCIONAL]","google",16.2,41,10,0],["2026-08-14","[GGD][LEADS][SEARCH][GLAUCOMA]","google",42.8523,315,22,4],["2026-08-14","[GGD][SEARCH][INSTITUCIONAL]","google",10.33,21,6,4],["2026-08-15","[GGD][LEADS][SEARCH][GLAUCOMA]","google",6.46,204,5,0],["2026-08-16","[GGD][LEADS][SEARCH][GLAUCOMA]","google",17.0943,312,11,0],["2026-08-16","[GGD][SEARCH][INSTITUCIONAL]","google",3.44,11,2,0],["2026-08-17","[GGD][LEADS][SEARCH][GLAUCOMA]","google",61.4392,456,29,4]],"nomes":{"[GGD][DISTRIBUICAO][VVIEW][RJ]":"[GGD][DISTRIBUICAO][VVIEW][RJ]","[GGD][MENSAGEM][RJ]":"[GGD][MENSAGEM][RJ]","[GGD][CADASTRO][LEAD][CARROSSEL]":"[GGD][CADASTRO][LEAD][CARROSSEL]","[GGD][SEGUIDORES][IG][RJ]":"[GGD][SEGUIDORES][IG][RJ]","[GGD][SEGUIDORES][IG][BR-EX-RJ]":"[GGD][SEGUIDORES][IG][BR-EX-RJ]","[GGD][LEADS][SEARCH][GLAUCOMA]":"[GGD][LEADS][SEARCH][GLAUCOMA]","[GGD][SEARCH][INSTITUCIONAL]":"[GGD][SEARCH][INSTITUCIONAL]"},"sub":{},"status":{},"links":{}}]};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        if (li && m.conv) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
 </script>
 </body>
 </html>

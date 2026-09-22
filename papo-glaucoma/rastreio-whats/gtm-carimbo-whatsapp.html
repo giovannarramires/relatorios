@@ -1,0 +1,88 @@
+<!-- ============================================================
+     GGD — Carimbo de origem nos botões de WhatsApp
+     Cliente: Instituto Vasques de Glaucoma (Papo Glaucoma / Sol)
+     Onde entra: GTM do site (hoje GTM-NRPLW5RK, institutovasques.com.br)
+     Tipo de tag: HTML Personalizado · Gatilho: All Pages (Inicialização)
+     O que faz:
+       1. guarda a origem da PRIMEIRA visita por 30 dias (gclid, fbclid, utm, referrer)
+       2. quando a pessoa clica em qualquer botão de WhatsApp, acrescenta
+          "(via ...)" no fim da mensagem pré-preenchida — a recepção lê a origem
+          já na primeira mensagem
+       3. manda o evento whatsapp_click pro dataLayer (vira conversão no GA4/Ads/Meta)
+     Escrito em 21/09/2026.
+     ============================================================ -->
+<script>
+(function () {
+  var CHAVE = 'ggd_origem', DIAS = 30;
+
+  function ler() {
+    try { var o = JSON.parse(localStorage.getItem(CHAVE) || 'null');
+          return (o && o.ate > Date.now()) ? o : null; } catch (e) { return null; }
+  }
+  function gravar(o) {
+    try { o.ate = Date.now() + DIAS * 864e5; localStorage.setItem(CHAVE, JSON.stringify(o)); } catch (e) {}
+  }
+
+  // --- 1. descobre a origem desta visita -------------------------------
+  function detectar() {
+    var q = new URLSearchParams(location.search);
+    var ref = document.referrer || '';
+    var o = {
+      gclid: q.get('gclid') || q.get('wbraid') || q.get('gbraid') || '',
+      fbclid: q.get('fbclid') || '',
+      source: q.get('utm_source') || '',
+      medium: q.get('utm_medium') || '',
+      campanha: q.get('utm_campaign') || '',
+      criativo: q.get('utm_content') || q.get('utm_term') || ''
+    };
+    if (o.gclid) { o.canal = 'Google Ads'; }
+    else if (o.fbclid) { o.canal = 'anúncio Meta'; }
+    else if (o.source) { o.canal = o.source + (o.medium ? '/' + o.medium : ''); }
+    else if (/google\./i.test(ref)) { o.canal = 'busca do Google'; }
+    else if (/instagram\./i.test(ref)) { o.canal = 'Instagram'; }
+    else if (/facebook\./i.test(ref)) { o.canal = 'Facebook'; }
+    else if (/youtube\./i.test(ref)) { o.canal = 'YouTube'; }
+    else if (ref && ref.indexOf(location.hostname) === -1) { o.canal = 'site: ' + ref.split('/')[2]; }
+    else { o.canal = 'direto'; }
+    return o;
+  }
+
+  var atual = detectar();
+  var salva = ler();
+  // só sobrescreve se a visita de agora trouxer origem de verdade (não "direto")
+  if (!salva || atual.canal !== 'direto') { gravar(atual); salva = ler() || atual; }
+  var org = salva || atual;
+
+  // --- 2. monta o carimbo legível --------------------------------------
+  function carimbo() {
+    var p = org.canal;
+    if (org.campanha) { p += ' · ' + org.campanha; }
+    return ' (via ' + p + ')';
+  }
+
+  // --- 3. reescreve o link no momento do clique (funciona em SPA) -------
+  document.addEventListener('click', function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"]') : null;
+    if (!a) return;
+    try {
+      var u = new URL(a.href);
+      var t = u.searchParams.get('text') || 'Olá! Gostaria de agendar uma consulta.';
+      if (t.indexOf('(via ') === -1) {
+        u.searchParams.set('text', t + carimbo());
+        // remonta a query com %20 no lugar de "+" — o WhatsApp mostra o "+" literal
+        var qs = [];
+        u.searchParams.forEach(function (val, k) { qs.push(k + '=' + encodeURIComponent(val)); });
+        a.href = u.origin + u.pathname + '?' + qs.join('&');
+      }
+      (window.dataLayer = window.dataLayer || []).push({
+        event: 'whatsapp_click',
+        wa_canal: org.canal,
+        wa_campanha: org.campanha || '',
+        wa_criativo: org.criativo || '',
+        wa_gclid: org.gclid || '',
+        wa_pagina: location.pathname
+      });
+    } catch (e) {}
+  }, true);
+})();
+</script>
