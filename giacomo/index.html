@@ -131,6 +131,105 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
 @media(max-width:620px){.container{padding:16px 16px 34px}.header{padding:0 18px}
 .kpi-grid{grid-template-columns:1fr}.st-row{grid-template-columns:1fr auto;gap:6px}
 .st-tipo{grid-column:1/-1}.st-meta{grid-column:1/-1}}
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
 </style></head><body>
 <div class="brandstrip">GIO <span>GROWTH</span> DIGITAL</div>
 <div class="header">
@@ -148,13 +247,13 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
 <div class="hero">
   <div class="hero-label">Investimento <span>— o que saiu do caixa no período</span></div>
   <div class="hero-row">
-    <div class="hero-box"><div class="hb-l">Mídia</div><div class="hb-v">R$ 926,27</div>
+    <div class="hero-box"><div class="hb-l">Mídia</div><div class="hb-v">R$ 965,68</div>
       <div class="hb-s">o que foi para o leilão do Meta</div></div>
     <div class="hero-op">+</div>
-    <div class="hero-box"><div class="hb-l">Imposto (13,83%)</div><div class="hb-v">R$ 128,10</div>
+    <div class="hero-box"><div class="hb-l">Imposto (13,83%)</div><div class="hb-v">R$ 133,55</div>
       <div class="hb-s">ISS + IOF sobre a mídia</div></div>
     <div class="hero-op">=</div>
-    <div class="hero-box total"><div class="hb-l">Total pago</div><div class="hb-v">R$ 1.054,37</div>
+    <div class="hero-box total"><div class="hb-l">Total pago</div><div class="hb-v">R$ 1.099,23</div>
       <div class="hb-s">22 dia(s) com entrega</div></div>
   </div>
 </div>
@@ -164,18 +263,18 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
   <span class="section-hint">campanha de reconhecimento se mede por <b>quanta gente nova viu</b>, e por quanto custou cada mil</span></div>
 <div class="kpi-grid">
   <div class="kpi destaque"><div class="kpi-l">Pessoas alcançadas</div>
-    <div class="kpi-v">39.407</div>
+    <div class="kpi-v">40.018</div>
     <div class="kpi-s">pessoas diferentes que viram o Dr. pelo menos uma vez</div></div>
   <div class="kpi"><div class="kpi-l">Impressões</div>
-    <div class="kpi-v">135.715</div>
+    <div class="kpi-v">139.544</div>
     <div class="kpi-s">quantas vezes o anúncio apareceu na tela</div></div>
   <div class="kpi"><div class="kpi-l">Frequência</div>
-    <div class="kpi-v">3,44×
+    <div class="kpi-v">3,49×
       <span class="pill bad" style="font-size:10px;vertical-align:middle;margin-left:6px">Saturado</span></div>
     <div class="kpi-s">trocar criativo ou ampliar o público</div></div>
   <div class="kpi"><div class="kpi-l">Custo por mil alcançadas</div>
-    <div class="kpi-v">R$ 23,51</div>
-    <div class="kpi-s">CPM (por mil impressões): R$ 6,83</div></div>
+    <div class="kpi-v">R$ 24,13</div>
+    <div class="kpi-s">CPM (por mil impressões): R$ 6,92</div></div>
 </div>
 
 <div class="section-header"><span class="section-tag"></span>
@@ -191,12 +290,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 22s</div>
             <div class="cri-nums">
-              <div><span>2.066</span>pessoas alcançadas</div>
-              <div><span>2.509</span>viram 3s</div>
-              <div><span>65</span>ThruPlay</div>
-              <div><span>1,8%</span>foram até o fim</div>
-              <div><span>R$ 31,17</span>investido</div>
-              <div><span>R$ 11,94</span>CPM</div>
+              <div><span>2.289</span>pessoas alcançadas</div>
+              <div><span>2.846</span>viram 3s</div>
+              <div><span>71</span>ThruPlay</div>
+              <div><span>1,7%</span>foram até o fim</div>
+              <div><span>R$ 35,08</span>investido</div>
+              <div><span>R$ 11,82</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdbaJovsQ6K/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_122234621816303516" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251139546340737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -209,12 +308,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 77s</div>
             <div class="cri-nums">
-              <div><span>404</span>pessoas alcançadas</div>
-              <div><span>879</span>viram 3s</div>
-              <div><span>40</span>ThruPlay</div>
-              <div><span>0,9%</span>foram até o fim</div>
-              <div><span>R$ 34,80</span>investido</div>
-              <div><span>R$ 37,46</span>CPM</div>
+              <div><span>480</span>pessoas alcançadas</div>
+              <div><span>1.108</span>viram 3s</div>
+              <div><span>49</span>ThruPlay</div>
+              <div><span>0,8%</span>foram até o fim</div>
+              <div><span>R$ 43,47</span>investido</div>
+              <div><span>R$ 36,96</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdCqXHdsZ4P/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_4611680135728755" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251139918540737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -227,12 +326,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 69s</div>
             <div class="cri-nums">
-              <div><span>1.232</span>pessoas alcançadas</div>
-              <div><span>1.520</span>viram 3s</div>
-              <div><span>76</span>ThruPlay</div>
-              <div><span>0,6%</span>foram até o fim</div>
-              <div><span>R$ 52,27</span>investido</div>
-              <div><span>R$ 33,48</span>CPM</div>
+              <div><span>1.335</span>pessoas alcançadas</div>
+              <div><span>1.657</span>viram 3s</div>
+              <div><span>83</span>ThruPlay</div>
+              <div><span>0,5%</span>foram até o fim</div>
+              <div><span>R$ 57,46</span>investido</div>
+              <div><span>R$ 33,88</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/Ddbah3sMA0E/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_122234622128303516" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251139570220737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -245,12 +344,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 58s</div>
             <div class="cri-nums">
-              <div><span>1.784</span>pessoas alcançadas</div>
-              <div><span>2.034</span>viram 3s</div>
-              <div><span>90</span>ThruPlay</div>
+              <div><span>1.966</span>pessoas alcançadas</div>
+              <div><span>2.315</span>viram 3s</div>
+              <div><span>100</span>ThruPlay</div>
               <div><span>1,1%</span>foram até o fim</div>
-              <div><span>R$ 32,60</span>investido</div>
-              <div><span>R$ 15,54</span>CPM</div>
+              <div><span>R$ 35,76</span>investido</div>
+              <div><span>R$ 14,91</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdbaZlSsXVh/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_122234622008303516" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251139560250737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -263,12 +362,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 51s</div>
             <div class="cri-nums">
-              <div><span>1.896</span>pessoas alcançadas</div>
-              <div><span>2.265</span>viram 3s</div>
-              <div><span>196</span>ThruPlay</div>
-              <div><span>1,3%</span>foram até o fim</div>
-              <div><span>R$ 31,49</span>investido</div>
-              <div><span>R$ 13,63</span>CPM</div>
+              <div><span>2.098</span>pessoas alcançadas</div>
+              <div><span>2.538</span>viram 3s</div>
+              <div><span>211</span>ThruPlay</div>
+              <div><span>1,2%</span>foram até o fim</div>
+              <div><span>R$ 34,74</span>investido</div>
+              <div><span>R$ 13,36</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdbaSPDMn8s/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_122234621888303516" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251139552440737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -281,12 +380,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 99s</div>
             <div class="cri-nums">
-              <div><span>2.978</span>pessoas alcançadas</div>
-              <div><span>3.685</span>viram 3s</div>
-              <div><span>381</span>ThruPlay</div>
-              <div><span>2,4%</span>foram até o fim</div>
-              <div><span>R$ 70,26</span>investido</div>
-              <div><span>R$ 18,30</span>CPM</div>
+              <div><span>3.092</span>pessoas alcançadas</div>
+              <div><span>3.849</span>viram 3s</div>
+              <div><span>388</span>ThruPlay</div>
+              <div><span>2,3%</span>foram até o fim</div>
+              <div><span>R$ 72,90</span>investido</div>
+              <div><span>R$ 18,14</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_2030509224267491" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120251063728330737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -335,12 +434,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 104s</div>
             <div class="cri-nums">
-              <div><span>5.628</span>pessoas alcançadas</div>
-              <div><span>7.876</span>viram 3s</div>
-              <div><span>354</span>ThruPlay</div>
+              <div><span>5.755</span>pessoas alcançadas</div>
+              <div><span>8.143</span>viram 3s</div>
+              <div><span>367</span>ThruPlay</div>
               <div><span>0,7%</span>foram até o fim</div>
-              <div><span>R$ 127,69</span>investido</div>
-              <div><span>R$ 15,76</span>CPM</div>
+              <div><span>R$ 131,34</span>investido</div>
+              <div><span>R$ 15,68</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdCpramsPzq/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_1693031591758105" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120250983544670737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -353,12 +452,12 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 49s</div>
             <div class="cri-nums">
-              <div><span>6.871</span>pessoas alcançadas</div>
-              <div><span>10.212</span>viram 3s</div>
-              <div><span>528</span>ThruPlay</div>
+              <div><span>7.095</span>pessoas alcançadas</div>
+              <div><span>10.669</span>viram 3s</div>
+              <div><span>548</span>ThruPlay</div>
               <div><span>1,1%</span>foram até o fim</div>
-              <div><span>R$ 155,73</span>investido</div>
-              <div><span>R$ 14,72</span>CPM</div>
+              <div><span>R$ 161,34</span>investido</div>
+              <div><span>R$ 14,60</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DdCp-LnMd_E/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_1592957545571539" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120250983552920737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
           </div></div>
@@ -371,11 +470,11 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
             </div>
             <div class="cri-sub">VIDEO · 112s</div>
             <div class="cri-nums">
-              <div><span>22.920</span>pessoas alcançadas</div>
-              <div><span>63.533</span>viram 3s</div>
-              <div><span>972</span>ThruPlay</div>
+              <div><span>23.243</span>pessoas alcançadas</div>
+              <div><span>64.990</span>viram 3s</div>
+              <div><span>987</span>ThruPlay</div>
               <div><span>0,2%</span>foram até o fim</div>
-              <div><span>R$ 157,62</span>investido</div>
+              <div><span>R$ 160,95</span>investido</div>
               <div><span>R$ 2,32</span>CPM</div>
             </div>
             <div class="cri-links"><a href="https://www.instagram.com/p/DccNQG4s6YO/" target="_blank" rel="noopener">Instagram ↗</a> · <a href="https://www.facebook.com/330060483516792_1729573374783066" target="_blank" rel="noopener">Facebook ↗</a> · <a href="https://adsmanager.facebook.com/adsmanager/manage/ads?act=595009265656090&selected_ad_ids=120250881353740737" target="_blank" rel="noopener">Gerenciador ↗</a></div>
@@ -404,25 +503,25 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
     <div class="ret-linha">
           <span class="ret-rot">3s</span>
           <div class="ret-trilho"><div class="ret-barra" style="width:100.0%"></div></div>
-          <span class="ret-val">128.392<em>100%</em></span></div>
+          <span class="ret-val">131.994<em>100%</em></span></div>
 <div class="ret-linha">
           <span class="ret-rot">25%</span>
-          <div class="ret-trilho"><div class="ret-barra" style="width:2.2%"></div></div>
-          <span class="ret-val">2.868<em>2%</em></span></div>
+          <div class="ret-trilho"><div class="ret-barra" style="width:2.3%"></div></div>
+          <span class="ret-val">2.973<em>2%</em></span></div>
 <div class="ret-linha">
           <span class="ret-rot">50%</span>
           <div class="ret-trilho"><div class="ret-barra" style="width:1.2%"></div></div>
-          <span class="ret-val">1.468<em>1%</em></span></div>
+          <span class="ret-val">1.515<em>1%</em></span></div>
 <div class="ret-linha">
           <span class="ret-rot">75%</span>
           <div class="ret-trilho"><div class="ret-barra" style="width:1.2%"></div></div>
-          <span class="ret-val">933<em>1%</em></span></div>
+          <span class="ret-val">955<em>1%</em></span></div>
 <div class="ret-linha">
           <span class="ret-rot">100%</span>
           <div class="ret-trilho"><div class="ret-barra" style="width:1.2%"></div></div>
-          <span class="ret-val">631<em>0%</em></span></div>
+          <span class="ret-val">645<em>0%</em></span></div>
     <div class="mini" style="margin-top:18px">
-      <div><b>3.179</b><span>ThruPlay (15s ou até o fim)</span></div>
+      <div><b>3.281</b><span>ThruPlay (15s ou até o fim)</span></div>
       <div><b>2,0s</b><span>tempo médio assistido</span></div>
       <div><b>R$ 0,29</b><span>custo por ThruPlay</span></div>
       <div><b>94,6%</b><span>das impressões viraram 3s de vídeo</span></div>
@@ -435,35 +534,35 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
   <span class="section-hint">topo de funil não vende — mas deixa rastro: <b>engajamento, perfil e conversa</b></span></div>
 <div class="kpi-grid">
   <div class="kpi"><div class="kpi-l">Engajamento com o post</div>
-    <div class="kpi-v">179</div>
-    <div class="kpi-s">165 reações · 2 comentários ·
-      4 compart. · 8 salvos</div></div>
+    <div class="kpi-v">188</div>
+    <div class="kpi-s">173 reações · 2 comentários ·
+      5 compart. · 8 salvos</div></div>
   <div class="kpi"><div class="kpi-l">Visitas ao perfil</div>
-    <div class="kpi-v">637</div>
+    <div class="kpi-v">665</div>
     <div class="kpi-s">gente que foi conhecer o @drgiacomogtrojan</div></div>
   <div class="kpi"><div class="kpi-l">Cliques / CTR</div>
-    <div class="kpi-v">1.220</div>
+    <div class="kpi-v">1.257</div>
     <div class="kpi-s">CTR 0,9% ·
-      754 no link</div></div>
+      784 no link</div></div>
   <div class="kpi destaque"><div class="kpi-l">Conversas iniciadas</div>
     <div class="kpi-v">5</div>
-    <div class="kpi-s">custo por conversa R$ 38,17 (só a frente de mensagem)</div></div>
+    <div class="kpi-s">custo por conversa R$ 40,94 (só a frente de mensagem)</div></div>
 </div>
 
 <div class="section-header"><span class="section-tag"></span>
   <span class="section-title">Quem já conhece o Dr. em Balneário</span>
   <span class="section-hint">a base que as visitas ao perfil estão <b>construindo</b> para o próximo passo</span></div>
 <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr)"><div class="kpi"><div class="kpi-l">Mulheres 38–64 em Balneário</div>
-          <div class="kpi-v" style="font-size:22px">1.900–2.200
-            <span class="pill wait" style="font-size:10px;vertical-align:middle;margin-left:6px">Saiu do piso</span></div>
+          <div class="kpi-v" style="font-size:22px">2.000–2.400
+            <span class="pill ok" style="font-size:10px;vertical-align:middle;margin-left:6px">Pronto</span></div>
           <div class="kpi-s">o público exato das campanhas</div></div><div class="kpi"><div class="kpi-l">Todo mundo em Balneário</div>
-          <div class="kpi-v" style="font-size:22px">3.400–3.900
+          <div class="kpi-v" style="font-size:22px">2.900–3.400
             <span class="pill ok" style="font-size:10px;vertical-align:middle;margin-left:6px">Pronto</span></div>
           <div class="kpi-s">mesma base, sem filtro de idade nem gênero</div></div></div>
       <div class="card" style="margin-top:16px"><h3>Evolução</h3>
       <div class="cap">gente de Balneário que visitou o perfil, interagiu, engajou com anúncio ou viu metade de um vídeo (90 dias).
       O Meta só entrega a partir de 1.000 pessoas; com 2.000 o remarketing roda sem travar.</div>
-      <div class="mini"><div><b>1.900–2.200</b><span>22/09 · sem filtro: 3.400–3.900</span></div><div><b>1.700–2.000</b><span>21/09 · sem filtro: 3.000–3.500</span></div><div><b>1.400–1.700</b><span>20/09 · sem filtro: 2.700–3.100</span></div><div><b>1.800–2.100</b><span>19/09 · sem filtro: 2.600–3.000</span></div></div></div>
+      <div class="mini"><div><b>2.000–2.400</b><span>22/09 · sem filtro: 2.900–3.400</span></div></div></div>
 
 <div class="section-header"><span class="section-tag"></span>
   <span class="section-title">Dia a dia</span>
@@ -472,7 +571,7 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
       <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#2f6f8f"/><stop offset="100%" stop-color="#123c5a"/>
       </linearGradient></defs>
-      <rect x="51.0" y="149.4" width="31.9" height="76.6" rx="4" fill="url(#g)"/><text x="66.9" y="143.4" class="gv">2.448</text><rect x="100.8" y="50.8" width="31.9" height="175.2" rx="4" fill="url(#g)"/><text x="116.7" y="44.8" class="gv">5.596</text><rect x="150.6" y="50.6" width="31.9" height="175.4" rx="4" fill="url(#g)"/><text x="166.5" y="44.6" class="gv">5.603</text><rect x="200.4" y="70.3" width="31.9" height="155.7" rx="4" fill="url(#g)"/><text x="216.4" y="64.3" class="gv">4.975</text><rect x="250.2" y="81.2" width="31.9" height="144.8" rx="4" fill="url(#g)"/><text x="266.2" y="75.2" class="gv">4.625</text><rect x="300.1" y="41.8" width="31.9" height="184.2" rx="4" fill="url(#g)"/><text x="316.0" y="35.8" class="gv">5.886</text><rect x="349.9" y="37.8" width="31.9" height="188.2" rx="4" fill="url(#g)"/><text x="365.8" y="31.8" class="gv">6.012</text><rect x="399.7" y="70.1" width="31.9" height="155.9" rx="4" fill="url(#g)"/><text x="415.6" y="64.1" class="gv">4.981</text><rect x="449.5" y="96.0" width="31.9" height="130.0" rx="4" fill="url(#g)"/><text x="465.5" y="90.0" class="gv">4.154</text><rect x="499.3" y="88.6" width="31.9" height="137.4" rx="4" fill="url(#g)"/><text x="515.3" y="82.6" class="gv">4.391</text><rect x="549.1" y="87.8" width="31.9" height="138.2" rx="4" fill="url(#g)"/><text x="565.1" y="81.8" class="gv">4.414</text><rect x="599.0" y="94.4" width="31.9" height="131.6" rx="4" fill="url(#g)"/><text x="614.9" y="88.4" class="gv">4.203</text><rect x="648.8" y="39.7" width="31.9" height="186.3" rx="4" fill="url(#g)"/><text x="664.7" y="33.7" class="gv">5.953</text><rect x="698.6" y="69.7" width="31.9" height="156.3" rx="4" fill="url(#g)"/><text x="714.5" y="63.7" class="gv">4.994</text><rect x="748.4" y="80.9" width="31.9" height="145.1" rx="4" fill="url(#g)"/><text x="764.4" y="74.9" class="gv">4.635</text><rect x="798.2" y="97.9" width="31.9" height="128.1" rx="4" fill="url(#g)"/><text x="814.2" y="91.9" class="gv">4.094</text><rect x="848.1" y="80.3" width="31.9" height="145.7" rx="4" fill="url(#g)"/><text x="864.0" y="74.3" class="gv">4.655</text><rect x="897.9" y="36.7" width="31.9" height="189.3" rx="4" fill="url(#g)"/><text x="913.8" y="30.7" class="gv">6.049</text><rect x="947.7" y="36.0" width="31.9" height="190.0" rx="4" fill="url(#g)"/><text x="963.6" y="30.0" class="gv">6.070</text><rect x="997.5" y="109.5" width="31.9" height="116.5" rx="4" fill="url(#g)"/><text x="1013.5" y="103.5" class="gv">3.723</text><rect x="1047.3" y="51.4" width="31.9" height="174.6" rx="4" fill="url(#g)"/><text x="1063.3" y="45.4" class="gv">5.579</text><rect x="1097.1" y="177.8" width="31.9" height="48.2" rx="4" fill="url(#g)"/><text x="1113.1" y="171.8" class="gv">1.541</text><polyline points="66.9,46.4 116.7,36.1 166.5,36.2 216.4,37.5 266.2,37.7 316.0,36.9 365.8,36.0 415.6,38.8 465.5,40.1 515.3,42.1 565.1,43.7 614.9,45.7 664.7,47.3 714.5,48.6 764.4,49.5 814.2,50.3 864.0,51.1 913.8,51.7 963.6,52.1 1013.5,52.6 1063.3,53.0 1113.1,53.3" fill="none" stroke="#d4a24c" stroke-width="2.5" stroke-linecap="round"/><circle cx="66.9" cy="46.4" r="3.5" fill="#d4a24c"/><circle cx="116.7" cy="36.1" r="3.5" fill="#d4a24c"/><circle cx="166.5" cy="36.2" r="3.5" fill="#d4a24c"/><circle cx="216.4" cy="37.5" r="3.5" fill="#d4a24c"/><circle cx="266.2" cy="37.7" r="3.5" fill="#d4a24c"/><circle cx="316.0" cy="36.9" r="3.5" fill="#d4a24c"/><circle cx="365.8" cy="36.0" r="3.5" fill="#d4a24c"/><circle cx="415.6" cy="38.8" r="3.5" fill="#d4a24c"/><circle cx="465.5" cy="40.1" r="3.5" fill="#d4a24c"/><circle cx="515.3" cy="42.1" r="3.5" fill="#d4a24c"/><circle cx="565.1" cy="43.7" r="3.5" fill="#d4a24c"/><circle cx="614.9" cy="45.7" r="3.5" fill="#d4a24c"/><circle cx="664.7" cy="47.3" r="3.5" fill="#d4a24c"/><circle cx="714.5" cy="48.6" r="3.5" fill="#d4a24c"/><circle cx="764.4" cy="49.5" r="3.5" fill="#d4a24c"/><circle cx="814.2" cy="50.3" r="3.5" fill="#d4a24c"/><circle cx="864.0" cy="51.1" r="3.5" fill="#d4a24c"/><circle cx="913.8" cy="51.7" r="3.5" fill="#d4a24c"/><circle cx="963.6" cy="52.1" r="3.5" fill="#d4a24c"/><circle cx="1013.5" cy="52.6" r="3.5" fill="#d4a24c"/><circle cx="1063.3" cy="53.0" r="3.5" fill="#d4a24c"/><circle cx="1113.1" cy="53.3" r="3.5" fill="#d4a24c"/><text x="66.9" y="246" class="gx">01/09</text><text x="116.7" y="246" class="gx">02/09</text><text x="166.5" y="246" class="gx">03/09</text><text x="216.4" y="246" class="gx">04/09</text><text x="266.2" y="246" class="gx">05/09</text><text x="316.0" y="246" class="gx">06/09</text><text x="365.8" y="246" class="gx">07/09</text><text x="415.6" y="246" class="gx">08/09</text><text x="465.5" y="246" class="gx">09/09</text><text x="515.3" y="246" class="gx">10/09</text><text x="565.1" y="246" class="gx">11/09</text><text x="614.9" y="246" class="gx">12/09</text><text x="664.7" y="246" class="gx">13/09</text><text x="714.5" y="246" class="gx">14/09</text><text x="764.4" y="246" class="gx">15/09</text><text x="814.2" y="246" class="gx">16/09</text><text x="864.0" y="246" class="gx">17/09</text><text x="913.8" y="246" class="gx">18/09</text><text x="963.6" y="246" class="gx">19/09</text><text x="1013.5" y="246" class="gx">20/09</text><text x="1063.3" y="246" class="gx">21/09</text><text x="1113.1" y="246" class="gx">22/09</text></svg>
+      <rect x="51.0" y="149.4" width="31.9" height="76.6" rx="4" fill="url(#g)"/><text x="66.9" y="143.4" class="gv">2.448</text><rect x="100.8" y="50.8" width="31.9" height="175.2" rx="4" fill="url(#g)"/><text x="116.7" y="44.8" class="gv">5.596</text><rect x="150.6" y="50.6" width="31.9" height="175.4" rx="4" fill="url(#g)"/><text x="166.5" y="44.6" class="gv">5.603</text><rect x="200.4" y="70.3" width="31.9" height="155.7" rx="4" fill="url(#g)"/><text x="216.4" y="64.3" class="gv">4.975</text><rect x="250.2" y="81.2" width="31.9" height="144.8" rx="4" fill="url(#g)"/><text x="266.2" y="75.2" class="gv">4.625</text><rect x="300.1" y="41.8" width="31.9" height="184.2" rx="4" fill="url(#g)"/><text x="316.0" y="35.8" class="gv">5.886</text><rect x="349.9" y="37.8" width="31.9" height="188.2" rx="4" fill="url(#g)"/><text x="365.8" y="31.8" class="gv">6.012</text><rect x="399.7" y="70.1" width="31.9" height="155.9" rx="4" fill="url(#g)"/><text x="415.6" y="64.1" class="gv">4.981</text><rect x="449.5" y="96.0" width="31.9" height="130.0" rx="4" fill="url(#g)"/><text x="465.5" y="90.0" class="gv">4.154</text><rect x="499.3" y="88.6" width="31.9" height="137.4" rx="4" fill="url(#g)"/><text x="515.3" y="82.6" class="gv">4.391</text><rect x="549.1" y="87.8" width="31.9" height="138.2" rx="4" fill="url(#g)"/><text x="565.1" y="81.8" class="gv">4.414</text><rect x="599.0" y="94.4" width="31.9" height="131.6" rx="4" fill="url(#g)"/><text x="614.9" y="88.4" class="gv">4.203</text><rect x="648.8" y="39.7" width="31.9" height="186.3" rx="4" fill="url(#g)"/><text x="664.7" y="33.7" class="gv">5.953</text><rect x="698.6" y="69.7" width="31.9" height="156.3" rx="4" fill="url(#g)"/><text x="714.5" y="63.7" class="gv">4.994</text><rect x="748.4" y="80.9" width="31.9" height="145.1" rx="4" fill="url(#g)"/><text x="764.4" y="74.9" class="gv">4.635</text><rect x="798.2" y="97.9" width="31.9" height="128.1" rx="4" fill="url(#g)"/><text x="814.2" y="91.9" class="gv">4.094</text><rect x="848.1" y="80.3" width="31.9" height="145.7" rx="4" fill="url(#g)"/><text x="864.0" y="74.3" class="gv">4.655</text><rect x="897.9" y="36.7" width="31.9" height="189.3" rx="4" fill="url(#g)"/><text x="913.8" y="30.7" class="gv">6.049</text><rect x="947.7" y="36.0" width="31.9" height="190.0" rx="4" fill="url(#g)"/><text x="963.6" y="30.0" class="gv">6.070</text><rect x="997.5" y="109.5" width="31.9" height="116.5" rx="4" fill="url(#g)"/><text x="1013.5" y="103.5" class="gv">3.723</text><rect x="1047.3" y="50.9" width="31.9" height="175.1" rx="4" fill="url(#g)"/><text x="1063.3" y="44.9" class="gv">5.594</text><rect x="1097.1" y="85.5" width="31.9" height="140.5" rx="4" fill="url(#g)"/><text x="1113.1" y="79.5" class="gv">4.488</text><polyline points="66.9,46.4 116.7,36.1 166.5,36.2 216.4,37.5 266.2,37.7 316.0,36.9 365.8,36.0 415.6,38.8 465.5,40.1 515.3,42.1 565.1,43.7 614.9,45.7 664.7,47.3 714.5,48.6 764.4,49.5 814.2,50.3 864.0,51.1 913.8,51.7 963.6,52.1 1013.5,52.6 1063.3,53.0 1113.1,53.3" fill="none" stroke="#d4a24c" stroke-width="2.5" stroke-linecap="round"/><circle cx="66.9" cy="46.4" r="3.5" fill="#d4a24c"/><circle cx="116.7" cy="36.1" r="3.5" fill="#d4a24c"/><circle cx="166.5" cy="36.2" r="3.5" fill="#d4a24c"/><circle cx="216.4" cy="37.5" r="3.5" fill="#d4a24c"/><circle cx="266.2" cy="37.7" r="3.5" fill="#d4a24c"/><circle cx="316.0" cy="36.9" r="3.5" fill="#d4a24c"/><circle cx="365.8" cy="36.0" r="3.5" fill="#d4a24c"/><circle cx="415.6" cy="38.8" r="3.5" fill="#d4a24c"/><circle cx="465.5" cy="40.1" r="3.5" fill="#d4a24c"/><circle cx="515.3" cy="42.1" r="3.5" fill="#d4a24c"/><circle cx="565.1" cy="43.7" r="3.5" fill="#d4a24c"/><circle cx="614.9" cy="45.7" r="3.5" fill="#d4a24c"/><circle cx="664.7" cy="47.3" r="3.5" fill="#d4a24c"/><circle cx="714.5" cy="48.6" r="3.5" fill="#d4a24c"/><circle cx="764.4" cy="49.5" r="3.5" fill="#d4a24c"/><circle cx="814.2" cy="50.3" r="3.5" fill="#d4a24c"/><circle cx="864.0" cy="51.1" r="3.5" fill="#d4a24c"/><circle cx="913.8" cy="51.7" r="3.5" fill="#d4a24c"/><circle cx="963.6" cy="52.1" r="3.5" fill="#d4a24c"/><circle cx="1013.5" cy="52.6" r="3.5" fill="#d4a24c"/><circle cx="1063.3" cy="53.0" r="3.5" fill="#d4a24c"/><circle cx="1113.1" cy="53.3" r="3.5" fill="#d4a24c"/><text x="66.9" y="246" class="gx">01/09</text><text x="116.7" y="246" class="gx">02/09</text><text x="166.5" y="246" class="gx">03/09</text><text x="216.4" y="246" class="gx">04/09</text><text x="266.2" y="246" class="gx">05/09</text><text x="316.0" y="246" class="gx">06/09</text><text x="365.8" y="246" class="gx">07/09</text><text x="415.6" y="246" class="gx">08/09</text><text x="465.5" y="246" class="gx">09/09</text><text x="515.3" y="246" class="gx">10/09</text><text x="565.1" y="246" class="gx">11/09</text><text x="614.9" y="246" class="gx">12/09</text><text x="664.7" y="246" class="gx">13/09</text><text x="714.5" y="246" class="gx">14/09</text><text x="764.4" y="246" class="gx">15/09</text><text x="814.2" y="246" class="gx">16/09</text><text x="864.0" y="246" class="gx">17/09</text><text x="913.8" y="246" class="gx">18/09</text><text x="963.6" y="246" class="gx">19/09</text><text x="1013.5" y="246" class="gx">20/09</text><text x="1063.3" y="246" class="gx">21/09</text><text x="1113.1" y="246" class="gx">22/09</text></svg>
       <div class="leg"><span class="ldot bar"></span>pessoas alcançadas no dia
       <span class="ldot lin"></span>frequência acumulada (máx. 1,43×)</div></div>
 
@@ -484,35 +583,35 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
       <th>Tempo médio</th><th>Visitas ao perfil</th><th>Custo/visita</th>
       <th>Conversas</th><th class="d">Investido</th></tr></thead>
       <tbody><tr>
+          <td class="l">AD_KARINA_MELHOR_DECISAO<em>PERFIL_KARINA_DECISAO</em></td>
+          <td>7.095</td><td>11.054</td>
+          <td>1,56×</td><td>R$ 14,60</td>
+          <td>548</td>
+          <td>1,1%</td>
+          <td>4s</td>
+          <td>222</td>
+          <td>R$ 0,73</td>
+          <td>0</td><td class="d">R$ 161,34</td>
+        </tr><tr>
           <td class="l">AD_RESULTADO_DEBORA_7DIAS<em>GEO_38_64_FEM_02</em></td>
-          <td>22.920</td><td>67.900</td>
-          <td>2,96×</td><td>R$ 2,32</td>
-          <td>972</td>
+          <td>23.243</td><td>69.470</td>
+          <td>2,99×</td><td>R$ 2,32</td>
+          <td>987</td>
           <td>0,2%</td>
           <td>2s</td>
           <td>—</td>
           <td>—</td>
-          <td>0</td><td class="d">R$ 157,62</td>
-        </tr><tr>
-          <td class="l">AD_KARINA_MELHOR_DECISAO<em>PERFIL_KARINA_DECISAO</em></td>
-          <td>6.871</td><td>10.578</td>
-          <td>1,54×</td><td>R$ 14,72</td>
-          <td>528</td>
-          <td>1,1%</td>
-          <td>4s</td>
-          <td>210</td>
-          <td>R$ 0,74</td>
-          <td>0</td><td class="d">R$ 155,73</td>
+          <td>0</td><td class="d">R$ 160,95</td>
         </tr><tr>
           <td class="l">AD_KARINA_EXCESSO_GORDURA_7DIAS<em>PERFIL_KARINA_GORDURA</em></td>
-          <td>5.628</td><td>8.101</td>
-          <td>1,44×</td><td>R$ 15,76</td>
-          <td>354</td>
+          <td>5.755</td><td>8.374</td>
+          <td>1,46×</td><td>R$ 15,68</td>
+          <td>367</td>
           <td>0,7%</td>
           <td>4s</td>
-          <td>154</td>
+          <td>158</td>
           <td>R$ 0,83</td>
-          <td>0</td><td class="d">R$ 127,69</td>
+          <td>0</td><td class="d">R$ 131,34</td>
         </tr><tr>
           <td class="l">AD_SOU_MAGRA_POR_QUE_PAPADA<em>DIRECT_FRIO_38_64_FEM</em></td>
           <td>998</td><td>2.163</td>
@@ -524,6 +623,16 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
           <td>—</td>
           <td>2</td><td class="d">R$ 103,76</td>
         </tr><tr>
+          <td class="l">AD_LISTA_ESPERA_BALNEARIO<em>PERFIL_LISTA_ESPERA</em></td>
+          <td>3.092</td><td>4.018</td>
+          <td>1,30×</td><td>R$ 18,14</td>
+          <td>388</td>
+          <td>2,3%</td>
+          <td>8s</td>
+          <td>92</td>
+          <td>R$ 0,79</td>
+          <td>0</td><td class="d">R$ 72,90</td>
+        </tr><tr>
           <td class="l">AD_SE_SEU_MEDO_PELE_RETIRADA<em>GEO_38_64_FEM</em></td>
           <td>13.443</td><td>29.757</td>
           <td>2,21×</td><td>R$ 2,40</td>
@@ -533,16 +642,6 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
           <td>—</td>
           <td>—</td>
           <td>0</td><td class="d">R$ 71,30</td>
-        </tr><tr>
-          <td class="l">AD_LISTA_ESPERA_BALNEARIO<em>PERFIL_LISTA_ESPERA</em></td>
-          <td>2.978</td><td>3.839</td>
-          <td>1,29×</td><td>R$ 18,30</td>
-          <td>381</td>
-          <td>2,4%</td>
-          <td>9s</td>
-          <td>91</td>
-          <td>R$ 0,77</td>
-          <td>0</td><td class="d">R$ 70,26</td>
         </tr><tr>
           <td class="l">AD_VANIA_JA_TENTEI_OUTRAS<em>PERFIL_VANIA</em></td>
           <td>2.948</td><td>3.869</td>
@@ -555,54 +654,54 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
           <td>0</td><td class="d">R$ 57,58</td>
         </tr><tr>
           <td class="l">AD_EMAGRECEU_PAPADA_FICOU<em>PQ_ENGAJOU_90D</em></td>
-          <td>1.232</td><td>1.561</td>
-          <td>1,27×</td><td>R$ 33,48</td>
-          <td>76</td>
-          <td>0,6%</td>
+          <td>1.335</td><td>1.696</td>
+          <td>1,27×</td><td>R$ 33,88</td>
+          <td>83</td>
+          <td>0,5%</td>
           <td>5s</td>
           <td>—</td>
           <td>—</td>
-          <td>2</td><td class="d">R$ 52,27</td>
+          <td>2</td><td class="d">R$ 57,46</td>
         </tr><tr>
           <td class="l">AD_SOU_MAGRA_POR_QUE_PAPADA<em>WHATS_QUENTE_38_64_FEM</em></td>
-          <td>404</td><td>929</td>
-          <td>2,30×</td><td>R$ 37,46</td>
-          <td>40</td>
-          <td>0,9%</td>
-          <td>5s</td>
+          <td>480</td><td>1.176</td>
+          <td>2,45×</td><td>R$ 36,96</td>
+          <td>49</td>
+          <td>0,8%</td>
+          <td>4s</td>
           <td>—</td>
           <td>—</td>
-          <td>1</td><td class="d">R$ 34,80</td>
+          <td>1</td><td class="d">R$ 43,47</td>
         </tr><tr>
           <td class="l">AD_CAIXINHA_MEDO_VEIA<em>PERFIL_CAIXINHA_VEIA</em></td>
-          <td>1.784</td><td>2.098</td>
-          <td>1,18×</td><td>R$ 15,54</td>
-          <td>90</td>
+          <td>1.966</td><td>2.398</td>
+          <td>1,22×</td><td>R$ 14,91</td>
+          <td>100</td>
           <td>1,1%</td>
-          <td>5s</td>
-          <td>38</td>
-          <td>R$ 0,86</td>
-          <td>0</td><td class="d">R$ 32,60</td>
-        </tr><tr>
-          <td class="l">AD_CAIXINHA_CANETA_GORDURA<em>PERFIL_CAIXINHA_CANETA</em></td>
-          <td>1.896</td><td>2.310</td>
-          <td>1,22×</td><td>R$ 13,63</td>
-          <td>196</td>
-          <td>1,3%</td>
           <td>4s</td>
-          <td>51</td>
-          <td>R$ 0,62</td>
-          <td>0</td><td class="d">R$ 31,49</td>
+          <td>43</td>
+          <td>R$ 0,83</td>
+          <td>0</td><td class="d">R$ 35,76</td>
         </tr><tr>
           <td class="l">AD_CAIXINHA_CICATRIZ<em>PERFIL_CAIXINHA_CICATRIZ</em></td>
-          <td>2.066</td><td>2.610</td>
-          <td>1,26×</td><td>R$ 11,94</td>
-          <td>65</td>
-          <td>1,8%</td>
+          <td>2.289</td><td>2.968</td>
+          <td>1,30×</td><td>R$ 11,82</td>
+          <td>71</td>
+          <td>1,7%</td>
           <td>2s</td>
-          <td>48</td>
-          <td>R$ 0,65</td>
-          <td>0</td><td class="d">R$ 31,17</td>
+          <td>51</td>
+          <td>R$ 0,69</td>
+          <td>0</td><td class="d">R$ 35,08</td>
+        </tr><tr>
+          <td class="l">AD_CAIXINHA_CANETA_GORDURA<em>PERFIL_CAIXINHA_CANETA</em></td>
+          <td>2.098</td><td>2.601</td>
+          <td>1,24×</td><td>R$ 13,36</td>
+          <td>211</td>
+          <td>1,2%</td>
+          <td>4s</td>
+          <td>54</td>
+          <td>R$ 0,64</td>
+          <td>0</td><td class="d">R$ 34,74</td>
         </tr></tbody></table></div></div>
 
 <div class="section-header"><span class="section-tag"></span>
@@ -773,8 +872,467 @@ color:var(--text-3);display:flex;justify-content:space-between;gap:14px;flex-wra
                   <span class="st-meta"></span>
                   <span class="pill off">Conjunto pausado</span></div></div>
 
+<div class="section-header"><span class="section-tag"></span>
+  <span class="section-title">Por dia · escolher datas</span>
+  <span class="section-hint">o resto da página é o acumulado; aqui você escolhe o intervalo</span></div>
+
+<div class="dd" style="--dd-tema:#c9663c;--dd-tema-esc:#0d3339;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, ou o dia em que a conta ficou parada —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
+  </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Por campanha</b><em>no período marcado</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e cliques por dia</b>
+    <em>barra = investido · linha = cliques do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+  <div class="dd-sec"><i></i><b>Anúncios no período</b><em>por cliques no período marcado</em></div>
+  <div class="dd-card dd-wrap" id="d-t-ads"></div>
+</div>
+
 <div class="rodape">
   <span>Conta Meta 595009265656090 · atualizado em 22/09/2026</span>
   <span>Gio Growth Digital</span>
 </div>
-</div></body></html>
+</div>
+<script>
+window.__DIA__ = {"desde":"2026-09-01","ate":"2026-09-22","imposto":0.1383,"campos":["gasto","impressoes","cliques","cliques_link","conversas","engajamento_post","v_thruplay"],"met":{"gasto":"gasto","conv":"cliques_link","conv_rot":"Cliques no link","conv_rot_curto":"Cliques","conv_rot_1":"cliques","conv_rot_s":"clique","receita":null,"etapa":null,"impr":"impressoes","cliq":"cliques_link"},"eixo":{"ordem":["[GGD][ALCANCE][TOPO_FUNIL]","[GGD][MENSAGENS]","[GGD][MENSAGENS][RMKT_QUENTE]","[GGD][PERFIL][VISITAS_IG]"],"defs":{"[GGD][ALCANCE][TOPO_FUNIL]":{"nome":"ALCANCE · TOPO_FUNIL","cor":"#0d4f57","sub":""},"[GGD][MENSAGENS]":{"nome":"MENSAGENS","cor":"#c9663c","sub":""},"[GGD][MENSAGENS][RMKT_QUENTE]":{"nome":"MENSAGENS · RMKT_QUENTE","cor":"#d4a24c","sub":""},"[GGD][PERFIL][VISITAS_IG]":{"nome":"PERFIL · VISITAS_IG","cor":"#4a7c59","sub":""}}},"dias":[["2026-09-01","[GGD][ALCANCE][TOPO_FUNIL]",8.61,3305,11,0,0,565,54],["2026-09-02","[GGD][ALCANCE][TOPO_FUNIL]",19.85,8175,22,0,0,1268,135],["2026-09-03","[GGD][ALCANCE][TOPO_FUNIL]",18.1,7985,15,0,0,1170,113],["2026-09-04","[GGD][ALCANCE][TOPO_FUNIL]",15.56,6919,11,0,0,885,67],["2026-09-05","[GGD][ALCANCE][TOPO_FUNIL]",14.879999999999999,6518,14,0,0,785,74],["2026-09-06","[GGD][ALCANCE][TOPO_FUNIL]",21.200000000000003,8495,12,0,0,979,100],["2026-09-07","[GGD][ALCANCE][TOPO_FUNIL]",20.46,8786,17,0,0,988,80],["2026-09-08","[GGD][ALCANCE][TOPO_FUNIL]",12.27,5414,15,0,0,656,77],["2026-09-08","[GGD][MENSAGENS]",4.03,94,3,2,0,35,7],["2026-09-08","[GGD][PERFIL][VISITAS_IG]",11.559999999999999,749,19,13,0,183,31],["2026-09-09","[GGD][ALCANCE][TOPO_FUNIL]",7.43,3214,9,0,0,384,37],["2026-09-09","[GGD][MENSAGENS]",16.52,401,12,8,1,153,18],["2026-09-09","[GGD][PERFIL][VISITAS_IG]",29.12,1809,37,27,0,436,74],["2026-09-10","[GGD][ALCANCE][TOPO_FUNIL]",8.23,3418,15,0,0,446,63],["2026-09-10","[GGD][MENSAGENS]",11.56,174,3,2,0,51,12],["2026-09-10","[GGD][PERFIL][VISITAS_IG]",30.29,1827,42,34,0,428,72],["2026-09-11","[GGD][ALCANCE][TOPO_FUNIL]",7.76,3393,7,0,0,391,38],["2026-09-11","[GGD][MENSAGENS]",9.91,211,2,2,0,66,13],["2026-09-11","[GGD][PERFIL][VISITAS_IG]",31.270000000000003,1842,45,40,0,477,72],["2026-09-12","[GGD][ALCANCE][TOPO_FUNIL]",6.99,3022,2,0,0,342,46],["2026-09-12","[GGD][MENSAGENS]",8.75,220,3,3,0,71,13],["2026-09-12","[GGD][PERFIL][VISITAS_IG]",24.82,1671,36,31,0,329,65],["2026-09-13","[GGD][ALCANCE][TOPO_FUNIL]",10.05,4213,17,0,0,523,63],["2026-09-13","[GGD][MENSAGENS]",14.99,349,5,3,0,104,13],["2026-09-13","[GGD][PERFIL][VISITAS_IG]",38.73,2729,56,47,0,624,119],["2026-09-14","[GGD][ALCANCE][TOPO_FUNIL]",7.92,3472,10,0,0,428,32],["2026-09-14","[GGD][MENSAGENS]",10.35,184,3,2,1,63,15],["2026-09-14","[GGD][PERFIL][VISITAS_IG]",33.84,2387,61,46,0,727,137],["2026-09-15","[GGD][ALCANCE][TOPO_FUNIL]",7.34,3232,6,0,0,373,33],["2026-09-15","[GGD][MENSAGENS]",9.07,194,2,2,0,67,6],["2026-09-15","[GGD][PERFIL][VISITAS_IG]",34.54,2247,81,55,0,706,150],["2026-09-16","[GGD][ALCANCE][TOPO_FUNIL]",7.42,2941,10,0,0,319,33],["2026-09-16","[GGD][MENSAGENS]",8.99,162,4,2,0,57,8],["2026-09-16","[GGD][PERFIL][VISITAS_IG]",33.86,1851,67,60,0,579,116],["2026-09-17","[GGD][ALCANCE][TOPO_FUNIL]",8.52,3458,11,0,0,404,51],["2026-09-17","[GGD][MENSAGENS]",7.28,148,2,2,0,59,13],["2026-09-17","[GGD][PERFIL][VISITAS_IG]",37.21,2092,70,56,0,672,140],["2026-09-18","[GGD][ALCANCE][TOPO_FUNIL]",7.55,3215,12,0,0,329,33],["2026-09-18","[GGD][MENSAGENS]",12.31,245,10,3,1,83,19],["2026-09-18","[GGD][MENSAGENS][RMKT_QUENTE]",16.23,554,6,3,0,141,20],["2026-09-18","[GGD][PERFIL][VISITAS_IG]",53.800000000000004,3524,105,77,0,1156,215],["2026-09-19","[GGD][ALCANCE][TOPO_FUNIL]",7.18,3227,7,0,0,311,33],["2026-09-19","[GGD][MENSAGENS]",7.2,222,4,0,0,76,11],["2026-09-19","[GGD][MENSAGENS][RMKT_QUENTE]",16.64,564,9,3,1,167,30],["2026-09-19","[GGD][PERFIL][VISITAS_IG]",50.68,3629,97,77,0,1178,208],["2026-09-20","[GGD][ALCANCE][TOPO_FUNIL]",4.25,1854,5,0,0,197,27],["2026-09-20","[GGD][MENSAGENS]",6.94,208,8,0,0,60,7],["2026-09-20","[GGD][MENSAGENS][RMKT_QUENTE]",6.98,154,1,1,0,43,7],["2026-09-20","[GGD][PERFIL][VISITAS_IG]",34.54,2305,63,55,0,715,117],["2026-09-21","[GGD][ALCANCE][TOPO_FUNIL]",6.06,2799,8,0,0,288,27],["2026-09-21","[GGD][MENSAGENS]",6.52,186,4,1,0,56,4],["2026-09-21","[GGD][MENSAGENS][RMKT_QUENTE]",9.36,214,6,4,1,68,14],["2026-09-21","[GGD][PERFIL][VISITAS_IG]",49.02,3791,88,71,0,1138,171],["2026-09-22","[GGD][ALCANCE][TOPO_FUNIL]",4.62,2172,3,0,0,194,22],["2026-09-22","[GGD][MENSAGENS]",12.81,341,5,3,0,79,11],["2026-09-22","[GGD][MENSAGENS][RMKT_QUENTE]",8.25,210,0,0,0,59,12],["2026-09-22","[GGD][PERFIL][VISITAS_IG]",35.46,2829,59,49,0,747,103]],"tabelas":[{"id":"ads","chave_rot":"Anúncio","top":20,"linhas":[["2026-09-01","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",3.76,1375,5,0,0,301,36],["2026-09-01","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",4.85,1930,6,0,0,264,18],["2026-09-02","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",9.07,3866,15,0,0,711,84],["2026-09-02","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",10.78,4309,7,0,0,557,51],["2026-09-03","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.93,3592,9,0,0,598,74],["2026-09-03","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",10.17,4393,6,0,0,572,39],["2026-09-04","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",6.73,3073,4,0,0,418,47],["2026-09-04","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",8.83,3846,7,0,0,467,20],["2026-09-05","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",6.56,2928,8,0,0,381,46],["2026-09-05","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",8.32,3590,6,0,0,404,28],["2026-09-06","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",9.38,3821,3,0,0,509,60],["2026-09-06","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",11.82,4674,9,0,0,470,40],["2026-09-07","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",8.98,3945,11,0,0,520,46],["2026-09-07","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",11.48,4841,6,0,0,468,34],["2026-09-08","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",4.39,275,10,6,0,63,13],["2026-09-08","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",3.09,212,7,5,0,82,11],["2026-09-08","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.22,3240,12,0,0,430,56],["2026-09-08","AD_SE_SEU_MEDO_PELE_RETIRADA","[GGD][ALCANCE][TOPO_FUNIL]",5.05,2174,3,0,0,226,21],["2026-09-08","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",4.03,94,3,2,0,35,7],["2026-09-08","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",4.08,262,2,2,0,38,7],["2026-09-09","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",7.8,461,12,9,0,103,20],["2026-09-09","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",11.71,698,16,11,0,221,36],["2026-09-09","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.43,3214,9,0,0,384,37],["2026-09-09","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",16.52,401,12,8,1,153,18],["2026-09-09","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",9.61,650,9,7,0,112,18],["2026-09-10","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",10.71,586,11,10,0,112,27],["2026-09-10","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",9.11,576,21,15,0,205,30],["2026-09-10","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",8.23,3418,15,0,0,446,63],["2026-09-10","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",11.56,174,3,2,0,51,12],["2026-09-10","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",10.47,665,10,9,0,111,15],["2026-09-11","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",10.43,568,14,12,0,110,28],["2026-09-11","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",10.78,661,18,17,0,245,27],["2026-09-11","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.76,3393,7,0,0,391,38],["2026-09-11","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",9.91,211,2,2,0,66,13],["2026-09-11","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",10.06,613,13,11,0,122,17],["2026-09-12","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",9,597,10,10,0,86,22],["2026-09-12","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",7.67,530,13,10,0,152,30],["2026-09-12","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",6.99,3022,2,0,0,342,46],["2026-09-12","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",8.75,220,3,3,0,71,13],["2026-09-12","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",8.15,544,13,11,0,91,13],["2026-09-13","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",12.83,880,14,12,0,155,37],["2026-09-13","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",12.86,863,27,24,0,314,49],["2026-09-13","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",10.05,4213,17,0,0,523,63],["2026-09-13","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",14.99,349,5,3,0,104,13],["2026-09-13","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",13.04,986,15,11,0,155,33],["2026-09-14","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",8.41,611,16,15,0,113,25],["2026-09-14","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",15.15,1174,22,17,0,409,64],["2026-09-14","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",8.11,453,22,13,0,186,46],["2026-09-14","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.92,3472,10,0,0,428,32],["2026-09-14","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",10.35,184,3,2,1,63,15],["2026-09-14","AD_VANIA_JA_TENTEI_OUTRAS","[GGD][PERFIL][VISITAS_IG]",2.17,149,1,1,0,19,2],["2026-09-15","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",11.01,672,25,17,0,118,24],["2026-09-15","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",12.21,923,26,18,0,306,54],["2026-09-15","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",11.32,652,30,20,0,282,72],["2026-09-15","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.34,3232,6,0,0,373,33],["2026-09-15","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",9.07,194,2,2,0,67,6],["2026-09-16","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",10.16,624,23,19,0,143,31],["2026-09-16","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",13.39,751,24,23,0,242,42],["2026-09-16","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",10.31,476,20,18,0,194,43],["2026-09-16","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.42,2941,10,0,0,319,33],["2026-09-16","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",8.99,162,4,2,0,57,8],["2026-09-17","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",10.75,683,20,18,0,158,40],["2026-09-17","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",15.66,866,29,24,0,291,38],["2026-09-17","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",10.8,543,21,14,0,223,62],["2026-09-17","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",8.52,3458,11,0,0,404,51],["2026-09-17","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",7.28,148,2,2,0,59,13],["2026-09-18","AD_CAIXINHA_CANETA_GORDURA","[GGD][PERFIL][VISITAS_IG]",8.1,549,21,15,0,208,57],["2026-09-18","AD_CAIXINHA_CICATRIZ","[GGD][PERFIL][VISITAS_IG]",7.76,617,12,10,0,145,24],["2026-09-18","AD_CAIXINHA_MEDO_VEIA","[GGD][PERFIL][VISITAS_IG]",8.41,538,19,9,0,216,32],["2026-09-18","AD_EMAGRECEU_PAPADA_FICOU","[GGD][MENSAGENS][RMKT_QUENTE]",16.23,554,6,3,0,141,20],["2026-09-18","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",9.01,594,8,6,0,105,19],["2026-09-18","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",12.64,772,27,23,0,299,48],["2026-09-18","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",7.88,454,18,14,0,183,35],["2026-09-18","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.55,3215,12,0,0,329,33],["2026-09-18","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",2.31,26,1,1,0,10,3],["2026-09-18","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",10,219,9,2,1,73,16],["2026-09-19","AD_CAIXINHA_CANETA_GORDURA","[GGD][PERFIL][VISITAS_IG]",8.07,635,17,12,0,218,55],["2026-09-19","AD_CAIXINHA_CICATRIZ","[GGD][PERFIL][VISITAS_IG]",8.39,666,20,14,0,191,14],["2026-09-19","AD_CAIXINHA_MEDO_VEIA","[GGD][PERFIL][VISITAS_IG]",7.73,532,15,15,0,202,24],["2026-09-19","AD_EMAGRECEU_PAPADA_FICOU","[GGD][MENSAGENS][RMKT_QUENTE]",16.64,564,9,3,1,167,30],["2026-09-19","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",7.79,556,10,8,0,96,29],["2026-09-19","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",11.19,853,20,17,0,283,37],["2026-09-19","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",7.51,387,15,11,0,188,49],["2026-09-19","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",7.18,3227,7,0,0,311,33],["2026-09-19","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",7.2,222,4,0,0,76,11],["2026-09-20","AD_CAIXINHA_CANETA_GORDURA","[GGD][PERFIL][VISITAS_IG]",5.08,385,10,8,0,129,24],["2026-09-20","AD_CAIXINHA_CICATRIZ","[GGD][PERFIL][VISITAS_IG]",4.39,375,6,6,0,84,9],["2026-09-20","AD_CAIXINHA_MEDO_VEIA","[GGD][PERFIL][VISITAS_IG]",6.21,384,10,9,0,135,13],["2026-09-20","AD_EMAGRECEU_PAPADA_FICOU","[GGD][MENSAGENS][RMKT_QUENTE]",6.98,154,1,1,0,43,7],["2026-09-20","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",5.56,299,8,8,0,59,13],["2026-09-20","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",7.24,571,18,15,0,177,29],["2026-09-20","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",6.06,291,11,9,0,131,29],["2026-09-20","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",4.25,1854,5,0,0,197,27],["2026-09-20","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",6.94,208,8,0,0,60,7],["2026-09-21","AD_CAIXINHA_CANETA_GORDURA","[GGD][PERFIL][VISITAS_IG]",7.68,569,12,12,0,188,48],["2026-09-21","AD_CAIXINHA_CICATRIZ","[GGD][PERFIL][VISITAS_IG]",7.96,722,18,17,0,172,14],["2026-09-21","AD_CAIXINHA_MEDO_VEIA","[GGD][PERFIL][VISITAS_IG]",7.98,516,10,7,0,183,18],["2026-09-21","AD_EMAGRECEU_PAPADA_FICOU","[GGD][MENSAGENS][RMKT_QUENTE]",9.36,214,6,4,1,68,14],["2026-09-21","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",7.51,555,18,17,0,97,24],["2026-09-21","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",10.97,932,11,10,0,292,28],["2026-09-21","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",6.92,497,19,8,0,206,39],["2026-09-21","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",6.06,2799,8,0,0,288,27],["2026-09-21","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",6.52,186,4,1,0,56,4],["2026-09-22","AD_CAIXINHA_CANETA_GORDURA","[GGD][PERFIL][VISITAS_IG]",5.81,463,10,8,0,138,27],["2026-09-22","AD_CAIXINHA_CICATRIZ","[GGD][PERFIL][VISITAS_IG]",6.58,588,10,9,0,140,10],["2026-09-22","AD_CAIXINHA_MEDO_VEIA","[GGD][PERFIL][VISITAS_IG]",5.43,428,10,9,0,117,13],["2026-09-22","AD_EMAGRECEU_PAPADA_FICOU","[GGD][MENSAGENS][RMKT_QUENTE]",8.25,210,0,0,0,59,12],["2026-09-22","AD_KARINA_EXCESSO_GORDURA_7DIAS","[GGD][PERFIL][VISITAS_IG]",5.98,413,5,5,0,71,15],["2026-09-22","AD_KARINA_MELHOR_DECISAO","[GGD][PERFIL][VISITAS_IG]",7.67,672,18,15,0,196,25],["2026-09-22","AD_LISTA_ESPERA_BALNEARIO","[GGD][PERFIL][VISITAS_IG]",3.99,265,6,3,0,85,13],["2026-09-22","AD_RESULTADO_DEBORA_7DIAS","[GGD][ALCANCE][TOPO_FUNIL]",4.62,2172,3,0,0,194,22],["2026-09-22","AD_SOU_MAGRA_POR_QUE_PAPADA","[GGD][MENSAGENS]",12.81,341,5,3,0,79,11]],"nomes":{"AD_RESULTADO_DEBORA_7DIAS":"AD_RESULTADO_DEBORA_7DIAS","AD_SE_SEU_MEDO_PELE_RETIRADA":"AD_SE_SEU_MEDO_PELE_RETIRADA","AD_KARINA_EXCESSO_GORDURA_7DIAS":"AD_KARINA_EXCESSO_GORDURA_7DIAS","AD_KARINA_MELHOR_DECISAO":"AD_KARINA_MELHOR_DECISAO","AD_SOU_MAGRA_POR_QUE_PAPADA":"AD_SOU_MAGRA_POR_QUE_PAPADA","AD_VANIA_JA_TENTEI_OUTRAS":"AD_VANIA_JA_TENTEI_OUTRAS","AD_LISTA_ESPERA_BALNEARIO":"AD_LISTA_ESPERA_BALNEARIO","AD_CAIXINHA_CANETA_GORDURA":"AD_CAIXINHA_CANETA_GORDURA","AD_CAIXINHA_CICATRIZ":"AD_CAIXINHA_CICATRIZ","AD_CAIXINHA_MEDO_VEIA":"AD_CAIXINHA_MEDO_VEIA","AD_EMAGRECEU_PAPADA_FICOU":"AD_EMAGRECEU_PAPADA_FICOU"},"sub":{"AD_RESULTADO_DEBORA_7DIAS":"GEO_38_64_FEM_02","AD_SE_SEU_MEDO_PELE_RETIRADA":"GEO_38_64_FEM","AD_KARINA_EXCESSO_GORDURA_7DIAS":"PERFIL_KARINA_GORDURA","AD_KARINA_MELHOR_DECISAO":"PERFIL_KARINA_DECISAO","AD_SOU_MAGRA_POR_QUE_PAPADA":"WHATS_QUENTE_38_64_FEM","AD_VANIA_JA_TENTEI_OUTRAS":"PERFIL_VANIA","AD_LISTA_ESPERA_BALNEARIO":"PERFIL_LISTA_ESPERA","AD_CAIXINHA_CANETA_GORDURA":"PERFIL_CAIXINHA_CANETA","AD_CAIXINHA_CICATRIZ":"PERFIL_CAIXINHA_CICATRIZ","AD_CAIXINHA_MEDO_VEIA":"PERFIL_CAIXINHA_VEIA","AD_EMAGRECEU_PAPADA_FICOU":"PQ_ENGAJOU_90D"},"status":{},"links":{}}]};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        if (li && m.conv) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
+</script>
+</body></html>
