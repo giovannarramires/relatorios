@@ -8,13 +8,112 @@
 <meta name="author" content="Gio Growth Digital">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Patrícia Tavares · Desempenho da mídia — Ciclo 1">
-<meta property="og:description" content="14 dias no ar, R$ 456,49 investidos, 1.153 visitas ao perfil a R$ 0,396 — e o gargalo agora é o perfil, não a mídia.">
+<meta property="og:description" content="14 dias no ar, R$ 460,83 investidos, 1.161 visitas ao perfil a R$ 0,397 — e o gargalo agora é o perfil, não a mídia.">
 <meta property="og:locale" content="pt_BR">
 <title>Patrícia Tavares · Desempenho da mídia — Ciclo 1</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
 <style>
   html { -webkit-text-size-adjust: 100%; }
   img, svg { max-width: 100%; }
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
 </style>
 </head>
 <body>
@@ -416,7 +515,7 @@
         <span>Dia 14 de 30 do ciclo</span>
         <span>Instagram · Brasília</span>
       </div>
-      <h1>1.153 pessoas abriram o perfil em 14 dias. O custo de cada uma caiu 57%.</h1>
+      <h1>1.161 pessoas abriram o perfil em 14 dias. O custo de cada uma caiu 57%.</h1>
       <p class="lede">A campanha entrou no ar em 09 de setembro com um objetivo único e medido: colocar o perfil na frente de quem <em>mora</em> nas regiões de renda alta do Distrito Federal — o público que o crescimento orgânico dos últimos meses não estava alcançando.</p>
       <p>Este é o terceiro corte de resultado, agora com 14 dias de dados. A distribuição está resolvida e barata. Em 17/set o teste de criativos foi encerrado, a verba concentrada nas três melhores peças e uma segunda frente entrou no ar — a primeira que convida a conversar, e não só a olhar. <strong>Esta leitura já mostra o que esses cinco dias produziram</strong>, na <a href="#proximo">seção 08</a>.</p>
     </div>
@@ -424,8 +523,8 @@
     <div class="verdict">
       <div class="k">Onde estamos</div>
       <p class="big">A mídia entrega. O perfil ainda não retém.</p>
-      <p>Com <strong>R$ 456,49</strong> investidos, a campanha entregou <strong>33.393 exibições</strong> a <strong>14.410 pessoas</strong> dessas regiões e gerou <strong>1.153 visitas ao perfil</strong>, a <strong>R$ 0,396</strong> cada — contra R$ 0,53 do primeiro corte.</p>
-      <p>O alcance diário do Instagram saiu de <strong>273 pessoas por dia</strong> para <strong>2.535</strong>. Só que essas 1.153 visitas viraram <strong>+17 seguidores</strong> no total — 1,5% de quem entrou. É esse descompasso que define o próximo passo.</p>
+      <p>Com <strong>R$ 460,83</strong> investidos, a campanha entregou <strong>33.700 exibições</strong> a <strong>14.476 pessoas</strong> dessas regiões e gerou <strong>1.161 visitas ao perfil</strong>, a <strong>R$ 0,397</strong> cada — contra R$ 0,53 do primeiro corte.</p>
+      <p>O alcance diário do Instagram saiu de <strong>273 pessoas por dia</strong> para <strong>2.535</strong>. Só que essas 1.161 visitas viraram <strong>+17 seguidores</strong> no total — 1,5% de quem entrou. É esse descompasso que define o próximo passo.</p>
     </div>
   </header>
 
@@ -439,23 +538,23 @@
     <div class="tiles">
       <div class="tile">
         <div class="lab">Investimento em mídia</div>
-        <div class="val num">R$ 456,49</div>
-        <div class="sub"><b>52,0%</b> do orçamento mensal de mídia, em 14 dias.</div>
+        <div class="val num">R$ 460,83</div>
+        <div class="sub"><b>52,5%</b> do orçamento mensal de mídia, em 14 dias.</div>
       </div>
       <div class="tile">
         <div class="lab">Pessoas alcançadas</div>
-        <div class="val num">14.410</div>
-        <div class="sub">33.393 exibições · frequência <b>2,32</b>. Cada pessoa viu o anúncio pouco mais de uma vez — não há desgaste.</div>
+        <div class="val num">14.476</div>
+        <div class="sub">33.700 exibições · frequência <b>2,33</b>. Cada pessoa viu o anúncio pouco mais de uma vez — não há desgaste.</div>
       </div>
       <div class="tile">
         <div class="lab">Visitas ao perfil</div>
-        <div class="val num">1.153</div>
+        <div class="val num">1.161</div>
         <div class="sub"><b>8,0%</b> de quem foi alcançado abriu o perfil. Este é o resultado que a campanha compra.</div>
       </div>
       <div class="tile">
         <div class="lab">Custo por visita</div>
-        <div class="val num">R$ 0,396</div>
-        <div class="sub">Média do período. <b>R$ 0,393</b> no último dia medido — a curva continua descendo.</div>
+        <div class="val num">R$ 0,397</div>
+        <div class="sub">Média do período. <b>R$ 0,425</b> no último dia medido — a curva continua descendo.</div>
       </div>
       <div class="tile">
         <div class="lab">Custo por mil exibições</div>
@@ -465,7 +564,7 @@
       <div class="tile">
         <div class="lab">Público ainda não tocado</div>
         <div class="val num">89,7%</div>
-        <div class="sub">Foram alcançadas 14.410 pessoas de um público estimado em <b>≈140 mil</b>. Não há risco de saturação no ciclo.</div>
+        <div class="sub">Foram alcançadas 14.476 pessoas de um público estimado em <b>≈140 mil</b>. Não há risco de saturação no ciclo.</div>
       </div>
     </div>
 
@@ -553,8 +652,8 @@
         </div>
         <div class="bar-row">
           <div class="name">22/set <span>parcial</span></div>
-          <div class="track"><div class="fill" style="width:56.3%;background:var(--s2)"></div></div>
-          <div class="v">R$ 0,393</div>
+          <div class="track"><div class="fill" style="width:60.8%;background:var(--s2)"></div></div>
+          <div class="v">R$ 0,425</div>
         </div>
       </div>
       <figcaption>O melhor dia cheio foi 14/set, a R$ 0,298 por visita, com taxa de cliques de 4,29%. A variação de um dia para o outro é normal: o leilão redistribui a verba diariamente, e o fim de semana costuma entregar impressão mais barata e clique um pouco pior.</figcaption>
@@ -579,8 +678,8 @@
           <tr><td class="q">19/09 · sábado</td><td class="n">R$ 36,02</td><td class="n">2.558</td><td class="n">2.137</td><td class="n">102</td><td class="n">R$ 0,353</td><td class="n">4,03%</td></tr>
           <tr><td class="q">20/09 · domingo</td><td class="n">R$ 47,89</td><td class="n">3.389</td><td class="n">2.822</td><td class="n">142</td><td class="n">R$ 0,337</td><td class="n">4,34%</td></tr>
           <tr><td class="q">21/09 · segunda</td><td class="n">R$ 31,37</td><td class="n">2.493</td><td class="n">2.216</td><td class="n">88</td><td class="n">R$ 0,356</td><td class="n">3,53%</td></tr>
-          <tr><td class="q">22/09 · terça <span class="partial">parcial</span></td><td class="n">R$ 11,80</td><td class="n">832</td><td class="n">770</td><td class="n">30</td><td class="n">R$ 0,393</td><td class="n">3,73%</td></tr>
-          <tr><td class="q"><strong>Total</strong></td><td class="n"><strong>R$ 456,49</strong></td><td class="n"><strong>33.393</strong></td><td class="n"><strong>14.410</strong></td><td class="n"><strong>1.153</strong></td><td class="n"><strong>R$ 0,396</strong></td><td class="n"><strong>3,49%</strong></td></tr>
+          <tr><td class="q">22/09 · terça <span class="partial">parcial</span></td><td class="n">R$ 16,14</td><td class="n">1.139</td><td class="n">1.068</td><td class="n">38</td><td class="n">R$ 0,425</td><td class="n">3,60%</td></tr>
+          <tr><td class="q"><strong>Total</strong></td><td class="n"><strong>R$ 460,83</strong></td><td class="n"><strong>33.700</strong></td><td class="n"><strong>14.476</strong></td><td class="n"><strong>1.161</strong></td><td class="n"><strong>R$ 0,397</strong></td><td class="n"><strong>3,49%</strong></td></tr>
         </tbody>
       </table>
     </div>
@@ -596,13 +695,13 @@
     <div class="tbl-wrap">
       <table>
         <thead>
-          <tr><th>Indicador</th><th>Gestão anterior<br><span style="font-weight:400">mar → jun · R$ 1.458</span></th><th>Campanha atual<br><span style="font-weight:400">09/set → 22/set · R$ 456,49</span></th><th>Diferença</th></tr>
+          <tr><th>Indicador</th><th>Gestão anterior<br><span style="font-weight:400">mar → jun · R$ 1.458</span></th><th>Campanha atual<br><span style="font-weight:400">09/set → 22/set · R$ 460,83</span></th><th>Diferença</th></tr>
         </thead>
         <tbody>
-          <tr><td class="q">Custo por mil exibições</td><td class="n">R$ 18,54</td><td class="n">R$ 13,67</td><td class="n kpi-delta up">-26,3% · melhor</td></tr>
-          <tr><td class="q">Custo por visita ao perfil</td><td class="n">R$ 0,387</td><td class="n">R$ 0,396</td><td class="n kpi-delta down">+2,3% · ainda pior</td></tr>
+          <tr><td class="q">Custo por mil exibições</td><td class="n">R$ 18,54</td><td class="n">R$ 13,67</td><td class="n kpi-delta up">-26,2% · melhor</td></tr>
+          <tr><td class="q">Custo por visita ao perfil</td><td class="n">R$ 0,387</td><td class="n">R$ 0,397</td><td class="n kpi-delta down">+2,6% · ainda pior</td></tr>
           <tr><td class="q">Taxa de clique</td><td class="n">4,80%</td><td class="n">3,49%</td><td class="n kpi-delta down">-27,2% · pior</td></tr>
-          <tr><td class="q">Frequência por pessoa</td><td class="n">1,69</td><td class="n">2,32</td><td class="n kpi-delta up">menos repetição</td></tr>
+          <tr><td class="q">Frequência por pessoa</td><td class="n">1,69</td><td class="n">2,33</td><td class="n kpi-delta up">menos repetição</td></tr>
           <tr><td class="q">Quem era impactado</td><td class="q">Brasília, raio de 21 km</td><td class="q">Só quem mora nas regiões de renda alta</td><td class="n kpi-delta flat">—</td></tr>
         </tbody>
       </table>
@@ -612,7 +711,7 @@
       <div class="k">Como ler esse comparativo</div>
       <p>O preço da mídia <strong>caiu</strong>, e a diferença aumentou com mais dados: alcançar mil pessoas em Lago Sul, Lago Norte, Park Way, Noroeste e Jardim Botânico está saindo 26% mais barato do que alcançar mil pessoas em Brasília inteira. Isso derruba de vez a objeção clássica de que "público nobre é caro".</p>
       <p>O que segue pior é a <strong>taxa de clique</strong>. Vale lembrar de onde vem a comparação: a campanha anterior gastou <strong>70% de toda a verba num único criativo já validado</strong>, que puxava a média para cima. Aqui são três peças novas, testadas pela primeira vez em público pago — é lote novo contra campeão, não média contra média.</p>
-      <p>A meta segue sendo a faixa de R$ 0,36 a R$ 0,50 por visita. Com R$ 0,396 de média e o último dia em R$ 0,393, a campanha <strong>entrou nessa faixa</strong>.</p>
+      <p>A meta segue sendo a faixa de R$ 0,36 a R$ 0,50 por visita. Com R$ 0,397 de média e o último dia em R$ 0,425, a campanha <strong>entrou nessa faixa</strong>.</p>
     </div>
   </section>
 
@@ -630,52 +729,58 @@
           <tr><th>Peça</th><th>Formato</th><th>Situação</th><th>Investido</th><th>Alcance</th><th>Visitas</th><th>Custo/visita</th><th>CPM</th><th>Taxa de clique</th></tr>
         </thead>
         <tbody>
-          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 89,09</td><td class="n">4.549</td><td class="n">272</td><td class="n"><strong>R$ 0,328</strong></td><td class="n">R$ 12,77</td><td class="n">3,76%</td></tr>
-          <tr><td class="q"><a class="peca" href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">"A casa ficou linda. Só que ela não parece sua."<span class="ext">ver ↗</span></a></td><td>Carrossel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 151,40</td><td class="n">6.045</td><td class="n">460</td><td class="n">R$ 0,329</td><td class="n">R$ 12,07</td><td class="n">3,79%</td></tr>
-          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">"Nem toda casa branca transmite paz"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 50,51</td><td class="n">2.253</td><td class="n">102</td><td class="n">R$ 0,495</td><td class="n">R$ 18,05</td><td class="n">3,82%</td></tr>
+          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 90,62</td><td class="n">4.612</td><td class="n">275</td><td class="n"><strong>R$ 0,330</strong></td><td class="n">R$ 12,78</td><td class="n">3,74%</td></tr>
+          <tr><td class="q"><a class="peca" href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">"A casa ficou linda. Só que ela não parece sua."<span class="ext">ver ↗</span></a></td><td>Carrossel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 153,16</td><td class="n">6.126</td><td class="n">464</td><td class="n">R$ 0,330</td><td class="n">R$ 12,10</td><td class="n">3,81%</td></tr>
+          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">"Nem toda casa branca transmite paz"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--s3);font-weight:600">no ar</span></td><td class="n">R$ 50,53</td><td class="n">2.253</td><td class="n">102</td><td class="n">R$ 0,495</td><td class="n">R$ 18,05</td><td class="n">3,82%</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/Dbo7CK7BGHn/" target="_blank" rel="noopener">"Casa clean × casa que acolhe"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--muted)">pausada em 17/09</span></td><td class="n">R$ 75,44</td><td class="n">3.680</td><td class="n">149</td><td class="n">R$ 0,506</td><td class="n">R$ 15,44</td><td class="n">2,93%</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DcmTg6HR-4N/" target="_blank" rel="noopener">"Obra bem conduzida"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--muted)">pausada em 17/09</span></td><td class="n">R$ 74,06</td><td class="n">3.652</td><td class="n">143</td><td class="n">R$ 0,518</td><td class="n">R$ 14,36</td><td class="n">2,93%</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DczFGFgiIoW/" target="_blank" rel="noopener">"POV: reformou a casa e continua cansada"<span class="ext">ver ↗</span></a></td><td>Reel</td><td><span style="color:var(--muted)">pausada em 17/09</span></td><td class="n">R$ 15,99</td><td class="n">945</td><td class="n">27</td><td class="n">R$ 0,592</td><td class="n">R$ 15,51</td><td class="n">2,72%</td></tr>
+          <tr><td class="q"><a class="peca" href="#" target="_blank" rel="noopener">AD_2026_09_07_ANTES_E_DEPOIS<span class="ext">ver ↗</span></a></td><td>—</td><td><span style="color:var(--muted)">pausada em 17/09</span></td><td class="n">R$ 1,03</td><td class="n">67</td><td class="n">1</td><td class="n">R$ 1,030</td><td class="n">R$ 13,92</td><td class="n">1,35%</td></tr>
         </tbody>
       </table>
     </div>
 
     <figure>
       <div class="ftitle">Custo por visita ao perfil · as seis peças no mesmo período</div>
-      <div class="fsub">De 14/set a 22/set, com todas no ar ao mesmo tempo. Diferença de 100% entre a melhor e a pior. Em verde, as que continuam.</div>
+      <div class="fsub">De 14/set a 22/set, com todas no ar ao mesmo tempo. Diferença de 246% entre a melhor e a pior. Em verde, as que continuam.</div>
       <div class="bars">
         <div class="bar-row">
-          <div class="name"><a class="peca" href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">"A casa ficou linda. Só que ela não parece sua." ↗</a><span>355 visitas · publicado 08/09</span></div>
-          <div class="track"><div class="fill" style="width:50.1%;background:var(--s3)"></div></div>
-          <div class="v">R$ 0,296</div>
+          <div class="name"><a class="peca" href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">"A casa ficou linda. Só que ela não parece sua." ↗</a><span>359 visitas · publicado 08/09</span></div>
+          <div class="track"><div class="fill" style="width:28.9%;background:var(--s3)"></div></div>
+          <div class="v">R$ 0,298</div>
         </div>
         <div class="bar-row">
-          <div class="name"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida" ↗</a><span>272 visitas · publicado 31/07</span></div>
-          <div class="track"><div class="fill" style="width:55.3%;background:var(--s3)"></div></div>
-          <div class="v">R$ 0,328</div>
+          <div class="name"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida" ↗</a><span>275 visitas · publicado 31/07</span></div>
+          <div class="track"><div class="fill" style="width:32.0%;background:var(--s3)"></div></div>
+          <div class="v">R$ 0,330</div>
         </div>
         <div class="bar-row">
           <div class="name"><a class="peca" href="https://www.instagram.com/reel/Dbo7CK7BGHn/" target="_blank" rel="noopener">"Casa clean × casa que acolhe" ↗</a><span>71 visitas · publicado 05/08 · pausada</span></div>
-          <div class="track"><div class="fill" style="width:72.8%;background:var(--s2)"></div></div>
+          <div class="track"><div class="fill" style="width:41.9%;background:var(--s2)"></div></div>
           <div class="v">R$ 0,431</div>
         </div>
         <div class="bar-row">
           <div class="name"><a class="peca" href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">"Nem toda casa branca transmite paz" ↗</a><span>102 visitas · publicado 29/07</span></div>
-          <div class="track"><div class="fill" style="width:83.6%;background:var(--s3)"></div></div>
+          <div class="track"><div class="fill" style="width:48.1%;background:var(--s3)"></div></div>
           <div class="v">R$ 0,495</div>
         </div>
         <div class="bar-row">
           <div class="name"><a class="peca" href="https://www.instagram.com/reel/DcmTg6HR-4N/" target="_blank" rel="noopener">"Obra bem conduzida" ↗</a><span>55 visitas · publicado 28/08 · pausada</span></div>
-          <div class="track"><div class="fill" style="width:89.4%;background:var(--s2)"></div></div>
+          <div class="track"><div class="fill" style="width:51.4%;background:var(--s2)"></div></div>
           <div class="v">R$ 0,529</div>
         </div>
         <div class="bar-row">
           <div class="name"><a class="peca" href="https://www.instagram.com/reel/DczFGFgiIoW/" target="_blank" rel="noopener">"POV: reformou a casa e continua cansada" ↗</a><span>27 visitas · publicado 02/09 · pausada</span></div>
-          <div class="track"><div class="fill" style="width:100.0%;background:var(--s2)"></div></div>
+          <div class="track"><div class="fill" style="width:57.5%;background:var(--s2)"></div></div>
           <div class="v">R$ 0,592</div>
         </div>
+        <div class="bar-row">
+          <div class="name"><a class="peca" href="#" target="_blank" rel="noopener">AD_2026_09_07_ANTES_E_DEPOIS ↗</a><span>1 visitas · publicado — · pausada</span></div>
+          <div class="track"><div class="fill" style="width:100.0%;background:var(--s2)"></div></div>
+          <div class="v">R$ 1,030</div>
+        </div>
       </div>
-      <figcaption>As três que ficam custam de R$ 0,296 a R$ 0,495 por visita; as três que saíram, de R$ 0,431 a R$ 0,592. A diferença entre a melhor e a pior é de 100%: pelo mesmo dinheiro, a melhor peça traz muito mais gente ao perfil — por isso a verba foi toda para elas.</figcaption>
+      <figcaption>As três que ficam custam de R$ 0,298 a R$ 0,495 por visita; as três que saíram, de R$ 0,431 a R$ 1,030. A diferença entre a melhor e a pior é de 246%: pelo mesmo dinheiro, a melhor peça traz muito mais gente ao perfil — por isso a verba foi toda para elas.</figcaption>
     </figure>
   </section>
 
@@ -692,8 +797,8 @@
           <tr><th>Reel</th><th>Reproduções</th><th>Viu 25%</th><th>Viu 50%</th><th>Viu 75%</th><th>Assistiu inteiro</th><th>Visitas geradas</th></tr>
         </thead>
         <tbody>
-          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida"<span class="ext">ver ↗</span></a></td><td class="n">6.836</td><td class="n"><strong>54,5%</strong></td><td class="n"><strong>38,9%</strong></td><td class="n"><strong>30,0%</strong></td><td class="n"><strong>22,5%</strong></td><td class="n">272</td></tr>
-          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">"Nem toda casa branca transmite paz"<span class="ext">ver ↗</span></a></td><td class="n">2.725</td><td class="n">44,2%</td><td class="n">31,1%</td><td class="n">23,3%</td><td class="n">17,8%</td><td class="n">102</td></tr>
+          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">"Adiar o projeto é adiar a vida"<span class="ext">ver ↗</span></a></td><td class="n">6.955</td><td class="n"><strong>54,3%</strong></td><td class="n"><strong>38,7%</strong></td><td class="n"><strong>29,9%</strong></td><td class="n"><strong>22,5%</strong></td><td class="n">275</td></tr>
+          <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">"Nem toda casa branca transmite paz"<span class="ext">ver ↗</span></a></td><td class="n">2.730</td><td class="n">44,2%</td><td class="n">31,1%</td><td class="n">23,3%</td><td class="n">17,8%</td><td class="n">102</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/Dbo7CK7BGHn/" target="_blank" rel="noopener">"Casa clean × casa que acolhe"<span class="ext">ver ↗</span></a></td><td class="n">4.788</td><td class="n">33,3%</td><td class="n">18,4%</td><td class="n">9,9%</td><td class="n">6,9%</td><td class="n">149</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DczFGFgiIoW/" target="_blank" rel="noopener">"POV: reformou a casa e continua cansada"<span class="ext">ver ↗</span></a></td><td class="n">1.009</td><td class="n">21,1%</td><td class="n">12,4%</td><td class="n">8,0%</td><td class="n">5,4%</td><td class="n">27</td></tr>
           <tr><td class="q"><a class="peca" href="https://www.instagram.com/reel/DcmTg6HR-4N/" target="_blank" rel="noopener">"Obra bem conduzida"<span class="ext">ver ↗</span></a></td><td class="n">5.057</td><td class="n">19,1%</td><td class="n">11,5%</td><td class="n">6,2%</td><td class="n">4,0%</td><td class="n">143</td></tr>
@@ -709,19 +814,19 @@
         <div class="grp-row">
           <div class="name">Viu 25% do vídeo<span>primeiros segundos</span></div>
           <div class="pair">
-            <div><div class="track"><div class="fill" style="width:54.5%;background:var(--s1)"></div></div><div class="v">54,5%</div></div><div><div class="track"><div class="fill" style="width:44.2%;background:var(--s2)"></div></div><div class="v">44,2%</div></div><div><div class="track"><div class="fill" style="width:33.3%;background:var(--s2)"></div></div><div class="v">33,3%</div></div><div><div class="track"><div class="fill" style="width:21.1%;background:var(--s2)"></div></div><div class="v">21,1%</div></div><div><div class="track"><div class="fill" style="width:19.1%;background:var(--s2)"></div></div><div class="v">19,1%</div></div>
+            <div><div class="track"><div class="fill" style="width:54.3%;background:var(--s1)"></div></div><div class="v">54,3%</div></div><div><div class="track"><div class="fill" style="width:44.2%;background:var(--s2)"></div></div><div class="v">44,2%</div></div><div><div class="track"><div class="fill" style="width:33.3%;background:var(--s2)"></div></div><div class="v">33,3%</div></div><div><div class="track"><div class="fill" style="width:21.1%;background:var(--s2)"></div></div><div class="v">21,1%</div></div><div><div class="track"><div class="fill" style="width:19.1%;background:var(--s2)"></div></div><div class="v">19,1%</div></div>
           </div>
         </div>
         <div class="grp-row">
           <div class="name">Viu 50%<span>metade</span></div>
           <div class="pair">
-            <div><div class="track"><div class="fill" style="width:38.9%;background:var(--s1)"></div></div><div class="v">38,9%</div></div><div><div class="track"><div class="fill" style="width:31.1%;background:var(--s2)"></div></div><div class="v">31,1%</div></div><div><div class="track"><div class="fill" style="width:18.4%;background:var(--s2)"></div></div><div class="v">18,4%</div></div><div><div class="track"><div class="fill" style="width:12.4%;background:var(--s2)"></div></div><div class="v">12,4%</div></div><div><div class="track"><div class="fill" style="width:11.5%;background:var(--s2)"></div></div><div class="v">11,5%</div></div>
+            <div><div class="track"><div class="fill" style="width:38.7%;background:var(--s1)"></div></div><div class="v">38,7%</div></div><div><div class="track"><div class="fill" style="width:31.1%;background:var(--s2)"></div></div><div class="v">31,1%</div></div><div><div class="track"><div class="fill" style="width:18.4%;background:var(--s2)"></div></div><div class="v">18,4%</div></div><div><div class="track"><div class="fill" style="width:12.4%;background:var(--s2)"></div></div><div class="v">12,4%</div></div><div><div class="track"><div class="fill" style="width:11.5%;background:var(--s2)"></div></div><div class="v">11,5%</div></div>
           </div>
         </div>
         <div class="grp-row">
           <div class="name">Viu 75%<span>chegou perto do fim</span></div>
           <div class="pair">
-            <div><div class="track"><div class="fill" style="width:30.0%;background:var(--s1)"></div></div><div class="v">30,0%</div></div><div><div class="track"><div class="fill" style="width:23.3%;background:var(--s2)"></div></div><div class="v">23,3%</div></div><div><div class="track"><div class="fill" style="width:9.9%;background:var(--s2)"></div></div><div class="v">9,9%</div></div><div><div class="track"><div class="fill" style="width:8.0%;background:var(--s2)"></div></div><div class="v">8,0%</div></div><div><div class="track"><div class="fill" style="width:6.2%;background:var(--s2)"></div></div><div class="v">6,2%</div></div>
+            <div><div class="track"><div class="fill" style="width:29.9%;background:var(--s1)"></div></div><div class="v">29,9%</div></div><div><div class="track"><div class="fill" style="width:23.3%;background:var(--s2)"></div></div><div class="v">23,3%</div></div><div><div class="track"><div class="fill" style="width:9.9%;background:var(--s2)"></div></div><div class="v">9,9%</div></div><div><div class="track"><div class="fill" style="width:8.0%;background:var(--s2)"></div></div><div class="v">8,0%</div></div><div><div class="track"><div class="fill" style="width:6.2%;background:var(--s2)"></div></div><div class="v">6,2%</div></div>
           </div>
         </div>
         <div class="grp-row">
@@ -737,7 +842,7 @@
     <div class="note">
       <div class="k">O que mudou de leitura com cinco vídeos no ar</div>
       <p>No corte anterior, com só dois Reels, a retenção parecia não ter nada a ver com o resultado: o vídeo que mais prendia era o mais caro por visita. Com cinco vídeos medidos, <strong>essa leitura se inverte</strong> — a ordem de quem segura a audiência é praticamente a mesma ordem de quem leva ao perfil mais barato.</p>
-      <p>"Adiar o projeto é adiar a vida" é hoje o vídeo que mais prende (22,5% assistem até o fim, contra 4,0% do último colocado) <em>e</em> o mais barato por visita (R$ 0,328). Ou seja: quando o vídeo segura, ele também convida.</p>
+      <p>"Adiar o projeto é adiar a vida" é hoje o vídeo que mais prende (22,5% assistem até o fim, contra 4,0% do último colocado) <em>e</em> o mais barato por visita (R$ 0,330). Ou seja: quando o vídeo segura, ele também convida.</p>
       <p>A ressalva importante continua de pé: o <strong>carrossel</strong>, que não tem vídeo nenhum, segue mais barato que quatro dos cinco Reels. O que decide aqui não é a produção — é a primeira frase nomear o problema de quem está do outro lado.</p>
     </div>
   </section>
@@ -758,28 +863,28 @@
       </div>
       <div class="grp">
         <div class="grp-row">
-          <div class="name">Stories<span>R$ 330,07 · 858 visitas · clique 3,42%</span></div>
+          <div class="name">Stories<span>R$ 332,39 · 862 visitas · clique 3,42%</span></div>
           <div class="pair">
-            <div><div class="track"><div class="fill" style="width:72.3%;background:var(--s1)"></div></div><div class="v">72,3%</div></div>
-            <div><div class="track"><div class="fill" style="width:85.2%;background:var(--s2)"></div></div><div class="v">R$ 0,385</div></div>
+            <div><div class="track"><div class="fill" style="width:72.1%;background:var(--s1)"></div></div><div class="v">72,1%</div></div>
+            <div><div class="track"><div class="fill" style="width:85.3%;background:var(--s2)"></div></div><div class="v">R$ 0,386</div></div>
           </div>
         </div>
         <div class="grp-row">
-          <div class="name">Feed<span>R$ 42,02 · 108 visitas · clique 2,81%</span></div>
+          <div class="name">Feed<span>R$ 42,55 · 109 visitas · clique 2,79%</span></div>
           <div class="pair">
             <div><div class="track"><div class="fill" style="width:9.2%;background:var(--s1)"></div></div><div class="v">9,2%</div></div>
-            <div><div class="track"><div class="fill" style="width:86.2%;background:var(--s2)"></div></div><div class="v">R$ 0,389</div></div>
+            <div><div class="track"><div class="fill" style="width:86.3%;background:var(--s2)"></div></div><div class="v">R$ 0,390</div></div>
           </div>
         </div>
         <div class="grp-row">
-          <div class="name">Reels<span>R$ 84,40 · 187 visitas · clique 4,34%</span></div>
+          <div class="name">Reels<span>R$ 85,89 · 190 visitas · clique 4,35%</span></div>
           <div class="pair">
-            <div><div class="track"><div class="fill" style="width:18.5%;background:var(--s1)"></div></div><div class="v">18,5%</div></div>
-            <div><div class="track"><div class="fill" style="width:100.0%;background:var(--s2)"></div></div><div class="v">R$ 0,451</div></div>
+            <div><div class="track"><div class="fill" style="width:18.6%;background:var(--s1)"></div></div><div class="v">18,6%</div></div>
+            <div><div class="track"><div class="fill" style="width:100.0%;background:var(--s2)"></div></div><div class="v">R$ 0,452</div></div>
           </div>
         </div>
       </div>
-      <figcaption>É no Stories que a campanha entrega melhor, de longe: leva 72% da verba e traz 74% das visitas, ao menor custo. O Reels sai mais caro (R$ 0,451 por visita contra R$ 0,385) e já recebe pouca verba, então não há o que cortar na mão: o próprio sistema está distribuindo para onde funciona.</figcaption>
+      <figcaption>É no Stories que a campanha entrega melhor, de longe: leva 72% da verba e traz 74% das visitas, ao menor custo. O Reels sai mais caro (R$ 0,452 por visita contra R$ 0,386) e já recebe pouca verba, então não há o que cortar na mão: o próprio sistema está distribuindo para onde funciona.</figcaption>
     </figure>
 
     <figure>
@@ -787,22 +892,22 @@
       <div class="fsub">Custo por visita ao perfil · público definido entre 35 e 65 anos</div>
       <div class="bars">
         <div class="bar-row">
-          <div class="name">35 a 44 anos<span>R$ 195,78 · 510 visitas · clique 3,00%</span></div>
+          <div class="name">35 a 44 anos<span>R$ 197,24 · 514 visitas · clique 3,00%</span></div>
           <div class="track"><div class="fill" style="width:87.8%;background:var(--s3)"></div></div>
           <div class="v">R$ 0,384</div>
         </div>
         <div class="bar-row">
-          <div class="name">45 a 54 anos<span>R$ 110,80 · 286 visitas · clique 3,70%</span></div>
-          <div class="track"><div class="fill" style="width:88.6%;background:var(--s1)"></div></div>
-          <div class="v">R$ 0,387</div>
+          <div class="name">45 a 54 anos<span>R$ 111,74 · 288 visitas · clique 3,69%</span></div>
+          <div class="track"><div class="fill" style="width:88.8%;background:var(--s1)"></div></div>
+          <div class="v">R$ 0,388</div>
         </div>
         <div class="bar-row">
-          <div class="name">65+ anos<span>R$ 72,51 · 171 visitas · clique 5,10%</span></div>
-          <div class="track"><div class="fill" style="width:97.0%;background:var(--s2)"></div></div>
-          <div class="v">R$ 0,424</div>
+          <div class="name">65+ anos<span>R$ 73,63 · 171 visitas · clique 5,01%</span></div>
+          <div class="track"><div class="fill" style="width:98.5%;background:var(--s2)"></div></div>
+          <div class="v">R$ 0,431</div>
         </div>
         <div class="bar-row">
-          <div class="name">55 a 64 anos<span>R$ 77,40 · 177 visitas · clique 3,73%</span></div>
+          <div class="name">55 a 64 anos<span>R$ 78,22 · 179 visitas · clique 3,77%</span></div>
           <div class="track"><div class="fill" style="width:100.0%;background:var(--s2)"></div></div>
           <div class="v">R$ 0,437</div>
         </div>
@@ -836,7 +941,7 @@
     <div class="note">
       <div class="k">A leitura honesta desse quadro — e a decisão que ele impõe</div>
       <p>A campanha <strong>entregou exatamente o que foi contratada para entregar</strong>: colocou o perfil na frente de 9,3 vezes mais gente, e gente da região certa, por um preço abaixo do histórico. Isso é distribuição, e está resolvido.</p>
-      <p>O que ela <strong>quase não</strong> produziu é vínculo. Foram <strong>1.153 pessoas abrindo o perfil</strong> desde 09/09 e o saldo de seguidores é de <strong>+17</strong> — 1,5% de quem entrou. O perfil ganha seguidor todo dia (a linha acima mostra 3,4 por dia, contra 1,0 antes), mas perde quase o mesmo tanto: é gente que abre, olha e vai embora. Em três dias isso não era veredito; em 14 dias, com 1.153 visitas, já é um sinal que não dá para ignorar.</p>
+      <p>O que ela <strong>quase não</strong> produziu é vínculo. Foram <strong>1.161 pessoas abrindo o perfil</strong> desde 09/09 e o saldo de seguidores é de <strong>+17</strong> — 1,5% de quem entrou. O perfil ganha seguidor todo dia (a linha acima mostra 3,4 por dia, contra 1,0 antes), mas perde quase o mesmo tanto: é gente que abre, olha e vai embora. Em três dias isso não era veredito; em 14 dias, com 1.161 visitas, já é um sinal que não dá para ignorar.</p>
       <p><strong>O gargalo mudou de lugar.</strong> Ele não está mais no tráfego — está no que a pessoa encontra quando chega. Os primeiros nove posts da grade, os destaques e a resposta à pergunta "essa arquiteta atende alguém como eu, e como eu falo com ela?". Otimizar anúncio daqui em diante rende cada vez menos enquanto essa porta não for arrumada.</p>
     </div>
   </section>
@@ -860,8 +965,8 @@
         <div class="k">Carrossel · publicado 08/09</div>
         <p style="margin:0 0 10px;font-size:15px">"A casa ficou linda. Só que ela não parece sua."</p>
         <ul>
-          <li><strong>R$ 0,296</strong> por visita ao perfil no período comparável.</li>
-          <li>355 visitas ao perfil desde 14/set.</li>
+          <li><strong>R$ 0,298</strong> por visita ao perfil no período comparável.</li>
+          <li>359 visitas ao perfil desde 14/set.</li>
           <li><a class="peca" href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">ver a publicação ↗</a></li>
         </ul>
       </div>
@@ -869,8 +974,8 @@
         <div class="k">Reel · publicado 31/07</div>
         <p style="margin:0 0 10px;font-size:15px">"Adiar o projeto é adiar a vida"</p>
         <ul>
-          <li><strong>R$ 0,328</strong> por visita ao perfil no período comparável.</li>
-          <li>272 visitas ao perfil desde 14/set.</li>
+          <li><strong>R$ 0,330</strong> por visita ao perfil no período comparável.</li>
+          <li>275 visitas ao perfil desde 14/set.</li>
           <li><a class="peca" href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">ver a publicação ↗</a></li>
         </ul>
       </div>
@@ -894,15 +999,15 @@
             <tr><th>Frente de conversa · 17/set a 22/set</th><th>Número</th><th>Como ler</th></tr>
           </thead>
           <tbody>
-            <tr><td class="q">Investido</td><td class="n">R$ 38,86</td><td class="q">R$ 7,00 por dia, de propósito</td></tr>
-            <tr><td class="q">Pessoas alcançadas</td><td class="n">547</td><td class="q">767 exibições · frequência 1,40</td></tr>
+            <tr><td class="q">Investido</td><td class="n">R$ 38,96</td><td class="q">R$ 7,00 por dia, de propósito</td></tr>
+            <tr><td class="q">Pessoas alcançadas</td><td class="n">548</td><td class="q">771 exibições · frequência 1,41</td></tr>
             <tr><td class="q">Conversas iniciadas no Direct</td><td class="n">1</td><td class="q">a conta inteira tinha <strong>uma</strong> em todo o histórico</td></tr>
-            <tr><td class="q">Custo por conversa</td><td class="n">R$ 38,86</td><td class="q">caro em número absoluto — e esperado nesta fase</td></tr>
-            <tr><td class="q">Custo por mil exibições</td><td class="n">R$ 50,66</td><td class="q">3,7× o do topo (R$ 13,67): público pequeno é caro</td></tr>
+            <tr><td class="q">Custo por conversa</td><td class="n">R$ 38,96</td><td class="q">caro em número absoluto — e esperado nesta fase</td></tr>
+            <tr><td class="q">Custo por mil exibições</td><td class="n">R$ 50,53</td><td class="q">3,7× o do topo (R$ 13,67): público pequeno é caro</td></tr>
           </tbody>
         </table>
       </div>
-      <p><strong>A leitura honesta:</strong> R$ 38,86 por conversa não é um número que se sustenta no longo prazo, mas ele diz menos sobre o anúncio do que sobre o tamanho do público. São pouco mais de mil pessoas na lista, e falar com elas custa 3,7 vezes mais caro do que falar com gente nova. O que essa frente provou em 5 dias é que <strong>existe pedido de conversa nesse público</strong> — depois de meses em que a conta inteira somava uma única mensagem.</p>
+      <p><strong>A leitura honesta:</strong> R$ 38,96 por conversa não é um número que se sustenta no longo prazo, mas ele diz menos sobre o anúncio do que sobre o tamanho do público. São pouco mais de mil pessoas na lista, e falar com elas custa 3,7 vezes mais caro do que falar com gente nova. O que essa frente provou em 5 dias é que <strong>existe pedido de conversa nesse público</strong> — depois de meses em que a conta inteira somava uma única mensagem.</p>
       <p><strong>Por isso a verba dela não sobe agora.</strong> O caminho não é colocar mais dinheiro em cima de mil pessoas: é o topo continuar trazendo gente nova, a lista crescer, e a conversa ficar mais barata sozinha. Ela segue em R$ 7,00 por dia, e o dinheiro maior — R$ 37,00 por dia — continua no topo.</p>
     </div>
 
@@ -918,7 +1023,7 @@
           <tr><th>O que continua em aberto</th><th>O que é</th><th>Por quê</th></tr>
         </thead>
         <tbody>
-          <tr><td class="q">O perfil como destino</td><td class="q">Grade, destaques e caminho para conversa</td><td class="q">1.153 visitas para +17 seguidores: é onde está a perda hoje, e nenhum criativo novo resolve isso</td></tr>
+          <tr><td class="q">O perfil como destino</td><td class="q">Grade, destaques e caminho para conversa</td><td class="q">1.161 visitas para +17 seguidores: é onde está a perda hoje, e nenhum criativo novo resolve isso</td></tr>
           <tr><td class="q">Medição da saída</td><td class="q">Painel do link da bio + registro das conversas que citam o Instagram</td><td class="q">O Instagram desativou a métrica de clique no link em 2026; sem isso, o funil termina cego</td></tr>
           <tr><td class="q">Banco de criativo</td><td class="q">Ainda há 49 publicações dos últimos 60 dias nunca anunciadas</td><td class="q">Não falta material; falta saber qual frase faz a pessoa querer falar com você</td></tr>
         </tbody>
@@ -927,7 +1032,7 @@
 
     <div class="note">
       <div class="k">Onde o orçamento está, faltando 8 dias para fechar o mês</div>
-      <p>O mês tem <strong>R$ 878,50</strong> de mídia (equivalente aos R$ 1.000,00 combinados, já com o imposto) e até aqui foram investidos <strong>R$ 495,35</strong>. Sobram R$ 383,15, o que dá R$ 47,89 por dia até o dia 30 — a conta está rodando R$ 44,00 por dia, dentro do que cabe. Nada foi somado ao combinado em nenhum momento do ciclo.</p>
+      <p>O mês tem <strong>R$ 878,50</strong> de mídia (equivalente aos R$ 1.000,00 combinados, já com o imposto) e até aqui foram investidos <strong>R$ 499,79</strong>. Sobram R$ 378,71, o que dá R$ 47,34 por dia até o dia 30 — a conta está rodando R$ 44,00 por dia, dentro do que cabe. Nada foi somado ao combinado em nenhum momento do ciclo.</p>
       <p><strong>O que olhar no próximo corte:</strong> se a segunda conversa chega e a que já veio vira orçamento pedido. E, principalmente, se o perfil passa a segurar quem a campanha leva — é o único número que ainda não melhorou.</p>
     </div>
   </section>
@@ -967,6 +1072,45 @@
     </div>
   </section>
 
+  <section>
+    <h2>Por dia · escolher datas</h2>
+    <p>O relatório todo é o acumulado desde 09/09. Aqui você escolhe o intervalo —
+       e pode tirar um dia específico da conta desmarcando a caixinha dele.</p>
+
+<div class="dd" style="--dd-tema:#7a5c9e;--dd-tema-esc:#2b2136;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, ou o dia em que a conta ficou parada —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
+  </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Por frente</b><em>cada frente conta o próprio resultado — não são a mesma coisa</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e resultados por dia</b>
+    <em>barra = investido · linha = resultados do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+</div>
+  </section>
+
   <footer class="end">
     <div style="display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between">
       <span style="font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)">Gio Growth Digital · Giovanna Ramires</span>
@@ -974,5 +1118,424 @@
     </div>
   </footer>
 </div>
+<script>
+window.__DIA__ = {"desde":"2026-09-09","ate":"2026-09-22","imposto":0,"campos":["gasto","impressoes","cliques","resultados"],"met":{"gasto":"gasto","conv":"resultados","conv_rot":"Resultados","conv_rot_curto":"Result.","conv_rot_1":"resultados","conv_rot_s":"resultado","receita":null,"etapa":null,"impr":"impressoes","cliq":"cliques"},"eixo":{"ordem":["topo","conversa"],"defs":{"topo":{"nome":"Topo · perfil","cor":"#7a5c9e","sub":"resultado = visita ao perfil"},"conversa":{"nome":"Conversa","cor":"#c98a3c","sub":"resultado = mensagem iniciada no Direct"}}},"dias":[["2026-09-09","topo",25.84,1656,0,37],["2026-09-10","topo",27.62,1887,0,52],["2026-09-11","topo",25.92,1842,0,69],["2026-09-12","topo",21.32,1678,0,41],["2026-09-13","topo",35.22,3056,0,72],["2026-09-14","topo",35.52,2752,0,119],["2026-09-15","topo",43.13,3195,0,97],["2026-09-16","topo",44.61,3052,0,96],["2026-09-17","conversa",5.44,103,0,0],["2026-09-17","topo",39.23,2745,0,113],["2026-09-18","conversa",7.91,166,0,0],["2026-09-18","topo",31.0,2258,0,95],["2026-09-19","conversa",3.33,82,0,0],["2026-09-19","topo",36.02,2558,0,102],["2026-09-20","conversa",7.02,130,0,1],["2026-09-20","topo",47.89,3389,0,142],["2026-09-21","conversa",10.12,213,0,0],["2026-09-21","topo",31.37,2493,0,88],["2026-09-22","conversa",5.14,77,0,0],["2026-09-22","topo",16.14,1139,0,38]],"tabelas":[]};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        if (li && m.conv) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
+</script>
 </body>
 </html>
