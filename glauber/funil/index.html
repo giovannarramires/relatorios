@@ -847,7 +847,10 @@ window.__DIA__ = {"desde":"2026-08-24","ate":"2026-09-22","imposto":0,"campos":[
       var corpo = ls.slice(0, t.top || 25).map(function (a) {
         var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
         var nome = esc((t.nomes || {})[a._k] || a._k);
-        if (li && m.conv) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        // Link SEMPRE que existir, mesmo sem conversao no periodo (regra da Gio,
+        // 23/09/2026): anuncio que nao vendeu e justamente o que ela precisa
+        // abrir para entender por que nao vendeu.
+        if (li) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
         else nome = '<b>' + nome + '</b>';
         var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
         var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
