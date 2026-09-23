@@ -91,14 +91,21 @@ h1,h2,h3,.display{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spa
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
 .hero-bg::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(15,13,12,.72) 0%,rgba(15,13,12,.80) 45%,rgba(15,13,12,.96) 100%);
+  background:linear-gradient(180deg,rgba(15,13,12,.62) 0%,rgba(15,13,12,.74) 45%,rgba(15,13,12,.96) 100%);
 }
 .hero-in{position:relative;z-index:1;padding:28px 0 56px}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:36px}
-h1{font-size:clamp(38px,6.4vw,68px);line-height:.98}
+.hero-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:22px 48px;
+  grid-template-areas:"texto form" "selos form";
+  align-content:center;padding-top:36px;
+}
+.hero-texto{grid-area:texto;align-self:end}
+.hero-grid .card-form{grid-area:form;align-self:center}
+.selos{grid-area:selos;align-self:start}
+h1{font-size:clamp(34px,6.4vw,68px);line-height:.98;text-shadow:0 2px 24px rgba(0,0,0,.55)}
 h1 .hl{color:var(--dourado)}
 .lead{font-size:clamp(17px,2.2vw,20px);color:var(--creme-2);margin:20px 0 0;max-width:30em}
-.selos{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.selos{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
 .selos li{
   font-size:14px;font-weight:600;background:rgba(246,239,234,.06);
   border:1px solid var(--linha);border-radius:999px;padding:7px 14px;
@@ -131,6 +138,15 @@ h1 .hl{color:var(--dourado)}
 .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(226,58,58,.38)}
 .btn-wpp{background:linear-gradient(180deg,#2BBF63,#159949);box-shadow:0 8px 24px rgba(43,191,99,.25)}
 .btn-wpp:hover{box-shadow:0 12px 30px rgba(43,191,99,.35)}
+.opcional{
+  font-weight:600;font-size:11px;letter-spacing:.08em;color:var(--creme-3);
+  border:1px solid var(--linha);border-radius:999px;padding:2px 8px;margin-left:8px;
+}
+.atalho-wpp{
+  display:block;text-align:center;margin-top:14px;font-weight:700;font-size:15px;
+  color:var(--creme-2);text-decoration:none;
+}
+.atalho-wpp:hover{color:var(--dourado)}
 .miudo{font-size:12.5px;color:var(--creme-3);margin:12px 0 0;text-align:center;line-height:1.5}
 .miudo a{color:var(--creme-2)}
 .ou{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--creme-3);font-size:13px;text-transform:uppercase;letter-spacing:.12em}
@@ -233,7 +249,18 @@ footer a{color:var(--creme-2)}
 .barra .btn{padding:15px;font-size:17px}
 
 @media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:30px;padding-top:18px}
+  /* a foto da academia precisa ser vista antes de qualquer texto */
+  .hero-bg::after{
+    background:linear-gradient(180deg,
+      rgba(15,13,12,.28) 0%, rgba(15,13,12,.52) 26%,
+      rgba(15,13,12,.90) 58%, rgba(15,13,12,.99) 100%);
+  }
+  .hero-in{padding:14px 0 30px}
+  /* e o formulário vem logo depois do título, sem texto no meio */
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"texto" "form" "selos";gap:18px;padding-top:120px}
+  .hero-texto{align-self:auto}
+  .card-form{padding:20px}
+  .card-form h2{font-size:21px}
   .pilares{grid-template-columns:repeat(2,1fr)}
   .aulas{grid-template-columns:1fr}
   .passos{grid-template-columns:1fr}
@@ -270,25 +297,21 @@ footer a{color:var(--creme-2)}
       </div>
 
       <div class="hero-grid">
-        <div>
+        <div class="hero-texto">
           <p class="eyebrow">Av. JK, 3761 · Região do Shopping Iguatemi · Rio Preto</p>
           <h1>Venha conhecer a <span class="hl">Academia Go Heat</span></h1>
-          <p class="lead">
-            Antes de decidir onde treinar, faça uma aula com a gente. Musculação,
-            Muay Thai, Jiu-Jítsu, Submission e Pilates na mesma casa — com turmas
-            kids e teen pros seus filhos.
-          </p>
-          <ul class="selos">
-            <li>Aula experimental gratuita</li>
-            <li>Sem matrícula pra experimentar</li>
-            <li>Professor junto na primeira aula</li>
-          </ul>
         </div>
+
+        <ul class="selos">
+          <li>Aula experimental gratuita</li>
+          <li>Sem matrícula pra experimentar</li>
+          <li>Professor junto na primeira aula</li>
+        </ul>
 
         <!-- formulário principal -->
         <div class="card-form" id="agendar">
           <h2>Agende sua aula experimental</h2>
-          <p class="sub">Preenche aí que a recepção confirma o seu horário.</p>
+          <p class="sub">Dois campos e pronto — a recepção confirma seu horário no WhatsApp.</p>
           <form class="form-lead" data-origem="hero">
             <div class="campo">
               <label for="nome-1">Seu nome</label>
@@ -299,29 +322,21 @@ footer a{color:var(--creme-2)}
               <input id="fone-1" name="fone" type="tel" inputmode="numeric" placeholder="(17) 90000-0000" required autocomplete="tel">
             </div>
             <div class="campo">
-              <label for="mod-1">Qual aula você quer fazer</label>
-              <select id="mod-1" name="modalidade" required>
-                <option value="">Escolha uma opção</option>
+              <label for="mod-1">Qual aula <span class="opcional">opcional</span></label>
+              <select id="mod-1" name="modalidade">
+                <option selected>Ainda não sei — quero conhecer</option>
                 <option>Musculação</option>
                 <option>Muay Thai</option>
                 <option>Jiu-Jítsu</option>
                 <option>Submission</option>
                 <option>Pilates</option>
                 <option>Turma Kids / Teen</option>
-                <option>Ainda não sei — quero conhecer</option>
-              </select>
-            </div>
-            <div class="campo">
-              <label for="dia-1">Melhor dia pra você vir</label>
-              <select id="dia-1" name="dia" required>
-                <option value="">Escolha uma opção</option>
-                <option>Hoje mesmo</option>
-                <option>Amanhã</option>
-                <option>Nesta semana</option>
-                <option>Na semana que vem</option>
               </select>
             </div>
             <button type="submit" class="btn">Quero agendar minha aula</button>
+            <a class="atalho-wpp" href="https://wa.me/5517981200070"
+               data-wpp-base="Oi! Quero agendar minha aula experimental na Academia Go Heat."
+               data-cta="hero-whatsapp">ou chame no WhatsApp →</a>
             <p class="miudo">
               Seus dados vão direto pro WhatsApp da recepção. Ao enviar você concorda com a
               <a href="privacidade.html">Política de Privacidade</a>.
@@ -332,6 +347,23 @@ footer a{color:var(--creme-2)}
     </div>
   </div>
 </div>
+
+<!-- ══════════ A CASA ══════════ -->
+<section style="padding-bottom:56px">
+  <div class="wrap">
+    <p class="eyebrow">A casa</p>
+    <h2 class="sec-titulo">Vem ver de perto</h2>
+    <p class="sec-texto">
+      Pé-direito alto, equipamento novo, tatame separado do salão e uma turma que
+      conhece todo mundo pelo nome. É isso que te espera na aula experimental.
+    </p>
+    <div class="galeria">
+      <img class="alta" src="img/casa-arco.jpg" alt="Salão de musculação da Go Heat com o arco iluminado" loading="lazy">
+      <img class="larga" src="img/casa-corredor.jpg" alt="Área de máquinas e anilhas da Go Heat" loading="lazy">
+      <img class="larga" src="img/casa-maquina.jpg" alt="Equipamento de musculação com a marca Go Heat" loading="lazy">
+    </div>
+  </div>
+</section>
 
 <!-- ══════════ PILARES ══════════ -->
 <div class="pilares">
@@ -480,22 +512,6 @@ footer a{color:var(--creme-2)}
   </section>
 </div>
 
-<!-- ══════════ A CASA ══════════ -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow">A casa</p>
-    <h2 class="sec-titulo">Vem ver de perto</h2>
-    <p class="sec-texto">
-      Pé-direito alto, equipamento novo, tatame separado do salão e uma turma que
-      conhece todo mundo pelo nome. É isso que te espera na aula experimental.
-    </p>
-    <div class="galeria">
-      <img class="alta" src="img/casa-arco.jpg" alt="Salão de musculação da Go Heat com o arco iluminado" loading="lazy">
-      <img class="larga" src="img/casa-corredor.jpg" alt="Área de máquinas e anilhas da Go Heat" loading="lazy">
-      <img class="larga" src="img/casa-maquina.jpg" alt="Equipamento de musculação com a marca Go Heat" loading="lazy">
-    </div>
-  </div>
-</section>
 
 <!-- ══════════ FAMÍLIA ══════════ -->
 <section style="padding-top:0">
@@ -607,26 +623,15 @@ footer a{color:var(--creme-2)}
             <input id="fone-2" name="fone" type="tel" inputmode="numeric" placeholder="(17) 90000-0000" required autocomplete="tel">
           </div>
           <div class="campo">
-            <label for="mod-2">Qual aula você quer fazer</label>
-            <select id="mod-2" name="modalidade" required>
-              <option value="">Escolha uma opção</option>
+            <label for="mod-2">Qual aula <span class="opcional">opcional</span></label>
+            <select id="mod-2" name="modalidade">
+              <option selected>Ainda não sei — quero conhecer</option>
               <option>Musculação</option>
               <option>Muay Thai</option>
               <option>Jiu-Jítsu</option>
               <option>Submission</option>
               <option>Pilates</option>
               <option>Turma Kids / Teen</option>
-              <option>Ainda não sei — quero conhecer</option>
-            </select>
-          </div>
-          <div class="campo">
-            <label for="dia-2">Melhor dia pra você vir</label>
-            <select id="dia-2" name="dia" required>
-              <option value="">Escolha uma opção</option>
-              <option>Hoje mesmo</option>
-              <option>Amanhã</option>
-              <option>Nesta semana</option>
-              <option>Na semana que vem</option>
             </select>
           </div>
           <button type="submit" class="btn">Quero agendar minha aula</button>
@@ -749,21 +754,19 @@ footer a{color:var(--creme-2)}
       var nome = (f.get("nome")||"").trim();
       var fone = (f.get("fone")||"").trim();
       var mod  = f.get("modalidade");
-      var dia  = f.get("dia");
 
       if (fone.replace(/\D/g,"").length < 10) {
         form.querySelector('input[name="fone"]').focus();
         return;
       }
 
-      track("lead_enviado", {origem: form.dataset.origem, modalidade: mod, dia: dia, veio_de: ORIGEM});
+      track("lead_enviado", {origem: form.dataset.origem, modalidade: mod, veio_de: ORIGEM});
 
       var msg =
         "Oi! Quero agendar minha aula experimental na Academia Go Heat.\n\n" +
         "Nome: " + nome + "\n" +
         "WhatsApp: " + fone + "\n" +
-        "Quero fazer: " + mod + "\n" +
-        "Melhor dia: " + dia;
+        "Quero fazer: " + mod;
 
       window.location.href = linkWpp(msg);
     });
