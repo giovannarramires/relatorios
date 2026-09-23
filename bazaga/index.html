@@ -1,0 +1,464 @@
+<title>André Bazaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Archivo:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#111312;
+  --ground:#f3f3f1;
+  --surface:#ffffff;
+  --line:#dcdcd7;
+  --line-soft:#e7e7e3;
+  --muted:#6b6e6a;
+  --accent:#2a7fb5;
+  --display:"Bodoni Moda",Didot,"Times New Roman",serif;
+  --ui:"Archivo",system-ui,-apple-system,sans-serif;
+  --gut:clamp(20px,5vw,64px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#ecece7;
+    --ground:#111312;
+    --surface:#191c1b;
+    --line:#2f3332;
+    --line-soft:#232726;
+    --muted:#9ba09c;
+    --accent:#63b2e0;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ecece7;
+  --ground:#111312;
+  --surface:#191c1b;
+  --line:#2f3332;
+  --line-soft:#232726;
+  --muted:#9ba09c;
+  --accent:#63b2e0;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--ui);
+  font-size:17px;
+  line-height:1.65;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:inherit}
+:where(a,button):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ================= topo ================= */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--ground) 92%,transparent);
+  backdrop-filter:saturate(1.6) blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar-in{
+  max-width:1280px;margin:0 auto;
+  padding-inline:var(--gut);padding-block:14px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.brand{
+  font-family:var(--display);font-size:19px;letter-spacing:.06em;
+  text-transform:uppercase;text-decoration:none;margin-right:auto;
+}
+nav{display:flex;gap:22px}
+nav a{
+  font-size:13.5px;letter-spacing:.06em;text-decoration:none;color:var(--muted);
+  padding-block:4px;border-bottom:1px solid transparent;transition:color .18s,border-color .18s;
+}
+nav a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.langs{display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}
+.langs button{
+  font-family:var(--ui);font-size:11.5px;font-weight:600;letter-spacing:.09em;
+  background:none;border:0;color:var(--muted);cursor:pointer;
+  padding:5px 10px;border-radius:999px;transition:background .18s,color .18s;
+}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+
+/* ================= estrutura ================= */
+main{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
+section{padding-block:clamp(56px,9vw,116px);border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:0}
+.kicker{
+  font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:22px;
+}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+
+/* ================= hero ================= */
+.hero{padding-block:clamp(44px,8vw,90px) clamp(40px,6vw,72px);border-bottom:0}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(52px,13vw,148px);
+  line-height:.92;letter-spacing:-.015em;
+  margin-bottom:18px;
+}
+.hero .role{
+  font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:34px;
+}
+.hero .lead{
+  font-family:var(--display);
+  font-size:clamp(21px,2.9vw,33px);
+  line-height:1.32;max-width:24ch;margin-bottom:34px;
+}
+.hero .scroll{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  border-bottom:1px solid var(--ink);padding-bottom:5px;
+}
+.hero-art{margin-top:clamp(40px,7vw,80px)}
+.hero-art img{width:100%;height:auto;display:block}
+.hero-art figcaption{
+  margin-top:12px;font-size:13px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:4px 12px;
+}
+.hero-art figcaption b{font-weight:500;color:var(--ink);font-style:italic}
+
+/* ================= sobre ================= */
+.about{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.about{grid-template-columns:minmax(0,34%) minmax(0,66%)}}
+.about h2{font-family:var(--display);font-size:clamp(30px,4.6vw,52px);line-height:1.05;letter-spacing:-.01em}
+.about-portrait{margin:30px 0 0;max-width:360px}
+.about-portrait img{width:100%;height:auto;display:block;background:var(--line-soft)}
+.about-portrait figcaption{margin-top:11px;font-size:13px;color:var(--muted);line-height:1.5}
+.about-body{display:flex;flex-direction:column;gap:20px;max-width:62ch}
+.about-body p{margin:0}
+.about-body .bio{
+  font-family:var(--display);font-size:clamp(19px,2.2vw,24px);line-height:1.45;
+  padding-bottom:6px;
+}
+.cv{
+  margin-top:14px;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px;
+}
+.cv .cv-label{font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.cv p{font-size:15.5px;color:var(--muted);margin:0}
+
+/* ================= obras ================= */
+.works-head{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(30px,4vw,54px)}
+.works-head h2{font-family:var(--display);font-size:clamp(30px,4.6vw,52px);line-height:1.05;letter-spacing:-.01em}
+.works-head .note{font-size:15px;color:var(--muted);max-width:44ch}
+
+.row{display:grid;gap:clamp(20px,3.2vw,44px);align-items:start;margin-bottom:clamp(28px,4.5vw,64px)}
+.row.two{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.row.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.row.wide{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.row.wide{grid-template-columns:minmax(0,1fr) minmax(0,34%);align-items:end}}
+
+figure.work{margin:0;display:flex;flex-direction:column;gap:13px}
+figure.work img{
+  width:100%;height:auto;display:block;
+  background:var(--line-soft);
+  transition:opacity .25s;
+}
+figure.work:hover img{opacity:.92}
+figure.work figcaption{display:flex;flex-direction:column;gap:2px}
+figure.work .t{font-family:var(--display);font-size:clamp(18px,2vw,22px);font-style:italic}
+figure.work .m{font-size:14px;color:var(--muted)}
+.ar-9273 img{aspect-ratio:92/73;object-fit:contain}
+.ar-8060 img{aspect-ratio:60/80;object-fit:contain}
+.ar-6080 img{aspect-ratio:80/60;object-fit:contain}
+.ar-sq img{aspect-ratio:1/1;object-fit:contain}
+
+.pf-ask{
+  margin-top:clamp(20px,3vw,38px);
+  padding-top:26px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:14px 28px;align-items:baseline;
+}
+.pf-ask a{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:5px;
+}
+.pf-ask span{font-size:14.5px;color:var(--muted)}
+
+/* ================= contato ================= */
+.contact{display:grid;gap:clamp(24px,4vw,56px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.contact{grid-template-columns:minmax(0,34%) minmax(0,66%)}}
+.contact h2{font-family:var(--display);font-size:clamp(30px,4.6vw,52px);line-height:1.05;letter-spacing:-.01em}
+.contact .note{font-size:16px;color:var(--muted);max-width:40ch;margin-bottom:28px}
+.cbox{display:flex;flex-direction:column}
+.cline{
+  display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;
+  padding-block:16px;border-top:1px solid var(--line);
+}
+.cline:last-child{border-bottom:1px solid var(--line)}
+.cline .k{font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);min-width:84px}
+.cline .v{font-family:var(--display);font-size:clamp(19px,2.3vw,26px)}
+.cline a{text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .18s}
+.cline a:hover{border-bottom-color:var(--ink)}
+
+footer{
+  max-width:1280px;margin:0 auto;padding-inline:var(--gut);
+  padding-block:30px 44px;border-top:1px solid var(--line-soft);
+  display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between;
+  font-size:12.5px;color:var(--muted);
+}
+</style>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">André Bazaga</a>
+    <nav>
+      <a href="#obra" data-t="navWork"></a>
+      <a href="#sobre" data-t="navAbout"></a>
+      <a href="#contacto" data-t="navContact"></a>
+    </nav>
+    <div class="langs" role="group" aria-label="Idioma">
+      <button type="button" id="lang-es" data-set="es" aria-pressed="true">ES</button>
+      <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+      <button type="button" id="lang-pt" data-set="pt" aria-pressed="false">PT</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1>André Bazaga</h1>
+    <span class="role" data-t="role"></span>
+    <p class="lead" data-t="heroLead"></p>
+    <a class="scroll" href="#obra"><span data-t="cta"></span> ↓</a>
+
+    <figure class="hero-art">
+      <img src="obras/07_casita-blanca_60x80.jpeg" width="2048" height="1542"
+           alt="Casita blanca — céu pintado a óleo com sol, nuvens e uma casinha desenhados a pastel">
+      <figcaption><b>Casita blanca</b><span data-t="medium"></span><span>60 × 80 cm</span></figcaption>
+    </figure>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section id="sobre">
+    <div class="about">
+      <div>
+        <span class="kicker" data-t="aboutKicker"></span>
+        <h2 data-t="aboutTitle"></h2>
+        <figure class="about-portrait">
+          <img src="obras/00_andre-atelie.jpeg" width="1200" height="1600"
+               alt="André Bazaga pintando diante da janela do seu ateliê em Barcelona">
+          <figcaption data-t="portraitCap"></figcaption>
+        </figure>
+      </div>
+      <div class="about-body">
+        <p class="bio" data-t="bio"></p>
+        <p data-t="st1"></p>
+        <p data-t="st2"></p>
+        <p data-t="st3"></p>
+        <p data-t="st4"></p>
+        <div class="cv">
+          <span class="cv-label" data-t="cvLabel"></span>
+          <p data-t="cv"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OBRA ===== -->
+  <section id="obra">
+    <span class="kicker" data-t="worksKicker"></span>
+    <div class="works-head">
+      <h2 data-t="worksTitle"></h2>
+      <p class="note" data-t="worksNote"></p>
+    </div>
+
+    <!-- os dois corações: mesmo formato, um responde ao outro -->
+    <div class="row two">
+      <figure class="work ar-9273">
+        <img src="obras/02_cupido_92x73.jpeg" width="1622" height="2048"
+             alt="Cupido — coração anatômico numa mão, com flecha desenhada a pastel">
+        <figcaption><span class="t">Cupido</span><span class="m"><span data-t="medium"></span> · 92 × 73 cm</span></figcaption>
+      </figure>
+      <figure class="work ar-9273">
+        <img src="obras/01_me-quita-el-aire_92x73.jpeg" width="1594" height="2048"
+             alt="Me quita el aire — mão segurando um saco com sangue, coração desenhado no pulso">
+        <figcaption><span class="t">Me quita el aire</span><span class="m"><span data-t="medium"></span> · 92 × 73 cm</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- as duas Eden: a inversão entre o pintado e o desenhado -->
+    <div class="row two">
+      <figure class="work ar-sq">
+        <img src="obras/03_eden_60x60.jpeg" width="2048" height="2032"
+             alt="Eden — folhagem pintada, flores desenhadas a pastel e borboletas pintadas">
+        <figcaption><span class="t">Eden</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm</span></figcaption>
+      </figure>
+      <figure class="work ar-sq">
+        <img src="obras/04_eden-ii_60x60.jpeg" width="2048" height="2038"
+             alt="Eden II — flores cosmos pintadas e borboletas desenhadas a pastel azul">
+        <figcaption><span class="t">Eden II</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="row wide">
+      <figure class="work ar-8060">
+        <img src="obras/06_mediterraneo_80x60.jpeg" width="1520" height="2048"
+             alt="Mediterráneo — água pintada com peixes desenhados a pastel roxo, vermelho e laranja">
+        <figcaption><span class="t">Mediterráneo</span><span class="m"><span data-t="medium"></span> · 80 × 60 cm</span></figcaption>
+      </figure>
+      <figure class="work ar-sq">
+        <img src="obras/05_deseo_40x40.jpeg" width="2048" height="2036"
+             alt="Deseo — balas num prato, com uma mão desenhada a pastel branco">
+        <figcaption><span class="t">Deseo</span><span class="m"><span data-t="medium"></span> · 40 × 40 cm</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="pf-ask">
+      <a href="portfolio/" id="pf-link"><span data-t="askPortfolio"></span> →</a>
+      <span data-t="askNote"></span>
+    </div>
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+  <section id="contacto">
+    <div class="contact">
+      <div>
+        <span class="kicker" data-t="contactKicker"></span>
+        <h2 data-t="contactTitle"></h2>
+      </div>
+      <div>
+        <p class="note" data-t="contactNote"></p>
+        <div class="cbox">
+          <div class="cline">
+            <span class="k" data-t="kMail"></span>
+            <span class="v"><a href="mailto:info@andrebazaga.com" id="mail-link">info@andrebazaga.com</a></span>
+          </div>
+          <div class="cline">
+            <span class="k" data-t="kPhone"></span>
+            <span class="v"><a href="tel:+34608809745">+34 608 80 97 45</a></span>
+          </div>
+          <div class="cline">
+            <span class="k" data-t="kCity"></span>
+            <span class="v" data-t="city"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 André Bazaga</span>
+  <span data-t="rights"></span>
+</footer>
+
+<script>
+(function(){
+  var T = {
+    es:{
+      navWork:"Obra", navAbout:"Sobre", navContact:"Contacto",
+      role:"Artista visual · Barcelona",
+      heroLead:"Mi pintura nace del encuentro entre dos lenguajes visuales aparentemente opuestos: el realismo y la expresión naïf del dibujo infantil.",
+      cta:"Ver la obra",
+      medium:"Óleo y pastel al óleo sobre lino",
+      aboutKicker:"Sobre", aboutTitle:"El artista",
+      bio:"André Bazaga es artista visual residente en Barcelona. Se graduó en Artes Plásticas por la Universidad Federal de Uberlândia, Brasil, en 2008.",
+      st1:"Trabajo principalmente con pintura al óleo, creando imágenes precisas y detalladas en las que la observación, la técnica y el control son esenciales. Sobre esta superficie realista aparece otro lenguaje, creado con pastel al óleo: espontáneo, intuitivo y aparentemente sencillo.",
+      st2:"Me interesa la tensión entre precisión y espontaneidad, entre lo aprendido y lo instintivo, y entre la mirada adulta y la manera de ver del niño. Al introducir el lenguaje del dibujo infantil en una pintura realista, creo una tensión visual que también refleja algo profundamente personal.",
+      st3:"En este sentido, mi pintura se convierte en una especie de autorretrato: en ella conviven el adulto que observa y analiza y el niño que permanece presente, curioso, instintivo y libre.",
+      st4:"Es a través del encuentro entre estos dos lenguajes como exploro ideas relacionadas con la identidad, la memoria y esa parte de la infancia que continúa viviendo dentro de nosotros.",
+      cvLabel:"Exposiciones",
+      cv:"Ha participado en exposiciones en Brasil, Estados Unidos, Japón y España, incluyendo el MEAM Hall de Barcelona y el Espacio Jovellanos, Madrid (2025).",
+      worksKicker:"Obra", worksTitle:"Obra seleccionada",
+      worksNote:"Una selección. El catálogo completo, con medidas, disponibilidad y precios, se envía a petición.",
+      askPortfolio:"Ver el portafolio completo", askNote:"Diez páginas en A4, listas para descargar en PDF.",
+      contactKicker:"Contacto", contactTitle:"Hablemos",
+      contactNote:"Para adquisiciones, encargos, prensa o visitas de estudio.",
+      kMail:"Correo", kPhone:"Teléfono", kCity:"Estudio",
+      city:"Barcelona, España",
+      rights:"Todas las obras son propiedad del artista.",
+      portraitCap:"André Bazaga en su estudio, Barcelona.",
+      mailSubject:"Portafolio — André Bazaga"
+    },
+    en:{
+      navWork:"Work", navAbout:"About", navContact:"Contact",
+      role:"Visual artist · Barcelona",
+      heroLead:"My painting arises from the encounter between two seemingly opposite visual languages: realism and the naïve expression of children's drawing.",
+      cta:"See the work",
+      medium:"Oil and oil pastel on linen",
+      aboutKicker:"About", aboutTitle:"The artist",
+      bio:"André Bazaga is a visual artist based in Barcelona, Spain. He graduated in Fine Arts from the Federal University of Uberlândia, Brazil, in 2008.",
+      st1:"I work primarily with oil paint, creating precise and detailed images in which observation, technique and control are essential. Across this realistic surface, another language emerges through oil pastel: spontaneous, intuitive and seemingly simple.",
+      st2:"I am interested in the tension between precision and spontaneity, between what is learned and what is instinctive, and between the adult gaze and the way a child sees the world. By introducing the language of children's drawing into a realistic painting, I create a visual tension that also reflects something deeply personal.",
+      st3:"In this sense, my painting becomes a kind of self-portrait: within it coexist the adult who observes and analyses, and the child who remains present, curious, instinctive and free.",
+      st4:"It is through the encounter between these two languages that I explore ideas of identity, memory, and that part of childhood that continues to live within us.",
+      cvLabel:"Exhibitions",
+      cv:"He has exhibited in Brazil, the United States, Japan and Spain, including MEAM Hall in Barcelona and Espacio Jovellanos in Madrid (2025).",
+      worksKicker:"Work", worksTitle:"Selected work",
+      worksNote:"A selection. The full catalogue, with dimensions, availability and prices, is sent on request.",
+      askPortfolio:"See the full portfolio", askNote:"Ten A4 pages, ready to download as a PDF.",
+      contactKicker:"Contact", contactTitle:"Let's talk",
+      contactNote:"For acquisitions, commissions, press or studio visits.",
+      kMail:"Email", kPhone:"Phone", kCity:"Studio",
+      city:"Barcelona, Spain",
+      rights:"All works are the property of the artist.",
+      portraitCap:"André Bazaga in his studio, Barcelona.",
+      mailSubject:"Portfolio — André Bazaga"
+    },
+    pt:{
+      navWork:"Obra", navAbout:"Sobre", navContact:"Contato",
+      role:"Artista visual · Barcelona",
+      heroLead:"Minha pintura nasce do encontro entre duas linguagens visuais aparentemente opostas: o realismo e a expressão naïf do desenho infantil.",
+      cta:"Ver a obra",
+      medium:"Óleo e pastel oleoso sobre linho",
+      aboutKicker:"Sobre", aboutTitle:"O artista",
+      bio:"André Bazaga é artista visual radicado em Barcelona, Espanha. Graduou-se em Artes Plásticas pela Universidade Federal de Uberlândia, Brasil, em 2008.",
+      st1:"Trabalho principalmente com pintura a óleo, criando imagens precisas e detalhadas, em que observação, técnica e controle são essenciais. Sobre essa superfície realista surge outra linguagem, feita com pastel oleoso: espontânea, intuitiva e aparentemente simples.",
+      st2:"Me interessa a tensão entre precisão e espontaneidade, entre o aprendido e o instintivo, entre o olhar adulto e o modo de ver da criança. Ao introduzir a linguagem do desenho infantil numa pintura realista, crio uma tensão visual que também reflete algo profundamente pessoal.",
+      st3:"Nesse sentido, minha pintura se torna uma espécie de autorretrato: nela convivem o adulto que observa e analisa e a criança que permanece presente, curiosa, instintiva e livre.",
+      st4:"É pelo encontro entre essas duas linguagens que exploro ideias ligadas à identidade, à memória e a essa parte da infância que continua viva dentro de nós.",
+      cvLabel:"Exposições",
+      cv:"Participou de exposições no Brasil, nos Estados Unidos, no Japão e na Espanha, entre elas o MEAM Hall, em Barcelona, e o Espacio Jovellanos, em Madri (2025).",
+      worksKicker:"Obra", worksTitle:"Obra selecionada",
+      worksNote:"Uma seleção. O catálogo completo, com medidas, disponibilidade e preços, é enviado mediante solicitação.",
+      askPortfolio:"Ver o portfólio completo", askNote:"Dez páginas em A4, prontas para baixar em PDF.",
+      contactKicker:"Contato", contactTitle:"Vamos conversar",
+      contactNote:"Para aquisições, encomendas, imprensa ou visitas ao ateliê.",
+      kMail:"E-mail", kPhone:"Telefone", kCity:"Ateliê",
+      city:"Barcelona, Espanha",
+      rights:"Todas as obras são propriedade do artista.",
+      portraitCap:"André Bazaga no ateliê, em Barcelona.",
+      mailSubject:"Portfólio — André Bazaga"
+    }
+  };
+
+  var LANGS = ["es","en","pt"];
+  var current = "es";
+
+  function apply(lang){
+    if(LANGS.indexOf(lang) === -1){ lang = "es"; }
+    current = lang;
+    var dict = T[lang];
+    document.querySelectorAll("[data-t]").forEach(function(el){
+      var v = dict[el.dataset.t];
+      if(typeof v === "string"){ el.textContent = v; }
+    });
+    document.querySelectorAll(".langs button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.set === lang));
+    });
+    try{ localStorage.setItem("bazaga-lang", lang); }catch(e){}
+  }
+
+  document.querySelectorAll(".langs button").forEach(function(b){
+    b.addEventListener("click", function(){ apply(b.dataset.set); });
+  });
+
+  var start = null;
+  try{ start = localStorage.getItem("bazaga-lang"); }catch(e){}
+  if(!start){
+    var nav = (navigator.language || "es").slice(0,2).toLowerCase();
+    start = LANGS.indexOf(nav) !== -1 ? nav : "es";
+  }
+  apply(start);
+})();
+</script>
