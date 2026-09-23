@@ -265,7 +265,8 @@ footer a{color:var(--creme-2)}
           <span class="marca-cima">Academia</span>
           <span class="marca"><span class="go">Go</span><span class="heat">Heat</span></span>
         </span>
-        <a class="tel" href="https://wa.me/5517981200070?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Go%20Heat." data-cta="topo-whatsapp">(17) 98120-0070</a>
+        <a class="tel" href="https://wa.me/5517981200070?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Academia%20Go%20Heat."
+           data-wpp-base="Oi! Quero saber mais sobre a Academia Go Heat." data-cta="topo-whatsapp">(17) 98120-0070</a>
       </div>
 
       <div class="hero-grid">
@@ -632,7 +633,8 @@ footer a{color:var(--creme-2)}
         </form>
 
         <div class="ou">ou</div>
-        <a class="btn btn-wpp" href="https://wa.me/5517981200070?text=Oi!%20Quero%20agendar%20minha%20aula%20experimental%20na%20Go%20Heat." data-cta="whatsapp-direto">Chamar no WhatsApp</a>
+        <a class="btn btn-wpp" href="https://wa.me/5517981200070?text=Oi!%20Quero%20agendar%20minha%20aula%20experimental%20na%20Academia%20Go%20Heat."
+           data-wpp-base="Oi! Quero agendar minha aula experimental na Academia Go Heat." data-cta="whatsapp-direto">Chamar no WhatsApp</a>
         <p class="miudo">
           Respondemos dentro do horário de funcionamento. Ao enviar você concorda com a
           <a href="privacidade.html">Política de Privacidade</a>.
@@ -668,6 +670,58 @@ footer a{color:var(--creme-2)}
 (function(){
   var WPP = "5517981200070";
 
+  // ───── de onde a pessoa veio ─────
+  // Guarda a origem na primeira visita (sessionStorage) pra não perder o dado
+  // se ela navegar dentro da página e voltar. Toda mensagem que sai daqui leva
+  // essa assinatura, pra recepção saber na hora que o contato veio do site —
+  // e, quando o anúncio mandou UTM, de qual anúncio veio.
+  var ORIGEM = (function(){
+    var q = new URLSearchParams(location.search);
+    function pega(k){ return (q.get(k) || "").trim(); }
+
+    var salvo;
+    try { salvo = sessionStorage.getItem("goheat_origem"); } catch(e){ salvo = null; }
+
+    var fonte = pega("utm_source").toLowerCase();
+    var campanha = pega("utm_campaign");
+    var termo = pega("utm_content") || pega("utm_term");
+
+    if (!fonte) {
+      if (pega("gclid")) fonte = "google";
+      else if (pega("fbclid")) fonte = "meta";
+    }
+
+    var rotulo;
+    if (fonte) {
+      if (fonte === "google" || fonte === "google_ads" || fonte === "googleads") rotulo = "Google";
+      else if (["facebook","fb","instagram","ig","meta","an"].indexOf(fonte) >= 0) rotulo = "Meta";
+      else rotulo = fonte.charAt(0).toUpperCase() + fonte.slice(1);
+
+      var detalhe = [campanha, termo].filter(Boolean).join(" · ");
+      rotulo = "site · " + rotulo + (detalhe ? " · " + detalhe : "");
+    } else if (salvo) {
+      return salvo;                      // já tinha sido identificada nesta sessão
+    } else if (document.referrer && document.referrer.indexOf(location.hostname) < 0) {
+      rotulo = "site · " + document.referrer.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
+    } else {
+      rotulo = "site";
+    }
+
+    try { sessionStorage.setItem("goheat_origem", rotulo); } catch(e){}
+    return rotulo;
+  })();
+
+  var ASSINATURA = "\n\n— vim pelo " + ORIGEM;
+
+  function linkWpp(texto){
+    return "https://wa.me/" + WPP + "?text=" + encodeURIComponent(texto + ASSINATURA);
+  }
+
+  // carimba os links de WhatsApp que já estão no HTML
+  document.querySelectorAll("[data-wpp-base]").forEach(function(el){
+    el.href = linkWpp(el.dataset.wppBase);
+  });
+
   function track(evento, extra){
     var d = Object.assign({event: evento}, extra || {});
     window.dataLayer.push(d);
@@ -702,16 +756,16 @@ footer a{color:var(--creme-2)}
         return;
       }
 
-      track("lead_enviado", {origem: form.dataset.origem, modalidade: mod, dia: dia});
+      track("lead_enviado", {origem: form.dataset.origem, modalidade: mod, dia: dia, veio_de: ORIGEM});
 
       var msg =
-        "Oi! Quero agendar minha aula experimental na Go Heat.\n\n" +
+        "Oi! Quero agendar minha aula experimental na Academia Go Heat.\n\n" +
         "Nome: " + nome + "\n" +
         "WhatsApp: " + fone + "\n" +
         "Quero fazer: " + mod + "\n" +
         "Melhor dia: " + dia;
 
-      window.location.href = "https://wa.me/" + WPP + "?text=" + encodeURIComponent(msg);
+      window.location.href = linkWpp(msg);
     });
   });
 
@@ -721,6 +775,8 @@ footer a{color:var(--creme-2)}
       track("clique_cta", {cta: el.dataset.cta});
     });
   });
+
+  track("origem_identificada", {veio_de: ORIGEM});
 
   // profundidade de rolagem (mede se a página está sendo lida)
   var marcos = [25,50,75,100], vistos = {};
