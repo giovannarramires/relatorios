@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portafolio — André Bazaga</title>
+<title>Portafolio · André Bazaga</title>
 <meta name="description" content="Portafolio 2026 de André Bazaga: siete obras, statement y contacto. Diez páginas A4, listas para descargar en PDF.">
 <link rel="canonical" href="https://relatorios.giogrowthdigital.com.br/bazaga/portfolio/">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="André Bazaga">
-<meta property="og:title" content="Portafolio — André Bazaga">
+<meta property="og:title" content="Portafolio · André Bazaga">
 <meta property="og:description" content="Portafolio 2026 de André Bazaga: siete obras, statement y contacto. Diez páginas A4, listas para descargar en PDF.">
 <meta property="og:image" content="https://relatorios.giogrowthdigital.com.br/bazaga/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -18,8 +18,8 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
-<title>Portafolio André Bazaga</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Archivo:wght@400;500;600&display=swap">
@@ -99,14 +99,14 @@ img{max-width:100%}
 .p-cover .credit i{font-family:var(--display)}
 
 /* texto */
-.p-text{padding:11cqw 10cqw}
-.p-text .kick{font-size:2.2cqw;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4cqw}
-.p-text h2{font-family:var(--display);font-size:7cqw;font-weight:400;margin:0 0 5cqw;line-height:1.05}
-.p-text .bio{font-family:var(--display);font-size:3.5cqw;line-height:1.4;margin:0 0 4cqw}
-.p-text p{font-size:2.9cqw;line-height:1.55;margin:0 0 3cqw}
-.p-text .rule{height:1px;background:var(--line);margin:4cqw 0}
+.p-text{padding:8cqw}
+.p-text .kick{font-size:2.2cqw;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3cqw}
+.p-text h2{font-family:var(--display);font-size:6cqw;font-weight:400;margin:0 0 3.5cqw;line-height:1.05}
+.p-text .bio{font-family:var(--display);font-size:3.2cqw;line-height:1.4;margin:0 0 3.5cqw}
+.p-text p{font-size:2.25cqw;line-height:1.55;margin:0 0 2.6cqw}
+.p-text .rule{height:1px;background:var(--line);margin:3.5cqw 0}
 .p-text .cvl{font-size:2.2cqw;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1.6cqw}
-.p-text .cvt{font-size:2.7cqw;color:var(--muted);margin:0}
+.p-text .cvt{font-size:2.1cqw;color:var(--muted);margin:0;line-height:1.5}
 
 /* obra */
 .p-work{padding:8cqw;justify-content:flex-start;gap:3.5cqw}
@@ -116,7 +116,7 @@ img{max-width:100%}
 .p-work .fig .t{font-family:var(--display);font-style:italic;font-size:4.2cqw;margin-right:auto}
 .p-work .fig .m{font-size:2.5cqw;color:var(--muted)}
 .p-work .no{position:absolute;top:6cqw;right:7cqw;font-size:2.2cqw;letter-spacing:.16em;color:var(--muted)}
-.p-work .gloss{font-size:2.5cqw;color:var(--muted);line-height:1.5;margin:0;max-width:62cqw}
+.p-work .gloss{font-size:2.2cqw;color:var(--muted);line-height:1.5;margin:0;max-width:78cqw}
 
 /* fim */
 .p-end{padding:11cqw 10cqw;justify-content:center;gap:9cqw;align-items:flex-start}
@@ -166,17 +166,42 @@ img{max-width:100%}
   letter-spacing:.16em;text-transform:uppercase;opacity:.65;padding-top:10px;
 }
 
-/* ---------- impressão ---------- */
+/* ---------- impressão ----------
+   Dois problemas cortavam as paginas no iPhone:
+   1. o .deck e um container flex, e o WebKit ignora quebra de pagina em item
+      de flex, e o conteudo escorria continuo de uma folha para a outra;
+   2. a folha tinha altura fixa de 297mm, mas a impressora reserva margem
+      propria (no iPhone sobra algo como 1,18 x a largura util), entao cada
+      folha empurrava um pedaco para a seguinte.
+   Aqui o deck vira bloco, a folha se ajusta a largura util e todas as alturas
+   ficam em cqw, proporcionais a ela, dentro de um orcamento de 112cqw. */
 @page{size:A4 portrait;margin:0}
 @media print{
   body{background:#fff}
   .toolbar{display:none!important}
-  .deck{gap:0;padding:0}
-  .page{
-    width:210mm;height:297mm;aspect-ratio:auto;
-    box-shadow:none;break-after:page;page-break-after:always;
+  .deck{display:block;gap:0;padding:0}
+
+  .page,.onepager{
+    width:auto;height:auto;min-height:0;aspect-ratio:auto;
+    box-shadow:none;overflow:visible;
+    break-inside:avoid;page-break-inside:avoid;
   }
+  .page{break-after:page;page-break-after:always}
   .page:last-child{break-after:auto;page-break-after:auto}
+  .onepager{break-after:auto;page-break-after:auto}
+
+  /* capa */
+  .p-cover .art{height:68cqw;flex:none}
+
+  /* obra */
+  .p-work .frame{flex:none;height:auto;margin-top:3cqw}
+  .p-work img{max-height:72cqw}
+
+  /* contato */
+  .p-end{padding:9cqw;gap:6cqw}
+
+  /* folha avulsa */
+  .op-grid{flex:none;grid-template-rows:repeat(3,24cqw)}
 }
 
 @media print{
@@ -184,8 +209,8 @@ img{max-width:100%}
   body:not(.print-full) .deck-label{display:none!important}
   body.print-full .onepager,
   body.print-full .deck-label{display:none!important}
-  .onepager{width:210mm;height:297mm;aspect-ratio:auto;box-shadow:none;break-after:auto}
 }
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 :where(button,a):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
@@ -199,60 +224,15 @@ img{max-width:100%}
       <button type="button" id="l-es" data-set="es" aria-pressed="true"><span>ES</span></button>
       <button type="button" id="l-en" data-set="en" aria-pressed="false"><span>EN</span></button>
       <button type="button" id="l-pt" data-set="pt" aria-pressed="false"><span>PT</span></button>
+      <button type="button" id="l-fr" data-set="fr" aria-pressed="false"><span>FR</span></button>
     </div>
-    <button type="button" class="print-btn" id="print-sheet" data-t="printSheet"></button>
-    <button type="button" class="print-btn alt" id="print-full" data-t="printFull"></button>
+    <button type="button" class="print-btn" id="print-full" data-t="printFull"></button>
+    <button type="button" class="print-btn alt" id="print-sheet" data-t="printSheet"></button>
     <p class="hint" data-t="hint"></p>
   </div>
 </div>
 
 
-<div class="deck-label" data-t="lblSheet"></div>
-<div class="onepager">
-  <div class="op-head">
-    <h1>André Bazaga</h1>
-    <span class="role" data-t="role"></span>
-  </div>
-  <p class="op-stmt" data-t="sheetStmt"></p>
-  <div class="op-grid">
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/07_casita-blanca_60x80.jpeg" alt="Casita blanca"></div>
-        <figcaption><b>Casita blanca</b>60 × 80 cm · 2026</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/02_cupido_92x73.jpeg" alt="Cupido"></div>
-        <figcaption><b>Cupido</b>92 × 73 cm · 2024</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/01_me-quita-el-aire_92x73.jpeg" alt="Me quita el aire"></div>
-        <figcaption><b>Me quita el aire</b>92 × 73 cm · 2024</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/03_eden_60x60.jpeg" alt="Eden"></div>
-        <figcaption><b>Eden</b>60 × 60 cm · 2026</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/04_eden-ii_60x60.jpeg" alt="Eden II"></div>
-        <figcaption><b>Eden II</b>60 × 60 cm · 2026</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/06_mediterraneo_80x60.jpeg" alt="Mediterráneo"></div>
-        <figcaption><b>Mediterráneo</b>80 × 60 cm · 2026</figcaption>
-      </figure>
-      <figure class="op-cell">
-        <div class="box"><img src="../obras/05_the-munchies_40x40.jpeg" alt="The munchies"></div>
-        <figcaption><b>The munchies</b>40 × 40 cm · 2026</figcaption>
-      </figure>
-    <div class="op-foot">
-      <div class="qrbg"><svg class="qr" role="img" aria-label="QR: andrebazaga" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49" class="segno"><path class="qrline" stroke="currentColor" d="M4 4.5h7m3 0h2m5 0h2m1 0h2m1 0h1m2 0h3m1 0h1m3 0h7m-41 1h1m5 0h1m1 0h3m3 0h2m1 0h2m9 0h1m1 0h2m2 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m3 0h1m2 0h3m1 0h1m3 0h3m1 0h1m3 0h4m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m3 0h1m4 0h3m4 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m2 0h1m1 0h4m3 0h3m1 0h1m1 0h5m5 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m1 0h1m2 0h1m3 0h2m1 0h3m1 0h2m2 0h1m2 0h3m2 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-33 1h1m1 0h1m3 0h1m1 0h1m1 0h2m2 0h8m1 0h2m-29 1h4m2 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1m2 0h2m3 0h1m-38 1h1m1 0h1m4 0h2m2 0h4m1 0h1m1 0h1m1 0h3m1 0h3m1 0h1m3 0h4m1 0h2m-41 1h3m3 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m3 0h1m2 0h2m3 0h3m5 0h1m-41 1h2m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3m4 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m2 0h1m-41 1h1m2 0h1m2 0h1m1 0h1m2 0h2m3 0h1m2 0h1m1 0h1m2 0h2m2 0h2m2 0h1m-30 1h2m2 0h1m3 0h1m1 0h2m1 0h1m4 0h1m3 0h1m3 0h3m2 0h4m2 0h1m-41 1h2m1 0h5m1 0h4m2 0h2m1 0h1m3 0h1m2 0h1m1 0h1m1 0h3m1 0h5m2 0h1m-38 1h2m5 0h3m1 0h1m2 0h1m2 0h1m1 0h11m3 0h2m2 0h1m-41 1h1m5 0h2m2 0h3m2 0h2m1 0h1m3 0h4m3 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-40 1h1m3 0h1m1 0h2m2 0h1m2 0h1m2 0h1m2 0h2m2 0h4m1 0h2m2 0h4m1 0h1m1 0h1m-38 1h2m1 0h3m5 0h1m3 0h1m4 0h2m2 0h2m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m-41 1h1m1 0h1m4 0h1m1 0h1m2 0h1m2 0h2m1 0h3m1 0h1m2 0h1m2 0h1m2 0h1m3 0h1m1 0h1m1 0h1m-40 1h4m2 0h3m1 0h3m2 0h1m2 0h1m2 0h2m1 0h3m4 0h3m3 0h1m-38 1h1m4 0h1m2 0h1m4 0h2m1 0h3m1 0h3m2 0h1m1 0h2m1 0h1m3 0h4m2 0h1m-39 1h1m1 0h1m1 0h4m1 0h1m1 0h1m6 0h1m3 0h7m1 0h1m3 0h1m1 0h1m1 0h1m-41 1h3m4 0h2m3 0h9m1 0h6m1 0h6m2 0h1m1 0h1m-40 1h1m1 0h3m1 0h4m1 0h4m1 0h3m1 0h1m2 0h1m1 0h2m1 0h2m2 0h1m4 0h1m-36 1h1m2 0h1m2 0h1m3 0h1m3 0h1m2 0h1m1 0h10m1 0h1m1 0h3m1 0h1m1 0h1m-41 1h4m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m2 0h1m4 0h1m-40 1h3m1 0h1m1 0h3m2 0h1m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m1 0h6m4 0h1m1 0h1m-40 1h1m3 0h3m1 0h2m3 0h2m1 0h2m4 0h1m3 0h1m2 0h1m2 0h1m-33 1h1m1 0h1m1 0h2m1 0h1m4 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m1 0h2m3 0h1m3 0h1m-38 1h1m2 0h1m1 0h1m3 0h4m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h3m1 0h1m-37 1h2m4 0h4m1 0h4m2 0h2m1 0h1m4 0h1m3 0h1m1 0h1m1 0h1m1 0h2m-41 1h3m1 0h3m3 0h2m2 0h2m5 0h1m1 0h7m1 0h6m2 0h1m-32 1h3m4 0h3m2 0h2m4 0h3m1 0h3m3 0h2m1 0h2m-41 1h7m1 0h3m2 0h2m9 0h6m1 0h2m1 0h1m1 0h2m2 0h1m-41 1h1m5 0h1m1 0h1m3 0h1m5 0h1m1 0h3m5 0h5m3 0h2m-38 1h1m1 0h3m1 0h1m1 0h3m3 0h5m3 0h4m2 0h1m1 0h7m2 0h2m-41 1h1m1 0h3m1 0h1m5 0h3m1 0h1m1 0h1m8 0h3m1 0h1m3 0h1m1 0h4m-41 1h1m1 0h3m1 0h1m2 0h2m5 0h1m3 0h2m1 0h2m2 0h1m1 0h5m3 0h1m1 0h2m-41 1h1m5 0h1m2 0h1m1 0h2m1 0h1m1 0h2m5 0h2m1 0h1m2 0h1m2 0h2m1 0h1m1 0h1m1 0h2m-41 1h7m2 0h1m3 0h2m8 0h1m2 0h1m2 0h1m2 0h2m1 0h3m1 0h1"/></svg></div>
-      <div class="ct">
-        <b>andrebazaga.com</b>
-        info@andrebazaga.com<br>
-        +34 608 80 97 45 · Barcelona
-      </div>
-    </div>
-  </div>
-</div>
 <div class="deck-label" data-t="lblDeck"></div>
 
 <div class="deck">
@@ -271,10 +251,11 @@ img{max-width:100%}
   <section class="page p-text">
     <span class="kick" data-t="aboutKicker"></span>
     <h2 data-t="aboutTitle"></h2>
-    <p class="bio" data-t="bio"></p>
+    <p class="bio" data-t="stmt0"></p>
     <p data-t="st1"></p>
     <p data-t="st2"></p>
     <p data-t="st3"></p>
+    <p data-t="st4"></p>
     <div class="rule"></div>
     <span class="cvl" data-t="cvLabel"></span>
     <p class="cvt" data-t="cv"></p>
@@ -288,12 +269,12 @@ img{max-width:100%}
     <div class="fig"><span class="t">Casita blanca</span><span class="m"><span data-t="medium"></span> · 60 × 80 cm · 2026</span></div>
   </section>
 
-  <!-- 4 · Cupido -->
+  <!-- 4 · El Cupido -->
   <section class="page p-work">
     <span class="no">02 / 07</span>
-    <div class="frame"><img src="../obras/02_cupido_92x73.jpeg" alt="Cupido"></div>
+    <div class="frame"><img src="../obras/02_el-cupido_92x73.jpeg" alt="El Cupido"></div>
     <p class="gloss" data-t="g2"></p>
-    <div class="fig"><span class="t">Cupido</span><span class="m"><span data-t="medium"></span> · 92 × 73 cm · 2024</span></div>
+    <div class="fig"><span class="t">El Cupido</span><span class="m"><span data-t="medium"></span> · 92 × 73 cm · 2024</span></div>
   </section>
 
   <!-- 5 · Me quita el aire -->
@@ -304,20 +285,20 @@ img{max-width:100%}
     <div class="fig"><span class="t">Me quita el aire</span><span class="m"><span data-t="medium"></span> · 92 × 73 cm · 2024</span></div>
   </section>
 
-  <!-- 6 · Eden -->
+  <!-- 6 · Edén -->
   <section class="page p-work">
     <span class="no">04 / 07</span>
-    <div class="frame"><img src="../obras/03_eden_60x60.jpeg" alt="Eden"></div>
+    <div class="frame"><img src="../obras/03_eden_60x60.jpeg" alt="Edén"></div>
     <p class="gloss" data-t="g4"></p>
-    <div class="fig"><span class="t">Eden</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm · 2026</span></div>
+    <div class="fig"><span class="t">Edén</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm · 2026</span></div>
   </section>
 
-  <!-- 7 · Eden II -->
+  <!-- 7 · Edén II -->
   <section class="page p-work">
     <span class="no">05 / 07</span>
-    <div class="frame"><img src="../obras/04_eden-ii_60x60.jpeg" alt="Eden II"></div>
+    <div class="frame"><img src="../obras/04_eden-ii_60x60.jpeg" alt="Edén II"></div>
     <p class="gloss" data-t="g5"></p>
-    <div class="fig"><span class="t">Eden II</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm · 2026</span></div>
+    <div class="fig"><span class="t">Edén II</span><span class="m"><span data-t="medium"></span> · 60 × 60 cm · 2026</span></div>
   </section>
 
   <!-- 8 · Mediterráneo -->
@@ -328,12 +309,12 @@ img{max-width:100%}
     <div class="fig"><span class="t">Mediterráneo</span><span class="m"><span data-t="medium"></span> · 80 × 60 cm · 2026</span></div>
   </section>
 
-  <!-- 9 · Deseo -->
+  <!-- 9 · The Munchies -->
   <section class="page p-work">
     <span class="no">07 / 07</span>
-    <div class="frame"><img src="../obras/05_the-munchies_40x40.jpeg" alt="The munchies"></div>
+    <div class="frame"><img src="../obras/05_the-munchies_40x40.jpeg" alt="The Munchies"></div>
     <p class="gloss" data-t="g7"></p>
-    <div class="fig"><span class="t">The munchies</span><span class="m"><span data-t="medium"></span> · 40 × 40 cm · 2026</span></div>
+    <div class="fig"><span class="t">The Munchies</span><span class="m"><span data-t="medium"></span> · 40 × 40 cm · 2026</span></div>
   </section>
 
   <!-- 10 · contato -->
@@ -342,7 +323,6 @@ img{max-width:100%}
       <h2 data-t="contactTitle"></h2>
       <div class="ct">
         <div class="cl"><span class="k" data-t="kMail"></span><span class="v">info@andrebazaga.com</span></div>
-        <div class="cl"><span class="k" data-t="kPhone"></span><span class="v">+34 608 80 97 45</span></div>
         <div class="cl"><span class="k" data-t="kSite"></span><span class="v">andrebazaga.com</span></div>
         <div class="cl"><span class="k" data-t="kCity"></span><span class="v" data-t="city"></span></div>
       </div>
@@ -355,99 +335,184 @@ img{max-width:100%}
 
 </div>
 
+<div class="deck-label" data-t="lblSheet"></div>
+<div class="onepager">
+  <div class="op-head">
+    <h1>André Bazaga</h1>
+    <span class="role" data-t="role"></span>
+  </div>
+  <p class="op-stmt" data-t="sheetStmt"></p>
+  <div class="op-grid">
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/07_casita-blanca_60x80.jpeg" alt="Casita blanca"></div>
+        <figcaption><b>Casita blanca</b>60 × 80 cm · 2026</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/02_el-cupido_92x73.jpeg" alt="El Cupido"></div>
+        <figcaption><b>El Cupido</b>92 × 73 cm · 2024</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/01_me-quita-el-aire_92x73.jpeg" alt="Me quita el aire"></div>
+        <figcaption><b>Me quita el aire</b>92 × 73 cm · 2024</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/03_eden_60x60.jpeg" alt="Edén"></div>
+        <figcaption><b>Edén</b>60 × 60 cm · 2026</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/04_eden-ii_60x60.jpeg" alt="Edén II"></div>
+        <figcaption><b>Edén II</b>60 × 60 cm · 2026</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/06_mediterraneo_80x60.jpeg" alt="Mediterráneo"></div>
+        <figcaption><b>Mediterráneo</b>80 × 60 cm · 2026</figcaption>
+      </figure>
+      <figure class="op-cell">
+        <div class="box"><img src="../obras/05_the-munchies_40x40.jpeg" alt="The Munchies"></div>
+        <figcaption><b>The Munchies</b>40 × 40 cm · 2026</figcaption>
+      </figure>
+    <div class="op-foot">
+      <div class="qrbg"><svg class="qr" role="img" aria-label="QR: andrebazaga" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49" class="segno"><path class="qrline" stroke="currentColor" d="M4 4.5h7m3 0h2m5 0h2m1 0h2m1 0h1m2 0h3m1 0h1m3 0h7m-41 1h1m5 0h1m1 0h3m3 0h2m1 0h2m9 0h1m1 0h2m2 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m3 0h1m2 0h3m1 0h1m3 0h3m1 0h1m3 0h4m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m3 0h1m4 0h3m4 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m2 0h1m1 0h4m3 0h3m1 0h1m1 0h5m5 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m1 0h1m2 0h1m3 0h2m1 0h3m1 0h2m2 0h1m2 0h3m2 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-33 1h1m1 0h1m3 0h1m1 0h1m1 0h2m2 0h8m1 0h2m-29 1h4m2 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1m2 0h2m3 0h1m-38 1h1m1 0h1m4 0h2m2 0h4m1 0h1m1 0h1m1 0h3m1 0h3m1 0h1m3 0h4m1 0h2m-41 1h3m3 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m3 0h1m2 0h2m3 0h3m5 0h1m-41 1h2m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3m4 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m2 0h1m-41 1h1m2 0h1m2 0h1m1 0h1m2 0h2m3 0h1m2 0h1m1 0h1m2 0h2m2 0h2m2 0h1m-30 1h2m2 0h1m3 0h1m1 0h2m1 0h1m4 0h1m3 0h1m3 0h3m2 0h4m2 0h1m-41 1h2m1 0h5m1 0h4m2 0h2m1 0h1m3 0h1m2 0h1m1 0h1m1 0h3m1 0h5m2 0h1m-38 1h2m5 0h3m1 0h1m2 0h1m2 0h1m1 0h11m3 0h2m2 0h1m-41 1h1m5 0h2m2 0h3m2 0h2m1 0h1m3 0h4m3 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-40 1h1m3 0h1m1 0h2m2 0h1m2 0h1m2 0h1m2 0h2m2 0h4m1 0h2m2 0h4m1 0h1m1 0h1m-38 1h2m1 0h3m5 0h1m3 0h1m4 0h2m2 0h2m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m-41 1h1m1 0h1m4 0h1m1 0h1m2 0h1m2 0h2m1 0h3m1 0h1m2 0h1m2 0h1m2 0h1m3 0h1m1 0h1m1 0h1m-40 1h4m2 0h3m1 0h3m2 0h1m2 0h1m2 0h2m1 0h3m4 0h3m3 0h1m-38 1h1m4 0h1m2 0h1m4 0h2m1 0h3m1 0h3m2 0h1m1 0h2m1 0h1m3 0h4m2 0h1m-39 1h1m1 0h1m1 0h4m1 0h1m1 0h1m6 0h1m3 0h7m1 0h1m3 0h1m1 0h1m1 0h1m-41 1h3m4 0h2m3 0h9m1 0h6m1 0h6m2 0h1m1 0h1m-40 1h1m1 0h3m1 0h4m1 0h4m1 0h3m1 0h1m2 0h1m1 0h2m1 0h2m2 0h1m4 0h1m-36 1h1m2 0h1m2 0h1m3 0h1m3 0h1m2 0h1m1 0h10m1 0h1m1 0h3m1 0h1m1 0h1m-41 1h4m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m2 0h1m4 0h1m-40 1h3m1 0h1m1 0h3m2 0h1m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m1 0h6m4 0h1m1 0h1m-40 1h1m3 0h3m1 0h2m3 0h2m1 0h2m4 0h1m3 0h1m2 0h1m2 0h1m-33 1h1m1 0h1m1 0h2m1 0h1m4 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m1 0h2m3 0h1m3 0h1m-38 1h1m2 0h1m1 0h1m3 0h4m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h3m1 0h1m-37 1h2m4 0h4m1 0h4m2 0h2m1 0h1m4 0h1m3 0h1m1 0h1m1 0h1m1 0h2m-41 1h3m1 0h3m3 0h2m2 0h2m5 0h1m1 0h7m1 0h6m2 0h1m-32 1h3m4 0h3m2 0h2m4 0h3m1 0h3m3 0h2m1 0h2m-41 1h7m1 0h3m2 0h2m9 0h6m1 0h2m1 0h1m1 0h2m2 0h1m-41 1h1m5 0h1m1 0h1m3 0h1m5 0h1m1 0h3m5 0h5m3 0h2m-38 1h1m1 0h3m1 0h1m1 0h3m3 0h5m3 0h4m2 0h1m1 0h7m2 0h2m-41 1h1m1 0h3m1 0h1m5 0h3m1 0h1m1 0h1m8 0h3m1 0h1m3 0h1m1 0h4m-41 1h1m1 0h3m1 0h1m2 0h2m5 0h1m3 0h2m1 0h2m2 0h1m1 0h5m3 0h1m1 0h2m-41 1h1m5 0h1m2 0h1m1 0h2m1 0h1m1 0h2m5 0h2m1 0h1m2 0h1m2 0h2m1 0h1m1 0h1m1 0h2m-41 1h7m2 0h1m3 0h2m8 0h1m2 0h1m2 0h1m2 0h2m1 0h3m1 0h1"/></svg></div>
+      <div class="ct">
+        <b>andrebazaga.com</b>
+info@andrebazaga.com<br>
+        Barcelona
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var T={
     es:{
+      role:"Artista visual · Barcelona",
       printSheet:"Imprimir la hoja (A4)",
       printFull:"Imprimir las 10 páginas",
       lblSheet:"Hoja suelta · A4 · para repartir",
       lblDeck:"Cuadernillo · 10 páginas A4 · para convocatorias",
-      sheetStmt:"Mi pintura nace del encuentro entre dos lenguajes opuestos: el realismo y la expresión naïf del dibujo infantil. Sobre una superficie pintada al óleo con precisión aparece otro lenguaje, hecho con pastel al óleo: espontáneo, intuitivo, aparentemente sencillo.",
-      hint:"La hoja suelta es para repartir en exposiciones. El cuadernillo de 10 páginas es para convocatorias.",
+      sheetStmt:"Mi pintura surge del encuentro entre dos lenguajes visuales aparentemente opuestos: el realismo y la expresión naïf del dibujo infantil. Sobre una superficie pintada al óleo con precisión aparece otro lenguaje, creado con pastel al óleo: espontáneo, intuitivo y aparentemente sencillo.",
+      hint:"El cuadernillo de 10 páginas es para convocatorias. La hoja suelta es para repartir en exposiciones.",
       coverSub:"Portafolio 2026 · Barcelona",
       medium:"Óleo y pastel al óleo sobre lino",
       aboutKicker:"Sobre", aboutTitle:"El artista",
-      bio:"André Bazaga es artista visual residente en Barcelona. Se graduó en Artes Plásticas por la Universidad Federal de Uberlândia, Brasil, en 2008.",
+      stmt0:"Mi pintura surge del encuentro entre dos lenguajes visuales aparentemente opuestos: el realismo y la expresión naïf del dibujo infantil.",
       st1:"Trabajo principalmente con pintura al óleo, creando imágenes precisas y detalladas en las que la observación, la técnica y el control son esenciales. Sobre esta superficie realista aparece otro lenguaje, creado con pastel al óleo: espontáneo, intuitivo y aparentemente sencillo.",
-      st2:"Me interesa la tensión entre precisión y espontaneidad, entre lo aprendido y lo instintivo, y entre la mirada adulta y la manera de ver del niño. El dibujo que introduzco es deliberadamente estereotipado: el corazón, la flor, la mariposa, el sol — los mismos que todos dibujamos de niños.",
-      st3:"En este sentido, mi pintura se convierte en una especie de autorretrato: en ella conviven el adulto que observa y analiza y el niño que permanece presente, curioso, instintivo y libre. Es a través del encuentro entre estos dos lenguajes como exploro la identidad, la memoria y esa parte de la infancia que continúa viviendo dentro de nosotros.",
-      cvLabel:"Exposiciones",
-      cv:"Ha participado en exposiciones en Brasil, Estados Unidos, Japón y España, incluyendo el MEAM Hall de Barcelona y el Espacio Jovellanos, Madrid (2025).",
-      g1:"El sol, las nubes y la casa: los tres dibujos que hace cualquier niño, sobre un cielo pintado con precisión fotográfica.",
-      g2:"El corazón anatómico y la flecha de tiza. Dialoga con la obra siguiente: son independientes, pero se responden.",
-      g3:"La contraparte de Cupido. El mismo gesto de la mano, el mismo corazón — esta vez dibujado en la piel.",
-      g4:"Aquí las flores están dibujadas y las mariposas pintadas.",
-      g5:"Y aquí se invierte: las flores están pintadas y las mariposas dibujadas. El mismo jardín, el juego al revés.",
-      g6:"Los peces cambian de color al descender — morado en la superficie, rojo en medio, naranja en el fondo.",
-      g7:"La mano de tiza alcanza los dulces sin llegar a tocarlos.",
+      st2:"Me interesa la tensión entre precisión y espontaneidad, entre lo aprendido y lo instintivo, y entre la mirada adulta y la manera de ver del niño. Al introducir el lenguaje del dibujo infantil en una pintura realista, creo una tensión visual que también refleja algo profundamente personal.",
+      st3:"En este sentido, mi pintura se convierte en una especie de autorretrato: en ella conviven el adulto que observa y analiza y el niño que permanece presente, curioso, instintivo y libre.",
+      st4:"Es a través del encuentro entre estos dos lenguajes como exploro ideas relacionadas con la identidad, la memoria y esa parte de la infancia que continúa viviendo dentro de nosotros.",
+      cvLabel:"Formación y exposiciones",
+      cv:"Graduado en Artes Plásticas por la Universidad Federal de Uberlândia, Brasil, en 2008. Vive y trabaja en Barcelona. Con obras en Brasil, Estados Unidos y Japón y exposición en el MEAM Hall de Barcelona y el Espacio Jovellanos, Madrid (2025).",
+      g1:"El sol, las nubes y una casita: los estereotipos del dibujo infantil aparecen en un paisaje realista que busca captar los rayos del sol.",
+      g2:"En la pubertad, durante los primeros enamoramientos en el colegio, un corazón atravesado por una flecha formaba parte de la contraportada de muchos cuadernos escolares.",
+      g3:"Este mismo corazón, herido por Cupido, se queda sin aire, sofocado por el amor platónico de la juventud.",
+      g4:"Aquí aparece sutilmente la idea del autorretrato. A primera vista, encontramos una flor y el colorido del universo infantil; pero, cuando te permites conocerme y adentrarte en mi jardín, comienzas a descubrir otras capas, más complejas, de una persona atravesada por muchas experiencias y vidas.",
+      g5:"El juego al revés: cuando mi madurez llega antes que mi niño.",
+      g6:"Los colores complementarios dialogan con la narrativa de los peces y del mar Mediterráneo.",
+      g7:"El deseo de dulce, de volver a conectar con el paladar infantil después de la experiencia con sustancias asociadas al mundo adulto.",
       contactTitle:"Contacto",
-      kMail:"Correo", kPhone:"Teléfono", kSite:"Web", kCity:"Estudio",
+      kMail:"Correo", kSite:"Web", kCity:"Estudio",
       city:"Barcelona, España",
       qrTxt:"Obra completa, medidas, disponibilidad y precios en andrebazaga.com"
     },
     en:{
+      role:"Visual artist · Barcelona",
       printSheet:"Print the sheet (A4)",
       printFull:"Print the 10 pages",
       lblSheet:"Single sheet · A4 · to hand out",
       lblDeck:"Booklet · 10 A4 pages · for open calls",
-      sheetStmt:"My painting arises from the encounter between two opposite languages: realism and the naïve expression of children's drawing. Across a surface painted in oil with precision, another language appears in oil pastel: spontaneous, intuitive, seemingly simple.",
-      hint:"The single sheet is for handing out at exhibitions. The 10-page booklet is for open calls.",
+      sheetStmt:"My painting arises from the encounter between two seemingly opposite visual languages: realism and the naïve expression of children's drawing. Across a surface painted in oil with precision, another language appears in oil pastel: spontaneous, intuitive and seemingly simple.",
+      hint:"The 10-page booklet is for open calls. The single sheet is for handing out at exhibitions.",
       coverSub:"Portfolio 2026 · Barcelona",
       medium:"Oil and oil pastel on linen",
       aboutKicker:"About", aboutTitle:"The artist",
-      bio:"André Bazaga is a visual artist based in Barcelona, Spain. He graduated in Fine Arts from the Federal University of Uberlândia, Brazil, in 2008.",
+      stmt0:"My painting arises from the encounter between two seemingly opposite visual languages: realism and the naïve expression of children's drawing.",
       st1:"I work primarily with oil paint, creating precise and detailed images in which observation, technique and control are essential. Across this realistic surface, another language emerges through oil pastel: spontaneous, intuitive and seemingly simple.",
-      st2:"I am interested in the tension between precision and spontaneity, between what is learned and what is instinctive, and between the adult gaze and the way a child sees the world. The drawing I introduce is deliberately stereotypical: the heart, the flower, the butterfly, the sun — the very ones we all drew as children.",
-      st3:"In this sense, my painting becomes a kind of self-portrait: within it coexist the adult who observes and analyses, and the child who remains present, curious, instinctive and free. It is through the encounter between these two languages that I explore identity, memory, and that part of childhood that continues to live within us.",
-      cvLabel:"Exhibitions",
-      cv:"He has exhibited in Brazil, the United States, Japan and Spain, including MEAM Hall in Barcelona and Espacio Jovellanos in Madrid (2025).",
-      g1:"The sun, the clouds and the house: the three drawings every child makes, over a sky painted with photographic precision.",
-      g2:"The anatomical heart and the chalk arrow. It speaks to the next work: they stand alone, but answer each other.",
-      g3:"The counterpart to Cupido. The same grip of the hand, the same heart — this time drawn on the skin.",
-      g4:"Here the flowers are drawn and the butterflies are painted.",
-      g5:"And here it inverts: the flowers are painted and the butterflies are drawn. The same garden, the game reversed.",
-      g6:"The fish change colour as they descend — purple at the surface, red in the middle, orange at the bottom.",
-      g7:"The chalk hand reaches the sweets without ever touching them.",
+      st2:"I am interested in the tension between precision and spontaneity, between what is learned and what is instinctive, and between the adult gaze and the way a child sees the world. By introducing the language of children's drawing into a realistic painting, I create a visual tension that also reflects something deeply personal.",
+      st3:"In this sense, my painting becomes a kind of self-portrait: within it coexist the adult who observes and analyses, and the child who remains present, curious, instinctive and free.",
+      st4:"It is through the encounter between these two languages that I explore ideas of identity, memory, and that part of childhood that continues to live within us.",
+      cvLabel:"Education and exhibitions",
+      cv:"Graduated in Fine Arts from the Federal University of Uberlândia, Brazil, in 2008. Lives and works in Barcelona. With works in Brazil, the United States and Japan, and exhibitions at MEAM Hall, Barcelona, and Espacio Jovellanos, Madrid (2025).",
+      g1:"The sun, the clouds and a little house: the stereotypes of children's drawing appear in a realistic landscape that sets out to catch the rays of the sun.",
+      g2:"In puberty, during the first crushes at school, a heart pierced by an arrow was part of the back cover of many school notebooks.",
+      g3:"That same heart, wounded by Cupid, is left without air, suffocated by the platonic love of youth.",
+      g4:"Here the idea of the self-portrait appears, quietly. At first sight we find a flower and the colour of a child's world; but when you allow yourself to know me and step into my garden, you begin to discover other layers, more complex, of a person shaped by many experiences and many lives.",
+      g5:"The game reversed: when my maturity arrives before my child does.",
+      g6:"Complementary colours in dialogue with the narrative of the fish and of the Mediterranean sea.",
+      g7:"The craving for sweetness, for reconnecting with a child's palate after the experience of substances belonging to the adult world.",
       contactTitle:"Contact",
-      kMail:"Email", kPhone:"Phone", kSite:"Web", kCity:"Studio",
+      kMail:"Email", kSite:"Web", kCity:"Studio",
       city:"Barcelona, Spain",
       qrTxt:"Full body of work, dimensions, availability and prices at andrebazaga.com"
     },
     pt:{
+      role:"Artista visual · Barcelona",
       printSheet:"Imprimir a folha (A4)",
       printFull:"Imprimir as 10 páginas",
       lblSheet:"Folha avulsa · A4 · para distribuir",
       lblDeck:"Caderno · 10 páginas A4 · para editais",
-      sheetStmt:"Minha pintura nasce do encontro entre duas linguagens opostas: o realismo e a expressão naïf do desenho infantil. Sobre uma superfície pintada a óleo com precisão surge outra linguagem, feita com pastel oleoso: espontânea, intuitiva, aparentemente simples.",
-      hint:"A folha avulsa é para distribuir em exposições. O caderno de 10 páginas é para editais.",
+      sheetStmt:"Minha pintura surge do encontro entre duas linguagens visuais aparentemente opostas: o realismo e a expressão naïf do desenho infantil. Sobre uma superfície pintada a óleo com precisão surge outra linguagem, feita com pastel oleoso: espontânea, intuitiva e aparentemente simples.",
+      hint:"O caderno de 10 páginas é para editais. A folha avulsa é para distribuir em exposições.",
       coverSub:"Portfólio 2026 · Barcelona",
       medium:"Óleo e pastel oleoso sobre linho",
       aboutKicker:"Sobre", aboutTitle:"O artista",
-      bio:"André Bazaga é artista visual radicado em Barcelona, Espanha. Graduou-se em Artes Plásticas pela Universidade Federal de Uberlândia, Brasil, em 2008.",
+      stmt0:"Minha pintura surge do encontro entre duas linguagens visuais aparentemente opostas: o realismo e a expressão naïf do desenho infantil.",
       st1:"Trabalho principalmente com pintura a óleo, criando imagens precisas e detalhadas, em que observação, técnica e controle são essenciais. Sobre essa superfície realista surge outra linguagem, feita com pastel oleoso: espontânea, intuitiva e aparentemente simples.",
-      st2:"Me interessa a tensão entre precisão e espontaneidade, entre o aprendido e o instintivo, entre o olhar adulto e o modo de ver da criança. O desenho que introduzo é deliberadamente estereotipado: o coração, a flor, a borboleta, o sol — os mesmos que todos nós desenhamos quando crianças.",
-      st3:"Nesse sentido, minha pintura se torna uma espécie de autorretrato: nela convivem o adulto que observa e analisa e a criança que permanece presente, curiosa, instintiva e livre. É pelo encontro entre essas duas linguagens que exploro a identidade, a memória e essa parte da infância que continua viva dentro de nós.",
-      cvLabel:"Exposições",
-      cv:"Participou de exposições no Brasil, nos Estados Unidos, no Japão e na Espanha, entre elas o MEAM Hall, em Barcelona, e o Espacio Jovellanos, em Madri (2025).",
-      g1:"O sol, as nuvens e a casa: os três desenhos que toda criança faz, sobre um céu pintado com precisão fotográfica.",
-      g2:"O coração anatômico e a flecha de giz. Conversa com a obra seguinte: são independentes, mas se respondem.",
-      g3:"A contraparte de Cupido. O mesmo gesto da mão, o mesmo coração — desta vez desenhado na pele.",
-      g4:"Aqui as flores estão desenhadas e as borboletas, pintadas.",
-      g5:"E aqui inverte: as flores estão pintadas e as borboletas, desenhadas. O mesmo jardim, o jogo ao contrário.",
-      g6:"Os peixes mudam de cor conforme descem — roxo na superfície, vermelho no meio, laranja no fundo.",
-      g7:"A mão de giz alcança os doces sem nunca tocá-los.",
+      st2:"Me interessa a tensão entre precisão e espontaneidade, entre o aprendido e o instintivo, e entre o olhar adulto e o modo de ver da criança. Ao introduzir a linguagem do desenho infantil numa pintura realista, crio uma tensão visual que também reflete algo profundamente pessoal.",
+      st3:"Nesse sentido, minha pintura se torna uma espécie de autorretrato: nela convivem o adulto que observa e analisa e a criança que permanece presente, curiosa, instintiva e livre.",
+      st4:"É pelo encontro entre essas duas linguagens que exploro ideias ligadas à identidade, à memória e a essa parte da infância que continua viva dentro de nós.",
+      cvLabel:"Formação e exposições",
+      cv:"Graduado em Artes Plásticas pela Universidade Federal de Uberlândia, Brasil, em 2008. Vive e trabalha em Barcelona. Com obras no Brasil, nos Estados Unidos e no Japão e exposição no MEAM Hall, em Barcelona, e no Espacio Jovellanos, em Madri (2025).",
+      g1:"O sol, as nuvens e uma casinha: os estereótipos do desenho infantil aparecem numa paisagem realista que busca captar os raios do sol.",
+      g2:"Na puberdade, nas primeiras paixões do colégio, um coração atravessado por uma flecha fazia parte da contracapa de muitos cadernos escolares.",
+      g3:"Esse mesmo coração, ferido pelo Cupido, fica sem ar, sufocado pelo amor platônico da juventude.",
+      g4:"Aqui aparece sutilmente a ideia do autorretrato. À primeira vista, encontramos uma flor e o colorido do universo infantil; mas, quando você se permite me conhecer e entrar no meu jardim, começa a descobrir outras camadas, mais complexas, de uma pessoa atravessada por muitas experiências e muitas vidas.",
+      g5:"O jogo ao contrário: quando a minha maturidade chega antes do meu menino.",
+      g6:"As cores complementares dialogam com a narrativa dos peixes e do mar Mediterrâneo.",
+      g7:"O desejo de doce, de voltar a se conectar com o paladar infantil depois da experiência com substâncias associadas ao mundo adulto.",
       contactTitle:"Contato",
-      kMail:"E-mail", kPhone:"Telefone", kSite:"Site", kCity:"Ateliê",
+      kMail:"E-mail", kSite:"Site", kCity:"Ateliê",
       city:"Barcelona, Espanha",
       qrTxt:"Obra completa, medidas, disponibilidade e preços em andrebazaga.com"
+    },
+    fr:{
+      role:"Artiste visuel · Barcelone",
+      printSheet:"Imprimer la feuille (A4)",
+      printFull:"Imprimer les 10 pages",
+      lblSheet:"Feuille volante · A4 · à distribuer",
+      lblDeck:"Cahier · 10 pages A4 · pour les appels à candidature",
+      sheetStmt:"Ma peinture naît de la rencontre entre deux langages visuels apparemment opposés : le réalisme et l'expression naïve du dessin d'enfant. Sur une surface peinte à l'huile avec précision apparaît un autre langage, tracé au pastel à l'huile : spontané, intuitif et apparemment simple.",
+      hint:"Le cahier de 10 pages est destiné aux appels à candidature. La feuille volante est à distribuer lors des expositions.",
+      coverSub:"Portfolio 2026 · Barcelone",
+      medium:"Huile et pastel à l'huile sur lin",
+      aboutKicker:"À propos", aboutTitle:"L'artiste",
+      stmt0:"Ma peinture naît de la rencontre entre deux langages visuels apparemment opposés : le réalisme et l'expression naïve du dessin d'enfant.",
+      st1:"Je travaille principalement la peinture à l'huile, en créant des images précises et détaillées où l'observation, la technique et le contrôle sont essentiels. Sur cette surface réaliste apparaît un autre langage, tracé au pastel à l'huile : spontané, intuitif et apparemment simple.",
+      st2:"Ce qui m'intéresse, c'est la tension entre précision et spontanéité, entre l'acquis et l'instinctif, et entre le regard de l'adulte et la manière de voir de l'enfant. En introduisant le langage du dessin d'enfant dans une peinture réaliste, je crée une tension visuelle qui reflète aussi quelque chose de profondément personnel.",
+      st3:"En ce sens, ma peinture devient une sorte d'autoportrait : y cohabitent l'adulte qui observe et analyse et l'enfant qui demeure présent, curieux, instinctif et libre.",
+      st4:"C'est par la rencontre entre ces deux langages que j'explore des idées liées à l'identité, à la mémoire et à cette part de l'enfance qui continue de vivre en nous.",
+      cvLabel:"Formation et expositions",
+      cv:"Diplômé en arts plastiques de l'Université fédérale d'Uberlândia, au Brésil, en 2008. Vit et travaille à Barcelone. Œuvres présentes au Brésil, aux États-Unis et au Japon, et exposition au MEAM Hall de Barcelone et à l'Espacio Jovellanos, Madrid (2025).",
+      g1:"Le soleil, les nuages et une petite maison : les stéréotypes du dessin d'enfant apparaissent dans un paysage réaliste qui cherche à capter les rayons du soleil.",
+      g2:"À la puberté, lors des premiers amours au collège, un cœur transpercé d'une flèche faisait partie de la quatrième de couverture de bien des cahiers d'école.",
+      g3:"Ce même cœur, blessé par Cupidon, se retrouve sans air, étouffé par l'amour platonique de la jeunesse.",
+      g4:"Ici apparaît discrètement l'idée de l'autoportrait. À première vue, on trouve une fleur et les couleurs de l'univers de l'enfance ; mais, lorsque tu te permets de me connaître et d'entrer dans mon jardin, tu commences à découvrir d'autres couches, plus complexes, d'une personne traversée par de nombreuses expériences et de nombreuses vies.",
+      g5:"Le jeu à l'envers : quand ma maturité arrive avant mon enfant.",
+      g6:"Les couleurs complémentaires dialoguent avec le récit des poissons et de la mer Méditerranée.",
+      g7:"L'envie de sucre, de renouer avec le palais de l'enfance après l'expérience des substances associées au monde adulte.",
+      contactTitle:"Contact",
+      kMail:"Courriel", kSite:"Site", kCity:"Atelier",
+      city:"Barcelone, Espagne",
+      qrTxt:"Œuvre complète, dimensions, disponibilité et prix sur andrebazaga.com"
     }
   };
 
-  var LANGS=["es","en","pt"];
+  var LANGS=["es","en","pt","fr"];
+  var HTMLLANG={es:"es",en:"en",pt:"pt-BR",fr:"fr"};
   function apply(l){
     if(LANGS.indexOf(l)===-1){l="es";}
     var d=T[l];
+    document.documentElement.setAttribute("lang",HTMLLANG[l]);
     document.querySelectorAll("[data-t]").forEach(function(el){
       var v=d[el.dataset.t];
       if(typeof v==="string"){el.textContent=v;}
@@ -465,13 +530,10 @@ img{max-width:100%}
   var bf=document.getElementById("print-full");
   if(bf){bf.addEventListener("click",function(){document.body.classList.add("print-full");window.print();});}
 
+  /* o espanhol e a entrada: so muda se a pessoa ja escolheu outro idioma aqui */
   var s=null;
   try{s=localStorage.getItem("bazaga-pf-lang");}catch(e){}
-  if(!s){
-    var n=(navigator.language||"es").slice(0,2).toLowerCase();
-    s=LANGS.indexOf(n)!==-1?n:"es";
-  }
-  apply(s);
+  apply(LANGS.indexOf(s)!==-1?s:"es");
 })();
 </script>
 
