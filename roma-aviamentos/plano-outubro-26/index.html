@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Plano de Outubro 2026 — Roma Aviamentos</title>
+<style>
+  :root {
+    --ground: #EEEFE9;
+    --surface: #F7F8F3;
+    --field: #FFFFFF;
+    --ink: #1C1F1A;
+    --ink-soft: #43483E;
+    --muted: #6B6F63;
+    --line: #D4D7CA;
+    --line-soft: #E1E3D8;
+    --accent: #8F6410;
+    --moss: #2F4636;
+    --star: #7A4A0C;
+    --star-bg: #EFE6D2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E;
+      --surface: #1C1A15;
+      --field: #211E18;
+      --ink: #E9E4D7;
+      --ink-soft: #C7C1B1;
+      --muted: #948D7D;
+      --line: #38342A;
+      --line-soft: #2A261D;
+      --accent: #D8A63F;
+      --moss: #8FAE97;
+      --star: #E0B463;
+      --star-bg: #2A2115;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 140px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 64px 0 30px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5.4vw, 52px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 62ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 14px;
+  }
+  .kpi { background: var(--surface); padding: 20px 22px; display: flex; flex-direction: column; gap: 4px; }
+  .kpi b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .kpi strong {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi span { font-size: 14px; color: var(--muted); line-height: 1.4; }
+
+  section.block {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 44px;
+    padding: 38px 0 42px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  section.block:first-of-type { border-top: 2px solid var(--ink); margin-top: 64px; }
+  .block-head { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .block-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    color: var(--accent);
+  }
+  .block-head h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-why { font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 26ch; margin: 0; }
+  .body > p { margin: 0 0 16px; max-width: 64ch; }
+  .body > p:last-child { margin-bottom: 0; }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h3:first-child { margin-top: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 18px; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+  }
+  td.num, th.num { text-align: right; padding-right: 0; font-variant-numeric: tabular-nums; }
+  .tablewrap { overflow-x: auto; }
+
+  ul, ol { margin: 0 0 16px; padding-left: 22px; max-width: 64ch; }
+  li { margin-bottom: 7px; }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { color: var(--star); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 22px 24px;
+    margin: 0 0 16px;
+  }
+  .card h4 {
+    margin: 0 0 4px;
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .card .lead { margin: 0 0 14px; font-size: 15px; color: var(--muted); }
+  .card dl { margin: 0; display: grid; grid-template-columns: 96px 1fr; gap: 8px 16px; font-size: 15.5px; }
+  .card dt {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    padding-top: 4px;
+  }
+  .card dd { margin: 0; color: var(--ink-soft); }
+  .card dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .pill {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+    background: var(--star-bg);
+    border-radius: 2px;
+    padding: 3px 7px;
+    vertical-align: 2px;
+    margin-left: 8px;
+  }
+  .note {
+    border-left: 2px solid var(--line);
+    padding: 2px 0 2px 14px;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 18px 0 0;
+  }
+  footer {
+    margin-top: 70px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+  }
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 18px 90px; }
+    section.block { grid-template-columns: 1fr; gap: 18px; padding: 30px 0 32px; }
+    .block-head { position: static; }
+    .card dl { grid-template-columns: 1fr; gap: 3px; }
+    .card dt { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="eyebrow">Roma Aviamentos · Plano de mídia</span>
+  <h1>Outubro é o maior mês da Roma. O plano é <em>fazer de novo</em>.</h1>
+  <p class="standfirst">Em outubro de 2025 a loja fez 1.455 pedidos e R$ 313 mil em produtos — o melhor mês do período. Fomos atrás do que exatamente produziu esse resultado, campanha por campanha e vídeo por vídeo, e montamos outubro de 2026 em cima disso.</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>Outubro 2025 · pedidos</b><strong>1.455</strong><span>o maior volume do período</span></div>
+    <div class="kpi"><b>Faturamento em produtos</b><strong>R$ 313 mil</strong><span>R$ 347 mil com frete</span></div>
+    <div class="kpi"><b>Ticket médio</b><strong>R$ 215</strong><span>por pedido</span></div>
+    <div class="kpi"><b>Retorno sobre a mídia</b><strong>36,9×</strong><span>cada R$ 1 investido voltou como R$ 36,90 em venda</span></div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="block-head">
+    <span class="block-num">01</span>
+    <h2>O que outubro de 2025 mostrou</h2>
+    <p class="block-why">Quatro coisas se repetiram no mês inteiro. São elas que guiam o plano.</p>
+  </div>
+  <div class="body">
+
+    <h3>1. Vídeo de produto vende mais que qualquer outra peça</h3>
+    <p>Todas as peças que venderam eram vídeo vertical, curto, com a mão manipulando o produto. Nenhuma arte estática apareceu entre as que trouxeram compra.</p>
+
+    <div class="tablewrap">
+    <table>
+      <tr><th>Vídeo</th><th class="num">Investimento</th><th class="num">Compras</th></tr>
+      <tr><td><a href="https://www.instagram.com/p/DMLRrmXPkW5/" target="_blank" rel="noopener">Miçangas ↗</a></td><td class="num">R$ 353</td><td class="num">135</td></tr>
+      <tr><td><a href="https://www.instagram.com/p/DPeniF6jMil/" target="_blank" rel="noopener">Promo de outubro, com a Rosi ↗</a></td><td class="num">R$ 171</td><td class="num">64</td></tr>
+      <tr><td><a href="https://www.instagram.com/p/DMLRrsCsATh/" target="_blank" rel="noopener">Strass ↗</a></td><td class="num">R$ 200</td><td class="num">60</td></tr>
+      <tr><td><a href="https://fb.me/2byoUEoQmlVPig4" target="_blank" rel="noopener">Natal — produto aplicado ↗</a></td><td class="num">R$ 115</td><td class="num">48</td></tr>
+      <tr><td><a href="https://www.instagram.com/p/DP6zTmsDIzC/" target="_blank" rel="noopener">Natal — se antecipe ↗</a></td><td class="num">R$ 71</td><td class="num">40</td></tr>
+    </table>
+    </div>
+    <p class="note">Toque no nome de qualquer vídeo para abrir a peça.</p>
+
+    <h3>2. O vídeo com uma pessoa falando foi o mais eficiente do mês</h3>
+    <p>A peça com a Rosi, gravada na loja, trouxe 64 compras com R$ 171 — o melhor resultado por real investido de todas as peças. É também a mais barata de produzir.</p>
+
+    <h3>3. O Natal começou a vender ainda em outubro</h3>
+    <p>As peças natalinas entraram na segunda metade do mês e, mesmo com pouco tempo de rua, trouxeram 110 compras. Quem compra aviamento de Natal em outubro é quem vai <strong>produzir para vender</strong> — e compra em quantidade.</p>
+
+    <h3>4. O recorte por região e por linha de produto rendeu mais que a campanha aberta</h3>
+    <p>As campanhas organizadas por linha (Princess, laceira, artigos natalinos) e por região performaram acima da campanha genérica. É um padrão claro no mês inteiro, e é a base da estrutura de outubro de 2026.</p>
+
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <span class="block-num">02</span>
+    <h2>As quatro frentes de outubro de 2026</h2>
+    <p class="block-why">Mesmo investimento que a operação já roda hoje, organizado de outra forma.</p>
+  </div>
+  <div class="body">
+
+    <p>O plano <strong>não pede aporte adicional</strong>. O investimento de outubro fica em torno de <strong>R$ 10 mil no mês</strong>, entre Meta e Google — o mesmo patamar de hoje. O que muda é a distribuição: sai de onde não há retorno e entra nas frentes abaixo.</p>
+
+    <div class="card">
+      <h4>Frente 1 · Catálogo e recompra</h4>
+      <p class="lead">A base de venda do mês, quem já conhece a Roma.</p>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-soft)">Mantém o giro diário da loja e traz de volta quem visitou e não comprou. É a frente que já sustenta a operação e segue com a maior fatia do investimento.</p>
+    </div>
+
+    <div class="card">
+      <h4>Frente 2 · Aquisição com vídeo próprio<span class="pill">Nova</span></h4>
+      <p class="lead">Cliente novo, com criativo da Roma.</p>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-soft)">É a frente que mais produziu em outubro de 2025 e a que mais depende de vídeo novo: peças de produto e peças com gente falando, alcançando quem trabalha com artesanato e costura e ainda não compra na Roma. É por isso que o bloco 04 pede vídeos.</p>
+    </div>
+
+    <div class="card">
+      <h4>Frente 3 · Sazonal de Natal e Halloween, desde o dia 1º<span class="pill">Nova</span></h4>
+      <p class="lead">A linha que mais cresce no mês.</p>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-soft)">No ano passado o sazonal entrou na segunda metade de outubro e mesmo assim vendeu bem. Este ano sobe no dia 1º, com peça própria — são duas semanas a mais de venda na linha que tem a maior margem de crescimento do mês.</p>
+    </div>
+
+    <div class="card">
+      <h4>Frente 4 · Linhas de produto e recorte regional<span class="pill">Nova</span></h4>
+      <p class="lead">Campanha por linha, não campanha genérica.</p>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-soft)">Princess, laceira, apliques para laço e artigos natalinos ganham campanha própria, com página própria de destino. Somam-se a elas a concentração nas regiões que mais compram e uma frente voltada a quem está no entorno da loja e das rodoviárias — é onde o custo por pedido é historicamente o menor da conta.</p>
+    </div>
+
+    <p class="note">A definição operacional de cada frente — públicos, divisão de investimento por campanha, réguas de otimização e de corte — faz parte do trabalho de gestão da GGD e é revisada a cada ciclo, com leitura quinzenal do que está rendendo.</p>
+
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <span class="block-num">03</span>
+    <h2>O calendário do mês</h2>
+    <p class="block-why">Quando cada frente entra e quando sai.</p>
+  </div>
+  <div class="body">
+    <div class="tablewrap">
+    <table>
+      <tr><th>Quando</th><th>O que acontece</th></tr>
+      <tr><td><strong>25 a 30/09</strong></td><td>Campanhas montadas e revisadas. <strong>Vídeos gravados e entregues</strong> — é o prazo que depende do time da Roma.</td></tr>
+      <tr><td><strong>1º/10</strong></td><td>Tudo no ar. Natal e Halloween já entram neste dia.</td></tr>
+      <tr><td><strong>1 a 12/10</strong></td><td>Halloween e Dia das Crianças com investimento curto, prazo fechado.</td></tr>
+      <tr><td><strong>7/10</strong></td><td>Primeira leitura do mês. Sem mexer nas campanhas antes disso — elas precisam de uma semana para estabilizar.</td></tr>
+      <tr><td><strong>13/10</strong></td><td>Natal assume todo o investimento sazonal.</td></tr>
+      <tr><td><strong>15/10</strong></td><td>Segunda leva de vídeos de Natal entra no ar.</td></tr>
+      <tr><td><strong>20 a 25/10</strong></td><td>Leitura de meio de mês: reforço no que está rendendo mais, corte no que não está.</td></tr>
+      <tr><td><strong>26 a 31/10</strong></td><td>Aquecimento de Black Friday — formação de público para novembro.</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <span class="block-num">04</span>
+    <h2>Os vídeos para gravar</h2>
+    <p class="block-why">Sete peças, entregues até 30/09. É o que o plano precisa da Roma.</p>
+  </div>
+  <div class="body">
+
+    <p>Todos são <strong>vídeo vertical, gravado no celular</strong>. Produção simples é parte do que funciona — as peças que mais venderam no ano passado foram gravadas assim, dentro da loja.</p>
+
+    <div class="card">
+      <h4>1 · Apliques para laço <span class="pill">Prioridade</span></h4>
+      <dl>
+        <dt>Duração</dt><dd>12 a 18 segundos, sem locução, música de trend</dd>
+        <dt>Abertura</dt><dd>A mão despejando um punhado de apliques sortidos numa superfície clara, bem de perto. <em>Sem logo, sem abertura</em> — o produto na primeira imagem.</dd>
+        <dt>Meio</dt><dd>4 ou 5 cortes secos, um por modelo, girando a peça na luz para pegar o brilho. A variedade é o argumento.</dd>
+        <dt>Final</dt><dd>A mão montando <em>um laço pronto</em> com o aplique no centro. O resultado é o que vende.</dd>
+        <dt>Na tela</dt><dd>“mais de XX modelos” na abertura · “a partir de R$ X,XX” no final</dd>
+        <dt>Referência</dt><dd><a href="https://www.instagram.com/p/DMLRrmXPkW5/" target="_blank" rel="noopener">o vídeo de miçangas ↗</a> — mesmo ritmo, mesma câmera</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>2 · Princess</h4>
+      <dl>
+        <dt>Duração</dt><dd>15 a 20 segundos</dd>
+        <dt>Abertura</dt><dd>A mesa cheia de utensílios Princess de uma vez. <em>Abundância</em> é o gancho, não um produto sozinho.</dd>
+        <dt>Meio</dt><dd>Três produtos em uso real, um corte cada — a mão usando, não o produto parado na prateleira.</dd>
+        <dt>Final</dt><dd>O kit montado, com preço na tela.</dd>
+        <dt>Extra</dt><dd>Gravar <em>duas versões</em> do final: uma com preço, outra sem. Queremos comparar as duas no ar.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>3 · Promoção de outubro, com uma pessoa <span class="pill">Prioridade</span></h4>
+      <dl>
+        <dt>Duração</dt><dd>20 a 30 segundos, celular na mão, dentro da loja</dd>
+        <dt>Quem</dt><dd>De preferência <em>a mesma pessoa do vídeo do ano passado</em>. Rosto conhecido rende mais que produção bonita.</dd>
+        <dt>Abertura</dt><dd>Olhando para a câmera: “Chegou a promoção de outubro da Roma e eu vim te mostrar.” Começar falando, sem vinheta.</dd>
+        <dt>Meio</dt><dd>Ela pega três produtos em promoção, um por vez, e <em>fala o preço em voz alta</em>.</dd>
+        <dt>Final</dt><dd>“É só até [data]. Clica aqui embaixo.”</dd>
+        <dt>Importante</dt><dd>Postar no perfil primeiro. O anúncio leva junto as curtidas e os comentários, e isso ajuda a venda.</dd>
+        <dt>Referência</dt><dd><a href="https://www.instagram.com/p/DPeniF6jMil/" target="_blank" rel="noopener">a peça da Rosi de 2025 ↗</a></dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>4 · Natal, primeira leva <span class="pill">Até 30/09</span></h4>
+      <dl>
+        <dt>Duração</dt><dd>12 a 15 segundos</dd>
+        <dt>Ângulo</dt><dd>Antecipação, não Natal. Quem compra aviamento de Natal em outubro <em>vai produzir para vender</em>.</dd>
+        <dt>Abertura</dt><dd>“Quem vende no Natal já tá comprando”, sobre o rolo de fita natalina girando.</dd>
+        <dt>Meio</dt><dd>Fitas, laços prontos, apliques natalinos em cortes rápidos.</dd>
+        <dt>Final</dt><dd>“Monte seu estoque antes de novembro” + preço.</dd>
+        <dt>Referência</dt><dd><a href="https://www.instagram.com/p/DP6zTmsDIzC/" target="_blank" rel="noopener">a peça de antecipação de 2025 ↗</a></dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>5 · Natal, segunda leva <span class="pill">Até 12/10</span></h4>
+      <dl>
+        <dt>Ângulo</dt><dd>Mesma linha, mas mostrando o <em>resultado pronto</em> em vez da matéria-prima.</dd>
+        <dt>Abertura</dt><dd>O laço de Natal pronto, girando na mão.</dd>
+        <dt>Meio</dt><dd>O passo a passo em três cortes: fita → aplique → laço montado.</dd>
+        <dt>Final</dt><dd>“Tudo que você precisa em um lugar só.”</dd>
+        <dt>Por quê</dt><dd>A peça de Natal que mais vendeu em 2025 mostrava <em>produto aplicado</em>, não produto na prateleira.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>6 · Halloween</h4>
+      <dl>
+        <dt>Duração</dt><dd>10 a 12 segundos, um vídeo só</dd>
+        <dt>Ângulo</dt><dd>Fantasia infantil feita em casa — quem costura a fantasia do filho compra na véspera.</dd>
+        <dt>Prazo</dt><dd>No ar de 1º a 31/10, investimento curto. É um teste: a linha nunca foi trabalhada de verdade.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>7 · “Tá no Brás? A Roma é aqui”</h4>
+      <dl>
+        <dt>Duração</dt><dd>15 a 20 segundos, celular</dd>
+        <dt>Abertura</dt><dd>“Tá no Brás? A Roma é aqui”, com a fachada aparecendo.</dd>
+        <dt>Meio</dt><dd>O caminho por dentro da loja, mostrando a variedade das prateleiras.</dd>
+        <dt>Final</dt><dd>Endereço e horário na tela.</dd>
+        <dt>Para quê</dt><dd>Vai para a frente que fala com quem está perto da loja e das rodoviárias, com chamada para comprar.</dd>
+      </dl>
+    </div>
+
+    <h3>As regras que valem para todos</h3>
+    <ol>
+      <li><strong>Sempre vídeo vertical.</strong> Arte parada não trouxe compra nesta conta.</li>
+      <li><strong>Menos de 20 segundos</strong> nos vídeos de produto.</li>
+      <li><strong>Começar pelo produto em movimento</strong>, nunca por logo ou vinheta.</li>
+      <li><strong>Sempre uma mão em quadro.</strong> Produto parado não converteu.</li>
+      <li><strong>Postar no perfil antes</strong>, quando fizer sentido — o anúncio leva a prova social junto.</li>
+      <li><strong>Mínimo de seis vídeos</strong> para o mês, entregues até 30/09.</li>
+    </ol>
+
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <span class="block-num">05</span>
+    <h2>O que precisamos da Roma</h2>
+    <p class="block-why">Três itens, com prazo.</p>
+  </div>
+  <div class="body">
+    <div class="tablewrap">
+    <table>
+      <tr><th>O quê</th><th>Prazo</th></tr>
+      <tr><td><strong>Os seis vídeos do bloco 04</strong>, gravados no celular</td><td>30/09</td></tr>
+      <tr><td><strong>Confirmação das promoções de outubro</strong> — quais produtos e quais preços entram, para as peças e para os anúncios</td><td>29/09</td></tr>
+      <tr><td><strong>Confirmação do estoque de Natal e Halloween</strong> — o que já está disponível para venda no dia 1º</td><td>29/09</td></tr>
+    </table>
+    </div>
+    <p>Com os vídeos em mãos até 30/09, outubro começa no dia 1º com todas as frentes no ar — inclusive a de Natal, que no ano passado só entrou na segunda metade do mês.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Roma Aviamentos · Plano de Outubro 2026</span>
+  <span>Preparado pela Gio Growth Digital · 24/09/2026</span>
+</footer>
+
+</div>
+</body>
+</html>
