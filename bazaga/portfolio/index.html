@@ -520,7 +520,7 @@ info@andrebazaga.com<br>
     document.querySelectorAll(".langs button").forEach(function(b){
       b.setAttribute("aria-pressed",String(b.dataset.set===l));
     });
-    try{localStorage.setItem("bazaga-pf-lang",l);}catch(e){}
+    try{localStorage.setItem("bazaga-idioma-v2",l);}catch(e){}
   }
   document.querySelectorAll(".langs button").forEach(function(b){
     b.addEventListener("click",function(){apply(b.dataset.set);});
@@ -530,9 +530,12 @@ info@andrebazaga.com<br>
   var bf=document.getElementById("print-full");
   if(bf){bf.addEventListener("click",function(){document.body.classList.add("print-full");window.print();});}
 
-  /* o espanhol e a entrada: so muda se a pessoa ja escolheu outro idioma aqui */
+  /* o espanhol e a entrada. A escolha vale para o site e para o portfolio:
+     e a mesma chave nos dois, senao escolher ES aqui e abrir o portfolio
+     trazia de volta o idioma velho guardado la. O sufixo -v2 descarta o
+     que a versao antiga tinha gravado a partir do idioma do navegador. */
   var s=null;
-  try{s=localStorage.getItem("bazaga-pf-lang");}catch(e){}
+  try{s=localStorage.getItem("bazaga-idioma-v2");}catch(e){}
   apply(LANGS.indexOf(s)!==-1?s:"es");
 })();
 </script>
