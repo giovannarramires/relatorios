@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Setembro (parcial) · Roma Aviamentos</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#FBFAF8; --surface:#FFFFFF; --sunk:#F3F1EC;
+    --ink:#1A1D23; --ink2:#5C616B; --ink3:#8A8E97;
+    --line:#E4E0DA; --line2:#CFCAC1;
+    --accent:#9E2B25; --accent-soft:#F0DFDD;
+    --data2:#3D5A80; --data2-soft:#E1E7F0;
+    --good:#2F6B4F; --good-soft:#DFEAE4; --warn:#A8630A; --warn-soft:#F5E7D3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#15171B; --surface:#1D2026; --sunk:#22262D;
+      --ink:#ECEAE5; --ink2:#A6ABB4; --ink3:#767B84;
+      --line:#2E333B; --line2:#3D434C;
+      --accent:#D4594F; --accent-soft:#3A2321;
+      --data2:#7FA3C9; --data2-soft:#1F2833;
+      --good:#6FAE8C; --good-soft:#1C2A24; --warn:#D79641; --warn-soft:#2E2417;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#15171B; --surface:#1D2026; --sunk:#22262D;
+    --ink:#ECEAE5; --ink2:#A6ABB4; --ink3:#767B84;
+    --line:#2E333B; --line2:#3D434C;
+    --accent:#D4594F; --accent-soft:#3A2321;
+    --data2:#7FA3C9; --data2-soft:#1F2833;
+    --good:#6FAE8C; --good-soft:#1C2A24; --warn:#D79641; --warn-soft:#2E2417;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:"Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1020px; margin:0 auto; padding-inline:20px; padding-block:0 80px}
+  h1,h2,h3,h4{font-family:"Zilla Slab", Georgia, serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(2rem,5.2vw,2.9rem); font-weight:700; line-height:1.08; letter-spacing:-.015em}
+  h2{font-size:clamp(1.3rem,3vw,1.7rem); font-weight:600; line-height:1.2}
+  h3{font-size:1.1rem; font-weight:600}
+  p{margin:0}
+  .mono{font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:.67rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--ink3)}
+
+  header{padding-block:46px 30px; border-bottom:2px solid var(--ink); display:flex; flex-direction:column; gap:13px}
+  .lede{font-size:1.1rem; color:var(--ink2); max-width:64ch}
+  .lede strong{color:var(--ink); font-weight:600}
+
+  nav{padding-block:22px; border-bottom:1px solid var(--line)}
+  nav ol{margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:8px 26px; counter-reset:s}
+  nav li{counter-increment:s; font-size:.9rem}
+  nav li::before{content:counter(s,decimal-leading-zero); font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--ink3); margin-right:9px}
+  nav a{color:var(--ink2); text-decoration:none; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--accent); border-bottom-color:var(--accent)}
+
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-bottom:1px solid var(--line)}
+  .kpi{background:var(--ground); padding:20px 16px 18px; display:flex; flex-direction:column; gap:3px}
+  .kpi .v{font-family:"Zilla Slab",serif; font-size:1.7rem; font-weight:600; line-height:1.05; font-variant-numeric:tabular-nums}
+  .kpi .k{font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3)}
+  .kpi .d{font-size:.82rem; color:var(--ink2)}
+
+  section{padding-block:44px; border-bottom:1px solid var(--line); scroll-margin-top:16px}
+  section:last-of-type{border-bottom:none}
+  .sec-head{display:flex; flex-direction:column; gap:7px; margin-bottom:22px}
+  .sec-head .eyebrow{color:var(--accent)}
+  .sec-head p{color:var(--ink2); max-width:68ch}
+
+  .tbl-scroll{overflow-x:auto; margin-inline:-20px; padding-inline:20px}
+  table{border-collapse:collapse; width:100%; font-size:.9rem; min-width:560px}
+  th{font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink3); font-weight:500; text-align:right; padding:0 0 8px 14px; border-bottom:1px solid var(--line2); white-space:nowrap; vertical-align:bottom}
+  th:first-child, td:first-child{text-align:left; padding-left:0}
+  td{padding:9px 0 9px 14px; text-align:right; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:none}
+  td.name{font-weight:600}
+  tr.total td{border-top:1px solid var(--line2); font-weight:600}
+  tr.hl td{background:var(--accent-soft)}
+  tr.ok td{background:var(--good-soft)}
+  tr.dim td{color:var(--ink3)}
+  .num{font-family:"IBM Plex Mono",monospace}
+  .sub{display:block; font-size:.78rem; font-weight:400; color:var(--ink3); line-height:1.35}
+  .why{text-align:left; font-size:.86rem; color:var(--ink2)}
+  .dn{color:var(--accent)}
+  .lead-in{font-weight:600; color:var(--ink)}
+
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px}
+  .panel{background:var(--surface); border:1px solid var(--line); padding:18px; display:flex; flex-direction:column; gap:9px}
+  .panel p{font-size:.91rem; color:var(--ink2)}
+  .panel .fig{font-family:"Zilla Slab",serif; font-size:1.4rem; font-weight:600; color:var(--ink); line-height:1.15}
+
+  .note{border-left:3px solid var(--warn); background:var(--warn-soft); padding:16px 18px; display:flex; flex-direction:column; gap:7px}
+  .note .eyebrow{color:var(--warn)}
+  .note p{font-size:.92rem; color:var(--ink2)}
+  .note.ok{border-left-color:var(--good); background:var(--good-soft)}
+  .note.ok .eyebrow{color:var(--good)}
+  .note.neutral{border-left-color:var(--line2); background:var(--sunk)}
+  .note.neutral .eyebrow{color:var(--ink2)}
+
+  ul{margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:6px}
+  li::marker{color:var(--ink3)}
+  li strong{color:var(--ink)}
+  ul.tight li{font-size:.92rem; color:var(--ink2)}
+
+  /* ponte em cascata */
+  .bridge{display:flex; flex-direction:column; gap:0; border:1px solid var(--line); background:var(--surface)}
+  .brow{display:grid; grid-template-columns:1fr 132px; gap:16px; padding:13px 18px; border-top:1px solid var(--line); align-items:baseline}
+  .brow:first-child{border-top:none}
+  .brow .lbl{font-size:.93rem}
+  .brow .lbl strong{font-weight:600}
+  .brow .lbl span{display:block; font-size:.81rem; color:var(--ink3)}
+  .brow .val{font-family:"IBM Plex Mono",monospace; text-align:right; font-variant-numeric:tabular-nums; font-size:.95rem}
+  .brow.start{background:var(--sunk)}
+  .brow.minus .val{color:var(--accent)}
+  .brow.end{background:var(--good-soft); border-top:2px solid var(--good)}
+  .brow.end .lbl strong, .brow.end .val{font-family:"Zilla Slab",serif; font-size:1.15rem; font-weight:600}
+
+  .resp{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .resp > div{border:1px solid var(--line); background:var(--surface); display:flex; flex-direction:column}
+  .resp .top{padding:15px 18px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:2px}
+  .resp .top strong{font-family:"Zilla Slab",serif; font-size:1.08rem}
+  .resp .ours .top{background:var(--accent-soft)}
+  .resp .them .top{background:var(--data2-soft)}
+  .resp ul{padding:16px 18px 18px 34px; gap:9px}
+  .resp li{font-size:.91rem; color:var(--ink2)}
+
+  .work{display:flex; flex-direction:column}
+  .wgroup{border-top:1px solid var(--line); padding-block:22px; display:grid; grid-template-columns:168px 1fr; gap:24px}
+  .wgroup:first-child{border-top:2px solid var(--ink)}
+  .wtitle{display:flex; flex-direction:column; gap:3px}
+  .wtitle strong{font-family:"Zilla Slab",serif; font-size:1.05rem}
+  .wtitle span{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3)}
+  .witems{display:flex; flex-direction:column; gap:13px}
+  .witem{display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:baseline}
+  .wdate{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--accent); font-weight:500}
+  .wbody{font-size:.93rem; color:var(--ink2)}
+  .wbody strong{color:var(--ink); font-weight:600}
+
+  figure{margin:0; display:flex; flex-direction:column; gap:11px}
+  .chart-box{background:var(--surface); border:1px solid var(--line); padding:18px 16px 10px; overflow-x:auto}
+  figcaption{font-size:.83rem; color:var(--ink3); max-width:68ch}
+
+  .check{display:grid; grid-template-columns:210px 1fr; gap:10px 22px; font-size:.9rem}
+  .check dt{font-weight:600; color:var(--ink)}
+  .check dd{margin:0; color:var(--ink2)}
+
+  /* leitura do mês */
+  .read{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:0; border:1px solid var(--line); background:var(--surface)}
+  .read > div{padding:20px 20px 22px; border-left:1px solid var(--line); display:flex; flex-direction:column; gap:8px}
+  .read > div:first-child{border-left:none}
+  .read .n{font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink3)}
+  .read h3{font-size:1.06rem; line-height:1.28}
+  .read p{font-size:.9rem; color:var(--ink2)}
+  .verdict{
+    background:var(--ink); color:var(--ground); padding:26px 26px 28px;
+    display:flex; flex-direction:column; gap:10px; margin-bottom:22px;
+  }
+  .verdict .eyebrow{color:rgba(251,250,248,.55)}
+  .verdict p{font-family:"Zilla Slab",serif; font-size:clamp(1.2rem,2.7vw,1.55rem); line-height:1.32; font-weight:500}
+  .verdict p em{font-style:normal; color:#E8A29C; font-weight:600}
+  :root[data-theme="dark"] .verdict p em{color:#E8A29C}
+
+  /* prioridades */
+  .prio{display:flex; flex-direction:column}
+  .pitem{display:grid; grid-template-columns:34px 1fr 138px; gap:18px; padding-block:20px; border-top:1px solid var(--line); align-items:start}
+  .pitem:first-child{border-top:2px solid var(--ink)}
+  .pnum{font-family:"Zilla Slab",serif; font-size:1.5rem; font-weight:600; color:var(--accent); line-height:1}
+  .pbody{display:flex; flex-direction:column; gap:7px}
+  .pbody h3{font-size:1.08rem}
+  .pbody p{font-size:.92rem; color:var(--ink2)}
+  .pbody .how{font-size:.85rem; color:var(--ink3); border-left:2px solid var(--line2); padding-left:11px}
+  .pbody .how strong{color:var(--ink2); font-weight:600}
+  .pmeta{display:flex; flex-direction:column; gap:5px; text-align:right}
+  .pval{font-family:"Zilla Slab",serif; font-size:1.12rem; font-weight:600; line-height:1.15}
+  .powner{font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink3)}
+  .ptag{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; padding:2px 7px; border-radius:2px; align-self:flex-end}
+  .ptag.roma{background:var(--data2-soft); color:var(--data2)}
+  .ptag.plat{background:var(--warn-soft); color:var(--warn)}
+  .ptag.ggd{background:var(--accent-soft); color:var(--accent)}
+  @media (max-width:720px){
+    .pitem{grid-template-columns:28px 1fr; gap:12px}
+    .pmeta{grid-column:2; text-align:left; align-items:flex-start; flex-direction:row; flex-wrap:wrap; gap:10px; align-items:baseline}
+    .ptag{align-self:auto}
+  }
+
+  .versus{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:0; border:1px solid var(--line); background:var(--surface); margin-bottom:24px}
+  .versus > div{padding:20px; border-left:1px solid var(--line); display:flex; flex-direction:column; gap:4px}
+  .versus > div:first-child{border-left:none}
+  .versus .plat{font-family:"Zilla Slab",serif; font-size:1.12rem; font-weight:600}
+  .versus .big{font-family:"Zilla Slab",serif; font-size:1.75rem; font-weight:600; line-height:1.05; font-variant-numeric:tabular-nums; margin-top:4px}
+  .versus .cap{font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink3)}
+  .versus .row{display:flex; justify-content:space-between; gap:12px; font-size:.88rem; color:var(--ink2); font-variant-numeric:tabular-nums; border-top:1px solid var(--line); padding-top:7px; margin-top:7px}
+  .versus .row b{color:var(--ink); font-weight:600; font-family:"IBM Plex Mono",monospace}
+  .versus .tot{background:var(--sunk)}
+
+  footer{padding-top:32px; color:var(--ink3); font-size:.82rem; display:flex; flex-direction:column; gap:6px}
+  a{color:var(--accent)}
+  @media (max-width:720px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .resp{grid-template-columns:1fr}
+    .wgroup{grid-template-columns:1fr; gap:12px}
+    .check{grid-template-columns:1fr; gap:4px 0}
+    .check dd{margin-bottom:10px}
+    .brow{grid-template-columns:1fr 110px; gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Roma Aviamentos · Relatório parcial · 1 a 23 de setembro de 2026</span>
+  <h1>O mês em três réguas</h1>
+  <p class="lede" style="font-size:.95rem"><strong>Leitura parcial:</strong> este relatório fecha em <strong>23 de setembro</strong> — faltam os dias 24 a 30. Todo número aqui se refere a esses 23 dias, e a projeção de mês cheio aparece só onde está escrita como projeção.</p>
+  <p class="lede">Este relatório mostra <strong>os mesmos dias medidos por fontes diferentes</strong> — o que as plataformas de anúncio reportam, o que o Google Analytics registra, o que a loja registrou de pedidos e o que virou faturamento de verdade. Os números são diferentes entre si, e cada diferença tem explicação. Elas estão aqui, junto com o que já foi feito e com o que ainda depende de cada lado.</p>
+</header>
+
+<nav aria-label="Índice">
+  <ol>
+    <li><a href="#leitura">A leitura do mês</a></li>
+    <li><a href="#ponte">Do pedido ao faturamento</a></li>
+    <li><a href="#reguas">Por que as plataformas não batem</a></li>
+    <li><a href="#plataformas">Desempenho por plataforma</a></li>
+    <li><a href="#sinal">O sinal que não se conserta com verba</a></li>
+    <li><a href="#feito">Tudo que foi feito em setembro</a></li>
+    <li><a href="#pendente">O que precisamos olhar agora</a></li>
+    <li><a href="#conferir">Como conferir cada número</a></li>
+  </ol>
+</nav>
+
+<div class="kpis">
+  <div class="kpi">
+    <span class="k">Faturamento líquido</span>
+    <span class="v">R$ 134.211</span>
+    <span class="d">1 a 23/09 · número oficial da Roma</span>
+  </div>
+  <div class="kpi">
+    <span class="k">Pedidos registrados</span>
+    <span class="v">861</span>
+    <span class="d">ticket médio de R$ 200,87</span>
+  </div>
+  <div class="kpi">
+    <span class="k">Investido em mídia</span>
+    <span class="v">R$ 7.431</span>
+    <span class="d">5,5% do faturamento · Meta 3.170 · Google 4.260</span>
+  </div>
+  <div class="kpi">
+    <span class="k">Retorno</span>
+    <span class="v">18,1x</span>
+    <span class="d">R$ 18,10 faturados por real investido</span>
+  </div>
+</div>
+
+<section id="leitura">
+  <div class="verdict">
+    <span class="eyebrow">A leitura de setembro</span>
+    <p>O mês não teve problema de <em>trazer gente</em>. Teve problema de <em>transformar pedido em receita</em>. Cada R$ 1 investido em anúncio trouxe R$ 18,10 — e, de cada R$ 6 vendidos na loja, <em>R$ 1 foi cancelado</em>.</p>
+  </div>
+
+  <div class="read">
+    <div>
+      <span class="n">Sobre a mídia</span>
+      <h3>Pequena, barata e eficiente</h3>
+      <p>R$ 7.431 investidos, <strong>5,5% do faturamento</strong>. Trouxe 397 dos 814 pedidos que o Analytics conseguiu rastrear. Não há desperdício visível e não é aqui que o mês se perdeu.</p>
+    </div>
+    <div>
+      <span class="n">Sobre a loja</span>
+      <h3>861 pedidos, 98 cancelados</h3>
+      <p><strong>R$ 30.498,71</strong> em pedidos que não se completaram — e são os pedidos <em>grandes</em> (ticket 55% acima da média). É a maior perda identificada no mês, e é quatro vezes o valor investido em mídia.</p>
+    </div>
+    <div>
+      <span class="n">Sobre o canal</span>
+      <h3>O maior vendedor é gratuito</h3>
+      <p>A <strong>busca orgânica respondeu por 29,2% da receita</strong> — mais que qualquer campanha paga, sem custo por clique. É um ativo construído em anos, e ele depende do site: velocidade, fichas completas, indexação.</p>
+    </div>
+    <div>
+      <span class="n">Sobre a medição</span>
+      <h3>Agora dá para confiar</h3>
+      <p>Três correções deste mês — marcação de links, janela de contagem e privacidade — mais a auditoria que explicou a contagem dobrada. <strong>Outubro será o primeiro mês em que os números nascem certos</strong> e comparáveis.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ponte">
+  <div class="sec-head">
+    <span class="eyebrow">02</span>
+    <h2>Do pedido ao faturamento</h2>
+    <p>A loja registrou 861 pedidos e R$ 172.949 em vendas no período. O faturamento líquido foi de R$ 134.211. Esta é a diferença, linha a linha.</p>
+  </div>
+
+  <div class="bridge">
+    <div class="brow start">
+      <span class="lbl"><strong>Pedidos registrados na loja</strong><span>861 pedidos · ticket médio R$ 200,87 · sem contar frete</span></span>
+      <span class="val">172.948,79</span>
+    </div>
+    <div class="brow minus">
+      <span class="lbl"><strong>− Pedidos cancelados</strong><span>98 pedidos · ticket médio R$ 311,21</span></span>
+      <span class="val">− 30.498,71</span>
+    </div>
+    <div class="brow minus">
+      <span class="lbl"><strong>− Aguardando pagamento</strong><span>16 pedidos ainda em aberto na data desta leitura</span></span>
+      <span class="val">− 2.046,35</span>
+    </div>
+    <div class="brow minus">
+      <span class="lbl"><strong>− Em análise</strong><span>1 pedido</span></span>
+      <span class="val">− 568,05</span>
+    </div>
+    <div class="brow minus">
+      <span class="lbl"><strong>− Ajustes pós-venda e critério contábil</strong><span>devoluções, estornos e diferença de apuração — 3,3% do total</span></span>
+      <span class="val">− 5.624,57</span>
+    </div>
+    <div class="brow end">
+      <span class="lbl"><strong>Faturamento líquido</strong><span>número oficial da Roma para 1 a 23/09</span></span>
+      <span class="val">134.211,11</span>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:24px">
+    <span class="eyebrow">O maior vazamento do mês não está na mídia</span>
+    <p><strong>R$ 30.498,71 em pedidos cancelados</strong> — 98 pedidos, 17,6% de tudo que a loja vendeu no período. É a maior perda identificada no mês, e nenhum real dela está na mídia.</p>
+    <p>O detalhe que mais chama atenção: <strong>o pedido cancelado é maior que o pedido médio.</strong> O ticket do cancelado foi de <strong>R$ 311,21</strong> contra R$ 200,87 do geral — 55% maior. É o pedido grande que não se completa.</p>
+    <p>Já estamos levantando o histórico dos últimos anos para dimensionar se este é o padrão da operação ou um ponto fora da curva. O resultado vem em um documento à parte.</p>
+  </div>
+
+  <div class="note neutral" style="margin-top:20px">
+    <span class="eyebrow">Por que isso importa para a mídia — e por que não é da mídia</span>
+    <p>A mídia é paga pelo <em>pedido feito</em>. Quando o pedido é cancelado, o investimento já aconteceu. Recuperar um terço desses R$ 30 mil vale mais, em um mês, do que qualquer ajuste de campanha que possamos fazer com a verba atual.</p>
+    <p><strong>Vale a pena abrir esses 98 pedidos e descobrir por que caíram:</strong> pagamento recusado, boleto não pago, desistência no frete, produto sem estoque depois da compra, cliente que pediu cancelamento. Cada motivo tem uma solução diferente, e nenhuma delas é campanha. Podemos apoiar a leitura, mas o dado está no sistema da loja.</p>
+  </div>
+</section>
+
+<section id="reguas">
+  <div class="sec-head">
+    <span class="eyebrow">03</span>
+    <h2>Por que as plataformas não batem</h2>
+    <p>Nós gerenciamos <em>por plataforma</em> — é lá que se decide público, verba e lance, e é lá que o resultado aparece primeiro. Mas o número da plataforma não é o faturamento da loja, e a diferença precisa de explicação linha a linha.</p>
+  </div>
+
+  <div class="tbl-scroll">
+    <table>
+      <thead>
+        <tr><th>Fonte</th><th>Pedidos</th><th>Receita</th><th>O que ela mede de verdade</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Meta Ads</td><td class="num">900</td><td class="num">125.088</td>
+          <td class="why">Toda venda que aconteceu depois de alguém ver ou clicar no anúncio — mesmo sem clicar. <strong>Hoje conta cada venda 2,2 vezes</strong> (erro técnico, explicado abaixo).</td>
+        </tr>
+        <tr>
+          <td class="name">Google Ads</td><td class="num">447</td><td class="num">84.455</td>
+          <td class="why">Vendas ligadas a um clique em anúncio, dentro da janela de atribuição. Conta uma vez por venda.</td>
+        </tr>
+        <tr class="hl">
+          <td class="name">Soma das duas</td><td class="num">1.347</td><td class="num">209.543</td>
+          <td class="why" style="color:var(--ink)"><strong>Não pode ser somado.</strong> São mais pedidos do que a loja inteira registrou — as duas plataformas contam a mesma venda.</td>
+        </tr>
+        <tr>
+          <td class="name">Google Analytics</td><td class="num">814</td><td class="num">152.774</td>
+          <td class="why">Mede todos os canais com o mesmo critério e credita o último que trouxe a pessoa. Capturou <strong>94,5% dos pedidos</strong> e 88,3% do valor — o que falta é bloqueador de anúncio e recusa de cookies.</td>
+        </tr>
+        <tr class="ok">
+          <td class="name">Loja · pedidos</td><td class="num">861</td><td class="num">172.949</td>
+          <td class="why" style="color:var(--ink)"><strong>A régua que não erra.</strong> Tudo que foi pedido no site, antes de cancelamento.</td>
+        </tr>
+        <tr class="ok">
+          <td class="name">Faturamento líquido</td><td class="num">—</td><td class="num">134.211</td>
+          <td class="why" style="color:var(--ink)">O que efetivamente virou receita, depois de cancelamentos e ajustes. <strong>É o número que vale.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2" style="margin-top:26px">
+    <div class="note">
+      <span class="eyebrow">O erro técnico que encontramos</span>
+      <p><strong>A plataforma do site tem um código de rastreamento próprio, fora do nosso controle, que registra cada compra duas vezes para o Meta.</strong> Encontramos o trecho exato no código em 21/09, conferimos de novo em 22/09 e medimos o fator em duas janelas independentes: <strong>2,20 vezes</strong>.</p>
+      <p>Consequência: as <strong>900 compras</strong> que o Meta reivindica no mês são, na prática, cerca de <strong>409</strong>. O custo real por pedido do Meta é de <strong>R$ 7,75</strong> — e não os R$ 3,52 que o painel mostra. O número do painel é otimista; o real continua muito bom.</p>
+      <p>Não é erro de configuração da nossa parte e não se resolve dentro do Meta: está no código da plataforma da loja. Já foi formalmente reportado — ver a seção 07.</p>
+    </div>
+    <div class="note neutral">
+      <span class="eyebrow">Por que ainda sobra diferença</span>
+      <p>Mesmo corrigido o erro, Meta (409) e Google (447) somam mais pedidos do que o Analytics consegue ligar à mídia paga (397). <strong>Isso não é erro de ninguém</strong> — é a mesma venda vista por ângulos diferentes.</p>
+      <p>Uma cliente vê o anúncio no Instagram na segunda, procura "roma aviamentos" no Google na quarta e compra. O Meta conta (ele mostrou o produto), o Google conta (ele trouxe o clique final) e o Analytics credita só o Google. Os três estão certos dentro da própria régua.</p>
+      <p><strong>Por isso o número que usamos para decidir é o faturamento da loja</strong>, e as plataformas servem para comparar campanhas entre si — nunca para somar.</p>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px; border-left:3px solid var(--good)">
+    <span class="eyebrow" style="color:var(--good)">O número honesto do mês</span>
+    <p class="fig">R$ 134.211 de faturamento líquido ÷ R$ 7.431 de mídia = 18,1 vezes</p>
+    <p>Para cada R$ 1 investido em anúncio, a Roma faturou <strong>R$ 18,10 líquidos</strong> — contando <em>todo</em> o faturamento, inclusive o que veio por busca orgânica e por quem já conhecia a loja, e já descontando os cancelamentos. É a leitura mais conservadora possível, e é a que recomendamos acompanhar mês a mês.</p>
+  </div>
+</section>
+
+<section id="plataformas">
+  <div class="sec-head">
+    <span class="eyebrow">04</span>
+    <h2>Desempenho por plataforma</h2>
+    <p>Quanto cada plataforma custou, quantas compras trouxe e a que preço. Os números do Meta já estão <strong>corrigidos</strong> pela contagem dobrada — são as compras reais, não as do painel.</p>
+  </div>
+
+  <div class="versus">
+    <div>
+      <span class="plat">Meta Ads</span>
+      <span class="cap">Instagram e Facebook</span>
+      <span class="big">17,9x</span>
+      <span class="cap">retorno real</span>
+      <div class="row"><span>Investido</span><b>R$ 3.170</b></div>
+      <div class="row"><span>Vendas reais</span><b>409</b></div>
+      <div class="row"><span>Custo por venda</span><b>R$ 7,75</b></div>
+      <div class="row"><span>Faturamento atribuído</span><b>R$ 56.858</b></div>
+      <div class="row"><span>No painel aparece</span><b>900 vendas · R$ 125.088</b></div>
+    </div>
+    <div>
+      <span class="plat">Google Ads</span>
+      <span class="cap">busca, vitrine e vídeo</span>
+      <span class="big">19,8x</span>
+      <span class="cap">retorno real</span>
+      <div class="row"><span>Investido</span><b>R$ 4.260</b></div>
+      <div class="row"><span>Vendas</span><b>447</b></div>
+      <div class="row"><span>Custo por venda</span><b>R$ 9,53</b></div>
+      <div class="row"><span>Faturamento atribuído</span><b>R$ 84.455</b></div>
+      <div class="row"><span>Contagem</span><b>uma vez por venda</b></div>
+    </div>
+    <div class="tot">
+      <span class="plat">As duas juntas</span>
+      <span class="cap">1 a 23 de setembro</span>
+      <span class="big">19,0x</span>
+      <span class="cap">retorno real da mídia</span>
+      <div class="row"><span>Investido</span><b>R$ 7.431</b></div>
+      <div class="row"><span>Vendas atribuídas</span><b>856</b></div>
+      <div class="row"><span>Custo médio por venda</span><b>R$ 8,68</b></div>
+      <div class="row"><span>Faturamento atribuído</span><b>R$ 141.313</b></div>
+      <div class="row"><span>Pedidos na loja</span><b>861 · R$ 172.949</b></div>
+    </div>
+  </div>
+
+  <div class="note neutral" style="margin-bottom:24px">
+    <span class="eyebrow">De onde saem estes números</span>
+    <p><strong>Meta:</strong> o painel reivindica 900 vendas e R$ 125.088. Dividindo pelo fator de duplicação medido (2,20), sobram <strong>409 vendas e R$ 56.858</strong> — R$ 7,75 por venda e <strong>17,9x</strong> de retorno. É a leitura mais conservadora possível: pelo outro caminho (409 vendas × o ticket médio real da loja, R$ 200,87) o Meta chegaria a R$ 82.156 e 25,9x.</p>
+    <p><strong>Google:</strong> número do painel sem correção — ele conta cada venda uma única vez. R$ 4.260 para 447 vendas e R$ 84.455, <strong>19,8x</strong>.</p>
+    <p><strong>As duas juntas:</strong> R$ 141.313 ÷ R$ 7.431 = <strong>19,0x</strong>. Este valor serve para comparar as duas plataformas entre si, e <em>não</em> é o faturamento da Roma: as duas ainda contam a mesma venda quando a cliente vê o anúncio no Instagram e depois chega pelo Google. O número que vale continua sendo o faturamento líquido da loja — R$ 134.211, <strong>18,1x</strong> sobre toda a mídia.</p>
+  </div>
+
+  <h3 style="margin-bottom:12px">Meta Ads — resultado por frente</h3>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Frente</th><th>Investido</th><th>Vendas reais</th><th>Custo por venda</th><th>Faturamento real</th><th>Retorno real</th><th>Carrinhos</th><th>O que aconteceu</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td class="name">Catálogo — remarketing</td><td class="num">963</td><td class="num">151</td><td class="num">6,38</td><td class="num">21.181</td><td class="num">22,0x</td><td class="num">4.785</td><td class="why">O melhor custo por compra do mês. Quem já visitou a loja e volta pelo anúncio.</td></tr>
+        <tr class="ok"><td class="name">Catálogo — prospecção</td><td class="num">995</td><td class="num">149</td><td class="num">6,69</td><td class="num">17.185</td><td class="num">17,3x</td><td class="num">4.349</td><td class="why">A frente que sustenta o volume: leva o catálogo a quem ainda não conhece a loja.</td></tr>
+        <tr><td class="name">Semelhantes de compradores<span class="sub">frente nova, criada em 01/09</span></td><td class="num">621</td><td class="num">76</td><td class="num">8,13</td><td class="num">13.603</td><td class="num">21,9x</td><td class="num">2.077</td><td class="why"><strong>O teste do mês deu certo.</strong> Construída a partir de quem comprou nos últimos 50 dias, entregou no primeiro mês a um custo próximo das frentes maduras.</td></tr>
+        <tr><td class="name">Remarketing Nordeste</td><td class="num">215</td><td class="num">31</td><td class="num">6,96</td><td class="num">4.621</td><td class="num">21,5x</td><td class="num">1.045</td><td class="why">Verba dedicada à praça, mantida mesmo nos fins de semana. Custo em linha com o remarketing geral.</td></tr>
+        <tr><td class="name">Top 10 artesanato</td><td class="num">63</td><td class="num">2</td><td class="num">27,72</td><td class="num">271</td><td class="num">4,3x</td><td class="num">147</td><td class="why">Teve a verba <strong>reduzida em 40% no dia 02/09</strong>: vendia bem, mas produtos de ticket baixo. O dinheiro foi para a frente de clientes novos.</td></tr>
+        <tr class="dim"><td class="name">Reconhecimento e perfil<span class="sub">3 frentes de topo</span></td><td class="num">294</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">25</td><td class="why">Não existem para vender no clique: alimentam o público que as outras frentes convertem depois. Inclui a primeira campanha com criadora de conteúdo, no ar desde 14/09.</td></tr>
+        <tr class="dim"><td class="name">Outras frentes sem entrega<span class="sub">São Paulo em catálogo e semelhantes de 120 dias</span></td><td class="num">19</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">0</td><td class="why">Ligadas e sem entrega no período; verba residual.</td></tr>
+        <tr class="total"><td>Total Meta</td><td class="num">3.170</td><td class="num">409</td><td class="num">7,75</td><td class="num">56.858</td><td class="num">17,9x</td><td class="num">12.428</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note neutral" style="margin-top:18px">
+    <span class="eyebrow">Como ler o faturamento e o retorno desta tabela</span>
+    <p>O faturamento de cada frente é o valor que o Meta reporta <strong>dividido pelo fator de duplicação medido (2,20)</strong>. Isso assume que a contagem dobrada acontece por igual em todas as frentes — é o mais razoável a supor, já que o código que duplica está no site e não na campanha, mas <strong>só dá para confirmar depois que a plataforma desligar a chamada duplicada</strong>. O custo por venda não depende dessa suposição e é o número mais firme da tabela.</p>
+    <p>Duas leituras do mesmo mês: <strong>22,0x no remarketing de catálogo</strong> contra 17,3x na prospecção — quem já conhece a loja compra mais caro. E a frente nova de <strong>semelhantes entrega 21,9x no primeiro mês</strong>, praticamente empatada com o remarketing.</p>
+  </div>
+
+  <h3 style="margin:30px 0 12px">Google Ads — resultado por frente</h3>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Frente</th><th>Investido</th><th>Vendas</th><th>Custo por venda</th><th>Faturamento</th><th>Retorno</th><th>O que aconteceu</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td class="name">Campanha inteligente<span class="sub">vitrine, YouTube, Display e Gmail</span></td><td class="num">1.776</td><td class="num">221</td><td class="num">8,03</td><td class="num">42.446</td><td class="num">23,9x</td><td class="why">A frente mais eficiente do Google no mês, em volume e em custo.</td></tr>
+        <tr class="ok"><td class="name">Busca pela marca</td><td class="num">1.287</td><td class="num">122</td><td class="num">10,55</td><td class="num">27.916</td><td class="num">21,7x</td><td class="why">O clique mais barato da conta: <strong>R$ 0,36</strong>. Garante que quem procura "roma aviamentos" encontre a loja em primeiro lugar.</td></tr>
+        <tr><td class="name">Vitrine de produtos</td><td class="num">1.058</td><td class="num">103</td><td class="num">10,27</td><td class="num">14.069</td><td class="num">13,3x</td><td class="why">É a frente com mais espaço para crescer: hoje aparece em apenas <strong>15% das buscas</strong> em que poderia aparecer, por limite de orçamento.</td></tr>
+        <tr class="dim"><td class="name">Teste de busca por demanda</td><td class="num">140</td><td class="num">1</td><td class="num">139,90</td><td class="num">24</td><td class="num">0,2x</td><td class="why">Testada no início do mês e <strong>pausada no dia 09</strong>, com R$ 140 gastos. Teste barato, corte rápido.</td></tr>
+        <tr class="total"><td>Total Google</td><td class="num">4.260</td><td class="num">447</td><td class="num">9,53</td><td class="num">84.455</td><td class="num">19,8x</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin:30px 0 12px">Os criativos que mais levaram gente ao site</h3>
+  <p style="color:var(--ink2); font-size:.93rem; margin-bottom:14px">No total, os anúncios levaram <strong>64.571 visitas</strong> ao site e ao perfil no período — a um custo médio de <strong>R$ 0,05 por visita</strong>.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Criativo</th><th>Onde rodou</th><th>Investido</th><th>Visitas levadas</th><th>Custo por visita</th><th>Quantos clicaram</th><th>Compras</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td class="name">Fitas Princess — catálogo</td><td class="why">prospecção</td><td class="num">567</td><td class="num">13.253</td><td class="num">0,04</td><td class="num">16,7%</td><td class="num">178</td></tr>
+        <tr class="ok"><td class="name">Fitas Princess — quem já visitou</td><td class="why">remarketing</td><td class="num">396</td><td class="num">10.257</td><td class="num">0,04</td><td class="num">15,8%</td><td class="num">167</td></tr>
+        <tr><td class="name">Catálogo completo</td><td class="why">prospecção</td><td class="num">428</td><td class="num">9.848</td><td class="num">0,04</td><td class="num">12,4%</td><td class="num">149</td></tr>
+        <tr><td class="name">Curva A — os campeões de venda</td><td class="why">remarketing</td><td class="num">360</td><td class="num">8.861</td><td class="num">0,04</td><td class="num">16,1%</td><td class="num">107</td></tr>
+        <tr><td class="name">Catálogo para semelhantes</td><td class="why">clientes novos</td><td class="num">621</td><td class="num">7.921</td><td class="num">0,08</td><td class="num">13,9%</td><td class="num">168</td></tr>
+        <tr><td class="name">Organizadores</td><td class="why">remarketing</td><td class="num">207</td><td class="num">5.789</td><td class="num">0,04</td><td class="num">16,2%</td><td class="num">58</td></tr>
+        <tr><td class="name">Princess — Nordeste</td><td class="why">remarketing regional</td><td class="num">215</td><td class="num">4.658</td><td class="num">0,05</td><td class="num">13,8%</td><td class="num">68</td></tr>
+        <tr class="hl"><td class="name">Reel da parceira — headband<span class="sub">tráfego para o perfil no Instagram</span></td><td class="why">conteúdo de criadora</td><td class="num">97</td><td class="num">3.132</td><td class="num">0,03</td><td class="num">11,2%</td><td class="num">—</td></tr>
+        <tr class="dim"><td class="name">Dia das Crianças</td><td class="why">reconhecimento</td><td class="num">83</td><td class="num">86</td><td class="num">0,96</td><td class="num">0,5%</td><td class="num">—</td></tr>
+        <tr class="dim"><td class="name">Linhas InLove Círculo</td><td class="why">reconhecimento</td><td class="num">76</td><td class="num">31</td><td class="num">2,45</td><td class="num">0,4%</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2" style="margin-top:20px">
+    <div class="panel" style="border-left:3px solid var(--accent)">
+      <span class="eyebrow" style="color:var(--accent)">O criativo campeão</span>
+      <p><strong>Fitas Princess</strong> é o produto que mais move gente: aparece como o primeiro e o segundo criativo do mês, nas duas pontas do funil, e juntos responderam por <strong>345 das compras</strong>. Quando a mesma linha de produto ganha de quem já conhece a loja <em>e</em> de quem nunca entrou, é sinal de que ela merece mais peças e mais variações.</p>
+    </div>
+    <div class="panel" style="border-left:3px solid var(--data2)">
+      <span class="eyebrow" style="color:var(--data2)">O achado do conteúdo de criadora</span>
+      <p>O reel da parceira levou <strong>3.132 pessoas ao perfil por R$ 97</strong> — <strong>R$ 0,03 por visita</strong>, o clique mais barato de toda a conta, com 11,2% de quem viu clicando. Para comparação: os anúncios de reconhecimento feitos com material próprio custaram entre R$ 0,96 e R$ 2,45 por visita. <strong>Conteúdo de criadora entrega de 30 a 80 vezes mais gente pelo mesmo dinheiro.</strong></p>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel" style="border-left:3px solid var(--good)">
+      <span class="eyebrow" style="color:var(--good)">O que funcionou</span>
+      <p><strong>Remarketing e catálogo no Meta</strong> (R$ 6,38 e R$ 6,69 por compra) e a <strong>campanha inteligente do Google</strong> (R$ 8,03). Juntas, essas três frentes trouxeram 521 das 856 compras do mês, com 55% do investimento.</p>
+    </div>
+    <div class="panel" style="border-left:3px solid var(--data2)">
+      <span class="eyebrow" style="color:var(--data2)">O que foi testado</span>
+      <p>A frente de <strong>semelhantes de compradores</strong> era aposta e virou realidade: 76 compras a R$ 8,13 no primeiro mês. A <strong>busca por demanda</strong> foi testada com R$ 140 e cortada em 8 dias. Testar barato e cortar rápido é a regra.</p>
+    </div>
+    <div class="panel" style="border-left:3px solid var(--warn)">
+      <span class="eyebrow" style="color:var(--warn)">Onde há espaço</span>
+      <p>A <strong>vitrine de produtos do Google</strong> aparece em só 15% das buscas possíveis — perde as outras por orçamento, não por qualidade. É o lugar mais óbvio para crescer quando houver decisão de investimento.</p>
+    </div>
+  </div>
+</section>
+
+<section id="sinal">
+  <div class="sec-head">
+    <span class="eyebrow">05</span>
+    <h2>O sinal que não se conserta com verba</h2>
+    <p>Mesma campanha de marca, mesma janela de 23 dias, um ano de distância. É a comparação mais limpa que a conta permite fazer — mesmo público, mesma verba, mesmo período.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="tbl-scroll">
+      <table style="min-width:0">
+        <thead><tr><th>Marca · 01–23/09</th><th>2025</th><th>2026</th><th>Δ</th></tr></thead>
+        <tbody>
+          <tr><td class="name">Impressões</td><td class="num">11.713</td><td class="num">9.107</td><td class="num dn">−22%</td></tr>
+          <tr><td class="name">Cliques</td><td class="num">3.940</td><td class="num">3.596</td><td class="num dn">−9%</td></tr>
+          <tr><td class="name">Verba</td><td class="num">1.253</td><td class="num">1.287</td><td class="num">+3%</td></tr>
+          <tr><td class="name">Receita</td><td class="num">47.758</td><td class="num">27.916</td><td class="num dn">−42%</td></tr>
+          <tr class="total"><td>Valor por clique</td><td class="num">R$ 12,12</td><td class="num">R$ 7,76</td><td class="num dn">−36%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:14px">
+      <p>Levamos praticamente o <strong>mesmo número de pessoas</strong> que já procuravam a Roma pelo nome, pagando o mesmo — e cada uma delas passou a valer <strong>R$ 4,36 a menos</strong>. Isso não é leilão nem lance: é o que acontece depois do clique.</p>
+      <ul>
+        <li><span class="lead-in">Preço na página:</span> 753 produtos com divergência entre o preço do feed e o da página, porque a promoção não é publicada na ficha do produto.</li>
+        <li><span class="lead-in">Feed:</span> 22 produtos reprovados no Merchant; fonte principal trocada para o feed vivo em 18/09 e ainda em observação.</li>
+        <li><span class="lead-in">Busca pela marca:</span> −22% de impressões é menos gente procurando "roma aviamentos". A mídia paga colhe demanda de marca, não a cria — quem alimenta esse número é topo de funil e presença orgânica.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="feito">
+  <div class="sec-head">
+    <span class="eyebrow">06</span>
+    <h2>Tudo que foi feito em setembro</h2>
+    <p>Vinte e oito entregas, em cinco frentes, cada uma com a data em que foi ao ar.</p>
+  </div>
+
+  <div class="work">
+    <div class="wgroup">
+      <div class="wtitle"><strong>Meta Ads</strong><span>7 entregas</span></div>
+      <div class="witems">
+        <div class="witem"><span class="wdate">01/09</span><span class="wbody"><strong>Regra de feriado.</strong> Medimos que feriado em dia útil derruba a conta entre 61% e 75% — e feriado em fim de semana, não. Os feriados até janeiro de 2027 já entraram na regra; a Independência foi o primeiro a rodar assim.</span></div>
+        <div class="witem"><span class="wdate">01/09</span><span class="wbody"><strong>Nova frente de aquisição de clientes novos</strong>, construída a partir da lista real de quem comprou nos últimos 50 dias — e não mais de uma lista antiga de 2025.</span></div>
+        <div class="witem"><span class="wdate">01/09</span><span class="wbody"><strong>Frente de São Paulo religada</strong> em escala menor, como segunda perna de aquisição.</span></div>
+        <div class="witem"><span class="wdate">02/09</span><span class="wbody"><strong>Verba realocada</strong> de uma frente de ticket baixo para a frente de clientes novos, sem mexer no total investido.</span></div>
+        <div class="witem"><span class="wdate">02/09</span><span class="wbody"><strong>Nova frente para a linha Princess em São Paulo.</strong></span></div>
+        <div class="witem"><span class="wdate">14/09</span><span class="wbody"><strong>Primeira campanha com criadora de conteúdo</strong> no ar. O conteúdo próprio da Roma alcança cerca de 900 pessoas; o vídeo da parceira alcançou <strong>907 mil</strong>.</span></div>
+        <div class="witem"><span class="wdate">22/09</span><span class="wbody"><strong>Marcação de links corrigida em todos os anúncios ativos</strong>, para o Analytics enxergar o Instagram. Resultado no primeiro dia: o Meta virou o maior canal de tráfego do Brasil.</span></div>
+      </div>
+    </div>
+
+    <div class="wgroup">
+      <div class="wtitle"><strong>Google Ads</strong><span>3 entregas</span></div>
+      <div class="witems">
+        <div class="witem"><span class="wdate">02/09</span><span class="wbody"><strong>14 imagens novas</strong> na campanha institucional, para o Google ter mais material para montar os anúncios.</span></div>
+        <div class="witem"><span class="wdate">06/09</span><span class="wbody"><strong>Janela de contagem de vendas reduzida de 30 dias para 7.</strong> O número do Google passa a ficar mais próximo do que a loja fecha no mês — menos atribuição inflada, leitura mais honesta.</span></div>
+        <div class="witem"><span class="wdate">setembro</span><span class="wbody"><strong>Verba concentrada nas três frentes que sustentam a conta</strong> — marca, campanha inteligente e vitrine de produtos — depois do teste de escala feito em agosto.</span></div>
+      </div>
+    </div>
+
+    <div class="wgroup">
+      <div class="wtitle"><strong>Catálogo no Google</strong><span>7 entregas</span></div>
+      <div class="witems">
+        <div class="witem"><span class="wdate">04/09</span><span class="wbody"><strong>Correção de títulos e marcas no catálogo.</strong> Descobrimos que <strong>80,6% dos produtos não traziam a própria marca no título</strong> e 55,4% carregavam código interno no lugar — e o título é o campo que o Google mais usa para decidir se o produto aparece. Passamos a corrigir isso automaticamente, todo dia, em quase 16 mil produtos.</span></div>
+        <div class="witem"><span class="wdate">15/09</span><span class="wbody"><strong>Achado grave:</strong> o catálogo enviado ao Google não conhecia <strong>nenhuma</strong> das 19 promoções ativas do site. Mais de 500 produtos estavam sendo anunciados mais caros do que a loja cobra.</span></div>
+        <div class="witem"><span class="wdate">17/09</span><span class="wbody"><strong>Solução própria no ar.</strong> A plataforma respondeu que não conseguia publicar as promoções no catálogo; passamos a publicar o preço promocional por conta própria, todo dia.</span></div>
+        <div class="witem"><span class="wdate">18/09</span><span class="wbody"><strong>Fonte do catálogo trocada.</strong> A que estava em uso estava congelada desde março — o Google recebia um catálogo velho. Agora lê o arquivo vivo.</span></div>
+        <div class="witem"><span class="wdate">18/09</span><span class="wbody"><strong>Vigia automático do catálogo</strong> no ar: confere todo dia se o arquivo atualizou, se o número de produtos caiu e se os preços estão certos — e só avisa quando há problema.</span></div>
+        <div class="witem"><span class="wdate">21/09</span><span class="wbody"><strong>Resultado conferido em 3 dias seguidos:</strong> produtos com preço promocional inválido caíram de <strong>802 para 4</strong>; reprovados em 22; nenhum produto limitado.</span></div>
+        <div class="witem"><span class="wdate">22/09</span><span class="wbody"><strong>Alarme de "24,5 mil produtos limitados" investigado e encerrado.</strong> Não afeta os anúncios: é um canal para loja física que a Roma nunca ativou. Virou oportunidade para outubro.</span></div>
+      </div>
+    </div>
+
+    <div class="wgroup">
+      <div class="wtitle"><strong>Medição</strong><span>7 entregas</span></div>
+      <div class="witems">
+        <div class="witem"><span class="wdate">21/09</span><span class="wbody"><strong>Auditoria completa de rastreamento</strong> — 16 páginas. Encontrou, com o trecho de código na mão, por que o Meta conta cada venda 2,2 vezes, desde quando isso acontece e quanto muda em cada campanha.</span></div>
+        <div class="witem"><span class="wdate">21/09</span><span class="wbody"><strong>Correção de privacidade (LGPD).</strong> O e-mail do cliente estava saindo em texto aberto em duas etapas do rastreamento do site. Não sai mais.</span></div>
+        <div class="witem"><span class="wdate">22/09</span><span class="wbody"><strong>Auditoria conferida de forma independente</strong> um dia depois, em outra janela de datas. Todos os números se confirmaram.</span></div>
+        <div class="witem"><span class="wdate">22/09</span><span class="wbody"><strong>Tráfego automatizado identificado e provado</strong> — quatro evidências independentes de que mais da metade dos acessos ao site não é público real.</span></div>
+        <div class="witem"><span class="wdate">22/09</span><span class="wbody"><strong>Pedido formal enviado</strong> à equipe da plataforma, com cinco itens e o passo a passo para reproduzir cada um.</span></div>
+        <div class="witem"><span class="wdate">23/09</span><span class="wbody"><strong>Visão "só Brasil" criada e salva no Analytics</strong>, disponível para qualquer pessoa da Roma com um clique.</span></div>
+        <div class="witem"><span class="wdate">24/09</span><span class="wbody"><strong>Correção da marcação de links conferida:</strong> funcionou, e o Instagram voltou a aparecer nos relatórios.</span></div>
+      </div>
+    </div>
+
+    <div class="wgroup">
+      <div class="wtitle"><strong>Estudos e materiais</strong><span>4 entregas</span></div>
+      <div class="witems">
+        <div class="witem"><span class="wdate">03/09</span><span class="wbody"><strong>Estudo de busca orgânica</strong> a partir do Search Console — o canal que respondeu por 29% da receita do mês.</span></div>
+        <div class="witem"><span class="wdate">04/09</span><span class="wbody"><strong>Desenho do projeto digital</strong> a partir do briefing respondido pela Roma: nove áreas, quatro frentes para começar e a conta do caminho até a meta de faturamento.</span></div>
+        <div class="witem"><span class="wdate">14/09</span><span class="wbody"><strong>Mapas de calor do site</strong> (página inicial, carrinho e a página da linha Princess), mostrando onde as pessoas realmente clicam.</span></div>
+        <div class="witem"><span class="wdate">21/09</span><span class="wbody"><strong>Página de acompanhamento do catálogo</strong> publicada para a Roma consultar quando quiser.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pendente">
+  <div class="sec-head">
+    <span class="eyebrow">07</span>
+    <h2>O que precisamos olhar agora</h2>
+    <p>Em ordem de quanto valem, não de quanto custam. Cada item traz quem decide, o que fazer e como conferir se funcionou.</p>
+  </div>
+
+  <div class="prio">
+
+    <div class="pitem">
+      <span class="pnum">1</span>
+      <div class="pbody">
+        <h3>Descobrir por que 98 pedidos foram cancelados</h3>
+        <p>São os pedidos grandes que não se completam — ticket 55% acima da média. Não existe ajuste de campanha, com a verba atual, que devolva esse valor: recuperar <strong>um terço</strong> desses pedidos vale mais do que tudo que a mídia conseguiria fazer no mês.</p>
+        <p class="how"><strong>O que fazer:</strong> abrir os 98 pedidos e classificar o motivo em cinco caixas — pagamento recusado, boleto não pago, desistência no frete, produto sem estoque depois da compra, pedido do cliente. Cada motivo tem uma solução diferente e nenhuma delas é anúncio.<br><strong>Como conferir:</strong> painel da loja → Relatórios → Vendas → Status = cancelado, no mesmo período. O número tem que cair mês a mês.</p>
+      </div>
+      <div class="pmeta">
+        <span class="pval">R$ 30.499</span>
+        <span class="powner">no mês</span>
+        <span class="ptag roma">Roma</span>
+      </div>
+    </div>
+
+    <div class="pitem">
+      <span class="pnum">2</span>
+      <div class="pbody">
+        <h3>Publicar o preço promocional na página do produto</h3>
+        <p>São <strong>753 produtos</strong> anunciados com um preço que a ficha não mostra. A pessoa clica atrás da promoção, chega e encontra outro valor. É a diferença entre pagar por uma visita e desperdiçá-la — e corrigir não custa mídia nenhuma.</p>
+        <p class="how"><strong>O que fazer:</strong> fazer a página do produto exibir a promoção que já existe em <span class="mono">/promocao</span>. Podemos entregar a lista completa dos 753 itens para a equipe do site.<br><strong>Como conferir:</strong> abrir qualquer produto da lista e comparar o preço da página com o do anúncio na busca do Google.</p>
+      </div>
+      <div class="pmeta">
+        <span class="pval">753 itens</span>
+        <span class="powner">pedido em 15/09</span>
+        <span class="ptag roma">Roma</span>
+      </div>
+    </div>
+
+    <div class="pitem">
+      <span class="pnum">3</span>
+      <div class="pbody">
+        <h3>Desligar a contagem duplicada de compra</h3>
+        <p>Enquanto o código próprio da plataforma seguir registrando cada venda duas vezes, o painel do Meta mostra o dobro do que aconteceu e <strong>não é possível comparar uma campanha com a outra</strong> — que é como se decide onde colocar verba.</p>
+        <p class="how"><strong>O que fazer:</strong> a equipe da plataforma desliga a chamada de compra do lado do navegador; o rastreamento correto, que já existe, continua funcionando.<br><strong>Como conferir:</strong> Gerenciador de Eventos do Meta → evento Compra → o total do período tem que ficar próximo do número de pedidos da loja, e não o dobro.</p>
+      </div>
+      <div class="pmeta">
+        <span class="pval">2,2x</span>
+        <span class="powner">pedido em 22/09</span>
+        <span class="ptag plat">Plataforma</span>
+      </div>
+    </div>
+
+    <div class="pitem">
+      <span class="pnum">4</span>
+      <div class="pbody">
+        <h3>Decidir o investimento de outubro</h3>
+        <p>As campanhas de <strong>Natal e Halloween</strong> estão montadas desde 04/09 e precisam subir em outubro: a procura por "laço de natal" cresce 129% no trimestre e o pico de venda é em novembro. Quem entra depois do pico paga mais caro pelo mesmo clique.</p>
+        <p class="how"><strong>O que fazer:</strong> confirmar se o investimento de outubro sobe para acomodar as sazonais ou se elas saem da verba atual — as duas opções funcionam, mas a decisão precisa sair nos próximos dias.<br><strong>Como conferir:</strong> acompanhamento semanal, com o retorno de cada frente na mesa.</p>
+      </div>
+      <div class="pmeta">
+        <span class="pval">até 30/09</span>
+        <span class="powner">decisão</span>
+        <span class="ptag ggd">Rose + GGD</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note ok" style="margin-top:26px">
+    <span class="eyebrow">O que já está encaminhado do nosso lado</span>
+    <p>O item 3 foi <strong>enviado por escrito à plataforma em 22/09</strong>, com o passo a passo para reproduzir o problema em um minuto. O item 2 foi pedido em 15/09, e a solução provisória — publicar o preço promocional por conta própria no catálogo do Google — <strong>já está no ar desde 17/09</strong>. Seguimos cobrando os dois.</p>
+  </div>
+</section>
+
+<section id="conferir">
+  <div class="sec-head">
+    <span class="eyebrow">08</span>
+    <h2>Como conferir cada número</h2>
+    <p>Todo número deste relatório pode ser reproduzido. Aqui está onde cada um está, para quem quiser checar.</p>
+  </div>
+
+  <dl class="check">
+    <dt>Pedidos e vendas da loja</dt>
+    <dd>Painel administrativo da loja → Relatórios → Vendas, período de 01/09 a 23/09. O mesmo filtro, com Status = cancelado, dá o número de cancelamentos.</dd>
+
+    <dt>Faturamento líquido</dt>
+    <dd>Número oficial fornecido pela administração da Roma — é a base contábil, depois de cancelamentos e ajustes.</dd>
+
+    <dt>Investimento em mídia</dt>
+    <dd>Gerenciador de Anúncios do Meta e painel do Google Ads, coluna "Valor gasto", mesmo período. Os valores deste relatório são de mídia; o débito no saldo inclui impostos.</dd>
+
+    <dt>A contagem dobrada do Meta</dt>
+    <dd>Gerenciador de Eventos do Meta → evento Compra → total do período, dividido pelo número de pedidos da loja no mesmo período. Deu 2,20 em duas janelas independentes.</dd>
+
+    <dt>Saúde do catálogo</dt>
+    <dd>Google Merchant Center → Produtos → Requer atenção. Também publicamos uma página de acompanhamento com esses números.</dd>
+
+  </dl>
+</section>
+
+<footer>
+  <p>Roma Aviamentos · Relatório <strong>parcial</strong> de 1 a 23 de setembro de 2026 · elaborado pela GGD em 24/09/2026 · publicado em 25/09/2026.</p>
+  <p>Faturamento líquido mensal: dados oficiais da administração da Roma. Pedidos, cancelamentos e ticket médio: painel da loja. Investimento e desempenho de campanha: Meta Ads e Google Ads. Canais e comportamento: Google Analytics. Nenhum número deste relatório é estimado.</p>
+</footer>
+
+</div>
+
+
+</body>
+</html>
