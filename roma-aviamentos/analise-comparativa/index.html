@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analise comparativa 2025 x 2026 &middot; Roma Aviamentos</title>
+<meta name="robots" content="noindex">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#EDEFF2; --surface:#FBFCFD; --surface-2:#F4F6F8;
+  --ink:#14161A; --ink-2:#4E545D; --muted:#7D838C; --rule:#DBDFE5; --rule-soft:#E6E9ED;
+  --s25:#2a78d6; --s26:#eb6834;
+  --q1:#184f95; --q2:#256abf; --q3:#2a78d6; --q4:#5598e7; --q5:#86b6ef;
+  --good:#0ca30c; --critical:#d03b3b;
+  --accent:#184f95; --cShop:#2a78d6; --cPmax:#1baf7a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#121317; --surface:#191B20; --surface-2:#1F2229;
+    --ink:#F1F3F6; --ink-2:#AEB4BD; --muted:#868C96; --rule:#2C3037; --rule-soft:#24272D;
+    --s25:#3987e5; --s26:#d95926;
+    --q1:#3987e5; --q2:#5598e7; --q3:#6da7ec; --q4:#86b6ef; --q5:#9ec5f4;
+    --good:#0ca30c; --critical:#d03b3b;
+    --accent:#86b6ef; --cShop:#3987e5; --cPmax:#199e70;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121317; --surface:#191B20; --surface-2:#1F2229;
+  --ink:#F1F3F6; --ink-2:#AEB4BD; --muted:#868C96; --rule:#2C3037; --rule-soft:#24272D;
+  --s25:#3987e5; --s26:#d95926;
+  --q1:#3987e5; --q2:#5598e7; --q3:#6da7ec; --q4:#86b6ef; --q5:#9ec5f4;
+  --accent:#86b6ef; --cShop:#3987e5; --cPmax:#199e70;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;line-height:1.62;margin:0;padding-block:0 64px;padding-left:20px;padding-right:20px;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1020px;margin:0 auto}
+.col{max-width:68ch}
+h1,h2,h3,.tile-n,.big{font-family:Archivo,"Helvetica Neue",Arial,sans-serif;text-wrap:balance}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0}
+
+/* cabeçalho */
+header{padding-block:56px 34px;border-bottom:1px solid var(--rule)}
+h1{font-size:clamp(34px,5.4vw,58px);line-height:1.02;letter-spacing:-.025em;font-weight:700;margin:14px 0 0}
+.sub{font-size:19px;color:var(--ink-2);margin:18px 0 0;max-width:64ch}
+.sub b{color:var(--ink);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+
+/* seções */
+section{padding-block:44px;border-bottom:1px solid var(--rule-soft)}
+section:last-of-type{border-bottom:0}
+h2{font-size:clamp(23px,2.9vw,31px);line-height:1.12;letter-spacing:-.018em;font-weight:700;margin:10px 0 0}
+h3{font-size:15px;font-weight:600;letter-spacing:.005em;margin:0 0 8px}
+p{margin:16px 0 0}
+p.lead{font-size:18.5px}
+.note{font-size:14.5px;color:var(--ink-2)}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:34px}
+.tile{background:var(--surface);padding:20px 18px 18px;display:flex;flex-direction:column;gap:2px}
+.tile .lab{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
+.tile-n{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.tile .from{font-size:13.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.delta{font-family:"IBM Plex Mono",monospace;font-size:12px;margin-top:6px}
+.dn{color:var(--critical)} .up{color:var(--good)} .flat{color:var(--muted)}
+
+/* gráficos */
+figure{margin:30px 0 0}
+.plot{background:var(--surface);border:1px solid var(--rule);padding:16px 12px 8px;overflow-x:auto}
+svg{display:block;width:100%;min-width:600px;height:auto}
+.grid{stroke:var(--rule-soft);stroke-width:1}
+.axis{stroke:var(--rule);stroke-width:1}
+.tick{stroke:var(--muted);stroke-width:1;opacity:.55}
+.divider{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4}
+.divider.soft{stroke:var(--rule-soft)}
+.gridlab,.unit,.mlab,.ylab,.qlab,.qval,.qpct,.lvllab{font-family:"IBM Plex Mono",monospace}
+.gridlab{font-size:11px;fill:var(--muted);text-anchor:end}
+.unit{font-size:10px;fill:var(--muted);text-anchor:end;letter-spacing:.08em}
+.mlab{font-size:10px;fill:var(--muted);text-anchor:middle}
+.ylab{font-size:12px;fill:var(--ink-2);text-anchor:middle;letter-spacing:.14em}
+.bar{transition:opacity .12s}
+.b25{fill:var(--s25)} .b26{fill:var(--s26)}
+.plot:hover .bar{opacity:.45}
+.plot .bar:hover{opacity:1}
+.lvl{stroke-width:1.6;stroke-dasharray:5 4;fill:none}
+.p1,.p2{stroke:var(--s25)} .p3{stroke:var(--s26)}
+.lvllab{font-size:11px}
+.lvllab.p1,.lvllab.p2{fill:var(--s25)} .lvllab.p3{fill:var(--s26)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;padding-left:4px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2)}
+.key{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:11px;height:11px;border-radius:2px;display:inline-block}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:12px;max-width:72ch}
+.qlab{font-size:13px;fill:var(--ink)}
+.qval{font-size:13px;fill:var(--ink-2)}
+.qpct{font-size:12px;fill:var(--muted);text-anchor:end}
+.q1{fill:var(--q1)}.q2{fill:var(--q2)}.q3{fill:var(--q3)}.q4{fill:var(--q4)}.q5{fill:var(--q5)}
+
+/* tabelas */
+.tablewrap{overflow-x:auto;margin-top:26px;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+caption{text-align:left;padding:14px 16px 0;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+th,td{padding:9px 16px;text-align:right;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule-soft)}
+th:first-child,td:first-child{text-align:left;font-variant-numeric:normal}
+thead th{font-family:Archivo,sans-serif;font-size:12px;font-weight:600;color:var(--ink-2);
+  border-bottom:1px solid var(--rule);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tfoot td{font-weight:600;border-top:1px solid var(--rule);background:var(--surface-2)}
+td.d{font-family:"IBM Plex Mono",monospace;font-size:13px}
+
+/* listas de veredito */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.panel{background:var(--surface);border:1px solid var(--rule);padding:22px 22px 24px}
+.panel h3{font-family:Archivo,sans-serif;font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px}
+.panel ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.panel li{font-size:15.5px;line-height:1.5;padding-left:16px;position:relative}
+.panel li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%}
+.pos li::before{background:var(--good)}
+.neg li::before{background:var(--critical)}
+.panel li b{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:500;color:var(--ink)}
+
+/* destaque de número no texto */
+.big{font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.025em;line-height:1.05;
+  margin:28px 0 0;font-variant-numeric:tabular-nums}
+.big span{color:var(--muted);font-weight:500}
+.pull{border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin-top:28px;max-width:62ch}
+.pull p{margin:0;font-size:18px}
+
+/* fontes */
+.fontes{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.fonte{background:var(--surface);padding:16px 18px}
+.fonte dt{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin:0}
+.fonte dd{margin:6px 0 0;font-size:14.5px;line-height:1.45}
+.fonte dd code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-2)}
+
+
+/* elos da cadeia */
+.elos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:30px}
+.elo{background:var(--surface);padding:22px 20px 20px;display:flex;flex-direction:column}
+.elo-n{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent)}
+.elo h3{font-family:Archivo,sans-serif;font-size:16.5px;font-weight:600;margin:8px 0 14px;line-height:1.25}
+.elo ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;flex:1}
+.elo li{font-size:15px;line-height:1.45;padding-left:15px;position:relative}
+.elo li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;
+  background:var(--accent);opacity:.6}
+.elo li b{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:500}
+.elo-nota{font-size:13.5px;color:var(--muted);margin-top:18px;padding-top:14px;
+  border-top:1px solid var(--rule-soft);line-height:1.45}
+
+/* leilao */
+.leilaotop{font-family:"Source Serif 4",Georgia,serif;font-size:14px;fill:var(--ink-2)}
+.lseg.l1{fill:var(--s25)} .lseg.l2{fill:var(--s26)} .lseg.l3{fill:var(--rule)}
+.lpct{font-family:Archivo,sans-serif;font-size:19px;font-weight:700;text-anchor:middle}
+.lpct.l1{fill:var(--s25)} .lpct.l2{fill:var(--s26)} .lpct.l3{fill:var(--ink-2)}
+.ltxt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;fill:var(--muted);text-anchor:middle}
+.chart3{min-width:520px}
+
+p code,td code,li code{font-family:"IBM Plex Mono",monospace;font-size:13px;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+
+/* fichas da fila do site */
+h3.bloco{font-family:Archivo,sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin:40px 0 0;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.fichas{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-top:0;margin-top:0}
+.ficha{background:var(--surface);padding:22px 20px 20px}
+.ficha-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+  border:1px solid var(--rule);border-radius:2px;padding:2px 7px}
+.ficha-tag.alta{color:var(--surface);background:var(--accent);border-color:var(--accent)}
+.ficha h4{font-family:Archivo,sans-serif;font-size:17px;font-weight:600;line-height:1.25;
+  margin:12px 0 0;text-wrap:balance}
+.ficha p{font-size:14.8px;line-height:1.5;margin:11px 0 0}
+.ficha p b{font-weight:600}
+.ficha-conf{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);
+  line-height:1.45;margin-top:14px;padding-top:11px;border-top:1px solid var(--rule-soft)}
+.ficha-conf code{background:none;padding:0;font-size:11.5px}
+
+/* entregas */
+.entregas{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.entrega{background:var(--surface);padding:20px}
+.entrega h4{font-family:Archivo,sans-serif;font-size:15.5px;font-weight:600;margin:0;line-height:1.3}
+.entrega p{font-size:14.5px;line-height:1.5;margin:9px 0 0;color:var(--ink-2)}
+
+
+/* cpm */
+.cShop{fill:var(--cShop)} .cPmax{fill:var(--cPmax)}
+.cval{font-family:"IBM Plex Mono",monospace;font-size:11px;text-anchor:middle}
+.cval.cShop{fill:var(--cShop)} .cval.cPmax{fill:var(--cPmax)}
+.cper{font-family:"IBM Plex Mono",monospace;font-size:11.5px;fill:var(--ink-2);text-anchor:middle}
+.chart4{min-width:560px}
+ul.notas{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;max-width:70ch}
+ul.notas li{font-size:15.5px;line-height:1.5;padding-left:17px;position:relative}
+ul.notas li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.55}
+
+@media (max-width:760px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+  .elos{grid-template-columns:1fr}
+  body{font-size:16.5px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Roma Aviamentos · varejo · estudo comparativo</p>
+  <h1>O mesmo site,<br>um ano depois</h1>
+  <p class="sub">Este documento compara <b>2025 e 2026 número a número</b>, nas quatro fontes que a
+  Roma tem: o faturamento oficial do Gentili, os pedidos do Octopus, o comportamento do site no Google
+  Analytics e o investimento nas plataformas de anúncio. Nos oito primeiros meses, o faturamento caiu
+  <b>30,8%</b>. A loja não passou a converter pior: em cada porta de entrada do site — pesquisa do Google,
+  Shopping, busca orgânica, indicações — <b>a visita rende hoje praticamente o que rendia em 2025</b>.
+  O que encolheu foi <b>quanta gente entrou por essas portas</b>: de 20% a 74% menos, conforme a porta.
+  E a queda começou em <b>julho de 2025</b>.</p>
+  <p class="meta"><span>Janela comparada: 1º de janeiro a 31 de agosto</span><span>Setembro entra à parte, com 24 dias nos dois anos</span><span>Fontes: Gentili · Octopus · GA4 · Google Ads · Meta</span><span>Levantado em 25/09/2026</span></p>
+</header>
+
+<section>
+  <p class="eyebrow">Os quatro números do ano contra ano</p>
+  <h2>O que mudou entre 2025 e 2026</h2>
+  <div class="tiles">
+    <div class="tile">
+      <span class="lab">Faturamento líquido</span>
+      <span class="tile-n">R$ 1,50 mi</span>
+      <span class="from">era R$ 2,16 mi</span>
+      <span class="delta dn">−30,8% · −R$ 666,9 mil</span>
+    </div>
+    <div class="tile">
+      <span class="lab">Pedidos</span>
+      <span class="tile-n">8.155</span>
+      <span class="from">eram 12.149</span>
+      <span class="delta dn">−32,9% · −3.994 pedidos</span>
+    </div>
+    <div class="tile">
+      <span class="lab">Ticket médio</span>
+      <span class="tile-n">R$ 212,97</span>
+      <span class="from">era R$ 207,35</span>
+      <span class="delta up">+2,7%</span>
+    </div>
+    <div class="tile">
+      <span class="lab">Visitas vindas do Brasil</span>
+      <span class="tile-n">660.041</span>
+      <span class="from">eram 605.722</span>
+      <span class="delta flat">+9,0%</span>
+    </div>
+  </div>
+  <p class="note col">Os três primeiros números vêm da própria Roma (faturamento líquido do Gentili
+  e pedidos do Octopus). O quarto é o que parece contraditório e que este estudo explica: <b>entrou mais
+  gente e faturou-se menos</b>, porque a composição dessas visitas mudou por completo. A próxima seção abre
+  porta por porta. Vale registrar desde já que <b>toda a queda de faturamento é queda de volume de
+  pedidos</b> — o ticket subiu e devolveu R$ 45,8 mil.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Quando começou</p>
+  <h2>"Ano passado" não foi um ano só</h2>
+  <p class="lead col">O ano de 2025 tem duas metades muito diferentes. Até junho a loja rodava a
+  R$ 275,9 mil por mês. De julho em diante caiu para R$ 235,0 mil — <b>a queda começou dentro do
+  próprio 2025</b>, quatro meses antes de o ano virar. Em 2026 o patamar desceu mais um degrau,
+  para R$ 187,0 mil por mês, e parou de cair: de março a agosto a média é R$ 188,9 mil.</p>
+  <figure>
+    <div class="plot">
+<svg viewBox="0 0 980 352" class="chart1" role="img" aria-label="Faturamento líquido mês a mês, janeiro de 2025 a setembro de 2026">
+<line class="grid" x1="62" y1="215.3" x2="964" y2="215.3"/>
+<text class="gridlab" x="52" y="219.3">100</text>
+<line class="grid" x1="62" y1="144.6" x2="964" y2="144.6"/>
+<text class="gridlab" x="52" y="148.6">200</text>
+<line class="grid" x1="62" y1="73.8" x2="964" y2="73.8"/>
+<text class="gridlab" x="52" y="77.8">300</text>
+<text class="unit" x="52" y="60.8">R$ mil</text>
+<rect class="bar b25" x="70.0" y="96.3" width="27.0" height="189.7" rx="2.5" data-m="jan/25" data-v="R$ 268,3 mil" data-s="1564 pedidos"><title>jan/25 — R$ 268,3 mil</title></rect>
+<rect class="bar b25" x="112.9" y="91.8" width="27.0" height="194.2" rx="2.5" data-m="fev/25" data-v="R$ 274,6 mil" data-s="1405 pedidos"><title>fev/25 — R$ 274,6 mil</title></rect>
+<rect class="bar b25" x="155.9" y="92.8" width="27.0" height="193.2" rx="2.5" data-m="mar/25" data-v="R$ 273,2 mil" data-s="1783 pedidos"><title>mar/25 — R$ 273,2 mil</title></rect>
+<rect class="bar b25" x="198.8" y="74.9" width="27.0" height="211.1" rx="2.5" data-m="abr/25" data-v="R$ 298,5 mil" data-s="1681 pedidos"><title>abr/25 — R$ 298,5 mil</title></rect>
+<rect class="bar b25" x="241.8" y="69.3" width="27.0" height="216.7" rx="2.5" data-m="mai/25" data-v="R$ 306,5 mil" data-s="1767 pedidos"><title>mai/25 — R$ 306,5 mil</title></rect>
+<rect class="bar b25" x="284.7" y="120.1" width="27.0" height="165.9" rx="2.5" data-m="jun/25" data-v="R$ 234,6 mil" data-s="1283 pedidos"><title>jun/25 — R$ 234,6 mil</title></rect>
+<rect class="bar b25" x="327.7" y="105.8" width="27.0" height="180.2" rx="2.5" data-m="jul/25" data-v="R$ 254,8 mil" data-s="1407 pedidos"><title>jul/25 — R$ 254,8 mil</title></rect>
+<rect class="bar b25" x="370.6" y="107.5" width="27.0" height="178.5" rx="2.5" data-m="ago/25" data-v="R$ 252,4 mil" data-s="1259 pedidos"><title>ago/25 — R$ 252,4 mil</title></rect>
+<rect class="bar b25" x="413.6" y="105.2" width="27.0" height="180.8" rx="2.5" data-m="set/25" data-v="R$ 255,6 mil" data-s="1349 pedidos"><title>set/25 — R$ 255,6 mil</title></rect>
+<rect class="bar b25" x="456.5" y="83.8" width="27.0" height="202.2" rx="2.5" data-m="out/25" data-v="R$ 285,9 mil" data-s="1455 pedidos"><title>out/25 — R$ 285,9 mil</title></rect>
+<rect class="bar b25" x="499.5" y="147.1" width="27.0" height="138.9" rx="2.5" data-m="nov/25" data-v="R$ 196,4 mil" data-s="1433 pedidos"><title>nov/25 — R$ 196,4 mil</title></rect>
+<rect class="bar b25" x="542.5" y="169.5" width="27.0" height="116.5" rx="2.5" data-m="dez/25" data-v="R$ 164,8 mil" data-s="571 pedidos"><title>dez/25 — R$ 164,8 mil</title></rect>
+<rect class="bar b26" x="585.4" y="122.0" width="27.0" height="164.0" rx="2.5" data-m="jan/26" data-v="R$ 231,9 mil" data-s="1024 pedidos"><title>jan/26 — R$ 231,9 mil</title></rect>
+<rect class="bar b26" x="628.4" y="193.6" width="27.0" height="92.4" rx="2.5" data-m="fev/26" data-v="R$ 130,6 mil" data-s="933 pedidos"><title>fev/26 — R$ 130,6 mil</title></rect>
+<rect class="bar b26" x="671.3" y="129.8" width="27.0" height="156.2" rx="2.5" data-m="mar/26" data-v="R$ 220,9 mil" data-s="1044 pedidos"><title>mar/26 — R$ 220,9 mil</title></rect>
+<rect class="bar b26" x="714.3" y="160.1" width="27.0" height="125.9" rx="2.5" data-m="abr/26" data-v="R$ 178,0 mil" data-s="1060 pedidos"><title>abr/26 — R$ 178,0 mil</title></rect>
+<rect class="bar b26" x="757.2" y="152.4" width="27.0" height="133.6" rx="2.5" data-m="mai/26" data-v="R$ 188,9 mil" data-s="1141 pedidos"><title>mai/26 — R$ 188,9 mil</title></rect>
+<rect class="bar b26" x="800.2" y="166.6" width="27.0" height="119.4" rx="2.5" data-m="jun/26" data-v="R$ 168,8 mil" data-s="927 pedidos"><title>jun/26 — R$ 168,8 mil</title></rect>
+<rect class="bar b26" x="843.1" y="144.1" width="27.0" height="141.9" rx="2.5" data-m="jul/26" data-v="R$ 200,7 mil" data-s="998 pedidos"><title>jul/26 — R$ 200,7 mil</title></rect>
+<rect class="bar b26" x="886.1" y="161.4" width="27.0" height="124.6" rx="2.5" data-m="ago/26" data-v="R$ 176,2 mil" data-s="1028 pedidos"><title>ago/26 — R$ 176,2 mil</title></rect>
+<rect class="bar b26" x="929.0" y="191.1" width="27.0" height="94.9" rx="2.5" opacity=".5" data-m="set/26" data-v="R$ 134,2 mil" data-s="861 pedidos · 23 dias"><title>set/26 — R$ 134,2 mil</title></rect>
+<line class="lvl p1" x1="65.0" y1="90.9" x2="316.7" y2="90.9"/><text class="lvllab p1" x="69.0" y="41.0">jan–jun/25 · média R$ 275,9 mil/mês</text>
+<line class="lvl p2" x1="322.7" y1="119.8" x2="574.4" y2="119.8"/><text class="lvllab p2" x="326.7" y="41.0">jul–dez/25 · média R$ 235,0 mil/mês</text>
+<line class="lvl p3" x1="580.4" y1="153.8" x2="918.0" y2="153.8"/><text class="lvllab p3" x="584.4" y="41.0">jan–ago/26 · média R$ 187,0 mil/mês</text>
+<line class="axis" x1="62" y1="286.0" x2="964" y2="286.0"/>
+<line class="tick" x1="83.5" y1="286.0" x2="83.5" y2="297.0"/>
+<text class="mlab" x="83.5" y="311.0">J</text>
+<line class="tick" x1="126.4" y1="286.0" x2="126.4" y2="290.0"/>
+<text class="mlab" x="126.4" y="311.0">F</text>
+<line class="tick" x1="169.4" y1="286.0" x2="169.4" y2="290.0"/>
+<text class="mlab" x="169.4" y="311.0">M</text>
+<line class="tick" x1="212.3" y1="286.0" x2="212.3" y2="293.0"/>
+<text class="mlab" x="212.3" y="311.0">A</text>
+<line class="tick" x1="255.3" y1="286.0" x2="255.3" y2="290.0"/>
+<text class="mlab" x="255.3" y="311.0">M</text>
+<line class="tick" x1="298.2" y1="286.0" x2="298.2" y2="290.0"/>
+<text class="mlab" x="298.2" y="311.0">J</text>
+<line class="tick" x1="341.2" y1="286.0" x2="341.2" y2="293.0"/>
+<text class="mlab" x="341.2" y="311.0">J</text>
+<line class="tick" x1="384.1" y1="286.0" x2="384.1" y2="290.0"/>
+<text class="mlab" x="384.1" y="311.0">A</text>
+<line class="tick" x1="427.1" y1="286.0" x2="427.1" y2="290.0"/>
+<text class="mlab" x="427.1" y="311.0">S</text>
+<line class="tick" x1="470.0" y1="286.0" x2="470.0" y2="293.0"/>
+<text class="mlab" x="470.0" y="311.0">O</text>
+<line class="tick" x1="513.0" y1="286.0" x2="513.0" y2="290.0"/>
+<text class="mlab" x="513.0" y="311.0">N</text>
+<line class="tick" x1="556.0" y1="286.0" x2="556.0" y2="290.0"/>
+<text class="mlab" x="556.0" y="311.0">D</text>
+<line class="tick" x1="598.9" y1="286.0" x2="598.9" y2="297.0"/>
+<text class="mlab" x="598.9" y="311.0">J</text>
+<line class="tick" x1="641.9" y1="286.0" x2="641.9" y2="290.0"/>
+<text class="mlab" x="641.9" y="311.0">F</text>
+<line class="tick" x1="684.8" y1="286.0" x2="684.8" y2="290.0"/>
+<text class="mlab" x="684.8" y="311.0">M</text>
+<line class="tick" x1="727.8" y1="286.0" x2="727.8" y2="293.0"/>
+<text class="mlab" x="727.8" y="311.0">A</text>
+<line class="tick" x1="770.7" y1="286.0" x2="770.7" y2="290.0"/>
+<text class="mlab" x="770.7" y="311.0">M</text>
+<line class="tick" x1="813.7" y1="286.0" x2="813.7" y2="290.0"/>
+<text class="mlab" x="813.7" y="311.0">J</text>
+<line class="tick" x1="856.6" y1="286.0" x2="856.6" y2="293.0"/>
+<text class="mlab" x="856.6" y="311.0">J</text>
+<line class="tick" x1="899.6" y1="286.0" x2="899.6" y2="290.0"/>
+<text class="mlab" x="899.6" y="311.0">A</text>
+<line class="tick" x1="942.5" y1="286.0" x2="942.5" y2="290.0"/>
+<text class="mlab" x="942.5" y="311.0">S</text>
+<text class="ylab" x="319.7" y="331.0">2025</text>
+<text class="ylab" x="770.7" y="331.0">2026</text>
+<line class="divider" x1="577.4" y1="26" x2="577.4" y2="318.0"/>
+<line class="divider soft" x1="319.7" y1="26" x2="319.7" y2="286.0"/>
+</svg>
+    </div>
+    <div class="legend">
+      <span class="key"><i class="swatch" style="background:var(--s25)"></i>2025</span>
+      <span class="key"><i class="swatch" style="background:var(--s26)"></i>2026</span>
+      <span class="key">Linha tracejada = média do trecho</span>
+    </div>
+    <figcaption>Faturamento líquido mês a mês, como consta no Gentili. Setembro/2026 aparece em tom mais claro
+    porque são 23 dias, não o mês fechado. Fevereiro/2026 (R$ 130,6 mil) é o fundo da série e foi o mês
+    da troca de estrutura das campanhas.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <p class="eyebrow">O site, canal a canal</p>
+  <h2>Cada porta de entrada continua rendendo o mesmo. O que mudou foi quanta gente veio por cada uma.</h2>
+  <p class="lead col">Esta é a tabela mais importante do estudo, e ela usa só as visitas <b>vindas do
+  Brasil</b> — 99,2% do faturamento da loja. Para cada porta de entrada do site estão o número de visitas
+  e quanto cada visita rendeu em reais.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Visitas do Brasil e receita por visita — janeiro a agosto</caption>
+      <thead><tr><th>Por onde a pessoa chegou</th><th>Visitas 2025</th><th>Visitas 2026</th><th>Variação</th><th>R$ por visita 2025</th><th>R$ por visita 2026</th><th>Variação</th></tr></thead>
+      <tbody>
+        <tr><td>Pesquisa paga do Google</td><td>63.874</td><td>46.330</td><td class="d dn">−27,5%</td><td>R$ 8,20</td><td>R$ 7,59</td><td class="d flat">−7,4%</td></tr>
+        <tr><td>Acesso direto (já conhece a loja)</td><td>70.985</td><td>67.386</td><td class="d flat">−5,1%</td><td>R$ 6,13</td><td>R$ 5,10</td><td class="d flat">−16,7%</td></tr>
+        <tr><td>PMax (automática do Google)</td><td>93.514</td><td>74.331</td><td class="d dn">−20,5%</td><td>R$ 4,41</td><td>R$ 4,05</td><td class="d flat">−8,0%</td></tr>
+        <tr><td>Shopping pago</td><td>51.979</td><td>33.571</td><td class="d dn">−35,4%</td><td>R$ 3,61</td><td>R$ 3,53</td><td class="d flat">−2,4%</td></tr>
+        <tr><td>Busca orgânica do Google</td><td>160.828</td><td>114.137</td><td class="d dn">−29,0%</td><td>R$ 2,46</td><td>R$ 2,17</td><td class="d flat">−11,5%</td></tr>
+        <tr><td>Indicação de outros sites</td><td>34.358</td><td>9.067</td><td class="d dn">−73,6%</td><td>R$ 2,90</td><td>R$ 2,48</td><td class="d flat">−14,5%</td></tr>
+        <tr><td>Shopping gratuito (vitrine sem custo)</td><td>15.679</td><td>12.488</td><td class="d dn">−20,4%</td><td>R$ 2,36</td><td>R$ 1,91</td><td class="d flat">−18,9%</td></tr>
+        <tr><td>Rede social (perfil, links e anúncio sem marcação)</td><td>22.215</td><td>250.603</td><td class="d up">+1.028%</td><td>R$ 1,11</td><td>R$ 0,11</td><td class="d">—</td></tr>
+        <tr><td>Sem origem identificada</td><td>66.023</td><td>36.565</td><td class="d dn">−44,6%</td><td>R$ 0,56</td><td>R$ 0,57</td><td class="d up">+1,9%</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Todas as visitas do Brasil</td><td>605.722</td><td>660.041</td><td class="d up">+9,0%</td><td>R$ 3,57</td><td>R$ 2,22</td><td class="d">ver abaixo</td></tr>
+        <tr><td>Sem a linha da rede social</td><td>583.507</td><td>409.438</td><td class="d dn">−29,8%</td><td>R$ 3,66</td><td>R$ 3,51</td><td class="d flat">−4,3%</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <p class="col">Lendo linha por linha: <b>em todas as portas em que a pessoa está procurando produto — a
+  pesquisa do Google, o Shopping, o PMax, a busca orgânica, as indicações — a visita rende hoje
+  praticamente o que rendia em 2025</b>. As quedas de receita por visita ficam entre 2% e 17%, que é
+  variação normal de um ano para o outro. O que mudou de verdade está na coluna do meio: <b>o número de
+  visitas caiu em todas essas portas</b>, entre 20% e 74%.</p>
+
+  <p class="col">A única linha que cresceu é a rede social, e ela multiplicou por onze. É por causa dela
+  que o total de visitas do Brasil sobe 9% enquanto o faturamento cai: <b>o site recebeu 228 mil visitas a
+  mais de rede social, que trouxeram R$ 2,9 mil a mais de receita</b>. Tirando essa linha, o site do Brasil
+  recebeu 29,8% menos visitas e cada uma rendeu <b>R$ 3,66 contra R$ 3,51 — diferença de 4,3%</b>.</p>
+
+  <div class="pull">
+    <p>Em uma frase: <b>a loja continua convertendo como convertia. O que diminuiu foi o número de pessoas
+    entrando por onde se compra.</b></p>
+  </div>
+
+  <p class="note col">A linha da rede social tem explicação, e ela é o assunto da próxima seção:
+  foi uma frente reforçada de propósito neste ano, a pedido da Roma, para levar mais gente ao site e ao
+  perfil.</p>
+  </section>
+
+<section>
+  <p class="eyebrow">A frente que cresceu no ano</p>
+  <h2>O Meta entrou para trazer gente nova — e trouxe</h2>
+  <p class="lead col">Ampliar o investimento no Meta foi uma decisão combinada com a Roma, com um objetivo
+  declarado: <b>levar mais gente ao site e ao perfil</b>. Foi o que esse investimento fez, e é a razão
+  direta da linha que mais cresceu na tabela anterior.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Meta Ads — janeiro a agosto</caption>
+      <thead><tr><th>Medida</th><th>2025</th><th>2026</th><th>Variação</th></tr></thead>
+      <tbody>
+        <tr><td>Investimento</td><td>R$ 19.870</td><td>R$ 25.126</td><td class="d up">+26,5%</td></tr>
+        <tr><td>Aparições dos anúncios</td><td>4.809.908</td><td>5.907.256</td><td class="d up">+22,8%</td></tr>
+        <tr><td>Cliques nos anúncios</td><td>174.233</td><td>600.594</td><td class="d up">+245%</td></tr>
+        <tr><td>Custo de cada clique</td><td>R$ 0,114</td><td>R$ 0,042</td><td class="d up">−63%</td></tr>
+        <tr><td>Visitas ao site vindas de rede social</td><td>22.215</td><td>250.603</td><td class="d up">11 vezes mais</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">Dentro do próprio ano o reforço é visível: o Meta saiu de <b>R$ 2.103 em janeiro para
+  R$ 4.408 em agosto</b> — mais que o dobro. E o dinheiro foi para frentes com papéis diferentes: o
+  catálogo, que é o motor de venda; reconhecimento no Nordeste e em São Paulo; distribuição de vídeo; e
+  uma campanha dedicada de <b>visita ao perfil do Instagram com reels de criadoras</b>, no ar desde
+  setembro.</p>
+  <p class="col">Esse investimento também vende: o custo real por compra pelo catálogo do Meta está em
+  <b>R$ 6,59</b>, para um ticket médio de R$ 213. E ele faz o que foi pedido — apresentar a Roma a quem
+  ainda não a conhece.</p>
+
+  <div class="pull">
+    <p><b>É por isso que o total de visitas do site sobe 9% enquanto o faturamento cai.</b> O tráfego de
+    rede social cumpre o papel de descoberta, e cumpre bem; ele não substitui a vitrine do Google, que é
+    onde a pessoa já está procurando o produto — e foi essa vitrine que encolheu no período.</p>
+  </div>
+
+  <p class="note col">Duas observações técnicas para quem for conferir. <b>Uma:</b> até 22/09/2026 os
+  anúncios de catálogo chegavam ao site sem marcação de origem, e quem clica dentro do aplicativo do
+  Instagram entra classificado como "rede social" — parte da linha de 250 mil visitas é, na verdade,
+  anúncio. Corrigimos a marcação em 22/09 e, já no primeiro dia inteiro, <b>1.408 visitas apareceram com o
+  nome certo (20,8% do dia)</b>; daqui em diante esse tráfego aparece separado. <b>Duas:</b> o anúncio de
+  catálogo é comprado por compra, não por visita — medi-lo por "quanto rende por visita" é como medir uma
+  vitrine pelo número de pessoas que passam na calçada. A régua dele é o custo por compra.</p>
+</section>
+
+<section>
+  <p class="eyebrow">A conta da diferença</p>
+  <h2>De onde saiu cada real dos R$ 699,2 mil</h2>
+  <p class="lead col">Esta é a queda de receita das visitas do Brasil, aberta pela origem de cada uma.
+  Metade tem um endereço só.</p>
+  <figure>
+    <div class="plot">
+<svg viewBox="0 0 980 280" class="chart2" role="img" aria-label="De onde saiu a queda de receita, por origem de visita">
+<text class="qlab" x="16" y="25">Google pago — Pesquisa, Shopping e PMax</text>
+<text class="qpct" x="980" y="25">50% da queda</text>
+<rect class="qbar q1" x="16" y="34" width="759.0" height="15" rx="3"/>
+<text class="qval" x="785.0" y="46">R$ 352,3 mil</text>
+<text class="qlab" x="16" y="79">Busca orgânica — quem acha a Roma no Google</text>
+<text class="qpct" x="980" y="79">21% da queda</text>
+<rect class="qbar q2" x="16" y="88" width="316.3" height="15" rx="3"/>
+<text class="qval" x="342.3" y="100">R$ 146,8 mil</text>
+<text class="qlab" x="16" y="133">Acesso direto — quem já digita o endereço</text>
+<text class="qpct" x="980" y="133">13% da queda</text>
+<rect class="qbar q3" x="16" y="142" width="196.1" height="15" rx="3"/>
+<text class="qval" x="222.1" y="154">R$ 91,0 mil</text>
+<text class="qlab" x="16" y="187">Indicações vindas de outros sites</text>
+<text class="qpct" x="980" y="187">11% da queda</text>
+<rect class="qbar q4" x="16" y="196" width="166.5" height="15" rx="3"/>
+<text class="qval" x="192.5" y="208">R$ 77,3 mil</text>
+<text class="qlab" x="16" y="241">Demais origens</text>
+<text class="qpct" x="980" y="241">5% da queda</text>
+<rect class="qbar q5" x="16" y="250" width="73.9" height="15" rx="3"/>
+<text class="qval" x="99.9" y="262">R$ 34,3 mil</text>
+</svg>
+    </div>
+    <figcaption>Diferença de receita por canal, janeiro a agosto de 2026 contra o mesmo período de 2025.
+    Fonte: GA4, relatório de aquisição de tráfego.</figcaption>
+  </figure>
+  <p class="col">Os três formatos pagos do Google — Pesquisa, Shopping e PMax — responderam sozinhos por
+  <b>R$ 352,3 mil</b> da diferença. A busca orgânica, que é o canal que mais traz receita sem custo de mídia,
+  perdeu outros R$ 146,8 mil. E as <b>indicações de outros sites praticamente sumiram</b>: 34.358 visitas em 2025 contra 9.067 em 2026 (−73,6%), R$ 77,3 mil a menos. Esse terceiro item não é mídia nem site — é uma
+  origem de tráfego que a loja tinha e deixou de ter; vale descobrir com a Roma qual parceria ou marketplace
+  parou.</p>
+</section>
+
+<section>
+  <p class="eyebrow">1 · o motor do Google</p>
+  <h2>O que foi reduzido — e por que o mesmo dinheiro rende menos</h2>
+  <p class="lead col">Duas coisas aconteceram ao mesmo tempo, e as duas são mensuráveis. A verba do Google
+  caiu <b>19%</b> (R$ 52,4 mil → R$ 42,4 mil de janeiro a agosto), com o corte em julho de 2025:
+  de R$ 7.041 para R$ 4.991 por mês. E o espaço no Google ficou <b>15,5% mais caro</b> — o custo de mil
+  aparições subiu de R$ 8,70 para R$ 10,05.</p>
+  <p class="col">As duas se multiplicam e explicam a perda de alcance inteira, sem sobra:
+  <b>0,81 (verba) × 0,87 (preço) = 0,70</b>. As aparições caíram exatamente 29,9%. Dois terços da perda
+  é verba menor; um terço é o leilão ficando mais caro.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Google Ads por tipo de campanha — janeiro a agosto</caption>
+      <thead><tr><th>Tipo</th><th>Verba 2025</th><th>Verba 2026</th><th>Aparições 2025</th><th>Aparições 2026</th><th>Aparições por R$ 1</th></tr></thead>
+      <tbody>
+        <tr><td><b>Shopping</b> — a vitrine de produto</td><td>R$ 15.287</td><td>R$ 13.370</td><td>2.636.941</td><td>1.630.240</td><td class="d dn">172 → 122</td></tr>
+        <tr><td><b>PMax</b> — automática, roda em toda a rede</td><td>R$ 20.541</td><td>R$ 17.069</td><td>3.211.954</td><td>2.414.546</td><td class="d dn">156 → 141</td></tr>
+        <tr><td><b>Pesquisa</b> — o anúncio de texto</td><td>R$ 16.580</td><td>R$ 12.003</td><td>177.118</td><td>180.328</td><td class="d up">11 → 15</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>R$ 52.408</td><td>R$ 42.442</td><td>6.026.013</td><td>4.225.114</td><td class="d">115 → 100</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="col">Onde doeu foi o <b>Shopping</b> — a foto do produto com preço que aparece na busca, o canal
+  que traz volume para e-commerce. Perdeu 1,0 milhão de aparições com apenas 12,5% menos verba, porque o
+  espaço de Shopping quase dobrou de preço: de R$ 5,80 para R$ 8,20 por mil aparições (+41%).</p>
+  <p class="note col">Há um terceiro movimento, que não aparece no total: <b>a verba se espalhou</b>.
+  Em 2025 eram 9 campanhas e as três maiores levavam 66% do dinheiro. Em 2026 são <b>26 campanhas</b> e as
+  três maiores levam 49%. Catorze delas ficaram com menos de R$ 400 cada nos oito meses — R$ 2,4 mil no
+  total, 5,8% da verba, que renderam 3% do alcance. Campanha pequena não sai da fase de aprendizado do
+  Google; a mesma verba concentrada compra mais espaço.</p>
+</section>
+
+<section>
+  <p class="eyebrow">1b · desde quando o espaço encarece</p>
+  <h2>O preço do anúncio sobe sem parar há três anos</h2>
+  <p class="lead col">Não é um efeito de setembro nem de 2026: o custo de aparecer no Google vem subindo
+  semestre após semestre, nos dois formatos que trazem volume para a loja. Abaixo, quanto custou cada mil
+  aparições em cada meio ano.</p>
+  <figure>
+    <div class="plot">
+<svg viewBox="0 0 980 330" class="chart4" role="img" aria-label="Custo de mil aparições no Shopping e no PMax, por semestre, de 2024 a 2026">
+<line class="grid" x1="54" y1="209.5" x2="964" y2="209.5"/>
+<text class="gridlab" x="45" y="213.5">3</text>
+<line class="grid" x1="54" y1="153.0" x2="964" y2="153.0"/>
+<text class="gridlab" x="45" y="157.0">6</text>
+<line class="grid" x1="54" y1="96.5" x2="964" y2="96.5"/>
+<text class="gridlab" x="45" y="100.5">9</text>
+<line class="grid" x1="54" y1="40.0" x2="964" y2="40.0"/>
+<text class="gridlab" x="45" y="44.0">12</text>
+<text class="unit" x="150" y="28.0">R$ por mil aparições</text>
+<rect class="cShop" x="88.8" y="194.8" width="38.0" height="71.2" rx="3"/>
+<text class="cval cShop" x="107.8" y="187.8">3,78</text>
+<rect class="cPmax" x="132.8" y="195.0" width="38.0" height="71.0" rx="3"/>
+<text class="cval cPmax" x="151.8" y="188.0">3,77</text>
+<text class="cper" x="129.8" y="288.0">1S 2024</text>
+<rect class="cShop" x="240.5" y="182.4" width="38.0" height="83.6" rx="3"/>
+<text class="cval cShop" x="259.5" y="175.4">4,44</text>
+<rect class="cPmax" x="284.5" y="173.3" width="38.0" height="92.7" rx="3"/>
+<text class="cval cPmax" x="303.5" y="166.3">4,92</text>
+<text class="cper" x="281.5" y="288.0">2S 2024</text>
+<rect class="cShop" x="392.2" y="154.1" width="38.0" height="111.9" rx="3"/>
+<text class="cval cShop" x="411.2" y="147.1">5,94</text>
+<rect class="cPmax" x="436.2" y="144.9" width="38.0" height="121.1" rx="3"/>
+<text class="cval cPmax" x="455.2" y="137.9">6,43</text>
+<text class="cper" x="433.2" y="288.0">1S 2025</text>
+<rect class="cShop" x="543.8" y="152.8" width="38.0" height="113.2" rx="3"/>
+<text class="cval cShop" x="562.8" y="145.8">6,01</text>
+<rect class="cPmax" x="587.8" y="135.5" width="38.0" height="130.5" rx="3"/>
+<text class="cval cPmax" x="606.8" y="128.5">6,93</text>
+<text class="cper" x="584.8" y="288.0">2S 2025</text>
+<rect class="cShop" x="695.5" y="106.5" width="38.0" height="159.5" rx="3"/>
+<text class="cval cShop" x="714.5" y="99.5">8,47</text>
+<rect class="cPmax" x="739.5" y="136.8" width="38.0" height="129.2" rx="3"/>
+<text class="cval cPmax" x="758.5" y="129.8">6,86</text>
+<text class="cper" x="736.5" y="288.0">1S 2026</text>
+<rect class="cShop" x="847.2" y="109.7" width="38.0" height="156.3" rx="3"/>
+<text class="cval cShop" x="866.2" y="102.7">8,30</text>
+<rect class="cPmax" x="891.2" y="68.6" width="38.0" height="197.4" rx="3"/>
+<text class="cval cPmax" x="910.2" y="61.6">10,48</text>
+<text class="cper" x="888.2" y="288.0">jul–set 2026</text>
+<line class="axis" x1="54" y1="266.0" x2="964" y2="266.0"/>
+</svg>
+    </div>
+    <div class="legend">
+      <span class="key"><i class="swatch" style="background:var(--cShop)"></i>Shopping</span>
+      <span class="key"><i class="swatch" style="background:var(--cPmax)"></i>PMax</span>
+      <span class="key">R$ por mil aparições, conta Varejo</span>
+    </div>
+    <figcaption>Fonte: Google Ads, conta Varejo, 33 meses. O Shopping da Roma começou a rodar em maio de
+    2024, então o primeiro ponto dessa série cobre maio e junho.</figcaption>
+  </figure>
+  <div class="tablewrap">
+    <table>
+      <caption>Quanto subiu, ponta a ponta</caption>
+      <thead><tr><th>Formato</th><th>Início de 2024</th><th>Hoje (jul–set/2026)</th><th>Variação</th></tr></thead>
+      <tbody>
+        <tr><td>Shopping — mil aparições</td><td>R$ 3,78</td><td>R$ 8,30</td><td class="d dn">+120%</td></tr>
+        <tr><td>PMax — mil aparições</td><td>R$ 3,77</td><td>R$ 10,48</td><td class="d dn">+178%</td></tr>
+        <tr><td>Shopping — custo do clique</td><td>R$ 0,205</td><td>R$ 0,351</td><td class="d dn">+71%</td></tr>
+        <tr><td>PMax — custo do clique</td><td>R$ 0,174</td><td>R$ 0,257</td><td class="d dn">+48%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">A subida é contínua e não tem um único degrau: sobe de 2024 para 2025, sobe dentro de
+  2025 e sobe de novo em 2026. É movimento de mercado — mais lojas disputando o mesmo espaço de vitrine,
+  sobretudo em datas de pico —, não característica da conta da Roma.</p>
+  <p class="col">A consequência prática é a que mais pesa neste estudo: <b>manter a mesma verba todo ano
+  significa aparecer menos todo ano</b>. As 8,1 milhões de aparições que a Roma teve em 2024 custaram
+  R$ 48,5 mil. <b>As mesmas 8,1 milhões de aparições custariam hoje R$ 81,5 mil</b> — 68% a mais pela
+  mesma presença.</p>
+  <div class="pull">
+    <p>É por isso que "voltar a investir o que se investia" não devolve o resultado que se tinha:
+    <b>o mesmo dinheiro compra hoje dois terços da vitrine que comprava dois anos atrás.</b></p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">2 · o que já foi retomado</p>
+  <h2>A verba já voltou ao nível de 2025. O espaço é que ficou mais caro.</h2>
+  <p class="lead col">Esta é a comparação mais direta possível: os mesmos 24 dias de setembro, um ano contra
+  o outro, com praticamente o mesmo dinheiro.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Google Ads, 1 a 24 de setembro</caption>
+      <thead><tr><th>Tipo</th><th>Verba 2025</th><th>Verba 2026</th><th>Aparições 2025</th><th>Aparições 2026</th><th>Custo de mil aparições</th></tr></thead>
+      <tbody>
+        <tr><td>Shopping</td><td>R$ 1.056</td><td>R$ 1.098</td><td>155.773</td><td>96.868</td><td class="d dn">R$ 6,78 → R$ 11,34</td></tr>
+        <tr><td>PMax</td><td>R$ 1.693</td><td>R$ 1.840</td><td>220.550</td><td>177.819</td><td class="d dn">R$ 7,68 → R$ 10,35</td></tr>
+        <tr><td>Pesquisa</td><td>R$ 1.608</td><td>R$ 1.490</td><td>13.729</td><td>22.860</td><td class="d up">R$ 117 → R$ 65</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>R$ 4.357</td><td>R$ 4.428</td><td>390.052</td><td>297.547</td><td class="d">−23,7% de alcance</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="col">Com <b>1,6% a mais de verba</b>, a Roma apareceu <b>23,7% menos</b>. No Shopping, R$ 42 a
+  mais compraram 38% menos aparições, porque o preço subiu 67% em um ano. Ou seja: <b>o tipo de campanha
+  que trazia volume já está no ar e a verba já está no patamar de 2025</b> — o que falta é cobrir o que o
+  espaço encareceu. Repor o mesmo dinheiro não repõe o mesmo alcance.</p>
+</section>
+
+<section>
+  <p class="eyebrow">3 · onde investir</p>
+  <h2>Existe espaço esperando verba — e dá para medir quanto</h2>
+  <p class="lead col">O Google informa, para cada campanha, quanto do leilão a gente conquistou e por que
+  perdeu o resto. No Shopping da Roma, hoje:</p>
+  <figure>
+    <div class="plot">
+<svg viewBox="0 0 980 150" class="chart3" role="img" aria-label="Participação da Roma no leilão de Shopping do Google: apareceu em 18,2 por cento, perdeu 45,1 por cento por verba e 36,5 por cento por relevância">
+<text class="leilaotop" x="16" y="18">De cada 100 vezes que alguém podia ver a Roma no Shopping do Google, entre julho e setembro de 2026:</text>
+<rect class="lseg l1" x="16.0" y="34" width="170.9" height="46" rx="3"/>
+<text class="lpct l1" x="101.4" y="104">18,2%</text>
+<text class="ltxt" x="101.4" y="121">a Roma apareceu</text>
+<rect class="lseg l2" x="188.9" y="34" width="426.1" height="46" rx="3"/>
+<text class="lpct l2" x="401.9" y="104">45,1%</text>
+<text class="ltxt" x="401.9" y="121">perdemos por falta</text>
+<text class="ltxt" x="401.9" y="135">de verba</text>
+<rect class="lseg l3" x="617.0" y="34" width="347.0" height="46" rx="3"/>
+<text class="lpct l3" x="790.5" y="104">36,5%</text>
+<text class="ltxt" x="790.5" y="121">perdemos por relevância</text>
+<text class="ltxt" x="790.5" y="135">no leilão</text>
+</svg>
+    </div>
+    <figcaption>Participação de impressões do <code>[GGD][SHOPPING]</code>, 1º de julho a 24 de setembro de 2026.
+    Fonte: Google Ads, colunas de parcela de impressões.</figcaption>
+  </figure>
+  <p class="col"><b>45,1% das aparições são perdidas por falta de verba.</b> Isso é espaço disponível,
+  parado, esperando dinheiro — não é concorrente ganhando por ser melhor. E os 36,5% perdidos por
+  relevância não se compram: dependem de qualidade do anúncio de produto, velocidade do site e reputação
+  da loja. São duas filas diferentes, e só a primeira responde a verba.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>A conta de voltar ao alcance de 2025 no Shopping</caption>
+      <thead><tr><th>Item</th><th>Número</th></tr></thead>
+      <tbody>
+        <tr><td>Aparições que faltam por mês para igualar 2025</td><td>125.838</td></tr>
+        <tr><td>Preço de hoje no Shopping</td><td>122 aparições por R$ 1</td></tr>
+        <tr><td><b>Verba adicional necessária</b></td><td><b>R$ 1.032 por mês — R$ 34 por dia</b></td></tr>
+        <tr><td>Retorno atual do Shopping (2026, jan–ago)</td><td>19,1× o valor investido</td></tr>
+        <tr><td>Faturamento que esse acréscimo acompanha, à régua de hoje</td><td>≈ R$ 19,7 mil por mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">O último número é projeção pela eficiência atual do próprio canal, não promessa: se o
+  leilão encarecer mais, entrega menos. A régua honesta é a primeira linha — <b>R$ 34 por dia recompõem o
+  alcance que a loja tinha</b>, e o Google confirma que há espaço para absorver isso.</p>
+</section>
+
+<section>
+  <p class="eyebrow">4 · a indicação que sumiu</p>
+  <h2>Como a gente sabe que a Roma perdeu um site que a indicava</h2>
+  <p class="lead col">"Indicação" aqui tem definição técnica: é a visita que chega <b>clicando num link em
+  outro site</b> — um marketplace, um blog, um parceiro, um comparador de preço. O GA4 separa essas visitas
+  num canal próprio (<i>Referral</i>) porque a origem vem no próprio clique; não é estimativa nem modelo.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Canal Referral — janeiro a agosto</caption>
+      <thead><tr><th></th><th>2025</th><th>2026</th><th>Variação</th></tr></thead>
+      <tbody>
+        <tr><td>Visitas vindas de outros sites</td><td>34.358</td><td>9.067</td><td class="d dn">−73,6%</td></tr>
+        <tr><td>Receita gerada por elas</td><td>R$ 99.794</td><td>R$ 22.509</td><td class="d dn">−77,4%</td></tr>
+        <tr><td>Taxa de engajamento dessas visitas</td><td>90,3%</td><td>85,7%</td><td class="d flat">−5 pontos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">O que esses números dizem: não é que a indicação passou a converter mal — <b>ela deixou de
+  existir</b>. Eram 4.295 visitas por mês vindas de outros sites; hoje são 1.133. E eram visitas boas: 90% de engajamento, contra 70% da média do site em 2025.</p>
+  <p class="note col"><b>Para ver o nome dos sites em 30 segundos:</b> GA4 → Relatórios → Aquisição →
+  Aquisição de tráfego → no cabeçalho da tabela, trocar "Grupo principal de canais da sessão" por
+  <b>"Origem da sessão"</b> → no campo Pesquisar, digitar <code>referral</code>. Comparando 2025 e 2026 na
+  mesma janela, aparece exatamente qual site parou de mandar gente. É a única informação deste estudo que depende de dados que estão com a Roma — costuma ser um marketplace desativado, um parceiro que tirou o link ou um disparo de e-mail que parou.</p>
+</section>
+
+<section>
+  <p class="eyebrow">A cadeia inteira</p>
+  <h2>A mídia está fazendo o papel dela — e o que mais pesa</h2>
+  <p class="lead col">Faturar é uma corrente de três elos: alguém precisa <b>chegar</b>, precisa
+  <b>comprar</b> e o pedido precisa <b>virar dinheiro</b>. Cada elo tem medida própria, e vale olhar um por um
+  antes de apontar para qualquer um deles.</p>
+
+  <div class="elos">
+    <div class="elo">
+      <span class="elo-n">Elo 1</span>
+      <h3>Trazer a visita — é o que a mídia faz</h3>
+      <ul>
+        <li>O clique custa o mesmo de 2025: <b>R$ 0,264 → R$ 0,257</b></li>
+        <li>A mídia é <b>4,52% do faturamento</b> — em e-commerce o normal é 8% a 15%</li>
+        <li>Retorno de <b>22,1×</b>: cada R$ 1 de mídia acompanha R$ 22 de faturamento</li>
+        <li>No Meta, o custo real por compra é <b>R$ 6,59</b> para um ticket de R$ 213</li>
+        <li>Os canais pagos entregaram <b>R$ 774 mil</b> de receita com R$ 67,6 mil de verba</li>
+      </ul>
+      <p class="elo-nota">O que está fora do alcance da mídia: o preço do leilão subiu 15,5% e a verba
+      disponível é menor que a de 2025.</p>
+    </div>
+    <div class="elo">
+      <span class="elo-n">Elo 2</span>
+      <h3>Transformar visita em pedido — é do site</h3>
+      <ul>
+        <li>Em toda porta de compra a visita rende quase o mesmo que em 2025 (de −2% a −17%)</li>
+        <li>Mas o funil trava: de <b>10.434</b> que chegam ao carrinho, <b>849</b> fecham (8,1%)</li>
+        <li>O site abre em <b>1,78s</b>; os dois concorrentes medidos abrem em 1,21s e 0,06s</li>
+        <li>A loja <b>não tem avaliação de produto</b> — e avaliação entra na nota do Google</li>
+        <li>Sem frete grátis por valor mínimo, e sem entrega em parte de Minas (só retirada)</li>
+      </ul>
+      <p class="elo-nota">É aqui que estão os 36,5% de leilão perdidos por relevância: velocidade,
+      qualidade do anúncio de produto e reputação da loja entram na nota que define quem aparece.</p>
+    </div>
+    <div class="elo">
+      <span class="elo-n">Elo 3</span>
+      <h3>Virar faturamento — é da operação</h3>
+      <ul>
+        <li><b>13,5% do valor vendido é cancelado</b> — R$ 233,9 mil em oito meses</li>
+        <li>No cartão piorou: <b>13,3% → 16,1%</b>, R$ 32,6 mil só pela diferença</li>
+        <li>Metade volta como recompra do mesmo cliente (mediana de 6 minutos)</li>
+        <li>O boleto cancela 26% e responde por 4,5% do faturamento</li>
+      </ul>
+      <p class="elo-nota">Nenhum ajuste de campanha alcança esse elo: é antifraude, adquirente e
+      checkout.</p>
+    </div>
+  </div>
+
+  <div class="pull">
+    <p>Em resumo: <b>a mídia entrega hoje a visita mais barata dos últimos dois anos e com um retorno de 22×. O que mudou está antes dela — o espaço de anúncio ficou mais caro e a verba é menor — e depois dela: funil de compra, velocidade, reputação da loja e cancelamento.</b></p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">O que já está mapeado</p>
+  <h2>A fila de atualizações do site — o que é, o que resolve, quanto vale</h2>
+  <p class="lead col">Nada aqui é suposição. Cada item abaixo foi medido no site da Roma, com data e
+  ferramenta, ao longo de 2026: auditoria de rastreamento, gravações e mapas de calor do Clarity,
+  Search Console, Merchant Center e o caixa da própria loja. São as travas que estão entre o visitante
+  e o pedido — e a maior parte delas não se resolve com verba de anúncio.</p>
+
+  <h3 class="bloco">Bloco 1 · Depende da plataforma (LojaComm)</h3>
+  <p class="note col">Chamado técnico enviado em 22/09/2026 com reprodução passo a passo, cobrança em
+  25/09. São itens de código da plataforma, aos quais não temos acesso.</p>
+  <div class="fichas">
+    <article class="ficha">
+      <span class="ficha-tag alta">Prioridade 1</span>
+      <h4>A compra é contada duas vezes</h4>
+      <p><b>O que acontece:</b> a plataforma dispara um evento de Compra próprio, fora do nosso
+      Gerenciador de Tags. Entre 24/08 e 20/09 a loja fez 1.004 pedidos e o Meta registrou 2.210 eventos —
+      fator <b>2,20×</b>. Medimos em duas janelas independentes e o fator se repete.</p>
+      <p><b>O que resolve:</b> desligar a chamada de Compra da confirmação de pedido, ou habilitar a
+      guarda que a própria plataforma já tem no código (o campo de pixel está vazio na configuração da loja).</p>
+      <p><b>Quanto vale:</b> enquanto durar, o Facebook otimiza com sinal inflado — ele aprende com o
+      número errado e encarece a aquisição. Não há perda de venda; a perda é de decisão de investimento.</p>
+      <p class="ficha-conf">Como conferir: abrir o site, F12 → aba Rede → filtrar <code>facebook.com/tr</code> → recarregar sem clicar em nada.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">Prioridade 2</span>
+      <h4>Peso extra em toda página de produto</h4>
+      <p><b>O que acontece:</b> como consequência do item acima, as páginas de produto e de carrinho
+      carregam um segundo arquivo do Facebook de <b>~420 KB</b> que não serve para nada.</p>
+      <p><b>O que resolve:</b> não injetar o código quando não há pixel configurado na loja.</p>
+      <p><b>Quanto vale:</b> velocidade. O site abre em <b>1,78s</b> e a maior imagem aparece em 3,3s
+      (a meta do Google é 2,5s). Velocidade entra na nota que define quem aparece no Shopping.</p>
+      <p class="ficha-conf">Como conferir: código-fonte da página de produto, procurar <code>fbevents.js</code>.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">Prioridade 3</span>
+      <h4>Acesso automatizado ocupa o site</h4>
+      <p><b>O que acontece:</b> <b>59% do tráfego bruto é robô</b> (304 mil sessões em 30 dias). As duas
+      maiores origens do site são Hong Kong e Lanzhou, na China — 42% dos acessos, zero compra. Há acesso
+      simultâneo às telas de login.</p>
+      <p><b>O que resolve:</b> uma regra por país na CDN (gocache), no módulo de Firewall/SmartRules,
+      começando por captcha em vez de bloqueio seco. Não mexe em código.</p>
+      <p><b>Quanto vale:</b> tira carga do servidor (ajuda a velocidade) e devolve a leitura real do
+      comportamento da loja, hoje diluída em 42%.</p>
+      <p class="ficha-conf">Como conferir: Analytics → Dados demográficos → Cidade, e comparar com pedidos.</p>
+    </article>
+  </div>
+
+  <h3 class="bloco">Bloco 2 · Depende de decisão da Roma</h3>
+  <div class="fichas">
+    <article class="ficha">
+      <span class="ficha-tag alta">A maior alavanca do site</span>
+      <h4>A tela de pagamento e a parede de login</h4>
+      <p><b>O que acontece:</b> em 30 dias, <b>10.434</b> pessoas chegam ao carrinho, <b>3.570</b> passam
+      para o resumo (34,2%), 2.232 chegam ao pagamento e <b>849</b> fecham (38,0%). Nenhum degrau melhorou
+      desde a primeira medição. Na etapa de login, 2.302 visitas à tela de entrar geraram 519 logins e 250
+      contas novas.</p>
+      <p><b>O que resolve:</b> permitir a compra sem criar conta (checkout como convidado) e revisar a
+      tela de pagamento — ordem dos meios, campos exigidos e mensagens de erro.</p>
+      <p><b>Quanto vale:</b> cada ponto percentual na tela de pagamento são <b>~22 pedidos por mês</b>.
+      Sair de 38% para 45% vale <b>+156 pedidos/mês ≈ R$ 33 mil</b>, sem um real a mais de anúncio.
+      Na etapa do carrinho, 5 pontos a mais valem outros ~124 pedidos/mês.</p>
+      <p class="ficha-conf">Como conferir: Clarity → Funis, com as URLs /cart, /summary, /checkout/carriers, /checkout/payment.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag alta">R$ 32,6 mil no ano</span>
+      <h4>O cancelamento no cartão</h4>
+      <p><b>O que acontece:</b> o cancelamento é estrutural (13,3% do valor há três anos), mas
+      <b>o cartão piorou</b>: 13,3% do valor em 2025 e 16,1% em 2026. Metade volta como recompra do mesmo
+      cliente — mediana de 6 minutos, o que indica recusa e nova tentativa, não desistência.</p>
+      <p><b>O que resolve:</b> conversa com a adquirente/antifraude sobre as regras de recusa, e uma
+      tela de erro que diga o que fazer quando o cartão é recusado.</p>
+      <p><b>Quanto vale:</b> voltar à taxa de 2025 são <b>R$ 32,6 mil</b> no ano.</p>
+      <p class="ficha-conf">Como conferir: Octopus → relatório de pedidos por status, filtrando Cancelado por forma de pagamento.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">Rank no Google</span>
+      <h4>A loja não tem avaliação de produto</h4>
+      <p><b>O que acontece:</b> as páginas de produto não têm avaliações. O Google usa reputação e
+      avaliação como parte da nota que decide quem aparece no Shopping — e a Roma perde <b>36,5%</b> das
+      aparições por relevância, não por verba.</p>
+      <p><b>O que resolve:</b> instalar uma ferramenta de avaliação (Yourviews, Trustvox ou similar) e
+      disparar o pedido de avaliação por e-mail depois da entrega.</p>
+      <p><b>Quanto vale:</b> é o caminho para recuperar parte dos 36,5% — a fatia do leilão que dinheiro
+      não compra.</p>
+      <p class="ficha-conf">Como conferir: Google Ads → Campanhas → colunas de parcela de impressões perdida por classificação.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">Objeção nº 1</span>
+      <h4>Frete: cobertura e frete grátis</h4>
+      <p><b>O que acontece:</b> a Roma é a <b>mais barata e mais rápida no Sudeste</b> (R$ 7,64 para São
+      Paulo, contra R$ 9,51 e R$ 12,34 dos dois concorrentes medidos). Mas em Uberaba/MG o site só oferece
+      retirada na loja, enquanto os dois concorrentes entregam. E a loja não tem frete grátis por valor
+      mínimo, que os concorrentes anunciam.</p>
+      <p><b>O que resolve:</b> revisar a tabela de cobertura no interior de Minas e testar frete grátis
+      acima de um valor, começando por São Paulo e Sudeste, onde o custo de envio é menor.</p>
+      <p><b>Quanto vale:</b> o frete é a objeção nº 1 do carrinho — é lá que 18,1% dos toques acontecem.</p>
+      <p class="ficha-conf">Como conferir: simular no próprio site um item de R$ 10–20 para 38400-000.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">12.779 visitas/mês</span>
+      <h4>A página da Princess não mostra produto</h4>
+      <p><b>O que acontece:</b> a /princess recebe 12.779 entradas por mês e <b>94,9% das pessoas param
+      nos primeiros 5% da página</b>. A página tem vitrine de 13 categorias, mas a apresentação da marca
+      ocupa a primeira tela inteira — o primeiro produto só aparece bem depois do corte.</p>
+      <p><b>O que resolve:</b> encurtar a apresentação e subir o primeiro carrossel de produtos para a
+      primeira tela.</p>
+      <p><b>Quanto vale:</b> são 12,7 mil visitas por mês que hoje veem uma capa institucional em vez de
+      produto com preço.</p>
+      <p class="ficha-conf">Como conferir: Clarity → mapa de calor de rolagem da /princess.</p>
+    </article>
+  </div>
+
+  <h3 class="bloco">Bloco 3 · Ser encontrado (site + conteúdo)</h3>
+  <div class="fichas">
+    <article class="ficha">
+      <span class="ficha-tag alta">R$ 142,8 mil no ano</span>
+      <h4>Páginas de produto fora do índice do Google</h4>
+      <p><b>O que acontece:</b> a busca orgânica perdeu 29% das visitas e R$ 142,8 mil de receita. A
+      posição da Roma não piorou — o que encolheu foi a quantidade de páginas que o Google mantém no
+      índice. Hoje são 30,2 mil páginas indexadas e <b>19,2 mil fora</b>.</p>
+      <p><b>O que resolve:</b> o roteiro de SEO das 30 categorias já foi entregue (títulos, descrições e
+      a marcação das páginas de busca interna). Falta a plataforma aplicar, e falta cobrir o maior
+      grupo de buscas não ligadas à marca — "tinta spray", verniz spray, presilha, lantejoula, kit costura.</p>
+      <p><b>Quanto vale:</b> a busca orgânica é o canal que mais traz receita sem custo de mídia.</p>
+      <p class="ficha-conf">Como conferir: Search Console → Indexação de páginas.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">Velocidade</span>
+      <h4>O site abre mais devagar que os concorrentes</h4>
+      <p><b>O que acontece:</b> o site responde em <b>1,78s</b>; os dois concorrentes medidos respondem
+      em 1,21s e 0,06s. A maior imagem aparece em 3,3s (meta: 2,5s). E erros de JavaScript aparecem em
+      <b>19,2% das sessões</b>.</p>
+      <p><b>O que resolve:</b> CDN com cache bem configurado, remoção do arquivo extra do Facebook e
+      correção do erro que responde por 35% das ocorrências.</p>
+      <p><b>Quanto vale:</b> velocidade e erro entram na nota do Google e derrubam conversão em celular —
+      e 85% do tráfego da Roma é celular.</p>
+      <p class="ficha-conf">Como conferir: PageSpeed Insights no endereço da loja; Clarity → Erros de script.</p>
+    </article>
+    <article class="ficha">
+      <span class="ficha-tag">R$ 77,3 mil no ano</span>
+      <h4>Um site parou de indicar a Roma</h4>
+      <p><b>O que acontece:</b> as visitas vindas de links em outros sites caíram de 34.964 para 9.294
+      (−73%) e a receita delas, de R$ 100,3 mil para R$ 23,1 mil. Eram visitas de alta qualidade — 90% de
+      engajamento.</p>
+      <p><b>O que resolve:</b> identificar no Analytics qual site saiu e religar a parceria. É a única
+      informação deste estudo que depende de dados que estão com a Roma — marketplace desativado,
+      parceiro que tirou o link ou disparo de e-mail que parou.</p>
+      <p><b>Quanto vale:</b> R$ 77,3 mil de receita em oito meses.</p>
+      <p class="ficha-conf">Como conferir: Analytics → Aquisição de tráfego → dimensão "Origem da sessão" → buscar <code>referral</code>.</p>
+    </article>
+  </div>
+
+  <div class="pull">
+    <p>Somadas, as travas mapeadas dentro da loja valem mais do que qualquer ajuste de campanha possível
+    com a verba atual: <b>a tela de pagamento sozinha vale ~R$ 33 mil por mês</b>, sem um real a mais de
+    anúncio.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Do nosso lado</p>
+  <h2>O que a gestão de mídia entregou em 2026</h2>
+  <p class="lead col">Para leitura conjunta com a fila acima: o que foi construído neste ano do lado do
+  tráfego, além da operação diária das campanhas.</p>
+  <div class="entregas">
+    <div class="entrega"><h4>Auditoria completa de rastreamento</h4>
+      <p>16 páginas, 13 seções. Foi ela que encontrou a Compra contada 2,20× e provou de onde vem, com o
+      código na mão. Inclui o caminho exato para a Roma conferir cada número sozinha.</p></div>
+    <div class="entrega"><h4>Medição do site consertada</h4>
+      <p>Correções publicadas no Gerenciador de Tags, endereçamento padronizado dos anúncios (o tráfego
+      do Meta passou a aparecer com nome próprio no Analytics — antes ia para "direto") e o funil de
+      cadastro voltando a medir.</p></div>
+    <div class="entrega"><h4>Clarity instalado e dois estudos de comportamento</h4>
+      <p>Gravações, mapas de calor e funil do checkout — foi de onde saíram os números da tela de
+      pagamento, da parede de login e da /princess.</p></div>
+    <div class="entrega"><h4>Catálogo do Google reconstruído</h4>
+      <p>Endereço do feed corrigido, 24,5 mil produtos voltando a atualizar diariamente e uma fonte
+      complementar que leva o preço promocional para o Shopping — o que a plataforma dizia não ser possível.</p></div>
+    <div class="entrega"><h4>Meta ampliado, como combinado</h4>
+      <p>Investimento de R$ 2.103 em janeiro para R$ 4.408 em agosto, em quatro frentes com papéis
+      distintos — catálogo, reconhecimento, distribuição de vídeo e visita ao perfil com criadoras.
+      Resultado: 600 mil cliques no ano e 11 vezes mais visitas de rede social no site.</p></div>
+    <div class="entrega"><h4>Públicos a partir de quem compra</h4>
+      <p>Listas de compradores recentes da própria loja alimentando os públicos semelhantes do Meta,
+      no lugar de listas antigas.</p></div>
+    <div class="entrega"><h4>Estudos que viraram decisão</h4>
+      <p>Análise de concorrência (leilão, preço, frete, parcelamento e velocidade), roteiro de SEO de 30
+      categorias, série histórica de cancelamento de 33 meses e este comparativo.</p></div>
+    <div class="entrega"><h4>Chamado técnico à plataforma</h4>
+      <p>Documento com reprodução passo a passo dos cinco pontos de código, enviado em 22/09 e em
+      cobrança — o caminho formal para destravar o que não está ao nosso alcance.</p></div>
+    <div class="entrega"><h4>Relatório mensal e réguas de conferência</h4>
+      <p>Faturamento sempre pela régua contábil da Roma, com o caminho de conferência de cada número em
+      três fontes independentes.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">O saldo honesto do ano</p>
+  <h2>O que melhorou e o que piorou</h2>
+  <div class="split">
+    <div class="panel pos">
+      <h3>Melhorou</h3>
+      <ul>
+        <li><b>Ticket médio +2,7%</b> — R$ 207,35 → R$ 212,97. No cartão, R$ 269 → R$ 281.</li>
+        <li><b>Cancelamento no Pix caiu</b> — 9,6% → 8,1% do valor. No boleto, 38,6% → 26,0%.</li>
+        <li><b>O Meta cumpriu o que foi pedido</b> — verba +26,5%, 245% mais cliques, clique 63% mais
+        barato e <b>11 vezes mais visitas de rede social</b> chegando ao site.</li>
+        <li><b>E vende</b> — o custo real por compra pelo catálogo do Meta está em R$ 6,59 (medido já
+        descontando a duplicação de eventos da plataforma).</li>
+        <li><b>A loja parou de cair</b> — de março a agosto de 2026 o patamar é estável em
+        R$ 188,9 mil/mês, depois do fundo de fevereiro.</li>
+        <li><b>A medição hoje é confiável</b> — auditoria de rastreamento, UTM padronizada, funil de
+        cadastro e Clarity no ar. Em 2025 não dava para saber de onde vinha a venda; hoje dá.</li>
+      </ul>
+    </div>
+    <div class="panel neg">
+      <h3>Piorou</h3>
+      <ul>
+        <li><b>Volume de pedidos −32,9%</b> — 3.994 pedidos a menos em oito meses. É a causa integral
+        da queda de faturamento.</li>
+        <li><b>Visitas pelas portas de compra −29,8%</b> — a loja aparece menos para quem está procurando produto.</li>
+        <li><b>Alcance no Google −30%</b> — 6,0 → 4,2 milhões de aparições.</li>
+        <li><b>Indicações de outros sites −73%</b> — uma origem inteira de tráfego sumiu.</li>
+        <li><b>Cancelamento no cartão 13,3% → 16,1%</b> do valor vendido — R$ 188,3 mil só em 2026.</li>
+        <li><b>A mídia pesa mais</b> — 3,34% → 4,52% do faturamento; o retorno caiu de 29,9× para 22,1×.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Dentro da loja</p>
+  <h2>O cancelamento é o buraco que não é de tráfego</h2>
+  <p class="lead col">De todo pedido que entra, uma parte não vira faturamento. Isso é estável há três anos
+  (13,3% do valor em média), mas <b>o cartão piorou</b>: cancelava 13,3% do valor em 2025 e cancela 16,1%
+  em 2026 — R$ 188,3 mil no ano. O boleto melhorou muito e o Pix é o melhor meio da loja.</p>
+  <div class="tablewrap">
+    <table>
+      <caption>Cancelamento por forma de pagamento — % do valor vendido</caption>
+      <thead><tr><th>Forma</th><th>2024</th><th>2025</th><th>2026</th><th>Valor cancelado em 2026</th></tr></thead>
+      <tbody>
+        <tr><td>Cartão</td><td>14,9%</td><td>13,3%</td><td>16,1%</td><td>R$ 188.287</td></tr>
+        <tr><td>Boleto</td><td>35,0%</td><td>38,6%</td><td>26,0%</td><td>R$ 22.408</td></tr>
+        <tr><td>Pix</td><td>7,6%</td><td>9,6%</td><td>8,1%</td><td>R$ 53.015</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Metade desse valor volta: em 199 casos abertos um a um, 52% dos pedidos cancelados
+  viraram venda do mesmo cliente, a mediana em 6 minutos — é gente repetindo o checkout, não venda perdida.
+  A perda que fica de pé é a outra metade. Quem some de vez é o cliente do Pix (só 40% volta):
+  ali é desistência, não recusa do banco.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Onde está o dinheiro de volta</p>
+  <h2>O que dá para recuperar</h2>
+  <p class="lead col">A queda tem três endereços conhecidos, e dois deles têm caminho de volta sem depender
+  de mais verba:</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Frente</th><th>O que aconteceu</th><th>Diferença medida</th></tr></thead>
+      <tbody>
+        <tr><td>Alcance do Google</td><td><b>+R$ 34/dia no Shopping</b> repõe as 125,8 mil aparições/mês que faltam; o leilão tem 45,1% de espaço livre por verba</td><td>R$ 353,4 mil</td></tr>
+        <tr><td>Indicações perdidas</td><td>Identificar no GA4 qual site parou de indicar (Origem da sessão → <code>referral</code>) e religar com a Roma</td><td>R$ 77,3 mil</td></tr>
+        <tr><td>Busca orgânica</td><td>Páginas de produto fora do índice desde setembro/2025; roteiro de SEO já entregue</td><td>R$ 142,8 mil</td></tr>
+        <tr><td>Tela de pagamento e login</td><td>Compra sem criar conta e revisão da tela de pagamento (medido no Clarity)</td><td>R$ 33 mil por mês</td></tr>
+        <tr><td>Cancelamento no cartão</td><td>Voltar à taxa de 2025 (13,3%) com o adquirente/antifraude</td><td>R$ 32,6 mil</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Os valores são a diferença medida entre 2025 e 2026 em cada frente, não promessa de
+  retorno. Servem para ordenar a fila: o Google pago é metade do problema e é a única frente que responde
+  em semanas.</p>
+</section>
+
+<section>
+  <p class="eyebrow">A série inteira</p>
+  <h2>Mês a mês, 2025 e 2026</h2>
+  <div class="tablewrap">
+    <table>
+      <caption>Faturamento líquido (Gentili) · pedidos e cancelamento (Octopus) · mídia (Google + Meta)</caption>
+      <thead><tr><th>Mês</th><th>Líquido</th><th>Pedidos</th><th>Vendas brutas</th><th>Cancelado</th><th>Google</th><th>Meta</th></tr></thead>
+      <tbody>
+        <tr><td>jan/25</td><td>R$ 268.277</td><td>1.564</td><td>R$ 303.062</td><td>13,1%</td><td>R$ 6.071</td><td>R$ 1.195</td></tr>
+        <tr><td>fev/25</td><td>R$ 274.621</td><td>1.405</td><td>R$ 316.680</td><td>13,3%</td><td>R$ 6.083</td><td>R$ 1.062</td></tr>
+        <tr><td>mar/25</td><td>R$ 273.214</td><td>1.783</td><td>R$ 338.126</td><td>13,0%</td><td>R$ 8.695</td><td>R$ 3.485</td></tr>
+        <tr><td>abr/25</td><td>R$ 298.529</td><td>1.681</td><td>R$ 338.454</td><td>12,3%</td><td>R$ 8.813</td><td>R$ 3.379</td></tr>
+        <tr><td>mai/25</td><td>R$ 306.494</td><td>1.767</td><td>R$ 362.402</td><td>12,2%</td><td>R$ 7.727</td><td>R$ 3.055</td></tr>
+        <tr><td>jun/25</td><td>R$ 234.581</td><td>1.283</td><td>R$ 284.041</td><td>12,0%</td><td>R$ 4.856</td><td>R$ 3.095</td></tr>
+        <tr><td>jul/25</td><td>R$ 254.753</td><td>1.407</td><td>R$ 301.863</td><td>13,9%</td><td>R$ 5.016</td><td>R$ 2.283</td></tr>
+        <tr><td>ago/25</td><td>R$ 252.395</td><td>1.259</td><td>R$ 274.426</td><td>13,0%</td><td>R$ 5.148</td><td>R$ 2.314</td></tr>
+        <tr><td>set/25</td><td>R$ 255.613</td><td>1.349</td><td>R$ 305.372</td><td>12,5%</td><td>R$ 5.472</td><td>R$ 2.405</td></tr>
+        <tr><td>out/25</td><td>R$ 285.858</td><td>1.455</td><td>R$ 313.032</td><td>14,8%</td><td>R$ 5.302</td><td>R$ 3.172</td></tr>
+        <tr><td>nov/25</td><td>R$ 196.435</td><td>1.433</td><td>R$ 301.988</td><td>10,5%</td><td>R$ 5.263</td><td>R$ 2.363</td></tr>
+        <tr><td>dez/25</td><td>R$ 164.790</td><td>571</td><td>R$ 108.431</td><td>9,8%</td><td>R$ 3.742</td><td>R$ 1.282</td></tr>
+        <tr><td>jan/26</td><td>R$ 231.855</td><td>1.024</td><td>R$ 244.989</td><td>10,2%</td><td>R$ 4.422</td><td>R$ 2.103</td></tr>
+        <tr><td>fev/26</td><td>R$ 130.619</td><td>933</td><td>R$ 189.585</td><td>12,2%</td><td>R$ 3.676</td><td>R$ 2.645</td></tr>
+        <tr><td>mar/26</td><td>R$ 220.915</td><td>1.044</td><td>R$ 242.675</td><td>16,2%</td><td>R$ 5.016</td><td>R$ 3.196</td></tr>
+        <tr><td>abr/26</td><td>R$ 177.995</td><td>1.060</td><td>R$ 201.866</td><td>13,8%</td><td>R$ 5.089</td><td>R$ 2.914</td></tr>
+        <tr><td>mai/26</td><td>R$ 188.892</td><td>1.141</td><td>R$ 222.333</td><td>14,2%</td><td>R$ 7.652</td><td>R$ 2.831</td></tr>
+        <tr><td>jun/26</td><td>R$ 168.812</td><td>927</td><td>R$ 189.459</td><td>11,7%</td><td>R$ 5.978</td><td>R$ 2.902</td></tr>
+        <tr><td>jul/26</td><td>R$ 200.718</td><td>998</td><td>R$ 234.635</td><td>17,4%</td><td>R$ 4.597</td><td>R$ 4.126</td></tr>
+        <tr><td>ago/26</td><td>R$ 176.150</td><td>1.028</td><td>R$ 211.202</td><td>11,4%</td><td>R$ 6.012</td><td>R$ 4.408</td></tr>
+        <tr><td>set/26 <span style="color:var(--muted)">(23 dias)</span></td><td>R$ 134.211</td><td>861</td><td>R$ 172.949</td><td>17,6%</td><td>R$ 4.261</td><td>R$ 3.170</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>jan–ago/25</td><td>R$ 2.162.865</td><td>12.149</td><td>R$ 2.519.053</td><td>12,8%</td><td>R$ 52.408</td><td>R$ 19.870</td></tr>
+        <tr><td>jan–ago/26</td><td>R$ 1.495.957</td><td>8.155</td><td>R$ 1.736.743</td><td>13,5%</td><td>R$ 42.442</td><td>R$ 25.126</td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="note col">Dezembro/2025 é o único mês em que as duas réguas não fecham: o Gentili registra
+  R$ 164,8 mil de faturamento e a extração do Octopus traz só 571 pedidos. Somando novembro e dezembro,
+  as duas fontes batem com 1,8% de diferença — é competência entre os dois meses, e vale conferir antes de
+  usar dezembro isolado.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Para conferir</p>
+  <h2>De onde veio cada número</h2>
+  <dl class="fontes">
+    <div class="fonte"><dt>Faturamento líquido</dt>
+      <dd>Série oficial do <b>Gentili</b>, passada pela administração da Roma. É a régua contábil do estudo.</dd></div>
+    <div class="fonte"><dt>Pedidos, ticket e cancelamento</dt>
+      <dd>Painel da loja (<b>Octopus</b>), relatório de pedidos por status, 33 meses de janeiro/2024 a 23/09/2026.</dd></div>
+    <div class="fonte"><dt>Visitas e receita por canal</dt>
+      <dd><b>GA4</b>, propriedade <code>290308094</code>, relatório de aquisição de tráfego, mesma janela nos dois anos.</dd></div>
+    <div class="fonte"><dt>Espaço livre no leilão</dt>
+      <dd><b>Google Ads</b>, colunas de parcela de impressões — conquistada, perdida por orçamento e perdida por classificação, de 1/jul a 24/set de 2026.</dd></div>
+    <div class="fonte"><dt>Verba, aparições e cliques</dt>
+      <dd><b>Google Ads</b> conta Varejo <code>841-012-9672</code> e <b>Meta</b> conta <code>334867505168849</code>.</dd></div>
+  </dl>
+  <p class="note col">Três ressalvas que valem para qualquer leitura deste estudo. <b>Um:</b> a comparação
+  principal é de janeiro a agosto nos dois anos — setembro/2026 tem só 23 dias e aparece sempre marcado.
+  <b>Dois:</b> as visitas usadas na comparação são as <b>vindas do Brasil</b>, que respondem por 99,2% do faturamento — o acesso de fora do país não compra e distorceria qualquer média. <b>Três:</b> o número de compras que o Meta
+  informa não entra neste estudo — a plataforma da loja dispara o evento de compra em duplicidade e o Meta
+  conta 2,20 vezes cada pedido. O faturamento usado aqui é sempre o da Roma, não o da plataforma de anúncio.</p>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var plot = document.querySelector('.chart1');
+  if(!plot) return;
+  var tip = document.createElement('div');
+  tip.id = 'tip-mensal';
+  tip.setAttribute('role','status');
+  tip.style.cssText = 'position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;'+
+    'background:var(--ink);color:var(--ground);font-family:"IBM Plex Mono",monospace;font-size:12px;'+
+    'line-height:1.5;padding:7px 10px;border-radius:4px;z-index:9;white-space:nowrap';
+  document.body.appendChild(tip);
+  plot.addEventListener('mouseover', function(e){
+    var b = e.target.closest('.bar'); if(!b) return;
+    tip.innerHTML = '<b>'+b.dataset.m+'</b> · '+b.dataset.v+'<br>'+b.dataset.s;
+    tip.style.opacity = '1';
+  });
+  plot.addEventListener('mousemove', function(e){
+    var r = tip.getBoundingClientRect();
+    tip.style.left = Math.min(e.clientX+14, window.innerWidth-r.width-10)+'px';
+    tip.style.top = Math.max(e.clientY-r.height-12, 8)+'px';
+  });
+  plot.addEventListener('mouseleave', function(){ tip.style.opacity='0'; });
+})();
+</script>
+
+</body>
+</html>
