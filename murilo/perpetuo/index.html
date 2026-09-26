@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Perpétuo Low Ticket — Prof. Murilo Soares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef2f7;--surface:#fff;--border:#e3e8ef;--text:#101a26;--text-2:#4a5768;--text-3:#93a1b3;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 10px 30px rgba(0,0,0,.13);
+--radius:14px;--c1:#123c5a;--c2:#2f8f8a;--c3:#d4a24c;--ink:#08192b;
+--ok:#0f8a5f;--bad:#c0392b;--off:#8593a5}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.brandstrip{background:var(--ink);color:#fff;text-align:center;font-family:'Space Grotesk',sans-serif;
+font-weight:700;letter-spacing:5px;font-size:12px;padding:7px 0;text-transform:uppercase}
+.brandstrip span{color:var(--c3)}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 135%);padding:0 32px;min-height:78px;
+display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:100;
+box-shadow:0 4px 20px rgba(0,0,0,.22);flex-wrap:wrap}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.logo{width:50px;height:50px;border-radius:13px;background:var(--ink);display:flex;align-items:center;
+justify-content:center;font-family:'Space Grotesk',sans-serif;border:2px solid rgba(255,255,255,.35)}
+.logo b{color:#fff;font-size:21px}
+.header-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.6px}
+.header-sub{font-size:11.5px;color:rgba(255,255,255,.86);margin-top:2px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;
+padding:7px 15px;border-radius:20px;font-size:12.5px;font-weight:700;white-space:nowrap;margin:12px 0}
+.tabs{position:sticky;top:78px;z-index:99;background:rgba(238,242,247,.96);backdrop-filter:blur(6px);
+border-bottom:1px solid var(--border);padding:11px 32px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs-rot{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);
+font-weight:700;margin-right:4px}
+.tab{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--text-2);cursor:pointer;
+background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 16px;transition:all .15s}
+.tab.mes{text-transform:capitalize}
+.tab:hover{border-color:var(--c2);color:var(--c1)}
+.tab.on{background:var(--c1);border-color:var(--c1);color:#fff;box-shadow:var(--shadow-sm)}
+.container{max-width:1280px;margin:0 auto;padding:20px 32px 44px}
+.watermark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;
+color:var(--text-3);text-align:right;text-transform:uppercase;opacity:.6;margin:2px 0 14px}
+.watermark span{color:var(--c2)}
+.hero{background:linear-gradient(135deg,var(--ink) 0%,var(--c1) 92%,var(--c2) 165%);border-radius:18px;
+padding:22px 26px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero::after{content:'⚖️';position:absolute;right:24px;bottom:-16px;font-size:96px;opacity:.07}
+.hero-label{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;
+font-size:12px;color:var(--c3);font-weight:700;margin-bottom:14px}
+.hero-label span{color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.3px;text-transform:none}
+.hero-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.hero-box{flex:1;min-width:158px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+border-radius:12px;padding:15px 18px}
+.hero-box.total{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5)}
+.hero-box.roas .hb-v{color:var(--c3);font-size:30px}
+.hero-box.roas{min-width:180px}
+.hb-l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:7px}
+.hb-v{font-size:25px;font-weight:900;letter-spacing:-.5px}
+.hb-v small{font-size:13px;font-weight:700;opacity:.75}
+.hb-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px}
+.hero-op{align-self:center;font-size:24px;font-weight:300;color:rgba(255,255,255,.45)}
+.section-header{display:flex;align-items:baseline;gap:10px;margin:30px 0 14px;flex-wrap:wrap}
+.section-tag{width:4px;height:20px;background:var(--c2);border-radius:3px;align-self:center}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.section-hint{font-size:11.5px;color:var(--text-3)}
+.plat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.plat{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);
+border-top:4px solid var(--pc)}
+.plat-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
+.plat-nome{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--pc);line-height:1.25}
+.plat-sub{font-size:11px;color:var(--text-3);margin-top:4px;word-break:break-word;line-height:1.45}
+.plat-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.plat-kpis div{background:#f6f8fb;border-radius:10px;padding:11px 13px;font-size:11.5px;color:var(--text-2)}
+.plat-kpis span{display:block;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--text)}
+.plat-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--text-3);margin-top:2px}
+.plat-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 14px;margin-top:12px;font-size:11.5px;color:var(--text-2)}
+.plat-mini b{color:var(--text)}
+.nota{margin-top:12px;background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:10px 12px;
+font-size:11.5px;line-height:1.5;color:#5d4a1c}
+.nota.alerta{background:#fdecea;border-color:#f3c2bd;color:#8c2d22}
+.card{background:var(--surface);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:13.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2)}
+.card .cap{font-size:11.5px;color:var(--text-3);margin:4px 0 16px}
+.grid-funil{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.fx{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.fx-r{width:74px;font-size:12px;font-weight:700;color:var(--text-2);flex-shrink:0}
+.fx-t{flex:1;height:16px;background:#eef2f7;border-radius:8px;overflow:hidden}
+.fx-b{height:100%;border-radius:8px;opacity:.85}
+.fx-v{width:120px;text-align:right;font-size:12.5px;font-weight:700;flex-shrink:0}
+.fx-v em{display:block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--text-3)}
+.graf{width:100%;height:auto}
+.gy{font-size:10.5px;fill:var(--text-3);text-anchor:end;font-family:'Inter',sans-serif}
+.gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start;font-family:'Inter',sans-serif}
+.gx{font-size:10px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.gx2{font-size:9.5px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.gv{font-size:11px;font-weight:700;fill:var(--text-2);text-anchor:middle;font-family:'Inter',sans-serif}
+.leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--text-2);margin-top:10px;flex-wrap:wrap}
+.leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.tab-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px}
+th{background:#f6f8fb;padding:11px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--text-3);font-weight:700;white-space:nowrap}
+th.l,td.l{text-align:left} th.d,td.d{text-align:right;font-weight:700}
+td{padding:11px 12px;text-align:right;border-bottom:1px solid var(--border)}
+td.l em{display:block;font-style:normal;font-size:11px;color:var(--text-3);margin-top:2px}
+td.l a{color:var(--c1);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(18,60,90,.25)}
+td.l a:hover{color:var(--c2);border-bottom-color:var(--c2)}
+td.l a .ext{font-size:11px;color:var(--text-3)}
+tbody tr:hover{background:#f9fbfd}
+tbody tr.sem td{color:var(--text-3)}
+.pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.pill.ok{background:var(--ok)} .pill.off{background:var(--off)}
+.vazio{padding:26px;text-align:center;color:var(--text-3);font-size:13px;background:#f6f8fb;border-radius:12px}
+.leitura{background:var(--surface);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow-sm);
+font-size:13px;line-height:1.65;color:var(--text-2)}
+.leitura li{margin:0 0 9px 18px} .leitura b{color:var(--text)}
+.rodape{margin-top:34px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--text-3);line-height:1.7}
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
+@media(max-width:760px){.container{padding:16px} .header{padding:0 16px} .tabs{top:0;position:static;padding:11px 16px}
+.plat-kpis{grid-template-columns:1fr}}
+</style></head><body>
+<div class="brandstrip">Gio <span>Growth Digital</span></div>
+<div class="header">
+  <div class="header-left"><div class="logo"><b>MS</b></div>
+    <div><div class="header-title">Perpétuo — Low Ticket</div>
+      <div class="header-sub">Prof. Murilo Soares · conta 1498770914317901 · leitura por público e por criativo</div></div></div>
+  <div class="header-badge">Atualizado em 26 de set</div>
+</div>
+<div class="tabs"><span class="tabs-rot">Período</span><button class="tab on" data-p="total">Tudo</button><button class="tab" data-p="dia">Por dia · escolher datas</button><button class="tab mes" data-p="2026-09">setembro/26</button></div>
+<div class="container">
+  <div class="watermark">Relatório <span>GGD</span></div>
+  <section class="periodo" data-p="total">
+  
+<div class="hero">
+  <div class="hero-label">Perpétuo Low Ticket — Manual do Prequestionamento no RR <span>· todo o período (26 de set a 26 de set)</span></div>
+  <div class="hero-row">
+    <div class="hero-box"><div class="hb-l">Investido (mídia)</div><div class="hb-v">R$ 297,95</div>
+      <div class="hb-s">R$ 339,16 com imposto (13,83%)</div></div>
+    <div class="hero-op">→</div>
+    <div class="hero-box"><div class="hb-l">Vendas do Manual</div><div class="hb-v">12</div>
+      <div class="hb-s">19 chegaram ao checkout · 63,2% viraram venda</div></div>
+    <div class="hero-op">=</div>
+    <div class="hero-box"><div class="hb-l">Receita do Manual</div><div class="hb-v">R$ 238,80</div>
+      <div class="hb-s">12 × R$ 19,90 · pixel reporta R$ 328,50</div></div>
+    <div class="hero-box total roas"><div class="hb-l">ROAS</div>
+      <div class="hb-v">0,70x</div>
+      <div class="hb-s">sobre a mídia com imposto · abaixo do ponto de equilíbrio (1,00x)</div></div>
+  </div>
+  <div class="hero-row" style="margin-top:12px">
+    <div class="hero-box"><div class="hb-l">No ar hoje</div><div class="hb-v">R$ 270<small>/dia</small></div>
+      <div class="hb-s">9 conjuntos ativos · 5 ainda sem entregar</div></div>
+    <div class="hero-box"><div class="hb-l">Últimos 7 dias</div><div class="hb-v">12<small> vendas</small></div>
+      <div class="hb-s">R$ 297,95 investidos · custo/venda R$ 24,83</div></div>
+    <div class="hero-box"><div class="hb-l">26 de set</div><div class="hb-v">12<small> vendas</small></div>
+      <div class="hb-s">R$ 297,95 investidos · custo/venda R$ 24,83</div></div>
+    <div class="hero-box"><div class="hb-l">Custo por venda</div><div class="hb-v">R$ 24,83</div>
+      <div class="hb-s">R$ 28,26 com imposto · custo por checkout R$ 15,68</div></div></div>
+</div>
+  
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Por público</div>
+    <div class="section-hint">o público sai do nome do conjunto · 3.947 pessoas alcançadas no total (sem repetir)</div></div>
+  <div class="plat-grid">
+<div class="plat" style="--pc:#2f8f8a">
+  <div class="plat-top">
+    <div><div class="plat-nome">Frio · advocacia trabalhista</div>
+      <div class="plat-sub">interesse/cargo em advocacia trabalhista, 25–65, Advantage+ ligado</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 101,55</span>investido<em>34,1% da verba</em></div>
+    <div><span>0</span>vendas<em>2 chegaram ao checkout</em></div>
+    <div><span>—</span>CPA<em>— c/ imposto</em></div>
+    <div><span>0,00x</span>ROAS<em>R$ 0,00 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 58,03</b></div><div>CTR link <b>0,91%</b></div>
+    <div>CPC link <b>R$ 6,35</b></div><div>Checkout→venda <b>0,0%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#d4732c">
+  <div class="plat-top">
+    <div><div class="plat-nome">Quente · 180 dias</div>
+      <div class="plat-sub">os 19 públicos de 180D: engajamento IG, vídeo 25→95%, site, cadastrados</div></div>
+    <span class="pill ok">no ar · R$ 150/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 99,29</span>investido<em>33,3% da verba</em></div>
+    <div><span>11</span>vendas<em>14 chegaram ao checkout</em></div>
+    <div><span>R$ 9,03</span>CPA<em>R$ 10,27 c/ imposto</em></div>
+    <div><span>1,94x</span>ROAS<em>R$ 218,90 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 38,86</b></div><div>CTR link <b>2,07%</b></div>
+    <div>CPC link <b>R$ 1,87</b></div><div>Checkout→venda <b>78,6%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#4a6fa5">
+  <div class="plat-top">
+    <div><div class="plat-nome">Frio · lookalikes</div>
+      <div class="plat-sub">3 semelhantes 1% (seguiu, visitou o perfil 180D, viu 75% de vídeo 365D)</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 96,93</span>investido<em>32,5% da verba</em></div>
+    <div><span>1</span>vendas<em>3 chegaram ao checkout</em></div>
+    <div><span>R$ 96,93</span>CPA<em>R$ 110,34 c/ imposto</em></div>
+    <div><span>0,18x</span>ROAS<em>R$ 19,90 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 62,45</b></div><div>CTR link <b>1,48%</b></div>
+    <div>CPC link <b>R$ 4,21</b></div><div>Checkout→venda <b>33,3%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Por criativo</div>
+    <div class="section-hint">estático × vídeo, lido no nome do anúncio · cada anúncio leva feed 1:1 e story 9:16</div></div>
+  <div class="plat-grid">
+<div class="plat" style="--pc:#6c4ad0">
+  <div class="plat-top">
+    <div><div class="plat-nome">Estáticos</div>
+      <div class="plat-sub">arte parada, feed 1:1 + story 9:16 no mesmo anúncio</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 178,79</span>investido<em>60,0% da verba</em></div>
+    <div><span>8</span>vendas<em>9 chegaram ao checkout</em></div>
+    <div><span>R$ 22,35</span>CPA<em>R$ 25,44 c/ imposto</em></div>
+    <div><span>0,78x</span>ROAS<em>R$ 159,20 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 45,56</b></div><div>CTR link <b>1,50%</b></div>
+    <div>CPC link <b>R$ 3,03</b></div><div>Checkout→venda <b>88,9%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#0f8a5f">
+  <div class="plat-top">
+    <div><div class="plat-nome">Vídeos</div>
+      <div class="plat-sub">vídeo, feed 1:1 + story 9:16 no mesmo anúncio</div></div>
+    <span class="pill ok">no ar · R$ 210/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 119,07</span>investido<em>40,0% da verba</em></div>
+    <div><span>4</span>vendas<em>10 chegaram ao checkout</em></div>
+    <div><span>R$ 29,77</span>CPA<em>R$ 33,88 c/ imposto</em></div>
+    <div><span>0,59x</span>ROAS<em>R$ 79,60 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 61,57</b></div><div>CTR link <b>1,71%</b></div>
+    <div>CPC link <b>R$ 3,61</b></div><div>Checkout→venda <b>40,0%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Investimento e vendas por dia</div>
+    <div class="section-hint">1 dias com entrega em todo o período · barra empilhada por público</div></div>
+  <div class="card"><svg viewBox="0 0 1180 300" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="52" y1="266.0" x2="1134" y2="266.0" stroke="#e3e8ef"/><text x="44" y="270.0" class="gy">R$ 0</text><line x1="52" y1="203.5" x2="1134" y2="203.5" stroke="#e3e8ef"/><text x="44" y="207.5" class="gy">R$ 74</text><line x1="52" y1="141.0" x2="1134" y2="141.0" stroke="#e3e8ef"/><text x="44" y="145.0" class="gy">R$ 149</text><line x1="52" y1="78.5" x2="1134" y2="78.5" stroke="#e3e8ef"/><text x="44" y="82.5" class="gy">R$ 223</text><line x1="52" y1="16.0" x2="1134" y2="16.0" stroke="#e3e8ef"/><text x="44" y="20.0" class="gy">R$ 298</text><rect x="570.0" y="180.7" width="46.0" height="85.3" fill="#2f8f8a" rx="2"><title>26/09 — Frio · advocacia trabalhista: R$ 101,55</title></rect><rect x="570.0" y="97.4" width="46.0" height="83.4" fill="#d4732c" rx="2"><title>26/09 — Quente · 180 dias: R$ 99,29</title></rect><rect x="570.0" y="16.0" width="46.0" height="81.4" fill="#4a6fa5" rx="2"><title>26/09 — Frio · lookalikes: R$ 96,93</title></rect><polyline points="593.0,16.0" fill="none" stroke="#d4a24c" stroke-width="2.2"/><circle cx="593.0" cy="16.0" r="3.4" fill="#d4a24c"><title>26/09: 12 vendas</title></circle><text x="1142" y="270.0" class="gy2">0</text><text x="1142" y="207.5" class="gy2">3</text><text x="1142" y="145.0" class="gy2">6</text><text x="1142" y="82.5" class="gy2">9</text><text x="1142" y="20.0" class="gy2">12</text><text x="593.0" y="288" class="gx">26/09</text></svg>
+    <div class="leg"><span><i style="background:#2f8f8a"></i>Frio · advocacia trabalhista</span><span><i style="background:#d4732c"></i>Quente · 180 dias</span><span><i style="background:#4a6fa5"></i>Frio · lookalikes</span>
+      <span><i style="background:#d4a24c;border-radius:50%"></i>vendas/dia (eixo direito)</span></div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada público</div>
+    <div class="section-hint">a barra mostra quanto passou do degrau anterior — é onde o funil estrangula</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Frio · advocacia trabalhista</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#2f8f8a"></div></div><div class="fx-v">1.358<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 1,18% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:1.2%;background:#2f8f8a"></div></div><div class="fx-v">16<em>1,2% de alcance</em></div></div><div class="fx" title="visualizações da LP · 0,81% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:68.8%;background:#2f8f8a"></div></div><div class="fx-v">11<em>68,8% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,15% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:18.2%;background:#2f8f8a"></div></div><div class="fx-v">2<em>18,2% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,07% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:50.0%;background:#2f8f8a"></div></div><div class="fx-v">1<em>50,0% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,00% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:0.0%;background:#2f8f8a"></div></div><div class="fx-v">0<em>0,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Compra</b> — passa 0,0% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Quente · 180 dias</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#d4732c"></div></div><div class="fx-v">1.567<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 3,38% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:3.4%;background:#d4732c"></div></div><div class="fx-v">53<em>3,4% de alcance</em></div></div><div class="fx" title="visualizações da LP · 2,87% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:84.9%;background:#d4732c"></div></div><div class="fx-v">45<em>84,9% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,89% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:31.1%;background:#d4732c"></div></div><div class="fx-v">14<em>31,1% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,70% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:78.6%;background:#d4732c"></div></div><div class="fx-v">11<em>78,6% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,70% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#d4732c"></div></div><div class="fx-v">11<em>100,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 31,1% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Frio · lookalikes</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#4a6fa5"></div></div><div class="fx-v">1.247<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 1,84% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:1.8%;background:#4a6fa5"></div></div><div class="fx-v">23<em>1,8% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,12% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:60.9%;background:#4a6fa5"></div></div><div class="fx-v">14<em>60,9% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,24% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:21.4%;background:#4a6fa5"></div></div><div class="fx-v">3<em>21,4% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,08% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:33.3%;background:#4a6fa5"></div></div><div class="fx-v">1<em>33,3% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,08% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#4a6fa5"></div></div><div class="fx-v">1<em>100,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 21,4% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada criativo</div>
+    <div class="section-hint">mesmo funil, agora separando arte parada de vídeo</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Estáticos</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#6c4ad0"></div></div><div class="fx-v">2.791<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,11% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.1%;background:#6c4ad0"></div></div><div class="fx-v">59<em>2,1% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,68% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:79.7%;background:#6c4ad0"></div></div><div class="fx-v">47<em>79,7% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,32% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:19.1%;background:#6c4ad0"></div></div><div class="fx-v">9<em>19,1% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,21% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:66.7%;background:#6c4ad0"></div></div><div class="fx-v">6<em>66,7% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,29% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#6c4ad0"></div></div><div class="fx-v">8<em>133,3% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 19,1% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Vídeos</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#0f8a5f"></div></div><div class="fx-v">1.573<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,10% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.1%;background:#0f8a5f"></div></div><div class="fx-v">33<em>2,1% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,46% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:69.7%;background:#0f8a5f"></div></div><div class="fx-v">23<em>69,7% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,64% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:43.5%;background:#0f8a5f"></div></div><div class="fx-v">10<em>43,5% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,45% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:70.0%;background:#0f8a5f"></div></div><div class="fx-v">7<em>70,0% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,25% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:57.1%;background:#0f8a5f"></div></div><div class="fx-v">4<em>57,1% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 43,5% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Campanhas</div>
+    <div class="section-hint">números de todo o período · status e verba/dia são de agora</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Campanha</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th><th>Receita</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>GGD_VENDAS_LT_0926</b><em>OUTCOME_SALES</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 270/dia</td>
+  <td class="d">R$ 297,95</td><td>19</td>
+  <td class="d">12</td><td>R$ 24,83</td>
+  <td>R$ 238,80</td><td class="d">0,70x</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Conjuntos</div>
+    <div class="section-hint">1 conjunto = 1 criativo (padrão da conta) · 20 melhores por vendas em todo o período, mais os que estão no ar sem entrega</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Conjunto</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST07</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 21,25</td><td>4</td>
+  <td class="d">4</td>
+  <td>R$ 5,31</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST09</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 18,57</td><td>4</td>
+  <td class="d">3</td>
+  <td>R$ 6,19</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID01</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 17,84</td><td>2</td>
+  <td class="d">2</td>
+  <td>R$ 8,92</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID02</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,82</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,82</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST04</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,81</td><td>1</td>
+  <td class="d">1</td>
+  <td>R$ 20,81</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID02</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,74</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,74</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID02</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 21,71</td><td>2</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST07</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,79</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST04</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,69</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST07</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,89</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST04</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,60</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID01</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,41</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST09</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,95</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID01</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,50</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST09</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,15</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID03</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,05</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr class="sem">
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID03</b>
+    <em>Frio · advocacia trabalhista · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID04</b>
+    <em>Frio · advocacia trabalhista · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID04</b>
+    <em>Frio · lookalikes · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID03</b>
+    <em>Quente · 180 dias · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID04</b>
+    <em>Quente · 180 dias · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Ranking de criativos</div>
+    <div class="section-hint">top 25 por vendas em todo o período · o nome abre o anúncio para ver a peça</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Anúncio</th><th>Formato</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNvcLsOW_/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 21,25</td><td>2,32%</td><td>4</td>
+  <td class="d">4</td>
+  <td>R$ 5,31</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNw7vMxoR/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,66</td><td>1,13%</td><td>4</td>
+  <td class="d">3</td>
+  <td>R$ 6,22</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNzipMenn/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 17,84</td><td>2,08%</td><td>2</td>
+  <td class="d">2</td>
+  <td>R$ 8,92</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNpjNMM9G/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 20,74</td><td>2,55%</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,74</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNtWUsTqM/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,81</td><td>1,75%</td><td>1</td>
+  <td class="d">1</td>
+  <td>R$ 20,81</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduN2NFsfk0/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 20,82</td><td>3,32%</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,82</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNpfns_Iy/" target="_blank" rel="noopener">VIDEO_AD03 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID03 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 0,05</td><td>0,00%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNl7IsOVZ/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,15</td><td>0,97%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNoBms3uw/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 18,50</td><td>0,00%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNbLBMqgp/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,95</td><td>0,87%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNdKJMCxT/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 19,41</td><td>0,33%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNheFMGJD/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 19,60</td><td>2,52%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNjf2s6ed/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 19,89</td><td>1,32%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNZbVMP1n/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,69</td><td>0,53%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNaUwsPc-/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,79</td><td>1,56%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNdPRs3QS/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 21,71</td><td>1,09%</td><td>2</td>
+  <td class="d">0</td>
+  <td>—</td></tr></tbody></table></div>
+</section><section class="periodo" data-p="dia" hidden>
+<div class="dd" style="--dd-tema:#2f8f8a;--dd-tema-esc:#123c5a;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, o dia em que a conta ficou parada, o dia em que entrou um lote novo —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
+  </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Por público</b><em>no período marcado · o público sai do nome do conjunto</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e vendas por dia</b>
+    <em>barra = investido · linha = vendas do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+  <div class="dd-sec"><i></i><b>Por criativo</b><em>estático × vídeo, no período marcado</em></div>
+  <div class="dd-card dd-wrap" id="d-t-fmt"></div>
+  <div class="dd-sec"><i></i><b>Conjuntos</b><em>status e verba/dia são de agora; os números são do período marcado</em></div>
+  <div class="dd-card dd-wrap" id="d-t-conj"></div>
+  <div class="dd-sec"><i></i><b>Ranking de criativos</b><em>por vendas no período marcado · o nome abre o anúncio</em></div>
+  <div class="dd-card dd-wrap" id="d-t-ads"></div>
+</div></section><section class="periodo" data-p="2026-09" hidden>
+  
+<div class="hero">
+  <div class="hero-label">Perpétuo Low Ticket — Manual do Prequestionamento no RR <span>· setembro/26 (26/09 a 26/09)</span></div>
+  <div class="hero-row">
+    <div class="hero-box"><div class="hb-l">Investido (mídia)</div><div class="hb-v">R$ 297,95</div>
+      <div class="hb-s">R$ 339,16 com imposto (13,83%)</div></div>
+    <div class="hero-op">→</div>
+    <div class="hero-box"><div class="hb-l">Vendas do Manual</div><div class="hb-v">12</div>
+      <div class="hb-s">19 chegaram ao checkout · 63,2% viraram venda</div></div>
+    <div class="hero-op">=</div>
+    <div class="hero-box"><div class="hb-l">Receita do Manual</div><div class="hb-v">R$ 238,80</div>
+      <div class="hb-s">12 × R$ 19,90 · pixel reporta R$ 328,50</div></div>
+    <div class="hero-box total roas"><div class="hb-l">ROAS</div>
+      <div class="hb-v">0,70x</div>
+      <div class="hb-s">sobre a mídia com imposto · abaixo do ponto de equilíbrio (1,00x)</div></div>
+  </div>
+  <div class="hero-row" style="margin-top:12px">
+    <div class="hero-box"><div class="hb-l">No ar hoje</div><div class="hb-v">R$ 270<small>/dia</small></div>
+      <div class="hb-s">9 conjuntos ativos · 5 ainda sem entregar</div></div>
+    <div class="hero-box"><div class="hb-l">Últimos 7 dias</div><div class="hb-v">12<small> vendas</small></div>
+      <div class="hb-s">R$ 297,95 investidos · custo/venda R$ 24,83</div></div>
+    <div class="hero-box"><div class="hb-l">26 de set</div><div class="hb-v">12<small> vendas</small></div>
+      <div class="hb-s">R$ 297,95 investidos · custo/venda R$ 24,83</div></div>
+    <div class="hero-box"><div class="hb-l">Custo por venda</div><div class="hb-v">R$ 24,83</div>
+      <div class="hb-s">R$ 28,26 com imposto · custo por checkout R$ 15,68</div></div></div>
+</div>
+  
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Por público</div>
+    <div class="section-hint">o público sai do nome do conjunto · 3.947 pessoas alcançadas no total (sem repetir)</div></div>
+  <div class="plat-grid">
+<div class="plat" style="--pc:#2f8f8a">
+  <div class="plat-top">
+    <div><div class="plat-nome">Frio · advocacia trabalhista</div>
+      <div class="plat-sub">interesse/cargo em advocacia trabalhista, 25–65, Advantage+ ligado</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 101,55</span>investido<em>34,1% da verba</em></div>
+    <div><span>0</span>vendas<em>2 chegaram ao checkout</em></div>
+    <div><span>—</span>CPA<em>— c/ imposto</em></div>
+    <div><span>0,00x</span>ROAS<em>R$ 0,00 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 58,03</b></div><div>CTR link <b>0,91%</b></div>
+    <div>CPC link <b>R$ 6,35</b></div><div>Checkout→venda <b>0,0%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#d4732c">
+  <div class="plat-top">
+    <div><div class="plat-nome">Quente · 180 dias</div>
+      <div class="plat-sub">os 19 públicos de 180D: engajamento IG, vídeo 25→95%, site, cadastrados</div></div>
+    <span class="pill ok">no ar · R$ 150/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 99,29</span>investido<em>33,3% da verba</em></div>
+    <div><span>11</span>vendas<em>14 chegaram ao checkout</em></div>
+    <div><span>R$ 9,03</span>CPA<em>R$ 10,27 c/ imposto</em></div>
+    <div><span>1,94x</span>ROAS<em>R$ 218,90 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 38,86</b></div><div>CTR link <b>2,07%</b></div>
+    <div>CPC link <b>R$ 1,87</b></div><div>Checkout→venda <b>78,6%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#4a6fa5">
+  <div class="plat-top">
+    <div><div class="plat-nome">Frio · lookalikes</div>
+      <div class="plat-sub">3 semelhantes 1% (seguiu, visitou o perfil 180D, viu 75% de vídeo 365D)</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 96,93</span>investido<em>32,5% da verba</em></div>
+    <div><span>1</span>vendas<em>3 chegaram ao checkout</em></div>
+    <div><span>R$ 96,93</span>CPA<em>R$ 110,34 c/ imposto</em></div>
+    <div><span>0,18x</span>ROAS<em>R$ 19,90 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 62,45</b></div><div>CTR link <b>1,48%</b></div>
+    <div>CPC link <b>R$ 4,21</b></div><div>Checkout→venda <b>33,3%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Por criativo</div>
+    <div class="section-hint">estático × vídeo, lido no nome do anúncio · cada anúncio leva feed 1:1 e story 9:16</div></div>
+  <div class="plat-grid">
+<div class="plat" style="--pc:#6c4ad0">
+  <div class="plat-top">
+    <div><div class="plat-nome">Estáticos</div>
+      <div class="plat-sub">arte parada, feed 1:1 + story 9:16 no mesmo anúncio</div></div>
+    <span class="pill ok">no ar · R$ 60/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 178,79</span>investido<em>60,0% da verba</em></div>
+    <div><span>8</span>vendas<em>9 chegaram ao checkout</em></div>
+    <div><span>R$ 22,35</span>CPA<em>R$ 25,44 c/ imposto</em></div>
+    <div><span>0,78x</span>ROAS<em>R$ 159,20 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 45,56</b></div><div>CTR link <b>1,50%</b></div>
+    <div>CPC link <b>R$ 3,03</b></div><div>Checkout→venda <b>88,9%</b></div>
+  </div>
+</div>
+<div class="plat" style="--pc:#0f8a5f">
+  <div class="plat-top">
+    <div><div class="plat-nome">Vídeos</div>
+      <div class="plat-sub">vídeo, feed 1:1 + story 9:16 no mesmo anúncio</div></div>
+    <span class="pill ok">no ar · R$ 210/dia</span>
+  </div>
+  <div class="plat-kpis">
+    <div><span>R$ 119,07</span>investido<em>40,0% da verba</em></div>
+    <div><span>4</span>vendas<em>10 chegaram ao checkout</em></div>
+    <div><span>R$ 29,77</span>CPA<em>R$ 33,88 c/ imposto</em></div>
+    <div><span>0,59x</span>ROAS<em>R$ 79,60 de receita</em></div>
+  </div>
+  <div class="plat-mini">
+    <div>CPM <b>R$ 61,57</b></div><div>CTR link <b>1,71%</b></div>
+    <div>CPC link <b>R$ 3,61</b></div><div>Checkout→venda <b>40,0%</b></div>
+  </div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Investimento e vendas por dia</div>
+    <div class="section-hint">1 dias com entrega em setembro/26 · barra empilhada por público</div></div>
+  <div class="card"><svg viewBox="0 0 1180 300" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="52" y1="266.0" x2="1134" y2="266.0" stroke="#e3e8ef"/><text x="44" y="270.0" class="gy">R$ 0</text><line x1="52" y1="203.5" x2="1134" y2="203.5" stroke="#e3e8ef"/><text x="44" y="207.5" class="gy">R$ 74</text><line x1="52" y1="141.0" x2="1134" y2="141.0" stroke="#e3e8ef"/><text x="44" y="145.0" class="gy">R$ 149</text><line x1="52" y1="78.5" x2="1134" y2="78.5" stroke="#e3e8ef"/><text x="44" y="82.5" class="gy">R$ 223</text><line x1="52" y1="16.0" x2="1134" y2="16.0" stroke="#e3e8ef"/><text x="44" y="20.0" class="gy">R$ 298</text><rect x="570.0" y="180.7" width="46.0" height="85.3" fill="#2f8f8a" rx="2"><title>26/09 — Frio · advocacia trabalhista: R$ 101,55</title></rect><rect x="570.0" y="97.4" width="46.0" height="83.4" fill="#d4732c" rx="2"><title>26/09 — Quente · 180 dias: R$ 99,29</title></rect><rect x="570.0" y="16.0" width="46.0" height="81.4" fill="#4a6fa5" rx="2"><title>26/09 — Frio · lookalikes: R$ 96,93</title></rect><polyline points="593.0,16.0" fill="none" stroke="#d4a24c" stroke-width="2.2"/><circle cx="593.0" cy="16.0" r="3.4" fill="#d4a24c"><title>26/09: 12 vendas</title></circle><text x="1142" y="270.0" class="gy2">0</text><text x="1142" y="207.5" class="gy2">3</text><text x="1142" y="145.0" class="gy2">6</text><text x="1142" y="82.5" class="gy2">9</text><text x="1142" y="20.0" class="gy2">12</text><text x="593.0" y="288" class="gx">26/09</text></svg>
+    <div class="leg"><span><i style="background:#2f8f8a"></i>Frio · advocacia trabalhista</span><span><i style="background:#d4732c"></i>Quente · 180 dias</span><span><i style="background:#4a6fa5"></i>Frio · lookalikes</span>
+      <span><i style="background:#d4a24c;border-radius:50%"></i>vendas/dia (eixo direito)</span></div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada público</div>
+    <div class="section-hint">a barra mostra quanto passou do degrau anterior — é onde o funil estrangula</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Frio · advocacia trabalhista</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#2f8f8a"></div></div><div class="fx-v">1.358<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 1,18% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:1.2%;background:#2f8f8a"></div></div><div class="fx-v">16<em>1,2% de alcance</em></div></div><div class="fx" title="visualizações da LP · 0,81% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:68.8%;background:#2f8f8a"></div></div><div class="fx-v">11<em>68,8% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,15% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:18.2%;background:#2f8f8a"></div></div><div class="fx-v">2<em>18,2% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,07% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:50.0%;background:#2f8f8a"></div></div><div class="fx-v">1<em>50,0% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,00% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:0.0%;background:#2f8f8a"></div></div><div class="fx-v">0<em>0,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Compra</b> — passa 0,0% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Quente · 180 dias</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#d4732c"></div></div><div class="fx-v">1.567<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 3,38% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:3.4%;background:#d4732c"></div></div><div class="fx-v">53<em>3,4% de alcance</em></div></div><div class="fx" title="visualizações da LP · 2,87% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:84.9%;background:#d4732c"></div></div><div class="fx-v">45<em>84,9% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,89% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:31.1%;background:#d4732c"></div></div><div class="fx-v">14<em>31,1% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,70% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:78.6%;background:#d4732c"></div></div><div class="fx-v">11<em>78,6% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,70% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#d4732c"></div></div><div class="fx-v">11<em>100,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 31,1% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Frio · lookalikes</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#4a6fa5"></div></div><div class="fx-v">1.247<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 1,84% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:1.8%;background:#4a6fa5"></div></div><div class="fx-v">23<em>1,8% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,12% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:60.9%;background:#4a6fa5"></div></div><div class="fx-v">14<em>60,9% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,24% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:21.4%;background:#4a6fa5"></div></div><div class="fx-v">3<em>21,4% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,08% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:33.3%;background:#4a6fa5"></div></div><div class="fx-v">1<em>33,3% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,08% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#4a6fa5"></div></div><div class="fx-v">1<em>100,0% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 21,4% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Funil de cada criativo</div>
+    <div class="section-hint">mesmo funil, agora separando arte parada de vídeo</div></div>
+  <div class="grid-funil">
+<div class="card">
+  <h3>Funil — Estáticos</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#6c4ad0"></div></div><div class="fx-v">2.791<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,11% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.1%;background:#6c4ad0"></div></div><div class="fx-v">59<em>2,1% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,68% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:79.7%;background:#6c4ad0"></div></div><div class="fx-v">47<em>79,7% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,32% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:19.1%;background:#6c4ad0"></div></div><div class="fx-v">9<em>19,1% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,21% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:66.7%;background:#6c4ad0"></div></div><div class="fx-v">6<em>66,7% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,29% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#6c4ad0"></div></div><div class="fx-v">8<em>133,3% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 19,1% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div>
+<div class="card">
+  <h3>Funil — Vídeos</h3>
+  <div class="cap">alcance → cliques → página → checkout → pagamento → compra</div>
+  <div class="fx" title="pessoas diferentes que viram o anúncio · 100,00% do alcance"><div class="fx-r">Alcance</div><div class="fx-t"><div class="fx-b" style="width:100.0%;background:#0f8a5f"></div></div><div class="fx-v">1.573<em>100% da base</em></div></div><div class="fx" title="cliques no link (inline_link_clicks) · 2,10% do alcance"><div class="fx-r">Cliques</div><div class="fx-t"><div class="fx-b" style="width:2.1%;background:#0f8a5f"></div></div><div class="fx-v">33<em>2,1% de alcance</em></div></div><div class="fx" title="visualizações da LP · 1,46% do alcance"><div class="fx-r">Página</div><div class="fx-t"><div class="fx-b" style="width:69.7%;background:#0f8a5f"></div></div><div class="fx-v">23<em>69,7% de cliques</em></div></div><div class="fx" title="abriram a página de pagamento da Ticto (AddToCart) · 0,64% do alcance"><div class="fx-r">Checkout</div><div class="fx-t"><div class="fx-b" style="width:43.5%;background:#0f8a5f"></div></div><div class="fx-v">10<em>43,5% de página</em></div></div><div class="fx" title="preencheram dados de pagamento · 0,45% do alcance"><div class="fx-r">Pagamento</div><div class="fx-t"><div class="fx-b" style="width:70.0%;background:#0f8a5f"></div></div><div class="fx-v">7<em>70,0% de checkout</em></div></div><div class="fx" title="vendas do Manual · 0,25% do alcance"><div class="fx-r">Compra</div><div class="fx-t"><div class="fx-b" style="width:57.1%;background:#0f8a5f"></div></div><div class="fx-v">4<em>57,1% de pagamento</em></div></div><div class="cap" style="margin:12px 0 0">Maior perda: <b>Checkout</b> — passa 43,5% de quem chegou no degrau anterior.</div><div class="cap" style="margin:12px 0 0">Fora do funil: <b>Iniciou</b> — a Ticto não envia esse evento ao pixel nesta oferta, então a etapa não existe na medição (não é queda).</div>
+</div></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Campanhas</div>
+    <div class="section-hint">números de setembro/26 · status e verba/dia são de agora</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Campanha</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th><th>Receita</th><th class="d">ROAS</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>GGD_VENDAS_LT_0926</b><em>OUTCOME_SALES</em></td>
+  <td><span class="pill ok">ativa</span></td>
+  <td>R$ 270/dia</td>
+  <td class="d">R$ 297,95</td><td>19</td>
+  <td class="d">12</td><td>R$ 24,83</td>
+  <td>R$ 238,80</td><td class="d">0,70x</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Conjuntos</div>
+    <div class="section-hint">1 conjunto = 1 criativo (padrão da conta) · 20 melhores por vendas em setembro/26, mais os que estão no ar sem entrega</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Conjunto</th><th>Status</th><th>Verba</th><th class="d">Investido</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST07</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 21,25</td><td>4</td>
+  <td class="d">4</td>
+  <td>R$ 5,31</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST09</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 18,57</td><td>4</td>
+  <td class="d">3</td>
+  <td>R$ 6,19</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID01</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 17,84</td><td>2</td>
+  <td class="d">2</td>
+  <td>R$ 8,92</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID02</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,82</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,82</td></tr><tr>
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_EST04</b>
+    <em>Quente · 180 dias</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,81</td><td>1</td>
+  <td class="d">1</td>
+  <td>R$ 20,81</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID02</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,74</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,74</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID02</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 21,71</td><td>2</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST07</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,79</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST04</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 20,69</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST07</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,89</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST04</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,60</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID01</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 19,41</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_EST09</b>
+    <em>Frio · advocacia trabalhista</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,95</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID01</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,50</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_EST09</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill off">pausado</span></td>
+  <td>—</td>
+  <td class="d">R$ 18,15</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID03</b>
+    <em>Frio · lookalikes</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,05</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr class="sem">
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID03</b>
+    <em>Frio · advocacia trabalhista · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>ADV_TRABALHISTA_MISTO_25_65_VID04</b>
+    <em>Frio · advocacia trabalhista · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>MIX_LAL_MISTO_30_65_VID04</b>
+    <em>Frio · lookalikes · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID03</b>
+    <em>Quente · 180 dias · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr><tr class="sem">
+  <td class="l"><b>PQ_ENGAJ_180D_MISTO_30_65_VID04</b>
+    <em>Quente · 180 dias · ainda sem entrega</em></td>
+  <td><span class="pill ok">ativo</span></td>
+  <td>R$ 30/dia</td>
+  <td class="d">R$ 0,00</td><td>0</td><td class="d">0</td><td>—</td></tr></tbody></table></div>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Ranking de criativos</div>
+    <div class="section-hint">top 25 por vendas em setembro/26 · o nome abre o anúncio para ver a peça</div></div>
+  <div class="card tab-wrap"><table>
+    <thead><tr><th class="l">Anúncio</th><th>Formato</th><th class="d">Investido</th><th>CTR link</th>
+      <th>Checkouts</th><th class="d">Vendas</th><th>CPA</th></tr></thead>
+    <tbody><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNvcLsOW_/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 21,25</td><td>2,32%</td><td>4</td>
+  <td class="d">4</td>
+  <td>R$ 5,31</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNw7vMxoR/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,66</td><td>1,13%</td><td>4</td>
+  <td class="d">3</td>
+  <td>R$ 6,22</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNzipMenn/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 17,84</td><td>2,08%</td><td>2</td>
+  <td class="d">2</td>
+  <td>R$ 8,92</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNpjNMM9G/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 20,74</td><td>2,55%</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,74</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNtWUsTqM/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,81</td><td>1,75%</td><td>1</td>
+  <td class="d">1</td>
+  <td>R$ 20,81</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduN2NFsfk0/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>PQ_ENGAJ_180D_MISTO_30_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 20,82</td><td>3,32%</td><td>3</td>
+  <td class="d">1</td>
+  <td>R$ 20,82</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNpfns_Iy/" target="_blank" rel="noopener">VIDEO_AD03 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID03 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 0,05</td><td>0,00%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNl7IsOVZ/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,15</td><td>0,97%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNoBms3uw/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 18,50</td><td>0,00%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNbLBMqgp/" target="_blank" rel="noopener">ESTATICO_AD09 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST09 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 18,95</td><td>0,87%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNdKJMCxT/" target="_blank" rel="noopener">VIDEO_AD01 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_VID01 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 19,41</td><td>0,33%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNheFMGJD/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 19,60</td><td>2,52%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNjf2s6ed/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>MIX_LAL_MISTO_30_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 19,89</td><td>1,32%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNZbVMP1n/" target="_blank" rel="noopener">ESTATICO_AD04 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST04 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,69</td><td>0,53%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNaUwsPc-/" target="_blank" rel="noopener">ESTATICO_AD07 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_EST07 · abrir no Instagram</em></td>
+  <td>Estáticos</td>
+  <td class="d">R$ 20,79</td><td>1,56%</td><td>0</td>
+  <td class="d">0</td>
+  <td>—</td></tr><tr>
+  <td class="l"><a href="https://www.instagram.com/p/DduNdPRs3QS/" target="_blank" rel="noopener">VIDEO_AD02 <span class="ext">↗</span></a><em>ADV_TRABALHISTA_MISTO_25_65_VID02 · abrir no Instagram</em></td>
+  <td>Vídeos</td>
+  <td class="d">R$ 21,71</td><td>1,09%</td><td>2</td>
+  <td class="d">0</td>
+  <td>—</td></tr></tbody></table></div>
+</section>
+
+  <div class="section-header"><div class="section-tag"></div>
+    <div class="section-title">Como ler estes números</div></div>
+  <div class="leitura"><ul>
+    <li><b>O que entra neste dash:</b> só as campanhas de <b>perpétuo low ticket</b> (nome com <code>_LT_</code>) da conta 1498770914317901. Lançamento, captação de lead e campanha de seguidores ficam fora — são outra conta de resultado.</li>
+    <li><b>Vendas</b> = compras do pixel <code>975791790814595</code> na janela padrão (7 dias de clique / 1 dia de visualização), da oferta R$ 19,90 (Manual do Prequestionamento no RR), com checkout na Ticto.</li>
+    <li><b>Receita</b> = vendas × R$ 19,90. Quando o pixel reporta valor acima disso — order bump, upsell ou venda de outro produto que ele credita ao low ticket — o excedente aparece como nota, e <b>não</b> entra na receita.</li>
+    <li><b>“Checkout”</b> aqui é o <code>AddToCart</code>, que na Ticto dispara quando a página de pagamento carrega. O <code>InitiateCheckout</code> está <b>desligado</b> na integração da Ticto: quando um evento não dispara, a etapa sai do funil e vira nota — manter desenharia uma queda que não existe.</li>
+    <li><b>CPC e CTR são sempre de LINK</b> (<code>inline_link_clicks</code>): contam só quem clicou para sair do anúncio e ir para a LP — não entram curtida, comentário, ver mais nem clique no perfil. Dão pior (e mais honesto) que o CTR geral do Gerenciador.</li>
+    <li><b>ROAS</b> é sobre a mídia <b>com imposto</b> (13,83%), não sobre o valor bruto do Meta.</li>
+    <li><b>Alcance não soma:</b> a mesma pessoa vista por dois conjuntos conta uma vez. Por isso o alcance vem deduplicado do Meta, por público e por formato — e a soma dos cards é maior que o total.</li>
+    <li>O <b>período</b> muda tudo o que está acima. Status e verba/dia são sempre de <b>agora</b>, porque descrevem o que está no ar hoje.</li>
+    <li>O low ticket é <b>canal de aquisição</b>: quem compra o Manual entra na base para o Especialista em Recurso de Revista. Este dash mede a máquina de aquisição; a venda do curso é acompanhada à parte.</li>
+  </ul></div>
+
+  <div class="rodape">
+    Fonte: Graph API do Meta (conta 1498770914317901), período 26 de set a 26 de set.
+    Destino dos anúncios: lp.profmurilosoares.com.br → payment.ticto.app/O191355E4.
+    Atualizado automaticamente 3x/dia. Vendas e checkouts são o que o pixel enxerga —
+    o faturamento oficial é o da Ticto.
+  </div>
+</div>
+<script>
+window.__DIA__ = {"desde":"2026-09-26","ate":"2026-09-26","imposto":0.1383,"campos":["gasto","impressoes","cliques_link","lpv","atc","api","compras_lt","receita_lt"],"met":{"gasto":"gasto","conv":"compras_lt","conv_rot":"Vendas do Manual","conv_rot_1":"vendas","conv_rot_curto":"Vendas","conv_rot_s":"venda","receita":"receita_lt","receita_rot":"Receita do Manual","etapa":"atc","etapa_rot":"Checkouts","impr":"impressoes","cliq":"cliques_link"},"eixo":{"ordem":["adv","lal","quente"],"defs":{"adv":{"nome":"Frio · advocacia trabalhista","cor":"#2f8f8a","sub":"interesse/cargo em advocacia trabalhista, 25–65, Advantage+ ligado"},"lal":{"nome":"Frio · lookalikes","cor":"#4a6fa5","sub":"3 semelhantes 1% (seguiu, visitou o perfil 180D, viu 75% de vídeo 365D)"},"quente":{"nome":"Quente · 180 dias","cor":"#d4732c","sub":"os 19 públicos de 180D: engajamento IG, vídeo 25→95%, site, cadastrados"},"outro":{"nome":"Outros conjuntos","cor":"#8593a5","sub":"conjunto cujo nome não casa com nenhum público conhecido"}}},"dias":[["2026-09-26","adv",101.55,1750,16,11,2,1,0,0],["2026-09-26","lal",96.93,1552,23,14,3,1,1,19.9],["2026-09-26","quente",99.29,2555,53,45,14,11,11,218.9]],"tabelas":[{"id":"fmt","chave_rot":"Formato","top":10,"linhas":[["2026-09-26","estatico","adv",178.79,3924,59,47,9,6,8,159.2],["2026-09-26","video","adv",119.07,1934,33,23,10,7,4,79.6]],"nomes":{"estatico":"Estáticos","video":"Vídeos","outro":"Outros criativos"},"sub":{"estatico":"arte parada, feed 1:1 + story 9:16 no mesmo anúncio","video":"vídeo, feed 1:1 + story 9:16 no mesmo anúncio","outro":"anúncio cujo nome não diz se é estático ou vídeo"},"sem_eixo":true,"status":{},"links":{}},{"id":"conj","chave_rot":"Conjunto","top":25,"linhas":[["2026-09-26","120246676887660662","adv",20.69,375,2,2,0,0,0,0],["2026-09-26","120246676890810662","adv",20.79,448,7,4,0,0,0,0],["2026-09-26","120246676893030662","adv",18.95,346,3,1,0,0,0,0],["2026-09-26","120246676895160662","adv",19.41,307,1,1,0,0,0,0],["2026-09-26","120246676896270662","adv",21.71,274,3,3,2,1,0,0],["2026-09-26","120246676904100662","lal",19.6,317,8,5,0,0,0,0],["2026-09-26","120246676908520662","lal",19.89,380,5,4,0,0,0,0],["2026-09-26","120246676912100662","lal",18.15,309,3,1,0,0,0,0],["2026-09-26","120246676915850662","lal",18.5,271,0,0,0,0,0,0],["2026-09-26","120246676917970662","lal",20.74,274,7,4,3,1,1,19.9],["2026-09-26","120246676919600662","lal",0.05,1,0,0,0,0,0,0],["2026-09-26","120246676927120662","quente",20.81,573,10,9,1,1,1,19.9],["2026-09-26","120246676932100662","quente",21.25,646,15,14,4,2,4,79.6],["2026-09-26","120246676935470662","quente",18.57,529,6,7,4,3,3,59.7],["2026-09-26","120246676938550662","quente",17.84,385,8,6,2,2,2,39.8],["2026-09-26","120246676940860662","quente",20.82,422,14,9,3,3,1,19.9]],"nomes":{"120246676945550662":"PQ_ENGAJ_180D_MISTO_30_65_VID04","120246676943090662":"PQ_ENGAJ_180D_MISTO_30_65_VID03","120246676940860662":"PQ_ENGAJ_180D_MISTO_30_65_VID02","120246676938550662":"PQ_ENGAJ_180D_MISTO_30_65_VID01","120246676936810662":"PQ_ENGAJ_180D_MISTO_30_65_EST10","120246676935470662":"PQ_ENGAJ_180D_MISTO_30_65_EST09","120246676934010662":"PQ_ENGAJ_180D_MISTO_30_65_EST08","120246676932100662":"PQ_ENGAJ_180D_MISTO_30_65_EST07","120246676930600662":"PQ_ENGAJ_180D_MISTO_30_65_EST06","120246676929440662":"PQ_ENGAJ_180D_MISTO_30_65_EST05","120246676927120662":"PQ_ENGAJ_180D_MISTO_30_65_EST04","120246676925660662":"PQ_ENGAJ_180D_MISTO_30_65_EST03","120246676923930662":"PQ_ENGAJ_180D_MISTO_30_65_EST02","120246676922020662":"MIX_LAL_MISTO_30_65_VID04","120246676919600662":"MIX_LAL_MISTO_30_65_VID03","120246676917970662":"MIX_LAL_MISTO_30_65_VID02","120246676915850662":"MIX_LAL_MISTO_30_65_VID01","120246676913780662":"MIX_LAL_MISTO_30_65_EST10","120246676912100662":"MIX_LAL_MISTO_30_65_EST09","120246676910100662":"MIX_LAL_MISTO_30_65_EST08","120246676908520662":"MIX_LAL_MISTO_30_65_EST07","120246676907160662":"MIX_LAL_MISTO_30_65_EST06","120246676905530662":"MIX_LAL_MISTO_30_65_EST05","120246676904100662":"MIX_LAL_MISTO_30_65_EST04","120246676902150662":"MIX_LAL_MISTO_30_65_EST03","120246676901040662":"MIX_LAL_MISTO_30_65_EST02","120246676899020662":"ADV_TRABALHISTA_MISTO_25_65_VID04","120246676897180662":"ADV_TRABALHISTA_MISTO_25_65_VID03","120246676896270662":"ADV_TRABALHISTA_MISTO_25_65_VID02","120246676895160662":"ADV_TRABALHISTA_MISTO_25_65_VID01","120246676894010662":"ADV_TRABALHISTA_MISTO_25_65_EST10","120246676893030662":"ADV_TRABALHISTA_MISTO_25_65_EST09","120246676891950662":"ADV_TRABALHISTA_MISTO_25_65_EST08","120246676890810662":"ADV_TRABALHISTA_MISTO_25_65_EST07","120246676890040662":"ADV_TRABALHISTA_MISTO_25_65_EST06","120246676888970662":"ADV_TRABALHISTA_MISTO_25_65_EST05","120246676887660662":"ADV_TRABALHISTA_MISTO_25_65_EST04","120246676886160662":"ADV_TRABALHISTA_MISTO_25_65_EST03","120246676885060662":"ADV_TRABALHISTA_MISTO_25_65_EST02","120246676423130662":"PQ_ENGAJ_180D_MISTO_30_65_EST01","120246676422840662":"MIX_LAL_MISTO_30_65_EST01","120246676422400662":"ADV_TRABALHISTA_MISTO_25_65_EST01"},"sub":{},"sem_eixo":false,"status":{"120246676945550662":{"ativo":true,"verba":30.0},"120246676943090662":{"ativo":true,"verba":30.0},"120246676940860662":{"ativo":false,"verba":30.0},"120246676938550662":{"ativo":true,"verba":30.0},"120246676936810662":{"ativo":false,"verba":30.0},"120246676935470662":{"ativo":true,"verba":30.0},"120246676934010662":{"ativo":false,"verba":30.0},"120246676932100662":{"ativo":true,"verba":30.0},"120246676930600662":{"ativo":false,"verba":30.0},"120246676929440662":{"ativo":false,"verba":30.0},"120246676927120662":{"ativo":false,"verba":30.0},"120246676925660662":{"ativo":false,"verba":30.0},"120246676923930662":{"ativo":false,"verba":30.0},"120246676922020662":{"ativo":true,"verba":30.0},"120246676919600662":{"ativo":true,"verba":30.0},"120246676917970662":{"ativo":false,"verba":30.0},"120246676915850662":{"ativo":false,"verba":30.0},"120246676913780662":{"ativo":false,"verba":30.0},"120246676912100662":{"ativo":false,"verba":30.0},"120246676910100662":{"ativo":false,"verba":30.0},"120246676908520662":{"ativo":false,"verba":30.0},"120246676907160662":{"ativo":false,"verba":30.0},"120246676905530662":{"ativo":false,"verba":30.0},"120246676904100662":{"ativo":false,"verba":30.0},"120246676902150662":{"ativo":false,"verba":30.0},"120246676901040662":{"ativo":false,"verba":30.0},"120246676899020662":{"ativo":true,"verba":30.0},"120246676897180662":{"ativo":true,"verba":30.0},"120246676896270662":{"ativo":false,"verba":30.0},"120246676895160662":{"ativo":false,"verba":30.0},"120246676894010662":{"ativo":false,"verba":30.0},"120246676893030662":{"ativo":false,"verba":30.0},"120246676891950662":{"ativo":false,"verba":30.0},"120246676890810662":{"ativo":false,"verba":30.0},"120246676890040662":{"ativo":false,"verba":30.0},"120246676888970662":{"ativo":false,"verba":30.0},"120246676887660662":{"ativo":false,"verba":30.0},"120246676886160662":{"ativo":false,"verba":30.0},"120246676885060662":{"ativo":false,"verba":30.0},"120246676423130662":{"ativo":false,"verba":30.0},"120246676422840662":{"ativo":false,"verba":30.0},"120246676422400662":{"ativo":false,"verba":30.0}},"links":{}},{"id":"ads","chave_rot":"Anúncio","top":25,"linhas":[["2026-09-26","120246676888480662","adv",20.69,375,2,2,0,0,0,0],["2026-09-26","120246676891560662","adv",20.79,448,7,4,0,0,0,0],["2026-09-26","120246676893610662","adv",18.95,346,3,1,0,0,0,0],["2026-09-26","120246676895860662","adv",19.41,307,1,1,0,0,0,0],["2026-09-26","120246676896870662","adv",21.71,274,3,3,2,1,0,0],["2026-09-26","120246676904940662","lal",19.6,317,8,5,0,0,0,0],["2026-09-26","120246676909660662","lal",19.89,380,5,4,0,0,0,0],["2026-09-26","120246676913140662","lal",18.15,309,3,1,0,0,0,0],["2026-09-26","120246676917520662","lal",18.5,271,0,0,0,0,0,0],["2026-09-26","120246676918810662","lal",20.74,274,7,4,3,1,1,19.9],["2026-09-26","120246676920990662","lal",0.05,1,0,0,0,0,0,0],["2026-09-26","120246676928740662","quente",20.81,573,10,9,1,1,1,19.9],["2026-09-26","120246676933700662","quente",21.25,646,15,14,4,2,4,79.6],["2026-09-26","120246676936430662","quente",18.66,530,6,7,4,3,3,59.7],["2026-09-26","120246676940310662","quente",17.84,385,8,6,2,2,2,39.8],["2026-09-26","120246676942750662","quente",20.82,422,14,9,3,3,1,19.9]],"nomes":{"120246676942750662":"VIDEO_AD02","120246676945250662":"VIDEO_AD03","120246676947170662":"VIDEO_AD04","120246676935210662":"ESTATICO_AD08","120246676923730662":"VIDEO_AD04","120246676929900662":"ESTATICO_AD05","120246676940310662":"VIDEO_AD01","120246676906310662":"ESTATICO_AD05","120246676889820662":"ESTATICO_AD05","120246676573960662":"ESTATICO_AD01","120246676931260662":"ESTATICO_AD06","120246676917520662":"VIDEO_AD01","120246676892540662":"ESTATICO_AD08","120246676568770662":"ESTATICO_AD01","120246676915060662":"ESTATICO_AD10","120246676936430662":"ESTATICO_AD09","120246676920990662":"VIDEO_AD03","120246676895860662":"VIDEO_AD01","120246676913140662":"ESTATICO_AD09","120246676938030662":"ESTATICO_AD10","120246676928740662":"ESTATICO_AD04","120246676933700662":"ESTATICO_AD07","120246676909660662":"ESTATICO_AD07","120246676918810662":"VIDEO_AD02","120246676908070662":"ESTATICO_AD06","120246676911160662":"ESTATICO_AD08","120246676888480662":"ESTATICO_AD04","120246676896870662":"VIDEO_AD02","120246676903580662":"ESTATICO_AD03","120246676926650662":"ESTATICO_AD03","120246676924870662":"ESTATICO_AD02","120246676900640662":"VIDEO_AD04","120246676890520662":"ESTATICO_AD06","120246676904940662":"ESTATICO_AD04","120246676901890662":"ESTATICO_AD02","120246676898190662":"VIDEO_AD03","120246676894410662":"ESTATICO_AD10","120246676563070662":"ESTATICO_AD01","120246676893610662":"ESTATICO_AD09","120246676891560662":"ESTATICO_AD07","120246676886930662":"ESTATICO_AD03","120246676885790662":"ESTATICO_AD02"},"sub":{"120246676942750662":"PQ_ENGAJ_180D_MISTO_30_65_VID02","120246676945250662":"PQ_ENGAJ_180D_MISTO_30_65_VID03","120246676947170662":"PQ_ENGAJ_180D_MISTO_30_65_VID04","120246676935210662":"PQ_ENGAJ_180D_MISTO_30_65_EST08","120246676923730662":"MIX_LAL_MISTO_30_65_VID04","120246676929900662":"PQ_ENGAJ_180D_MISTO_30_65_EST05","120246676940310662":"PQ_ENGAJ_180D_MISTO_30_65_VID01","120246676906310662":"MIX_LAL_MISTO_30_65_EST05","120246676889820662":"ADV_TRABALHISTA_MISTO_25_65_EST05","120246676573960662":"PQ_ENGAJ_180D_MISTO_30_65_EST01","120246676931260662":"PQ_ENGAJ_180D_MISTO_30_65_EST06","120246676917520662":"MIX_LAL_MISTO_30_65_VID01","120246676892540662":"ADV_TRABALHISTA_MISTO_25_65_EST08","120246676568770662":"MIX_LAL_MISTO_30_65_EST01","120246676915060662":"MIX_LAL_MISTO_30_65_EST10","120246676936430662":"PQ_ENGAJ_180D_MISTO_30_65_EST09","120246676920990662":"MIX_LAL_MISTO_30_65_VID03","120246676895860662":"ADV_TRABALHISTA_MISTO_25_65_VID01","120246676913140662":"MIX_LAL_MISTO_30_65_EST09","120246676938030662":"PQ_ENGAJ_180D_MISTO_30_65_EST10","120246676928740662":"PQ_ENGAJ_180D_MISTO_30_65_EST04","120246676933700662":"PQ_ENGAJ_180D_MISTO_30_65_EST07","120246676909660662":"MIX_LAL_MISTO_30_65_EST07","120246676918810662":"MIX_LAL_MISTO_30_65_VID02","120246676908070662":"MIX_LAL_MISTO_30_65_EST06","120246676911160662":"MIX_LAL_MISTO_30_65_EST08","120246676888480662":"ADV_TRABALHISTA_MISTO_25_65_EST04","120246676896870662":"ADV_TRABALHISTA_MISTO_25_65_VID02","120246676903580662":"MIX_LAL_MISTO_30_65_EST03","120246676926650662":"PQ_ENGAJ_180D_MISTO_30_65_EST03","120246676924870662":"PQ_ENGAJ_180D_MISTO_30_65_EST02","120246676900640662":"ADV_TRABALHISTA_MISTO_25_65_VID04","120246676890520662":"ADV_TRABALHISTA_MISTO_25_65_EST06","120246676904940662":"MIX_LAL_MISTO_30_65_EST04","120246676901890662":"MIX_LAL_MISTO_30_65_EST02","120246676898190662":"ADV_TRABALHISTA_MISTO_25_65_VID03","120246676894410662":"ADV_TRABALHISTA_MISTO_25_65_EST10","120246676563070662":"ADV_TRABALHISTA_MISTO_25_65_EST01","120246676893610662":"ADV_TRABALHISTA_MISTO_25_65_EST09","120246676891560662":"ADV_TRABALHISTA_MISTO_25_65_EST07","120246676886930662":"ADV_TRABALHISTA_MISTO_25_65_EST03","120246676885790662":"ADV_TRABALHISTA_MISTO_25_65_EST02"},"sem_eixo":false,"status":{},"links":{"120246676891560662":"https://www.instagram.com/p/DduNaUwsPc-/","120246676918810662":"https://www.instagram.com/p/DduNpjNMM9G/","120246676909660662":"https://www.instagram.com/p/DduNjf2s6ed/","120246676888480662":"https://www.instagram.com/p/DduNZbVMP1n/","120246676920990662":"https://www.instagram.com/p/DduNpfns_Iy/","120246676896870662":"https://www.instagram.com/p/DduNdPRs3QS/","120246676928740662":"https://www.instagram.com/p/DduNtWUsTqM/","120246676933700662":"https://www.instagram.com/p/DduNvcLsOW_/","120246676895860662":"https://www.instagram.com/p/DduNdKJMCxT/","120246676917520662":"https://www.instagram.com/p/DduNoBms3uw/","120246676940310662":"https://www.instagram.com/p/DduNzipMenn/","120246676904940662":"https://www.instagram.com/p/DduNheFMGJD/","120246676893610662":"https://www.instagram.com/p/DduNbLBMqgp/","120246676936430662":"https://www.instagram.com/p/DduNw7vMxoR/","120246676942750662":"https://www.instagram.com/p/DduN2NFsfk0/","120246676913140662":"https://www.instagram.com/p/DduNl7IsOVZ/"}}]};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (D.extra) {
+      var ex = {}, exN = D.extra.campos.length;
+      D.extra.campos.forEach(function (c, i) { ex[c.k] = 0; });
+      D.extra.linhas.forEach(function (l) {
+        if (!setSel[l[0]]) return;
+        D.extra.campos.forEach(function (c, i) { ex[c.k] += l[i + 1] || 0; });
+      });
+      var prim = D.extra.campos[0], resto = D.extra.campos.slice(1);
+      linha2.push('<div class="dd-box"><div class="dd-bl">' + esc(D.extra.rotulo) + '</div>' +
+        '<div class="dd-v">' + (prim.tipo === 'brl' ? brl(ex[prim.k]) : num(ex[prim.k])) + '</div>' +
+        '<div class="dd-s">' + esc(prim.rot) + (resto.length ? ' · ' + resto.map(function (c) {
+          return (c.tipo === 'brl' ? brl(ex[c.k]) : num(ex[c.k])) + ' ' + esc(c.rot);
+        }).join(' · ') : '') + '</div></div>');
+    }
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        // Link SEMPRE que existir, mesmo sem conversao no periodo (regra da Gio,
+        // 23/09/2026): anuncio que nao vendeu e justamente o que ela precisa
+        // abrir para entender por que nao vendeu.
+        if (li) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        // sem_eixo: tabela cujo recorte NAO e o eixo (ex.: formato de criativo
+        // numa pagina cujo eixo e publico) — ali o nome do segmento do eixo
+        // seria o do primeiro grupo que caiu na linha, ou seja, mentira.
+        var sub = [(t.sub || {})[a._k] || '', (ORDEM.length > 1 && !t.sem_eixo) ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
+(function () {
+  var tabs = document.querySelectorAll('.tab');
+  var blocos = document.querySelectorAll('.periodo');
+  function abrir(p) {
+    tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.p === p); });
+    blocos.forEach(function (b) { b.hidden = b.dataset.p !== p; });
+    if (location.hash.slice(1) !== p) history.replaceState(null, '', '#' + p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { abrir(t.dataset.p); }); });
+  function doHash(comScroll) {
+    var p = location.hash.slice(1);
+    if (p && document.querySelector('.periodo[data-p="' + p + '"]')) {
+      abrir(p);
+      if (!comScroll) window.scrollTo({ top: 0 });
+    }
+  }
+  window.addEventListener('hashchange', function () { doHash(true); });
+  doHash(false);
+})();
+</script>
+</body></html>
