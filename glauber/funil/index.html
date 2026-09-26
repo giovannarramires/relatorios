@@ -852,7 +852,10 @@ window.__DIA__ = {"desde":"2026-08-27","ate":"2026-09-25","imposto":0,"campos":[
         // abrir para entender por que nao vendeu.
         if (li) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
         else nome = '<b>' + nome + '</b>';
-        var sub = [(t.sub || {})[a._k] || '', ORDEM.length > 1 ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        // sem_eixo: tabela cujo recorte NAO e o eixo (ex.: formato de criativo
+        // numa pagina cujo eixo e publico) — ali o nome do segmento do eixo
+        // seria o do primeiro grupo que caiu na linha, ou seja, mentira.
+        var sub = [(t.sub || {})[a._k] || '', (ORDEM.length > 1 && !t.sem_eixo) ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
         var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
         if (temStatus) {
           tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
