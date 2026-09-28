@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Setembro do Dr. Giácomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8;
+  --surface:#FFFFFF;
+  --ink:#141F26;
+  --muted:#5B6D77;
+  --line:#DCE4E5;
+  --accent:#0E6B61;
+  --accent-soft:#E1EFEC;
+  --warm:#A9662F;
+  --warm-soft:#F5E9DE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519;
+    --surface:#161F25;
+    --ink:#E6EDEF;
+    --muted:#94A6B0;
+    --line:#263239;
+    --accent:#4FC2B1;
+    --accent-soft:#12312D;
+    --warm:#D6935C;
+    --warm-soft:#33241A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519;
+  --surface:#161F25;
+  --ink:#E6EDEF;
+  --muted:#94A6B0;
+  --line:#263239;
+  --accent:#4FC2B1;
+  --accent-soft:#12312D;
+  --warm:#D6935C;
+  --warm-soft:#33241A;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 24px 96px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+/* ---- cabeçalho ---- */
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+/* ---- seções ---- */
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:"Karla",sans-serif;font-weight:700;
+  font-size:17px;margin:0;letter-spacing:-.005em;
+}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- painel de números ---- */
+.kpis{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:26px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---- lista de achados ---- */
+.findings{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.mark{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.finding p{margin-top:6px;color:var(--muted);font-size:16px}
+.finding .verdict{
+  display:inline-block;margin-top:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);
+  padding:4px 9px;border-radius:2px;
+}
+
+/* ---- tabela do plano ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+td.money{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tfoot td{
+  border-top:2px solid var(--line);font-weight:700;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+/* ---- destaque / pedido ---- */
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  align-self:flex-start;word-break:break-word;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+.vlink{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.vlink:hover{background:var(--accent-soft)}
+.vlink::after{content:" ↗";font-size:.85em;opacity:.7;border:0}
+.tipnote{font-size:14.5px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* tabela larga (retenção): escapa da coluna de 720px em telas grandes */
+.tablewrap.wide{width:min(100%, 1060px)}
+@media (min-width:1100px){
+  .tablewrap.wide{width:1060px;margin-left:calc(360px - 530px)}
+}
+.tablewrap.wide table{min-width:860px}
+.tablewrap.wide th:first-child,.tablewrap.wide td:first-child{min-width:230px}
+.tablewrap.wide td.money{white-space:nowrap}
+.tablewrap.wide td.money .what{white-space:nowrap}
+.tablewrap.wide thead th{line-height:1.3}
+</style>
+
+<style>
+:root[data-theme="dark"] .new{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+ letter-spacing:.07em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);
+ padding:2px 7px;border-radius:2px;margin-left:9px;vertical-align:2px;white-space:nowrap}
+.steps{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:auto 1fr;gap:0 18px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start}
+.step .when{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--accent);padding-top:3px;white-space:nowrap}
+.step p{margin-top:5px;color:var(--muted);font-size:16px}
+dl.gloss{margin:0;display:flex;flex-direction:column;gap:14px}
+dl.gloss dt{font-weight:700;font-size:16px}
+dl.gloss dd{margin:2px 0 0;color:var(--muted);font-size:15.5px;max-width:66ch}
+.vlink{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.vlink:hover{background:var(--accent-soft)}
+.vlink::after{content:" ↗";font-size:.85em;opacity:.7;border:0}
+.tipnote{font-size:14.5px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Toda semana, mais gente e mais barato</h1>
+    <p class="dek">O balanço do mês inteiro: o que foi investido, o que cada vídeo entregou, o que mudou no caminho e o que já está montado para outubro.</p>
+    <p class="meta">1 a 27 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>O mês em números</h2>
+    <p class="lead">Setembro foi o primeiro mês completo de trabalho na conta. Ele começou com uma campanha de reconhecimento, que fazia gente ver o seu nome, e terminou com um caminho completo: alguém vê o vídeo, entra no seu Instagram e, quando está pronta, abre uma conversa no WhatsApp do consultório.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="num">1.274</span><span class="lbl">visitas ao seu Instagram vindas dos anúncios</span></div>
+      <div class="kpi"><span class="num">R$ 0,74</span><span class="lbl">custo médio de cada visita no mês</span></div>
+      <div class="kpi"><span class="num">50.203</span><span class="lbl">pessoas diferentes alcançadas em Balneário e região</span></div>
+      <div class="kpi"><span class="num">10</span><span class="lbl">conversas iniciadas com o consultório</span></div>
+      <div class="kpi"><span class="num">R$ 1.749</span><span class="lbl">investidos no mês, já com impostos</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A curva do mês, semana a semana</h2>
+    <p>Esta é a tabela que mais importa do relatório. Ela mostra que o resultado não veio de uma semana boa isolada: <strong>cada semana entregou mais visitas que a anterior, e cada visita custou menos</strong>.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Semana</th><th scope="col">Investido</th><th scope="col">Pessoas alcançadas</th><th scope="col">Visitas ao perfil</th><th scope="col">Custo por visita</th><th scope="col">Conversas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 a 7 de setembro<span class="what">só reconhecimento</span></td><td class="money">R$ 135</td><td class="money">18.077</td><td class="money">—</td><td class="money">—</td><td class="money">—</td></tr>
+          <tr><td>8 a 13 de setembro<span class="what">primeira semana com destino</span></td><td class="money">R$ 324</td><td class="money">16.864</td><td class="money">168</td><td class="money">R$ 0,99</td><td class="money">1</td></tr>
+          <tr><td>14 a 20 de setembro</td><td class="money">R$ 490</td><td class="money">19.977</td><td class="money">383</td><td class="money">R$ 0,73</td><td class="money">3</td></tr>
+          <tr><td>21 a 27 de setembro</td><td class="money">R$ 801</td><td class="money">27.386</td><td class="money">723</td><td class="money">R$ 0,68</td><td class="money">6</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Mês inteiro</td><td class="money">R$ 1.749</td><td class="money">50.203</td><td class="money">1.274</td><td class="money">R$ 0,74</td><td class="money">10</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="tipnote">Valores já com os impostos sobre mídia. O total de pessoas alcançadas no mês não é a soma das semanas: quem foi alcançada em duas semanas diferentes conta uma vez só.</p>
+    <p><strong>De 8 a 27 de setembro, as visitas ao seu perfil multiplicaram por 4,3</strong> — de 168 para 723 por semana — enquanto o custo de cada uma caiu 31%. O investimento cresceu no meio do caminho, mas cresceu porque estava valendo a pena: se o custo por visita tivesse subido junto, teríamos segurado a verba.</p>
+    <p>A frente de conversa fez o mesmo movimento: a primeira conversa do mês custou R$ 65,76 e na última semana a média foi de <strong>R$ 24,97</strong> — 2,6 vezes mais barata.</p>
+  </section>
+
+  <section>
+    <h2>O que foi feito no mês</h2>
+    <p>Cinco intervenções, cada uma com um motivo medido antes de ser executada.</p>
+    <div class="steps">
+      <div class="step"><span class="when">1 set</span><div>
+        <h3>A conta entrou no ar</h3>
+        <p>Duas peças de reconhecimento em Balneário Camboriú, para mulheres de 38 a 64 anos, cada uma rodando sozinha para que a comparação entre elas fosse limpa. Em paralelo montamos as listas que o Instagram usa para reencontrar quem interage com você.</p>
+      </div></div>
+      <div class="step"><span class="when">8 set</span><div>
+        <h3>Virada de estratégia: de ser visto para ser visitado</h3>
+        <p>Oito dias de reconhecimento alcançaram muita gente e trouxeram <strong>zero visita ao seu perfil</strong> — campanha de reconhecimento não tem destino, só aparece. Trocamos o objetivo: a partir daí cada anúncio passou a convidar a pessoa a abrir o seu Instagram. No mesmo dia, três depoimentos entraram no ar. A primeira semana já trouxe 168 visitas.</p>
+      </div></div>
+      <div class="step"><span class="when">14 set</span><div>
+        <h3>Primeira troca de criativo por dado</h3>
+        <p>O vídeo da Vania saiu — era o mais caro por visita e o que menos prendia atenção. Entrou “um novo método de lipo de papada”, o único do acervo que termina chamando para entrar na lista de espera, e o depoimento da Karina, campeão do mês, ganhou reforço de verba.</p>
+      </div></div>
+      <div class="step"><span class="when">18 set</span><div>
+        <h3>Quatro vídeos novos, o WhatsApp no ar e mais verba</h3>
+        <p>As três respostas da sua caixinha de perguntas estrearam, cada uma medida separadamente. Com o número do consultório conectado, a frente de conversa saiu do Direct e passou a abrir <strong>direto no WhatsApp</strong>. E o investimento diário quase dobrou, sem tirar nada do que já funcionava.</p>
+      </div></div>
+      <div class="step"><span class="when">23 set</span><div>
+        <h3>A conta inteira passou a falar só com quem decide</h3>
+        <p>A última frente que ainda alcançava homens passou a falar apenas com mulheres de 38 a 64 anos — o perfil de quem procura o procedimento. Antes de aplicar, medimos: o público continuou grande o bastante para não prejudicar a entrega.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Vídeo por vídeo, no mês inteiro</h2>
+    <p>Cada vídeo roda sozinho, com público igual, para que a comparação seja limpa. Abaixo, tudo o que a frente de visita ao perfil entregou em setembro.</p>
+    <p class="tipnote">Toque no nome de qualquer vídeo para abri-lo no Instagram.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Vídeo</th><th scope="col">Investido</th><th scope="col">Visitas</th><th scope="col">Custo por visita</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdCp-LnMd_E/" target="_blank" rel="noopener">Karina, “a melhor decisão”</a><span class="what">Depoimento falado, 49 s · no ar desde 8 set</span></td><td class="money">R$ 250,12</td><td class="money">370</td><td class="money">R$ 0,68</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdCpramsPzq/" target="_blank" rel="noopener">Karina, contorno em 7 dias</a><span class="what">Registro do resultado, 1 min 44 s · desde 8 set</span></td><td class="money">R$ 195,30</td><td class="money">242</td><td class="money">R$ 0,81</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">Um novo método de lipo de papada</a><span class="what">Lista de espera, 1 min 39 s · desde 14 set</span></td><td class="money">R$ 138,40</td><td class="money">181</td><td class="money">R$ 0,76</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaSPDMn8s/" target="_blank" rel="noopener">“A caneta de emagrecer tira a papada?”</a><span class="what">Resposta de caixinha, 51 s · desde 18 set</span></td><td class="money">R$ 98,56</td><td class="money">150</td><td class="money">R$ 0,66</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaZlSsXVh/" target="_blank" rel="noopener">“E o medo de furar uma veia?”</a><span class="what">Resposta de caixinha, 58 s · desde 18 set</span></td><td class="money">R$ 98,46</td><td class="money">146</td><td class="money">R$ 0,67</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaJovsQ6K/" target="_blank" rel="noopener">“Fica cicatriz?”</a><span class="what">Resposta de caixinha, 22 s · desde 18 set</span></td><td class="money">R$ 98,17</td><td class="money">140</td><td class="money">R$ 0,70</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DcbTGjlsxuI/" target="_blank" rel="noopener">Vania, “já tentei de tudo”</a><span class="what">Rodou de 8 a 14 set</span></td><td class="money">R$ 57,58</td><td class="money">45</td><td class="money">R$ 1,28</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Frente de visita ao perfil</td><td class="money">R$ 936,59</td><td class="money">1.274</td><td class="money">R$ 0,74</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p><strong>Os três vídeos gravados no celular respondendo a caixinha estão entre os quatro melhores do mês</strong>, mesmo tendo estreado dez dias depois dos outros. A resposta sobre a caneta de emagrecer é a peça mais barata da conta: R$ 0,66 por visita.</p>
+
+    <h3>A frente de conversa</h3>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Onde</th><th scope="col">Investido</th><th scope="col">Conversas</th><th scope="col">Custo por conversa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/Ddbah3sMA0E/" target="_blank" rel="noopener">“Emagreceu e a papada ficou?”</a><span class="what">Para quem já interagiu com você · desde 18 set</span></td><td class="money">R$ 110,14</td><td class="money">5</td><td class="money">R$ 22,03</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdCqXHdsZ4P/" target="_blank" rel="noopener">“Sou magra, por que tenho papada?”</a><span class="what">Abrindo no WhatsApp do consultório · desde 18 set</span></td><td class="money">R$ 103,66</td><td class="money">3</td><td class="money">R$ 34,55</td></tr>
+          <tr><td>A mesma peça, abrindo no Direct<span class="what">Rodou de 8 a 18 set, para quem ainda não conhecia você</span></td><td class="money">R$ 103,76</td><td class="money">2</td><td class="money">R$ 51,88</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Frente de conversa</td><td class="money">R$ 317,56</td><td class="money">10</td><td class="money">R$ 31,76</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p>A leitura aqui é clara: <strong>falar com quem já conhece você custa menos da metade</strong> de falar com quem nunca ouviu seu nome — R$ 22,03 contra R$ 51,88 por conversa. É exatamente por isso que o mês inteiro foi dedicado a levar gente ao seu perfil: cada visita de hoje é uma conversa mais barata amanhã.</p>
+    <p class="tipnote">Os valores por vídeo são de mídia; os impostos (13,83%) estão somados apenas no total do mês.</p>
+  </section>
+
+  <section>
+    <h2>Quanto tempo as pessoas ficam em cada vídeo</h2>
+    <p class="lead">Este quadro mostra <strong>que tipo de conteúdo o seu público gosta de consumir</strong> — e é o que orienta o que vale a pena gravar. Para cada peça: quantas pessoas chegaram a um quarto, à metade, a três quartos e ao fim, com o tempo de tela que cada marca representa, já que um quarto de um vídeo de 22 segundos são 6 segundos e um quarto de um de 1 min 44 são 26.</p>
+    <p class="tipnote">Toque no nome de qualquer vídeo para abri-lo no Instagram.</p>
+    <div class="tablewrap wide">
+      <table>
+        <thead>
+          <tr><th scope="col">Vídeo</th><th scope="col">Chegou a 25%</th><th scope="col">Chegou a 50%</th><th scope="col">Chegou a 75%</th><th scope="col">Assistiu<br>até o fim</th><th scope="col">Terminou depois<br>de engatar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">Um novo método de lipo de papada</a><span class="what">1 min 39 s · narrativa com desfecho</span></td><td class="money">395<span class="what">25 s · 5,6%</span></td><td class="money">238<span class="what">49 s · 3,3%</span></td><td class="money">200<span class="what">1 min 14 s · 2,8%</span></td><td class="money">174<span class="what">1 min 39 s · 2,4%</span></td><td class="money">44%</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdCp-LnMd_E/" target="_blank" rel="noopener">Karina, “a melhor decisão”</a><span class="what">49 s · depoimento falado</span></td><td class="money">1.045<span class="what">12 s · 5,9%</span></td><td class="money">564<span class="what">25 s · 3,2%</span></td><td class="money">305<span class="what">37 s · 1,7%</span></td><td class="money">189<span class="what">49 s · 1,1%</span></td><td class="money">18%</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdCpramsPzq/" target="_blank" rel="noopener">Karina, contorno em 7 dias</a><span class="what">1 min 44 s · registro do resultado</span></td><td class="money">334<span class="what">26 s · 2,7%</span></td><td class="money">268<span class="what">52 s · 2,2%</span></td><td class="money">131<span class="what">1 min 18 s · 1,1%</span></td><td class="money">84<span class="what">1 min 44 s · 0,7%</span></td><td class="money">25%</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaJovsQ6K/" target="_blank" rel="noopener">“Fica cicatriz?”</a><span class="what">22 s · resposta de caixinha</span></td><td class="money">686<span class="what">6 s · 8,5%</span></td><td class="money">274<span class="what">11 s · 3,4%</span></td><td class="money">171<span class="what">17 s · 2,1%</span></td><td class="money">142<span class="what">22 s · 1,8%</span></td><td class="money">21%</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaSPDMn8s/" target="_blank" rel="noopener">“A caneta de emagrecer tira a papada?”</a><span class="what">51 s · resposta de caixinha</span></td><td class="money">616<span class="what">13 s · 8,5%</span></td><td class="money">291<span class="what">26 s · 4,0%</span></td><td class="money">138<span class="what">38 s · 1,9%</span></td><td class="money">84<span class="what">51 s · 1,2%</span></td><td class="money">14%</td></tr>
+          <tr><td><a class="vlink" href="https://www.instagram.com/p/DdbaZlSsXVh/" target="_blank" rel="noopener">“E o medo de furar uma veia?”</a><span class="what">58 s · resposta de caixinha</span></td><td class="money">301<span class="what">14 s · 4,5%</span></td><td class="money">146<span class="what">29 s · 2,2%</span></td><td class="money">104<span class="what">43 s · 1,5%</span></td><td class="money">72<span class="what">58 s · 1,1%</span></td><td class="money">24%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>O número pequeno em cada casa é o tempo de tela daquela marca e a fatia de quem viu o vídeo aparecer. A última coluna é a mais reveladora: de cada 100 pessoas que passaram do primeiro quarto, quantas ficaram até o último segundo.</p>
+  </section>
+
+  <section>
+    <h2>O que o mês ensinou</h2>
+    <div class="findings">
+      <div class="finding">
+        <span class="mark">01</span>
+        <div>
+          <h3>Pergunta respondida é o que faz parar de rolar</h3>
+          <p>As duas melhores aberturas do mês são respostas de caixinha gravadas no celular: <strong>8,5% de quem viu o vídeo aparecer chegou ao primeiro quarto</strong>, contra 2,7% a 5,9% das peças produzidas. Quando a tela abre com uma pergunta que a pessoa também tem, ela para. É a porta de entrada mais barata que a conta tem — e custa cinco minutos do seu dia.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">02</span>
+        <div>
+          <h3>Quem segura até o fim é a história com desfecho</h3>
+          <p>“Um novo método de lipo de papada” é o vídeo mais longo da conta e mesmo assim <strong>44% de quem passou do primeiro quarto assistiu até o último segundo</strong> — o dobro de todo o resto. Ele tem começo, meio e fim: a viagem, o método e a lista de espera aberta. A resposta sobre a caneta entra forte e perde gente no meio: 14% terminam.</p>
+          <span class="verdict">A receita: abrir com a pergunta, emendar num caso com desfecho</span>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">03</span>
+        <div>
+          <h3>O grupo de quem já conhece você foi construído do zero</h3>
+          <p>No começo de setembro, o grupo de pessoas de Balneário que visitaram seu perfil ou assistiram seus vídeos aparecia como “menos de mil” — abaixo do mínimo que o Instagram exige para entregar. <strong>Hoje ele está entre 7 e 8 mil pessoas.</strong> Esse é o ativo mais valioso que o mês deixou: é a lista para quem a conversa custa R$ 22 em vez de R$ 52.</p>
+          <span class="verdict">De “menos de mil” a 7–8 mil pessoas</span>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">04</span>
+        <div>
+          <h3>Nenhum vídeo está cansado, mas uma frente já repete</h3>
+          <p>Na frente de visita ao perfil, cada pessoa viu os anúncios 1,3 a 1,5 vez no mês — há muita gente nova em Balneário para alcançar. Já a frente de WhatsApp trabalha hoje num raio curto demais em volta da clínica: ali a mesma pessoa já viu o anúncio 3,5 vezes. É o primeiro ajuste de outubro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que precisamos de você</h2>
+    <div class="callout">
+      <h3>1 · O termo de imagem dos casos que vamos anunciar</h3>
+      <p>Os antes e depois publicados no seu perfil são o melhor material de anúncio do acervo — é exatamente o formato que os especialistas de referência no país mantêm no ar há mais de um ano. Queremos colocá-los para rodar.</p>
+      <p>Para isso precisamos da confirmação de que o <strong>termo de autorização de uso de imagem está assinado e guardado</strong> para cada caso. A legenda já traz a menção à Resolução CFO 196/19; o documento em mãos é a parte que protege você.</p>
+    </div>
+    <div class="callout">
+      <h3>2 · Manter a caixinha aberta toda semana</h3>
+      <p>As respostas de caixinha estrearam melhor que os vídeos produzidos e seguraram o posto o mês inteiro. Elas custam um celular e cinco minutos, e o público responde a elas melhor do que a qualquer peça montada. Vale manter a caixinha aberta e gravar as três perguntas mais repetidas — é o formato com melhor relação entre esforço e resultado que a conta tem hoje.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que entra em outubro</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Ação</th><th scope="col">Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Os casos de antes e depois viram anúncio</td><td>Formato de maior permanência no ar entre os especialistas do país e o material mais forte do acervo atual — depende do termo de imagem</td></tr>
+          <tr><td>Ampliar o alcance da frente de WhatsApp</td><td>Ela trabalha num raio curto demais e já repete para as mesmas pessoas: 3,5 exibições por pessoa no mês</td></tr>
+          <tr><td>Crescer a etapa de quem já conhece você</td><td>O grupo saltou para 7–8 mil pessoas e é onde a conversa custa menos da metade</td></tr>
+          <tr><td>Concentrar verba nas peças mais baratas por visita</td><td>A resposta sobre a caneta e o depoimento da Karina entregam visita a R$ 0,66–0,68</td></tr>
+          <tr><td>Gravar no formato que os números apontam</td><td>Abrir com a pergunta da caixinha e emendar num caso com desfecho — juntar o que faz parar com o que segura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Em português claro</h2>
+    <dl class="gloss">
+      <dt>Visita ao perfil</dt>
+      <dd>Pessoa que viu o anúncio, se interessou e tocou para abrir seu Instagram. É o resultado que a conta persegue nesta fase: quem visita entra no grupo que recebe a etapa seguinte.</dd>
+      <dt>Custo por visita</dt>
+      <dd>Quanto foi investido dividido pelo número de visitas. Quanto menor, mais gente o mesmo dinheiro leva ao seu perfil.</dd>
+      <dt>Pessoas diferentes alcançadas</dt>
+      <dd>Quantas pessoas distintas viram seus anúncios — não conta a mesma pessoa duas vezes.</dd>
+      <dt>Conversa iniciada</dt>
+      <dd>Alguém que veio do anúncio e mandou a primeira mensagem para o consultório, no WhatsApp ou no Direct.</dd>
+      <dt>Chegou a 25%, 50%, 75%</dt>
+      <dd>Quantas pessoas assistiram ao menos aquele pedaço do vídeo. Como cada peça tem uma duração, mostramos ao lado o tempo de tela que aquela marca representa.</dd>
+      <dt>Terminou depois de engatar</dt>
+      <dd>De cada 100 pessoas que passaram do primeiro quarto, quantas ficaram até o último segundo. Separa o vídeo que só tem uma boa abertura daquele que segura a atenção do começo ao fim.</dd>
+      <dt>Grupo de remarketing</dt>
+      <dd>A lista que o Instagram monta sozinho com quem visitou seu perfil, assistiu seus vídeos ou interagiu com você. Anunciar para essa lista custa bem menos do que para quem nunca ouviu falar — mas ela só funciona depois de atingir um tamanho mínimo.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Acompanhe quando quiser</h2>
+    <div class="panel">
+      <p>O painel atualiza sozinho todo dia de manhã, com investimento, alcance, quantas pessoas assistiram a cada vídeo e até que ponto assistiram.</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo">relatorios.giogrowthdigital.com.br/giacomo</a>
+    </div>
+    <div class="panel">
+      <p>Relatórios anteriores:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/funil-fechado/">O funil fechou · 14 a 20 de setembro</a>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/perfil-primeiros-dias/">Os primeiros cliques · 9 a 13 de setembro</a>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/relatorio-setembro/">Do alcance ao perfil · 1 a 8 de setembro</a>
+    </div>
+  </section>
+
+  <footer>Preparado por GGD Growth Digital · 28 de setembro de 2026</footer>
+
+</div>
+</body>
+</html>
