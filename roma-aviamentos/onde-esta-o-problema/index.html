@@ -161,6 +161,33 @@
   ul.clean li::before{content:"";position:absolute;left:7px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
   ul.clean li b{color:var(--ink)}
 </style>
+
+<style>
+  .trava{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-top:18px}
+  .trava h3{font-size:16.5px;font-weight:740;margin-bottom:3px}
+  .trava .cap{font-size:13px;color:var(--ink-soft);margin-bottom:20px}
+  .fn{display:grid;gap:0}
+  .fn .st{display:grid;grid-template-columns:186px 1fr 118px;gap:13px;align-items:center}
+  .fn .st .nm{font-size:13.5px;color:var(--ink-soft)}
+  .fn .st .nm b{display:block;color:var(--ink);font-size:14px;font-weight:700}
+  .fn .st .bx{height:32px;background:var(--line-soft);border-radius:7px;overflow:hidden;position:relative}
+  .fn .st .bx>span{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--accent),#3aa98c)}
+  .fn .st .bx>span.amb{background:linear-gradient(90deg,var(--amber),#d99a2b)}
+  .fn .st .qt{text-align:right;font-weight:760;font-size:15px;font-variant-numeric:tabular-nums}
+  .fn .gap{display:grid;grid-template-columns:186px 1fr 118px;gap:13px;align-items:center;margin:5px 0}
+  .fn .gap .lbl{grid-column:2;font-size:12px;font-weight:700;color:var(--ink-soft);display:flex;align-items:center;gap:8px}
+  .fn .gap .lbl .tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--line-soft);color:var(--ink-soft)}
+  .fn .gap.bad .lbl{color:var(--red)}
+  .fn .gap.bad .lbl .tag{background:var(--red-soft);color:var(--red)}
+  .fn .gap.ok .lbl .tag{background:var(--green-soft);color:var(--green)}
+  @media (max-width:760px){.fn .st,.fn .gap{grid-template-columns:1fr 78px}.fn .st .bx{grid-column:1}.fn .st .nm{grid-column:1/-1}.fn .gap .lbl{grid-column:1/-1}}
+  .reg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:16px}
+  @media (max-width:760px){.reg{grid-template-columns:1fr}}
+  .reg .c{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+  .reg .c .t{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+  .reg .c .v{font-size:22px;font-weight:780;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .reg .c .s{font-size:12.5px;color:var(--ink-soft);margin-top:5px}
+</style>
 </head>
 
 <body>
@@ -182,6 +209,39 @@
     <p class="q">A resposta curta</p>
     <p class="a">Não é tráfego. Em setembro entrou <em>mais</em> gente, a loja registrou <em>mais</em> pedidos — e mesmo assim o líquido ficou parado.</p>
     <p class="b">Visitantes por dia subiram <b>10,9%</b> sobre agosto. Pedidos por dia subiram <b>12,9%</b>. Vendas brutas por dia, <b>10,4%</b>. Já o faturamento líquido subiu só <b>2,7%</b>. Tudo que o site tinha que fazer, ele fez. O dinheiro se perdeu <b>depois da compra</b>: o cancelamento saltou de 11,4% para 17,6%.</p>
+  </div>
+
+
+  <div class="trava">
+    <h3>Onde travamos — o caminho de quem tenta comprar</h3>
+    <p class="cap">Pessoas, não cliques. Google Analytics da loja, 1 a 23 de setembro de 2026.</p>
+
+    <div class="fn">
+      <div class="st"><span class="nm"><b>Viram um produto</b>abriram uma página de item</span><span class="bx"><span style="width:100%"></span></span><span class="qt">36.527</span></div>
+      <div class="gap ok"><span class="lbl"><span class="tag">normal</span>89,3% não colocam nada no carrinho — é o comportamento de vitrine, esperado em qualquer loja</span></div>
+
+      <div class="st"><span class="nm"><b>Puseram no carrinho</b>escolheram e guardaram</span><span class="bx"><span style="width:10.7%"></span></span><span class="qt">3.906</span></div>
+      <div class="gap bad"><span class="lbl"><span class="tag">a trava</span>72,4% desistem aqui — são 2.897 pessoas em 23 dias, 126 por dia. É onde o site pede cadastro.</span></div>
+
+      <div class="st"><span class="nm"><b>Iniciaram o checkout</b>passaram do cadastro</span><span class="bx"><span class="amb" style="width:2.96%"></span></span><span class="qt">1.080</span></div>
+      <div class="gap"><span class="lbl"><span class="tag">ok</span>10,8% saem na escolha do frete</span></div>
+
+      <div class="st"><span class="nm"><b>Escolheram o frete</b></span><span class="bx"><span style="width:2.64%"></span></span><span class="qt">963</span></div>
+      <div class="gap"><span class="lbl"><span class="tag">ok</span>22,5% saem antes de abrir o pagamento</span></div>
+
+      <div class="st"><span class="nm"><b>Chegaram ao pagamento</b></span><span class="bx"><span style="width:2.04%"></span></span><span class="qt">746</span></div>
+      <div class="gap"><span class="lbl"><span class="tag">ok</span>9,8% não concluem</span></div>
+
+      <div class="st"><span class="nm"><b>Compraram</b></span><span class="bx"><span style="width:1.84%"></span></span><span class="qt">673</span></div>
+    </div>
+
+    <div class="reg">
+      <div class="c"><div class="t">Onde está a trava</div><div class="v">Entre o carrinho<br>e o cadastro</div><div class="s">É o único degrau fora do normal. Depois dele o caminho é limpo: perde 10%, 22% e 10%.</div></div>
+      <div class="c"><div class="t">Quantas pessoas</div><div class="v">3.779 por mês</div><div class="s">Montaram o carrinho e não seguiram. 126 por dia, todo dia.</div></div>
+      <div class="c"><div class="t">Quanto vale destravar</div><div class="v">R$ 6.826 / mês</div><div class="s">Para cada 1 ponto percentual a mais nessa passagem. São R$ 82 mil por ano por ponto.</div></div>
+    </div>
+
+    <p class="note" style="margin-top:16px">Os números de pessoas vêm do Google Analytics, que registra 78% dos pedidos que a loja de fato fez (673 contra 861 no período). Servem para medir <b>proporção entre etapas</b>, que é o que interessa aqui. O valor em reais usa o ticket médio real da loja, R$ 200,87.</p>
   </div>
 
   <!-- 1 -->
@@ -316,7 +376,7 @@
     <div class="find crit" style="margin-top:16px">
       <div class="hd"><span class="sev">maior perda</span><h4>A parede de login no carrinho</h4></div>
       <p>É o único degrau grande do caminho, e ele está igual há 90 dias: só <b>1 de cada 3 carrinhos</b> chega ao resumo do pedido. Quem passa dali compra — a tela de pagamento converte entre 85% e 89%. Ou seja: o site não perde na hora de pagar, perde na hora de <b>pedir cadastro</b>.</p>
-      <p class="ev"><b>O que vale:</b> voltar apenas ao patamar de julho (39,1%) já significaria cerca de <b>176 pedidos a mais por mês</b> — algo como <b>R$ 35 mil</b> de venda bruta, sem gastar um real a mais em anúncio. <b>O que resolve:</b> compra sem criar conta (convidado), com o cadastro oferecido depois da compra.</p>
+      <p class="ev"><b>Não é oscilação, é uma trava fixa:</b> medida em pessoas no Google Analytics, a passagem do carrinho para o pagamento deu <b>25,5% em julho, 23,7% em agosto e 25,8% em setembro</b>. Três meses no mesmo lugar. <b>O que resolve:</b> compra sem criar conta (convidado), com o cadastro oferecido depois da compra. A conta do que isso vale está na seção 6.</p>
     </div>
 
     <div class="find good">
@@ -325,9 +385,43 @@
     </div>
   </section>
 
+
+  <!-- VALOR PARADO -->
+  <section>
+    <h2><span class="n">6</span> Quanto está parado no carrinho</h2>
+    <p class="sub">O que a trava do cadastro custa, em pessoas e em reais. Setembro, 1 a 23.</p>
+
+    <div class="kpis">
+      <div class="kpi bad"><div class="v">2.897</div><div class="l">pessoas montaram o carrinho e não foram ao pagamento</div></div>
+      <div class="kpi bad"><div class="v">126<small>/dia</small></div><div class="l">todo dia, sem exceção</div></div>
+      <div class="kpi warn"><div class="v">66,7<small>%</small></div><div class="l">de quem passa da trava acaba comprando</div></div>
+      <div class="kpi"><div class="v">R$ 6.826</div><div class="l">por mês, para cada ponto percentual destravado</div></div>
+    </div>
+
+    <div class="lead"><b>A régua mais útil é a do ponto percentual.</b> Hoje 25,8% de quem monta o carrinho chega ao pagamento. Cada ponto a mais nesse número são <b>39 pessoas por mês</b> a mais no checkout, das quais dois terços compram — <b>34 pedidos, R$ 6.826 de venda bruta por mês, R$ 82 mil por ano</b>. Não é projeção otimista: usa a taxa de compra que essas pessoas já têm depois de passar do cadastro, e o ticket médio real da loja.</div>
+
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Se a passagem carrinho → pagamento for…</th><th class="num">Pedidos a mais/mês</th><th class="num">Venda bruta a mais/mês</th><th class="num">Por ano</th></tr></thead>
+        <tbody>
+          <tr><td>30% <small>(hoje 25,8%)</small></td><td class="num">+142</td><td class="num">R$ 28.450</td><td class="num">R$ 341 mil</td></tr>
+          <tr class="hi"><td><b>35%</b> <small>— patamar comum em loja sem cadastro obrigatório</small></td><td class="num"><b>+312</b></td><td class="num"><b>R$ 62.580</b></td><td class="num"><b>R$ 751 mil</b></td></tr>
+          <tr><td>40%</td><td class="num">+481</td><td class="num">R$ 96.710</td><td class="num">R$ 1,16 mi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">São cenários, não promessa. O que é <b>medido</b>: as 2.897 pessoas que param ali, os 66,7% que compram depois de passar, e o ticket de R$ 200,87. O que é <b>suposto</b>: até onde a passagem sobe quando o cadastro deixa de ser obrigatório — por isso estão três hipóteses, e não um número só. O teste honesto é liberar a compra como convidado e medir por 30 dias.</p>
+
+    <div class="find warn">
+      <div class="hd"><span class="sev">o que dá para fazer já</span><h4>Enquanto o cadastro não muda: recuperar quem abandonou</h4></div>
+      <p>São 126 pessoas por dia com carrinho montado e identificadas em boa parte dos casos. A mesma régua vale aqui: trazer de volta <b>1 em cada 20</b> (189 pessoas por mês), dos quais dois terços compram, são <b>126 pedidos por mês</b> — cerca de <b>R$ 25 mil</b> de venda bruta. É a mesma estrutura de mensagem que já vai ser usada para a recuperação de pagamento no Pix.</p>
+    </div>
+  </section>
+
   <!-- 5 -->
   <section>
-    <h2><span class="n">6</span> E a queda contra o ano passado?</h2>
+    <h2><span class="n">7</span> E a queda contra o ano passado?</h2>
     <p class="sub">Setembro/2026 contra setembro/2025, por dia. São duas conversas diferentes.</p>
 
     <div class="tbl-wrap">
@@ -347,7 +441,7 @@
 
   <!-- 6 -->
   <section>
-    <h2><span class="n">7</span> O que estamos acompanhando</h2>
+    <h2><span class="n">8</span> O que estamos acompanhando</h2>
     <p class="sub">Medição contínua — o que já está em curso e o que depende de terceiros.</p>
 
     <div class="steps">
@@ -362,7 +456,7 @@
 
   <!-- 7 -->
   <section>
-    <h2><span class="n">8</span> De onde veio cada número</h2>
+    <h2><span class="n">9</span> De onde veio cada número</h2>
     <p class="sub">Para qualquer número desta página ser conferido.</p>
     <ul class="clean">
       <li><b>Visitas, robôs e caminho no site:</b> Microsoft Clarity, projeto da loja, janelas de 7, 14, 30, 60 e 90 dias fechando em 27/09/2026, e por mês calendário.</li>
@@ -371,6 +465,7 @@
       <li><b>Pedidos, vendas brutas, cancelamento e faturamento líquido:</b> registro da própria loja — a régua que não erra. Setembro cobre <b>1 a 23/09</b>; o mês fecha dia 30.</li>
       <li><b>Conversão real:</b> pedidos da loja divididos por visitas humanas do Clarity, na mesma janela.</li>
       <li><b>Comparação com 2025:</b> mesma base mensal usada no estudo 2025×2026 já entregue.</li>
+      <li><b>Pessoas por etapa e valor parado no carrinho:</b> Google Analytics 4 da loja, relatórios "Jornada de compra" e "Jornada de finalização da compra", julho, agosto e 1–23/09. Contagem de usuários, não de cliques.</li>
       <li><b>Etapas do checkout:</b> exibições de página de carrinho, resumo, frete e pagamento. Servem para comparar mês a mês; não são contagem de pessoas únicas.</li>
     </ul>
   </section>
