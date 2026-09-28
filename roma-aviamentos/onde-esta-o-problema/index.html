@@ -175,6 +175,7 @@
     <span class="chip">Loja e faturamento <b>jul · ago · 1–23 set</b></span>
     <span class="chip">Amostra <b>318.216 visitas reais</b></span>
     <span class="chip">Robôs separados <b>428.007</b></span>
+    <span class="chip">Origem dos robôs <b>China e Hong Kong</b></span>
   </div>
 
   <div class="hero">
@@ -197,12 +198,53 @@
 
     <p class="note">A conversão real é <b>pedidos da loja ÷ visitas humanas</b>: 0,942% em julho, 0,942% em agosto, 0,959% em setembro. A loja converte igual — como já havia mostrado a análise 2025×2026. O que o site recebe, ele aproveita na mesma proporção.</p>
 
-    <div class="lead"><b>Cuidado com um número que engana.</b> Nos últimos 90 dias o site recebeu <b>428 mil visitas de robô</b> — 57% de tudo que bateu no servidor. Na última semana esses robôs caíram de ~5.200 para 1.473 por dia. Se algum painel mostrar "o tráfego caiu", é raspador indo embora, não cliente: as visitas humanas seguem firmes.</p></div>
+    <div class="lead"><b>Cuidado com um número que engana.</b> Nos últimos 90 dias o site recebeu <b>428 mil visitas de robô</b> — 57% de tudo que bateu no servidor. Elas não aparecem nos números desta página, mas aparecem no Google Analytics. A seção seguinte mostra de onde vêm.</div>
+  </section>
+
+
+  <!-- ROBOS -->
+  <section>
+    <h2><span class="n">2</span> De onde vêm os robôs</h2>
+    <p class="sub">Um site de loja com catálogo e preço abertos é alvo permanente de raspagem. Aqui está o retrato, medido no Google Analytics — que, ao contrário do Clarity, não separa robô de gente.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th class="num">Visitantes em 90 dias</th><th class="num">Tempo no site</th><th class="num">Compraram</th><th>O que é</th></tr></thead>
+        <tbody>
+          <tr><td>China</td><td class="num">167.219 <small>(40,2%)</small></td><td class="num">1 s</td><td class="num">R$ 0</td><td>raspagem de catálogo</td></tr>
+          <tr class="hi"><td><b>Brasil</b></td><td class="num"><b>159.559 <small>(38,4%)</small></b></td><td class="num"><b>2 min 31 s</b></td><td class="num"><b>R$ 559.276</b></td><td><b>os clientes de verdade — 99,3% de tudo que a loja faturou</b></td></tr>
+          <tr><td>Hong Kong</td><td class="num">55.064 <small>(13,2%)</small></td><td class="num">0 s</td><td class="num">R$ 0</td><td>raspagem de catálogo</td></tr>
+          <tr><td>Estados Unidos</td><td class="num">21.815 <small>(5,3%)</small></td><td class="num">5 s</td><td class="num">R$ 850</td><td>servidores de nuvem e ferramentas</td></tr>
+          <tr><td>Índia, Suécia, Irlanda, Singapura</td><td class="num">18.302 <small>(4,4%)</small></td><td class="num">0 a 3 s</td><td class="num">R$ 909</td><td>servidores de nuvem</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">Ninguém entra numa loja de aviamentos, fica <b>1 segundo</b> e vai embora — 167 mil vezes. Esse é o rastro de um programa que abre a página, copia o preço e sai. O Brasil aparece em <b>segundo lugar</b> na lista de visitantes e responde por <b>99,3% do faturamento</b>: é o único bloco que é gente.</p>
+
+    <div class="find warn">
+      <div class="hd"><span class="sev">o que mudou</span><h4>Eles não foram embora — trocaram de endereço</h4></div>
+      <p>Em agosto a raspagem vinha da <b>China</b> (2.574 acessos por dia). Em setembro a China parou e <b>Hong Kong</b> assumiu, no mesmo ritmo (3.168 por dia na última semana), com o mesmo comportamento: zero segundo no site, zero compra. O volume total de robô praticamente não mudou — <b>3.516 por dia em agosto, 3.248 por dia na última semana</b>.</p>
+      <p class="ev"><b>Por que isso importa:</b> se alguém olhar o Google Analytics e vir "o tráfego caiu" ou "o tráfego cresceu", pode estar lendo robô trocando de país. <b>A régua confiável é o Brasil</b> — e o Brasil cresceu 11,1% de agosto para a última semana de setembro, o mesmo que o Clarity mediu por outro caminho.</p>
+    </div>
+
+    <div class="find good">
+      <div class="hd"><span class="sev">boa notícia</span><h4>Nenhum centavo de anúncio está sendo gasto com robô</h4></div>
+      <p>Os robôs chegam por acesso direto, sem campanha. Nos canais pagos o comportamento é de gente: <b>busca paga</b> engaja 78,6% e converte 2,85%, <b>campanha inteligente</b> 72,3% e 2,77%, <b>vitrine de produtos</b> 65,0% e 2,48%. Já o acesso direto engaja 13,8% e converte 0,2%. O lixo está todo fora da mídia.</p>
+    </div>
+
+    <div class="find crit">
+      <div class="hd"><span class="sev">por que o site atrai</span><h4>A porta está aberta — e dá para fechar sem contratar nada</h4></div>
+      <p>Três coisas verificadas hoje no site: o arquivo que orienta robôs (<code>robots.txt</code>) <b>libera tudo para todos</b>, sem nenhuma restrição e sem limite de velocidade; o site responde normalmente até para programas que se identificam como robô e para scripts anônimos; e o catálogo tem <b>preço público e dois arquivos de produtos abertos</b>, que é exatamente o que um comparador de preço quer.</p>
+      <p class="ev"><b>O que pedimos ao time técnico:</b> a loja já roda atrás de um serviço de CDN com proteção (GoCache) — dá para ligar lá o bloqueio por origem e o limite de acessos por minuto, <b>sem custo novo</b>. Junto, uma restrição no <code>robots.txt</code> para os raspadores que respeitam a regra. <b>Cuidado obrigatório:</b> Google e Bing não podem ser bloqueados junto, ou a loja some da busca.</p>
+    </div>
+
+    <div class="lead"><b>E o que isso custa hoje?</b> Servidor processando 428 mil visitas que nunca compram, e todo relatório que não separa robô mostrando um número inflado — a taxa de conversão medida no Google Analytics sem filtrar por Brasil aparece <b>quase pela metade</b> do que a loja de fato faz.</div>
   </section>
 
   <!-- 2 -->
   <section>
-    <h2><span class="n">2</span> Setembro contra agosto, medida por medida</h2>
+    <h2><span class="n">3</span> Setembro contra agosto, medida por medida</h2>
     <p class="sub">Tudo por dia, para comparar um mês fechado com 23 dias. Agosto = 100.</p>
 
     <div class="panel">
@@ -223,7 +265,7 @@
 
   <!-- 3 -->
   <section>
-    <h2><span class="n">3</span> O buraco: cancelamento</h2>
+    <h2><span class="n">4</span> O buraco: cancelamento</h2>
     <p class="sub">Percentual do valor vendido que é cancelado depois. Mês a mês, 2026.</p>
 
     <div class="panel">
@@ -254,7 +296,7 @@
 
   <!-- 4 -->
   <section>
-    <h2><span class="n">4</span> O gargalo do site que não mudou</h2>
+    <h2><span class="n">5</span> O gargalo do site que não mudou</h2>
     <p class="sub">Caminho do carrinho até o pedido, por mês. Exibições de página.</p>
 
     <div class="tbl-wrap">
@@ -285,7 +327,7 @@
 
   <!-- 5 -->
   <section>
-    <h2><span class="n">5</span> E a queda contra o ano passado?</h2>
+    <h2><span class="n">6</span> E a queda contra o ano passado?</h2>
     <p class="sub">Setembro/2026 contra setembro/2025, por dia. São duas conversas diferentes.</p>
 
     <div class="tbl-wrap">
@@ -305,7 +347,7 @@
 
   <!-- 6 -->
   <section>
-    <h2><span class="n">6</span> O que estamos acompanhando</h2>
+    <h2><span class="n">7</span> O que estamos acompanhando</h2>
     <p class="sub">Medição contínua — o que já está em curso e o que depende de terceiros.</p>
 
     <div class="steps">
@@ -320,10 +362,12 @@
 
   <!-- 7 -->
   <section>
-    <h2><span class="n">7</span> De onde veio cada número</h2>
+    <h2><span class="n">8</span> De onde veio cada número</h2>
     <p class="sub">Para qualquer número desta página ser conferido.</p>
     <ul class="clean">
       <li><b>Visitas, robôs e caminho no site:</b> Microsoft Clarity, projeto da loja, janelas de 7, 14, 30, 60 e 90 dias fechando em 27/09/2026, e por mês calendário.</li>
+      <li><b>Origem dos robôs:</b> Google Analytics 4 da loja, relatório de país e de canal, mesmas janelas. O Google Analytics não separa esse tipo de robô — por isso ele serve justamente para enxergá-los.</li>
+      <li><b>Porta aberta:</b> leitura do <code>robots.txt</code> do site e teste de resposta a seis identificações de robô, feitos em 28/09/2026.</li>
       <li><b>Pedidos, vendas brutas, cancelamento e faturamento líquido:</b> registro da própria loja — a régua que não erra. Setembro cobre <b>1 a 23/09</b>; o mês fecha dia 30.</li>
       <li><b>Conversão real:</b> pedidos da loja divididos por visitas humanas do Clarity, na mesma janela.</li>
       <li><b>Comparação com 2025:</b> mesma base mensal usada no estudo 2025×2026 já entregue.</li>
