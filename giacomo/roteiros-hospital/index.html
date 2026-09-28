@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Oito gravações no hospital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F6F8F8;
+  --surface:#FFFFFF;
+  --ink:#141F26;
+  --muted:#5B6D77;
+  --line:#DCE4E5;
+  --accent:#0E6B61;
+  --accent-soft:#E1EFEC;
+  --warm:#A9662F;
+  --warm-soft:#F5E9DE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1519;
+    --surface:#161F25;
+    --ink:#E6EDEF;
+    --muted:#94A6B0;
+    --line:#263239;
+    --accent:#4FC2B1;
+    --accent-soft:#12312D;
+    --warm:#D6935C;
+    --warm-soft:#33241A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1519;
+  --surface:#161F25;
+  --ink:#E6EDEF;
+  --muted:#94A6B0;
+  --line:#263239;
+  --accent:#4FC2B1;
+  --accent-soft:#12312D;
+  --warm:#D6935C;
+  --warm-soft:#33241A;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 24px 96px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+
+/* ---- cabeçalho ---- */
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+h1{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:clamp(38px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0;
+}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:56ch}
+.meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:16px;margin:0;
+}
+
+/* ---- seções ---- */
+section{display:flex;flex-direction:column;gap:20px}
+h2{
+  font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+  font-weight:600;font-size:27px;line-height:1.2;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:"Karla",sans-serif;font-weight:700;
+  font-size:17px;margin:0;letter-spacing:-.005em;
+}
+p{margin:0;max-width:66ch}
+.lead{font-size:18.5px}
+
+/* ---- painel de números ---- */
+.kpis{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:26px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+
+/* ---- lista de achados ---- */
+.findings{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.mark{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--accent);padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.finding p{margin-top:6px;color:var(--muted);font-size:16px}
+.finding .verdict{
+  display:inline-block;margin-top:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);
+  padding:4px 9px;border-radius:2px;
+}
+
+/* ---- tabela do plano ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);font-weight:400;
+}
+tbody tr:last-child td{border-bottom:none}
+td.money{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tfoot td{
+  border-top:2px solid var(--line);font-weight:700;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+}
+.what{color:var(--muted);font-size:14.5px;display:block;margin-top:3px}
+
+/* ---- destaque / pedido ---- */
+.callout{
+  background:var(--warm-soft);border-left:3px solid var(--warm);
+  padding:22px 24px;border-radius:0 3px 3px 0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.callout h3{color:var(--warm)}
+.callout p{font-size:16px}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.panel a{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  align-self:flex-start;word-break:break-word;
+}
+.panel a:hover{background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+footer{
+  border-top:1px solid var(--line);padding-top:20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--muted);
+}
+.vlink{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.vlink:hover{background:var(--accent-soft)}
+.vlink::after{content:" ↗";font-size:.85em;opacity:.7;border:0}
+.tipnote{font-size:14.5px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* tabela larga (retenção): escapa da coluna de 720px em telas grandes */
+.tablewrap.wide{width:min(100%, 1060px)}
+@media (min-width:1100px){
+  .tablewrap.wide{width:1060px;margin-left:calc(360px - 530px)}
+}
+.tablewrap.wide table{min-width:860px}
+.tablewrap.wide th:first-child,.tablewrap.wide td:first-child{min-width:230px}
+.tablewrap.wide td.money{white-space:nowrap}
+.tablewrap.wide td.money .what{white-space:nowrap}
+.tablewrap.wide thead th{line-height:1.3}
+</style>
+
+<style>
+:root[data-theme="dark"] .new{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+ letter-spacing:.07em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);
+ padding:2px 7px;border-radius:2px;margin-left:9px;vertical-align:2px;white-space:nowrap}
+.steps{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:auto 1fr;gap:0 18px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start}
+.step .when{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--accent);padding-top:3px;white-space:nowrap}
+.step p{margin-top:5px;color:var(--muted);font-size:16px}
+dl.gloss{margin:0;display:flex;flex-direction:column;gap:14px}
+dl.gloss dt{font-weight:700;font-size:16px}
+dl.gloss dd{margin:2px 0 0;color:var(--muted);font-size:15.5px;max-width:66ch}
+.vlink{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.vlink:hover{background:var(--accent-soft)}
+.vlink::after{content:" ↗";font-size:.85em;opacity:.7;border:0}
+.tipnote{font-size:14.5px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</p>
+    <h1>Oito gravações no hospital</h1>
+    <p class="dek">Roteiro de cada peça, palavra por palavra, com o tempo de cada trecho — e três opções de abertura para escolher na hora. Tudo pensado para ser gravado num único dia.</p>
+    <p class="meta">28 de setembro de 2026 &nbsp;·&nbsp; GGD Growth Digital</p>
+  </header>
+
+  <section>
+    <h2>Por que o hospital é material novo</h2>
+    <p class="lead">Em setembro, os vídeos que mais fizeram gente parar de rolar foram as respostas da sua caixinha — pergunta respondida, gravada no celular. E o que mais segurou a pessoa até o fim foi o vídeo com história de começo, meio e fim. Falta um terceiro elemento, que nenhum dos dois entrega: <strong>a prova de que ela está em boas mãos</strong>. Estrutura, equipe e rotina de segurança são exatamente isso — e até agora não tínhamos imagem nenhuma para mostrar.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="num">8</span><span class="lbl">peças a gravar num único dia de hospital</span></div>
+      <div class="kpi"><span class="num">~9 min</span><span class="lbl">de material bruto no total</span></div>
+      <div class="kpi"><span class="num">6 a 8</span><span class="lbl">semanas de anúncio que esse dia rende</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A regra dos três primeiros segundos</h2>
+    <p class="lead">Em todos os vídeos da conta, <strong>nove em cada dez pessoas saem antes do primeiro quarto</strong>. Depois desse ponto a curva fica quase plana: quem passou dos primeiros segundos costuma ficar até o fim. Ou seja — o trabalho todo está na abertura.</p>
+    <div class="findings">
+      <div class="finding">
+        <span class="mark">01</span>
+        <div>
+          <h3>Comece pela frase, nunca pela saudação</h3>
+          <p>“Oi, tudo bem? Hoje eu vou falar sobre…” gasta os três segundos mais caros do vídeo dizendo nada. A primeira palavra do vídeo já tem que ser a frase mais forte que você tem.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">02</span>
+        <div>
+          <h3>A abertura é sobre ela, não sobre você</h3>
+          <p>“Eu atendo há 14 anos” é sobre você. “Você não vai precisar dormir aqui” é sobre ela. A segunda segura, a primeira não. Por isso quase todas as aberturas abaixo começam com <em>você</em> ou com uma pergunta que ela já se fez.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="mark">03</span>
+        <div>
+          <h3>Escolha uma das três aberturas — e não emende as três</h3>
+          <p>Em cada peça você encontra três opções. Grave a que soar mais natural na sua voz; se sobrar tempo no dia, grave duas versões da mesma peça trocando só a abertura, que a gente testa qual entrega mais barato.</p>
+          <span class="verdict">Duas aberturas da mesma peça = teste limpo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 1 · “Por que eu escolhi operar no hospital”</h2>
+    <p class="lead">A principal do dia. Vai para quem ainda não conhece você e responde, sem ser perguntado, a objeção mais cara de todas: segurança. Duração alvo: <strong>50 a 60 segundos</strong>. Cenário: paramentado, em pé, com o corredor ou a porta do centro cirúrgico atrás.</p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Eu poderia fazer essa cirurgia dentro do meu consultório. <strong>Eu escolhi não fazer.</strong>”</p><span class="verdict">A mais forte — abre uma pergunta que a pessoa precisa ver respondida</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Todo mundo me pergunta por que eu levo para o hospital um procedimento que chamam de pequeno.”</p></div></div>
+      <div class="finding"><span class="mark">C</span><div><p>“Não existe cirurgia pequena. O que existe é cirurgia bem estruturada.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida, sem saudação nenhuma antes.</td><td>Plano do peito para cima, corredor do centro cirúrgico ao fundo.<span class="what">É o trecho mais importante do vídeo inteiro.</span></td></tr>
+          <tr><td class="money">4–18 s</td><td>“Aqui eu tenho um anestesista que cuida exclusivamente de você durante todo o procedimento. Eu tenho monitorização dos seus sinais o tempo todo, equipe treinada em volta e a estrutura de um hospital do lado de fora dessa porta.”</td><td>Mesmo plano. Pode gesticular apontando a porta.</td></tr>
+          <tr><td class="money">18–34 s</td><td>“Na prática, o que isso muda para você é simples: enquanto eu cuido da cirurgia, tem outra pessoa cuidando só do seu sono, da sua respiração e do seu coração. Eu não preciso dividir a minha atenção. E você não precisa torcer para dar tudo certo.”</td><td>Mesmo plano, ritmo mais devagar.<span class="what">Este é o trecho que vende. Fale pausado.</span></td></tr>
+          <tr><td class="money">34–48 s</td><td>“Nenhum procedimento é isento de risco — e quem te disser o contrário está te enganando. O que a gente faz aqui é ter equipe e estrutura preparadas para qualquer situação. É por isso que eu escolhi esse caminho.”</td><td>Mesmo plano, tom mais baixo.<span class="what">Trecho obrigatório: é o que mantém a peça dentro das regras do conselho.</span></td></tr>
+          <tr><td class="money">48–58 s</td><td>“Se você está pensando em tratar a papada e quer entender como seria no seu caso, me chama aqui com a palavra <strong>avaliação</strong>.”</td><td>Mesmo plano, tom direto.<span class="what">Uma chamada só. Não misture “segue”, “salva” e “chama”.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 2 · “O que tem dentro de uma sala de cirurgia”</h2>
+    <p class="lead">Tour pela sala <strong>vazia</strong>, antes de qualquer paciente entrar. O que impressiona aqui é a estrutura — nunca o procedimento. Duração alvo: <strong>60 a 70 segundos</strong>.</p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Tem quatro equipamentos nessa sala que existem por um motivo só: o caso de alguma coisa não sair como o planejado.”</p><span class="verdict">Curiosidade + segurança na mesma frase</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Você provavelmente nunca viu por dentro a sala onde a sua cirurgia acontece. Vem comigo.”</p></div></div>
+      <div class="finding"><span class="mark">C</span><div><p>“Essa sala fica pronta duas horas antes de você chegar. Deixa eu te mostrar o que tem nela.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida, já andando para dentro da sala.</td><td>Câmera na mão, entrando na sala vazia e iluminada.</td></tr>
+          <tr><td class="money">4–20 s</td><td>“Esse aqui é o monitor: ele acompanha os seus batimentos, a sua pressão e a sua oxigenação do começo ao fim. Ninguém tira o olho dele em momento nenhum.”</td><td>Close no monitor.<span class="what">Aponte com a mão o que está falando.</span></td></tr>
+          <tr><td class="money">20–36 s</td><td>“Esse é o aparelho de anestesia, e quem opera ele é o anestesista — um profissional que está aqui exclusivamente para cuidar de você enquanto eu faço a cirurgia.”</td><td>Plano do aparelho, depois volta para você.</td></tr>
+          <tr><td class="money">36–52 s</td><td>“Todo o material que eu uso é esterilizado e montado antes de você entrar. Nada é improvisado, nada é aberto na hora. E a sala inteira segue um protocolo que não é meu: é do hospital.”</td><td>Mesa de instrumental montada, coberta.<span class="what">Nada de instrumento em mão nem em contato com pele.</span></td></tr>
+          <tr><td class="money">52–65 s</td><td>“É esse ambiente que eu escolhi para tratar a papada dos meus pacientes. Se você quer entender como seria no seu caso, me chama com a palavra <strong>avaliação</strong>.”</td><td>Plano aberto da sala com você no meio.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 3 · “Quem está na sala comigo”</h2>
+    <p class="lead">Apresentação da equipe pelo nome e pela função. É aqui que a parceria com a <strong>Dra. Carolina Macedo</strong> entra de forma natural, quando o caso for em conjunto. Duração alvo: <strong>45 a 60 segundos</strong>.</p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Você acha que na sala tem eu e você. Tem mais gente — e cada uma delas está ali por um motivo.”</p><span class="verdict">Quebra de expectativa: o formato que mais engata na sua conta</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Ninguém opera sozinho. Deixa eu te apresentar quem cuida de você comigo.”</p></div></div>
+      <div class="finding"><span class="mark">C</span><div><p>“Essas são as pessoas que vão estar com você no dia da sua cirurgia.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida.</td><td>Você em primeiro plano, equipe atrás, já paramentados.</td></tr>
+          <tr><td class="money">4–22 s</td><td>“Essa é a [nome], anestesista. Ela não faz mais nada durante a sua cirurgia além de cuidar de você: do seu sono, da sua respiração e dos seus sinais.”</td><td>Ela aparece e acena.<span class="what">Peça autorização de imagem da equipe também.</span></td></tr>
+          <tr><td class="money">22–38 s</td><td>“Essa é a [nome], que organiza e entrega todo o material esterilizado, e a [nome], que cuida da sala. Cada uma tem a sua função, e nenhuma delas se acumula.”</td><td>Elas aparecem, plano rápido em cada uma.</td></tr>
+          <tr><td class="money">38–52 s</td><td><em>Quando o caso for em parceria:</em> “E nesse caso eu opero junto com a <strong>Dra. Carolina Macedo</strong>. São quatro mãos na mesma cirurgia, cada um cuidando da sua parte do planejamento.”</td><td>Vocês dois no mesmo quadro.<span class="what">Marcar @dra.carolina.macedo na legenda também.</span></td></tr>
+          <tr><td class="money">52–60 s</td><td>“Quando você entra aqui, não é uma pessoa cuidando de você. São quatro.”</td><td>Plano aberto com a equipe toda.<span class="what">Frase de fechamento. Ajuste o número ao time real.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 4 · O dia da cirurgia, do começo ao fim</h2>
+    <p class="lead">A peça de maior potencial do dia — e a única que não se grava de uma vez: são trechos curtos ao longo das horas, que a gente monta depois num vídeo de <strong>1 a 2 minutos</strong>. O mês inteiro mostrou que história com começo, meio e fim é o que segura a pessoa até o último segundo. <strong>Exige autorização de imagem assinada da paciente para este uso.</strong></p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“São [X] horas entre a [paciente] entrar aqui e ir embora de alta. Deixa eu te mostrar como elas passam.”</p><span class="verdict">Promete uma jornada — é o que faz a pessoa ficar até o fim</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Esse é o dia da cirurgia da [paciente]. Ela topou que a gente filmasse tudo.”</p></div></div>
+      <div class="finding"><span class="mark">C</span><div><p>“Todo mundo me pergunta como é o dia da cirurgia. Hoje eu vou te mostrar em vez de explicar.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Trecho</th><th scope="col">O que falar (em off ou na hora)</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">Chegada<span class="what">5–8 s</span></td><td>A abertura escolhida.</td><td>Ela chegando, recepção ou corredor.<span class="what">Grave também o horário no relógio — ajuda a contar o tempo.</span></td></tr>
+          <tr><td class="money">Antes de entrar<span class="what">10–15 s</span></td><td>“Antes de qualquer coisa a gente conversa: eu explico de novo o que vai ser feito, tiro as últimas dúvidas e confirmo o planejamento com ela.”</td><td>Vocês dois conversando sentados.</td></tr>
+          <tr><td class="money">Marcação<span class="what">10–15 s</span></td><td>“Essa marcação é o planejamento virando desenho. Ela é diferente em cada rosto.”</td><td>Close nas suas mãos marcando.<span class="what">Sem mostrar o rosto inteiro se ela não autorizou identificação.</span></td></tr>
+          <tr><td class="money">A porta<span class="what">5 s</span></td><td>Sem fala. Só o som.</td><td>A porta da sala fechando.<span class="what">Corte seco aqui. O vídeo NÃO entra na cirurgia.</span></td></tr>
+          <tr><td class="money">Recuperação<span class="what">15–20 s</span></td><td>“Acabou. Agora ela fica aqui em observação até estar completamente acordada e confortável para ir embora.”</td><td>Sala de recuperação, ela já acordada.</td></tr>
+          <tr><td class="money">A saída<span class="what">10–15 s</span></td><td>“E é assim que termina o dia: ela sai andando, pelo mesmo lugar por onde entrou.”</td><td>Ela saindo, de costas ou de frente conforme a autorização.<span class="what">É o desfecho. Sem ele o vídeo não fecha.</span></td></tr>
+          <tr><td class="money">Fechamento<span class="what">8–10 s</span></td><td>“Se você quer entender como seria esse dia no seu caso, me chama com a palavra <strong>avaliação</strong>.”</td><td>Você falando, já sem paramentação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 5 · Três caixinhas gravadas no hospital</h2>
+    <p class="lead">O formato mais barato da conta — R$ 0,66 a R$ 0,70 por visita ao perfil — agora com um cenário que reforça cada palavra. Grave as três de uma vez, ainda paramentado, <strong>30 a 50 segundos cada</strong>.</p>
+
+    <h3>5.1 · “Eu preciso ficar internada?”</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Não. Você não vai dormir aqui. Mas deixa eu te explicar por que a cirurgia é no hospital mesmo assim.”</p><span class="verdict">Responde nos 2 primeiros segundos e ainda abre uma segunda pergunta</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“‘Dr., eu vou ter que ficar internada?’ — essa é a pergunta que mais chega na minha caixinha.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida.</td><td>Paramentado, corredor ao fundo.</td></tr>
+          <tr><td class="money">4–25 s</td><td>“O hospital não está ali porque você vai ficar internada. Ele está ali pela estrutura: anestesista dedicado, monitorização e equipe completa. Terminada a cirurgia, você fica em observação até estar bem acordada — e vai para casa no mesmo dia.”</td><td>Mesmo plano.<span class="what">Ajuste ao seu protocolo real se for diferente.</span></td></tr>
+          <tr><td class="money">25–38 s</td><td>“Quem decide a hora da alta é a equipe, olhando para você — não o relógio.”</td><td>Mesmo plano.<span class="what">Evita prometer prazo, e soa mais cuidadoso.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>5.2 · “Quanto tempo eu fico aí dentro?”</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“A cirurgia em si é a parte mais curta do seu dia. Te explico o resto.”</p><span class="verdict">Contraintuitivo — e verdadeiro</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Você chega de manhã e almoça em casa. Deixa eu te mostrar como esse tempo se divide.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida.</td><td>Paramentado.</td></tr>
+          <tr><td class="money">4–28 s</td><td>“Tem o preparo, que é quando a gente conversa, marca e a equipe organiza tudo. Tem a cirurgia. E tem a recuperação, que é a parte que ninguém conta, e onde você fica até estar completamente acordada. Somando tudo, [ajuste ao seu protocolo].”</td><td>Mesmo plano, contando nos dedos.<span class="what">Ritmo de lista, com pausa entre as três etapas.</span></td></tr>
+          <tr><td class="money">28–40 s</td><td>“E você precisa de alguém para te levar para casa. Isso não é opcional.”</td><td>Mesmo plano.<span class="what">Detalhe prático que gera comentário — e comentário alimenta o alcance.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>5.3 · “Eu durmo ou fico acordada?”</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Você não vai ver, não vai ouvir e não vai lembrar. Mas não é exatamente dormir.”</p><span class="verdict">A melhor das três — responde e contradiz ao mesmo tempo</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“O medo de ‘acordar no meio’ é o que mais aparece nas mensagens que eu recebo.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida.</td><td>Paramentado.</td></tr>
+          <tr><td class="money">4–30 s</td><td>“Quem conduz essa parte é o anestesista, e ele acompanha você o tempo inteiro pelo monitor. A escolha do que é usado em cada caso é dele, feita depois de avaliar o seu histórico — não é padrão para todo mundo.”</td><td>Mesmo plano, pode apontar a sala.<span class="what">Não cite nome de medicação nem prometa que não vai doer.</span></td></tr>
+          <tr><td class="money">30–45 s</td><td>“Por isso a avaliação pré-operatória existe. É lá que essas perguntas todas são respondidas olhando para o seu caso, e não pela internet.”</td><td>Mesmo plano.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 6 · A marcação antes de começar</h2>
+    <p class="lead">Vídeo curto, de <strong>20 a 30 segundos</strong>, em close nas suas mãos. Mostra planejamento individualizado — o argumento honesto contra o “resultado padrão” — sem mostrar nada do procedimento.</p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p>“Esse desenho aqui não se repete em ninguém.”</p><span class="verdict">Cinco palavras, e a pessoa quer saber por quê</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p>“Antes de qualquer corte, vem isso aqui.”</p></div></div>
+      <div class="finding"><span class="mark">C</span><div><p>“Se a sua cirurgia começa com um desenho igual ao da outra paciente, tem alguma coisa errada.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que falar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–3 s</td><td>A abertura escolhida.</td><td>Close nas mãos com a caneta cirúrgica.<span class="what">Nada de instrumento cortante em quadro.</span></td></tr>
+          <tr><td class="money">3–18 s</td><td>“Cada rosto distribui a gordura de um jeito, tem um limite ósseo diferente e uma pele diferente. Essa marcação é o planejamento que eu fiz na avaliação virando mapa — e ela muda de paciente para paciente.”</td><td>Continua a marcação, ritmo calmo.</td></tr>
+          <tr><td class="money">18–28 s</td><td>“É por isso que eu não consigo te dizer nada sobre o seu caso por mensagem. Eu preciso ver o seu rosto.”</td><td>Corta para você falando à câmera.<span class="what">Ótima frase: protege você e qualifica quem chama.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 7 · A paciente na recuperação, no mesmo dia</h2>
+    <p class="lead">De <strong>20 a 40 segundos</strong>, com ela já acordada e apresentável. Depoimento gravado no próprio dia tem uma credibilidade que o gravado depois não alcança. <strong>Só com autorização assinada para este uso.</strong></p>
+    <h3>Escolha a abertura</h3>
+    <div class="findings">
+      <div class="finding"><span class="mark">A</span><div><p><em>Você, em off:</em> “Ela saiu da sala há quarenta minutos. Pergunta pra ela como está.”</p><span class="verdict">Coloca a pessoa dentro da cena imediatamente</span></div></div>
+      <div class="finding"><span class="mark">B</span><div><p><em>Ela mesma abrindo:</em> “Eu achei que ia ser muito pior do que foi.”</p></div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Tempo</th><th scope="col">O que perguntar</th><th scope="col">Na tela</th></tr></thead>
+        <tbody>
+          <tr><td class="money">0–4 s</td><td>A abertura escolhida.</td><td>Ela sentada, sorrindo, ambiente de recuperação.</td></tr>
+          <tr><td class="money">4–18 s</td><td>“Como você está se sentindo agora?”</td><td>Ela responde.<span class="what">Deixe a resposta correr. Não complete a frase dela.</span></td></tr>
+          <tr><td class="money">18–32 s</td><td>“O que você imaginava que seria e não foi?”</td><td>Ela responde.<span class="what">É a pergunta que produz a melhor frase do vídeo — quase sempre.</span></td></tr>
+          <tr><td class="money">32–40 s</td><td>“O que você diria para quem está com medo de marcar?”</td><td>Ela responde, corte no fim.<span class="what">Nunca peça para ela prometer resultado a ninguém.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Peça 8 · As fotos do dia</h2>
+    <p class="lead">Dez minutos no fim do dia que rendem capa de vídeo, anúncio estático e material de perfil por um ano inteiro. Todas na vertical, sem filtro.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Foto</th><th scope="col">Como fazer</th></tr></thead>
+        <tbody>
+          <tr><td>Você paramentado, olhando para a câmera</td><td>Plano do peito para cima, corredor ao fundo. É a foto que vira capa da maioria dos vídeos.</td></tr>
+          <tr><td>Você paramentado, olhando para o lado</td><td>Mesma posição, sem olhar para a lente. Serve para arte com texto por cima.</td></tr>
+          <tr><td>A equipe reunida</td><td>Todos paramentados, na sala. Transmite estrutura numa imagem só.</td></tr>
+          <tr><td>A sala montada e vazia</td><td>Plano aberto, luzes acesas, material coberto.</td></tr>
+          <tr><td>Detalhe do monitor ligado</td><td>Close. Ótima imagem de fundo para texto.</td></tr>
+          <tr><td>Suas mãos, close</td><td>Com luva, sem instrumento cortante.</td></tr>
+          <tr><td>Você e a Dra. Carolina</td><td>Quando o caso for em parceria — usa nas peças que mencionam o trabalho em conjunto.</td></tr>
+          <tr><td>A entrada do centro cirúrgico</td><td>Sem placa de identificação do hospital, a menos que já tenha autorização escrita para citar o nome.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como gravar para o material render</h2>
+    <div class="findings">
+      <div class="finding"><span class="mark">01</span><div><h3>Áudio é o ponto crítico aqui</h3><p>Centro cirúrgico tem ar-condicionado barulhento e a máscara abafa a voz. Use microfone de lapela por dentro da paramentação e fale mais devagar e mais alto do que o normal. Áudio ruim mata a peça — imagem tremida, não.</p></div></div>
+      <div class="finding"><span class="mark">02</span><div><h3>Fuja da luz do teto</h3><p>A luz de sala cirúrgica vem de cima e marca olheira. Para as falas diretas à câmera, prefira o corredor ou perto de uma janela. Para o tour da sala, a luz de lá está ótima.</p></div></div>
+      <div class="finding"><span class="mark">03</span><div><h3>Vertical, na altura dos olhos</h3><p>Celular em pé, lente na altura dos seus olhos — nunca de baixo para cima. Se alguém segurar, peça para apoiar os cotovelos no corpo.</p></div></div>
+      <div class="finding"><span class="mark">04</span><div><h3>Grave cada peça duas vezes</h3><p>Uma logo depois da outra, trocando só a abertura. Custa trinta segundos a mais e nos dá um teste limpo de qual abertura entrega mais barato.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que não pode entrar</h2>
+    <div class="findings">
+      <div class="finding"><span class="mark">01</span><div><h3>Nada do ato cirúrgico</h3><p>Sem incisão, sem sangue, sem instrumento em contato com a pele. Além do risco junto ao conselho, imagem de procedimento afasta muito mais gente do que atrai: quem está decidindo quer ver cuidado, não cirurgia.</p></div></div>
+      <div class="finding"><span class="mark">02</span><div><h3>Nenhuma paciente sedada ou identificável sem autorização</h3><p>A autorização precisa ser para este uso específico. Vale também para a equipe que aparecer nas peças.</p></div></div>
+      <div class="finding"><span class="mark">03</span><div><h3>Nome e imagem do hospital sem aval por escrito</h3><p>Confirme antes do dia da gravação se pode filmar dentro e se pode citar o nome. Enquanto não tiver isso, evite placas e logotipos em quadro.</p></div></div>
+      <div class="finding"><span class="mark">04</span><div><h3>“Aqui não tem risco nenhum”</h3><p>Essa é a frase que costuma dar problema com o conselho. O ambiente hospitalar <strong>reduz risco e dá estrutura para imprevistos</strong> — não elimina risco. “Aqui eu tenho equipe e estrutura para qualquer situação” diz a mesma coisa, é mais forte e é verdade.</p></div></div>
+      <div class="finding"><span class="mark">05</span><div><h3>Comparação com outros profissionais</h3><p>Nada de “diferente de quem faz em consultório”. Diga o que <em>você</em> faz e por quê. A comparação o espectador faz sozinho.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como mandar para a gente</h2>
+    <div class="panel">
+      <p>Pode mandar tudo bruto, sem editar nem cortar — inclusive as tomadas em que você errou. A edição, as legendas e a montagem do vídeo do dia da cirurgia são por nossa conta.</p>
+      <p>Mande também, por escrito, o nome de cada pessoa que aparece e a confirmação da autorização de imagem de quem for paciente.</p>
+    </div>
+    <div class="panel">
+      <p>Relatório de setembro, com o que cada vídeo entregou:</p>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/balanco-setembro/">Balanço de setembro · 1 a 27 de setembro</a>
+      <a href="https://relatorios.giogrowthdigital.com.br/giacomo/roteiros/">Os dois primeiros roteiros · 14 de setembro</a>
+    </div>
+  </section>
+
+  <footer>Preparado por GGD Growth Digital · 28 de setembro de 2026</footer>
+
+</div>
+</body>
+</html>
