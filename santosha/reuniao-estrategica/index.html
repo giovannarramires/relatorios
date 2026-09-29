@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Santosha · A virada de maio</title>
+<meta name="description" content="Reuniao estrategica Santosha: onde o ano virou, as tres causas datadas, o que funcionou e as decisoes a tomar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#FAF6F1; --surface:#FFFFFF; --gelo:#F2EBDF;
+    --ink:#3D2718; --ink-soft:#7A6553; --line:#E6DAC9;
+    --terra:#BF6A45; --terra-claro:#DCA98B;
+    --musgo:#6B7C5C; --aten:#C89640;
+    --shadow:0 1px 2px rgba(61,39,24,.04), 0 8px 24px rgba(191,106,69,.07);
+    --r:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#1A1612; --surface:#241F1A; --gelo:#2E2720;
+      --ink:#F5EDE0; --ink-soft:#B3A493; --line:#3A322A;
+      --terra:#D98F6A; --terra-claro:#8F5334;
+      --musgo:#93A683; --aten:#D9BC72;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#1A1612; --surface:#241F1A; --gelo:#2E2720;
+    --ink:#F5EDE0; --ink-soft:#B3A493; --line:#3A322A;
+    --terra:#D98F6A; --terra-claro:#8F5334;
+    --musgo:#93A683; --aten:#D9BC72;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding-block:48px 80px;
+        padding-left:20px; padding-right:20px;
+        display:flex; flex-direction:column; gap:44px}
+  h1,h2,h3{font-family:Lora,Georgia,serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(30px,4.6vw,44px); font-weight:700; line-height:1.15; letter-spacing:-.01em}
+  h2{font-size:23px; font-weight:700; line-height:1.25}
+  h3{font-size:17px; font-weight:600}
+  p{margin:0}
+  .eyebrow{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--terra); font-family:Inter,sans-serif}
+  .lead{font-size:18px; color:var(--ink-soft); max-width:64ch}
+  .nota{font-size:14px; color:var(--ink-soft); max-width:70ch}
+
+  header.top{display:flex; flex-direction:column; gap:16px}
+  .marca{display:flex; align-items:center; gap:12px}
+  .disco{width:34px; height:34px; border-radius:50%; background:var(--terra-claro);
+         display:grid; place-items:center; flex:none; color:#3D2718; font-weight:700;
+         font-size:15px; font-family:Lora,Georgia,serif}
+  .marca b{font-family:Lora,Georgia,serif; font-weight:700; font-size:17px}
+  .marca span{color:var(--ink-soft); font-size:14px}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .card{background:var(--surface); border:1px solid var(--line);
+        border-radius:var(--r); box-shadow:var(--shadow)}
+  .painel{padding:28px; display:flex; flex-direction:column; gap:24px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:24px}
+  .kpi{display:flex; flex-direction:column; gap:3px}
+  .kpi .rot{font-size:13px; color:var(--ink-soft)}
+  .kpi .val{font-family:Lora,Georgia,serif; font-weight:700; font-size:29px; line-height:1.1;
+            font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+  .kpi .val.destaque{color:var(--terra)}
+  .kpi .sub{font-size:12.5px; color:var(--ink-soft)}
+  .barra-h{height:1px; background:var(--line)}
+
+  .faixa{background:var(--gelo); border-radius:var(--r); padding:22px 24px;
+         display:flex; flex-direction:column; gap:7px}
+  .faixa .num{font-family:Lora,Georgia,serif; font-weight:700;
+              font-size:clamp(23px,3.2vw,32px); color:var(--terra); line-height:1.15;
+              font-variant-numeric:tabular-nums}
+  .faixa p{font-size:15px; color:var(--ink-soft)}
+
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:14.5px}
+  .tabela-wrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line);
+               background:var(--surface); box-shadow:var(--shadow)}
+  th,td{padding:11px 14px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:11.5px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+           color:var(--ink-soft); background:var(--gelo)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.total td{font-weight:600; background:var(--gelo)}
+  tbody tr.parcial td{color:var(--ink-soft); font-style:italic}
+  .up{color:var(--musgo); font-weight:600}
+
+  .gr{display:flex; flex-direction:column; gap:9px}
+  .gr-legenda{display:flex; gap:18px; flex-wrap:wrap; font-size:13px; color:var(--ink-soft)}
+  .gr-legenda span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:11px; height:11px; border-radius:3px; flex:none}
+  .sw-venda{background:var(--terra)}
+  .sw-midia{background:var(--musgo)}
+  .linha{display:grid; grid-template-columns:62px 1fr 92px; align-items:center; gap:12px}
+  .linha .mes{font-size:13px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+  .pilha{display:flex; flex-direction:column; gap:2px; min-width:0}
+  .bar{height:11px; border-radius:0 4px 4px 0; min-width:2px}
+  .bar.venda{background:var(--terra)}
+  .bar.midia{background:var(--musgo)}
+  .linha .mer{font-size:13.5px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600}
+  .linha.pico .mes{color:var(--ink); font-weight:600}
+
+  .prop{display:flex; height:42px; border-radius:10px; overflow:hidden; border:1px solid var(--line)}
+  .prop div{display:grid; place-items:center; font-size:12.5px; font-weight:600; color:#fff}
+  .prop .ig{background:var(--terra)}
+  .prop .fb{background:var(--musgo)}
+
+  ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:15px}
+  ul.lista li{display:flex; gap:12px; align-items:flex-start; font-size:15.5px}
+  ul.lista li::before{content:""; width:7px; height:7px; border-radius:50%;
+                      background:var(--terra-claro); margin-top:9px; flex:none}
+  ul.lista li b{font-weight:600}
+
+  ol.plano{margin:0; padding:0; list-style:none; counter-reset:p;
+           display:flex; flex-direction:column; gap:16px}
+  ol.plano li{counter-increment:p; display:grid; grid-template-columns:34px 1fr; gap:14px;
+              align-items:start}
+  ol.plano li::before{content:counter(p); font-family:Lora,Georgia,serif; font-weight:700;
+    font-size:15px; color:var(--terra); background:var(--gelo); border-radius:9px;
+    width:34px; height:34px; display:grid; place-items:center}
+  ol.plano .t{font-weight:600; display:block; margin-bottom:2px}
+  ol.plano .d{font-size:14.5px; color:var(--ink-soft)}
+
+  footer{border-top:1px solid var(--line); padding-top:26px;
+         display:flex; flex-direction:column; gap:10px}
+  footer p{font-size:13px; color:var(--ink-soft); max-width:72ch}
+
+  @media (max-width:560px){
+    .linha{grid-template-columns:50px 1fr 66px; gap:9px}
+    th,td{padding:10px 12px}
+    .prop div{font-size:11px}
+  }
+</style>
+
+<style>
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr}}
+  .virada{display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:stretch}
+  @media (max-width:640px){.virada{grid-template-columns:1fr}}
+  .bloco-v{background:var(--gelo); border-radius:var(--r); padding:22px 24px;
+           display:flex; flex-direction:column; gap:6px}
+  .bloco-v .rot{font-size:12.5px; color:var(--ink-soft); font-weight:600;
+                letter-spacing:.06em; text-transform:uppercase}
+  .bloco-v .big{font-family:Lora,Georgia,serif; font-weight:700;
+                font-size:clamp(30px,5vw,42px); line-height:1.05;
+                font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+  .bloco-v.sobe .big{color:var(--musgo)}
+  .bloco-v.desce .big{color:var(--terra)}
+  .bloco-v p{font-size:14px; color:var(--ink-soft)}
+  .divisor-v{display:grid; place-items:center; color:var(--ink-soft);
+             font-size:12px; font-weight:600; letter-spacing:.1em;
+             text-transform:uppercase; padding:0 4px}
+  @media (max-width:640px){.divisor-v{padding:2px 0}}
+
+  .causa{display:grid; grid-template-columns:38px 1fr; gap:15px; align-items:start}
+  .causa .n{font-family:Lora,Georgia,serif; font-weight:700; font-size:16px;
+            color:#fff; background:var(--terra); border-radius:10px;
+            width:38px; height:38px; display:grid; place-items:center}
+  .causa h3{margin-bottom:5px}
+  .causa .d{font-size:15px; color:var(--ink-soft)}
+
+  .spark{display:flex; align-items:flex-end; gap:3px; height:52px; margin-top:6px}
+  .spark i{flex:1; background:var(--terra-claro); border-radius:2px 2px 0 0; min-height:2px;
+           display:block}
+  .spark i.viva{background:var(--terra)}
+  .spark i.morta{background:var(--line)}
+  .spark-rot{display:flex; gap:3px; font-size:10px; color:var(--ink-soft); margin-top:3px}
+  .spark-rot span{flex:1; text-align:center}
+
+  td.neg{color:var(--terra); font-weight:600}
+  td.pos{color:var(--musgo); font-weight:600}
+  a.peca{color:var(--terra); font-weight:600; text-decoration:none;
+         border-bottom:1px solid var(--terra-claro)}
+  a.peca:hover{border-bottom-color:var(--terra)}
+  .selo{display:inline-block; font-size:11px; font-weight:600; letter-spacing:.05em;
+        text-transform:uppercase; padding:3px 9px; border-radius:99px;
+        background:var(--gelo); color:var(--ink-soft)}
+  .selo.fora{background:var(--terra); color:#fff}
+  .selo.ok{background:var(--musgo); color:#fff}
+  .decisao{background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--terra);
+           border-radius:0 var(--r) var(--r) 0; padding:20px 22px;
+           display:flex; flex-direction:column; gap:6px}
+  .decisao .q{font-weight:600; font-size:16px}
+  .decisao .por{font-size:14.5px; color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="marca">
+      <div class="disco">S</div>
+      <div>
+        <b>Santosha por aí</b><br>
+        <span>Reunião estratégica · 29 de setembro de 2026</span>
+      </div>
+    </div>
+    <h1>O ano não caiu. Ele virou em maio — e dá para nomear o que aconteceu.</h1>
+    <p class="lead">Comparando 2025 e 2026 na mesma janela (1º de janeiro a 28 de setembro),
+    a leitura que importa não é o total do ano. É que os quatro primeiros meses de 2026 foram
+    os melhores da série e o que veio depois não se parece com nenhum outro período.</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">O ponto de virada</p>
+    <h2>Dois anos dentro do mesmo ano</h2>
+    <div class="virada">
+      <div class="bloco-v sobe">
+        <span class="rot">Janeiro a abril</span>
+        <span class="big">+20,6%</span>
+        <p>R$ 206.824 em 2025 → <b>R$ 249.344</b> em 2026.<br>O melhor primeiro quadrimestre da loja.</p>
+      </div>
+      <div class="divisor-v">então</div>
+      <div class="bloco-v desce">
+        <span class="rot">Maio a agosto</span>
+        <span class="big">−37,2%</span>
+        <p>R$ 286.457 em 2025 → <b>R$ 179.924</b> em 2026.<br>A queda inteira do ano cabe aqui.</p>
+      </div>
+    </div>
+    <p class="nota">Maio a agosto são os últimos quatro meses fechados. Setembro de 2026 está
+    contado até o dia 28 e por isso fica fora dessa comparação — ele aparece completo nas tabelas,
+    sempre marcado como parcial.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Mês a mês</p>
+    <h2>Faturamento da loja, 2025 contra 2026</h2>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr><th>Mês</th><th>2025</th><th>2026</th><th>Variação</th><th>Pedidos 25 → 26</th></tr></thead>
+        <tbody>
+          <tr><td>Janeiro</td><td>R$ 63.441</td><td>R$ 60.984</td><td class="neg">−3,9%</td><td>220 → 195</td></tr>
+          <tr><td>Fevereiro</td><td>R$ 58.008</td><td>R$ 51.327</td><td class="neg">−11,5%</td><td>177 → 165</td></tr>
+          <tr><td>Março</td><td>R$ 52.612</td><td>R$ 69.966</td><td class="pos">+33,0%</td><td>181 → 218</td></tr>
+          <tr><td>Abril</td><td>R$ 32.763</td><td>R$ 67.067</td><td class="pos">+104,7%</td><td>121 → 165</td></tr>
+          <tr class="total"><td>Jan–abr</td><td>R$ 206.824</td><td>R$ 249.344</td><td class="pos">+20,6%</td><td>699 → 743</td></tr>
+          <tr><td>Maio</td><td>R$ 100.833</td><td>R$ 46.005</td><td class="neg">−54,4%</td><td>251 → 123</td></tr>
+          <tr><td>Junho</td><td>R$ 66.346</td><td>R$ 47.311</td><td class="neg">−28,7%</td><td>261 → 140</td></tr>
+          <tr><td>Julho</td><td>R$ 61.647</td><td>R$ 34.366</td><td class="neg">−44,3%</td><td>193 → 114</td></tr>
+          <tr><td>Agosto</td><td>R$ 57.631</td><td>R$ 52.242</td><td class="neg">−9,3%</td><td>219 → 134</td></tr>
+          <tr class="total"><td>Mai–ago</td><td>R$ 286.457</td><td>R$ 179.924</td><td class="neg">−37,2%</td><td>924 → 511</td></tr>
+          <tr class="parcial"><td>Setembro</td><td>R$ 76.189</td><td>R$ 29.096</td><td>parcial, até dia 28</td><td>245 → 98</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">As causas</p>
+    <h2>Três coisas aconteceram entre março e maio — e nenhuma delas é a loja vender pior</h2>
+    <p class="lead">Cada uma tem data, tamanho em reais e fonte. Elas se somam em parte, então
+    não devem ser empilhadas como se fossem independentes — mas cada uma, sozinha, é grande.</p>
+
+    <div class="card painel">
+      <div class="causa">
+        <div class="n">1</div>
+        <div>
+          <h3>Seis produtos saíram da vitrine e não voltaram</h3>
+          <p class="d">São produtos que, juntos, faziam <b>R$ 18.173 por mês</b> no começo de 2026.
+          Março foi o pico deles (R$ 22.058). De lá em diante a curva desce sem parar até zerar em
+          setembro. <b>Hoje os seis estão indisponíveis na loja.</b></p>
+          <div class="spark">
+            <i class="viva" style="height:80%"></i><i class="viva" style="height:67%"></i>
+            <i class="viva" style="height:100%"></i><i class="viva" style="height:83%"></i>
+            <i class="viva" style="height:65%"></i><i class="morta" style="height:47%"></i>
+            <i class="morta" style="height:36%"></i><i class="morta" style="height:12%"></i>
+            <i class="morta" style="height:2%"></i>
+          </div>
+          <div class="spark-rot"><span>jan</span><span>fev</span><span>mar</span><span>abr</span><span>mai</span><span>jun</span><span>jul</span><span>ago</span><span>set</span></div>
+        </div>
+      </div>
+      <div class="barra-h"></div>
+      <div class="tabela-wrap">
+        <table>
+          <thead><tr><th>Produto</th><th>Vendeu em 2026</th><th>Situação hoje</th></tr></thead>
+          <tbody>
+            <tr><td>Matosha | Guia Solar</td><td>R$ 38.389</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr><td>MATravel | Waves</td><td>R$ 19.935</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr><td>MATravel | Nature</td><td>R$ 16.988</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr><td>Matosha | Guia Monstera</td><td>R$ 16.423</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr><td>Yoga Bag | Caramelo</td><td>R$ 8.938</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr><td>Bloco de Yoga</td><td>R$ 7.323</td><td><span class="selo fora">indisponível</span></td></tr>
+            <tr class="total"><td>Seis produtos</td><td>R$ 107.996</td><td>23,6% do faturamento de 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="faixa">
+        <span class="num">R$ 55.562 não vendidos</span>
+        <p>É o que esses seis deixaram de fazer de maio a setembro, medido contra o patamar deles
+        próprios de janeiro a abril. Não é estimativa de demanda: é a diferença entre o que a linha
+        vinha entregando e o que entregou depois que o estoque acabou.</p>
+      </div>
+      <p class="nota">Fonte: relatório de vendas por produto do Shopify (janela igual nos dois anos)
+      e leitura da disponibilidade real do catálogo da loja em 29/09/2026 — 6 de 27 produtos
+      publicados estão sem nenhuma variante disponível.</p>
+    </div>
+  </section>
+  <section>
+    <div class="card painel">
+      <div class="causa">
+        <div class="n">2</div>
+        <div>
+          <h3>O CONTENTE parou de ser usado em abril</h3>
+          <p class="d">É o cupom mais rentável da loja: desconta apenas 5% e respondia por cerca de
+          um quarto de tudo que a loja fatura. Ele rodava <b>R$ 22.209 por mês</b> de janeiro a março.
+          De abril em diante caiu para <b>R$ 5.516 por mês</b> e nunca mais voltou ao patamar.</p>
+        </div>
+      </div>
+      <div class="tabela-wrap">
+        <table>
+          <thead><tr><th>Mês</th><th>2025</th><th>2026</th><th>Pedidos 26</th></tr></thead>
+          <tbody>
+            <tr><td>Janeiro</td><td>R$ 25.139</td><td>R$ 28.689</td><td>97</td></tr>
+            <tr><td>Fevereiro</td><td>R$ 19.306</td><td>R$ 16.801</td><td>59</td></tr>
+            <tr><td>Março</td><td>R$ 26.441</td><td>R$ 21.137</td><td>66</td></tr>
+            <tr><td>Abril</td><td>R$ 9.075</td><td>R$ 10.004</td><td>22</td></tr>
+            <tr><td>Maio</td><td>R$ 24.339</td><td class="neg">R$ 3.051</td><td>4</td></tr>
+            <tr><td>Junho</td><td>R$ 699</td><td class="neg">R$ 386</td><td>1</td></tr>
+            <tr><td>Julho</td><td>R$ 26.077</td><td class="neg">R$ 3.568</td><td>13</td></tr>
+            <tr><td>Agosto</td><td>R$ 19.508</td><td>R$ 9.049</td><td>26</td></tr>
+            <tr class="parcial"><td>Setembro</td><td>R$ 10.613</td><td>R$ 7.036</td><td>17</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="faixa">
+        <span class="num">R$ 100.158 de diferença</span>
+        <p>É quanto o cupom deixou de trazer de abril a setembro, medido contra o próprio ritmo dele
+        no primeiro trimestre. Em 2025 ele trouxe R$ 246.272 em 800 pedidos custando apenas
+        R$ 13.455 de desconto.</p>
+      </div>
+      <ul class="lista">
+        <li><b>Não é falha técnica.</b> Conferimos o cupom na loja: está ativo, sem data de término,
+        sem valor mínimo de compra, e vale em 8 coleções — incluindo a de todos os produtos.
+        Quem digitar o código hoje recebe o desconto.</li>
+        <li><b>Não é esgotamento da base.</b> Ele é de uso único por cliente, mas a queda foi em
+        degrau — de 66 pedidos em março para 4 em maio — e depois houve recuperação parcial em
+        agosto. Esgotamento de base produziria uma curva suave, não esse formato.</li>
+        <li><b>Sobra a exposição.</b> O que mudou entre março e maio foi onde esse código aparecia
+        para o cliente. Essa é a pergunta que só vocês podem responder na reunião.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="card painel">
+      <div class="causa">
+        <div class="n">3</div>
+        <div>
+          <h3>A marca passou a aparecer três vezes menos por dia</h3>
+          <p class="d">Não por corte de verba — o investimento diário caiu apenas 16%. O que mudou
+          foi o <b>preço de aparecer</b>: o custo por mil exibições saiu de R$ 12,75 em janeiro para
+          R$ 31,27 em setembro. O mesmo dinheiro compra um terço da vitrine que comprava.</p>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Exibições por dia · jan–abr</span>
+          <span class="val">17.894</span>
+          <span class="sub">com R$ 265/dia</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Exibições por dia · mai–set</span>
+          <span class="val destaque">11.048</span>
+          <span class="sub">com R$ 223/dia</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Exibições por dia · setembro</span>
+          <span class="val destaque">7.070</span>
+          <span class="sub">−60% contra janeiro</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por mil exibições</span>
+          <span class="val">+145%</span>
+          <span class="sub">R$ 12,75 → R$ 31,27</span>
+        </div>
+      </div>
+      <p class="nota">Quando os produtos campeões saem do ar, os anúncios que os levavam também
+      saem — e a verba se concentra em menos peças e em públicos mais estreitos, que custam mais caro.
+      As três causas se alimentam.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Tirando suspeitas da mesa</p>
+    <h2>O que <em>não</em> explica a queda</h2>
+    <div class="card painel">
+      <ul class="lista">
+        <li><b>Não é o tapete Matosha.</b> As linhas que continuaram disponíveis venderam
+        R$ 163.433 em 2026 contra R$ 164.618 em 2025 — praticamente o mesmo número (−0,7%).</li>
+        <li><b>Não é o Cartasflow.</b> Segue sendo o produto nº 1 da loja e <span class="up">cresceu
+        2,9%</span>: R$ 55.513 → R$ 57.140.</li>
+        <li><b>Não é o interesse pela marca.</b> O tráfego de redes sociais ficou idêntico
+        (4.983 → 4.988 sessões por mês) e a busca no Google <span class="up">cresceu 36,2%</span>
+        (1.830 → 2.492 sessões por mês). Quem cai é o acesso direto, −21,8%.</li>
+        <li><b>Não é a loja converter pior por si só.</b> A conversão passou de 1,75% para 1,38% —
+        mas metade do catálogo campeão está indisponível. Uma loja com a vitrine furada converte
+        menos por consequência, não por defeito.</li>
+        <li><b>O ticket médio subiu 11,2%</b> (R$ 305 → R$ 339). Quem compra está gastando mais.
+        O problema é quanta gente chega até a compra.</li>
+      </ul>
+    </div>
+  </section>
+  <section>
+    <p class="eyebrow">O que funcionou</p>
+    <h2>Onde o dinheiro rendeu e onde não rendeu</h2>
+
+    <div class="card painel">
+      <h3>A linha que mais cresceu no ano é a de tapete de viagem</h3>
+      <p class="d nota">MATravel somou R$ 61.759 em 2026 contra R$ 34.757 em 2025 —
+      <span class="up">+77,7%</span>, o maior crescimento do catálogo. E duas das três cores
+      (Waves e Nature) estão indisponíveis hoje. É a linha em ascensão com metade da vitrine fechada.</p>
+      <div class="barra-h"></div>
+      <h3>A verba que foi para o Google não voltou</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead><tr><th>Canal</th><th>Investimento 25 → 26</th><th>Receita 25 → 26</th><th>Retorno</th></tr></thead>
+          <tbody>
+            <tr><td>Google</td><td>R$ 20.526 → R$ 31.084 <b>(+51,4%)</b></td><td>R$ 166.989 → R$ 176.731 (+5,8%)</td><td class="neg">8,14x → 5,69x</td></tr>
+            <tr><td>Meta</td><td>R$ 69.896 → R$ 65.343 (−6,5%)</td><td>R$ 359.887 → R$ 263.096 (−26,9%)</td><td class="neg">5,15x → 4,03x</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">Cada real a mais colocado no Google devolveu R$ 0,92 — menos do que custou.
+      É o mesmo comportamento que já tínhamos medido em 54 semanas dessa conta: a receita do Google
+      aqui praticamente não responde a aumento de verba. O canal é bom no que já faz; não é onde
+      escalar.</p>
+      <div class="barra-h"></div>
+      <h3>Quatro conjuntos entregaram 12,55x com R$ 1.311 no ano inteiro</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead><tr><th>Público</th><th>Investido</th><th>Compras</th><th>Retorno</th><th>Custo por venda</th></tr></thead>
+          <tbody>
+            <tr><td>[AUTO][ADV][YOGA]</td><td>R$ 371</td><td>20</td><td class="pos">16,17x</td><td>R$ 19</td></tr>
+            <tr><td>[AUTO][MIX_QUENTE]</td><td>R$ 271</td><td>9</td><td class="pos">13,56x</td><td>R$ 30</td></tr>
+            <tr><td>[AUTO][ADVANTAGE]</td><td>R$ 399</td><td>13</td><td class="pos">10,92x</td><td>R$ 31</td></tr>
+            <tr><td>[AUTO][ENVOLVIMENTO_180D]</td><td>R$ 270</td><td>9</td><td class="pos">8,93x</td><td>R$ 30</td></tr>
+            <tr class="total"><td>Somados</td><td>R$ 1.311</td><td>51</td><td>12,55x</td><td>R$ 26</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">A média da conta é R$ 83 por venda. Estes quatro fizeram a R$ 26 e receberam
+      2% da verba do ano. É a hipótese mais promissora de 2026 — com a ressalva honesta de que
+      público pequeno costuma perder eficiência quando recebe mais dinheiro. O teste é dar verba
+      controlada e medir, não escalar de uma vez.</p>
+      <div class="barra-h"></div>
+      <h3>Onde o dinheiro foi para o lixo</h3>
+      <ul class="lista">
+        <li><b>Audience Network:</b> 93.254 exibições, 10 cliques, <b>zero venda</b> de maio a setembro.
+        Dá para excluir hoje, sem custo e sem risco.</li>
+        <li><b>Reels tem o CPM mais barato e o pior resultado:</b> R$ 14,48 por mil exibições, mas
+        R$ 177 por venda — o dobro do Stories. Barato para aparecer não é barato para vender.
+        Isso corrige o que dissemos no balanço anterior.</li>
+      </ul>
+      <div class="tabela-wrap">
+        <table>
+          <thead><tr><th>Onde o anúncio aparece</th><th>Investido</th><th>Retorno</th><th>Custo/venda</th><th>CPM</th></tr></thead>
+          <tbody>
+            <tr><td>Instagram Feed</td><td>R$ 17.563</td><td>3,43x</td><td>R$ 91</td><td>R$ 26,11</td></tr>
+            <tr><td>Instagram Stories</td><td>R$ 12.168</td><td class="pos">3,73x</td><td>R$ 99</td><td>R$ 18,75</td></tr>
+            <tr><td>Instagram Reels</td><td>R$ 2.828</td><td class="neg">2,69x</td><td class="neg">R$ 177</td><td>R$ 14,48</td></tr>
+            <tr><td>Facebook Feed</td><td>R$ 654</td><td>2,63x</td><td>R$ 93</td><td>R$ 23,65</td></tr>
+            <tr><td>Audience Network</td><td>R$ 73</td><td class="neg">zero</td><td>—</td><td>R$ 0,79</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">Maio a setembro de 2026. Fonte: pixel da loja, que registra menos vendas do
+      que o Shopify — os números servem para comparar as colocações entre si, não como faturamento.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Onde está o cliente</p>
+    <h2>Que região devolve mais do que custa</h2>
+    <p class="lead">O índice abaixo compara a fatia da verba que cada estado recebe com a fatia da
+    venda que ele entrega. Acima de 1,00 o estado devolve mais do que consome.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr><th>Estado</th><th>% da verba</th><th>% da venda</th><th>Índice</th><th>Venda 2026</th></tr></thead>
+        <tbody>
+          <tr><td>Santa Catarina</td><td>6,8%</td><td>9,5%</td><td class="pos">1,40</td><td>R$ 43.436</td></tr>
+          <tr><td>Minas Gerais</td><td>7,0%</td><td>7,7%</td><td class="pos">1,10</td><td>R$ 35.237</td></tr>
+          <tr><td>Rio de Janeiro</td><td>11,2%</td><td>11,4%</td><td>1,02</td><td>R$ 52.285</td></tr>
+          <tr><td>São Paulo</td><td>45,3%</td><td>46,1%</td><td>1,02</td><td>R$ 211.387</td></tr>
+          <tr><td>Paraná</td><td>4,9%</td><td>3,8%</td><td class="neg">0,78</td><td>R$ 17.358</td></tr>
+          <tr><td>Distrito Federal</td><td>3,0%</td><td>2,3%</td><td class="neg">0,78</td><td>R$ 10.613</td></tr>
+          <tr><td>Rio Grande do Sul</td><td>5,9%</td><td>4,5%</td><td class="neg">0,77</td><td>R$ 20.786</td></tr>
+          <tr><td>Ceará</td><td>1,5%</td><td>1,0%</td><td class="neg">0,69</td><td>R$ 4.809</td></tr>
+          <tr><td>Bahia</td><td>2,6%</td><td>1,5%</td><td class="neg">0,58</td><td>R$ 6.919</td></tr>
+          <tr><td>Pernambuco</td><td>1,9%</td><td>1,0%</td><td class="neg">0,52</td><td>R$ 4.557</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="nota">São Paulo e Rio estão no ponto exato: levam o que devolvem. Santa Catarina é o
+    estado que mais rende por real investido. Bahia, Pernambuco e Ceará somam 6,0% da verba e
+    entregam 3,5% da venda — é o ajuste mais simples de fazer. Verba do Meta em 2026 contra venda
+    da loja no mesmo período.</p>
+  </section>
+  <section>
+    <p class="eyebrow">Criativo</p>
+    <h2>O que a peça precisa mostrar — clique para abrir cada anúncio</h2>
+    <p class="lead">Todos os links abaixo abrem o anúncio real, como ele aparece para o cliente.
+    Dá para abrir lado a lado durante a conversa e comparar.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr><th>Anúncio</th><th>Investido</th><th>Compras</th><th>Retorno</th><th>Cliques</th><th>Ver</th></tr></thead>
+        <tbody>
+          <tr><td>AD01_CARR_COMECAR_ANO</td><td>R$ 664</td><td>19</td><td class="pos">8,05x</td><td>0,97%</td><td><a class="peca" href="https://fb.me/2qHamHc5dtG2GEE" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD01_CARTAS_FLOW</td><td>R$ 848</td><td>17</td><td class="pos">7,15x</td><td>2,66%</td><td><a class="peca" href="https://fb.me/26842oOEPvmPF9Y" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD04_CARTASANAS_POSTURA</td><td>R$ 961</td><td>17</td><td class="pos">5,99x</td><td>1,59%</td><td><a class="peca" href="https://fb.me/2aA5sw709NMxNW2" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD01_FLOW</td><td>R$ 4.970</td><td>85</td><td class="pos">5,30x</td><td>1,70%</td><td><a class="peca" href="https://fb.me/1W6NENFlxlqqlp7" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD02_DIFERENCIAL_MATOSHA</td><td>R$ 896</td><td>9</td><td>5,12x</td><td>1,96%</td><td><a class="peca" href="https://fb.me/2mRjvqFSliLuLax" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD11_CARR_YOGA_BAG_OLIVA</td><td>R$ 893</td><td>11</td><td>5,12x</td><td>2,08%</td><td><a class="peca" href="https://fb.me/284gHbKnzkWLALf" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD_CARTASANAS_BRINDE</td><td>R$ 1.218</td><td>15</td><td>4,95x</td><td>1,33%</td><td><a class="peca" href="https://fb.me/23yDT7x8h0tzksS" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD14_VID_MATS_VENCEDOR</td><td>R$ 4.553</td><td>44</td><td>4,75x</td><td>2,35%</td><td><a class="peca" href="https://fb.me/qytYijyuTfVa0nH" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>CATALOGO_TODOS_PRODUTOS</td><td>R$ 9.770</td><td>158</td><td>4,59x</td><td>2,58%</td><td><a class="peca" href="https://fb.me/27Qb3cuZr2ZfA7u" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>FEEDBACK_MATRAVEL</td><td>R$ 954</td><td>9</td><td>4,01x</td><td class="pos">3,03%</td><td><a class="peca" href="https://fb.me/29mtIkWAytVaQVc" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD_TESTE</td><td>R$ 3.047</td><td>37</td><td class="neg">3,84x</td><td>2,02%</td><td><a class="peca" href="https://fb.me/1QKqGPJQ6vreJwq" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+          <tr><td>AD01_ALL_PRODUCTS</td><td>R$ 2.221</td><td>29</td><td class="neg">3,28x</td><td>2,14%</td><td><a class="peca" href="https://fb.me/1SuQPCoXx5Bf8m1" target="_blank" rel="noopener">abrir ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card painel">
+      <h3>O padrão que aparece quando se lê a coluna de retorno</h3>
+      <ul class="lista">
+        <li><b>Carta ganha de tapete no anúncio.</b> Quatro dos cinco melhores retornos do ano são
+        peças de Cartasflow e Cartasanas. A peça que está no ar hoje é de janeiro.</li>
+        <li><b>As duas peças que mais levam dinheiro estão no fim da lista.</b> CATALOGO_TODOS_PRODUTOS
+        e AD_TESTE somam R$ 12.817 — 20% da verba do ano — com 4,59x e 3,84x, abaixo da média das
+        peças pequenas.</li>
+        <li><b>Clique alto não é venda.</b> FEEDBACK_MATRAVEL tem o melhor índice de cliques da conta
+        (3,03%) e fica em 4,01x. AD01_CARR_COMECAR_ANO tem o pior (0,97%) e entrega 8,05x.
+        Nesta conta o clique não prevê a compra — quem decide é o produto na peça.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">A conversa</p>
+    <h2>O que precisa sair decidido desta reunião</h2>
+    <div class="grid2">
+      <div class="decisao">
+        <span class="q">1. Os seis produtos voltam? Quando?</span>
+        <span class="por">São R$ 18.173 por mês de vitrine desligada e a linha que mais cresce no
+        ano (MATravel) está com duas das três cores fora. Nenhuma decisão de mídia rende enquanto
+        isso não tiver data.</span>
+      </div>
+      <div class="decisao">
+        <span class="q">2. Onde o CONTENTE aparecia até março?</span>
+        <span class="por">O cupom está ativo e funcionando. O que mudou foi a exposição dele.
+        Saber onde ele estava é o caminho mais barato de recuperar R$ 16 mil por mês.</span>
+      </div>
+      <div class="decisao">
+        <span class="q">3. A verba volta do Google para o Instagram?</span>
+        <span class="por">O Google recebeu 51% a mais e devolveu R$ 0,92 por real. A mesma verba
+        no Instagram historicamente devolve 4 a 5 vezes.</span>
+      </div>
+      <div class="decisao">
+        <span class="q">4. Criativo novo de carta — até quando?</span>
+        <span class="por">Carta é o que mais retorna e a peça no ar é de janeiro. Outubro e dezembro
+        são os dois melhores meses do ano para esse produto.</span>
+      </div>
+    </div>
+    <div class="card painel">
+      <h3>O que fazemos independente de decisão</h3>
+      <ol class="plano">
+        <li><span class="t">Excluir Audience Network de todos os conjuntos</span>
+            <span class="d">93 mil exibições e zero venda. Sem custo, sem risco, hoje.</span></li>
+        <li><span class="t">Reequilibrar Bahia, Pernambuco e Ceará</span>
+            <span class="d">6,0% da verba para 3,5% da venda. A diferença vai para Santa Catarina e Minas, que rendem acima do que custam.</span></li>
+        <li><span class="t">Dar verba controlada aos quatro conjuntos [AUTO]</span>
+            <span class="d">12,55x com R$ 1.311 no ano. Sobe devagar e mede — não escala de uma vez.</span></li>
+        <li><span class="t">Rever as duas peças que levam 20% da verba</span>
+            <span class="d">CATALOGO_TODOS_PRODUTOS e AD_TESTE rendem abaixo das peças pequenas de carta.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Fontes.</b> Faturamento, pedidos, produtos, cupons, região e sessões: Shopify, janela de
+    1º de janeiro a 28 de setembro nos dois anos. Investimento, exibições, CPM, públicos, colocações
+    e criativos: Meta Ads e Google Ads via Windsor. Disponibilidade do catálogo: leitura direta da
+    loja em 29/09/2026.</p>
+    <p>O retorno informado por plataforma conta a mesma venda em cada canal e por isso soma mais do
+    que a loja fatura. Para o total da operação vale sempre o Shopify.</p>
+    <p>Setembro de 2026 está contado até o dia 28 e aparece sempre marcado como parcial.</p>
+  </footer>
+
+</div>
+</body>
+</html>
