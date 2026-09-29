@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>A página de vendas da Dra. Fernanda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FAF6F4; --surface:#FFFFFF; --ink:#26161A; --muted:#7A6057;
+  --line:#E7DBD6; --accent:#8E2B3F; --accent-soft:#F6E6E9;
+  --warm:#A9662F; --warm-soft:#F6EADE; --ok:#2E6A52; --ok-soft:#E3F0E9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#181012; --surface:#211619; --ink:#F0E6E3; --muted:#B49C95;
+    --line:#382A2D; --accent:#E8899B; --accent-soft:#3A1E25;
+    --warm:#D6935C; --warm-soft:#33241A; --ok:#7FC9A6; --ok-soft:#1A2F26;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#181012; --surface:#211619; --ink:#F0E6E3; --muted:#B49C95;
+  --line:#382A2D; --accent:#E8899B; --accent-soft:#3A1E25;
+  --warm:#D6935C; --warm-soft:#33241A; --ok:#7FC9A6; --ok-soft:#1A2F26;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.65;margin:0;padding:0 24px 96px}
+.wrap{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:clamp(36px,6vw,56px);line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:58ch}
+.meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+section{display:flex;flex-direction:column;gap:20px}
+h2{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;font-size:27px;line-height:1.2;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h3{font-family:"Karla",sans-serif;font-weight:700;font-size:17px;margin:0;letter-spacing:-.005em}
+p{margin:0;max-width:68ch}
+.lead{font-size:18.5px}
+strong{font-weight:700}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--accent-soft);padding:1px 5px;border-radius:3px;word-break:break-word}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.kpi{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.kpi .num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:25px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.kpi .lbl{font-size:13.5px;color:var(--muted);line-height:1.35}
+.alerta{background:var(--accent-soft);border-left:3px solid var(--accent);padding:22px 24px;border-radius:0 3px 3px 0;display:flex;flex-direction:column;gap:12px}
+.alerta h3{color:var(--accent)}
+.bom{background:var(--ok-soft);border-left:3px solid var(--ok);padding:22px 24px;border-radius:0 3px 3px 0;display:flex;flex-direction:column;gap:12px}
+.bom h3{color:var(--ok)}
+.findings{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.finding{display:grid;grid-template-columns:auto 1fr;gap:0 18px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start}
+.mark{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--accent);padding-top:5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.finding p{margin-top:8px;color:var(--muted);font-size:16px}
+.finding .fix{margin-top:10px;font-size:15.5px;color:var(--ink);border-left:2px solid var(--line);padding-left:14px}
+.finding .fix b{color:var(--warm);font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+figure{margin:0;display:flex;flex-direction:column;gap:10px}
+figure img{width:100%;border:1px solid var(--line);border-radius:3px;display:block}
+figcaption{font-size:14px;color:var(--muted);font-style:italic}
+.tabela{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+th{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:none}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right}
+ol.passos{counter-reset:p;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+ol.passos li{counter-increment:p;background:var(--surface);border:1px solid var(--line);padding:18px 20px 18px 56px;position:relative;font-size:16px}
+ol.passos li::before{content:counter(p);position:absolute;left:20px;top:18px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);font-weight:500}
+ol.passos li b{display:block;margin-bottom:2px}
+ol.passos li span{color:var(--muted);font-size:15px}
+ul.simples{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:16px}
+ul.simples li{max-width:64ch}
+ul.simples b{color:var(--ink)}
+footer{border-top:1px solid var(--line);padding-top:24px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px}
+  .finding{grid-template-columns:1fr;gap:0}
+  .mark{padding-top:0;margin-bottom:6px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Dra. Fernanda Fiori · análise da página de vendas</p>
+  <h1>A página está no ar. O botão não leva a lugar nenhum.</h1>
+  <p class="dek">Analisei linha a linha a página de vendas da Imersão Prática — copy, oferta, prova, rastreamento e carregamento — e cruzei com o que o último ciclo de mídia realmente entregou. O achado mais caro não é de texto: <strong>os seis botões de compra apontam para um checkout que devolve “Oferta não encontrada”</strong>.</p>
+  <p class="meta">29/09/2026 · páginas <code>dermatocursos.com.br/imersao-pratica</code> (v1 a v5) · dados de mídia 29/08→19/09 · GGD</p>
+</header>
+
+<section>
+  <div class="alerta">
+    <h3>Antes de qualquer outra coisa</h3>
+    <p>Enquanto o link de compra estiver morto, <strong>toda verba que voltar a rodar é perda de 100%</strong> — a pessoa clica no anúncio, lê a página inteira, clica em comprar e bate numa página de erro. Isso vale para as cinco versões da página que estão no ar.</p>
+  </div>
+  <figure>
+    <img src="img/checkout-404.jpg" alt="Tela do checkout HeroSpark com a mensagem Oferta não encontrada">
+    <figcaption>O que o comprador vê ao clicar em “Comprar Ingresso”, hoje, em qualquer uma das cinco páginas. Verificado às 16h20 de 29/09, por navegador e por requisição direta (HTTP 404).</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>O que o último ciclo mostrou</h2>
+  <p>Números do ciclo 04 (29/08 a 19/09), cruzando o que o Meta entregou com as vendas reais registradas na HeroSpark.</p>
+  <div class="kpis">
+    <div class="kpi"><span class="num">971</span><span class="lbl">pessoas chegaram na página</span></div>
+    <div class="kpi"><span class="num">14,6%</span><span class="lbl">clicaram em comprar</span></div>
+    <div class="kpi"><span class="num">30</span><span class="lbl">vendas pagas (+3 estornadas)</span></div>
+    <div class="kpi"><span class="num">R$ 153</span><span class="lbl">custo por venda paga</span></div>
+    <div class="kpi"><span class="num">1,20x</span><span class="lbl">retorno do ciclo</span></div>
+    <div class="kpi"><span class="num">R$ 4,73</span><span class="lbl">custo de cada visita</span></div>
+  </div>
+  <div class="tabela">
+    <table>
+      <tr><th>Etapa</th><th style="text-align:right">Pessoas</th><th style="text-align:right">Passa</th><th>Leitura</th></tr>
+      <tr><td>Clicaram no anúncio</td><td class="n">1.111</td><td class="n">—</td><td>R$ 4.592,75 de mídia</td></tr>
+      <tr><td>A página abriu</td><td class="n">971</td><td class="n">87,4%</td><td>140 cliques pagos (≈ R$ 578) somem antes da página carregar</td></tr>
+      <tr><td>Clicaram em comprar</td><td class="n">142</td><td class="n">14,6%</td><td>abaixo do 17,7% da 1ª edição e da meta de 15%</td></tr>
+      <tr><td>Compraram</td><td class="n">26</td><td class="n">18,3%</td><td>etapa do checkout, não da página</td></tr>
+    </table>
+  </div>
+  <p><strong>O que pagou o ciclo não foi o ingresso.</strong> Das 30 vendas pagas, 28 foram ingresso de R$ 97 — R$ 2.722,84 contra R$ 4.592,75 de mídia, ou seja, <strong>o evento sozinho devolve 0,59x</strong>. O ciclo só fecha em 1,20x por causa de <strong>uma única venda do Método Midas, de R$ 2.497, que sozinha é 45% de toda a receita</strong>. A página de R$ 97 não existe para se pagar: ela existe para encher a sala onde o Midas é apresentado. Por isso a métrica que importa nela é volume de inscrito, e conversão da página é a alavanca mais direta que temos.</p>
+  <p><strong>A trava é a página, não o anúncio.</strong> O anúncio entregou CTR de 1,57% e trouxe 971 médicos até o texto de venda — tráfego bom, custo de visita dentro do esperado. De cada 100 que chegaram, <strong>85 leram e foram embora sem tocar no botão</strong>.</p>
+</section>
+
+<section>
+  <h2>Quanto vale mexer nisso</h2>
+  <p>Com o mesmo tráfego e o mesmo dinheiro, cada ponto percentual de conversão da página vale <strong>9,7 checkouts, 2 vendas e R$ 199 de ingresso por ciclo</strong> — sem contar o que essas duas pessoas a mais valem na hora do Método Midas. Sair dos 14,6% atuais para 20% — patamar normal para uma página de evento barato com oferta clara — significa:</p>
+  <div class="kpis">
+    <div class="kpi"><span class="num">+52</span><span class="lbl">checkouts no mesmo tráfego</span></div>
+    <div class="kpi"><span class="num">+11</span><span class="lbl">vendas pagas por ciclo</span></div>
+    <div class="kpi"><span class="num">R$ 112</span><span class="lbl">custo por venda (era R$ 153)</span></div>
+    <div class="kpi"><span class="num">41</span><span class="lbl">inscritos na sala do Midas (eram 30)</span></div>
+  </div>
+  <p>É o mesmo anúncio, o mesmo público e a mesma verba. Muda só o que acontece depois do clique — e é a parte mais barata de consertar, porque não custa mídia nenhuma. Como o resultado do ciclo depende da venda do Método Midas no fim do evento, cada inscrito a mais na sala vale bem mais do que os R$ 97 dele.</p>
+</section>
+
+<section>
+  <h2>O que está errado, em ordem de dinheiro</h2>
+  <div class="findings">
+
+    <div class="finding">
+      <div class="mark">01</div>
+      <div>
+        <h3>O checkout está morto</h3>
+        <p>Os seis botões das cinco páginas apontam para <code>pay.herospark.com/…ingresso-comum-526980</code>, que hoje devolve 404 e a mensagem “Oferta não encontrada”. A oferta foi encerrada na HeroSpark junto com o evento de 19/09 e ninguém atualizou o link.</p>
+        <div class="fix"><b>conserto</b>Criar a oferta do próximo evento na HeroSpark e trocar o link nas cinco páginas antes de religar um centavo de verba.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">02</div>
+      <div>
+        <h3>Nenhum sinal de intenção chega ao Meta pela página</h3>
+        <p>Medi no navegador: clicar no botão de compra <strong>não dispara nenhum evento de pixel</strong>. O único evento que a página manda é PageView. Os 142 “checkouts iniciados” e as 26 compras que aparecem no painel vêm da própria HeroSpark, num domínio que não é o da página — por isso o público de site da conta tem 20 pessoas e nunca serviu para remarketing.</p>
+        <p>Na prática: você não consegue perseguir quem leu a página inteira e clicou em comprar sem finalizar, que é o público mais quente que existe nesse funil.</p>
+        <div class="fix"><b>conserto</b>Uma tag no GTM (container <code>GTM-NN4R45G2</code>) disparando um evento próprio no clique do botão — <code>clique_comprar</code>, não “InitiateCheckout”, para não duplicar com o que a HeroSpark já manda. Mais um ViewContent em 50% de rolagem. São 15 minutos e abrem dois públicos novos de remarketing.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">03</div>
+      <div>
+        <h3>A página vende um evento que já passou</h3>
+        <p>“19 de setembro”, “sábado”, “★ 4ª Edição” — quatro ocorrências da data vencida na v4 e na v1, sem o ano em lugar nenhum. Quem cair na página hoje vê um evento de dez dias atrás.</p>
+        <div class="fix"><b>conserto</b>Data nova com ano, e um contador de verdade até o fechamento do lote em vez do “expira em breve” solto.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">04</div>
+      <div>
+        <h3>O rodapé é de outro curso</h3>
+        <p>Todas as cinco versões terminam com <em>“© 2026 — Imersão Prática: Dominando Lipo Definição”</em>. O template veio de outro lançamento e o rodapé nunca foi trocado. Para um público de médicos que está avaliando se confia na condução clínica de quem ensina, esse tipo de descuido no rodapé pesa mais do que parece.</p>
+        <div class="fix"><b>conserto</b>Trocar o rodapé. Dois minutos, nas cinco páginas.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">05</div>
+      <div>
+        <h3>Cinco páginas idênticas no ar, todas indexáveis</h3>
+        <p>De <code>/imersao-pratica/</code> a <code>/imersao-pratica-v5/</code>, todas respondem 200, todas com o mesmo conteúdo, o mesmo checkout morto, nenhuma com <code>noindex</code> e nenhuma com canonical. O Google escolhe sozinho qual mostrar, e o “v4” aparece no título da aba do navegador e em qualquer link compartilhado.</p>
+        <div class="fix"><b>conserto</b>Escolher uma como oficial, tirar o “v2/v3/v4/v5” do título, e mandar as outras quatro para <code>noindex</code> + redirecionamento. Assim também não existe mais o risco de atualizar a página errada.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">06</div>
+      <div>
+        <h3>O link não tem prévia no WhatsApp</h3>
+        <p>A página não tem nenhuma tag <code>og:</code> — sem título, sem imagem, sem descrição de compartilhamento. Colada num grupo de médicos, sai como um link cru. Num produto que tem grupo de WhatsApp como entrega e indicação entre colegas como canal, isso é alcance jogado fora.</p>
+        <div class="fix"><b>conserto</b>og:title, og:description e og:image (a arte do topo serve) no cabeçalho da página.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">07</div>
+      <div>
+        <h3>Quatro contradições que o comprador enxerga</h3>
+        <p><b>Certificado:</b> uma seção diz “após 7 dias você recebe”; o FAQ diz “após o evento”.<br>
+        <b>Garantia:</b> um bloco promete “sem burocracia e sem questionamentos”; o FAQ condiciona “dentro do prazo informado” — e o prazo não é informado em lugar nenhum da página.<br>
+        <b>Horário:</b> o topo diz 09h às 18h; os blocos dizem manhã 09–13 e tarde 15–18; o cronograma diz almoço às 12h e retorno às 15h. Três versões do mesmo dia.<br>
+        <b>Ingresso:</b> o FAQ manda “escolher a modalidade — Ingresso Comum ou Ingresso VIP”, e VIP não existe nesta oferta.</p>
+        <div class="fix"><b>conserto</b>Fixar o prazo da garantia em 7 dias (é o direito de arrependimento do CDC, então é o número que já vale de qualquer forma) e alinhar as quatro respostas. Contradição perto do botão custa venda.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">08</div>
+      <div>
+        <h3>A prova social é de paciente, e o comprador é médico</h3>
+        <p>A única prova da página são oito prints sob o título “Feedback de alguns pacientes”, e eles aparecem só na metade da rolagem. Para um médico decidindo se compra um curso, depoimento de paciente é a prova errada — ele não está comprando resultado estético, está comprando segurança clínica e método.</p>
+        <p>E as credenciais mais fortes que existem na página estão escondidas: <strong>dermatologista, CRM-GO 12319, RQE 8199</strong> aparecem só na assinatura da garantia. O RQE é exatamente o que separa a Dra. Fernanda da maioria de quem ensina toxina no Instagram.</p>
+        <div class="fix"><b>conserto</b>Subir a credencial médica para o topo, com o RQE em destaque, e trocar os prints por depoimento de médico-aluno das quatro edições anteriores + o número de médicos já formados. Se não houver depoimento de aluno gravado, vale pedir três por WhatsApp no grupo das edições passadas — é o ativo de maior retorno da página.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">09</div>
+      <div>
+        <h3>O bloco de dor pede desculpa por existir</h3>
+        <p>São sete cards e todos começam com “Parece que…”, “Soa como se…”, “A impressão que fica é que…”, repetindo os três em ciclo. É a parte da página que deveria fazer o médico se reconhecer, e ela fala como se tivesse medo de afirmar.</p>
+        <div class="fix"><b>conserto</b>Afirmação direta, na voz de quem lê: “Você decora os pontos, mas trava quando o rosto não é igual ao do curso.” Mesma ideia, sem o amortecedor.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">10</div>
+      <div>
+        <h3>Escassez que ninguém acredita</h3>
+        <p>“93% das vagas preenchidas” aparece três vezes, sempre no mesmo número, num evento 100% online — onde vaga não acaba. “Lote atual com vagas limitadas” e “esta oferta expira em breve” sem data nenhuma. Médico é público cético; escassez falsa queima confiança justamente onde ela mais importa, que é ao lado do botão.</p>
+        <div class="fix"><b>conserto</b>Trocar por escassez verdadeira: data e hora reais de virada do lote, com contador. Se houver limite de turma no grupo de WhatsApp, esse é o número honesto para usar.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">11</div>
+      <div>
+        <h3>A página vende contra si mesma na hora de fechar</h3>
+        <p>O aviso “⚠️ Importante: as gravações NÃO estão incluídas nesta modalidade” aparece duas vezes, destacado, logo abaixo do botão de compra. A informação é honesta e precisa ficar — mas colada no CTA, em destaque, ela só dá um motivo a mais para adiar.</p>
+        <div class="fix"><b>conserto</b>Descer o aviso para o FAQ em corpo normal e transformar a gravação em oferta: se existir um VIP com gravação, ele vira o degrau natural ali.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="mark">12</div>
+      <div>
+        <h3>3 MB, 92 imagens e 21 mil pixels de rolagem</h3>
+        <p>A página pesa 2,97 MB em 77 requisições (2,5 MB só de imagem) e leva 3,6s para terminar de carregar em desktop com fibra. No 4G de um celular entre um paciente e outro, é bem mais. Já se perdem 140 dos 1.111 cliques pagos (≈ R$ 578 no ciclo) antes da página abrir.</p>
+        <p>São 21.780 pixels de rolagem — o equivalente a umas 25 telas de celular — com seis botões espalhados e nenhum CTA fixo.</p>
+        <div class="fix"><b>conserto</b>Comprimir as imagens e carregar sob demanda as que estão abaixo da dobra, e colocar uma barra fixa no celular com preço e botão. São as duas únicas mudanças da lista que mexem em quem nunca chegaria ao fim da página.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>O que já está certo e não deve ser mexido</h2>
+  <div class="bom">
+    <h3>O rastreamento de origem da venda</h3>
+    <p>O script que carrega os parâmetros do anúncio para dentro do checkout está impecável: guarda a origem por 7 dias, reescreve todos os links da HeroSpark e ainda manda os identificadores próprios (<code>src</code> e <code>sck</code>). Testei com um UTM falso e os sete parâmetros chegaram inteiros no destino. É por isso que dá para saber qual criativo vendeu — e é o que faz o painel de vendas funcionar. Não encostar.</p>
+  </div>
+  <ul class="simples">
+    <li><b>A oferta e a estrutura.</b> Âncora de R$ 997 → R$ 97, o que está incluso, para quem é e para quem não é, os dois caminhos no fim, a garantia. A espinha da página é boa.</li>
+    <li><b>O bloco “Por que tão barato?”.</b> Avisar que 80% do tempo é conteúdo e 20% é apresentação do treinamento completo é honesto e qualifica quem compra. Mantém.</li>
+    <li><b>A lista de conteúdo.</b> Treze tópicos escritos na linguagem de quem aplica — ptose, sobrancelha pesada, quando NÃO aplicar, framework de decisão. É a parte mais forte do texto e é o que puxa médico de verdade.</li>
+    <li><b>O topo.</b> Título, faixa “exclusivo para médicos”, foto da Dra. aplicando, preço visível na primeira tela. Não precisa de reforma.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Em que ordem fazer</h2>
+  <ol class="passos">
+    <li><b>Criar a oferta nova na HeroSpark e trocar o link</b><span>Sem isso, nada nesta lista importa e nenhuma verba pode voltar.</span></li>
+    <li><b>Escolher uma página oficial e aposentar as outras quatro</b><span>Tirar o “v4” do título, noindex e redirecionamento nas demais. Evita continuar editando a página errada.</span></li>
+    <li><b>Trocar data, horário e rodapé</b><span>Data nova com ano, um único horário em toda a página, rodapé com o nome certo do curso.</span></li>
+    <li><b>Tag de clique no GTM e tags de compartilhamento</b><span>Evento próprio no botão de compra + og:title/description/image. Abre remarketing de quem quase comprou.</span></li>
+    <li><b>Resolver as quatro contradições</b><span>Certificado, garantia (7 dias), horário e a menção ao VIP que não existe.</span></li>
+    <li><b>Trocar a prova social</b><span>Médico no lugar de paciente, credencial e RQE para o topo, número de médicos já formados nas quatro edições.</span></li>
+    <li><b>Reescrever os sete cards de dor</b><span>Afirmação direta, sem “parece que” e “soa como se”.</span></li>
+    <li><b>Peso e CTA fixo no celular</b><span>Comprimir imagem, carregar sob demanda, barra fixa com preço e botão.</span></li>
+  </ol>
+  <p>Os quatro primeiros são de execução, não de decisão: resolvem em uma tarde e são pré-requisito para religar a conta. Do cinco ao oito é trabalho de página e pode entrar junto com a montagem do próximo ciclo.</p>
+</section>
+
+<section>
+  <h2>Como isso foi medido</h2>
+  <ul class="simples">
+    <li><b>A página:</b> as cinco versões baixadas e lidas por inteiro, e a v4 aberta no navegador com um UTM de teste para conferir carregamento, peso, disparo de pixel e repasse de parâmetros.</li>
+    <li><b>O pixel:</b> o container <code>GTM-NN4R45G2</code> lido tag por tag, mais um clique instrumentado no botão de compra para ver o que o pixel realmente manda (não manda nada).</li>
+    <li><b>O checkout:</b> verificado por navegador e por requisição direta, com e sem parâmetros — HTTP 404 nos dois casos.</li>
+    <li><b>Os números:</b> mídia do ciclo 04 pela API do Meta (conta 855583125797769) e vendas reais pela planilha da HeroSpark, cruzando as duas pontas.</li>
+  </ul>
+</section>
+
+<footer>
+  Gio Growth Digital · 29/09/2026 · análise da página de vendas da Imersão Prática: Botox com Segurança Médica
+</footer>
+
+</div>
+</body>
+</html>
