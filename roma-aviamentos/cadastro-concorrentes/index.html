@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Roma Aviamentos — Precisa se cadastrar para comprar?</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec;
+    --accent:#127a63; --accent-soft:#e3f1ec;
+    --red:#c0442e; --red-soft:#fae6e1;
+    --amber:#b07408; --amber-soft:#fbf0d9;
+    --green:#0c7a54; --green-soft:#d6f2e5;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925;
+      --accent:#48c3a0; --accent-soft:#123027;
+      --red:#f08a72; --red-soft:#3a1d16;
+      --amber:#e6b04a; --amber-soft:#33260f;
+      --green:#5fd6a6; --green-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 70px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:70ch}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 30px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft)}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  h2{font-size:20px;font-weight:720;letter-spacing:-.01em;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--accent);color:#04211a;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex:0 0 auto}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0 0 18px 36px}
+  section{margin-top:48px}
+  h3{font-size:16px;font-weight:720;margin:26px 0 4px}
+
+  .hero{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);margin-top:6px}
+  .hero .q{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:10px}
+  .hero .a{font-size:clamp(21px,3.2vw,28px);font-weight:760;letter-spacing:-.02em;line-height:1.24}
+  .hero .a em{font-style:normal;color:var(--accent)}
+  .hero .b{margin-top:14px;font-size:14.5px;color:var(--ink-soft);max-width:74ch}
+  .hero .b b{color:var(--ink)}
+
+  .lead{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;margin-top:18px;box-shadow:var(--shadow);font-size:14.5px;color:var(--ink-soft)}
+  .lead b{color:var(--ink)}
+  .lead.red{border-left-color:var(--red)} .lead.amber{border-left-color:var(--amber)} .lead.green{border-left-color:var(--green)}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:13.5px}
+  th{background:var(--line-soft);text-align:left;padding:10px 12px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:700}
+  td{padding:10px 12px;border-top:1px solid var(--line-soft);font-variant-numeric:tabular-nums;vertical-align:top}
+  td.num,th.num{text-align:right}
+  tr.hi td{background:var(--red-soft)}
+  tr.us td{background:var(--accent-soft)}
+  .tbl-wrap{overflow-x:auto;margin-top:16px}
+  .tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .tag.bad{background:var(--red-soft);color:var(--red)}
+  .tag.ok{background:var(--green-soft);color:var(--green)}
+  .tag.mid{background:var(--amber-soft);color:var(--amber)}
+  .tag.n{background:var(--line-soft);color:var(--ink-soft)}
+
+  figure.shot{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-top:18px;box-shadow:var(--shadow)}
+  figure.shot img{width:100%;height:auto;display:block;border-radius:9px;background:#fff;border:1px solid var(--line-soft)}
+  figure.shot figcaption{font-size:13px;color:var(--ink-soft);margin-top:11px}
+  figure.shot figcaption b{color:var(--ink)}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  .quad{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media (max-width:800px){.duo,.quad{grid-template-columns:1fr}}
+  .duo figure.shot,.quad figure.shot{margin-top:0}
+  .shot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+  .shot .hd .who{font-size:14px;font-weight:740}
+  .shot.us{border-color:var(--red);border-width:2px}
+  .shot.good{border-color:var(--green);border-width:2px}
+
+  .bars{display:grid;gap:10px;margin-top:6px}
+  .bar{display:grid;grid-template-columns:150px 1fr 92px;align-items:center;gap:11px;font-size:13.5px}
+  .bar .nm{color:var(--ink-soft)}
+  .bar .tk{height:26px;background:var(--line-soft);border-radius:6px;overflow:hidden}
+  .bar .tk>span{display:block;height:100%;border-radius:0 6px 6px 0;background:linear-gradient(90deg,var(--accent),#3aa98c)}
+  .bar .tk>span.bad{background:linear-gradient(90deg,#d1614a,var(--red))}
+  .bar .tk>span.amb{background:linear-gradient(90deg,var(--amber),#d99a2b)}
+  .bar .vl{text-align:right;font-weight:760;font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.bar{grid-template-columns:1fr 82px}.bar .nm{grid-column:1/-1}}
+
+  .find{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:11px;box-shadow:var(--shadow)}
+  .find.crit{border-left-color:var(--red)} .find.warn{border-left-color:var(--amber)} .find.good{border-left-color:var(--green)}
+  .find .hd{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .find h4{font-size:15px;font-weight:720}
+  .find p{font-size:14px;color:var(--ink-soft)}
+  .find .ev{font-size:12.5px;color:var(--ink-soft);margin-top:9px;padding-top:9px;border-top:1px solid var(--line-soft)}
+  .find .ev b{color:var(--ink)}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:18px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 18px 16px;box-shadow:var(--shadow);position:relative}
+  .step .num{position:absolute;top:-11px;left:16px;background:var(--accent);color:#04211a;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .step h4{font-size:14.5px;font-weight:720;margin:4px 0 6px}
+  .step p{font-size:13.5px;color:var(--ink-soft)}
+  .step .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .step .b{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+  .step .b.esf{background:var(--line-soft);color:var(--ink-soft)}
+
+  ul.clean{list-style:none;display:grid;gap:9px;margin-top:10px}
+  ul.clean li{font-size:14px;color:var(--ink-soft);padding-left:24px;position:relative}
+  ul.clean li::before{content:"";position:absolute;left:7px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  ul.clean li b{color:var(--ink)}
+  .note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;padding-left:12px;border-left:2px solid var(--line)}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Roma Aviamentos · 29 de setembro de 2026</p>
+  <h1>Precisa se cadastrar para comprar?</h1>
+  <p class="lede">Levantamos a hipótese de que a exigência de cadastro antes da compra estaria segurando as vendas. Para responder, percorremos o caminho inteiro de compra — buscar, escolher a cor, colocar no carrinho, calcular o frete e clicar em pagar — em <b>seis lojas concorrentes</b>, com prints de cada tela. Esta página mostra o que encontramos.</p>
+
+  <div class="chips">
+    <span class="chip">🛒 <b>6</b> lojas percorridas</span>
+    <span class="chip">📸 <b>18</b> telas registradas</span>
+    <span class="chip">🧵 mesmo produto comparado: <b>Linha Anne 500m Círculo</b></span>
+    <span class="chip">📅 teste feito em <b>29/09/2026</b></span>
+  </div>
+
+  <div class="hero">
+    <p class="q">A resposta curta</p>
+    <p class="a">Nenhuma das seis concorrentes deixa comprar sem se identificar. <em>A exigência de cadastro não é o que separa a Roma do mercado</em> — é o padrão do setor inteiro.</p>
+    <p class="b">Mas o teste achou outra coisa, e essa sim separa: <b>o que cada loja coloca no lugar mais nobre do carrinho</b>, logo acima do botão de pagar. A Roma coloca um aviso vermelho de 494 pixels falando em <b>trocas e devoluções</b>. O Armarinho São José não coloca nada — o botão fica a 69 pixels do subtotal. O Ladeira coloca um incentivo para comprar mais. Tudo isso está fotografado adiante.</p>
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <section>
+    <h2><span class="n">1</span> Como o teste foi feito</h2>
+    <p class="sub">Sem contar com o que a loja diz de si mesma — percorremos como cliente.</p>
+
+    <p class="lead">Em cada loja fizemos <b>o mesmo caminho</b>, sem estar logados: buscar "linha para costura", abrir o produto, escolher uma cor, colocar no carrinho, pedir o cálculo de frete e clicar no botão de pagar. Paramos exatamente na tela em que a loja pede a identificação — <b>nenhum dado pessoal foi digitado em nenhuma delas</b>. Cada tela desta página é uma foto real desse percurso, feita em 29 de setembro de 2026.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Loja</th><th>Onde fica</th><th>Vende online?</th><th>O que é</th></tr></thead>
+        <tbody>
+          <tr class="us"><td><b>Roma Aviamentos</b></td><td>Nova Odessa/SP</td><td>Sim</td><td>Nós</td></tr>
+          <tr><td><b>Armarinho São José</b></td><td>Londrina/PR</td><td>Sim</td><td>Maior loja online do nicho, mesma plataforma da Roma</td></tr>
+          <tr><td><b>Aviamentos São Paulo</b></td><td>São Paulo/SP</td><td>Sim</td><td>Mesma plataforma da Roma</td></tr>
+          <tr><td><b>Armarinhos Partata</b></td><td>São Paulo/SP</td><td>Sim</td><td>Mesma plataforma da Roma</td></tr>
+          <tr><td><b>Ladeira Armarinhos</b></td><td>São Paulo/SP</td><td>Sim</td><td>Plataforma VTEX — a loja mais bem montada do teste</td></tr>
+          <tr><td><b>AF Aviamentos</b></td><td>S. J. do Rio Preto/SP</td><td>Sim</td><td>Plataforma Loja Integrada</td></tr>
+          <tr><td><b>Armarinhos Fernando</b></td><td>São Paulo/SP (25 de Março)</td><td><span class="tag bad">Não</span></td><td>18 lojas físicas e <b>nenhuma venda online</b> — o site é institucional</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">Descoberta lateral que vale registrar: o <b>Armarinhos Fernando</b>, a maior rede do país no segmento, com 18 lojas e 49 anos, <b>não vende pela internet</b>. O site dele só mostra endereços das lojas e o cartão próprio. Quem compra aviamento online no Brasil não tem tantas opções quanto parece.</p>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section>
+    <h2><span class="n">2</span> Todo mundo pede cadastro. A diferença é o tamanho do pedido</h2>
+    <p class="sub">As seis lojas param o cliente antes do pagamento. O que muda é quantos dados elas pedem ali.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Loja</th><th>Preço sem login</th><th>Carrinho sem login</th><th>Frete sem login</th>
+            <th>Para pagar</th><th>O que pede na porta</th><th>Entrar com Google/Facebook</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="us">
+            <td><b>Roma</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag bad">Identificação</span></td><td>E-mail, CPF ou CNPJ <b>+ senha</b></td><td><span class="tag ok">Sim, os dois</span></td>
+          </tr>
+          <tr>
+            <td><b>Armarinho São José</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag bad">Identificação</span></td><td>E-mail, CPF ou CNPJ <b>+ senha</b></td><td><span class="tag bad">Não tem</span></td>
+          </tr>
+          <tr>
+            <td><b>Aviamentos São Paulo</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag bad">Identificação</span></td><td>E-mail, CPF ou CNPJ <b>+ senha</b></td><td><span class="tag ok">Sim, os dois</span></td>
+          </tr>
+          <tr>
+            <td><b>Armarinhos Partata</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag bad">Identificação</span></td><td>E-mail, CPF ou CNPJ <b>+ senha</b></td><td><span class="tag bad">Não tem</span></td>
+          </tr>
+          <tr>
+            <td><b>AF Aviamentos</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag mid">Identificação</span></td><td>E-mail <b>ou</b> CPF/CNPJ — e a loja avisa que <b>cria a conta sozinha</b></td><td><span class="tag ok">Sim, os dois</span></td>
+          </tr>
+          <tr>
+            <td><b>Ladeira Armarinhos</b></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td><td><span class="tag ok">Sim</span></td>
+            <td><span class="tag mid">Identificação</span></td><td><b>Só o e-mail.</b> Sem senha, sem CPF</td><td><span class="tag n">Não exibe</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lead green"><b>Leitura:</b> na porta de entrada, a Roma não está atrás — está à frente do Armarinho São José e do Partata, que <b>não oferecem entrar com Google ou Facebook</b>. Quem facilita de verdade são o Ladeira (um campo só, sem senha) e o AF (que diz ao cliente, em letras grandes, que ele não precisa criar conta — a loja cria).</div>
+
+    <h3>As quatro portas de entrada, lado a lado</h3>
+    <div class="quad">
+      <figure class="shot us">
+        <div class="hd"><span class="who">Roma Aviamentos</span><span class="tag mid">e-mail/CPF/CNPJ + senha</span></div>
+        <img src="img/roma-signin.jpg" alt="Tela de identificação da Roma Aviamentos">
+        <figcaption>Pede e-mail, CPF ou CNPJ e depois a senha. <b>Tem entrar com Google e Facebook</b> — ponto a favor. Embaixo, "Ainda não é cliente? Crie sua conta".</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="hd"><span class="who">Armarinho São José</span><span class="tag bad">sem login social</span></div>
+        <img src="img/saojose-signin.jpg" alt="Tela de identificação do Armarinho São José">
+        <figcaption>Tela idêntica à da Roma — <b>mas sem Google e sem Facebook</b>. O maior concorrente online do nicho exige mais do cliente do que a Roma neste ponto.</figcaption>
+      </figure>
+      <figure class="shot good">
+        <div class="hd"><span class="who">Ladeira Armarinhos</span><span class="tag ok">só e-mail</span></div>
+        <img src="img/ladeira-identificacao-email.jpg" alt="Tela de identificação do Ladeira Armarinhos: só e-mail">
+        <figcaption><b>"Identifique-se e garanta a sua compra"</b> — um campo, o e-mail. Sem senha, sem CPF. Barra de progresso mostrando que ele está no começo e no rodapé "compra rápida".</figcaption>
+      </figure>
+      <figure class="shot good">
+        <div class="hd"><span class="who">AF Aviamentos</span><span class="tag ok">a loja cria a conta</span></div>
+        <img src="img/af-identificacao.jpg" alt="Tela de identificação do AF Aviamentos">
+        <figcaption>"Informe seu e-mail ou CPF/CNPJ para prosseguir com sua compra — <b>utilizaremos seus dados para identificar seu cadastro ou criar uma nova conta</b>". O cliente não sente que está se cadastrando.</figcaption>
+      </figure>
+    </div>
+
+    <h3>As outras duas, para não ficar dúvida</h3>
+    <div class="duo">
+      <figure class="shot">
+        <div class="hd"><span class="who">Aviamentos São Paulo</span><span class="tag ok">tem Google e Facebook</span></div>
+        <img src="img/aviamentossp-signin.jpg" alt="Tela de identificação do Aviamentos São Paulo">
+        <figcaption>Mesma estrutura da Roma, com os dois botões de login social.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="hd"><span class="who">Armarinhos Partata</span><span class="tag bad">sem login social</span></div>
+        <img src="img/partata-signin.jpg" alt="Tela de identificação do Armarinhos Partata">
+        <figcaption>Só o campo e o botão. Nenhuma outra forma de entrar.</figcaption>
+      </figure>
+    </div>
+
+    <h3>E o formulário de cadastro da Roma, quando o cliente é novo</h3>
+    <figure class="shot us">
+      <div class="hd"><span class="who">Roma — criar conta</span><span class="tag mid">5 campos + senha</span></div>
+      <img src="img/roma-signup.jpg" alt="Formulário de criar conta da Roma">
+      <figcaption>Nome e sobrenome, CPF, telefone, e-mail e senha — e um botão "Conta empresa" para quem compra com CNPJ. <b>É o mesmo formulário do Armarinho São José, campo por campo</b>: as duas lojas rodam a mesma plataforma. Não há desvantagem da Roma aqui.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section>
+    <h2><span class="n">3</span> O que a Roma coloca entre o preço e o botão de pagar</h2>
+    <p class="sub">Esta é a maior diferença encontrada no teste — e a mais barata de corrigir.</p>
+
+    <p class="lead red">No carrinho da Roma, entre a linha do <b>Subtotal</b> e o botão <b>Prosseguir para Pagamento</b>, há um bloco vermelho com o título <b>"Atenção"</b> e o texto <i>"Já conferiu se todos os itens estão corretos? Pedimos que confira atentamente os itens selecionados antes de efetuar o pagamento para evitar transtornos com trocas e devoluções."</i> Ele ocupa <b>494 pixels</b>. No Armarinho São José, essa mesma distância é de <b>69 pixels</b> — o botão vem logo abaixo do subtotal. <b>São 7 vezes mais espaço, e o que está nesse espaço é um alerta de problema.</b></p>
+
+    <div class="duo">
+      <figure class="shot us">
+        <div class="hd"><span class="who">Roma Aviamentos</span><span class="tag bad">494 px de aviso</span></div>
+        <img src="img/roma-carrinho-col.jpg" alt="Coluna do carrinho da Roma com o banner Atenção">
+        <figcaption>O cliente chegou até aqui, escolheu, somou R$ 735,75 — e a última coisa que lê antes de pagar é um aviso sobre <b>trocas e devoluções</b>. O botão verde fica empurrado para fora da tela.</figcaption>
+      </figure>
+      <figure class="shot good">
+        <div class="hd"><span class="who">Armarinho São José</span><span class="tag ok">69 px</span></div>
+        <img src="img/saojose-carrinho-col.jpg" alt="Coluna do carrinho do Armarinho São José, limpa">
+        <figcaption>Mesma escala, mesmo recorte. Subtotal, botão. <b>Nada entre os dois.</b> O concorrente direto usa esse espaço para não atrapalhar.</figcaption>
+      </figure>
+    </div>
+
+    <div class="bars" style="margin-top:22px">
+      <div class="bar"><span class="nm">Roma</span><span class="tk"><span class="bad" style="width:100%"></span></span><span class="vl">494 px</span></div>
+      <div class="bar"><span class="nm">Aviamentos SP</span><span class="tk"><span class="amb" style="width:45%"></span></span><span class="vl">~220 px</span></div>
+      <div class="bar"><span class="nm">Armarinho São José</span><span class="tk"><span style="width:14%"></span></span><span class="vl">69 px</span></div>
+    </div>
+    <p class="note">Distância medida por código, do topo da palavra "Subtotal" ao topo do botão de pagamento, na mesma tela e mesmo navegador. O Aviamentos São Paulo também tem um aviso ali, mas é um texto de três linhas — não um banner com imagem de fundo.</p>
+
+    <h3>Honestidade: o aviso não é invenção da Roma</h3>
+    <figure class="shot">
+      <div class="hd"><span class="who">Aviamentos São Paulo</span><span class="tag mid">aviso curto</span></div>
+      <img src="img/aviamentossp-carrinho.jpg" alt="Carrinho do Aviamentos São Paulo com aviso curto">
+      <figcaption>O Aviamentos São Paulo também avisa — <i>"Revise o endereço e os produtos de sua compra para evitar possíveis devoluções e transtornos na entrega"</i> — em <b>três linhas de texto</b>, e coloca o simulador de frete aberto logo acima, com o campo de CEP à mão. <b>A diferença não é ter o aviso, é o tamanho e o peso visual dele.</b></figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section>
+    <h2><span class="n">4</span> O que a melhor loja do teste coloca nesse mesmo espaço</h2>
+    <p class="sub">Ladeira Armarinhos, São Paulo — o carrinho que empurra para a frente em vez de puxar para trás.</p>
+
+    <div class="duo">
+      <figure class="shot good">
+        <div class="hd"><span class="who">Ladeira — carrinho</span><span class="tag ok">incentivo</span></div>
+        <img src="img/ladeira-minicarrinho.jpg" alt="Mini-carrinho do Ladeira Armarinhos">
+        <figcaption>O carrinho abre <b>por cima da página</b>, sem tirar o cliente de onde ele está. No alto: <i>"Não perca! Produtos no carrinho podem acabar. Finalize a compra agora!"</i>. No meio: uma barra de progresso — <b>"Compre R$ 1.000,00 e ganhe 10% de desconto · Faltam R$ 981,60"</b>. Mesmo espaço da Roma, mensagem oposta.</figcaption>
+      </figure>
+      <figure class="shot good">
+        <div class="hd"><span class="who">Ladeira — checkout</span><span class="tag ok">o cliente vê onde está</span></div>
+        <img src="img/ladeira-checkout-passos.jpg" alt="Checkout do Ladeira com as etapas visíveis">
+        <figcaption>No topo, as cinco etapas: <b>CARRINHO → LOGIN → ENVIO → PAGAMENTO → REVISÃO</b>. O cliente sabe quanto falta. Na Roma não existe essa indicação: ele clica em pagar e cai numa tela de login sem saber quantos passos ainda vêm.</figcaption>
+      </figure>
+    </div>
+
+    <figure class="shot good">
+      <div class="hd"><span class="who">Ladeira — página do produto</span><span class="tag ok">67 a 87 cores com foto</span></div>
+      <img src="img/ladeira-pdp.jpg" alt="Página de produto do Ladeira com grade de cores fotografadas">
+      <figcaption>Cada cor tem <b>a foto do novelo naquela cor</b> e o nome escrito ("Cor: TURQUESA 2194", "ANIL PROFUNDO 2856"). Ao lado: PIX parcelado em até 4x, envio expresso em 48h, <b>escada de desconto por volume (10% · 15% · 17% · 20%)</b> e cashback de 5% no clube. Preço: <b>R$ 18,40</b>.</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <div class="hd"><span class="who">Ladeira — listagem</span><span class="tag ok">a cor aparece antes de clicar</span></div>
+      <img src="img/ladeira-busca-cores.jpg" alt="Listagem do Ladeira com selo de quantidade de cores">
+      <figcaption>Na busca, cada produto já mostra um selo com <b>quantas cores existem</b> — 67, 54, 84, 60, 87. Quem compra aviamento compra cor: essa informação na listagem é o que faz a pessoa clicar.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section>
+    <h2><span class="n">5</span> O mesmo produto, nas três lojas</h2>
+    <p class="sub">Linha Anne Círculo 500m, 147g, algodão mercerizado — item idêntico, medido no mesmo dia.</p>
+
+    <div class="bars" style="margin-top:14px">
+      <div class="bar"><span class="nm">Ladeira</span><span class="tk"><span style="width:82%"></span></span><span class="vl">R$ 18,40</span></div>
+      <div class="bar"><span class="nm">Armarinho São José</span><span class="tk"><span class="amb" style="width:98%"></span></span><span class="vl">R$ 21,99</span></div>
+      <div class="bar"><span class="nm">Roma</span><span class="tk"><span class="bad" style="width:100%"></span></span><span class="vl">R$ 22,43</span></div>
+    </div>
+
+    <p class="lead amber">A Roma está <b>21,9% acima do Ladeira</b> e 2% acima do São José nesse item. Com os 5% do Pix, a Roma cai para R$ 21,31 — ainda <b>15,8% acima</b>. <b>Mas isso não vale para o catálogo inteiro:</b> num levantamento de dez produtos Círculo contra o Armarinho São José, a Roma é <b>mais barata em sete deles</b> (Anne Brilho −15%, Fio Náutico −15%, Amigurumi Pelúcia −11%). O preço da Roma é competitivo; o que não dá para sustentar é ser a mais cara justamente no item mais procurado da categoria.</p>
+
+    <h3>Parcelamento — aqui a diferença é grande</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Loja</th><th>Cartão</th><th>À vista</th><th>Extra</th></tr></thead>
+        <tbody>
+          <tr class="us"><td><b>Roma</b></td><td><span class="tag bad">até 5x</span></td><td>5% off no Pix</td><td>—</td></tr>
+          <tr><td><b>Armarinho São José</b></td><td><span class="tag ok">até 12x</span> (3x sem juros)</td><td>Boleto e Pix</td><td>2ª via de boleto na central de ajuda</td></tr>
+          <tr><td><b>Ladeira</b></td><td>—</td><td>PIX parcelado em até 4x</td><td>Cashback 5% no clube + escada 10/15/17/20% por volume</td></tr>
+          <tr><td><b>AF Aviamentos</b></td><td>—</td><td>—</td><td>Cashback de 5% em toda compra, mostrado no produto e no carrinho</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section>
+    <h2><span class="n">6</span> O que a Roma faz melhor que os concorrentes</h2>
+    <p class="sub">O teste não achou só problema. Estas são vantagens reais, e vale defendê-las.</p>
+
+    <div class="find good">
+      <div class="hd"><span class="tag ok">Vantagem</span><h4>Entrar com Google e Facebook</h4></div>
+      <p>A Roma tem os dois botões na tela de identificação. O <b>Armarinho São José e o Partata não têm nenhum</b> — o cliente deles só entra digitando e lembrando a senha.</p>
+    </div>
+
+    <div class="find good">
+      <div class="hd"><span class="tag ok">Vantagem</span><h4>Sem pedido mínimo</h4></div>
+      <p>Na Roma e no São José a compra fecha com qualquer valor. No <b>Ladeira, o pedido só avança a partir de R$ 50,00</b> — o teste bateu nessa trava com um carrinho de R$ 18,40.</p>
+      <div class="ev"><b>Prova:</b> a tela de bloqueio do Ladeira está logo abaixo.</div>
+    </div>
+
+    <div class="find good">
+      <div class="hd"><span class="tag ok">Vantagem</span><h4>Frete simulado já na página do produto</h4></div>
+      <p>A Roma oferece "Simular frete deste item" antes do carrinho. O São José só calcula depois que o produto já está no carrinho.</p>
+    </div>
+
+    <div class="find good">
+      <div class="hd"><span class="tag ok">Vantagem</span><h4>Marcas próprias</h4></div>
+      <p>Princess, Sanding, Fofurinha, Violin, Xikkye e RomaBond. Nenhum concorrente do teste tem uma linha própria comparável — é ativo que ninguém copia e que hoje aparece pouco na loja.</p>
+    </div>
+
+    <figure class="shot">
+      <div class="hd"><span class="who">Ladeira — pedido mínimo</span><span class="tag bad">R$ 50,00</span></div>
+      <img src="img/ladeira-pedido-minimo.jpg" alt="Aviso de pedido mínimo de R$50 no Ladeira">
+      <figcaption>"O valor mínimo do pedido deve ser de R$ 50,00". A loja mais bem montada do teste perde a venda pequena. A Roma não perde.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section>
+    <h2><span class="n">7</span> As outras diferenças que o teste registrou</h2>
+    <p class="sub">Medidas na mesma categoria e no mesmo dia.</p>
+
+    <div class="find crit">
+      <div class="hd"><span class="tag bad">Crítico</span><h4>Nenhuma avaliação nos produtos</h4></div>
+      <p>A página de produto testada na Roma tem <b>zero avaliações</b> — cinco estrelas vazias e um convite para "Avaliar produto". A mesma linha no Armarinho São José tem <b>148 avaliações</b>; no Ladeira, 15.</p>
+      <div class="ev"><b>Por que importa:</b> quem compra cor pela internet sem poder tocar no produto procura a experiência de quem já comprou. É o que sustenta o preço mais alto.</div>
+    </div>
+
+    <div class="find crit">
+      <div class="hd"><span class="tag bad">Crítico</span><h4>A cor não tem nome nem foto</h4></div>
+      <p>No produto testado, a Roma oferecia <b>2 cores</b>, identificadas como <code>Lres/verm35</code> e <code>Lres/beg68</code> — código interno. O Armarinho São José entrega <b>196 cores</b> com nome ("000- Branca", "005- Jasmim") e foto do cone. O Ladeira, 67 a 87 cores com foto do novelo real.</p>
+    </div>
+
+    <div class="find warn">
+      <div class="hd"><span class="tag mid">Atenção</span><h4>Um quarto da categoria está esgotado</h4></div>
+      <p>Na categoria Linhas de Costura da Roma: 34 produtos, <b>9 esgotados (26,5%)</b>. Na mesma categoria do Armarinho São José: 43 produtos, <b>nenhum esgotado</b>.</p>
+    </div>
+
+    <div class="find warn">
+      <div class="hd"><span class="tag mid">Atenção</span><h4>O carrinho abriu travado por estoque</h4></div>
+      <p>Ao abrir o carrinho da Roma, a primeira coisa na tela foi um erro: <i>"Fita Gorgurão Poá Princess ... não possui a quantidade desejada. Quantidade disponível: 2"</i>, com um botão ATUALIZAR que precisa ser clicado antes de qualquer outra coisa. Quem chegou ali com a compra pronta encontra um problema, não um caminho.</p>
+      <div class="ev"><b>Prova:</b> visível no alto do print do carrinho completo.</div>
+    </div>
+
+    <figure class="shot us">
+      <div class="hd"><span class="who">Roma — carrinho completo</span><span class="tag bad">erro de estoque no topo</span></div>
+      <img src="img/roma-carrinho-full.jpg" alt="Carrinho completo da Roma com erro de estoque no topo">
+      <figcaption>A faixa cinza no topo é o bloqueio de estoque. À direita, o aviso vermelho. Este é o carrinho como o cliente o encontra.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section>
+    <h2><span class="n">8</span> O que fazer</h2>
+    <p class="sub">Em ordem de esforço. As duas primeiras não dependem de desenvolvimento.</p>
+
+    <div class="steps">
+      <div class="step"><div class="num">1</div>
+        <h4>Tirar o aviso vermelho do carrinho</h4>
+        <p>Ou, no mínimo, reduzi-lo a uma linha de texto discreta como faz o Aviamentos São Paulo. No lugar dele, colocar o que o cliente quer ver ali: o frete já calculado ou o valor que falta para um benefício.</p>
+        <div class="meta"><span class="b">maior impacto</span><span class="b esf">sem desenvolvimento</span></div>
+      </div>
+      <div class="step"><div class="num">2</div>
+        <h4>Mostrar as etapas do checkout</h4>
+        <p>Carrinho → Identificação → Entrega → Pagamento. O cliente que sabe quanto falta desiste menos. O Ladeira faz isso e é a diferença entre "vou ter que me cadastrar" e "faltam três passos".</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">baixo esforço</span></div>
+      </div>
+      <div class="step"><div class="num">3</div>
+        <h4>Reescrever a tela de identificação</h4>
+        <p>Trocar "Ainda não é cliente? Crie sua conta" por algo como o AF: "usamos seus dados para achar seu cadastro ou criar um para você". E dar destaque aos botões de Google e Facebook, que a Roma já tem e os concorrentes não.</p>
+        <div class="meta"><span class="b">médio impacto</span><span class="b esf">baixo esforço</span></div>
+      </div>
+      <div class="step"><div class="num">4</div>
+        <h4>Nome e foto em cada cor</h4>
+        <p>Trocar <code>Lres/verm35</code> por "35 - Vermelho" com a foto do cone. E mostrar na listagem quantas cores o produto tem, como o Ladeira faz.</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">trabalho de cadastro</span></div>
+      </div>
+      <div class="step"><div class="num">5</div>
+        <h4>Pedir avaliação de quem já comprou</h4>
+        <p>Zero contra 148 do concorrente. Um disparo para a base de quem comprou nos últimos 90 dias resolve parte disso em uma semana.</p>
+        <div class="meta"><span class="b">alto impacto</span><span class="b esf">baixo esforço</span></div>
+      </div>
+      <div class="step"><div class="num">6</div>
+        <h4>Rever o parcelamento</h4>
+        <p>5x contra 12x do Armarinho São José. Em compra de ateliê e revenda, o número de parcelas decide.</p>
+        <div class="meta"><span class="b">médio impacto</span><span class="b esf">decisão comercial</span></div>
+      </div>
+    </div>
+
+    <div class="lead">Nada nesta lista depende de mudar a exigência de cadastro — e é por isso que ela existe. <b>O cadastro é o preço de entrada do setor inteiro.</b> O que a Roma pode ganhar está no que vem antes e no que vem depois dele.</div>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital — teste de percurso de compra, 29 de setembro de 2026</span>
+    <span>Todas as telas são fotos reais do percurso, sem edição.</span>
+  </footer>
+
+</div>
+</body>
+</html>
