@@ -18,7 +18,6 @@
     { id: "resumo",     rotulo: "Resumo",     nota: "visão geral",      href: BASE },
     { id: "perpetuo",   rotulo: "Biblioteca", nota: "perpétuo · R$ 97", href: BASE + "perpetuo/" },
     { id: "lancamento", rotulo: "Imersão",    nota: "lançamentos",      href: BASE + "lancamento/" },
-    { id: "live",       rotulo: "Aula de terça", nota: "captação",     href: BASE + "live/" },
     { id: "funil",      rotulo: "Funil 30d",  nota: "conta 01",         href: BASE + "funil/" }
   ];
 
