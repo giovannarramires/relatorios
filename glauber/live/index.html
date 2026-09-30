@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aula de terça · captação — Dr. Glauber | GGD</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--txt:#e6edf3;
     --mut:#8b98a9;--accent:#4f9cff;--green:#2ec27e;--greenbg:#12301f;--yellow:#e8b13b;
@@ -33,23 +32,108 @@
   .aviso{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--yellow);
     border-radius:10px;padding:16px 18px;font-size:13.5px;color:var(--txt);margin-top:4px}
   .aviso b{color:var(--yellow)}
-  .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600}
-  .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)}
-  .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
-  .tbox{overflow-x:auto}
-  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
-    border-radius:12px;overflow:hidden;font-size:13px;min-width:720px}
-  thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;
-    font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-  tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
-  tbody tr:hover{background:#141a24}
-  .num{text-align:right;font-variant-numeric:tabular-nums}
-  th.num{text-align:right}
-  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
   footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
   footer ul{margin:8px 0 0 18px} footer li{margin:5px 0}
   a{color:var(--accent);text-decoration:none}
-  .vazio{color:var(--mut);font-style:italic}
+
+/* A aba tem CSS proprio (prefixo dd-) e nao herda nada do dash que a hospeda:
+   sao quinze visuais diferentes e ela precisa ficar igual em todos. Cor de
+   destaque e fundo do resumo vem por variavel, com fallback. */
+.dd{--dd-cor:var(--dd-tema,#12857f);--dd-esc:var(--dd-tema-esc,#0d3f45);
+--dd-bg:var(--dd-surface,#fff);--dd-br:var(--dd-linha,#e3e8ef);--dd-tx:var(--dd-texto,#101a26);
+--dd-t2:var(--dd-texto2,#4a5768);--dd-t3:var(--dd-texto3,#93a1b3);--dd-ze:var(--dd-zebra,#f6f8fb);
+font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--dd-tx);margin-top:8px}
+.dd *{box-sizing:border-box}
+.dd-bar{background:var(--dd-bg);border:1px solid var(--dd-br);border-left:4px solid var(--dd-cor);
+border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-bar h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--dd-t2);
+margin:0 0 12px;font-weight:700}
+.dd-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.dd-preset{font:700 12.5px/1 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:var(--dd-ze);
+border:1px solid var(--dd-br);border-radius:18px;padding:7px 14px;transition:all .15s}
+.dd-preset:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-preset.on{background:var(--dd-cor);border-color:var(--dd-cor);color:#fff}
+.dd-datas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dd-t2)}
+.dd-datas input[type=date]{font:600 13px 'Inter',sans-serif;color:var(--dd-tx);background:var(--dd-bg);
+color-scheme:light dark;
+border:1px solid var(--dd-br);border-radius:9px;padding:7px 10px;cursor:pointer}
+.dd-datas input[type=date]:focus{outline:none;border-color:var(--dd-cor)}
+.dd-cont{font-size:12px;color:var(--dd-t3);font-weight:600}
+.dd-cont b{color:var(--dd-cor)}
+.dd-acoes{display:flex;gap:7px;margin-left:auto}
+.dd-mini{font:700 11.5px 'Inter',sans-serif;color:var(--dd-t2);cursor:pointer;background:transparent;
+border:1px solid var(--dd-br);border-radius:16px;padding:6px 12px}
+.dd-mini:hover{border-color:var(--dd-cor);color:var(--dd-cor)}
+.dd-dica{font-size:11.5px;color:var(--dd-t3);margin-top:11px;line-height:1.55}
+.dd-dica b{color:var(--dd-t2)}
+.dd-hero{background:linear-gradient(135deg,var(--dd-esc) 0%,var(--dd-cor) 165%);border-radius:16px;
+padding:20px 24px;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.13)}
+.dd-hl{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
+color:rgba(255,255,255,.72);margin-bottom:14px}
+.dd-hl span{letter-spacing:.3px;text-transform:none;font-weight:600;color:rgba(255,255,255,.62)}
+.dd-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.dd-box{flex:1;min-width:158px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+border-radius:12px;padding:14px 17px}
+.dd-box.forte{background:rgba(212,162,76,.2);border-color:rgba(212,162,76,.5);min-width:178px}
+.dd-box.forte .dd-v{color:#f0c579;font-size:29px}
+.dd-bl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.7);
+font-weight:700;margin-bottom:6px}
+.dd-v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.dd-v small{font-size:13px;font-weight:700;opacity:.75}
+.dd-s{font-size:11px;color:rgba(255,255,255,.62);margin-top:5px;line-height:1.45}
+.dd-op{align-self:center;font-size:22px;font-weight:300;color:rgba(255,255,255,.45)}
+.delta{display:block;font-style:normal;font-size:10.5px;font-weight:700;margin-top:5px}
+.delta.up{color:#8ce0b4} .delta.down{color:#ffb4a8} .delta.flat{color:rgba(255,255,255,.5)}
+.dd-sec{display:flex;align-items:baseline;gap:10px;margin:26px 0 13px;flex-wrap:wrap}
+.dd-sec i{width:4px;height:18px;background:var(--dd-cor);border-radius:3px;align-self:center;display:block}
+.dd-sec b{font-size:14.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.dd-sec em{font-style:normal;font-size:11.5px;color:var(--dd-t3)}
+.dd-card{background:var(--dd-bg);border:1px solid var(--dd-br);border-radius:12px;padding:18px 20px;
+box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.dd-seg{background:var(--dd-bg);border:1px solid var(--dd-br);border-top:4px solid var(--pc);
+border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.dd-seg-n{font-size:18px;font-weight:700;color:var(--pc)}
+.dd-seg-s{font-size:11px;color:var(--dd-t3);margin:3px 0 13px;min-height:1px}
+.dd-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.dd-kpis div{background:var(--dd-ze);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--dd-t2)}
+.dd-kpis span{display:block;font-size:19px;font-weight:700;color:var(--dd-tx)}
+.dd-kpis em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);margin-top:2px;min-height:12px}
+.dd-mn{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 14px;margin-top:11px;font-size:11.5px;color:var(--dd-t2)}
+.dd-mn b{color:var(--dd-tx)}
+.dd-wrap{overflow-x:auto}
+.dd-wrap.alta{max-height:620px;overflow:auto}
+.dd-wrap.alta thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--dd-br)}
+table.dd-t{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;background:transparent}
+table.dd-t th{background:var(--dd-ze);padding:10px 12px;text-align:right;font-size:10.5px;text-transform:uppercase;
+letter-spacing:.5px;color:var(--dd-t3);font-weight:700;white-space:nowrap;border:none}
+table.dd-t th.l,table.dd-t td.l{text-align:left}
+table.dd-t th.d,table.dd-t td.d{text-align:right;font-weight:700}
+table.dd-t td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--dd-br);vertical-align:top;color:var(--dd-tx)}
+table.dd-t td.l em{display:block;font-style:normal;font-size:11px;color:var(--dd-t3);margin-top:2px}
+table.dd-t td.d em{display:block;font-style:normal;font-size:10.5px;color:var(--dd-t3);font-weight:600;margin-top:3px;white-space:nowrap}
+table.dd-t tbody tr:hover{background:var(--dd-ze)}
+table.dd-t tr.sem td{color:var(--dd-t3)}
+table.dd-t tr.fora td{opacity:.34}
+table.dd-t tr.fora td.l b{text-decoration:line-through}
+table.dd-t td.l a{color:var(--dd-cor);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+table.dd-t td.dia{white-space:nowrap}
+table.dd-t td.dia em{text-transform:capitalize}
+.dd-chk{width:16px;height:16px;accent-color:var(--dd-cor);cursor:pointer;vertical-align:-3px}
+.dd-pill{padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;color:#fff;display:inline-block}
+.dd-pill.ok{background:#0f8a5f} .dd-pill.off{background:#8593a5}
+.dd-leg{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--dd-t2);margin-top:10px;flex-wrap:wrap}
+.dd-leg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.dd-graf{width:100%;height:auto}
+.dd-graf .gy{font-size:10.5px;fill:var(--dd-t3);text-anchor:end}
+.dd-graf .gy2{font-size:10.5px;fill:#b08a3c;text-anchor:start}
+.dd-graf .gx{font-size:10px;fill:var(--dd-t3);text-anchor:middle}
+.dd-vazio{padding:24px;text-align:center;color:var(--dd-t3);font-size:13px;background:var(--dd-ze);border-radius:12px}
+.dd-nota{background:#fff8e6;border:1px solid #f0dca8;border-radius:10px;padding:9px 12px;
+font-size:11.5px;color:#5d4a1c;margin-top:12px;line-height:1.5}
+.dd-cap{font-size:11.5px;color:var(--dd-t3);margin-top:12px}
+@media(max-width:760px){.dd-kpis{grid-template-columns:1fr}.dd-acoes{margin-left:0}}
+
 </style>
 </head>
 <body>
@@ -62,13 +146,13 @@
       <div class="sub">Quanto custa colocar um médico dentro da aula ao vivo de terça, 20h30</div>
     </div>
     <div>
-      <span class="badge">25/09 → 30/09</span>
-      <span class="badge">atualizado em 30/09 às 12h57</span>
+      <span class="badge">28/09 → 30/09</span>
+      <span class="badge">atualizado em 30/09 às 13h04</span>
     </div>
   </header>
 
-  <h2 class="sec">O essencial</h2>
-  <div class="cards"><div class="card"><div class="stripe s-accent"></div><div class="lbl">Investido</div><div class="val">R$ 446,86</div><div class="foot">de 25/09 a 30/09</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Inscrições na aula</div><div class="val">22</div><div class="foot">pessoas que deixaram o contato</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Custo por inscrição</div><div class="val">R$ 20,31</div><div class="foot">quanto custa cada inscrito</div></div><div class="card"><div class="stripe s-yellow"></div><div class="lbl">No ar agora</div><div class="val">8 conjuntos</div><div class="foot">R$ 160,00/dia</div></div></div>
+  <h2 class="sec">O essencial · período inteiro</h2>
+  <div class="cards"><div class="card"><div class="stripe s-accent"></div><div class="lbl">Investido</div><div class="val">R$ 446,86</div><div class="foot">em 3 dias de entrega (28/09 a 30/09)</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Inscrições na aula</div><div class="val">22</div><div class="foot">pessoas que deixaram o contato</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Custo por inscrição</div><div class="val">R$ 20,31</div><div class="foot">quanto custa cada inscrito</div></div><div class="card"><div class="stripe s-yellow"></div><div class="lbl">No ar agora</div><div class="val">8 conjuntos</div><div class="foot">R$ 160,00/dia</div></div></div>
 
   <div class="aviso" style="border-left-color:var(--accent)">
     <b style="color:var(--accent)">Como ler esta página.</b>
@@ -76,27 +160,10 @@
     Cada inscrito é alguém que viu o vídeo, clicou e deixou o contato para assistir.
     A venda da Imersão acontece depois, e está na aba <a href="/glauber/lancamento/">Imersão</a>.
     O número que manda nesta página é o <b>custo por inscrição</b>: quanto mais barato,
-    mais gente entra na sala pelo mesmo dinheiro.
+    mais gente entra na sala pelo mesmo dinheiro.<br><br>
+    As quatro caixas acima são do período inteiro. Logo abaixo, <b>o filtro por dia</b>:
+    escolha as datas e todos os números da seção se refazem sozinhos.
   </div>
-
-  <h2 class="sec">Dia a dia</h2>
-  <div class="chartbox"><canvas id="g" height="92"></canvas></div>
-
-  <h2 class="sec">Cada combinação de público e vídeo</h2>
-  <div class="tbox"><table>
-    <thead><tr><th>Status</th><th>Público</th><th class="num">Vídeo</th><th class="num">Investido</th>
-      <th class="num">Vezes exibido</th><th class="num">Freq.</th><th class="num">Cliques</th>
-      <th class="num">Inscrições</th><th class="num">Custo/inscrição</th></tr></thead>
-    <tbody><tr><td><span class="pill p-green">no ar</span></td><td>Semelhante a compradores</td><td class='num'>006</td><td class='num'>R$ 58,76</td><td class='num'>1.218</td><td class='num'>1.22</td><td class='num'>2.79%</td><td class='num'>7</td><td class="num"><span class="pill p-green">R$ 8,39</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Quem ja engajou</td><td class='num'>001</td><td class='num'>R$ 65,82</td><td class='num'>1.086</td><td class='num'>1.29</td><td class='num'>2.58%</td><td class='num'>5</td><td class="num"><span class="pill p-yellow">R$ 13,16</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Semelhante a compradores</td><td class='num'>007</td><td class='num'>R$ 57,77</td><td class='num'>675</td><td class='num'>1.21</td><td class='num'>2.37%</td><td class='num'>5</td><td class="num"><span class="pill p-green">R$ 11,55</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Interesse: medicina e fisio</td><td class='num'>004</td><td class='num'>R$ 19,29</td><td class='num'>494</td><td class='num'>1.14</td><td class='num'>2.23%</td><td class='num'>2</td><td class="num"><span class="pill p-green">R$ 9,64</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>004</td><td class='num'>R$ 48,18</td><td class='num'>786</td><td class='num'>1.23</td><td class='num'>2.16%</td><td class='num'>1</td><td class="num"><span class="pill p-red">R$ 48,18</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>001</td><td class='num'>R$ 20,40</td><td class='num'>394</td><td class='num'>1.05</td><td class='num'>1.78%</td><td class='num'>1</td><td class="num"><span class="pill p-red">R$ 20,40</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>006</td><td class='num'>R$ 19,01</td><td class='num'>404</td><td class='num'>1.10</td><td class='num'>1.98%</td><td class='num'>1</td><td class="num"><span class="pill p-yellow">R$ 19,01</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>007</td><td class='num'>R$ 20,69</td><td class='num'>393</td><td class='num'>1.08</td><td class='num'>2.54%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>002</td><td class='num'>R$ 15,27</td><td class='num'>88</td><td class='num'>1.05</td><td class='num'>2.27%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>008</td><td class='num'>R$ 13,79</td><td class='num'>121</td><td class='num'>1.01</td><td class='num'>3.31%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>006</td><td class='num'>R$ 12,46</td><td class='num'>192</td><td class='num'>1.05</td><td class='num'>2.08%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>007</td><td class='num'>R$ 12,43</td><td class='num'>117</td><td class='num'>1.03</td><td class='num'>1.71%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>005</td><td class='num'>R$ 11,97</td><td class='num'>86</td><td class='num'>1.05</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>008</td><td class='num'>R$ 11,29</td><td class='num'>117</td><td class='num'>1.04</td><td class='num'>0.85%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>005</td><td class='num'>R$ 11,01</td><td class='num'>69</td><td class='num'>1.01</td><td class='num'>1.45%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>003</td><td class='num'>R$ 10,58</td><td class='num'>136</td><td class='num'>1.04</td><td class='num'>2.94%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>002</td><td class='num'>R$ 10,11</td><td class='num'>103</td><td class='num'>1.04</td><td class='num'>3.88%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>001</td><td class='num'>R$ 10,03</td><td class='num'>120</td><td class='num'>1.04</td><td class='num'>2.50%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>004</td><td class='num'>R$ 9,88</td><td class='num'>126</td><td class='num'>1.07</td><td class='num'>3.17%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>003</td><td class='num'>R$ 8,12</td><td class='num'>128</td><td class='num'>1.03</td><td class='num'>2.34%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Aberto + Advantage+</td><td class='num'>007</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Aberto + Advantage+</td><td class='num'>006</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Aberto + Advantage+</td><td class='num'>004</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Aberto + Advantage+</td><td class='num'>001</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr></tbody>
-  </table></div>
-
-  <h2 class="sec">Qual vídeo puxa mais gente</h2>
-  <div class="tbox"><table>
-    <thead><tr><th>Criativo</th><th class="num">Em quantos públicos</th><th class="num">Investido</th>
-      <th class="num">Vezes exibido</th><th class="num">Cliques</th><th class="num">Inscrições</th>
-      <th class="num">Custo/inscrição</th></tr></thead>
-    <tbody><tr><td><b>Vídeo 006</b></td><td class='num'>3</td><td class='num'>R$ 90,23</td><td class='num'>1.814</td><td class='num'>2.54%</td><td class='num'>8</td><td class="num"><span class="pill p-green">R$ 11,28</span></td></tr><tr><td><b>Vídeo 001</b></td><td class='num'>3</td><td class='num'>R$ 96,25</td><td class='num'>1.600</td><td class='num'>2.38%</td><td class='num'>6</td><td class="num"><span class="pill p-yellow">R$ 16,04</span></td></tr><tr><td><b>Vídeo 007</b></td><td class='num'>3</td><td class='num'>R$ 90,89</td><td class='num'>1.185</td><td class='num'>2.36%</td><td class='num'>5</td><td class="num"><span class="pill p-yellow">R$ 18,18</span></td></tr><tr><td><b>Vídeo 004</b></td><td class='num'>3</td><td class='num'>R$ 77,35</td><td class='num'>1.406</td><td class='num'>2.28%</td><td class='num'>3</td><td class="num"><span class="pill p-red">R$ 25,78</span></td></tr><tr><td><b>Vídeo 002</b></td><td class='num'>2</td><td class='num'>R$ 25,38</td><td class='num'>191</td><td class='num'>3.14%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 008</b></td><td class='num'>2</td><td class='num'>R$ 25,08</td><td class='num'>238</td><td class='num'>2.10%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 005</b></td><td class='num'>2</td><td class='num'>R$ 22,98</td><td class='num'>155</td><td class='num'>0.65%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 003</b></td><td class='num'>2</td><td class='num'>R$ 18,70</td><td class='num'>264</td><td class='num'>2.65%</td><td class='num'>0</td><td class="num vazio">—</td></tr></tbody>
-  </table></div>
 
   <h2 class="sec">O teste que está começando</h2>
   <div class="aviso">
@@ -110,39 +177,501 @@
     Se o público aberto trouxer inscrição mais barata que os três públicos escolhidos, o
     caminho é abrir a torneira. Se trouxer mais caro, a mira está pagando o próprio custo.<br><br>
     Os quatro vídeos são os mesmos que já estão no ar — é a única forma de a comparação
-    ser honesta: muda o público, não muda o criativo. O teste está no ar.
+    ser honesta: muda o público, não muda o criativo. O teste está no ar desde 30/09.
   </div>
+
+  <h2 class="sec">Por dia · escolher datas</h2>
+
+<div class="dd" style="--dd-tema:#2ec27e;--dd-tema-esc:#123a2a;--dd-surface:#161b22;--dd-linha:#2a3441;--dd-texto:#e6edf3;--dd-texto2:#b6c2d2;--dd-texto3:#8b98a9;--dd-zebra:#1c2330;">
+  <div class="dd-bar">
+    <h3>Escolha o período</h3>
+    <div class="dd-presets" id="d-presets"></div>
+    <div class="dd-datas">
+      <label>De <input type="date" id="d-de"></label>
+      <label>até <input type="date" id="d-ate"></label>
+      <span class="dd-cont" id="d-cont"></span>
+      <span class="dd-acoes">
+        <button class="dd-mini" id="d-todos">Marcar todos</button>
+        <button class="dd-mini" id="d-uteis">Só dias úteis</button>
+        <button class="dd-mini" id="d-limpar">Desmarcar todos</button>
+      </span>
+    </div>
+    <div class="dd-dica">Os números de toda esta aba são só dos dias marcados.
+      Para tirar um dia específico da conta — um domingo, ou o dia em que a conta ficou parada —
+      <b>desmarque a caixinha dele na tabela “Dia a dia”</b> logo abaixo do gráfico.</div>
+  </div>
+  <div id="d-resumo"></div>
+  <div id="d-aviso"></div>
+
+  <div class="dd-sec" id="d-sec-cards"><i></i><b>Cada público</b><em>no período marcado · o teste aberto entrou em 30/09</em></div>
+  <div class="dd-grid" id="d-cards"></div>
+
+  <div class="dd-sec"><i></i><b>Investimento e inscrições por dia</b>
+    <em>barra = investido · linha = inscrições do dia</em></div>
+  <div class="dd-card"><div id="d-graf"></div><div class="dd-leg" id="d-leg"></div></div>
+
+  <div class="dd-sec"><i></i><b>Dia a dia</b>
+    <em>desmarque um dia para tirá-lo de todas as contas desta aba</em></div>
+  <div class="dd-card dd-wrap" id="d-tab"></div>
+  <div class="dd-sec"><i></i><b>Cada combinação de público e vídeo</b><em>por inscrições no período marcado</em></div>
+  <div class="dd-card dd-wrap" id="d-t-conjuntos"></div>
+  <div class="dd-sec"><i></i><b>Qual vídeo puxa mais gente</b><em>somando todos os públicos</em></div>
+  <div class="dd-card dd-wrap" id="d-t-pecas"></div>
+</div>
 
   <footer>
     <b>Do que esta página é feita</b>
     <ul>
       <li>Fonte: Meta Ads, campanha da aula de terça, conta Dr. Glauber. Números do próprio Meta,
           sem intermediário.</li>
+      <li>A página mostra os <b>dias em que houve entrega</b>. Dia sem investimento não vira
+          linha — nem no gráfico, nem nas contas.</li>
       <li><b>Inscrição</b> = evento de Lead no pixel, atribuído a quem clicou no anúncio em até 7 dias.</li>
-      <li><b>Freq.</b> = quantas vezes, em média, a mesma pessoa viu o anúncio. Acima de 3 a lista
-          está cansando e o custo tende a subir.</li>
-      <li>Um conjunto pausado continua na tabela com o que já gastou — é assim que se enxerga
+      <li>Um conjunto pausado continua nas tabelas com o que já gastou — é assim que se enxerga
           o que foi testado e desligado, não só o que sobrou.</li>
+      <li>Desmarcar um dia na tabela "Dia a dia" tira aquele dia de <b>todas</b> as contas da seção.</li>
     </ul>
   </footer>
 </div>
 <script src="../abas.js"></script>
 <script>
-new Chart(document.getElementById('g'), {
-  data: { labels: ["28/09", "29/09", "30/09"], datasets: [
-    {type:'bar', label:'Investido no dia', data:[241.28, 170.24, 35.34], backgroundColor:'rgba(79,156,255,.35)',
-      borderColor:'#4f9cff', borderWidth:1, yAxisID:'y', borderRadius:4},
-    {type:'line', label:'Inscrições', data:[9, 12, 1], borderColor:'#2ec27e', backgroundColor:'#2ec27e',
-      borderWidth:2, tension:.3, pointRadius:3, yAxisID:'y2'}
-  ]},
-  options: { responsive:true, interaction:{mode:'index',intersect:false},
-    plugins:{ legend:{labels:{color:'#8b98a9',boxWidth:12}} },
-    scales:{
-      x:{ ticks:{color:'#8b98a9'}, grid:{color:'#1c2330'} },
-      y:{ position:'left', ticks:{color:'#8b98a9',callback:v=>'R$ '+v}, grid:{color:'#1c2330'} },
-      y2:{ position:'right', beginAtZero:true, ticks:{color:'#2ec27e',precision:0}, grid:{display:false} }
-    } }
-});
+window.__DIA__ = {"desde":"2026-09-28","ate":"2026-09-30","imposto":0,"campos":["gasto","impressoes","cliques","cliques_link","leads"],"met":{"gasto":"gasto","conv":"leads","conv_rot":"Inscrições na aula","conv_rot_curto":"Inscrições","conv_rot_1":"inscrições","conv_rot_s":"inscrição","receita":null,"etapa":null,"impr":"impressoes","cliq":"cliques_link"},"eixo":{"ordem":["rmkt","lal","med"],"defs":{"rmkt":{"nome":"Quem já engajou","cor":"#e8b13b","sub":"lista de quem já interagiu com o Dr. Glauber"},"lal":{"nome":"Semelhante a compradores","cor":"#4f9cff","sub":"gente parecida com quem já comprou"},"med":{"nome":"Interesse: medicina e fisio","cor":"#2ec27e","sub":"interesse declarado nas duas formações"}}},"dias":[["2026-09-28","lal",129.03,1632,36,20,4.0],["2026-09-28","rmkt",112.25,1358,33,19,5.0],["2026-09-29","lal",46.24,826,24,17,8.0],["2026-09-29","med",65.65,1389,32,17,3.0],["2026-09-29","rmkt",58.35,1051,24,13,1.0],["2026-09-30","lal",6.86,83,4,1,0],["2026-09-30","med",13.74,296,4,3,1.0],["2026-09-30","rmkt",14.739999999999998,218,6,4,0]],"tabelas":[{"id":"conjuntos","chave_rot":"Conjunto","top":30,"linhas":[["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD001","lal",10.03,120,3,1,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD002","lal",15.27,88,2,1,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD003","lal",8.12,128,3,1,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD004","lal",9.88,126,4,3,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD005","lal",11.01,69,1,1,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD006","lal",31.41,597,15,9,2.0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD007","lal",32.02,387,7,4,2.0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD001","rmkt",30.06,458,11,7,4.0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD002","rmkt",10.11,103,4,1,0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD003","rmkt",10.58,136,4,2,0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD004","rmkt",10.85,145,4,4,1.0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD005","rmkt",11.97,86,0,0,0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD006","rmkt",12.46,192,4,2,0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD007","rmkt",12.43,117,2,0,0],["2026-09-28","LAL1_COMPRADORES_MISTO_28_50_AD008","lal",11.29,117,1,0,0],["2026-09-28","RMKT_ENGAJOU_MISTO_28_50_AD008","rmkt",13.79,121,4,3,0],["2026-09-29","LAL1_COMPRADORES_MISTO_28_50_AD006","lal",24.48,570,16,11,5.0],["2026-09-29","LAL1_COMPRADORES_MISTO_28_50_AD007","lal",21.76,256,8,6,3.0],["2026-09-29","RMKT_ENGAJOU_MISTO_28_50_AD001","rmkt",29.14,525,15,7,1.0],["2026-09-29","RMKT_ENGAJOU_MISTO_28_50_AD004","rmkt",29.21,526,9,6,0],["2026-09-29","MED_FISIO_MISTO_28_50_AD001","med",16.96,312,5,2,1.0],["2026-09-29","MED_FISIO_MISTO_28_50_AD006","med",15.63,334,8,3,1.0],["2026-09-29","MED_FISIO_MISTO_28_50_AD007","med",17.05,338,9,5,0],["2026-09-29","MED_FISIO_MISTO_28_50_AD004","med",16.01,405,10,7,1.0],["2026-09-30","LAL1_COMPRADORES_MISTO_28_50_AD006","lal",2.87,51,3,1,0],["2026-09-30","LAL1_COMPRADORES_MISTO_28_50_AD007","lal",3.99,32,1,0,0],["2026-09-30","RMKT_ENGAJOU_MISTO_28_50_AD001","rmkt",6.62,103,2,2,0],["2026-09-30","RMKT_ENGAJOU_MISTO_28_50_AD004","rmkt",8.12,115,4,2,0],["2026-09-30","MED_FISIO_MISTO_28_50_AD001","med",3.44,82,2,1,0],["2026-09-30","MED_FISIO_MISTO_28_50_AD006","med",3.38,70,0,0,0],["2026-09-30","MED_FISIO_MISTO_28_50_AD007","med",3.64,55,1,0,0],["2026-09-30","MED_FISIO_MISTO_28_50_AD004","med",3.28,89,1,2,1.0]],"nomes":{"LAL1_COMPRADORES_MISTO_28_50_AD001":"Vídeo 001","LAL1_COMPRADORES_MISTO_28_50_AD002":"Vídeo 002","LAL1_COMPRADORES_MISTO_28_50_AD003":"Vídeo 003","LAL1_COMPRADORES_MISTO_28_50_AD004":"Vídeo 004","LAL1_COMPRADORES_MISTO_28_50_AD005":"Vídeo 005","LAL1_COMPRADORES_MISTO_28_50_AD006":"Vídeo 006","LAL1_COMPRADORES_MISTO_28_50_AD007":"Vídeo 007","RMKT_ENGAJOU_MISTO_28_50_AD001":"Vídeo 001","RMKT_ENGAJOU_MISTO_28_50_AD002":"Vídeo 002","RMKT_ENGAJOU_MISTO_28_50_AD003":"Vídeo 003","RMKT_ENGAJOU_MISTO_28_50_AD004":"Vídeo 004","RMKT_ENGAJOU_MISTO_28_50_AD005":"Vídeo 005","RMKT_ENGAJOU_MISTO_28_50_AD006":"Vídeo 006","RMKT_ENGAJOU_MISTO_28_50_AD007":"Vídeo 007","LAL1_COMPRADORES_MISTO_28_50_AD008":"Vídeo 008","RMKT_ENGAJOU_MISTO_28_50_AD008":"Vídeo 008","MED_FISIO_MISTO_28_50_AD001":"Vídeo 001","MED_FISIO_MISTO_28_50_AD006":"Vídeo 006","MED_FISIO_MISTO_28_50_AD007":"Vídeo 007","MED_FISIO_MISTO_28_50_AD004":"Vídeo 004"},"sub":{},"sem_eixo":false,"status":{"ABERTO_ADV_MISTO_25_65_AD007":{"ativo":true,"verba":20.0},"ABERTO_ADV_MISTO_25_65_AD006":{"ativo":true,"verba":20.0},"ABERTO_ADV_MISTO_25_65_AD004":{"ativo":true,"verba":20.0},"ABERTO_ADV_MISTO_25_65_AD001":{"ativo":true,"verba":20.0},"MED_FISIO_MISTO_28_50_AD004":{"ativo":true,"verba":20.0},"MED_FISIO_MISTO_28_50_AD007":{"ativo":false,"verba":20.0},"MED_FISIO_MISTO_28_50_AD006":{"ativo":false,"verba":20.0},"MED_FISIO_MISTO_28_50_AD001":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD008":{"ativo":false,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD008":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD007":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD006":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD005":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD004":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD003":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD002":{"ativo":false,"verba":20.0},"RMKT_ENGAJOU_MISTO_28_50_AD001":{"ativo":true,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD007":{"ativo":true,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD006":{"ativo":true,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD005":{"ativo":false,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD004":{"ativo":false,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD003":{"ativo":false,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD002":{"ativo":false,"verba":20.0},"LAL1_COMPRADORES_MISTO_28_50_AD001":{"ativo":false,"verba":20.0}},"links":{}},{"id":"pecas","chave_rot":"Criativo","top":12,"linhas":[["2026-09-28","001","lal",10.03,120,3,1,0],["2026-09-28","002","lal",15.27,88,2,1,0],["2026-09-28","003","lal",8.12,128,3,1,0],["2026-09-28","004","lal",9.88,126,4,3,0],["2026-09-28","005","lal",11.01,69,1,1,0],["2026-09-28","006","lal",31.41,597,15,9,2.0],["2026-09-28","007","lal",32.02,387,7,4,2.0],["2026-09-28","001","rmkt",30.06,458,11,7,4.0],["2026-09-28","002","rmkt",10.11,103,4,1,0],["2026-09-28","003","rmkt",10.58,136,4,2,0],["2026-09-28","004","rmkt",10.85,145,4,4,1.0],["2026-09-28","005","rmkt",11.97,86,0,0,0],["2026-09-28","006","rmkt",12.46,192,4,2,0],["2026-09-28","007","rmkt",12.43,117,2,0,0],["2026-09-28","008","lal",11.29,117,1,0,0],["2026-09-28","008","rmkt",13.79,121,4,3,0],["2026-09-29","006","lal",24.48,570,16,11,5.0],["2026-09-29","007","lal",21.76,256,8,6,3.0],["2026-09-29","001","rmkt",29.14,525,15,7,1.0],["2026-09-29","004","rmkt",29.21,526,9,6,0],["2026-09-29","001","med",16.96,312,5,2,1.0],["2026-09-29","006","med",15.63,334,8,3,1.0],["2026-09-29","007","med",17.05,338,9,5,0],["2026-09-29","004","med",16.01,405,10,7,1.0],["2026-09-30","006","lal",2.87,51,3,1,0],["2026-09-30","007","lal",3.99,32,1,0,0],["2026-09-30","001","rmkt",6.62,103,2,2,0],["2026-09-30","004","rmkt",8.12,115,4,2,0],["2026-09-30","001","med",3.44,82,2,1,0],["2026-09-30","006","med",3.38,70,0,0,0],["2026-09-30","007","med",3.64,55,1,0,0],["2026-09-30","004","med",3.28,89,1,2,1.0]],"nomes":{"001":"Vídeo 001","002":"Vídeo 002","003":"Vídeo 003","004":"Vídeo 004","005":"Vídeo 005","006":"Vídeo 006","007":"Vídeo 007","008":"Vídeo 008"},"sub":{},"sem_eixo":true,"status":{},"links":{}}]};
+
+(function () {
+  var D = window.__DIA__;
+  if (!D) return;
+  var C = D.campos, MET = D.met, EIXO = D.eixo, IMP = D.imposto || 0;
+  var DEFS = EIXO.defs, ORDEM = EIXO.ordem;
+
+  // ---- formatadores: as mesmas regras dos geradores (brl/num/pct) ----
+  function fmt(v, casas) {
+    var s = (Number(v) || 0).toFixed(casas), p = s.split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return p[1] ? p[0] + ',' + p[1] : p[0];
+  }
+  function brl(v, casas) { return 'R$ ' + fmt(v, casas == null ? 2 : casas); }
+  function num(v, casas) { return fmt(v, casas || 0); }
+  function pct(v, casas) { return (Number(v) || 0).toFixed(casas == null ? 1 : casas).replace('.', ',') + '%'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function dext(iso) { var p = iso.split('-'); return Number(p[2]) + ' de ' + MES[Number(p[1]) - 1]; }
+  function dia_semana(iso) { return SEM[new Date(iso + 'T12:00:00').getDay()]; }
+  function dsomar(iso, n) {
+    var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function div(a, b) { return b ? a / b : 0; }
+
+  // ---- soma e metricas ----
+  function zero() { var t = {}; C.forEach(function (c) { t[c] = 0; }); return t; }
+  function mais(t, l) { C.forEach(function (c) { t[c] += l[c] || 0; }); return t; }
+  function somar(ls) { return ls.reduce(function (t, l) { return mais(t, l); }, zero()); }
+  function metricas(t) {
+    var m = {};
+    C.forEach(function (c) { m[c] = t[c]; });
+    m.gasto = t[MET.gasto] || 0;
+    m.conv = t[MET.conv] || 0;
+    m.receita = MET.receita ? (t[MET.receita] || 0) : null;
+    m.etapa = MET.etapa ? (t[MET.etapa] || 0) : null;
+    m.gasto_imp = m.gasto * (1 + IMP);
+    m.cpa = div(m.gasto, m.conv);
+    m.cpa_imp = div(m.gasto_imp, m.conv);
+    m.roas = MET.receita ? div(m.receita, m.gasto_imp) : null;
+    m.impr = MET.impr ? (t[MET.impr] || 0) : 0;
+    m.cliq = MET.cliq ? (t[MET.cliq] || 0) : 0;
+    m.cpm = div(m.gasto, m.impr) * 1000;
+    m.ctr = div(m.cliq, m.impr) * 100;
+    m.cpc = div(m.gasto, m.cliq);
+    m.conv_etapa = MET.etapa ? div(m.conv, m.etapa) * 100 : null;
+    m.ticket = MET.receita ? div(m.receita, m.conv) : null;
+    return m;
+  }
+  function hidratar(rows, chaves) {
+    return rows.map(function (r) {
+      var o = {}, i;
+      for (i = 0; i < chaves.length; i++) o[chaves[i]] = r[i];
+      for (i = 0; i < C.length; i++) o[C[i]] = r[chaves.length + i];
+      return o;
+    });
+  }
+  function agrupar(linhas, chave) {
+    var mapa = {}, ordem = [];
+    linhas.forEach(function (l) {
+      var k = chave(l);
+      if (!mapa[k]) { mapa[k] = zero(); mapa[k]._k = k; mapa[k]._l = l; ordem.push(k); }
+      mais(mapa[k], l);
+    });
+    return ordem.map(function (k) { return mapa[k]; });
+  }
+
+  var DIAS = hidratar(D.dias, ['data', 'eixo']);
+  D.tabelas.forEach(function (t) { t._linhas = hidratar(t.linhas, ['data', 'id', 'eixo']); });
+
+  // ---- estado ----
+  var TODAS = [];
+  (function () { for (var d = D.desde; d <= D.ate; d = dsomar(d, 1)) TODAS.push(d); })();
+  var de = TODAS.length > 7 ? dsomar(D.ate, -6) : D.desde, ate = D.ate, fora = {};
+  function noIntervalo() { return TODAS.filter(function (d) { return d >= de && d <= ate; }); }
+  function marcados() { return noIntervalo().filter(function (d) { return !fora[d]; }); }
+
+  var PRESETS = [
+    { k: 'hoje', r: 'Hoje', f: function () { return [D.ate, D.ate]; } },
+    { k: 'ontem', r: 'Ontem', f: function () { var o = dsomar(D.ate, -1); return [o, o]; } },
+    { k: '7', r: '7 dias', f: function () { return [dsomar(D.ate, -6), D.ate]; } },
+    { k: '14', r: '14 dias', f: function () { return [dsomar(D.ate, -13), D.ate]; } },
+    { k: '30', r: '30 dias', f: function () { return [dsomar(D.ate, -29), D.ate]; } },
+    { k: 'mes', r: 'Este mês', f: function () { return [D.ate.slice(0, 8) + '01', D.ate]; } },
+    { k: 'tudo', r: 'Tudo', f: function () { return [D.desde, D.ate]; } }
+  ];
+  function pintaPresets() {
+    document.getElementById('d-presets').innerHTML = PRESETS.map(function (p) {
+      var r = p.f(), a = r[0] < D.desde ? D.desde : r[0], b = r[1] > D.ate ? D.ate : r[1];
+      var on = (a === de && b === ate && !Object.keys(fora).some(function (d) { return d >= de && d <= ate; }));
+      return '<button class="dd-preset' + (on ? ' on' : '') + '" data-k="' + p.k + '">' + p.r + '</button>';
+    }).join('');
+  }
+
+  function cor(k) { return (DEFS[k] || {}).cor || '#8593a5'; }
+  function nomeEixo(k) { return (DEFS[k] || {}).nome || k || '—'; }
+
+  // ---- grafico (mesma leitura do SVG dos geradores) ----
+  function grafico(datas, porData) {
+    if (!datas.length) return '<div class="dd-vazio">Nenhum dia marcado.</div>';
+    var W = 1180, H = 300, ml = 52, mr = 46, mt = 16, mb = 34;
+    var gw = W - ml - mr, gh = H - mt - mb, i, p = [], max_g = 1, max_v = 1;
+    datas.forEach(function (d) {
+      var s = 0;
+      ORDEM.forEach(function (k) { s += (porData[d].gasto[k] || 0); });
+      if (s > max_g) max_g = s;
+      if (porData[d].conv > max_v) max_v = porData[d].conv;
+    });
+    var passo = gw / datas.length, larg = Math.min(46, passo * 0.5);
+    p.push('<svg viewBox="0 0 ' + W + ' ' + H + '" class="dd-graf" preserveAspectRatio="xMidYMid meet">');
+    for (i = 0; i < 5; i++) {
+      var y = mt + gh - gh * i / 4;
+      p.push('<line x1="' + ml + '" y1="' + y.toFixed(1) + '" x2="' + (ml + gw) + '" y2="' + y.toFixed(1) + '" stroke="#e3e8ef"/>');
+      p.push('<text x="' + (ml - 8) + '" y="' + (y + 4).toFixed(1) + '" class="gy">' + brl(max_g * i / 4, 0) + '</text>');
+    }
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + (passo - larg) / 2, base = mt + gh;
+      ORDEM.forEach(function (k) {
+        var v = porData[d].gasto[k] || 0;
+        if (v <= 0) return;
+        var h = gh * v / max_g;
+        base -= h;
+        p.push('<rect x="' + x.toFixed(1) + '" y="' + base.toFixed(1) + '" width="' + larg.toFixed(1) +
+          '" height="' + h.toFixed(1) + '" fill="' + cor(k) + '" rx="2"><title>' + dm(d) + ' — ' +
+          esc(nomeEixo(k)) + ': ' + brl(v) + '</title></rect>');
+      });
+    });
+    var pts = datas.map(function (d, i) {
+      return (ml + i * passo + passo / 2).toFixed(1) + ',' + (mt + gh - gh * porData[d].conv / max_v).toFixed(1);
+    });
+    p.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#d4a24c" stroke-width="2.2"/>');
+    datas.forEach(function (d, i) {
+      var x = ml + i * passo + passo / 2, y = mt + gh - gh * porData[d].conv / max_v;
+      p.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="#d4a24c"><title>' +
+        dm(d) + ': ' + num(porData[d].conv) + ' ' + esc(MET.conv_rot_1 || 'vendas') + '</title></circle>');
+    });
+    for (i = 0; i < 5; i++) {
+      var yy = mt + gh - gh * i / 4;
+      p.push('<text x="' + (ml + gw + 8) + '" y="' + (yy + 4).toFixed(1) + '" class="gy2">' + num(max_v * i / 4) + '</text>');
+    }
+    var pr = Math.max(1, Math.floor(datas.length / 22));
+    datas.forEach(function (d, i) {
+      if (i % pr) return;
+      p.push('<text x="' + (ml + i * passo + passo / 2).toFixed(1) + '" y="' + (H - 12) + '" class="gx">' + dm(d) + '</text>');
+    });
+    p.push('</svg>');
+    return p.join('');
+  }
+
+  function seta(atual, ant, maiorMelhor) {
+    if (!ant) return '<span class="delta flat">sem base de comparação</span>';
+    var v = (atual - ant) / Math.abs(ant) * 100;
+    if (Math.abs(v) < 0.5) return '<span class="delta flat">igual ao período anterior</span>';
+    var sobe = v > 0, bom = maiorMelhor ? sobe : !sobe;
+    return '<span class="delta ' + (bom ? 'up' : 'down') + '">' + (sobe ? '▲' : '▼') + ' ' +
+      pct(Math.abs(v)) + ' vs. período anterior</span>';
+  }
+
+  // ---- render ----
+  function aplicar() {
+    var sel = marcados(), setSel = {};
+    sel.forEach(function (d) { setSel[d] = 1; });
+    var noInt = noIntervalo();
+
+    document.getElementById('d-de').value = de;
+    document.getElementById('d-ate').value = ate;
+    document.getElementById('d-cont').innerHTML = noInt.length === sel.length
+      ? '<b>' + sel.length + '</b> ' + (sel.length === 1 ? 'dia' : 'dias') + ' no período'
+      : '<b>' + sel.length + '</b> de ' + noInt.length + ' dias marcados';
+    pintaPresets();
+
+    var dsel = DIAS.filter(function (l) { return setSel[l.data]; });
+    var tot = metricas(somar(dsel));
+
+    var cmp = null;
+    if (noInt.length === sel.length && sel.length) {
+      var n = noInt.length, a_ate = dsomar(de, -1), a_de = dsomar(de, -n);
+      if (a_ate >= D.desde) {
+        var ant = DIAS.filter(function (l) { return l.data >= a_de && l.data <= a_ate; });
+        if (ant.length) cmp = { m: metricas(somar(ant)), de: a_de < D.desde ? D.desde : a_de, ate: a_ate };
+      }
+    }
+
+    var sobra = noInt.length - sel.length;
+    var faixa = sel.length ? (sel.length === 1 ? dext(sel[0])
+      : dext(sel[0]) + ' a ' + dext(sel[sel.length - 1]) +
+        (sobra ? ' · ' + sobra + (sobra === 1 ? ' dia fora da conta' : ' dias fora da conta') : ''))
+      : 'nenhum dia marcado';
+
+    var caixas = [];
+    caixas.push('<div class="dd-box"><div class="dd-bl">Investido (mídia)</div><div class="dd-v">' + brl(tot.gasto) + '</div>' +
+      '<div class="dd-s">' + (IMP ? brl(tot.gasto_imp) + ' com imposto (' + pct(IMP * 100, 2) + ')' : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.gasto, cmp.m.gasto, true) : '') + '</div>');
+    caixas.push('<div class="dd-op">→</div>');
+    caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.conv_rot) + '</div><div class="dd-v">' + num(tot.conv) + '</div>' +
+      '<div class="dd-s">' + (MET.etapa ? num(tot.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() + ' · ' + pct(tot.conv_etapa) + ' viraram ' + esc(MET.conv_rot_s || MET.conv_rot_1 || 'venda') : 'no período marcado') + '</div>' +
+      (cmp ? seta(tot.conv, cmp.m.conv, true) : '') + '</div>');
+    if (MET.receita) {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box"><div class="dd-bl">' + esc(MET.receita_rot || 'Receita') + '</div><div class="dd-v">' + brl(tot.receita) + '</div>' +
+        '<div class="dd-s">ticket médio ' + brl(tot.ticket) + '</div>' +
+        (cmp ? seta(tot.receita, cmp.m.receita, true) : '') + '</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">ROAS</div><div class="dd-v">' + num(tot.roas, 2) + 'x</div>' +
+        '<div class="dd-s">sobre a mídia' + (IMP ? ' com imposto' : '') + ' · ' + (tot.roas >= 1 ? 'acima' : 'abaixo') + ' do equilíbrio (1,00x)</div>' +
+        (cmp ? seta(tot.roas, cmp.m.roas, true) : '') + '</div>');
+    } else {
+      caixas.push('<div class="dd-op">=</div>');
+      caixas.push('<div class="dd-box forte"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div>' +
+        '<div class="dd-v">' + (tot.conv ? brl(tot.cpa) : '—') + '</div>' +
+        '<div class="dd-s">' + (tot.conv && IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+
+    var linha2 = [];
+    if (MET.receita) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">Custo por ' + esc(MET.conv_rot_s || 'venda') + '</div><div class="dd-v">' +
+        (tot.conv ? brl(tot.cpa) : '—') + '</div><div class="dd-s">' +
+        (tot.conv ? (IMP ? brl(tot.cpa_imp) + ' com imposto' : 'no período marcado') : 'sem registro no período') + '</div>' +
+        (cmp && cmp.m.conv && tot.conv ? seta(tot.cpa, cmp.m.cpa, false) : '') + '</div>');
+    }
+    linha2.push('<div class="dd-box"><div class="dd-bl">Média por dia</div><div class="dd-v">' + brl(div(tot.gasto, sel.length), 0) +
+      '<small>/dia</small></div><div class="dd-s">' + num(div(tot.conv, sel.length), 1) + ' ' + esc(MET.conv_rot_1 || 'vendas') +
+      '/dia em ' + sel.length + (sel.length === 1 ? ' dia' : ' dias') + '</div></div>');
+    if (D.extra) {
+      var ex = {}, exN = D.extra.campos.length;
+      D.extra.campos.forEach(function (c, i) { ex[c.k] = 0; });
+      D.extra.linhas.forEach(function (l) {
+        if (!setSel[l[0]]) return;
+        D.extra.campos.forEach(function (c, i) { ex[c.k] += l[i + 1] || 0; });
+      });
+      var prim = D.extra.campos[0], resto = D.extra.campos.slice(1);
+      linha2.push('<div class="dd-box"><div class="dd-bl">' + esc(D.extra.rotulo) + '</div>' +
+        '<div class="dd-v">' + (prim.tipo === 'brl' ? brl(ex[prim.k]) : num(ex[prim.k])) + '</div>' +
+        '<div class="dd-s">' + esc(prim.rot) + (resto.length ? ' · ' + resto.map(function (c) {
+          return (c.tipo === 'brl' ? brl(ex[c.k]) : num(ex[c.k])) + ' ' + esc(c.rot);
+        }).join(' · ') : '') + '</div></div>');
+    }
+    if (MET.impr) {
+      linha2.push('<div class="dd-box"><div class="dd-bl">CPM · CTR</div><div class="dd-v">' + brl(tot.cpm) + '</div>' +
+        '<div class="dd-s">' + pct(tot.ctr, 2) + ' de CTR · CPC ' + brl(tot.cpc) + '</div></div>');
+      linha2.push('<div class="dd-box"><div class="dd-bl">Impressões</div><div class="dd-v">' + num(tot.impr) + '</div>' +
+        '<div class="dd-s">' + num(tot.cliq) + ' cliques · alcance não soma por dia</div></div>');
+    }
+
+    document.getElementById('d-resumo').innerHTML = !sel.length
+      ? '<div class="dd-vazio">Marque pelo menos um dia para ver os resultados.</div>'
+      : '<div class="dd-hero"><div class="dd-hl">Período escolhido <span>· ' + faixa + '</span></div>' +
+        '<div class="dd-row">' + caixas.join('') + '</div>' +
+        '<div class="dd-row" style="margin-top:12px">' + linha2.join('') + '</div></div>';
+
+    var avisos = [];
+    if (cmp) avisos.push('Comparação com <b>' + dext(cmp.de) + ' a ' + dext(cmp.ate) + '</b>, o período de mesmo tamanho logo antes deste.');
+    if (setSel[D.ate]) avisos.push('<b>' + dext(D.ate) + ' ainda está em andamento</b> — o dia de hoje fecha só à meia-noite, então os números dele sobem até lá.');
+    document.getElementById('d-aviso').innerHTML = avisos.length ? '<div class="dd-nota">' + avisos.join(' ') + '</div>' : '';
+
+    // ---- cards do eixo ----
+    var porEixo = {};
+    dsel.forEach(function (l) {
+      if (!porEixo[l.eixo]) porEixo[l.eixo] = zero();
+      mais(porEixo[l.eixo], l);
+    });
+    var chaves = ORDEM.filter(function (k) { return porEixo[k] && (porEixo[k][MET.gasto] || porEixo[k][MET.conv]); })
+      .sort(function (a, b) { return (porEixo[b][MET.gasto] || 0) - (porEixo[a][MET.gasto] || 0); });
+    document.getElementById('d-cards').innerHTML = chaves.length ? chaves.map(function (k) {
+      var m = metricas(porEixo[k]), d = DEFS[k] || {};
+      var part = div(m.gasto, tot.gasto) * 100;
+      // 4o KPI do card: ROAS onde ha receita; conversao da etapa onde ha funil;
+      // e, quando nao ha nem um nem outro (campanha de alcance), o ritmo por dia.
+      var quarto;
+      if (MET.receita) {
+        quarto = '<div><span>' + num(m.roas, 2) + 'x</span>ROAS<em>' + brl(m.receita) + ' de receita</em></div>';
+      } else if (m.conv_etapa != null) {
+        quarto = '<div><span>' + pct(m.conv_etapa) + '</span>' + esc(MET.etapa_rot) + '→' +
+          esc(MET.conv_rot_s || 'venda') + '<em>' + num(m.etapa || 0) + ' ' +
+          esc((MET.etapa_rot || '')).toLowerCase() + '</em></div>';
+      } else {
+        quarto = '<div><span>' + num(div(m.conv, sel.length), 1) + '</span>' +
+          esc(MET.conv_rot_1 || 'vendas') + '/dia<em>em ' + sel.length +
+          (sel.length === 1 ? ' dia' : ' dias') + '</em></div>';
+      }
+      return '<div class="dd-seg" style="--pc:' + cor(k) + '">' +
+        '<div class="dd-seg-n">' + esc(nomeEixo(k)) + '</div>' +
+        '<div class="dd-seg-s">' + esc(d.sub || '') + '</div>' +
+        '<div class="dd-kpis">' +
+        '<div><span>' + brl(m.gasto) + '</span>investido<em>' + pct(part) + ' da verba do período</em></div>' +
+        '<div><span>' + num(m.conv) + '</span>' + esc(MET.conv_rot_1 || 'vendas') +
+        '<em>' + (MET.etapa ? num(m.etapa) + ' ' + esc(MET.etapa_rot).toLowerCase() : '') + '</em></div>' +
+        '<div><span>' + (m.conv ? brl(m.cpa) : '—') + '</span>CPA<em>' + (m.conv && IMP ? brl(m.cpa_imp) + ' c/ imposto' : '') + '</em></div>' +
+        quarto + '</div>' +
+        (MET.impr ? '<div class="dd-mn"><div>CPM <b>' + brl(m.cpm) + '</b></div><div>CTR <b>' + pct(m.ctr, 2) + '</b></div>' +
+          '<div>CPC <b>' + brl(m.cpc) + '</b></div>' + (MET.etapa ? '<div>' + esc(MET.etapa_rot) + '→' + esc(MET.conv_rot_s || 'venda') +
+          ' <b>' + pct(m.conv_etapa) + '</b></div>' : '<div></div>') + '</div>' : '') +
+        '</div>';
+    }).join('') : '<div class="dd-vazio">Sem entrega nos dias marcados.</div>';
+    // um segmento so = o card seria o proprio resumo de novo; a secao some
+    var umSo = ORDEM.length < 2;
+    document.getElementById('d-cards').style.display = umSo ? 'none' : '';
+    var secCards = document.getElementById('d-sec-cards');
+    if (secCards) secCards.style.display = umSo ? 'none' : '';
+
+    // ---- grafico ----
+    var porData = {};
+    sel.forEach(function (d) { porData[d] = { gasto: {}, conv: 0 }; });
+    dsel.forEach(function (l) {
+      porData[l.data].gasto[l.eixo] = (porData[l.data].gasto[l.eixo] || 0) + (l[MET.gasto] || 0);
+      porData[l.data].conv += (l[MET.conv] || 0);
+    });
+    document.getElementById('d-graf').innerHTML = grafico(sel, porData);
+    document.getElementById('d-leg').innerHTML = ORDEM.filter(function (k) { return DEFS[k]; }).map(function (k) {
+      return '<span><i style="background:' + cor(k) + '"></i>' + esc(nomeEixo(k)) + '</span>';
+    }).join('') + '<span><i style="background:#d4a24c;border-radius:50%"></i>' + esc(MET.conv_rot_1 || 'vendas') + '/dia (eixo direito)</span>';
+
+    // ---- dia a dia ----
+    var porDia = {};
+    DIAS.filter(function (l) { return l.data >= de && l.data <= ate; }).forEach(function (l) {
+      var e = porDia[l.data] = porDia[l.data] || { t: zero(), q: {} };
+      mais(e.t, l);
+      e.q[l.eixo] = (e.q[l.eixo] || 0) + (l[MET.conv] || 0);
+    });
+    var cols = ['<th class="l">Dia</th>', '<th class="d">Investido</th>'];
+    if (IMP) cols.push('<th>c/ imposto</th>');
+    if (MET.impr) cols.push('<th>CPM</th>', '<th>CTR</th>');
+    if (MET.etapa) cols.push('<th>' + esc(MET.etapa_rot) + '</th>');
+    cols.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+    if (MET.receita) cols.push('<th>Receita</th>', '<th class="d">ROAS</th>');
+
+    var linhas = noInt.map(function (d) {
+      var e = porDia[d] || { t: zero(), q: {} }, m = metricas(e.t), off = !!fora[d];
+      var quebra = ORDEM.filter(function (k) { return e.q[k]; })
+        .map(function (k) { return esc(nomeEixo(k)) + ' ' + num(e.q[k]); }).join(' · ');
+      var tds = ['<td class="l dia"><input type="checkbox" class="dd-chk" data-d="' + d + '"' + (off ? '' : ' checked') +
+        '> <b>' + dm(d) + '</b><em>' + dia_semana(d) + '</em></td>', '<td class="d">' + brl(m.gasto) + '</td>'];
+      if (IMP) tds.push('<td>' + brl(m.gasto_imp) + '</td>');
+      if (MET.impr) tds.push('<td>' + brl(m.cpm) + '</td>', '<td>' + pct(m.ctr, 2) + '</td>');
+      if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+      tds.push('<td class="d">' + num(m.conv) + (quebra && ORDEM.length > 1 ? '<em>' + quebra + '</em>' : '') + '</td>',
+        '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+      if (MET.receita) tds.push('<td>' + brl(m.receita) + '</td>', '<td class="d">' + num(m.roas, 2) + 'x</td>');
+      return '<tr class="' + (off ? 'fora' : (m.gasto ? '' : 'sem')) + '">' + tds.join('') + '</tr>';
+    }).join('');
+    document.getElementById('d-tab').innerHTML = '<table class="dd-t"><thead><tr>' + cols.join('') +
+      '</tr></thead><tbody>' + (linhas || '<tr><td class="l" colspan="' + cols.length + '">Nenhum dia no intervalo.</td></tr>') +
+      '</tbody></table>';
+    document.getElementById('d-tab').classList.toggle('alta', noInt.length > 40);
+
+    // ---- tabelas configuradas (conjuntos, anuncios, campanhas...) ----
+    D.tabelas.forEach(function (t) {
+      var ls = agrupar(t._linhas.filter(function (l) { return setSel[l.data]; }), function (l) { return l.id; });
+      ls.sort(function (a, b) { return (b[MET.conv] - a[MET.conv]) || (b[MET.gasto] - a[MET.gasto]); });
+      var temStatus = Object.keys(t.status || {}).length > 0;
+      var cab = ['<th class="l">' + esc(t.chave_rot) + '</th>'];
+      if (temStatus) cab.push('<th>Status</th>', '<th>Verba</th>');
+      cab.push('<th class="d">Investido</th>');
+      if (MET.impr) cab.push('<th>CTR</th>');
+      if (MET.etapa) cab.push('<th>' + esc(MET.etapa_rot) + '</th>');
+      cab.push('<th class="d">' + esc(MET.conv_rot_curto || MET.conv_rot) + '</th>', '<th>CPA</th>');
+      var corpo = ls.slice(0, t.top || 25).map(function (a) {
+        var m = metricas(a), st = (t.status || {})[a._k] || {}, li = (t.links || {})[a._k];
+        var nome = esc((t.nomes || {})[a._k] || a._k);
+        // Link SEMPRE que existir, mesmo sem conversao no periodo (regra da Gio,
+        // 23/09/2026): anuncio que nao vendeu e justamente o que ela precisa
+        // abrir para entender por que nao vendeu.
+        if (li) nome = '<a href="' + esc(li) + '" target="_blank" rel="noopener">' + nome + ' <span class="ext">↗</span></a>';
+        else nome = '<b>' + nome + '</b>';
+        // sem_eixo: tabela cujo recorte NAO e o eixo (ex.: formato de criativo
+        // numa pagina cujo eixo e publico) — ali o nome do segmento do eixo
+        // seria o do primeiro grupo que caiu na linha, ou seja, mentira.
+        var sub = [(t.sub || {})[a._k] || '', (ORDEM.length > 1 && !t.sem_eixo) ? nomeEixo(a._l.eixo) : ''].filter(Boolean).join(' · ');
+        var tds = ['<td class="l">' + nome + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</td>'];
+        if (temStatus) {
+          tds.push('<td>' + (st.ativo ? '<span class="dd-pill ok">ativo</span>' : '<span class="dd-pill off">pausado</span>') + '</td>');
+          tds.push('<td>' + (st.ativo && st.verba ? brl(st.verba, 0) + '/dia' : '—') + '</td>');
+        }
+        tds.push('<td class="d">' + brl(m.gasto) + '</td>');
+        if (MET.impr) tds.push('<td>' + pct(m.ctr, 2) + '</td>');
+        if (MET.etapa) tds.push('<td>' + num(m.etapa) + '</td>');
+        tds.push('<td class="d">' + num(m.conv) + '</td>', '<td>' + (m.conv ? brl(m.cpa) : '—') + '</td>');
+        return '<tr>' + tds.join('') + '</tr>';
+      }).join('');
+      var extra = ls.length > (t.top || 25)
+        ? '<div class="dd-cap">' + (t.top || 25) + ' primeiros · ' +
+          (ls.length - (t.top || 25)) + ' com menos entrega ficaram fora da lista.</div>' : '';
+      document.getElementById('d-t-' + t.id).innerHTML = '<table class="dd-t"><thead><tr>' + cab.join('') + '</tr></thead><tbody>' +
+        (corpo || '<tr><td class="l" colspan="' + cab.length + '">Sem entrega nos dias marcados.</td></tr>') +
+        '</tbody></table>' + extra;
+    });
+  }
+
+  // ---- eventos ----
+  document.getElementById('d-presets').addEventListener('click', function (e) {
+    var b = e.target.closest('.dd-preset');
+    if (!b) return;
+    var p = PRESETS.filter(function (x) { return x.k === b.dataset.k; })[0];
+    if (!p) return;
+    var r = p.f();
+    de = r[0] < D.desde ? D.desde : r[0];
+    ate = r[1] > D.ate ? D.ate : r[1];
+    fora = {};
+    aplicar();
+  });
+  function mudouData() {
+    var a = document.getElementById('d-de').value, b = document.getElementById('d-ate').value;
+    if (!a || !b) return;
+    if (a > b) { var t = a; a = b; b = t; }
+    de = a < D.desde ? D.desde : a;
+    ate = b > D.ate ? D.ate : b;
+    aplicar();
+  }
+  document.getElementById('d-de').addEventListener('change', mudouData);
+  document.getElementById('d-ate').addEventListener('change', mudouData);
+  document.getElementById('d-todos').addEventListener('click', function () { fora = {}; aplicar(); });
+  document.getElementById('d-limpar').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) { fora[d] = 1; }); aplicar();
+  });
+  document.getElementById('d-uteis').addEventListener('click', function () {
+    noIntervalo().forEach(function (d) {
+      var w = new Date(d + 'T12:00:00').getDay();
+      if (w === 0 || w === 6) fora[d] = 1; else delete fora[d];
+    });
+    aplicar();
+  });
+  document.getElementById('d-tab').addEventListener('change', function (e) {
+    if (!e.target.classList.contains('dd-chk')) return;
+    if (e.target.checked) delete fora[e.target.dataset.d]; else fora[e.target.dataset.d] = 1;
+    aplicar();
+  });
+  (function () {
+    var a = document.getElementById('d-de'), b = document.getElementById('d-ate');
+    a.min = b.min = D.desde; a.max = b.max = D.ate;
+  })();
+  aplicar();
+})();
+
 </script>
 </body>
 </html>
