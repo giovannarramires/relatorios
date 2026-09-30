@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula de terça · captação — Dr. Glauber | GGD</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--txt:#e6edf3;
+    --mut:#8b98a9;--accent:#4f9cff;--green:#2ec27e;--greenbg:#12301f;--yellow:#e8b13b;
+    --yellowbg:#332807;--red:#f2545b;--redbg:#331013;--gray:#6b7688;--graybg:#1e2530}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.5;padding:28px 20px 60px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px}
+  header.top h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+  header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--mut);
+    font-size:11px;padding:3px 9px;border-radius:20px;margin-right:6px}
+  h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);
+    margin:34px 0 14px;font-weight:600}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;
+    position:relative;overflow:hidden}
+  .card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .card .val{font-size:27px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
+  .card .foot{font-size:12px;color:var(--mut);margin-top:6px}
+  .card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .s-green{background:var(--green)} .s-yellow{background:var(--yellow)}
+  .s-red{background:var(--red)} .s-accent{background:var(--accent)} .s-gray{background:var(--gray)}
+  .aviso{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--yellow);
+    border-radius:10px;padding:16px 18px;font-size:13.5px;color:var(--txt);margin-top:4px}
+  .aviso b{color:var(--yellow)}
+  .pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  .p-green{background:var(--greenbg);color:var(--green)} .p-yellow{background:var(--yellowbg);color:var(--yellow)}
+  .p-red{background:var(--redbg);color:var(--red)} .p-gray{background:var(--graybg);color:var(--gray)}
+  .tbox{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;font-size:13px;min-width:720px}
+  thead th{background:var(--panel2);color:var(--mut);text-align:left;padding:11px 12px;font-weight:600;
+    font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+  tbody td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
+  tbody tr:hover{background:#141a24}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  th.num{text-align:right}
+  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+  footer ul{margin:8px 0 0 18px} footer li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none}
+  .vazio{color:var(--mut);font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="ggd-abas"></div>
+
+  <header class="top">
+    <div>
+      <h1>Aula de terça · captação</h1>
+      <div class="sub">Quanto custa colocar um médico dentro da aula ao vivo de terça, 20h30</div>
+    </div>
+    <div>
+      <span class="badge">25/09 → 30/09</span>
+      <span class="badge">atualizado em 30/09 às 12h53</span>
+    </div>
+  </header>
+
+  <h2 class="sec">O essencial</h2>
+  <div class="cards"><div class="card"><div class="stripe s-accent"></div><div class="lbl">Investido</div><div class="val">R$ 446,86</div><div class="foot">de 25/09 a 30/09</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Inscrições na aula</div><div class="val">22</div><div class="foot">pessoas que deixaram o contato</div></div><div class="card"><div class="stripe s-green"></div><div class="lbl">Custo por inscrição</div><div class="val">R$ 20,31</div><div class="foot">quanto custa cada inscrito</div></div><div class="card"><div class="stripe s-yellow"></div><div class="lbl">No ar agora</div><div class="val">4 conjuntos</div><div class="foot">R$ 80,00/dia</div></div></div>
+
+  <div class="aviso" style="border-left-color:var(--accent)">
+    <b style="color:var(--accent)">Como ler esta página.</b>
+    A aula de terça é gratuita, então aqui o resultado não é venda — é <b>inscrição</b>.
+    Cada inscrito é alguém que viu o vídeo, clicou e deixou o contato para assistir.
+    A venda da Imersão acontece depois, e está na aba <a href="/glauber/lancamento/">Imersão</a>.
+    O número que manda nesta página é o <b>custo por inscrição</b>: quanto mais barato,
+    mais gente entra na sala pelo mesmo dinheiro.
+  </div>
+
+  <h2 class="sec">Dia a dia</h2>
+  <div class="chartbox"><canvas id="g" height="92"></canvas></div>
+
+  <h2 class="sec">Cada combinação de público e vídeo</h2>
+  <div class="tbox"><table>
+    <thead><tr><th>Status</th><th>Público</th><th class="num">Vídeo</th><th class="num">Investido</th>
+      <th class="num">Vezes exibido</th><th class="num">Freq.</th><th class="num">Cliques</th>
+      <th class="num">Inscrições</th><th class="num">Custo/inscrição</th></tr></thead>
+    <tbody><tr><td><span class="pill p-green">no ar</span></td><td>Semelhante a compradores</td><td class='num'>006</td><td class='num'>R$ 58,76</td><td class='num'>1.218</td><td class='num'>1.22</td><td class='num'>2.79%</td><td class='num'>7</td><td class="num"><span class="pill p-green">R$ 8,39</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Quem ja engajou</td><td class='num'>001</td><td class='num'>R$ 65,82</td><td class='num'>1.086</td><td class='num'>1.29</td><td class='num'>2.58%</td><td class='num'>5</td><td class="num"><span class="pill p-yellow">R$ 13,16</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Semelhante a compradores</td><td class='num'>007</td><td class='num'>R$ 57,77</td><td class='num'>675</td><td class='num'>1.21</td><td class='num'>2.37%</td><td class='num'>5</td><td class="num"><span class="pill p-green">R$ 11,55</span></td></tr><tr><td><span class="pill p-green">no ar</span></td><td>Interesse: medicina e fisio</td><td class='num'>004</td><td class='num'>R$ 19,29</td><td class='num'>494</td><td class='num'>1.14</td><td class='num'>2.23%</td><td class='num'>2</td><td class="num"><span class="pill p-green">R$ 9,64</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>004</td><td class='num'>R$ 48,18</td><td class='num'>786</td><td class='num'>1.23</td><td class='num'>2.16%</td><td class='num'>1</td><td class="num"><span class="pill p-red">R$ 48,18</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>001</td><td class='num'>R$ 20,40</td><td class='num'>394</td><td class='num'>1.05</td><td class='num'>1.78%</td><td class='num'>1</td><td class="num"><span class="pill p-red">R$ 20,40</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>006</td><td class='num'>R$ 19,01</td><td class='num'>404</td><td class='num'>1.10</td><td class='num'>1.98%</td><td class='num'>1</td><td class="num"><span class="pill p-yellow">R$ 19,01</span></td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Interesse: medicina e fisio</td><td class='num'>007</td><td class='num'>R$ 20,69</td><td class='num'>393</td><td class='num'>1.08</td><td class='num'>2.54%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>002</td><td class='num'>R$ 15,27</td><td class='num'>88</td><td class='num'>1.05</td><td class='num'>2.27%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>008</td><td class='num'>R$ 13,79</td><td class='num'>121</td><td class='num'>1.01</td><td class='num'>3.31%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>006</td><td class='num'>R$ 12,46</td><td class='num'>192</td><td class='num'>1.05</td><td class='num'>2.08%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>007</td><td class='num'>R$ 12,43</td><td class='num'>117</td><td class='num'>1.03</td><td class='num'>1.71%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>005</td><td class='num'>R$ 11,97</td><td class='num'>86</td><td class='num'>1.05</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>008</td><td class='num'>R$ 11,29</td><td class='num'>117</td><td class='num'>1.04</td><td class='num'>0.85%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>005</td><td class='num'>R$ 11,01</td><td class='num'>69</td><td class='num'>1.01</td><td class='num'>1.45%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>003</td><td class='num'>R$ 10,58</td><td class='num'>136</td><td class='num'>1.04</td><td class='num'>2.94%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Quem ja engajou</td><td class='num'>002</td><td class='num'>R$ 10,11</td><td class='num'>103</td><td class='num'>1.04</td><td class='num'>3.88%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>001</td><td class='num'>R$ 10,03</td><td class='num'>120</td><td class='num'>1.04</td><td class='num'>2.50%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>004</td><td class='num'>R$ 9,88</td><td class='num'>126</td><td class='num'>1.07</td><td class='num'>3.17%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Semelhante a compradores</td><td class='num'>003</td><td class='num'>R$ 8,12</td><td class='num'>128</td><td class='num'>1.03</td><td class='num'>2.34%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Aberto + Advantage+</td><td class='num'>007</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Aberto + Advantage+</td><td class='num'>006</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Aberto + Advantage+</td><td class='num'>004</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><span class="pill p-gray">pausado</span></td><td>Aberto + Advantage+</td><td class='num'>001</td><td class='num'>R$ 0,00</td><td class='num'>0</td><td class='num'>0.00</td><td class='num'>0.00%</td><td class='num'>0</td><td class="num vazio">—</td></tr></tbody>
+  </table></div>
+
+  <h2 class="sec">Qual vídeo puxa mais gente</h2>
+  <div class="tbox"><table>
+    <thead><tr><th>Criativo</th><th class="num">Em quantos públicos</th><th class="num">Investido</th>
+      <th class="num">Vezes exibido</th><th class="num">Cliques</th><th class="num">Inscrições</th>
+      <th class="num">Custo/inscrição</th></tr></thead>
+    <tbody><tr><td><b>Vídeo 006</b></td><td class='num'>3</td><td class='num'>R$ 90,23</td><td class='num'>1.814</td><td class='num'>2.54%</td><td class='num'>8</td><td class="num"><span class="pill p-green">R$ 11,28</span></td></tr><tr><td><b>Vídeo 001</b></td><td class='num'>3</td><td class='num'>R$ 96,25</td><td class='num'>1.600</td><td class='num'>2.38%</td><td class='num'>6</td><td class="num"><span class="pill p-yellow">R$ 16,04</span></td></tr><tr><td><b>Vídeo 007</b></td><td class='num'>3</td><td class='num'>R$ 90,89</td><td class='num'>1.185</td><td class='num'>2.36%</td><td class='num'>5</td><td class="num"><span class="pill p-yellow">R$ 18,18</span></td></tr><tr><td><b>Vídeo 004</b></td><td class='num'>3</td><td class='num'>R$ 77,35</td><td class='num'>1.406</td><td class='num'>2.28%</td><td class='num'>3</td><td class="num"><span class="pill p-red">R$ 25,78</span></td></tr><tr><td><b>Vídeo 002</b></td><td class='num'>2</td><td class='num'>R$ 25,38</td><td class='num'>191</td><td class='num'>3.14%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 008</b></td><td class='num'>2</td><td class='num'>R$ 25,08</td><td class='num'>238</td><td class='num'>2.10%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 005</b></td><td class='num'>2</td><td class='num'>R$ 22,98</td><td class='num'>155</td><td class='num'>0.65%</td><td class='num'>0</td><td class="num vazio">—</td></tr><tr><td><b>Vídeo 003</b></td><td class='num'>2</td><td class='num'>R$ 18,70</td><td class='num'>264</td><td class='num'>2.65%</td><td class='num'>0</td><td class="num vazio">—</td></tr></tbody>
+  </table></div>
+
+  <h2 class="sec">O teste que está começando</h2>
+  <div class="aviso">
+    <b>Público aberto, 4 conjuntos a R$ 20,00/dia.</b><br>
+    Até agora a aula de terça foi divulgada para três públicos escolhidos a dedo: quem já
+    engajou com o Dr. Glauber, gente parecida com quem já comprou, e quem tem interesse
+    declarado em medicina e fisioterapia. Esse teste faz o contrário: entrega os
+    <b>mesmos quatro vídeos</b> sem nenhum recorte de interesse e sem nenhuma lista, com o
+    Advantage+ do Meta livre para procurar o inscrito onde quiser, no Brasil inteiro, de 25 a 65 anos.<br><br>
+    A pergunta que ele responde é direta: <b>a nossa mira está ajudando ou atrapalhando?</b>
+    Se o público aberto trouxer inscrição mais barata que os três públicos escolhidos, o
+    caminho é abrir a torneira. Se trouxer mais caro, a mira está pagando o próprio custo.<br><br>
+    Os quatro vídeos são os mesmos que já estão no ar — é a única forma de a comparação
+    ser honesta: muda o público, não muda o criativo. O teste está pronto e ainda pausado.
+  </div>
+
+  <footer>
+    <b>Do que esta página é feita</b>
+    <ul>
+      <li>Fonte: Meta Ads, campanha da aula de terça, conta Dr. Glauber. Números do próprio Meta,
+          sem intermediário.</li>
+      <li><b>Inscrição</b> = evento de Lead no pixel, atribuído a quem clicou no anúncio em até 7 dias.</li>
+      <li><b>Freq.</b> = quantas vezes, em média, a mesma pessoa viu o anúncio. Acima de 3 a lista
+          está cansando e o custo tende a subir.</li>
+      <li>Um conjunto pausado continua na tabela com o que já gastou — é assim que se enxerga
+          o que foi testado e desligado, não só o que sobrou.</li>
+    </ul>
+  </footer>
+</div>
+<script src="../abas.js"></script>
+<script>
+new Chart(document.getElementById('g'), {
+  data: { labels: ["28/09", "29/09", "30/09"], datasets: [
+    {type:'bar', label:'Investido no dia', data:[241.28, 170.24, 35.34], backgroundColor:'rgba(79,156,255,.35)',
+      borderColor:'#4f9cff', borderWidth:1, yAxisID:'y', borderRadius:4},
+    {type:'line', label:'Inscrições', data:[9, 12, 1], borderColor:'#2ec27e', backgroundColor:'#2ec27e',
+      borderWidth:2, tension:.3, pointRadius:3, yAxisID:'y2'}
+  ]},
+  options: { responsive:true, interaction:{mode:'index',intersect:false},
+    plugins:{ legend:{labels:{color:'#8b98a9',boxWidth:12}} },
+    scales:{
+      x:{ ticks:{color:'#8b98a9'}, grid:{color:'#1c2330'} },
+      y:{ position:'left', ticks:{color:'#8b98a9',callback:v=>'R$ '+v}, grid:{color:'#1c2330'} },
+      y2:{ position:'right', beginAtZero:true, ticks:{color:'#2ec27e',precision:0}, grid:{display:false} }
+    } }
+});
+</script>
+</body>
+</html>
