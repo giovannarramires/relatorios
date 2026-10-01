@@ -522,9 +522,23 @@
     flex-direction: column;
     gap: 0;
   }
+  /* ─── Barra de meses (a partir de setembro/26) ─── */
+  .monthbar{position:fixed;top:12px;right:16px;left:auto;z-index:1200;
+    display:flex;align-items:center;gap:6px;background:rgba(238,244,253,0.95);
+    backdrop-filter:blur(8px);padding:5px 8px 5px 14px;border-radius:30px;
+    border:1px solid rgba(74,127,199,0.35);box-shadow:0 2px 12px rgba(64,56,56,0.15);
+    font-family:var(--le-font-body);}
+  .monthbar .mb-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--le-blue);font-weight:700;margin-right:4px;}
+  .monthbar a{font-size:12px;color:var(--le-ink);text-decoration:none;padding:4px 12px;
+    border-radius:20px;transition:background .2s;font-weight:600;}
+  .monthbar a:hover{background:rgba(74,127,199,0.18);}
+  .monthbar a.active{background:var(--le-blue);color:#fff;}
+  @media print{ .monthbar{display:none !important;} }
 </style>
 </head>
 <body>
+<nav class="monthbar"><span class="mb-label">Relatório mensal</span><a href="/le-medical/relatorio-junho-26/">Junho</a><a href="/le-medical/relatorio-julho-26/">Julho</a><a class="active" href="/le-medical/relatorio-agosto-26/">Agosto</a><a href="/le-medical/relatorio-setembro-26/">Setembro</a></nav>
 
 <div id="stage">
 
