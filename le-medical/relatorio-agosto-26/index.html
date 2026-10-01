@@ -1021,6 +1021,7 @@
   function scale() {
     const stage = document.getElementById('stage');
     const sw = window.innerWidth, sh = window.innerHeight;
+    if (!sw || !sh) { requestAnimationFrame(scale); return; }  // janela ainda sem dimensao: tenta de novo
     const ratio = Math.min(sw / 1280, sh / 720);
     stage.style.transform = `scale(${ratio})`;
     stage.style.left = ((sw - 1280 * ratio) / 2) + 'px';
@@ -1044,6 +1045,11 @@
   });
 
   window.addEventListener('resize', scale);
+  window.addEventListener('load', scale);
+  window.addEventListener('pageshow', scale);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) scale(); });
+  if (window.ResizeObserver) new ResizeObserver(() => scale()).observe(document.documentElement);
+  if (!document.querySelector('.slide.active')) slides[0].classList.add('active');
   scale();
 </script>
 </body>
