@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dr. Giácomo Trojan — Relatório de Setembro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Dr. Giácomo Trojan</p>
+  <h1>Setembro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia no <b>Meta</b> — lipo de papada em Balneário Camboriú. Não há site: o destino do anúncio é o <b>perfil do Instagram</b> e a <b>conversa no WhatsApp</b>.</p>
+  <p class="periodo">Período: 1 a 30 de setembro de 2026 · primeiro mês de mídia da conta</p>
+
+  <nav class="meses" aria-label="Meses">
+    <span class="mes on" aria-current="page">Setembro 2026</span>
+  </nav>
+  <p class="meses-nota">Este é o primeiro relatório mensal consolidado. A partir de outubro, os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · perfil no Instagram</span>
+        <p class="big">1.516</p>
+        <p class="what">visitas ao seu perfil</p>
+        <p class="cost">a <b>R$ 1,20</b> cada — <b>R$ 0,74</b> contando só a campanha de perfil</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Meta · WhatsApp</span>
+        <p class="big">10</p>
+        <p class="what">conversas abertas</p>
+        <p class="cost">a <b>R$ 39,54</b> cada — <b>R$ 28,57</b> no remarketing</p>
+      </div>
+    </div>
+    <p class="frase">Setembro foi o primeiro mês de mídia da conta. Com R$ 1.815,44 em verba, o anúncio chegou a <b>53.197 pessoas diferentes</b>, levou <b>1.516 pessoas até o seu perfil</b> e abriu <b>10 conversas no WhatsApp</b>. O resultado estrutural do mês é outro: o <b>público quente</b> — gente que já viu seu vídeo ou mexeu no seu perfil — saiu de cerca de mil pessoas no dia 16 para <b>3.000 a 3.500 mulheres de 38 a 64 anos</b> no fim do mês. É esse público que faz a conversa ficar barata, e ele passou a existir em setembro.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Setembro</th><th class="n">Agosto</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — CA_Giacomo_Lipo_papada</td></tr>
+          <tr><td>Verba em campanha<span class="muted">o que foi para o anúncio</span></td><td class="n">R$ 1.815,44</td><td class="n">—</td><td class="n flat">1º mês</td></tr>
+          <tr><td>Impostos (ISS + IOF)<span class="muted">13,83% sobre a verba</span></td><td class="n">R$ 251,08</td><td class="n">—</td><td class="n flat">1º mês</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 2.066,52</td><td class="n">—</td><td class="n flat">1º mês</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que a coluna de agosto está vazia:</b> a primeira campanha desta conta foi ao ar em <b>1º de setembro de 2026</b> — em agosto não houve investimento, então não existe mês anterior para comparar. A comparação mês a mês começa no relatório de outubro. O mês também teve rampa: nos 8 primeiros dias a conta gastava cerca de R$ 18 por dia, e fechou setembro na casa dos R$ 100 por dia.</div>
+    <div class="nota"><b>Só Meta neste relatório:</b> não há Google Ads nesta conta. Tudo que está aqui é Meta (Instagram e Facebook).</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Setembro</th><th class="n">Custo por resultado</th><th class="n">vs. agosto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Visitas ao perfil<span class="muted">quem saiu do anúncio e foi até o @drgiacomogtrojan</span></td><td class="n"><b>1.516</b></td><td class="n">R$ 1,20</td><td class="n flat">1º mês medido</td></tr>
+          <tr><td>Conversas no WhatsApp<span class="muted">conversa iniciada pelo anúncio</span></td><td class="n"><b>10</b></td><td class="n">R$ 39,54</td><td class="n flat">1º mês medido</td></tr>
+          <tr><td>Público quente — remarketing<span class="muted">mulheres de 38 a 64 que já viram seu conteúdo</span></td><td class="n">3.000 a 3.500</td><td class="n">—</td><td class="n up">era ~1.000 em 16/09</td></tr>
+          <tr><td>Toques no link do anúncio<span class="muted">quem clicou para ir ao perfil ou ao WhatsApp</span></td><td class="n">1.748</td><td class="n">R$ 1,04</td><td class="n flat">1º mês medido</td></tr>
+          <tr><td>Vídeos assistidos até o fim<span class="muted">ThruPlay — quem ficou do começo ao fim</span></td><td class="n">5.808</td><td class="n">R$ 0,31</td><td class="n flat">1º mês medido</td></tr>
+          <tr><td>Plays de 3 segundos<span class="muted">quem parou para assistir</span></td><td class="n">205.986</td><td class="n">R$ 0,01</td><td class="n flat">1º mês medido</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Os dois custos que importam, lidos com honestidade:</b> o <b>R$ 1,20 por visita ao perfil</b> divide toda a verba do mês pelas 1.516 visitas — inclui campanhas que nem tinham o perfil como destino. Olhando só a campanha que existe para isso, a visita saiu a <b>R$ 0,74</b>. O <b>R$ 39,54 por conversa</b> divide apenas a verba das duas campanhas de mensagem (R$ 395,38) pelas 10 conversas; se dividíssemos a conta inteira pelas conversas daria R$ 181,54, e isso seria injusto, porque três quartos da verba estavam trabalhando para outra coisa. Dentro das conversas, o remarketing foi a melhor fonte: <b>R$ 28,57</b> por conversa, contra R$ 51,88 no público frio.</div>
+    <div class="nota"><b>O público quente cresceu — e isso é resultado:</b> os cinco públicos de remarketing (visitou o perfil, interagiu, engajou com o anúncio, viu 50% do vídeo) estavam em cerca de <b>1.000 a 1.100</b> mulheres de 38 a 64 anos na primeira medição, em 16/09, e fecharam o mês em <b>3.000 a 3.500</b> — acima do alvo de 2.000 que a gente tinha posto para liberar o remarketing. Sem recorte de idade, são <b>4.200 a 4.900</b> pessoas. O Meta só entrega esse tamanho em faixa estimada, nunca um número exato — por isso o intervalo.</div>
+    <div class="nota"><b>O que ficou de fora e por quê:</b> (1) <b>Não há venda nem consulta agendada medida.</b> Sem site e sem pixel, o anúncio entrega a pessoa no seu perfil ou no seu WhatsApp e a medição para ali — quantas das 10 conversas viraram consulta só o consultório sabe, e a gente não chuta esse número aqui. (2) <b>Seguidores novos do @drgiacomogtrojan</b>: o perfil ainda não está conectado ao painel de dados, então não existe número de seguidores novos neste mês. (3) <b>Clique no botão de WhatsApp dentro do perfil</b> não é medido — só a conversa aberta direto pelo anúncio. (4) As <b>53.197 pessoas alcançadas</b> são o número da conta inteira; não somamos o alcance de cada campanha, porque quem viu duas campanhas seria contado duas vezes.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Os vídeos que levaram gente ao seu perfil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Vídeo</th><th class="n">Gasto</th><th class="n">Plays 3s</th><th class="n">Visitas ao perfil</th><th class="n">Custo por visita</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Karina — “a melhor decisão”</b><span class="muted">depoimento, 49s</span></td><td class="n">R$ 288,98</td><td class="n">20.459</td><td class="n"><b>418</b></td><td class="n">R$ 0,69</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCp-LnMd_E/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>Karina — excesso de gordura, 7 dias</b><span class="muted">depoimento, 1min44</span></td><td class="n">R$ 222,45</td><td class="n">13.994</td><td class="n">270</td><td class="n">R$ 0,82</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCpramsPzq/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Lista de espera — Balneário<span class="muted">chamada para a fila de atendimento, 1min39</span></td><td class="n">R$ 167,02</td><td class="n">8.393</td><td class="n">212</td><td class="n">R$ 0,79</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — “medo de mexer na veia”<span class="muted">resposta de caixinha, 58s</span></td><td class="n">R$ 127,30</td><td class="n">8.583</td><td class="n">196</td><td class="n"><b>R$ 0,65</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaZlSsXVh/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — cicatriz<span class="muted">resposta de caixinha, 22s</span></td><td class="n">R$ 126,20</td><td class="n">10.205</td><td class="n">189</td><td class="n">R$ 0,67</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaJovsQ6K/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — caneta e gordura<span class="muted">resposta de caixinha, 51s</span></td><td class="n">R$ 126,15</td><td class="n">9.073</td><td class="n">186</td><td class="n">R$ 0,68</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaSPDMn8s/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Vânia — “já tentei de tudo”<span class="muted">depoimento, 50s</span></td><td class="n">R$ 57,58</td><td class="n">3.727</td><td class="n">45</td><td class="n">R$ 1,28</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DcbTGjlsxuI/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Campanha de perfil — 7 peças</td><td class="n">R$ 1.115,68</td><td class="n">74.434</td><td class="n">1.516</td><td class="n">R$ 0,74</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> a campanha de perfil levou <b>61% da verba</b> do mês e trouxe <b>todas as 1.516 visitas</b>. Os dois depoimentos da Karina sozinhos respondem por 688 dessas visitas — quase metade. E tem uma descoberta boa aqui: os três vídeos de <b>caixinha de perguntas</b>, que são os mais baratos de gravar, entregaram a visita mais barata da conta (<b>R$ 0,65 a R$ 0,68</b>), melhor que os depoimentos. Do outro lado, a <b>Vânia</b> custou R$ 1,28 por visita — quase o dobro do melhor — e foi pausada dentro do mês.</div>
+
+    <p class="sub g"><span class="dot g"></span>WhatsApp e topo de funil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Anúncio</th><th class="n">Gasto</th><th class="n">Alcance</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Débora — resultado em 7 dias<span class="muted">topo de funil, alcance — não tem link para o perfil</span></td><td class="n">R$ 233,08</td><td class="n">28.304</td><td class="n">0</td><td class="n">—</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DccNQG4s6YO/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>“Sou magra, por que tenho papada?”<span class="muted">mensagens — público quente</span></td><td class="n">R$ 148,78</td><td class="n">1.029</td><td class="n">3</td><td class="n">R$ 49,59</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCqXHdsZ4P/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>“Emagreceu e a papada ficou”</b><span class="muted">remarketing — quem engajou nos últimos 90 dias</span></td><td class="n">R$ 142,84</td><td class="n">2.938</td><td class="n"><b>5</b></td><td class="n"><b>R$ 28,57</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/Ddbah3sMA0E/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>“Sou magra, por que tenho papada?”<span class="muted">mensagens — público frio</span></td><td class="n">R$ 103,76</td><td class="n">998</td><td class="n">2</td><td class="n">R$ 51,88</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdCqXHdsZ4P/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>“Se o seu medo é a pele que sobra”<span class="muted">topo de funil, alcance</span></td><td class="n">R$ 71,30</td><td class="n">13.443</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DcwdQIvsG3v/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Mensagens + alcance — 5 peças</td><td class="n">R$ 699,76</td><td class="n">—</td><td class="n">10</td><td class="n">R$ 39,54</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> a conversa mais barata do mês veio de quem já conhecia você — o <b>“Emagreceu e a papada ficou”</b> no remarketing trouxe <b>metade das conversas</b> gastando R$ 142,84, a R$ 28,57 cada. O mesmo criativo rodando no público frio custou R$ 51,88 por conversa e foi pausado. Já o <b>topo de funil</b> é o ponto de atenção: R$ 304,38 (17% da verba) em dois vídeos de alcance que entregaram 206 mil plays, <b>1 único toque no link e nenhuma visita ao perfil</b> — eles existem para fazer barulho e alimentar o público quente, e nisso funcionaram; mas como caminho direto para você, não levam ninguém. O custo por conversa total do mês fica alto (R$ 39,54) justamente porque o público quente ainda estava sendo construído. O alcance não é somado na linha final porque quem viu mais de uma peça seria contado duas vezes.</div>
+    <div class="nota"><b>Sobre o termo de imagem:</b> nada a pedir — você já tem o termo das pacientes que aparecem nos vídeos.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em outubro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Ligar o remarketing de verdade — o público quente já existe</h3>
+          <p>Em setembro o remarketing rodou com R$ 142,84 porque o público ainda era pequeno. Agora são 3.000 a 3.500 mulheres de 38 a 64 anos que já viram seu conteúdo, e é delas que vem a conversa a R$ 28,57 — a metade do preço do público frio.</p>
+          <span class="muda">Verba: remarketing de R$ 10 para R$ 25 por dia (≈ R$ 775/mês)</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Tirar verba do topo de funil e colocar na campanha de perfil</h3>
+          <p>Os dois vídeos de alcance levaram R$ 304,38 e geraram 1 clique no link e nenhuma visita ao perfil. Já cumpriram o papel de encher o público quente. A campanha de perfil, no mesmo mês, trouxe visita a R$ 0,74.</p>
+          <span class="muda">Verba: topo de funil de R$ 8 para R$ 4 por dia; a diferença vai para os conjuntos de caixinha</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Gravar mais três vídeos de caixinha de perguntas</h3>
+          <p>Foi a descoberta do mês: os três vídeos de caixinha trouxeram visita ao perfil a R$ 0,65–0,68, mais barato que os depoimentos, e são os mais rápidos de gravar — um celular e 30 segundos de resposta. Três perguntas novas entram em outubro, uma por semana.</p>
+          <span class="muda">Depende de você: gravar 3 respostas de caixinha (até 60s cada). Estrutura: 3 conjuntos novos a R$ 10/dia</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Substituir a Vânia e deixar o Direct frio pausado</h3>
+          <p>A Vânia custou R$ 1,28 por visita (o dobro da melhor peça) e o “Sou magra” no público frio custou R$ 51,88 por conversa. As duas já estão pausadas e ficam assim. A verba delas vai para o que já está provado.</p>
+          <span class="muda">Estrutura: 2 conjuntos permanecem pausados; ≈ R$ 18/dia realocados para perfil e remarketing</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Fechar a medição que falta</h3>
+          <p>Hoje o relatório para na visita e na conversa. Em outubro conectamos o @drgiacomogtrojan ao painel — aí passa a existir número de seguidores novos — e combinamos com o consultório um jeito simples de marcar, na conversa, quem veio do anúncio e virou consulta. Sem isso, o relatório de novembro continua sem saber o que a conversa gerou.</p>
+          <span class="muda">Depende de você: confirmar quem responde o WhatsApp e anotar “veio do anúncio” no atendimento</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 30 de setembro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
