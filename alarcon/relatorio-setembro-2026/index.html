@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Alarcon — Relatório de Setembro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Alarcon</p>
+  <h1>Setembro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia da <b>Alarcon Preparação Física</b> — preparação física e consultoria esportiva, com as campanhas levando gente para conversar no <b>Direct do @alarconpreparacaofisica</b> e no WhatsApp. Em setembro só o <b>Meta</b> (Instagram e Facebook) entregou anúncio — a conta não tem Google Ads em gestão.</p>
+  <p class="periodo">Período: 1 a 30 de setembro de 2026 · 30 dias com anúncio no ar, sem nenhum dia parado · status das peças lido em 01/10/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <span class="mes on" aria-current="page">Setembro 2026</span>
+  </nav>
+  <p class="meses-nota">Este é o primeiro relatório mensal consolidado. A partir de outubro, os meses anteriores ficam clicáveis aqui. O histórico mês a mês de 2025 e 2026 continua no <a class="mes" href="../" style="padding:2px 9px">dashboard de controle</a>.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · mensagem no Direct e WhatsApp</span>
+        <p class="big">161</p>
+        <p class="what">conversas iniciadas</p>
+        <p class="cost">a <b>R$ 6,13</b> cada em verba de anúncio — <b>R$ 6,98</b> contando o imposto</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Meta · frente de alcance</span>
+        <p class="big">96.939</p>
+        <p class="what">exibições para apresentar o trabalho</p>
+        <p class="cost">com <b>R$ 305,13</b> de verba — essa frente é medida por aparecer, não por conversa</p>
+      </div>
+    </div>
+    <p class="frase">Setembro saiu do caixa em <b>R$ 1.123,32</b>, tudo no Meta. Esse dinheiro abriu <b>161 conversas novas</b> com gente interessada — <b>49% mais que agosto</b>, que teve 108 — e a conversa custou praticamente o mesmo de antes: <b>R$ 6,13</b> contra R$ 5,91 em agosto. A comparação que mais importa é com o ano passado: em <b>setembro de 2025</b> a conta investiu <b>R$ 1.685,70</b> em mídia para abrir <b>168 conversas</b> a <b>R$ 10,03</b> cada. Ou seja: com <b>41% menos verba</b>, setembro de 2026 entregou praticamente o mesmo número de conversas, com cada uma saindo <b>39% mais barata</b>. <b>Quantas dessas 161 conversas viraram aluno ou consultoria vendida, este relatório não afirma</b> — essa leitura acontece no seu Direct e no seu WhatsApp, e está explicada no bloco 3.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Setembro</th><th class="n">Agosto</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta CA-Alarcon · 3553771504851630</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega</span></td><td class="n">R$ 986,84</td><td class="n">R$ 637,91</td><td class="n up">+54,7%</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">13,83% cobrados por dentro</span></td><td class="n">R$ 136,48</td><td class="n">R$ 88,22</td><td class="n up">+54,7%</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 1.123,32</td><td class="n">R$ 726,13</td><td class="n up">+54,7%</td></tr>
+          <tr class="sub-row"><td colspan="4">Como a verba se dividiu entre as duas frentes</td></tr>
+          <tr><td>Mensagem no Direct e WhatsApp<span class="muted">a frente que tem a responsabilidade de abrir conversa</span></td><td class="n">R$ 681,71</td><td class="n">R$ 364,86</td><td class="n up">+86,8%</td></tr>
+          <tr><td>Alcance e distribuição<span class="muted">a frente que apresenta o trabalho a quem ainda não conhece</span></td><td class="n">R$ 305,13</td><td class="n">R$ 273,05</td><td class="n up">+11,7%</td></tr>
+          <tr class="tot"><td>Total do mês em verba de anúncio</td><td class="n">R$ 986,84</td><td class="n">R$ 637,91</td><td class="n up">+54,7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o mês fechou 55% acima de agosto:</b> por causa do <b>sprint de fechamento de trimestre, de 14 a 22/09</b>. Nesses 9 dias entraram <b>R$ 583,47</b> — 59% da verba do mês inteiro — com seis peças novas levando a conversa para o WhatsApp. Foi uma decisão de calendário, não de rotina: o fim de setembro é a última janela para quem quer começar a preparação ainda em 2026. Fora do sprint, a conta rodou no ritmo normal de <b>R$ 15 a R$ 25 por dia</b>.</div>
+    <div class="nota"><b>O mês teve três tempos bem diferentes, e vale olhar separado:</b> de <b>1 a 13/09</b> foram R$ 213,17 e 23 conversas (<b>R$ 9,27</b> cada); de <b>14 a 22/09</b>, o sprint, R$ 583,47 e 102 conversas (<b>R$ 5,72</b> cada); de <b>23 a 30/09</b>, R$ 190,20 e 36 conversas (<b>R$ 5,28</b> cada). O sprint não só trouxe volume: ele <b>baixou o custo da conversa</b> e deixou a conta mais barata do que estava antes dele, mesmo depois de voltar ao ritmo normal de verba.</div>
+    <div class="nota"><b>O imposto da plataforma:</b> o Meta cobra <b>13,83% por dentro</b> da verba (ISS + IOF) — de cada R$ 100 que saem do caixa, R$ 87,85 viram entrega de anúncio. É por isso que o investimento aparece sempre em duas linhas aqui, e é a mesma régua usada no dashboard de controle da conta.</div>
+    <div class="nota"><b>Não há Google Ads nesta conta.</b> Toda a verba de setembro foi no Meta. Esta seção continua na página todos os meses — se um dia entrar um segundo canal, ele aparece aqui lado a lado.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Setembro</th><th class="n">Custo por resultado</th><th class="n">vs. agosto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Conversas iniciadas<span class="muted">a régua desta conta — conversa nova no Direct ou no WhatsApp, janela de 7 dias</span></td><td class="n"><b>161</b></td><td class="n"><b>R$ 6,13</b></td><td class="n up">+49% · custo +4%</td></tr>
+          <tr><td>Alunos e consultorias fechadas<span class="muted">o que a conversa vira depois</span></td><td class="n"><b>não medido</b></td><td class="n">—</td><td class="n flat">ver nota abaixo</td></tr>
+          <tr><td>Mensagens trocadas no total<span class="muted">todas as conexões por mensagem, não só as primeiras</span></td><td class="n">192</td><td class="n">R$ 5,14</td><td class="n up">+15% · custo +35%</td></tr>
+          <tr><td>Cliques no anúncio<span class="muted">quem tocou na peça</span></td><td class="n">1.035</td><td class="n">R$ 0,95</td><td class="n up">+58% · custo −2%</td></tr>
+          <tr><td>Cliques que abriram o destino<span class="muted">quem seguiu até o perfil ou a conversa</span></td><td class="n">299</td><td class="n">R$ 3,30</td><td class="n up">+51% · custo +2%</td></tr>
+          <tr><td>Exibições do anúncio<span class="muted">quantas vezes a peça apareceu · alcance aproximado de 37.190 pessoas</span></td><td class="n">154.461</td><td class="n">R$ 6,39 por mil</td><td class="n up">+19% · CPM +30%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O que ficou de fora e por quê.</b> A régua combinada desta conta é <b>conversa iniciada</b> — e essa está medida, são as 161 acima. O que a mídia <b>não</b> consegue ver é o passo seguinte: quantas dessas conversas viraram <b>aluno matriculado ou consultoria paga</b>. Isso acontece dentro do seu Direct e do seu WhatsApp, em conversa humana, e não existe nenhuma ferramenta nossa ligada ali. <b>Por isso setembro é publicado sem número de venda e sem ROAS:</b> preferimos entregar o relatório sem esse número a entregá-lo com um número inventado. <b>O que falta para fechar:</b> você marcar as conversas que fecharam (uma etiqueta no WhatsApp Business já resolve) ou passar o número do mês no fechamento. Com isso, a partir de outubro esta linha deixa de dizer "não medido" e passa a mostrar custo por aluno.</div>
+    <div class="nota"><b>O recado honesto dos números de setembro:</b> a verba subiu 55% e as conversas subiram 49% — quase na mesma proporção, e <b>isso é a notícia boa</b>: significa que a conta aguentou quase dobrar de tamanho sem perder eficiência, com a conversa indo de R$ 5,91 para R$ 6,13 (<b>4% mais caro</b>, dentro da variação normal de um mês). O que subiu de verdade foi o <b>CPM, 30%</b> — aparecer ficou mais caro, efeito esperado de setembro, que é mês disputado no leilão. Mesmo assim o custo por conversa ficou parado, porque as peças novas do sprint converteram melhor e compensaram o leilão mais caro.</div>
+    <div class="nota"><b>Uma linha que merece atenção: o custo por mensagem subiu 35%.</b> Foram 161 conversas novas, mas 192 conexões por mensagem no total — a conta abre bastante conversa nova e <b>troca pouca mensagem dentro de cada uma</b>. Em agosto a proporção era mais favorável. Isso não é problema de anúncio: é o que acontece <b>depois</b> que a pessoa escreve. É o ponto número 4 do plano de outubro.</div>
+    <div class="nota"><b>A comparação com o ano passado, que é a mais importante aqui:</b> setembro de 2025 teve <b>R$ 1.685,70</b> de mídia, <b>217.775 exibições</b> e <b>168 conversas</b> a <b>R$ 10,03</b>. Setembro de 2026 teve <b>R$ 986,84</b>, <b>154.461 exibições</b> e <b>161 conversas</b> a <b>R$ 6,13</b>. Menos verba, menos exibição, praticamente a mesma conversa — e <b>39% mais barata</b>. A conta aprendeu a comprar conversa: em 2025 ela gastava para ser vista por muita gente, hoje gasta para falar com quem responde.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Mensagem no Direct e WhatsApp — a frente que traz a conversa</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Cliques</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Flexível — 10 vídeos no mesmo anúncio</b><span class="muted">o Instagram escolhe sozinho qual vídeo mostrar a cada pessoa — no ar o mês inteiro</span></td><td class="n">R$ 311,20</td><td class="n">26.222</td><td class="n">431</td><td class="n"><b>101</b></td><td class="n"><b>R$ 3,08</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdY4BcSsfMV/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Velocidade<span class="muted">peça de prateleira, a que vinha carregando a conta antes do sprint</span></td><td class="n">R$ 109,05</td><td class="n">8.367</td><td class="n">156</td><td class="n">17</td><td class="n">R$ 6,41</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DayEog7MgxK/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>Sprint final · "Levantar o caneco"</b><span class="muted">a melhor das seis peças do sprint — no ar de 14 a 22/09</span></td><td class="n">R$ 67,01</td><td class="n">5.855</td><td class="n">63</td><td class="n"><b>13</b></td><td class="n"><b>R$ 5,15</b></td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdRVFJ8s3s-/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Sprint final · "Levantar a taça"<span class="muted">segunda melhor do sprint</span></td><td class="n">R$ 42,74</td><td class="n">3.727</td><td class="n">41</td><td class="n">6</td><td class="n">R$ 7,12</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdRVD3mMk0f/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Sprint final · as outras 4 peças<span class="muted">"Vem pro time", "Plano pra você", "Promo exclusiva" e "Último trimestre"</span></td><td class="n">R$ 150,87</td><td class="n">13.254</td><td class="n">131</td><td class="n">10</td><td class="n">R$ 15,09</td><td><span class="st off">Pausadas</span></td><td></td></tr>
+          <tr class="tot"><td>Mensagem — 8 peças</td><td class="n">R$ 680,87</td><td class="n">57.425</td><td class="n">822</td><td class="n">147</td><td class="n">R$ 4,63</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> o <b>anúncio flexível com 10 vídeos é o melhor ativo que esta conta tem hoje</b>. Ele levou R$ 311,20 — menos de um terço da verba do mês — e entregou <b>101 das 161 conversas</b>, a <b>R$ 3,08</b> cada. É metade do custo médio da conta e menos de um terço do que a conversa custava em setembro de 2025. O motivo é a mecânica: com 10 vídeos no mesmo anúncio, o Instagram testa sozinho, todo dia, qual peça fala com cada pessoa — em vez de nós apostarmos em uma. <b>Ele é o único que está no ar agora</b>, e é por onde outubro começa.</div>
+    <div class="nota"><b>O sprint de fechamento de trimestre, avaliado com sinceridade:</b> as seis peças juntas levaram <b>R$ 260,62</b> e abriram <b>29 conversas</b>, a <b>R$ 8,99</b> cada — mais caro que a média do mês. Visto peça a peça, no entanto, o sprint se divide ao meio: <b>"Levantar o caneco" (R$ 5,15) e "Levantar a taça" (R$ 7,12)</b> ficaram no mesmo nível das melhores peças da conta, enquanto as outras quatro somaram R$ 150,87 para 10 conversas, a <b>R$ 15,09</b>. <b>As seis foram pausadas em 22/09</b>, no fim da janela de calendário, e não por desempenho. As duas boas voltam em outubro como peça de prateleira; as quatro caras não voltam na forma em que estão.</div>
+    <div class="nota"><b>A peça "Velocidade" não foi reprovada — ela foi deixada de lado:</b> era ela que sustentava a conta antes do sprint, com conversa a <b>R$ 6,41</b>, que é um custo bom. Ela está <b>pausada</b> desde que a verba migrou para o sprint. Entra na fila de outubro.</div>
+    <div class="nota"><b>Uma campanha espelho ficou no caminho:</b> além das peças acima, existe uma campanha <i>[GGD][MENSAGEM][SPRINT_FINAL][SET26]</i> que foi montada como estrutura separada para o sprint e acabou não sendo usada — ela gastou <b>R$ 0,84</b>, teve 97 exibições e <b>nenhuma conversa</b>, e está <span class="st off">Pausada</span>. O sprint rodou inteiro dentro da campanha principal, que já tinha histórico de aprendizado. Esses R$ 0,84 estão somados no total do mês, por isso o investimento fecha em R$ 986,84 e não em R$ 986,00.</div>
+
+    <p class="sub g"><span class="dot g"></span>Alcance e distribuição — a frente que apresenta o trabalho</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Cliques</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Último trimestre<span class="muted">a mensagem de fechamento de ano, em formato de alcance</span></td><td class="n">R$ 86,50</td><td class="n">27.069</td><td class="n">51</td><td class="n">2</td><td class="n">R$ 43,25</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdXRDY-sJqS/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Você utiliza<span class="muted">a peça de alcance com mais cliques no destino do mês — 52</span></td><td class="n">R$ 86,10</td><td class="n">24.691</td><td class="n">70</td><td class="n"><b>5</b></td><td class="n"><b>R$ 17,22</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DbBADsMMHRC/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>E-book do rugby</b><span class="muted">a mais eficiente da frente de alcance</span></td><td class="n">R$ 61,69</td><td class="n">24.295</td><td class="n">42</td><td class="n"><b>5</b></td><td class="n"><b>R$ 12,34</b></td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdJp_4UsVXL/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Dia de velocidade<span class="muted">versão em alcance da peça de velocidade</span></td><td class="n">R$ 39,59</td><td class="n">11.080</td><td class="n">36</td><td class="n">2</td><td class="n">R$ 19,80</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdJp9bTscUL/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Similaridades<span class="muted">única peça do mês sem nenhuma conversa</span></td><td class="n">R$ 31,25</td><td class="n">9.804</td><td class="n">14</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DdJphhMshc-/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Alcance — 5 peças</td><td class="n">R$ 305,13</td><td class="n">96.939</td><td class="n">213</td><td class="n">14</td><td class="n">R$ 21,79</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura — e o cuidado para não cobrar a coisa errada:</b> a frente de alcance levou <b>31% da verba</b> e trouxe <b>14 das 161 conversas</b>, a <b>R$ 21,79</b> cada. Lida como campanha de conversa, ela é <b>3,5 vezes mais cara</b> que a frente de mensagem — mas não é isso que ela faz. O trabalho dela é <b>aparecer</b>: ela sozinha gerou <b>96.939 exibições</b>, quase dois terços de toda a visibilidade do mês, por R$ 3,15 a cada mil exibições. É essa frente que abastece o público que a frente de mensagem depois colhe barato. <b>As conversas que ela traz são bônus, não a cobrança.</b></div>
+    <div class="nota"><b>O que mudou aqui dentro do mês:</b> três das cinco peças foram pausadas, e por motivos diferentes. A <b>"Similaridades"</b> foi a única peça do mês inteiro com <b>zero conversa</b> em R$ 31,25 e 14 cliques — essa é um corte por desempenho e não volta. A <b>"E-book do rugby"</b> e a <b>"Dia de velocidade"</b> foram pausadas quando a verba migrou para o sprint, e a do e-book é justamente a <b>mais eficiente da frente</b> (R$ 12,34) — ela volta em outubro. Seguem no ar a "Último trimestre" e a "Você utiliza".</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em outubro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>O anúncio flexível de 10 vídeos passa a receber a maior parte da verba</h3>
+          <p>Ele entregou conversa a <b>R$ 3,08</b> com um terço do dinheiro do mês — nenhuma outra peça da conta chegou perto, nem em 2025. Em outubro ele deixa de dividir verba com peças de teste e vira a frente principal, com aumento gradual: sobe de patamar a cada três dias, só se o custo por conversa continuar abaixo de R$ 5. Subir de uma vez derrubaria o aprendizado que ele já tem.</p>
+          <span class="muda">Verba: de R$ 10 para R$ 20/dia nesta peça (≈R$ 560 no mês) · o que cobramos dela: conversa abaixo de R$ 5</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Volta à prateleira só o que fechou abaixo de R$ 8 por conversa</h3>
+          <p>Três peças pausadas merecem voltar e nenhuma delas é novidade a ser testada — todas já têm número: <b>"Levantar o caneco" (R$ 5,15)</b>, <b>"Velocidade" (R$ 6,41)</b> e <b>"Levantar a taça" (R$ 7,12)</b>. As quatro peças caras do sprint (R$ 15,09 na média) <b>não voltam como estão</b>: o que havia nelas de bom era a urgência de calendário, que já passou. A "Similaridades", zero conversa, está encerrada.</p>
+          <span class="muda">Estrutura: 3 peças religadas na campanha principal · nenhuma campanha nova · verba R$ 6/dia nas três juntas</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>A frente de alcance encolhe um pouco e passa a ser medida por aparecer</h3>
+          <p>Ela levou 31% da verba de setembro para trazer 9% das conversas — e isso está certo, porque conversa não é o trabalho dela. Mas 31% é mais do que ela precisa. Em outubro ela cai para perto de <b>20% da verba</b>, com a <b>"E-book do rugby"</b> religada (era a mais eficiente, R$ 12,34) e sem a "Similaridades". A cobrança dela passa a ser explícita: exibições e custo por mil, não conversa.</p>
+          <span class="muda">Verba: de R$ 305 para ≈R$ 200 no mês · o que cobramos dela: manter acima de 90 mil exibições</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Fechar a régua da venda — é o que falta para este relatório ficar completo</h3>
+          <p>Este mês foi publicado sabendo quantas conversas abriram, mas <b>sem saber quantas viraram aluno</b>. Esse número não está em ferramenta nenhuma: ele está no seu WhatsApp. A combinação para outubro é simples e leva poucos minutos por semana — <b>etiquetar no WhatsApp Business</b> as conversas que fecharam, ou nos passar o total do mês no fechamento. Com isso, o relatório de outubro mostra custo por aluno, e aí sim dá para dizer se R$ 6 por conversa é caro ou barato.</p>
+          <span class="muda">Depende de você: etiquetar as conversas fechadas, ou passar o número no fechamento do mês</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Atacar o gargalo que não é da mídia: a conversa que abre e não anda</h3>
+          <p>Foram <b>161 conversas novas</b> e <b>192 trocas de mensagem</b> no total — a conta abre muita conversa e troca pouca mensagem dentro de cada uma, e o custo por mensagem subiu <b>35%</b> no mês por causa disso. O anúncio já fez a parte dele: a pessoa escreveu. O que decide agora é a <b>primeira resposta</b>. Duas coisas resolvem a maior parte sem gastar um real de mídia: uma <b>resposta rápida salva</b> no WhatsApp para a primeira mensagem (com a pergunta que qualifica: objetivo, rotina e prazo) e <b>responder dentro de 1 hora</b> — a conversa esfria depois disso e a pessoa já falou com outro.</p>
+          <span class="muda">Depende de você: configurar a resposta rápida no WhatsApp · nada disso muda verba de anúncio</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 30 de setembro de 2026 · venda não lida neste mês</span>
+    <a href="../">Dashboard de controle →</a>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
