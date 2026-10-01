@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cal.maria — Relatório de Setembro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Cal.maria</p>
+  <h1>Setembro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia da <b>Cal.maria</b> — almofadas de yoga e meditação em tecido 100% algodão, vendidas na loja <b>vivacalmaria.com.br</b>. Em setembro só o <b>Meta</b> (Instagram e Facebook) entregou anúncio; o <b>Google</b> ficou o mês inteiro parado por saldo.</p>
+  <p class="periodo">Período: 1 a 30 de setembro de 2026 · 26 dias com anúncio no ar (a conta ficou parada de 16 a 20/09) · status das peças lido em 01/10/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <span class="mes on" aria-current="page">Setembro 2026</span>
+  </nav>
+  <p class="meses-nota">Este é o primeiro relatório mensal consolidado. A partir de outubro, os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · Instagram e Facebook</span>
+        <p class="big">44</p>
+        <p class="what">carrinhos montados na loja</p>
+        <p class="cost">a <b>R$ 17,57</b> cada em verba de anúncio — <b>R$ 20,00</b> contando o imposto</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Google · conta pré-paga</span>
+        <p class="big">R$ 0</p>
+        <p class="what">nenhum anúncio no ar</p>
+        <p class="cost">a conta está sem saldo desde <b>08/07/2026</b> — zero investimento e zero entrega no mês</p>
+      </div>
+    </div>
+    <p class="frase">Setembro saiu do caixa em <b>R$ 880,13</b>, tudo no Meta. Esse dinheiro levou <b>784 pessoas até a loja</b>, fez <b>665 visitas a página de produto</b> e <b>44 carrinhos montados</b> — e, em 8 vezes, alguém chegou a começar a finalização da compra. <b>Quantos desses carrinhos viraram pedido pago, este relatório não afirma:</b> a venda da Cal.maria só existe na Nuvemshop, e a leitura pedido a pedido de setembro na loja não foi feita (depende do login da loja, que é seu). O número de "26 compras" que o Meta exibe <b>não é venda</b> — é o evento quebrado do pixel, que dispara na página de produto e com valor R$ 0. Está explicado no bloco 3, e nenhuma decisão aqui usa esse número.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Setembro</th><th class="n">Agosto</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta CA_CALMARIA · 551454998262282</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega</span></td><td class="n">R$ 773,20</td><td class="n">R$ 851,54</td><td class="n down">−9,2%</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">13,83% cobrados por dentro</span></td><td class="n">R$ 106,93</td><td class="n">R$ 117,77</td><td class="n down">−9,2%</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 880,13</td><td class="n">R$ 969,31</td><td class="n down">−9,2%</td></tr>
+          <tr class="sub-row"><td colspan="4">Google Ads — conta 899-131-6621 (pré-paga)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">conta sem saldo o mês inteiro</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">esta conta não tem cobrança por dentro</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr class="tot"><td>Total pago no Google</td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr class="tot"><td>Total do mês nos dois canais</td><td class="n">R$ 880,13</td><td class="n">R$ 969,31</td><td class="n down">−9,2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o mês fechou abaixo de agosto:</b> a conta do Meta é <b>pré-paga</b>, e a segunda metade de setembro rodou com o saldo que já existia. Em 17/09 foi pedido <b>R$ 1.500 para 7 dias</b>; o saldo lido era <b>R$ 729,06</b>, que não cobre nem metade disso, e a recarga não veio. Resultado: a conta ficou <b>parada de 16 a 20/09</b> (só R$ 10,25 escaparam no dia 17) e voltou no dia 21 com o catálogo reorganizado. São 4 dias sem anúncio dentro do mês.</div>
+    <div class="nota"><b>O Google não gastou nada, e isso é de propósito até certo ponto:</b> a conta está sem saldo desde <b>08/07/2026</b> e a decisão de 05/08 foi não religar. Em 30/09 o Pix da primeira semana de outubro (R$ 147) foi confirmado e a campanha de vitrine foi montada e deixada pausada — ela só liga em <b>01/10</b>, para não gastar verba de outubro dentro de setembro. Então "R$ 0 no Google" é o retrato correto de setembro, não uma falha de medição.</div>
+    <div class="nota"><b>A diferença entre os dois canais no imposto:</b> o Meta cobra <b>13,83% por dentro</b> da verba — de cada R$ 100 que saem do caixa, R$ 87,85 viram entrega. A conta do Google da Cal.maria, pela forma como é faturada, não tem essa cobrança: R$ 100 são R$ 100 de anúncio. É por isso que os dois canais aparecem sempre em duas linhas aqui.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Setembro</th><th class="n">Custo por resultado</th><th class="n">vs. agosto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pedidos pagos na loja<span class="muted">a régua de verdade — Nuvemshop, pagamento confirmado</span></td><td class="n"><b>não medido</b></td><td class="n">—</td><td class="n flat">ver nota abaixo</td></tr>
+          <tr><td>Carrinhos montados<span class="muted">quem colocou produto no carrinho depois do anúncio</span></td><td class="n"><b>44</b></td><td class="n"><b>R$ 17,57</b></td><td class="n down">−36% · custo +42%</td></tr>
+          <tr><td>Finalizações iniciadas<span class="muted">quem começou a fechar o pedido</span></td><td class="n">8</td><td class="n">R$ 96,65</td><td class="n up">+14% · custo −21%</td></tr>
+          <tr><td>Acessos à loja<span class="muted">quem tocou no anúncio e a página abriu</span></td><td class="n">784</td><td class="n">R$ 0,99</td><td class="n down">−24% · custo +19%</td></tr>
+          <tr><td>Páginas de produto vistas<span class="muted">quem chegou e olhou um produto</span></td><td class="n">665</td><td class="n">R$ 1,16</td><td class="n down">−25% · custo +21%</td></tr>
+          <tr><td>Exibições do anúncio<span class="muted">quantas vezes a peça apareceu · 12.842 pessoas, 2,3 vezes cada</span></td><td class="n">29.316</td><td class="n">R$ 26,37 por mil</td><td class="n down">−11% · CPM +2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O que ficou de fora e por quê — o número mais importante do relatório.</b> A Cal.maria tem uma régua só para receita: <b>pedido com pagamento confirmado na Nuvemshop</b>. Essa leitura é feita dentro do painel da loja, pedido a pedido, e <b>depende do login da loja — que é seu, não nosso</b>. A Nuvemshop também não tem conexão automática com as nossas ferramentas de medição. Por isso setembro é publicado <b>sem o número de vendas e sem ROAS</b>: preferimos entregar o relatório sem esse número a entregá-lo com um número inventado. <b>O que falta para fechar:</b> abrir a lista de pedidos de 01 a 30/09 com status pago e conferir quais vieram de anúncio. Fica combinado para o fechamento de outubro.</div>
+    <div class="nota"><b>Por que as "26 compras" do Meta não entram aqui:</b> o pixel desta loja está quebrado desde antes da nossa gestão. Ele dispara o evento de compra <b>na página de produto</b>, não na confirmação do pedido, e manda <b>valor R$ 0</b>. Em julho o Meta anunciava 30 compras; a conferência pedido a pedido na loja encontrou <b>4 pedidos pagos</b>. O conserto já reduziu o erro em cerca de 60% em 03/09, mas não zerou — o próximo passo é um chamado na Nuvemshop, levando a URL de produto que dispara o evento. <b>Enquanto isso, compra, faturamento e ROAS do Meta não devem ser lidos nesta conta.</b> Investimento, exibições, cliques, acessos e carrinhos são confiáveis e é com eles que trabalhamos.</div>
+    <div class="nota"><b>O recado honesto dos números de setembro:</b> o mês investiu 9% menos que agosto e entregou <b>36% menos carrinhos</b>, com o carrinho saindo de R$ 12,34 para R$ 17,57 — <b>42% mais caro</b>. Duas coisas explicam, e nenhuma é "o anúncio piorou de repente". A primeira é mecânica: <b>4 dias sem anúncio no ar</b> e uma troca completa de estrutura no dia 21 fazem o Instagram recomeçar o aprendizado, e a fase de aprendizado é sempre a mais cara. A segunda é de público: a partir de 25/09 a verba passou a falar com <b>gente nova que nunca ouviu falar da marca</b> (interesse em yoga e pilates), e apresentar a marca custa mais caro que colher quem já conhecia. O carrinho a R$ 11,43 do remarketing no mesmo mês mostra bem a diferença — é o mesmo produto, público diferente.</div>
+    <div class="nota"><b>Uma comparação com o ano passado não existe ainda:</b> a gestão da GGD nesta conta começou em 2026, não há setembro de 2025 medido com a mesma régua. A partir de 2027 esta linha passa a ter o ano anterior.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>O catálogo — a vitrine automática de produtos</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Acessos</th><th class="n">Carrinhos</th><th class="n">Custo por carrinho</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Catálogo só de zafu e meia lua</b><span class="muted">18 produtos de R$ 164 a R$ 314 — no ar de 21 a 25/09</span></td><td class="n">R$ 187,74</td><td class="n">6.029</td><td class="n">165</td><td class="n"><b>14</b></td><td class="n"><b>R$ 13,41</b></td><td><span class="st off">Pausado em 25/09</span></td></tr>
+          <tr><td>Catálogo do mix completo<span class="muted">todos os produtos — no ar de 1 a 17/09</span></td><td class="n">R$ 297,92</td><td class="n">11.598</td><td class="n">320</td><td class="n">17</td><td class="n">R$ 17,52</td><td><span class="st off">Pausado em 21/09</span></td></tr>
+          <tr class="tot"><td>Catálogo — 2 peças</td><td class="n">R$ 485,66</td><td class="n">17.627</td><td class="n">485</td><td class="n">31</td><td class="n">R$ 15,67</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> concentrar a vitrine nos produtos de maior valor funcionou. Em 21/09 o catálogo deixou de mostrar o mix inteiro e passou a mostrar <b>só zafu e meia lua</b> — e o carrinho caiu de R$ 17,52 para <b>R$ 13,41</b>, <b>23% mais barato</b>, em apenas 5 dias no ar. O ticket dos produtos anunciados, nesse recorte, vai de R$ 164 a R$ 314, contra um mix que incluía itens de R$ 56. <b>É o resultado mais aproveitável de setembro</b>, e vale guardar: menos produtos na vitrine, produtos mais caros, carrinho mais barato. O catálogo saiu do ar em 25/09 só porque a verba inteira foi para os carrosséis novos — não porque tinha parado de funcionar.</div>
+
+    <p class="sub g"><span class="dot g"></span>Os carrosséis novos — a marca contada em sequência</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Acessos</th><th class="n">Carrinhos</th><th class="n">Custo por carrinho</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>C2 — Bolster e mini bolster</b><span class="muted">para quem já conhece a Cal.maria</span></td><td class="n">R$ 54,44</td><td class="n">3.279</td><td class="n">121</td><td class="n"><b>5</b></td><td class="n"><b>R$ 10,89</b></td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/Dd17rbis-xm/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>C1 — Zafu redondo e meia lua</b><span class="muted">para quem já conhece a Cal.maria</span></td><td class="n">R$ 36,99</td><td class="n">2.261</td><td class="n">58</td><td class="n">3</td><td class="n">R$ 12,33</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/Dd173vhsC5a/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>C1 variação B — Zafu redondo e meia lua<span class="muted">para mulheres que praticam yoga e pilates no Sul e Sudeste</span></td><td class="n">R$ 133,64</td><td class="n">3.621</td><td class="n">80</td><td class="n">4</td><td class="n">R$ 33,41</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/Dd173oSs6Hc/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>C3 — "Não é só o tapete"<span class="muted">para mulheres que praticam yoga e pilates no Sul e Sudeste</span></td><td class="n">R$ 54,42</td><td class="n">1.058</td><td class="n">34</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/Dd174G-MkHM/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Carrosséis — 4 peças</td><td class="n">R$ 279,49</td><td class="n">10.219</td><td class="n">293</td><td class="n">12</td><td class="n">R$ 23,29</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> os carrosséis subiram em 25/09 e tiveram <b>6 dias no ar</b> — é pouco para condenar ou aprovar peça, e nenhuma decisão de corte foi tomada com base neles. Mas a separação por público já é clara: falando com <b>quem já conhece a marca</b> (interagiu com o Instagram), o carrinho saiu a <b>R$ 10,89 e R$ 12,33</b> — mais barato que qualquer coisa que a conta fez em setembro. Falando com <b>gente nova</b>, o mesmo carrossel custou <b>R$ 33,41</b>, três vezes mais. Isso não desqualifica a frente de público novo: é ela que abastece a lista que depois sai barata. Só mostra que cobrar venda imediata de quem está conhecendo a marca agora é cobrar a coisa errada da ferramenta certa. O C3, que fala de não ser só o tapete, foi o único sem nenhum carrinho. <b>Dois dos quatro carrosséis estão pausados agora</b> (o C2 e o C3), porque a frente do Meta está sendo remontada para o papel novo de outubro — e o C2, que foi a peça mais barata do mês, é a primeira que volta.</div>
+    <div class="nota"><b>Os 72 criativos novos do mês:</b> o lote de setembro foi produzido inteiro nos três formatos (feed, stories e reels) e revisado com você. Toda peça passou a descrever o produto como <b>"em tecido 100% algodão"</b>, que é o atributo correto, e o descanso para os olhos estampado, que saiu de linha, deu lugar ao bordado <b>Menos pressa, mais cal.maria</b>. Dessas 72 peças, <b>4 viraram anúncio em setembro</b> (os carrosséis acima). O resto é o banco de material que outubro vai usar sem precisar de produção nova.</div>
+    <div class="nota"><b>O que subiu e saiu no mesmo dia — e o que isso custou:</b> em 17/09, na tentativa de religar a conta com R$ 1.500 para 7 dias, quatro frentes voltaram ao ar e ficaram <b>menos de 24 horas</b>, somando <b>R$ 8,05</b> e 1 carrinho: a peça do tapete (<span class="st off">Pausado</span> — e o tapete saiu de linha em 28/09, sem estoque nem reposição, então não volta), o remarketing antigo (<span class="st off">Pausado</span>), a peça <b>"Mais conforto — meia lua"</b> (<span class="st off">Pausado</span>) e a do mini bolster com desconto (<span class="st off">Pausado</span>). <b>O detalhe que dói:</b> a peça "Mais conforto — meia lua" é a <b>campeã histórica da conta</b> — ela entregava carrinho a R$ 9,63 quando tinha verba — e em setembro recebeu <b>R$ 2,24</b>. Ela não foi testada e reprovada: ela foi deixada de fora quando a verba migrou para o catálogo e depois para os carrosséis. Entra na fila de outubro.</div>
+
+    <p class="sub g"><span class="dot g"></span>Google — nada para listar neste mês</p>
+    <div class="nota"><b>Não houve peça no ar no Google em setembro</b>, porque não houve investimento: a conta é pré-paga e está sem saldo desde 08/07/2026. Esta seção continua na página todos os meses, com dado ou sem. O que foi feito no mês, sem gastar, foi <b>preparar a volta</b>: a campanha de vitrine <i>Núcleo sem tapete</i> montada e deixada pausada, o tapete que saiu de linha <b>excluído</b> do grupo de produtos, <b>9 palavras negativas</b> cadastradas para não pagar por busca de tapete e colchonete, e a campanha antiga que tinha ficado ativa por engano foi <b>pausada em 30/09</b> — se não fosse, ela voltaria a gastar sozinha na hora da recarga.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em outubro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>O Google volta a ser o canal que tem a responsabilidade de vender</h3>
+          <p>A vitrine de produtos no Google liga no dia 1º: os produtos a partir de R$ 138,90 aparecendo com foto e preço para quem está procurando zafu, zabuton, bolster e almofada de meditação. É o anúncio mais perto da decisão de compra, e o histórico de 24 meses desta conta mostra pedido pago a <b>R$ 148</b> por essa porta, contra R$ 270 pelas redes. O lance é manual, R$ 0,50 por clique, calculado para o pedido sair perto de R$ 104.</p>
+          <span class="muda">Verba: R$ 21,00/dia no Google (R$ 650 no mês) · o que cobramos dela: pedido pago abaixo de R$ 150</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>O Meta troca de papel: deixa de cobrar venda e passa a apresentar a marca</h3>
+          <p>Setembro provou o que a conta já insinuava: no Meta, o carrinho sai a R$ 10,89 falando com quem já conhece a Cal.maria e a R$ 33,41 falando com gente nova. Em outubro o Meta fica no ar <b>todos os dias</b> com a função de levar a marca a quem ainda não a conhece, e passa a ser medido por alcance e acesso à loja — não por venda no mesmo dia. O efeito dela aparece depois: é essa frente que reabastece o público que o Google colhe mais barato nos meses seguintes.</p>
+          <span class="muda">Verba: R$ 9,90/dia de anúncio no Meta (R$ 350 no mês, R$ 307,48 de mídia) · campanha montada com você em 01/10</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>A verba entra semana a semana, não de uma vez</h3>
+          <p>Em setembro o mês parou 4 dias porque o saldo acabou e a recarga não veio — e esse é o jeito mais caro de perder resultado, porque o aprendizado recomeça do zero quando volta. Em outubro os R$ 1.000 entram em quatro parcelas, cada uma liberada depois da leitura da semana anterior. Se algo não estiver funcionando, paramos na segunda semana com pouco mais de R$ 450 investidos em vez de ter o mês inteiro comprometido. A primeira parcela já está confirmada.</p>
+          <span class="muda">Caixa: R$ 226 + R$ 226 + R$ 226 + R$ 322 · leituras nos dias 7, 14, 21 e fechamento em 3 de novembro</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Fechar a régua da venda — é o que falta para este relatório ficar completo</h3>
+          <p>Este mês foi publicado sem o número de vendas, e isso não pode repetir. Duas frentes: no fechamento de outubro a lista de pedidos pagos da Nuvemshop é conferida pedido a pedido com você — <b>precisamos de meia hora sua com a loja aberta</b> —, e em paralelo seguimos o chamado na Nuvemshop para consertar o evento de compra do pixel, levando a URL de produto que dispara o evento errado. Com o pixel consertado, a conferência manual deixa de ser necessária.</p>
+          <span class="muda">Depende de você: abrir a loja com a gente no fechamento do mês · e o acesso ao suporte da Nuvemshop</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Atacar o gargalo que não é da mídia: 3 em cada 1.000 visitas compram</h3>
+          <p>A loja converte <b>0,33%</b> das visitas que o anúncio manda — o normal de e-commerce é 1% a 2%. Com a conversão dobrada, o mesmo investimento de outubro devolveria o dobro em vendas, sem comprar um clique a mais. Em 30/09 instalamos uma ferramenta que grava a tela de quem navega, para parar de adivinhar onde a pessoa desiste. Três coisas já identificadas valem mais que qualquer ajuste de anúncio: <b>frete grátis visível</b> na página do produto (o benefício acima de R$ 299 existe e quem chega numa almofada de R$ 178 não fica sabendo), <b>avaliações de quem já comprou</b> (o aplicativo é gratuito e está parado esperando uma conta sua) e <b>recuperação de carrinho abandonado</b>, que a loja já lista com contato e não custa mídia nenhuma.</p>
+          <span class="muda">Depende de você: criar a conta do aplicativo de avaliações · nada disso muda verba de anúncio</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 30 de setembro de 2026 · venda da loja não lida neste mês</span>
+    <a href="../plano-outubro/">Plano de outubro →</a>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
