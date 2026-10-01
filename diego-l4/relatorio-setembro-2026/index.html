@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Diego (L4) — Diego Vasconcelos — Relatório de Setembro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Diego (L4) — Diego Vasconcelos</p>
+  <h1>Setembro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia de <b>Diego Vasconcelos</b> — conta de Meta Ads da <b>Imersão Prática</b>, vendida para médicos. Este relatório registra um mês <b>sem mídia</b>: em setembro a conta não entregou nenhum anúncio e não saiu dinheiro. Para que o mês não fique sem leitura, cada bloco traz, ao lado do zero, <b>o último mês de fato medido — junho de 2026</b>, que é a base de qualquer religamento.</p>
+  <p class="periodo">Período: 1 a 30 de setembro de 2026 · 0 dias com anúncio no ar · última entrega da conta em 26/06/2026 · status das peças e saldo lidos em 01/10/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <span class="mes on" aria-current="page">Setembro 2026</span>
+  </nav>
+  <p class="meses-nota">Este é o primeiro relatório mensal consolidado. A partir de outubro, os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Setembro · Meta Ads</span>
+        <p class="big">R$ 0,00</p>
+        <p class="what">nenhum anúncio no ar no mês</p>
+        <p class="cost">zero exibição, zero clique e zero venda — as <b>6 campanhas</b> da conta estão pausadas e nenhuma entregou em setembro</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Última base medida · junho de 2026</span>
+        <p class="big">17</p>
+        <p class="what">compras em 15 dias de entrega</p>
+        <p class="cost">a <b>R$ 379,12</b> cada, com <b>R$ 6.445,03</b> de verba e retorno de <b>0,44x</b> — é daqui que outubro parte</p>
+      </div>
+    </div>
+    <p class="frase">O recado de setembro é curto e não é de desempenho: <b>a conta não rodou</b>. Não houve verba, não houve entrega e portanto não há custo por resultado para comparar — nem com agosto, que também foi <b>R$ 0,00</b>. A conta <b>parou em 26 de junho</b> e chegou a 30 de setembro com <b>96 dias sem entregar</b>, porque a Imersão que estava sendo vendida acabou e nenhuma oferta nova entrou no lugar. O que ainda está vivo é o site: o pixel registrou movimento em <b>14 dias de setembro</b>, tudo orgânico. E o que importa para outubro está em junho: aquele mês vendeu 17 ingressos, mas <b>cada compra custou R$ 379,12 para um ticket de R$ 97</b> — o retorno foi 0,44x. Religar a conta como ela era repete esse resultado.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Setembro</th><th class="n">Agosto</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — Imersão Prática</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">sem base</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">cobrados por fora da verba</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">sem verba, sem imposto</td></tr>
+          <tr class="tot"><td>Total pago no mês</td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">sem base</td></tr>
+          <tr class="sub-row"><td colspan="4">Referência — último mês com entrega (junho/2026)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">15 dias de entrega, de 12 a 26/06 · média de R$ 429,67 por dia</span></td><td class="n">R$ 6.445,03</td><td class="n">—</td><td class="n flat">base de outubro</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que não houve verba:</b> não foi corte de orçamento nem bloqueio de conta — <b>acabou o que estava sendo vendido</b>. A última entrega foi em <b>26 de junho de 2026</b>, quando a turma da Imersão Prática encerrou, e desde então nenhuma oferta nova entrou. Com oferta nenhuma no ar, as 6 campanhas ficaram pausadas: julho, agosto e setembro fecharam os três em <b>R$ 0,00</b>. A conta em si está <b>ativa e saudável</b> — sem restrição, sem bloqueio.</div>
+    <div class="nota"><b>Tem dinheiro parado na conta e tem um freio que ninguém vê:</b> hoje há <b>R$ 1.663,62 de saldo disponível</b>. Mas a conta também tem um <b>limite de gasto acumulado de R$ 8.906,53</b> e já gastou <b>R$ 7.445,04</b> ao longo da vida dela — ou seja, <b>restam R$ 1.461,49 antes de a entrega travar sozinha</b>, independente de saldo e de orçamento diário. Em junho a conta gastava R$ 429,67 por dia: nesse ritmo, esse limite dura <b>3 dias e meio</b>. É o primeiro ajuste de outubro, e é de graça.</div>
+    <div class="nota"><b>Sobre o imposto:</b> esta conta é brasileira e o Meta cobra imposto por fora da verba. Como <b>não houve verba e não houve fatura em setembro</b>, não houve imposto — e por isso a alíquota não é afirmada nesta página. Ela entra no relatório do primeiro mês em que a conta voltar a gastar, lida na fatura, não estimada.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Setembro</th><th class="n">Custo por resultado</th><th class="n">vs. agosto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Compras<span class="muted">registradas pelo pixel na página de vendas</span></td><td class="n"><b>0</b></td><td class="n">—</td><td class="n flat">sem base</td></tr>
+          <tr><td>Faturamento<span class="muted">valor das compras vindas de anúncio</span></td><td class="n">R$ 0,00</td><td class="n">—</td><td class="n flat">sem base</td></tr>
+          <tr><td>Checkouts iniciados por anúncio<span class="muted">quem chegou na tela de pagamento vindo de mídia paga</span></td><td class="n">0</td><td class="n">—</td><td class="n flat">sem base</td></tr>
+          <tr><td>Visitas à página de vendas por anúncio<span class="muted">quem clicou no anúncio e a página abriu</span></td><td class="n">0</td><td class="n">—</td><td class="n flat">sem base</td></tr>
+          <tr><td>Conversas iniciadas<span class="muted">mensagens no Direct e no WhatsApp vindas de anúncio</span></td><td class="n">0</td><td class="n">—</td><td class="n flat">sem base</td></tr>
+          <tr><td>Exibições e alcance<span class="muted">quantas vezes o anúncio apareceu e para quanta gente</span></td><td class="n">0 · 0 pessoas</td><td class="n">—</td><td class="n flat">sem base</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura em uma frase:</b> <b>não houve resultado porque não houve anúncio</b>. Todos os zeros desta tabela são zeros de ausência, não de desempenho — nenhuma peça foi testada e reprovada em setembro, nenhuma verba foi gasta sem retorno. A comparação com agosto também não diz nada, porque agosto foi igualmente <b>R$ 0,00</b>: é zero contra zero.</div>
+    <div class="nota"><b>O site continua recebendo gente, e isso é a boa notícia do mês:</b> mesmo sem um real de anúncio, o pixel da conta registrou movimento em <b>14 dias de setembro</b> — <b>119 visitas à página</b>, <b>7 cliques no botão de compra</b> e <b>5 checkouts iniciados</b>, tudo <b>orgânico</b>, vindo do perfil e da busca. Nenhum virou venda. O que isso prova é prático: a <b>medição está de pé e funcionando</b> (página, clique de botão e checkout são lidos corretamente), então, no dia em que a verba voltar, ela volta medindo desde o primeiro clique — não vai ser preciso instalar nada.</div>
+    <div class="nota"><b>O que ficou de fora e por quê — o pixel de setembro está incompleto.</b> O Meta só guarda o detalhe de evento do pixel por cerca de 28 dias. Na leitura de hoje, 01/10, isso significa que os números do parágrafo acima cobrem <b>5 a 26 de setembro</b>, e os dias <b>1 a 4 de setembro já não podem mais ser consultados</b>. Portanto 119 visitas é um <b>piso</b>, não o total do mês. Isso não afeta nenhum número de dinheiro desta página: a verba, a entrega e as vendas por anúncio são zero medido, não estimado.</div>
+    <div class="nota"><b>Uma comparação com o ano passado não existe ainda:</b> a gestão da GGD nesta conta começou em 2026, não há setembro de 2025 medido com a mesma régua. A partir de 2027 esta linha passa a ter o ano anterior.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Setembro — nenhuma peça no ar e nenhuma peça cortada</p>
+    <div class="nota"><b>Não houve corte nem decisão de criativo em setembro.</b> As 6 campanhas da conta já entraram no mês pausadas — foram desligadas em <b>junho</b>, quando a turma da Imersão encerrou. Nada foi pausado por desempenho neste mês, nada foi ligado e nenhum criativo novo subiu. A tabela abaixo não é de setembro: é o <b>retrato de junho de 2026</b>, o último mês em que essas peças de fato entregaram, e está aqui porque é a única base real para decidir o que religar.</div>
+
+    <p class="sub g"><span class="dot g"></span>Referência — as 5 campanhas em junho/2026 (último mês medido)</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Campanha</th><th class="n">Verba jun/26</th><th class="n">Exibições</th><th class="n">Checkouts</th><th class="n">Compras</th><th class="n">Custo por compra</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Estático · público frio de médicos (PG01)</b><span class="muted">a maior verba e o maior volume · 9 das 17 compras do mês</span></td><td class="n">R$ 3.089,90</td><td class="n">33.215</td><td class="n">58</td><td class="n"><b>9</b></td><td class="n">R$ 343,32</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>Estático · público frio de médicos (PG02)</b><span class="muted">a compra mais barata do mês · R$ 260 · e a melhor taxa de fechamento (30,4%)</span></td><td class="n">R$ 1.822,61</td><td class="n">18.747</td><td class="n">23</td><td class="n"><b>7</b></td><td class="n"><b>R$ 260,37</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Vídeo · público frio de médicos (PG02)<span class="muted">CPM de R$ 223 contra R$ 93 do estático · uma compra só</span></td><td class="n">R$ 719,02</td><td class="n">3.222</td><td class="n">4</td><td class="n">1</td><td class="n">R$ 719,02</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Estático · público quente 30 e 90 dias (PG01)<span class="muted">frequência 3,8 em 671 pessoas · público pequeno e saturado</span></td><td class="n">R$ 569,84</td><td class="n">2.553</td><td class="n">4</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Vídeo · público quente 90 dias (PG01)<span class="muted">o CPM mais caro da conta: R$ 285,65</span></td><td class="n">R$ 243,66</td><td class="n">853</td><td class="n">1</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>As 5 campanhas — junho inteiro</td><td class="n">R$ 6.445,03</td><td class="n">58.590</td><td class="n">90</td><td class="n">17</td><td class="n">R$ 379,12</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O que junho ensinou, e que vale para outubro:</b> <b>quem compra é o público frio de médicos, e com imagem.</b> As duas campanhas de estático no frio levaram <b>76,2% da verba</b> e entregaram <b>16 das 17 compras</b>. Na ponta oposta, o <b>público quente custou R$ 813,50 nas duas campanhas e não vendeu nada</b> — e o motivo é tamanho: eram 671 e 393 pessoas, com frequência de 3,8 e 2,2 exibições por pessoa — público pequeno demais para sustentar verba. O <b>vídeo custou R$ 962,68 somado e trouxe 1 compra</b>, com CPM de R$ 223 a R$ 286 contra R$ 93 do estático: apareceu três vezes mais caro para a mesma gente. (Os dois recortes se cruzam numa campanha — a de vídeo no público quente entra nos R$ 813,50 e nos R$ 962,68 — então os dois valores não se somam; a tabela acima é a conta fechada.) Dentro do estático, dois criativos carregaram o mês — o <b>IMG1_009</b> (R$ 1.456,84 · 6 compras · R$ 242,81 cada · o melhor retorno da conta, 0,94x) e o <b>IMG1_004</b> (R$ 1.363,27 · 6 compras · R$ 227,21 cada).</div>
+    <div class="nota"><b>E o que junho ensinou de mais importante é desconfortável:</b> mesmo no melhor desenho, <b>a conta não se pagava</b>. Foram R$ 6.445,03 de verba para R$ 2.840,00 de faturamento — <b>retorno de 0,44x</b>, ou seja, voltaram 44 centavos de cada real. A causa não é o anúncio: o anúncio converteu (<b>830 visitas à página, 90 checkouts, 18,9% deles fecharam</b>). A causa é a <b>conta de chegada</b> — ingresso de <b>R$ 97</b> contra compra que custa <b>R$ 379</b>. Nenhum ajuste de público ou de criativo fecha uma diferença de quatro vezes. Isso é decisão de oferta, e está no bloco 5.</div>
+    <div class="nota"><b>Há uma sexta campanha na conta:</b> a <b>LIPO [VENDAS][LOCAL]</b> (<span class="st off">Pausado</span>), de julho de 2024, de outra fase da conta e sem nenhuma relação com a Imersão. Está pausada desde 2024 e não gastou nada em 2026. Fica registrada aqui para que a contagem de 6 campanhas feche.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em outubro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Decidir se outubro tem mídia — hoje não há o que anunciar</h3>
+          <p>A conta está parada há <b>97 dias</b> (contados até hoje, 01/10) por um motivo só: <b>não existe oferta no ar</b>. A turma da Imersão acabou em junho e nada entrou no lugar. Antes de qualquer verba, é preciso fechar <b>o que será vendido e com que data</b> — sem isso, ligar campanha é mandar gente para uma página que não vende nada, e a perda é de 100%. Este item tranca todos os outros abaixo.</p>
+          <span class="muda">Nada de verba liga antes · depende de você: definir a próxima oferta e a data</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Resolver a conta de chegada antes de repetir junho</h3>
+          <p>Junho entregou <b>17 compras a R$ 379,12</b> com ingresso de <b>R$ 97</b>: retorno de <b>0,44x</b>. O anúncio fez a parte dele — 830 visitas à página, 90 checkouts, 18,9% de fechamento. O que não fecha é a aritmética. São três saídas possíveis, e a escolha é de negócio, não de mídia: <b>subir o preço do ingresso</b>, <b>colocar um produto de ticket maior depois da Imersão</b> (é o que faz as outras contas do grupo fecharem no azul) ou <b>trocar o objetivo</b>, deixando a mídia encher a lista e a venda acontecer na sequência, não no clique. Religar sem decidir isso reproduz 0,44x.</p>
+          <span class="muda">Estrutura: a meta da mídia muda conforme a saída escolhida · definir antes de abrir verba</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Soltar o limite de gasto da conta — são 3 dias e meio de verba</h3>
+          <p>A conta tem um <b>limite de gasto acumulado de R$ 8.906,53</b> e já gastou <b>R$ 7.445,04</b> na vida dela: sobram <b>R$ 1.461,49</b>. Esse limite não é orçamento diário, é um teto que <b>desliga a entrega sozinho</b> quando é atingido — no ritmo de junho (R$ 429,67 por dia), ele dura menos de quatro dias. Há <b>R$ 1.663,62 de saldo disponível</b> na conta, então o dinheiro existe; é o teto que precisa subir. É ajuste de configuração, não custa nada, e é no seu acesso que se faz.</p>
+          <span class="muda">Depende de você: subir o limite de gasto da conta antes de religar</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Religar só no desenho que junho mediu — frio, estático, dois criativos</h3>
+          <p>Quando houver oferta e teto, a conta não volta como estava. Volta <b>só com público frio de médicos e só com imagem</b>: foi isso que levou 76,2% da verba e trouxe 16 das 17 compras. Os <b>dois criativos campeões</b> entram primeiro — o <b>IMG1_009</b> (6 compras a R$ 242,81) e o <b>IMG1_004</b> (6 compras a R$ 227,21). <b>Público quente fica fora</b>: custou R$ 813,50 e não vendeu, porque são 671 e 393 pessoas, com frequência de 3,8 e 2,2 — não cabe verba ali, e ele só volta quando o perfil tiver público maior. <b>Vídeo fica fora</b> da largada: R$ 962,68 para 1 compra, com CPM três vezes o do estático. A verba começa pequena, vinculada ao teto novo, e sobe só depois da primeira venda medida.</p>
+          <span class="muda">Estrutura: 2 campanhas de estático no frio · quente e vídeo aposentados na largada</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · investimento e resultados pelo Meta Ads · dados fechados em 30 de setembro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
