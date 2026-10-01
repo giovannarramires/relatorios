@@ -115,9 +115,9 @@
   .prop .fb{background:var(--musgo)}
 
   ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:15px}
-  ul.lista li{display:flex; gap:12px; align-items:flex-start; font-size:15.5px}
-  ul.lista li::before{content:""; width:7px; height:7px; border-radius:50%;
-                      background:var(--terra-claro); margin-top:9px; flex:none}
+  ul.lista li{position:relative; padding-left:19px; font-size:15.5px; line-height:1.6}
+  ul.lista li::before{content:""; position:absolute; left:0; top:9px; width:7px; height:7px;
+                      border-radius:50%; background:var(--terra-claro)}
   ul.lista li b{font-weight:600}
 
   ol.plano{margin:0; padding:0; list-style:none; counter-reset:p;
@@ -177,11 +177,14 @@
   .marca img.logo{height:52px; width:auto; display:block}
   .marca .periodo{font-size:14px; color:var(--ink-soft); letter-spacing:.02em}
   @media (max-width:560px){ .marca img.logo{height:42px} }
+  table.larga th, table.larga td{white-space:normal}
+  table.larga td:first-child{min-width:145px}
+  table.larga td:nth-child(2){min-width:130px}
   .tres{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px}
   ul.bul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px}
-  ul.bul li{display:flex; gap:9px; align-items:flex-start; font-size:14.5px; line-height:1.5}
-  ul.bul li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--terra-claro);
-    margin-top:8px; flex:none}
+  ul.bul li{position:relative; padding-left:16px; font-size:14.5px; line-height:1.55}
+  ul.bul li::before{content:""; position:absolute; left:0; top:8px; width:6px; height:6px;
+    border-radius:50%; background:var(--terra-claro)}
   .ctx .cab-mes{font-family:Lora,Georgia,serif; font-weight:700; font-size:20px; line-height:1.2;
     font-variant-numeric:tabular-nums}
   .ctx .cab-sub{font-size:13px; color:var(--ink-soft); margin-bottom:4px}
@@ -336,30 +339,6 @@
   R$ 109 mil. O custo de mídia subiu na medida do mercado, e o investimento total do ano subiu 7,2% —
   não encolheu. A explicação está na próxima seção.</p>
 </section>
-<section>
-  <p class="eyebrow">Onde a diferença aconteceu</p>
-  <h2>Tudo que a loja fatura é visita × compra × ticket</h2>
-  <div class="tabela-wrap">
-    <table>
-      <thead><tr><th>Componente</th><th>2025</th><th>2026</th><th>Variação</th><th>Efeito no faturamento</th></tr></thead>
-      <tbody>
-        <tr><td><b>Visita</b> · quanta gente chegou na loja</td><td>106.731</td><td>98.766</td><td class="neg">−7,5%</td><td class="neg">−R$ 42.499</td></tr>
-        <tr><td><b>Compra</b> · quantas dessas visitas compraram</td><td>1,750%</td><td>1,377%</td><td class="neg">−21,3%</td><td class="neg">−R$ 112.430</td></tr>
-        <tr><td><b>Ticket</b> · quanto cada uma gastou</td><td>R$ 304,85</td><td>R$ 338,60</td><td class="pos">+11,1%</td><td class="pos">+R$ 45.888</td></tr>
-        <tr class="total"><td>Diferença do período</td><td>R$ 569.470</td><td>R$ 460.491</td><td class="neg">−19,1%</td><td class="neg">−R$ 108.979</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <ul class="lista">
-    <li><b>A visita continuou chegando.</b> Caiu 7,5% em nove meses, enquanto o investimento em mídia
-    subiu 7,2% — e quem buscou a marca pelo nome no Google cresceu. O interesse pela Santosha segurou.</li>
-    <li><b>O ticket devolveu R$ 45,9 mil.</b> Sozinho, ele cobriu mais do que a perda de visitas, num
-    ano em que o e-commerce brasileiro inteiro vendeu 13% mais barato.</li>
-    <li><b>O que pesou foi a passagem de visita para compra</b> — três quartos de toda a diferença.
-    E essa passagem tem um endereço, que é a próxima seção.</li>
-  </ul>
-</section>
-
 <section>
   <p class="eyebrow">O que vendeu</p>
   <h2>O coração da marca cresceu. A diferença está no entorno</h2>
@@ -714,7 +693,7 @@
 
   <h3>Onde o Matosha está na régua de preço do Brasil</h3>
   <div class="tabela-wrap">
-    <table>
+    <table class="larga">
       <thead><tr><th>Marca e modelo</th><th>Material e espessura</th><th>Preço</th></tr></thead>
       <tbody>
         <tr><td>Manduka PRO extra grande</td><td>borracha sintética 6 mm</td><td>R$ 2.690</td></tr>
@@ -1068,64 +1047,6 @@
       cheia vale mais, nesse mês, do que qualquer ajuste de campanha.</span></li>
   </ol>
 </section>
-
-<section>
-  <p class="eyebrow">Outubro de 2026 a março de 2027</p>
-  <h2>O que vamos repetir na temporada mais forte do ano</h2>
-  <ol class="plano">
-    <li><span class="t">O calendário de verba montado por semana, não por mês</span>
-      <span class="d">Outubro contido enquanto a eleição ocupa o leilão, subindo na virada para
-      novembro · primeira quinzena de novembro em ritmo normal · <b>contenção na semana da Black Friday</b>,
-      que nos dois anos medidos vendeu menos do que uma semana comum de dezembro custando mais caro ·
-      <b>teto do período entre 1º e 21 de dezembro</b>, com o pico em 8 a 21, que concentrou um quarto
-      do trimestre em 2025 · freio a partir de 26 de dezembro, quando o prazo de entrega fecha a janela ·
-      manutenção em janeiro e fevereiro e novo reforço em março, o segundo pico do ano.</span></li>
-    <li><span class="t">Cartas em primeiro plano de novembro a dezembro</span>
-      <span class="d">O baralho dobra em dezembro — 157 pedidos contra 66 em outubro — e quase empata
-      com o tapete em faturamento. A campanha dedicada de cartas, que entrou no ar em setembro, passa a
-      ser a frente principal da virada do ano, com criativo próprio e o pôster como acompanhante de
-      presente.</span></li>
-    <li><span class="t">Ampliar Reels e o Feed do Facebook</span>
-      <span class="d">São as duas únicas colocações que melhoraram de 2025 para 2026, e Reels é a mais
-      barata da conta (R$ 13,46 por mil exibições contra R$ 21,76 do Feed). Subimos a participação dos
-      dois de forma gradual, sempre com vídeo de produto, que é o formato que vende aqui.</span></li>
-    <li><span class="t">Marca com campanha própria e busca genérica contida</span>
-      <span class="d">A busca de marca devolve 24,6 vezes e segue com verba garantida. Na busca genérica,
-      concentramos nas descrições que vendem — cor, material, modelo, uso — e mantemos a categoria pura
-      pequena, porque é o clique mais caro e o que menos converte.</span></li>
-    <li><span class="t">Vitrine do Google como frente principal do canal</span>
-      <span class="d">Shopping é onde o tapete compete melhor: foto, preço e produto na frente de quem
-      está procurando. Seguimos cuidando dos títulos e do feed de produtos, e o grupo de cartas e
-      pôsteres criado em setembro continua separado para ter leitura própria.</span></li>
-    <li><span class="t">Catálogo e otimização por valor como segunda perna no Instagram</span>
-      <span class="d">O catálogo entregou 229 compras a 4,24x em 2026 trabalhando com o site, e a
-      otimização por valor é o que mantém o ticket alto. As duas continuam, com o público quente
-      sustentando o volume.</span></li>
-    <li><span class="t">Cartas com campanha própria</span>
-      <span class="d">A linha de cartas é a segunda maior da loja, tem o produto número um dos dois anos
-      e dobra em dezembro. A campanha dedicada entrou no ar em setembro e fez 3,79x no primeiro mês,
-      antes de qualquer ajuste de criativo.</span></li>
-    <li><span class="t">A promoção curta de março, repetida</span>
-      <span class="d">Prazo curto, site inteiro, três peças, público quente: 12,55x. É o modelo de ação
-      que vamos propor para a janela de dezembro e para março de 2027.</span></li>
-  </ol>
-
-  <h3>O que mais ajuda, vindo de vocês</h3>
-  <ul class="lista">
-    <li><b>A faixa de entrada do tapete.</b> O MATravel de R$ 378 é a linha que mais cresceu em 2026
-    (+79,8%, R$ 62,5 mil) e é por onde entra quem está comprando o primeiro tapete. Cada cor que volta
-    para a vitrine volta direto para a vitrine do Google e para o catálogo do Instagram.</li>
-    <li><b>Os acessórios que a busca pede.</b> Almofada de meditação (3.230 buscas por mês, R$ 13,3 mil
-    vendidos em 2025), bloco de yoga (2.740 buscas), toalha e kit. São itens de R$ 88 a R$ 308 — os que
-    formam a primeira compra e os que sobem o carrinho de quem leva o tapete.</li>
-    <li><b>Material novo de vídeo.</b> Reels é a colocação mais barata e a que melhorou no ano; o que
-    limita a participação dela é o volume de vídeo disponível. Vídeo de produto em uso, gravado no celular,
-    é o que esta conta transforma em venda.</li>
-    <li><b>O cupom CONTENTE voltando a circular.</b> É o que mais vendeu nos dois anos com o menor
-    desconto da loja, e está pronto no site.</li>
-  </ul>
-</section>
-
 
 </div>
 </body>
