@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Patrícia Tavares — Relatório de Setembro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Patrícia Tavares</p>
+  <h1>Setembro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia no <b>Meta</b> — neuroarquitetura em Brasília. Não há site: o destino do anúncio é o <b>perfil do Instagram</b> e a <b>conversa no Direct</b>.</p>
+  <p class="periodo">Período: 1 a 30 de setembro de 2026 · a campanha nova entrou no ar em 09/09 (22 dias de veiculação)</p>
+
+  <nav class="meses" aria-label="Meses">
+    <span class="mes on" aria-current="page">Setembro 2026</span>
+  </nav>
+  <p class="meses-nota">Este é o primeiro relatório mensal consolidado. A partir de outubro, os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · perfil no Instagram</span>
+        <p class="big">1.973</p>
+        <p class="what">visitas ao seu perfil</p>
+        <p class="cost">a <b>R$ 0,43</b> cada — <b>R$ 0,38</b> contando só a campanha de perfil</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Meta · Direct</span>
+        <p class="big">3</p>
+        <p class="what">conversas iniciadas</p>
+        <p class="cost">a <b>R$ 54,23</b> cada na frente de conversa — a conta inteira somava <b>uma</b> em todo o histórico</p>
+      </div>
+    </div>
+    <p class="frase">Setembro foi o primeiro mês cheio da campanha nova. Com R$ 857,24 em verba, o anúncio levou <b>1.973 pessoas até o seu perfil</b> a R$ 0,43 cada — contra R$ 0,53 em agosto, com 4,4 vezes mais gente. O resultado de distribuição está resolvido: o alcance diário do seu Instagram saiu de <b>273 pessoas por dia</b> na semana só orgânica (01 a 08/09) para <b>2.499 por dia</b> nos dias de campanha. O ponto que não melhorou é o outro lado da porta: essas 1.973 visitas renderam <b>37 seguidores atribuídos ao anúncio</b> e um saldo de <b>+25 seguidores</b> no perfil. É esse descompasso que define outubro.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Setembro</th><th class="n">Agosto</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta CA · Patrícia Tavares</td></tr>
+          <tr><td>Verba em campanha<span class="muted">o que foi para o anúncio</span></td><td class="n">R$ 857,24</td><td class="n">R$ 234,17</td><td class="n up">+266%</td></tr>
+          <tr><td>Impostos (ISS + IOF)<span class="muted">13,83% sobre a verba</span></td><td class="n">R$ 118,56</td><td class="n">R$ 32,39</td><td class="n up">+266%</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 975,80</td><td class="n">R$ 266,56</td><td class="n up">+266%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Contra o teto do mês:</b> o combinado é de <b>R$ 1.000,00 por mês</b>, o que equivale a <b>R$ 878,50 de mídia</b> já descontado o imposto. Setembro fechou em <b>R$ 857,24 de mídia</b> (R$ 975,80 com imposto) — <b>97,6% do teto</b>, com folga de R$ 24,20. <b>Nada foi somado ao combinado em nenhum momento do mês.</b> A folga é de propósito: o Instagram pode gastar até 25% a mais num dia e compensar no seguinte, e foi para garantir isso que a verba diária foi reduzida de R$ 48,00 para R$ 30,00 em 28/09.</div>
+    <div class="nota"><b>Por que agosto é tão menor:</b> em agosto rodaram só as campanhas antigas da gestão anterior, e por 11 dias (07 a 17/08), a R$ 21,29 por dia. A campanha nova subiu em <b>09 de setembro</b> — então setembro teve 22 dias de veiculação a R$ 38,97 por dia. A comparação de mês cheio contra mês cheio só existe a partir do relatório de outubro.</div>
+    <div class="nota"><b>Só Meta neste relatório:</b> não há Google Ads nesta conta. Tudo que está aqui é Meta (Instagram e Facebook).</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Setembro</th><th class="n">Custo por resultado</th><th class="n">vs. agosto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Visitas ao perfil<span class="muted">quem viu o anúncio e tocou para abrir o @patriciatavaresinteriores</span></td><td class="n"><b>1.973</b></td><td class="n">R$ 0,43</td><td class="n up">+344% · custo −18%</td></tr>
+          <tr><td>Conversas no Direct<span class="muted">mensagem iniciada pelo anúncio</span></td><td class="n"><b>3</b></td><td class="n">R$ 54,23</td><td class="n up">era 1</td></tr>
+          <tr><td>Seguidores novos atribuídos ao anúncio<span class="muted">quem passou a seguir depois de interagir com a peça</span></td><td class="n">37</td><td class="n">R$ 23,17</td><td class="n down">−72% · era 132 a R$ 1,77</td></tr>
+          <tr><td>Exibições do anúncio<span class="muted">quantas vezes a peça apareceu</span></td><td class="n">55.715</td><td class="n">R$ 15,39 por mil</td><td class="n up">+433% · CPM −31%</td></tr>
+          <tr><td>Alcance diário do seu perfil<span class="muted">pessoas que viram algo seu no Instagram, por dia</span></td><td class="n">2.499/dia</td><td class="n">—</td><td class="n up">era 273/dia só no orgânico</td></tr>
+          <tr><td>Saldo de seguidores do perfil<span class="muted">quem entrou menos quem saiu</span></td><td class="n">+25</td><td class="n">—</td><td class="n flat">6.854 → 6.879</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Os dois custos que importam, lidos com honestidade:</b> o <b>R$ 0,43 por visita ao perfil</b> divide toda a verba do mês pelas 1.973 visitas — inclui a frente de conversa, que não existe para trazer visita. Olhando só a campanha que existe para isso, a visita saiu a <b>R$ 0,38</b>, contra R$ 0,53 em agosto: <b>27% mais barata</b>. O <b>R$ 54,23 por conversa</b> divide apenas a verba da frente de conversa (R$ 108,47) pelas 2 conversas que ela trouxe; se dividíssemos a conta inteira pelas 3 conversas daria R$ 285,75, e isso seria injusto, porque 87% da verba estava trabalhando para outra coisa. A terceira conversa apareceu sozinha na campanha de perfil.</div>
+    <div class="nota"><b>O número que piorou, e o que ele quer dizer:</b> em agosto as campanhas antigas trouxeram <b>132 seguidores por R$ 234,17</b> — R$ 1,77 cada, com 30% de quem visitava o perfil passando a seguir. Em setembro foram <b>37 seguidores por R$ 857,24</b> — R$ 23,17 cada, 1,9% de quem visitou. A diferença não é o anúncio piorar: é que as duas campanhas compram coisas diferentes. A antiga distribuía Reels para Brasília inteira e colhia seguidor de quem já gosta do assunto; a atual fala <b>só com quem mora nas regiões de renda alta</b> e compra a visita ao perfil — gente que chega, olha e, hoje, vai embora. A mídia entrega. O perfil ainda não retém, e nenhum criativo novo resolve isso: resolve a grade, os destaques e a resposta à pergunta "essa arquiteta atende alguém como eu, e como eu falo com ela?".</div>
+    <div class="nota"><b>O que ficou de fora e por quê:</b> (1) <b>Não há projeto fechado nem visita técnica medida.</b> Sem site e sem pixel, o anúncio entrega a pessoa no seu perfil ou no seu Direct e a medição para ali — quantas das 3 conversas viraram proposta só você sabe, e a gente não chuta esse número aqui. (2) <b>Clique no link da bio não é medido:</b> o Instagram desativou essa métrica em 2026, então o funil termina cego depois da visita. (3) O <b>saldo de +25 seguidores</b> é contado de 08/09 (6.854, última medição só orgânica) a 30/09 (6.879); como 68 pessoas passaram a seguir nesse intervalo, cerca de 43 deixaram de seguir. (4) O <b>alcance de cada campanha não é somado</b> — quem viu as duas seria contado duas vezes; a campanha de perfil sozinha alcançou 19.716 pessoas, com frequência 2,70.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>As peças que levaram gente ao seu perfil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Gasto</th><th class="n">Alcance</th><th class="n">Visitas ao perfil</th><th class="n">Custo por visita</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>"Adiar o projeto é adiar a vida"</b><span class="muted">Reel, publicado 31/07</span></td><td class="n">R$ 218,29</td><td class="n">8.259</td><td class="n"><b>673</b></td><td class="n"><b>R$ 0,32</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/reel/DbeIWtMjD9q/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>"A casa ficou linda. Só que ela não parece sua."</b><span class="muted">Carrossel, publicado 08/09</span></td><td class="n">R$ 263,28</td><td class="n">8.622</td><td class="n"><b>745</b></td><td class="n">R$ 0,35</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCnvlKGndj/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"O verdadeiro antes e depois"<span class="muted">Carrossel, publicado 16/09 — entrou em 22/09</span></td><td class="n">R$ 51,18</td><td class="n">2.328</td><td class="n">110</td><td class="n">R$ 0,47</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdXJa5KjTcK/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"Nem toda casa branca transmite paz"<span class="muted">Reel, publicado 29/07</span></td><td class="n">R$ 50,53</td><td class="n">2.253</td><td class="n">102</td><td class="n">R$ 0,50</td><td><span class="st off">Pausado em 22/09</span></td><td><a href="https://www.instagram.com/reel/DbYeLCYtd5P/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"Casa clean × casa que acolhe"<span class="muted">Reel, publicado 05/08</span></td><td class="n">R$ 75,44</td><td class="n">3.680</td><td class="n">149</td><td class="n">R$ 0,51</td><td><span class="st off">Pausado em 17/09</span></td><td><a href="https://www.instagram.com/reel/Dbo7CK7BGHn/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"Obra bem conduzida"<span class="muted">Reel, publicado 28/08</span></td><td class="n">R$ 74,06</td><td class="n">3.652</td><td class="n">143</td><td class="n">R$ 0,52</td><td><span class="st off">Pausado em 17/09</span></td><td><a href="https://www.instagram.com/reel/DcmTg6HR-4N/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"POV: reformou a casa e continua cansada"<span class="muted">Reel, publicado 02/09</span></td><td class="n">R$ 15,99</td><td class="n">945</td><td class="n">27</td><td class="n">R$ 0,59</td><td><span class="st off">Pausado em 17/09</span></td><td><a href="https://www.instagram.com/reel/DczFGFgiIoW/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Campanha de perfil — 7 peças</td><td class="n">R$ 748,77</td><td class="n">19.716</td><td class="n">1.949</td><td class="n">R$ 0,38</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> a campanha de perfil levou <b>87% da verba</b> do mês e trouxe <b>1.949 das 1.973 visitas</b>. Duas peças sozinhas respondem por <b>1.418 delas — 72%</b>: o Reel "Adiar o projeto é adiar a vida" (R$ 0,32) e o carrossel "A casa ficou linda. Só que ela não parece sua." (R$ 0,35). As quatro peças pausadas custavam de R$ 0,50 a R$ 0,59 — <b>84% mais caro</b> que a melhor. O corte foi feito em 17/09 e se pagou dentro do mês: antes dele a visita custava R$ 0,445; depois, R$ 0,352. Não entrou dinheiro novo — o mesmo orçamento só parou de sustentar peça mediana. E a descoberta que desmentiu a expectativa: <b>o carrossel, que não tem vídeo nenhum, está entre as duas peças mais baratas da conta</b>. O que decide aqui não é a produção — é a primeira frase nomear o que a pessoa está sentindo em casa.</div>
+
+    <p class="sub g"><span class="dot g"></span>A frente de conversa no Direct</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Gasto</th><th class="n">Alcance</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>"Você chega em casa, mas a sensação de descanso não chega com você"</b><span class="muted">Carrossel, publicado 06/08 — remarketing, quem já viu a campanha ou passou pelo perfil</span></td><td class="n">R$ 72,11</td><td class="n">886</td><td class="n"><b>2</b></td><td class="n"><b>R$ 36,06</b></td><td><span class="st off">Pausado em 28/09</span></td><td><a href="https://www.instagram.com/p/DbtjkyUm2iJ/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>"Neste projeto, eu e a Daiane, minha cliente, fomos construindo cada escolha juntas"<span class="muted">Carrossel, publicado 19/09 — entrou em 22/09</span></td><td class="n">R$ 36,36</td><td class="n">568</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado em 28/09</span></td><td><a href="https://www.instagram.com/p/Dde2gHCjKCc/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Frente de conversa — 2 peças</td><td class="n">R$ 108,47</td><td class="n">1.242</td><td class="n">2</td><td class="n">R$ 54,23</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> R$ 54,23 por conversa não é um número que se sustenta no longo prazo, mas ele diz menos sobre o anúncio do que sobre o <b>tamanho do público</b>. São pouco mais de mil pessoas na lista, e falar com elas custou R$ 44,15 por mil exibições — <b>3,2 vezes o custo do topo</b> (R$ 14,06). O que essa frente provou é que <b>existe pedido de conversa nesse público</b>, depois de meses em que a conta inteira somava uma única mensagem. O caminho não é colocar mais dinheiro em cima de mil pessoas: é o topo continuar trazendo gente nova, a lista crescer, e a conversa ficar mais barata sozinha. Foi por isso que a verba dessa frente nunca passou de R$ 12,00 por dia — e por isso ela foi a primeira a sair em 28/09, para o mês fechar dentro do combinado.</div>
+    <div class="nota"><b>O carrossel de maior alcance orgânico não gerou conversa:</b> o post do projeto da Daiane foi a publicação de maior entrega orgânica do mês (1.253 visualizações) e, no anúncio, falando com quem já conhece o perfil, não trouxe <b>nenhuma</b> mensagem com R$ 36,36 investidos. A peça que continuou trazendo conversa foi a antiga, "Você chega em casa…". A lição se repete nesta conta: <b>o que faz a pessoa falar com você não é o projeto bonito — é a frase que nomeia o que ela está sentindo</b>. O projeto pronto encanta quem já gosta; a dor nomeada é o que faz escrever.</div>
+    <div class="nota"><b>A regra do áudio, de novo:</b> duas peças escolhidas para essa frente não puderam ser anunciadas — "Eu sei que reforma pode parecer problema" (<a href="https://www.instagram.com/reel/DZ3zLknNCxy/" target="_blank" rel="noopener">ver ↗</a>) e "Ninguém contrata um projeto porque quer apenas uma casa bonita" (<a href="https://www.instagram.com/reel/DZ3uWPkNgxl/" target="_blank" rel="noopener">ver ↗</a>) usam música de catálogo, e o Instagram não permite impulsionar Reels com música licenciada. Já são cinco peças perdidas assim nesta conta. <b>Publicação pensada para virar anúncio precisa usar áudio original</b> — carrossel não tem esse risco.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em outubro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Arrumar o perfil — é lá que está a perda, não na mídia</h3>
+          <p>1.973 pessoas abriram seu perfil em setembro e o saldo foi de +25 seguidores. O gargalo mudou de lugar: não está mais no tráfego, está no que a pessoa encontra quando chega. Em outubro mexemos nos primeiros nove posts da grade, nos destaques e na bio, para responder em três segundos "essa arquiteta atende alguém como eu, e como eu falo com ela?". Otimizar anúncio rende cada vez menos enquanto essa porta não for arrumada.</p>
+          <span class="muda">Depende de você: aprovar a nova ordem da grade e gravar 1 destaque de "como começar um projeto"</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Mês cheio, mesma verba: a diária cai de R$ 48 para R$ 28,34</h3>
+          <p>Setembro rodou a R$ 48,00 por dia porque a campanha começou no dia 9 — foram 22 dias dividindo o orçamento do mês inteiro. Outubro tem 31 dias, e o mesmo teto de R$ 1.000,00 dá R$ 28,34 por dia. Dá para manter no ar o que funciona; não dá para continuar testando material novo no ritmo de setembro — e foi justamente o teste que derrubou o custo da visita de R$ 0,53 para R$ 0,38.</p>
+          <span class="muda">Verba: R$ 28,34/dia nas 3 peças que ficaram · teto do mês mantido em R$ 1.000,00</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Entender o seguidor barato de agosto antes de descartá-lo</h3>
+          <p>As campanhas antigas trouxeram seguidor a R$ 1,77 falando com Brasília inteira; a campanha atual traz a R$ 23,17 falando só com as regiões de renda alta. Visita barata e seguidor barato não vêm do mesmo lugar. Em outubro sobe <b>um</b> conjunto pequeno, em paralelo, com público mais amplo e a peça campeã, só para medir se o seguidor volta a custar pouco sem estragar o custo da visita.</p>
+          <span class="muda">Estrutura: 1 conjunto novo a R$ 6,00/dia, dentro do mesmo teto</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Religar a frente de conversa só quando a lista tiver crescido</h3>
+          <p>A conversa custou R$ 54,23 porque a lista tem pouco mais de mil pessoas e falar com ela sai 3,2 vezes mais caro que falar com gente nova. Em outubro a frente volta ao ar na segunda metade do mês, com a peça que funcionou ("Você chega em casa…"), depois que o topo tiver alimentado a lista. A do projeto da Daiane continua pausada.</p>
+          <span class="muda">Verba: frente de conversa a R$ 7,00/dia a partir de 16/10 · 1 peça permanece pausada</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Fechar a medição que falta</h3>
+          <p>Hoje o relatório para na visita e na conversa. O Instagram desativou a métrica de clique no link da bio em 2026, então colocamos um painel próprio no link, e combinamos um jeito simples de anotar, na conversa, quem chegou pelo anúncio e virou proposta. Sem isso, o relatório de novembro continua sem saber o que a conversa gerou.</p>
+          <span class="muda">Depende de você: anotar "veio do anúncio" quando a pessoa escrever no Direct</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 30 de setembro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
