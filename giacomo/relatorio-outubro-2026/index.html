@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dr. Giácomo Trojan — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Dr. Giácomo Trojan</p>
+  <h1>Outubro de 2026 <span style="font-weight:400;color:var(--ink-soft)">— em andamento</span></h1>
+  <p class="lede">Relatório mensal da mídia no <b>Meta</b> — lipo de papada em Balneário Camboriú. Não há site: o destino do anúncio é o <b>perfil do Instagram</b> e a <b>conversa no WhatsApp</b>.</p>
+  <p class="periodo">Período medido até agora: 1 a 5 de outubro de 2026 · mês ainda em andamento, números parciais</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026 (em andamento)</span>
+  </nav>
+  <p class="meses-nota">Outubro acabou de começar — os números abaixo são parciais e vão mudar até o relatório fechado, no início de novembro.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número (parcial)</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · perfil no Instagram</span>
+        <p class="big">15</p>
+        <p class="what">visitas ao seu perfil</p>
+        <p class="cost">a <b>R$ 1,26</b> cada, até agora</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Meta · WhatsApp</span>
+        <p class="big">1</p>
+        <p class="what">conversa aberta</p>
+        <p class="cost">a <b>R$ 4,84</b>, até agora</p>
+      </div>
+    </div>
+    <p class="frase">Outubro está só começando: os números acima vêm de um volume ainda pequeno de mídia medida, não dá pra comparar com o mês inteiro de setembro. O público quente — gente que já viu seu vídeo ou mexeu no seu perfil, medido pela última vez em 28/09 — estava em <b>7.100 a 8.400</b> mulheres de 38 a 64 anos no remarketing geral e <b>4.100 a 4.800</b> na frente de WhatsApp. Ainda não voltamos a medir esse público em outubro.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro (parcial)</th><th class="n">Setembro (mês fechado)</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — CA_Giacomo_Lipo_papada</td></tr>
+          <tr><td>Verba em campanha<span class="muted">o que foi para o anúncio</span></td><td class="n">R$ 28,58</td><td class="n">R$ 1.815,44</td><td class="n flat">mês em andamento</td></tr>
+          <tr><td>Impostos (ISS + IOF)<span class="muted">13,83% sobre a verba</span></td><td class="n">R$ 3,95</td><td class="n">R$ 251,08</td><td class="n flat">mês em andamento</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 32,53</td><td class="n">R$ 2.066,52</td><td class="n flat">mês em andamento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o número de outubro é tão menor:</b> o valor acima é o que foi medido até agora, não o mês fechado — comparar com o total de setembro não faz sentido ainda. O relatório de novembro traz outubro inteiro, lado a lado com setembro.</div>
+    <div class="nota"><b>Só Meta neste relatório:</b> não há Google Ads nesta conta. Tudo que está aqui é Meta (Instagram e Facebook).</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu (parcial)</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro (parcial)</th><th class="n">Custo por resultado</th><th class="n">vs. setembro (mês fechado)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Visitas ao perfil<span class="muted">quem saiu do anúncio e foi até o @drgiacomogtrojan</span></td><td class="n"><b>15</b></td><td class="n">R$ 1,26</td><td class="n flat">amostra pequena, não compara ainda</td></tr>
+          <tr><td>Conversas no WhatsApp<span class="muted">conversa iniciada pelo anúncio</span></td><td class="n"><b>1</b></td><td class="n">R$ 4,84</td><td class="n flat">amostra pequena, não compara ainda</td></tr>
+          <tr><td>Público quente — remarketing<span class="muted">mulheres de 38 a 64 que já viram seu conteúdo</span></td><td class="n">7.100 a 8.400</td><td class="n">—</td><td class="n flat">última medição: 28/09 (sem nova leitura ainda)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que não dá pra ler tendência ainda:</b> os números de outubro acima vêm de pouquíssimo volume. Um custo por visita ou por conversa calculado em cima de 1 ou 15 eventos sobe e desce fácil — não é sinal de melhora nem de piora, é só o começo do mês. A leitura séria de outubro vem no relatório de novembro, com o mês inteiro.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu (parcial)</h2>
+
+    <p class="sub m"><span class="dot m"></span>Os vídeos que levaram gente ao seu perfil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Vídeo</th><th class="n">Gasto</th><th class="n">Visitas ao perfil</th><th class="n">Custo por visita</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Karina — “a melhor decisão”</b><span class="muted">depoimento, 49s</span></td><td class="n">R$ 4,08</td><td class="n"><b>8</b></td><td class="n"><b>R$ 0,51</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCp-LnMd_E/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — cicatriz<span class="muted">resposta de caixinha, 22s</span></td><td class="n">R$ 2,41</td><td class="n">3</td><td class="n">R$ 0,80</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaJovsQ6K/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Lista de espera — Balneário<span class="muted">chamada para a fila de atendimento, 1min39</span></td><td class="n">R$ 3,68</td><td class="n">2</td><td class="n">R$ 1,84</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdRLAJWMigv/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Karina — excesso de gordura, 7 dias<span class="muted">depoimento, 1min44</span></td><td class="n">R$ 3,40</td><td class="n">1</td><td class="n">R$ 3,40</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCpramsPzq/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — caneta e gordura<span class="muted">resposta de caixinha, 51s</span></td><td class="n">R$ 2,77</td><td class="n">1</td><td class="n">R$ 2,77</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaSPDMn8s/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Caixinha — “medo de mexer na veia”<span class="muted">resposta de caixinha, 58s</span></td><td class="n">R$ 2,58</td><td class="n">0</td><td class="n">—</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdbaZlSsXVh/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Campanha de perfil — 6 peças</td><td class="n">R$ 18,92</td><td class="n">15</td><td class="n">R$ 1,26</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Leia com cuidado:</b> isso é 1 dia de dado, não um ranking de mês. A ordem acima pode virar de cabeça para baixo nos próximos dias — ela só existe aqui porque a régua pede status por peça desde o primeiro dia do relatório. Vânia e o Direct frio continuam pausados, como fecharam setembro.</div>
+
+    <p class="sub g"><span class="dot g"></span>WhatsApp e topo de funil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Anúncio</th><th class="n">Gasto</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>“Sou magra, por que tenho papada?”</b><span class="muted">mensagens — público quente</span></td><td class="n">R$ 4,84</td><td class="n"><b>1</b></td><td class="n"><b>R$ 4,84</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdCqXHdsZ4P/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>“Emagreceu e a papada ficou”<span class="muted">remarketing — quem engajou nos últimos 90 dias</span></td><td class="n">R$ 2,10</td><td class="n">0</td><td class="n">—</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/Ddbah3sMA0E/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Débora — resultado em 7 dias<span class="muted">topo de funil, alcance — não tem link para o perfil</span></td><td class="n">R$ 2,72</td><td class="n">0</td><td class="n">—</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DccNQG4s6YO/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>Mensagens + alcance — 3 peças no ar</td><td class="n">R$ 9,66</td><td class="n">1</td><td class="n">R$ 4,84</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Sem mudança de estrutura ainda:</b> a conta segue com a mesma configuração que fechou setembro — R$ 93/dia somados, 9 conjuntos no ar e 3 pausados (Vânia, Direct frio, o vídeo de alcance “pele que sobra”). As trocas planejadas para outubro (bloco 5) ainda não entraram no ar.</div>
+    <div class="nota"><b>Sobre o termo de imagem:</b> nada a pedir — você já tem o termo das pacientes que aparecem nos vídeos.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Ampliar o raio da frente de WhatsApp quente</h3>
+          <p>Fechamos setembro com a frente de WhatsApp quente alcançando pouca gente perto demais de você (raio de 17 km) e se repetindo muito rápido na mesma pessoa. A correção é abrir a área para 25 milhas — o mesmo tamanho que já funciona bem no outro público de remarketing.</p>
+          <span class="muda">Estrutura: ajuste de raio, sem mudar verba</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Mover verba da Lista de Espera para a Caneta</h3>
+          <p>A Lista de Espera veio perdendo força ao longo de setembro, e a Caneta e Gordura segue como a visita mais barata da conta. A troca de verba entre as duas já está desenhada, só falta executar.</p>
+          <span class="muda">Verba: realoca dentro dos R$ 10/dia já ativos, sem aumentar o total</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Gravar as 6 caixinhas do hospital — “a mesma segurança, na minha clínica”</h3>
+          <p>O roteiro novo já está pronto e publicado: 6 respostas de caixinha gravadas em par — o mesmo plano no hospital e na sua clínica de Balneário — para provar, em imagem, que a estrutura é a mesma nos dois lugares. É o material que fecha a objeção de segurança que a sua própria caixinha de perguntas levanta toda semana.</p>
+          <span class="muda">Depende de você: gravar os 6 pares (hospital + clínica). Roteiro com fala palavra por palavra já entregue</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Transformar os casos da Geise em anúncio</h3>
+          <p>Os 3 posts com a paciente Geise (antes/depois de perfil e dois relatos em vídeo) já estão no ar organicamente, com o termo e a legenda certos, e seguem o formato que os concorrentes mantêm anunciando por mais de um ano. É a peça mais pronta para entrar como anúncio novo da campanha de perfil.</p>
+          <span class="muda">Estrutura: 1 conjunto novo a R$ 10/dia, dentro da campanha de perfil já existente</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados parciais até 5 de outubro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
