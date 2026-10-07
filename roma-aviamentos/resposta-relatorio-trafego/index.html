@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resposta ao relat&oacute;rio de tr&aacute;fego pago &middot; Roma Aviamentos</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f4f7; --paper:#fff; --ink:#10141c; --ink-soft:#4c5668; --ink-mute:#8891a1;
+    --line:rgba(16,20,28,.11); --line-soft:rgba(16,20,28,.06);
+    --y25:#2a78d6; --y26:#eb6834; --good:#0ca30c; --alerta:#d03b3b;
+    --shadow:0 1px 2px rgba(16,20,28,.04), 0 8px 24px -16px rgba(16,20,28,.18);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#121418; --paper:#1b1e24; --ink:#f4f5f7; --ink-soft:#c2c8d4; --ink-mute:#8891a1;
+    --line:rgba(255,255,255,.12); --line-soft:rgba(255,255,255,.07);
+    --y25:#3987e5; --y26:#d95926; --good:#19c419; --alerta:#e36a6a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6); } }
+  :root[data-theme="dark"]{
+    --bg:#121418; --paper:#1b1e24; --ink:#f4f5f7; --ink-soft:#c2c8d4; --ink-mute:#8891a1;
+    --line:rgba(255,255,255,.12); --line-soft:rgba(255,255,255,.07);
+    --y25:#3987e5; --y26:#d95926; --good:#19c419; --alerta:#e36a6a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6); }
+
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif; padding-block:48px 72px}
+  .wrap{max-width:900px; margin:0 auto; padding-inline:20px}
+  .mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+
+  header{margin-bottom:34px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:12.5px; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--ink-mute); margin-bottom:14px;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+  .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--y26)}
+  h1{font-size:clamp(27px,3.8vw,36px); line-height:1.1; letter-spacing:-.015em; margin:0 0 14px; font-weight:700; text-wrap:balance}
+  .lede{font-size:16px; line-height:1.62; color:var(--ink-soft); max-width:66ch; margin:0}
+
+  section{margin-top:52px}
+  .sh{margin-bottom:18px}
+  .sh .k{font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-mute);
+    font-family:"IBM Plex Mono",monospace; margin-bottom:6px}
+  .sh h2{font-size:22px; margin:0 0 7px; letter-spacing:-.012em; text-wrap:balance}
+  .sh p{margin:0; color:var(--ink-soft); font-size:14.5px; max-width:68ch; line-height:1.6}
+
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:var(--shadow)}
+  .card + .card{margin-top:14px}
+  .card h3{font-size:15.5px; margin:0 0 10px; letter-spacing:-.005em}
+  .card p{font-size:14px; color:var(--ink-soft); line-height:1.65; margin:0 0 13px; max-width:72ch}
+  .card p:last-child{margin-bottom:0}
+  .card b{color:var(--ink)}
+  .card.alerta{border-left:4px solid var(--alerta)}
+  .card.ok{border-left:4px solid var(--good)}
+  .card.neutro{border-left:4px solid var(--y25)}
+
+  .tw{overflow-x:auto; border-radius:14px}
+  table{width:100%; border-collapse:collapse; background:var(--paper); border:1px solid var(--line);
+    border-radius:14px; overflow:hidden; box-shadow:var(--shadow)}
+  thead th{text-align:right; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--ink-mute); font-weight:600; padding:11px 12px; border-bottom:1px solid var(--line); background:var(--line-soft)}
+  thead th:first-child{text-align:left}
+  tbody td{padding:10px 12px; font-size:13px; text-align:right; border-bottom:1px solid var(--line-soft);
+    font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+  tbody td:first-child{text-align:left; font-family:"IBM Plex Sans",sans-serif; color:var(--ink-soft)}
+  tbody tr:last-child td{border-bottom:none}
+  tr.hl td{font-weight:700; color:var(--ink); background:var(--line-soft)}
+  td.up{color:var(--y26); font-weight:600}
+  td.ok{color:var(--good); font-weight:600}
+  td.al{color:var(--alerta); font-weight:700}
+  .fn{font-size:11.5px; color:var(--ink-mute); margin-top:12px; line-height:1.55; max-width:88ch}
+  .fn b{color:var(--ink-soft)}
+
+  .figs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px}
+  @media (max-width:700px){ .figs{grid-template-columns:1fr} }
+  .fig{background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow)}
+  .fig .l{font-size:11.5px; color:var(--ink-mute); margin-bottom:8px; line-height:1.4; min-height:2.8em}
+  .fig .v{font-family:"IBM Plex Mono",monospace; font-size:27px; font-weight:700; letter-spacing:-.02em; line-height:1}
+  .fig .s{font-size:12px; color:var(--ink-mute); margin-top:7px}
+
+  .passos{display:grid; gap:10px; margin-top:16px}
+  .passo{background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:15px 18px;
+    box-shadow:var(--shadow); display:flex; gap:15px; align-items:flex-start}
+  .passo .n{flex:0 0 26px; height:26px; border-radius:50%; background:var(--line-soft); color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600;
+    display:flex; align-items:center; justify-content:center}
+  .passo.fim .n{background:var(--y26); color:#fff}
+  .passo .t{flex:1; min-width:0}
+  .passo .tt{font-size:14px; font-weight:600; margin-bottom:3px}
+  .passo .tn{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+  .passo .tn .a{color:var(--y25); font-weight:600}
+  .passo .tn .b{color:var(--y26); font-weight:600}
+  .passo .tn .g{color:var(--good); font-weight:600}
+
+  .plano{display:grid; gap:12px; margin-top:16px}
+  .pl{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:var(--shadow)}
+  .pl-top{display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:10px}
+  .pl-top h3{font-size:16px; margin:0}
+  .pl-tag{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 9px; border-radius:20px; white-space:nowrap}
+  .pl-tag.sim{background:#e5f6e5; color:#0a7a0a}
+  .pl-tag.talvez{background:var(--line-soft); color:var(--ink-soft)}
+  .pl-tag.nao{background:#fdeae0; color:var(--y26)}
+  .pl p{font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 10px}
+  .pl p:last-child{margin-bottom:0}
+  .pl .conta{font-family:"IBM Plex Mono",monospace; font-size:13px; background:var(--line-soft);
+    padding:12px 14px; border-radius:8px; line-height:1.75; margin-top:10px}
+  .pl .conta b{color:var(--ink)}
+
+  @media print{
+    body{padding-block:18px; background:#fff}
+    .wrap{max-width:none; padding-inline:0}
+    .card,.fig,.passo,.pl,.tw,.sh{break-inside:avoid; page-break-inside:avoid}
+    .sh{break-after:avoid}
+    .figs{grid-template-columns:repeat(3,1fr)}
+    table{min-width:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow"><span class="dot"></span>ROMA AVIAMENTOS &middot; RESPOSTA AO RELAT&Oacute;RIO DE TR&Aacute;FEGO PAGO &middot; JAN&ndash;SET 2025 &times; 2026</div>
+  <h1>Resposta ponto a ponto, com os dados das plataformas</h1>
+  <p class="lede">Conferimos cada n&uacute;mero do relat&oacute;rio contra o gasto di&aacute;rio extra&iacute;do direto do Google Ads e do Meta. A maior parte bate. Dois pontos n&atilde;o batem &mdash; e um deles inverte a conclus&atilde;o sobre qual plataforma rende mais. Abaixo: o que confere, o que precisa ser corrigido, a resposta &agrave; pergunta de junho a setembro e o plano de crescimento pedido.</p>
+</header>
+
+<section>
+  <div class="sh">
+    <div class="k">Primeiro, o que confere</div>
+    <h2>O custo de 2026 do relat&oacute;rio est&aacute; correto</h2>
+    <p>Comparamos m&ecirc;s a m&ecirc;s com o gasto real das duas contas. Em 2026 a diferen&ccedil;a &eacute; de centavos.</p>
+  </div>
+  <div class="card ok">
+    <h3>Os nove meses de 2026 batem dentro de R$ 10</h3>
+    <p>O custo informado soma <b>R$ 77.128,94</b>; o gasto real das plataformas soma <b>R$ 77.170,44</b>. Diferen&ccedil;a de <b>R$ 41,50 no per&iacute;odo inteiro</b> &mdash; 0,05%. A metodologia de custo est&aacute; certa e o ROAS de 2026 calculado no relat&oacute;rio (21,66x) &eacute; exatamente o que d&aacute; na nossa apura&ccedil;&atilde;o.</p>
+    <p>Tamb&eacute;m confere a leitura de mar&ccedil;o como exce&ccedil;&atilde;o, a de que o retorno caiu em oito dos nove meses, e a observa&ccedil;&atilde;o de que em setembro os pedidos subiram 5,5% com o ticket caindo.</p>
+  </div>
+  <div class="card neutro">
+    <h3>Em 2025 h&aacute; R$ 3.238,11 a mais que n&atilde;o encontramos nas plataformas</h3>
+    <p>O relat&oacute;rio informa <b>R$ 83.392,75</b> para 2025; o gasto real do Google mais o Meta soma <b>R$ 80.154,63</b>. A diferen&ccedil;a aparece concentrada em <b>fevereiro a julho</b>, entre R$ 277 e R$ 622 por m&ecirc;s &mdash; janeiro, agosto e setembro batem exato.</p>
+    <p>N&atilde;o estamos dizendo que o n&uacute;mero est&aacute; errado: pode ser alguma verba que n&atilde;o passa por essas duas contas. <b>Precisamos saber qual &eacute; a origem desses R$ 3.238,11</b>, porque ela muda o ROAS de 2025 de 27,99x para 29,11x e, com isso, o tamanho da queda no per&iacute;odo.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">O ponto que precisa ser corrigido antes de virar decis&atilde;o</div>
+    <h2>A compara&ccedil;&atilde;o entre Google e Meta da p&aacute;gina 5 n&atilde;o se sustenta</h2>
+    <p>&Eacute; a parte mais importante desta resposta, porque ela conclui que &ldquo;o Meta apresenta ROAS maior nos dois anos&rdquo; &mdash; e essa conclus&atilde;o, se virar decis&atilde;o de verba, leva dinheiro para o lugar errado.</p>
+  </div>
+
+  <div class="card alerta">
+    <h3>As duas plataformas, somadas, dizem ter vendido mais do que a loja inteira vendeu</h3>
+    <div class="tw" style="margin-bottom:14px">
+      <table>
+        <thead><tr><th>Ano</th><th>Google diz</th><th>Meta diz</th><th>Soma</th><th>Loja faturou</th><th>Reivindicado</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>2.115.383,22</td><td>1.138.583,73</td><td>3.253.966,95</td><td>2.334.086,92</td><td class="al">139%</td></tr>
+          <tr><td>2026</td><td>1.139.777,46</td><td>1.259.497,87</td><td>2.399.275,33</td><td>1.670.947,86</td><td class="al">144%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Nenhuma das duas receitas &eacute; venda conferida: s&atilde;o <b>atribui&ccedil;&atilde;o</b>, ou seja, cada plataforma contando para si as vendas em que participou. Quando as duas contam a mesma venda, o total estoura o faturamento real. <b>Dividir uma receita inflada pelo custo correto produz um ROAS inflado</b> &mdash; e infla mais a plataforma que mais duplica.</p>
+  </div>
+
+  <div class="card alerta">
+    <h3>O Meta da Roma conta cada compra 2,24 vezes &mdash; isso foi medido na conta</h3>
+    <p>Em 29/09 comparamos as compras que o pixel do Meta registra com os pedidos reais da loja na mesma janela: <b>o Meta reivindica 2,24 compras para cada compra que existiu</b>. A causa &eacute; disparo duplicado do evento no site, j&aacute; diagnosticada e em corre&ccedil;&atilde;o com a plataforma da loja.</p>
+    <p>Aplicando esse fator medido ao n&uacute;mero da p&aacute;gina 5, a ordem se inverte:</p>
+    <div class="tw" style="margin-top:12px">
+      <table>
+        <thead><tr><th>2026</th><th>Receita que a plataforma reivindica</th><th>ROAS do relat&oacute;rio</th><th>Receita corrigida</th><th>ROAS corrigido</th></tr></thead>
+        <tbody>
+          <tr><td>Google</td><td>1.139.777,46</td><td>23,87x</td><td>&mdash;</td><td class="ok">23,87x</td></tr>
+          <tr><td>Meta</td><td>1.259.497,87</td><td>42,81x</td><td>562.275,83</td><td class="al">19,11x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px"><b>Com o fator medido, o Meta rende menos que o Google, n&atilde;o mais.</b> Por isso, nesta conta, nunca usamos o ROAS por plataforma para decidir verba &mdash; usamos o custo por compra real e o faturamento da loja.</p>
+  </div>
+
+  <div class="card neutro">
+    <h3>O n&uacute;mero do Google de 2025 tamb&eacute;m est&aacute; inflado, por outro motivo</h3>
+    <p>Entre <b>30/03 e 26/06 de 2025</b> a campanha de Shopping registrou convers&otilde;es que n&atilde;o eram vendas: naqueles meses o Google sozinho declara <b>mais receita do que a loja inteira faturou</b> &mdash; abril R$ 340,9 mil contra R$ 293,5 mil de loja, maio R$ 365,1 mil contra R$ 305,1 mil, junho R$ 350,2 mil contra R$ 235,9 mil.</p>
+    <p>Isso significa que o <b>36,55x do Google em 2025 est&aacute; superestimado</b>, e a queda de 34,7% at&eacute; 2026 &eacute; menor do que parece. &Eacute; mais um motivo para a compara&ccedil;&atilde;o entre plataformas n&atilde;o se sustentar nessa base.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">A pergunta central do relat&oacute;rio</div>
+    <h2>&ldquo;De junho a setembro aumentamos a verba e n&atilde;o tivemos retorno&rdquo;</h2>
+    <p>A observa&ccedil;&atilde;o est&aacute; certa e o n&uacute;mero confere. Abrimos o recorte para mostrar exatamente onde o dinheiro entrou e onde ele parou.</p>
+  </div>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="n">1</div>
+      <div class="t">
+        <div class="tt">A verba subiu, e quase toda a diferen&ccedil;a foi para o Meta</div>
+        <div class="tn">total <span class="a">R$ 30.588,09</span> → <span class="b">R$ 37.625,98</span> (+23,0%) &middot; do acr&eacute;scimo de R$ 7.037,89, <b>R$ 5.631,94 (80%) foi para o Meta</b></div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="n">2</div>
+      <div class="t">
+        <div class="tt">E foi para campanha de venda, n&atilde;o para campanha de alcance</div>
+        <div class="tn"><span class="g">88,4% do aumento do Meta</span> entrou em cat&aacute;logo, remarketing e semelhante de compradores &middot; s&oacute; 11,6% em alcance e perfil</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="n">3</div>
+      <div class="t">
+        <div class="tt">Esse dinheiro comprou tr&aacute;fego &mdash; e comprou muito, e barato</div>
+        <div class="tn">visitas <span class="a">178.433</span> → <span class="b">420.749</span> (+135,8%) &middot; custo por visita <span class="a">R$ 0,1714</span> → <span class="g">R$ 0,0894</span> (−47,8%)</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="n">4</div>
+      <div class="t">
+        <div class="tt">Mas o faturamento caiu</div>
+        <div class="tn"><span class="a">R$ 922.966,34</span> → <span class="b">R$ 721.173,73</span> (−21,9%) &middot; retorno de <span class="a">30,17x</span> para <span class="b">19,17x</span></div>
+      </div>
+    </div>
+    <div class="passo fim">
+      <div class="n">=</div>
+      <div class="t">
+        <div class="tt">A conclus&atilde;o, sem rodeio: a verba a mais trouxe gente, e a gente n&atilde;o comprou</div>
+        <div class="tn">R$ 7.037,89 a mais &rarr; <b>242.316 visitas a mais</b>, a R$ 0,029 cada &middot; e mesmo assim <b>R$ 201.792,61 a menos de faturamento</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Onde a conta parou &mdash; e por que n&atilde;o d&aacute; para resolver s&oacute; na m&iacute;dia</h3>
+    <p>No mesmo per&iacute;odo de janeiro a setembro, a loja registrou <b>13.498 pedidos em 2025 e 9.269 em 2026 &mdash; 31,3% a menos</b>, enquanto o tr&aacute;fego pago <b>dobrou</b>. O ticket m&eacute;dio n&atilde;o caiu: subiu de R$ 209,25 para R$ 212,06. E o cancelamento foi de <b>12,8% para 14,1% do valor vendido</b>; mantida a taxa do ano anterior, teriam sido preservados <b>R$ 26.138,43</b>.</p>
+    <p>Ou seja: chegou <b>o dobro de gente</b> e <b>um ter&ccedil;o a menos de pedidos</b>. Esse degrau acontece depois do clique &mdash; entre a visita e o pedido pago. <b>Nenhum ajuste de campanha fecha essa diferen&ccedil;a sozinho</b>, e &eacute; por isso que trazemos o checkout e o cancelamento junto: n&atilde;o para transferir tarefa, mas porque &eacute; onde est&aacute; a maior parte do dinheiro que falta.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">O que o relat&oacute;rio n&atilde;o mostra</div>
+    <h2>O que melhorou em 2026</h2>
+    <p>Estes s&atilde;o os indicadores que medem diretamente a gest&atilde;o das campanhas &mdash; e todos foram no sentido contr&aacute;rio ao do retorno.</p>
+  </div>
+  <div class="figs">
+    <div class="fig">
+      <div class="l">Visitas levadas ao site, somando as duas plataformas</div>
+      <div class="v" style="color:var(--good)">+104,4%</div>
+      <div class="s">425.965 &rarr; 870.767</div>
+    </div>
+    <div class="fig">
+      <div class="l">Custo para trazer cada visita at&eacute; a loja</div>
+      <div class="v" style="color:var(--good)">&minus;52,9%</div>
+      <div class="s">R$ 0,1882 &rarr; R$ 0,0886</div>
+    </div>
+    <div class="fig">
+      <div class="l">De cada cem pessoas que viram o an&uacute;ncio, quantas clicaram</div>
+      <div class="v" style="color:var(--good)">+114,7%</div>
+      <div class="s">3,61% &rarr; 7,74%</div>
+    </div>
+  </div>
+  <div class="card ok" style="margin-top:14px">
+    <h3>O n&uacute;mero que melhor mede o trabalho de m&iacute;dia</h3>
+    <p>No Google, <b>o pre&ccedil;o de mil apari&ccedil;&otilde;es subiu 17,1%</b> no per&iacute;odo &mdash; e <b>o custo do clique n&atilde;o subiu: R$ 0,265 contra R$ 0,263</b>. Isso acontece porque o an&uacute;ncio ficou <b>18,0% mais atraente</b> (CTR de 3,35% para 3,96%), e a melhora absorveu a infla&ccedil;&atilde;o inteira do leil&atilde;o. Sem ela, cada visita teria ficado 17% mais cara.</p>
+    <p>No Meta, considerando <b>apenas as campanhas de venda e cat&aacute;logo</b> (as de alcance compram apari&ccedil;&atilde;o a um ter&ccedil;o do pre&ccedil;o e distorcem a m&eacute;dia), o espa&ccedil;o ficou <b>16,0% mais barato</b>: CPM de R$ 6,64 para R$ 5,58.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">O que foi pedido</div>
+    <h2>Plano de crescimento de verba</h2>
+    <p>Em vez de um aumento gen&eacute;rico, a proposta &eacute; por destino, na ordem do que o hist&oacute;rico da conta mostra que ainda rende. A base &eacute; a participa&ccedil;&atilde;o de leil&atilde;o de setembro e 45 meses de hist&oacute;rico de verba contra retorno.</p>
+  </div>
+
+  <div class="plano">
+    <div class="pl">
+      <div class="pl-top">
+        <h3>1. Campanha de marca no Google</h3>
+        <span class="pl-tag sim">come&ccedil;ar por aqui</span>
+      </div>
+      <p>&Eacute; o <b>&uacute;nico lugar da conta que perde leil&atilde;o por falta de or&ccedil;amento</b>, e n&atilde;o por concorr&ecirc;ncia. Em setembro ela apareceu em 64,28% das buscas pelo nome da Roma e <b>deixou de aparecer em 23,79% por verba</b> &mdash; espa&ccedil;o j&aacute; ganho, que n&atilde;o foi comprado. O hist&oacute;rico de 45 meses mostra que a marca <b>n&atilde;o satura</b>: rende o mesmo em qualquer faixa de verba, porque o limite &eacute; o tamanho da procura.</p>
+      <div class="conta">
+        verba hoje &nbsp;&nbsp;&nbsp;&nbsp;R$ 1.634,00/m&ecirc;s<br>
+        verba proposta R$ 2.238,74/m&ecirc;s &nbsp;&nbsp;<b>(+R$ 604,74)</b><br>
+        receita esperada +R$ 14.329,14/m&ecirc;s &nbsp;&nbsp;<b>retorno sobre o acr&eacute;scimo: 23,7x</b>
+      </div>
+    </div>
+
+    <div class="pl">
+      <div class="pl-top">
+        <h3>2. PMax &mdash; subir pouco e medir</h3>
+        <span class="pl-tag talvez">com cautela</span>
+      </div>
+      <p>O hist&oacute;rico mostra que a PMax <b>perde efici&ecirc;ncia conforme recebe mais verba</b>: at&eacute; R$ 1.200/m&ecirc;s rende 46,4x; de R$ 1.200 a R$ 2.200, 34,2x; de R$ 2.200 a R$ 3.500, 27,9x; acima de R$ 3.500, 23,8x. Em setembro ela j&aacute; levou R$ 2.220,76 &mdash; est&aacute; entrando na terceira faixa.</p>
+      <p>Al&eacute;m disso, ela perde <b>58,17% do leil&atilde;o por posi&ccedil;&atilde;o</b>, n&atilde;o por verba: a&iacute; dinheiro resolve pouco, quem resolve &eacute; t&iacute;tulo, pre&ccedil;o e p&aacute;gina de produto. <b>Proposta: aumentar em degraus de R$ 300/m&ecirc;s e s&oacute; manter se o retorno sustentar.</b></p>
+    </div>
+
+    <div class="pl">
+      <div class="pl-top">
+        <h3>3. Shopping &mdash; tem espa&ccedil;o, mas &eacute; o &uacute;ltimo da fila</h3>
+        <span class="pl-tag talvez">depois dos dois acima</span>
+      </div>
+      <p>&Eacute; onde h&aacute; mais espa&ccedil;o &agrave; venda: perde <b>76,10% do leil&atilde;o por or&ccedil;amento</b>. Mas &eacute; tamb&eacute;m <b>o pior retorno da conta</b> (12,4x em setembro, contra 25,6x da PMax e 23,7x da marca). Verba aqui compra volume barato, n&atilde;o rentabilidade &mdash; s&oacute; faz sentido depois que a marca estiver no teto.</p>
+    </div>
+
+    <div class="pl">
+      <div class="pl-top">
+        <h3>4. Tirar verba do Meta para o Google</h3>
+        <span class="pl-tag nao">n&atilde;o recomendamos</span>
+      </div>
+      <p>Pode parecer a sa&iacute;da &oacute;bvia, mas <b>n&atilde;o h&aacute; folga para cortar</b>: em setembro, de R$ 4.292,61 investidos no Meta, <b>R$ 3.820,08 (89%) estavam em cat&aacute;logo, remarketing e p&uacute;blico semelhante de compradores</b> &mdash; frentes de venda. Alcance e perfil somaram R$ 472,53, que &eacute; a constru&ccedil;&atilde;o de base que alimenta o remarketing.</p>
+      <p>Cortar o Meta significa cortar cat&aacute;logo e remarketing, que vendem. <b>Se houver verba nova, ela rende mais na marca do Google; o Meta deve ser mantido.</b></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">O outro pedido do relat&oacute;rio</div>
+    <h2>&ldquo;Cada plataforma precisa indicar o que realmente converteu&rdquo;</h2>
+  </div>
+  <div class="card">
+    <h3>Concordamos, e esse trabalho j&aacute; est&aacute; em andamento</h3>
+    <p>&Eacute; exatamente o problema da p&aacute;gina 5. Hoje as duas plataformas somam 144% do faturamento real, e o Meta conta cada compra 2,24 vezes. <b>O conserto n&atilde;o est&aacute; na configura&ccedil;&atilde;o das campanhas &mdash; est&aacute; no site</b>, no evento de compra que dispara mais de uma vez.</p>
+    <p>O diagn&oacute;stico est&aacute; fechado e o pedido t&eacute;cnico foi enviado &agrave; plataforma da loja: ligar o envio da compra pelo servidor e remover o disparo duplicado no navegador. <b>Enquanto isso n&atilde;o for aplicado, nenhum ROAS por plataforma dessa conta &eacute; compar&aacute;vel</b> &mdash; e a &uacute;nica r&eacute;gua confi&aacute;vel continua sendo faturamento da loja dividido pela m&iacute;dia total, que &eacute; a usada em todo este material.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh">
+    <div class="k">Em uma frase</div>
+    <h2>O resumo</h2>
+  </div>
+  <div class="card">
+    <p><b>O custo de 2026 do relat&oacute;rio est&aacute; certo e o ROAS de 21,66x tamb&eacute;m.</b> O que precisa sair da conversa &eacute; a compara&ccedil;&atilde;o entre Google e Meta da p&aacute;gina 5: ela usa n&uacute;mero de plataforma, que soma 144% do que a loja vendeu, e com o fator de duplica&ccedil;&atilde;o medido o Meta cai de 42,81x para 19,11x &mdash; abaixo do Google.</p>
+    <p><b>De junho a setembro a verba subiu 23% e foi para o lugar certo</b> &mdash; 88,4% do acr&eacute;scimo do Meta entrou em campanha de venda. Ela trouxe 242 mil visitas a mais, a 2,9 centavos cada, com o clique mais barato dos dois anos. <b>O que n&atilde;o acompanhou foi o pedido: 31,3% menos pedidos com o dobro de visitas.</b></p>
+    <p><b>Para crescer com retorno, o primeiro destino &eacute; a marca no Google</b> &mdash; R$ 604,74 a mais por m&ecirc;s em espa&ccedil;o que j&aacute; ganhamos no leil&atilde;o e deixamos de comprar por verba, a 23,7x sobre o acr&eacute;scimo. Depois dela, PMax em degraus medidos. E, em paralelo, o conserto do evento de compra no site, sem o qual nenhuma leitura por plataforma vale.</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
