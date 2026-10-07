@@ -118,9 +118,9 @@
   .mcard p:last-child{ margin-bottom:0; }
   .mcard .big{ font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:700; color:var(--y26); display:block; margin-bottom:4px; }
   .minitable{ width:100%; border-collapse:collapse; margin-top:4px; }
-  .minitable th{ text-align:right; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-mute); font-weight:600; padding:6px 0; border-bottom:1px solid var(--line); }
+  .minitable th{ text-align:right; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-mute); font-weight:600; padding:6px 4px; border-bottom:1px solid var(--line); }
   .minitable th:first-child{ text-align:left; }
-  .minitable td{ text-align:right; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:12.5px; padding:8px 0; border-bottom:1px solid var(--line-soft); }
+  .minitable td{ text-align:right; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:12.5px; padding:8px 4px; border-bottom:1px solid var(--line-soft); }
   .minitable td:first-child{ text-align:left; font-family:"IBM Plex Sans",sans-serif; color:var(--ink-soft); }
   .minitable tr:last-child td{ border-bottom:none; }
   .minitable td.up{ color:var(--y26); font-weight:600; }
@@ -173,6 +173,23 @@
   .passo .t-num .de{ color:var(--y25); font-weight:600; }
   .passo .t-num .para{ color:var(--y26); font-weight:600; }
   .passo .t-num .igual{ color:var(--good); font-weight:600; }
+
+  @media print{
+    body{ padding-block:18px; background:#fff; }
+    .wrap{ max-width:none; padding-inline:0; }
+    /* os dois cartoes lado a lado nao cabem na largura da folha */
+    .cards2{ grid-template-columns:1fr; gap:12px; }
+    .reguas{ gap:10px; }
+    /* nada de bloco partido no meio entre uma pagina e outra */
+    .mcard, .regua, .passo, .frase, .analogia, .vitrine, .tablewrap, .section-head{
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .section-head{ break-after:avoid; page-break-after:avoid; }
+    section{ margin-top:34px; }
+    table{ min-width:0; }
+    .tablewrap{ overflow:visible; }
+    tbody td, thead th{ padding-left:7px; padding-right:7px; }
+  }
 </style>
 </head>
 <body>
