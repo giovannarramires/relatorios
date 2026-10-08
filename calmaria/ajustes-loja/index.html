@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cal.maria · Ajustes na loja</title>
+<style>
+  :root{
+    --bege-claro:#FAF6F1; --bege:#F2EBDF; --creme:#F5EDE0; --branco:#FFF;
+    --card-bg:#FFF; --marrom:#3D2718; --terracota:#BF6A45; --ocre:#C89640;
+    --verde:#6B7C5C; --verde-ok:#2E6E35;
+    --text-muted:rgba(61,39,24,0.58); --linha:rgba(61,39,24,0.10);
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Trebuchet MS','Segoe UI',sans-serif;background:var(--bege-claro);
+    color:var(--marrom);line-height:1.6;-webkit-font-smoothing:antialiased;margin:0}
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 70px}
+  h1,h2,h3{font-family:Georgia,serif;font-weight:normal;margin:0}
+  p{margin:0 0 12px}
+  a{color:var(--terracota)}
+
+  header{background:linear-gradient(135deg,#BF6A45 0%,#A0522D 55%,#8a4a2b 100%);
+    color:#FCF7F0;padding:46px 20px 40px;text-align:center;border-bottom:5px solid var(--ocre)}
+  header .marca{font-family:Georgia,serif;font-size:38px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:15px}
+  header .periodo{margin-top:18px;display:inline-block;background:rgba(255,255,255,.15);
+    padding:7px 18px;border-radius:30px;font-size:13.5px}
+
+  .lead{margin-top:30px}
+  .lead h1{font-size:28px;line-height:1.3}
+  .lead p{margin-top:14px;font-size:16px;max-width:760px}
+
+  .bloco{background:var(--card-bg);border-radius:16px;padding:26px 24px 26px;
+    margin-top:26px;box-shadow:0 2px 14px rgba(61,39,24,.06);border:1px solid var(--linha)}
+  .bloco h2{font-size:22px;margin:8px 0 10px}
+  .tag{display:inline-block;background:var(--bege);color:var(--terracota);
+    font-size:11px;font-weight:bold;padding:4px 11px;border-radius:20px;
+    text-transform:uppercase;letter-spacing:.5px}
+
+  .funil{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 6px}
+  .etapa{background:var(--creme);border-radius:12px;padding:16px 14px;border:1px solid var(--linha);text-align:center}
+  .etapa .n{font-family:Georgia,serif;font-size:30px;font-weight:bold;display:block}
+  .etapa .l{font-size:12.5px;color:var(--text-muted)}
+  .etapa.queda{background:#FBEDE6;border-color:rgba(191,106,69,.35)}
+  .etapa.queda .n{color:var(--terracota)}
+
+  .prints{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+  .prints.um{grid-template-columns:minmax(0,1fr)}
+  figure{margin:0;background:var(--bege-claro);border:1px solid var(--linha);border-radius:12px;padding:10px}
+  figure a{display:block}
+  figure img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--linha)}
+  figure.estreita img{max-width:300px;margin:0 auto}
+  figcaption{font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.45}
+  figcaption b{color:var(--marrom)}
+  .dica{font-size:12.5px;color:var(--text-muted);margin-top:4px}
+
+  .proposta{background:var(--bege);border-left:4px solid var(--ocre);padding:14px 16px;
+    border-radius:8px;font-size:14.5px;margin-top:16px}
+  .proposta b{color:var(--terracota)}
+
+  .faixa{background:var(--marrom);color:#F5EDE0;border-radius:16px;padding:26px 24px;margin-top:30px}
+  .faixa h2{font-size:24px;margin-bottom:10px;color:#FCF7F0}
+  .faixa p{opacity:.95}
+  .faixa ol{margin:12px 0 0;padding-left:22px}
+  .faixa li{margin-bottom:12px;font-size:15px}
+  .faixa li b{color:#F0C77E}
+  .faixa .decisao{margin-top:18px;padding-top:16px;border-top:1px solid rgba(245,237,224,.2)}
+  .faixa .eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:#F0C77E;margin:0 0 8px}
+
+  .nota{font-size:12.5px;color:var(--text-muted);margin-top:26px;line-height:1.5}
+  footer{text-align:center;color:var(--text-muted);font-size:12.5px;margin-top:40px}
+
+  @media (max-width:700px){
+    header .marca{font-size:30px}
+    .lead h1{font-size:23px}
+    .funil{grid-template-columns:repeat(2,1fr)}
+    .prints{grid-template-columns:minmax(0,1fr)}
+    .bloco{padding:22px 16px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="marca">Cal.maria</div>
+  <div class="sub">Ajustes na loja · o que as visitas nos mostraram</div>
+  <div class="periodo">30 de setembro a 8 de outubro de 2026</div>
+</header>
+
+<div class="wrap">
+
+  <section class="lead">
+    <h1>Os anúncios trazem as pessoas até o produto. O que trava a venda acontece dentro da loja.</h1>
+    <p>No fim de setembro instalamos na loja uma ferramenta da Microsoft (o Clarity) que registra de forma anônima como as pessoas navegam: até onde rolam a página, onde tocam e em que momento desistem. Analisamos as primeiras 400 visitas. Abaixo estão os quatro pontos que encontramos, com o print de cada um, e no final o que precisamos que você aprove.</p>
+    <p class="dica">Toque em qualquer imagem para abrir em tamanho grande.</p>
+  </section>
+
+  <!-- 1. FUNIL -->
+  <section class="bloco">
+    <span class="tag">Onde as pessoas param</span>
+    <h2>De cada 100 pessoas que abrem um produto, só 7 colocam no carrinho</h2>
+    <p>Entre 30/09 e 07/10 o Google Analytics da loja registrou este caminho:</p>
+    <div class="funil">
+      <div class="etapa"><span class="n">164</span><span class="l">abriram um produto</span></div>
+      <div class="etapa queda"><span class="n">12</span><span class="l">colocaram no carrinho</span></div>
+      <div class="etapa"><span class="n">3</span><span class="l">foram para o pagamento</span></div>
+      <div class="etapa"><span class="n">1</span><span class="l">compra</span></div>
+    </div>
+    <p>A maior perda está na passagem do <b>produto para o carrinho</b>. Por isso os ajustes que propomos são todos na página de produto e no carrinho.</p>
+    <div class="prints um">
+      <figure><a href="img/01-funil.jpg" target="_blank" rel="noopener"><img src="img/01-funil.jpg" alt="Relatório de eventos do Google Analytics" loading="lazy"></a>
+        <figcaption><b>Google Analytics, 30/09 a 07/10.</b> Coluna "Total de usuários": <code>view_item</code> = viu produto (164), <code>add_to_cart</code> = carrinho (12), <code>begin_checkout</code> = pagamento (3), <code>purchase</code> = compra (1).</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 2. PAGINA ZAFU -->
+  <section class="bloco">
+    <span class="tag">Página de Zafus</span>
+    <h2>Quase metade sai da página de Zafus sem chegar aos produtos</h2>
+    <p>A página <b>/zafu/</b> é a mais visitada da loja (340 visitas no celular). <b>49% das pessoas saem antes de rolar um quarto da página</b>, e 72% não passam de 30%. O primeiro produto que elas veem é o Kit Zafu + Zabuton.</p>
+    <p>O que mais tocam nessa página é a <b>busca</b> e o <b>menu</b>, e não os produtos. A pessoa está procurando alguma coisa e não encontra logo de cara.</p>
+    <div class="prints">
+      <figure><a href="img/02-zafu-rolagem.jpg" target="_blank" rel="noopener"><img src="img/02-zafu-rolagem.jpg" alt="Mapa de rolagem da página Zafu" loading="lazy"></a>
+        <figcaption><b>Até onde rolam.</b> Na linha de 25%, a coluna "% de desistência" marca 49,12%.</figcaption></figure>
+      <figure><a href="img/03-zafu-toques.jpg" target="_blank" rel="noopener"><img src="img/03-zafu-toques.jpg" alt="Mapa de toques da página Zafu" loading="lazy"></a>
+        <figcaption><b>Onde tocam.</b> Nº 1 é o campo de busca (11 toques). Os pontos quentes ficam no topo: busca, menu e o caminho "Início · Zafu".</figcaption></figure>
+    </div>
+    <div class="proposta"><b>Proposta:</b> colocar os zafus redondos e meia lua nas primeiras posições da página, com o Kit logo depois.</div>
+  </section>
+
+  <!-- 3. BOTAO COMPRAR -->
+  <section class="bloco">
+    <span class="tag">Página de produto</span>
+    <h2>O botão "Comprar" só aparece depois de rolar, e 4 em cada 10 pessoas saem antes disso</h2>
+    <p>No celular, o topo da loja (faixa de frete, logo, ícones e busca) somado à foto ocupa a tela inteira. O preço e o botão <b>Comprar</b> ficam logo abaixo da primeira tela.</p>
+    <p>Nas páginas de produto, <b>40% das visitas terminam antes de chegar a essa altura</b>. Das 310 vezes que alguém tocou em uma página de produto, o botão Comprar recebeu 7 toques. A foto e o logo receberam bem mais.</p>
+    <div class="prints">
+      <figure><a href="img/07-botao-comprar.jpg" target="_blank" rel="noopener"><img src="img/07-botao-comprar.jpg" alt="Página de produto no celular com o botão Comprar marcado" loading="lazy"></a>
+        <figcaption><b>Zafu Tribal Boho num iPhone.</b> A linha azul é o fim da primeira tela. O botão Comprar (em vermelho) começa logo abaixo dela.</figcaption></figure>
+      <figure><a href="img/04-produto-rolagem.jpg" target="_blank" rel="noopener"><img src="img/04-produto-rolagem.jpg" alt="Mapa de rolagem das páginas de produto" loading="lazy"></a>
+        <figcaption><b>Até onde rolam nas páginas de produto.</b> Na linha de 30%, 39,68% já saíram.</figcaption></figure>
+      <figure class="estreita"><a href="img/05-produto-toques.jpg" target="_blank" rel="noopener"><img src="img/05-produto-toques.jpg" alt="Lista de toques nas páginas de produto" loading="lazy"></a>
+        <figcaption><b>Onde tocam.</b> O item nº 9 (<code>js-addtocart</code>) é o botão Comprar: 7 toques. Os mais tocados são a foto (15 + 15) e o logo (12).</figcaption></figure>
+    </div>
+    <div class="proposta"><b>Proposta:</b> no celular, diminuir o logo e o espaço do topo para o preço e o botão Comprar aparecerem já na primeira tela.</div>
+  </section>
+
+  <!-- 4. KIT -->
+  <section class="bloco">
+    <span class="tag">Kit Zafu + Zabuton</span>
+    <h2>A primeira foto do Kit mostra uma bolsa, e não as almofadas</h2>
+    <p>O Kit (R$314) é o primeiro produto da página de Zafus e uma das páginas de onde mais saem visitas. A primeira foto mostra o zabuton dobrado como bolsa. Quem chega pelo anúncio não reconhece ali as almofadas de meditação. Numa das gravações, a pessoa abre o Kit e volta para a lista em 8 segundos.</p>
+    <div class="prints">
+      <figure><a href="img/06-kit-foto.jpg" target="_blank" rel="noopener"><img src="img/06-kit-foto.jpg" alt="Página do Kit no celular com a foto da bolsa" loading="lazy"></a>
+        <figcaption><b>Página do Kit no celular.</b> A primeira imagem é a bolsa.</figcaption></figure>
+      <figure><a href="img/09-kit-gravacao.jpg" target="_blank" rel="noopener"><img src="img/09-kit-gravacao.jpg" alt="Gravação de uma visita ao Kit" loading="lazy"></a>
+        <figcaption><b>Gravação de uma visita vinda do Instagram.</b> O resumo do Clarity, à esquerda, registra que a pessoa voltou para a lista aos 8 segundos.</figcaption></figure>
+    </div>
+    <div class="proposta"><b>Proposta:</b> usar como primeira foto o zafu e o zabuton montados, do jeito que se usa na meditação. Se você tiver essa foto, é só nos mandar.</div>
+  </section>
+
+  <!-- 5. FRETE -->
+  <section class="bloco">
+    <span class="tag">Carrinho e frete</span>
+    <h2>Quem põe no carrinho desiste quando vê o frete</h2>
+    <p>As pessoas que colocaram um produto no carrinho e não compraram saíram logo depois de calcular o frete. Na gravação abaixo, a pessoa veio do Google, colocou o Zafu Meia Lua (R$164) no carrinho, digitou o CEP, viu o frete de <b>R$19,92</b> e saiu da loja em seguida, sem continuar a compra.</p>
+    <p>Para a Av. Paulista, em São Paulo, o frete mais barato desse mesmo produto é <b>R$19,24</b>, cerca de 12% do valor da almofada. O frete grátis começa em R$299 (Sul e Sudeste), então um zafu sozinho fica R$135 abaixo. Ao abrir "ver mais opções" aparecem 8 alternativas, com o SEDEX repetido em dois preços diferentes.</p>
+    <div class="prints">
+      <figure><a href="img/08-carrinho-frete-a.jpg" target="_blank" rel="noopener"><img src="img/08-carrinho-frete-a.jpg" alt="Gravação: carrinho com Meios de envio aberto" loading="lazy"></a>
+        <figcaption><b>Gravação, 1min20.</b> Com a almofada no carrinho, a pessoa abre "Meios de envio".</figcaption></figure>
+      <figure><a href="img/08-carrinho-frete-b.jpg" target="_blank" rel="noopener"><img src="img/08-carrinho-frete-b.jpg" alt="Gravação: frete calculado de R$19,92" loading="lazy"></a>
+        <figcaption><b>Gravação, 1min52 de 1min56.</b> Frete calculado em R$19,92. A visita termina em seguida.</figcaption></figure>
+      <figure><a href="img/10-frete-a.jpg" target="_blank" rel="noopener"><img src="img/10-frete-a.jpg" alt="Frete para a Av. Paulista" loading="lazy"></a>
+        <figcaption><b>Simulação na loja, CEP 01310-100 (Av. Paulista).</b> As 2 primeiras opções: R$19,24 e R$20,74.</figcaption></figure>
+      <figure><a href="img/10-frete-b.jpg" target="_blank" rel="noopener"><img src="img/10-frete-b.jpg" alt="Lista completa de opções de frete" loading="lazy"></a>
+        <figcaption><b>Ao tocar em "ver mais opções".</b> São 8 alternativas, de R$19,24 a R$32,01. O SEDEX aparece duas vezes (R$20,74 e R$25,65).</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- SOLICITACAO -->
+  <section class="faixa">
+    <p class="eyebrow">O que precisamos de você</p>
+    <h2>Podemos fazer estes três ajustes?</h2>
+    <p>Fazemos tudo pelo painel da Nuvemshop, sem custo e sem tirar a loja do ar. Qualquer item pode ser desfeito a qualquer momento.</p>
+    <ol>
+      <li><b>Primeira foto do Kit:</b> trocar a foto da bolsa pelas almofadas montadas. <i>Você tem essa foto?</i></li>
+      <li><b>Ordem da página de Zafus:</b> colocar os zafus redondos e meia lua na frente e o Kit logo depois.</li>
+      <li><b>Topo da página no celular:</b> diminuir o logo para o preço e o botão Comprar aparecerem na primeira tela.</li>
+    </ol>
+    <div class="decisao">
+      <p class="eyebrow">E uma decisão que é sua</p>
+      <p><b>O frete.</b> Vale conversarmos sobre duas coisas: deixar só 2 ou 3 opções de entrega (hoje são 8) e, se fizer sentido para a sua margem, baixar o valor mínimo do frete grátis (hoje R$299) ou ter um frete fixo para o Sul e o Sudeste. Isso mexe no seu custo, então só seguimos com o seu aval.</p>
+    </div>
+  </section>
+
+  <p class="nota">Como lemos: comportamento (rolagem, toques e gravações) vem do Microsoft Clarity, de forma anônima e sem nenhum dado pessoal. Números de visitas e compras vêm do Google Analytics da loja. Alguns prints do Clarity aparecem com palavras traduzidas automaticamente pelo navegador (por exemplo, "Clareza" em vez de "Clarity"). O frete foi simulado na própria loja em 08/10/2026.</p>
+
+  <footer>Gio Growth Digital · Cal.maria · outubro de 2026</footer>
+</div>
+</body>
+</html>
