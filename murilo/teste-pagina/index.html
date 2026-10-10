@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Teste de Página Murilo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: coluna única de relatório, tabela principal + gráfico diário + leitura curta */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5f6b64; --line:#dde2de;
+  --accent:#2f5d50; --accent-soft:#e3ece8;
+  --good:#2e7d4f; --warn:#a8650c; --warn-soft:#fbf0de; --bad:#b23a32;
+  --bar:#9fb8ae; --bar-low:#c9675f;
+  --display:"Fraunces",Georgia,serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
+  --accent:#8cc2b0; --accent-soft:#22302b; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
+  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
+  --accent:#8cc2b0; --accent-soft:#22302b; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
+  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:grid;gap:36px}
+header{display:grid;gap:6px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(28px,4.5vw,40px)/1.15 var(--display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.25 var(--display);margin:0 0 12px;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.sub{color:var(--muted)}
+.alert{background:var(--warn-soft);border-left:4px solid var(--warn);padding:16px 18px;border-radius:4px;display:grid;gap:6px}
+.alert strong{color:var(--warn)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:1080px;font-variant-numeric:tabular-nums}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);vertical-align:bottom}
+th:first-child,td:first-child{text-align:left}
+tbody tr:last-child td{border-bottom:0}
+td.pg{font-weight:700}
+td.pg small{display:block;font:400 12px var(--mono);color:var(--muted)}
+.hl{background:var(--accent-soft)}
+.est{color:var(--muted);font-size:13px}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 14px 8px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font:11px var(--mono)}
+.chart .lbl{fill:var(--fg);font:500 11px var(--mono)}
+.grid line{stroke:var(--line)}
+ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Prof. Murilo Soares · Low ticket · 08/10 a 10/10/2026</span>
+  <h1>Teste de página: raiz × V2 × V3</h1>
+  <p class="sub">As três páginas recebem os mesmos 3 anúncios, para os mesmos públicos. Assim a diferença de resultado vem da página. Verba com imposto de 13,83%.</p>
+</header>
+
+<section>
+  <h2>As três páginas lado a lado</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr>
+      <th>Página</th><th>Verba</th><th>Cliques</th><th>Custo por<br>clique</th>
+      <th>Taxa de<br>abertura</th><th>Visitas</th><th>Custo por<br>visualização</th>
+      <th>Clique →<br>checkout</th><th>Checkout →<br>compra</th><th>Vendas</th>
+      <th>Conversão<br>clique → venda</th><th>Conversão<br>visita → venda</th><th>Custo por<br>venda</th><th>Retorno</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="pg">Raiz<small>página atual</small></td><td>R$ 296,78</td><td>95</td><td>R$ 3,12</td><td>81,6%</td><td>78</td><td>R$ 3,83</td><td>11,6%</td><td>73%</td><td>8</td><td>8,4%</td><td>10,3%</td><td>R$ 37,10</td><td>0,94x</td></tr>
+      <tr class="hl"><td class="pg">V2<small>/v2-sb</small></td><td>R$ 183,81</td><td>44</td><td>R$ 4,18</td><td>81,6%</td><td>36</td><td>R$ 5,12</td><td class="good">13,6%</td><td>67%</td><td>4</td><td class="good">9,1%</td><td class="good">11,1%</td><td>R$ 45,95</td><td class="good">1,08x</td></tr>
+      <tr><td class="pg">V3<small>/v3</small></td><td>R$ 222,42</td><td>61</td><td>R$ 3,65</td><td>81,6%</td><td>50</td><td>R$ 4,49</td><td>8,2%</td><td>60%</td><td>3</td><td>4,9%</td><td>6,0%</td><td>R$ 74,14</td><td>0,27x</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Taxa de abertura = parte dos cliques que carrega a página. Usamos a média medida de 26/09 a 06/10 (81,6%, 686 de 841 cliques), porque a contagem de visitas está sendo recalibrada desde 07/10. Visitas e custo por visualização partem dessa taxa. Vendas e checkouts são medidos direto. Checkout = clique no botão de compra.</p>
+</section>
+
+<section>
+  <h2>O que os números mostram</h2>
+  <ul>
+    <li><b>A V2 está na frente.</b> Ela leva mais gente de quem clica até o checkout (13,6%), tem a maior conversão (9,1% dos cliques viram venda) e é a única acima de 1x de retorno.</li>
+    <li><b>A V3 recebe bastante clique, mas converte menos.</b> Ela fica em 4,9% dos cliques virando venda, perto da metade das outras duas. A diferença aparece antes do checkout: quem chega ao checkout compra numa proporção parecida nas três páginas, de 60% a 73%.</li>
+    <li><b>O custo por visualização</b> fica entre R$ 3,83 e R$ 5,12. A raiz sai mais barata porque já roda há mais tempo, e as páginas novas ainda estão na fase de aprendizado do Meta.</li>
+    <li><b>O teste ainda está no começo.</b> São 15 vendas em pouco mais de 2 dias. Para decidir com segurança, ele precisa de mais volume.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Próximos passos</h2>
+  <ul>
+    <li>Manter as três páginas no ar até quarta, 14/10, para juntar mais vendas.</li>
+    <li>Na quarta, comparar de novo a conversão e levar a verba para a página que vencer.</li>
+    <li>Concluir a recalibração da contagem de visitas para medir a abertura de cada página separadamente.</li>
+  </ul>
+</section>
+
+<footer>GGD · Gio Growth Digital · leitura de 10/10/2026</footer>
+</div>
+</body>
+</html>
