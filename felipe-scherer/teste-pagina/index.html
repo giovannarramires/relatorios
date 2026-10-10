@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Teste de Página Felipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: coluna única de relatório, tabela principal + gráfico diário + leitura curta */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5f6b64; --line:#dde2de;
+  --accent:#2b4f7a; --accent-soft:#e4ebf4;
+  --good:#2e7d4f; --warn:#a8650c; --warn-soft:#fbf0de; --bad:#b23a32;
+  --bar:#9fb8ae; --bar-low:#c9675f;
+  --display:"Fraunces",Georgia,serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
+  --accent:#9db9e0; --accent-soft:#1f2a38; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
+  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
+  --accent:#9db9e0; --accent-soft:#1f2a38; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
+  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:grid;gap:36px}
+header{display:grid;gap:6px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(28px,4.5vw,40px)/1.15 var(--display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.25 var(--display);margin:0 0 12px;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.sub{color:var(--muted)}
+.alert{background:var(--warn-soft);border-left:4px solid var(--warn);padding:16px 18px;border-radius:4px;display:grid;gap:6px}
+.alert strong{color:var(--warn)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:1080px;font-variant-numeric:tabular-nums}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);vertical-align:bottom}
+th:first-child,td:first-child{text-align:left}
+tbody tr:last-child td{border-bottom:0}
+td.pg{font-weight:700}
+td.pg small{display:block;font:400 12px var(--mono);color:var(--muted)}
+.hl{background:var(--accent-soft)}
+.est{color:var(--muted);font-size:13px}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 14px 8px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font:11px var(--mono)}
+.chart .lbl{fill:var(--fg);font:500 11px var(--mono)}
+.grid line{stroke:var(--line)}
+ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+.ref td{color:var(--muted)}
+tr.top td{background:var(--accent-soft)}
+tr.low td{color:var(--muted)}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;font:500 11px var(--mono);letter-spacing:.04em}
+.chip.vid{background:var(--accent-soft);color:var(--accent)}
+.chip.est{background:var(--warn-soft);color:var(--warn)}
+.mini{display:block;font:400 11px var(--mono);color:var(--muted)}
+.tbl.sm table{min-width:620px}
+.tbl.md table{min-width:900px}
+h3{font:600 16px var(--body);margin:20px 0 8px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Felipe Scherer · Low ticket · 29/09 a 10/10/2026</span>
+  <h1>Teste de página e criativos</h1>
+  <p class="sub">Três versões da página de venda com os mesmos 3 anúncios (AD03 vídeo, AD20 e AD44 estáticos) e os mesmos 2 públicos. Na mesma tela, o desempenho de cada vídeo e estático da conta. Verba com imposto de 13,83%. Fonte: pixel da Meta.</p>
+</header>
+
+<section>
+  <h2>As três páginas lado a lado</h2>
+  <div class="tbl"><table><thead><tr><th>Página</th><th>Verba</th><th>Cliques</th><th>Custo por<br>clique</th><th>Visitas</th><th>Taxa de<br>abertura</th><th>Custo por<br>visualização</th><th>Visita →<br>checkout</th><th>Checkout →<br>compra</th><th>Vendas</th><th>Conversão<br>clique → venda</th><th>Conversão<br>visita → venda</th><th>Custo por<br>venda</th><th>Retorno</th></tr></thead><tbody>
+<tr class="hl"><td class="pg">/vtic2<small>página longa</small></td><td>R$ 851,16</td><td>218</td><td>R$ 3,90</td><td>182</td><td>83,5%</td><td>R$ 4,68</td><td>18,7%</td><td>65%</td><td>22</td><td>10,1%</td><td>12,1%</td><td>R$ 38,69</td><td>1,10x</td></tr>
+<tr class=""><td class="pg">/vtic3<small>página mínima</small></td><td>R$ 396,17</td><td>96</td><td>R$ 4,13</td><td>82</td><td>85,4%</td><td>R$ 4,83</td><td>12,2%</td><td>40%</td><td>4</td><td>4,2%</td><td>4,9%</td><td>R$ 99,04</td><td>0,43x</td></tr>
+<tr class=""><td class="pg">/vtic5<small>página média</small></td><td>R$ 238,38</td><td>52</td><td>R$ 4,58</td><td>51</td><td>98,1%</td><td>R$ 4,67</td><td>13,7%</td><td>29%</td><td>2</td><td>3,8%</td><td>3,9%</td><td>R$ 119,19</td><td>0,17x</td></tr>
+<tr class="ref"><td class="pg">/vtic<small>página principal · referência</small></td><td>R$ 1.729,05</td><td>439</td><td>R$ 3,94</td><td>373</td><td>85,0%</td><td>R$ 4,64</td><td>15,3%</td><td>51%</td><td>29</td><td>6,6%</td><td>7,8%</td><td>R$ 59,62</td><td>0,69x</td></tr>
+  </tbody></table></div>
+  <p class="note">Taxa de abertura = visitas ÷ cliques no link. Custo por visualização = verba ÷ visitas. Checkout = início de pagamento na Ticto. A página principal (/vtic) roda com outros anúncios e públicos, então serve só de referência. Em volumes pequenos a abertura pode passar de 100%, porque o Meta também conta visitas que acontecem depois do clique, como a pessoa que volta à página.</p>
+
+  <h3>Nos dias em que as três rodaram juntas (29 e 30/09)</h3>
+  <div class="tbl sm"><table><thead><tr><th>Página</th><th>Verba</th><th>Cliques</th><th>Taxa de<br>abertura</th><th>Custo por<br>visualização</th><th>Vendas</th><th>Conversão<br>clique → venda</th><th>Custo por<br>venda</th></tr></thead><tbody>
+<tr class="hl"><td class="pg">/vtic2</td><td>R$ 292,59</td><td>86</td><td>87,2%</td><td>R$ 3,90</td><td>8</td><td>9,3%</td><td>R$ 36,57</td></tr>
+<tr class=""><td class="pg">/vtic3</td><td>R$ 199,54</td><td>40</td><td>95,0%</td><td>R$ 5,25</td><td>2</td><td>5,0%</td><td>R$ 99,77</td></tr>
+<tr class=""><td class="pg">/vtic5</td><td>R$ 238,38</td><td>52</td><td>98,1%</td><td>R$ 4,67</td><td>2</td><td>3,8%</td><td>R$ 119,19</td></tr>
+  </tbody></table></div>
+  <p class="note">É a comparação mais justa: mesmo dia, mesma verba diária, mesmos anúncios. Depois de 30/09 a verba foi concentrada na /vtic2.</p>
+</section>
+
+<section>
+  <h2>Vídeo × estático</h2>
+  <div class="tbl md"><table><thead><tr><th>Formato</th><th>Verba</th><th>CTR</th><th>Custo por<br>clique</th><th>Taxa de<br>abertura</th><th>Custo por<br>visualização</th><th>Visita →<br>checkout</th><th>Checkout →<br>compra</th><th>Vendas</th><th>Conversão<br>clique → venda</th><th>Custo por<br>venda</th><th>Retorno</th></tr></thead><tbody>
+<tr><td class="pg">Vídeo</td><td>R$ 1.722,19</td><td>0,90%</td><td>R$ 4,56</td><td>85,7%</td><td>R$ 5,32</td><td>18,5%</td><td>48%</td><td>29</td><td>7,7%</td><td>R$ 59,39</td><td>0,74x</td></tr><tr><td class="pg">Estático</td><td>R$ 1.492,58</td><td>0,63%</td><td>R$ 3,50</td><td>85,2%</td><td>R$ 4,10</td><td>13,2%</td><td>58%</td><td>28</td><td>6,6%</td><td>R$ 53,31</td><td>0,71x</td></tr>
+  </tbody></table></div>
+  <p class="note">Todos os anúncios da conta no período, nas 4 páginas.</p>
+</section>
+
+<section>
+  <h2>Cada criativo da conta</h2>
+  <div class="tbl md"><table><thead><tr><th>Criativo</th><th>Formato</th><th>Verba</th><th>CTR</th><th>Taxa de<br>abertura</th><th>Custo por<br>visualização</th><th>Visita →<br>checkout</th><th>Vendas</th><th>Conversão<br>clique → venda</th><th>Custo por<br>venda</th><th>Retorno</th></tr></thead><tbody>
+<tr class="top"><td class="pg">AD51 · notícia, fundo preto</td><td><span class="chip est">estático</span></td><td>R$ 151,86</td><td>0,63%</td><td>90,0%</td><td>R$ 4,22</td><td>19,4%</td><td>7</td><td>17,5%</td><td>R$ 21,69</td><td>1,51x</td></tr>
+<tr class="top"><td class="pg">AD1 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 269,57</td><td>1,22%</td><td>85,9%</td><td>R$ 4,02</td><td>20,9%</td><td>8</td><td>10,3%</td><td>R$ 33,70</td><td>0,63x</td></tr>
+<tr class="low"><td class="pg">AD4 · Playbook <span class="mini">verba abaixo de R$ 75</span></td><td><span class="chip vid">vídeo</span></td><td>R$ 37,67</td><td>0,43%</td><td>100,0%</td><td>R$ 9,42</td><td>75,0%</td><td>1</td><td>25,0%</td><td>R$ 37,67</td><td>2,91x</td></tr>
+<tr class="top"><td class="pg">AD15 · estático</td><td><span class="chip est">estático</span></td><td>R$ 170,34</td><td>0,83%</td><td>76,0%</td><td>R$ 4,48</td><td>21,1%</td><td>4</td><td>8,0%</td><td>R$ 42,58</td><td>1,05x</td></tr>
+<tr class=""><td class="pg">AD03 · vídeo</td><td><span class="chip vid">vídeo</span></td><td>R$ 637,89</td><td>0,83%</td><td>85,0%</td><td>R$ 5,65</td><td>23,9%</td><td>14</td><td>10,5%</td><td>R$ 45,56</td><td>0,86x</td></tr>
+<tr class=""><td class="pg">AD20 · estático</td><td><span class="chip est">estático</span></td><td>R$ 737,21</td><td>0,55%</td><td>85,7%</td><td>R$ 3,74</td><td>14,2%</td><td>13</td><td>5,7%</td><td>R$ 56,71</td><td>0,58x</td></tr>
+<tr class=""><td class="pg">AD02 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 222,38</td><td>0,83%</td><td>76,7%</td><td>R$ 6,74</td><td>15,2%</td><td>3</td><td>7,0%</td><td>R$ 74,13</td><td>1,08x</td></tr>
+<tr class=""><td class="pg">AD7 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 102,16</td><td>0,75%</td><td>80,0%</td><td>R$ 8,51</td><td>16,7%</td><td>1</td><td>6,7%</td><td>R$ 102,16</td><td>0,19x</td></tr>
+<tr class=""><td class="pg">AD44 · 9 alegações</td><td><span class="chip est">estático</span></td><td>R$ 433,18</td><td>0,77%</td><td>86,9%</td><td>R$ 4,66</td><td>5,4%</td><td>4</td><td>3,7%</td><td>R$ 108,30</td><td>0,53x</td></tr>
+<tr class=""><td class="pg">AD5 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 113,03</td><td>0,90%</td><td>86,2%</td><td>R$ 4,52</td><td>12,0%</td><td>1</td><td>3,4%</td><td>R$ 113,03</td><td>0,71x</td></tr>
+<tr class=""><td class="pg">AD3 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 115,66</td><td>0,81%</td><td>108,7%</td><td>R$ 4,63</td><td>8,0%</td><td>1</td><td>4,3%</td><td>R$ 115,66</td><td>0,95x</td></tr>
+<tr class=""><td class="pg">AD6 · Playbook</td><td><span class="chip vid">vídeo</span></td><td>R$ 113,66</td><td>1,06%</td><td>84,4%</td><td>R$ 4,21</td><td>11,1%</td><td>0</td><td>0,0%</td><td>–</td><td>0,00x</td></tr>
+<tr class=""><td class="pg">AD06 · vídeo</td><td><span class="chip vid">vídeo</span></td><td>R$ 110,16</td><td>0,82%</td><td>85,7%</td><td>R$ 6,12</td><td>5,6%</td><td>0</td><td>0,0%</td><td>–</td><td>0,00x</td></tr>
+  </tbody></table></div>
+  <p class="note">Ordenado pelo custo por venda. Em destaque, as peças com custo por venda até R$ 45 e pelo menos R$ 75 de verba. Abaixo de R$ 75 a peça ainda não teve verba suficiente para uma leitura firme.</p>
+</section>
+
+<section>
+  <h2>O que os números mostram</h2>
+  <ul>
+    <li><b>A página longa (/vtic2) venceu o teste.</b> Ela converte 10,1% dos cliques em venda, contra 4,2% da /vtic3 e 3,8% da /vtic5, e é a única que se paga (1,10x). Nos dois dias em que as três rodaram juntas, a ordem foi a mesma: 8 vendas na /vtic2 e 2 em cada uma das outras.</li>
+    <li><b>As três páginas abrem bem.</b> A taxa de abertura ficou entre 83% e 98% e o custo por visualização entre R$ 4,68 e R$ 4,83. A diferença aparece depois que a pessoa entra: a /vtic2 leva mais visitas ao checkout (18,7%) e fecha mais checkouts (65%). Quem lê a página inteira chega ao pagamento mais decidido.</li>
+    <li><b>A /vtic2 também supera a página principal</b> no período: R$ 38,69 por venda contra R$ 59,62. Os anúncios são diferentes, então a comparação é indicativa.</li>
+    <li><b>Vídeo e estático empatam no custo por venda</b> (R$ 59,39 e R$ 53,31). O vídeo ganha clique (CTR 0,90% contra 0,63%) e leva mais visitas ao checkout (18,5% contra 13,2%). O estático compensa com clique mais barato.</li>
+    <li><b>O formato importa menos que a peça.</b> Os melhores do período foram o AD51 (notícia, fundo preto, R$ 21,69 por venda e 1,51x), o AD1 do Playbook (R$ 33,70, 8 vendas), o AD15 (R$ 42,58) e o AD03 em vídeo (R$ 45,56, 14 vendas, o que mais vendeu).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Próximos passos</h2>
+  <ul>
+    <li>Usar a /vtic2 como página dos anúncios de venda.</li>
+    <li>Levar para a /vtic2 as peças que mais venderam na página principal: o AD51 e o AD1 do Playbook.</li>
+    <li>Abrir espaço para criativos novos no lugar das peças que tiveram verba e não chegaram a vender no período.</li>
+  </ul>
+</section>
+
+<footer>GGD · Gio Growth Digital · leitura de 10/10/2026</footer>
+</div>
+</body>
+</html>
