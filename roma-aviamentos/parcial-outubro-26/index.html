@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Roma Aviamentos · Parcial de Outubro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F7F7FA;
+    --surface:#FFFFFF;
+    --gelo:#FCEFF2;
+    --ink:#1A1A2E;
+    --ink-soft:#5F6475;
+    --line:#E6E3EA;
+    --azul:#D63A55;
+    --azul-claro:#E94560;
+    --pos:#1F8F6E;
+    --aten:#B7832F;
+    --shadow:0 1px 2px rgba(26,26,46,.04), 0 8px 24px rgba(233,69,96,.07);
+    --r:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#15151F;
+      --surface:#1E1E2B;
+      --gelo:#2A2030;
+      --ink:#F2EEF4;
+      --ink-soft:#A9A6B4;
+      --line:#33313F;
+      --azul:#F27A90;
+      --azul-claro:#C83A54;
+      --pos:#5CC4A0;
+      --aten:#D9B26A;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#15151F;
+    --surface:#1E1E2B;
+    --gelo:#2A2030;
+    --ink:#F2EEF4;
+    --ink-soft:#A9A6B4;
+    --line:#33313F;
+    --azul:#F27A90;
+    --azul-claro:#C83A54;
+    --pos:#5CC4A0;
+    --aten:#D9B26A;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:48px 24px 80px; display:flex; flex-direction:column; gap:40px}
+  h1,h2,h3{font-family:Nunito, Inter, sans-serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(30px,4.4vw,42px); font-weight:800; line-height:1.15; letter-spacing:-.01em}
+  h2{font-size:22px; font-weight:800}
+  h3{font-size:17px; font-weight:700}
+  p{margin:0}
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--azul); font-family:Inter,sans-serif;
+  }
+  .lead{font-size:18px; color:var(--ink-soft); max-width:62ch}
+
+  header.top{display:flex; flex-direction:column; gap:14px}
+  .marca{display:flex; align-items:center; gap:12px}
+  .disco{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--azul-claro); display:grid; place-items:center; flex:none;
+  }
+  .disco svg{width:20px;height:20px}
+  .marca b{font-family:Nunito,sans-serif; font-weight:800; font-size:17px}
+  .marca span{color:var(--ink-soft); font-size:14px}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  .painel{padding:28px; display:flex; flex-direction:column; gap:24px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:22px}
+  .kpi{display:flex; flex-direction:column; gap:4px}
+  .kpi .rot{font-size:13px; color:var(--ink-soft)}
+  .kpi .val{
+    font-family:Nunito,sans-serif; font-weight:800; font-size:30px; line-height:1.1;
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em; white-space:nowrap;
+  }
+  .kpi .val.destaque{color:var(--azul)}
+  .kpi .nota{font-size:12.5px; color:var(--ink-soft)}
+  .barra{height:1px; background:var(--line)}
+
+  .faixa{
+    background:var(--gelo); border-radius:var(--r); padding:22px 24px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .faixa .num{font-family:Nunito,sans-serif; font-weight:800; font-size:34px; color:var(--azul); line-height:1.1; font-variant-numeric:tabular-nums}
+
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px}
+  .tabela-wrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+  th,td{padding:13px 16px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left}
+  thead th{
+    font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--gelo);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.total td{font-weight:600; background:color-mix(in srgb, var(--gelo) 55%, transparent)}
+  td .up{color:var(--pos); font-weight:600}
+  .cap{font-size:13px; color:var(--ink-soft)}
+  .cap strong{color:var(--ink)}
+
+  ul.lista{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+  ul.lista li{display:flex; gap:12px; align-items:flex-start}
+  ul.lista li .marc{
+    width:8px;height:8px;border-radius:50%;background:var(--azul-claro);
+    margin-top:9px; flex:none;
+  }
+  ul.lista li b{font-weight:600}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+  .bloco{padding:24px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--ink-soft)}
+  .bloco p strong{color:var(--ink); font-weight:600}
+
+  footer{
+    border-top:1px solid var(--line); padding-top:22px;
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size:13px; color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .wrap{padding:32px 16px 56px; gap:32px}
+    .painel{padding:22px}
+    .kpi .val{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="marca">
+      <span class="disco" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="8"></circle>
+          <circle cx="9.5" cy="9.5" r="1.1"></circle>
+          <circle cx="14.5" cy="9.5" r="1.1"></circle>
+          <circle cx="9.5" cy="14.5" r="1.1"></circle>
+          <circle cx="14.5" cy="14.5" r="1.1"></circle>
+        </svg>
+      </span>
+      <div>
+        <b>Roma Aviamentos</b> <span>· acompanhamento de mídia</span>
+      </div>
+    </div>
+    <p class="eyebrow">Parcial de outubro · 1 a 11 de outubro de 2026</p>
+    <h1>Outubro abriu com 442 pedidos em 11 dias, o maior ritmo de pedidos dos últimos três meses</h1>
+    <p class="lead">Um retrato do mês antes do fechamento. O faturamento e os pedidos vêm do sistema da própria loja e não da estimativa das plataformas. São as vendas registradas no período, antes dos cancelamentos, que só se fecham no fim do mês.</p>
+  </header>
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Investimento em mídia</span>
+          <span class="val">R$ 3.900</span>
+          <span class="nota">Google R$ 2.000 · Meta R$ 1.900</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Vendas registradas na loja</span>
+          <span class="val">R$ 80.379</span>
+          <span class="nota">442 pedidos, sem frete</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Retorno sobre a mídia</span>
+          <span class="val destaque">20,6×</span>
+          <span class="nota">R$ 20,61 em vendas por real investido</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo de mídia por pedido</span>
+          <span class="val">R$ 8,82</span>
+          <span class="nota">ticket médio de R$ 181,85</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Visitas trazidas pela mídia</span>
+          <span class="val">43.764</span>
+          <span class="nota">R$ 0,09 por visita</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Pedidos por dia</span>
+          <span class="val">40,2</span>
+          <span class="nota">média jul–set: 34,1</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Vendas por dia</span>
+          <span class="val">R$ 7.307</span>
+          <span class="nota">média jul–set: R$ 7.333</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">O número da parcial</p>
+    <div class="faixa">
+      <span class="num">+18% de pedidos por dia</span>
+      <p>Outubro está fazendo 40 pedidos por dia, contra 34 na média de julho, agosto e setembro. O faturamento diário ficou no mesmo patamar desses meses (R$ 7.307 contra R$ 7.333) porque o valor médio de cada pedido ficou menor: R$ 181,85, contra cerca de R$ 214 no trimestre. <strong>Mais gente está comprando, e cada compra está menor.</strong> Esse é o ponto que vamos trabalhar nas próximas semanas.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como outubro se compara</h2>
+    <p class="cap">Sempre a mesma janela, do dia 1 ao dia 11, para a comparação ser justa.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Período</th><th>Investimento</th><th>Vendas na loja</th><th>Retorno</th><th>Pedidos</th><th>Ticket</th><th>Custo/pedido</th></tr>
+        </thead>
+        <tbody>
+          <tr class="total"><td>1–11 de outubro/26</td><td>R$ 3.900</td><td>R$ 80.379</td><td>20,6×</td><td><span class="up">442</span></td><td>R$ 181,85</td><td>R$ 8,82</td></tr>
+          <tr><td>1–11 de setembro/26</td><td>R$ 3.494</td><td>R$ 85.209</td><td>24,4×</td><td>408</td><td>R$ 208,85</td><td>R$ 8,56</td></tr>
+          <tr><td>1–11 de agosto/26</td><td>R$ 5.022</td><td>R$ 75.160</td><td>15,0×</td><td>385</td><td>R$ 195,22</td><td>R$ 13,04</td></tr>
+          <tr><td>1–11 de julho/26</td><td>R$ 2.793</td><td>R$ 82.311</td><td>29,5×</td><td>336</td><td>R$ 244,97</td><td>R$ 8,31</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Nos mesmos 11 dias, outubro tem <strong>34 pedidos a mais que setembro, 57 a mais que agosto e 106 a mais que julho</strong>. O custo de mídia por pedido segue na faixa de R$ 8 a R$ 9, a mesma de julho e setembro.</p>
+  </section>
+
+  <section>
+    <h2>Outubro do ano passado, no mesmo ponto</h2>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>1 a 11 de outubro</th><th>Investimento</th><th>Vendas na loja</th><th>Pedidos</th><th>Ticket</th><th>Visitas da mídia</th></tr>
+        </thead>
+        <tbody>
+          <tr class="total"><td>2026</td><td>R$ 3.900</td><td>R$ 80.379</td><td>442</td><td>R$ 181,85</td><td><span class="up">43.764</span></td></tr>
+          <tr><td>2025</td><td>R$ 3.107</td><td>R$ 113.874</td><td>481</td><td>R$ 236,74</td><td>21.515</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">A mídia levou <strong>o dobro de visitas</strong> à loja (+103%), e a quantidade de pedidos ficou perto da de 2025 (442 contra 481). A diferença de faturamento está quase toda no <strong>valor de cada pedido</strong>, que foi de R$ 236,74 para R$ 181,85, menor tanto no Pix quanto no cartão. Em setembro, a diferença para 2025 estava mais na quantidade de pedidos. Agora ela se concentra no tamanho da compra.</p>
+  </section>
+
+  <section>
+    <h2>O que cada canal está fazendo</h2>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>Google: Busca, Shopping e PMax</h3>
+        <p><strong>R$ 2.000 investidos · 6.704 visitas · R$ 0,30 por visita.</strong> O custo para aparecer mil vezes no Google ficou em <strong>R$ 12,82</strong>, abaixo dos R$ 15,15 do início de setembro (−15%). A verba de setembro passou a comprar mais espaço no leilão.</p>
+        <p>Mesmo assim, ainda existe mais procura do que a verba atual consegue cobrir: em cerca de 4 de cada 10 buscas em que poderíamos aparecer, a verba do dia já tinha sido usada.</p>
+      </div>
+      <div class="card bloco">
+        <h3>Meta: Instagram e Facebook</h3>
+        <p><strong>R$ 1.900 investidos · 37.060 visitas · R$ 0,05 por visita.</strong> O custo para aparecer mil vezes caiu para <strong>R$ 4,02</strong>, contra R$ 6,66 no início de setembro e R$ 5,08 em outubro de 2025.</p>
+        <p>É o canal que mais ampliou o alcance da loja no mês: <strong>3.369 visitas por dia</strong>, contra 2.555 no mesmo período de setembro.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que fizemos até aqui</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Dia 5: reforçamos a verba das campanhas de produto</b> (Shopping e PMax), que são as que mostram o catálogo com foto e preço para quem está procurando aviamentos.</span></li>
+      <li><span class="marc"></span><span><b>Dia 7: a lista de clientes da loja passou a orientar o Google.</b> Quem já comprou na Roma agora serve de sinal para as campanhas de produto acharem pessoas parecidas e reconhecerem quem volta.</span></li>
+      <li><span class="marc"></span><span><b>Dias 7 e 8: a campanha da marca passou a cobrir o Brasil inteiro.</b> Quem procura "Roma Aviamentos" no Google encontra a loja em qualquer estado.</span></li>
+      <li><span class="marc"></span><span><b>Dia 8: avaliações do Google ligadas.</b> Depois da compra, o cliente é convidado a avaliar a loja. Já são dezenas de autorizações, e as notas vão aparecer nos anúncios como prova de confiança.</span></li>
+      <li><span class="marc"></span><span><b>Dia 8: vitrine de Natal no ar.</b> Os anúncios da marca ganharam o atalho "Aviamentos para Natal", que leva direto à seção de fitas, laços e enfeites natalinos.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>As próximas semanas</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Recuperar o valor por pedido.</b> Vamos abrir as vendas por categoria para ver quais linhas perderam espaço no carrinho e dar mais destaque, nos anúncios, a kits e produtos de maior valor.</span></li>
+      <li><span class="marc"></span><span><b>Medir as mudanças de outubro.</b> A lista de clientes e as avaliações precisam de cerca de duas semanas para mostrar efeito. Fazemos a leitura na semana de 19 a 23.</span></li>
+      <li><span class="marc"></span><span><b>Espaço de crescimento no Google.</b> Ainda existe procura que a verba atual não alcança. Com o Natal se aproximando, é a conversa que queremos ter com vocês sobre o restante do ano.</span></li>
+      <li><span class="marc"></span><span><b>Uma oportunidade fora da mídia:</b> hoje há <b>42 pedidos no cartão aguardando análise de pagamento, somando R$ 13.099</b>. Acompanhar esses pedidos de perto, e oferecer Pix quando o cartão não passar, ajuda a evitar que virem cancelamento. Em setembro, o cancelamento foi o ponto que mais pesou no resultado da loja.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>GGD · Gio Growth Digital</span>
+    <span>Dados de 1 a 11 de outubro de 2026 · vendas registradas na loja, sem frete, antes de cancelamentos</span>
+  </footer>
+
+</div>
+</body>
+</html>
