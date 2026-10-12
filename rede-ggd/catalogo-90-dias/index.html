@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Catálogo 90 Dias de Tráfego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+/* Layout: coluna de leitura de 1080px; avaliação em grade 2×2, depois calendário em semanas com 3 peças cada */
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --ink:#15192b; --muted:#5b6175; --line:#dcdfe7;
+  --accent:#2747d6; --accent-soft:#e6ebfd;
+  --p-explica:#2747d6; --p-raiox:#b4560a; --p-bastidor:#0f7a5c;
+  --p-explica-bg:#e6ebfd; --p-raiox-bg:#fbeedd; --p-bastidor-bg:#dcf3ea;
+  --p-fund:#9a2f5a; --p-fund-bg:#fbe4ee; --p-quem:#5b3fb0; --p-quem-bg:#ece6fb;
+  --warn-bg:#fff4e0; --warn-ink:#7a4a00;
+  --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Helvetica Neue", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10131d; --surface:#181c2a; --ink:#e9ebf3; --muted:#9aa1b8; --line:#2b3145;
+  --accent:#8ea2ff; --accent-soft:#232a4a;
+  --p-explica:#8ea2ff; --p-raiox:#f0a35a; --p-bastidor:#5fd3a9;
+  --p-explica-bg:#232a4a; --p-raiox-bg:#3a2a18; --p-bastidor-bg:#173429;
+  --p-fund:#f28ab3; --p-fund-bg:#3d1a2a; --p-quem:#b9a5ff; --p-quem-bg:#2a2245;
+  --warn-bg:#3a2d12; --warn-ink:#f6d28e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10131d; --surface:#181c2a; --ink:#e9ebf3; --muted:#9aa1b8; --line:#2b3145;
+  --accent:#8ea2ff; --accent-soft:#232a4a;
+  --p-explica:#8ea2ff; --p-raiox:#f0a35a; --p-bastidor:#5fd3a9;
+  --p-explica-bg:#232a4a; --p-raiox-bg:#3a2a18; --p-bastidor-bg:#173429;
+  --p-fund:#f28ab3; --p-fund-bg:#3d1a2a; --p-quem:#b9a5ff; --p-quem-bg:#2a2245;
+  --warn-bg:#3a2d12; --warn-ink:#f6d28e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:40px 80px;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.15rem;color:var(--muted);max-width:68ch}
+header{display:flex;flex-direction:column;gap:14px}
+.stack{display:flex;flex-direction:column;gap:18px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* tese */
+.thesis{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.thesis>div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.thesis b{color:var(--accent)}
+
+/* perfis */
+.profiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.prof{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.prof-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.prof-top a{color:var(--ink);text-decoration:none}
+.prof-top a:hover{text-decoration:underline}
+.stats{display:flex;gap:18px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat .v{font-family:var(--f-mono);font-size:1.15rem;font-variant-numeric:tabular-nums}
+.stat .k{font-size:.78rem;color:var(--muted)}
+.prof dl{margin:0;display:grid;grid-template-columns:96px 1fr;gap:8px 12px;font-size:.95rem}
+.prof dt{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:3px}
+.prof dd{margin:0;min-width:0}
+.dd-yes{color:var(--p-bastidor)} .dd-no{color:var(--p-raiox)}
+
+/* pilares */
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pillar{border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.pillar.explica{background:var(--p-explica-bg)} .pillar.raiox{background:var(--p-raiox-bg)} .pillar.bastidor{background:var(--p-bastidor-bg)}
+.pillar .day{font-family:var(--f-mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
+.pillar.explica .day{color:var(--p-explica)} .pillar.raiox .day{color:var(--p-raiox)} .pillar.bastidor .day{color:var(--p-bastidor)}
+
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.phase{border-top:3px solid var(--accent);padding-top:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.phase .dates{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+
+.rules{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:22px}
+.rules ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+
+/* controles */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 .85rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.done input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.progress{margin-left:auto;font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+
+/* calendário */
+.week{display:flex;flex-direction:column;gap:12px}
+.week-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.week-h .tag{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.is-done{opacity:.55}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.date{font-family:var(--f-mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+.pill{font-size:.72rem;font-weight:700;border-radius:999px;padding:3px 9px;text-transform:uppercase;letter-spacing:.05em}
+.pill.explica{background:var(--p-explica-bg);color:var(--p-explica)}
+.pill.raiox{background:var(--p-raiox-bg);color:var(--p-raiox)}
+.pill.bastidor{background:var(--p-bastidor-bg);color:var(--p-bastidor)}
+.fmt{font-size:.8rem;color:var(--muted)}
+.card h3{font-size:1.06rem}
+.card p{font-size:.93rem}
+.meta{display:flex;flex-direction:column;gap:4px;font-size:.84rem;border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
+.meta span b{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:6px;font-weight:500}
+.done{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);cursor:pointer}
+
+/* stories + métricas */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+td{padding:7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);width:56px}
+.box ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.refs td:first-child{width:72px}
+.refs a{color:var(--accent);font-weight:600;text-decoration:none;display:block}
+.refs a:hover,.meta a:hover{text-decoration:underline}
+.refs span{display:block;font-size:.85rem;color:var(--muted)}
+.meta a{color:var(--accent);text-decoration:none;font-weight:600}
+.pill.fundamento{background:var(--p-fund-bg);color:var(--p-fund)}
+.pill.quemsou{background:var(--p-quem-bg);color:var(--p-quem)}
+.pillar.fundamento{background:var(--p-fund-bg)} .pillar.quemsou{background:var(--p-quem-bg)}
+.pillar.fundamento .day{color:var(--p-fund)} .pillar.quemsou .day{color:var(--p-quem)}
+.roteiro-link{font-size:.84rem;font-weight:600;color:var(--accent);text-decoration:none}
+.scripts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.script{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0;scroll-margin-top:90px}
+.script .beat{display:grid;grid-template-columns:84px 1fr;gap:10px;font-size:.95rem}
+.script .beat b{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;padding-top:3px}
+.script .beat p{min-width:0}
+.script .say{font-size:1rem}
+.script .gap{background:var(--warn-bg);color:var(--warn-ink);border-radius:6px;padding:2px 6px}
+footer{font-size:.85rem;color:var(--muted)}
+
+@media (max-width:860px){.scripts,.cards,.pillars,.phases{grid-template-columns:1fr}.profiles,.thesis,.grid2{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.card{transition:opacity .2s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Plano de conteúdo · 19/10/2026 a 15/01/2027 · 48 posts no feed</span>
+  <h1>Catálogo 90 Dias de Tráfego</h1>
+  <p class="lead">Tráfego explicado para quem paga a conta. Começa explicando o que é tráfego e quem é você. Depois, três posts por semana, cada um com um número de verdade, construídos a partir do que funciona em quatro perfis de referência e adaptados para trazer cliente, e não aluno.</p>
+</header>
+
+<section class="stack">
+  <span class="eyebrow">A descoberta que muda o plano</span>
+  <div class="thesis">
+    <div>
+      <h3>Três dos quatro perfis falam com outro gestor</h3>
+      <p>Pedro Sobral vende a Comunidade Subido para quem quer <b>virar</b> gestor. Caroline Gandara ensina gestor a automatizar. Cadu Neiva vende masterminds e eventos para o mercado de tráfego. O público deles quer aprender a fazer.</p>
+    </div>
+    <div>
+      <h3>Você precisa falar com quem contrata</h3>
+      <p>O dono da clínica, da loja e do curso não quer saber de CBO. Ele quer saber <b>por que pagou mais e vendeu menos</b>. O plano copia o formato desses perfis e troca o tema: cada post responde a uma dúvida do dono, com um número tirado das suas contas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <span class="eyebrow">Avaliação · lido em 12/10/2026 nos perfis</span>
+  <h2>Os quatro perfis</h2>
+  <div class="profiles">
+
+    <article class="prof">
+      <div class="prof-top"><h3><a href="https://www.instagram.com/pedrosobral/">@pedrosobral</a></h3><span class="eyebrow">ensina a anunciar</span></div>
+      <div class="stats">
+        <div class="stat"><span class="v">2,3 mi</span><span class="k">seguidores</span></div>
+        <div class="stat"><span class="v">3.434</span><span class="k">posts</span></div>
+        <div class="stat"><span class="v">20–325 mil</span><span class="k">views por reel</span></div>
+      </div>
+      <dl>
+        <dt>Funciona</dt><dd>Meme de identificação do dia a dia do gestor: “tem dias que não é 1 leão só” fez <span class="num">2,4 mi</span> de views, 32× a média dele. Crônica do dia a dia com dado (“nem todo mundo tem as mesmas 24 horas”) fez <span class="num">286 mil</span>. Conceito simples com analogia (“como funciona um leilão”).</dd>
+        <dt class="dd-yes">Copiar</dt><dd>Humor de rotina e conceito técnico explicado em 30 segundos. Capa preta com seta, marca fácil de reconhecer no feed.</dd>
+        <dt class="dd-no">Não copiar</dt><dd>O discurso de “liberdade” e “mude de vida” e a venda de curso. Isso atrai aluno, não cliente.</dd>
+      </dl>
+    </article>
+
+    <article class="prof">
+      <div class="prof-top"><h3><a href="https://www.instagram.com/caduneiva/">@caduneiva</a></h3><span class="eyebrow">CEO de agência</span></div>
+      <div class="stats">
+        <div class="stat"><span class="v">373 mil</span><span class="k">seguidores</span></div>
+        <div class="stat"><span class="v">+1 bi</span><span class="k">investidos (bio)</span></div>
+        <div class="stat"><span class="v">3,5–158 mil</span><span class="k">views por reel</span></div>
+      </div>
+      <dl>
+        <dt>Funciona</dt><dd>História de negócio com o número na manchete, em tarja vermelha no topo do vídeo: “dois irmãos começaram cortando carne de madrugada e hoje faturam R$ 3,5 bi” fez <span class="num">81 mil</span>. O trem do Maranhão fez <span class="num">158 mil</span> (6,3× a média). Prova de escala logo na bio.</dd>
+        <dt class="dd-yes">Copiar</dt><dd>Manchete com número na capa, fala direta para a câmera, prova de volume (“+1 bi investidos”) na bio. Para você: o total investido nas contas que você opera.</dd>
+        <dt class="dd-no">Não copiar</dt><dd>Assunto sem ligação com o negócio. Os vídeos de ciência e curiosidade ficaram entre <span class="num">3,5 mil</span> e <span class="num">19 mil</span>.</dd>
+      </dl>
+    </article>
+
+    <article class="prof">
+      <div class="prof-top"><h3><a href="https://www.instagram.com/caroline.gandara/">@caroline.gandara</a></h3><span class="eyebrow">tráfego + automação</span></div>
+      <div class="stats">
+        <div class="stat"><span class="v">5.732</span><span class="k">seguidores</span></div>
+        <div class="stat"><span class="v">293</span><span class="k">posts</span></div>
+        <div class="stat"><span class="v">277–1.176</span><span class="k">views por reel</span></div>
+      </div>
+      <dl>
+        <dt>Funciona</dt><dd>É o perfil mais perto do seu momento. Texto curto na tela com ela trabalhando ao fundo. O melhor recente: “Quando a campanha vende, mérito da empresa. Quando não vende, o tráfego é ruim” (<span class="num">1.176</span>). Bio com promessa concreta: “atendo +20 clientes sozinha”.</dd>
+        <dt class="dd-yes">Copiar</dt><dd>Bastidor da operação automatizada. Você tem mais para mostrar: painel diário de 26 contas, alertas de conta parada, relatório 3× ao dia. Para o dono, isso vira “ninguém dorme com o anúncio parado”.</dd>
+        <dt class="dd-no">Não copiar</dt><dd>A mesma legenda (“Siga @… se você tem interesse…”) em todo post e a conversa voltada para gestor.</dd>
+      </dl>
+    </article>
+
+    <article class="prof">
+      <div class="prof-top"><h3><a href="https://www.instagram.com/leorocha_p/">@leorocha_p</a></h3><span class="eyebrow">empresário · hoje político</span></div>
+      <div class="stats">
+        <div class="stat"><span class="v">38,9 mil</span><span class="k">seguidores</span></div>
+        <div class="stat"><span class="v">505</span><span class="k">posts</span></div>
+        <div class="stat"><span class="v">6,5–26,5 mil</span><span class="k">views por reel</span></div>
+      </div>
+      <dl>
+        <dt>Funciona</dt><dd>O feed atual é quase todo opinião política sobre a eleição. O formato que serve é o carrossel de análise: “quase ninguém leu o plano, eu li as 76 páginas”. Ele faz o trabalho chato e entrega a conclusão.</dd>
+        <dt class="dd-yes">Copiar</dt><dd>O formato “eu analisei X para você”, com dado e fonte. Exemplo: “abri 26 contas e comparei o custo de Black Friday”.</dd>
+        <dt class="dd-no">Não copiar</dt><dd>Política. Sua carteira tem médico, dentista, loja e academia, com público misto. Posicionamento político divide quem contrata.</dd>
+      </dl>
+    </article>
+
+  </div>
+  <p class="fmt">Views lidas na aba de reels de cada perfil. O “×” é o multiplicador sobre a média do perfil que aparece no seu navegador.</p>
+</section>
+
+<section class="stack" id="estudar">
+  <span class="eyebrow">Para estudar · 22 vídeos e posts</span>
+  <h2>Referências com link</h2>
+  <p class="lead">Assista na ordem. Em cada um, observe o primeiro segundo (o gancho), onde fica o texto na tela e como termina (o CTA). As peças com menos views estão aqui de propósito, para comparar com as que deram certo.</p>
+  <div class="profiles">
+    <div class="box">
+      <h3>Pedro Sobral</h3>
+      <table class="refs">
+        <tr><td>2,4 mi</td><td><a href="https://www.instagram.com/reel/DdtzDEDu3mP/">“E tem dias que não é 1 leão só”</a><span>Meme de identificação. O maior viral recente.</span></td></tr>
+        <tr><td>325 mil</td><td><a href="https://www.instagram.com/reel/Dd4FyBAxWiQ/">“Persigo desconhecidos pela internet por dinheiro”</a><span>Trend “eu começo”: humor sobre a profissão.</span></td></tr>
+        <tr><td>286 mil</td><td><a href="https://www.instagram.com/reel/Dd9S1H4xU4v/">“Nem todo mundo tem as mesmas 24 horas”</a><span>Crônica com dado. Bom modelo para opinião.</span></td></tr>
+        <tr><td>245 mil</td><td><a href="https://www.instagram.com/reel/DeEiadORDrv/">“E ela mandou você entrar na Comunidade”</a><span>Prova social com aluna. Para você, seria com cliente.</span></td></tr>
+        <tr><td>244 mil</td><td><a href="https://www.instagram.com/reel/DdjYYofugcF/">“Quem mais acha que vai ser assim?”</a><span>Humor de expectativa contra realidade.</span></td></tr>
+        <tr><td>124 mil</td><td><a href="https://www.instagram.com/reel/Ddoce_RuWDd/">“Por que suas campanhas do Google Ads tão uma 💩”</a><span>Tutorial curto com gancho provocador.</span></td></tr>
+        <tr><td>115 mil</td><td><a href="https://www.instagram.com/reel/Dd1gx-qvTPq/">“Cliente mandou os criativos às 8h”</a><span>Rotina com cliente, tom leve.</span></td></tr>
+        <tr><td>64 mil</td><td><a href="https://www.instagram.com/reel/Dd89zffxZ7L/">“Aceite sua faixa-branquice”</a><span>Lado pessoal (jiu-jítsu) ligado ao trabalho.</span></td></tr>
+        <tr><td>47 mil</td><td><a href="https://www.instagram.com/reel/DeCMsyQPjcz/">“83 milhões de brasileiros negativados”</a><span>Dado macro sem gancho pessoal: rendeu abaixo da média.</span></td></tr>
+        <tr><td>19,7 mil</td><td><a href="https://www.instagram.com/reel/DdmIdnEuZOH/">“Como funciona um LEILÃO”</a><span>Aula pura. Poucas views, mas é o modelo do seu pilar Explica.</span></td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Cadu Neiva</h3>
+      <table class="refs">
+        <tr><td>158 mil</td><td><a href="https://www.instagram.com/reel/DeIgOCTpNec/">“O trem de passageiros mais longo do Brasil”</a><span>Manchete em tarja vermelha. Melhor da série (6,3×).</span></td></tr>
+        <tr><td>101 mil</td><td><a href="https://www.instagram.com/reel/DKxxYSfMOpF/">“O dia que eu fui no leilão do Neymar”</a><span>Vlog de bastidor, fixado no perfil.</span></td></tr>
+        <tr><td>81 mil</td><td><a href="https://www.instagram.com/reel/DeNpmMPuTDB/">“Dois irmãos… hoje faturam R$ 3,5 bi”</a><span>Caso de negócio com número na capa. Modelo do Raio-X.</span></td></tr>
+        <tr><td>18,9 mil</td><td><a href="https://www.instagram.com/reel/DeX81ERONnm/">“Membrana para produzir hidrogênio verde”</a><span>Ciência sem ligação com negócio: rendeu menos.</span></td></tr>
+        <tr><td>3,5 mil</td><td><a href="https://www.instagram.com/reel/DeVX96AO0-Z/">“O Cine Pax abriu em 1943”</a><span>História sem número na manchete: o pior da série.</span></td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Caroline Gandara</h3>
+      <table class="refs">
+        <tr><td>1.176</td><td><a href="https://www.instagram.com/reel/DeMasTZxzPK/">“Quando a campanha vende… mérito da empresa”</a><span>Texto na tela com ela trabalhando. O melhor recente.</span></td></tr>
+        <tr><td>746</td><td><a href="https://www.instagram.com/reel/DeJ13pnRbak/">“Proposta sem resposta não é proposta perdida”</a><span>Dica de rotina comercial.</span></td></tr>
+        <tr><td>446</td><td><a href="https://www.instagram.com/reel/DeIICmqRVWx/">“O que a IA faz melhor do que o gestor?”</a><span>Pergunta na capa.</span></td></tr>
+        <tr><td>277</td><td><a href="https://www.instagram.com/reel/DeKsxVeR3y7/">“Custo operacional: R$ 5 mil ou R$ 40 por mês?”</a><span>Comparação de custo com número.</span></td></tr>
+        <tr><td>fixado</td><td><a href="https://www.instagram.com/reel/DNjP0XaOAPX/">“Enquanto eu foco na estratégia, a automação cuida do operacional”</a><span>Bastidor de automação de campanha.</span></td></tr>
+        <tr><td>fixado</td><td><a href="https://www.instagram.com/p/DUJVmthEu3S/">“Cada print desse post é a prova…”</a><span>Carrossel de prints de resultado.</span></td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <h3>Léo Rocha</h3>
+      <table class="refs">
+        <tr><td>post</td><td><a href="https://www.instagram.com/p/DeP4VZyoBae/">“Quase ninguém leu o plano. Eu li as 76 páginas”</a><span>Estude só o formato “eu analisei por você”. O tema é político.</span></td></tr>
+      </table>
+      <p class="fmt">Os outros posts recentes dele são opinião política e não servem de referência para o seu perfil.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <span class="eyebrow">Como o calendário funciona</span>
+  <h2>Abertura nas semanas 1 e 2, depois três pilares</h2>
+  <div class="pillars" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="pillar fundamento"><span class="day">Semanas 1–2 · seg, qua, sex, ter</span><h3>Tráfego pago do zero</h3><p>4 vídeos: o que é, para quem é, o que não pode faltar e o que o dono precisa saber. É a base para quem chega ao perfil sem saber nada.</p></div>
+    <div class="pillar quemsou"><span class="day">Semanas 1–2 · ter, qui, sex e sáb</span><h3>Quem é a Giovanna</h3><p>5 capítulos da sua história, de 2019 até a GGD, e um carrossel com quem você aprendeu. Cada um termina puxando o próximo. O último fica fixado no perfil.</p></div>
+  </div>
+  <p class="fmt">Nessas duas semanas são 5 posts por semana. A partir da semana 3 entram os três pilares abaixo, com 3 posts por semana e alguns extras.</p>
+  <div class="pillars">
+    <div class="pillar explica"><span class="day">Segunda · reel</span><h3>Explica</h3><p>Um conceito de tráfego traduzido para o dono do negócio, em até 45 segundos. Referência: Pedro explicando leilão.</p></div>
+    <div class="pillar raiox"><span class="day">Quarta · carrossel</span><h3>Raio-X</h3><p>Um caso real com número, anonimizado: o problema, o que você viu, o que mudou. Referência: manchete do Cadu e análise do Léo.</p></div>
+    <div class="pillar bastidor"><span class="day">Sexta · reel</span><h3>Bastidor</h3><p>Rotina, ferramenta, opinião ou humor de identificação do dono. Referência: Caroline no computador e o meme do Pedro.</p></div>
+  </div>
+  <div class="phases">
+    <div class="phase"><span class="dates">Semanas 1–4 · 19/10 a 13/11</span><h3>Confiança</h3><p>O que é tráfego, quem é você e os erros que você encontra quando pega uma conta nova.</p></div>
+    <div class="phase"><span class="dates">Semanas 5–9 · 16/11 a 18/12</span><h3>Prova</h3><p>Casos com número, Black Friday e Natal ao vivo. É o período em que o dono mais pensa em anúncio.</p></div>
+    <div class="phase"><span class="dates">Semanas 10–13 · 21/12 a 15/01</span><h3>Conversão</h3><p>Planejamento de 2027, diagnóstico gratuito e abertura de vagas para fevereiro.</p></div>
+  </div>
+  <div class="rules">
+    <h3>Regras para todas as peças</h3>
+    <ul>
+      <li>Nome, logo ou print de cliente só com autorização por escrito. Sem ela, use o nicho (“uma clínica de estética em SP”) e números arredondados.</li>
+      <li>Cada peça tem um número. Sem número, vira opinião, e opinião de gestor o dono já ouviu demais.</li>
+      <li>Saúde segue o conselho: nada de “antes e depois” escrito, nada de promessa de resultado. Use “diagnóstico inicial” e “resultado final”.</li>
+      <li>Fora: política, “mude de vida”, venda de curso.</li>
+      <li>CTA por palavra no direct (DIAGNÓSTICO, BLACK, PLANO). Cada palavra mostra qual peça trouxe a conversa.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="stack" id="calendario">
+  <span class="eyebrow">Calendário</span>
+  <h2>As 48 peças</h2>
+  <div class="controls" role="toolbar" aria-label="Filtros do calendário">
+    <div class="chips" id="f-fase">
+      <button class="chip" data-v="all" aria-pressed="true" id="ff-all">Todas as fases</button>
+      <button class="chip" data-v="Confiança" aria-pressed="false" id="ff-1">Confiança</button>
+      <button class="chip" data-v="Prova" aria-pressed="false" id="ff-2">Prova</button>
+      <button class="chip" data-v="Conversão" aria-pressed="false" id="ff-3">Conversão</button>
+    </div>
+    <div class="chips" id="f-pilar">
+      <button class="chip" data-v="all" aria-pressed="true" id="fp-all">Todos os pilares</button>
+      <button class="chip" data-v="explica" aria-pressed="false" id="fp-1">Explica</button>
+      <button class="chip" data-v="raiox" aria-pressed="false" id="fp-2">Raio-X</button>
+      <button class="chip" data-v="bastidor" aria-pressed="false" id="fp-3">Bastidor</button>
+      <button class="chip" data-v="fundamento" aria-pressed="false" id="fp-4">Do zero</button>
+      <button class="chip" data-v="quemsou" aria-pressed="false" id="fp-5">Quem sou</button>
+    </div>
+    <span class="progress" id="progress">0 postados</span>
+  </div>
+  <div id="cal" class="stack" style="gap:34px"></div>
+</section>
+
+
+<section class="stack" id="roteiros">
+  <span class="eyebrow">Para gravar · semanas 1 e 2</span>
+  <h2>Roteiros da abertura</h2>
+  <p class="lead">Fale com as suas palavras. O roteiro mostra a ordem e o tamanho de cada parte. Os vídeos de “quem sou” rendem mais gravados de uma vez, olhando para a câmera, com fotos da época entrando por cima.</p>
+
+  <h3>Tráfego pago do zero</h3>
+  <div class="scripts">
+    <article class="script" id="r-f1">
+      <span class="eyebrow">Do zero · vídeo 1 · seg 19/10 · até 45s</span>
+      <h3>O que é tráfego pago, em 40 segundos</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Se você tem um negócio e nunca entendeu direito o que é tráfego pago, esse vídeo é para você.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Tráfego pago é pagar para aparecer para quem ainda não te conhece. Pensa numa loja de rua: o aluguel na avenida movimentada é mais caro porque passa mais gente na frente. No Instagram e no Google é parecido. A diferença é que aqui você escolhe quem passa na frente e sabe quanto custou cada pessoa que entrou.”</p></div>
+      <div class="beat"><b>Na tela</b><p>Meta (Instagram e Facebook): mostra para quem pode se interessar. Google: aparece para quem já está procurando.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“No próximo vídeo: para quem isso funciona e para quem ainda não é a hora. Me segue para não perder.”</p></div>
+    </article>
+    <article class="script" id="r-f2">
+      <span class="eyebrow">Do zero · vídeo 2 · qua 21/10 · até 45s</span>
+      <h3>Tráfego pago não é para todo mundo</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Tráfego pago não é para todo mundo. E eu prefiro te falar isso antes de você gastar.”</p></div>
+      <div class="beat"><b>Funciona</b><p>1. Você já vendeu sem anúncio, por indicação ou boca a boca. 2. Tem margem para pagar pela venda. 3. Consegue atender mais gente sem travar.</p></div>
+      <div class="beat"><b>Ainda não</b><p>Nunca vendeu. O WhatsApp demora horas para responder. O preço não paga o custo de trazer o cliente.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Anúncio acelera o que já funciona. Ele não conserta o que está quebrado. Se você está no primeiro grupo, comenta EU.”</p></div>
+    </article>
+    <article class="script" id="r-f3">
+      <span class="eyebrow">Do zero · vídeo 3 · sex 23/10 · até 45s</span>
+      <h3>5 coisas que eu confiro antes de colocar R$ 1 em anúncio</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Antes de colocar um real em anúncio, eu confiro cinco coisas.”</p></div>
+      <div class="beat"><b>Lista</b><p>1. Oferta clara: em uma frase, o que você vende e para quem. 2. Lugar para a pessoa chegar: página, WhatsApp ou loja, com alguém respondendo rápido. 3. Rastreio: pixel e tags instalados, senão você paga e não sabe o que voltou. 4. Verba de teste: o valor que você aceita usar para aprender nas primeiras semanas. 5. Criativo: foto ou vídeo real do seu negócio.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Faltou um desses, o anúncio vira gasto. Salva para conferir antes de começar.”</p></div>
+    </article>
+    <article class="script" id="r-f4">
+      <span class="eyebrow">Do zero · vídeo 4 · ter 27/10 · até 45s</span>
+      <h3>Você não precisa saber mexer no gerenciador. Precisa saber 4 números</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Você não precisa saber mexer no gerenciador de anúncios. Mas precisa saber quatro números do seu negócio.”</p></div>
+      <div class="beat"><b>Lista</b><p>1. Ticket médio. 2. Margem. 3. Quanto pode pagar para conseguir um cliente. 4. De cada 10 pessoas que te chamam, quantas compram.</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Com esses quatro números eu calculo quanto investir e o que esperar. Campanha, público, criativo, teste e relatório ficam comigo.”</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Não sabe algum deles? Manda DIAGNÓSTICO no direct que eu te ajudo a achar.”</p></div>
+    </article>
+  </div>
+
+  <h3>Quem é a Giovanna</h3>
+  <div class="scripts">
+    <article class="script" id="r-q1">
+      <span class="eyebrow">Quem sou · capítulo 1 · ter 20/10 · 60 a 90s</span>
+      <h3>Ouvi falar de tráfego pela primeira vez na plateia de um evento</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Em 2019 eu estava sentada na plateia de um evento quando ouvi falar de tráfego pago pela primeira vez.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Era o evento do Fórmula de Lançamento, do Érico Rocha. Em algumas palestras falavam de tráfego, e eu saí de lá querendo entender aquilo. Fui atrás do Pedro Sobral. Antes de comprar qualquer coisa, assisti a todas as aulas gratuitas do canal dele no YouTube. Quando abriu a primeira turma do curso, eu comprei e comecei a aplicar. E nunca mais parei de estudar.”</p></div>
+      <div class="beat"><b>Na tela</b><p>“2019”. Foto do evento ou do seu caderno de anotações, se tiver. Marcar @pedrosobral e @ericorocha na legenda.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Hoje eu cuido do anúncio de 26 empresas. No próximo vídeo eu te conto o primeiro lançamento, que mudou tudo.”</p></div>
+    </article>
+    <article class="script" id="r-q2">
+      <span class="eyebrow">Quem sou · capítulo 2 · qui 22/10 · 60 a 90s</span>
+      <h3>Primeiro lançamento da nossa vida: 30 vendas</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Início da pandemia, primeiro lançamento da nossa vida, e vieram 30 vendas.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Eu tinha uma sócia, a Carol. Foi ela que abriu esse mundo para mim. Juntas, a gente fechou com a nossa primeira especialista e fez um lançamento sem nunca ter feito um. Trinta vendas pode parecer pouco. Para a gente foi a coisa mais legal do mundo. Validamos o produto e validamos o lançamento.”</p></div>
+      <div class="beat"><b>Na tela</b><p>“30 vendas”. Print da plataforma de vendas daquele lançamento, se ainda tiver.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Depois vieram outras especialistas. E foi aí que eu descobri uma coisa que pouca gente fala. Te conto no próximo.”</p></div>
+    </article>
+    <article class="script" id="r-q3">
+      <span class="eyebrow">Quem sou · capítulo 3 · seg 26/10 · 60 a 90s</span>
+      <h3>Deixei de ser minha própria chefe</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Eu deixei de ser minha própria chefe. E foi onde eu mais aprendi.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Ser sócia de especialista não é fácil, e eu não vou mentir para você. Eu percebi que o que eu gosto mesmo é de tráfego: olhar os dados, entender o que está acontecendo e achar onde dá para melhorar. Então dei um passo para trás e fui trabalhar numa agência. Lá eu atendi de tudo: lançamento, produto, negócio local, franquia, todo tamanho e todo nicho. Atendi contas como XP Investimentos e Sicoob.”</p></div>
+      <div class="beat"><b>Na tela</b><p>Os nichos aparecendo um a um. Depois os logos da XP e do Sicoob.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“No próximo vídeo eu te conto o preço que eu paguei por esse ritmo.”</p></div>
+    </article>
+    <article class="script" id="r-q4">
+      <span class="eyebrow">Quem sou · capítulo 4 · qui 29/10 · 60 a 90s</span>
+      <h3>Eu cheguei no meu limite</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Eu trabalhava muito, trazia muito resultado, aprendia muito. E cheguei no meu limite.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“O ritmo era insano. Não foi simples e eu não vou fingir que foi. Precisei parar. Depois disso, trabalhei pouco tempo na Veleiro, uma empresa incrível, de um nicho muito específico, com pessoas incríveis. E aí abri a minha empresa. Fui trazendo os meus clientes, um por um, aumentando a base. Desde então eu estou no tráfego, do meu jeito.”</p></div>
+      <div class="beat"><b>Na tela</b><p>Sem texto quando você fala do limite: deixe a fala respirar. Depois, a fachada ou o logo da GGD.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“No último capítulo eu te conto a frase que eu repito para todo cliente.”</p></div>
+    </article>
+    <article class="script" id="r-q5">
+      <span class="eyebrow">Quem sou · capítulo 5 · sex 30/10 · 60 a 90s · fixar</span>
+      <h3>Dinheiro do meu cliente é o meu dinheiro</h3>
+      <div class="beat"><b>Gancho</b><p class="say">“Dinheiro do meu cliente é o meu dinheiro. É a primeira coisa que eu falo para quem começa comigo.”</p></div>
+      <div class="beat"><b>Meio</b><p class="say">“Investimento se faz olhando para os números, para os dados, para o que está acontecendo em cada etapa do processo. Eu sou apaixonada por número e por gerar resultado. E eu gosto de desafio, então o tráfego pago, para mim, é um desafio novo todo dia. Hoje são 26 empresas: clínicas, dentistas, lojas, cursos e academia. Cada conta com rastreio conferido, alerta quando algo para e relatório que o cliente acompanha durante o dia.”</p></div>
+      <div class="beat"><b>Na tela</b><p>“Dinheiro do meu cliente é o meu dinheiro” como frase de capa. Painel diário com os nomes borrados.</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“Se você tem um negócio e quer saber se o tráfego faz sentido para você, manda DIAGNÓSTICO no direct.”</p></div>
+    </article>
+    <article class="script" id="r-q6">
+      <span class="eyebrow">Quem sou · carrossel · sáb 31/10 · 8 telas</span>
+      <h3>Com quem eu aprendi tráfego</h3>
+      <div class="beat"><b>Capa</b><p class="say">“Desde 2019 eu nunca parei de estudar. Esses são os mestres que me formaram.”</p></div>
+      <div class="beat"><b>Telas</b><p>Uma por formação, com foto, nome marcado e uma frase sobre o que você aprendeu com cada um:<br>
+      Érico Rocha · Fórmula de Lançamento e Insider<br>
+      Pedro Sobral · primeira turma e Subido Pro<br>
+      Cadu Neiva · <span class="gap">nome da mentoria</span><br>
+      Priscila <span class="gap">sobrenome e @</span><br>
+      <span class="gap">Tabaré</span> · <span class="gap">Ferrari</span> · <span class="gap">Janine</span>: nomes e cursos a confirmar</p></div>
+      <div class="beat"><b>Penúltima</b><p class="say">“O que eu levei de cada um: estudar antes de investir, olhar o número antes da opinião e tratar o dinheiro do cliente como se fosse meu.”</p></div>
+      <div class="beat"><b>Fecho</b><p class="say">“E você, com quem aprendeu? Marca aqui.”</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="grid2">
+  <div class="box">
+    <span class="eyebrow">Todo dia</span>
+    <h3>Rotina de stories</h3>
+    <table>
+      <tr><td>Seg</td><td>Enquete ligada ao reel do dia (“você sabe quanto paga por cliente?”)</td></tr>
+      <tr><td>Ter</td><td>Tela de trabalho com nome de cliente borrado: painel, alerta, relatório</td></tr>
+      <tr><td>Qua</td><td>Caixinha de perguntas. As melhores viram reel da semana seguinte</td></tr>
+      <tr><td>Qui</td><td>Número da semana: um dado de uma conta, com contexto</td></tr>
+      <tr><td>Sex</td><td>Mensagem ou resultado de cliente (com autorização)</td></tr>
+      <tr><td>Sáb</td><td>Você fora do trabalho. Gera proximidade, como o Pedro no jiu-jítsu</td></tr>
+      <tr><td>Dom</td><td>Livre</td></tr>
+    </table>
+  </div>
+  <div class="box">
+    <span class="eyebrow">O que acompanhar</span>
+    <h3>Métricas que importam para trazer cliente</h3>
+    <ul>
+      <li><b>Conversas no direct com palavra-chave</b> por semana. É a métrica principal.</li>
+      <li><b>Reuniões de diagnóstico marcadas</b> e quantas viraram contrato.</li>
+      <li><b>Salvamentos e envios</b> nos carrosséis de Raio-X. Mostram se o conteúdo é útil.</li>
+      <li><b>Visitas ao perfil</b> vindas de reel. Mostram se o gancho atrai a pessoa certa.</li>
+      <li>Seguidores contam menos. Mil donos de negócio valem mais que 50 mil gestores.</li>
+    </ul>
+    <p class="fmt">Revisão a cada 30 dias: os 3 posts com mais conversas no direct ganham uma parte 2 no mês seguinte.</p>
+  </div>
+</section>
+
+<footer>Antes de publicar cada peça, confira o número na plataforma (Meta, Google ou loja) na mesma janela de datas. Os números do calendário vêm das contas que você opera e precisam ser atualizados na data da gravação.</footer>
+</div>
+
+<script>
+const START = new Date(2026, 9, 19); // seg 19/10/2026
+const OFF = {explica:0, raiox:2, bastidor:4, fundamento:0, quemsou:1};
+const FMT = {fundamento:"Reel · até 45s", quemsou:"Reel · 60 a 90s, olhando para a câmera", explica:"Reel · até 45s", raiox:"Carrossel · 7 a 9 telas", bastidor:"Reel · até 30s"};
+const LABEL = {fundamento:"Do zero", quemsou:"Quem sou", explica:"Explica", raiox:"Raio-X", bastidor:"Bastidor"};
+// [semana, pilar, gancho, o que mostrar, número/prova, CTA, referência]
+const P = [
+[1,"fundamento","O que é tráfego pago, em 40 segundos","Série Tráfego pago do zero, vídeo 1. Pagar para aparecer para quem ainda não te conhece, com a comparação da loja na avenida.","Meta mostra para quem pode se interessar. Google aparece para quem já está procurando.","Siga para ver a série","Pedro · leilão",0,"r-f1"],
+[1,"quemsou","Ouvi falar de tráfego pela primeira vez na plateia de um evento","Quem é a Giovanna, vídeo 1. 2019, Fórmula de Lançamento, as aulas gratuitas do Pedro Sobral e a primeira turma do curso.","2019: o ano em que você começou.","Siga para o próximo capítulo","Pedro · lado pessoal",1,"r-q1"],
+[1,"fundamento","Tráfego pago não é para todo mundo","Série Tráfego pago do zero, vídeo 2. Para quem funciona e para quem ainda não é a hora.","3 sinais de que é a hora e 3 de que ainda não é.","Comente EU","Pedro · conceito simples",2,"r-f2"],
+[1,"quemsou","Primeiro lançamento da nossa vida: 30 vendas","Quem é a Giovanna, vídeo 2. Início da pandemia, a sociedade com a Carol, a primeira especialista.","30 vendas no primeiro lançamento.","Siga para o próximo capítulo","Cadu · número na manchete",3,"r-q2"],
+[1,"fundamento","5 coisas que eu confiro antes de colocar R$ 1 em anúncio","Série Tráfego pago do zero, vídeo 3. Oferta, lugar para a pessoa chegar, rastreio, verba de teste e criativo.","5 itens. Faltou um, o anúncio vira gasto.","Salve para conferir antes de começar","Caroline · rotina",4,"r-f3"],
+[2,"quemsou","Deixei de ser minha própria chefe","Quem é a Giovanna, vídeo 3. Ser sócia de especialista não é fácil, a escolha pelo tráfego e pelos dados, a agência.","Agência com todo tipo de nicho. Contas como XP Investimentos e Sicoob.","Siga para o próximo capítulo","Caroline · ‘quando a campanha vende’",0,"r-q3"],
+[2,"fundamento","Você não precisa saber mexer no gerenciador. Precisa saber 4 números","Série Tráfego pago do zero, vídeo 4. Ticket, margem, quanto pode pagar por cliente e taxa de fechamento. O resto fica com a gestora.","Os 4 números do negócio.","Direct DIAGNÓSTICO","Léo · conta passo a passo",1,"r-f4"],
+[2,"raiox","3 números que eu peço antes de mexer em qualquer campanha","Ticket médio, margem e taxa de cancelamento ou comparecimento. Mostre por que cada um muda a estratégia.","Os 3 verificadores que você usa: loja, plataforma e Google Analytics, na mesma janela de datas.","Salve e me mande os seus 3 números no direct","Léo · ‘eu analisei por você’",2],
+[2,"quemsou","Eu cheguei no meu limite","Quem é a Giovanna, vídeo 4. O ritmo insano de agência, o limite, a passagem pela Veleiro e a decisão de abrir a sua empresa.","Do limite à própria empresa, trazendo cliente a cliente.","Siga para o último capítulo","Caroline · transparência",3,"r-q4"],
+[2,"quemsou","Dinheiro do meu cliente é o meu dinheiro","Quem é a Giovanna, vídeo 5. A frase que guia o trabalho: investir olhando para números e dados. Hoje, 26 contas.","26 contas ativas e os nichos que você atende.","Fixar no perfil · direct DIAGNÓSTICO","Cadu · prova de escala",4,"r-q5"],
+[2,"quemsou","Com quem eu aprendi tráfego","Carrossel de formação: uma tela por mestre, com o que você aprendeu com cada um. Mostra que você estudou com os nomes que o seu público já conhece.","Os cursos, mentorias e comunidades de 2019 até hoje.","Salve · marque quem te ensinou","Léo · material salvável",5,"r-q6"],
+[4,"bastidor","Um dia na minha operação: 26 contas e um painel","Tela do painel diário de mídia, nomes borrados. Mostre o que você olha primeiro de manhã.","Quantas contas são revisadas por dia e quantos alertas o sistema mandou na semana.","Siga para ver a próxima conta que eu abrir","Caroline · bastidor",3],
+[3,"explica","Seu anúncio ficou mais caro e você não mudou nada","Anúncio funciona como leilão: quanto mais gente disputa, mais caro fica aparecer. Verba ÷ custo por mil = quantas vezes você aparece.","Numa conta de e-commerce, o custo por mil no Google subiu 116% em 2 anos. Com a mesma verba, a loja passou a aparecer menos da metade das vezes.","Comente LEILÃO e eu mando como ver isso na sua conta","Pedro · leilão",1],
+[3,"explica","Seu faturamento caiu. Nem sempre a culpa é do anúncio","Três vilões fora do anúncio: ticket médio, cancelamento e preço. Mostre a conta com números simples.","Uma loja faturou menos em setembro com mais mídia. O cancelamento foi de 12,5% para 19,1% e o ticket caiu 9,3%.","Comente CONTA","Caroline · ‘quando a campanha vende’",3],
+[4,"bastidor","Dono: “só sobe a verba que vende mais”","Humor de identificação: a expectativa do dono contra o gráfico real quando a verba dobra de uma vez.","Uma frase de número: dobrar a verba de um dia para o outro reinicia o aprendizado.","Marque um sócio que fala isso","Pedro · meme do leão",1],
+[3,"explica","O botão que dobrou o orçamento de um cliente sem ninguém pedir","As recomendações automáticas do Google aplicadas sozinhas. Mostre onde fica e como desligar.","O orçamento de uma campanha foi de R$ 45 para R$ 89 por dia por uma recomendação automática.","Comente BOTÃO e eu mando o caminho","Pedro · tutorial curto"],
+[3,"raiox","Página longa ou curta? O teste que decidiu","Mesmo anúncio, duas páginas, verba igual. Mostre o desenho do teste e o vencedor.","A página longa venceu: custo por venda de R$ 38,69 e 10,1% de quem clicou comprou. Vídeo e imagem empataram.","Direct PÁGINA para eu olhar a sua","Cadu · número na manchete"],
+[3,"bastidor","O que eu automatizei para nenhum problema passar","Alertas de conta parada, anúncio recusado e saldo acabando chegando no celular.","Quantos alertas chegaram no mês e o tempo até resolver.","Siga para ver mais da operação","Caroline · automação"],
+[4,"explica","Como eu testo criativo sem jogar dinheiro fora","Um criativo por conjunto e os mesmos criativos em todos os públicos. Explique por que isso mostra quem vende de verdade.","Num lote de 9 conjuntos, só 2 públicos venderam em 30 dias.","Comente TESTE","Pedro · conceito simples"],
+[4,"raiox","O pixel quebrou e ninguém viu","Linha do tempo de um rastreio quebrado: o que caiu, como você notou, o que consertou.","A medição de visualização de página caiu de 81,6% para 12,3% de um dia para o outro.","Direct PIXEL para eu checar o seu","Léo · análise passo a passo"],
+[4,"bastidor","O que eu checo toda segunda antes do café","Checklist rápido na tela: saldo, entrega, anúncio recusado, frequência, custo do dia.","Quantos itens tem o checklist e quanto tempo leva.","Salve para usar na sua conta","Caroline · rotina"],
+[5,"explica","Black Friday: por que o anúncio fica caro e o que fazer 10 dias antes","Todo mundo entra no leilão ao mesmo tempo. O que preparar antes: criativo pronto, público de quem já comprou, saldo.","Compare o custo por mil da semana da Black de 2025 com uma semana comum (puxe da sua carteira).","Comente BLACK","Pedro · leilão parte 2"],
+[5,"raiox","Sua lista de clientes vale mais que qualquer público","Como subir a base de compradores no Google e no Meta e por que ela ajuda o anúncio a achar gente parecida.","Uma loja subiu 36 mil compradores. Mostre o que mudou depois.","Direct LISTA","Cadu · caso de negócio"],
+[5,"bastidor","Bastidor: preparando 20 criativos para a Black","Produção em sequência: roteiro, gravação, nomes, conjuntos pausados esperando o dia.","20 conjuntos montados e pausados, prontos para ligar.","Siga para ver a Black ao vivo","Caroline · processo"],
+[6,"explica","Clique não é visita: para onde vai parte dos seus cliques","O que acontece entre o clique e a página carregar. Redirecionamento, página lenta, login que perde a origem.","Numa loja, cerca de 20% dos cliques no anúncio não viravam visita registrada.","Comente CLIQUE","Pedro · explicação com analogia"],
+[6,"raiox","Checklist de Black Friday em 7 telas","Um item por tela: estoque, saldo, rastreio, criativo, lista de compradores, horário, plano B.","Um erro real de Black que você já viu em cada item.","Salve e mande para o seu sócio","Léo · carrossel denso"],
+[6,"bastidor","Ao vivo na Black: o que eu olho de hora em hora","Reel curto de manhã, stories o dia todo. Mostre a tela de acompanhamento.","Venda por hora de uma conta (sem nome).","Stories o dia todo","Pedro · presença ao vivo"],
+[7,"explica","Clínica e consultório: o que o conselho proíbe e o que funciona no lugar","Regras de CFM e CRO para anúncio. Troque “antes e depois” por diagnóstico inicial e resultado final, e promessa por explicação.","Peças reprovadas contra peças aprovadas que você já fez para clientes de saúde.","Direct CONSELHO","Cadu · tema do nicho"],
+[7,"raiox","O anúncio mais barato era o que menos aparecia","Como achar a peça que traz resultado barato e recebe pouca verba, e como subir em degraus.","Um anúncio trazia metade dos cadastros a R$ 5,96 cada, com verba bem abaixo da que precisava.","Comente ESCALA","Cadu · número na manchete"],
+[7,"bastidor","Resultado da Black: o que deu certo e o que eu não repetiria","Balanço honesto, com um acerto e um erro.","Somado das contas: vendas e custo por venda na semana da Black contra a média do mês.","Direct BLACK para o balanço completo","Caroline · transparência"],
+[8,"explica","Negócio local: anúncio num raio de 1 km a partir de R$ 5 por dia","Como uma academia ou clínica de bairro anuncia só para quem mora perto. O mínimo por conjunto e como dividir.","O Meta pede no mínimo R$ 5,27 por conjunto por dia. Uma academia roda 6 conjuntos por cerca de R$ 32 por dia.","Comente BAIRRO","Pedro · tutorial curto"],
+[8,"raiox","Quanto custa um seguidor de verdade","A diferença entre seguidor barato e seguidor que vira paciente ou cliente.","Seguidor de perfil de criadora a R$ 0,56 contra seguidor real de médica a R$ 3,40–6,20. Explique por que o caro pode valer mais.","Direct SEGUIDOR","Léo · comparação"],
+[8,"bastidor","O relatório que o meu cliente recebe","Tela do relatório atualizado três vezes ao dia, sem nomes. Explique cada número em uma frase.","Quantas vezes por dia o relatório atualiza e o que o cliente vê.","Comente RELATÓRIO para ver um modelo","Caroline · ferramenta"],
+[9,"explica","Dezembro: pausar ou manter o anúncio?","Depende do negócio. Loja ganha no Natal, clínica perde nas férias. Mostre como decidir.","Venda por semana de dezembro de 2025 em dois nichos diferentes da sua carteira.","Comente DEZEMBRO","Pedro · dúvida comum"],
+[9,"raiox","Mesmo vídeo, três públicos: qual vendeu?","Teste de público com o mesmo criativo. Desenho, resultado e decisão.","Custo por venda de cada público no mesmo período.","Direct TESTE","Cadu · caso"],
+[9,"bastidor","Perguntas que eu mais recebo no WhatsApp de cliente","Humor leve com as 5 perguntas mais repetidas e a resposta curta de cada uma.","Uma resposta com número em cada pergunta.","Mande a sua pergunta na caixinha","Pedro · identificação"],
+[10,"explica","Quanto investir em anúncio em 2027: a conta de trás para frente","Meta de faturamento ÷ ticket = vendas. Vendas ÷ taxa de conversão = contatos. Contatos × custo por contato = verba.","Faça a conta inteira com o exemplo de um nicho da carteira.","Comente PLANO e eu mando a planilha","Léo · conta passo a passo"],
+[10,"raiox","O que 26 contas me ensinaram em 2026","Cinco lições, uma por tela, cada uma com o número que a provou.","Reaproveite os números das peças anteriores que mais tiveram conversas no direct.","Salve · direct DIAGNÓSTICO","Cadu · retrospectiva"],
+[10,"bastidor","Feliz Natal, com o fim de ano da operação","Post leve: como fica a operação no feriado e quem fica de olho nas contas.","Quantas contas seguem rodando no feriado.","Sem CTA","Pedro · lado pessoal"],
+[11,"explica","5 perguntas para fazer antes de contratar um gestor de tráfego","Acesso às contas no seu nome, relatório, quem cria o criativo, como mede venda, prazo para resultado.","Por que cada pergunta importa, com um caso real de problema.","Salve · direct DIAGNÓSTICO","Pedro · lista simples"],
+[11,"raiox","Planejamento de 2027 em uma página","Modelo de uma tela: meta, verba por mês, datas fortes do nicho, teste por trimestre.","Calendário de datas fortes dos seus nichos (Dia das Mães, Black, volta às aulas).","Comente PLANO","Léo · material salvável"],
+[11,"bastidor","Minha meta pública para 2027","Transparência: quantos clientes você quer atender, em quais nichos, e por que limita a quantidade.","Sua meta de contas e de verba administrada.","Siga para acompanhar","Caroline · bio com promessa concreta"],
+[12,"explica","Janeiro é um mês barato para anunciar?","Compare janeiro com dezembro. Quando o leilão esvazia, sobra espaço para quem continua.","Custo por mil de janeiro de 2026 contra dezembro de 2025 nas suas contas.","Comente JANEIRO","Pedro · leilão parte 3"],
+[12,"raiox","Raio-X ao vivo da conta de um seguidor","Diagnóstico real de quem pediu no direct (com autorização): 3 achados e 3 ações.","Os números da própria conta analisada.","Direct DIAGNÓSTICO para ser o próximo","Léo · ‘eu analisei por você’"],
+[12,"bastidor","Como é o primeiro mês comigo","Do acesso ao primeiro relatório: guia de acessos, conferência do rastreio, primeiros testes, reunião de 30 dias.","Quantos dias leva cada etapa.","Direct DIAGNÓSTICO","Caroline · processo"],
+[13,"explica","O erro de trocar de gestor a cada 3 meses","Fase de aprendizado, histórico da conta, teste que precisa de tempo. Curto prazo contra longo prazo.","Evolução do custo por venda de uma conta ao longo de 6 meses.","Comente PACIÊNCIA","Pedro · ‘o curto prazo nem sempre é justo’"],
+[13,"raiox","90 dias de uma conta, do primeiro dia ao resultado","Caso completo (com autorização): como estava, o que foi feito em cada mês e onde chegou.","Custo por venda e faturamento no dia 1, no dia 30, no dia 60 e no dia 90.","Direct DIAGNÓSTICO","Cadu · caso completo"],
+[13,"bastidor","Abri vagas para fevereiro","Quantas vagas, para quais nichos, o que o cliente recebe e como é o diagnóstico gratuito.","Número exato de vagas e resultado médio que você pode mostrar.","Direct VAGA","Caroline · oferta direta"]
+];
+const R="https://www.instagram.com/reel/", Q="https://www.instagram.com/p/";
+const LINK={"Pedro · leilão":R+"DdmIdnEuZOH/","Pedro · leilão parte 2":R+"DdmIdnEuZOH/","Pedro · leilão parte 3":R+"DdmIdnEuZOH/","Pedro · conceito simples":R+"DdmIdnEuZOH/","Pedro · explicação com analogia":R+"DdmIdnEuZOH/",
+"Pedro · meme do leão":R+"DdtzDEDu3mP/","Pedro · identificação":R+"DdjYYofugcF/","Pedro · tutorial curto":R+"Ddoce_RuWDd/","Pedro · presença ao vivo":R+"Dd0L40muQvk/","Pedro · dúvida comum":R+"Dd1gx-qvTPq/","Pedro · lado pessoal":R+"Dd89zffxZ7L/","Pedro · lista simples":R+"Dd9S1H4xU4v/","Pedro · ‘o curto prazo nem sempre é justo’":"https://www.instagram.com/pedrosobral/",
+"Cadu · prova de escala":"https://www.instagram.com/caduneiva/","Cadu · número na manchete":R+"DeNpmMPuTDB/","Cadu · caso de negócio":R+"DeNpmMPuTDB/","Cadu · caso":R+"DeIgOCTpNec/","Cadu · caso completo":R+"DeNpmMPuTDB/","Cadu · tema do nicho":R+"DeIgOCTpNec/","Cadu · retrospectiva":R+"DeIgOCTpNec/",
+"Caroline · bastidor":R+"DNjP0XaOAPX/","Caroline · automação":R+"DNjP0XaOAPX/","Caroline · ferramenta":R+"DNjP0XaOAPX/","Caroline · processo":R+"DNjP0XaOAPX/","Caroline · ‘quando a campanha vende’":R+"DeMasTZxzPK/","Caroline · rotina":R+"DeJ13pnRbak/","Caroline · transparência":Q+"DUJVmthEu3S/","Caroline · bio com promessa concreta":"https://www.instagram.com/caroline.gandara/","Caroline · oferta direta":R+"DeKsxVeR3y7/"};
+const refHtml = r => { const u = LINK[r] || (r.startsWith("Léo") ? Q+"DeP4VZyoBae/" : null); return u ? `<a href="${u}">${esc(r)} ↗</a>` : esc(r); };
+const fase = w => w<=4 ? "Confiança" : w<=9 ? "Prova" : "Conversão";
+const dfmt = d => d.toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"}).replace(".","");
+let done = {};
+try { done = JSON.parse(localStorage.getItem("cat90-done")||"{}"); } catch(e) {}
+const save = () => { try { localStorage.setItem("cat90-done", JSON.stringify(done)); } catch(e) {} };
+const state = {fase:"all", pilar:"all"};
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}
+function render(){
+  const cal = document.getElementById("cal"); cal.innerHTML = "";
+  for(let w=1; w<=13; w++){
+    const items = P.map((p,i)=>({p,i})).sort((a,b)=>(a.p[7] ?? OFF[a.p[1]])-(b.p[7] ?? OFF[b.p[1]])).filter(({p})=>p[0]===w && (state.fase==="all"||fase(w)===state.fase) && (state.pilar==="all"||p[1]===state.pilar));
+    if(!items.length) continue;
+    const mon = new Date(START); mon.setDate(START.getDate()+(w-1)*7);
+    const fri = new Date(mon); fri.setDate(mon.getDate()+4);
+    const sec = document.createElement("div"); sec.className="week";
+    sec.innerHTML = `<div class="week-h"><h3>Semana ${w}</h3><span class="tag">${mon.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})} a ${fri.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})} · ${fase(w)}</span></div>`;
+    const grid = document.createElement("div"); grid.className="cards";
+    items.forEach(({p,i})=>{
+      const d = new Date(mon); d.setDate(mon.getDate()+(p[7] ?? OFF[p[1]]));
+      const id = "post-"+(i+1);
+      const c = document.createElement("article"); c.className="card"+(done[id]?" is-done":"");
+      c.innerHTML = `<div class="card-top"><span class="date">${dfmt(d)}</span><span class="pill ${p[1]}">${LABEL[p[1]]}</span></div>
+        <span class="fmt">${FMT[p[1]]} · peça ${i+1}</span>
+        <h3>${esc(p[2])}</h3><p>${esc(p[3])}</p>
+        <div class="meta"><span><b>Número</b>${esc(p[4])}</span><span><b>CTA</b>${esc(p[5])}</span><span><b>Ref.</b>${refHtml(p[6])}</span>${p[8]?`<a class="roteiro-link" href="#${p[8]}">Ler o roteiro ↓</a>`:""}</div>
+        <label class="done" for="${id}"><input type="checkbox" id="${id}" ${done[id]?"checked":""}> Postado</label>`;
+      c.querySelector("input").addEventListener("change", e=>{ done[id]=e.target.checked; if(!e.target.checked) delete done[id]; save(); c.classList.toggle("is-done", e.target.checked); prog(); });
+      grid.appendChild(c);
+    });
+    sec.appendChild(grid); cal.appendChild(sec);
+  }
+  prog();
+}
+function prog(){ document.getElementById("progress").textContent = `${Object.keys(done).length} de ${P.length} postados`; }
+function bind(gid, key){
+  document.querySelectorAll(`#${gid} .chip`).forEach(b=>b.addEventListener("click",()=>{
+    state[key]=b.dataset.v;
+    document.querySelectorAll(`#${gid} .chip`).forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+    render();
+  }));
+}
+bind("f-fase","fase"); bind("f-pilar","pilar"); render();
+</script>
+</body>
+</html>
