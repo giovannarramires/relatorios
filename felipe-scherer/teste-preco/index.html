@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Teste de Preço Felipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: uma faixa por página de preço; o preço grande ancora cada faixa, os 5 anúncios em grade logo abaixo */
+:root{--bg:#f3f1ee;--surface:#ffffff;--fg:#221b16;--muted:#6d625a;--line:#e0d9d1;--accent:#8a4b1f;--amber:#c98a4a;--ok:#2f7a4b;--okbg:#e3f1e8;--warn:#9a5b00;--warnbg:#fbefd9;--newbg:#f6e7d6;--cutbg:#e6ecf5;--cut:#2f4f7a;
+--display:"Newsreader",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130f;--surface:#211b16;--fg:#efe7de;--muted:#a99b8e;--line:#382e26;--accent:#e0a36a;--amber:#d9a066;--ok:#7fcf9c;--okbg:#1d3326;--warn:#f0b866;--warnbg:#3a2a12;--newbg:#3a2716;--cutbg:#1d2a3d;--cut:#9cbbe6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17130f;--surface:#211b16;--fg:#efe7de;--muted:#a99b8e;--line:#382e26;--accent:#e0a36a;--amber:#d9a066;--ok:#7fcf9c;--okbg:#1d3326;--warn:#f0b866;--warnbg:#3a2a12;--newbg:#3a2716;--cutbg:#1d2a3d;--cut:#9cbbe6;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,4vw,40px)} h2{font-size:24px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.intro{display:flex;flex-direction:column;gap:10px;max-width:70ch} .intro p{margin:0;color:var(--muted)}
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.resumo div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.resumo b{display:block;font-family:var(--display);font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums} .resumo span{color:var(--muted);font-size:13px}
+.bloco{display:flex;flex-direction:column;gap:14px} .bloco>h2{font-size:22px}
+.tab{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:13px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tbody th{font-family:var(--display);font-size:17px;white-space:nowrap} tbody th small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
+td code{font-family:var(--mono);font-size:11.5px;word-break:break-all} td.n{font-weight:600;text-align:center}
+tr:last-child th,tr:last-child td{border-bottom:0}
+.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px}
+.checks li{display:flex;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.checks li span:last-child{font-weight:600;color:var(--ok);white-space:nowrap} .checks li.pend span:last-child{color:var(--warn)}
+.pagina{display:flex;flex-direction:column;gap:18px;padding-top:28px;border-top:2px solid var(--fg)}
+.ph{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.preco{font-family:var(--display);font-weight:700;font-size:clamp(56px,9vw,84px);line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.preco .rs{font-size:.32em;vertical-align:.95em;margin-right:4px} .preco .cent{font-size:.4em;vertical-align:.8em}
+.phinfo{display:flex;flex-direction:column;gap:4px;min-width:0} .phinfo p{margin:0}
+.link a{color:var(--fg);font-family:var(--mono);font-size:13px;word-break:break-all} .ck{color:var(--muted);font-size:14px} .ck code{font-family:var(--mono)}
+.ok{color:var(--ok);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ad{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-width:0}
+.media{aspect-ratio:1/1;background:#000;max-width:100%} .media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
+.meta{display:flex;flex-direction:column;gap:6px;padding:10px 12px 12px}
+.chip{align-self:flex-start;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;line-height:1.3}
+.chip.novo{background:var(--newbg);color:var(--accent)} .chip.orig{background:var(--okbg);color:var(--ok)} .chip.corte{background:var(--cutbg);color:var(--cut)}
+.nome{font-family:var(--mono);font-size:11.5px;word-break:break-all} .hist{font-size:12px;color:var(--muted)}
+details.copy{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.copy summary{cursor:pointer;font-weight:600} details.copy summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+dl{margin:12px 0 0;display:grid;grid-template-columns:130px minmax(0,1fr);gap:8px 16px} dt{color:var(--muted);font-size:13px} dd{margin:0;min-width:0}
+pre{margin:0;white-space:pre-wrap;font:inherit}
+@media (max-width:620px){dl{grid-template-columns:1fr}}
+.avisos{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.avisos li{background:var(--warnbg);border-radius:8px;padding:10px 14px} .avisos b{color:var(--warn)}
+.legenda{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted);align-items:center}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+body{margin:0}img{max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="intro"><span class="eyebrow">Felipe Scherer · Playbook do Reclamante · 14/10/2026</span>
+<h1>Teste de preço: quais anúncios vão para cada página</h1>
+<p>São 4 páginas novas, uma por preço. Cada uma recebe os mesmos 5 criativos que mais venderam nos últimos 30 dias, cada um ajustado ao preço da sua página. Os anúncios ainda não estão no ar.</p></div>
+<div class="resumo"><div><b>4</b><span>páginas de preço</span></div><div><b>5</b><span>anúncios por página</span></div><div><b>20</b><span>anúncios no total</span></div><div><b>4/4</b><span>páginas com rastreio conferido</span></div></div>
+
+<section class="bloco"><h2>Mapa: página × anúncio</h2>
+<div class="tab"><table><thead><tr><th>Página</th><th>Estático 1</th><th>Estático 2</th><th>Estático 3</th><th>Vídeo 1</th><th>Vídeo 2</th><th>Total</th></tr></thead><tbody><tr><th scope="row">R$ 37,90<small>/vtic-o1</small></th><td><code>AD20_AUTORIDADE_FELIPE_P3790</code></td><td><code>AD44_9_ALEGACOES_V2_P3790</code></td><td><code>AD51_NOTICIA_GLOBO_300_PRETO</code></td><td><code>AD03_VIDEO</code></td><td><code>AD1_PLAYBOOK_VIDEO</code></td><td class="n">5</td></tr><tr><th scope="row">R$ 47,00<small>/vtic-o2</small></th><td><code>AD20_AUTORIDADE_FELIPE_P4700</code></td><td><code>AD44_9_ALEGACOES_V2_P4700</code></td><td><code>AD51_NOTICIA_GLOBO_300_PRETO</code></td><td><code>AD03_VIDEO</code></td><td><code>AD1_PLAYBOOK_VIDEO</code></td><td class="n">5</td></tr><tr><th scope="row">R$ 57,00<small>/vtic-o3</small></th><td><code>AD20_AUTORIDADE_FELIPE_P5700</code></td><td><code>AD44_9_ALEGACOES_V2_P5700</code></td><td><code>AD51_NOTICIA_GLOBO_300_PRETO</code></td><td><code>AD03_VIDEO</code></td><td><code>AD1_PLAYBOOK_VIDEO</code></td><td class="n">5</td></tr><tr><th scope="row">R$ 67,00<small>/vtic-o4</small></th><td><code>AD20_AUTORIDADE_FELIPE_P6700</code></td><td><code>AD44_9_ALEGACOES_V2_P6700</code></td><td><code>AD51_NOTICIA_GLOBO_300_PRETO</code></td><td><code>AD03_VIDEO</code></td><td><code>AD1_PLAYBOOK_VIDEO</code></td><td class="n">5</td></tr></tbody></table></div>
+<div class="legenda"><span class="chip novo">Arte nova com o preço</span><span class="chip orig">Arte original, sem preço na imagem</span><span class="chip corte">Vídeo com a frase do preço cortada</span><span>Em todos, a copy muda para o preço da página.</span></div></section>
+
+<section class="bloco"><h2>Rastreio conferido no navegador</h2>
+<ul class="checks"><li class=""><span>Página abre e mostra o preço certo</span><span>4/4</span></li><li class=""><span>Pixel 149885701370932 + PageView na página</span><span>4/4</span></li><li class=""><span>Botão leva UTMs + fbclid ao checkout</span><span>4/4</span></li><li class=""><span>Checkout dispara no mesmo pixel (PageView, InitiateCheckout, AddToCart)</span><span>4/4</span></li><li class=""><span>Valor enviado ao pixel = preço da página</span><span>4/4</span></li><li class="pend"><span>Compra (Purchase)</span><span>não testado — exigiria comprar</span></li></ul></section>
+
+<section class="pagina" id="p3790">
+<header class="ph"><div class="preco"><span class="rs">R$</span>37<span class="cent">,90</span></div>
+<div class="phinfo"><h2>Página do preço R$ 37,90</h2>
+<p class="link"><a href="https://lp.felipeschereradv.com.br/vtic-o1/" target="_blank" rel="noopener">lp.felipeschereradv.com.br/vtic-o1/</a></p>
+<p class="ck">Checkout <code>O35BF6B18</code> · <b>5 anúncios</b> · rastreio <span class="ok">conferido</span></p></div></header>
+<div class="grid"><article class="ad"><div class="media"><img src="img/AD20_ESTA_AUTORIDADE_FELIPE_P3790.jpg" alt="AD20_ESTA_AUTORIDADE_FELIPE_P3790" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 37,90</span>
+<code class="nome">AD20_ESTA_AUTORIDADE_FELIPE_P3790</code></div></article><article class="ad"><div class="media"><img src="img/AD44_ESTA_9_ALEGACOES_V2_P3790.jpg" alt="AD44_ESTA_9_ALEGACOES_V2_P3790" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 37,90</span>
+<code class="nome">AD44_ESTA_9_ALEGACOES_V2_P3790</code></div></article><article class="ad"><div class="media"><img src="img/AD51_ESTA_NOTICIA_GLOBO_300_PRETO.jpg" alt="AD51_ESTA_NOTICIA_GLOBO_300_PRETO" loading="lazy"></div><div class="meta">
+<span class="chip orig">Estático · Arte original, sem preço</span>
+<code class="nome">AD51_ESTA_NOTICIA_GLOBO_300_PRETO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD03_poster.jpg" playsinline><source src="vid/AD03_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (1:24)</span>
+<code class="nome">AD03_VIDEO_SEMPRECO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD1_poster.jpg" playsinline><source src="vid/AD1_PLAYBOOK_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (2:00)</span>
+<code class="nome">AD1_PLAYBOOK_VIDEO_SEMPRECO</code></div></article></div>
+<details class="copy"><summary>Copy destes 5 anúncios (igual para os 5; só o preço muda)</summary>
+<dl><dt>Texto principal</dt><dd><pre>🚨 A maioria dos advogados trabalhistas ainda improvisa quando recebe uma ação de Burnout.
+
+📚 Por apenas R$37,90, você terá acesso a um Playbook completo com checklist de triagem, petição inicial, quesitos periciais, perguntas para audiência, teses defensivas refutadas e outros materiais prontos para aplicação imediata.
+
+Toque em &quot;Saiba Mais&quot; e garanta agora o seu acesso. 🔗</pre></dd>
+<dt>Título</dt><dd>Quesitos Prontos, Nexo Causal Provado: O Playbook que Todo Advogado Trabalhista Precisa</dd>
+<dt>Descrição</dt><dd>Acesso imediato · R$ 37,90</dd>
+<dt>Link</dt><dd>https://lp.felipeschereradv.com.br/vtic-o1/</dd></dl></details>
+</section><section class="pagina" id="p4700">
+<header class="ph"><div class="preco"><span class="rs">R$</span>47<span class="cent">,00</span></div>
+<div class="phinfo"><h2>Página do preço R$ 47,00</h2>
+<p class="link"><a href="https://lp.felipeschereradv.com.br/vtic-o2/" target="_blank" rel="noopener">lp.felipeschereradv.com.br/vtic-o2/</a></p>
+<p class="ck">Checkout <code>O1BDF758A</code> · <b>5 anúncios</b> · rastreio <span class="ok">conferido</span></p></div></header>
+<div class="grid"><article class="ad"><div class="media"><img src="img/AD20_ESTA_AUTORIDADE_FELIPE_P4700.jpg" alt="AD20_ESTA_AUTORIDADE_FELIPE_P4700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 47,00</span>
+<code class="nome">AD20_ESTA_AUTORIDADE_FELIPE_P4700</code></div></article><article class="ad"><div class="media"><img src="img/AD44_ESTA_9_ALEGACOES_V2_P4700.jpg" alt="AD44_ESTA_9_ALEGACOES_V2_P4700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 47,00</span>
+<code class="nome">AD44_ESTA_9_ALEGACOES_V2_P4700</code></div></article><article class="ad"><div class="media"><img src="img/AD51_ESTA_NOTICIA_GLOBO_300_PRETO.jpg" alt="AD51_ESTA_NOTICIA_GLOBO_300_PRETO" loading="lazy"></div><div class="meta">
+<span class="chip orig">Estático · Arte original, sem preço</span>
+<code class="nome">AD51_ESTA_NOTICIA_GLOBO_300_PRETO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD03_poster.jpg" playsinline><source src="vid/AD03_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (1:24)</span>
+<code class="nome">AD03_VIDEO_SEMPRECO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD1_poster.jpg" playsinline><source src="vid/AD1_PLAYBOOK_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (2:00)</span>
+<code class="nome">AD1_PLAYBOOK_VIDEO_SEMPRECO</code></div></article></div>
+<details class="copy"><summary>Copy destes 5 anúncios (igual para os 5; só o preço muda)</summary>
+<dl><dt>Texto principal</dt><dd><pre>🚨 A maioria dos advogados trabalhistas ainda improvisa quando recebe uma ação de Burnout.
+
+📚 Por apenas R$47,00, você terá acesso a um Playbook completo com checklist de triagem, petição inicial, quesitos periciais, perguntas para audiência, teses defensivas refutadas e outros materiais prontos para aplicação imediata.
+
+Toque em &quot;Saiba Mais&quot; e garanta agora o seu acesso. 🔗</pre></dd>
+<dt>Título</dt><dd>Quesitos Prontos, Nexo Causal Provado: O Playbook que Todo Advogado Trabalhista Precisa</dd>
+<dt>Descrição</dt><dd>Acesso imediato · R$ 47,00</dd>
+<dt>Link</dt><dd>https://lp.felipeschereradv.com.br/vtic-o2/</dd></dl></details>
+</section><section class="pagina" id="p5700">
+<header class="ph"><div class="preco"><span class="rs">R$</span>57<span class="cent">,00</span></div>
+<div class="phinfo"><h2>Página do preço R$ 57,00</h2>
+<p class="link"><a href="https://lp.felipeschereradv.com.br/vtic-o3/" target="_blank" rel="noopener">lp.felipeschereradv.com.br/vtic-o3/</a></p>
+<p class="ck">Checkout <code>OC8F0F86D</code> · <b>5 anúncios</b> · rastreio <span class="ok">conferido</span></p></div></header>
+<div class="grid"><article class="ad"><div class="media"><img src="img/AD20_ESTA_AUTORIDADE_FELIPE_P5700.jpg" alt="AD20_ESTA_AUTORIDADE_FELIPE_P5700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 57,00</span>
+<code class="nome">AD20_ESTA_AUTORIDADE_FELIPE_P5700</code></div></article><article class="ad"><div class="media"><img src="img/AD44_ESTA_9_ALEGACOES_V2_P5700.jpg" alt="AD44_ESTA_9_ALEGACOES_V2_P5700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 57,00</span>
+<code class="nome">AD44_ESTA_9_ALEGACOES_V2_P5700</code></div></article><article class="ad"><div class="media"><img src="img/AD51_ESTA_NOTICIA_GLOBO_300_PRETO.jpg" alt="AD51_ESTA_NOTICIA_GLOBO_300_PRETO" loading="lazy"></div><div class="meta">
+<span class="chip orig">Estático · Arte original, sem preço</span>
+<code class="nome">AD51_ESTA_NOTICIA_GLOBO_300_PRETO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD03_poster.jpg" playsinline><source src="vid/AD03_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (1:24)</span>
+<code class="nome">AD03_VIDEO_SEMPRECO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD1_poster.jpg" playsinline><source src="vid/AD1_PLAYBOOK_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (2:00)</span>
+<code class="nome">AD1_PLAYBOOK_VIDEO_SEMPRECO</code></div></article></div>
+<details class="copy"><summary>Copy destes 5 anúncios (igual para os 5; só o preço muda)</summary>
+<dl><dt>Texto principal</dt><dd><pre>🚨 A maioria dos advogados trabalhistas ainda improvisa quando recebe uma ação de Burnout.
+
+📚 Por apenas R$57,00, você terá acesso a um Playbook completo com checklist de triagem, petição inicial, quesitos periciais, perguntas para audiência, teses defensivas refutadas e outros materiais prontos para aplicação imediata.
+
+Toque em &quot;Saiba Mais&quot; e garanta agora o seu acesso. 🔗</pre></dd>
+<dt>Título</dt><dd>Quesitos Prontos, Nexo Causal Provado: O Playbook que Todo Advogado Trabalhista Precisa</dd>
+<dt>Descrição</dt><dd>Acesso imediato · R$ 57,00</dd>
+<dt>Link</dt><dd>https://lp.felipeschereradv.com.br/vtic-o3/</dd></dl></details>
+</section><section class="pagina" id="p6700">
+<header class="ph"><div class="preco"><span class="rs">R$</span>67<span class="cent">,00</span></div>
+<div class="phinfo"><h2>Página do preço R$ 67,00</h2>
+<p class="link"><a href="https://lp.felipeschereradv.com.br/vtic-o4/" target="_blank" rel="noopener">lp.felipeschereradv.com.br/vtic-o4/</a></p>
+<p class="ck">Checkout <code>O0ABBB605</code> · <b>5 anúncios</b> · rastreio <span class="ok">conferido</span></p></div></header>
+<div class="grid"><article class="ad"><div class="media"><img src="img/AD20_ESTA_AUTORIDADE_FELIPE_P6700.jpg" alt="AD20_ESTA_AUTORIDADE_FELIPE_P6700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 67,00</span>
+<code class="nome">AD20_ESTA_AUTORIDADE_FELIPE_P6700</code></div></article><article class="ad"><div class="media"><img src="img/AD44_ESTA_9_ALEGACOES_V2_P6700.jpg" alt="AD44_ESTA_9_ALEGACOES_V2_P6700" loading="lazy"></div><div class="meta">
+<span class="chip novo">Estático · Arte nova com R$ 67,00</span>
+<code class="nome">AD44_ESTA_9_ALEGACOES_V2_P6700</code></div></article><article class="ad"><div class="media"><img src="img/AD51_ESTA_NOTICIA_GLOBO_300_PRETO.jpg" alt="AD51_ESTA_NOTICIA_GLOBO_300_PRETO" loading="lazy"></div><div class="meta">
+<span class="chip orig">Estático · Arte original, sem preço</span>
+<code class="nome">AD51_ESTA_NOTICIA_GLOBO_300_PRETO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD03_poster.jpg" playsinline><source src="vid/AD03_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (1:24)</span>
+<code class="nome">AD03_VIDEO_SEMPRECO</code></div></article><article class="ad"><div class="media"><video controls preload="none" poster="img/AD1_poster.jpg" playsinline><source src="vid/AD1_PLAYBOOK_VIDEO_SEMPRECO.mp4" type="video/mp4"></video></div><div class="meta">
+<span class="chip corte">Vídeo · Frase do preço cortada (2:00)</span>
+<code class="nome">AD1_PLAYBOOK_VIDEO_SEMPRECO</code></div></article></div>
+<details class="copy"><summary>Copy destes 5 anúncios (igual para os 5; só o preço muda)</summary>
+<dl><dt>Texto principal</dt><dd><pre>🚨 A maioria dos advogados trabalhistas ainda improvisa quando recebe uma ação de Burnout.
+
+📚 Por apenas R$67,00, você terá acesso a um Playbook completo com checklist de triagem, petição inicial, quesitos periciais, perguntas para audiência, teses defensivas refutadas e outros materiais prontos para aplicação imediata.
+
+Toque em &quot;Saiba Mais&quot; e garanta agora o seu acesso. 🔗</pre></dd>
+<dt>Título</dt><dd>Quesitos Prontos, Nexo Causal Provado: O Playbook que Todo Advogado Trabalhista Precisa</dd>
+<dt>Descrição</dt><dd>Acesso imediato · R$ 67,00</dd>
+<dt>Link</dt><dd>https://lp.felipeschereradv.com.br/vtic-o4/</dd></dl></details>
+</section>
+
+<section class="bloco pagina"><h2>Pontos para ajustar</h2>
+<ul class="avisos">
+<li><b>Descrição das 4 páginas:</b> o texto que aparece ao compartilhar o link ainda fala em "hérnia de disco" e "R$19,90".</li>
+<li><b>Taxa no checkout:</b> o checkout soma R$ 2,49 de taxa de serviço ao preço.</li>
+<li><b>Preço riscado:</b> o checkout mostra "De R$ 199,00"; as artes AD20 e AD44 mostram "De R$ 199,90".</li>
+<li><b>Vídeos:</b> os dois vídeos são os mesmos nas 4 páginas. Vale ouvir as emendas antes de subir (AD03 em 1:24 e AD1 em 2:00).</li>
+</ul></section>
+</div>
+</body>
+</html>
