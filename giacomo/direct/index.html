@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Direct do Dr. Giácomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: coluna única de leitura, navegação fixa no topo, conversas como fichas com as mensagens prontas em balão de Direct */
+:root{
+  --bg:#f6f6f9; --surface:#ffffff; --ink:#1d1b26; --muted:#615d72; --line:#e3e1ea;
+  --accent:#6a3fd8; --accent-soft:#efe9fd; --bubble:#6a3fd8; --bubble-ink:#ffffff;
+  --ok:#1f7a4d; --ok-soft:#e3f3ea; --warn:#9a5b00; --warn-soft:#fbf0dc; --bad:#b3261e; --bad-soft:#fbe7e5;
+  --display:"Newsreader",Georgia,serif; --body:"Figtree",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 80px;display:flex;flex-direction:column;gap:56px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{max-width:860px;margin:0 auto;padding:10px 16px;display:flex;gap:6px;overflow-x:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,5vw,42px)}
+h2{font-size:clamp(24px,3.6vw,30px)}
+h3{font-size:21px}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.lead{color:var(--muted);font-size:17px}
+header{display:flex;flex-direction:column;gap:12px}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:64px}
+.sechead{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.who{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.who h3{margin-right:auto}
+.pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.hot{background:var(--ok-soft);color:var(--ok)} .warm{background:var(--warn-soft);color:var(--warn)} .cold{background:var(--bad-soft);color:var(--bad)}
+.meta{font-size:14px;color:var(--muted)}
+.read{border-left:3px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px}
+.read b{color:var(--ink)}
+.opts{display:grid;gap:14px}
+.opt{display:grid;grid-template-columns:1fr;gap:8px}
+.optlabel{font-size:13px;font-weight:700;color:var(--muted)}
+.optlabel span{color:var(--accent)}
+.bubble{justify-self:end;max-width:min(560px,100%);background:var(--bubble);color:var(--bubble-ink);border-radius:20px 20px 6px 20px;padding:12px 16px;white-space:pre-line;position:relative}
+.copy{justify-self:end;font:600 12px var(--body);color:var(--accent);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.when{font-size:13px;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rule b{font-size:15px}
+.rule p{font-size:14.5px;color:var(--muted)}
+.alert{background:var(--warn-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.alert b{color:var(--warn)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sticker{align-self:flex-start;background:linear-gradient(var(--surface),var(--surface)) padding-box;border:2px solid var(--accent);border-radius:14px;padding:12px 16px;font-weight:600;max-width:100%}
+.sticker small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:2px}
+.script td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+.script td:nth-child(2){font-weight:500}
+.script td:nth-child(3){color:var(--muted);font-size:13.5px}
+.src{font-size:13px;color:var(--muted)}
+.dont{font-size:14px;color:var(--bad)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+li{max-width:66ch}
+footer a{color:var(--accent)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+</head>
+<body>
+<nav><div class="in">
+  <a href="#conversas">7 conversas</a>
+  <a href="#camila">Regras para a Camila</a>
+  <a href="#roteiros">6 caixinhas</a>
+  <a href="#videos">Melhores vídeos</a>
+  <a href="#gravacoes">3 gravações</a>
+</div></nav>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Dr. Giácomo Trojan · Lipo de papada · 14/10/2026</span>
+  <h1>O que as pacientes perguntam no Direct</h1>
+  <p class="lead">Lemos as 7 conversas do Direct de 13/10 (as pacientes aparecem só com as iniciais). Para cada uma: o que aconteceu, onde travou e três mensagens prontas para a Camila mandar. Depois, seis caixinhas tiradas das perguntas reais, os vídeos que mais trazem conversa e três gravações novas pensadas para gerar mensagem.</p>
+</header>
+
+<!-- ============ CONVERSAS ============ -->
+<section id="conversas">
+  <div class="sechead">
+    <span class="eyebrow">Parte 1</span>
+    <h2>As 7 conversas, uma por uma</h2>
+    <p class="lead">Ordem: da mais quente para a mais fria. Os horários nas mensagens são exemplos; trocar pelos horários reais da agenda.</p>
+  </div>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente E.</h3><span class="pill hot">Quente · deixou o WhatsApp</span></div>
+    <p class="meta">Desde 24/09 · fala por áudio · escreve "vocês" (vem acompanhada)</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> a melhor conversa das sete. Recebeu localização, fotos de casos parecidos, valor da avaliação (R$ 200 revertidos), valor do procedimento e deixou o WhatsApp, encaminhado "às meninas".</p>
+      <p><b>Onde pode travar:</b> já são 20 dias. Antes de qualquer mensagem, a Camila precisa conferir se alguém ligou e se a avaliação foi marcada. Ela manda áudio; responder em texto longo esfria a conversa.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Se ninguém marcou ainda (mandar em áudio, de preferência)</div>
+        <div class="bubble">Oi [nome], tudo bem? Aqui é a Camila, da equipe do Dr. Giácomo. Passando pra marcar a avaliação de vocês! Tenho quinta às 14h ou sexta às 10h. Qual fica melhor?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Usar o "vocês" a favor</div>
+        <div class="bubble">[nome], como vocês vêm juntas, consigo deixar as duas avaliações no mesmo horário, uma em seguida da outra. Assim vocês resolvem tudo numa ida só. Quer que eu reserve?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Prazo verdadeiro da condição de outubro</div>
+        <div class="bubble">[nome], lembrando que a condição de outubro (o valor da avaliação volta como desconto no procedimento) vale até 31/10. Quer que eu segure um horário pra vocês ainda esta semana?</div><button class="copy" type="button">copiar</button></div>
+    </div>
+    <p class="when">Se já está agendada: mandar a confirmação na véspera com endereço e o que levar.</p>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente M. A.</h3><span class="pill warm">Morna · viu o preço e sumiu</span></div>
+    <p class="meta">Chegou pelo vídeo da Helena · "Quanto custa?" · 1º follow-up mandado hoje às 10:23</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> boa condução. Antes do preço veio uma pergunta sobre a queixa, ela respondeu "Posso ter os dois?" e se identificou. Recebeu R$ 6.990 à vista ou R$ 7.990 em <b>12x</b>, visualizou e não respondeu.</p>
+      <p><b>Onde travou:</b> o preço chegou sozinho, sem um próximo passo junto. O follow-up de hoje está certo; os próximos precisam dar a ela algo novo, não só perguntar de novo.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Mandar o caso junto (daqui a 2 dias) · anexar antes o vídeo ou as fotos do caso</div>
+        <div class="bubble">Dona [nome], lembrei de você! Esse caso aqui em cima é exatamente o que você me perguntou: ela tinha as duas queixas, gordura e contorno. É esse tipo de resultado que a gente já conseguiu e que eu gostaria de planejar pra você também. Vamos marcar a sua avaliação?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Avaliação como passo pequeno</div>
+        <div class="bubble">A avaliação não te compromete com nada: o Dr. olha o seu caso, explica o que dá pra fazer e você decide com calma, em casa. Tenho terça às 15h ou quarta às 9h. Qual fica melhor?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Abrir a objeção do valor</div>
+        <div class="bubble">Dona [nome], muita paciente me fala que o valor pesa na hora de decidir, e tudo bem. Se for isso, me conta? Dá pra parcelar no cartão e o valor da avaliação volta como desconto. Posso te mostrar como fica por mês.</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente A.</h3><span class="pill warm">Morna · perguntou o preço e não recebeu</span></div>
+    <p class="meta">Respondeu ao anúncio da Helena · "Como agendar?" + "Quanto custa?"</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> perguntou duas coisas diretas. A resposta pediu o contato dela e falou em "planejamento financeiro", mas não deu valor nenhum.</p>
+      <p><b>Onde travou:</b> quem pergunta preço e recebe "deixa seu contato" sente que está sendo enrolada. Outra paciente recebeu o valor na mesma situação; esta não. Falta uma regra só (ver Parte 2).</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Responder o que ela perguntou</div>
+        <div class="bubble">Dona [nome], respondendo direitinho o que você perguntou: o Método Papada 3D fica em média R$ 6.990 à vista ou R$ 7.990 parcelado no cartão. O valor exato sai na avaliação, porque depende do seu caso. Quer que eu reserve um horário?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Puxar pelo vídeo que ela viu</div>
+        <div class="bubble">Vi que você chegou pelo vídeo da Helena! O que mais te chamou atenção no caso dela? Me conta o que te incomoda hoje que eu te digo se o seu caso parece com o dela.</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Horário direto + avaliação que volta</div>
+        <div class="bubble">A avaliação é R$ 200 e esse valor volta inteiro como desconto se você fizer o procedimento em outubro. Tenho quinta às 11h ou sábado às 9h. Qual fica melhor pra você?</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente F.</h3><span class="pill warm">Morna · a queixa é pele</span></div>
+    <p class="meta">Respondeu ao anúncio · "Ele só faz lipo de papada?" + "Preciso fazer cirurgia de papada, tenho muita pele"</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> a queixa dela é flacidez, não gordura. Recebeu "podemos agendar uma avaliação" e um pedido de WhatsApp, sem nenhuma palavra sobre a pele.</p>
+      <p><b>Onde travou:</b> o método não retira pele. Se ela vier achando que vai, a avaliação vira frustração. Falar disso com sinceridade agora é o que gera confiança, e o ultraformer no final é um argumento verdadeiro para flacidez leve e moderada.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Acolher a queixa da pele</div>
+        <div class="bubble">[nome], você falou de pele e isso é importante. O Método Papada 3D trabalha a gordura, o contorno e, no final, uma tecnologia que estimula colágeno e ajuda na flacidez. Se a pele for muita, o Dr. te fala com sinceridade na avaliação se esse é o caminho certo pra você.</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Foto de perfil para saber se vale vir</div>
+        <div class="bubble">Se quiser, me manda uma foto de lado, com o rosto relaxado. Não é diagnóstico, é só pro Dr. ver se vale a pena você vir pra avaliação. Assim você não perde viagem.</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Mandar o caso junto · anexar antes o vídeo ou as fotos de um caso com flacidez</div>
+        <div class="bubble">[nome], esse caso aqui em cima é de uma paciente com a pele bem parecida com a que você descreveu. Olha como ficou! É esse tipo de resultado que eu gostaria de buscar pra você também. Quer marcar sua avaliação?</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente M. V.</h3><span class="pill warm">Morna · pediu para agendar</span></div>
+    <p class="meta">Domingo 09:47 · "Como agendar uma consulta?"</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> ela fez o pedido mais quente que existe e foi mandada para o link da bio ou para deixar o WhatsApp. Não voltou.</p>
+      <p><b>Onde travou:</b> cada troca de canal perde gente. Quem pede para agendar no Direct tem que conseguir agendar no Direct.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Agendar por ali mesmo</div>
+        <div class="bubble">[nome], consigo agendar por aqui mesmo, sem você precisar ir pra outro lugar! Tenho quinta às 14h ou sexta às 10h. Qual fica melhor?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Entender a queixa antes</div>
+        <div class="bubble">Antes de marcar, me conta rapidinho: o que te incomoda hoje? A gordura embaixo do queixo, o contorno do rosto ou os dois? Assim o Dr. já chega na avaliação sabendo do seu caso.</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Oferecer ligação curta</div>
+        <div class="bubble">Se preferir, eu te ligo dois minutinhos e já deixo tudo marcado. Me passa o melhor número e o horário que fica bom pra você?</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente R.</h3><span class="pill cold">Fria · parou de responder em 19/09</span></div>
+    <p class="meta">Homem · "Excesso de gordura abaixo do queixo"</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> a explicação foi boa (gordura localizada não sai com emagrecimento). Terminou com "Você tem alguma dúvida em relação ao tratamento V?" (erro de digitação) e um "?" solto. Recebeu um "Bom dia" em 21/09 e parou.</p>
+      <p><b>Onde travou:</b> "alguma dúvida?" é fácil de ignorar. Homem costuma ter outras dúvidas: afastamento do trabalho, se fica marca, se alguém vai perceber.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Dúvida que homem costuma ter</div>
+        <div class="bubble">[nome], muitos homens me perguntam quantos dias precisam ficar longe do trabalho e se fica marca. Quer que eu te explique como é a recuperação?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · O valor que ele não perguntou</div>
+        <div class="bubble">[nome], muita gente fica com a dúvida do valor e não pergunta. O procedimento fica em média R$ 6.990 à vista ou R$ 7.990 parcelado. Se fizer sentido, te mando os horários de avaliação.</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Encerramento leve</div>
+        <div class="bubble">[nome], não quero ficar te enchendo de mensagem! Se um dia quiser resolver essa gordura embaixo do queixo, é só me chamar aqui. Fico à disposição.</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>Paciente E. M.</h3><span class="pill cold">Fria · a clínica chamou primeiro</span></div>
+    <p class="meta">Terça 20:48 · ela não escreveu; interagiu com um vídeo e recebeu abordagem</p>
+    <div class="read">
+      <p><b>O que aconteceu:</b> "Vi que se identificou com nosso vídeo sobre papada" + a pergunta da queixa. Sem resposta, o que é normal: ela não pediu contato.</p>
+      <p><b>Onde travou:</b> para quem não pediu nada, uma pergunta aberta dá trabalho para responder. Facilitar ao máximo ou entregar conteúdo.</p>
+    </div>
+    <div class="opts">
+      <div class="opt"><div class="optlabel"><span>A</span> · Resposta de um toque</div>
+        <div class="bubble">[nome], me responde só com o número 😊
+1. Gordura embaixo do queixo
+2. Falta de contorno no rosto
+3. Os dois</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>B</span> · Mandar o caso junto · anexar antes o vídeo de um caso</div>
+        <div class="bubble">[nome], esse caso aqui em cima responde a dúvida mais comum de quem tem papada. É esse tipo de resultado que a gente já conseguiu e que eu gostaria de planejar pra você também. Me conta: o que te incomoda hoje?</div><button class="copy" type="button">copiar</button></div>
+      <div class="opt"><div class="optlabel"><span>C</span> · Encerramento leve</div>
+        <div class="bubble">[nome], não quero te incomodar! Se um dia quiser saber mais sobre a papada, é só me chamar aqui que eu te explico tudo.</div><button class="copy" type="button">copiar</button></div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ REGRAS CAMILA ============ -->
+<section id="camila">
+  <div class="sechead">
+    <span class="eyebrow">Parte 2</span>
+    <h2>O que muda no atendimento</h2>
+    <p class="lead">Padrões que aparecem em mais de uma conversa. Cabe numa folha para a Camila deixar do lado do celular.</p>
+  </div>
+
+  <div class="alert">
+    <b>Parcelamento com dois números diferentes</b>
+    <p>Para uma paciente foi "R$ 7.990 em até 12x"; para outra, "R$ 7.990 em até 10x". Se as duas se conhecerem ou voltarem a perguntar, o número diferente gera desconfiança. Confirmar com o Dr. qual é o certo e usar sempre o mesmo.</p>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><b>Uma regra só para o preço</b><p>Perguntou o valor: faz uma pergunta sobre a queixa, explica o Método 3D em duas linhas e dá o valor médio. Foi o que funcionou na conversa da paciente M. A. Nunca responder preço com "deixa seu contato".</p></div>
+    <div class="rule"><b>Agendar onde a pessoa está</b><p>Pediu para agendar no Direct, agenda no Direct. Mandar para o link da bio ou para o WhatsApp perde gente a cada troca.</p></div>
+    <div class="rule"><b>Caso vai junto, sem pedir licença</b><p>Nada de "posso te mandar um caso?". Manda primeiro o vídeo ou as fotos de um caso parecido e, logo abaixo, a mensagem: "esse caso aqui em cima é exatamente o que você me perguntou". A pergunta gasta uma resposta da paciente; o caso já mostra o resultado.</p></div>
+    <div class="rule"><b>Terminar com duas opções</b><p>"Quinta às 14h ou sexta às 10h?" em vez de "alguma dúvida?". Pergunta fechada é respondida; pergunta aberta é ignorada.</p></div>
+    <div class="rule"><b>Áudio responde áudio</b><p>Tem paciente que só manda áudio. Responder em áudio curto, com voz de gente, aproxima mais do que três blocos de texto.</p></div>
+    <div class="rule"><b>Ritmo do follow-up</b><p>Sem resposta: 1 dia depois, 3 dias, 7 dias e uma última mensagem de encerramento leve aos 15. Cada uma traz algo novo (caso, horário, resposta a uma dúvida), nunca só "e aí?".</p></div>
+    <div class="rule"><b>Etiqueta em toda conversa</b><p>O Direct tem etiquetas. Usar cinco: Novo · Queixa entendida · Preço enviado · Agendado · Sumiu. Na segunda-feira fica fácil ver quem precisa de follow-up.</p></div>
+    <div class="rule"><b>Quem assina</b><p>As mensagens dizem "Dr. Giácomo aqui". Se é a Camila escrevendo, a paciente pode perceber na avaliação. Mais seguro: "Camila, da equipe do Dr. Giácomo". Decisão do Dr.</p></div>
+    <div class="rule"><b>Revisar antes de enviar</b><p>Erros que apareceram: "estipulação" (estimulação) de colágeno, "quando" (quanto) no excesso de gordura, "tratamento V", "Deix". Em clínica de estética, erro de português pesa na confiança.</p></div>
+    <div class="rule"><b>Preço e promoção só no privado</b><p>Valor, cashback e condição de outubro podem ir na conversa. Em post, story, caixinha ou anúncio, nunca. O CFO não permite anunciar preço nem promoção.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROTEIROS ============ -->
+<section id="roteiros">
+  <div class="sechead">
+    <span class="eyebrow">Parte 3</span>
+    <h2>Seis caixinhas tiradas das conversas</h2>
+    <p class="lead">Cada pergunta saiu de uma mensagem real. A ideia é abrir a caixinha no story, pedir para alguém da equipe mandar a pergunta exatamente como está abaixo (ou esperar uma parecida chegar) e gravar a resposta com o sticker na tela. Formato que já provou na conta: pergunta abre o vídeo, um caso com desfecho segura até o fim.</p>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><b>Como gravar</b><p>Vertical, câmera na altura dos olhos, luz de frente (janela). Começar direto pela resposta, sem "oi gente". 30 a 50 segundos.</p></div>
+    <div class="rule"><b>O que não pode entrar</b><p>Preço, promoção, "sem risco nenhum", "resultado garantido", as palavras "antes" e "depois" escritas na tela. Imagem de paciente só com autorização e com a legenda CFO.</p></div>
+  </div>
+
+
+  <article class="card">
+    <div class="who"><h3>1. O preço</h3><span class="src">de: pacientes M. A. e A.</span></div>
+    <div class="sticker"><small>Caixinha</small>Quanto custa a lipo de papada?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Essa é a pergunta que eu mais recebo no Direct."</td><td>Sticker da caixinha em destaque</td></tr>
+      <tr><td>3–12 s</td><td>"Aqui no Instagram eu não posso falar valor. Mas posso te contar o que faz um caso ser diferente do outro."</td><td>Dr. de frente, plano fechado</td></tr>
+      <tr><td>12–32 s</td><td>"São três coisas: quanta gordura tem embaixo do queixo, como está o contorno da mandíbula e como está a sua pele. No Método Papada 3D eu trabalho as três: a lipo, a lipoescultura do contorno e uma tecnologia no final que estimula colágeno."</td><td>Texto: GORDURA · CONTORNO · PELE (entra um por vez)</td></tr>
+      <tr><td>32–45 s</td><td>"Por isso o valor certo sai na avaliação, olhando o seu rosto. Me manda AVALIAÇÃO no Direct que a minha equipe te passa tudo, inclusive o valor."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>2. Gordura e contorno juntos</h3><span class="src">de: pacientes M. A. ("Posso ter os dois?") e R.</span></div>
+    <div class="sticker"><small>Caixinha</small>Dá pra ter gordura e falta de contorno ao mesmo tempo?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Dá. E é o caso mais comum que chega no meu consultório."</td><td>Sticker</td></tr>
+      <tr><td>3–15 s</td><td>"Faz um teste: vira de lado no espelho. Se você vê volume embaixo do queixo, é gordura. Se a linha do queixo até a orelha não aparece, é contorno."</td><td>Dr. vira de perfil e passa o dedo na linha da mandíbula</td></tr>
+      <tr><td>15–35 s</td><td>"Muita gente tem os dois, e por isso eu não faço só a lipo. A lipo tira a gordura, a lipoescultura desenha o contorno. É o que eu chamo de Método Papada 3D."</td><td>Texto: MÉTODO PAPADA 3D</td></tr>
+      <tr><td>35–45 s</td><td>"Quer saber qual é o seu caso? Me manda AVALIAÇÃO no Direct."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>3. Muita pele</h3><span class="src">de: paciente F.</span></div>
+    <div class="sticker"><small>Caixinha</small>Tenho muita pele no pescoço. Posso fazer?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Vou ser sincero com você: depende de quanto."</td><td>Sticker</td></tr>
+      <tr><td>3–18 s</td><td>"No meu método eu não retiro pele. Eu tiro a gordura e desenho o contorno. Quando a flacidez é leve ou moderada, no final eu uso uma tecnologia que estimula colágeno e ajuda a pele a firmar."</td><td>Dr. de frente</td></tr>
+      <tr><td>18–35 s</td><td>"Quando a pele sobra muito, eu te falo na avaliação que esse não é o seu caminho. Prefiro te dizer isso do que te prometer algo que não vai acontecer."</td><td>Texto: Sinceridade antes de tudo</td></tr>
+      <tr><td>35–45 s</td><td>"Na dúvida, vem conversar comigo. Me manda AVALIAÇÃO no Direct."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+    <p class="when">Essa é a resposta que mais gera confiança das seis, porque diz quando ele não é a solução.</p>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>4. Só lipo de papada?</h3><span class="src">de: paciente F. ("Ele só faz lipo de papada?")</span></div>
+    <div class="sticker"><small>Caixinha</small>Você só faz lipo de papada?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Não. E é justamente por isso que eu chamo de 3D."</td><td>Sticker</td></tr>
+      <tr><td>3–25 s</td><td>"São três etapas no mesmo procedimento. Primeiro, a lipo, que tira a gordura. Depois, a lipoescultura, que desenha o contorno do rosto. E no final, uma tecnologia que estimula colágeno e trabalha as camadas da pele."</td><td>Texto: 1 LIPO · 2 LIPOESCULTURA · 3 TECNOLOGIA</td></tr>
+      <tr><td>25–38 s</td><td>"Tudo com anestesia local. Você fica acordada, conversando comigo."</td><td>Imagem da sala do consultório</td></tr>
+      <tr><td>38–48 s</td><td>"Quer entender se o 3D serve pro seu caso? Me manda AVALIAÇÃO no Direct."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>5. Emagreci e não saiu</h3><span class="src">de: paciente R. ("mesmo com a perda de peso ela não desaparece")</span></div>
+    <div class="sticker"><small>Caixinha</small>Emagreci e a gordura embaixo do queixo não saiu. Por quê?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Não é falta de esforço. É o tipo de gordura."</td><td>Sticker</td></tr>
+      <tr><td>3–18 s</td><td>"A gordura embaixo do queixo é localizada. Ela tem a ver com genética e muitas vezes é a última a sair, ou não sai, mesmo com dieta e academia."</td><td>Dr. de frente</td></tr>
+      <tr><td>18–35 s</td><td>"Eu atendo muita paciente magra que fala: 'Dr., eu emagreci tudo e a papada ficou'. Pra essa gordura, a lipo é o caminho que resolve onde o emagrecimento não chega."</td><td>Texto: "Emagreci tudo e a papada ficou"</td></tr>
+      <tr><td>35–45 s</td><td>"Se essa é você, me manda AVALIAÇÃO no Direct."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+    <p class="when">É a versão caixinha do tema que mais traz conversa na conta (ver Parte 4).</p>
+  </article>
+
+
+  <article class="card">
+    <div class="who"><h3>6. Como é a avaliação</h3><span class="src">de: 4 das 7 pacientes perguntaram como agendar</span></div>
+    <div class="sticker"><small>Caixinha</small>Como funciona a avaliação? Como eu agendo?</div>
+    <div class="tbl"><table class="script"><thead><tr><th>Tempo</th><th>O que falar</th><th>Na tela</th></tr></thead><tbody>
+      <tr><td>0–3 s</td><td>"Agendar é mais simples do que você imagina."</td><td>Sticker</td></tr>
+      <tr><td>3–25 s</td><td>"Na avaliação a gente conversa sobre o que te incomoda, eu olho o seu rosto de frente e de perfil, te explico o que dá pra fazer e o que não dá. Você sai sabendo o seu plano e o valor, e decide com calma."</td><td>Imagens da recepção e da sala</td></tr>
+      <tr><td>25–35 s</td><td>"Meu consultório fica no Pioneiros, aqui em Balneário Camboriú."</td><td>Texto: Pioneiros · Balneário Camboriú</td></tr>
+      <tr><td>35–45 s</td><td>"Pra marcar, me manda AVALIAÇÃO aqui no Direct. A minha equipe agenda por aqui mesmo."</td><td>Texto: Mande AVALIAÇÃO no Direct</td></tr>
+    </tbody></table></div>
+    <p class="when">O "agenda por aqui mesmo" só pode ir ao ar quando a regra "Agendar onde a pessoa está" (Parte 2) estiver valendo.</p>
+  </article>
+</section>
+
+<!-- ============ VIDEOS ============ -->
+<section id="videos">
+  <div class="sechead">
+    <span class="eyebrow">Parte 4</span>
+    <h2>Os melhores vídeos até agora</h2>
+    <p class="lead">Anúncios de 01/09 a 13/10/2026. São duas tarefas diferentes, e o vídeo que ganha uma não ganha a outra.</p>
+  </div>
+
+  <h3>Os que trazem conversa</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Vídeo</th><th>Investido</th><th>Conversas</th><th>Custo por conversa</th></tr></thead>
+    <tbody>
+      <tr><td>Pós-operatório</td><td class="n">R$ 69,40</td><td class="n">4</td><td class="n"><b>R$ 17,35</b></td></tr>
+      <tr><td>"Emagreceu e a papada ficou"</td><td class="n">R$ 194,66</td><td class="n">8</td><td class="n">R$ 24,33</td></tr>
+      <tr><td>"Sou magra, por que tenho papada?"</td><td class="n">R$ 317,67</td><td class="n">9</td><td class="n">R$ 35,30</td></tr>
+    </tbody>
+  </table></div>
+  <p>Os três falam de <b>uma pessoa com um problema</b> ("emagreci e a papada ficou", "sou magra, por que papada", o pós de uma paciente) e fecham pedindo mensagem. O pós-operatório parece ser o vídeo da Helena ("O que mudou pós a lipo de papada?"), que aparece em 3 das 7 conversas dos prints.</p>
+
+  <h3>Os que trazem visita ao perfil</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Vídeo</th><th>Visitas</th><th>Custo por visita</th><th>Param de rolar</th><th>Ficam até o fim</th></tr></thead>
+    <tbody>
+      <tr><td>Karina, "a melhor decisão"</td><td class="n">548</td><td class="n"><b>R$ 0,65</b></td><td class="n">5,8%</td><td class="n">18%</td></tr>
+      <tr><td>Caixinha: cicatriz</td><td class="n">267</td><td class="n"><b>R$ 0,65</b></td><td class="n"><b>8,7%</b></td><td class="n">20%</td></tr>
+      <tr><td>Caixinha: medo de furar veia</td><td class="n">251</td><td class="n">R$ 0,69</td><td class="n">4,3%</td><td class="n">24%</td></tr>
+      <tr><td>Caixinha: caneta de emagrecer</td><td class="n">252</td><td class="n">R$ 0,70</td><td class="n">7,9%</td><td class="n">15%</td></tr>
+      <tr><td>Karina, 7 dias</td><td class="n">345</td><td class="n">R$ 0,79</td><td class="n">2,8%</td><td class="n">26%</td></tr>
+      <tr><td>Lista de espera em Balneário</td><td class="n">263</td><td class="n">R$ 0,82</td><td class="n">5,5%</td><td class="n"><b>44%</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">"Param de rolar" = chegaram a 25% do vídeo ÷ quem deu play. "Ficam até o fim" = assistiram 100% ÷ quem chegou a 25%.</p>
+  <p>A caixinha é a melhor para fazer parar de rolar e traz visita barata, mas quase nunca traz mensagem. A conversa vem do vídeo de identificação com pedido claro no final. Por isso as gravações da Parte 5 juntam as duas coisas: abrem como caixinha e fecham pedindo mensagem.</p>
+</section>
+
+<!-- ============ GRAVACOES ============ -->
+<section id="gravacoes">
+  <div class="sechead">
+    <span class="eyebrow">Parte 5</span>
+    <h2>Três gravações para trazer mensagem</h2>
+    <p class="lead">Feitas para rodar na campanha de mensagem, não na de perfil. Cada uma dá à pessoa um motivo concreto e fácil para escrever.</p>
+  </div>
+
+  <article class="card">
+    <h3>1. "O que mudou?" com mais pacientes</h3>
+    <p class="meta">Depoimento · 45 a 60 s · paciente fala, o Dr. fecha</p>
+    <p><b>Por quê:</b> é o formato do vídeo da Helena, o que mais trouxe conversa pelo menor custo. Hoje ele é um só; com três pacientes diferentes (idade, queixa, tempo de pós) dá para revezar sem cansar o público.</p>
+    <ul>
+      <li>Abertura com a pergunta escrita na tela: "O que mudou depois da lipo de papada?"</li>
+      <li>A paciente responde em uma frase forte, de perfil para a câmera ("Hoje eu tiro foto de lado")</li>
+      <li>Ela conta como era antes de decidir e o que sente agora, com as palavras dela</li>
+      <li>Fechamento do Dr., 5 segundos: "Se você se viu na história dela, me manda AVALIAÇÃO no Direct."</li>
+    </ul>
+    <p class="dont">Com autorização de imagem e legenda CFO. Na tela, nada de "antes" e "depois": usar Diagnóstico inicial e Resultado final, ou sem rótulo.</p>
+  </article>
+
+  <article class="card">
+    <h3>2. "Me manda o número"</h3>
+    <p class="meta">Autoavaliação · 30 a 40 s · Dr. de frente, depois de perfil</p>
+    <p><b>Por quê:</b> a pergunta que a equipe já faz no Direct ("gordura, contorno ou os dois?") é a que mais destrava a conversa. Levar essa pergunta para o vídeo faz a pessoa chegar no Direct já respondendo, com uma mensagem de um caractere.</p>
+    <ul>
+      <li>0–3 s: "Vira de lado no espelho agora."</li>
+      <li>Dr. de perfil mostra: 1) volume embaixo do queixo, 2) linha da mandíbula apagada, 3) os dois juntos</li>
+      <li>"Me manda no Direct só o número: 1, 2 ou 3. Eu te respondo o que dá pra fazer no seu caso."</li>
+      <li>Na tela, o tempo todo: 1 · 2 · 3 em cartelas grandes</li>
+    </ul>
+    <p class="dont">A Camila precisa ter a resposta pronta para cada número (pode usar as mensagens da Parte 1).</p>
+  </article>
+
+  <article class="card">
+    <h3>3. "Respondi as mensagens de vocês"</h3>
+    <p class="meta">Direct na tela · 45 a 60 s · três perguntas, respostas curtas</p>
+    <p><b>Por quê:</b> mostra que no Direct quem responde é gente, e responde de verdade. Quem tem vergonha de perguntar vê que outras perguntaram a mesma coisa.</p>
+    <ul>
+      <li>Abertura: "Essas são mensagens que chegaram essa semana."</li>
+      <li>Print da pergunta na tela, <b>sem nome nem foto</b>: "Posso ter os dois?" · "Tenho muita pele" · "Ele só faz papada?"</li>
+      <li>10 a 15 segundos de resposta para cada uma (resumo das caixinhas 2, 3 e 4)</li>
+      <li>Fechamento: "Qual é a sua pergunta? Me manda no Direct que eu respondo."</li>
+    </ul>
+    <p class="dont">Apagar nome, foto e qualquer detalhe que identifique a paciente antes de usar o print.</p>
+  </article>
+</section>
+
+<footer>GGD · Gio Growth Digital · Fontes: 7 conversas do Direct de 13/10/2026 e anúncios de 01/09 a 13/10/2026. <a href="/giacomo/central/">Voltar para a central</a></footer>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var b=btn.previousElementSibling, t=b.innerText;
+    function done(){btn.textContent='copiado';setTimeout(function(){btn.textContent='copiar'},1500)}
+    try{navigator.clipboard.writeText(t).then(done,function(){sel(b)})}catch(e){sel(b)}
+  });
+});
+function sel(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+
+</body>
+</html>
