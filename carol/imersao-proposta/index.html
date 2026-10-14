@@ -41,6 +41,9 @@ p{margin:0 0 12px}
 .garantia-mini{font-size:14.5px;color:var(--cinza);margin-top:12px}
 .hero figure{margin:0;position:relative}
 .hero figure img{border-radius:22px;aspect-ratio:1/1;object-fit:cover;width:100%}
+@media(max-width:879px){.hero figure img{aspect-ratio:4/3;object-position:center 25%}}
+.conta{display:inline-flex;gap:6px;margin-left:8px;font-variant-numeric:tabular-nums}
+.conta b{background:rgba(255,255,255,.12);border-radius:5px;padding:2px 6px;color:#fff}
 .selo{position:absolute;left:-10px;bottom:22px;background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:12px 16px;box-shadow:0 10px 30px rgba(22,63,55,.14);max-width:250px;font-size:14px;line-height:1.35}
 .selo b{display:block;font:700 26px/1.1 var(--display);color:var(--verde)}
 @media(max-width:600px){.selo{left:10px}}
@@ -75,7 +78,7 @@ p{margin:0 0 12px}
 .metodo .lead{color:#cfc4b2}
 .a3{display:grid;gap:16px;margin-top:28px}
 @media(min-width:820px){.a3{grid-template-columns:repeat(3,1fr)}}
-.a3 div{background:rgba(255,255,255,.06);border:1px solid rgba(227,185,143,.35);border-radius:16px;padding:24px}
+.a3>div{background:rgba(255,255,255,.06);border:1px solid rgba(227,185,143,.35);border-radius:16px;padding:24px}
 .a3 .letra{font:700 44px/1 var(--display);color:#e3b98f;margin-bottom:10px}
 .a3 h3{color:#fff}
 .a3 p{color:#d9cfbf;font-size:15.5px;margin:0}
@@ -153,7 +156,7 @@ footer{background:var(--tinta);color:#a9a196;font-size:13px;text-align:center;pa
 </style></head><body>
 
 <div class="proposta"><b>Proposta da Gio Growth Digital</b> · versão para aprovação, ainda não publicada no site da Dra. · os blocos tracejados são para a equipe preencher</div>
-<div class="faixa">EXCLUSIVO PARA MÉDICOS · <span>17 DE OUTUBRO</span> · ONLINE E AO VIVO · 9H ÀS 18H</div>
+<div class="faixa">EXCLUSIVO PARA MÉDICOS · <span>17 DE OUTUBRO</span> · ONLINE E AO VIVO · 9H ÀS 18H<span id="conta" class="conta" aria-label="Tempo até o evento"></span></div>
 
 <header class="hero"><div class="w">
   <div>
@@ -351,6 +354,8 @@ footer{background:var(--tinta);color:#a9a196;font-size:13px;text-align:center;pa
 </div></div>
 
 <script>
+// Contagem real até o início do evento (17/10, 9h de Brasília)
+(function(){var el=document.getElementById('conta'),fim=Date.parse('2026-10-17T09:00:00-03:00');function t(){var d=fim-Date.now();if(d<=0){el.textContent='';return}var x=Math.floor(d/1000),D=Math.floor(x/86400),H=Math.floor(x%86400/3600),M=Math.floor(x%3600/60);el.innerHTML=' · começa em <b>'+D+'d</b><b>'+H+'h</b><b>'+M+'min</b>'}t();setInterval(t,30000)})();
 // Repassa UTMs e fbclid da página para o checkout, para a venda chegar com a origem do anúncio
 (function(){try{var q=new URLSearchParams(location.search),k=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','src','sck'],p=new URLSearchParams();
 k.forEach(function(x){var v=q.get(x);if(v)p.set(x,v)});var s=p.toString();if(!s)return;
