@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Roteiro do Direct</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: coluna única de leitura, navegação fixa no topo, conversas como fichas com as mensagens prontas em balão de Direct */
+:root{
+  --bg:#f6f6f9; --surface:#ffffff; --ink:#1d1b26; --muted:#615d72; --line:#e3e1ea;
+  --accent:#6a3fd8; --accent-soft:#efe9fd; --bubble:#6a3fd8; --bubble-ink:#ffffff;
+  --ok:#1f7a4d; --ok-soft:#e3f3ea; --warn:#9a5b00; --warn-soft:#fbf0dc; --bad:#b3261e; --bad-soft:#fbe7e5;
+  --display:"Newsreader",Georgia,serif; --body:"Figtree",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 80px;display:flex;flex-direction:column;gap:56px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{max-width:860px;margin:0 auto;padding:10px 16px;display:flex;gap:6px;overflow-x:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,5vw,42px)}
+h2{font-size:clamp(24px,3.6vw,30px)}
+h3{font-size:21px}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.lead{color:var(--muted);font-size:17px}
+header{display:flex;flex-direction:column;gap:12px}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:64px}
+.sechead{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.who{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.who h3{margin-right:auto}
+.pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.hot{background:var(--ok-soft);color:var(--ok)} .warm{background:var(--warn-soft);color:var(--warn)} .cold{background:var(--bad-soft);color:var(--bad)}
+.meta{font-size:14px;color:var(--muted)}
+.read{border-left:3px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px}
+.read b{color:var(--ink)}
+.opts{display:grid;gap:14px}
+.opt{display:grid;grid-template-columns:1fr;gap:8px}
+.optlabel{font-size:13px;font-weight:700;color:var(--muted)}
+.optlabel span{color:var(--accent)}
+.bubble{justify-self:end;max-width:min(560px,100%);background:var(--bubble);color:var(--bubble-ink);border-radius:20px 20px 6px 20px;padding:12px 16px;white-space:pre-line;position:relative}
+.copy{justify-self:end;font:600 12px var(--body);color:var(--accent);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.when{font-size:13px;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rule b{font-size:15px}
+.rule p{font-size:14.5px;color:var(--muted)}
+.alert{background:var(--warn-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.alert b{color:var(--warn)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sticker{align-self:flex-start;background:linear-gradient(var(--surface),var(--surface)) padding-box;border:2px solid var(--accent);border-radius:14px;padding:12px 16px;font-weight:600;max-width:100%}
+.sticker small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:2px}
+.script td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+.script td:nth-child(2){font-weight:500}
+.script td:nth-child(3){color:var(--muted);font-size:13.5px}
+.src{font-size:13px;color:var(--muted)}
+.dont{font-size:14px;color:var(--bad)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+li{max-width:66ch}
+footer a{color:var(--accent)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+.step{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:34px;height:34px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.day{flex:none;min-width:58px;text-align:center;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:700;padding:6px 8px;font-variant-numeric:tabular-nums}
+.stepbody{display:flex;flex-direction:column;gap:12px;min-width:0;flex:1}
+.ok{background:var(--ok-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.ok b{color:var(--ok)}
+.swap td:first-child{color:var(--bad)} .swap td:last-child{color:var(--ok);font-weight:500}
+</style>
+</head>
+<body>
+<nav><div class="in">
+  <a href="#voz">A voz do Dr.</a>
+  <a href="#caminho">O caminho da conversa</a>
+  <a href="#duvidas">Dúvidas e áudios</a>
+  <a href="#seq45">Os 45 dias</a>
+  <a href="#organizar">Organização</a>
+</div></nav>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Dr. Giácomo Trojan · Lipo de papada · 15/10/2026</span>
+  <h1>Roteiro do Direct, na voz do Dr.</h1>
+  <p class="lead">O Instagram é do Dr. Giácomo, então quem responde fala como ele. Este roteiro leva a conversa do primeiro “oi” até a avaliação e mostra o que mandar nos 45 dias depois do preço, que é o tempo médio que uma paciente de papada leva pra decidir. Todas as mensagens têm botão de copiar.</p>
+</header>
+
+<section id="voz">
+  <div class="sechead"><span class="eyebrow">Parte 1</span><h2>A voz do Dr.</h2>
+  <p class="lead">Seis regras pra mensagem soar como ele escrevendo.</p></div>
+  <div class="rules">
+<div class="rule"><b>Sempre na primeira pessoa</b><p>Quem escreve é o Dr. Giácomo: “eu”, “no meu consultório”, “eu olho o seu rosto”. Nada de “a equipe”, “o Dr. vai avaliar” ou “vou ver com o Dr.”.</p></div>
+<div class="rule"><b>Frase curta, sem termo técnico</b><p>Uma ideia por mensagem, como se ele estivesse digitando no intervalo entre pacientes. Técnica só se a paciente perguntar.</p></div>
+<div class="rule"><b>Áudio só com a voz dele</b><p>Nunca mandar áudio de outra pessoa no lugar dele. Se a paciente manda áudio, responder em texto curto ou usar um dos 5 áudios que o Dr. grava uma vez só (Parte 3).</p></div>
+<div class="rule"><b>Pergunta clínica fica pra avaliação</b><p>Remédio, doença, gravidez, amamentação, cirurgia anterior: resposta curta e “isso eu preciso ver pessoalmente na avaliação”. Não diagnosticar por mensagem.</p></div>
+<div class="rule"><b>Anotar o que “ele” já disse</b><p>Na avaliação, o Dr. precisa saber o que foi falado no Direct. Toda conversa leva uma nota: queixa, caso enviado, preço enviado e a data.</p></div>
+<div class="rule"><b>Terminar com duas opções</b><p>“Quinta às 14h ou sexta às 10h?” em vez de “alguma dúvida?”. Pergunta fechada é respondida; pergunta aberta é ignorada.</p></div>
+</div>
+  <div class="tbl"><table class="swap"><thead><tr><th>Em vez de</th><th>Escrever</th></tr></thead><tbody>
+<tr><td>Aqui é a Camila, da equipe do Dr. Giácomo</td><td>Oi, [nome]! Aqui é o Dr. Giácomo</td></tr>
+<tr><td>O Dr. vai avaliar o seu caso</td><td>Eu olho o seu caso pessoalmente</td></tr>
+<tr><td>Nossa equipe entra em contato</td><td>Eu mesmo já deixo marcado por aqui</td></tr>
+<tr><td>Vou verificar com o Dr. e te retorno</td><td>Deixa eu olhar a agenda e já te falo</td></tr>
+<tr><td>Você tem alguma dúvida?</td><td>Fica melhor quinta às 14h ou sexta às 10h?</td></tr>
+</tbody></table></div>
+  <div class="alert"><b>Isso substitui uma regra da página de 14/10</b><p>Lá a sugestão era assinar “Camila, da equipe do Dr. Giácomo”. A partir de agora, todas as mensagens são do Dr., em primeira pessoa.</p></div>
+</section>
+<section id="caminho">
+  <div class="sechead"><span class="eyebrow">Parte 2</span><h2>O caminho da conversa</h2>
+  <p class="lead">Cinco passos, sempre na mesma ordem. Os horários nas mensagens são exemplo; trocar pelos da agenda.</p></div>
+<article class="card"><div class="step"><div class="num">1</div><div class="stepbody"><h3>A primeira resposta</h3><p class="meta">Depende de onde ela veio. Em todos os casos, a primeira mensagem já puxa a queixa.</p><div class="opts"><div class="opt"><div class="optlabel">Veio de um anúncio ou vídeo de resultado</div><div class="bubble">Oi, [nome]! Aqui é o Dr. Giácomo. Que bom que você me chamou! Me conta: o que te incomoda hoje na papada?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Perguntou o preço logo de cara</div><div class="bubble">Oi, [nome]! Já te passo o valor, sim. Antes, me conta rapidinho: o que te incomoda mais, a gordura embaixo do queixo, o contorno do rosto ou os dois? Assim eu te falo do jeito certo pro seu caso.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Pediu pra agendar</div><div class="bubble">Oi, [nome]! Consigo marcar por aqui mesmo. Tenho quinta às 14h ou sexta às 10h. Qual fica melhor pra você?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Respondeu um story ou caixinha</div><div class="bubble">Oi, [nome]! Vi que você respondeu meu story. Essa dúvida é muito comum! Me conta o que te incomoda hoje que eu te explico se o seu caso parece com o que eu mostrei.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Chegou fria (interagiu, mas não escreveu)</div><div class="bubble">Oi, [nome]! Aqui é o Dr. Giácomo. Me responde só com o número 😊
+1. Gordura embaixo do queixo
+2. Falta de contorno no rosto
+3. Os dois</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="num">2</div><div class="stepbody"><h3>Entender a queixa</h3><p class="meta">Uma pergunta, no máximo duas. O objetivo é saber qual caso mandar no passo 3.</p><div class="opts"><div class="opt"><div class="optlabel">Se ela não respondeu direito</div><div class="bubble">Faz um teste rápido: vira de lado no espelho. Você vê mais volume embaixo do queixo ou sente que a linha do queixo até a orelha sumiu?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Se ela falou de pele ou flacidez</div><div class="bubble">Você falou de pele e isso é importante. Me manda uma foto de lado, com o rosto relaxado? Não é diagnóstico, é só pra eu ver se vale a pena você vir pra avaliação.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="num">3</div><div class="stepbody"><h3>Mandar o caso junto, sem pedir licença</h3><p class="meta">Primeiro manda o vídeo ou as fotos de um caso parecido com a queixa dela. Logo abaixo, a mensagem. Nunca perguntar “posso te mandar um caso?”.</p><div class="opts"><div class="opt"><div class="optlabel">Abaixo do caso (gordura, contorno ou os dois)</div><div class="bubble">Esse caso aqui em cima é exatamente o que você me descreveu. É esse tipo de resultado que eu já consegui e que eu gostaria de planejar pra você também.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Abaixo do caso de flacidez</div><div class="bubble">Essa paciente tinha a pele bem parecida com a que você descreveu. No meu método eu não retiro pele: tiro a gordura, desenho o contorno e no final uso uma tecnologia que estimula colágeno. Se a sua pele sobrar demais, eu te falo com sinceridade na avaliação.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="num">4</div><div class="stepbody"><h3>O preço, sempre com o próximo passo</h3><p class="meta">Valor, o que inclui e dois horários, tudo junto. O preço nunca vai sozinho, porque preço sozinho é onde a paciente some.</p><div class="opts"><div class="opt"><div class="optlabel">Mensagem única</div><div class="bubble">O Método Papada 3D fica em média R$ 6.990 à vista ou R$ 7.990 parcelado no cartão em até [Nx]. Inclui a lipo, a lipoescultura do contorno e a tecnologia de colágeno no final, tudo com anestesia local.
+
+O valor exato eu fecho na avaliação, olhando o seu rosto. [condição do mês, se houver]
+
+Tenho quinta às 14h ou sexta às 10h. Qual fica melhor?</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="num">5</div><div class="stepbody"><h3>Agendar e confirmar</h3><p class="meta">Marcou: manda a confirmação na hora e lembra na véspera. Depois da avaliação, um contato no dia seguinte.</p><div class="opts"><div class="opt"><div class="optlabel">Na hora em que marcou</div><div class="bubble">Combinado, [nome]! Ficou [dia] às [hora], aqui no meu consultório: [endereço]. Qualquer coisa, me chama aqui.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">Na véspera</div><div class="bubble">[nome], amanhã às [hora] te espero aqui! Se tiver fotos antigas de perfil, traz no celular, me ajuda a entender o que mudou com o tempo.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel">No dia seguinte à avaliação</div><div class="bubble">[nome], gostei muito de te conhecer ontem! Ficou alguma dúvida do que eu te expliquei? Se quiser já reservar a data do procedimento, tenho [dia] ou [dia].</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<div class="alert"><b>Dois campos pra preencher antes de usar</b><p>[Nx]: nas conversas de 13/10 o parcelamento saiu como 10x numa e 12x na outra. Confirmar com o Dr. qual é o certo e usar sempre o mesmo. [condição do mês]: em outubro, o valor da avaliação (R$ 200) volta como desconto até 31/10. Fora disso, apagar a frase.</p></div>
+</section>
+<section id="duvidas">
+  <div class="sechead"><span class="eyebrow">Parte 3</span><h2>Respostas prontas e os 5 áudios do Dr.</h2>
+  <p class="lead">As perguntas que mais aparecem. As respostas clínicas (dor, recuperação, cicatriz, resultado e amamentação) precisam ser lidas e aprovadas pelo Dr. antes do primeiro uso.</p></div>
+  <article class="card">
+<div class="opts"><div class="opt"><div class="optlabel"><span>“Dói? Eu durmo?”</span></div><div class="bubble">Não dói, e você fica acordada. Eu faço com anestesia local, e a gente vai conversando durante o procedimento. É justamente por isso que é mais seguro.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Quantos dias de recuperação?”</span></div><div class="bubble">A maioria das pacientes volta à rotina leve em poucos dias. O tempo certo pro seu caso eu te passo na avaliação, junto com todos os cuidados do pós.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Fica cicatriz?”</span></div><div class="bubble">São pontinhos muito pequenos, em lugares escondidos. Na avaliação eu te mostro exatamente onde ficam.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Quando aparece o resultado?”</span></div><div class="bubble">O contorno já começa a aparecer nos primeiros dias e vai melhorando nas semanas seguintes, conforme o inchaço vai embora.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Emagreci e a papada não saiu”</span></div><div class="bubble">Não é falta de esforço. A gordura embaixo do queixo é localizada e muitas vezes não sai com dieta e academia. Pra essa gordura, a lipo resolve onde o emagrecimento não chega.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Você só faz papada?”</span></div><div class="bubble">Não! Além da lipo de papada, eu faço lip lift (o levantamento do lábio superior), otomodelação (orelha) e implantes. Qual é a sua dúvida?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Estou amamentando”</span></div><div class="bubble">Que bom que você me contou! Durante a amamentação a gente espera pra fazer o procedimento. Mas a avaliação você já pode fazer, pra deixar tudo planejado pra quando terminar.</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>“Dá pra parcelar?”</span></div><div class="bubble">Dá, sim: R$ 7.990 em até [Nx] no cartão. Se quiser, te mostro como fica por mês.</div><button class="copy" type="button">copiar</button></div></div>
+</article>
+  <article class="card"><h3>5 áudios que o Dr. grava uma vez só</h3>
+  <p class="meta">Tem paciente que só fala por áudio, e responder com três blocos de texto esfria a conversa. O Dr. grava estes cinco no celular, curtos e com a voz natural, e eles ficam salvos pra mandar sempre que encaixar.</p><ul>
+<li>Boas-vindas (15 s): “Oi, aqui é o Giácomo. Que bom que você me chamou! Me conta o que te incomoda hoje que eu te explico se o seu caso é parecido com os que eu faço.”</li>
+<li>Como funciona o Método Papada 3D (30 s): lipo, lipoescultura do contorno e tecnologia de colágeno, com anestesia local.</li>
+<li>Dói? Eu durmo? (20 s): anestesia local, ela fica acordada e conversando com ele.</li>
+<li>Como é a avaliação (20 s): o que ele olha, quanto tempo leva, que ela sai sabendo o plano e o valor.</li>
+<li>Convite pra avaliação (15 s): “Vem conversar comigo, sem compromisso. Você sai sabendo exatamente o que dá pra fazer no seu caso.”</li>
+</ul></article></section>
+<section id="seq45">
+  <div class="sechead"><span class="eyebrow">Parte 4</span><h2>Os 45 dias depois do preço</h2>
+  <p class="lead">Uma paciente de papada leva em média 45 dias do primeiro contato até fechar: ela olha, pensa e pesquisa quem é o cirurgião. Quem viu o preço e sumiu na primeira semana não desistiu, ainda está pensando. São 8 mensagens, cada uma trazendo algo novo; nenhuma é só “e aí?”.</p></div>
+  <div class="ok"><b>A regra que manda na sequência</b><p>Ela respondeu em qualquer ponto: a sequência para e a conversa volta pro passo que fizer sentido (dúvida → Parte 3, horário → passo 5). Se ela disser “agora não”, responder “sem pressa nenhuma, fico à disposição” e pular direto pro D+35.</p></div>
+<article class="card"><div class="step"><div class="day">D+1</div><div class="stepbody"><h3>Um caso parecido</h3><p class="meta">Manda antes o vídeo ou as fotos de um caso com a mesma queixa dela.</p><div class="opts"><div class="opt"><div class="bubble">[nome], lembrei de você! Esse caso aqui em cima é muito parecido com o que você me contou. É esse tipo de resultado que eu gostaria de planejar pra você também.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+3</div><div class="stepbody"><h3>A dúvida que ela não perguntou</h3><p class="meta">Quase toda paciente pensa em dor e não pergunta.</p><div class="opts"><div class="opt"><div class="bubble">[nome], uma coisa que muita paciente tem vergonha de perguntar: não dói, e você fica acordada. Eu faço com anestesia local, conversando com você o tempo todo.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+7</div><div class="stepbody"><h3>A avaliação como passo pequeno</h3><p class="meta">Tira o peso da decisão grande.</p><div class="opts"><div class="opt"><div class="bubble">[nome], a avaliação não te compromete com nada. Eu olho o seu rosto, te explico o que dá pra fazer e você decide com calma, em casa. Tenho [dia] às [hora] ou [dia] às [hora]. Qual fica melhor?</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+12</div><div class="stepbody"><h3>A voz de outra paciente</h3><p class="meta">Manda antes um depoimento em vídeo (tipo o da Helena).</p><div class="opts"><div class="opt"><div class="bubble">[nome], olha o que essa paciente contou depois do procedimento. Muita gente me diz que o que mais muda é a foto de lado.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+19</div><div class="stepbody"><h3>O valor, de frente</h3><p class="meta">Se ela travou no preço, é aqui que ela conta.</p><div class="opts"><div class="opt"><div class="bubble">[nome], muita paciente me fala que o valor pesa na hora de decidir, e tudo bem. Se for isso, me conta? Dá pra parcelar em até [Nx] no cartão e eu te mostro como fica por mês.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+26</div><div class="stepbody"><h3>Bastidor e segurança</h3><p class="meta">Foto ou vídeo curto da sala, do monitor, do preparo (sem paciente).</p><div class="opts"><div class="opt"><div class="bubble">[nome], essa é a sala onde eu faço o procedimento. Antes de tudo tem exame, avaliação completa e acompanhamento no pós. Segurança começa antes de você sentar na cadeira.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+35</div><div class="stepbody"><h3>Normalizar o tempo de decisão</h3><p class="meta">Tira a culpa de quem está demorando.</p><div class="opts"><div class="opt"><div class="bubble">[nome], é normal levar umas semanas pra decidir. A maioria das minhas pacientes pensou bastante antes de vir. Quando você sentir que é a hora, a avaliação está aqui. Quer que eu te mande os horários desta semana?</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><div class="step"><div class="day">D+45</div><div class="stepbody"><h3>Encerramento leve</h3><p class="meta">Porta aberta, sem cobrança. Depois disso, sai da sequência.</p><div class="opts"><div class="opt"><div class="bubble">[nome], não quero ficar te enchendo de mensagem! Se um dia quiser resolver a papada, é só me chamar aqui. Vai ser um prazer te atender.</div><button class="copy" type="button">copiar</button></div></div></div></div></article>
+<article class="card"><h3>Sumiu antes do preço? Sequência curta</h3>
+  <p class="meta">Pra quem chamou e parou de responder antes de saber o valor. Quatro mensagens em 15 dias.</p>
+<div class="opts"><div class="opt"><div class="optlabel"><span>D+1</span></div><div class="bubble">[nome], esse caso aqui em cima responde a dúvida mais comum de quem tem papada. Me conta o que te incomoda hoje?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>D+3</span></div><div class="bubble">[nome], me responde só com o número 😊
+1. Gordura embaixo do queixo
+2. Falta de contorno
+3. Os dois</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>D+7</span></div><div class="bubble">[nome], se quiser, eu já te passo o valor e os horários de avaliação. Quer?</div><button class="copy" type="button">copiar</button></div><div class="opt"><div class="optlabel"><span>D+15</span></div><div class="bubble">[nome], não quero te incomodar! Se um dia quiser saber mais sobre a papada, é só me chamar aqui que eu te explico tudo.</div><button class="copy" type="button">copiar</button></div></div>
+</article>
+  <p class="src">Enquanto isso, a campanha continua mostrando casos e depoimentos pra quem já conversou no Direct. O anúncio e a mensagem trabalham juntos nesses 45 dias.</p>
+</section>
+<section id="organizar">
+  <div class="sechead"><span class="eyebrow">Parte 5</span><h2>Organização</h2>
+  <p class="lead">Pra sequência funcionar, é preciso saber em que dia cada paciente está. O Direct tem etiquetas e notas por conversa; com isso, toda manhã leva 10 minutos.</p></div>
+  <div class="tbl"><table><thead><tr><th>Etiqueta</th><th>Quando usar</th></tr></thead><tbody>
+<tr><td><b>Novo</b></td><td>chegou e ainda não respondeu a queixa</td></tr>
+<tr><td><b>Queixa entendida</b></td><td>já sei se é gordura, contorno, pele ou os dois</td></tr>
+<tr><td><b>Preço enviado</b></td><td>entra na sequência de 45 dias; anotar a data na nota</td></tr>
+<tr><td><b>Agendado</b></td><td>confirmação na hora e lembrete na véspera</td></tr>
+<tr><td><b>Avaliou</b></td><td>contato no dia seguinte</td></tr>
+<tr><td><b>Porta aberta</b></td><td>passou dos 45 dias sem resposta; só volta se ela chamar</td></tr>
+</tbody></table></div>
+  <div class="rules">
+    <div class="rule"><b>Nota em toda conversa</b><p>Exemplo: “gordura + contorno · caso da loira enviado · preço 15/10”. A data do preço é o D+0 da sequência.</p></div>
+    <div class="rule"><b>Rotina da manhã</b><p>Abrir a etiqueta “Preço enviado”, ver a data de cada nota e mandar a mensagem do dia. Quem passou de 45 dias vira “Porta aberta”.</p></div>
+    <div class="rule"><b>Revisar antes de enviar</b><p>Erro de digitação pesa mais quando quem “escreve” é o Dr. Ler uma vez antes de mandar.</p></div>
+  </div>
+  <div class="alert"><b>O que não pode, nem no privado</b><p>“Sem risco nenhum”, “resultado garantido” e diagnóstico por mensagem. Procedimento que hoje não é permitido pra dentista não se oferece. Preço e condição do mês vão só na conversa privada, nunca em post, story ou anúncio.</p></div>
+</section>
+
+<footer>GGD · Gio Growth Digital · Roteiro feito a partir das conversas do Direct de 13/10/2026 e da conversa com a clínica em 15/10/2026. <a href="/giacomo/direct/">Página do Direct de 14/10</a> · <a href="/giacomo/central/">Voltar para a central</a></footer>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var b=btn.previousElementSibling, t=b.innerText;
+    function done(){btn.textContent='copiado';setTimeout(function(){btn.textContent='copiar'},1500)}
+    try{navigator.clipboard.writeText(t).then(done,function(){sel(b)})}catch(e){sel(b)}
+  });
+});
+function sel(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+</body>
+</html>
