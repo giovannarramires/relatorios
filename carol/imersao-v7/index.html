@@ -1,0 +1,305 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>Página v7 · Imersão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f6f5;--surface:#ffffff;--fg:#1d1a21;--muted:#6b6472;--line:#e4dfe6;--accent:#1f5f5b;--accent-soft:#e1efed;--hot:#9a5b13;--hot-soft:#f8ecdb;--del:#8a3b3b;--del-soft:#f6e6e6;
+--display:"Literata",Georgia,serif;--sans:"Public Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16141a;--surface:#1f1c24;--fg:#efeaf1;--muted:#a59dab;--line:#34303b;--accent:#7fd0c8;--accent-soft:#1b3532;--hot:#f0b56c;--hot-soft:#3a2c1a;--del:#f0a0a0;--del-soft:#3a2224;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16141a;--surface:#1f1c24;--fg:#efeaf1;--muted:#a59dab;--line:#34303b;--accent:#7fd0c8;--accent-soft:#1b3532;--hot:#f0b56c;--hot-soft:#3a2c1a;--del:#f0a0a0;--del-soft:#3a2224;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--sans);margin:0}
+.wrap{max-width:880px;margin:0 auto;padding:36px 16px 72px;display:grid;gap:48px}
+header{display:grid;gap:12px;border-bottom:1px solid var(--line);padding-bottom:26px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(28px,5vw,42px)/1.12 var(--display);margin:0;text-wrap:balance}
+h2{font:700 clamp(22px,3.4vw,27px)/1.2 var(--display);margin:0 0 6px;text-wrap:balance}
+h3{font:600 17px/1.35 var(--sans);margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:4px 18px;color:var(--muted);font-size:14px}
+.meta b{color:var(--fg);font-weight:600}
+.sub{color:var(--muted);margin:0 0 18px;max-width:70ch}
+p{margin:0}
+.cta-previa{display:inline-flex;gap:8px;align-items:center;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:8px;width:max-content}
+:root[data-theme="dark"] .cta-previa{color:#10201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta-previa{color:#10201f}}
+.laudo{display:grid;gap:12px}
+.laudo div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline}
+@media(max-width:560px){.laudo div{grid-template-columns:1fr}}
+.laudo .n{font:700 24px/1 var(--display);color:var(--accent);min-width:92px}
+.tab{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15px}
+.tab th,.tab td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tab th{font:500 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tab tr:last-child td{border-bottom:0}
+.tab td:first-child{white-space:nowrap}
+.scroll{overflow-x:auto}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:14px}
+.sec .top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.num{font:600 13px/1 var(--mono);color:var(--muted)}
+.tag{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:5px;width:max-content}
+.t-novo{background:var(--hot-soft);color:var(--hot)}
+.t-ajuste{background:var(--accent-soft);color:var(--accent)}
+.t-mantido{background:var(--line);color:var(--muted)}
+.t-sai{background:var(--del-soft);color:var(--del)}
+.copy{position:relative;border:1px dashed var(--accent);border-radius:8px;padding:16px 16px 14px;background:var(--bg);font-size:15px;display:grid;gap:8px}
+.copy .lbl{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.copy button{position:absolute;top:10px;right:10px;font:500 12px/1 var(--mono);border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:6px;padding:6px 9px;cursor:pointer}
+.copy .t{white-space:pre-line}
+.copy .t b{font-weight:600}
+.porque{border-left:3px solid var(--hot);padding:2px 0 2px 14px;display:grid;gap:6px;font-size:15px}
+.porque .lbl{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--hot)}
+.antes{color:var(--muted);font-size:14px}
+.antes q{font-style:italic}
+.pend{background:var(--hot-soft);border-radius:10px;padding:16px 18px;display:grid;gap:10px}
+.pend ol{margin:0;padding-left:20px;display:grid;gap:8px}
+.nota{background:var(--accent-soft);border-radius:8px;padding:12px 16px;font-size:14px}
+ul.limpo{margin:0;padding-left:20px;display:grid;gap:4px}
+footer{border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13px}
+</style></head><body><main class="wrap">
+
+<header>
+  <div class="eyebrow">Página de vendas · Imersão Prática: Dominando Cicatrizes de Acne</div>
+  <h1>Versão 7 da página: o texto completo e o porquê de cada mudança</h1>
+  <div class="meta"><span>Base: <b>/imersao-pratica-v6/</b></span><span>Data: <b>15/10/2026</b></span><span>Preparado por <b>Gio Growth Digital</b></span></div>
+  <p class="sub" style="margin:6px 0 0">A v7 mantém quase todo o texto da v6, que é a versão mais completa e mais próxima do médico. As mudanças se concentram em três frentes: o que o médico vê nos primeiros segundos, os elementos que podem tirar a confiança dele e a ordem das seções. Cada bloco abaixo traz o texto pronto para colar no Elementor e o motivo da mudança.</p>
+  <a class="cta-previa" href="previa/" target="_blank" rel="noopener">Ver a prévia visual da v7 →</a>
+</header>
+
+<section>
+  <h2>Os números que guiaram a v7</h2>
+  <p class="sub">Leitura dos anúncios de venda da Imersão de junho a outubro de 2026, junto com as vendas da HeroSpark.</p>
+  <div class="laudo">
+    <div><span class="n">Reel 039</span><p><b>O anúncio que mais trouxe compradores é a Dra. falando para a câmera.</b> A ideia central dele, que a cicatriz se resolve na decisão clínica e não na escolha da técnica, vira o título da v7.</p></div>
+    <div><span class="n">69%</span><p><b>dos cliques vêm dos vídeos,</b> e os vídeos trouxeram a maior parte das vendas. O médico decide comprar quando vê e ouve a Dra. A v7 abre com ela.</p></div>
+    <div><span class="n">9,2% × 6,8%</span><p><b>Quem já conhece a Dra. vai mais ao checkout</b> do que quem a vê pela primeira vez. A v7 traz para o topo o que gera essa confiança: a voz, a formação e a experiência dela.</p></div>
+    <div><span class="n">~R$ 8</span><p><b>é quanto custa, em média, levar um médico até a página.</b> Esse custo se manteve estável o período inteiro. Por isso o ganho mais rápido está na página: cada ponto a mais de conversão reduz o custo de cada ingresso vendido.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Resumo das mudanças</h2>
+  <div class="scroll"><table class="tab">
+    <tr><th>Tipo</th><th>O que é</th><th>Onde</th></tr>
+    <tr><td><span class="tag t-novo">Novo</span></td><td>Título com a frase do anúncio campeão, vídeo da Dra. e linha de formação no topo</td><td>Seção 1</td></tr>
+    <tr><td><span class="tag t-novo">Novo</span></td><td>Bloco de depoimentos de médicos que já fizeram a Imersão</td><td>Seção 6</td></tr>
+    <tr><td><span class="tag t-novo">Novo</span></td><td>Gravação oferecida como adicional no checkout, no lugar do aviso "gravações NÃO incluídas"</td><td>Seção 9</td></tr>
+    <tr><td><span class="tag t-novo">Novo</span></td><td>Pergunta frequente sobre a gravação</td><td>Seção 11</td></tr>
+    <tr><td><span class="tag t-ajuste">Ajuste</span></td><td>Bio da Dra. sobe do fim da página para logo depois da dor</td><td>Seção 3</td></tr>
+    <tr><td><span class="tag t-ajuste">Ajuste</span></td><td>Lista do ingresso aparece uma vez só, e os Caminhos A e B ficam mais curtos</td><td>Seções 9 e 10</td></tr>
+    <tr><td><span class="tag t-sai">Sai</span></td><td>Cronômetro de 15 minutos</td><td>Topo</td></tr>
+    <tr><td><span class="tag t-sai">Sai</span></td><td>"De R$ 997,00", "97,8% das vagas preenchidas", "Lote atual com vagas limitadas" e "essa oferta especial expira em breve"</td><td>Topo, ingresso e P.S.</td></tr>
+    <tr><td><span class="tag t-sai">Sai</span></td><td>Título "03 DE OUTUBRO | ONLINE"</td><td>Antes do cronograma</td></tr>
+    <tr><td><span class="tag t-sai">Sai</span></td><td>Fotos de antes e depois de pacientes</td><td>Depois de "pra quem não é"</td></tr>
+    <tr><td><span class="tag t-sai">Sai</span></td><td>Faixas decorativas ("Ciência · Prática · Resultados Reais" e a faixa que corre com 🔘)</td><td>Logo abaixo do topo</td></tr>
+    <tr><td><span class="tag t-mantido">Mantido</span></td><td>Dor do médico, Método A3, o que você vai ver, programa, pra quem é, por que R$ 97, garantia, certificado</td><td>Texto da v6</td></tr>
+  </table></div>
+</section>
+
+<section style="display:grid;gap:16px">
+  <div>
+    <h2>A v7, seção por seção</h2>
+    <p class="sub">Na ordem em que as seções aparecem na página. Onde está escrito "mantido", o texto da v6 fica como está.</p>
+  </div>
+
+  <!-- 1 -->
+  <div class="sec">
+    <div class="top"><span class="num">01</span><h3>Topo da página</h3><span class="tag t-novo">Novo</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t">Exclusivo para médicos · 17 de outubro · Online e ao vivo · 9h às 18h
+
+<b>Cicatriz de acne não começa pela técnica.
+Começa pela decisão clínica.</b>
+
+Em 1 dia, a Dra. Caroline Baima ensina o Método A3: o raciocínio para classificar, planejar e associar técnicas com segurança, inclusive em fototipos altos e mesmo sem Laser CO2.
+
+Dermatologista · Mestre e doutora · Professora e preceptora de residência · RQE 2539
+
+[VÍDEO DA DRA. · 60 a 90 segundos]
+
+R$ 97 · ingresso para o evento ao vivo
+[Botão] Quero garantir meu ingresso
+Pagamento seguro · Pix ou cartão · Garantia de 100% · Certificado incluso</div></div>
+    <p class="antes">Hoje: <q>Pare de tratar cicatrizes de acne no improviso</q>, "De R$ 997,00 / R$ 97,00" e cronômetro "Sua vaga por R$ 97 expira em 15:00".</p>
+    <div class="porque"><span class="lbl">Por que</span>
+      <p><b>O título.</b> É a ideia do anúncio que mais trouxe compradores. O médico que clicou por causa dela chega e encontra a mesma frase, o que confirma que está no lugar certo. A própria v6 já tem essa ideia ("Cicatriz de acne não é uma técnica. É uma condução."), só que mais abaixo, depois do cronômetro. O título atual, "Pare de tratar no improviso", tem um tom que pode soar como crítica ao médico que está lendo.</p>
+      <p><b>O vídeo.</b> Os vídeos da Dra. são a maioria dos cliques e das vendas. Na página, o vídeo cumpre o mesmo papel: em 60 segundos o médico conhece a voz e o jeito de ensinar dela, que é o que mais pesa na decisão.</p>
+      <p><b>A formação.</b> Mestre, doutora e preceptora de residência é o argumento mais forte para um médico, e hoje só aparece no fim da página. Uma linha no topo resolve.</p>
+      <p><b>Garantia e certificado ao lado do botão.</b> São as duas respostas para "e se não valer a pena?" e "vale como formação?". Perto do botão, elas tiram a última dúvida na hora do clique.</p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="sec">
+    <div class="top"><span class="num">02</span><h3>"Se você atende pacientes com cicatrizes de acne, talvez já tenha sentido isso…"</h3><span class="tag t-mantido">Mantido</span></div>
+    <div class="porque"><span class="lbl">Por que</span><p>É o melhor trecho da v6: fala do medo de HPI e de hipercromia, do paciente que "já tentou de tudo" e da dúvida sobre qual técnica usar primeiro, com as palavras do próprio médico. Na v7 ele vem logo depois do topo, sem as faixas decorativas no caminho.</p></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="sec">
+    <div class="top"><span class="num">03</span><h3>Quem ensina</h3><span class="tag t-ajuste">Ajuste · sobe do fim da página</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t"><b>Quem ensina: uma dermatologista que também tem cicatriz de acne.</b>
+
+"Eu tenho cicatriz. Convivo até hoje com a acne da mulher adulta."
+
+A Dra. Caroline Baima é médica dermatologista, professora, mestre, doutora e preceptora de residência. Escolheu a cicatriz de acne como área de atuação e recebe casos encaminhados por colegas.
+
+Ao longo da trajetória, ela percebeu que muitos médicos conhecem Laser CO2, peelings, drug delivery, microagulhamento e subcisão, mas ainda travam na hora de decidir quando usar cada recurso e como associar as técnicas com previsibilidade.
+
+Na Imersão, ela ensina o raciocínio que usa na clínica, inclusive com os erros que já viu e cometeu: "Em vez de aprender com o seu erro, você vai aprender com os meus."
+
+Dra. Caroline Baima · CRM-PI 5023 · RQE 2539</div></div>
+    <div class="porque"><span class="lbl">Por que</span><p>Na v6, a bio aparece depois do ingresso, quando boa parte dos médicos já decidiu se compra ou não. Logo depois da dor, ela responde à pergunta seguinte do leitor: "quem é ela para me ensinar isso?". A frase sobre a própria cicatriz aproxima a Dra. do médico e do paciente dele ao mesmo tempo. Essa frase e a dos erros são falas da própria Dra. na Imersão; ela precisa confirmar que pode publicá-las.</p></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="sec">
+    <div class="top"><span class="num">04</span><h3>Método A3 + "Veja o que você vai ver na prática" + programa da manhã e da tarde</h3><span class="tag t-mantido">Mantido</span></div>
+    <div class="porque"><span class="lbl">Por que</span><p>O Método A3 (Avaliar, Associar, Acompanhar) é simples de lembrar, e o programa mostra que o dia tem conteúdo de verdade. O texto fica como está. Na v7 o programa vem logo depois do método, para o médico ver o dia inteiro de uma vez.</p></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="sec">
+    <div class="top"><span class="num">05</span><h3>Fotos de antes e depois de pacientes</h3><span class="tag t-sai">Sai</span></div>
+    <p class="antes">Hoje: <q>Veja alguns antes e depois de pacientes tratados com o mesmo método que eu vou te entregar dentro da Imersão</q>, com 7 fotos.</p>
+    <div class="porque"><span class="lbl">Por que</span><p>Dois motivos. O primeiro é a plataforma: fotos de antes e depois em página de saúde pesam na revisão de categoria do domínio no Meta, o que limita o alcance dos anúncios que levam para a página. O segundo é o público: o médico já sabe que a cicatriz melhora com tratamento. O que ele quer ver é se outro médico conseguiu aplicar o método, e isso vem na seção 6.</p></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="sec">
+    <div class="top"><span class="num">06</span><h3>O que dizem os médicos que já fizeram a Imersão</h3><span class="tag t-novo">Novo</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t"><b>Médicos que já passaram pela Imersão</b>
+
+[Depoimento de médico 1 · print ou vídeo curto, com nome, especialidade e cidade]
+[Depoimento de médico 2 · de preferência alguém que não tinha Laser CO2 ou tinha receio de tratar fototipo alto]
+[Depoimento de médico 3 · alguém que já aplicou o Método A3 na clínica depois da Imersão]
+
+<b>E é esse tipo de mensagem que você vai receber dos seus pacientes:</b>
+[3 das mensagens de pacientes que já estão na v6]</div></div>
+    <div class="porque"><span class="lbl">Por que</span><p>Hoje os depoimentos da página são todos de pacientes. Eles mostram que a Dra. trata bem, mas não respondem ao que o médico se pergunta antes de pagar: "isso funciona para um médico como eu?". Três depoimentos de colegas, com nome e especialidade, respondem. As mensagens de pacientes continuam, abaixo, como o resultado que o médico pode esperar no próprio consultório.</p></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="sec">
+    <div class="top"><span class="num">07</span><h3>Pra quem é / pra quem não é</h3><span class="tag t-mantido">Mantido</span></div>
+    <div class="porque"><span class="lbl">Por que</span><p>Ajuda o médico a se reconhecer no público certo e filtra quem procura fórmula mágica. Fica como está.</p></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="sec">
+    <div class="top"><span class="num">08</span><h3>Por que R$ 97? + Garantia de 100% + Certificado</h3><span class="tag t-mantido">Mantido</span></div>
+    <div class="porque"><span class="lbl">Por que</span><p>Explicar o preço com transparência (80% de conteúdo e 20% de apresentação da formação) gera mais confiança do que um desconto. Com esse bloco na página, o "de R$ 997" deixa de ser necessário. A garantia assinada com CRM e RQE é forte e fica.</p></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="sec">
+    <div class="top"><span class="num">09</span><h3>Ingresso</h3><span class="tag t-ajuste">Ajuste</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t"><b>Ingresso · 17 de outubro · online · 9h às 18h</b>
+
+Imersão Prática: Dominando Cicatrizes de Acne
+• Evento completo, ao vivo e 100% online
+• Slides do evento para revisar os conceitos
+• Fluxogramas práticos de condução das cicatrizes de acne
+• Protocolos para classificar, planejar e associar técnicas
+• Checklists de classificação, planejamento e condução
+• Casos clínicos comentados em PDF
+• Grupo exclusivo de WhatsApp dos participantes
+• Certificado de participação
+
+<b>R$ 97</b>
+[Botão] Garantir meu ingresso
+
+Não pode ficar o dia todo? A gravação completa pode ser adicionada no checkout.
+Garantia de 100% · Pix ou cartão · Certificado incluso</div></div>
+    <p class="antes">Hoje: <q>Lote atual com vagas limitadas!</q>, <q>DE R$ 997,00 por apenas R$ 97,00</q>, <q>97,8% das vagas preenchidas</q>, <q>As gravações NÃO estão incluídas nesta modalidade</q> e a lista de itens repetida em três lugares (ingresso, cartão do ingresso e P.S.).</p>
+    <div class="porque"><span class="lbl">Por que</span>
+      <p><b>Uma lista só.</b> Repetida três vezes, ela deixa a página mais longa sem acrescentar informação nova. Uma vez, junto do botão, é suficiente.</p>
+      <p><b>Sem "de R$ 997" e sem "97,8%".</b> Para o médico, essas frases soam como promoção, e o "97,8%" é o mesmo número para qualquer pessoa que volte à página. Na v7 o preço é R$ 97, com o motivo explicado na seção 8.</p>
+      <p><b>A gravação vira opção.</b> "As gravações NÃO estão incluídas" é uma informação correta, mas, no ponto da compra, ela faz o médico pensar no que vai perder. Dita como "pode ser adicionada no checkout", a mesma informação vira uma escolha e apresenta a gravação, que já é vendida como adicional.</p>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="sec">
+    <div class="top"><span class="num">10</span><h3>Os dois caminhos</h3><span class="tag t-ajuste">Ajuste · mais curto</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t"><b>Agora você tem dois caminhos:</b>
+
+<b>Caminho A · continuar como está</b>
+• Escolher a técnica antes de classificar a cicatriz
+• Ter receio de HPI e de hipercromia em fototipos altos
+• Encaminhar os casos difíceis para outro colega
+• Vender sessões soltas e competir por preço
+
+<b>Caminho B · conduzir com método</b>
+• Classificar cada tipo de cicatriz antes de decidir
+• Associar técnicas com critério, com ou sem Laser CO2
+• Conduzir fototipos altos com mais segurança
+• Montar um plano de tratamento e ser a referência da sua região
+
+[Botão] Quero garantir meu ingresso</div></div>
+    <div class="porque"><span class="lbl">Por que</span><p>Na v6 são 8 itens no Caminho A e 9 no B, quase todos repetindo seções anteriores. Com 4 de cada, a comparação fica clara e rápida de ler no celular, onde lê quem chega pelo Instagram.</p></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="sec">
+    <div class="top"><span class="num">11</span><h3>Perguntas frequentes</h3><span class="tag t-novo">Novo · 1 pergunta</span></div>
+    <div class="copy"><span class="lbl">Acrescentar às perguntas da v6</span><button type="button">Copiar</button>
+<div class="t"><b>A Imersão fica gravada?</b>
+O ingresso dá acesso ao evento ao vivo. Se quiser rever depois, a gravação completa pode ser adicionada no checkout.</div></div>
+    <div class="porque"><span class="lbl">Por que</span><p>As perguntas da v6 já cobrem laser de CO2, fototipo alto, certificado e garantia, e ficam como estão. Falta a dúvida de quem não pode ficar das 9h às 18h: sem resposta, esse médico desiste. Respondida, ela ainda apresenta a gravação.</p></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="sec">
+    <div class="top"><span class="num">12</span><h3>Fechamento</h3><span class="tag t-novo">Novo</span></div>
+    <div class="copy"><span class="lbl">Texto da v7</span><button type="button">Copiar</button>
+<div class="t">17 de outubro · online · 9h às 18h
+
+<b>O próximo paciente com cicatriz pode ficar com você.</b>
+Um dia para sair com um raciocínio claro: avaliar, associar e acompanhar.
+Turma ao vivo, sem reprise.
+
+[Botão] Quero meu ingresso por R$ 97</div></div>
+    <p class="antes">Hoje: <q>P.S.: Lembre-se, essa oferta especial expira em breve</q> e o cronômetro do topo.</p>
+    <div class="porque"><span class="lbl">Por que</span><p>A urgência real da Imersão é a data: é um evento ao vivo, em um dia marcado. O cronômetro de 15 minutos recomeça a cada visita, e um médico que volta à página percebe. Trocar por "turma ao vivo, sem reprise" mantém a urgência com uma informação verdadeira.</p></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="sec">
+    <div class="top"><span class="num">13</span><h3>Ajustes rápidos que valem para a página toda</h3><span class="tag t-sai">Sai</span></div>
+    <ul class="limpo">
+      <li>Apagar o título <b>"03 DE OUTUBRO | ONLINE"</b>, que fica logo antes do cronograma. Ele aparece na mesma página que "17 de outubro".</li>
+      <li>Apagar as duas faixas decorativas logo abaixo do topo ("Ciência · Prática · Resultados Reais · Pele · Confiança" e a faixa que corre com 🔘). No celular, elas empurram a dor do médico para baixo sem trazer informação.</li>
+      <li>Manter o mesmo GTM da página atual (<code>GTM-5FW629KM</code>) e o mesmo link de checkout. Assim a v7 é medida exatamente como as outras versões.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pend">
+  <h2 style="margin:0">O que a equipe da Dra. precisa providenciar</h2>
+  <ol>
+    <li><b>Vídeo da Dra., de 60 a 90 segundos</b>, na vertical e na horizontal e com legenda. Roteiro sugerido: "eu tenho cicatriz" → "cicatriz não começa pela técnica, começa pela decisão clínica" → o que o médico vai aprender → convite para o dia 17. Se não der tempo de gravar, dá para usar um corte do próprio vídeo do anúncio 039.</li>
+    <li><b>3 depoimentos de médicos</b> que já fizeram a Imersão, com nome, especialidade e cidade, e com a autorização deles.</li>
+    <li><b>Autorização da Dra.</b> para usar as falas "Eu tenho cicatriz…" e "Em vez de aprender com o seu erro, você vai aprender com os meus".</li>
+    <li><b>Confirmar no checkout da HeroSpark</b> que a gravação aparece como adicional, como diz o texto novo.</li>
+    <li>Publicar como <b>/imersao-pratica-v7/</b>, sem mexer na página atual. Se a v7 for usada para a próxima turma, trocar a data nos 4 lugares em que ela aparece (topo, ingresso, fechamento e cronograma).</li>
+  </ol>
+  <p class="nota">Sem o vídeo e os depoimentos, a v7 já pode ir ao ar com as outras mudanças (título, formação no topo, bio subindo, os itens que saem e a lista única do ingresso). O vídeo e os depoimentos entram assim que ficarem prontos.</p>
+</section>
+
+<section>
+  <h2>Como a v7 vai ser testada</h2>
+  <p class="sub" style="margin:0">O mesmo anúncio, o que mais trouxe compradores, para o mesmo público. Metade das visitas vai para a v7 e metade para a página atual, ao mesmo tempo. Assim a única diferença entre os dois lados é a página. A leitura sai com cerca de 180 visitas em cada uma, e a v7 vence se vender mais ingressos por visita.</p>
+</section>
+
+<footer>Gio Growth Digital · documento para a equipe da Dra. Caroline Baima · 15/10/2026</footer>
+</main>
+<script>
+document.querySelectorAll('.copy button').forEach(function(b){b.addEventListener('click',function(){
+  var t=b.parentNode.querySelector('.t').innerText.trim();
+  var done=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1500)};
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){})}
+});});
+</script>
+</body></html>
