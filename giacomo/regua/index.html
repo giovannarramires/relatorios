@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Régua de alimentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: coluna única de leitura, navegação fixa no topo, conversas como fichas com as mensagens prontas em balão de Direct */
+:root{
+  --bg:#f6f6f9; --surface:#ffffff; --ink:#1d1b26; --muted:#615d72; --line:#e3e1ea;
+  --accent:#6a3fd8; --accent-soft:#efe9fd; --bubble:#6a3fd8; --bubble-ink:#ffffff;
+  --ok:#1f7a4d; --ok-soft:#e3f3ea; --warn:#9a5b00; --warn-soft:#fbf0dc; --bad:#b3261e; --bad-soft:#fbe7e5;
+  --display:"Newsreader",Georgia,serif; --body:"Figtree",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15141b; --surface:#1e1c26; --ink:#ecebf2; --muted:#a6a2b8; --line:#2f2c3a;
+  --accent:#a98bff; --accent-soft:#2a2340; --bubble:#5b37c4; --bubble-ink:#ffffff;
+  --ok:#6fcf9b; --ok-soft:#173226; --warn:#f0b65a; --warn-soft:#33270f; --bad:#ff8a80; --bad-soft:#3a1a18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 80px;display:flex;flex-direction:column;gap:56px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{max-width:860px;margin:0 auto;padding:10px 16px;display:flex;gap:6px;overflow-x:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,5vw,42px)}
+h2{font-size:clamp(24px,3.6vw,30px)}
+h3{font-size:21px}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.lead{color:var(--muted);font-size:17px}
+header{display:flex;flex-direction:column;gap:12px}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:64px}
+.sechead{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.who{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.who h3{margin-right:auto}
+.pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.hot{background:var(--ok-soft);color:var(--ok)} .warm{background:var(--warn-soft);color:var(--warn)} .cold{background:var(--bad-soft);color:var(--bad)}
+.meta{font-size:14px;color:var(--muted)}
+.read{border-left:3px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px}
+.read b{color:var(--ink)}
+.opts{display:grid;gap:14px}
+.opt{display:grid;grid-template-columns:1fr;gap:8px}
+.optlabel{font-size:13px;font-weight:700;color:var(--muted)}
+.optlabel span{color:var(--accent)}
+.bubble{justify-self:end;max-width:min(560px,100%);background:var(--bubble);color:var(--bubble-ink);border-radius:20px 20px 6px 20px;padding:12px 16px;white-space:pre-line;position:relative}
+.copy{justify-self:end;font:600 12px var(--body);color:var(--accent);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.when{font-size:13px;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rule b{font-size:15px}
+.rule p{font-size:14.5px;color:var(--muted)}
+.alert{background:var(--warn-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.alert b{color:var(--warn)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sticker{align-self:flex-start;background:linear-gradient(var(--surface),var(--surface)) padding-box;border:2px solid var(--accent);border-radius:14px;padding:12px 16px;font-weight:600;max-width:100%}
+.sticker small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:2px}
+.script td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+.script td:nth-child(2){font-weight:500}
+.script td:nth-child(3){color:var(--muted);font-size:13.5px}
+.src{font-size:13px;color:var(--muted)}
+.dont{font-size:14px;color:var(--bad)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+li{max-width:66ch}
+footer a{color:var(--accent)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+.step{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:34px;height:34px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.day{flex:none;min-width:58px;text-align:center;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:700;padding:6px 8px;font-variant-numeric:tabular-nums}
+.stepbody{display:flex;flex-direction:column;gap:12px;min-width:0;flex:1}
+.ok{background:var(--ok-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.ok b{color:var(--ok)}
+.swap td:first-child{color:var(--bad)} .swap td:last-child{color:var(--ok);font-weight:500}
+</style>
+<style>
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.p-ps{background:#fbe9f1;color:#a3245e} .p-co{background:#e6f0fb;color:#1f5f9e} .p-ap{background:#fbf0dc;color:#8a5200}
+.f{background:var(--accent-soft);color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .p-ps{background:#3a1a2a;color:#f39ac2}
+ :root:not([data-theme="light"]) .p-co{background:#16283b;color:#8fc1f2} :root:not([data-theme="light"]) .p-ap{background:#33270f;color:#f0b65a}}
+:root[data-theme="dark"] .p-ps{background:#3a1a2a;color:#f39ac2} :root[data-theme="dark"] .p-co{background:#16283b;color:#8fc1f2} :root[data-theme="dark"] .p-ap{background:#33270f;color:#f0b65a}
+.sug{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.sug .optlabel{font-size:13px}
+.mat{font-size:13.5px;color:var(--muted);display:flex;gap:6px;align-items:baseline}
+.mat b{color:var(--ink);font-weight:600}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.gal.one{grid-template-columns:minmax(0,260px)}
+.gal a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--muted);font-size:12px;font-weight:600}
+.gal img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;background:var(--line)}
+.then{font-size:13px;font-weight:700;color:var(--muted);justify-self:end}
+.bubble.in{justify-self:start;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px 20px 20px 6px}
+@media (max-width:560px){.step{flex-direction:column;gap:10px}}
+.branch{display:grid;gap:10px;border-top:1px dashed var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+<nav><div class="in">
+  <a href="#como">Como funciona</a>
+  <a href="#qual">Qual caso mandar</a>
+  <a href="#contatos">Os 12 contatos</a>
+  <a href="#material">Material</a>
+  <a href="#depois">Depois dos 45 dias</a>
+</div></nav>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Dr. Giácomo Trojan · Lipo de papada · 16/10/2026</span>
+  <h1>Régua de alimentação dos leads</h1>
+  <p class="lead">Uma paciente de papada leva em média 45 dias do primeiro contato até fechar. Nesse tempo ela precisa de três coisas: se aproximar do Dr., entender o que é a papada e ver que outras pessoas como ela já resolveram. São 12 contatos em 45 dias e cada um tem três sugestões. Quem atende escolhe uma, adapta se quiser e envia. As artes já estão prontas: é só tocar na imagem pra abrir em tamanho real e salvar.</p>
+</header>
+
+<section id="como">
+  <div class="sechead"><span class="eyebrow">Parte 1</span><h2>Como funciona</h2></div>
+  <div class="rules">
+    <div class="rule"><b>Quem entra</b><p>Toda paciente que conversou e não agendou, tenha recebido o preço ou não. O dia em que a conversa parou é o D+0.</p></div>
+    <div class="rule"><b>Ela respondeu? A régua pausa</b><p>A conversa segue pelo roteiro do Direct. Se ela parar de responder de novo, a régua volta do ponto em que estava.</p></div>
+    <div class="rule"><b>Quem sai</b><p>Quem agendou, quem pediu pra não receber e quem chegou ao D+45. Depois do D+45 ela passa a receber um caso por mês.</p></div>
+  </div>
+  <div class="rules">
+    <div class="rule"><b><span class="pill p-ap">Aproximar</span></b><p>O Dr. como pessoa: a voz dele, o consultório, perguntas sobre ela. Cria confiança.</p></div>
+    <div class="rule"><b><span class="pill p-co">Consciência</span></b><p>Por que a dieta não tira, como é o método, como é a segurança, como é a avaliação. Tira o medo e a dúvida.</p></div>
+    <div class="rule"><b><span class="pill p-ps">Prova social</span></b><p>Casos, depoimentos e histórias de pacientes. Ela vê que é possível no rosto de alguém como ela.</p></div>
+  </div>
+  <div class="ok"><b>O fecho muda de um contato pro outro</b><p>Se toda mensagem terminar em “vamos agendar?”, ela para de abrir. Por isso o fecho varia: <b>pergunta</b> (fácil de responder), <b>curiosidade</b> (deixa algo pra contar depois), <b>sem fecho</b> (só entrega o conteúdo) e <b>convite</b>. O convite direto pra avaliação aparece só no D+14 (se ela responder) e no D+33.</p></div>
+  <div class="tbl"><table><thead><tr><th>Dia</th><th>Tema</th><th>Contato</th><th>Fecho</th></tr></thead><tbody><tr><td class='n'><a href='#d1'>D+1</a></td><td><span class='pill p-ps'>Prova social</span></td><td>Um caso parecido com o dela</td><td>pergunta</td></tr><tr><td class='n'><a href='#d3'>D+3</a></td><td><span class='pill p-ap'>Aproximar</span></td><td>O Dr. de verdade</td><td>sem fecho</td></tr><tr><td class='n'><a href='#d5'>D+5</a></td><td><span class='pill p-co'>Consciência</span></td><td>A papada que a dieta não tira</td><td>curiosidade</td></tr><tr><td class='n'><a href='#d8'>D+8</a></td><td><span class='pill p-ps'>Prova social</span></td><td>O resultado de perto</td><td>sem fecho</td></tr><tr><td class='n'><a href='#d11'>D+11</a></td><td><span class='pill p-co'>Consciência</span></td><td>As três etapas</td><td>curiosidade</td></tr><tr><td class='n'><a href='#d12'>D+12</a></td><td><span class='pill p-co'>Consciência</span></td><td>A resposta prometida</td><td>pergunta</td></tr><tr><td class='n'><a href='#d14'>D+14</a></td><td><span class='pill p-ap'>Aproximar</span></td><td>A pergunta pessoal</td><td>pergunta → convite</td></tr><tr><td class='n'><a href='#d18'>D+18</a></td><td><span class='pill p-ps'>Prova social</span></td><td>Uma história inteira</td><td>curiosidade</td></tr><tr><td class='n'><a href='#d22'>D+22</a></td><td><span class='pill p-co'>Consciência</span></td><td>Segurança antes de tudo</td><td>sem fecho</td></tr><tr><td class='n'><a href='#d27'>D+27</a></td><td><span class='pill p-ap'>Aproximar</span></td><td>O que está segurando</td><td>pergunta</td></tr><tr><td class='n'><a href='#d33'>D+33</a></td><td><span class='pill p-ps'>Prova social</span></td><td>Cada rosto pede um plano</td><td>convite</td></tr><tr><td class='n'><a href='#d39'>D+39</a></td><td><span class='pill p-co'>Consciência</span></td><td>O que acontece na avaliação</td><td>curiosidade</td></tr><tr><td class='n'><a href='#d45'>D+45</a></td><td><span class='pill p-ap'>Aproximar</span></td><td>Encerrar sem fechar a porta</td><td>porta aberta</td></tr></tbody></table></div>
+</section>
+
+<section id="qual">
+  <div class="sechead"><span class="eyebrow">Parte 2</span><h2>Qual caso mandar pra cada queixa</h2>
+  <p class="lead">O caso que vai no D+1 é o mais parecido com o que ela contou. Anotar na nota da conversa qual caso foi enviado, pra não repetir depois.</p></div>
+  <div class="tbl"><table><thead><tr><th>A queixa dela</th><th>Casos que combinam</th></tr></thead><tbody>
+    <tr><td>Gordura embaixo do queixo</td><td>Caso 01 · Caso 04</td></tr>
+    <tr><td>Falta de contorno, a linha do queixo sumiu</td><td>Caso 02 · Caso 05 · Caso 06</td></tr>
+    <tr><td>Pele com menos firmeza, paciente mais madura</td><td>Caso 03</td></tr>
+    <tr><td>Os dois (gordura e contorno)</td><td>Caso 01 · Caso 06</td></tr>
+  </tbody></table></div>
+  <div class="alert"><b>A legenda acompanha a imagem</b><p>Nos casos 01, 02, 03, 04 e 06 a arte já traz “Cirurgia em parceria com a Dra. Carolina Macedo”. O caso 05 é só do Dr. Todas as artes têm a assinatura CRO/SC 25648 e a frase do CFO 196/19; não recortar essa parte.</p></div>
+</section>
+
+<section id="contatos">
+  <div class="sechead"><span class="eyebrow">Parte 3</span><h2>Os 12 contatos</h2>
+  <p class="lead">Os balões roxos são o que se envia, com botão de copiar. Os balões brancos são o que ela pode responder. Trocar [nome], [dia] e [hora] antes de mandar.</p></div>
+<article class='card' id='d1'><div class='step'><div class='day'>D+1</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ps'>Prova social</span><span class='pill f'>Fecho: pergunta</span></div>
+<h3>Um caso parecido com o dela</h3><p class='meta'>O primeiro contato depois da conversa já mostra resultado. Escolha o caso pela queixa dela (tabela acima) e mande a arte antes do texto, sem perguntar se pode.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · A queixa era parecida com a sua?</div><div class='mat'>Material: <b>arte "Pergunta", uma por caso</b></div><div class='gal'><a href='artes/01_loira_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/01_loira_A_PERGUNTA.jpg' alt='Caso 01'>Caso 01</a><a href='artes/02_morena_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/02_morena_A_PERGUNTA.jpg' alt='Caso 02'>Caso 02</a><a href='artes/03_senhora_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/03_senhora_A_PERGUNTA.jpg' alt='Caso 03'>Caso 03</a><a href='artes/04_touca_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/04_touca_A_PERGUNTA.jpg' alt='Caso 04'>Caso 04</a><a href='artes/05_cabelo_preto_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/05_cabelo_preto_A_PERGUNTA.jpg' alt='Caso 05'>Caso 05</a><a href='artes/06_brincos_A_PERGUNTA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/06_brincos_A_PERGUNTA.jpg' alt='Caso 06'>Caso 06</a></div><div class='bubble'>[nome], lembrei de você quando vi esse caso. A queixa dela era bem parecida com a que você me contou. Você sente que a sua é assim também?</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Repara na linha</div><div class='mat'>Material: <b>arte "Linha", uma por caso</b></div><div class='gal'><a href='artes/01_loira_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/01_loira_B_LINHA.jpg' alt='Caso 01'>Caso 01</a><a href='artes/02_morena_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/02_morena_B_LINHA.jpg' alt='Caso 02'>Caso 02</a><a href='artes/03_senhora_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/03_senhora_B_LINHA.jpg' alt='Caso 03'>Caso 03</a><a href='artes/04_touca_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/04_touca_B_LINHA.jpg' alt='Caso 04'>Caso 04</a><a href='artes/05_cabelo_preto_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/05_cabelo_preto_B_LINHA.jpg' alt='Caso 05'>Caso 05</a><a href='artes/06_brincos_B_LINHA.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/06_brincos_B_LINHA.jpg' alt='Caso 06'>Caso 06</a></div><div class='bubble'>[nome], repara na linha do queixo até a orelha nesse caso aqui em cima. É exatamente o ponto que você me falou que te incomoda. Faz sentido pra você?</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Três ângulos</div><div class='mat'>Material: <b>arte "Três ângulos" (caso 01)</b></div><div class='gal one'><a href='artes/TRES_ANGULOS.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/TRES_ANGULOS.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], te mando esse caso em três ângulos, porque resultado de papada não pode depender de foto boa 😊 Qual desses ângulos mais te incomoda no seu rosto hoje?</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d3'><div class='step'><div class='day'>D+3</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ap'>Aproximar</span><span class='pill f'>Fecho: sem fecho</span></div>
+<h3>O Dr. de verdade</h3><p class='meta'>Ela conhece o resultado; agora conhece quem faz. Nenhuma pergunta e nenhum convite: é só presença.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Áudio do Dr. (20 s)</div><div class='mat'>Material: <b>áudio para o Dr. gravar uma vez</b></div><p class='meta'>Fala sugerida: “Oi, aqui é o Giácomo. Queria te contar por que eu me dedico tanto à papada. Muita paciente chega aqui dizendo que evita foto de lado há anos. Não precisa me responder agora, tá? Só queria que você me conhecesse um pouco.”</p><div class='bubble'>[nome], gravei esse áudio rapidinho pra você me conhecer um pouco melhor 😊</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · O lugar onde ela vai ser recebida</div><div class='mat'>Material: <b>foto do Dr. no consultório (depois da reforma)</b></div><div class='bubble'>[nome], esse é o meu cantinho de trabalho 😊 É aqui que eu recebo cada paciente pra avaliação. Quando você vier, é aqui que a gente vai conversar.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Por que papada importa</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], uma coisa que eu sempre falo pras minhas pacientes: papada não é só vaidade. É sobre se olhar no espelho, na foto, no vídeo da família, e se reconhecer. Por isso eu levo tão a sério cada caso.</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d5'><div class='step'><div class='day'>D+5</div><div class='stepbody'>
+<div class='pills'><span class='pill p-co'>Consciência</span><span class='pill f'>Fecho: curiosidade</span></div>
+<h3>A papada que a dieta não tira</h3><p class='meta'>Tira a culpa dela e explica por que a lipo existe. A mensagem abre a curiosidade; a explicação só vai quando ela pedir.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Quer que eu te conte?</div><div class='mat'>Material: <b>vídeo da caixinha CANETA (já existe)</b></div><div class='bubble'>[nome], sabia que tem papada que nenhuma dieta tira? Não é falta de esforço. Tem um motivo, e quase ninguém explica. Quer que eu te conte?</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder, manda o vídeo e:</div><div class='bubble'>É gordura localizada. Ela tem outro comportamento e muitas vezes não sai com dieta, treino nem caneta de emagrecer. É aí que a lipo entra: ela resolve onde o emagrecimento não chega.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Você já passou por isso?</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], pergunta rápida: você já emagreceu e sentiu que a papada continuou lá?</div><button class='copy' type='button'>copiar</button><div class='then'>se ela disser que sim:</div><div class='bubble'>Isso é muito mais comum do que parece, e não é culpa sua. A gordura embaixo do queixo é localizada e responde diferente do resto do corpo. Por isso tanta paciente chega aqui depois de já ter emagrecido.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Três causas</div><div class='mat'>Material: <b>só texto · a explicação precisa do OK do Dr.</b></div><div class='bubble'>[nome], tem três coisas que podem formar a papada, e cada uma pede um caminho diferente. A mais comum é justamente a que menos responde à dieta. Quer saber quais são?</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder:</div><div class='bubble'>Gordura localizada, pele com menos firmeza e o próprio formato do queixo. Na maioria dos casos é a gordura, e é por isso que dieta sozinha não resolve. Na avaliação eu te digo qual é o seu.</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d8'><div class='step'><div class='day'>D+8</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ps'>Prova social</span><span class='pill f'>Fecho: sem fecho</span></div>
+<h3>O resultado de perto</h3><p class='meta'>Segunda prova social, agora com outra pessoa falando ou com o resultado em destaque. Nada de convite: deixa a imagem trabalhar.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · A voz de uma paciente</div><div class='mat'>Material: <b>vídeo de depoimento da Helena (já existe)</b></div><div class='bubble'>[nome], pedi pra uma paciente contar, com as palavras dela, o que mudou depois do procedimento. Escuta até o final 😊</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Resultado final em destaque</div><div class='mat'>Material: <b>arte "Resultado", uma por caso</b></div><div class='gal'><a href='artes/01_loira_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/01_loira_RESULTADO.jpg' alt='Caso 01'>Caso 01</a><a href='artes/02_morena_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/02_morena_RESULTADO.jpg' alt='Caso 02'>Caso 02</a><a href='artes/03_senhora_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/03_senhora_RESULTADO.jpg' alt='Caso 03'>Caso 03</a><a href='artes/04_touca_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/04_touca_RESULTADO.jpg' alt='Caso 04'>Caso 04</a><a href='artes/05_cabelo_preto_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/05_cabelo_preto_RESULTADO.jpg' alt='Caso 05'>Caso 05</a><a href='artes/06_brincos_RESULTADO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/06_brincos_RESULTADO.jpg' alt='Caso 06'>Caso 06</a></div><div class='bubble'>[nome], esse é o resultado final de uma paciente com um perfil parecido com o seu. Na fotinho do canto, como ela chegou pra mim.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · O detalhe que muda a foto</div><div class='mat'>Material: <b>arte "Detalhe", uma por caso (versão sem botão)</b></div><div class='gal'><a href='artes/01_loira_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/01_loira_DETALHE.jpg' alt='Caso 01'>Caso 01</a><a href='artes/02_morena_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/02_morena_DETALHE.jpg' alt='Caso 02'>Caso 02</a><a href='artes/03_senhora_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/03_senhora_DETALHE.jpg' alt='Caso 03'>Caso 03</a><a href='artes/04_touca_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/04_touca_DETALHE.jpg' alt='Caso 04'>Caso 04</a><a href='artes/05_cabelo_preto_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/05_cabelo_preto_DETALHE.jpg' alt='Caso 05'>Caso 05</a><a href='artes/06_brincos_DETALHE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/06_brincos_DETALHE.jpg' alt='Caso 06'>Caso 06</a></div><div class='bubble'>[nome], olha esse detalhe: o ângulo entre o queixo e o pescoço. É ele que deixa o rosto mais leve na foto de lado.</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d11'><div class='step'><div class='day'>D+11</div><div class='stepbody'>
+<div class='pills'><span class='pill p-co'>Consciência</span><span class='pill f'>Fecho: curiosidade</span></div>
+<h3>As três etapas (a segunda fica pra amanhã)</h3><p class='meta'>Deixa uma pergunta aberta de propósito. É o único contato que já promete o próximo, e por isso o D+12 vem só um dia depois.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Cartão das três etapas</div><div class='mat'>Material: <b>cartão "Três etapas"</b></div><div class='gal one'><a href='artes/D11_tres_etapas.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/D11_tres_etapas.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], o Método Papada 3D tem três etapas. A primeira tira a gordura e a terceira estimula o colágeno. A do meio é a que mais muda o rosto, e quase ninguém conhece. Amanhã te conto qual é 😉</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Promessa de áudio</div><div class='mat'>Material: <b>só texto (o áudio vai no D+12)</b></div><div class='bubble'>[nome], amanhã eu te mando um áudio explicando a parte do meu método que mais muda o contorno do rosto. Fica de olho 😉</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · A pergunta que intriga</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], você sabe por que tirar só a gordura nem sempre basta pra papada? Amanhã te explico. É a parte que eu mais cuido no meu método.</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d12'><div class='step'><div class='day'>D+12</div><div class='stepbody'>
+<div class='pills'><span class='pill p-co'>Consciência</span><span class='pill f'>Fecho: pergunta</span></div>
+<h3>A resposta prometida</h3><p class='meta'>Fecha a curiosidade do D+11 e devolve a conversa pra ela com uma pergunta simples.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Prometido é devido</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>Prometido é devido 😊 A segunda etapa é a lipoescultura do contorno: eu desenho a linha do queixo até a orelha. É ela que dá aquele perfil marcado. Isso já tinha passado pela sua cabeça?</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · O áudio prometido</div><div class='mat'>Material: <b>áudio "Como funciona o Método Papada 3D" (30 s)</b></div><div class='bubble'>[nome], aqui está o áudio que eu te prometi 😊 Me conta depois o que achou?</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Mostrando a linha</div><div class='mat'>Material: <b>arte "Linha" do mesmo caso do D+1</b></div><div class='bubble'>[nome], a segunda etapa é o desenho do contorno. Repara nessa linha aqui em cima: é ela que eu desenho. Você sente falta dessa linha no seu rosto?</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d14'><div class='step'><div class='day'>D+14</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ap'>Aproximar</span><span class='pill f'>Fecho: pergunta, e o convite só se ela responder</span></div>
+<h3>A pergunta pessoal</h3><p class='meta'>Uma pergunta que ela quer responder. O convite pra avaliação não vai na primeira mensagem: ele vem como resposta ao que ela contar.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · A foto que ela evita</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], posso te fazer uma pergunta sincera? Tem alguma foto que você evita por causa da papada? De lado, de cima, em vídeo…</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder:</div><div class='bubble'>Entendo demais. Na avaliação eu te mostro exatamente o que dá pra mudar nesse ângulo. Tenho [dia] às [hora] ou [dia] às [hora]. Qual fica melhor?</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Se a papada não estivesse aí</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], se a papada não estivesse aí amanhã, qual é a primeira coisa que você faria? 😊</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder:</div><div class='bubble'>Adorei! É por isso que eu faço o que faço. Quer dar o primeiro passo com uma avaliação? Tenho [dia] às [hora] ou [dia] às [hora].</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Há quanto tempo</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], eu sempre pergunto isso pras minhas pacientes: há quanto tempo a papada te incomoda?</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder:</div><div class='bubble'>Muita gente convive anos com isso achando que não tem solução. Vem conversar comigo, sem compromisso: você sai sabendo exatamente o que dá pra fazer no seu caso. Tenho [dia] ou [dia].</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d18'><div class='step'><div class='day'>D+18</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ps'>Prova social</span><span class='pill f'>Fecho: curiosidade</span></div>
+<h3>Uma história inteira</h3><p class='meta'>Prova social em formato de história ou de jogo. O objetivo é ela assistir até o fim ou responder um número.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · A história da Geise</div><div class='mat'>Material: <b>reel “O dia em que eu decidi dar adeus à minha papada” (no perfil)</b></div><div class='bubble'>[nome], essa é a história da Geise, minha paciente. Assiste até o final: ela conta como foi o dia em que decidiu.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Qual se parece com você?</div><div class='mat'>Material: <b>arte "Qual se parece" (4 casos numerados)</b></div><div class='gal one'><a href='artes/QUAL_SE_PARECE.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/QUAL_SE_PARECE.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], uma brincadeira rápida: qual desses 4 casos mais se parece com o seu? Me responde só com o número 😊</div><button class='copy' type='button'>copiar</button><div class='then'>quando ela responder:</div><div class='bubble'>Boa escolha! Esse caso é bem parecido com o que você me contou. Na avaliação eu consigo te dizer o que daria pra fazer no seu rosto.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Os primeiros dias</div><div class='mat'>Material: <b>carrossel da Geise “pós imediato” (no perfil)</b></div><div class='bubble'>[nome], esse post mostra os primeiros dias depois do procedimento da Geise. Desliza até o final 😊</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d22'><div class='step'><div class='day'>D+22</div><div class='stepbody'>
+<div class='pills'><span class='pill p-co'>Consciência</span><span class='pill f'>Fecho: sem fecho</span></div>
+<h3>Segurança antes de tudo</h3><p class='meta'>Responde o medo sem ela precisar perguntar: anestesia local, ela acordada e monitor cardíaco o tempo todo.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · A sala por dentro</div><div class='mat'>Material: <b>foto ou vídeo curto da sala com o monitor (depois da reforma)</b></div><div class='bubble'>[nome], essa é a sala onde eu faço o procedimento. Monitor cardíaco do começo ao fim e anestesia local: você fica acordada, conversando comigo. Segurança, pra mim, vem antes de tudo.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Cartão da segurança</div><div class='mat'>Material: <b>cartão "Segurança" (serve enquanto não tem a foto da sala)</b></div><div class='gal one'><a href='artes/D22_seguranca.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/D22_seguranca.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], antes de você sentar na cadeira, vem a segurança. É assim que eu cuido de cada paciente.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · A pergunta que dá vergonha</div><div class='mat'>Material: <b>áudio "Dói? Eu durmo?" (20 s)</b></div><div class='bubble'>[nome], muita paciente tem vergonha de perguntar isso, então eu já te mando a resposta 😊</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d27'><div class='step'><div class='day'>D+27</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ap'>Aproximar</span><span class='pill f'>Fecho: pergunta</span></div>
+<h3>O que está segurando</h3><p class='meta'>Depois de quase um mês, descobrir a objeção vale mais que insistir. Cada resposta tem a mensagem pronta logo abaixo.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Responde com o número</div><div class='mat'>Material: <b>cartão "O que mais pesa"</b></div><div class='gal one'><a href='artes/D27_o_que_pesa.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/D27_o_que_pesa.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], posso te perguntar uma coisa? O que mais pesa pra você hoje na hora de decidir? Me responde só com o número 😊</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Direto ao ponto</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], tem alguma coisa te segurando? Se for valor, medo ou agenda, me conta que eu te ajudo a pensar.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · A pergunta que ela não fez</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], fiquei pensando: talvez eu não tenha respondido alguma dúvida sua. Qual é a pergunta que você ainda não teve coragem de me fazer? 😊</div><button class='copy' type='button'>copiar</button></div></div><div class='branch'><div class='optlabel'>Quando ela responder</div><div class='bubble in'>1 · o valor</div><div class='bubble'>Obrigado por me contar, [nome]. Dá pra parcelar em até [Nx] no cartão, e o valor exato eu fecho na avaliação, olhando o seu rosto. Quer que eu te mostre como fica por mês?</div><button class='copy' type='button'>copiar</button><div class='bubble in'>2 · medo do procedimento</div><div class='bubble'>Faz todo sentido, e ainda bem que você me falou. A anestesia é local, você fica acordada e conversando comigo, com monitor cardíaco o tempo todo. Vem só conversar: a avaliação não te compromete com nada.</div><button class='copy' type='button'>copiar</button><div class='bubble in'>3 · não é o momento</div><div class='bubble'>Sem pressa nenhuma! Me conta quando seria um bom momento, que eu te chamo perto da data?</div><button class='copy' type='button'>copiar</button><div class='bubble in'>4 · outra coisa</div><div class='bubble'>Me conta? Quero entender pra te ajudar do jeito certo.</div><button class='copy' type='button'>copiar</button></div></div></div></article><article class='card' id='d33'><div class='step'><div class='day'>D+33</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ps'>Prova social</span><span class='pill f'>Fecho: convite</span></div>
+<h3>Cada rosto pede um plano</h3><p class='meta'>O segundo convite dos 45 dias, apoiado em vários casos ao mesmo tempo: ela vê que tem gente de todo perfil.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Os seis casos</div><div class='mat'>Material: <b>arte "Cada rosto"</b></div><div class='gal one'><a href='artes/CADA_ROSTO.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/CADA_ROSTO.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], cada rosto pede um plano diferente. Esses são seis casos, cada um com o seu. Quer descobrir qual seria o seu? Tenho [dia] às [hora] ou [dia] às [hora] pra avaliação.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Três rostos</div><div class='mat'>Material: <b>arte "Três rostos"</b></div><div class='gal one'><a href='artes/TRES_ROSTOS.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/TRES_ROSTOS.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], três pacientes, três idades, o mesmo cuidado. Não existe rosto certo pro método: existe o plano certo pra cada rosto. Vamos montar o seu? Tenho [dia] às [hora] ou [dia] às [hora].</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · O caso dos três ângulos</div><div class='mat'>Material: <b>arte "Três ângulos" (se não foi usada no D+1)</b></div><div class='gal one'><a href='artes/TRES_ANGULOS.jpg' target='_blank' rel='noopener'><img loading='lazy' src='artes/TRES_ANGULOS.jpg' alt=''>abrir em tamanho real</a></div><div class='bubble'>[nome], esse é um caso que eu adoro mostrar: três ângulos, o mesmo contorno. Quero ver o seu rosto pessoalmente pra te dizer o que dá pra fazer. Fica melhor [dia] ou [dia]?</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d39'><div class='step'><div class='day'>D+39</div><div class='stepbody'>
+<div class='pills'><span class='pill p-co'>Consciência</span><span class='pill f'>Fecho: curiosidade</span></div>
+<h3>O que acontece na avaliação</h3><p class='meta'>Tira o medo do desconhecido: ela entende o que vai encontrar quando chegar.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Chuta 😄</div><div class='mat'>Material: <b>vídeo da caixinha CICATRIZ (já existe) · o Dr. confirma qual é a pergunta mais comum</b></div><div class='bubble'>[nome], qual você acha que é a pergunta que eu mais recebo na avaliação? Chuta 😄</div><button class='copy' type='button'>copiar</button><div class='then'>no dia seguinte, respondendo ou não, manda o vídeo e:</div><div class='bubble'>É “vai ficar cicatriz?” 😊 Olha a resposta aqui em cima.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Como é a avaliação</div><div class='mat'>Material: <b>áudio "Como é a avaliação" (20 s)</b></div><div class='bubble'>[nome], muita gente me pergunta como é a avaliação, então gravei esse áudio explicando 😊</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Por que fotos antigas</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], uma coisa que pouca gente sabe: na avaliação eu peço pra você trazer fotos antigas de perfil. Sabe por quê?</div><button class='copy' type='button'>copiar</button><div class='then'>se ela responder:</div><div class='bubble'>Elas me mostram como o seu contorno mudou com o tempo, e isso muda o plano que eu monto pra você.</div><button class='copy' type='button'>copiar</button></div></div></div></div></article><article class='card' id='d45'><div class='step'><div class='day'>D+45</div><div class='stepbody'>
+<div class='pills'><span class='pill p-ap'>Aproximar</span><span class='pill f'>Fecho: porta aberta</span></div>
+<h3>Encerrar sem fechar a porta</h3><p class='meta'>Último contato da régua. Depois daqui ela vai pra etiqueta “Porta aberta” e recebe um caso novo por mês.</p>
+<div class='opts'><div class='sug'><div class='optlabel'><span>Sugestão A</span> · Um caso por mês</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], não quero te encher de mensagem! Vou parar por aqui. Mas uma vez por mês eu te mando um caso novo, tá? Se preferir não receber, é só me falar 😊</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão B</span> · Quando for a hora</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], esse foi o último caso que eu separei pra você por agora. Quando sentir que é a hora, é só me chamar aqui. Vai ser um prazer te atender.</div><button class='copy' type='button'>copiar</button></div><div class='sug'><div class='optlabel'><span>Sugestão C</span> · Agradecer e pedir indicação</div><div class='mat'>Material: <b>só texto</b></div><div class='bubble'>[nome], obrigado por ter me acompanhado até aqui 😊 Quando quiser conversar sobre a papada, minha agenda está aberta. E se alguma amiga sua tiver a mesma queixa, pode me indicar!</div><button class='copy' type='button'>copiar</button></div></div></div></div></article>
+</section>
+
+<section id="material">
+  <div class="sechead"><span class="eyebrow">Parte 4</span><h2>Material: o que já existe e o que falta</h2></div>
+  <div class="tbl"><table><thead><tr><th>Material</th><th>Onde entra</th><th>Situação</th></tr></thead><tbody>
+    <tr><td>Artes desta página (casos, mosaicos e cartões)</td><td>D+1, D+8, D+11, D+18, D+22, D+27, D+33</td><td>Prontas</td></tr>
+    <tr><td>Vídeos de caixinha CANETA e CICATRIZ</td><td>D+5, D+39</td><td>Já existem</td></tr>
+    <tr><td>Depoimento da Helena</td><td>D+8</td><td>Já existe</td></tr>
+    <tr><td>Reel e carrossel da Geise</td><td>D+18</td><td>No perfil do Instagram</td></tr>
+    <tr><td>Áudio “por que papada” (20 s)</td><td>D+3</td><td>Gravar</td></tr>
+    <tr><td>Áudios “Como funciona”, “Dói? Eu durmo?” e “Como é a avaliação”</td><td>D+12, D+22, D+39</td><td>Gravar (já estão no roteiro do Direct)</td></tr>
+    <tr><td>Foto do consultório e da sala com o monitor</td><td>D+3, D+22</td><td>Fotografar depois da reforma</td></tr>
+  </tbody></table></div>
+  <div class="alert"><b>Duas coisas para o Dr. confirmar</b><p>A explicação das três causas da papada (D+5, sugestão C) e qual é a pergunta que ele mais recebe na avaliação (D+39, sugestão A). E, como no roteiro, o número de parcelas [Nx] no D+27.</p></div>
+</section>
+
+<section id="depois">
+  <div class="sechead"><span class="eyebrow">Parte 5</span><h2>Depois dos 45 dias</h2></div>
+  <div class="rules">
+    <div class="rule"><b>Um caso por mês</b><p>Quem está em “Porta aberta” recebe um caso novo por mês, com uma frase só e sem convite. Assim que entrar um caso novo, ele vira a mensagem do mês.</p></div>
+    <div class="rule"><b>Status do WhatsApp</b><p>Três vezes por semana: um resultado, um bastidor e uma resposta de caixinha. Quem tem o número salvo vê sem receber mensagem nenhuma.</p></div>
+    <div class="rule"><b>Os anúncios ajudam</b><p>Enquanto a régua roda, os anúncios continuam mostrando casos e depoimentos pra quem já conversou. A mensagem e o anúncio trabalham juntos.</p></div>
+  </div>
+  <div class="alert"><b>O que não pode, nem no privado</b><p>Escrever “antes” e “depois” (usar “Diagnóstico inicial” e “Resultado final”), prometer resultado, dizer “sem risco”, dar diagnóstico por mensagem ou oferecer procedimento que hoje não é permitido pra dentista. Preço e condição do mês só na conversa privada.</p></div>
+</section>
+
+<footer>GGD · Gio Growth Digital · Régua feita a partir das conversas do Direct de 13/10, da conversa com a clínica em 15/10 e dos casos aprovados de outubro. <a href="../direct-roteiro/">Roteiro do Direct</a> · <a href="../central/">Voltar para a central</a></footer>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var b=btn.previousElementSibling, t=b.innerText;
+    function done(){btn.textContent='copiado';setTimeout(function(){btn.textContent='copiar'},1500)}
+    try{navigator.clipboard.writeText(t).then(done,function(){sel(b)})}catch(e){sel(b)}
+  });
+});
+function sel(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+</body>
+</html>
