@@ -2,107 +2,190 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Teste de Página Murilo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: coluna única de relatório, tabela principal + gráfico diário + leitura curta */
+/* Layout: coluna de leitura única, quadro-resumo V2×V3 lado a lado, tabelas de funil com rolagem própria */
 :root{
-  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5f6b64; --line:#dde2de;
-  --accent:#2f5d50; --accent-soft:#e3ece8;
-  --good:#2e7d4f; --warn:#a8650c; --warn-soft:#fbf0de; --bad:#b23a32;
-  --bar:#9fb8ae; --bar-low:#c9675f;
-  --display:"Fraunces",Georgia,serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --bg:#f6f6f2; --surface:#ffffff; --fg:#1d2420; --muted:#5d6a63; --line:#d9ddd6;
+  --v2:#1f6b52; --v3:#b0662a; --warn:#a33a2c; --warn-bg:#fbeae6; --ok-bg:#e5f1ec;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
-  --accent:#8cc2b0; --accent-soft:#22302b; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
-  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141917; --surface:#1c2220; --fg:#e6ebe7; --muted:#9aa8a0; --line:#2e3733;
+  --v2:#5cc39d; --v3:#e09a5c; --warn:#f08a7a; --warn-bg:#3a201c; --ok-bg:#183028; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#141917; --surface:#1c2320; --fg:#e6ebe8; --muted:#9aa7a0; --line:#2e3833;
-  --accent:#8cc2b0; --accent-soft:#22302b; --good:#6cc493; --warn:#e3a54e; --warn-soft:#2f2617; --bad:#ec7c73;
-  --bar:#5d7d71; --bar-low:#d9776e; color-scheme:dark}
-body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
-.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:grid;gap:36px}
-header{display:grid;gap:6px}
-.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font:600 clamp(28px,4.5vw,40px)/1.15 var(--display);margin:0;text-wrap:balance}
-h2{font:600 22px/1.25 var(--display);margin:0 0 12px;text-wrap:balance}
+  --bg:#141917; --surface:#1c2220; --fg:#e6ebe7; --muted:#9aa8a0; --line:#2e3733;
+  --v2:#5cc39d; --v3:#e09a5c; --warn:#f08a7a; --warn-bg:#3a201c; --ok-bg:#183028; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:32px 64px;display:grid;gap:36px}
+h1{font:600 clamp(28px,5vw,40px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.2 var(--f-display);margin:0 0 12px;text-wrap:balance}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 p{margin:0;max-width:68ch}
-.sub{color:var(--muted)}
-.alert{background:var(--warn-soft);border-left:4px solid var(--warn);padding:16px 18px;border-radius:4px;display:grid;gap:6px}
-.alert strong{color:var(--warn)}
-.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
-table{border-collapse:collapse;width:100%;min-width:1080px;font-variant-numeric:tabular-nums}
-th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);vertical-align:bottom}
-th:first-child,td:first-child{text-align:left}
-tbody tr:last-child td{border-bottom:0}
-td.pg{font-weight:700}
-td.pg small{display:block;font:400 12px var(--mono);color:var(--muted)}
-.hl{background:var(--accent-soft)}
-.est{color:var(--muted);font-size:13px}
-.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}
-.note{font-size:13px;color:var(--muted);margin-top:10px}
-.chart{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 14px 8px}
-.chart svg{width:100%;height:auto;display:block}
-.chart text{fill:var(--muted);font:11px var(--mono)}
-.chart .lbl{fill:var(--fg);font:500 11px var(--mono)}
-.grid line{stroke:var(--line)}
-ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
-footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+.sub{color:var(--muted);margin-top:8px}
+.alert{background:var(--warn-bg);border-left:4px solid var(--warn);padding:14px 16px;border-radius:4px}
+.alert b{color:var(--warn)}
+.duel{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;min-width:0}
+.card h3{margin:0;font:600 18px var(--f-display);display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card h3 small{font:400 12px var(--f-mono);color:var(--muted)}
+.v2 h3{color:var(--v2)} .v3 h3{color:var(--v3)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-variant-numeric:tabular-nums}
+.kv dt{color:var(--muted)} .kv dd{margin:0;text-align:right;font-family:var(--f-mono)}
+.kv .hi{font-weight:600;color:var(--fg)}
+.bars{display:grid;gap:14px}
+.bar{display:grid;gap:4px}
+.bar .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.bar .row{display:grid;grid-template-columns:28px 1fr 64px;align-items:center;gap:8px;font:13px var(--f-mono);font-variant-numeric:tabular-nums}
+.track{height:12px;background:var(--line);border-radius:2px;overflow:hidden}
+.fill{height:100%}
+.f2{background:var(--v2)} .f3{background:var(--v3)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:500 11.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+tr:last-child td{border-bottom:0}
+tr.tot td{font-weight:600;background:var(--ok-bg)}
+.pg{font:600 12px var(--f-mono);padding:2px 6px;border-radius:3px;color:var(--surface)}
+.pg2{background:var(--v2)} .pg3{background:var(--v3)}
+.zero{color:var(--muted)}
+.good{color:var(--v2);font-weight:600}
+.note{font-size:13px;color:var(--muted);margin-top:8px}
+ol.read{margin:0;padding-left:22px;display:grid;gap:10px;max-width:72ch}
+.rec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:8px}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 </style>
 </head>
 <body>
+
 <div class="wrap">
 <header>
-  <span class="eyebrow">Prof. Murilo Soares · Low ticket · 08/10 a 10/10/2026</span>
-  <h1>Teste de página: raiz × V2 × V3</h1>
-  <p class="sub">As três páginas recebem os mesmos 3 anúncios, para os mesmos públicos. Assim a diferença de resultado vem da página. Verba com imposto de 13,83%.</p>
+  <div class="eyebrow">Prof. Murilo Soares · leitura de 16/10/2026</div>
+  <h1>Teste de página: V2 × V3</h1>
+  <p class="sub">Os mesmos 3 anúncios rodam nos mesmos 3 públicos e só a página muda, para isolar o efeito da página na venda. Dados de 08 a 16/10, com imposto de 13,83%.</p>
 </header>
 
 <section>
-  <h2>As três páginas lado a lado</h2>
-  <div class="tbl">
-  <table>
-    <thead><tr>
-      <th>Página</th><th>Verba</th><th>Cliques</th><th>Custo por<br>clique</th>
-      <th>Taxa de<br>abertura</th><th>Visitas</th><th>Custo por<br>visualização</th>
-      <th>Clique →<br>checkout</th><th>Checkout →<br>compra</th><th>Vendas</th>
-      <th>Conversão<br>clique → venda</th><th>Conversão<br>visita → venda</th><th>Custo por<br>venda</th><th>Retorno</th>
-    </tr></thead>
-    <tbody>
-      <tr><td class="pg">Raiz<small>página atual</small></td><td>R$ 296,78</td><td>95</td><td>R$ 3,12</td><td>81,6%</td><td>78</td><td>R$ 3,83</td><td>11,6%</td><td>73%</td><td>8</td><td>8,4%</td><td>10,3%</td><td>R$ 37,10</td><td>0,94x</td></tr>
-      <tr class="hl"><td class="pg">V2<small>/v2-sb</small></td><td>R$ 183,81</td><td>44</td><td>R$ 4,18</td><td>81,6%</td><td>36</td><td>R$ 5,12</td><td class="good">13,6%</td><td>67%</td><td>4</td><td class="good">9,1%</td><td class="good">11,1%</td><td>R$ 45,95</td><td class="good">1,08x</td></tr>
-      <tr><td class="pg">V3<small>/v3</small></td><td>R$ 222,42</td><td>61</td><td>R$ 3,65</td><td>81,6%</td><td>50</td><td>R$ 4,49</td><td>8,2%</td><td>60%</td><td>3</td><td>4,9%</td><td>6,0%</td><td>R$ 74,14</td><td>0,27x</td></tr>
-    </tbody>
-  </table>
+  <h2>Resultado por página</h2>
+  <div class="duel">
+    <div class="card v2"><h3>V2 <small>/v2-sb</small></h3>
+      <dl class="kv">
+        <dt>Verba</dt><dd>R$250,31</dd>
+        <dt>Cliques no link</dt><dd>54</dd>
+        <dt>Checkouts</dt><dd>7</dd>
+        <dt>Vendas</dt><dd class="hi">4</dd>
+        <dt>Receita</dt><dd>R$199,20</dd>
+        <dt>Ticket médio</dt><dd class="hi">R$49,80</dd>
+        <dt>Custo por venda</dt><dd class="hi">R$62,58</dd>
+        <dt>Retorno</dt><dd class="hi">0,80x</dd>
+      </dl></div>
+    <div class="card v3"><h3>V3 <small>/v3</small></h3>
+      <dl class="kv">
+        <dt>Verba</dt><dd>R$291,34</dd>
+        <dt>Cliques no link</dt><dd>73</dd>
+        <dt>Checkouts</dt><dd>5</dd>
+        <dt>Vendas</dt><dd class="hi">4</dd>
+        <dt>Receita</dt><dd>R$79,60</dd>
+        <dt>Ticket médio</dt><dd class="hi">R$19,90</dd>
+        <dt>Custo por venda</dt><dd class="hi">R$72,83</dd>
+        <dt>Retorno</dt><dd class="hi">0,27x</dd>
+      </dl></div>
   </div>
-  <p class="note">Taxa de abertura = parte dos cliques que carrega a página. Usamos a média medida de 26/09 a 06/10 (81,6%, 686 de 841 cliques), porque a contagem de visitas está sendo recalibrada desde 07/10. Visitas e custo por visualização partem dessa taxa. Vendas e checkouts são medidos direto. Checkout = clique no botão de compra.</p>
 </section>
 
 <section>
-  <h2>O que os números mostram</h2>
-  <ul>
-    <li><b>A V2 está na frente.</b> Ela leva mais gente de quem clica até o checkout (13,6%), tem a maior conversão (9,1% dos cliques viram venda) e é a única acima de 1x de retorno.</li>
-    <li><b>A V3 recebe bastante clique, mas converte menos.</b> Ela fica em 4,9% dos cliques virando venda, perto da metade das outras duas. A diferença aparece antes do checkout: quem chega ao checkout compra numa proporção parecida nas três páginas, de 60% a 73%.</li>
-    <li><b>O custo por visualização</b> fica entre R$ 3,83 e R$ 5,12. A raiz sai mais barata porque já roda há mais tempo, e as páginas novas ainda estão na fase de aprendizado do Meta.</li>
-    <li><b>O teste ainda está no começo.</b> São 15 vendas em pouco mais de 2 dias. Para decidir com segurança, ele precisa de mais volume.</li>
-  </ul>
+  <h2>Onde o funil perde</h2>
+  <div class="bars">
+    <div class="bar"><div class="lbl"><span>Clique → checkout</span><span>escala 0–20%</span></div>
+      <div class="row"><span>V2</span><div class="track"><div class="fill f2" style="width:65%"></div></div><span>13,0%</span></div>
+      <div class="row"><span>V3</span><div class="track"><div class="fill f3" style="width:34%"></div></div><span>6,8%</span></div></div>
+    <div class="bar"><div class="lbl"><span>Clique → venda</span><span>escala 0–20%</span></div>
+      <div class="row"><span>V2</span><div class="track"><div class="fill f2" style="width:37%"></div></div><span>7,4%</span></div>
+      <div class="row"><span>V3</span><div class="track"><div class="fill f3" style="width:27.5%"></div></div><span>5,5%</span></div></div>
+    <div class="bar"><div class="lbl"><span>Taxa de clique (CTR)</span><span>escala 0–2%</span></div>
+      <div class="row"><span>V2</span><div class="track"><div class="fill f2" style="width:40%"></div></div><span>0,8%</span></div>
+      <div class="row"><span>V3</span><div class="track"><div class="fill f3" style="width:45%"></div></div><span>0,9%</span></div></div>
+  </div>
+  <div class="tbl" style="margin-top:18px"><table>
+    <tr><th>Etapa</th><th>V2</th><th>V3</th></tr>
+    <tr><td>Impressões</td><td>6.886</td><td>7.841</td></tr>
+    <tr><td>CPM</td><td>R$31,93</td><td>R$32,64</td></tr>
+    <tr><td>Cliques no link</td><td>54</td><td>73</td></tr>
+    <tr><td>Custo por clique</td><td>R$4,64</td><td>R$3,99</td></tr>
+    <tr><td>Checkouts</td><td>7</td><td>5</td></tr>
+    <tr><td>Clique → checkout</td><td class="good">13,0%</td><td>6,8%</td></tr>
+    <tr><td>Checkout → venda</td><td>57%</td><td>80%</td></tr>
+    <tr><td>Vendas</td><td>4</td><td>4</td></tr>
+  </table></div>
+  <p class="note">Checkout = clique no botão de compra da página, que leva ao pagamento.</p>
 </section>
 
 <section>
-  <h2>Próximos passos</h2>
-  <ul>
-    <li>Manter as três páginas no ar até quarta, 14/10, para juntar mais vendas.</li>
-    <li>Na quarta, comparar de novo a conversão e levar a verba para a página que vencer.</li>
-    <li>Concluir a recalibração da contagem de visitas para medir a abertura de cada página separadamente.</li>
-  </ul>
+  <h2>Por público</h2>
+  <div class="tbl"><table>
+    <tr><th>Página</th><th class="l">Público</th><th>Verba</th><th>Cliques</th><th>Checkouts</th><th>Vendas</th><th>Custo/venda</th><th>Retorno</th></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">Frio 1 (interesse)</td><td>R$102,47</td><td>30</td><td>3</td><td>2</td><td>R$51,23</td><td class="good">1,56x</td></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">Frio 2 (semelhante a compradores)</td><td>R$115,97</td><td>16</td><td>3</td><td>2</td><td>R$57,99</td><td>0,34x</td></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">Quente (já interagiu)</td><td>R$31,87</td><td>8</td><td>1</td><td class="zero">0</td><td class="zero">–</td><td class="zero">0</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">Frio 1 (interesse)</td><td>R$102,54</td><td>27</td><td>2</td><td>2</td><td>R$51,27</td><td>0,39x</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">Frio 2 (semelhante a compradores)</td><td>R$116,11</td><td>34</td><td>2</td><td>2</td><td>R$58,05</td><td>0,34x</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">Quente (já interagiu)</td><td>R$72,69</td><td>12</td><td>1</td><td class="zero">0</td><td class="zero">–</td><td class="zero">0</td></tr>
+  </table></div>
 </section>
 
-<footer>GGD · Gio Growth Digital · leitura de 10/10/2026</footer>
+<section>
+  <h2>Por anúncio</h2>
+  <div class="tbl"><table>
+    <tr><th>Página</th><th class="l">Anúncio</th><th>Verba</th><th>Cliques</th><th>Checkouts</th><th>Vendas</th><th>Custo/venda</th><th>Retorno</th></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">VIDEO_AD03</td><td>R$123,69</td><td>27</td><td>5</td><td>3</td><td>R$41,23</td><td>0,72x</td></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">VIDEO_AD01</td><td>R$48,98</td><td>9</td><td>2</td><td>1</td><td>R$48,98</td><td class="good">2,24x</td></tr>
+    <tr><td><span class="pg pg2">V2</span></td><td class="l">ESTATICO_AD07</td><td>R$77,64</td><td>18</td><td class="zero">0</td><td class="zero">0</td><td class="zero">–</td><td class="zero">0</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">ESTATICO_AD07</td><td>R$115,37</td><td>33</td><td>2</td><td>3</td><td>R$38,46</td><td>0,52x</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">VIDEO_AD01</td><td>R$105,20</td><td>24</td><td>3</td><td>1</td><td>R$105,20</td><td>0,19x</td></tr>
+    <tr><td><span class="pg pg3">V3</span></td><td class="l">VIDEO_AD03</td><td>R$70,77</td><td>16</td><td class="zero">0</td><td class="zero">0</td><td class="zero">–</td><td class="zero">0</td></tr>
+  </table></div>
+  <p class="note">As vendas podem passar dos checkouts no mesmo anúncio porque o Meta atribui a compra por janela de tempo, e nem toda compra vem de um checkout registrado no mesmo dia.</p>
+</section>
+
+<section>
+  <h2>Por dia</h2>
+  <div class="tbl"><table>
+    <tr><th class="l">Dia</th><th>V2 verba</th><th>V2 vendas</th><th>V2 receita</th><th>V3 verba</th><th>V3 vendas</th><th>V3 receita</th></tr>
+    <tr><td class="l">08/10</td><td>R$75,84</td><td class="zero">0</td><td class="zero">R$0</td><td>R$78,92</td><td>1</td><td>R$19,90</td></tr>
+    <tr><td class="l">09/10</td><td>R$81,55</td><td>3</td><td>R$179,30</td><td>R$93,08</td><td>1</td><td>R$19,90</td></tr>
+    <tr><td class="l">10/10</td><td>R$27,18</td><td>1</td><td>R$19,90</td><td>R$52,09</td><td>1</td><td>R$19,90</td></tr>
+    <tr><td class="l">16/10 (parcial)</td><td>R$65,74</td><td class="zero">0</td><td class="zero">R$0</td><td>R$67,25</td><td>1</td><td>R$19,90</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>Comparação com a página atual</h2>
+  <p style="margin-bottom:12px">Passagem clique → checkout no mesmo período, com a página que já estava no ar.</p>
+  <div class="tbl"><table>
+    <tr><th class="l">Página</th><th>Cliques</th><th>Checkouts</th><th>Clique → checkout</th></tr>
+    <tr><td class="l">Página atual</td><td>350</td><td>45</td><td>12,9%</td></tr>
+    <tr><td class="l"><span class="pg pg2">V2</span></td><td>54</td><td>7</td><td class="good">13,0%</td></tr>
+    <tr><td class="l"><span class="pg pg3">V3</span></td><td>73</td><td>5</td><td>6,8%</td></tr>
+  </table></div>
+  <p class="note">A V2 acompanha a página atual na passagem para o checkout e ainda vende o item adicional com mais frequência.</p>
+</section>
+
+<section>
+  <h2>Leitura</h2>
+  <ol class="read">
+    <li><b>A V2 está na frente nos dois sinais que importam.</b> O clique vira checkout quase duas vezes mais nela (13,0% × 6,8%). As 4 vendas da V3 foram todas de R$19,90. Na V2 elas tiveram item adicional, inclusive uma de R$109,60, e o ticket médio fica em R$49,80. O resultado vai na mesma direção da leitura de 10/10.</li>
+    <li><b>Ainda não dá para decretar um vencedor.</b> São 4 vendas contra 4. Uma venda a mais ou a menos muda o resultado.</li>
+    <li><b>No público frio de interesse, a V2 se pagou (1,56x).</b> É a combinação de melhor retorno do teste.</li>
+    <li><b>O ESTATICO_AD07 não fez checkout na V2</b> (R$77,64), mas foi o que mais vendeu na V3. Com essa amostra, parece mais acaso do que padrão.</li>
+  </ol>
+</section>
+
+<footer>Leitura de 16/10/2026 com dados do Meta (atribuição padrão da conta). O dia 16/10 ainda está em andamento. Gio Growth Digital.</footer>
 </div>
 </body>
 </html>
