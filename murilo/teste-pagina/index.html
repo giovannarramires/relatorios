@@ -59,13 +59,32 @@ tr.tot td{font-weight:600;background:var(--ok-bg)}
 ol.read{margin:0;padding-left:22px;display:grid;gap:10px;max-width:72ch}
 .rec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:8px}
 footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+
+.diff th:nth-child(2),.diff td:nth-child(2),.diff th:nth-child(3),.diff td:nth-child(3){text-align:left;white-space:normal;min-width:220px}
+.diff td:first-child{white-space:normal;font-weight:500;min-width:120px}
+.same{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:72ch}
+.callout{background:var(--ok-bg);border-left:4px solid var(--v2);padding:14px 16px;border-radius:4px;max-width:72ch}
+.sugs{display:grid;gap:12px;counter-reset:s;margin:0;padding:0;list-style:none}
+.sugs li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px 14px 52px;position:relative;counter-increment:s}
+.sugs li::before{content:counter(s);position:absolute;left:16px;top:13px;width:24px;height:24px;border-radius:50%;background:var(--v2);color:var(--surface);font:600 13px/24px var(--f-mono);text-align:center}
+.sugs b{display:block;margin-bottom:2px}
+.sugs .why{font-size:13.5px;color:var(--muted)}
+.pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.lp{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;min-width:0}
+.lp .src{font:500 11.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.lp .body{padding:16px;display:grid;gap:10px;align-content:start}
+.lp .hl{font:600 19px/1.25 var(--f-display);text-wrap:balance}
+.lp .sl{font-size:14px;color:var(--muted)}
+.lp .then{font-size:13px;border-top:1px dashed var(--line);padding-top:10px}
+.lp .for{font:500 12px var(--f-mono);color:var(--v2)}
+.steps{display:grid;gap:10px;max-width:72ch;margin:0;padding-left:22px}
 </style>
 </head>
 <body>
 
 <div class="wrap">
 <header>
-  <div class="eyebrow">Prof. Murilo Soares · leitura de 16/10/2026</div>
+  <div class="eyebrow">Prof. Murilo Soares · leitura de 16/10/2026 · sugestões de 17/10</div>
   <h1>Teste de página: V2 × V3</h1>
   <p class="sub">Os mesmos 3 anúncios rodam nos mesmos 3 públicos e só a página muda, para isolar o efeito da página na venda. Dados de 08 a 16/10, com imposto de 13,83%.</p>
 </header>
@@ -181,11 +200,85 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
     <li><b>A V2 está na frente nos dois sinais que importam.</b> O clique vira checkout quase duas vezes mais nela (13,0% × 6,8%). As 4 vendas da V3 foram todas de R$19,90. Na V2 elas tiveram item adicional, inclusive uma de R$109,60, e o ticket médio fica em R$49,80. O resultado vai na mesma direção da leitura de 10/10.</li>
     <li><b>Ainda não dá para decretar um vencedor.</b> São 4 vendas contra 4. Uma venda a mais ou a menos muda o resultado.</li>
     <li><b>No público frio de interesse, a V2 se pagou (1,56x).</b> É a combinação de melhor retorno do teste.</li>
-    <li><b>O ESTATICO_AD07 não fez checkout na V2</b> (R$77,64), mas foi o que mais vendeu na V3. Com essa amostra, parece mais acaso do que padrão.</li>
+    <li><b>O ESTATICO_AD07 não fez checkout na V2</b> (R$77,64), mas foi o que mais vendeu na V3. Isso combina com o padrão abaixo: esse anúncio fala da ferramenta, e a V3 vai direto ao produto.</li>
   </ol>
 </section>
 
-<footer>Leitura de 16/10/2026 com dados do Meta (atribuição padrão da conta). O dia 16/10 ainda está em andamento. Gio Growth Digital.</footer>
+
+<section>
+  <h2>O que a V2 tem que a V3 não tem</h2>
+  <p style="margin-bottom:12px">As duas páginas usam o mesmo checkout e repetem a mesma lista do manual, o bônus e a apresentação do professor. A diferença está em como cada uma <b>começa</b> e em <b>quando pede a compra</b>.</p>
+  <div class="tbl diff"><table>
+    <tr><th class="l">Trecho</th><th class="l">V2 (na frente)</th><th class="l">V3</th></tr>
+    <tr><td>Abertura</td><td>Começa pelo problema: “Não espere chegar ao Recurso de Revista para descobrir que deixou de fazer o essencial ainda no TRT.”</td><td>Começa pela promessa (“Nunca mais interponha um RR sem saber se a sua matéria foi prequestionada”) e já mostra preço e botão.</td></tr>
+    <tr><td>Por que importa</td><td>Tem um bloco que explica o risco: o RR começa no acórdão do TRT, e uma boa tese pode ser barrada no TST e levar junto os honorários.</td><td>Não tem esse bloco. Passa direto para a lista do que vem no manual.</td></tr>
+    <tr><td>Valor antes do preço</td><td>Soma os 7 itens, um a um, até R$ 569 e só depois mostra R$ 19,90.</td><td>Não tem a soma. O único preço de referência é “de R$ 150 por R$ 19,90”.</td></tr>
+    <tr><td>Primeiro botão de compra</td><td>Só aparece depois do problema, da lista e da soma.</td><td>Logo no topo, antes de qualquer explicação.</td></tr>
+    <tr><td>Urgência</td><td>Contador regressivo de 3 dias no topo, que recomeça do zero a cada visita.</td><td>Faixa de texto (“vai sair do ar nos próximos dias”).</td></tr>
+  </table></div>
+  <div class="callout" style="margin-top:16px"><b>Leitura:</b> a V3 pede a compra antes de explicar por que o manual importa. Para quem ainda não conhece o professor, falta motivo para clicar, e por isso o clique vira checkout em metade das vezes (6,8% contra 13,0%). A soma de R$ 569 provavelmente ajuda a explicar por que quem compra na V2 aceita o item adicional, mas com 4 vendas isso ainda é hipótese.</div>
+</section>
+
+<section>
+  <h2>Cada anúncio vende melhor na página que continua a conversa dele</h2>
+  <p style="margin-bottom:12px">Aberto por anúncio, o teste mostra um padrão que vale perseguir:</p>
+  <div class="tbl"><table>
+    <tr><th class="l">Anúncio</th><th class="l">Do que ele fala</th><th>Na V2</th><th>Na V3</th></tr>
+    <tr><td class="l">VIDEO_AD03</td><td class="l">O problema (“a melhor tese não basta”)</td><td class="good">27 cliques · 5 checkouts · 3 vendas</td><td class="zero">16 cliques · 0 checkout · 0 venda</td></tr>
+    <tr><td class="l">VIDEO_AD01</td><td class="l">O problema (“o filtro silencioso do RR”)</td><td class="good">9 cliques · 2 checkouts · 1 venda</td><td>24 cliques · 3 checkouts · 1 venda</td></tr>
+    <tr><td class="l">ESTATICO_AD07</td><td class="l">A ferramenta (“dúvida? consulte”)</td><td class="zero">18 cliques · 0 checkout · 0 venda</td><td class="good">33 cliques · 2 checkouts · 3 vendas</td></tr>
+  </table></div>
+  <p class="note">O anúncio que fala do problema vende na página que começa pelo problema (V2). O anúncio que fala da ferramenta vendeu na página que vai direto ao produto (V3). A amostra ainda é pequena, mas é esse padrão que orienta as páginas novas abaixo.</p>
+</section>
+
+<section>
+  <h2>O que sugerimos mudar</h2>
+  <ol class="sugs">
+    <li><b>Adotar a V2 como página principal do perpétuo.</b><span class="why">Ela faz quase o dobro de checkouts por clique e vende o item adicional. A V3 sai da rotação no fim desta rodada.</span></li>
+    <li><b>Mostrar um trecho real do material.</b><span class="why">As duas páginas já têm uma imagem para cada item, mas são capas ilustrativas: não dá para ler nada nelas. Um trecho legível de verdade, como três perguntas do checklist, um galho do fluxograma ou o começo de um modelo de ED, mostra ao advogado exatamente o que ele vai abrir no processo dele. É o que o anúncio “dúvida? consulte” já promete.</span></li>
+    <li><b>Colocar prova de aluno perto do botão.</b><span class="why">Nenhuma das páginas tem depoimento. Com mais de 600 alunos formados, dois ou três relatos curtos (“usei o checklist antes de interpor o RR e…”) logo acima do primeiro botão reduzem a dúvida de quem chega frio.</span></li>
+    <li><b>Trazer o professor para o começo da página, em uma linha.</b><span class="why">“Ex-assessor jurídico do TST, analisou mais de 7 mil Recursos de Revista” hoje só aparece no final. Uma linha logo abaixo da abertura dá peso ao alerta do topo, sem virar bloco de currículo.</span></li>
+    <li><b>Trocar o contador por um prazo real, ou tirá-lo.</b><span class="why">O contador da V2 volta para 3 dias toda vez que a página é aberta. Quem volta para comprar, como o público que já conhece o professor, vê o prazo recomeçar. Para advogado, isso pesa contra a confiança. Uma data de verdade (“preço de lançamento até 31/10”) mantém a urgência sem esse risco.</span></li>
+    <li><b>Manter o que a V2 já faz bem:</b><span class="why">abertura pelo problema, o bloco do risco no TRT e a soma de R$ 569 antes do preço. Qualquer página nova parte dessa base.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Páginas novas a partir dos anúncios campeões</h2>
+  <p style="margin-bottom:14px">A ideia é que a pessoa, ao chegar, leia no topo a continuação exata do que ela acabou de ver no anúncio. O miolo segue o da V2.</p>
+  <div class="pages">
+    <div class="lp"><div class="src">Página A · do VIDEO_AD03</div><div class="body">
+      <div class="hl">Não adianta ter a melhor tese se ela não foi prequestionada.</div>
+      <div class="sl">É isso que separa o recurso analisado no TST do recurso que sequer é conhecido.</div>
+      <div class="then">Depois: o bloco do risco no TRT, a lista do manual, a soma de R$ 569 e o preço (miolo da V2).</div>
+      <div class="for">Para: o anúncio que mais vende no perpétuo</div>
+    </div></div>
+    <div class="lp"><div class="src">Página B · do VIDEO_AD01</div><div class="body">
+      <div class="hl">O prequestionamento é o filtro silencioso do Recurso de Revista.</div>
+      <div class="sl">A matéria que não está no acórdão do TRT não é analisada no TST.</div>
+      <div class="then">Depois: um desenho simples do caminho TRT → acórdão → ED → TST mostrando onde a matéria fica pelo caminho, e o miolo da V2.</div>
+      <div class="for">Para: o anúncio com menor custo por venda</div>
+    </div></div>
+    <div class="lp"><div class="src">Página C · do ESTATICO_AD07</div><div class="body">
+      <div class="hl">Surgiu uma dúvida de prequestionamento no seu processo? Consulte.</div>
+      <div class="sl">Precisa opor ED? Fluxograma. A matéria está prequestionada? Checklist. Precisa provocar o TRT? Modelo pronto.</div>
+      <div class="then">Depois: imagens do material e preço cedo, no formato curto da V3, que foi onde esse anúncio vendeu.</div>
+      <div class="for">Para: o anúncio que fala da ferramenta</div>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Próximo passo</h2>
+  <ol class="steps">
+    <li>Fechar esta rodada com a V2 como página base.</li>
+    <li>Montar a <b>Página A</b> primeiro: ela nasce do anúncio que mais vende. A GGD entrega o texto da abertura pronto.</li>
+    <li>Na rodada seguinte, o mesmo anúncio leva metade das pessoas à V2 e metade à Página A. Só a página muda, como neste teste.</li>
+    <li>As páginas B e C entram depois, uma de cada vez, se a A confirmar que continuar a fala do anúncio aumenta a venda.</li>
+  </ol>
+</section>
+
+<footer>Leitura de 16/10/2026, sugestões de 17/10/2026, com dados do Meta (atribuição padrão da conta). O dia 16/10 ainda está em andamento. Gio Growth Digital.</footer>
 </div>
 </body>
 </html>
