@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Teste de Preço · Leitura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: relatório de uma coluna, tabelas de leitura rápida, faixa de veredito no topo */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5d6a63; --line:#dde3df;
+  --accent:#1f6b4f; --accent-soft:#e3efe9;
+  --good:#1f7a4d; --warn:#9a6a00; --bad:#b0362c; --warn-soft:#fbf1dc; --bad-soft:#f8e4e1;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121614; --surface:#1a201d; --fg:#e4ebe7; --muted:#9aa8a0; --line:#2c3531;
+  --accent:#6cc39b; --accent-soft:#1d3329; --good:#6cc39b; --warn:#e2b24f; --bad:#ef8a80; --warn-soft:#332a14; --bad-soft:#3a1f1c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1a201d; --fg:#e4ebe7; --muted:#9aa8a0; --line:#2c3531;
+  --accent:#6cc39b; --accent-soft:#1d3329; --good:#6cc39b; --warn:#e2b24f; --bad:#ef8a80; --warn-soft:#332a14; --bad-soft:#3a1f1c; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:32px 56px;display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(28px,5vw,40px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.2 var(--f-display);margin:0 0 4px;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.sub{color:var(--muted)}
+.verdict{background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.verdict strong{color:var(--accent)}
+section{display:flex;flex-direction:column;gap:12px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+tr.ctrl td{background:var(--bg);font-weight:500}
+tr.tot td{font-weight:600}
+.pill{display:inline-block;font:500 12px var(--f-mono);padding:2px 8px;border-radius:99px}
+.g{background:var(--accent-soft);color:var(--good)} .w{background:var(--warn-soft);color:var(--warn)} .b{background:var(--bad-soft);color:var(--bad)}
+.bars{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.bar{display:grid;grid-template-columns:150px 1fr 56px;gap:12px;align-items:center;font-variant-numeric:tabular-nums}
+.bar .t{height:14px;background:var(--bg);border-radius:4px;overflow:hidden}
+.bar .f{height:100%;background:var(--accent);border-radius:4px}
+.bar.c .f{background:var(--muted)}
+.bar .v{text-align:right;font-family:var(--f-mono);font-size:13px}
+.note{font-size:13px;color:var(--muted)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.alert{background:var(--warn-soft);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 48px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Felipe Scherer · Playbook · Teste de preço</span>
+    <h1>Teste de preço: primeira leitura</h1>
+    <p class="sub">De 14 a 16/10/2026. Quatro páginas iguais à página atual, mudando só o preço: R$37,90, R$47, R$57 e R$67. A comparação é com a página atual a R$19,90 no mesmo período. Valores de investimento com imposto.</p>
+  </header>
+
+  <div class="verdict">
+    <p><strong>A página de R$37,90 já entrega o mesmo retorno que a página atual, com quase o dobro de valor por venda.</strong> Nas páginas de R$57 e R$67 a pessoa abre a página, vê o preço e não segue para o pagamento. Por isso essas duas saíram do teste em 16/10, e o investimento fica concentrado em R$37,90 e R$47.</p>
+    <p class="note">Ainda é uma leitura inicial, com poucas vendas por página. A leitura completa sai entre 18 e 19/10.</p>
+  </div>
+
+  <section>
+    <h2>Funil por página</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Página</th><th>Investimento</th><th>Cliques</th><th>CPC</th><th>Abertura da página</th><th>Custo/visualização</th><th>Conversão da página</th><th>Custo/checkout</th><th>Custo/venda</th><th>Vendas</th><th>Faturamento</th><th>ROAS</th></tr></thead>
+      <tbody>
+        <tr><td>R$37,90</td><td>R$231,76</td><td>31</td><td>R$7,48</td><td>90,3%</td><td>R$8,28</td><td>21,4%</td><td>R$38,63</td><td>R$46,35</td><td>5</td><td>R$189,50</td><td><span class="pill g">0,82x</span></td></tr>
+        <tr><td>R$47</td><td>R$295,88</td><td>49</td><td>R$6,04</td><td>79,6%</td><td>R$7,59</td><td>10,3%</td><td>R$73,97</td><td>R$147,94</td><td>2</td><td>R$94,00</td><td><span class="pill w">0,32x</span></td></tr>
+        <tr><td>R$57 · encerrada</td><td>R$288,09</td><td>37</td><td>R$7,79</td><td>86,5%</td><td>R$9,00</td><td>9,4%</td><td>R$96,03</td><td>—</td><td>0</td><td>R$0,00</td><td><span class="pill w">0,00x</span></td></tr>
+        <tr><td>R$67 · encerrada</td><td>R$310,89</td><td>61</td><td>R$5,10</td><td>82,0%</td><td>R$6,22</td><td>4,0%</td><td>R$155,45</td><td>R$310,89</td><td>1</td><td>R$67,00</td><td><span class="pill w">0,22x</span></td></tr>
+        <tr class="tot"><td>Total do teste</td><td>R$1.126,62</td><td>178</td><td>R$6,33</td><td>83,7%</td><td>R$7,56</td><td>10,1%</td><td>R$75,11</td><td>R$140,83</td><td>8</td><td>R$350,50</td><td>0,31x</td></tr>
+        <tr class="ctrl"><td>Página atual · R$19,90</td><td>R$1.734,58</td><td>429</td><td>R$4,04</td><td>85,5%</td><td>R$4,73</td><td>17,4%</td><td>R$27,10</td><td>R$41,30</td><td>42</td><td>R$1.311,50</td><td>0,76x</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">CPC = investimento ÷ cliques no link. Abertura da página = visualizações da página ÷ cliques. Custo/visualização = investimento ÷ visualizações da página. Conversão da página = pessoas que foram ao pagamento ÷ visualizações da página. ROAS = faturamento ÷ investimento. Na página atual o faturamento passa de 42 × R$19,90 porque algumas compras vieram com valor maior.</p>
+  </section>
+
+  <section>
+    <h2>Onde o preço pesa</h2>
+    <p>O anúncio e a abertura da página ficam parecidos nas quatro: CPC entre R$5,10 e R$7,79 e abertura acima de 79%. O que muda é quantas pessoas seguem da página para o pagamento. Com R$37,90 essa passagem é até maior que na página atual. A partir de R$47 ela cai pela metade.</p>
+    <div class="bars" role="img" aria-label="Conversão da página: R$37,90 21,4%, página atual 17,4%, R$47 10,3%, R$57 9,4%, R$67 4,0%">
+      <div class="bar"><span>R$37,90</span><div class="t"><div class="f" style="width:85.6%"></div></div><span class="v">21,4%</span></div>
+      <div class="bar c"><span>Atual · R$19,90</span><div class="t"><div class="f" style="width:69.6%"></div></div><span class="v">17,4%</span></div>
+      <div class="bar"><span>R$47</span><div class="t"><div class="f" style="width:41.2%"></div></div><span class="v">10,3%</span></div>
+      <div class="bar"><span>R$57</span><div class="t"><div class="f" style="width:37.6%"></div></div><span class="v">9,4%</span></div>
+      <div class="bar"><span>R$67</span><div class="t"><div class="f" style="width:16%"></div></div><span class="v">4,0%</span></div>
+    </div>
+    <p class="note">Conversão da página (visualização → pagamento), escala de 0 a 25%.</p>
+  </section>
+
+  <section>
+    <h2>Anúncios no teste</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Anúncio</th><th>Investimento</th><th>Vendas</th><th>Faturamento</th><th>ROAS</th></tr></thead>
+      <tbody>
+        <tr><td>AD70 · estático</td><td>R$242,40</td><td>6</td><td>R$245,60</td><td><span class="pill g">1,01x</span></td></tr>
+        <tr><td>AD03 · vídeo</td><td>R$369,87</td><td>1</td><td>R$67,00</td><td>0,18x</td></tr>
+        <tr><td>AD1 · vídeo</td><td>R$227,86</td><td>1</td><td>R$37,90</td><td>0,17x</td></tr>
+        <tr><td>AD_MIX · vídeos</td><td>R$286,49</td><td>0</td><td>R$0,00</td><td>0,00x</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Os vídeos foram editados sem a fala do preço de R$19,90 para poderem rodar nas páginas novas.</p>
+  </section>
+
+  <section>
+    <h2>Anúncio × preço</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Anúncio</th><th>R$37,90</th><th>R$47</th><th>R$57</th><th>R$67</th></tr></thead>
+      <tbody>
+        <tr><td>AD70</td><td><strong>R$67 · 4 vendas · 2,25x</strong></td><td>R$61 · 2 vendas · 1,54x</td><td>R$57 · 0</td><td>R$57 · 0</td></tr>
+        <tr><td>AD03</td><td>R$90 · 0</td><td>R$85 · 0</td><td>R$87 · 0</td><td>R$108 · 1 venda · 0,62x</td></tr>
+        <tr><td>AD1</td><td>R$33 · 1 venda · 1,14x</td><td>R$67 · 0</td><td>R$64 · 0</td><td>R$64 · 0</td></tr>
+        <tr><td>AD_MIX</td><td>R$41 · 0</td><td>R$83 · 0</td><td>R$81 · 0</td><td>R$82 · 0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Cada célula mostra investimento · vendas · ROAS.</p>
+  </section>
+
+  <section>
+    <h2>O AD70 é o anúncio que puxa o teste</h2>
+    <ul>
+      <li>Na página de R$37,90 fez 4 vendas com R$67 de investimento: R$151,60 de faturamento, 2,25x.</li>
+      <li>Na página atual de R$19,90 fez 11 vendas no mesmo período, a R$15,14 por venda. É o anúncio de menor custo por venda da conta.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Próximos passos</h2>
+    <ul>
+      <li>Seguir com as páginas de R$37,90 e R$47 até a leitura completa, entre 18 e 19/10.</li>
+      <li>Se a página de R$37,90 mantiver o ritmo, ela passa a ser a candidata para substituir a de R$19,90.</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>
