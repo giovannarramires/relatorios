@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Triagem Dr. Omar de Faria</title>
+<style>
+  :root {
+    --ground: #EEEFE9;
+    --surface: #F7F8F3;
+    --field: #FFFFFF;
+    --ink: #1C1F1A;
+    --ink-soft: #43483E;
+    --muted: #6B6F63;
+    --line: #D4D7CA;
+    --line-soft: #E1E3D8;
+    --accent: #8F6410;
+    --moss: #2F4636;
+    --star: #7A4A0C;
+    --star-bg: #EFE6D2;
+    --bar: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14120E;
+      --surface: #1C1A15;
+      --field: #211E18;
+      --ink: #E9E4D7;
+      --ink-soft: #C7C1B1;
+      --muted: #948D7D;
+      --line: #38342A;
+      --line-soft: #2A261D;
+      --accent: #D8A63F;
+      --moss: #8FAE97;
+      --star: #E0B463;
+      --star-bg: #2A2115;
+      --bar: #1A1712;
+    }
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px 180px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  header.top { display: flex; flex-direction: column; gap: 20px; padding: 72px 0 36px; }
+  h1 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, "Palatino Linotype", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst { max-width: 62ch; font-size: 18.5px; color: var(--ink-soft); margin: 0; }
+
+  .howto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .howto div { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .howto b {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .howto span { font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+
+  .whobox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .whobox label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .whobox input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 11px;
+  }
+  .whobox input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+  .section-title p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 66ch; }
+  .read { margin-top: 56px; }
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-top: 0;
+  }
+  .finding { background: var(--surface); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .finding h3 { margin: 0; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+  .finding p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+
+  .blocks { margin-top: 70px; }
+  section.block {
+    display: grid;
+    grid-template-columns: 214px 1fr;
+    gap: 44px;
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  section.block:first-of-type { border-top: 2px solid var(--ink); }
+  .block-head { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .block-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.17em;
+    color: var(--accent);
+  }
+  .block-head h2 {
+    font-family: "Iowan Old Style", "Hoefler Text", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-why { font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 26ch; margin: 0; }
+  .block-count {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ul.qs { list-style: none; margin: 0; padding: 0; }
+  ul.qs > li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 84px;
+    align-items: start;
+    column-gap: 8px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  ul.qs > li:first-child { padding-top: 4px; }
+  ul.qs > li:last-child { border-bottom: 0; }
+  .qn {
+    grid-column: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding-top: 5px;
+  }
+  li[data-filled="1"] .qn { color: var(--moss); font-weight: 700; }
+  .q { grid-column: 2; max-width: 62ch; }
+  .q > p { margin: 0; color: var(--ink); }
+  .q > p.note {
+    margin-top: 7px;
+    padding-left: 13px;
+    border-left: 2px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .tag {
+    grid-column: 3;
+    justify-self: end;
+    margin-top: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+    background: var(--star-bg);
+    border-radius: 2px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+  li.key .qn { color: var(--star); font-weight: 700; }
+  li.key[data-filled="1"] .qn { color: var(--moss); }
+  li.key .q > p:first-child { font-weight: 600; }
+
+  textarea.ans {
+    display: block;
+    width: 100%;
+    margin-top: 11px;
+    min-height: 46px;
+    resize: vertical;
+    overflow: hidden;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  textarea.ans::placeholder { color: var(--muted); opacity: 0.75; }
+  textarea.ans:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  textarea.ans[data-filled="1"] { border-left: 3px solid var(--moss); }
+
+  .savebar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 20;
+    background: var(--bar);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.10);
+  }
+  .savebar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 13px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .progress { flex: 1 1 200px; min-width: 170px; display: flex; flex-direction: column; gap: 6px; }
+  .progress .pline {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress .track { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .progress .fill { height: 100%; width: 0%; background: var(--moss); transition: width 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) { .progress .fill { transition: none; } }
+
+  #status { font-size: 14.5px; color: var(--muted); }
+  #status[data-tone="ok"] { color: var(--moss); }
+
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.primary { color: #F7F8F3; background: var(--moss); border-color: var(--moss); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #14120E; } }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+
+  @media (max-width: 860px) {
+    body { font-size: 16.5px; }
+    .wrap { padding: 0 20px 210px; }
+    header.top { padding-top: 44px; }
+    h1 { max-width: none; }
+    section.block { grid-template-columns: 1fr; gap: 18px; padding: 26px 0 30px; }
+    .block-head { position: static; }
+    .block-why { max-width: 58ch; }
+    ul.qs > li { grid-template-columns: 32px minmax(0, 1fr); column-gap: 10px; row-gap: 5px; }
+    .qn { grid-column: 1; grid-row: 1; }
+    .tag { grid-column: 2; grid-row: 1; justify-self: start; margin-top: 3px; }
+    .q { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+    .savebar-inner { padding: 11px 20px; gap: 10px; }
+    .btns { width: 100%; }
+    .btns button { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap"><div id="root"></div></div>
+
+<div class="savebar">
+  <div class="savebar-inner">
+    <div class="progress">
+      <div class="pline"><span id="pcount">—</span><span id="pmode"></span></div>
+      <div class="track"><div class="fill" id="pfill"></div></div>
+    </div>
+    <span id="status">&nbsp;</span>
+    <div class="btns">
+      <button type="button" id="download">Baixar respostas</button>
+      <button type="button" id="copy" class="primary">Copiar para enviar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "ggd-briefing-omar-de-faria-v1";
+
+  var BLOCKS = [
+ {
+  "n": "01",
+  "title": "Onde você está hoje",
+  "why": "O ponto de partida. Sem esses números não dá para definir meta.",
+  "qs": [
+   {
+    "key": true,
+    "q": "Hoje, o que você vende e quanto cada coisa representa do seu faturamento? (WHE, Formação em Fertilidade, mini curso de Lipedema, consultas, mentoria, palestras)",
+    "note": "Uma estimativa em porcentagem já resolve.",
+    "id": "q01"
+   },
+   {
+    "q": "Qual é o seu faturamento médio por mês, somando tudo? Se preferir, o total de 2026 até agora.",
+    "id": "q02",
+    "key": false
+   },
+   {
+    "key": true,
+    "q": "Quantos ingressos você vendeu em cada etapa do WHE em 2026? Em qual lote vendeu mais?",
+    "id": "q03"
+   },
+   {
+    "key": true,
+    "q": "Para o WHE Goiânia (05/12): qual é a meta de ingressos e quantos já foram vendidos até hoje?",
+    "id": "q04"
+   },
+   {
+    "q": "A Formação em Fertilidade: qual o preço, em qual plataforma está, quantos alunos tem e se vende o ano todo ou por turma.",
+    "id": "q05",
+    "key": false
+   },
+   {
+    "q": "Você ainda atende no consultório? Quer mais pacientes ou o foco agora é só o público profissional?",
+    "id": "q06",
+    "key": false
+   }
+  ]
+ },
+ {
+  "n": "02",
+  "title": "Onde você quer chegar",
+  "why": "É isso que define o que vamos anunciar primeiro.",
+  "qs": [
+   {
+    "key": true,
+    "q": "Daqui a 12 meses, o que precisa ter acontecido para você dizer que valeu a pena? Em número (faturamento, ingressos, alunos).",
+    "id": "q07"
+   },
+   {
+    "key": true,
+    "q": "Se tivesse que escolher um único produto para crescer em 2027, qual seria? Por quê?",
+    "id": "q08"
+   },
+   {
+    "q": "Tem algo novo nos planos: pós-graduação, curso online, mentoria, comunidade, novas cidades? Para quando?",
+    "id": "q09",
+    "key": false
+   },
+   {
+    "q": "O calendário do WHE 2027 já está definido? Quais cidades e datas?",
+    "id": "q10",
+    "key": false
+   }
+  ]
+ },
+ {
+  "n": "03",
+  "title": "Tráfego pago",
+  "why": "Para entender o que já foi feito e não repetir o que não deu certo.",
+  "qs": [
+   {
+    "key": true,
+    "q": "Você já investiu em anúncios? Quanto por mês, ou por etapa do WHE, e em quais plataformas (Instagram/Facebook, Google, YouTube)?",
+    "id": "q11"
+   },
+   {
+    "q": "O que deu resultado e o que não deu? Teve algum anúncio ou campanha que vendeu bem?",
+    "id": "q12",
+    "key": false
+   },
+   {
+    "key": true,
+    "q": "Quanto você pode investir em anúncios por mês daqui para frente? E por quantos meses consegue manter antes de cobrar retorno?",
+    "note": "Estamos falando só da verba dos anúncios, paga direto às plataformas. A gestão é à parte.",
+    "id": "q13"
+   },
+   {
+    "key": true,
+    "q": "Quem tem acesso hoje à conta de anúncios, ao portfólio empresarial do Meta e à Sympla? Está tudo no seu nome?",
+    "note": "Se a conta está no nome de outra pessoa ou de uma agência, você corre o risco de perder o histórico. É a primeira coisa que resolvemos.",
+    "id": "q14"
+   },
+   {
+    "q": "Hoje você consegue saber de onde veio cada venda (anúncio, Instagram, indicação, palestra)?",
+    "id": "q15",
+    "key": false
+   },
+   {
+    "key": true,
+    "q": "O que você espera receber da gestão de tráfego: que tipo de relatório, com que frequência e o que não pode faltar nele?",
+    "id": "q16"
+   }
+  ]
+ },
+ {
+  "n": "04",
+  "title": "Orgânico e equipe",
+  "why": "Anúncio bom depende de conteúdo bom e de alguém para atender quem chega.",
+  "qs": [
+   {
+    "key": true,
+    "q": "Quem cuida hoje do seu Instagram: quem grava, edita, faz as artes, posta e responde o direct?",
+    "id": "q17"
+   },
+   {
+    "q": "Quem faz e atualiza o site do WHE e o linktree?",
+    "id": "q18",
+    "key": false
+   },
+   {
+    "q": "Quanto tempo por semana você consegue reservar para gravar? Prefere gravar vários vídeos de uma vez?",
+    "id": "q19",
+    "key": false
+   },
+   {
+    "key": true,
+    "q": "Quem atende os interessados no WhatsApp e no direct e fecha a venda do ingresso e da formação?",
+    "id": "q20"
+   },
+   {
+    "q": "A sua equipe está mudando? O que você gostaria que ficasse com a agência e o que fica com você?",
+    "id": "q21",
+    "key": false
+   }
+  ]
+ },
+ {
+  "n": "05",
+  "title": "Público e mensagem",
+  "why": "Para o anúncio falar com quem compra, do jeito certo.",
+  "qs": [
+   {
+    "key": true,
+    "q": "Quem é o profissional que mais compra de você: nutricionista ou médico? Recém-formado ou com consultório cheio? De quais regiões?",
+    "id": "q22"
+   },
+   {
+    "q": "Por que as pessoas escolhem o WHE e não outro evento ou curso? O que mais ouve de quem participou?",
+    "id": "q23",
+    "key": false
+   },
+   {
+    "q": "O que faz alguém desistir de comprar? Quais são as dúvidas e objeções que mais aparecem?",
+    "id": "q24",
+    "key": false
+   },
+   {
+    "q": "Quem você enxerga como concorrente (eventos, cursos, outros profissionais)?",
+    "id": "q25",
+    "key": false
+   },
+   {
+    "q": "Tem algum tema, promessa ou formato que você não quer ver ligado ao seu nome?",
+    "id": "q26",
+    "key": false
+   }
+  ]
+ },
+ {
+  "n": "06",
+  "title": "Base e materiais",
+  "why": "O que você já tem e que pode virar anúncio desde o primeiro dia.",
+  "qs": [
+   {
+    "q": "Você tem a lista de quem já comprou ingresso, de alunos e de quem participou das lives? Mais ou menos quantos contatos?",
+    "id": "q27",
+    "key": false
+   },
+   {
+    "q": "Tem vídeos das etapas anteriores, depoimentos gravados de participantes e autorização para usar essas imagens?",
+    "id": "q28",
+    "key": false
+   },
+   {
+    "q": "Os patrocinadores e parceiros do WHE ajudam a divulgar? Existe alguma contrapartida de divulgação combinada?",
+    "id": "q29",
+    "key": false
+   }
+  ]
+ }
+];
+
+  var FINDINGS = [
+ {
+  "h": "Uma marca forte no meio profissional",
+  "p": "O WHE já passou por várias capitais em 2026, tem patrocinador de laboratório e você está nos palcos de eventos grandes, como o Nutrição Brasil. Essa autoridade é o que mais facilita o anúncio."
+ },
+ {
+  "h": "O link da bio ainda mostra o WHE Recife",
+  "p": "O primeiro botão do linktree leva para a etapa de Recife, que já aconteceu. Quem quer comprar Goiânia precisa achar o caminho sozinho. É um ajuste rápido."
+ },
+ {
+  "h": "A página de Goiânia ainda sem palestrantes",
+  "p": "A página diz que os palestrantes serão anunciados em breve. Nas outras etapas, os nomes confirmados foram um dos conteúdos que mais movimentaram a venda."
+ },
+ {
+  "h": "Nenhum anúncio ativo hoje",
+  "p": "Na Biblioteca de Anúncios do Meta não aparece nenhuma campanha sua no ar neste momento. Quer dizer que a venda de Goiânia está dependendo hoje do orgânico e das parcerias."
+ },
+ {
+  "h": "O que mais alcança é o conteúdo clínico",
+  "p": "Entre os reels mais recentes, os que mais tiveram visualizações foram os de GLP-1 e lipedema. São bons candidatos para virar anúncio."
+ },
+ {
+  "h": "Fertilidade é um espaço pouco disputado",
+  "p": "Quase ninguém anuncia formação em fertilidade para profissionais. Lipedema, por outro lado, já tem muitos cursos anunciando ao mesmo tempo."
+ }
+];
+
+  var TOTAL = 0;
+  for (var i = 0; i < BLOCKS.length; i++) TOTAL += BLOCKS[i].qs.length;
+
+  var STATE = { answers: {}, who: "", updated: "" };
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        STATE.answers = parsed.answers || {};
+        STATE.who = parsed.who || "";
+        STATE.updated = parsed.updated || "";
+      }
+    }
+  } catch (e) {}
+
+  var root = document.getElementById("root");
+  var statusEl = document.getElementById("status");
+  var pcount = document.getElementById("pcount");
+  var pfill = document.getElementById("pfill");
+  var pmode = document.getElementById("pmode");
+  var saveTimer = null;
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function answered(id) {
+    var v = STATE.answers[id];
+    return !!(v && String(v).trim().length);
+  }
+
+  function blockDone(b) {
+    var n = 0;
+    for (var i = 0; i < b.qs.length; i++) if (answered(b.qs[i].id)) n++;
+    return n;
+  }
+
+  function fmt(iso) {
+    try {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      var pad = function (x) { return x < 10 ? "0" + x : "" + x; };
+      return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " às " + pad(d.getHours()) + "h" + pad(d.getMinutes());
+    } catch (e) { return ""; }
+  }
+
+  function render() {
+    var h = [];
+
+    h.push('<header class="top">');
+    h.push('<div class="eyebrow">Dr. Omar de Faria × GGD · triagem inicial</div>');
+    h.push('<h1>Para onde você quer <em>levar o seu trabalho</em></h1>');
+    h.push('<p class="standfirst">Antes da nossa call, queremos entender onde você está hoje e onde quer chegar. São 29 perguntas em seis blocos, respondidas aqui mesmo nesta página. Não precisa responder tudo nem na ordem: as 12 marcadas como essenciais são as que mais ajudam a chegar na call com um plano concreto.</p>');
+    h.push('<div class="howto">');
+    h.push('<div><b>Como responder</b><span>Escreva direto no campo abaixo de cada pergunta. Resposta curta serve. Pode responder por tópicos, e “não sei” também é uma resposta útil.</span></div>');
+    h.push('<div><b>Salva sozinho</b><span>O texto fica guardado neste navegador conforme você escreve. Pode fechar e voltar depois, no mesmo aparelho.</span></div>');
+    h.push('<div><b>Quando terminar</b><span>Clique em <strong>Copiar para enviar</strong> na barra de baixo e cole no WhatsApp da Gio — ou use <strong>Baixar respostas</strong> e mande o arquivo.</span></div>');
+    h.push('</div>');
+    h.push('<div class="whobox"><label for="who">Quem está respondendo</label>');
+    h.push('<input id="who" type="text" placeholder="Nome de quem preencheu" value="' + esc(STATE.who || "") + '"></div>');
+    h.push('</header>');
+
+    h.push('<div class="read"><div class="section-title"><div class="eyebrow">Antes de começar</div>');
+    h.push('<h2>O que já observamos no seu perfil</h2>');
+    h.push('<p>Leitura rápida do Instagram, do site do WHE e da Biblioteca de Anúncios, feita antes da nossa conversa. Nada aqui é conclusão fechada: são pontos para confirmar com você.</p></div>');
+    h.push('<div class="findings">');
+    for (var f = 0; f < FINDINGS.length; f++) {
+      h.push('<div class="finding"><h3>' + esc(FINDINGS[f].h) + '</h3><p>' + esc(FINDINGS[f].p) + '</p></div>');
+    }
+    h.push('</div></div>');
+
+    h.push('<div class="blocks">');
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      h.push('<section class="block"><div class="block-head">');
+      h.push('<div class="block-num">BLOCO ' + esc(bl.n) + '</div>');
+      h.push('<h2>' + esc(bl.title) + '</h2>');
+      h.push('<p class="block-why">' + esc(bl.why) + '</p>');
+      h.push('<div class="block-count" data-bcount="' + b + '">' + blockDone(bl) + ' de ' + bl.qs.length + ' respondidas</div>');
+      h.push('</div><ul class="qs">');
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var num = it.id.replace("q", "");
+        var full = answered(it.id) ? "1" : "0";
+        h.push('<li class="' + (it.key ? "key" : "") + '" data-filled="' + full + '">');
+        h.push('<span class="qn">' + esc(num) + '</span>');
+        h.push('<div class="q"><p>' + esc(it.q) + '</p>');
+        if (it.note) h.push('<p class="note">' + esc(it.note) + '</p>');
+        h.push('<textarea class="ans" id="' + it.id + '" data-id="' + it.id + '" data-filled="' + full + '" rows="1" placeholder="Sua resposta…">' + esc(STATE.answers[it.id] || "") + '</textarea>');
+        h.push('</div>');
+        if (it.key) h.push('<span class="tag">essencial</span>');
+        h.push('</li>');
+      }
+      h.push('</ul></section>');
+    }
+    h.push('</div>');
+
+    h.push('<footer>As observações do início vêm da leitura do perfil público, do site do WHE e da Biblioteca de Anúncios do Meta em 19 de outubro de 2026, e podem estar incompletas. O que se vê de fora quase sempre tem uma explicação de dentro. O que não couber nos campos, mande por WhatsApp ou deixe para a call.</footer>');
+
+    root.innerHTML = h.join("");
+    autosizeAll();
+    updateProgress();
+    if (STATE.updated) setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+  }
+
+  function autosize(t) {
+    t.style.height = "auto";
+    t.style.height = (t.scrollHeight + 2) + "px";
+  }
+  function autosizeAll() {
+    var list = root.querySelectorAll("textarea.ans");
+    for (var i = 0; i < list.length; i++) autosize(list[i]);
+  }
+
+  function countAnswered() {
+    var n = 0;
+    for (var b = 0; b < BLOCKS.length; b++) {
+      for (var q = 0; q < BLOCKS[b].qs.length; q++) if (answered(BLOCKS[b].qs[q].id)) n++;
+    }
+    return n;
+  }
+
+  function updateProgress() {
+    var n = countAnswered();
+    pcount.textContent = n + " de " + TOTAL + " respondidas";
+    pfill.style.width = Math.round((n / TOTAL) * 100) + "%";
+    var counters = root.querySelectorAll("[data-bcount]");
+    for (var i = 0; i < counters.length; i++) {
+      var idx = parseInt(counters[i].getAttribute("data-bcount"), 10);
+      counters[i].textContent = blockDone(BLOCKS[idx]) + " de " + BLOCKS[idx].qs.length + " respondidas";
+    }
+    pmode.textContent = n ? Math.round((n / TOTAL) * 100) + "%" : "";
+  }
+
+  function setStatus(msg, tone) {
+    statusEl.textContent = msg;
+    if (tone) statusEl.setAttribute("data-tone", tone);
+    else statusEl.removeAttribute("data-tone");
+  }
+
+  function persist() {
+    STATE.updated = new Date().toISOString();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(STATE));
+      setStatus("Salvo neste aparelho em " + fmt(STATE.updated), "ok");
+    } catch (e) {
+      setStatus("Não deu para salvar neste navegador. Copie as respostas antes de fechar.", null);
+    }
+  }
+
+  function schedulePersist() {
+    setStatus("Salvando…");
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 700);
+  }
+
+  function buildText() {
+    var out = [];
+    out.push("TRIAGEM INICIAL — DR. OMAR DE FARIA");
+    out.push("Respondido por: " + (STATE.who || "não informado"));
+    out.push("Data: " + fmt(new Date().toISOString()));
+    out.push("Respondidas: " + countAnswered() + " de " + TOTAL);
+    out.push("");
+    for (var b = 0; b < BLOCKS.length; b++) {
+      var bl = BLOCKS[b];
+      out.push("=== BLOCO " + bl.n + " — " + bl.title.toUpperCase() + " ===");
+      out.push("");
+      for (var q = 0; q < bl.qs.length; q++) {
+        var it = bl.qs[q];
+        var v = STATE.answers[it.id];
+        out.push(it.id.replace("q", "") + ". " + it.q);
+        out.push("R: " + (v && String(v).trim() ? String(v).trim() : "(em branco)"));
+        out.push("");
+      }
+    }
+    return out.join("\n");
+  }
+
+  root.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains("ans")) {
+      autosize(t);
+      var filled = t.value.trim().length ? "1" : "0";
+      t.setAttribute("data-filled", filled);
+      var li = t.closest("li");
+      if (li) li.setAttribute("data-filled", filled);
+      STATE.answers[t.getAttribute("data-id")] = t.value;
+      updateProgress();
+      schedulePersist();
+    } else if (t && t.id === "who") {
+      STATE.who = t.value;
+      schedulePersist();
+    }
+  });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var txt = buildText();
+    var done = function () { setStatus("Respostas copiadas. Agora é só colar no WhatsApp.", "ok"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done)["catch"](function () { fallbackCopy(txt, done); });
+    } else {
+      fallbackCopy(txt, done);
+    }
+  });
+
+  function fallbackCopy(txt, done) {
+    var ta = document.createElement("textarea");
+    ta.value = txt;
+    ta.setAttribute("readonly", "readonly");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); done(); }
+    catch (e) { setStatus("Não deu para copiar. Use o botão Baixar respostas.", null); }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    var blob = new Blob([buildText()], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "triagem-omar-de-faria.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    setStatus("Arquivo baixado. Mande para a GGD por WhatsApp ou e-mail.", "ok");
+  });
+
+  window.addEventListener("beforeunload", function () {
+    if (saveTimer) { clearTimeout(saveTimer); persist(); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
