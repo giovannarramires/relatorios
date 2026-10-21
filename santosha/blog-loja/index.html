@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Santosha · Blog ligado à loja</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: coluna única; números do blog no topo, 3 passos em ordem de execução, mapa artigo → produto no fim */
+:root{
+  --bg:#f6f4ee; --surface:#fffdf8; --fg:#2b2a26; --muted:#6c6a60; --line:#e2ddd0;
+  --accent:#5b7253; --clay:#a8583b; --ok:#3f7a4a; --warn:#a86a1c; --bad:#b0442f;
+  --display:"Young Serif",Georgia,serif; --body:"Figtree",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b1c18; --surface:#24251f; --fg:#ece8dc; --muted:#a5a293; --line:#3a3b33;
+  --accent:#9fbb93; --clay:#e08d6c; --ok:#8cc796; --warn:#e2ad62; --bad:#ec8a74; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1c18; --surface:#24251f; --fg:#ece8dc; --muted:#a5a293; --line:#3a3b33;
+  --accent:#9fbb93; --clay:#e08d6c; --ok:#8cc796; --warn:#e2ad62; --bad:#ec8a74; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:900px;margin:0 auto;padding:40px 20px 72px;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,40px);line-height:1.15}
+h2{font-size:25px}
+h3{font-size:18px}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.lede{max-width:68ch;color:var(--muted);font-size:17px}
+header,section{display:flex;flex-direction:column;gap:14px}
+.sec-head{display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.sec-head p{color:var(--muted)}
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.card .big{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums}
+.card p{color:var(--muted);font-size:14.5px}
+.card.bad .big{color:var(--bad)} .card.warn .big{color:var(--warn)} .card.ok .big{color:var(--ok)}
+.passo{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.passo .topo{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.passo .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--clay);font-weight:600}
+.passo .tempo{font-size:13.5px;color:var(--muted)}
+ol,ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:74ch}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+.nota{font-size:13.5px;color:var(--muted);max-width:78ch}
+.exemplo{border-left:3px solid var(--accent);padding:10px 14px;background:var(--bg);border-radius:0 8px 8px 0;font-size:15px}
+.exemplo b{color:var(--accent)}
+footer{font-size:12.5px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Santosha · outubro de 2026</span>
+  <h1>Como ligar o blog à loja</h1>
+  <p class="lede">O blog da Santosha tem 70 artigos sobre yoga, filosofia e posturas. Quem chega pelo Google lendo sobre mudras ou Saudação ao Sol é exatamente quem compraria um baralho, um e-book ou um Matosha. Hoje, metade desses artigos não mostra nenhum produto, e parte dos links que existem leva para páginas que já não existem.</p>
+</header>
+
+<section>
+  <div class="sec-head"><h2>Como o blog está hoje</h2><p>Conferimos os 70 artigos um por um em 21 de outubro.</p></div>
+  <div class="resumo">
+    <div class="card"><span class="big">70</span><p>artigos publicados, de julho de 2024 a agosto de 2026</p></div>
+    <div class="card bad"><span class="big">35</span><p>não têm nenhum link para produto ou coleção</p></div>
+    <div class="card warn"><span class="big">15</span><p>têm link que abre uma página de erro, porque o produto saiu do site</p></div>
+    <div class="card ok"><span class="big">20</span><p>já levam para um produto que existe</p></div>
+  </div>
+  <p class="nota">Os links quebrados apontam para produtos antigos: Cartasanas vol. I e vol. II, Combo Cartasanas, Dupla de pôsteres Surya Namaskar e Livro Ashtanga Yoga. Alguns artigos também usam o endereço antigo da loja (<code>4f96e7-60.myshopify.com</code>); esse ainda funciona, mas o certo é trocar pelo endereço oficial.</p>
+</section>
+
+<section>
+  <div class="sec-head"><h2>Os 3 passos, em ordem</h2><p>Do mais rápido para o mais trabalhoso. Os dois primeiros resolvem o blog inteiro de uma vez; o terceiro é artigo por artigo.</p></div>
+
+  <div class="passo">
+    <div class="topo"><span class="tag">Passo 1</span><h3>Redirecionar os produtos antigos</h3><span class="tempo">cerca de 15 minutos · conserta os 15 artigos de uma vez</span></div>
+    <p>Em vez de abrir cada artigo, a gente avisa a Shopify: “quem procurar o produto antigo, mande para o novo”. Todo link antigo volta a funcionar na hora.</p>
+    <ol>
+      <li>No painel da Shopify, abra <b>Loja virtual → Navegação → Redirecionamentos de URL</b> (ou digite “redirecionamentos” na busca do painel).</li>
+      <li>Clique em <b>Criar redirecionamento de URL</b>.</li>
+      <li>Em “Redirecionar de”, cole o endereço antigo. Em “Redirecionar para”, o produto atual. Salve e repita para cada linha da tabela abaixo.</li>
+    </ol>
+    <div class="tbl"><table>
+      <thead><tr><th>Redirecionar de</th><th>Para</th></tr></thead>
+      <tbody>
+        <tr><td><code>/products/cartasanas-de-yoga-vol-i</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/products/cartasanas-de-yoga-vol-ii</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/products/combo-cartasanas-1</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/products/dupla-de-posteres-surya-namaskar</code></td><td><code>/products/poster-saudacao-ao-sol</code></td></tr>
+        <tr><td><code>/products/livro-ashtanga-yoga</code></td><td><code>/products/poster-ashtanga-yoga</code></td></tr>
+        <tr><td><code>/collections/baralhos/products/cartasanas-de-yoga-vol-i</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/collections/baralhos/products/cartasanas-de-yoga-vol-ii</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/collections/baralhos/products/combo-cartasanas-1</code></td><td><code>/products/cartasanas-de-yoga</code></td></tr>
+        <tr><td><code>/collections/posteres/products/dupla-de-posteres-surya-namaskar</code></td><td><code>/products/poster-saudacao-ao-sol</code></td></tr>
+      </tbody>
+    </table></div>
+    <p class="nota">As linhas que começam com <code>/collections/</code> existem porque alguns artigos usaram o link de dentro da coleção. Se a Shopify recusar alguma por já existir, é só pular. O Livro Ashtanga Yoga não é mais vendido; mandamos para o pôster Ashtanga Yoga, que é o produto mais próximo. Se preferirem outro destino, troquem.</p>
+  </div>
+
+  <div class="passo">
+    <div class="topo"><span class="tag">Passo 2</span><h3>Colocar produtos no fim de todos os artigos</h3><span class="tempo">cerca de 30 minutos · vale para os 70 artigos</span></div>
+    <p>O tema da loja (Combine) deixa adicionar uma faixa de produtos no modelo dos artigos. Ela aparece embaixo de todo artigo, inclusive dos que ainda vão ser escritos.</p>
+    <ol>
+      <li>Abra <b>Loja virtual → Temas → Personalizar</b>.</li>
+      <li>No seletor de páginas, no topo da tela, escolha <b>Posts do blog</b> (pode aparecer como “Artigos” ou “Blog posts”).</li>
+      <li>Embaixo do conteúdo do artigo, clique em <b>Adicionar seção</b> e escolha <b>Coleção em destaque</b> (ou “Lista de produtos”).</li>
+      <li>Escolha a coleção <b>Mais vendidos</b>, deixe 4 produtos e dê um título como “Para levar para a sua prática”.</li>
+      <li>Clique em <b>Salvar</b>.</li>
+    </ol>
+    <p class="nota">Essa faixa é a mesma em todos os artigos. Para mostrar um produto diferente em cada artigo (por exemplo, o e-book de Mudras só nos artigos de mudras), dá para criar um campo “produto relacionado” em cada artigo. É um ajuste mais técnico, que podemos fazer juntas depois que o básico estiver no ar.</p>
+  </div>
+
+  <div class="passo">
+    <div class="topo"><span class="tag">Passo 3</span><h3>Links no meio do texto</h3><span class="tempo">5 minutos por artigo · começar pelos 10 da lista abaixo</span></div>
+    <p>É o link que mais vende, porque aparece no momento em que a leitora está interessada no assunto. A ideia é colocar de 1 a 3 links por artigo, em frases que já falam do produto.</p>
+    <ol>
+      <li>Abra <b>Loja virtual → Posts do blog</b> e clique no artigo.</li>
+      <li>No texto, selecione a frase que fala do produto.</li>
+      <li>Clique no ícone de <b>corrente (link)</b> na barra do editor, cole o endereço do produto e salve o artigo.</li>
+    </ol>
+    <div class="exemplo"><b>Exemplo.</b> No artigo sobre mudras, a frase “se você quer aprofundar os gestos de mão” vira um link para o e-book <i>Yoga na Ponta dos Dedos</i>. Evitem links soltos como “clique aqui”: a frase do link deve dizer para onde a pessoa vai.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>Por onde começar o passo 3</h2><p>Os artigos que falam de um produto e hoje não levam até ele, ou levam para uma página de erro. São os que mais rendem com menos trabalho.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Artigo</th><th>Hoje</th><th>Ligar a</th></tr></thead>
+    <tbody>
+      <tr><td>Cartasflow</td><td>sem link</td><td>Cartasflow</td></tr>
+      <tr><td>Cartasanas de Yoga: a jornada completa</td><td>sem link</td><td>Cartasanas de Yoga</td></tr>
+      <tr><td>Qual baralho escolher</td><td>1 link quebrado</td><td>Cartasanas, Cartasflow e Cartasprana</td></tr>
+      <tr><td>Seu cantinho do seu jeito (pôsteres)</td><td>sem link</td><td>coleção Pôsteres</td></tr>
+      <tr><td>Montando sua própria sequência de yoga</td><td>sem link</td><td>Manual de Sequências e Cartasanas</td></tr>
+      <tr><td>Virabhadrasana · 2 asanas, 2 classificações · Deusa Kali</td><td>1 link quebrado cada</td><td>Cartasanas de Yoga</td></tr>
+      <tr><td>Mudra</td><td>sem link</td><td>e-book Yoga na Ponta dos Dedos</td></tr>
+      <tr><td>Os cinco vrttis · Svadhyaya · Sadhana</td><td>sem link</td><td>e-book Introdução à Filosofia do Yoga</td></tr>
+      <tr><td>Sobre o yoga restaurativo</td><td>sem link</td><td>Shavasana Pillow e Bloco de Yoga</td></tr>
+      <tr><td>Oficina do Asana (6 artigos)</td><td>sem link</td><td>Cartasanas de Yoga e Bloco de Yoga</td></tr>
+    </tbody>
+  </table></div>
+  <p class="nota">O artigo “Zafu Chandra” fala de um produto que não está mais na loja. Vale atualizar o texto para outro produto ou tirar o artigo do ar. O artigo “Onde comprar nossos produtos” deveria levar para a página Todos os produtos.</p>
+</section>
+
+<section>
+  <div class="sec-head"><h2>O que muda</h2></div>
+  <ul>
+    <li>Quem lê o blog passa a ter um caminho até a loja, sem precisar procurar.</li>
+    <li>O Google entende melhor quais páginas da loja são importantes, porque recebem links de dentro do próprio site.</li>
+    <li>Deixam de existir páginas de erro dentro do blog, o que pesa contra a loja na busca.</li>
+  </ul>
+</section>
+
+<footer>GGD · Gio Growth Digital</footer>
+</div>
+</body>
+</html>
