@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Criativos Go Heat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;--warm:#A9662F;--warm-soft:#F5E9DE}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;--accent:#4FC2B1;--accent-soft:#12312D;--warm:#D6935C;--warm-soft:#33241A}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 16px 96px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+header{padding-top:64px;display:flex;flex-direction:column;gap:20px;max-width:780px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(36px,6vw,58px);line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:28px;line-height:1.18;margin:0}
+h3{font-weight:700;font-size:20px;margin:0;line-height:1.25}
+p{margin:0;max-width:68ch}
+a{color:inherit}
+.dek{color:var(--muted);font-size:19px}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+section{display:flex;flex-direction:column;gap:20px}
+.jump{display:flex;flex-wrap:wrap;gap:10px}
+.jump a{font-family:"IBM Plex Mono",monospace;font-size:13px;text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:3px}
+.jump a:hover{border-color:var(--accent);color:var(--accent)}
+.artes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.arte{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+.arte img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.arte figcaption{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;font-size:14.5px;line-height:1.4}
+.cod{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent)}
+.arte .d{color:var(--muted)}
+.dl{margin-top:6px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.dl a{color:var(--accent)}
+.rot{border-top:2px solid var(--ink);padding-top:26px;display:flex;flex-direction:column;gap:16px}
+.rothead{display:flex;gap:18px;align-items:flex-start}
+.rothead .num{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);padding-top:5px}
+.ficha{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:8px}
+.ficha span{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:2px}
+.por{color:var(--muted);font-size:16px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px;line-height:1.45}
+th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.tm{font-family:"IBM Plex Mono",monospace;font-size:12.5px;white-space:nowrap;color:var(--accent)}
+td.fala{font-weight:500}
+td.tela{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--warm)}
+.nota{font-size:15.5px}
+.cuid{background:var(--warm-soft);padding:10px 14px;border-radius:3px;max-width:none}
+ul.geral{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.msg{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px 20px;white-space:pre-wrap;font-size:15.5px;max-width:72ch}
+button{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--accent);color:var(--surface);border:0;border-radius:3px;padding:9px 14px;cursor:pointer;align-self:flex-start}
+@media (max-width:560px){.artes{grid-template-columns:1fr 1fr;gap:12px}.arte figcaption{font-size:13.5px}}
+@media print{.jump,button,.artes{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Academia Go Heat · Outubro de 2026</p>
+  <h1>10 artes e 6 roteiros para gravar</h1>
+  <p class="dek">Saíram do estudo do que as academias que mais anunciam estão fazendo (<a href="../referencias/">veja o estudo</a>). As artes usam cenas dos reels da própria Go Heat e já estão prontas. Os roteiros são vídeos curtos para a equipe gravar com o celular.</p>
+  <p class="meta">21 de outubro de 2026 · GGD Growth Digital</p>
+  <nav class="jump"><a href="#artes">10 artes prontas</a><a href="#roteiros">6 roteiros</a><a href="#gravar">Como gravar</a><a href="#mensagem">Mensagem para a Go Heat</a></nav>
+</header>
+
+<section id="artes">
+  <h2>10 artes prontas</h2>
+  <p>Todas com a oferta de aula experimental gratuita, o botão para o Direct e o endereço. Cada uma em 3 tamanhos: 1:1 para o feed, 4:5 para o feed do Instagram e 9:16 para stories e reels.</p>
+  <div class="artes">
+<figure class="arte">
+  <a href="artes/G01_HORARIO_MARCADO_4x5.jpg" target="_blank"><img src="artes/G01_HORARIO_MARCADO_4x5.jpg" alt="Aqui o seu treino tem horário marcado" loading="lazy"></a>
+  <figcaption><span class="cod">G01</span><strong>Aqui o seu treino tem horário marcado</strong><span class="d">Salão vazio de verdade. Responde à academia lotada que a Panobianco e a D’ONE citam.</span><span class="dl">Baixar <a href="artes/G01_HORARIO_MARCADO_1x1.jpg" download>1:1</a> · <a href="artes/G01_HORARIO_MARCADO_4x5.jpg" download>4:5</a> · <a href="artes/G01_HORARIO_MARCADO_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G02_PROFESSOR_DO_LADO_4x5.jpg" target="_blank"><img src="artes/G02_PROFESSOR_DO_LADO_4x5.jpg" alt="Professor do seu lado em cada treino" loading="lazy"></a>
+  <figcaption><span class="cod">G02</span><strong>Professor do seu lado em cada treino</strong><span class="d">Professor ajustando o aluno no aparelho. É o argumento da Corpore, com a cena da Go Heat.</span><span class="dl">Baixar <a href="artes/G02_PROFESSOR_DO_LADO_1x1.jpg" download>1:1</a> · <a href="artes/G02_PROFESSOR_DO_LADO_4x5.jpg" download>4:5</a> · <a href="artes/G02_PROFESSOR_DO_LADO_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G03_ENERGIA_DE_SOBRA_4x5.jpg" target="_blank"><img src="artes/G03_ENERGIA_DE_SOBRA_4x5.jpg" alt="Seu filho tem energia de sobra?" loading="lazy"></a>
+  <figcaption><span class="cod">G03</span><strong>Seu filho tem energia de sobra?</strong><span class="d">Turma kids sentada no tatame com o professor. É a pergunta que a Gracie Elite faz aos pais.</span><span class="dl">Baixar <a href="artes/G03_ENERGIA_DE_SOBRA_1x1.jpg" download>1:1</a> · <a href="artes/G03_ENERGIA_DE_SOBRA_4x5.jpg" download>4:5</a> · <a href="artes/G03_ENERGIA_DE_SOBRA_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G04_DISCIPLINA_E_CONFIANCA_4x5.jpg" target="_blank"><img src="artes/G04_DISCIPLINA_E_CONFIANCA_4x5.jpg" alt="Disciplina, foco e confiança" loading="lazy"></a>
+  <figcaption><span class="cod">G04</span><strong>Disciplina, foco e confiança</strong><span class="d">Aluno do kids de kimono, olhando para a câmera. Fala com os pais.</span><span class="dl">Baixar <a href="artes/G04_DISCIPLINA_E_CONFIANCA_1x1.jpg" download>1:1</a> · <a href="artes/G04_DISCIPLINA_E_CONFIANCA_4x5.jpg" download>4:5</a> · <a href="artes/G04_DISCIPLINA_E_CONFIANCA_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G05_A_GENTE_TE_ENSINA_4x5.jpg" target="_blank"><img src="artes/G05_A_GENTE_TE_ENSINA_4x5.jpg" alt="Nunca treinou? A gente te ensina" loading="lazy"></a>
+  <figcaption><span class="cod">G05</span><strong>Nunca treinou? A gente te ensina</strong><span class="d">Aluna de luva com o professor no muay thai. Tira o medo de quem nunca lutou.</span><span class="dl">Baixar <a href="artes/G05_A_GENTE_TE_ENSINA_1x1.jpg" download>1:1</a> · <a href="artes/G05_A_GENTE_TE_ENSINA_4x5.jpg" download>4:5</a> · <a href="artes/G05_A_GENTE_TE_ENSINA_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G06_CLIMATIZADO_4x5.jpg" target="_blank"><img src="artes/G06_CLIMATIZADO_4x5.jpg" alt="Calor de Rio Preto? Aqui é climatizado" loading="lazy"></a>
+  <figcaption><span class="cod">G06</span><strong>Calor de Rio Preto? Aqui é climatizado</strong><span class="d">O salão inteiro. Nenhuma concorrente da cidade usa o calor como gancho.</span><span class="dl">Baixar <a href="artes/G06_CLIMATIZADO_1x1.jpg" download>1:1</a> · <a href="artes/G06_CLIMATIZADO_4x5.jpg" download>4:5</a> · <a href="artes/G06_CLIMATIZADO_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G07_DECISAO_4x5.jpg" target="_blank"><img src="artes/G07_DECISAO_4x5.jpg" alt="Não é vontade. É decisão." loading="lazy"></a>
+  <figcaption><span class="cod">G07</span><strong>Não é vontade. É decisão.</strong><span class="d">Aluna no aparelho. Motiva sem dar bronca, ao contrário do “pare de mentir” das redes.</span><span class="dl">Baixar <a href="artes/G07_DECISAO_1x1.jpg" download>1:1</a> · <a href="artes/G07_DECISAO_4x5.jpg" download>4:5</a> · <a href="artes/G07_DECISAO_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G08_SEMPRE_QUIS_JIU_4x5.jpg" target="_blank"><img src="artes/G08_SEMPRE_QUIS_JIU_4x5.jpg" alt="Sempre quis treinar jiu-jítsu?" loading="lazy"></a>
+  <figcaption><span class="cod">G08</span><strong>Sempre quis treinar jiu-jítsu?</strong><span class="d">Turma adulta de kimono. Fala com o adulto que adia o jiu há anos.</span><span class="dl">Baixar <a href="artes/G08_SEMPRE_QUIS_JIU_1x1.jpg" download>1:1</a> · <a href="artes/G08_SEMPRE_QUIS_JIU_4x5.jpg" download>4:5</a> · <a href="artes/G08_SEMPRE_QUIS_JIU_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G09_CONHECA_ANTES_4x5.jpg" target="_blank"><img src="artes/G09_CONHECA_ANTES_4x5.jpg" alt="Conheça a academia antes de decidir" loading="lazy"></a>
+  <figcaption><span class="cod">G09</span><strong>Conheça a academia antes de decidir</strong><span class="d">Fachada com o letreiro, à noite. Convite para conhecer a casa.</span><span class="dl">Baixar <a href="artes/G09_CONHECA_ANTES_1x1.jpg" download>1:1</a> · <a href="artes/G09_CONHECA_ANTES_4x5.jpg" download>4:5</a> · <a href="artes/G09_CONHECA_ANTES_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+<figure class="arte">
+  <a href="artes/G10_MUSCULO_E_SAUDE_4x5.jpg" target="_blank"><img src="artes/G10_MUSCULO_E_SAUDE_4x5.jpg" alt="Músculo forte é saúde em dia" loading="lazy"></a>
+  <figcaption><span class="cod">G10</span><strong>Músculo forte é saúde em dia</strong><span class="d">Aluna de mais de 60 anos treinando. Saúde no lugar de corpo, como a Corpore faz.</span><span class="dl">Baixar <a href="artes/G10_MUSCULO_E_SAUDE_1x1.jpg" download>1:1</a> · <a href="artes/G10_MUSCULO_E_SAUDE_4x5.jpg" download>4:5</a> · <a href="artes/G10_MUSCULO_E_SAUDE_9x16.jpg" download>9:16</a></span></figcaption>
+</figure>
+  </div>
+</section>
+
+<section id="roteiros">
+  <h2>6 roteiros para a equipe gravar</h2>
+  <p>Vídeos de 30 segundos, gravados no celular, com gente da casa. As falas são um guia: pode falar com as próprias palavras, desde que a ideia fique igual. O texto na tela entra na edição.</p>
+<article class="rot" id="roteiro-01">
+  <div class="rothead"><span class="num">01</span><div><h3>Seu filho e a tela</h3>
+  <p class="ficha"><span>Professor do kids (jiu ou muay thai)</span><span>Tatame, com a turma kids treinando atrás</span><span>30 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> O anúncio mais antigo da Bodytech é do kids (359 dias no ar) e a Gracie Elite, em Rio Preto, começou a falar com os pais agora..</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">0–3 s</td><td>Professor de kimono olhando para a câmera, crianças treinando desfocadas atrás.</td><td class="fala">“Seu filho passa horas no celular e ainda termina o dia com energia sobrando?”</td><td class="tela">MENOS TELA. MAIS TATAME.</td></tr>
+<tr><td class="tm">3–12 s</td><td>Cortes curtos da aula: crianças fazendo o aquecimento, rolamento, cumprimento com a faixa.</td><td class="fala">“Aqui no tatame ele gasta essa energia do jeito certo. Aprende disciplina, respeito, foco e ganha confiança.”</td><td class="tela">DISCIPLINA · FOCO · CONFIANÇA</td></tr>
+<tr><td class="tm">12–22 s</td><td>Professor de novo, com uma criança fazendo a saudação no fundo.</td><td class="fala">“E não precisa saber nada. A primeira aula é uma aula experimental, gratuita, com a turma da idade dele.”</td><td class="tela">AULA EXPERIMENTAL GRATUITA</td></tr>
+<tr><td class="tm">22–30 s</td><td>Professor aponta para a câmera; termina com a turma reunida acenando.</td><td class="fala">“Chama a gente no Direct e agenda a aula do seu filho aqui na Academia Go Heat.”</td><td class="tela">CHAME NO DIRECT E AGENDE</td></tr>
+  </tbody></table></div>
+  
+  <p class="nota cuid"><strong>Cuidado:</strong> Só gravar criança com autorização escrita dos pais. Mostrar só crianças e professor (sem pai ou mãe junto no tatame).</p>
+</article>
+<article class="rot" id="roteiro-02">
+  <div class="rothead"><span class="num">02</span><div><h3>Aqui o seu treino tem horário marcado</h3>
+  <p class="ficha"><span>Dono ou gerente da Go Heat</span><span>Andando pelo salão de musculação, do rack ao grafite</span><span>30 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> Panobianco Rio Preto e D’ONE vendem “sem fila nos aparelhos” e “sem superlotação”. Na Go Heat todas as aulas são agendadas, inclusive a musculação: dá para provar isso mostrando o salão.</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">0–3 s</td><td>Câmera seguindo o dono entrando no salão, que está organizado e com aparelhos livres.</td><td class="fala">“Sabe aquela academia em que você espera dez minutos pra usar um aparelho?”</td><td class="tela">CANSOU DE ESPERAR NA FILA?</td></tr>
+<tr><td class="tm">3–15 s</td><td>Ele passa pelo rack, pelas máquinas e pelo espelho com LED, mostrando com a mão.</td><td class="fala">“Aqui na Go Heat todo treino é agendado, inclusive a musculação. Você escolhe o seu horário e o espaço está pronto pra você.”</td><td class="tela">TODO TREINO COM HORÁRIO MARCADO</td></tr>
+<tr><td class="tm">15–24 s</td><td>Professor acompanhando um aluno no aparelho (pode ser de costas).</td><td class="fala">“E tem professor acompanhando de perto, do primeiro treino em diante.”</td><td class="tela">PROFESSOR DO SEU LADO</td></tr>
+<tr><td class="tm">24–30 s</td><td>Ele para em frente ao grafite “Let’s Go Heat” e olha para a câmera.</td><td class="fala">“Vem conhecer. A aula experimental é gratuita: chama no Direct e agenda.”</td><td class="tela">ACADEMIA GO HEAT · AV. JK, 3761</td></tr>
+  </tbody></table></div>
+  
+  <p class="nota cuid"><strong>Cuidado:</strong> Gravar num horário calmo, com o salão arrumado. Não falar de preço.</p>
+</article>
+<article class="rot" id="roteiro-03">
+  <div class="rothead"><span class="num">03</span><div><h3>Por que eu treino na Go Heat</h3>
+  <p class="ficha"><span>4 alunos de verdade, cada um num vídeo</span><span>Cada um no lugar onde treina (aparelho, tatame, saco de pancada)</span><span>4 vídeos de 10–15 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> A Corpore roda 48 vídeos com só 4 legendas: o que muda é a pessoa falando. Gente real da casa é o que mais trouxe conversa no histórico da Go Heat.</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">Abertura</td><td>Aluno olhando para a câmera, celular na vertical, já no lugar do treino.</td><td class="fala">Nome, idade e o que treina: “Sou a Ana, tenho 46 anos e faço musculação.”</td><td class="tela">NOME, IDADE</td></tr>
+<tr><td class="tm">Meio</td><td>Corta para 3 segundos do treino dele.</td><td class="fala">Uma frase só, do jeito dele, sem decorar. Ex.: “Aqui eu não me sinto perdida: o professor sabe o meu nome e o meu treino.”</td><td class="tela">A FRASE DELE, EM DESTAQUE</td></tr>
+<tr><td class="tm">Fim</td><td>Volta para o rosto.</td><td class="fala">“Vem fazer uma aula experimental comigo na Go Heat.”</td><td class="tela">AULA EXPERIMENTAL GRATUITA</td></tr>
+  </tbody></table></div>
+  <p class="nota"><strong>Quem chamar:</strong> Ideal: uma mulher de 40+, um aluno de luta, uma pessoa que começou do zero e um pai ou mãe de aluno do kids (falando fora do tatame).</p>
+  <p class="nota cuid"><strong>Cuidado:</strong> Não roteirizar a frase do aluno: perguntar “por que você treina aqui?” e usar a resposta. Pegar autorização de uso de imagem de todos.</p>
+</article>
+<article class="rot" id="roteiro-04">
+  <div class="rothead"><span class="num">04</span><div><h3>Nunca treinou? A gente te ensina</h3>
+  <p class="ficha"><span>Professor de muay thai + uma aluna iniciante</span><span>Área de luta, com aparadores</span><span>30 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> A Gracie Elite e a Lions CT tiram o medo do iniciante (“você não precisa chegar sabendo”). Na Go Heat, mulher é o público que mais conversa no Direct.</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">0–3 s</td><td>Close na aluna calçando a luva pela primeira vez.</td><td class="fala">Professor (fora do quadro): “Primeira vez?” Ela: “Primeira vez.”</td><td class="tela">NUNCA TREINOU?</td></tr>
+<tr><td class="tm">3–15 s</td><td>Professor ensinando jab e direto devagar; ela repetindo.</td><td class="fala">“A gente começa do básico: posição, guarda, o primeiro soco. Cada um no seu ritmo.”</td><td class="tela">A GENTE TE ENSINA DO ZERO</td></tr>
+<tr><td class="tm">15–24 s</td><td>Ela batendo no aparador, mais solta, sorrindo.</td><td class="fala">Professor: “Viu? Em 10 minutos já está soltando o soco.”</td><td class="tela">SEM PRECISAR CHEGAR SABENDO</td></tr>
+<tr><td class="tm">24–30 s</td><td>Os dois olhando para a câmera.</td><td class="fala">“A primeira aula é por nossa conta. Chama no Direct e agenda a sua.”</td><td class="tela">AULA EXPERIMENTAL GRATUITA</td></tr>
+  </tbody></table></div>
+  
+  <p class="nota cuid"><strong>Cuidado:</strong> A aluna precisa ser iniciante de verdade (ou recente). Nada de golpe forte ou cena de briga.</p>
+</article>
+<article class="rot" id="roteiro-05">
+  <div class="rothead"><span class="num">05</span><div><h3>Como é a aula experimental</h3>
+  <p class="ficha"><span>Quem atende na recepção</span><span>Recepção, depois uma volta rápida pela academia</span><span>30–40 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> As grandes redes explicam a oferta em uma linha (“1º mês grátis”). A Go Heat pede o Direct: este vídeo mostra o que acontece depois da mensagem, para tirar a dúvida antes que ela trave a pessoa.</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">0–4 s</td><td>Recepcionista sorrindo atrás do balcão com o letreiro ao fundo.</td><td class="fala">“Você mandou mensagem pra fazer a aula experimental. E agora? Te conto como funciona.”</td><td class="tela">COMO FUNCIONA A AULA EXPERIMENTAL</td></tr>
+<tr><td class="tm">4–14 s</td><td>Celular na mão mostrando uma conversa no Direct (pode ser simulada, sem dados reais).</td><td class="fala">“Primeiro você escolhe a aula: musculação, muay thai, jiu-jítsu ou kids. A gente agenda o melhor horário pra você.”</td><td class="tela">1. ESCOLHE A AULA · 2. AGENDA O HORÁRIO</td></tr>
+<tr><td class="tm">14–28 s</td><td>Ela recebe alguém na porta e leva até o professor.</td><td class="fala">“No dia, você chega, a gente te recebe e o professor te acompanha a aula inteira. Não precisa de experiência nem de equipamento.”</td><td class="tela">3. O PROFESSOR TE ACOMPANHA</td></tr>
+<tr><td class="tm">28–38 s</td><td>De volta ao balcão, olhando para a câmera.</td><td class="fala">“É gratuita. Chama no Direct e marca a sua.”</td><td class="tela">AULA EXPERIMENTAL GRATUITA · CHAME NO DIRECT</td></tr>
+  </tbody></table></div>
+  
+  <p class="nota cuid"><strong>Cuidado:</strong> Confirmar com a equipe o que a pessoa precisa levar (roupa, garrafa) e falar só o que vale de verdade.</p>
+</article>
+<article class="rot" id="roteiro-06">
+  <div class="rothead"><span class="num">06</span><div><h3>Depois dos 50, músculo é saúde</h3>
+  <p class="ficha"><span>Professor + aluno ou aluna de 50+</span><span>Musculação, num aparelho de perna ou de puxada</span><span>30 s</span></p></div></div>
+  <p class="por"><strong>Por que este vídeo:</strong> Smart Fit e Corpore falam de saúde e independência, não de corpo, e mostram gente mais velha..</p>
+  <div class="tw"><table><thead><tr><th>Tempo</th><th>O que aparece</th><th>O que falar</th><th>Texto na tela</th></tr></thead><tbody>
+<tr><td class="tm">0–4 s</td><td>Aluna de 50+ terminando uma série, sorrindo.</td><td class="fala">Ela: “Comecei aos 52. Hoje subo escada sem cansar.” (a frase real dela)</td><td class="tela">COMEÇAR AOS 50 TAMBÉM É COMEÇAR</td></tr>
+<tr><td class="tm">4–16 s</td><td>Professor ao lado, ajustando o aparelho.</td><td class="fala">“Com o passar dos anos, o corpo perde músculo se não for estimulado. A musculação bem orientada ajuda a manter força e disposição no dia a dia.”</td><td class="tela">MÚSCULO FORTE É SAÚDE EM DIA</td></tr>
+<tr><td class="tm">16–24 s</td><td>Ela fazendo o exercício com o professor contando as repetições.</td><td class="fala">“Aqui o treino é montado pra você, no seu ritmo, com acompanhamento.”</td><td class="tela">TREINO NO SEU RITMO</td></tr>
+<tr><td class="tm">24–30 s</td><td>Os dois para a câmera.</td><td class="fala">“Vem fazer uma aula experimental gratuita. Chama no Direct.”</td><td class="tela">ACADEMIA GO HEAT</td></tr>
+  </tbody></table></div>
+  
+  <p class="nota cuid"><strong>Cuidado:</strong> Não prometer resultado de saúde (cura, emagrecimento em X dias). O depoimento é a experiência dela.</p>
+</article>
+</section>
+
+<section id="gravar">
+  <h2>Como gravar</h2>
+  <ul class="geral"><li>Celular na vertical (9:16), câmera de trás, 1080p ou 4K a 30 quadros.</li><li>Luz de frente para quem fala (nunca janela atrás). Microfone de lapela se tiver.</li><li>Os 3 primeiros segundos decidem: comece já falando, sem “oi, gente”.</li><li>Grave cada fala 2 ou 3 vezes e mande todas. Pode errar, a gente escolhe.</li><li>Sem música no vídeo: a trilha entra na edição.</li><li>Camiseta da Go Heat e o salão arrumado. O grafite e o letreiro ajudam a mostrar que é a Go Heat.</li><li>Autorização de uso de imagem de todo mundo que aparece. Criança, só com autorização dos pais.</li><li>Mande os arquivos originais (pelo Drive ou WhatsApp como documento), não por story.</li></ul>
+</section>
+
+<section id="mensagem">
+  <h2>Mensagem para a Go Heat</h2>
+  <p>Pronta para mandar no WhatsApp.</p>
+  <div class="msg" id="txt">Oi, Caio! Tudo bem? Tenho um pedido URGENTE pra Go Heat 🔥
+
+Fizemos um estudo das academias que mais anunciam no Instagram (Rio Preto e Brasil) e o que mais funciona é vídeo com gente de verdade da academia: professor, aluno e a equipe.
+
+Preparei 6 roteiros curtos (30 segundos cada) pra vocês gravarem com o celular, e já deixei 10 artes novas prontas com imagens dos reels de vocês. Está tudo aqui:
+https://relatorios.giogrowthdigital.com.br/go-heat/criativos-referencias/
+
+Os que mais preciso primeiro:
+1️⃣ Seu filho e a tela (professor do kids)
+2️⃣ Horário marcado (você andando pelo salão)
+3️⃣ Por que eu treino na Go Heat (4 alunos, 1 frase cada)
+
+Consegue gravar até sexta? Qualquer dúvida me chama 🙌</div>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('txt').innerText).then(()=>{this.textContent='Copiado'})">Copiar mensagem</button>
+</section>
+</div>
+</body>
+</html>
