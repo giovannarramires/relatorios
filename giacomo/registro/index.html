@@ -53,6 +53,13 @@ td select{width:auto}
 details summary{cursor:pointer;color:var(--accent);font-weight:600}
 .legend{display:grid;gap:4px;font-size:.9rem;color:var(--muted)}
 .legend b{color:var(--fg)}
+.noar{display:grid;gap:0;padding:4px 14px}
+.noar-item{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.noar-item:last-child{border-bottom:0}
+.noar-item .nome{flex:1 1 180px;min-width:0;color:var(--muted);font-size:.9rem}
+a.ver{color:var(--accent);font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap}
+a.ver:hover,a.ver:focus-visible{text-decoration:underline}
+td a{color:inherit}
 </style>
 </head>
 <body>
@@ -124,6 +131,8 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600}
       <span><b>última letra</b>: o formato da arte (A Noir · B Arcos · C Galeria · D Lâmina · E Monocromo · F Detalhe · H Carrossel)</span>
       <span>Exemplo: <span class="code">F04D</span> = público frio, caso 04, arte Lâmina.</span>
     </div>
+    <h3 style="margin:6px 0 0;font-size:1rem">No ar agora · toque para ver o anúncio</h3>
+    <div id="no-ar" class="panel noar"></div>
     <details>
       <summary>Ver todos os códigos (em negrito, os que estão no ar)</summary>
       <div id="chips" class="chips" style="margin-top:10px"></div>
@@ -151,6 +160,19 @@ CODIGOS.D02 = ["Direct · emagreceu e a papada ficou", 0];
 CODIGOS.D03 = ["Direct · emagreci e a papada não saiu (5584)", 0];
 CODIGOS.D04 = ["Direct · pós-operatório (seguidores)", 0];
 NO_AR.forEach(c=>{ if(CODIGOS[c]) CODIGOS[c][1]=1; });
+// link do anúncio no Instagram (instagram_permalink_url do criativo, lido na Meta em 26/10/2026)
+const LINKS = {
+  F06A:"https://www.instagram.com/p/DesKBPpMZ-U/",
+  D01:"https://www.instagram.com/p/DesK1_qMimj/",
+  D02:"https://www.instagram.com/p/DesK_BiMLia/",
+  D03:"https://www.instagram.com/p/De2BblCM_2g/",
+  D04:"https://www.instagram.com/p/De2BldXsr6c/",
+  F07V:"https://www.instagram.com/p/De2Djp3Mzdf/"
+};
+function linkVer(c, txt){
+  const a=document.createElement("a"); a.className="ver"; a.href=LINKS[c]; a.target="_blank"; a.rel="noopener";
+  a.textContent=txt; a.setAttribute("aria-label",`Ver o anúncio ${c} no Instagram`); return a;
+}
 CODIGOS.SEM = ["Mensagem sem código", 1];
 CODIGOS.PERFIL = ["Perfil, indicação ou orgânico", 1];
 
@@ -197,6 +219,14 @@ function montarFixos(){
     const b=document.createElement("button"); b.type="button"; b.className="chip"+(ativo?"":" off");
     b.textContent=c; b.title=nome; b.addEventListener("click",()=>{ $("f-codigo").value=c; $("f-codigo").focus(); });
     chips.appendChild(b);
+  });
+  const na=$("no-ar");
+  NO_AR.forEach(c=>{
+    const d=document.createElement("div"); d.className="noar-item";
+    const k=document.createElement("span"); k.className="code"; k.textContent=c;
+    const n=document.createElement("span"); n.className="nome"; n.textContent=(CODIGOS[c]||[""])[0];
+    d.append(k,n); if(LINKS[c]) d.appendChild(linkVer(c,"Ver anúncio ↗"));
+    na.appendChild(d);
   });
 }
 
@@ -252,6 +282,7 @@ function render(){
     const tr=document.createElement("tr");
     [k,(CODIGOS[k]||["código desconhecido"])[0],s.c,s.a,s.m,s.f,fmt(s.v)].forEach((v,i)=>{
       const td=document.createElement("td"); td.textContent=v;
+      if(i===0 && LINKS[k]){ td.textContent=""; td.appendChild(linkVer(k,k)); }
       if(i===0) td.className="code"; if(i>=2) td.className="num";
       tr.appendChild(td);
     });
