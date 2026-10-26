@@ -136,16 +136,21 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600}
 const API = "https://n8n.giogrowthdigital.com.br/webhook/giacomo-leads";
 
 const ARTES = {A:"NOIR",B:"ARCOS",C:"GALERIA",D:"LAMINA",E:"MONOCROMO",F:"DETALHE",H:"CARROSSEL_CAPA"};
-const NO_AR = ["04","05","06"]; // casos com anúncio ligado no público frio
+// no ar = effective_status ACTIVE na Meta (conferido em 26/10/2026)
+const NO_AR = ["F06A","D01","D02","D03","D04"];
 const CODIGOS = {};
 ["01","02","03","04","05","06"].forEach(p=>{
   Object.entries(ARTES).forEach(([l,arte])=>{
     CODIGOS["Q"+p+l] = [`P${p}_${l}_${arte} · quente`, 0];
-    CODIGOS["F"+p+l] = [`P${p}_${l}_${arte} · frio`, NO_AR.includes(p)?1:0];
+    CODIGOS["F"+p+l] = [`P${p}_${l}_${arte} · frio`, 0];
   });
 });
-CODIGOS.D01 = ["Direct · pós-operatório", 1];
-CODIGOS.D02 = ["Direct · emagreceu e a papada ficou", 1];
+CODIGOS.F07V = ["P07_V_CASO_FRUSTRADA · frio (vídeo)", 0];
+CODIGOS.D01 = ["Direct · pós-operatório", 0];
+CODIGOS.D02 = ["Direct · emagreceu e a papada ficou", 0];
+CODIGOS.D03 = ["Direct · emagreci e a papada não saiu (5584)", 0];
+CODIGOS.D04 = ["Direct · pós-operatório (seguidores)", 0];
+NO_AR.forEach(c=>{ if(CODIGOS[c]) CODIGOS[c][1]=1; });
 CODIGOS.SEM = ["Mensagem sem código", 1];
 CODIGOS.PERFIL = ["Perfil, indicação ou orgânico", 1];
 
