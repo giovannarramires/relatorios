@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex"><title>Correção do GTM · Prof. Murilo Soares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;
+--ok:#1F7A4D;--ok-soft:#E3F2EA;--mid:#9A6A12;--mid-soft:#FBF0D9;--bad:#B23B2E;--bad-soft:#F8E4E1;--code:#EEF2F2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;
+--accent:#4FC2B1;--accent-soft:#12312D;--ok:#5CC48E;--ok-soft:#14301F;--mid:#E0B25A;--mid-soft:#33290F;--bad:#EE8577;--bad-soft:#3A1C18;--code:#1C272D;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;
+--accent:#4FC2B1;--accent-soft:#12312D;--ok:#5CC48E;--ok-soft:#14301F;--mid:#E0B25A;--mid-soft:#33290F;--bad:#EE8577;--bad-soft:#3A1C18;--code:#1C272D;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 16px 96px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+header{padding-top:56px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(32px,6vw,48px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:62ch}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:0}
+section{display:flex;flex-direction:column;gap:16px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;line-height:1.2;margin:0;text-wrap:balance}
+h3{font-size:17px;margin:0}
+p{margin:0;max-width:68ch}
+code{font-family:"IBM Plex Mono",monospace;font-size:14px;background:var(--code);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+pre{font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.55;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;margin:0}
+.box{border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.bad{background:var(--bad-soft);border:1px solid var(--bad)} .bad strong{color:var(--bad)}
+.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+mark{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:0 2px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
+ol.steps>li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px 16px 60px;position:relative;display:flex;flex-direction:column;gap:8px;min-width:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:18px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 15px/28px "Karla",sans-serif;text-align:center}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+button{font:700 14px "Karla",sans-serif;border:1px solid var(--accent);background:var(--accent);color:var(--surface);border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.tw{overflow-x:auto}
+</style></head><body><div class="wrap">
+
+<header>
+  <p class="eyebrow">Prof. Murilo Soares · /irrp-inscricao</p>
+  <h1>O código do Google Tag Manager foi colado com defeito</h1>
+  <p class="dek">A troca do carregador foi feita, mas o código entrou com uma formatação que quebra o script. Hoje a página de inscrição não registra nenhuma visita nem cadastro. A correção leva 2 minutos.</p>
+  <p class="meta">Conferido em 27/10/2026 · página https://profmurilosoares.com.br/irrp-inscricao/ · contêiner GTM-5PW9JMJT</p>
+</header>
+
+<section>
+  <h2>O que aconteceu</h2>
+  <div class="box bad">
+    <p><strong>A URL do script foi colada no formato de link do Markdown.</strong> Isso acontece quando o código é copiado de um texto formatado (WhatsApp, Notion, ChatGPT, e-mail), que transforma o endereço em link. No código-fonte da página está assim:</p>
+  </div>
+  <pre>j.src=
+<mark>'[</mark>https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)<mark>](https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore\(j,f\));</mark></pre>
+  <p>Os trechos marcados (<code>[</code>, <code>](…)</code> e as barras <code>\(</code>) não fazem parte do código. O navegador encontra um erro de sintaxe e para de ler o script inteiro. Por isso o GTM não carrega, e junto com ele não disparam:</p>
+  <ul>
+    <li>o Pixel da Meta (visita e cadastro)</li>
+    <li>o Google Analytics 4</li>
+    <li>o Microsoft Clarity</li>
+  </ul>
+  <p>Os anúncios que levam para essa página ficam sem contar os cadastros enquanto isso não for corrigido.</p>
+  <p><strong>O que ficou certo:</strong> o carregador antigo (<code>api.profmurilosoares.com.br</code>) foi removido e o ID <code>GTM-5PW9JMJT</code> aparece uma vez só. Falta só arrumar a colagem.</p>
+</section>
+
+<section>
+  <h2>O que fazer</h2>
+  <ol class="steps">
+    <li>
+      <h3>Apagar o bloco atual</h3>
+      <p>No WordPress, no lugar onde o código do GTM foi colado no <code>&lt;head&gt;</code> (plugin de códigos, tema ou Elementor › Código personalizado), apague tudo de <code>&lt;!-- Google Tag Manager --&gt;</code> até <code>&lt;!-- End Google Tag Manager --&gt;</code>.</p>
+    </li>
+    <li>
+      <h3>Colar este código, exatamente como está</h3>
+      <p>Use o botão para copiar. Não copie passando pelo WhatsApp ou outro app que formata texto.</p>
+<pre id="head">&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5PW9JMJT');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</pre>
+      <button type="button" data-copy="head">Copiar código do head</button>
+    </li>
+    <li>
+      <h3>(Recomendado) Colar o trecho do body</h3>
+      <p>Logo depois da abertura do <code>&lt;body&gt;</code>. Hoje ele não está na página. Não impede o rastreio, mas é o padrão do Google.</p>
+<pre id="body">&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PW9JMJT"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</pre>
+      <button type="button" data-copy="body">Copiar código do body</button>
+    </li>
+    <li>
+      <h3>Limpar o cache e conferir</h3>
+      <p>Limpe o cache do site (plugin de cache / CDN). Depois abra a página, clique com o botão direito › <em>Exibir código-fonte</em> e procure (Ctrl+F) por <code>gtm.js</code>. A linha tem que ficar assim, <strong>sem</strong> colchetes:</p>
+      <pre>'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);</pre>
+    </li>
+    <li>
+      <h3>Avisar a GGD</h3>
+      <p>Com a troca feita, a gente publica a versão nova do GTM e faz um cadastro de teste para confirmar que tudo dispara uma vez só.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Outros dois pontos pendentes</h2>
+  <div class="tw"><table>
+    <tr><th>O quê</th><th>Onde</th></tr>
+    <tr><td>Apagar o cadastro de teste <strong>Teste GGD</strong> (teste.ggd@exemplo.com)</td><td>WordPress › Elementor › Envios</td></tr>
+    <tr><td>Página de obrigado nova: mandar a URL quando estiver pronta. Ela precisa ficar no domínio <code>profmurilosoares.com.br</code></td><td>Redirecionamento do formulário do popup</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="box ok">
+    <h3>Depois da correção</h3>
+    <p>Cada cadastro passa a ser registrado na Meta, no Google Analytics e no Clarity, e os anúncios voltam a aprender com quem realmente se inscreveu.</p>
+  </div>
+</section>
+
+</div>
+<script>
+document.querySelectorAll('button[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy),t=el.textContent,orig=b.textContent;
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)};
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='Copiado ✓'},()=>{sel();b.textContent='Selecionado, use Ctrl+C'});
+  setTimeout(()=>{b.textContent=orig},2500);
+}));
+</script>
+</body></html>
