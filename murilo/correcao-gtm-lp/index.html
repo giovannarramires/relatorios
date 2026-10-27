@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex"><title>GTM nas páginas de venda · Prof. Murilo Soares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFFFFF;--ink:#141F26;--muted:#5B6D77;--line:#DCE4E5;--accent:#0E6B61;--accent-soft:#E1EFEC;
+--ok:#1F7A4D;--ok-soft:#E3F2EA;--mid:#9A6A12;--mid-soft:#FBF0D9;--bad:#B23B2E;--bad-soft:#F8E4E1;--code:#EEF2F2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;
+--accent:#4FC2B1;--accent-soft:#12312D;--ok:#5CC48E;--ok-soft:#14301F;--mid:#E0B25A;--mid-soft:#33290F;--bad:#EE8577;--bad-soft:#3A1C18;--code:#1C272D;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1519;--surface:#161F25;--ink:#E6EDEF;--muted:#94A6B0;--line:#263239;
+--accent:#4FC2B1;--accent-soft:#12312D;--ok:#5CC48E;--ok-soft:#14301F;--mid:#E0B25A;--mid-soft:#33290F;--bad:#EE8577;--bad-soft:#3A1C18;--code:#1C272D;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;margin:0;padding:0 16px 96px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+header{padding-top:56px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(32px,6vw,48px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.dek{color:var(--muted);font-size:19px;margin:0;max-width:62ch}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:0}
+section{display:flex;flex-direction:column;gap:16px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;line-height:1.2;margin:0;text-wrap:balance}
+h3{font-size:17px;margin:0}
+p{margin:0;max-width:68ch}
+code{font-family:"IBM Plex Mono",monospace;font-size:14px;background:var(--code);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+pre{font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.55;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;margin:0}
+.box{border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.bad{background:var(--bad-soft);border:1px solid var(--bad)} .bad strong{color:var(--bad)}
+.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+mark{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:0 2px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
+ol.steps>li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px 16px 60px;position:relative;display:flex;flex-direction:column;gap:8px;min-width:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:18px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 15px/28px "Karla",sans-serif;text-align:center}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+button{font:700 14px "Karla",sans-serif;border:1px solid var(--accent);background:var(--accent);color:var(--surface);border-radius:6px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.tw{overflow-x:auto}
+.pages{display:flex;flex-direction:column;gap:8px}
+.pg{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-family:"IBM Plex Mono",monospace;font-size:14px}
+.pg span:last-child{font-family:"Karla",sans-serif;font-weight:700}
+.st-bad{color:var(--bad)} .st-ok{color:var(--ok)}
+</style></head><body><div class="wrap">
+
+<header>
+  <p class="eyebrow">Prof. Murilo Soares · lp.profmurilosoares.com.br</p>
+  <h1>As páginas de venda ainda estão com o código antigo do GTM</h1>
+  <p class="dek">A troca feita hoje no site principal funcionou. Só que as páginas de venda do Manual do Prequestionamento ficam em outro endereço, o <strong>lp.</strong>, e lá o código não foi trocado. Por isso, quem chega por anúncio não está sendo medido.</p>
+  <p class="meta">Conferido em 27/10/2026 · contêiner GTM-5PW9JMJT</p>
+</header>
+
+<section>
+  <h2>Quais páginas</h2>
+  <div class="pages">
+    <div class="pg"><span>https://lp.profmurilosoares.com.br/</span><span class="st-bad">trocar</span></div>
+    <div class="pg"><span>https://lp.profmurilosoares.com.br/v2-sb/</span><span class="st-bad">trocar</span></div>
+    <div class="pg"><span>https://lp.profmurilosoares.com.br/v3/</span><span class="st-bad">trocar</span></div>
+  </div>
+  <p>Estas são as páginas para onde os anúncios de venda estão levando hoje. O site principal (<code>profmurilosoares.com.br</code>, incluindo <code>/irrp-inscricao/</code> e <code>/obrigado/</code>) já está certo e não precisa de nada.</p>
+</section>
+
+<section>
+  <h2>O que está acontecendo</h2>
+  <div class="box bad">
+    <p><strong>As 3 páginas carregam o GTM por um endereço que não funciona mais.</strong> No código delas está assim:</p>
+  </div>
+  <pre>j.src="<mark>https://api.profmurilosoares.com.br/2hihhwiaauu.js?</mark>"+i;
+…
+&lt;iframe src="<mark>https://api.profmurilosoares.com.br/ns.html</mark>?id=GTM-5PW9JMJT" …&gt;</pre>
+  <p>O endereço <code>api.profmurilosoares.com.br</code> responde com certificado de segurança inválido e "página não encontrada" (erro 404). O navegador bloqueia, e o GTM nunca chega a rodar. Com isso, nessas páginas <strong>não dispara</strong>:</p>
+  <ul>
+    <li>o Pixel da Meta: a visita na página e a ida para o checkout</li>
+    <li>o Google Analytics 4</li>
+    <li>o Microsoft Clarity</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Por que isso importa</h2>
+  <ul>
+    <li><strong>Os anúncios aprendem com menos informação.</strong> A Meta só fica sabendo da compra (que chega pela Ticto) e não vê quem visitou a página nem quem foi para o checkout. Com menos sinal, ela demora mais para achar quem compra.</li>
+    <li><strong>O remarketing perde gente.</strong> Quem visitou a página de venda e não comprou não entra no público de visitantes, que é o público mais quente para anunciar de novo.</li>
+    <li><strong>Não dá para comparar as páginas.</strong> Sem medir visita e checkout em cada versão (raiz, v2-sb e v3), não dá para saber qual converte melhor.</li>
+  </ul>
+  <p>As vendas continuam sendo registradas pela integração da Ticto. Por isso o problema não aparece de cara.</p>
+</section>
+
+<section>
+  <h2>O que fazer</h2>
+  <ol class="steps">
+    <li>
+      <h3>Abrir as 3 páginas no editor do lp.</h3>
+      <p>O <code>lp.</code> não é o mesmo WordPress do site principal, por isso a troca de hoje não chegou até ele. A troca tem que ser feita onde essas 3 páginas são editadas. Se o código estiver num cabeçalho comum às 3, basta trocar uma vez.</p>
+    </li>
+    <li>
+      <h3>No &lt;head&gt;: apagar o bloco antigo e colar este</h3>
+      <p>Apague o script que tem <code>api.profmurilosoares.com.br/2hihhwiaauu.js</code> e cole no lugar exatamente o código abaixo. Use o botão para copiar, não passe pelo WhatsApp.</p>
+<pre id="head">&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5PW9JMJT');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</pre>
+      <button type="button" data-copy="head">Copiar código do head</button>
+    </li>
+    <li>
+      <h3>Logo depois do &lt;body&gt;: trocar o noscript</h3>
+      <p>Apague o <code>&lt;noscript&gt;</code> que aponta para <code>api.profmurilosoares.com.br/ns.html</code> e cole este:</p>
+<pre id="body">&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PW9JMJT"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</pre>
+      <button type="button" data-copy="body">Copiar código do body</button>
+    </li>
+    <li>
+      <h3>Limpar o cache e conferir</h3>
+      <p>Abra cada uma das 3 páginas, clique com o botão direito › <em>Exibir código-fonte</em> e procure (Ctrl+F):</p>
+      <ul>
+        <li><code>api.profmurilosoares</code>: <strong>não pode aparecer</strong></li>
+        <li><code>googletagmanager.com/gtm.js</code>: tem que aparecer 1 vez, sem colchetes</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Avisar a GGD</h3>
+      <p>A gente confere as 3 páginas e testa se a visita e a ida ao checkout estão chegando na Meta e no GA4.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>O que já está certo</h2>
+  <div class="tw"><table>
+    <tr><th>Página</th><th>Situação</th></tr>
+    <tr><td><code>profmurilosoares.com.br/irrp-inscricao/</code></td><td class="st-ok">✓ GTM, Pixel, GA4 e Clarity funcionando; cadastro testado</td></tr>
+    <tr><td><code>profmurilosoares.com.br/obrigado/</code></td><td class="st-ok">✓ GTM funcionando</td></tr>
+    <tr><td>Demais páginas do site principal</td><td class="st-ok">✓ GTM funcionando</td></tr>
+    <tr><td>Cadastros de teste no Elementor (Teste GGD: teste.ggd@, teste.ggd2@ e teste.ggd3@exemplo.com)</td><td>apagar</td></tr>
+  </table></div>
+</section>
+
+</div>
+<script>
+document.querySelectorAll('button[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy),t=el.textContent,orig=b.textContent;
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)};
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='Copiado ✓'},()=>{sel();b.textContent='Selecionado, use Ctrl+C'});
+  setTimeout(()=>{b.textContent=orig},2500);
+}));
+</script>
+</body></html>
