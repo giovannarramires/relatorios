@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex"><title>Ajuste do pop-up · Imersão v8–v10 · Dra. Fernanda Fiori</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+*{box-sizing:border-box} body{margin:0}
+/* Layout: instrução de trabalho em coluna única; cada troca é um cartão com "procure" e "troque por", com botão copiar */
+:root{
+  --bg:#f6f5f8; --surface:#ffffff; --fg:#1f1c24; --muted:#655f6e; --line:#e1dde7;
+  --accent:#6f3a6a; --code-bg:#f1eef5; --old:#b3261e; --old-bg:#fbe9e7; --new:#1f7a4d; --new-bg:#e6f4ec; --warn:#9a5a06; --warn-bg:#fbf1de;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17151b; --surface:#211e27; --fg:#ece8f1; --muted:#a8a1b2; --line:#363040;
+  --accent:#d9a2d1; --code-bg:#2a2631; --old:#f2918a; --old-bg:#3b201f; --new:#79d3a3; --new-bg:#1c3328; --warn:#f0b864; --warn-bg:#382c15; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17151b; --surface:#211e27; --fg:#ece8f1; --muted:#a8a1b2; --line:#363040;
+  --accent:#d9a2d1; --code-bg:#2a2631; --old:#f2918a; --old-bg:#3b201f; --new:#79d3a3; --new-bg:#1c3328; --warn:#f0b864; --warn-bg:#382c15; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--f-body)}
+.wrap{max-width:820px;margin:0 auto;padding-inline:16px;padding-block:32px 64px;display:grid;gap:28px}
+h1{font:600 clamp(26px,5vw,34px)/1.15 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 20px/1.3 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 16px/1.4 var(--f-body);margin:0}
+p{margin:0;max-width:65ch} ul,ol{margin:0;padding-left:22px;max-width:65ch} li{margin:4px 0}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+code{font:13px var(--f-mono);background:var(--code-bg);padding:1px 5px;border-radius:4px;word-break:break-word}
+section{display:grid;gap:12px}
+.note{background:var(--warn-bg);color:var(--fg);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.note strong{color:var(--warn)}
+.troca{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:14px}
+.troca .num{font:500 12px var(--f-mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.bloco{display:grid;gap:6px;min-width:0}
+.rot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{font:500 12px var(--f-mono);padding:2px 9px;border-radius:99px}
+.tag.old{background:var(--old-bg);color:var(--old)} .tag.new{background:var(--new-bg);color:var(--new)}
+pre{margin:0;background:var(--code-bg);border-radius:8px;padding:12px;overflow-x:auto;font:13px/1.55 var(--f-mono);white-space:pre}
+pre.old{border-left:3px solid var(--old)} pre.new{border-left:3px solid var(--new)}
+button.copiar{font:500 13px var(--f-body);background:var(--accent);color:var(--surface);border:0;border-radius:7px;padding:6px 12px;cursor:pointer}
+button.copiar:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+button.copiar.ok{background:var(--new)}
+.check{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px}
+table{border-collapse:collapse;width:100%;min-width:520px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+</style>
+
+</head><body>
+<div class="wrap">
+<header style="display:grid;gap:8px">
+  <div class="eyebrow">dermatocursos.com.br · pedido da GGD · 27/10/2026</div>
+  <h1>Ajuste no pop-up das páginas da Imersão v8, v9 e v10</h1>
+  <p class="muted">São 3 trocas pequenas no código do pop-up, iguais nas três páginas. Leva uns 10 minutos.</p>
+</header>
+
+<section>
+  <h2>Páginas que mudam</h2>
+  <ul>
+    <li><code>dermatocursos.com.br/imersao-pratica-v8/</code></li>
+    <li><code>dermatocursos.com.br/imersao-pratica-v9/</code></li>
+    <li><code>dermatocursos.com.br/imersao-pratica-v10/</code></li>
+  </ul>
+  <p>Só essas 3. Nenhuma outra página do site precisa mudar.</p>
+</section>
+
+<section>
+  <h2>Por que mudar</h2>
+  <ul>
+    <li><strong>O checkout perde a origem da venda.</strong> Depois do cadastro no pop-up, a pessoa vai para o link fixo da HeroSpark, sem as UTMs da campanha. A venda chega sem dizer de qual anúncio veio.</li>
+    <li><strong>"Iniciar checkout" é contado cedo demais.</strong> Hoje o evento <code>InitiateCheckout</code> dispara só por abrir o pop-up, antes de a pessoa preencher. A HeroSpark já manda esse evento quando a pessoa chega no checkout, então ele fica contado em dobro.</li>
+  </ul>
+  <p>Depois da troca: abrir o pop-up vira um evento próprio (<code>PopupAberto</code>), preencher certo continua gerando <code>Lead</code>, e a pessoa chega no checkout com a origem da campanha.</p>
+</section>
+
+<div class="note">
+  <p><strong>Não mexer em mais nada.</strong> Fica como está: o código do pixel do Meta e do Google Tag Manager no topo da página, o envio para o ActiveCampaign (<code>ac-imersao-botox.php</code>), o visual, os textos e o link do checkout. Ajustamos o resto pelo Google Tag Manager.</p>
+</div>
+
+<section>
+  <h2>As 3 trocas</h2>
+  <p>Todas ficam no <code>&lt;script&gt;</code> do pop-up, no fim do arquivo (procure pelo comentário <code>Popup de cadastro</code>). Em cada troca, procure o trecho vermelho (Ctrl+F / Cmd+F) e substitua pelo verde. Cada trecho aparece uma vez só em cada página.</p>
+
+  <div class="troca">
+    <div class="num">Troca 1 de 3 · permitir evento personalizado</div>
+    <div class="bloco">
+      <div class="rot"><span class="tag old">procure esta linha</span><button class="copiar" type="button" data-alvo="t1a">Copiar</button></div>
+<pre class="old" id="t1a">try{ if(window.fbq) fbq('track',evento.fb,dados.fb||{}); }catch(e){}</pre>
+    </div>
+    <div class="bloco">
+      <div class="rot"><span class="tag new">troque por</span><button class="copiar" type="button" data-alvo="t1b">Copiar</button></div>
+<pre class="new" id="t1b">try{ if(window.fbq) fbq(evento.custom?'trackCustom':'track',evento.fb,dados.fb||{}); }catch(e){}</pre>
+    </div>
+  </div>
+
+  <div class="troca">
+    <div class="num">Troca 2 de 3 · abrir o pop-up vira "PopupAberto"</div>
+    <div class="bloco">
+      <p>Procure pela palavra <code>InitiateCheckout</code>. Ela está na primeira das 3 linhas abaixo: apague as 3 (o recuo dos espaços pode estar diferente no arquivo, tudo bem).</p>
+      <div class="rot"><span class="tag old">estas 3 linhas saem</span><button class="copiar" type="button" data-alvo="t2a">Copiar</button></div>
+<pre class="old" id="t2a">rastrear({fb:'InitiateCheckout',ga:'begin_checkout',dl:'popup_aberto'},
+  {fb:{value:97,currency:'BRL',content_name:'Imersao Botox na Pratica Medica'},
+   ga:{value:97,currency:'BRL'}});</pre>
+    </div>
+    <div class="bloco">
+      <div class="rot"><span class="tag new">troque por</span><button class="copiar" type="button" data-alvo="t2b">Copiar</button></div>
+<pre class="new" id="t2b">rastrear({fb:'PopupAberto',custom:true,ga:'popup_aberto',dl:'popup_aberto'},
+  {fb:{content_name:'Imersao Botox na Pratica Medica'},
+   ga:{}});</pre>
+    </div>
+    <p class="muted">O trecho do <code>Lead</code>, logo abaixo no mesmo script, fica como está.</p>
+  </div>
+
+  <div class="troca">
+    <div class="num">Troca 3 de 3 · levar a origem da campanha até o checkout</div>
+    <p>Fica dentro da função <code>irParaCheckout()</code>.</p>
+    <div class="bloco">
+      <div class="rot"><span class="tag old">procure esta linha</span><button class="copiar" type="button" data-alvo="t3a">Copiar</button></div>
+<pre class="old" id="t3a">window.location.href=CHECKOUT;</pre>
+    </div>
+    <div class="bloco">
+      <div class="rot"><span class="tag new">troque por</span><button class="copiar" type="button" data-alvo="t3b">Copiar</button></div>
+<pre class="new" id="t3b">// leva a UTM da página pro checkout; o GTM completa src/sck no clique
+var url=CHECKOUT;
+if(location.search) url+=(url.indexOf('?')<0?'?':'&')+location.search.slice(1);
+var a=document.createElement('a'); a.href=url; a.style.display='none';
+document.body.appendChild(a); a.click();</pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Como fica a função depois da troca 3</h2>
+  <p>Para conferir. A função inteira deve ficar assim:</p>
+<pre class="new">function irParaCheckout(){
+    if(redirecionado) return; redirecionado=true;
+    // leva a UTM da página pro checkout; o GTM completa src/sck no clique
+    var url=CHECKOUT;
+    if(location.search) url+=(url.indexOf('?')<0?'?':'&')+location.search.slice(1);
+    var a=document.createElement('a'); a.href=url; a.style.display='none';
+    document.body.appendChild(a); a.click();
+  }</pre>
+</section>
+
+<section class="check">
+  <h2>Depois de publicar, confira</h2>
+  <ol>
+    <li>Abra a página com uma UTM de teste no fim do endereço, por exemplo <code>/imersao-pratica-v9/?utm_source=teste&amp;utm_campaign=teste</code>.</li>
+    <li>Clique em "Garantir meu ingresso": o pop-up abre normalmente.</li>
+    <li>Preencha com dados de teste e envie: a página vai para o checkout da HeroSpark.</li>
+    <li>No endereço do checkout precisa aparecer <code>utm_source=teste</code>, <code>utm_campaign=teste</code>, <code>src=</code> e <code>sck=</code>.</li>
+    <li>Repita na v8 e na v10.</li>
+  </ol>
+  <p class="muted">Apague o contato de teste no ActiveCampaign depois. Quando terminar, avise a GGD que a gente confere o pixel e o GA4.</p>
+</section>
+
+<section>
+  <h2>Resumo dos eventos depois do ajuste</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Momento</th><th>Meta</th><th>Google Analytics</th></tr></thead>
+    <tbody>
+      <tr><td>Abriu a página</td><td><code>PageView</code></td><td><code>page_view</code></td></tr>
+      <tr><td>Abriu o pop-up</td><td><code>PopupAberto</code></td><td><code>popup_aberto</code></td></tr>
+      <tr><td>Preencheu certo e enviou</td><td><code>Lead</code></td><td><code>generate_lead</code></td></tr>
+      <tr><td>Chegou no checkout</td><td><code>InitiateCheckout</code> (HeroSpark)</td><td>—</td></tr>
+      <tr><td>Comprou</td><td><code>Purchase</code> (HeroSpark)</td><td><code>purchase</code> (GGD, pelo servidor)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+</div>
+
+<script>
+document.querySelectorAll('button.copiar').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.alvo), txt=el.textContent;
+    function feito(){b.textContent='Copiado';b.classList.add('ok');setTimeout(function(){b.textContent='Copiar';b.classList.remove('ok')},1800)}
+    function selecionar(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado: Cmd+C'}
+    try{navigator.clipboard.writeText(txt).then(feito,selecionar)}catch(e){selecionar()}
+  });
+});
+</script>
+
+</body></html>
