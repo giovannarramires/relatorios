@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Lançamento Murilo Soares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#eef2f7;--surface:#fff;--border:#e3e8ef;--text:#101a26;--text-2:#4a5768;--text-3:#93a1b3;
+--shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 10px 30px rgba(0,0,0,.13);
+--radius:14px;--c1:#123c5a;--c2:#2f8f8a;--c3:#d4a24c;--ink:#08192b;
+--ok:#0f8a5f;--warn:#b8860b;--bad:#c0392b;--off:#8593a5}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.brandstrip{background:var(--ink);color:#fff;text-align:center;font-family:'Space Grotesk',sans-serif;
+font-weight:700;letter-spacing:5px;font-size:12px;padding:7px 0;text-transform:uppercase}
+.brandstrip span{color:var(--c3)}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 135%);padding:0 32px;min-height:78px;
+display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);flex-wrap:wrap}
+.header-left{display:flex;align-items:center;gap:14px;padding:12px 0}
+.logo{width:50px;height:50px;border-radius:13px;background:var(--ink);display:flex;align-items:center;
+justify-content:center;font-family:'Space Grotesk',sans-serif;border:2px solid rgba(255,255,255,.35)}
+.logo b{color:#fff;font-size:21px}
+.header-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.6px}
+.header-sub{font-size:11.5px;color:rgba(255,255,255,.86);margin-top:2px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;
+padding:7px 15px;border-radius:20px;font-size:12.5px;font-weight:700;white-space:nowrap;margin:12px 0}
+.header-badge a{color:#fff;text-decoration:none}
+/* seletor de FRENTE — o cliente escolhe qual relatorio quer ver (pedido da Gio 02/10) */
+.frentes{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 32px;
+display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.frentes-rot{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);
+font-weight:700;margin-right:4px}
+.fr{display:flex;flex-direction:column;gap:1px;text-decoration:none;font-size:13.5px;font-weight:700;
+color:var(--text-2);background:var(--bg);border:1px solid var(--border);border-radius:11px;
+padding:8px 16px;transition:all .15s}
+.fr em{font-style:normal;font-size:10.5px;font-weight:400;color:var(--text-3)}
+.fr:hover{border-color:var(--c2);color:var(--c1)}
+.fr.on{background:var(--c1);border-color:var(--c1);color:#fff;box-shadow:var(--shadow-sm)}
+.fr.on em{color:rgba(255,255,255,.82)}
+@media(max-width:620px){.frentes{padding:10px 16px} .fr{flex:1 1 100%}}
+.container{max-width:1240px;margin:0 auto;padding:26px 32px 60px}
+.section{margin:34px 0 14px}
+.section h2{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--c1);
+letter-spacing:.3px;border-left:4px solid var(--c3);padding-left:11px}
+.section-hint{font-size:12px;color:var(--text-3);margin:6px 0 0 15px}
+
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+box-shadow:var(--shadow-lg);padding:24px;display:grid;grid-template-columns:1.8fr 1fr;gap:24px;margin-top:4px}
+.hero-rot{font-size:11.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-3);font-weight:700}
+.hero-v{font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:700;color:var(--c1);
+line-height:1.1;margin:6px 0 2px}
+.hero-v span{font-size:21px;color:var(--text-3);font-weight:500}
+.hero-s{font-size:13px;color:var(--text-2);margin-bottom:14px}
+.hero-diag{font-size:13px;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:9px;display:inline-block}
+.d-ok{background:rgba(15,138,95,.1);color:var(--ok)}
+.d-warn{background:rgba(184,134,11,.12);color:var(--warn)}
+.d-bad{background:rgba(192,57,43,.1);color:var(--bad)}
+.hero-r{display:flex;flex-direction:column;gap:10px;justify-content:center}
+.hero-mini{background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:11px 14px}
+.hero-mini span{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;
+color:var(--text-3);font-weight:700}
+.hero-mini b{display:block;font-family:'Space Grotesk',sans-serif;font-size:21px;color:var(--c1);margin-top:2px}
+.hero-mini i{display:block;font-size:11px;color:var(--text-3);font-style:normal}
+
+.vbar{position:relative;height:30px;background:var(--bg);border:1px solid var(--border);
+border-radius:8px;overflow:hidden;margin-top:12px}
+.vbar>span{position:absolute;inset:0 auto 0 0;border-radius:8px 0 0 8px;transition:none}
+.vbar>b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+font-size:11.5px;font-weight:700;color:var(--text);text-shadow:0 1px 2px rgba(255,255,255,.75)}
+.vbar>i.mk{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);z-index:2}
+.vbar>i.mk::after{content:'';position:absolute;top:-1px;left:-3px;border:4px solid transparent;
+border-top-color:var(--ink)}
+
+.fases{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fase{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+box-shadow:var(--shadow-sm);padding:18px}
+.fase-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
+.fase-n{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700}
+.fase-s{font-size:11.5px;color:var(--text-3);margin-top:2px}
+.fase-fatia{color:#fff;font-weight:700;font-size:13px;padding:5px 11px;border-radius:14px;white-space:nowrap}
+.fase-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fase-diag{font-size:12px;font-weight:700;margin-top:10px;padding:7px 11px;border-radius:8px;display:inline-block}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:13px 14px;
+position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+.stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+.s-accent{background:var(--c2)} .s-green{background:var(--ok)}
+.s-yellow{background:var(--warn)} .s-red{background:var(--bad)}
+.card-t{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-3);font-weight:700}
+.card-v{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--text);margin:3px 0 1px}
+.card-s{font-size:11px;color:var(--text-3);line-height:1.35}
+
+.cen{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+box-shadow:var(--shadow-sm);padding:18px;margin-top:14px}
+.cen-t{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--c1);margin-bottom:10px}
+.cen-tab{min-width:0} .cen-tab td{padding:9px 10px}
+.cen-tab td.o{color:var(--text-3);font-size:11.5px}
+.cen-n{font-size:11.5px;color:var(--text-3);margin-top:8px}
+
+.card.graf-wrap,.gwrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+box-shadow:var(--shadow-sm);padding:16px}
+.graf{width:100%;height:auto;display:block}
+.gy,.gy2{font-size:10px;fill:var(--text-3);font-family:'Inter',sans-serif}
+.gy{text-anchor:end} .gy2{text-anchor:start}
+.gx{font-size:10px;fill:var(--text-3);text-anchor:middle;font-family:'Inter',sans-serif}
+.gm{font-size:10.5px;fill:var(--text-2);font-weight:700;font-family:'Inter',sans-serif}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--text-2);margin-top:10px}
+.leg i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+.tab-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
+border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:780px}
+thead th{background:var(--bg);color:var(--text-2);font-size:10.5px;text-transform:uppercase;
+letter-spacing:.6px;padding:10px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody td{padding:10px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody td.l{text-align:left;white-space:normal}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f7fafc}
+td .sub{display:block;font-size:10.5px;color:var(--text-3);font-weight:400;margin-top:1px}
+td.g{color:var(--ok);font-weight:700} td.r{color:var(--bad);font-weight:700}
+.tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+padding:3px 8px;border-radius:11px;border:1px solid var(--border);color:var(--text-3)}
+.tag.on{border-color:var(--ok);color:var(--ok);background:rgba(15,138,95,.08)}
+a{color:var(--c2)}
+
+.fstep{margin-bottom:13px}
+.flab{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
+.flab em{font-style:normal;font-size:11px;color:var(--text-3)}
+.flab b{font-family:'Space Grotesk',sans-serif}
+.fbar{height:11px;background:var(--bg);border-radius:6px;overflow:hidden}
+.fbar span{display:block;height:100%;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:6px}
+.fpct{font-size:10.5px;color:var(--text-3);margin-top:3px}
+.vazio{padding:22px;color:var(--text-3);font-size:12.5px;text-align:center}
+.nota{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--c3);
+border-radius:11px;padding:15px 17px;font-size:12.5px;color:var(--text-2);line-height:1.6;margin-top:14px}
+.nota b{color:var(--text)}
+.rodape{margin-top:38px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--text-3)}
+@media(max-width:900px){.hero,.fases,.grid4{grid-template-columns:1fr}
+  .fase-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.container{padding:16px} .header{padding:0 16px}
+  .hero-v{font-size:32px} .fase-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="brandstrip">GIO <span>GROWTH</span> DIGITAL</div>
+<div class="frentes"><span class="frentes-rot">Relatório</span><a class="fr" href="https://relatorios.giogrowthdigital.com.br/murilo/perpetuo/">Low Ticket<em>Manual do Prequestionamento · R$ 19,90</em></a><a class="fr on" href="https://relatorios.giogrowthdigital.com.br/murilo/lancamento/">Lançamento<em>Imersão RR na Prática · 14/11</em></a></div>
+<div class="header">
+  <div class="header-left">
+    <div class="logo"><b>MS</b></div>
+    <div><div class="header-title">Lançamento — Imersão RR na Prática</div>
+      <div class="header-sub">Prof. Murilo Soares · sábado 14 de novembro de 2026, 10h ·
+        carrinho aberto até 21/11</div></div>
+  </div>
+  <div class="header-badge">atualizado em 29 de outubro</div>
+</div>
+<div class="container">
+
+  <div class="section"><h2>O sinal da verba</h2><div class="section-hint">R$ 40.000 de mídia limpa para o lançamento inteiro. A barra mostra o que já saiu; o risco escuro é onde o calendário diz que o gasto deveria estar hoje.</div></div>
+  
+  <div class="hero">
+    <div class="hero-l">
+      <div class="hero-rot">Verba de mídia do lançamento</div>
+      <div class="hero-v">R$ 490,39 <span>de R$ 40.000,00</span></div>
+      <div class="hero-s">1,2% usado · <b>R$ 39.509,61 para usar</b> ·
+        24 dos 25 dias ainda por rodar</div>
+      <div class="vbar"><span style="width:1.2%;background:#2f8f8a"></span><i class="mk" style="left:4.0%"></i><b>1,2% da verba usada · o risco é onde o calendário põe hoje (4,0%)</b></div>
+      <div class="hero-diag d-ok">no ritmo do calendário</div>
+    </div>
+    <div class="hero-r">
+      <div class="hero-mini"><span>no cartão (c/ 13,83% de imposto)</span>
+        <b>R$ 558,21</b><i>de R$ 45.532,00</i></div>
+      <div class="hero-mini"><span>faltam para a imersão</span>
+        <b>16 dias</b><i>sábado 14 de novembro, 10h</i></div>
+      <div class="hero-mini"><span>carrinho fecha</span>
+        <b>21/11</b><i>7 dias depois do evento</i></div>
+    </div>
+  </div>
+
+  <div class="section"><h2>As três verbas</h2><div class="section-hint">70% para captação até a véspera da imersão, 10% para o lembrete nos inscritos na última semana e 20% para a venda com o carrinho aberto. Cada fase tem a sua janela e o seu ritmo.</div></div>
+  <div class="fases">
+    <div class="fase">
+      <div class="fase-top">
+        <div><div class="fase-n" style="color:#2f8f8a">Captação</div>
+          <div class="fase-s">inscrição na imersão · otimizando LEAD no pixel</div></div>
+        <div class="fase-fatia" style="background:#2f8f8a">70%</div>
+      </div>
+      <div class="fase-grid">
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Verba planejada</div><div class="card-v">R$ 28.000,00</div><div class="card-s">R$ 1.647,06/dia × 17 dias · 28/10–13/11</div></div>
+        <div class="card"><span class="stripe s-green"></span><div class="card-t">Já utilizado</div><div class="card-v">R$ 490,39</div><div class="card-s">1,8% da fase</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Falta utilizar</div><div class="card-v">R$ 27.509,61</div><div class="card-s">R$ 1.719,35/dia nos 16 dias que sobram</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Ritmo no ar agora</div><div class="card-v">R$ 190,00/dia</div><div class="card-s">16 conjuntos ativos</div></div>
+      </div>
+      <div class="vbar"><span style="width:1.8%;background:#2f8f8a"></span><i class="mk" style="left:5.9%"></i><b>R$ 490,39 de R$ 28.000,00 · 1,8%</b></div>
+      <div class="fase-diag d-ok">no ritmo do calendário</div>
+    </div>
+    <div class="fase">
+      <div class="fase-top">
+        <div><div class="fase-n" style="color:#d4a24c">Lembrete</div>
+          <div class="fase-s">remarketing nos inscritos para estarem na imersão</div></div>
+        <div class="fase-fatia" style="background:#d4a24c">10%</div>
+      </div>
+      <div class="fase-grid">
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Verba planejada</div><div class="card-v">R$ 4.000,00</div><div class="card-s">R$ 500,00/dia × 8 dias · 07/11–14/11</div></div>
+        <div class="card"><span class="stripe s-green"></span><div class="card-t">Já utilizado</div><div class="card-v">R$ 0,00</div><div class="card-s">0,0% da fase</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Falta utilizar</div><div class="card-v">R$ 4.000,00</div><div class="card-s">R$ 500,00/dia nos 8 dias que sobram</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Ritmo no ar agora</div><div class="card-v">— nada no ar</div><div class="card-s">nenhum conjunto ativo nesta fase</div></div>
+      </div>
+      <div class="vbar"><span style="width:0.0%;background:#d4a24c"></span><i class="mk" style="left:0.0%"></i><b>R$ 0,00 de R$ 4.000,00 · 0,0%</b></div>
+      <div class="fase-diag d-ok">ainda não começou</div>
+    </div>
+    <div class="fase">
+      <div class="fase-top">
+        <div><div class="fase-n" style="color:#c9663c">Venda</div>
+          <div class="fase-s">pós-evento, carrinho aberto 7 dias · compra no pixel</div></div>
+        <div class="fase-fatia" style="background:#c9663c">20%</div>
+      </div>
+      <div class="fase-grid">
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Verba planejada</div><div class="card-v">R$ 8.000,00</div><div class="card-s">R$ 1.000,00/dia × 8 dias · 14/11–21/11</div></div>
+        <div class="card"><span class="stripe s-green"></span><div class="card-t">Já utilizado</div><div class="card-v">R$ 0,00</div><div class="card-s">0,0% da fase</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Falta utilizar</div><div class="card-v">R$ 8.000,00</div><div class="card-s">R$ 1.000,00/dia nos 8 dias que sobram</div></div>
+        <div class="card"><span class="stripe s-accent"></span><div class="card-t">Ritmo no ar agora</div><div class="card-v">— nada no ar</div><div class="card-s">nenhum conjunto ativo nesta fase</div></div>
+      </div>
+      <div class="vbar"><span style="width:0.0%;background:#c9663c"></span><i class="mk" style="left:0.0%"></i><b>R$ 0,00 de R$ 8.000,00 · 0,0%</b></div>
+      <div class="fase-diag d-ok">ainda não começou</div>
+    </div></div>
+
+  <div class="section"><h2>A queima da verba</h2><div class="section-hint">a linha cheia é o gasto acumulado; a pontilhada é o plano. Linha cheia por cima = gastando adiantado; por baixo = sobrando verba.</div></div>
+  <div class="gwrap"><svg viewBox="0 0 1180 320" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="70" y1="284.0" x2="1156" y2="284.0" stroke="#e3e8ef"/><text x="62" y="288.0" class="gy">R$ 0</text><line x1="70" y1="217.5" x2="1156" y2="217.5" stroke="#e3e8ef"/><text x="62" y="221.5" class="gy">R$ 10.000</text><line x1="70" y1="151.0" x2="1156" y2="151.0" stroke="#e3e8ef"/><text x="62" y="155.0" class="gy">R$ 20.000</text><line x1="70" y1="84.5" x2="1156" y2="84.5" stroke="#e3e8ef"/><text x="62" y="88.5" class="gy">R$ 30.000</text><line x1="70" y1="18.0" x2="1156" y2="18.0" stroke="#e3e8ef"/><text x="62" y="22.0" class="gy">R$ 40.000</text><polyline points="70.0,273.0 115.2,262.1 160.5,251.1 205.8,240.2 251.0,229.2 296.2,218.3 341.5,207.3 386.8,196.4 432.0,185.4 477.2,174.5 522.5,160.2 567.8,145.9 613.0,131.6 658.2,117.4 703.5,103.1 748.8,88.8 794.0,74.5 839.2,64.6 884.5,57.9 929.8,51.2 975.0,44.6 1020.2,37.9 1065.5,31.3 1110.8,24.7 1156.0,18.0" fill="none" stroke="#93a1b3" stroke-width="2" stroke-dasharray="6 5"/><polygon points="70.0,284.0 70.0,281.5 115.2,280.7 115.2,284.0" fill="#2f8f8a" opacity=".12"/><polyline points="70.0,281.5 115.2,280.7" fill="none" stroke="#2f8f8a" stroke-width="2.8"/><circle cx="70.0" cy="281.5" r="4" fill="#2f8f8a"><title>28/10 — gasto acumulado R$ 376,66 · plano R$ 1.647,06</title></circle><circle cx="115.2" cy="280.7" r="4" fill="#2f8f8a"><title>29/10 — gasto acumulado R$ 490,39 · plano R$ 3.294,12</title></circle><line x1="839.2" y1="18" x2="839.2" y2="284" stroke="#c9663c" stroke-width="1.6" stroke-dasharray="3 4"/><text x="835.2" y="30" class="gm" text-anchor="end">imersão 14/11</text><line x1="1156.0" y1="18" x2="1156.0" y2="284" stroke="#8593a5" stroke-width="1.6" stroke-dasharray="3 4"/><text x="1152.0" y="30" class="gm" text-anchor="end">carrinho fecha 21/11</text><text x="70.0" y="308" class="gx">28/10</text><text x="115.2" y="308" class="gx">29/10</text><text x="160.5" y="308" class="gx">30/10</text><text x="205.8" y="308" class="gx">31/10</text><text x="251.0" y="308" class="gx">01/11</text><text x="296.2" y="308" class="gx">02/11</text><text x="341.5" y="308" class="gx">03/11</text><text x="386.8" y="308" class="gx">04/11</text><text x="432.0" y="308" class="gx">05/11</text><text x="477.2" y="308" class="gx">06/11</text><text x="522.5" y="308" class="gx">07/11</text><text x="567.8" y="308" class="gx">08/11</text><text x="613.0" y="308" class="gx">09/11</text><text x="658.2" y="308" class="gx">10/11</text><text x="703.5" y="308" class="gx">11/11</text><text x="748.8" y="308" class="gx">12/11</text><text x="794.0" y="308" class="gx">13/11</text><text x="839.2" y="308" class="gx">14/11</text><text x="884.5" y="308" class="gx">15/11</text><text x="929.8" y="308" class="gx">16/11</text><text x="975.0" y="308" class="gx">17/11</text><text x="1020.2" y="308" class="gx">18/11</text><text x="1065.5" y="308" class="gx">19/11</text><text x="1110.8" y="308" class="gx">20/11</text><text x="1156.0" y="308" class="gx">21/11</text></svg>
+    <div class="leg"><span><i style="background:#2f8f8a"></i>gasto acumulado (mídia)</span>
+      <span><i style="background:#93a1b3"></i>plano · R$ 1.647,06/dia na captação, R$ 500,00/dia no lembrete e R$ 1.000,00/dia na venda</span>
+      <span><i style="background:#c9663c"></i>dia da imersão</span></div></div>
+
+  <div class="section"><h2>Lead e CPL</h2><div class="section-hint">só a captação. O alvo de R$ 11,50 sem imposto é a meta da captação; os lançamentos anteriores ficaram entre R$ 9,68 e R$ 16,45.</div></div>
+  
+  <div class="grid4">
+    <div class="card"><span class="stripe s-accent"></span><div class="card-t">Leads</div><div class="card-v">38</div><div class="card-s">inscrições na imersão · pixel 4595</div></div>
+    <div class="card"><span class="stripe s-green"></span><div class="card-t">CPL</div><div class="card-v">R$ 12,90</div><div class="card-s">mídia ÷ leads · alvo R$ 11,50</div></div>
+    <div class="card"><span class="stripe s-green"></span><div class="card-t">CPL com imposto</div><div class="card-v">R$ 14,69</div><div class="card-s">o que o lead custa no cartão</div></div>
+    <div class="card"><span class="stripe s-green"></span><div class="card-t">Quantas vezes o alvo</div><div class="card-v">1,1×</div><div class="card-s">meta da captação: R$ 11,50 sem imposto</div></div>
+  </div>
+  <div class="cen">
+    <div class="cen-t">Quantos leads a verba de captação compra</div>
+    <table class="cen-tab"><tbody>
+      <tr><td class="l">A <b>R$ 11,50</b> (o alvo)</td>
+        <td><b>2.435</b> leads</td><td class="o">R$ 28.000,00 ÷ R$ 11,50</td></tr>
+      <tr><td class="l">No CPL de hoje, <b>R$ 12,90</b></td>
+        <td><b>2.170</b> leads</td>
+        <td class="o">265 leads a menos pela mesma verba</td></tr>
+      <tr><td class="l">No ritmo que está no ar (R$ 190,00/dia)</td>
+        <td><b>274</b> leads</td>
+        <td class="o">gastaria R$ 3.530,39 dos R$ 28.000,00 — sobrariam R$ 24.469,61</td></tr>
+    </tbody></table>
+    <div class="cen-n">Projeção reta: mantém o CPL de hoje e o orçamento diário que está no ar.
+      Serve para decidir verba, não para prometer resultado.</div>
+  </div>
+
+  <div class="section"><h2>Lembrete e venda</h2><div class="section-hint">o lembrete não gera inscrição — mede-se por quantas pessoas alcança e quantas vezes. A venda é lida pela compra do pixel na Ticto.</div></div>
+  <div class="fase"><div class="fase-n" style="color:#d4a24c">Lembrete</div>
+    <div class="fase-grid" style="margin-top:10px"><div class="vazio">começa em 07/11 · R$ 4.000 reservados</div></div></div>
+  <div class="fase" style="margin-top:14px"><div class="fase-n" style="color:#c9663c">Venda</div>
+    <div class="fase-grid" style="margin-top:10px"><div class="vazio">começa em 14/11 · R$ 8.000 reservados</div></div></div>
+
+  <div class="section"><h2>Dia a dia</h2><div class="section-hint">barra = gasto do dia (todas as fases) · linha vermelha = CPL do dia na captação · tracejado escuro = o ritmo diário que a verba pede · tracejado dourado = o alvo de R$ 11,50.</div></div>
+  <div class="gwrap"><svg viewBox="0 0 1180 300" class="graf" preserveAspectRatio="xMidYMid meet"><line x1="62" y1="264.0" x2="1122" y2="264.0" stroke="#e3e8ef"/><text x="54" y="268.0" class="gy">R$ 0</text><text x="1130" y="268.0" class="gy2">R$ 0</text><line x1="62" y1="202.5" x2="1122" y2="202.5" stroke="#e3e8ef"/><text x="54" y="206.5" class="gy">R$ 412</text><text x="1130" y="206.5" class="gy2">R$ 5</text><line x1="62" y1="141.0" x2="1122" y2="141.0" stroke="#e3e8ef"/><text x="54" y="145.0" class="gy">R$ 824</text><text x="1130" y="145.0" class="gy2">R$ 9</text><line x1="62" y1="79.5" x2="1122" y2="79.5" stroke="#e3e8ef"/><text x="54" y="83.5" class="gy">R$ 1.235</text><text x="1130" y="83.5" class="gy2">R$ 14</text><line x1="62" y1="18.0" x2="1122" y2="18.0" stroke="#e3e8ef"/><text x="54" y="22.0" class="gy">R$ 1.647</text><text x="1130" y="22.0" class="gy2">R$ 19</text><line x1="62" y1="18.0" x2="1122" y2="18.0" stroke="#123c5a" stroke-width="1.6" stroke-dasharray="7 5"/><text x="66" y="12.0" class="gm">ritmo que a verba pede · R$ 1.647,06/dia</text><rect x="300.0" y="207.7" width="54.0" height="56.3" fill="#2f8f8a" rx="3"><title>28/10 (quarta) — R$ 376,66 · 32 leads</title></rect><rect x="830.0" y="247.0" width="54.0" height="17.0" fill="#2f8f8a" rx="3"><title>29/10 (quinta) — R$ 113,73 · 6 leads</title></rect><line x1="62" y1="114.8" x2="1122" y2="114.8" stroke="#d4a24c" stroke-width="1.6" stroke-dasharray="3 4"/><text x="1118.0" y="108.8" class="gm" text-anchor="end">alvo de CPL · R$ 11,50</text><polyline points="327.0,111.2 857.0,18.0" fill="none" stroke="#c0392b" stroke-width="2.4"/><circle cx="327.0" cy="111.2" r="4" fill="#c0392b"><title>28/10 — CPL R$ 11,77</title></circle><circle cx="857.0" cy="18.0" r="4" fill="#c0392b"><title>29/10 — CPL R$ 18,95</title></circle><text x="327.0" y="288" class="gx">28/10</text><text x="857.0" y="288" class="gx">29/10</text></svg></div>
+  <div class="tab-wrap" style="margin-top:14px"><table>
+    <thead><tr><th>Dia</th><th>Mídia</th><th>No cartão</th><th>Leads</th><th>CPL</th>
+      <th>Acumulado</th><th>% da verba</th><th>Falta</th></tr></thead>
+    <tbody><tr><td class="l"><b>28/10</b> <span class="sub">quarta</span></td><td>R$ 376,66</td><td>R$ 428,75</td><td>32</td><td class="g">R$ 11,77</td><td>R$ 376,66</td><td>0,9%</td><td>R$ 39.623,34</td></tr><tr><td class="l"><b>29/10</b> <span class="sub">quinta</span></td><td>R$ 113,73</td><td>R$ 129,46</td><td>6</td><td class="r">R$ 18,95</td><td>R$ 490,39</td><td>1,2%</td><td>R$ 39.509,61</td></tr></tbody></table></div>
+
+  <div class="section"><h2>Por público</h2><div class="section-hint">captação: onde o lead está mais barato. Quem está pausado fica na tabela com o que já gastou — o dinheiro foi gasto e conta na verba.</div></div>
+  <div class="tab-wrap"><table>
+    <thead><tr><th>Público</th><th>Estado</th><th>Mídia</th><th>Leads</th><th>CPL</th>
+      <th>CPM</th><th>CTR</th><th>Visitas à LP</th><th>LP → lead</th></tr></thead>
+    <tbody><tr><td class="l"><b>Frio — semelhantes</b><span class="sub">LAL seguidores + visitou perfil 180D + vídeo 75% 365D · 25–65</span></td><td><span class="tag on">no ar</span></td><td>R$ 114,95</td><td>11</td><td class="g">R$ 10,45</td><td>R$ 25,78</td><td>1,21%</td><td>45</td><td>24,4%</td></tr><tr><td class="l"><b>Quente — envolvimento 180D</b><span class="sub">quem interagiu com a conta em 180 dias</span></td><td><span class="tag on">no ar</span></td><td>R$ 94,60</td><td>10</td><td class="g">R$ 9,46</td><td>R$ 21,87</td><td>0,99%</td><td>39</td><td>25,6%</td></tr><tr><td class="l"><b>Frio — aberto</b><span class="sub">Advantage+ sem interesse</span></td><td><span class="tag on">no ar</span></td><td>R$ 93,76</td><td>7</td><td class="g">R$ 13,39</td><td>R$ 23,59</td><td>1,13%</td><td>36</td><td>19,4%</td></tr><tr><td class="l"><b>Quente — envolvimento 90D</b><span class="sub">quem interagiu com a conta em 90 dias</span></td><td><span class="tag">pausado</span></td><td>R$ 67,71</td><td>2</td><td class="r">R$ 33,85</td><td>R$ 19,13</td><td>0,88%</td><td>21</td><td>9,5%</td></tr><tr><td class="l"><b>Frio — advogado trabalhista</b><span class="sub">Advantage+ com sugestão de interesse</span></td><td><span class="tag on">no ar</span></td><td>R$ 65,42</td><td>5</td><td class="g">R$ 13,08</td><td>R$ 21,93</td><td>0,60%</td><td>15</td><td>33,3%</td></tr><tr><td class="l"><b>Quente — listas</b><span class="sub">leads/compradores + cadastrados 180D + vídeo 75% + site 90D</span></td><td><span class="tag on">no ar</span></td><td>R$ 53,95</td><td>3</td><td class="r">R$ 17,98</td><td>R$ 24,06</td><td>0,67%</td><td>15</td><td>20,0%</td></tr></tbody></table></div>
+
+  <div class="section"><h2>Por criativo</h2><div class="section-hint">captação: 1 conjunto = 1 peça, os mesmos criativos nos públicos — então a comparação é limpa. Ordenado por leads.</div></div>
+  <div class="tab-wrap"><table>
+    <thead><tr><th>Peça</th><th>Estado</th><th>Mídia</th><th>Leads</th><th>CPL</th>
+      <th>CTR</th><th>CPC</th><th>Visitas à LP</th><th>Ver</th></tr></thead>
+    <tbody><tr><td class="l"><b>Vídeo AD12</b><span class="sub">AD12 · pergunta de aluno + Súmula 126</span></td><td><span class="tag on">no ar</span></td><td>R$ 84,29</td><td><b>10</b></td><td class="g">R$ 8,43</td><td>1,20%</td><td>R$ 2,72</td><td>27</td><td><a href="https://www.instagram.com/p/DfCggmSMfLM/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Vídeo AD7</b><span class="sub">AD7 · divergência / precedentes</span></td><td><span class="tag on">no ar</span></td><td>R$ 65,14</td><td><b>8</b></td><td class="g">R$ 8,14</td><td>0,92%</td><td>R$ 4,07</td><td>14</td><td><a href="https://www.instagram.com/p/DfCgeKAMPFP/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL2</b><span class="sub">CVAL2 · Súmula 126 +50%</span></td><td><span class="tag on">no ar</span></td><td>R$ 55,68</td><td><b>6</b></td><td class="g">R$ 9,28</td><td>0,99%</td><td>R$ 1,92</td><td>26</td><td><a href="https://www.instagram.com/p/DfCY3xns2nw/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL6</b><span class="sub">CVAL6 · não é sorte, é método</span></td><td><span class="tag on">no ar</span></td><td>R$ 51,79</td><td><b>5</b></td><td class="g">R$ 10,36</td><td>0,68%</td><td>R$ 2,47</td><td>17</td><td><a href="https://www.instagram.com/p/DfCY5DksfMm/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL10</b><span class="sub">CVAL10 · 500 mil / 450 mil desprovidos</span></td><td><span class="tag">pausado</span></td><td>R$ 48,18</td><td><b>3</b></td><td class="r">R$ 16,06</td><td>0,58%</td><td>R$ 3,01</td><td>13</td><td><a href="https://www.instagram.com/p/DfCY6a6MbHu/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL4</b><span class="sub">CVAL4 · RR rejeitado</span></td><td><span class="tag on">no ar</span></td><td>R$ 25,33</td><td><b>2</b></td><td class="g">R$ 12,66</td><td>1,54%</td><td>R$ 1,33</td><td>16</td><td><a href="https://www.instagram.com/p/DfCY4cQMq2R/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL12</b><span class="sub">CVAL12 · 500 mil / menos de 10% providos</span></td><td><span class="tag on">no ar</span></td><td>R$ 46,33</td><td><b>2</b></td><td class="r">R$ 23,16</td><td>1,00%</td><td>R$ 1,54</td><td>24</td><td><a href="https://www.instagram.com/p/DfCY7M1MA2e/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Vídeo AD9</b><span class="sub">AD9 · vídeo</span></td><td><span class="tag">pausado</span></td><td>R$ 31,27</td><td><b>1</b></td><td class="r">R$ 31,27</td><td>1,90%</td><td>R$ 2,41</td><td>9</td><td><a href="https://www.instagram.com/p/DfDvlPlsASS/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Carrossel CVAL3</b><span class="sub">CVAL3 · RR negado por prequestionamento</span></td><td><span class="tag">pausado</span></td><td>R$ 51,81</td><td><b>1</b></td><td class="r">R$ 51,81</td><td>1,03%</td><td>R$ 1,79</td><td>24</td><td><a href="https://www.instagram.com/p/DfCY4R8sLT1/" target="_blank" rel="noopener">Instagram</a></td></tr><tr><td class="l"><b>Vídeo AD1</b><span class="sub">AD1 · vídeo</span></td><td><span class="tag">pausado</span></td><td>R$ 30,57</td><td><b>0</b></td><td class="">—</td><td>0,29%</td><td>R$ 15,29</td><td>1</td><td><a href="https://www.instagram.com/p/DfDvfuzsNhn/" target="_blank" rel="noopener">Instagram</a></td></tr></tbody></table></div>
+
+  <div class="section"><h2>O funil até a inscrição</h2><div class="section-hint">onde a captação perde gente. Lead medido na /obrigado/, 1 vez por e-mail — o popup do Elementor redireciona para lá.</div></div>
+  <div class="gwrap"><div class="fstep"><div class="flab"><span>Impressões</span><b>21.524</b></div><div class="fbar"><span style="width:100.0%"></span></div><div class="fpct">100,0% do topo</div></div><div class="fstep"><div class="flab"><span>Cliques no link <em>CTR 0,96%</em></span><b>206</b></div><div class="fbar"><span style="width:1.2%"></span></div><div class="fpct">1,0% do topo</div></div><div class="fstep"><div class="flab"><span>Visitas à LP <em>83,0% dos cliques chegam</em></span><b>171</b></div><div class="fbar"><span style="width:1.2%"></span></div><div class="fpct">0,8% do topo</div></div><div class="fstep"><div class="flab"><span>Leads <em>22,2% de quem chega se inscreve</em></span><b>38</b></div><div class="fbar"><span style="width:1.2%"></span></div><div class="fpct">0,2% do topo</div></div></div>
+
+  <div class="section"><h2>O que está no ar agora</h2><div class="section-hint">orçamento diário dos conjuntos ativos neste instante — é daqui que sai o "ritmo no ar".</div></div>
+  <div class="tab-wrap"><table>
+    <thead><tr><th>Conjunto</th><th>Fase</th><th>Orçamento</th><th>Otimizando</th></tr></thead>
+    <tbody><tr><td class="l"><b>[ADV][ABERTO]_AD2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ABERTO]_AD7</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ABERTO]_CVAL2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ABERTO]_CVAL6</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ADVOGADO_TRABALHISTA]_AD2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ADVOGADO_TRABALHISTA]_AD7</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ADV][ADVOGADO_TRABALHISTA]_CVAL6</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_AD12</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_AD2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_AD7</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_CVAL12</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_CVAL2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 10,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[ENVOLVIMENTO_TOTAL_180D]_CVAL6</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[MIX_LAL]_AD12</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[MIX_LAL]_CVAL4</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr><tr><td class="l"><b>[QUENTE]_CVAL2</b></td><td><span class="tag" style="border-color:#2f8f8a;color:#2f8f8a">Captação</span></td><td>R$ 13,00/dia</td><td>OFFSITE_CONVERSIONS</td></tr></tbody></table></div>
+  <div class="nota">
+    <b>16 conjuntos no ar a R$ 190,00/dia</b> de mídia
+    (R$ 216,28/dia no cartão) · 176 pausados.
+    No ritmo de hoje a captação fecharia em <b>R$ 3.530,39</b> dos R$ 28.000,00 planejados.
+    A verba que falta na captação dura <b>144,8 dias</b> neste ritmo, e faltam
+    <b>16 dias</b> de janela.<br>
+    <b>Teto da conta:</b> R$ 0,00 com R$ 26.359,47 no contador — folga de R$ 0,00.
+    O teto conta a mídia do perpétuo também, então ele aperta antes da verba do lançamento.
+  </div>
+
+  <div class="rodape">
+    Régua: <b>verba de mídia limpa</b> (os 13,83% de ISS+IOF aparecem na coluna
+    "no cartão" e nos cards de imposto). Alcance deduplicado: 13.704 pessoas.
+    Leads medidos pelo pixel 975791790814595 no pageview da página de obrigado; o Meta atribui o
+    lead ao dia do CLIQUE, então o número de ontem ainda pode subir.
+    Janela do lançamento: 28/10 a 21/11.
+    Fonte: Graph API do Meta, conta 1498770914317901. Gerado em 29/10/2026.
+  </div>
+</div>
+</body></html>
