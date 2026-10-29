@@ -5,11 +5,11 @@
 /* Layout: leitura em coluna; peças campeãs em grade; cada criativo novo é uma ficha com "vem de" + briefing */
 :root{
   --bg:#f7f4f1;--card:#ffffff;--fg:#22201f;--mut:#6c6460;--line:#e2dad4;
-  --wine:#5b2338;--gold:#9a7442;--soft:#f1e8e2;
+  --wine:#5b2338;--gold:#9a7442;--soft:#f1e8e2;--ok:#2f7a4f;
   --disp:"Cormorant Garamond",Georgia,serif;--body:"Source Sans 3",system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1617;--card:#241f20;--fg:#eee8e4;--mut:#a89f9a;--line:#3a3133;--wine:#d99ab0;--gold:#d2ab74;--soft:#2e2628;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1a1617;--card:#241f20;--fg:#eee8e4;--mut:#a89f9a;--line:#3a3133;--wine:#d99ab0;--gold:#d2ab74;--soft:#2e2628;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1617;--card:#241f20;--fg:#eee8e4;--mut:#a89f9a;--line:#3a3133;--wine:#d99ab0;--gold:#d2ab74;--soft:#2e2628;--ok:#6cc08f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1617;--card:#241f20;--fg:#eee8e4;--mut:#a89f9a;--line:#3a3133;--wine:#d99ab0;--gold:#d2ab74;--soft:#2e2628;--ok:#6cc08f;color-scheme:dark}
 body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
 .w{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
 h1{font:700 2.4rem/1.1 var(--disp);margin:0 0 10px;color:var(--wine);text-wrap:balance}
@@ -44,6 +44,18 @@ ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-
 .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .tl div{border-top:3px solid var(--gold);padding-top:8px}
 .tl b{display:block;color:var(--wine)}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-top:8px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;white-space:nowrap}
+th{font:700 .7rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);white-space:normal}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+td.hl{font-weight:700;color:var(--wine)}
+.chip{display:inline-block;font:700 .68rem var(--body);letter-spacing:.04em;padding:2px 8px;border-radius:99px;border:1px solid currentColor}
+.c-ok{color:var(--ok)}.c-ref{color:var(--gold)}.c-neu{color:var(--mut)}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:6px 0 4px}
+.defs div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.9rem}
+.defs b{display:block;color:var(--wine)}
 </style>
 </head><body>
 <div class="w">
@@ -63,7 +75,7 @@ ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-
   <h2>O que está vendendo agora</h2>
   <p>Nas últimas duas semanas testamos cinco versões da página de vendas e combinamos cada uma com as peças campeãs. O teste trouxe dois aprendizados claros:</p>
   <ul>
-    <li><b>As páginas v9 e v11-v2 são as que convertem.</b> Foram as que fecharam venda, e passam a ser o destino principal dos anúncios até a imersão.</li>
+    <li><b>As páginas v9 e v11-v2 são as que convertem.</b> Foram as que fecharam venda (taxa de cada página <a href="#paginas" style="color:var(--wine)">logo abaixo</a>), e passam a ser o destino principal dos anúncios até a imersão.</li>
     <li><b>Neste ciclo, o ingresso veio das artes estáticas.</b> A arte 083 (autoridade) foi a que mais trouxe ingresso, seguida da 117 (antes e depois com R$ 97) e das versões Prontuário e Cartaz da 117. Os vídeos seguem trazendo visita e são os que mais formam aluno do A3, por isso a mensagem deles entra nas peças novas.</li>
   </ul>
   <div class="camp" style="margin-top:16px">
@@ -72,6 +84,29 @@ ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-
     <figure><img src="img/117-prontuario.jpg" alt="Versão Prontuário da 117"><figcaption><span class="tag">vende</span><b>117 · Prontuário</b>Ficha clínica escrita à mão em que o médico é o paciente.</figcaption></figure>
     <figure><img src="img/117-cartaz.jpg" alt="Versão Cartaz da 117"><figcaption><span class="tag">vende</span><b>117 · Cartaz R$ 97</b>Preço gigante e “1 sábado. 1 critério.”</figcaption></figure>
   </div>
+</section>
+
+<section id="paginas">
+  <h2>Conversão de cada página testada</h2>
+  <p>Todas as páginas receberam as mesmas peças campeãs, para que a diferença venha da página. As três taxas abaixo leem o caminho do médico do clique até a compra.</p>
+  <div class="defs">
+    <div><b>Visita → checkout</b>De quem chegou na página, quantos clicaram em comprar e abriram o checkout. Referência do time: 10% ótimo, 6% mínimo.</div>
+    <div><b>Conversão da página</b>Vendas ÷ visitas. De cada 100 médicos que chegam, quantos compram. Referência: 3% ótimo, 1,2% mínimo.</div>
+    <div><b>Conversão do checkout</b>Vendas ÷ checkouts. De quem abriu o checkout, quantos pagaram. Referência do time: 30% ótimo, 20% mínimo.</div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Página</th><th>Visitas</th><th>Checkouts</th><th>Vendas</th><th>Visita → checkout</th><th>Conversão da página</th><th>Conversão do checkout</th><th>Leitura</th></tr>
+    <tr><td><b>v9</b></td><td>79</td><td>8</td><td>2</td><td>10,1%</td><td class="hl">2,5%</td><td class="hl">25%</td><td><span class="chip c-ok">converte</span></td></tr>
+    <tr><td><b>v11-v2</b></td><td>80</td><td>9</td><td>2</td><td>11,3%</td><td class="hl">2,5%</td><td class="hl">22%</td><td><span class="chip c-ok">converte</span></td></tr>
+    <tr><td>/imersao-pratica (atual)</td><td>204</td><td>25</td><td>3</td><td class="hl">12,3%</td><td>1,5%</td><td>12%</td><td><span class="chip c-ref">referência</span></td></tr>
+    <tr><td>v7</td><td>83</td><td>5</td><td>1</td><td>6,0%</td><td>1,2%</td><td>20%</td><td><span class="chip c-neu">no mínimo</span></td></tr>
+    <tr><td>v10</td><td>33</td><td>4</td><td>0</td><td>12,1%</td><td>–</td><td>–</td><td><span class="chip c-neu">pouca visita</span></td></tr>
+    <tr><td>v8</td><td>63</td><td>4</td><td>0</td><td>6,3%</td><td>–</td><td>–</td><td><span class="chip c-neu">ainda sem venda</span></td></tr>
+    <tr><td>v11</td><td>23</td><td>0</td><td>0</td><td>–</td><td>–</td><td>–</td><td><span class="chip c-neu">pouca visita</span></td></tr>
+  </table></div>
+  <p style="margin-top:12px"><b>Como ler:</b> a página atual é a que mais leva o médico ao checkout (12,3%), mas é na v9 e na v11-v2 que mais gente termina a compra: de cada 100 visitas, 2 a 3 viram ingresso, e de cada 4 a 5 checkouts, 1 é pago. Por isso essas duas viram o destino principal até 07/11. A v10 e a v11 tiveram poucas visitas, então ainda não dá para dizer que não funcionam.</p>
+  <p>O ponto em comum de todas: a conversão do checkout está perto ou abaixo do mínimo de 20%. Ou seja, o médico chega a abrir o checkout e para ali. É aí que a recuperação de carrinho, no fim desta página, tem o maior efeito.</p>
+  <p class="mut">Visitas e checkouts vêm do Meta; vendas vêm da HeroSpark, pela origem do anúncio. Período: desde que cada página entrou no teste (v7 em 15/10, a atual a partir de 17/10, v8 a v11-v2 a partir de 22/10) até 29/10. Até 28/10, a contagem de visitas das páginas v8, v10, v11 e v11-v2 foi parcial por uma configuração de carregamento do site, já ajustada. Nelas, a venda é o número mais firme.</p>
 </section>
 
 <section>
@@ -162,7 +197,7 @@ ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-
     <li><b>Fotos de antes e depois novas</b>, com autorização do paciente, de pelo menos um caso de outro tipo de cicatriz.</li>
     <li><b>Dois ou três depoimentos de alunos médicos</b>, gravados no celular mesmo.</li>
     <li><b>Uma gravação curta da Dra.</b> com a frase “Médico, se você ainda não se sente seguro para tratar cicatriz de acne…”.</li>
-    <li><b>Recuperação de checkout.</b> De cada cinco médicos que abrem o checkout, um finaliza. Se o time puder mandar o relatório de carrinhos abandonados da HeroSpark e chamar no WhatsApp quem gerou Pix e não pagou, é ingresso que já está a um passo.</li>
+    <li id="checkout"><b>Recuperação de checkout.</b> De cada cinco médicos que abrem o checkout, um finaliza. Se o time puder mandar o relatório de carrinhos abandonados da HeroSpark e chamar no WhatsApp quem gerou Pix e não pagou, é ingresso que já está a um passo.</li>
   </ol>
 </section>
 
