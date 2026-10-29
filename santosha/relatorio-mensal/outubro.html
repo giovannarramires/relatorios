@@ -1,0 +1,1426 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santosha Outubro 2026</title>
+<style>
+
+  /* ── Reset & Base ─────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bege:       #F2EBDF;
+    --bege-claro: #FAF6F1;
+    --terracota:  #BF6A45;
+    --terracota2: #A85A38;
+    --verde:      #6B7C5C;
+    --verde2:     #556347;
+    --ocre:       #C89640;
+    --marrom:     #3D2718;
+    --marrom2:    #2A1A0E;
+    --creme:      #F5EDE0;
+    --branco:     #FFFFFF;
+    --verde-ok:   #2E6E35;
+    --vermelho:   #B02A2A;
+    --amarelo:    #A06A00;
+    --card-bg:    #FFFFFF;
+    --text-muted: rgba(61,39,24,0.55);
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bege-claro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Slides container ─────────────────────────────────────────── */
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .slide.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* ── Navigation ───────────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1000;
+    background: rgba(242,235,223,0.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 20px;
+    border-radius: 40px;
+    border: 1px solid rgba(191,106,69,0.3);
+    box-shadow: 0 2px 12px rgba(61,39,24,0.12);
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--marrom);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    transition: background 0.2s;
+    font-family: inherit;
+  }
+  .nav button:hover { background: rgba(191,106,69,0.25); }
+  .nav button:disabled { opacity: 0.3; cursor: default; }
+  .nav .counter {
+    color: var(--terracota2);
+    font-size: 12px;
+    font-family: 'Trebuchet MS', sans-serif;
+    min-width: 55px;
+    text-align: center;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(61,39,24,0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot.active { background: var(--terracota); transform: scale(1.3); }
+
+  /* ── Keyboard hint ────────────────────────────────────────────── */
+  .hint {
+    position: fixed;
+    top: 14px;
+    right: 20px;
+    color: rgba(61,39,24,0.35);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+  }
+
+  /* ── Shared utilities ─────────────────────────────────────────── */
+  .sans { font-family: 'Trebuchet MS', sans-serif; }
+  .serif { font-family: 'Georgia', serif; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .tag-ok  { background: #d4edda; color: var(--verde-ok); }
+  .tag-warn{ background: #fff3cd; color: var(--amarelo); }
+  .tag-bad { background: #f8d7da; color: var(--vermelho); }
+
+  .up   { color: var(--verde-ok); }
+  .down { color: var(--vermelho); }
+  .flat { color: var(--verde); }
+
+  /* ── Slide header bar ─────────────────────────────────────────── */
+  .slide-header {
+    background: var(--terracota);
+    padding: 18px 48px 14px;
+    flex-shrink: 0;
+  }
+  .slide-header h1 {
+    font-size: clamp(20px, 2.8vw, 30px);
+    color: var(--branco);
+    font-weight: normal;
+    letter-spacing: -.01em;
+  }
+  .slide-header p {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: rgba(250,246,241,0.8);
+    margin-top: 4px;
+  }
+
+  /* ── Card KPI ─────────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--branco);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border-left: 4px solid var(--terracota);
+  }
+  .kpi-card .kpi-label {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    color: var(--verde);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .kpi-card .kpi-val {
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: bold;
+    color: var(--terracota);
+    margin: 4px 0 3px;
+    line-height: 1;
+  }
+  .kpi-card .kpi-delta {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+  }
+
+  /* ── Tables ───────────────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(9px, 1.1vw, 13px);
+  }
+  thead th {
+    background: var(--terracota);
+    color: var(--branco);
+    padding: 9px 10px;
+    text-align: left;
+    font-weight: bold;
+  }
+  tbody tr:nth-child(even) { background: var(--bege); }
+  tbody tr:nth-child(odd)  { background: var(--branco); }
+  tbody tr.total-row {
+    background: var(--terracota2);
+    color: var(--branco);
+    font-weight: bold;
+  }
+  tbody tr.total-row td { color: var(--branco); }
+  tbody td { padding: 8px 10px; }
+  .thead-verde thead th { background: var(--verde); }
+
+  /* ── Funil ────────────────────────────────────────────────────── */
+  .funil-step {
+    border-radius: 6px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    color: var(--branco);
+  }
+  .funil-step .fs-label { font-size: clamp(12px,1.4vw,16px); font-weight: bold; }
+  .funil-step .fs-sub   { font-size: 11px; opacity: .85; font-family: 'Trebuchet MS', sans-serif; }
+  .funil-step .fs-right { text-align: right; font-family: 'Trebuchet MS', sans-serif; font-size: 12px; }
+
+  /* ── Bar horizontal ───────────────────────────────────────────── */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .bar-label { font-family: 'Trebuchet MS', sans-serif; font-size: 11px; width: 160px; flex-shrink: 0; color: var(--marrom); }
+  .bar-track { flex: 1; background: var(--bege); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill  { height: 100%; border-radius: 4px; background: var(--terracota); }
+  .bar-val   { font-family: 'Trebuchet MS', sans-serif; font-size: 11px; width: 110px; text-align: right; flex-shrink: 0; font-weight: bold; color: var(--marrom); }
+
+  /* ── Note box ─────────────────────────────────────────────────── */
+  .note {
+    background: rgba(107,124,92,0.12);
+    border-left: 3px solid var(--verde);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: var(--verde2);
+    line-height: 1.5;
+  }
+  .note.warn {
+    background: rgba(191,106,69,0.1);
+    border-color: var(--terracota);
+    color: var(--terracota2);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 1 — CAPA                                                  */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s1 {
+    background: var(--bege);
+    flex-direction: row;
+  }
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 10 — BENCHMARKS                                           */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s10 { background: var(--bege-claro); }
+
+  .capa-stripe {
+    width: 10px;
+    background: var(--terracota);
+    flex-shrink: 0;
+  }
+  .capa-stripe-thin {
+    width: 4px;
+    background: var(--ocre);
+    flex-shrink: 0;
+  }
+  .capa-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+  .capa-eyebrow {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(11px,1.2vw,14px);
+    color: var(--ocre);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .capa-title {
+    font-size: clamp(40px, 6vw, 80px);
+    color: var(--marrom);
+    line-height: 1.05;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .capa-sub {
+    font-size: clamp(22px, 3vw, 40px);
+    color: var(--terracota);
+    margin-bottom: 28px;
+  }
+  .capa-divider {
+    width: 80px;
+    height: 3px;
+    background: var(--ocre);
+    margin-bottom: 22px;
+  }
+  .capa-canais {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(12px,1.3vw,15px);
+    color: var(--marrom2);
+    letter-spacing: .04em;
+  }
+  .capa-footer {
+    margin-top: auto;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: rgba(61,39,24,0.5);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 2 — VISÃO GERAL                                           */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s2 { background: var(--bege-claro); }
+  .s2-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+    padding: 18px 40px 70px;
+  }
+  .kpi-card-lg {
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 20px 22px;
+    border-top: 4px solid var(--terracota);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .kpi-card-lg .kpi-label { font-family: 'Trebuchet MS', sans-serif; font-size: 10px; color: var(--verde); text-transform: uppercase; letter-spacing: .07em; }
+  .kpi-card-lg .kpi-val { font-size: clamp(22px,2.8vw,34px); font-weight: bold; color: var(--terracota); margin: 8px 0 6px; line-height: 1; }
+  .kpi-card-lg .kpi-delta { font-family: 'Trebuchet MS', sans-serif; font-size: 12px; }
+  .kpi-card-lg.verde { border-top-color: var(--verde); }
+  .kpi-card-lg.verde .kpi-val { color: var(--verde); }
+  .kpi-card-lg.ocre  { border-top-color: var(--ocre); }
+  .kpi-card-lg.ocre  .kpi-val { color: var(--ocre); }
+
+  .s2-note {
+    padding: 0 40px 18px;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 3 — META VISÃO GERAL                                      */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s3 { background: var(--bege-claro); }
+  .s3-body { flex: 1; padding: 16px 40px 70px; overflow: auto; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 4 — META CAMPANHAS                                        */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s4 { background: var(--bege-claro); }
+  .s4-body { flex: 1; padding: 12px 40px 70px; overflow: auto; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 5 — FUNIL META                                            */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s5 { background: var(--bege-claro); }
+  .s5-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 20px 48px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 6 — GOOGLE ADS                                            */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s6 { background: var(--bege-claro); }
+  .s6-body {
+    flex: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+    padding: 16px 40px 70px;
+  }
+  .s6-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 7 — SHOPIFY RECEITA                                       */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s7 { background: var(--bege-claro); }
+  .s7-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 8 — SHOPIFY FUNIL + PRODUTOS                              */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s8 { background: var(--bege-claro); }
+  .s8-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 9 — CLIENTES + CANAIS                                     */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s9 { background: var(--bege-claro); }
+  .s9-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding: 18px 40px 70px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 11 — RECOMENDAÇÕES                                        */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s11b { background: var(--bege-claro); }
+  .rec-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 16px 40px 70px;
+    align-items: start;
+  }
+  .rec-col { border-radius: 10px; overflow: hidden; }
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 5B — META INVESTIMENTO                                    */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s5b { background: var(--bege-claro); }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE 12 — ENCERRAMENTO                                         */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s12 {
+    background: var(--bege);
+    flex-direction: row;
+  }
+
+  .rec-col-head {
+    padding: 12px 16px;
+    color: var(--branco);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', sans-serif;
+    letter-spacing: .03em;
+  }
+  .rec-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: var(--branco);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: clamp(10px,1.1vw,13px);
+    color: var(--marrom);
+    line-height: 1.45;
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-item:nth-child(even) { background: var(--bege); }
+  .rec-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+  .enc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+  .enc-eyebrow { font-family: 'Trebuchet MS', sans-serif; font-size: 14px; color: var(--ocre); font-style: italic; margin-bottom: 14px; letter-spacing: .05em; }
+  .enc-title { font-size: clamp(50px,7vw,90px); color: var(--terracota); font-weight: bold; margin-bottom: 28px; }
+  .enc-divider { width: 80px; height: 3px; background: var(--ocre); margin-bottom: 24px; }
+  .enc-name { font-family: 'Trebuchet MS', sans-serif; font-size: 16px; color: var(--marrom); margin-bottom: 6px; }
+  .enc-email { font-family: 'Trebuchet MS', sans-serif; font-size: 13px; color: var(--terracota2); margin-bottom: 30px; }
+  .enc-footer { margin-top: auto; font-family: 'Trebuchet MS', sans-serif; font-size: 10px; color: rgba(61,39,24,0.55); line-height: 1.6; }
+
+  /* ── Seção title dentro de slide ─────────────────────────────── */
+  .section-title {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--verde);
+    margin-bottom: 10px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE Pinterest Ads                                             */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s6p { background: var(--bege-claro); }
+  .thead-ocre thead th { background: var(--ocre); }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* SLIDE s9b — Soluções Alertas: font override                    */
+  /* ═══════════════════════════════════════════════════════════════ */
+  #s9b [style*="font-size:10.5px"] { font-size: 12.5px !important; }
+  #s9b [style*="font-size:12px"]   { font-size: 14px !important; }
+  #s9b [style*="font-size:11px"]   { font-size: 12.5px !important; }
+
+  @media print {
+    @page { size: 13.33in 7.5in landscape; margin: 0; }
+    html, body { overflow: visible !important; height: auto !important; display: block !important; }
+    body { min-height: 0 !important; justify-content: flex-start !important; }
+    .deck { position: static !important; width: 1280px !important; height: auto !important; overflow: visible !important; }
+    .slide {
+      display: flex !important;
+      opacity: 1 !important;
+      position: relative !important;
+      inset: auto !important;
+      width: 1280px !important;
+      height: 720px !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      overflow: hidden !important;
+    }
+    .nav, .hint { display: none !important; }
+  }
+
+  .monthbar{position:fixed;top:12px;right:16px;left:auto;transform:none;z-index:1200;
+    display:flex;align-items:center;gap:6px;background:rgba(242,235,223,0.95);
+    backdrop-filter:blur(8px);padding:5px 8px 5px 14px;border-radius:30px;
+    border:1px solid rgba(191,106,69,0.35);box-shadow:0 2px 12px rgba(61,39,24,0.15);
+    font-family:'Trebuchet MS',sans-serif;}
+  .monthbar .mb-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--terracota2);font-weight:bold;margin-right:4px;}
+  .monthbar a{font-size:12px;color:var(--marrom);text-decoration:none;padding:4px 12px;
+    border-radius:20px;transition:background .2s;font-weight:600;}
+  .monthbar a:hover{background:rgba(191,106,69,0.18);}
+  .monthbar a.active{background:var(--terracota);color:#fff;}
+  @media print{ .monthbar{display:none !important;} }
+  #s-visao .grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  #s-visao .kpi-card-lg{padding:10px 12px}
+  #s-visao .kpi-card-lg .kpi-label{font-size:9px;letter-spacing:.05em;line-height:1.25}
+  #s-visao .kpi-card-lg .kpi-val{font-size:clamp(15px,1.55vw,20px);margin:5px 0 0;white-space:nowrap}
+  #s-visao .kpi-card-lg .kpi-delta{font-size:10.5px;line-height:1.35}
+  #s-visao thead th{padding:6px 10px}
+  #s-visao tbody td{padding:5px 10px}
+  #s-visao .note{padding:7px 12px;font-size:10.5px;line-height:1.42}
+  #s-publicos tbody td{padding:3px 8px} #s-publicos thead th{padding:5px 8px}
+  #s-ads tbody td{padding:2.5px 7px;white-space:nowrap} #s-ads thead th{padding:5px 7px}
+  #s-ads tbody td:first-child{white-space:normal;line-height:1.15}
+  #s-ads tbody td small{font-size:8.5px}
+  #s-termos tbody td{padding:3.5px 8px} #s-termos thead th{padding:5px 8px}
+  #s-ads .duas{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  .body-pad{flex:1;padding:16px 40px 70px;overflow:auto;justify-content:safe center}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .legenda{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--text-muted);
+    display:flex;gap:18px;align-items:center;margin-top:6px}
+  .legenda i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+</style>
+<style>
+.mat-btn{margin-top:7px;align-self:flex-start;font:700 11px 'Trebuchet MS',sans-serif;color:#fff;background:var(--terracota);border:0;border-radius:999px;padding:6px 13px;cursor:pointer}
+.mat-btn:hover{background:var(--terracota2)}
+.mat-modal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(42,26,14,.55);align-items:center;justify-content:center;padding:24px}
+.mat-modal.on{display:flex}
+.mat-box{background:var(--bege-claro);border-radius:14px;width:min(1100px,100%);max-height:100%;overflow:auto;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.mat-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 22px 12px;background:var(--terracota);color:#fff;position:sticky;top:0}
+.mat-head h2{font-weight:normal;font-size:22px}.mat-head p{font:11px 'Trebuchet MS',sans-serif;opacity:.85;margin-top:3px}
+.mat-eyebrow{font:700 10px 'Trebuchet MS',sans-serif;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.mat-head button{background:rgba(255,255,255,.18);border:0;color:#fff;font-size:16px;width:32px;height:32px;border-radius:50%;cursor:pointer;flex:0 0 auto}
+.mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;padding:16px 20px 22px}
+.mat-card{display:flex;gap:10px;align-items:center;background:#fff;border-radius:10px;padding:8px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)}
+.mat-card:hover{border-color:var(--terracota)}
+.mat-card img,.mat-sem{width:64px;height:64px;object-fit:cover;border-radius:7px;flex:0 0 auto;background:var(--bege);display:flex;align-items:center;justify-content:center;font:9px 'Trebuchet MS',sans-serif;color:var(--text-muted);text-align:center}
+.mat-txt{display:flex;flex-direction:column;gap:2px;font:11px 'Trebuchet MS',sans-serif;line-height:1.3;min-width:0}
+.mat-txt strong{color:var(--terracota);word-break:break-word}
+@media print{.mat-btn,.mat-modal{display:none!important}}
+</style>
+<style>
+  .aprov-flag{position:absolute;top:14px;right:18px;z-index:5;background:#f2c94c;color:#3d2718;font:800 11px 'Trebuchet MS',sans-serif;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .previa-flag{position:fixed;bottom:62px;left:50%;transform:translateX(-50%);z-index:50;background:#3d2718;color:#fff;font:700 11px 'Trebuchet MS',sans-serif;padding:6px 14px;border-radius:999px;opacity:.9}
+</style>
+<nav class="monthbar"><span class="mb-label">Relatório mensal</span><a href="junho.html">Junho</a><a href="index.html">Julho</a><a href="agosto.html">Agosto</a><a href="setembro.html">Setembro</a><a class="active" href="outubro.html">Outubro</a></nav>
+<span class="hint">← → ou clique nas setas</span>
+<div class="deck" id="deck">
+
+  <!-- 1 · CAPA -->
+  <section class="slide active" style="background:var(--bege);flex-direction:row">
+    <div class="capa-stripe"></div>
+    <div class="capa-stripe-thin"></div>
+    <div class="capa-content">
+      <p class="capa-eyebrow">Relatório de Resultados</p>
+      <h1 class="capa-title" style="font-size:clamp(40px,6vw,74px)">Santosha por aí</h1>
+      <p class="capa-sub">Outubro 2026</p>
+      <div class="capa-divider"></div>
+      <p class="capa-canais">Meta Ads &nbsp;·&nbsp; Google Ads &nbsp;·&nbsp; Shopify</p>
+      <p class="sans" style="margin-top:14px;font-size:12px;color:var(--terracota2)">Período: 01 a 28 de outubro de 2026 &nbsp;·&nbsp; com comparativo de setembro/2026 e outubro/2025 na mesma janela de dias</p>
+      <p class="capa-footer" style="margin-top:40px">GGD — Gestão de Tráfego</p>
+    </div>
+  </section>
+
+  <!-- 2 · VISÃO GERAL + COMPARATIVO -->
+  <section class="slide" id="s-visao" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Visão Geral — Outubro 2026</h1>
+      <p>01 a 28 de outubro · comparação com 01–28/09/26 e 01–28/10/25 em número e em % · Shopify + Meta + Google</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:11px">
+      <div class="grid6">
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Faturamento (vendas brutas)</div>
+          <div class="kpi-val">R$ 29.538,85</div>
+        </div>
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">Investimento em campanhas</div>
+          <div class="kpi-val">R$ 8.466,24</div>
+        </div>
+        <div class="kpi-card-lg">
+          <div class="kpi-label">Total de pedidos</div>
+          <div class="kpi-val">90</div>
+        </div>
+        <div class="kpi-card-lg ocre">
+          <div class="kpi-label">Taxa de recorrência</div>
+          <div class="kpi-val">sem leitura</div>
+        </div>
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">ROAS campanhas</div>
+          <div class="kpi-val">3,49x</div>
+        </div>
+        <div class="kpi-card-lg verde">
+          <div class="kpi-label">ROAS com imposto</div>
+          <div class="kpi-val">3,15x</div>
+        </div>
+      </div>
+      <table style="font-size:11.5px">
+        <thead><tr>
+          <th>Indicador</th><th>Outubro 2026</th><th>Setembro 2026</th><th>vs. mês anterior</th><th>Outubro 2025</th><th>vs. ano anterior</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><strong>Faturamento (vendas brutas)</strong></td><td><strong>R$ 29.538,85</strong></td><td>R$ 32.386,85</td><td><span class="down">▼ R$ 2.848,00 · 9%</span></td><td>R$ 55.361,70</td><td><span class="down">▼ R$ 25.822,85 · 47%</span></td></tr>
+          <tr><td>Pedidos</td><td><strong>90</strong></td><td>98</td><td><span class="down">▼ 8 pedidos · 8%</span></td><td>161</td><td><span class="down">▼ 71 pedidos · 44%</span></td></tr>
+          <tr><td>Ticket médio</td><td><strong>R$ 328,21</strong></td><td>R$ 330,48</td><td><span class="down">▼ R$ 2,27 · 1%</span></td><td>R$ 343,86</td><td><span class="down">▼ R$ 15,65 · 5%</span></td></tr>
+          <tr><td>Sessões</td><td>9.624</td><td>8.378</td><td><span class="up">▲ 1.246 · 15%</span></td><td>13.237</td><td><span class="down">▼ 3.613 · 27%</span></td></tr>
+          <tr><td>Conversão da loja</td><td><strong>0,94%</strong></td><td>1,17%</td><td><span class="down">▼ 0,23 p.p. · 20%</span></td><td>1,22%</td><td><span class="down">▼ 0,28 p.p. · 23%</span></td></tr>
+          <tr><td>Investimento em campanhas</td><td>R$ 8.466,24</td><td>R$ 8.079,10</td><td><span class="down">▲ R$ 387,14 · 5%</span></td><td>R$ 10.968,04</td><td><span class="up">▼ R$ 2.501,80 · 23%</span></td></tr>
+          <tr><td>Imposto Meta (13,83%)</td><td>R$ 898,17</td><td>R$ 856,10</td><td><span class="down">▲ R$ 42,07 · 5%</span></td><td>—</td><td>—</td></tr>
+          <tr><td><strong>Total pago (campanhas + imposto)</strong></td><td><strong>R$ 9.364,41</strong></td><td>R$ 8.935,20</td><td><span class="down">▲ R$ 429,21 · 5%</span></td><td>—</td><td>—</td></tr>
+          <tr><td>Mídia sobre o faturamento</td><td>28,7% (31,7% com imposto)</td><td>24,9%</td><td><span class="down">▲ 3,8 p.p.</span></td><td>19,8%</td><td>—</td></tr>
+          <tr><td>ROAS pago (MER com imposto)</td><td>3,15x</td><td>3,62x</td><td><span class="down">▼ 0,47x · 13%</span></td><td>—</td><td>—</td></tr>
+          <tr class="total-row"><td>ROAS real (MER)</td><td>3,49x</td><td>4,01x</td><td><span class="down">▼ 0,52x · 13%</span></td><td>5,05x</td><td><span class="down">▼ 1,56x · 31%</span></td></tr>
+        </tbody>
+      </table>
+      <div class="grid2">
+        <div class="note warn">
+          <strong>Contra setembro: mais visitas, menos conversão.</strong> A loja recebeu 1.246 sessões a mais (+15%)
+          com R$ 387,14 a mais de investimento, mas converteu 0,23 p.p. abaixo; o ticket ficou praticamente igual (R$ 328,21 contra R$ 330,48).
+          A virada veio na segunda metade do mês: de 23 a 28/10 a loja vendeu 4,5 pedidos por dia gastando menos (próximo slide).
+        </div>
+        <div class="note warn">
+          <strong>Contra outubro do ano passado: mês abaixo.</strong> R$ 25.822,85 a menos de faturamento,
+          71 pedidos a menos e 3.613 sessões a menos, com R$ 2.501,80 a menos de mídia. Outubro/25 rodou a 5,05x
+          de MER; a diferença segue no topo do funil e no ticket.
+        </div>
+      </div>
+      <div class="note warn" style="font-size:10.5px">
+        <strong>Régua das colunas:</strong> as três colunas comparam a <strong>mesma janela de dias (01 a 28)</strong>.
+        O investimento soma <strong>Meta + Google</strong> nas três. <strong>Faturamento = vendas brutas da Shopify</strong> — o valor dos pedidos antes de descontos e devoluções, nas três colunas. O imposto de 2025 não foi levantado, por isso as linhas de imposto ficam sem comparativo anual.
+      </div>
+    </div>
+  </section>
+
+  <!-- N0 · O MÊS DIA A DIA -->
+  <section class="slide" style="background:var(--bege-claro)">
+        <div class="slide-header">
+      <h1>O mês dia a dia — onde as vendas viraram</h1>
+      <p>Investimento diário × pedidos na loja · o que mudou em cada data · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:1.45fr 0.75fr;gap:18px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="background:var(--branco);border-radius:10px;padding:10px 12px 4px"><svg viewBox="0 0 760 262" style="width:100%;height:auto;display:block" role="img" aria-label="Investimento e pedidos por dia, 01 a 28 de outubro">
+<rect x="34.0" y="22" width="270.0" height="190" fill="rgba(61,39,24,.05)"/>
+<text x="169.0" y="16" text-anchor="middle" font-size="10" font-family="Trebuchet MS,sans-serif" fill="#3D2718" font-weight="bold">01–11 · estrutura antiga</text>
+<rect x="304.6" y="22" width="270.0" height="190" fill="rgba(200,150,64,.10)"/>
+<text x="439.6" y="16" text-anchor="middle" font-size="10" font-family="Trebuchet MS,sans-serif" fill="#3D2718" font-weight="bold">12–22 · frio e quente separados</text>
+<rect x="575.2" y="22" width="147.0" height="190" fill="rgba(107,124,92,.16)"/>
+<text x="648.7" y="16" text-anchor="middle" font-size="10" font-family="Trebuchet MS,sans-serif" fill="#3D2718" font-weight="bold">23–28 · vídeos novos + antigos no quente</text>
+<line x1="34" x2="724" y1="212.0" y2="212.0" stroke="rgba(61,39,24,.12)"/>
+<text x="30" y="215.0" text-anchor="end" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A06A00">R$0</text>
+<line x1="34" x2="724" y1="155.3" y2="155.3" stroke="rgba(61,39,24,.12)"/>
+<text x="30" y="158.3" text-anchor="end" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A06A00">R$200</text>
+<line x1="34" x2="724" y1="98.7" y2="98.7" stroke="rgba(61,39,24,.12)"/>
+<text x="30" y="101.7" text-anchor="end" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A06A00">R$400</text>
+<line x1="34" x2="724" y1="42.0" y2="42.0" stroke="rgba(61,39,24,.12)"/>
+<text x="30" y="45.0" text-anchor="end" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A06A00">R$600</text>
+<text x="730" y="215.0" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A85A38">0</text>
+<text x="730" y="172.5" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A85A38">2</text>
+<text x="730" y="130.0" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A85A38">4</text>
+<text x="730" y="87.5" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A85A38">6</text>
+<text x="730" y="45.0" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="#A85A38">8</text>
+<rect x="38.0" y="158.9" width="16" height="53.1" rx="2" fill="#C89640" opacity=".75"><title>01/10 · investimento R$ 187 · 4 pedidos · R$ 792 em vendas brutas</title></rect>
+<text x="46.0" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">01</text>
+<rect x="62.6" y="57.0" width="16" height="155.0" rx="2" fill="#C89640" opacity=".75"><title>02/10 · investimento R$ 547 · 3 pedidos · R$ 754 em vendas brutas</title></rect>
+<rect x="87.2" y="82.0" width="16" height="130.0" rx="2" fill="#C89640" opacity=".75"><title>03/10 · investimento R$ 459 · 3 pedidos · R$ 672 em vendas brutas</title></rect>
+<text x="95.2" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">03</text>
+<rect x="111.8" y="113.2" width="16" height="98.8" rx="2" fill="#C89640" opacity=".75"><title>04/10 · investimento R$ 349 · 2 pedidos · R$ 654 em vendas brutas</title></rect>
+<rect x="136.4" y="114.7" width="16" height="97.3" rx="2" fill="#C89640" opacity=".75"><title>05/10 · investimento R$ 343 · 4 pedidos · R$ 1,480 em vendas brutas</title></rect>
+<text x="144.4" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">05</text>
+<rect x="161.0" y="95.0" width="16" height="117.0" rx="2" fill="#C89640" opacity=".75"><title>06/10 · investimento R$ 413 · 6 pedidos · R$ 1,586 em vendas brutas</title></rect>
+<rect x="185.6" y="52.3" width="16" height="159.7" rx="2" fill="#C89640" opacity=".75"><title>07/10 · investimento R$ 564 · 1 pedidos · R$ 558 em vendas brutas</title></rect>
+<text x="193.6" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">07</text>
+<rect x="210.2" y="91.0" width="16" height="121.0" rx="2" fill="#C89640" opacity=".75"><title>08/10 · investimento R$ 427 · 3 pedidos · R$ 1,356 em vendas brutas</title></rect>
+<rect x="234.8" y="151.8" width="16" height="60.2" rx="2" fill="#C89640" opacity=".75"><title>09/10 · investimento R$ 212 · 3 pedidos · R$ 1,244 em vendas brutas</title></rect>
+<text x="242.8" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">09</text>
+<rect x="259.4" y="78.8" width="16" height="133.2" rx="2" fill="#C89640" opacity=".75"><title>10/10 · investimento R$ 470 · 3 pedidos · R$ 1,154 em vendas brutas</title></rect>
+<rect x="284.0" y="169.1" width="16" height="42.9" rx="2" fill="#C89640" opacity=".75"><title>11/10 · investimento R$ 151 · 0 pedidos · R$ 0 em vendas brutas</title></rect>
+<text x="292.0" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">11</text>
+<rect x="308.6" y="141.9" width="16" height="70.1" rx="2" fill="#C89640" opacity=".75"><title>12/10 · investimento R$ 247 · 3 pedidos · R$ 670 em vendas brutas</title></rect>
+<rect x="333.2" y="129.1" width="16" height="82.9" rx="2" fill="#C89640" opacity=".75"><title>13/10 · investimento R$ 293 · 3 pedidos · R$ 1,191 em vendas brutas</title></rect>
+<text x="341.2" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">13</text>
+<rect x="357.8" y="136.1" width="16" height="75.9" rx="2" fill="#C89640" opacity=".75"><title>14/10 · investimento R$ 268 · 3 pedidos · R$ 912 em vendas brutas</title></rect>
+<rect x="382.4" y="140.1" width="16" height="71.9" rx="2" fill="#C89640" opacity=".75"><title>15/10 · investimento R$ 254 · 3 pedidos · R$ 414 em vendas brutas</title></rect>
+<text x="390.4" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">15</text>
+<rect x="407.0" y="144.9" width="16" height="67.1" rx="2" fill="#C89640" opacity=".75"><title>16/10 · investimento R$ 237 · 3 pedidos · R$ 1,590 em vendas brutas</title></rect>
+<rect x="431.6" y="126.1" width="16" height="85.9" rx="2" fill="#C89640" opacity=".75"><title>17/10 · investimento R$ 303 · 2 pedidos · R$ 1,220 em vendas brutas</title></rect>
+<text x="439.6" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">17</text>
+<rect x="456.2" y="130.0" width="16" height="82.0" rx="2" fill="#C89640" opacity=".75"><title>18/10 · investimento R$ 290 · 1 pedidos · R$ 266 em vendas brutas</title></rect>
+<rect x="480.8" y="143.7" width="16" height="68.3" rx="2" fill="#C89640" opacity=".75"><title>19/10 · investimento R$ 241 · 1 pedidos · R$ 218 em vendas brutas</title></rect>
+<text x="488.8" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">19</text>
+<rect x="505.4" y="142.1" width="16" height="69.9" rx="2" fill="#C89640" opacity=".75"><title>20/10 · investimento R$ 247 · 6 pedidos · R$ 2,634 em vendas brutas</title></rect>
+<rect x="530.0" y="129.4" width="16" height="82.6" rx="2" fill="#C89640" opacity=".75"><title>21/10 · investimento R$ 291 · 5 pedidos · R$ 1,820 em vendas brutas</title></rect>
+<text x="538.0" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">21</text>
+<rect x="554.6" y="137.1" width="16" height="74.9" rx="2" fill="#C89640" opacity=".75"><title>22/10 · investimento R$ 264 · 1 pedidos · R$ 98 em vendas brutas</title></rect>
+<rect x="579.2" y="113.1" width="16" height="98.9" rx="2" fill="#C89640" opacity=".75"><title>23/10 · investimento R$ 349 · 7 pedidos · R$ 1,044 em vendas brutas</title></rect>
+<text x="587.2" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">23</text>
+<rect x="603.8" y="147.5" width="16" height="64.5" rx="2" fill="#C89640" opacity=".75"><title>24/10 · investimento R$ 228 · 3 pedidos · R$ 850 em vendas brutas</title></rect>
+<rect x="628.4" y="168.3" width="16" height="43.7" rx="2" fill="#C89640" opacity=".75"><title>25/10 · investimento R$ 154 · 1 pedidos · R$ 48 em vendas brutas</title></rect>
+<text x="636.4" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">25</text>
+<rect x="653.0" y="168.1" width="16" height="43.9" rx="2" fill="#C89640" opacity=".75"><title>26/10 · investimento R$ 155 · 4 pedidos · R$ 1,356 em vendas brutas</title></rect>
+<rect x="677.6" y="136.6" width="16" height="75.4" rx="2" fill="#C89640" opacity=".75"><title>27/10 · investimento R$ 266 · 4 pedidos · R$ 938 em vendas brutas</title></rect>
+<text x="685.6" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">27</text>
+<rect x="702.2" y="139.4" width="16" height="72.6" rx="2" fill="#C89640" opacity=".75"><title>28/10 · investimento R$ 256 · 8 pedidos · R$ 4,019 em vendas brutas</title></rect>
+<text x="710.2" y="224" text-anchor="middle" font-size="8.5" font-family="Trebuchet MS,sans-serif" fill="rgba(61,39,24,.6)">28</text>
+<polyline points="46.0,127.0 70.6,148.2 95.2,148.2 119.8,169.5 144.4,127.0 169.0,84.5 193.6,190.8 218.2,148.2 242.8,148.2 267.4,148.2 292.0,212.0 316.6,148.2 341.2,148.2 365.8,148.2 390.4,148.2 415.0,148.2 439.6,169.5 464.2,190.8 488.8,190.8 513.4,84.5 538.0,105.8 562.6,190.8 587.2,63.2 611.8,148.2 636.4,190.8 661.0,127.0 685.6,127.0 710.2,42.0" fill="none" stroke="#BF6A45" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="46.0" cy="127.0" r="3.2" fill="#BF6A45"/>
+<circle cx="70.6" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="95.2" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="119.8" cy="169.5" r="3.2" fill="#BF6A45"/>
+<circle cx="144.4" cy="127.0" r="3.2" fill="#BF6A45"/>
+<circle cx="169.0" cy="84.5" r="3.2" fill="#BF6A45"/>
+<text x="169.0" y="77.5" text-anchor="middle" font-size="9.5" font-weight="bold" font-family="Trebuchet MS,sans-serif" fill="#A85A38">6</text>
+<circle cx="193.6" cy="190.8" r="3.2" fill="#BF6A45"/>
+<circle cx="218.2" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="242.8" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="267.4" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="292.0" cy="212.0" r="3.2" fill="#BF6A45"/>
+<circle cx="316.6" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="341.2" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="365.8" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="390.4" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="415.0" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="439.6" cy="169.5" r="3.2" fill="#BF6A45"/>
+<circle cx="464.2" cy="190.8" r="3.2" fill="#BF6A45"/>
+<circle cx="488.8" cy="190.8" r="3.2" fill="#BF6A45"/>
+<circle cx="513.4" cy="84.5" r="3.2" fill="#BF6A45"/>
+<text x="513.4" y="77.5" text-anchor="middle" font-size="9.5" font-weight="bold" font-family="Trebuchet MS,sans-serif" fill="#A85A38">6</text>
+<circle cx="538.0" cy="105.8" r="3.2" fill="#BF6A45"/>
+<circle cx="562.6" cy="190.8" r="3.2" fill="#BF6A45"/>
+<circle cx="587.2" cy="63.2" r="3.2" fill="#BF6A45"/>
+<text x="587.2" y="56.2" text-anchor="middle" font-size="9.5" font-weight="bold" font-family="Trebuchet MS,sans-serif" fill="#A85A38">7</text>
+<circle cx="611.8" cy="148.2" r="3.2" fill="#BF6A45"/>
+<circle cx="636.4" cy="190.8" r="3.2" fill="#BF6A45"/>
+<circle cx="661.0" cy="127.0" r="3.2" fill="#BF6A45"/>
+<circle cx="685.6" cy="127.0" r="3.2" fill="#BF6A45"/>
+<circle cx="710.2" cy="42.0" r="3.2" fill="#BF6A45"/>
+<text x="710.2" y="35.0" text-anchor="middle" font-size="9.5" font-weight="bold" font-family="Trebuchet MS,sans-serif" fill="#A85A38">8</text>
+<line x1="304.6" x2="304.6" y1="24" y2="212" stroke="#3D2718" stroke-dasharray="3 3" stroke-width="1"/>
+<circle cx="304.6" cy="34" r="8" fill="#3D2718"/><text x="304.6" y="37.5" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff" font-family="Trebuchet MS,sans-serif">1</text>
+<line x1="538.0" x2="538.0" y1="24" y2="212" stroke="#3D2718" stroke-dasharray="3 3" stroke-width="1"/>
+<circle cx="538.0" cy="34" r="8" fill="#3D2718"/><text x="538.0" y="37.5" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff" font-family="Trebuchet MS,sans-serif">2</text>
+<line x1="575.2" x2="575.2" y1="24" y2="212" stroke="#3D2718" stroke-dasharray="3 3" stroke-width="1"/>
+<circle cx="575.2" cy="34" r="8" fill="#3D2718"/><text x="575.2" y="37.5" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff" font-family="Trebuchet MS,sans-serif">3</text>
+<text x="292.0" y="204" text-anchor="middle" font-size="8" font-family="Trebuchet MS,sans-serif" fill="#B02A2A">sem saldo</text>
+<rect x="46" y="238" width="12" height="9" fill="#C89640" opacity=".75"/><text x="62" y="246" font-size="10" font-family="Trebuchet MS,sans-serif" fill="#3D2718">Investimento do dia (Meta + Google) · eixo da esquerda</text>
+<line x1="372" x2="390" y1="242" y2="242" stroke="#BF6A45" stroke-width="2.4"/><circle cx="381" cy="242" r="3" fill="#BF6A45"/><text x="396" y="246" font-size="10" font-family="Trebuchet MS,sans-serif" fill="#3D2718">Pedidos na loja (Shopify) · eixo da direita</text>
+</svg></div>
+        <table style="font-size:11px">
+          <thead><tr><th>Fase</th><th style="text-align:right">Investimento/dia</th><th style="text-align:center">Pedidos/dia</th><th style="text-align:right">Faturamento/dia</th><th style="text-align:right">Mídia por pedido</th><th style="text-align:center">Retorno (MER)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>01–11/10</strong> · estrutura antiga · <a href="javascript:void(0)" onclick="abrirMat(0)" style="color:var(--terracota);font-weight:bold">ver materiais ↗</a></td><td style="text-align:right">R$ 375</td><td style="text-align:center">2,9</td><td style="text-align:right">R$ 932</td><td style="text-align:right">R$ 129</td><td style="text-align:center">2,49x</td></tr>
+            <tr><td><strong>12–22/10</strong> · frio e quente separados · <a href="javascript:void(0)" onclick="abrirMat(1)" style="color:var(--terracota);font-weight:bold">ver materiais ↗</a></td><td style="text-align:right">R$ 267</td><td style="text-align:center">2,8</td><td style="text-align:right">R$ 1.003</td><td style="text-align:right">R$ 95</td><td style="text-align:center"><strong style="color:var(--amarelo)">3,76x</strong></td></tr>
+            <tr class="total-row"><td>23–28/10 · vídeos novos + antigos no quente · <a href="javascript:void(0)" onclick="abrirMat(2)" style="color:#fff;font-weight:bold">ver materiais ↗</a></td><td style="text-align:right">R$ 235</td><td style="text-align:center">4,5</td><td style="text-align:right">R$ 1.376</td><td style="text-align:right">R$ 52</td><td style="text-align:center">5,86x</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <strong>Gastando 37% menos por dia, a loja passou a vender 48% mais por dia.</strong> Do começo do mês para a última semana,
+          o investimento caiu de R$ 375 para R$ 235 por dia, os pedidos subiram de 2,9 para 4,5 por dia e o custo de mídia por pedido
+          caiu de R$ 129 para R$ 52. "Mídia por pedido" divide todo o investimento (Meta + Google) por todos os pedidos da loja, de qualquer origem.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--marrom);line-height:1.42">
+        <div class="section-title" style="color:var(--terracota);margin-bottom:2px">O que fizemos e quando</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid rgba(61,39,24,.3)"><strong>01–11/10</strong> · várias campanhas de venda falando ao mesmo tempo com quem não conhece e com quem já conhece a Santosha. Em 11/10 a conta do Meta ficou sem saldo e o dia fechou sem pedido.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--ocre)"><strong>① 12/10 · estrutura nova.</strong> Separamos o <strong>frio</strong> (público novo) do <strong>quente</strong> (quem já seguiu, interagiu ou visitou o site no último ano, sem quem comprou nos últimos 30 dias). Pausamos as campanhas antigas e a busca institucional do Google.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--ocre)"><strong>20/10</strong> · o quente fez 4 compras num dia com R$ 53,65; a loja fechou com 6 pedidos e R$ 2.634.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--ocre)"><strong>② 21/10 · Google.</strong> Verba concentrada em busca pela marca e Shopping; as campanhas de descoberta saíram.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--verde)"><strong>③ 23/10 · vídeos novos somados aos antigos no quente.</strong> Entraram <a href="https://fb.me/238hi0U2Eyoasx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_t16_poster_ashtanga_cantinho_vid.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">Pôster (T16) ↗</a> — 4 compras e <a href="https://fb.me/2JGZ4qvGAtJ5dkn" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_t17_manual_sequencias_tour_vid.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">Tour do Manual (T17) ↗</a> — 6 compras. Seguiram rodando junto os que já estavam no ar: <a href="https://fb.me/1T6QYo6DCKIufaA" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_camp_manual_vid_a.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">vídeo do Manual ↗</a> — 5 compras, <a href="https://fb.me/286fcQJ2simaAUz" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_camp_cartasflow_vid.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">vídeo Cartasflow ↗</a> — 1, <a href="https://fb.me/21QW548pQ2Lo6sG" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_mat_this_yoga_mat.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">This Yoga Mat ↗</a>, <a href="https://fb.me/24vRzOhQPi5Chco" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4);white-space:nowrap"><img src="img/out_mat_como_lavar.jpg" alt="" style="width:16px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-3px;margin-right:3px">Como lavar o Matosha ↗</a>, Dias no Matosha e vídeo do Pôster. No período, o quente fez 16 compras com R$ 491. Em 23/10 a loja fez 7 pedidos.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--verde)"><strong>26/10</strong> · pausamos as peças do teste no frio que não venderam; a verba ficou no que vende.</div>
+        <div style="background:var(--branco);border-radius:8px;padding:8px 11px;border-left:3px solid var(--verde)"><strong>28/10 · melhor dia do mês:</strong> 8 pedidos e R$ 4.019 em vendas brutas.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · PLATAFORMAS -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Faturamento e ROAS por plataforma</h1>
+      <p>O que foi campanha e o que foi imposto · receita atribuída dentro de cada plataforma · 01 a 28 de outubro de 2026</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
+      <table style="font-size:11.5px">
+        <thead><tr>
+          <th>Plataforma</th><th>Campanhas</th><th>Imposto (NF)</th><th>Total pago</th>
+          <th>Faturamento</th><th>Compras</th><th>CPA pago</th><th>ROAS campanhas</th><th>ROAS pago</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Meta Ads</strong></td>
+            <td>R$ 6.494,39</td><td>R$ 898,17</td><td><strong>R$ 7.392,56</strong></td>
+            <td>R$ 15.866,07</td><td>55</td><td>R$ 134,41</td>
+            <td><strong style="color:var(--terracota)">2,44x</strong></td><td>2,15x</td>
+          </tr><tr>
+            <td><strong>Google Ads</strong></td>
+            <td>R$ 1.971,85</td><td>—</td><td><strong>R$ 1.971,85</strong></td>
+            <td>R$ 6.805,30</td><td>28,0</td><td>R$ 70,42</td>
+            <td><strong style="color:var(--terracota)">3,45x</strong></td><td>3,45x</td>
+          </tr>
+          <tr class="total-row"><td>TOTAL</td><td>R$ 8.466,24</td><td>R$ 898,17</td><td>R$ 9.364,41</td>
+          <td>R$ 22.671,37</td><td>83,0</td><td>R$ 112,82</td><td>2,68x</td><td>2,42x</td></tr>
+        </tbody>
+      </table>
+      <div class="note warn" style="font-size:10.5px">
+        <strong>Campanha × imposto:</strong> só o Meta emite NF com os tributos discriminados — COFINS 7,60% + PIS 1,65% + ISS 2,90% =
+        <strong>13,83% sobre o gasto de campanhas</strong>. O Google Ads não traz imposto em NF separada, então campanhas e total pago são o mesmo valor.
+        Da verba total do período, <strong>R$ 8.466,24 viraram anúncio no ar</strong> e <strong>R$ 898,17 foram imposto</strong>.
+        Faturamento por plataforma é atribuído por ela mesma — não somar com o faturamento da loja (R$ 29.538,85 em vendas brutas na Shopify).
+      </div>
+      <div class="grid2">
+        <div class="note">
+          <strong>O Meta segue sendo o motor:</strong> 77% da verba de campanha (79% do total pago, porque o imposto é só dele)
+          e 70% da receita atribuída. O ROAS do Meta foi de 2,92x em setembro para 2,44x, com o clique bem mais barato
+          e a conversão do site mais baixa (detalhe no funil).
+        </div>
+        <div class="note">
+          <strong>O Google manteve o retorno com menos verba:</strong> 3,45x contra 3,43x em setembro, e 28 conversões
+          contra 22 no mês inteiro de setembro — o CPA caiu de R$ 95,37 para R$ 70,42. Desde 21/10 a conta está
+          concentrada em busca de marca e Shopping.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- META · INVESTIMENTO E IMPOSTOS -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Investimento &amp; Impostos</h1>
+      <p>01 a 28 de outubro de 2026 &nbsp;|&nbsp; alíquota efetiva 13,83% sobre o gasto de campanha</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;height:calc(100% - 84px);padding:14px 36px 32px;overflow:auto">
+      <div class="s6-kpis">
+        <div class="kpi-card-lg verde"><div class="kpi-label">Investimento (mídia)</div><div class="kpi-val">R$ 6.494,39</div></div>
+        <div class="kpi-card-lg verde"><div class="kpi-label">Receita atribuída</div><div class="kpi-val">R$ 15.866,07</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">ROAS</div><div class="kpi-val">2,44x</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">CPA · 55 compras</div><div class="kpi-val">R$ 118,08</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;min-height:0">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="section-title">Resumo de investimento</div>
+        <div style="background:var(--card-bg);border-radius:14px;padding:20px 26px;border-left:5px solid var(--verde)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Investimento em campanhas</div>
+          <div style="font-size:34px;font-weight:800;color:var(--verde);line-height:1">R$ 6.494,39</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">Subtotal — o que virou anúncio no ar, sem impostos</div>
+        </div>
+        <div style="background:var(--card-bg);border-radius:14px;padding:20px 26px;border-left:5px solid var(--vermelho)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">Total de impostos</div>
+          <div style="font-size:34px;font-weight:800;color:var(--vermelho);line-height:1">R$ 898,17</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">COFINS + PIS + ISS — 13,83% sobre o subtotal</div>
+        </div>
+        <div style="background:var(--terracota);border-radius:14px;padding:20px 26px;border-left:5px solid var(--ocre)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:6px">Total pago (campanhas + impostos)</div>
+          <div style="font-size:38px;font-weight:800;color:#fff;line-height:1">R$ 7.392,56</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px">Valor debitado da conta — incluindo todos os tributos</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="section-title">Detalhamento dos impostos</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--terracota);color:#fff">
+            <th style="padding:9px 14px;text-align:left;border-radius:8px 0 0 0">Imposto</th>
+            <th style="padding:9px 14px;text-align:center">Alíquota</th>
+            <th style="padding:9px 14px;text-align:right;border-radius:0 8px 0 0">Valor (R$)</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--card-bg)"><td style="padding:10px 14px;font-weight:600">COFINS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">7,60%</td><td style="padding:10px 14px;text-align:right;font-weight:700">561,83</td></tr>
+            <tr style="background:rgba(0,0,0,0.04)"><td style="padding:10px 14px;font-weight:600">PIS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">1,65%</td><td style="padding:10px 14px;text-align:right;font-weight:700">121,98</td></tr>
+            <tr style="background:var(--card-bg)"><td style="padding:10px 14px;font-weight:600">ISS</td><td style="padding:10px 14px;text-align:center;color:var(--text-muted)">2,90%</td><td style="padding:10px 14px;text-align:right;font-weight:700">214,36</td></tr>
+            <tr style="background:var(--terracota);color:#fff;font-weight:800"><td style="padding:10px 14px;border-radius:0 0 0 8px">Total de impostos</td><td style="padding:10px 14px;text-align:center">13,83%*</td><td style="padding:10px 14px;text-align:right;border-radius:0 0 8px 0">898,17</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="font-size:10.5px">* As alíquotas incidem <strong>por dentro</strong>, sobre o valor da fatura (R$ 7.392,56) — o que dá os mesmos <strong>13,83% efetivos</strong> sobre o gasto de campanha usados de junho a setembro.</div>
+        <div style="background:var(--card-bg);border-radius:10px;padding:14px 18px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Composição do gasto total</div>
+          <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;gap:2px">
+            <div style="background:var(--verde);flex:6494;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">87,8% — Campanhas</div>
+            <div style="background:var(--vermelho);flex:898;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">12,2% — Impostos</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px"><span>R$ 6.494,39</span><span>R$ 898,17</span></div>
+        </div>
+        <div class="note warn" style="font-size:10.5px"><strong>Setembro para comparar (mesma janela, 01–28):</strong> campanhas R$ 6.190,17 + impostos R$ 856,10 = R$ 7.046,27 pagos. Outubro pagou <strong>R$ 346,29 a mais</strong> no total.</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · META DIA A DIA -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — investimento e ROAS dia a dia</h1>
+      <p>Conta CA - Santosha #2 · R$ 6.494,39 · 55 compras · R$ 15.866,07 de receita atribuída · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:10px">
+      <div class="grid3">
+        <div class="kpi-card-lg" style="border-top-color:rgba(61,39,24,.35);padding:10px 14px"><div class="kpi-label">01–11/10 · estrutura antiga</div><div class="kpi-val" style="font-size:24px;margin:5px 0 3px">1,64x de ROAS</div><div class="kpi-delta sans" style="color:var(--marrom)">R$ 290/dia · 17 compras · R$ 187,75 por compra</div><div class="kpi-delta sans" style="color:var(--text-muted);font-size:10.5px">várias campanhas de venda misturando público novo e quente</div><button class="mat-btn" onclick="abrirMat(0)">Ver os 28 materiais ↗</button></div>
+        <div class="kpi-card-lg ocre" style="padding:10px 14px"><div class="kpi-label">12–22/10 · frio e quente separados</div><div class="kpi-val" style="font-size:24px;margin:5px 0 3px">2,92x de ROAS</div><div class="kpi-delta sans" style="color:var(--marrom)">R$ 187/dia · 20 compras · R$ 102,68 por compra</div><div class="kpi-delta sans" style="color:var(--text-muted);font-size:10.5px">estrutura nova desde 12/10; campanhas antigas pausadas</div><button class="mat-btn" onclick="abrirMat(1)">Ver os 30 materiais ↗</button></div>
+        <div class="kpi-card-lg verde" style="padding:10px 14px"><div class="kpi-label">23–28/10 · vídeos novos + antigos no quente</div><div class="kpi-val" style="font-size:24px;margin:5px 0 3px">3,72x de ROAS</div><div class="kpi-delta sans" style="color:var(--marrom)">R$ 208/dia · 18 compras · R$ 69,39 por compra</div><div class="kpi-delta sans" style="color:var(--text-muted);font-size:10.5px">Pôster (T16) e Tour do Manual (T17) somados aos que já rodavam</div><button class="mat-btn" onclick="abrirMat(2)">Ver os 23 materiais ↗</button></div>
+      </div>
+      <div class="grid2" style="gap:16px;align-items:start">
+        <table style="font-size:10.5px"><thead><tr><th>Dia</th><th style="text-align:right">Investimento</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead><tbody><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>01/10</strong></td><td style="text-align:right">R$ 115,20</td><td style="text-align:center">1</td><td style="text-align:right">—</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,00x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>02/10</strong></td><td style="text-align:right">R$ 451,82</td><td style="text-align:center">2</td><td style="text-align:right">R$ 683,67</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,51x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>03/10</strong></td><td style="text-align:right">R$ 383,60</td><td style="text-align:center">3</td><td style="text-align:right">R$ 668,77</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,74x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>04/10</strong></td><td style="text-align:right">R$ 291,38</td><td style="text-align:center">2</td><td style="text-align:right">R$ 627,60</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,15x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>05/10</strong></td><td style="text-align:right">R$ 261,84</td><td style="text-align:center">1</td><td style="text-align:right">R$ 558,00</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,13x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>06/10</strong></td><td style="text-align:right">R$ 321,93</td><td style="text-align:center">3</td><td style="text-align:right">R$ 753,00</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,34x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>07/10</strong></td><td style="text-align:right">R$ 489,74</td><td style="text-align:center">1</td><td style="text-align:right">R$ 530,10</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,08x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>08/10</strong></td><td style="text-align:right">R$ 352,48</td><td style="text-align:center">1</td><td style="text-align:right">R$ 521,90</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,48x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>09/10</strong></td><td style="text-align:right">R$ 85,28</td><td style="text-align:center">1</td><td style="text-align:right">R$ 148,68</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,74x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>10/10</strong></td><td style="text-align:right">R$ 424,10</td><td style="text-align:center">2</td><td style="text-align:right">R$ 734,88</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,73x</strong></td></tr><tr><td style="border-left:4px solid rgba(61,39,24,.35)"><strong>11/10</strong></td><td style="text-align:right">R$ 14,34</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,00x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>12/10</strong></td><td style="text-align:right">R$ 167,94</td><td style="text-align:center">1</td><td style="text-align:right">R$ 48,00</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,29x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>13/10</strong></td><td style="text-align:right">R$ 224,20</td><td style="text-align:center">2</td><td style="text-align:right">R$ 690,72</td><td style="text-align:center"><strong style="color:var(--amarelo)">3,08x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>14/10</strong></td><td style="text-align:right">R$ 186,81</td><td style="text-align:center">2</td><td style="text-align:right">R$ 349,09</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,87x</strong></td></tr></tbody></table>
+        <table style="font-size:10.5px"><thead><tr><th>Dia</th><th style="text-align:right">Investimento</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead><tbody><tr><td style="border-left:4px solid var(--ocre)"><strong>15/10</strong></td><td style="text-align:right">R$ 180,61</td><td style="text-align:center">2</td><td style="text-align:right">R$ 337,50</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,87x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>16/10</strong></td><td style="text-align:right">R$ 190,07</td><td style="text-align:center">2</td><td style="text-align:right">R$ 1.223,12</td><td style="text-align:center"><strong style="color:var(--verde-ok)">6,44x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>17/10</strong></td><td style="text-align:right">R$ 167,93</td><td style="text-align:center">2</td><td style="text-align:right">R$ 1.052,00</td><td style="text-align:center"><strong style="color:var(--verde-ok)">6,26x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>18/10</strong></td><td style="text-align:right">R$ 199,33</td><td style="text-align:center">1</td><td style="text-align:right">R$ 259,92</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,30x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>19/10</strong></td><td style="text-align:right">R$ 148,23</td><td style="text-align:center">1</td><td style="text-align:right">R$ 228,60</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,54x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>20/10</strong></td><td style="text-align:right">R$ 173,48</td><td style="text-align:center">4</td><td style="text-align:right">R$ 1.330,94</td><td style="text-align:center"><strong style="color:var(--verde-ok)">7,67x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>21/10</strong></td><td style="text-align:right">R$ 190,19</td><td style="text-align:center">2</td><td style="text-align:right">R$ 370,35</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,95x</strong></td></tr><tr><td style="border-left:4px solid var(--ocre)"><strong>22/10</strong></td><td style="text-align:right">R$ 224,88</td><td style="text-align:center">1</td><td style="text-align:right">R$ 98,00</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,44x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>23/10</strong></td><td style="text-align:right">R$ 327,83</td><td style="text-align:center">5</td><td style="text-align:right">R$ 705,21</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,15x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>24/10</strong></td><td style="text-align:right">R$ 221,68</td><td style="text-align:center">2</td><td style="text-align:right">R$ 194,00</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,88x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>25/10</strong></td><td style="text-align:right">R$ 135,85</td><td style="text-align:center">1</td><td style="text-align:right">R$ 48,00</td><td style="text-align:center"><strong style="color:var(--vermelho)">0,35x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>26/10</strong></td><td style="text-align:right">R$ 132,06</td><td style="text-align:center">3</td><td style="text-align:right">R$ 1.030,50</td><td style="text-align:center"><strong style="color:var(--verde-ok)">7,80x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>27/10</strong></td><td style="text-align:right">R$ 227,32</td><td style="text-align:center">3</td><td style="text-align:right">R$ 809,92</td><td style="text-align:center"><strong style="color:var(--amarelo)">3,56x</strong></td></tr><tr><td style="border-left:4px solid var(--verde)"><strong>28/10</strong></td><td style="text-align:right">R$ 204,27</td><td style="text-align:center">4</td><td style="text-align:right">R$ 1.863,60</td><td style="text-align:center"><strong style="color:var(--verde-ok)">9,12x</strong></td></tr></tbody></table>
+      </div>
+      <div class="note">
+        <strong>O ROAS do Meta mais que dobrou ao longo do mês gastando menos por dia:</strong> de 1,64x (R$ 290/dia) no começo para 3,72x (R$ 208/dia)
+        na última semana, e o custo por compra caiu de R$ 187,75 para R$ 69,39. A cor à esquerda de cada dia mostra a fase; o ROAS é a receita
+        atribuída pelo Meta dividida pelo investimento do dia. O dia 11/10 ficou praticamente parado porque a conta estava sem saldo.
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · META POR ANÚNCIO -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Anúncios que venderam</h1>
+      <p>Os 10 criativos com mais receita, com a peça clicável · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:12px">
+      <table>
+        <thead><tr><th>Anúncio</th><th>Investimento</th><th>Compras</th><th>Receita</th><th>CPA</th><th>ROAS</th></tr></thead>
+        <tbody>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_camp_manual_vid_a.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/1T6QYo6DCKIufaA" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_MANUAL_VID_A</strong> ↗</a></span></div></td><td>R$ 491,72</td><td>13</td><td>R$ 3.628,58</td><td>R$ 37,82</td><td><strong style="color:var(--verde-ok)">7,38x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_camp_cartasflow_vid.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/286fcQJ2simaAUz" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_CARTASFLOW_VID</strong> ↗</a></span></div></td><td>R$ 222,72</td><td>7</td><td>R$ 2.344,74</td><td>R$ 31,82</td><td><strong style="color:var(--verde-ok)">10,53x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><span style="width:40px;height:40px;border-radius:6px;flex:0 0 auto;background:var(--bege);display:flex;align-items:center;justify-content:center;font-size:8px;line-height:1.1;text-align:center;color:var(--text-muted);font-family:'Trebuchet MS',sans-serif">vitrine<br>do site</span><span><a href="https://fb.me/1VXnPEfea0z7eSE" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>MATOSHA02</strong> ↗</a></span></div></td><td>R$ 573,74</td><td>4</td><td>R$ 1.770,80</td><td>R$ 143,44</td><td><strong style="color:var(--amarelo)">3,09x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><span style="width:40px;height:40px;border-radius:6px;flex:0 0 auto;background:var(--bege);display:flex;align-items:center;justify-content:center;font-size:8px;line-height:1.1;text-align:center;color:var(--text-muted);font-family:'Trebuchet MS',sans-serif">vitrine<br>do site</span><span><a href="https://fb.me/1WIJAQq9A8kBpH9" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>AD03 - Matoshas - Carrossel</strong> ↗</a></span></div></td><td>R$ 197,35</td><td>2</td><td>R$ 1.172,40</td><td>R$ 98,67</td><td><strong style="color:var(--verde-ok)">5,94x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_t16_poster_ashtanga_cantinho_vid.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/238hi0U2Eyoasx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T16_POSTER_ASHTANGA_CANTINHO_VID</strong> ↗</a></span></div></td><td>R$ 130,44</td><td>4</td><td>R$ 1.016,76</td><td>R$ 32,61</td><td><strong style="color:var(--verde-ok)">7,79x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_t10_matosha_paisagem_est.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/2a2Q8YNXzfDDYqi" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T10_MATOSHA_PAISAGEM_EST</strong> ↗</a></span></div></td><td>R$ 56,04</td><td>1</td><td>R$ 810,90</td><td>R$ 56,04</td><td><strong style="color:var(--verde-ok)">14,47x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><span style="width:40px;height:40px;border-radius:6px;flex:0 0 auto;background:var(--bege);display:flex;align-items:center;justify-content:center;font-size:8px;line-height:1.1;text-align:center;color:var(--text-muted);font-family:'Trebuchet MS',sans-serif">vitrine<br>do site</span><span><a href="https://fb.me/yHwV2pp2Si5VNUl" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>BARALHOS</strong> ↗</a></span></div></td><td>R$ 54,88</td><td>2</td><td>R$ 774,50</td><td>R$ 27,44</td><td><strong style="color:var(--verde-ok)">14,11x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_org_saudacao_ao_sol.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/29UVu2yX8E45hx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>ORG_SAUDACAO_AO_SOL</strong> ↗</a></span></div></td><td>R$ 81,73</td><td>1</td><td>R$ 584,36</td><td>R$ 81,73</td><td><strong style="color:var(--verde-ok)">7,15x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_ad14_vid_mats_vencedor.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/2grKj7CAE2MANST" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>AD14_VID_MATS_VENCEDOR</strong> ↗</a></span></div></td><td>R$ 103,19</td><td>1</td><td>R$ 577,95</td><td>R$ 103,19</td><td><strong style="color:var(--verde-ok)">5,60x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="img/out_ad8_mats_you_are_the_sun.jpg" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><span><a href="https://fb.me/2nOtIxPaFUOMu6D" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>AD8 - Mats You are the Sun</strong> ↗</a></span></div></td><td>R$ 166,65</td><td>1</td><td>R$ 558,00</td><td>R$ 166,65</td><td><strong style="color:var(--amarelo)">3,35x</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="grid2" style="align-items:start">
+        <div class="note">
+          <strong>Os vídeos de produto lideram:</strong> o <strong>CAMP_MANUAL_VID_A</strong> fez 13 compras e R$ 3.628,58 (7,38x)
+          e o <strong>CAMP_CARTASFLOW_VID</strong> fez 7 compras a 10,53x. O vídeo do pôster (<strong>T16</strong>), que saiu do teste
+          de criativos, entrou na campanha quente e fez 4 compras a 7,79x.
+        </div>
+        <div class="note">
+          <strong>Muito retorno com pouca verba:</strong> T10_MATOSHA_PAISAGEM_EST (14,47x) e BARALHOS (14,11x)
+          somaram R$ 110,92 de investimento e R$ 1.585,40 de receita. Os 10 anúncios da tabela fizeram 36 das 55 compras.
+        </div>
+      </div>
+      <div class="note">
+        <strong>Clique no nome de qualquer anúncio</strong> para abrir a peça exatamente como ela apareceu para o cliente.
+        Onde aparece “vitrine do site”, o anúncio é dinâmico: ele monta a peça na hora com os produtos da loja,
+        variando conforme quem está vendo — por isso não existe uma imagem única.
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- N2 · TESTE DE CRIATIVOS FRIO + QUENTE -->
+  <section class="slide" style="background:var(--bege-claro)">
+        <div class="slide-header">
+      <h1>Meta Ads — Teste de criativos: público novo e quente</h1>
+      <p>As mesmas peças rodando para quem ainda não conhece a Santosha (frio) e para quem já conhece (quente) · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+          <div class="section-title" style="color:var(--terracota)">Frio — público novo · R$ 1.608,01 · 5 compras · 1,08x</div>
+          <table style="font-size:10px"><thead><tr><th>Peça</th><th style="text-align:right">Invest.</th><th style="text-align:center">CTR</th><th style="text-align:center">Clique</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead><tbody>
+<tr><td><strong>MAT_YOGINIS_CARTASFLOW</strong></td><td style="text-align:right">R$ 300,91</td><td style="text-align:center">4,11%</td><td style="text-align:center">R$ 0,18</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span> <small style="color:var(--text-muted)">muito clique, sem compra</small></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_org_saudacao_ao_sol.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/29UVu2yX8E45hx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>ORG_SAUDACAO_AO_SOL</strong> ↗</a></div></td><td style="text-align:right">R$ 81,73</td><td style="text-align:center">1,39%</td><td style="text-align:center">R$ 1,78</td><td style="text-align:center">1</td><td style="text-align:right">R$ 584,36</td><td style="text-align:center"><strong style="color:var(--verde-ok)">7,15x</strong></td></tr>
+<tr><td><strong>T09 — Combo de e-books</strong></td><td style="text-align:right">R$ 79,23</td><td style="text-align:center">0,45%</td><td style="text-align:center">R$ 4,66</td><td style="text-align:center">1</td><td style="text-align:right">R$ 200,45</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,53x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_camp_cartasflow_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/286fcQJ2simaAUz" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_CARTASFLOW_VID</strong> ↗</a></div></td><td style="text-align:right">R$ 78,16</td><td style="text-align:center">1,92%</td><td style="text-align:center">R$ 3,13</td><td style="text-align:center">2</td><td style="text-align:right">R$ 144,49</td><td style="text-align:center"><strong style="color:var(--vermelho)">1,85x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_mat_this_yoga_mat.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/21QW548pQ2Lo6sG" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>MAT_THIS_YOGA_MAT</strong> ↗</a></div></td><td style="text-align:right">R$ 68,20</td><td style="text-align:center">2,10%</td><td style="text-align:center">R$ 1,02</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_t16_poster_ashtanga_cantinho_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/238hi0U2Eyoasx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T16 — Pôster no cantinho</strong> ↗</a></div></td><td style="text-align:right">R$ 66,38</td><td style="text-align:center">1,66%</td><td style="text-align:center">R$ 2,37</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span> <small style="color:var(--text-muted)">→ subiu p/ quente</small></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_t10_matosha_paisagem_est.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/2a2Q8YNXzfDDYqi" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T10 — Matosha paisagem</strong> ↗</a></div></td><td style="text-align:right">R$ 56,04</td><td style="text-align:center">1,12%</td><td style="text-align:center">R$ 1,56</td><td style="text-align:center">1</td><td style="text-align:right">R$ 810,90</td><td style="text-align:center"><strong style="color:var(--verde-ok)">14,47x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_t17_manual_sequencias_tour_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/2JGZ4qvGAtJ5dkn" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T17 — Tour do Manual</strong> ↗</a></div></td><td style="text-align:right">R$ 55,35</td><td style="text-align:center">1,05%</td><td style="text-align:center">R$ 2,77</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span> <small style="color:var(--text-muted)">→ subiu p/ quente</small></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_camp_manual_vid_a.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/1T6QYo6DCKIufaA" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_MANUAL_VID_A</strong> ↗</a></div></td><td style="text-align:right">R$ 44,68</td><td style="text-align:center">0,80%</td><td style="text-align:center">R$ 5,58</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span></td></tr>
+<tr><td><strong>ORG_FLOW_DA_MANHA</strong></td><td style="text-align:right">R$ 41,03</td><td style="text-align:center">2,35%</td><td style="text-align:center">R$ 1,28</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span></td></tr>
+            <tr><td style="color:var(--text-muted)">Outras 17 peças</td><td style="text-align:right;color:var(--text-muted)">R$ 736,30</td><td colspan="2" style="text-align:center;color:var(--text-muted)">—</td><td style="text-align:center;color:var(--text-muted)">0</td><td style="text-align:right;color:var(--text-muted)">—</td><td style="text-align:center;color:var(--text-muted)">—</td></tr>
+            <tr class="total-row"><td>TOTAL FRIO</td><td style="text-align:right">R$ 1.608,01</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">5</td><td style="text-align:right">R$ 1.740,20</td><td style="text-align:center">1,08x</td></tr>
+          </tbody></table>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+          <div class="section-title" style="color:var(--terracota)">Quente — quem já conhece · R$ 979,01 · 30 compras · 8,05x</div>
+          <table style="font-size:10px"><thead><tr><th>Peça</th><th style="text-align:right">Invest.</th><th style="text-align:center">CTR</th><th style="text-align:center">Clique</th><th style="text-align:center">Compras</th><th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead><tbody>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_camp_manual_vid_a.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/1T6QYo6DCKIufaA" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_MANUAL_VID_A</strong> ↗</a></div></td><td style="text-align:right">R$ 447,04</td><td style="text-align:center">0,87%</td><td style="text-align:center">R$ 3,55</td><td style="text-align:center">13</td><td style="text-align:right">R$ 3.628,58</td><td style="text-align:center"><strong style="color:var(--verde-ok)">8,12x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_t17_manual_sequencias_tour_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/2JGZ4qvGAtJ5dkn" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T17 — Tour do Manual</strong> ↗</a></div></td><td style="text-align:right">R$ 151,08</td><td style="text-align:center">1,10%</td><td style="text-align:center">R$ 2,01</td><td style="text-align:center">6</td><td style="text-align:right">R$ 441,52</td><td style="text-align:center"><strong style="color:var(--amarelo)">2,92x</strong> <small style="color:var(--text-muted)">veio do teste</small></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_camp_cartasflow_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/286fcQJ2simaAUz" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>CAMP_CARTASFLOW_VID</strong> ↗</a></div></td><td style="text-align:right">R$ 144,56</td><td style="text-align:center">1,43%</td><td style="text-align:center">R$ 2,83</td><td style="text-align:center">5</td><td style="text-align:right">R$ 2.200,25</td><td style="text-align:center"><strong style="color:var(--verde-ok)">15,22x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_mat_como_lavar.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/24vRzOhQPi5Chco" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>MAT_COMO_LAVAR</strong> ↗</a></div></td><td style="text-align:right">R$ 81,61</td><td style="text-align:center">2,38%</td><td style="text-align:center">R$ 1,51</td><td style="text-align:center">1</td><td style="text-align:right">R$ 368,90</td><td style="text-align:center"><strong style="color:var(--verde-ok)">4,52x</strong></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_t16_poster_ashtanga_cantinho_vid.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/238hi0U2Eyoasx2" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>T16 — Pôster no cantinho</strong> ↗</a></div></td><td style="text-align:right">R$ 64,06</td><td style="text-align:center">1,99%</td><td style="text-align:center">R$ 1,42</td><td style="text-align:center">4</td><td style="text-align:right">R$ 1.016,76</td><td style="text-align:center"><strong style="color:var(--verde-ok)">15,87x</strong> <small style="color:var(--text-muted)">veio do teste</small></td></tr>
+<tr><td><div style="display:flex;align-items:center;gap:7px"><img src="img/out_mat_this_yoga_mat.jpg" alt="" style="width:22px;height:22px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)"><a href="https://fb.me/21QW548pQ2Lo6sG" target="_blank" rel="noopener" style="color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(191,106,69,.4)"><strong>MAT_THIS_YOGA_MAT</strong> ↗</a></div></td><td style="text-align:right">R$ 60,02</td><td style="text-align:center">2,55%</td><td style="text-align:center">R$ 0,92</td><td style="text-align:center">1</td><td style="text-align:right">R$ 221,06</td><td style="text-align:center"><strong style="color:var(--amarelo)">3,68x</strong></td></tr>
+<tr><td><strong>MAT_DIAS_NO_MATOSHA</strong></td><td style="text-align:right">R$ 17,41</td><td style="text-align:center">1,41%</td><td style="text-align:center">R$ 2,49</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span></td></tr>
+<tr><td><strong>CAMP_POSTER_ASHTANGA</strong></td><td style="text-align:right">R$ 13,23</td><td style="text-align:center">1,44%</td><td style="text-align:center">R$ 2,65</td><td style="text-align:center">0</td><td style="text-align:right">—</td><td style="text-align:center"><span style="color:var(--text-muted)">—</span></td></tr>
+            <tr class="total-row"><td>TOTAL QUENTE</td><td style="text-align:right">R$ 979,01</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">30</td><td style="text-align:right">R$ 7.877,07</td><td style="text-align:center">8,05x</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="note">
+          <strong>A mesma peça muda de papel conforme o público:</strong> o vídeo do Manual (CAMP_MANUAL_VID_A) não vendeu no frio
+          e fez 13 compras na quente (8,12x). O Pôster (T16) e o Tour do Manual (T17) saíram do teste no frio, subiram para a quente
+          e lá fizeram 10 compras.
+        </div>
+        <div class="note warn">
+          <strong>No frio, o trabalho é trazer gente nova barata:</strong> MAT_THIS_YOGA_MAT, ORG_FLOW_DA_MANHA e T10 trouxeram clique
+          entre R$ 1,02 e R$ 1,56. A exceção é MAT_YOGINIS_CARTASFLOW: 1.702 cliques a R$ 0,18 e nenhuma compra — fica em observação
+          para novembro.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- 7 · FUNIL META -->
+  <section class="slide" id="s-funil" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Meta Ads — Funil de Conversão &amp; Benchmarks</h1>
+      <p>Do clique à compra · 01 a 28/10/2026 · comparado ao nicho yoga / wellness</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:20px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div class="section-title" style="color:var(--terracota)">Funil Meta Ads — outubro 2026</div>
+        <div style="background:var(--terracota);border-radius:10px;padding:9px 16px;width:100%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Cliques no link</div><div style="font-size:9.5px;opacity:.85">CTR 1,64% · topo do funil</div></div><div style="font-size:20px;font-weight:800">4.975</div></div><div style="background:var(--terracota2);border-radius:10px;padding:9px 16px;width:70%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Chegaram na página (LPV)</div><div style="font-size:9.5px;opacity:.85">73,4% dos cliques</div></div><div style="font-size:20px;font-weight:800">3.650</div></div><div style="background:var(--ocre);border-radius:10px;padding:9px 16px;width:52%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Adição ao carrinho</div><div style="font-size:9.5px;opacity:.85">10,2% de quem chegou</div></div><div style="font-size:20px;font-weight:800">374</div></div><div style="background:var(--verde);border-radius:10px;padding:9px 16px;width:38%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Início de checkout</div><div style="font-size:9.5px;opacity:.85">33,4% do carrinho</div></div><div style="font-size:20px;font-weight:800">125</div></div><div style="background:var(--verde2);border-radius:10px;padding:9px 16px;width:26%;min-width:210px;display:flex;align-items:center;justify-content:space-between;color:#fff"><div><div style="font-weight:800;font-size:13px">Compras finalizadas</div><div style="font-size:9.5px;opacity:.85">44,0% do checkout · CPA R$ 118,08</div></div><div style="font-size:20px;font-weight:800">55</div></div>
+        <div class="note" style="font-size:10.5px">
+          <strong>Conversão total (clique → compra): 1,11%.</strong> Em setembro era 1,57% —
+          o funil trouxe <strong>44% mais cliques</strong> pagos, mas converteu uma fatia menor deles.
+        </div>
+        <div class="note" style="font-size:10.5px">
+          <strong>O custo do clique voltou ao patamar de agosto:</strong> R$ 1,31 contra R$ 2,04 em setembro (−36%),
+          e o CPM caiu de R$ 31,98 para R$ 21,44. Cada visita ficou mais barata; a perda está do carrinho para frente
+          e na página, onde 73,4% de quem clica chega a ver a loja carregada (80,9% em setembro).
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="section-title" style="color:var(--terracota)">Benchmarks — nicho yoga / wellness (Meta Ads)</div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--terracota);color:#fff">
+            <th style="padding:7px 10px;text-align:left">Métrica</th>
+            <th style="padding:7px 10px;text-align:center">Santosha out/26</th>
+            <th style="padding:7px 10px;text-align:center">Benchmark</th>
+            <th style="padding:7px 10px;text-align:center">Status</th>
+            <th style="padding:7px 10px;text-align:center">Setembro</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:6px 10px;font-weight:600">CTR (link)</td><td style="padding:6px 10px;text-align:center;font-weight:700">1,64%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,5 – 2,2%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,56%</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">CPM</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 21,44</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 11 – 17</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--vermelho);font-weight:700">🔴 Acima (leilão)</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 31,98</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">CPC (link)</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 1,31</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 0,70 – 1,10</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--amarelo);font-weight:700">⚠️ Pouco acima</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 2,04</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">Add to Cart (dos cliques)</td><td style="padding:6px 10px;text-align:center;font-weight:700">7,52%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">4 – 8%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">10,12%</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">CVR clique → compra</td><td style="padding:6px 10px;text-align:center;font-weight:700">1,11%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,2 – 2,0%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--amarelo);font-weight:700">⚠️ Pouco abaixo</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">1,57%</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">Abandono carrinho → checkout</td><td style="padding:6px 10px;text-align:center;font-weight:700">66,6%</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">65 – 75%</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">64,8%</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">ROAS (atribuído Meta)</td><td style="padding:6px 10px;text-align:center;font-weight:700">2,44x</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,5 – 3,5x</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--amarelo);font-weight:700">⚠️ Pouco abaixo</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,92x</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">CPA</td><td style="padding:6px 10px;text-align:center;font-weight:700">R$ 118,08</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 60 – 130</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">R$ 130,59</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:600">Frequência</td><td style="padding:6px 10px;text-align:center;font-weight:700">2,89</td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">2,0 – 3,5</td><td style="padding:6px 10px;text-align:center;font-size:10px"><span style="color:var(--verde-ok);font-weight:700">✅ Na faixa</span></td><td style="padding:6px 10px;text-align:center;color:var(--text-muted)">3,35</td></tr>
+          </tbody>
+        </table>
+        <div class="note warn" style="font-size:10.5px">
+          <strong>Leitura:</strong> das 9 métricas, <strong>5 estão na faixa</strong>, 3 ficaram perto da borda e 1 acima.
+          Outubro inverteu setembro: o <strong>custo de mídia melhorou muito</strong> (CPM −33%, CPC −36%, frequência de 3,35
+          para 2,89 — a conta alcançou mais gente nova) e a <strong>conversão do site recuou</strong> (carrinho de 10,12% para 7,52%,
+          clique → compra de 1,57% para 1,11%). O CPA ainda assim caiu de R$ 130,59 para R$ 118,08.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- N3 · ESTRATÉGIA: ATRAIR BARATO, CONVERTER NO QUENTE -->
+  <section class="slide" style="background:var(--bege-claro)">
+        <div class="slide-header">
+      <h1>Meta Ads — Achamos o que vende para o público quente</h1>
+      <p>Por que o próximo passo é atrair gente nova barato e converter no quente · plano para novembro e dezembro</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:11px;min-width:0">
+        <div class="grid2" style="gap:12px">
+          <div class="kpi-card-lg" style="border-top-color:var(--vermelho)"><div class="kpi-label">Vender direto para quem não conhece (frio)</div><div class="kpi-val" style="color:var(--vermelho)">R$ 321,60</div><div class="kpi-delta sans" style="color:var(--text-muted)">por compra · R$ 1.608 → 5 compras · 1,08x</div></div>
+          <div class="kpi-card-lg verde"><div class="kpi-label">Vender para quem já conhece (quente)</div><div class="kpi-val">R$ 32,63</div><div class="kpi-delta sans" style="color:var(--text-muted)">por compra · R$ 979 → 30 compras · 8,05x</div></div>
+        </div>
+        <div class="note warn"><strong>A compra no frio custou 10 vezes mais que a compra no quente.</strong> Pagar para vender direto a quem nunca ouviu
+        falar da Santosha está caro. O que funcionou em outubro foi o caminho em duas etapas: primeiro a pessoa conhece a marca, depois ela compra.</div>
+        <div class="section-title" style="color:var(--terracota);margin:2px 0 0">O funil que queremos montar</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-family:'Trebuchet MS',sans-serif;font-size:10.5px;line-height:1.4">
+          <div style="background:var(--ocre);color:#fff;border-radius:9px;padding:9px 11px"><strong style="font-size:12px">1 · Atrair (topo)</strong><br>Vídeo, seguidores e público novo pagando por visita barata, não por venda. Em outubro o clique novo saiu entre R$ 0,18 e R$ 1,56.</div>
+          <div style="background:var(--terracota);color:#fff;border-radius:9px;padding:9px 11px"><strong style="font-size:12px">2 · Aquecer</strong><br>Quem assistiu, seguiu ou visitou o site entra no público quente — que hoje é pequeno e precisa ser reabastecido.</div>
+          <div style="background:var(--verde);color:#fff;border-radius:9px;padding:9px 11px"><strong style="font-size:12px">3 · Converter (quente)</strong><br>As peças ao lado vendem para essa turma. Foi aqui que saíram 30 das 55 compras do Meta.</div>
+        </div>
+        <div class="section-title" style="color:var(--terracota);margin:2px 0 0">Plano para novembro e dezembro</div>
+        <div style="background:var(--branco);border-radius:9px;padding:9px 13px;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--marrom);line-height:1.5">
+          <div>• <strong>Menos verba em venda fria, mais em atração barata</strong> — o topo passa a ser medido por gente nova a custo baixo.</div>
+          <div>• <strong>Replicar o quente enquanto funcionar</strong> — manter as 4 peças e subir a verba em degraus, com leitura toda semana.</div>
+          <div>• <strong>O retorno do quente oscila.</strong> Outubro respondeu muito acima do que esse público costuma dar; se cair, a verba volta um degrau.</div>
+          <div>• <strong>Os dois meses mais fortes do ano estão chegando:</strong> em 2025, outubro a dezembro fizeram 25,8% do faturamento do ano. O quente precisa estar cheio antes da Black Friday e do Natal.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div class="section-title" style="color:var(--terracota);margin-bottom:0">As peças que vendem para o quente · clique para ver</div>
+        <a href="https://fb.me/1T6QYo6DCKIufaA" target="_blank" rel="noopener" style="display:flex;gap:10px;align-items:center;background:var(--branco);border-radius:9px;padding:7px 10px;text-decoration:none;color:var(--marrom)">
+          <img src="img/out_camp_manual_vid_a.jpg" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:7px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)">
+          <span style="font-family:'Trebuchet MS',sans-serif;font-size:11px;line-height:1.35"><strong style="color:var(--terracota)">CAMP_MANUAL_VID_A ↗</strong><br><span style="color:var(--text-muted)">vídeo do Manual de Sequências</span><br><strong>13 compras</strong> · R$ 447 → R$ 3.629 · <strong style="color:var(--verde-ok)">8,12x</strong></span></a>
+        <a href="https://fb.me/286fcQJ2simaAUz" target="_blank" rel="noopener" style="display:flex;gap:10px;align-items:center;background:var(--branco);border-radius:9px;padding:7px 10px;text-decoration:none;color:var(--marrom)">
+          <img src="img/out_camp_cartasflow_vid.jpg" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:7px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)">
+          <span style="font-family:'Trebuchet MS',sans-serif;font-size:11px;line-height:1.35"><strong style="color:var(--terracota)">CAMP_CARTASFLOW_VID ↗</strong><br><span style="color:var(--text-muted)">vídeo das cartas Cartasflow</span><br><strong>5 compras</strong> · R$ 145 → R$ 2.200 · <strong style="color:var(--verde-ok)">15,22x</strong></span></a>
+        <a href="https://fb.me/238hi0U2Eyoasx2" target="_blank" rel="noopener" style="display:flex;gap:10px;align-items:center;background:var(--branco);border-radius:9px;padding:7px 10px;text-decoration:none;color:var(--marrom)">
+          <img src="img/out_t16_poster_ashtanga_cantinho_vid.jpg" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:7px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)">
+          <span style="font-family:'Trebuchet MS',sans-serif;font-size:11px;line-height:1.35"><strong style="color:var(--terracota)">T16 — Pôster no cantinho ↗</strong><br><span style="color:var(--text-muted)">vídeo novo, no quente desde 23/10</span><br><strong>4 compras</strong> · R$ 64 → R$ 1.017 · <strong style="color:var(--verde-ok)">15,87x</strong></span></a>
+        <a href="https://fb.me/2JGZ4qvGAtJ5dkn" target="_blank" rel="noopener" style="display:flex;gap:10px;align-items:center;background:var(--branco);border-radius:9px;padding:7px 10px;text-decoration:none;color:var(--marrom)">
+          <img src="img/out_t17_manual_sequencias_tour_vid.jpg" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:7px;flex:0 0 auto;border:1px solid rgba(61,39,24,.15)">
+          <span style="font-family:'Trebuchet MS',sans-serif;font-size:11px;line-height:1.35"><strong style="color:var(--terracota)">T17 — Tour do Manual ↗</strong><br><span style="color:var(--text-muted)">vídeo novo, no quente desde 23/10</span><br><strong>6 compras</strong> · R$ 151 → R$ 442 · <strong style="color:var(--amarelo)">2,92x</strong></span></a>
+        <div class="note" style="font-size:10.5px"><strong>O vídeo do Manual é o melhor exemplo:</strong> no frio gastou R$ 44,68 e não vendeu;
+        no quente fez 13 compras. A peça é a mesma — o que muda é falar com quem já conhece a Santosha.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- N4 · O QUE CRIAR PARA O FRIO -->
+  <section class="slide" style="background:var(--bege-claro)">
+        <div class="slide-header">
+      <h1>Meta Ads — O que criar para o público novo (frio)</h1>
+      <p>O que trouxe gente nova barata em outubro e o briefing das próximas peças · 01 a 28/10/2026 · clique em qualquer peça para ver</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:1.05fr 0.75fr 1fr;gap:16px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+        <div class="section-title" style="color:var(--verde-ok);margin-bottom:0">Funcionou no frio — visita barata e gente que salva</div>
+        <a href="https://fb.me/23DHSPTVZM1ePQR" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285587740558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">This Yoga Mat — o tapete em uso ↗</strong><br><span style="color:var(--verde-ok)">R$ 1,14 por visita na loja · 6 carrinhos</span></span></a>
+<a href="https://fb.me/1XgqmZVXqUzedwY" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285573830558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Flow da manhã — prática curta ↗</strong><br><span style="color:var(--verde-ok)">R$ 1,47 por visita · 21 salvamentos (o mais salvo)</span></span></a>
+<a href="https://fb.me/28mLVK2IR0kC40e" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255426071230558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Flow da manhã “salva pra praticar” ↗</strong><br><span style="color:var(--verde-ok)">R$ 1,46 por visita · 8 salvamentos · 3 carrinhos</span></span></a>
+<a href="https://fb.me/27OfN3PyGf16tSY" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255426090660558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Matosha na paisagem ↗</strong><br><span style="color:var(--verde-ok)">R$ 1,81 por visita · 7 carrinhos · 1 venda de R$ 810,90</span></span></a>
+<a href="https://fb.me/2iBa8uVivzof1xI" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285574360558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Saudação ao Sol — prática ↗</strong><br><span style="color:var(--verde-ok)">9 salvamentos · 1 venda de R$ 584,36</span></span></a>
+<a href="https://fb.me/2jYMik81O3pKZxg" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285571390558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">A jornada de quem pratica ↗</strong><br><span style="color:var(--verde-ok)">36% param para ver o vídeo (o maior da conta) · 5 carrinhos</span></span></a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+        <div class="section-title" style="color:var(--vermelho);margin-bottom:0">Não funcionou no frio — visita cara</div>
+        <a href="https://fb.me/2YCHj8IDfRn5szF" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285587270558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Pôster — vídeo de produto ↗</strong><br><span style="color:var(--vermelho)">R$ 9,85 por visita</span></span></a>
+<a href="https://fb.me/2A6QkDkudL5gSJ3" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255426065040558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Baralhos “qual o seu?” ↗</strong><br><span style="color:var(--vermelho)">R$ 9,43 por visita</span></span></a>
+<a href="https://fb.me/1XBqrYvI3LKAQOi" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255285589100558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Manual — vídeo de produto ↗</strong><br><span style="color:var(--vermelho)">R$ 7,45 por visita (no quente: 13 compras)</span></span></a>
+<a href="https://fb.me/27mvkkDBzNRbhZ9" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255426082000558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Caixinha Cartasanas ou Flow ↗</strong><br><span style="color:var(--vermelho)">R$ 5,52 por visita</span></span></a>
+<a href="https://fb.me/23gyFsyCJZCwzcI" target="_blank" rel="noopener" style="display:flex;gap:9px;align-items:center;background:#fff;border-radius:9px;padding:6px 9px;text-decoration:none;color:var(--marrom);border:1px solid rgba(61,39,24,.08)"><img src="img/mat/120255426088890558.jpg" alt="" style="width:46px;height:46px;object-fit:cover;border-radius:6px;flex:0 0 auto"><span style="font:10.5px 'Trebuchet MS',sans-serif;line-height:1.35"><strong style="color:var(--terracota)">Combo de e-books ↗</strong><br><span style="color:var(--vermelho)">R$ 4,95 por visita</span></span></a>
+        <div class="note warn" style="font-size:10px">Essas peças <strong>não são ruins</strong>: o vídeo do Manual fez 13 compras para quem já conhece a marca. Elas explicam produto e preço — isso convence quem já conhece, não quem está vendo a Santosha pela primeira vez.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div class="section-title" style="color:var(--terracota);margin-bottom:0">O que criar para o frio em novembro e dezembro</div>
+        <div style="background:#fff;border-radius:10px;padding:11px 14px;font:11px 'Trebuchet MS',sans-serif;color:var(--marrom);line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><strong style="color:var(--terracota)">1 · Prática de verdade com o tapete em uso.</strong> Uma sequência curta (flow da manhã, saudação ao sol), 15 a 30 segundos, alguém praticando. Fechar com “salva para praticar amanhã”.</div>
+          <div><strong style="color:var(--terracota)">2 · O tapete em um lugar bonito.</strong> Natureza, luz da manhã, viagem — a estampa como protagonista, sem texto de venda.</div>
+          <div><strong style="color:var(--terracota)">3 · A rotina de quem pratica.</strong> O ritual do dia, desenrolar o tapete, o cantinho de prática. Foi o vídeo que mais segurou atenção.</div>
+          <div><strong style="color:var(--terracota)">4 · Os 2 primeiros segundos decidem.</strong> Começar com movimento ou imagem forte; logo e nome da loja só no final.</div>
+          <div><strong style="color:var(--terracota)">5 · Sem preço, combo ou explicação de produto.</strong> Manual, Pôster, e-books e caixinhas ficam para o público quente, onde vendem.</div>
+        </div>
+        <div class="note" style="font-size:10.5px"><strong>Como vamos medir o frio:</strong> custo por visita na loja até cerca de R$ 1,50, carrinhos e salvamentos — não a venda no mesmo mês. A venda vem depois, quando essa pessoa entra no público quente.</div>
+        <div class="note warn" style="font-size:10px"><strong>Atenção a clique barato demais:</strong> Yoginis + Cartasflow trouxe 1.702 cliques a R$ 0,18, mas nenhuma compra e só 3 carrinhos — por isso o clique sozinho não basta, olhamos carrinho e salvamento junto.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · GOOGLE -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Google Ads — por campanha</h1>
+      <p>Conta Santosha 853-596-5913 · R$ 1.971,85 · 28,0 conversões · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:12px">
+      <div class="s6-kpis">
+        <div class="kpi-card-lg verde"><div class="kpi-label">Investimento</div><div class="kpi-val">R$ 1.971,85</div></div>
+        <div class="kpi-card-lg verde"><div class="kpi-label">Receita atribuída</div><div class="kpi-val">R$ 6.805,30</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">ROAS</div><div class="kpi-val">3,45x</div></div>
+        <div class="kpi-card-lg"><div class="kpi-label">CPA · 28,0 conversões</div><div class="kpi-val">R$ 70,42</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Campanha</th><th>Tipo</th><th>Investimento</th><th>Conversões</th><th>Receita</th><th>CPA</th><th>ROAS</th></tr></thead>
+        <tbody>
+          <tr><td><strong>[GGD][SHOPPING][VENDAS][ROAS8]</strong></td><td>Shopping</td><td>R$ 725,70</td><td>10,0</td><td>R$ 2.619,40</td><td>R$ 72,57</td><td><strong style="color:var(--terracota)">3,61x</strong></td></tr>
+          <tr><td><strong>[GGD] PERFORMANCE MAX - 2</strong></td><td>Performance Max</td><td>R$ 374,16</td><td>6,0</td><td>R$ 1.601,10</td><td>R$ 62,36</td><td><strong style="color:var(--terracota)">4,28x</strong></td></tr>
+          <tr><td><strong>[GGD][VENDAS][SEARCH][INSTITUCIONAL]</strong></td><td>Busca</td><td>R$ 357,21</td><td>1,0</td><td>R$ 207,10</td><td>R$ 357,21</td><td><strong style="color:var(--vermelho)">0,58x</strong></td></tr>
+          <tr><td><strong>[GGD][VENDAS][SEARCH][MARCA]</strong></td><td>Busca</td><td>R$ 292,79</td><td>10,0</td><td>R$ 2.069,70</td><td>R$ 29,28</td><td><strong style="color:var(--verde-ok)">7,07x</strong></td></tr>
+          <tr><td><strong>[GGD][VENDAS][SEARCH][ASHTANGA_ASANAS]</strong></td><td>Busca</td><td>R$ 221,99</td><td>1,0</td><td>R$ 308,00</td><td>R$ 221,99</td><td><strong style="color:var(--terracota)">1,39x</strong></td></tr>
+          <tr class="total-row"><td>TOTAL GOOGLE</td><td></td><td>R$ 1.971,85</td><td>28,0</td><td>R$ 6.805,30</td><td>R$ 70,42</td><td>3,45x</td></tr>
+        </tbody>
+      </table>
+      <div class="grid2">
+        <div class="note">
+          <strong>MARCA e Shopping fizeram 20 das 28 conversões:</strong> R$ 1.018,49 devolveram R$ 4.689,10 (4,60x).
+          A MARCA dobrou de tamanho — passou de 5,8% para 14,8% da verba do Google — e fez 10 conversões a R$ 29,28 cada.
+        </div>
+        <div class="note warn">
+          <strong>Três campanhas de descoberta rodaram até 21/10:</strong> Performance Max (4,28x), Institucional (0,58x)
+          e Ashtanga/Asanas (1,39x). Desde então a verba ficou com MARCA + Shopping, as duas que mais devolvem por real investido.
+        </div>
+      </div>
+      <div class="note warn">
+        <strong>Contra setembro:</strong> com R$ 126,33 a menos que o mês inteiro de setembro, outubro já tem 6 conversões
+        a mais (28 contra 22) e o ROAS ficou estável (3,45x contra 3,43x). O CPA caiu de R$ 95,37 para R$ 70,42.
+      </div>
+    </div>
+  </section>
+
+  <!-- GOOGLE · PALAVRAS-CHAVE E TERMOS -->
+  <section class="slide" id="s-termos" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Google Ads — Termos de pesquisa &amp; Leilão</h1>
+      <p>O que as pessoas digitaram e quem disputa o mesmo leilão com a Santosha · 01 a 28/10/2026</p>
+    </div>
+    <div class="body-pad" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="section-title" style="color:var(--terracota)">Termos que venderam</div>
+        <table style="font-size:10.5px">
+          <thead><tr><th>Termo pesquisado</th><th>Campanha</th><th style="text-align:right">Gasto</th>
+          <th style="text-align:center">Cliques</th><th style="text-align:center">Conv.</th>
+          <th style="text-align:right">Receita</th><th style="text-align:center">ROAS</th></tr></thead>
+          <tbody>
+            <tr><td><strong>santosha</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 193,83</td><td style="text-align:center">107</td><td style="text-align:center">4</td><td style="text-align:right">R$ 1.099,50</td><td style="text-align:center;color:var(--verde-ok)"><strong>5,7x</strong></td></tr>
+            <tr><td><strong>sequencia de ashtanga yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 0,26</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:right">R$ 582,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>2.238x</strong></td></tr>
+            <tr><td><strong>cartas de yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 5,24</td><td style="text-align:center">3</td><td style="text-align:center">1</td><td style="text-align:right">R$ 261,80</td><td style="text-align:center;color:var(--verde-ok)"><strong>50,0x</strong></td></tr>
+            <tr><td><strong>cartasanas de yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 1,94</td><td style="text-align:center">3</td><td style="text-align:center">1</td><td style="text-align:right">R$ 261,80</td><td style="text-align:center;color:var(--verde-ok)"><strong>134,9x</strong></td></tr>
+            <tr><td><strong>santosha yoga</strong></td><td><small style="color:var(--verde)">INSTITUCIONAL</small></td><td style="text-align:right">R$ 11,91</td><td style="text-align:center">7</td><td style="text-align:center">1</td><td style="text-align:right">R$ 207,10</td><td style="text-align:center;color:var(--verde-ok)"><strong>17,4x</strong></td></tr>
+            <tr><td><strong>santocha</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 16,45</td><td style="text-align:center">5</td><td style="text-align:center">1</td><td style="text-align:right">R$ 207,10</td><td style="text-align:center;color:var(--verde-ok)"><strong>12,6x</strong></td></tr>
+            <tr><td><strong>santoshaporai</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 1,54</td><td style="text-align:center">6</td><td style="text-align:center">1</td><td style="text-align:right">R$ 128,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>83,1x</strong></td></tr>
+            <tr><td><strong>loja de acessórios de yoga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 1,54</td><td style="text-align:center">2</td><td style="text-align:center">1</td><td style="text-align:right">R$ 121,60</td><td style="text-align:center;color:var(--verde-ok)"><strong>79,0x</strong></td></tr>
+            <tr><td><strong>ashtanga posturas</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 0,40</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:right">R$ 98,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>245,0x</strong></td></tr>
+            <tr><td><strong>poster ashtanga</strong></td><td><small style="color:var(--verde)">SHOPPING</small></td><td style="text-align:right">R$ 0,20</td><td style="text-align:center">2</td><td style="text-align:center">1</td><td style="text-align:right">R$ 93,10</td><td style="text-align:center;color:var(--verde-ok)"><strong>465,5x</strong></td></tr>
+            <tr><td><strong>santosha por ai</strong></td><td><small style="color:var(--verde)">MARCA</small></td><td style="text-align:right">R$ 6,77</td><td style="text-align:center">18</td><td style="text-align:center">1</td><td style="text-align:right">R$ 48,00</td><td style="text-align:center;color:var(--verde-ok)"><strong>7,1x</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="font-size:10.5px">
+          <strong>O nome da marca segue pagando a conta</strong> — santosha, santocha, santoshaporai, santosha yoga e santosha por ai
+          somam R$ 230,50 de gasto e R$ 1.689,70 de receita (<strong>7,3x</strong>). A novidade de outubro é o Shopping vendendo
+          <strong>cartas, pôster e sequência de ashtanga</strong> por busca de categoria: seis termos, R$ 9,58 de gasto, R$ 1.418,30 de receita.
+          A Performance Max (R$ 1.601,10) não informa os termos e fica fora desta lista.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="section-title" style="color:var(--terracota)">Leilão — quem aparece junto com a Santosha e quem ganha</div>
+        <div style="font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;color:var(--verde)">BUSCA (anúncios de texto)</div>
+        <table style="font-size:10.5px">
+          <thead><tr><th>Quem disputa</th><th style="text-align:center">Aparece em</th><th style="text-align:center">Fica acima da Santosha</th><th style="text-align:center">Santosha fica acima</th></tr></thead>
+          <tbody><tr style="background:rgba(191,106,69,.14)"><td><strong>Santosha (você)</strong></td><td style="text-align:center">24,91%</td><td style="text-align:center">—</td><td style="text-align:center">—</td></tr><tr><td><strong>mercadolivre.com.br</strong></td><td style="text-align:center">21,34%</td><td style="text-align:center">59,84%</td><td style="text-align:center"><strong style="color:var(--vermelho)">20,54%</strong></td></tr><tr><td><strong>ekomat.com.br</strong></td><td style="text-align:center">15,25%</td><td style="text-align:center">53,03%</td><td style="text-align:center"><strong style="color:var(--vermelho)">21,75%</strong></td></tr><tr><td><strong>gilistore.com.br</strong></td><td style="text-align:center">14,48%</td><td style="text-align:center">49,52%</td><td style="text-align:center"><strong style="color:var(--vermelho)">22,27%</strong></td></tr><tr><td><strong>amazon.com.br</strong></td><td style="text-align:center">< 10%</td><td style="text-align:center">35,05%</td><td style="text-align:center"><strong style="color:var(--vermelho)">23,80%</strong></td></tr></tbody>
+        </table>
+        <div style="font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;color:var(--verde);margin-top:4px">SHOPPING (vitrine de produtos)</div>
+        <table style="font-size:10.5px">
+          <thead><tr><th>Loja</th><th style="text-align:center">Aparece em</th><th style="text-align:center">Santosha fica acima</th></tr></thead>
+          <tbody><tr><td><strong>Mercado Livre</strong></td><td style="text-align:center">78,19%</td><td style="text-align:center"><strong style="color:var(--vermelho)">29,70%</strong></td></tr><tr style="background:rgba(191,106,69,.14)"><td><strong>Santosha (você)</strong></td><td style="text-align:center">75,81%</td><td style="text-align:center">—</td></tr><tr><td><strong>Amazon.com.br</strong></td><td style="text-align:center">60,67%</td><td style="text-align:center"><strong style="color:var(--vermelho)">49,48%</strong></td></tr><tr><td><strong>Track&Field</strong></td><td style="text-align:center">36,01%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">58,18%</strong></td></tr><tr><td><strong>Yogateria</strong></td><td style="text-align:center">34,81%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">56,06%</strong></td></tr><tr><td><strong>Decathlon</strong></td><td style="text-align:center">31,97%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">63,40%</strong></td></tr><tr><td><strong>Shein</strong></td><td style="text-align:center">31,88%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">64,01%</strong></td></tr><tr><td><strong>Shopee</strong></td><td style="text-align:center">28,65%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">63,79%</strong></td></tr><tr><td><strong>Gili Store</strong></td><td style="text-align:center">27,27%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">56,36%</strong></td></tr><tr><td><strong>LIVE!</strong></td><td style="text-align:center">17,94%</td><td style="text-align:center"><strong style="color:var(--verde-ok)">66,80%</strong></td></tr></tbody>
+        </table>
+        <div class="note warn" style="font-size:10.5px">
+          <strong>Quem ganha o leilão é o Mercado Livre.</strong> No Shopping ele aparece quase tanto quanto a Santosha (78% contra 76%),
+          mas a Santosha só fica à frente dele em 30% das vezes; na busca, quando os dois aparecem juntos, o Mercado Livre fica acima em 60%.
+          <strong>Contra as lojas de yoga a Santosha ganha:</strong> fica à frente de Yogateria, Gili Store, Track&amp;Field e Decathlon em mais da metade das vezes.
+          O que faz a Santosha perder é a posição, não a verba: o Shopping deixou de aparecer 47% das vezes por posição e menos de 1% por falta de verba;
+          a busca pela marca aparece em 81% das pesquisas pelo nome e fica no primeiro lugar em 60%.
+        </div>
+        <p class="sans" style="font-size:9.5px;color:var(--text-muted)">"Aparece em" = parcela de impressões. "Fica acima" = taxa de posição superior (quando os dois aparecem juntos). "Santosha fica acima" = parcela de superação. Fonte: Google Ads › Informações do leilão, 01 a 28/10/2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · LOJA -->
+  <section class="slide" style="background:var(--bege-claro)">
+    <div class="slide-header">
+      <h1>Shopify — a loja em outubro</h1>
+      <p>Fonte de verdade do faturamento · 01 a 28/10/2026 · leitura de 29/10 às 11h04</p>
+    </div>
+    <div class="body-pad" style="display:flex;flex-direction:column;gap:14px">
+      <div class="grid2" style="align-items:start">
+        <table>
+          <thead><tr><th>Detalhamento do faturamento</th><th style="text-align:right">Valor</th></tr></thead>
+          <tbody>
+            <tr class="total-row"><td>Vendas brutas — faturamento do relatório</td><td style="text-align:right">R$ 29.538,85</td></tr>
+            <tr><td>Descontos</td><td style="text-align:right">−R$ 3.687,14</td></tr>
+            <tr><td>Devoluções</td><td style="text-align:right">−R$ 606,00</td></tr>
+            <tr><td>Vendas líquidas</td><td style="text-align:right">R$ 25.245,71</td></tr>
+            <tr><td>Frete cobrado</td><td style="text-align:right">R$ 878,21</td></tr>
+            <tr><td>Total de vendas (líquido + frete)</td><td style="text-align:right">R$ 26.172,51</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="grid2">
+            <div class="kpi-card"><div class="kpi-label">Pedidos</div><div class="kpi-val">90</div><div class="kpi-delta sans" style="color:var(--text-muted)">ticket médio R$ 328,21</div></div>
+            <div class="kpi-card"><div class="kpi-label">Sessões</div><div class="kpi-val">9.624</div><div class="kpi-delta sans" style="color:var(--text-muted)">conversão 0,94%</div></div>
+          </div>
+          <div class="note">
+            <strong>O faturamento do relatório é a venda bruta:</strong> o valor dos 90 pedidos antes de descontos e devoluções.
+            Os descontos somaram 12,5% das vendas brutas (R$ 3.687,14) e as devoluções R$ 606,00 — o "Total de vendas" da Shopify
+            já sai com tudo isso descontado e com o frete somado. Recorrência e pedidos processados não foram lidos nesta rodada.
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Top 10 produtos por faturamento — 01 a 28/10/2026</div>
+        <div class="bar-row"><div class="bar-label">Matosha | Guia Lunar</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">R$ 5.775,30</div></div>
+        <div class="bar-row"><div class="bar-label">Cartasanas de Yoga</div><div class="bar-track"><div class="bar-fill" style="width:72.0%"></div></div><div class="bar-val">R$ 4.158,00</div></div>
+        <div class="bar-row"><div class="bar-label">Cartasflow</div><div class="bar-track"><div class="bar-fill" style="width:68.7%"></div></div><div class="bar-val">R$ 3.967,60</div></div>
+        <div class="bar-row"><div class="bar-label">Matosha | You are the Sun</div><div class="bar-track"><div class="bar-fill" style="width:57.5%"></div></div><div class="bar-val">R$ 3.320,10</div></div>
+        <div class="bar-row"><div class="bar-label">Pôster Ashtanga Yoga | A2</div><div class="bar-track"><div class="bar-fill" style="width:32.4%"></div></div><div class="bar-val">R$ 1.871,80</div></div>
+        <div class="bar-row"><div class="bar-label">Matosha | Yoginis</div><div class="bar-track"><div class="bar-fill" style="width:27.5%"></div></div><div class="bar-val">R$ 1.590,30</div></div>
+        <div class="bar-row"><div class="bar-label">Matosha | MOCHA</div><div class="bar-track"><div class="bar-fill" style="width:19.3%"></div></div><div class="bar-val">R$ 1.116,00</div></div>
+        <div class="bar-row"><div class="bar-label">Combo E-books Santosha</div><div class="bar-track"><div class="bar-fill" style="width:15.3%"></div></div><div class="bar-val">R$ 882,00</div></div>
+        <div class="bar-row"><div class="bar-label">Cartasprana</div><div class="bar-track"><div class="bar-fill" style="width:13.8%"></div></div><div class="bar-val">R$ 796,40</div></div>
+        <div class="bar-row"><div class="bar-label">Manual de Sequências</div><div class="bar-track"><div class="bar-fill" style="width:9.6%"></div></div><div class="bar-val">R$ 556,80</div></div>
+      </div>
+      <div class="note">
+        <strong>O tapete segue no topo:</strong> as quatro linhas Matosha somaram R$ 11.801,70 em 24 pedidos, e o Guia Lunar foi o produto
+        que mais faturou. As cartas (Cartasanas, Cartasflow e Cartasprana) fizeram R$ 8.922,00 em 45 pedidos. O Manual de Sequências
+        apareceu em 29 pedidos e o Pôster em 19 — são os produtos de menor preço da loja e explicam o ticket abaixo de setembro.
+        O top 10 concentra R$ 24.034,30 do que a loja vendeu no período.
+      </div>
+    </div>
+  </section>
+
+
+  
+  
+  
+  <!-- 12 · ENCERRAMENTO -->
+  <section class="slide" style="background:var(--bege);flex-direction:row">
+    <div class="capa-stripe"></div>
+    <div class="capa-stripe-thin"></div>
+    <div class="enc-content">
+      <p class="enc-eyebrow">"inspirando YOGA, expirando ARTE"</p>
+      <h1 class="enc-title">Obrigada!</h1>
+      <div class="enc-divider"></div>
+      <p class="enc-name">GGD — Gestão de Tráfego</p>
+      <p class="enc-email">giovannarramires@gmail.com</p>
+      <p class="enc-footer">Dados: Meta Ads e Google Ads via Windsor.ai · Shopify (Análises / Relatórios, ShopifyQL) na leitura de 29/10/2026 às 11h04 · período 01 a 28 de outubro de 2026.<br>
+      Comparativos: 01–28/09/2026 e 01–28/10/2025, mesma janela de dias.<br>
+      Faturamento = Vendas brutas do Shopify (antes de descontos e devoluções). ROAS por plataforma = receita atribuída pela própria plataforma. Leitura de 29/10/2026.</p>
+    </div>
+  </section>
+</div>
+<div class="mat-modal" id="mat0" onclick="if(event.target===this)fecharMat()"><div class="mat-box">
+  <div class="mat-head"><div><div class="mat-eyebrow">Materiais que rodaram no Meta</div><h2>01 a 11/10 · estrutura antiga</h2><p>28 anúncios com investimento · R$ 3.191,71 · 16 compras · clique em qualquer peça para ver como ela apareceu</p></div><button onclick="fecharMat()" aria-label="Fechar">✕</button></div>
+  <div class="mat-grid"><a class="mat-card" href="https://fb.me/1WMPnxwqyvupSDm" target="_blank" rel="noopener"><img src="img/mat/120210845553160558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD03 - Narrado ↗</strong><span>R$ 947,01 investidos</span><b style="color:var(--verde-ok)">6 compras · R$ 411,92</b></span></a><a class="mat-card" href="https://fb.me/1UAqqAn5pPa0SHK" target="_blank" rel="noopener"><img src="img/mat/120246828557850558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CATALOGO_TODOS_PRODUTOS ↗</strong><span>R$ 268,21 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 148,68</b></span></a><a class="mat-card" href="https://fb.me/23qREbl0mqy9Ii2" target="_blank" rel="noopener"><img src="img/mat/120255197046360558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MATOSHA02 ↗</strong><span>R$ 215,03 investidos</span><b style="color:var(--verde-ok)">2 compras · R$ 1.001,20</b></span></a><a class="mat-card" href="https://fb.me/2bSCQ0BEwhYKerp" target="_blank" rel="noopener"><img src="img/mat/120201410122690558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD03 - Matoshas - Carrossel ↗</strong><span>R$ 197,35 investidos</span><b style="color:var(--verde-ok)">2 compras · R$ 1.172,40</b></span></a><a class="mat-card" href="https://fb.me/23yWyvak981qNkk" target="_blank" rel="noopener"><img src="img/mat/120202389914670558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04 - Matoshas ↗</strong><span>R$ 162,49 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 326,91</b></span></a><a class="mat-card" href="https://fb.me/1Vug8EzjNae0RlS" target="_blank" rel="noopener"><img src="img/mat/120255197003270558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>BARALHOS02 ↗</strong><span>R$ 151,73 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/23Nlgqn99DYN8Kq" target="_blank" rel="noopener"><img src="img/mat/120243563995800558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04_YOGA_ALEM_POSTURA ↗</strong><span>R$ 150,91 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2Mm4sZH0AK7BcmQ" target="_blank" rel="noopener"><img src="img/mat/120206830238820558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD8 - Mats You are the Sun ↗</strong><span>R$ 147,45 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 558,00</b></span></a><a class="mat-card" href="https://fb.me/2ggvjAyrmWcpmmY" target="_blank" rel="noopener"><img src="img/mat/120255197172670558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>RMKT_DPA_TODOS_PRODUTOS ↗</strong><span>R$ 104,58 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2cAqbqJnngtF5fi" target="_blank" rel="noopener"><img src="img/mat/120253885734220558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD14_VID_MATS_VENCEDOR ↗</strong><span>R$ 103,19 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 577,95</b></span></a><a class="mat-card" href="https://fb.me/1Xsw5We6vHiLCDs" target="_blank" rel="noopener"><img src="img/mat/120254011809060558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD02_RAZOES_MATOSHA_DISTR ↗</strong><span>R$ 96,74 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/24GG7EmyH3HtMGf" target="_blank" rel="noopener"><img src="img/mat/120217067498460558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04_ASHTANGA ↗</strong><span>R$ 82,49 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2jKpcbYdrx17hBM" target="_blank" rel="noopener"><img src="img/mat/120216512550900558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD02_CARTASFLOW ↗</strong><span>R$ 77,23 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 263,78</b></span></a><a class="mat-card" href="https://fb.me/yXgwS2xoYMnVFlc" target="_blank" rel="noopener"><img src="img/mat/120215179111980558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD06_CARR_MATOSHA ↗</strong><span>R$ 76,85 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/28X3HphtQdCZVOa" target="_blank" rel="noopener"><img src="img/mat/120245454338560558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD01_CARR_CARTASANAS_JORNADA ↗</strong><span>R$ 76,22 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1XkI0vJT0GRx8Vg" target="_blank" rel="noopener"><img src="img/mat/120254202053080558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>Post do Instagram: quando a gente fala que... ↗</strong><span>R$ 51,26 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/qBBn2x0K2OII8vE" target="_blank" rel="noopener"><img src="img/mat/120202663923710558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD5 - Feedbacks Mats ↗</strong><span>R$ 46,00 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1X1IUUUhKMLncLL" target="_blank" rel="noopener"><img src="img/mat/120255196735760558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MATOSHA ↗</strong><span>R$ 41,61 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2bhFf3sxZuDNyIK" target="_blank" rel="noopener"><img src="img/mat/120244127956400558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD06 ↗</strong><span>R$ 33,68 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WRxN82d0dHWRMt" target="_blank" rel="noopener"><img src="img/mat/120255197059690558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>BARALHOS ↗</strong><span>R$ 31,94 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 521,90</b></span></a><a class="mat-card" href="https://fb.me/23Zc3NoEHwq0Bkg" target="_blank" rel="noopener"><img src="img/mat/120229279938080558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD_MATS ↗</strong><span>R$ 28,79 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1TVbIGBPqRkeVYs" target="_blank" rel="noopener"><img src="img/mat/120253725451060558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CARTAS_FLOW ↗</strong><span>R$ 28,08 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2C32GpZXX6H5nOf" target="_blank" rel="noopener"><img src="img/mat/120206829785600558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD7 - Mats ↗</strong><span>R$ 27,38 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WtkRZqku1XndY4" target="_blank" rel="noopener"><img src="img/mat/120254011809040558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04_CARR_FEEDBACKS ↗</strong><span>R$ 18,05 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/26YiajRvOJvx3VQ" target="_blank" rel="noopener"><img src="img/mat/120243810358480558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD02_CUPOM_BORAPROFLOW ↗</strong><span>R$ 14,75 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2Tj5Cr4SUwz3Xi8" target="_blank" rel="noopener"><img src="img/mat/120254011809070558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD01_CARR_CONHECA_MATOSHA ↗</strong><span>R$ 6,85 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2jhMmh1LKpbt19a" target="_blank" rel="noopener"><img src="img/mat/120227082267380558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD14_VID_MATS ↗</strong><span>R$ 3,34 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2cafSpnygGeyQhA" target="_blank" rel="noopener"><img src="img/mat/120217067924560558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD01_MOSAICO_VIDEO ↗</strong><span>R$ 2,50 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a></div></div></div>
+<div class="mat-modal" id="mat1" onclick="if(event.target===this)fecharMat()"><div class="mat-box">
+  <div class="mat-head"><div><div class="mat-eyebrow">Materiais que rodaram no Meta</div><h2>12 a 22/10 · frio e quente separados</h2><p>30 anúncios com investimento · R$ 2.052,22 · 20 compras · clique em qualquer peça para ver como ela apareceu</p></div><button onclick="fecharMat()" aria-label="Fechar">✕</button></div>
+  <div class="mat-grid"><a class="mat-card" href="https://fb.me/23qREbl0mqy9Ii2" target="_blank" rel="noopener"><img src="img/mat/120255197046360558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MATOSHA02 ↗</strong><span>R$ 358,71 investidos</span><b style="color:var(--verde-ok)">2 compras · R$ 769,60</b></span></a><a class="mat-card" href="https://fb.me/2cel3gXXzXCArDQ" target="_blank" rel="noopener"><img src="img/mat/120255285572760558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_YOGINIS_CARTASFLOW ↗</strong><span>R$ 300,91 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2afiIP5NtBqAFPF" target="_blank" rel="noopener"><img src="img/mat/120255285589100558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_MANUAL_VID_A ↗</strong><span>R$ 293,18 investidos</span><b style="color:var(--verde-ok)">8 compras · R$ 1.783,48</b></span></a><a class="mat-card" href="https://fb.me/1XpgZLH61Cbj9nE" target="_blank" rel="noopener"><img src="img/mat/120255285588440558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_CARTASFLOW_VID ↗</strong><span>R$ 191,50 investidos</span><b style="color:var(--verde-ok)">6 compras · R$ 2.008,24</b></span></a><a class="mat-card" href="https://fb.me/23DHSPTVZM1ePQR" target="_blank" rel="noopener"><img src="img/mat/120255285587740558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_THIS_YOGA_MAT ↗</strong><span>R$ 103,60 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 221,06</b></span></a><a class="mat-card" href="https://fb.me/D4TBAXJXnCiYqqk" target="_blank" rel="noopener"><img src="img/mat/120255285588060558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>ORG_CARTASANAS_NAVEGACAO ↗</strong><span>R$ 91,28 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2iBa8uVivzof1xI" target="_blank" rel="noopener"><img src="img/mat/120255285574360558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>ORG_SAUDACAO_AO_SOL ↗</strong><span>R$ 81,73 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 584,36</b></span></a><a class="mat-card" href="https://fb.me/1WtkRZqku1XndY4" target="_blank" rel="noopener"><img src="img/mat/120254011809040558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04_CARR_FEEDBACKS ↗</strong><span>R$ 80,81 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2b1DHq40zOADi9o" target="_blank" rel="noopener"><img src="img/mat/120255285575560558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_COMO_LAVAR ↗</strong><span>R$ 74,18 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 368,90</b></span></a><a class="mat-card" href="https://fb.me/1XkI0vJT0GRx8Vg" target="_blank" rel="noopener"><img src="img/mat/120254202053080558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>Post do Instagram: quando a gente fala que... ↗</strong><span>R$ 61,36 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2jYMik81O3pKZxg" target="_blank" rel="noopener"><img src="img/mat/120255285571390558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_JORNADA ↗</strong><span>R$ 57,72 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2YCHj8IDfRn5szF" target="_blank" rel="noopener"><img src="img/mat/120255285587270558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_POSTER_ASHTANGA ↗</strong><span>R$ 43,86 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1XgqmZVXqUzedwY" target="_blank" rel="noopener"><img src="img/mat/120255285573830558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>ORG_FLOW_DA_MANHA ↗</strong><span>R$ 41,03 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1Xsw5We6vHiLCDs" target="_blank" rel="noopener"><img src="img/mat/120254011809060558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD02_RAZOES_MATOSHA_DISTR ↗</strong><span>R$ 37,28 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1TKfY7mzzow1PCF" target="_blank" rel="noopener"><img src="img/mat/120255285586720558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_MANUAL_VID_B ↗</strong><span>R$ 29,76 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2Tj5Cr4SUwz3Xi8" target="_blank" rel="noopener"><img src="img/mat/120254011809070558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD01_CARR_CONHECA_MATOSHA ↗</strong><span>R$ 27,17 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WRxN82d0dHWRMt" target="_blank" rel="noopener"><img src="img/mat/120255197059690558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>BARALHOS ↗</strong><span>R$ 22,94 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 252,60</b></span></a><a class="mat-card" href="https://fb.me/27mvkkDBzNRbhZ9" target="_blank" rel="noopener"><img src="img/mat/120255426082000558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T15_CAIXINHA_CARTASANAS_OU_FLOW_VID ↗</strong><span>R$ 22,84 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2Mm4sZH0AK7BcmQ" target="_blank" rel="noopener"><img src="img/mat/120206830238820558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD8 - Mats You are the Sun ↗</strong><span>R$ 19,20 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2A6QkDkudL5gSJ3" target="_blank" rel="noopener"><img src="img/mat/120255426065040558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T06_BARALHOS_QUAL_O_SEU_VID ↗</strong><span>R$ 16,92 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WUBBxxOl3wDxI3" target="_blank" rel="noopener"><img src="img/mat/120255426084750558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T08_PRESENTES_YOGA_EST ↗</strong><span>R$ 13,80 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/26LDJk2DguwmwRt" target="_blank" rel="noopener"><img src="img/mat/120255285576100558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_DIAS_NO_MATOSHA ↗</strong><span>R$ 12,01 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2letLJ0V4lIQPVi" target="_blank" rel="noopener"><img src="img/mat/120255426056420558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T03_POSTER_ASHTANGA_PAREDE_VID ↗</strong><span>R$ 11,44 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2kkE2Q7ppLQWY86" target="_blank" rel="noopener"><img src="img/mat/120255426053070558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T02_CARTASFLOW_TIRA_UMA_CARTA_VID ↗</strong><span>R$ 11,01 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/23VZPyhNfx49Zxb" target="_blank" rel="noopener"><img src="img/mat/120255426068890558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T07_MATOSHA_ESTAMPAS_VID ↗</strong><span>R$ 10,79 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2PS70XEBiwy5ALU" target="_blank" rel="noopener"><img src="img/mat/120255426050210558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T01_MANUAL_AULA_DO_ZERO_VID ↗</strong><span>R$ 10,30 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2rOW6aGUUwl4doP" target="_blank" rel="noopener"><img src="img/mat/120255426061680558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T05_CARTASANAS_120_POSTURAS_VID ↗</strong><span>R$ 8,98 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/23gyFsyCJZCwzcI" target="_blank" rel="noopener"><img src="img/mat/120255426088890558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T09_COMBO_EBOOKS_EST ↗</strong><span>R$ 6,68 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2bdVh8FvKFCf9Ak" target="_blank" rel="noopener"><img src="img/mat/120255426074200558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T12_NOTAS_LISTA_DE_PRESENTES_VID ↗</strong><span>R$ 5,71 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/34M9WjSRre0OVFG" target="_blank" rel="noopener"><img src="img/mat/120206257005970558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD5 - Feedbacks Mats ↗</strong><span>R$ 5,52 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a></div></div></div>
+<div class="mat-modal" id="mat2" onclick="if(event.target===this)fecharMat()"><div class="mat-box">
+  <div class="mat-head"><div><div class="mat-eyebrow">Materiais que rodaram no Meta</div><h2>23 a 28/10 · vídeos novos + antigos no quente</h2><p>23 anúncios com investimento · R$ 1.249,01 · 18 compras · clique em qualquer peça para ver como ela apareceu</p></div><button onclick="fecharMat()" aria-label="Fechar">✕</button></div>
+  <div class="mat-grid"><a class="mat-card" href="https://fb.me/2hzDwc21bnViCbv" target="_blank" rel="noopener"><img src="img/mat/120255457484850558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T17_MANUAL_SEQUENCIAS_TOUR_VID ↗</strong><span>R$ 206,43 investidos</span><b style="color:var(--verde-ok)">6 compras · R$ 441,52</b></span></a><a class="mat-card" href="https://fb.me/2afiIP5NtBqAFPF" target="_blank" rel="noopener"><img src="img/mat/120255285589100558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_MANUAL_VID_A ↗</strong><span>R$ 198,54 investidos</span><b style="color:var(--verde-ok)">5 compras · R$ 1.845,10</b></span></a><a class="mat-card" href="https://fb.me/27l4rDrZ32N2MpB" target="_blank" rel="noopener"><img src="img/mat/120255457490920558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T16_POSTER_ASHTANGA_CANTINHO_VID ↗</strong><span>R$ 130,44 investidos</span><b style="color:var(--verde-ok)">4 compras · R$ 1.016,76</b></span></a><a class="mat-card" href="https://fb.me/23gyFsyCJZCwzcI" target="_blank" rel="noopener"><img src="img/mat/120255426088890558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T09_COMBO_EBOOKS_EST ↗</strong><span>R$ 72,55 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 200,45</b></span></a><a class="mat-card" href="https://fb.me/27OfN3PyGf16tSY" target="_blank" rel="noopener"><img src="img/mat/120255426090660558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T10_MATOSHA_PAISAGEM_EST ↗</strong><span>R$ 56,04 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 810,90</b></span></a><a class="mat-card" href="https://fb.me/2bdVh8FvKFCf9Ak" target="_blank" rel="noopener"><img src="img/mat/120255426074200558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T12_NOTAS_LISTA_DE_PRESENTES_VID ↗</strong><span>R$ 54,61 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/28nr4H3zvOSoDbg" target="_blank" rel="noopener"><img src="img/mat/120255426091630558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T13_PAREDE_DE_YOGA_EST ↗</strong><span>R$ 53,43 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1TzXBH3K6pKfQlT" target="_blank" rel="noopener"><img src="img/mat/120255426077200558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T14_MATOSHAS_PELO_MUNDO_VID ↗</strong><span>R$ 52,40 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/28mLVK2IR0kC40e" target="_blank" rel="noopener"><img src="img/mat/120255426071230558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T11_FLOW_DA_MANHA_SALVA_VID ↗</strong><span>R$ 51,15 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2rOW6aGUUwl4doP" target="_blank" rel="noopener"><img src="img/mat/120255426061680558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T05_CARTASANAS_120_POSTURAS_VID ↗</strong><span>R$ 47,20 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/27mvkkDBzNRbhZ9" target="_blank" rel="noopener"><img src="img/mat/120255426082000558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T15_CAIXINHA_CARTASANAS_OU_FLOW_VID ↗</strong><span>R$ 43,44 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WUBBxxOl3wDxI3" target="_blank" rel="noopener"><img src="img/mat/120255426084750558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T08_PRESENTES_YOGA_EST ↗</strong><span>R$ 42,04 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/23VZPyhNfx49Zxb" target="_blank" rel="noopener"><img src="img/mat/120255426068890558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T07_MATOSHA_ESTAMPAS_VID ↗</strong><span>R$ 41,00 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1XpgZLH61Cbj9nE" target="_blank" rel="noopener"><img src="img/mat/120255285588440558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_CARTASFLOW_VID ↗</strong><span>R$ 31,22 investidos</span><b style="color:var(--verde-ok)">1 compra · R$ 336,50</b></span></a><a class="mat-card" href="https://fb.me/1XkI0vJT0GRx8Vg" target="_blank" rel="noopener"><img src="img/mat/120254202053080558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>Post do Instagram: quando a gente fala que... ↗</strong><span>R$ 30,43 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2Tj5Cr4SUwz3Xi8" target="_blank" rel="noopener"><img src="img/mat/120254011809070558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD01_CARR_CONHECA_MATOSHA ↗</strong><span>R$ 29,31 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1Xsw5We6vHiLCDs" target="_blank" rel="noopener"><img src="img/mat/120254011809060558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD02_RAZOES_MATOSHA_DISTR ↗</strong><span>R$ 26,06 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2cPEyGOUJSLWjkx" target="_blank" rel="noopener"><img src="img/mat/120255285590230558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_THIS_YOGA_MAT ↗</strong><span>R$ 24,62 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2A6QkDkudL5gSJ3" target="_blank" rel="noopener"><img src="img/mat/120255426065040558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>T06_BARALHOS_QUAL_O_SEU_VID ↗</strong><span>R$ 20,81 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/1WtkRZqku1XndY4" target="_blank" rel="noopener"><img src="img/mat/120254011809040558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>AD04_CARR_FEEDBACKS ↗</strong><span>R$ 15,71 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/z45yfQErXkRXwwT" target="_blank" rel="noopener"><img src="img/mat/120255285589550558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>CAMP_POSTER_ASHTANGA ↗</strong><span>R$ 8,75 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/2b1DHq40zOADi9o" target="_blank" rel="noopener"><img src="img/mat/120255285575560558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_COMO_LAVAR ↗</strong><span>R$ 7,43 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a><a class="mat-card" href="https://fb.me/26LDJk2DguwmwRt" target="_blank" rel="noopener"><img src="img/mat/120255285576100558.jpg" alt="" loading="lazy"><span class="mat-txt"><strong>MAT_DIAS_NO_MATOSHA ↗</strong><span>R$ 5,40 investidos</span><span style="color:var(--text-muted)">sem compra</span></span></a></div></div></div>
+<nav class="nav">
+  <button id="btnPrev" onclick="go(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1 / 1</span>
+  <button id="btnNext" onclick="go(1)">→</button>
+</nav>
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const total = slides.length;
+  let cur = 0;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsEl.appendChild(dot);
+  });
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    counter.textContent = (cur + 1) + ' / ' + total;
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === total - 1;
+  }
+  function go(dir) { goTo(cur + dir); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+  });
+  goTo(0);
+</script>
+<script>
+function abrirMat(i){document.getElementById('mat'+i).classList.add('on')}
+function fecharMat(){document.querySelectorAll('.mat-modal.on').forEach(m=>m.classList.remove('on'))}
+document.addEventListener('keydown',e=>{if(document.querySelector('.mat-modal.on')){if(e.key==='Escape')fecharMat();e.stopImmediatePropagation()}},true);
+</script>
+</body></html>
