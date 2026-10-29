@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Página nova do Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: relatório de uma coluna, tabelas de leitura rápida, faixa de veredito no topo */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5d6a63; --line:#dde3df;
+  --accent:#1f6b4f; --accent-soft:#e3efe9;
+  --good:#1f7a4d; --warn:#9a6a00; --bad:#b0362c; --warn-soft:#fbf1dc; --bad-soft:#f8e4e1;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121614; --surface:#1a201d; --fg:#e4ebe7; --muted:#9aa8a0; --line:#2c3531;
+  --accent:#6cc39b; --accent-soft:#1d3329; --good:#6cc39b; --warn:#e2b24f; --bad:#ef8a80; --warn-soft:#332a14; --bad-soft:#3a1f1c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1a201d; --fg:#e4ebe7; --muted:#9aa8a0; --line:#2c3531;
+  --accent:#6cc39b; --accent-soft:#1d3329; --good:#6cc39b; --warn:#e2b24f; --bad:#ef8a80; --warn-soft:#332a14; --bad-soft:#3a1f1c; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:32px 56px;display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(28px,5vw,40px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.2 var(--f-display);margin:0 0 4px;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.sub{color:var(--muted)}
+.verdict{background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.verdict strong{color:var(--accent)}
+section{display:flex;flex-direction:column;gap:12px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+tr.ctrl td{background:var(--bg);font-weight:500}
+tr.tot td{font-weight:600}
+.pill{display:inline-block;font:500 12px var(--f-mono);padding:2px 8px;border-radius:99px}
+.g{background:var(--accent-soft);color:var(--good)} .w{background:var(--warn-soft);color:var(--warn)} .b{background:var(--bad-soft);color:var(--bad)}
+.bars{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.bar{display:grid;grid-template-columns:150px 1fr 56px;gap:12px;align-items:center;font-variant-numeric:tabular-nums}
+.bar .t{height:14px;background:var(--bg);border-radius:4px;overflow:hidden}
+.bar .f{height:100%;background:var(--accent);border-radius:4px}
+.bar.c .f{background:var(--muted)}
+.bar .v{text-align:right;font-family:var(--f-mono);font-size:13px}
+.note{font-size:13px;color:var(--muted)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.alert{background:var(--warn-soft);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 48px}}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.card img{width:100%;height:auto;border-radius:6px;display:block}
+.big{font:600 28px var(--f-mono)}
+ol.blocos{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;max-width:74ch}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font:12.5px/1.5 var(--f-mono);white-space:pre-wrap;word-break:break-all;margin:0}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:10px 16px;border-radius:8px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Felipe Scherer · Playbook do Reclamante (Burnout) · página de vendas · 29/10/2026</span>
+    <h1>O próximo salto do Playbook está na página: levar para o topo a oferta que os anúncios já mostram.</h1>
+    <p class="sub">Leitura de 06/09 a 29/10, desde que a venda passou para a Ticto: 3.807 visitas na página e 326 vendas. O anúncio entrega a visita e o checkout fecha bem. A etapa com mais espaço para crescer é a página, entre a chegada e o clique em comprar.</p>
+  </header>
+
+  <section>
+    <h2>De cada 100 pessoas que clicam no anúncio</h2>
+    <div class="bars">
+      <div class="bar"><span>clicam no anúncio</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">100</span></div>
+      <div class="bar"><span>chegam na página</span><span class="t"><span class="f" style="width:84%"></span></span><span class="v">84</span></div>
+      <div class="bar"><span>abrem o checkout</span><span class="t"><span class="f" style="width:12.5%;background:var(--warn)"></span></span><span class="v">12,5</span></div>
+      <div class="bar"><span>preenchem o pagamento</span><span class="t"><span class="f" style="width:8.7%"></span></span><span class="v">8,7</span></div>
+      <div class="bar"><span>compram</span><span class="t"><span class="f" style="width:7.2%"></span></span><span class="v">7,2</span></div>
+    </div>
+    <ul>
+      <li><b>O checkout converte bem:</b> 58% de quem abre o checkout compra. Nas campanhas que estão no ar hoje, são 68%.</li>
+      <li><b>A página carrega bem:</b> 84% dos cliques viram visita.</li>
+      <li><b>Onde está o ganho:</b> 15 de cada 100 visitas clicam em comprar. A /vtic e a /vtic2 ficam no mesmo nível (15,2% e 15,1%), então o ganho vem da estrutura da página, não da escolha entre as duas. Se a página chegar a ~30%, com o mesmo anúncio e o mesmo checkout, as vendas dobram.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Os anúncios que mais levam ao checkout mostram a oferta inteira antes do clique</h2>
+    <div class="grid2">
+      <div class="card"><img src="img/ad73.webp" alt="Anúncio com faixa de atenção para advogado trabalhista, capa do Playbook Burnout e preço de R$ 19,90" width="540" height="675" loading="lazy"><span class="big">32%</span><span class="note">das visitas vindas deste anúncio abrem o checkout, o dobro da média da página. Ele mostra público, promessa, livro, preço e botão.</span></div>
+      <div class="card"><img src="img/ad70.webp" alt="Anúncio com as frases que a defesa usa e a pergunta se o advogado tem a resposta técnica pronta" width="540" height="675" loading="lazy"><span class="big">17–24%</span><span class="note">das visitas abrem o checkout. É o anúncio que mais vendeu entre os novos: ele nomeia as objeções da defesa e entrega a resposta.</span></div>
+    </div>
+    <p class="note">A pessoa que vem desses anúncios já conhece o produto e o preço. A página nova começa exatamente de onde o anúncio parou.</p>
+  </section>
+
+  <section>
+    <h2>O que vimos na /vtic2 hoje</h2>
+    <ul>
+      <li><b>3 dos 4 botões "Quero comprar agora" não abrem o checkout.</b> Eles rolam a página até o bloco da oferta, que fica a ~2.800 px do topo no computador. Só o botão dentro da oferta abre o checkout. Inclusive o da primeira dobra rola, em vez de abrir. Cada rolagem a mais é uma chance a mais de a pessoa sair.</li>
+      <li><b>Preço riscado diferente:</b> o topo mostra "De R$ 199,00" e a oferta e os anúncios mostram "De R$ 199,90".</li>
+      <li><b>Descrição do Google e do WhatsApp:</b> a meta description ainda fala em "ações de hérnia de disco". É o texto que aparece quando o link é compartilhado.</li>
+      <li><b>Imagem do "10 casos reais":</b> o card usa a capa do Manual de Defesa de Reclamantes em hérnia de disco.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Estrutura proposta para a página nova</h2>
+    <p><a class="btn" href="prototipo/" target="_blank" rel="noopener">Abrir o protótipo da página →</a></p>
+    <ol class="blocos">
+      <li><b>Primeira dobra = o anúncio AD73.</b> Faixa "Atenção, advogado trabalhista". Título: "Seu próximo cliente com Burnout já pode estar a caminho." Subtítulo com as 5 etapas (triagem, inicial, quesitos, audiência e recurso), a capa do livro, "De R$ 199,90 por R$ 19,90", o botão que abre o checkout e a garantia de 7 dias logo abaixo. Tudo visível no celular sem rolar.</li>
+      <li><b>"A defesa vai dizer…"</b> (o gancho do AD70): as 4 frases da defesa e a resposta de que as 9 teses estão desmontadas no Playbook.</li>
+      <li><b>O que tem dentro:</b> os 7 entregáveis, em uma linha cada, com a imagem de cada material.</li>
+      <li><b>Quem é o Felipe:</b> mais de 10 anos de advocacia, mais de 3.000 processos e sócio da FOLS Advocacia.</li>
+      <li><b>Bônus:</b> o Núcleo da Advocacia Acidentária.</li>
+      <li><b>A oferta de novo:</b> preço, o que está incluso (acesso vitalício, imediato, documentos editáveis), o botão e a garantia.</li>
+      <li><b>Como recebe</b> e 3 perguntas rápidas (para quem é, em que formato vem, como funciona a garantia).</li>
+    </ol>
+    <ul>
+      <li><b>Todos os botões abrem o checkout direto,</b> sem rolar até a oferta. O script que já existe na /vtic2 continua passando as UTMs para o checkout.</li>
+      <li><b>Mesmo pixel, mesmo checkout e mesmo preço da /vtic2.</b> Assim a comparação mede só a página.</li>
+      <li><b>Leve:</b> imagens em WebP. O protótipo inteiro pesa menos de 600 KB.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Como vamos medir</h2>
+    <ul>
+      <li>A página nova sobe num endereço próprio (sugestão: <b>/vtic6</b>).</li>
+      <li>Nós duplicamos os anúncios que estão no ar, metade para a /vtic2 e metade para a nova, com o mesmo público e a mesma verba.</li>
+      <li>A leitura sai com ~300 visitas em cada página: quantas visitas abrem o checkout e quantas compram.</li>
+    </ul>
+  </section>
+
+  <section class="alert">
+    <h2>Antes disso: ligar o Clarity nas páginas</h2>
+    <p>Hoje as páginas do lp. não têm nenhuma ferramenta que mostre o comportamento da visita, como rolagem, cliques e gravação de sessão. O Clarity é gratuito e mostra exatamente até onde a pessoa chega antes de sair. Basta colar o código abaixo dentro do <code>&lt;head&gt;</code> do <code>index.html</code> da /vtic, da /vtic2 e da página nova, junto do código do Pixel que já está lá, e publicar na Vercel.</p>
+<pre>&lt;script type="text/javascript"&gt;
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "z5bwe1d8og");
+&lt;/script&gt;</pre>
+    <p class="note">É o mesmo projeto do Clarity que já está no site principal (felipeschereradv.com.br). Depois de publicar, nos avisem que conferimos se está gravando.</p>
+  </section>
+</div>
+</body>
+</html>

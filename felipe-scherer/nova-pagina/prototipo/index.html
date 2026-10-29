@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Playbook do Reclamante · Burnout · protótipo</title>
+<meta name="description" content="Checklist de triagem, petição inicial, quesitos, roteiro de audiência, teses da defesa desmontadas e recurso para ações de Síndrome de Burnout. De R$ 199,90 por R$ 19,90.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Baskerville:ital,wght@0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Protótipo GGD: primeira dobra = anúncio AD73; todos os botões abrem o checkout */
+:root{--bg:#111111;--bg2:#1a1a1a;--fg:#f4f1ea;--muted:#b9b3a8;--yellow:#f5c518;--copper:#d08a52;--line:#2c2c2c;--serif:"Libre Baskerville",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55}
+img{max-width:100%;height:auto;display:block}
+.tag{position:fixed;right:10px;bottom:10px;z-index:9;background:#fff;color:#111;font:600 11px var(--sans);padding:4px 8px;border-radius:99px;opacity:.85}
+.tape{background:var(--yellow);color:#111;font-family:"Anton",sans-serif;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;overflow:hidden;padding:6px 0;font-size:clamp(18px,5vw,26px);transform:rotate(-2deg);margin:0 -20px;
+  background-image:repeating-linear-gradient(-45deg,transparent 0 22px,rgba(0,0,0,.92) 22px 40px);background-size:100% 6px;background-repeat:repeat-x;background-position:0 0,0 100%}
+.tape span{display:inline-block;padding:4px 0;background:var(--yellow)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.hero{padding:22px 0 36px;overflow:hidden}
+.hero-grid{display:grid;gap:22px;align-items:center;margin-top:22px}
+@media(min-width:860px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:40px;margin-top:34px}}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,7.4vw,52px);line-height:1.12;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--yellow)}
+.lead{color:var(--muted);font-size:clamp(16px,4.2vw,19px);margin:12px 0 0}
+.buy{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}
+.price{display:flex;align-items:baseline;gap:8px}
+.price s{color:var(--muted);font-size:15px;text-decoration-color:#e04a3b}
+.price b{font-size:44px;line-height:1;color:var(--yellow);font-weight:700}
+.price small{font-size:18px;color:var(--yellow);font-weight:700}
+.cta{display:block;text-align:center;background:var(--yellow);color:#111;text-decoration:none;font-weight:700;font-size:18px;padding:16px 22px;border-radius:10px;width:100%;max-width:440px;box-shadow:0 6px 0 #a88710}
+.cta:active{transform:translateY(3px);box-shadow:0 3px 0 #a88710}
+.safe{font-size:13px;color:var(--muted);margin-top:10px}
+.book{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+@media(min-width:860px){.book{grid-template-columns:1fr}.book img{max-width:300px;margin:0 auto}}
+.book ul{margin:0;padding:0;list-style:none;font-size:14px;color:var(--muted);display:grid;gap:4px}
+.book li::before{content:"✓ ";color:var(--yellow);font-weight:700}
+section{padding:44px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-size:clamp(24px,5.6vw,36px);line-height:1.2;margin:0 0 18px;text-wrap:balance}
+h2 em{font-style:normal;color:var(--copper)}
+.def{display:grid;gap:4px;margin:0 0 18px}
+.def p{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(20px,5vw,30px);color:#8a857c}
+.def p:first-child{color:var(--fg)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.items{display:grid;gap:14px}
+@media(min-width:720px){.items{grid-template-columns:1fr 1fr}}
+.item{display:grid;grid-template-columns:92px 1fr;gap:14px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px}
+.item img{border-radius:6px;aspect-ratio:3/4;object-fit:cover;width:92px}
+.item h3{margin:0 0 4px;font-size:16px}
+.item p{margin:0;font-size:14px;color:var(--muted)}
+.author{display:grid;gap:10px;max-width:70ch}
+.author p{margin:0;color:var(--muted)}
+.stats{display:flex;gap:22px;flex-wrap:wrap;margin:6px 0}
+.stats b{display:block;font-size:28px;color:var(--yellow)}
+.stats span{font-size:13px;color:var(--muted)}
+.offer{background:var(--bg2);border:2px solid var(--yellow);border-radius:14px;padding:22px;max-width:520px;margin:0 auto;text-align:center;display:grid;gap:12px;justify-items:center}
+.offer ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.offer li::before{content:"✓ ";color:var(--yellow);font-weight:700}
+.faq details{border-bottom:1px solid var(--line);padding:12px 0}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{margin:8px 0 0;color:var(--muted)}
+.steps{display:grid;gap:10px;counter-reset:s;margin:0 0 18px;padding:0;list-style:none}
+.steps li{counter-increment:s;padding-left:40px;position:relative;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--yellow);color:#111;font-weight:700;display:grid;place-items:center;font-size:14px}
+.steps b{color:var(--fg)}
+footer{padding:30px 0 60px;color:#6f6a62;font-size:12px;text-align:center}
+</style>
+<script src="https://echo.ticto.app/ticto-echo.min.js"></script>
+</head>
+<body>
+<span class="tag">Protótipo GGD · referência para o time</span>
+
+<header class="hero">
+  <div class="tape"><span>Atenção, advogado trabalhista · Atenção, advogado trabalhista · Atenção, advogado trabalhista</span></div>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Seu próximo cliente com <em>Burnout</em> já pode estar a caminho.</h1>
+      <p class="lead">Chegue preparado: triagem, inicial, quesitos, audiência e recurso, num material só.</p>
+      <div class="buy">
+        <div class="price"><s>De R$ 199,90</s><small>R$</small><b>19,90</b></div>
+      </div>
+      <a class="cta" href="https://checkout.ticto.app/O60E6C790">Quero o Playbook por R$ 19,90</a>
+      <p class="safe">Acesso imediato no e-mail · garantia de 7 dias · documentos editáveis</p>
+    </div>
+    <div class="book">
+      <img src="../img/livro.webp" alt="Capa do Playbook Burnout, do Prof. Felipe Scherer" width="312" height="405">
+      <ul><li>Checklist de triagem</li><li>Petição inicial + 4 blocos</li><li>Quesitos periciais</li><li>9 teses da defesa desmontadas</li><li>Roteiro de audiência e de recurso</li></ul>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">A defesa vai dizer:</p>
+    <div class="def"><p>"É multifatorial."</p><p>"Era predisposição prévia."</p><p>"Não tem CAT."</p><p>"É depressão, não Burnout."</p></div>
+    <h2>Você tem a <em>resposta técnica pronta</em> para cada uma?</h2>
+    <p style="color:var(--muted);max-width:62ch;margin:0 0 20px">As 9 teses defensivas mais usadas em ações de Burnout, desmontadas uma a uma, com a refutação para multifatorialidade, fatores pessoais, ausência de CAT, doença pré-existente e comorbidades.</p>
+    <a class="cta" href="https://checkout.ticto.app/O60E6C790">Quero as respostas prontas</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que você recebe</h2>
+    <div class="items">
+      <div class="item"><img src="../img/doc-triagem.webp" alt="" width="92" height="123" loading="lazy"><div><h3>Checklist de triagem</h3><p>Decida em minutos se vale ajuizar e evite ações com baixa viabilidade.</p></div></div>
+      <div class="item"><img src="../img/doc-peticao.webp" alt="" width="92" height="123" loading="lazy"><div><h3>Petição inicial + 4 blocos</h3><p>A estrutura que o Felipe usa no escritório, pronta para adaptar.</p></div></div>
+      <div class="item"><img src="../img/doc-roteiro-audiencia.webp" alt="" width="92" height="123" loading="lazy"><div><h3>Roteiro de audiência</h3><p>Perguntas para reclamante, preposto e testemunhas que extraem a prova.</p></div></div>
+      <div class="item"><img src="../img/doc-quesitos-periciais.webp" alt="" width="92" height="123" loading="lazy"><div><h3>Quesitos periciais</h3><p>Nexo causal, dano e incapacidade, prontos para o perito.</p></div></div>
+      <div class="item"><img src="../img/doc-teses.webp" alt="" width="92" height="123" loading="lazy"><div><h3>9 teses da defesa desmontadas</h3><p>Refutação pronta para cada argumento comum da defesa e dos peritos.</p></div></div>
+      <div class="item"><img src="../img/doc-recurso.webp" alt="" width="92" height="123" loading="lazy"><div><h3>Roteiro de recurso</h3><p>Como analisar a improcedência e estruturar o RO, ponto a ponto.</p></div></div>
+      <div class="item"><img src="../img/doc-casos-reais.webp" alt="" width="92" height="123" loading="lazy"><div><h3>10 casos reais de procedência</h3><p>As provas e os fundamentos que levaram ao reconhecimento do Burnout.</p></div></div>
+    </div>
+    <p style="margin:22px 0 0"><a class="cta" href="https://checkout.ticto.app/O60E6C790">Quero tudo por R$ 19,90</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap author">
+    <h2>Quem preparou</h2>
+    <div class="stats"><div><b>10+ anos</b><span>de Direito do Trabalho</span></div><div><b>3.000+</b><span>processos</span></div><div><b>FOLS</b><span>Advocacia, sócio</span></div></div>
+    <p>Felipe Scherer é advogado especialista em Direito do Trabalho, pós-graduado em Direito e Processo do Trabalho e autor do curso "Prática em Acidente de Trabalho 2.0". O Playbook reúne o que ele usa no escritório nas ações de Burnout e doença ocupacional.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Bônus exclusivo</p>
+    <h2>Núcleo da Advocacia Acidentária</h2>
+    <p style="color:var(--muted);max-width:62ch;margin:0">Grupo restrito para alunos, com materiais estratégicos, áudios, PDFs técnicos e conteúdo aprofundado sobre acidente de trabalho e doença ocupacional.</p>
+  </div>
+</section>
+
+<section id="oferta">
+  <div class="wrap">
+    <div class="offer">
+      <h2 style="margin:0">Playbook do Reclamante · Burnout</h2>
+      <ul><li>Acesso vitalício</li><li>Acesso imediato no e-mail</li><li>Documentos editáveis</li><li>Bônus: Núcleo da Advocacia Acidentária</li></ul>
+      <div class="price"><s>De R$ 199,90</s><small>R$</small><b>19,90</b></div>
+      <a class="cta" href="https://checkout.ticto.app/O60E6C790">Quero o Playbook agora</a>
+      <p class="safe" style="margin:0">Garantia de 7 dias: se não gostar, devolvemos 100% do valor.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Como você recebe</h2>
+    <ol class="steps"><li><b>Clique em comprar</b> e preencha seus dados na próxima tela.</li><li><b>Receba no e-mail</b> o material completo, em instantes.</li><li><b>Edite e use</b> os documentos nos seus processos.</li></ol>
+    <div class="faq">
+      <details><summary>Para quem é?</summary><p>Para advogados que atuam ou querem atuar em ações de Burnout e doença ocupacional pelo reclamante.</p></details>
+      <details><summary>Em que formato vem?</summary><p>Documentos editáveis enviados por e-mail logo após a compra.</p></details>
+      <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias para pedir o reembolso integral.</p></details>
+    </div>
+    <p style="margin:24px 0 0"><a class="cta" href="https://checkout.ticto.app/O60E6C790">Quero o Playbook por R$ 19,90</a></p>
+  </div>
+</section>
+
+<footer>Protótipo de estrutura feito pela GGD para o time. Textos tirados da /vtic2 e dos anúncios. Pixel e Clarity entram na versão publicada.</footer>
+<script>
+function passarUTMs(){const p=new URLSearchParams(location.search);const u=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','sck','src'];document.querySelectorAll('a[href*="checkout.ticto.app"]').forEach(a=>{const url=new URL(a.href);u.forEach(k=>{if(p.get(k))url.searchParams.set(k,p.get(k))});a.href=url.toString()})}
+addEventListener('load',passarUTMs);
+</script>
+</body>
+</html>
