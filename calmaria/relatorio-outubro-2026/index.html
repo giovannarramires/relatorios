@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cal.maria — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Cal.maria</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia da <b>Cal.maria</b> — almofadas de yoga e meditação em tecido 100% algodão, vendidas na loja <b>vivacalmaria.com.br</b>. Em outubro os dois canais ficaram no ar: o <b>Google</b> voltou com a vitrine de produtos e o <b>Meta</b> (Instagram e Facebook) seguiu com peças novas e antigas.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · Google com anúncio nos 31 dias, Meta em 29 (sem anúncio em 10 e 11/10) · lista de pedidos da loja lida até 30/10 · status das peças lido em 01/11/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Mês de outubro fechado. Setembro continua como foi publicado — é só tocar na aba ao lado.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Meta · Instagram e Facebook</span>
+        <p class="big">0</p>
+        <p class="what">pedidos ligados a anúncio do Meta</p>
+        <p class="cost"><b>R$ 636,61</b> investidos com imposto, que deram <b>25 carrinhos</b> a <b>R$ 22,37</b> em verba de anúncio — <b>R$ 25,46</b> contando o imposto</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Google · conta pré-paga</span>
+        <p class="big">3</p>
+        <p class="what">pedidos vindos da vitrine de produtos</p>
+        <p class="cost">a <b>R$ 142,47</b> cada, com <b>R$ 938,36</b> em vendas — <b>R$ 2,20</b> de venda para cada R$ 1 investido</p>
+      </div>
+    </div>
+    <p class="frase">Outubro teve <b>R$ 1.064,01</b> investidos nos dois canais e <b>7 pedidos na loja, somando R$ 1.819,42</b> — o melhor mês de 2026 até aqui, com faturamento <b>82% acima de setembro</b> (R$ 999,61). Cada pedido custou <b>R$ 152,00</b> de mídia, contra R$ 176,03 em setembro. Dos 7, <b>3 têm origem no Google</b> e <b>nenhum foi ligado ao Meta</b>; os outros 4 (R$ 881,06) não têm anúncio comprovado por trás e estão abertos no bloco 3. <b>Fica uma ressalva:</b> a lista de pedidos foi lida em 30/10, então 31/10 ainda não foi conferido na loja.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta CA_CALMARIA · 551454998262282</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega</span></td><td class="n">R$ 559,26</td><td class="n">R$ 773,20</td><td class="n down">−27,7%</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">13,83% cobrados por dentro</span></td><td class="n">R$ 77,35</td><td class="n">R$ 106,93</td><td class="n down">−27,7%</td></tr>
+          <tr class="tot"><td>Total pago no Meta</td><td class="n">R$ 636,61</td><td class="n">R$ 880,13</td><td class="n down">−27,7%</td></tr>
+          <tr class="sub-row"><td colspan="4">Google Ads — conta 899-131-6621 (pré-paga)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">vitrine de produtos no ar o mês inteiro</span></td><td class="n">R$ 427,40</td><td class="n">R$ 0,00</td><td class="n up">+R$ 427,40</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">esta conta não tem cobrança por dentro</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr class="tot"><td>Total pago no Google</td><td class="n">R$ 427,40</td><td class="n">R$ 0,00</td><td class="n up">+R$ 427,40</td></tr>
+          <tr class="tot"><td>Total do mês nos dois canais</td><td class="n">R$ 1.064,01</td><td class="n">R$ 880,13</td><td class="n up">+20,9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o mês fechou acima de setembro e fora da divisão planejada:</b> o plano era <b>R$ 1.000</b>, com R$ 650 no Google e R$ 350 no Meta. O mês fechou em <b>R$ 1.064,01</b>, com <b>R$ 427,40 no Google e R$ 636,61 no Meta</b>. O Meta passou do plano porque começou outubro com saldo de setembro (cerca de R$ 190) e gastou mais rápido nos primeiros dias: só de 1 a 9/10 foram R$ 306,80 de verba em uma peça. O plano de novembro, feito em 28/10, mostra R$ 965 porque o mês ainda não tinha terminado; o número fechado é o desta página.</div>
+    <div class="nota"><b>O Google gastou menos do que podia:</b> dos R$ 650 previstos, foram usados R$ 427,40. Em parte da segunda quinzena o orçamento ficou em R$ 11 por dia para o saldo durar até a recarga, e mesmo depois de voltar a R$ 21 a campanha gastava perto de R$ 10 por dia, porque o lance por clique estava baixo para aparecer mais vezes. O lance foi subindo até chegar a R$ 0,80 em 29/10. Foram poucos dias para medir esse efeito dentro de outubro.</div>
+    <div class="nota"><b>A diferença entre os dois canais no imposto:</b> o Meta cobra <b>13,83% por dentro</b> da verba — de cada R$ 100 que saem do caixa, R$ 87,85 viram entrega. A conta do Google da Cal.maria, pela forma como é faturada, não tem essa cobrança: R$ 100 são R$ 100 de anúncio. É por isso que os dois canais aparecem sempre em duas linhas aqui.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pedidos na loja<span class="muted">a régua de verdade — lista de pedidos da Nuvemshop, lida até 30/10 · R$ 1.819,42</span></td><td class="n"><b>7</b></td><td class="n"><b>R$ 152,00</b></td><td class="n up">+40% · custo −14%</td></tr>
+          <tr><td>Carrinhos montados<span class="muted">Meta · quem colocou produto no carrinho depois do anúncio</span></td><td class="n"><b>25</b></td><td class="n"><b>R$ 22,37</b></td><td class="n down">−43% · custo +27%</td></tr>
+          <tr><td>Finalizações iniciadas<span class="muted">Meta · quem começou a fechar o pedido</span></td><td class="n">2</td><td class="n">R$ 279,63</td><td class="n down">−75% · custo +189%</td></tr>
+          <tr><td>Acessos à loja<span class="muted">Meta · quem tocou no anúncio e a página abriu</span></td><td class="n">400</td><td class="n">R$ 1,40</td><td class="n down">−49% · custo +42%</td></tr>
+          <tr><td>Páginas de produto vistas<span class="muted">Meta · quem chegou e olhou um produto</span></td><td class="n">204</td><td class="n">R$ 2,74</td><td class="n down">−69% · custo +136%</td></tr>
+          <tr><td>Exibições do anúncio<span class="muted">Meta · quantas vezes a peça apareceu · 12.948 pessoas, 1,6 vez cada</span></td><td class="n">21.069</td><td class="n">R$ 26,54 por mil</td><td class="n down">−28% · custo por mil +1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O que ficou de fora e por quê — o número mais importante do relatório.</b> A receita da Cal.maria só vale pela <b>Nuvemshop</b>, e esta página usa a lista de pedidos lida em <b>30/10</b>, quando o último pedido do mês era o de 22/10. O painel da loja não pôde ser aberto no fechamento, então ficaram <b>sem conferência os pedidos de 31/10 e o status de pagamento de cada pedido</b>. Se entrar pedido novo nessa conferência, os números de pedido e faturamento mudam. Os valores são os da lista da loja, com frete quando houve cobrança e sem descontar taxas. Setembro foi publicado sem vendas; os 5 pedidos e R$ 999,61 usados na comparação vêm da leitura da loja de 28/10. <b>Os outros 4 pedidos (R$ 881,06) não entram na conta de nenhum canal:</b> R$ 206,01 vieram de indicação, com cupom pessoal; R$ 201,81 vieram de busca orgânica no Google; R$ 250,60 não deixaram rastro em nenhuma ferramenta; e R$ 222,64, de 04/10, têm só um indício de vitrine do Google, pelo horário e pelo produto. Se esse último fosse confirmado, o Google subiria para 4 pedidos a R$ 106,85. Sem prova, ficou de fora. <b>Quanto o Meta influenciou essas compras, ao manter a marca à vista, não dá para medir com os dados de hoje.</b></div>
+    <div class="nota"><b>Por que as "8 compras" do Meta não entram aqui:</b> o Meta exibe 8 compras em outubro, todas com <b>valor R$ 0</b> e todas numa peça que saiu do ar em 09/10. É o evento quebrado do pixel, que disparava sem compra de verdade. O conserto de <b>14/10</b> resolveu o problema: nenhuma peça que rodou depois disso registrou compra falsa. Mesmo assim, a régua de venda segue sendo a loja.</div>
+    <div class="nota"><b>O recado honesto dos números de outubro, com os dois canais na mesma régua:</b> o <b>Google</b> investiu R$ 427,40 e trouxe <b>3 pedidos, R$ 938,36</b>: <b>R$ 142,47 por pedido</b> e <b>R$ 2,20 de venda para cada R$ 1</b> (ROAS 2,2). O <b>Meta</b> investiu R$ 636,61 e trouxe <b>0 pedido comprovado</b>: ROAS 0. O Google Ads contou 2 dos 3 pedidos (R$ 568,36). O terceiro, de R$ 370 em 20/10, entra como <b>provável</b>: a gravação de navegação mostra a entrada pela vitrine do Google no mesmo produto, mas a compra em si não foi gravada. A conversão de R$ 1 chamada <i>Compra</i> não entra em nenhuma conta aqui. O mês como um todo devolveu <b>R$ 1,71 por R$ 1 investido</b>, contra R$ 1,14 em setembro. o <b>Google respondeu pela venda</b> e cumpriu a meta de pedido abaixo de R$ 150. O Meta caiu em todos os degraus: <b>43% menos carrinhos</b> com 28% menos verba, e o carrinho saindo de R$ 17,57 para R$ 22,37. Boa parte disso vem da primeira semana, quando a verba estava concentrada em público novo a R$ 25,57 por carrinho. A queda de 69% em páginas de produto vistas é maior que a dos acessos (49%) e pode ter influência da limpeza do rastreamento em outubro, então vale ler a comparação com cuidado.</div>
+    <div class="nota"><b>A comparação com o ano passado ainda é parcial:</b> a loja registrou <b>3 pedidos em outubro de 2025</b>, contra 7 agora. Faturamento e investimento daquele mês não foram medidos com esta régua, então a comparação fica só no número de pedidos.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>O catálogo — a vitrine automática de produtos</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Acessos</th><th class="n">Carrinhos</th><th class="n">Custo por carrinho</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Catálogo só de zafu e meia lua<span class="muted">fora do ar desde 25/09</span></td><td class="n">R$ 0,00</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Catálogo — nenhuma peça com verba</td><td class="n">R$ 0,00</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">—</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> não houve dado de catálogo em outubro, porque nenhum catálogo rodou no Meta. O resultado de setembro (carrinho a R$ 13,41 só com zafu e meia lua) não foi repetido nem desmentido. A venda por vitrine de produtos no mês aconteceu no Google, descrita no fim deste bloco.</div>
+
+    <p class="sub g"><span class="dot g"></span>Os carrosséis novos — a marca contada em sequência</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Acessos</th><th class="n">Carrinhos</th><th class="n">Custo por carrinho</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>O03 — O acessório certo</b><span class="muted">para quem já conhece a Cal.maria · no ar desde 27/10</span></td><td class="n">R$ 29,15</td><td class="n">1.019</td><td class="n">25</td><td class="n"><b>6</b></td><td class="n"><b>R$ 4,86</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/De_-71HMcop/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>07 — Restaurativa completa</b><span class="muted">imagem do lote de outubro, para público novo</span></td><td class="n">R$ 71,75</td><td class="n">3.096</td><td class="n">43</td><td class="n"><b>7</b></td><td class="n"><b>R$ 10,25</b></td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/Deebg52sp1W/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>C1 variação B — Zafu redondo e meia lua<span class="muted">para mulheres que praticam yoga e pilates no Sul e Sudeste · de 1 a 9/10</span></td><td class="n">R$ 306,80</td><td class="n">11.380</td><td class="n">243</td><td class="n">12</td><td class="n">R$ 25,57</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/Dd173oSs6Hc/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Escolha seu favorito<span class="muted">peça antiga que voltou de 12 a 14/10</span></td><td class="n">R$ 39,27</td><td class="n">1.525</td><td class="n">42</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DXXDFLaDJRL/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Mais conforto — meia lua<span class="muted">peça antiga, testada de 12 a 14/10 e de 27 a 30/10</span></td><td class="n">R$ 22,59</td><td class="n">554</td><td class="n">3</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DXMjyQbDM8P/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>05 — Qual é a sua<span class="muted">lote de outubro, para público novo</span></td><td class="n">R$ 34,02</td><td class="n">1.202</td><td class="n">15</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DeeaQ_hMN06/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>08 — Kit dobra e leva<span class="muted">lote de outubro, para quem já conhece a Cal.maria</span></td><td class="n">R$ 28,52</td><td class="n">1.125</td><td class="n">17</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/Deebh7yMO3n/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>03 — Sofá, chão ou zafu<span class="muted">lote de outubro, para público novo</span></td><td class="n">R$ 16,35</td><td class="n">765</td><td class="n">9</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DeeaiBksTPj/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>O02 — Presente de Natal e kits<span class="muted">para quem já conhece a Cal.maria · no ar desde 27/10</span></td><td class="n">R$ 2,40</td><td class="n">59</td><td class="n">2</td><td class="n">0</td><td class="n">—</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DfAARcPsKLu/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Outras 3 peças — 01, 02 e V03<span class="muted">juntas, menos de R$ 10 de verba</span></td><td class="n">R$ 8,41</td><td class="n">344</td><td class="n">1</td><td class="n">0</td><td class="n">—</td><td><span class="st off">Pausado</span></td><td></td></tr>
+          <tr class="tot"><td>Meta — 12 peças</td><td class="n">R$ 559,26</td><td class="n">21.069</td><td class="n">400</td><td class="n">25</td><td class="n">R$ 22,37</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> esta tabela traz todas as peças do Meta em outubro, não só os carrosséis. Dos carrosséis de setembro, só a <b>C1 variação B</b> recebeu verba; o C2, o C1 para quem já conhece a marca e o C3 não rodaram, e o C2 não voltou como estava previsto. A C1 variação B levou 55% da verba, fez carrinho a <b>R$ 25,57</b> e foi pausada em 09/10. As duas peças mais baratas foram a <b>07</b> (R$ 10,25) e a <b>O03</b> (R$ 4,86). A O03 pede cautela: 5 dos 6 carrinhos saíram em um único dia, 27/10. <b>Nenhuma peça do Meta tem pedido comprovado na loja.</b></div>
+    <div class="nota"><b>O lote novo do mês:</b> as 10 peças de outubro (6 imagens e 4 vídeos) foram revisadas com você e entraram no ar a partir de 14/10. <b>Seis delas receberam verba</b>, e só a 07 gerou carrinho. As demais ficam disponíveis para os próximos meses.</div>
+    <div class="nota"><b>O que subiu e saiu rápido — e o que isso custou:</b> as duas peças que eram campeãs da conta voltaram em 12/10 e foram pausadas em 14/10, com <b>R$ 41,48 e nenhum carrinho</b>. A <b>Mais conforto — meia lua</b>, que estava na fila de outubro, teve nova chance a partir de 27/10 e somou R$ 22,59 no mês, ainda <b>sem carrinho</b>; o histórico de R$ 9,63 não se repetiu. Em 30/10 o conjunto dela foi pausado para o saldo durar até a recarga de 04/11.</div>
+
+    <p class="sub g"><span class="dot g"></span>Google — o que rodou neste mês</p>
+    <div class="nota"><b>Uma campanha só, a vitrine de produtos</b> <i>Núcleo sem tapete</i> <span class="st on">No ar</span>: R$ 427,40, 71.075 exibições e 981 cliques, a R$ 0,44 cada. <b>O que puxou:</b> o pedido de R$ 505,21 entrou pela página do kit de zafu e zabuton caramelo, e o de R$ 370 foi desse mesmo kit; esse produto recebeu R$ 40,16 de verba. <b>O que gastou sem pedido:</b> o zafu Tribal Boho levou R$ 67,13 e 131 cliques, e o Kit Natal levou R$ 39,64 e 101 cliques, nenhum dos dois com pedido em outubro. Os incensos somaram cerca de R$ 76, por isso saem da vitrine paga em novembro.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>O Google segue como o canal que tem a responsabilidade de vender</h3>
+          <p>A vitrine continua com foco nos produtos de maior valor, agora com o lance de R$ 0,80 por clique para aparecer mais vezes. Novembro mostra se o gasto chega aos R$ 21 por dia sem encarecer o pedido, que fechou outubro em R$ 142,47.</p>
+          <span class="muda">Verba: R$ 21,00/dia no Google (R$ 650 no mês) · incensos fora da vitrine paga · o que cobramos dela: pedido abaixo de R$ 150</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>O Meta fala só com quem já conhece a marca, e muda de mensagem em 20/11</h3>
+          <p>Em outubro o público novo não trouxe pedido comprovado, então a verba fica em quem já interagiu com o perfil ou visitou o site. A partir de 20/11, a mensagem passa para a Black Friday e para o Kit Natal, sem aumento de investimento. A oferta da Black e a quantidade de Kit Natal ainda dependem da sua decisão.</p>
+          <span class="muda">Verba: R$ 350 no mês (R$ 307,48 de mídia, R$ 10,26/dia) · até a recarga de 04/11, R$ 7/dia · depende de você: oferta da Black e estoque do Kit Natal</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>A verba entra toda quarta-feira e o total não passa do combinado</h3>
+          <p>Outubro fechou fora da divisão planejada, com o Meta acima e o Google abaixo do previsto. Em novembro, cada depósito paga os 7 dias seguintes, e toda terça conferimos o saldo de cada plataforma para ajustar o valor da semana.</p>
+          <span class="muda">Caixa: R$ 229 em 04/11 + R$ 229 em 11/11 + R$ 229 em 18/11 + R$ 197 em 25/11 · mais os R$ 100 já feitos em 28/10</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Fechar a régua da venda: conferir 31/10 e saber de onde vem cada pedido</h3>
+          <p>Primeiro, abrir a lista de pedidos da Nuvemshop para conferir 31/10 e o pagamento dos 7 pedidos, e corrigir esta página se algo mudar. Depois, avançar no rastreio próprio de pedidos, já preparado e ainda não publicado na loja, para reduzir os casos sem origem. Em outubro, 1 pedido não deixou rastro e 1 ficou só no indício.</p>
+          <span class="muda">Nada disso muda verba de anúncio</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Atacar o gargalo que não é da mídia: poucas visitas chegam ao carrinho</h3>
+          <p>Na leitura de 30 dias feita em outubro, de <b>806 visitas a página de produto, 24 chegaram ao carrinho, 3 ao fechamento e 2 à confirmação</b>. Em outubro já entraram no ar as avaliações nas páginas de produto e o e-mail automático de carrinho abandonado. O próximo ponto é o frete grátis: hoje ele começa em R$ 299, e o pedido médio de 2026 é de R$ 220.</p>
+          <span class="muda">Depende de você: decidir o valor do frete grátis · nada disso muda verba de anúncio</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · mídia fechada em 31 de outubro de 2026 · lista de pedidos da loja lida até 30/10</span>
+    <a href="../plano-novembro/">Plano de novembro →</a>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
