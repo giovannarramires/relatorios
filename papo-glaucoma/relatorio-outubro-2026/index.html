@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Papo Glaucoma — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Dra. Samantha Vasques</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal das duas frentes: <b>Google</b> — pedidos de consulta de glaucoma no Rio de Janeiro — e <b>Meta / Papo Glaucoma</b> — conteúdo, audiência e crescimento do perfil.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · comparado com setembro de 2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Clique em um mês para abrir o relatório fechado daquele período.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl g">
+        <span class="tag">Google · captação</span>
+        <p class="big">288</p>
+        <p class="what">pedidos de consulta</p>
+        <p class="cost">a <b>R$ 7,18</b> cada — eram R$ 9,09 em setembro</p>
+      </div>
+      <div class="hl m">
+        <span class="tag">Meta · Papo Glaucoma</span>
+        <p class="big">983</p>
+        <p class="what">seguidores novos no perfil</p>
+        <p class="cost">a <b>R$ 0,93</b> cada · visita ao perfil a <b>R$ 0,18</b></p>
+      </div>
+    </div>
+    <p class="frase">Com 9,5% a mais de investimento, os pedidos de consulta cresceram 35% e os seguidores novos mais que dobraram. O ponto de atenção é o fim do mês: a partir de 19/10, os pedidos do Google caíram pela metade por dia, e esse é o primeiro assunto de novembro.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — Papo Glaucoma</td></tr>
+          <tr><td>Verba em campanha<span class="muted">o que foi para o anúncio</span></td><td class="n">R$ 801,69</td><td class="n">R$ 680,52</td><td class="n flat">+17,8%</td></tr>
+          <tr><td>Impostos (ISS + IOF)<span class="muted">13,83% sobre a verba</span></td><td class="n">R$ 110,87</td><td class="n">R$ 94,12</td><td class="n flat">+17,8%</td></tr>
+          <tr><td><b>Total pago no Meta</b></td><td class="n"><b>R$ 912,56</b></td><td class="n">R$ 774,64</td><td class="n flat">+17,8%</td></tr>
+          <tr class="sub-row"><td colspan="4">Google Ads — captação RJ</td></tr>
+          <tr><td>Total pago no Google<span class="muted">sem imposto na fatura — padrão da casa</span></td><td class="n">R$ 2.067,27</td><td class="n">R$ 1.945,87</td><td class="n flat">+6,2%</td></tr>
+          <tr class="tot"><td>Mídia do mês</td><td class="n">R$ 2.979,83</td><td class="n">R$ 2.720,51</td><td class="n flat">+9,5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Como o Google foi somado:</b> setembro e outubro são só a conta nova, <b>370-498-4542</b>. A conta antiga <b>316-181-5766</b>, da Sol Oftalmologia, ficou com zero de investimento nos dois meses e segue guardada apenas como histórico.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pedidos de consulta<span class="muted">Google — ação “Contato”; nenhuma ligação registrada no mês (foram 4 em setembro)</span></td><td class="n">288</td><td class="n">R$ 7,18</td><td class="n up">+35% em volume<br>custo −21%</td></tr>
+          <tr><td>Cliques no anúncio do Google<span class="muted">CTR de 19,69% — era 12,20%</span></td><td class="n">802</td><td class="n">R$ 2,58</td><td class="n flat">eram 751 cliques<br>custo estável</td></tr>
+          <tr><td>Seguidores novos<span class="muted">Instagram @papoglaucoma</span></td><td class="n">983</td><td class="n">R$ 0,93</td><td class="n up">eram 416<br>custo era R$ 1,86</td></tr>
+          <tr><td>Visitas ao perfil<span class="muted">Meta — quem foi do anúncio até o Instagram</span></td><td class="n">4.956</td><td class="n">R$ 0,18</td><td class="n up">eram 819<br>custo era R$ 0,95</td></tr>
+          <tr><td>Plays de vídeo de 3 segundos<span class="muted">Meta — quem parou para assistir</span></td><td class="n">80.764</td><td class="n">R$ 0,01</td><td class="n up">+36%</td></tr>
+          <tr><td>Conversas iniciadas no Direct<span class="muted">Meta — 10 das 11 vieram dos anúncios de seguidores; a campanha de mensagem não gastou no mês</span></td><td class="n">11</td><td class="n">—</td><td class="n up">eram 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Seguidores — o que está medido e o que ficou de fora:</b> os <b>983</b> são o número real do Instagram, somado dia a dia. Duas ressalvas honestas: (1) o Instagram devolveu <b>zero</b> para o dia 31/10, então 983 é o piso do mês e o número real pode ser um pouco maior; (2) os 416 de setembro também são piso, pelo mesmo motivo com o dia 30/09, e não foram recalculados. O perfil tinha <b>15.400 seguidores</b> em 1º de novembro, contra 14.521 no fim de setembro. E a leitura do R$ 0,93 segue a mesma: é o investimento do mês dividido por <i>todos</i> os seguidores novos, os que vieram do anúncio e os que vieram do conteúdo orgânico. Não é o preço de "comprar" um seguidor isolado.</div>
+    <div class="nota"><b>Também ficou de fora:</b> (1) quantos dos 288 pedidos viraram consulta — esse dado não chega ao painel; o número mostra quem entrou em contato, não quem agendou; (2) o total de pessoas diferentes alcançadas no Meta no mês, porque somar as campanhas contaria duas vezes quem viu mais de uma. (3) O Google mostra só R$ 3,79 no dia 31/10, contra uma média de R$ 69 por dia no resto do mês. Publicamos o que o painel informou em 1º de novembro; esse dia ainda pode ser ajustado. Como a régua aqui é lead de clínica sem valor de venda, o Google é lido por CPA, CTR e CPC; não há ROAS neste relatório.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Meta — os vídeos que rodaram em outubro</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Vídeo</th><th class="n">Gasto</th><th class="n">Plays 3s</th><th class="n">Visitas ao perfil</th><th>Status</th><th>Post</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Muita gente acha…</b><span class="muted">seguidores — RJ + resto do Brasil</span></td><td class="n">R$ 269,23</td><td class="n">11.814</td><td class="n"><b>1.291</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DYXRHsrAHft/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>Seu olho arde…</b><span class="muted">seguidores — RJ + resto do Brasil · peça sem play de vídeo, entrou em 14/10</span></td><td class="n">R$ 191,60</td><td class="n">0</td><td class="n"><b>2.298</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DefVyLvgEOS/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Não dá close…<span class="muted">distribuição de vídeo</span></td><td class="n">R$ 116,18</td><td class="n"><b>45.956</b></td><td class="n">7</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DbWd6CVAF0m/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td><b>Primeiro centro…</b><span class="muted">seguidores — RJ + resto do Brasil · peça sem play de vídeo, entrou em 14/10</span></td><td class="n">R$ 110,53</td><td class="n">0</td><td class="n"><b>966</b></td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DefVwligdUB/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Tentou entender…<span class="muted">distribuição de vídeo</span></td><td class="n">R$ 63,23</td><td class="n">17.976</td><td class="n">0</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/Dd4S7WVgbxs/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Não é pressão alta…<span class="muted">seguidores — RJ + resto do Brasil · entrou em 14/10</span></td><td class="n">R$ 39,73</td><td class="n">3.053</td><td class="n">356</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DZpcuC8AH5l/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Minha visão está piorando…<span class="muted">seguidores — resto do Brasil</span></td><td class="n">R$ 4,26</td><td class="n">289</td><td class="n">28</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DaK8_8QAnQC/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Nem sempre a menor pressão…<span class="muted">distribuição de vídeo — voltou ao ar em 30/10</span></td><td class="n">R$ 4,08</td><td class="n">1.533</td><td class="n">0</td><td><span class="st on">No ar</span></td><td><a href="https://www.instagram.com/p/DdKopXtAZa0/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Nem o tipo nem o estágio…<span class="muted">seguidores — RJ + resto do Brasil</span></td><td class="n">R$ 2,32</td><td class="n">124</td><td class="n">10</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DZIDufTAD3_/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr><td>Nem todo olho vermelho…<span class="muted">seguidores — RJ + resto do Brasil</span></td><td class="n">R$ 0,53</td><td class="n">19</td><td class="n">0</td><td><span class="st off">Pausado</span></td><td><a href="https://www.instagram.com/p/DaK9IBSgQp5/" target="_blank" rel="noopener">ver ↗</a></td></tr>
+          <tr class="tot"><td>10 peças no ar durante o mês</td><td class="n">R$ 801,69</td><td class="n">80.764</td><td class="n">4.956</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> as três peças que entraram em 14/10 mudaram o mês: com 43% da verba do Meta, trouxeram <b>73% das visitas ao perfil</b>. A melhor é <b>“Seu olho arde…”</b>: 24% da verba e 46% das visitas, a R$ 0,08 de verba por visita. Os seguidores novos acompanharam: 303 na primeira quinzena e 680 na segunda. O <b>“Muita gente acha…”</b> segue no ar, mas deixou de ser a peça principal (26% das visitas; em setembro eram 91%). Do outro lado, <b>“Não dá close…”</b> consumiu R$ 116,18, entregou 46 mil plays e só 7 visitas: é ótimo para ser visto, mas não leva ninguém até você, e foi pausado. Dois cuidados: as visitas cresceram 6 vezes e os seguidores 2,4 vezes (de cada 100 visitas, cerca de 20 viraram seguidor; em setembro eram cerca de 51), e <b>78% das visitas vêm de fora do Rio</b>, onde a visita custa R$ 0,11 de verba, contra R$ 0,18 no RJ. Isso constrói audiência, mas não paciente da clínica.</div>
+
+    <p class="sub g"><span class="dot g"></span>Google — as campanhas de captação</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Campanha</th><th class="n">Gasto</th><th class="n">Pedidos</th><th class="n">CPA</th><th class="n">CTR</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Glaucoma — busca</b><span class="muted">quem procura tratamento de glaucoma no RJ</span></td><td class="n">R$ 1.659,91</td><td class="n"><b>278</b></td><td class="n">R$ 5,97</td><td class="n">19,92%</td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>Institucional — busca<span class="muted">quem procura a Dra. Samantha e o Instituto pelo nome</span></td><td class="n">R$ 407,36</td><td class="n">10</td><td class="n">R$ 40,74</td><td class="n">16,48%</td><td><span class="st on">No ar</span></td></tr>
+          <tr class="tot"><td>Conta 370-498-4542</td><td class="n">R$ 2.067,27</td><td class="n">288</td><td class="n">R$ 7,18</td><td class="n">19,69%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> a campanha de glaucoma segue como a máquina da conta — 80% da verba e 278 dos 288 pedidos, a R$ 5,97 cada (eram R$ 8,20). Mas o mês teve duas metades: de 1 a 18/10 foram <b>11,6 pedidos por dia a R$ 5,10</b>; de 19 a 31/10, <b>5,4 por dia a R$ 8,56</b>. O painel mostra a queda, mas não a causa, e ela ainda precisa ser investigada. A campanha apareceu em <b>menos de 10% das buscas em que poderia aparecer</b>. Aqui corrigimos a leitura de setembro: o orçamento explica só 22% das buscas perdidas; <b>73% se perdem por posição do anúncio</b>. E a verba diária proposta no mês passado (R$ 80) não foi aplicada: a campanha ficou em R$ 58 por dia em outubro. A institucional subiu de R$ 256,28 para R$ 407,36, com 10 pedidos a R$ 40,74. Ela é cara por pedido, mas protege seu nome: aparece em 89% das buscas em que pode aparecer.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Descobrir por que os pedidos caíram a partir de 19/10</h3>
+          <p>Antes de investir mais, precisamos entender por que o pedido por dia caiu pela metade e ficou mais caro. Vamos revisar as buscas, os anúncios e o caminho até o contato no site, e melhorar a posição do anúncio, que é onde se perde a maior parte das buscas.</p>
+          <span class="muda">Estrutura: revisão de buscas, anúncios e página, sem mudar a verba</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Aplicar a verba que ficou pendente no Google</h3>
+          <p>O custo por pedido ainda é baixo e o orçamento também limita a campanha, embora menos do que a posição do anúncio. Com a causa da queda entendida, a verba sobe e acompanhamos se o custo por pedido se mantém.</p>
+          <span class="muda">Verba: de R$ 58 para R$ 80 por dia na campanha de glaucoma (≈ R$ 2.400/mês)</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Levar para seguidores a verba de distribuição de vídeo</h3>
+          <p>Em outubro, a distribuição levou R$ 183,49 e trouxe 7 das 4.956 visitas ao perfil. A proposta de setembro era reduzir essa frente, e ela ainda ficou com 23% da verba. Agora ela cai de fato, e a diferença vai para as peças que levam ao perfil.</p>
+          <span class="muda">Verba: distribuição de ≈ R$ 6 para R$ 2 por dia; a diferença vai para a campanha de seguidores</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Testar duas peças novas no formato do “Seu olho arde…”</h3>
+          <p>A peça em forma de pergunta sobre um incômodo real foi a que mais levou gente ao perfil. Duas variações entram para testar contra ela, olhando também quantas visitas viram seguidor e quanto vem do Rio, para não crescer só em audiência fora da região da clínica.</p>
+          <span class="muda">Estrutura: 2 criativos novos na campanha de seguidores, R$ 10/dia cada para ter leitura em duas semanas</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Destravar a conversa no WhatsApp</h3>
+          <p>A campanha de mensagem não gastou em outubro e segue pausada. Para o anúncio abrir conversa no WhatsApp, o número precisa estar como WhatsApp Business e conectado à Página.</p>
+          <span class="muda">Depende de você: migrar o número para WhatsApp Business e conectá-lo à Página. Feito isso, refazemos a campanha com R$ 15/dia</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 1º de novembro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
