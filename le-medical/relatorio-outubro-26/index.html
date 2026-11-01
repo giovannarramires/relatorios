@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Relatório Mensal — LE Medical — Outubro 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --le-ink: #403838;
+    --le-blue-soft: #A4C9FA;
+    --le-blue: #4A7FC7;
+    --le-blue-ice: #EEF4FD;
+    --le-warm-gray: #F4F2F1;
+    --le-bg: #FFFFFF;
+    --le-text-secondary: #8A8180;
+    --le-border: #E7E3E1;
+    --le-success: #4E9C7A;
+    --le-warning: #C9A24B;
+    --le-danger: #C15B5B;
+    --le-font-title: 'Nunito', system-ui, sans-serif;
+    --le-font-body: 'Inter', system-ui, sans-serif;
+    --le-radius: 16px;
+  }
+
+  body {
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: var(--le-font-body);
+    overflow: hidden;
+  }
+
+  #stage {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    transform-origin: top left;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--le-bg);
+    display: none;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; flex-direction: column; }
+
+  /* Nav */
+  #nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(64,56,56,0.85);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: var(--le-font-body);
+    font-size: 13px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(8px);
+  }
+  #nav button {
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--le-font-body);
+    transition: background 0.15s;
+  }
+  #nav button:hover { background: rgba(255,255,255,0.15); }
+
+  /* ─── SHARED COMPONENTS ─── */
+  .slide-header {
+    padding: 36px 56px 0;
+    border-bottom: 2px solid var(--le-blue-soft);
+    padding-bottom: 16px;
+    margin-bottom: 0;
+  }
+  .slide-header h2 {
+    font-family: var(--le-font-title);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--le-ink);
+  }
+  .slide-header p {
+    font-size: 13px;
+    color: var(--le-text-secondary);
+    margin-top: 2px;
+  }
+
+  .slide-body {
+    flex: 1;
+    padding: 24px 56px 20px;
+    overflow: hidden;
+  }
+
+  /* Footer */
+  .slide-footer {
+    padding: 0 56px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .slide-footer span {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-family: var(--le-font-body);
+  }
+  .footer-logo {
+    height: 22px;
+    opacity: 0.55;
+  }
+
+  /* Cards */
+  .kpi-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--le-warm-gray);
+    border-radius: var(--le-radius);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .kpi-card .label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .kpi-card .value {
+    font-family: var(--le-font-title);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1;
+  }
+  .kpi-card .sub {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+  }
+  .kpi-card.blue { background: var(--le-blue-ice); }
+  .kpi-card.blue .value { color: var(--le-blue); }
+  .kpi-card.green .value { color: var(--le-success); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  thead th {
+    font-family: var(--le-font-body);
+    font-weight: 600;
+    color: var(--le-text-secondary);
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1.5px solid var(--le-border);
+  }
+  tbody tr:nth-child(even) { background: var(--le-warm-gray); }
+  tbody td {
+    padding: 9px 12px;
+    color: var(--le-ink);
+    font-size: 12px;
+    border-bottom: 1px solid var(--le-border);
+  }
+  tbody tr:last-child td { border-bottom: none; font-weight: 600; }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-green { background: #E8F5EF; color: var(--le-success); }
+  .tag-red { background: #FBEAEA; color: var(--le-danger); }
+  .tag-yellow { background: #FDF5E6; color: var(--le-warning); }
+  .tag-blue { background: var(--le-blue-ice); color: var(--le-blue); }
+
+  /* Highlight box */
+  .info-box {
+    background: var(--le-blue-ice);
+    border-left: 3px solid var(--le-blue);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--le-ink);
+    line-height: 1.5;
+  }
+  .info-box strong { color: var(--le-blue); }
+
+  /* Bar */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .bar-label {
+    font-size: 12px;
+    color: var(--le-ink);
+    width: 160px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track {
+    flex: 1;
+    height: 22px;
+    background: var(--le-warm-gray);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--le-blue);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 60px;
+  }
+  .bar-val {
+    font-size: 12px;
+    color: var(--le-text-secondary);
+    width: 110px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Funnel */
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .funnel-step .step-label {
+    font-size: 12px;
+    color: var(--le-ink);
+    width: 170px;
+    flex-shrink: 0;
+  }
+  .funnel-step .step-bar {
+    height: 28px;
+    background: var(--le-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .funnel-step .step-pct {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    min-width: 80px;
+  }
+
+  /* ─── SLIDE 1 — CAPA ─── */
+  #s1 {
+    background: var(--le-bg);
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .capa-left {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+  }
+  .capa-right {
+    width: 45%;
+    background: var(--le-blue-ice);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 18px;
+    position: relative;
+  }
+  .capa-circle {
+    width: 220px;
+    height: 220px;
+    background: var(--le-blue-soft);
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    opacity: 0.4;
+  }
+  .capa-badge {
+    background: var(--le-blue);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .capa-left h1 {
+    font-family: var(--le-font-title);
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .capa-left p {
+    font-size: 15px;
+    color: var(--le-text-secondary);
+    margin-bottom: 36px;
+  }
+  .kpi-mini {
+    background: var(--le-bg);
+    border-radius: var(--le-radius);
+    padding: 18px 22px;
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+    z-index: 1;
+  }
+  .kpi-mini .label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+  .kpi-mini .value {
+    font-family: var(--le-font-title);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--le-blue);
+    margin-top: 2px;
+  }
+
+  /* ─── SLIDE 2 — RESUMO ─── */
+  .resumo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .resumo-card {
+    background: var(--le-warm-gray);
+    border-radius: var(--le-radius);
+    padding: 18px 16px;
+  }
+  .resumo-card .r-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--le-text-secondary);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .resumo-card .r-val {
+    font-family: var(--le-font-title);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--le-ink);
+    line-height: 1;
+  }
+  .resumo-card .r-sub {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    margin-top: 4px;
+  }
+  .resumo-card.highlight { background: var(--le-blue-ice); }
+  .resumo-card.highlight .r-val { color: var(--le-blue); }
+
+  /* ─── ROAS BAR ─── */
+  .roas-compare {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .roas-item {
+    flex: 1;
+    background: var(--le-warm-gray);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .roas-item .ri-label {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .roas-item .ri-bar {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+  }
+  .roas-item .ri-val {
+    font-family: var(--le-font-title);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--le-ink);
+  }
+
+  /* ─── two-col layout ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ─── Section label ─── */
+  .section-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--le-blue-soft);
+    color: var(--le-ink);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-family: var(--le-font-title);
+  }
+
+  /* ─── Tax breakdown ─── */
+  .tax-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--le-border);
+    font-size: 13px;
+  }
+  .tax-row:last-child { border-bottom: none; }
+  .tax-row .tr-name { color: var(--le-ink); }
+  .tax-row .tr-val { font-weight: 600; color: var(--le-ink); }
+  .tax-row.total-row .tr-name { font-family: var(--le-font-title); font-weight: 800; font-size: 15px; color: var(--le-blue); }
+  .tax-row.total-row .tr-val { font-family: var(--le-font-title); font-size: 20px; color: var(--le-blue); }
+
+  /* oportunidades */
+  .op-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--le-warm-gray);
+    margin-bottom: 8px;
+  }
+  .op-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: var(--le-font-title);
+  }
+  .op-num.red { background: var(--le-danger); color: #fff; }
+  .op-num.amber { background: var(--le-warning); color: #fff; }
+  .op-body .op-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--le-ink);
+    line-height: 1.3;
+  }
+  .op-body .op-impact {
+    font-size: 11px;
+    color: var(--le-text-secondary);
+    margin-top: 2px;
+  }
+
+  /* ─── Barra de meses (a partir de setembro/26) ─── */
+  .monthbar{position:fixed;top:12px;right:16px;left:auto;z-index:1200;
+    display:flex;align-items:center;gap:6px;background:rgba(238,244,253,0.95);
+    backdrop-filter:blur(8px);padding:5px 8px 5px 14px;border-radius:30px;
+    border:1px solid rgba(74,127,199,0.35);box-shadow:0 2px 12px rgba(64,56,56,0.15);
+    font-family:var(--le-font-body);}
+  .monthbar .mb-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--le-blue);font-weight:700;margin-right:4px;}
+  .monthbar a{font-size:12px;color:var(--le-ink);text-decoration:none;padding:4px 12px;
+    border-radius:20px;transition:background .2s;font-weight:600;}
+  .monthbar a:hover{background:rgba(74,127,199,0.18);}
+  .monthbar a.active{background:var(--le-blue);color:#fff;}
+  @media print{ .monthbar{display:none !important;} }
+
+  /* encerramento */
+  #s14 {
+    background: var(--le-blue-ice);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+</style>
+</head>
+<body>
+<nav class="monthbar"><span class="mb-label">Relatório mensal</span><a href="/le-medical/relatorio-junho-26/">Junho</a><a href="/le-medical/relatorio-julho-26/">Julho</a><a href="/le-medical/relatorio-agosto-26/">Agosto</a><a href="/le-medical/relatorio-setembro-26/">Setembro</a><a class="active" href="/le-medical/relatorio-outubro-26/">Outubro</a></nav>
+
+<div id="stage">
+
+<!-- SLIDE 1 — CAPA -->
+<div class="slide active" id="s1">
+  <div class="capa-left">
+    <span class="capa-badge">Outubro 2026</span>
+    <h1>Relatório<br>Mensal</h1>
+    <p>Performance completa — Site · Meta Ads · Google Ads</p>
+    <img src="Manual da Marca/logo-le-medical.png" alt="LE Medical" style="height:40px; object-fit:contain; margin-top:12px;">
+  </div>
+  <div class="capa-right">
+    <div class="capa-circle"></div>
+    <div class="kpi-mini"><div class="label">Receita do site (1º a 26/10 · parcial)</div><div class="value">R$ 636.827</div></div>
+    <div class="kpi-mini"><div class="label">Investimento Total em Mídia</div><div class="value">R$ 60.446</div></div>
+    <div class="kpi-mini"><div class="label">ROAS real (outubro)</div><div class="value">pendente</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — RESUMO EXECUTIVO -->
+<div class="slide" id="s2">
+  <div class="slide-header"><h2>Resumo Executivo</h2><p>Principais indicadores — Outubro 2026 (mídia com mês fechado · loja lida até 26/10)</p></div>
+  <div class="slide-body">
+    <div class="resumo-grid">
+      <div class="resumo-card highlight"><div class="r-label">Receita total (site)</div><div class="r-val">R$ 636.827</div><div class="r-sub">797 pedidos pagos · <b>parcial, 1º a 26/10 às 14h</b></div></div>
+      <div class="resumo-card"><div class="r-label">Ticket médio</div><div class="r-val">R$ 799</div><div class="r-sub">por pedido pago (1º a 26/10)</div></div>
+      <div class="resumo-card"><div class="r-label">Compras no Meta</div><div class="r-val">449</div><div class="r-sub">R$ 57 por compra</div></div>
+      <div class="resumo-card"><div class="r-label">Conversões no Google</div><div class="r-val">680</div><div class="r-sub">R$ 46 por conversão</div></div>
+      <div class="resumo-card"><div class="r-label">Meta Ads (c/ impostos)</div><div class="r-val">R$ 29.201</div><div class="r-sub">mídia R$ 25.653 + 13,83%</div></div>
+      <div class="resumo-card"><div class="r-label">Google Ads</div><div class="r-val">R$ 31.245</div><div class="r-sub">6 campanhas ativas</div></div>
+      <div class="resumo-card"><div class="r-label">Total investido em mídia</div><div class="r-val">R$ 60.446</div><div class="r-sub">Meta + Google</div></div>
+      <div class="resumo-card highlight"><div class="r-label">ROAS Geral Real</div><div class="r-val">pendente</div><div class="r-sub">loja de outubro não fechada · atribuído 14,81x</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:24px;margin-top:0;">
+      <div class="roas-compare" style="margin-top:0;">
+        <div class="roas-item"><div class="ri-label">ROAS Meta (plataforma)</div><div class="ri-bar" style="width:72%; background: var(--le-blue-soft);"></div><div class="ri-val">14,39x</div></div>
+        <div class="roas-item"><div class="ri-label">ROAS Google (plataforma)</div><div class="ri-bar" style="width:84%; background: var(--le-blue);"></div><div class="ri-val">16,84x</div></div>
+        <div class="roas-item" style="background: var(--le-blue-ice);"><div class="ri-label">ROAS Geral Real (conservador)</div><div class="ri-bar" style="width:0%; background: var(--le-success);"></div><div class="ri-val" style="color:var(--le-text-secondary);font-size:15px;">pendente</div></div>
+      </div>
+      <div>
+        <div class="section-pill" style="font-size:11px;padding:3px 12px;margin-bottom:10px;">Outubro vs. Setembro</div>
+        <div class="bar-row" style="margin-bottom:7px;"><span class="bar-label">Receita do site</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--le-blue-ice); color:var(--le-text-secondary);">mês não fechado na loja</div></div><span class="bar-val">1,05M → —</span></div>
+        <div class="bar-row" style="margin-bottom:7px;"><span class="bar-label">Vendas pagas</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--le-blue-ice); color:var(--le-text-secondary);">mês não fechado na loja</div></div><span class="bar-val">1.322 → —</span></div>
+        <div class="bar-row" style="margin-bottom:7px;"><span class="bar-label">Investimento em mídia</span><div class="bar-track"><div class="bar-fill" style="width:92%; background:var(--le-blue-soft); color:var(--le-ink);">-8,1%</div></div><span class="bar-val">66k → 60k</span></div>
+        <div class="bar-row" style="margin-bottom:0;"><span class="bar-label">ROAS real</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--le-blue-ice); color:var(--le-text-secondary);">pendente · atribuído -15,2%</div></div><span class="bar-val">15,91x → —</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>2 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 3 — COMPARATIVO -->
+<div class="slide" id="s3">
+  <div class="slide-header"><h2>Outubro/26 × Setembro/26 × Outubro/25</h2><p>Mês fechado nas três colunas para a mídia · loja de outubro lida até 26/10</p></div>
+  <div class="slide-body">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:9px 8px;">Indicador</th>
+        <th style="text-align:right;padding:9px 8px;">Outubro 2026</th>
+        <th style="text-align:right;padding:9px 8px;">Setembro 2026</th>
+        <th style="text-align:right;padding:9px 8px;">vs. setembro</th>
+        <th style="text-align:right;padding:9px 8px;">Outubro 2025</th>
+        <th style="text-align:right;padding:9px 8px;">vs. ano anterior</th>
+      </tr></thead>
+      <tbody>
+        <tr style=""><td style="padding:8px;"><b>Receita do site</b></td><td style="text-align:right;padding:8px;"><b>parcial: R$ 636.827<br><span style='font-size:10px;color:var(--le-text-secondary)'>1º a 26/10, 14h</span></b></td><td style="text-align:right;padding:8px;">R$ 1.047.146</td><td style="text-align:right;padding:8px;">—</td><td style="text-align:right;padding:8px;">não disponível</td><td style="text-align:right;padding:8px;">—</td></tr>
+        <tr style=""><td style="padding:8px;">Pedidos pagos</td><td style="text-align:right;padding:8px;">parcial: 797</td><td style="text-align:right;padding:8px;">1.322</td><td style="text-align:right;padding:8px;">—</td><td style="text-align:right;padding:8px;">não disponível</td><td style="text-align:right;padding:8px;">—</td></tr>
+        <tr style=""><td style="padding:8px;">Ticket médio</td><td style="text-align:right;padding:8px;">R$ 799 (parcial)</td><td style="text-align:right;padding:8px;">R$ 792,09</td><td style="text-align:right;padding:8px;">—</td><td style="text-align:right;padding:8px;">—</td><td style="text-align:right;padding:8px;">—</td></tr>
+        <tr style="background:var(--le-blue-ice);"><td style="padding:8px;"><b>Receita atribuída (Meta+Google)</b></td><td style="text-align:right;padding:8px;"><b>R$ 895.274</b></td><td style="text-align:right;padding:8px;">R$ 1.149.859</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 22,1%</span></td><td style="text-align:right;padding:8px;">R$ 518.559</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-success);font-weight:700">&#9650; 72,6%</span></td></tr>
+        <tr style=""><td style="padding:8px;">Investimento total</td><td style="text-align:right;padding:8px;">R$ 60.446</td><td style="text-align:right;padding:8px;">R$ 65.806</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-success);font-weight:700">&#9660; 8,1%</span></td><td style="text-align:right;padding:8px;">R$ 32.530</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9650; 85,8%</span></td></tr>
+        <tr style=""><td style="padding:8px;">Compras no Meta</td><td style="text-align:right;padding:8px;">449</td><td style="text-align:right;padding:8px;">1.007</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 55,4%</span></td><td style="text-align:right;padding:8px;">560</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 19,8%</span></td></tr>
+        <tr style=""><td style="padding:8px;">ROAS Meta</td><td style="text-align:right;padding:8px;">14,39x</td><td style="text-align:right;padding:8px;">19,99x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 28,0%</span></td><td style="text-align:right;padding:8px;">18,21x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 21,0%</span></td></tr>
+        <tr style=""><td style="padding:8px;">ROAS Google</td><td style="text-align:right;padding:8px;">16,84x</td><td style="text-align:right;padding:8px;">17,28x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 2,5%</span></td><td style="text-align:right;padding:8px;">15,73x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-success);font-weight:700">&#9650; 7,1%</span></td></tr>
+        <tr style="border-top:2px solid var(--le-blue);"><td style="padding:8px;"><b>ROAS atribuído consolidado</b></td><td style="text-align:right;padding:8px;"><b>14,81x</b></td><td style="text-align:right;padding:8px;">17,47x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 15,2%</span></td><td style="text-align:right;padding:8px;">15,94x</td><td style="text-align:right;padding:8px;"><span style="color:var(--le-danger);font-weight:700">&#9660; 7,1%</span></td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:12px;">
+      <b>Outubro trouxe 72,6% mais receita atribuída que outubro de 2025</b> — R$ 895 mil contra R$ 519 mil —, com
+      85,8% mais verba. Contra setembro, a verba caiu 8,1% e a receita atribuída 22,1%. O cenário base projetado em
+      setembro era R$ 692.616 com R$ 50 mil de verba; o mês entregou <b>R$ 895.274 com R$ 60.446</b> — o Google
+      fechou em R$ 31.245, acima dos R$ 20 mil do plano, e foi ele quem sustentou o mês (16,84x).
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px;">
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);">
+        <b>A régua do Meta mudou.</b> Em 24/09 corrigimos no GTM a tag de Purchase, que desde 2023 disparava no
+        <i>add_payment_info</i>. Outubro é o primeiro mês inteiro na régua corrigida; setembro/26 (23 dias) e
+        outubro/25 estão na régua antiga — a queda de compras e de ROAS do Meta contra eles é, em boa parte, a régua.
+      </div>
+      <div class="info-box">
+        <b>Sobre a receita do site.</b> A API da Nuvemshop segue sem token e, na geração deste relatório, o painel da loja
+        não pôde ser lido. O que está medido é a leitura do painel em <b>26/10 às 14h13</b>: R$ 636.827 em 797 pedidos pagos.
+        Os 5 dias finais ficaram de fora — por isso não há receita do site, ROAS real nem comparação de loja do mês fechado.
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>3 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE — O CUSTO DO LEILÃO -->
+<div class="slide" id="s3b">
+  <div class="slide-header"><h2>O custo do leilão — 2026 contra 2025</h2><p>Mesmo mês, um ano depois · métricas de leilão, que não dependem de atribuição</p></div>
+  <div class="slide-body">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;">
+      <div class="kpi-card" style="padding:11px 16px;"><div class="label" style="font-size:10px;">CLIQUE NO GOOGLE — SETEMBRO</div><div class="value" style="color:var(--le-danger);">+13,5%</div><div class="r-sub">R$ 0,85 → R$ 0,96 · a/a</div></div>
+      <div class="kpi-card" style="padding:11px 16px;"><div class="label" style="font-size:10px;">CLIQUE NO GOOGLE — OUTUBRO</div><div class="value" style="color:var(--le-danger);">+89,0%</div><div class="r-sub">R$ 0,85 → R$ 1,61 · a/a</div></div>
+      <div class="kpi-card" style="padding:11px 16px;"><div class="label" style="font-size:10px;">CPM DO META, SETEMBRO → OUTUBRO</div><div class="value" style="color:var(--le-success);">-4,7%</div><div class="r-sub">em 2025 esse trecho caiu 13,3%</div></div>
+      <div class="kpi-card" style="padding:11px 16px;"><div class="label" style="font-size:10px;">CPM DO META DENTRO DE 2026</div><div class="value" style="color:var(--le-danger);">+35,7%</div><div class="r-sub">abr R$ 7,13 → out R$ 9,68</div></div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:5px 8px;">Leilão</th>
+        <th style="text-align:right;padding:5px 8px;">out/26</th>
+        <th style="text-align:right;padding:5px 8px;">out/25</th>
+        <th style="text-align:right;padding:5px 8px;">out × out</th>
+        <th style="text-align:right;padding:5px 8px;">set/26</th>
+        <th style="text-align:right;padding:5px 8px;">set/25</th>
+        <th style="text-align:right;padding:5px 8px;">set × set</th>
+      </tr></thead>
+      <tbody>
+        <tr style="background:var(--le-blue-ice);"><td colspan="7" style="padding:3px 8px;font-weight:700;font-size:11px;letter-spacing:.4px;">META ADS</td></tr>
+        <tr><td style="padding:3px 8px;">CPM (mil impressões)</td><td style="text-align:right;padding:3px 8px;">R$ 9,68</td><td style="text-align:right;padding:3px 8px;">R$ 8,83</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 9,6%</span></td><td style="text-align:right;padding:3px 8px;">R$ 10,16</td><td style="text-align:right;padding:3px 8px;">R$ 10,18</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-text-secondary)">estável</span></td></tr>
+        <tr><td style="padding:3px 8px;">CPC (custo do clique)</td><td style="text-align:right;padding:3px 8px;"><b>R$ 0,63</b></td><td style="text-align:right;padding:3px 8px;">R$ 0,74</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▼ 15,4%</span></td><td style="text-align:right;padding:3px 8px;">R$ 0,60</td><td style="text-align:right;padding:3px 8px;">R$ 0,85</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▼ 29,4%</span></td></tr>
+        <tr><td style="padding:3px 8px;">CTR (quem vê e clica)</td><td style="text-align:right;padding:3px 8px;"><b>1,55%</b></td><td style="text-align:right;padding:3px 8px;">1,19%</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▲ 29,7%</span></td><td style="text-align:right;padding:3px 8px;">1,69%</td><td style="text-align:right;padding:3px 8px;">1,20%</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▲ 40,8%</span></td></tr>
+        <tr><td style="padding:3px 8px;">Custo por compra</td><td style="text-align:right;padding:3px 8px;"><b>R$ 57,13</b></td><td style="text-align:right;padding:3px 8px;">R$ 40,45</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 41,3%</span></td><td style="text-align:right;padding:3px 8px;">R$ 39,31</td><td style="text-align:right;padding:3px 8px;">R$ 40,48</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▼ 2,9%</span></td></tr>
+        <tr><td style="padding:3px 8px;">ROAS da plataforma</td><td style="text-align:right;padding:3px 8px;">14,39x</td><td style="text-align:right;padding:3px 8px;">18,21x</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▼ 21,0%</span></td><td style="text-align:right;padding:3px 8px;">19,99x</td><td style="text-align:right;padding:3px 8px;">19,36x</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▲ 3,2%</span></td></tr>
+        <tr style="background:var(--le-blue-ice);"><td colspan="7" style="padding:3px 8px;font-weight:700;font-size:11px;letter-spacing:.4px;">GOOGLE ADS</td></tr>
+        <tr><td style="padding:3px 8px;">CPM (mil impressões)</td><td style="text-align:right;padding:3px 8px;">R$ 22,15</td><td style="text-align:right;padding:3px 8px;">R$ 18,67</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 18,7%</span></td><td style="text-align:right;padding:3px 8px;">R$ 16,82</td><td style="text-align:right;padding:3px 8px;">R$ 17,90</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▼ 6,0%</span></td></tr>
+        <tr><td style="padding:3px 8px;">CPC (custo do clique)</td><td style="text-align:right;padding:3px 8px;"><b>R$ 1,61</b></td><td style="text-align:right;padding:3px 8px;">R$ 0,85</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 89,0%</span></td><td style="text-align:right;padding:3px 8px;"><b>R$ 0,96</b></td><td style="text-align:right;padding:3px 8px;">R$ 0,85</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 13,5%</span></td></tr>
+        <tr><td style="padding:3px 8px;">Impressões perdidas por <b>verba</b></td><td style="text-align:right;padding:3px 8px;"><b>44,7%</b></td><td style="text-align:right;padding:3px 8px;">10,1%</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 34,6 p.p.</span></td><td style="text-align:right;padding:3px 8px;"><b>63,6%</b></td><td style="text-align:right;padding:3px 8px;">19,3%</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-danger)">▲ 44,3 p.p.</span></td></tr>
+        <tr><td style="padding:3px 8px;">ROAS da plataforma</td><td style="text-align:right;padding:3px 8px;">16,84x</td><td style="text-align:right;padding:3px 8px;">15,73x</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▲ 7,1%</span></td><td style="text-align:right;padding:3px 8px;">17,28x</td><td style="text-align:right;padding:3px 8px;">17,24x</td><td style="text-align:right;padding:3px 8px;"><span style="color:var(--le-success)">▲ 0,2%</span></td></tr>
+      </tbody>
+    </table>
+    <div class="two-col" style="margin-top:10px;font-size:10.5px;line-height:1.4;">
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);">
+        <b>Em outubro quem encareceu foi o Google.</b> O clique saiu de R$ 0,85 (out/25) para <b>R$ 1,61</b> — quase o dobro —
+        e o CPM subiu 18,7%. Parte é nossa escolha: a verba do Google foi multiplicada por 4,6 contra outubro/25 e entrou em
+        Shopping e Littmann, que disputam com o Mercado Livre. Mesmo pagando mais por clique, o Google rendeu
+        <b>7,1% mais por real</b> que há um ano.
+      </div>
+      <div class="info-box">
+        <b>O Meta ficou mais barato por clique e mais caro por compra.</b> CPC 15,4% menor e CTR 29,7% maior que outubro/25,
+        e a eleição não segurou o CPM, que caiu 4,7% de setembro para outubro. O custo por compra subiu 41,3% — mas
+        outubro/26 é o primeiro mês inteiro na régua corrigida do Purchase e outubro/25 está na antiga, que contava compra
+        a mais. A comparação de compra e ROAS do Meta favorece 2025.
+      </div>
+    </div>
+    <div style="font-size:9px;color:var(--le-text-secondary);margin-top:7px;line-height:1.42;">
+      CPM, CPC e CTR vêm do leilão e não dependem de atribuição. O ROAS é o da plataforma, o mesmo das demais abas deste relatório. As colunas de setembro são as entregues no relatório de setembro, sem recálculo. Out/26 está inteiro na régua corrigida do Purchase; out/25, set/25 e 23 dias de set/26 estão na antiga. A receita da loja não entra em 2025 porque o acompanhamento diário do faturamento só começou em jul/26.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>4 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 4 — FUNIL -->
+<div class="slide" id="s4">
+  <div class="slide-header"><h2>Funil de Conversão — Meta Ads</h2><p>Do clique no anúncio à compra · outubro/2026 · comparado com setembro</p></div>
+  <div class="slide-body">
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start;">
+      <div>
+        <div class="funnel-step" style="width:100%;"><b>41.024</b> cliques no anúncio</div>
+        <div style="font-size:11px;color:var(--le-muted);margin:4px 0 4px 6px;">▼ 57,3% carregam a página <span style="color:var(--le-muted)">(setembro: 62,1%)</span></div>
+        <div class="funnel-step" style="width:78%;"><b>23.504</b> chegaram ao site</div>
+        <div style="font-size:11px;color:var(--le-muted);margin:4px 0 4px 6px;">▼ 17,0% colocam no carrinho <span style="color:var(--le-muted)">(setembro: 22,8%)</span></div>
+        <div class="funnel-step" style="width:56%;"><b>4.000</b> adicionaram ao carrinho</div>
+        <div style="font-size:11px;color:var(--le-muted);margin:4px 0 4px 6px;">▼ 20,8% iniciam o checkout <span style="color:var(--le-muted)">(setembro: 24,2%)</span></div>
+        <div class="funnel-step" style="width:38%;"><b>832</b> iniciaram o checkout</div>
+        <div style="font-size:11px;color:var(--le-muted);margin:4px 0 4px 6px;">▼ 54,0% compram <span style="color:var(--le-muted)">(setembro: 44,6%)</span></div>
+        <div class="funnel-step" style="width:22%;background:var(--le-success);"><b>449</b> compraram ✓</div>
+      </div>
+      <div>
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="kpi-card"><div class="k-label">Alcance</div><div class="k-value">416.191</div></div>
+          <div class="kpi-card"><div class="k-label">CPM</div><div class="k-value">R$ 9,68</div></div>
+          <div class="kpi-card"><div class="k-label">CPC</div><div class="k-value">R$ 0,63</div></div>
+          <div class="kpi-card green"><div class="k-label">Custo por compra</div><div class="k-value">R$ 57,13</div></div>
+        </div>
+        <div class="info-box" style="margin-top:14px;">
+          <b>A chegada na página piorou.</b> 42,7% de quem clica no anúncio não chega a carregar o site —
+          são <b>17.520 cliques pagos que evaporam</b> antes de qualquer chance de venda. Em setembro eram 37,9%.
+          Segue sendo a maior perda isolada do funil, e o Clarity mediu carregamento de 3,1 s (LCP) no período.
+        </div>
+        <div class="info-box" style="margin-top:10px;background:#fff8e6;border-left-color:var(--le-warning);">
+          <b>O novo gargalo é o carrinho.</b> Página → carrinho caiu de 22,8% para <b>17,0%</b>, o pior dos três meses.
+          Do checkout para a compra subiu para 54,0% — e esse número já é todo da régua corrigida do Purchase,
+          por isso é o primeiro realmente confiável.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>5 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 5 — META POR CAMPANHA -->
+<div class="slide" id="s5">
+  <div class="slide-header"><h2>Meta Ads — Performance por Campanha</h2><p>10 campanhas ativas · mídia R$ 25.653 (débito R$ 29.201 com impostos) · outubro/2026</p></div>
+  <div class="slide-body">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:8px;">Campanha</th><th style="text-align:right;padding:8px;">Investido</th>
+        <th style="text-align:right;padding:8px;">Compras</th><th style="text-align:right;padding:8px;">Receita</th>
+        <th style="text-align:right;padding:8px;">CPA</th><th style="text-align:right;padding:8px;">ROAS</th>
+      </tr></thead>
+      <tbody><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][CATALOGO][2026]</td><td style="text-align:right;padding:7px 8px;">R$ 8.091</td><td style="text-align:right;padding:7px 8px;">156</td><td style="text-align:right;padding:7px 8px;">R$ 127.078</td><td style="text-align:right;padding:7px 8px;">R$ 51,86</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-warning);">15,7x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][ESTÁTICOS][SITE]_RMKT</td><td style="text-align:right;padding:7px 8px;">R$ 6.015</td><td style="text-align:right;padding:7px 8px;">120</td><td style="text-align:right;padding:7px 8px;">R$ 107.232</td><td style="text-align:right;padding:7px 8px;">R$ 50,13</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-success);">17,8x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][ABO][VOLTA_AS_AULAS][AGO26]</td><td style="text-align:right;padding:7px 8px;">R$ 5.967</td><td style="text-align:right;padding:7px 8px;">91</td><td style="text-align:right;padding:7px 8px;">R$ 77.756</td><td style="text-align:right;padding:7px 8px;">R$ 65,58</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-warning);">13,0x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">GGD_VENDAS_ESQUENTA_BLACK_1026_ABO</td><td style="text-align:right;padding:7px 8px;">R$ 1.756</td><td style="text-align:right;padding:7px 8px;">43</td><td style="text-align:right;padding:7px 8px;">R$ 33.064</td><td style="text-align:right;padding:7px 8px;">R$ 40,84</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-success);">18,8x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][ABO][TESTE_CRIATIVO][OUT26]</td><td style="text-align:right;padding:7px 8px;">R$ 1.062</td><td style="text-align:right;padding:7px 8px;">8</td><td style="text-align:right;padding:7px 8px;">R$ 7.381</td><td style="text-align:right;padding:7px 8px;">R$ 132,71</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-danger);">7,0x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][ADV][CATALOGO]_01</td><td style="text-align:right;padding:7px 8px;">R$ 1.028</td><td style="text-align:right;padding:7px 8px;">27</td><td style="text-align:right;padding:7px 8px;">R$ 13.019</td><td style="text-align:right;padding:7px 8px;">R$ 38,08</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-warning);">12,7x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][TRAFEGO][SEGUIDORES]</td><td style="text-align:right;padding:7px 8px;">R$ 604</td><td style="text-align:right;padding:7px 8px;">0</td><td style="text-align:right;padding:7px 8px;">R$ 0</td><td style="text-align:right;padding:7px 8px;">—</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-danger);">0,0x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">GGD_VENDAS_TESTE_BLACK_1126_ABO</td><td style="text-align:right;padding:7px 8px;">R$ 497</td><td style="text-align:right;padding:7px 8px;">1</td><td style="text-align:right;padding:7px 8px;">R$ 1.440</td><td style="text-align:right;padding:7px 8px;">R$ 497,32</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-danger);">2,9x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][VENDAS][CATALOGO][RMKT]</td><td style="text-align:right;padding:7px 8px;">R$ 330</td><td style="text-align:right;padding:7px 8px;">3</td><td style="text-align:right;padding:7px 8px;">R$ 2.081</td><td style="text-align:right;padding:7px 8px;">R$ 110,05</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-danger);">6,3x</td></tr><tr><td style="padding:7px 8px;font-size:12px;">[GGD][DISTRIBUICAO][VVIEW][BASE]</td><td style="text-align:right;padding:7px 8px;">R$ 302</td><td style="text-align:right;padding:7px 8px;">0</td><td style="text-align:right;padding:7px 8px;">R$ 0</td><td style="text-align:right;padding:7px 8px;">—</td><td style="text-align:right;padding:7px 8px;font-weight:700;color:var(--le-danger);">0,0x</td></tr>
+        <tr style="border-top:2px solid var(--le-blue);font-weight:700;"><td style="padding:8px;">TOTAL META</td><td style="text-align:right;padding:8px;">R$ 25.653</td><td style="text-align:right;padding:8px;">449</td><td style="text-align:right;padding:8px;">R$ 369.050</td><td style="text-align:right;padding:8px;">R$ 57,13</td><td style="text-align:right;padding:8px;">14,39x</td></tr>
+      </tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+      <div class="info-box"><b>A Esquenta Black foi a melhor campanha do mês.</b> Campanha nova de outubro: com R$ 1.756,
+      trouxe 43 compras a 18,8x — o menor custo por compra entre as campanhas de venda (R$ 40,84).
+      O remarketing de estáticos veio logo atrás, a 17,8x, com 29% da receita atribuída do Meta.</div>
+      <div class="info-box"><b>A verba de exploração foi 9,6% da mídia.</b> Teste de criativo de outubro, teste Black
+      (no ar só em 31/10), seguidores e visualização somaram R$ 2.465. O teste de outubro rendeu 6,9x no conjunto, mas
+      revelou peças que venderam bem com pouca verba — 03_DIA_DO_MEDICO e MED_07 passaram de 30x.
+      O CATALOGO RMKT quase não rodou (R$ 330) e o resto do remarketing ficou concentrado nos estáticos.</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>6 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 6 — CRIATIVOS -->
+<div class="slide" id="s6">
+  <div class="slide-header"><h2>Meta Ads — Os 10 anúncios que mais venderam</h2><p>Ordenados por investimento · outubro/2026</p></div>
+  <div class="slide-body">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:8px;">Anúncio</th><th style="text-align:right;padding:8px;">Investido</th>
+        <th style="text-align:right;padding:8px;">Compras</th><th style="text-align:right;padding:8px;">Receita</th><th style="text-align:right;padding:8px;">ROAS</th>
+      </tr></thead>
+      <tbody><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><span style="width:34px;height:34px;border-radius:5px;flex:0 0 auto;background:var(--le-blue-ice);display:flex;align-items:center;justify-content:center;font-size:7px;line-height:1.1;text-align:center;color:var(--le-muted)">vitrine<br>do site</span><span><a href="https://fb.me/2cIBeeTuDWUm0aX" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>AD00_CATALOGO_LITTMANN</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 5.961</td><td style="text-align:right;padding:2px 8px;">115</td><td style="text-align:right;padding:2px 8px;">R$ 93.725</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-warning);">15,7x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/03_ad03_volta_aulas_jul_2026.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/2hk7JqOqk4bqL2O" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>AD03_VOLTA_AULAS_JUL_2026</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 5.227</td><td style="text-align:right;padding:2px 8px;">107</td><td style="text-align:right;padding:2px 8px;">R$ 97.497</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-success);">18,7x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/15_ggd_ad_a_kit_academico_completo.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/2iHixrAULndlgx7" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>[GGD][AD_A][KIT_ACADEMICO_COMPLETO]</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 4.457</td><td style="text-align:right;padding:2px 8px;">67</td><td style="text-align:right;padding:2px 8px;">R$ 56.484</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-warning);">12,7x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><span style="width:34px;height:34px;border-radius:5px;flex:0 0 auto;background:var(--le-blue-ice);display:flex;align-items:center;justify-content:center;font-size:7px;line-height:1.1;text-align:center;color:var(--le-muted)">vitrine<br>do site</span><span><a href="https://fb.me/23a3IpFrmdyqagO" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>AD00_CONJUNTO_ACADEMICO</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 2.130</td><td style="text-align:right;padding:2px 8px;">41</td><td style="text-align:right;padding:2px 8px;">R$ 33.353</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-warning);">15,7x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/out26_02_seu_nome_gravado.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/2ZLRxTzuR4NPqMa" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>[OUT26]_02_SEU_NOME_GRAVADO</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 1.668</td><td style="text-align:right;padding:2px 8px;">24</td><td style="text-align:right;padding:2px 8px;">R$ 18.544</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-danger);">11,1x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><span style="width:34px;height:34px;border-radius:5px;flex:0 0 auto;background:var(--le-blue-ice);display:flex;align-items:center;justify-content:center;font-size:7px;line-height:1.1;text-align:center;color:var(--le-muted)">vitrine<br>do site</span><span><a href="https://fb.me/1Ve4L3bnX2Ou0PQ" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>[CONJUNTO_ADVANTAGE]</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 1.022</td><td style="text-align:right;padding:2px 8px;">26</td><td style="text-align:right;padding:2px 8px;">R$ 12.845</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-warning);">12,6x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/ggd_ad_c_passou_em_medicina.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/2b6xW40nhBhGBSI" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>[GGD][AD_C][PASSOU_EM_MEDICINA]</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 631</td><td style="text-align:right;padding:2px 8px;">11</td><td style="text-align:right;padding:2px 8px;">R$ 10.769</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-success);">17,1x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/feed_esquenta_black_01.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/23trYIxl49JEBBi" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>Feed ESQUENTA BLACK 01</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 613</td><td style="text-align:right;padding:2px 8px;">16</td><td style="text-align:right;padding:2px 8px;">R$ 12.367</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-success);">20,2x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/img_9912.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/2bKvB8DCxyJovkL" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>IMG_9912</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 573</td><td style="text-align:right;padding:2px 8px;">10</td><td style="text-align:right;padding:2px 8px;">R$ 7.343</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-warning);">12,8x</td></tr><tr><td style="padding:2px 8px;font-size:12px;"><div style="display:flex;align-items:center;gap:8px"><img src="img/feed_esquenta_black.jpg" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:5px;flex:0 0 auto;border:1px solid var(--le-border,#dde5ee)"><span><a href="https://fb.me/1TEcfThVW4wfqHQ" target="_blank" rel="noopener" style="color:var(--le-blue);text-decoration:none;border-bottom:1px solid rgba(74,144,217,.45)"><b>FEED ESQUENTA BLACK</b> &#8599;</a></span></div></td><td style="text-align:right;padding:2px 8px;">R$ 570</td><td style="text-align:right;padding:2px 8px;">17</td><td style="text-align:right;padding:2px 8px;">R$ 13.354</td><td style="text-align:right;padding:2px 8px;font-weight:700;color:var(--le-success);">23,4x</td></tr></tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+      <div class="info-box"><b>Três anúncios fazem dois terços da receita.</b> AD00_CATALOGO_LITTMANN,
+      AD03_VOLTA_AULAS_JUL_2026 e AD_A KIT_ACADEMICO_COMPLETO somam R$ 15.644 de investimento e R$ 247.707 de receita — 67% de tudo
+      que o Meta trouxe, a 15,8x. É concentração demais em peças antigas: a arte de volta às aulas é de julho e
+      segue sendo a 2ª do mês.</div>
+      <div class="info-box"><b>As peças da Esquenta Black são a novidade que deu certo.</b> Feed ESQUENTA BLACK, Feed ESQUENTA BLACK 01
+      e IMG_9912 somam R$ 1.756 investidos e R$ 33.064 de receita, a 18,8x — e o FEED ESQUENTA BLACK chegou a 23,4x.
+      Entre as peças novas de outubro, [OUT26]_02_SEU_NOME_GRAVADO foi a única a ganhar escala (R$ 1.668, 11,1x).</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>7 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 7 — GOOGLE -->
+<div class="slide" id="s7">
+  <div class="slide-header"><h2>Google Ads — Performance por Campanha</h2><p>Conta 966-316-8147 · R$ 31.245 investidos · outubro/2026</p></div>
+  <div class="slide-body">
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:8px;">Campanha</th><th style="text-align:left;padding:8px;">Tipo</th>
+        <th style="text-align:right;padding:8px;">Investido</th><th style="text-align:right;padding:8px;">Conversões</th>
+        <th style="text-align:right;padding:8px;">Receita</th><th style="text-align:right;padding:8px;">CPA</th><th style="text-align:right;padding:8px;">ROAS</th>
+      </tr></thead>
+      <tbody><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][SHOPPING][CURVA-A]</td><td style="padding:8px;">Shopping</td><td style="text-align:right;padding:8px;">R$ 20.959</td><td style="text-align:right;padding:8px;">384</td><td style="text-align:right;padding:8px;">R$ 298.299</td><td style="text-align:right;padding:8px;">R$ 54,64</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-warning);">14,2x</td></tr><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][SEARCH][LITTMANN]02</td><td style="padding:8px;">Busca</td><td style="text-align:right;padding:8px;">R$ 4.554</td><td style="text-align:right;padding:8px;">78</td><td style="text-align:right;padding:8px;">R$ 64.173</td><td style="text-align:right;padding:8px;">R$ 58,51</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-warning);">14,1x</td></tr><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][PMAX][2025]_EH</td><td style="padding:8px;">PMax</td><td style="text-align:right;padding:8px;">R$ 4.001</td><td style="text-align:right;padding:8px;">69</td><td style="text-align:right;padding:8px;">R$ 52.145</td><td style="text-align:right;padding:8px;">R$ 58,16</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-warning);">13,0x</td></tr><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][SEARCH][INSTITUCIONAL][2025]</td><td style="padding:8px;">Busca</td><td style="text-align:right;padding:8px;">R$ 871</td><td style="text-align:right;padding:8px;">138</td><td style="text-align:right;padding:8px;">R$ 104.509</td><td style="text-align:right;padding:8px;">R$ 6,30</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-success);">120,0x</td></tr><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][SEARCH][EQUIPAMENTOS][SET26]</td><td style="padding:8px;">Busca</td><td style="text-align:right;padding:8px;">R$ 616</td><td style="text-align:right;padding:8px;">6</td><td style="text-align:right;padding:8px;">R$ 4.124</td><td style="text-align:right;padding:8px;">R$ 100,32</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-danger);">6,7x</td></tr><tr><td style="padding:8px;font-size:12px;">[GGD][VENDAS][SEARCH][ESTETOSCOPIO]_02</td><td style="padding:8px;">Busca</td><td style="text-align:right;padding:8px;">R$ 244</td><td style="text-align:right;padding:8px;">5</td><td style="text-align:right;padding:8px;">R$ 2.974</td><td style="text-align:right;padding:8px;">R$ 45,35</td><td style="text-align:right;padding:8px;font-weight:700;color:var(--le-warning);">12,2x</td></tr>
+        <tr style="border-top:2px solid var(--le-blue);font-weight:700;"><td style="padding:8px;">TOTAL GOOGLE</td><td></td><td style="text-align:right;padding:8px;">R$ 31.245</td><td style="text-align:right;padding:8px;">680</td><td style="text-align:right;padding:8px;">R$ 526.223</td><td style="text-align:right;padding:8px;">R$ 45,95</td><td style="text-align:right;padding:8px;">16,84x</td></tr>
+      </tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+      <div class="info-box"><b>INSTITUCIONAL segue sendo a campanha mais rentável da conta:</b> R$ 871 devolveram R$ 104.509 —
+      <b>120,0x</b>, com 2,8% da verba do Google. Mas em outubro ela perdeu <b>16,6% da impressão por orçamento</b>
+      (em setembro, 0%): a partir de ~21/10 a IA Max passou a gastar a verba da marca em busca genérica.
+      Foi desligada em 26/10 e a campanha voltou a cobrir as buscas pelo nome da loja.</div>
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);"><b>A verba foi para onde havia procura — e ainda falta.</b>
+      Shopping recebeu 67% do Google (R$ 20.959, 14,2x) e Littmann R$ 4.554 (14,1x). Mesmo assim a perda por orçamento continua alta:
+      Shopping <b>52,2%</b>, PMax <b>84,7%</b>, Littmann 39,9% — esta caiu de 80,5% em setembro.</div>
+    </div>
+    <div class="info-box" style="margin-top:10px;">
+      <b>Contra setembro:</b> +50,6% de verba e +46,7% de receita, com o ROAS praticamente estável (17,28x → <b>16,84x</b>).
+      O Google absorveu a verba a mais sem perder eficiência por real — mas pagando mais caro pelo clique (R$ 1,61).
+      A campanha de <b>equipamentos</b> (R$ 616, 6,7x) segue abaixo da conta e perde 56,2% da impressão por rank.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>8 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 8 — COMPORTAMENTO NO SITE (3 MESES) -->
+<div class="slide" id="s8">
+  <div class="slide-header"><h2>Comportamento no site (últimos 3 meses)</h2><p>Agosto · Setembro · Outubro de 2026 — leitura de 3 meses móveis</p></div>
+  <div class="slide-body">
+    <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start;">
+    <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:6px 8px;">Etapa do caminho até a compra</th>
+        <th style="text-align:right;padding:6px 8px;">Agosto</th>
+        <th style="text-align:right;padding:6px 8px;">Setembro</th>
+        <th style="text-align:right;padding:6px 8px;">Outubro</th>
+        <th style="text-align:right;padding:6px 8px;">Conversão da etapa</th>
+        <th style="text-align:right;padding:6px 8px;"></th>
+      </tr></thead>
+      <tbody><tr><td style="padding:7px 8px;">Cliques no anúncio</td><td style="text-align:right;padding:7px 8px;">125.603</td><td style="text-align:right;padding:7px 8px;">65.936</td><td style="text-align:right;padding:7px 8px;font-weight:700;">41.024</td><td style="text-align:right;padding:7px 8px;color:var(--le-text-secondary);font-size:11px;"></td><td style="text-align:right;padding:7px 8px;"></td></tr><tr><td style="padding:7px 8px;">Chegaram a carregar a página</td><td style="text-align:right;padding:7px 8px;">78.567</td><td style="text-align:right;padding:7px 8px;">40.938</td><td style="text-align:right;padding:7px 8px;font-weight:700;">23.504</td><td style="text-align:right;padding:7px 8px;color:var(--le-text-secondary);font-size:11px;">62,6% · 62,1% · 57,3%</td><td style="text-align:right;padding:7px 8px;"><span class="tag tag-red">piorou</span></td></tr><tr><td style="padding:7px 8px;">Adicionaram ao carrinho</td><td style="text-align:right;padding:7px 8px;">16.787</td><td style="text-align:right;padding:7px 8px;">9.352</td><td style="text-align:right;padding:7px 8px;font-weight:700;">4.000</td><td style="text-align:right;padding:7px 8px;color:var(--le-text-secondary);font-size:11px;">21,4% · 22,8% · 17,0%</td><td style="text-align:right;padding:7px 8px;"><span class="tag tag-red">pior dos 3</span></td></tr><tr><td style="padding:7px 8px;">Iniciaram o checkout</td><td style="text-align:right;padding:7px 8px;">3.582</td><td style="text-align:right;padding:7px 8px;">2.259</td><td style="text-align:right;padding:7px 8px;font-weight:700;">832</td><td style="text-align:right;padding:7px 8px;color:var(--le-text-secondary);font-size:11px;">21,3% · 24,2% · 20,8%</td><td style="text-align:right;padding:7px 8px;"><span class="tag tag-blue">voltou ao nível</span></td></tr><tr><td style="padding:7px 8px;">Compraram</td><td style="text-align:right;padding:7px 8px;">1.598</td><td style="text-align:right;padding:7px 8px;">1.007</td><td style="text-align:right;padding:7px 8px;font-weight:700;">449</td><td style="text-align:right;padding:7px 8px;color:var(--le-text-secondary);font-size:11px;">44,6% · 44,6% · 54,0%</td><td style="text-align:right;padding:7px 8px;"><span class="tag tag-green">melhor dos 3</span></td></tr></tbody>
+    </table>
+    <div>
+      <div class="section-pill" style="font-size:11px;padding:3px 12px;margin-bottom:8px;">Clarity · 1º mês cheio</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <tbody>
+          <tr><td style="padding:4px 6px;">Sessões gravadas (30 dias até 26/10)</td><td style="text-align:right;padding:4px 6px;"><b>63.266</b></td></tr>
+          <tr><td style="padding:4px 6px;">Clique morto (dead click) no checkout</td><td style="text-align:right;padding:4px 6px;color:var(--le-danger);"><b>20,1%</b></td></tr>
+          <tr><td style="padding:4px 6px;">Clique de raiva (rage click)</td><td style="text-align:right;padding:4px 6px;color:var(--le-text-secondary);">não lido</td></tr>
+          <tr><td style="padding:4px 6px;">Rolagem — produto 5809 no celular</td><td style="text-align:right;padding:4px 6px;"><b>33%</b></td></tr>
+          <tr><td style="padding:4px 6px;">Retorno rápido — página da Black</td><td style="text-align:right;padding:4px 6px;"><b>28%</b></td></tr>
+          <tr><td style="padding:4px 6px;">Carregamento (LCP)</td><td style="text-align:right;padding:4px 6px;"><b>3,1 s</b></td></tr>
+          <tr><td style="padding:4px 6px;">Gravações de sessão</td><td style="text-align:right;padding:4px 6px;color:var(--le-text-secondary);">não assistidas</td></tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px;font-size:11px;line-height:1.42;">
+      <div class="info-box"><b>Onde o caminho quebra, nos três meses:</b> a entrada. Clique → página carregada foi de
+      62,6% e 62,1% para <b>57,3%</b>, e página → carrinho caiu para <b>17,0%</b>, o pior dos três meses.
+      No checkout, o Clarity mostra <b>1 em cada 5 sessões com clique morto</b> — concentrado em "Pagamento" (41), no
+      logo (30) e no campo de cupom (23): gente clicando em algo que não responde, bem na hora de pagar.</div>
+      <div class="info-box" style="background:#E8F5EF;border-left-color:var(--le-success);"><b>O que melhorou:</b>
+      checkout → compra subiu para <b>54,0%</b>, o melhor dos três meses, já na régua corrigida do Purchase.
+      Na página do 5809 no celular, a rolagem média para em 33%: só 4% clicam em comprar e 3,3% no cálculo de CEP.
+      35,6% das sessões chegam pelo navegador interno do Instagram.</div>
+    </div>
+    <div class="info-box" style="margin-top:8px;background:#fff8e6;border-left-color:var(--le-warning);font-size:10.5px;line-height:1.4;">
+      <b>O que ficou de fora desta seção neste mês, e por quê.</b>
+      <b>(1) GA4</b> — o funil de e-commerce, as páginas de entrada e saída e a quebra por dispositivo sairiam do Google
+      Analytics 4, que <b>segue sem conexão com o Windsor</b>; a leitura de 3 meses acima continua vindo do <b>pixel do Meta</b>, que cobre o tráfego pago.
+      <b>(2) Clarity</b> — não há API de exportação configurada e o painel não pôde ser aberto na geração deste relatório. Os números do
+      quadro são a <b>leitura do painel de 26/10</b> (janela de 30 dias, ~27/09 a 26/10), não o mês fechado. <b>Clique de raiva</b> não foi
+      registrado nessa leitura e as <b>gravações</b> não foram assistidas — entram no relatório de novembro. A leitura de 3 meses móveis do Clarity fecha em dezembro/26.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>9 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 9 — PLANO DE NOVEMBRO -->
+<div class="slide" id="s9">
+  <div class="slide-header"><h2>O plano de novembro, já em execução</h2><p>O que está no ar desde 1º/11 · verba do mês fechada em R$ 60 mil</p></div>
+  <div class="slide-body">
+    <div class="kpi-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="kpi-card blue"><div class="k-label">Verba de novembro</div><div class="k-value">R$ 60.000</div><div class="k-sub">R$ 10 mil ainda a depositar até 26/11</div></div>
+      <div class="kpi-card green"><div class="k-label">Divisão aplicada</div><div class="k-value">Google 31,5k · Meta 28,5k</div><div class="k-sub">Meta com imposto = R$ 25.037 de mídia</div></div>
+      <div class="kpi-card"><div class="k-label">Retorno esperado</div><div class="k-value">14x a 18x</div><div class="k-sub">atribuído · Black Friday em 27/11</div></div>
+    </div>
+    <div class="info-box" style="margin-top:16px;">
+      <b>A verba sobe em quatro degraus até a Black Friday.</b> Mídia por dia, Google / Meta:
+      <b>1º a 15/11</b> R$ 665 / R$ 535 · <b>16 a 23/11</b> R$ 970 / R$ 715 · <b>24 a 26/11</b> R$ 1.455 / R$ 1.305 ·
+      <b>27 a 30/11</b> R$ 2.350 / R$ 1.844. A maior parte fica guardada para a semana da Black, quando a procura
+      e a conversão sobem — em novembro/24 e novembro/25 a receita atribuída foi 2,5 vezes a de outubro.
+    </div>
+    <div class="info-box" style="margin-top:10px;background:var(--le-blue-ice);">
+      <b>No Google, a vitrine foi limpa para a Black.</b> Em 31/10 saíram 8 produtos do Shopping e da PMax que gastavam
+      sem vender, e a verba diária ficou Shopping R$ 205, Littmann R$ 220, PMax R$ 200 e Institucional R$ 40 (R$ 665/dia).
+      A IA Max segue desligada na Institucional desde 26/10. O rival no leilão é o Mercado Livre, com preço menor nos
+      Littmann Classic III — é onde o clique encareceu.
+    </div>
+    <div class="info-box" style="margin-top:10px;">
+      <b>No Meta, o teste Black já está no ar.</b> A campanha de teste com 10 criativos de Black Friday entrou em 31/10 com a
+      primeira onda (AD01, AD02, AD05, AD09 — 12 conjuntos), leitura marcada para 05/11. O que vencer vai para a
+      escala da semana da Black, ao lado da Esquenta Black (18,8x em outubro). As peças antigas (arte de julho no remarketing)
+      perdem espaço para as novas.
+    </div>
+    <div class="info-box" style="margin-top:10px;background:#fff8e6;border-left-color:var(--le-warning);">
+      <b>Duas pendências técnicas que valem dinheiro:</b> religar o token da API da Nuvemshop (a leitura de outubro parou em 26/10
+      e o mês fechado da loja não entrou neste relatório) e conectar o <b>GA4 ao Windsor</b>. Somam-se o clique morto no checkout,
+      que o Clarity mostrou em 20,1% das sessões. Nenhuma das três custa mídia.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>10 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 10 — CONSOLIDADO -->
+<div class="slide" id="s10">
+  <div class="slide-header"><h2>Consolidado Geral — Outubro 2026</h2><p>Site · Meta · Google · impostos</p></div>
+  <div class="slide-body">
+    <div class="tax-row" style="font-weight:700;"><span>Item</span><span>Valor</span></div>
+    <div class="tax-row"><span>Mídia Meta Ads</span><span>R$ 25.653,33</span></div>
+    <div class="tax-row"><span>Impostos sobre a mídia do Meta (13,83% — COFINS + PIS + ISS)</span><span>R$ 3.547,86</span></div>
+    <div class="tax-row"><span>Débito total no Meta Ads</span><span>R$ 29.201,19</span></div>
+    <div class="tax-row"><span>Google Ads</span><span>R$ 31.245,00</span></div>
+    <div class="tax-row total-row"><span>Investimento total em mídia</span><span>R$ 60.446,19</span></div>
+    <div class="tax-row"><span>Receita real do site (Nuvemshop, pedidos pagos) — <b>parcial, 1º a 26/10 às 14h13</b></span><span>R$ 636.827</span></div>
+    <div class="tax-row"><span>Receita atribuída pelas plataformas (mês inteiro)</span><span>R$ 895.273,66</span></div>
+    <div class="tax-row total-row"><span>ROAS real (receita do site ÷ investimento) — <b>mês fechado</b></span><span>pendente</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+      <div class="info-box"><b>No mês, a mídia foi 6,8% da receita atribuída</b> — contra 5,7% em setembro. O Google passou a ser
+      a maior parte do investimento (51,7%, R$ 31.245) e trouxe 58,8% da receita atribuída. Sem a loja fechada, não dá para
+      dizer quanto de cada R$ 1 investido voltou ao caixa — esse é o número que falta.</div>
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);"><b>O que ficou de fora, e por quê.</b>
+      A receita real do mês fechado não entrou: o token da API da Nuvemshop segue fora do ar e, na geração deste relatório,
+      o painel da loja não pôde ser lido. A única leitura medida é a de 26/10 às 14h13 (R$ 636.827, 797 pedidos pagos).
+      Não estimamos os 5 dias restantes. O ROAS real de outubro entra assim que a loja for lida.</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>11 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 11 — PREVISÃO -->
+<div class="slide" id="s11">
+  <div class="slide-header"><h2>Previsibilidade — Novembro 2026</h2><p>Dois novembros de histórico + a régua nova do Meta</p></div>
+  <div class="slide-body">
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:14px;">
+      <thead><tr style="border-bottom:2px solid var(--le-blue);">
+        <th style="text-align:left;padding:8px;">Ano</th><th style="text-align:right;padding:8px;">Investimento outubro</th>
+        <th style="text-align:right;padding:8px;">Receita atrib. outubro</th><th style="text-align:right;padding:8px;">Investimento novembro</th>
+        <th style="text-align:right;padding:8px;">Receita atrib. novembro</th><th style="text-align:right;padding:8px;">nov × out</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:8px;"><b>2024</b></td><td style="text-align:right;padding:8px;">R$ 10.888</td><td style="text-align:right;padding:8px;">R$ 318.283</td><td style="text-align:right;padding:8px;">R$ 32.231</td><td style="text-align:right;padding:8px;">R$ 779.927</td><td style="text-align:right;padding:8px;color:var(--le-success);font-weight:700;">+145,0%</td></tr>
+        <tr><td style="padding:8px;"><b>2025</b></td><td style="text-align:right;padding:8px;">R$ 32.530</td><td style="text-align:right;padding:8px;">R$ 518.559</td><td style="text-align:right;padding:8px;">R$ 69.125</td><td style="text-align:right;padding:8px;">R$ 1.294.083</td><td style="text-align:right;padding:8px;color:var(--le-success);font-weight:700;">+149,6%</td></tr>
+        <tr style="background:var(--le-blue-ice);border-top:2px solid var(--le-blue);"><td style="padding:8px;"><b>2026</b></td><td style="text-align:right;padding:8px;"><b>R$ 60.446</b></td><td style="text-align:right;padding:8px;"><b>R$ 895.274</b></td><td style="text-align:right;padding:8px;"><b>R$ 60.000</b><br><span style="font-size:10px;color:var(--le-text-secondary)">Google 31,5k · Meta 28,5k</span></td><td style="text-align:right;padding:8px;">R$ 911.060<br><span style="font-size:10px;color:var(--le-text-secondary)">cenário base</span></td><td style="text-align:right;padding:8px;"><span style="color:var(--le-success)">▲ 1,8%</span></td></tr>
+      </tbody>
+    </table>
+    <div class="kpi-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="kpi-card"><div class="k-label">Conservador</div><div class="k-value">R$ 741.448</div><div class="k-sub">Meta 12x · Google 14x</div></div>
+      <div class="kpi-card green"><div class="k-label">Cenário base</div><div class="k-value">R$ 911.060</div><div class="k-sub">Meta 15x · Google 17x · receita atribuída</div></div>
+      <div class="kpi-card blue"><div class="k-label">Otimista</div><div class="k-value">R$ 1.080.672</div><div class="k-sub">Meta 18x · Google 20x</div></div>
+    </div>
+    <div class="info-box" style="margin-top:16px;">
+      <b>Novembro é o mês da Black Friday, mas este ano a verba não dobra.</b> Nos dois anos com histórico a receita atribuída
+      de novembro foi 2,5 vezes a de outubro — sempre com a verba também 2 a 3 vezes maior. Em 2026 a verba de novembro (R$ 60 mil)
+      é a mesma de outubro, então o ganho tem de vir do retorno por real, concentrando verba nos dias da Black.
+      O cenário base de R$ 911.060 é +1,8% sobre outubro. Os cenários usam a verba fechada: R$ 28,5 mil de depósito no Meta
+      (R$ 25.037 de mídia, descontados os 13,83%) e R$ 31,5 mil no Google. Sem o depósito de R$ 10 mil, a verba acaba em 28/11.
+    </div>
+    <div class="info-box" style="margin-top:10px;background:#fff8e6;border-left-color:var(--le-warning);">
+      <b>Por que o ROAS do Meta projetado é 15x e não os 21x de novembro/25.</b> Novembro/25 está na régua antiga do Purchase,
+      que contava compra a mais. Outubro/26, o primeiro mês inteiro na régua corrigida, fechou em 14,39x. A projeção parte dele,
+      com o ganho típico de conversão da semana da Black — e não do histórico inflado.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>12 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 12 — OPORTUNIDADES -->
+<div class="slide" id="s12">
+  <div class="slide-header"><h2>Oportunidades e Ações Prioritárias</h2><p>Novembro 2026 · ordenadas por impacto</p></div>
+  <div class="slide-body">
+    <div class="op-item"><div class="op-num red">1</div><div class="op-body">
+      <h4>Concentrar a verba na semana da Black Friday</h4>
+      <p>Nos dois últimos novembros a receita atribuída foi 2,5 vezes a de outubro. Com a mesma verba de outubro, o ganho tem de vir
+      de pôr o dinheiro nos dias certos: R$ 2.350/dia no Google e R$ 1.844/dia no Meta de 27 a 30/11, contra R$ 665 e R$ 535 na
+      primeira quinzena. O depósito de R$ 10 mil até 26/11 é o que garante a verba no domingo e na segunda da Black.</p></div></div>
+    <div class="op-item"><div class="op-num red">2</div><div class="op-body">
+      <h4>Destravar o clique morto no checkout e a entrada no site</h4>
+      <p>O Clarity mostrou <b>20,1% das sessões de checkout com clique morto</b> (Pagamento, logo e cupom) e o funil perdeu
+      <b>17.520 cliques pagos</b> no carregamento — 42,7%, pior que setembro. Na semana da Black cada ponto aqui vale mais.
+      Não depende de verba; depende de ajuste na loja.</p></div></div>
+    <div class="op-item"><div class="op-num amber">3</div><div class="op-body">
+      <h4>Trocar as peças antigas pelas que já provaram em outubro</h4>
+      <p>Três anúncios fazem 67% da receita do Meta, e um deles é a arte de volta às aulas de julho. As peças da Esquenta Black
+      (18,8x, até 23,4x) e as de outubro que passaram de 30x com pouca verba (03_DIA_DO_MEDICO, MED_07) são as candidatas
+      a assumir esse espaço, junto com os vencedores do teste Black.</p></div></div>
+    <div class="op-item"><div class="op-num amber">4</div><div class="op-body">
+      <h4>Disputar preço com o Mercado Livre nos Littmann Classic III</h4>
+      <p>O clique do Google quase dobrou contra outubro/25 (R$ 0,85 → R$ 1,61). O concorrente que mais aparece junto é o Mercado Livre,
+      com preço menor no 5809, no 5620 e no 5803. Uma condição de Black nesses três itens é o que mais pesa no Shopping.</p></div></div>
+    <div class="op-item"><div class="op-num">5</div><div class="op-body">
+      <h4>Religar a medição: token da Nuvemshop e GA4 no Windsor</h4>
+      <p>Outubro fecha sem a receita real do mês porque o token da loja segue fora do ar e o GA4 não está conectado.
+      Em novembro, mês de Black, o ROAS real é o número que mais importa. Custo zero em mídia.</p></div></div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>13 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 13 — ATENÇÃO -->
+<div class="slide" id="s13">
+  <div class="slide-header"><h2>Pontos de Atenção</h2><p>O que monitorar em novembro</p></div>
+  <div class="slide-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);">
+        <b>A régua do Meta mudou — e isso muda a leitura</b><br>
+        Em 24/09 corrigimos no GTM a tag de Purchase, que desde 2023 disparava no <i>add_payment_info</i>.
+        Outubro é o primeiro mês inteiro na régua correta (14,39x). Todo comparativo com setembro/26 e com 2025 no Meta
+        carrega essa diferença — inclusive a projeção de novembro.
+      </div>
+      <div class="info-box" style="background:#fff8e6;border-left-color:var(--le-warning);">
+        <b>A receita real de outubro não fechou</b><br>
+        O token da API da Nuvemshop segue fora do ar e o painel não pôde ser lido na geração do relatório. Medido: R$ 636.827 em
+        797 pedidos pagos até 26/10 às 14h13. Nada foi estimado. O ROAS real de outubro entra quando a loja for lida.
+      </div>
+      <div class="info-box">
+        <b>O clique do Google quase dobrou</b><br>
+        R$ 1,61 em outubro contra R$ 0,85 em outubro/25 e R$ 0,96 em setembro. A perda por orçamento ainda é de 44,7%
+        na conta. Na semana da Black o leilão encarece de novo — a verba escalonada já conta com isso.
+      </div>
+      <div class="info-box">
+        <b>Clarity: primeiro mês cheio, leitura parcial</b><br>
+        Projeto <code>r20a87dzlh</code>, medindo desde 29/09. Os números deste relatório são da leitura de 26/10 (30 dias).
+        Clique de raiva e gravações entram em novembro; a leitura de 3 meses móveis do Clarity fecha em dezembro/26.
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:14px;background:var(--le-blue-ice);">
+      <b>O resumo do mês:</b> outubro trouxe <b>R$ 895 mil de receita atribuída, +72,6% sobre outubro de 2025</b>, e passou o
+      cenário base projetado em setembro (R$ 692 mil). O Google sustentou o mês (16,84x com R$ 31,2 mil) e o Meta fechou o
+      primeiro mês inteiro na régua corrigida a 14,39x, com a Esquenta Black como melhor campanha.
+      Novembro entra com a mesma verba e uma pergunta clara: quanto a semana da Black rende por real.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <img src="Manual da Marca/logo-le-medical.png" class="footer-logo" alt="">
+    <span>14 / 15 · GGD — Gio Growth Digital · Outubro 2026</span>
+  </div>
+</div>
+
+<!-- SLIDE 14 — ENCERRAMENTO -->
+<div class="slide" id="s14" style="background:var(--le-blue-ice); align-items:center; justify-content:center;">
+  <div style="width:300px; height:300px; background:var(--le-blue-soft); border-radius:50%; position:absolute; top:-80px; right:-80px; opacity:0.35;"></div>
+  <div style="width:180px; height:180px; background:var(--le-blue-soft); border-radius:50%; position:absolute; bottom:-50px; left:-50px; opacity:0.25;"></div>
+  <img src="Manual da Marca/logo-le-medical.png" alt="LE Medical" style="height:120px; object-fit:contain; position:relative; z-index:1;">
+  <div style="position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--le-muted);line-height:1.7;">
+    Fontes: Meta Ads (1033454737672761, API de insights) e Google Ads (966-316-8147) via Windsor.ai · Nuvemshop (pedidos pagos) — API sem token; leitura do painel em 26/10/2026 às 14h13, mês fechado não lido.<br>
+    Imposto de 13,83% aplicado sobre a mídia do Meta (COFINS + PIS + ISS). Comparativos de setembro/2026 e outubro/2025 na régua antiga do Purchase do Meta, corrigida em 24/09/2026.<br>
+    GA4 não conectado ao Windsor · Clarity (projeto r20a87dzlh) medindo desde 29/09/2026 — números da leitura de 26/10 (30 dias); clique de raiva e gravações não lidos.<br>
+    Projeção de novembro a partir dos novembros de 2024 e 2025, da régua corrigida de outubro/26 e da verba fechada de R$ 60 mil.
+  </div>
+</div>
+
+</div><!-- /stage -->
+
+
+<div id="nav">
+  <button id="prev-btn">← Anterior</button>
+  <span id="counter">1 / 15</span>
+  <button id="next-btn">Próximo →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+
+  function scale() {
+    const stage = document.getElementById('stage');
+    const sw = window.innerWidth, sh = window.innerHeight;
+    if (!sw || !sh) { requestAnimationFrame(scale); return; }  // janela ainda sem dimensao: tenta de novo
+    const ratio = Math.min(sw / 1280, sh / 720);
+    stage.style.transform = `scale(${ratio})`;
+    stage.style.left = ((sw - 1280 * ratio) / 2) + 'px';
+    stage.style.top  = ((sh - 720  * ratio) / 2) + 'px';
+    stage.style.position = 'fixed';
+  }
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  document.getElementById('next-btn').addEventListener('click', () => show(current + 1));
+  document.getElementById('prev-btn').addEventListener('click', () => show(current - 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   show(current - 1);
+  });
+
+  window.addEventListener('resize', scale);
+  window.addEventListener('load', scale);
+  window.addEventListener('pageshow', scale);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) scale(); });
+  if (window.ResizeObserver) new ResizeObserver(() => scale()).observe(document.documentElement);
+  if (!document.querySelector('.slide.active')) slides[0].classList.add('active');
+  scale();
+</script>
+</body>
+</html>
