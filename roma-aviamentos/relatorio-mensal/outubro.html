@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acompanhamento de Resultado — Outubro · Roma Aviamentos</title>
+<style>
+  :root{
+    --primary:#1a1a2e; --accent:#e94560; --green:#00c897; --yellow:#f5a623;
+    --blue:#4a90d9; --purple:#9b59b6; --bg:#f4f6f9; --card:#fff; --text:#2c3e50;
+    --muted:#6c757d; --border:#e0e6ed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .header{background:var(--primary);padding:30px 40px;color:#fff;}
+  .header h1{font-size:22px;font-weight:700;letter-spacing:-.5px;}
+  .header p{color:#8899aa;font-size:12.5px;margin-top:6px;}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 24px 60px;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+  .section h2{font-size:16px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px;}
+  .section .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px;}
+  .bar{width:4px;height:19px;border-radius:3px;display:inline-block;}
+  p.lead{font-size:14px;}
+  .kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;}
+  .kpi{flex:1;min-width:150px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px 11px;text-align:center;}
+  .kpi .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+  .kpi .v{font-size:17px;font-weight:800;margin-top:4px;white-space:nowrap;}
+  .kpi .s{font-size:11px;color:var(--muted);margin-top:3px;}
+  .kpi.hero{background:#eef7f3;border-color:#bfe9dc;}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);border-bottom:2px solid var(--border);padding:10px 8px;}
+  thead th.r,tbody td.r{text-align:right;}
+  tbody td{padding:11px 8px;border-bottom:1px solid var(--border);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.total td{font-weight:800;background:#f8fafc;border-top:2px solid var(--border);}
+  .tag{font-size:11px;color:var(--muted);}
+  .roas{font-weight:700;color:var(--green);}
+  .note{font-size:13px;background:#eef7f3;border-left:4px solid var(--green);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .warn{font-size:13px;background:#fdf4e7;border-left:4px solid var(--yellow);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .warn b{color:#b5790f;}
+  .blue-note{font-size:13px;background:#eef3fb;border-left:4px solid var(--blue);padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:6px;}
+  .step{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .step .num{font-size:12px;font-weight:800;color:var(--accent);}
+  .step b{display:block;font-size:13px;margin:4px 0 5px;}
+  .step span{font-size:12px;color:var(--muted);}
+  .foot-note{font-size:11.5px;color:var(--muted);margin-top:12px;}
+  .footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:30px;}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#eef7f3;color:#0a8f6e;margin-left:8px;vertical-align:middle;}
+  @media print{body{background:#fff;} .section{box-shadow:none;break-inside:avoid;}}
+  @media(max-width:560px){table{font-size:12px;} thead th,tbody td{padding:8px 5px;}}
+</style>
+
+<style>
+  .monthbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:30;}
+  .monthbar .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-right:4px;}
+  .monthbar a{font-size:12.5px;font-weight:700;color:var(--text);text-decoration:none;padding:5px 14px;border-radius:20px;border:1px solid var(--border);transition:.15s;}
+  .monthbar a:hover{background:#f4f6f9;}
+  .monthbar a.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+  @media print{.monthbar{display:none;}}
+  a.step{text-decoration:none;color:inherit;display:block;transition:.15s;}
+  a.step:hover{background:#eef3fb;border-color:#b9cfee;}
+  a.step .num{color:var(--blue);}
+  tbody tr.sub td{background:#fbfcfd;color:var(--muted);}
+  tbody tr.sub td:first-child{padding-left:20px;}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Acompanhamento de Resultado — Outubro 2026</h1>
+  <p>Roma Aviamentos · Gestão GGD · Período: mídia de 01 a 31 de outubro de 2026 — <b>mês fechado</b> · Loja: 01 a 20/10 — <b>fechamento pendente</b> · Comparativos: setembro/2026 e outubro/2025 · Atualizado em 01/11/2026</p>
+</div>
+<div class="monthbar"><span class="lab">Mês de referência</span><a href="julho.html">Julho 2026</a><a href="agosto.html">Agosto 2026</a><a href="setembro.html">Setembro 2026</a><a href="./" class="active">Outubro 2026</a></div>
+
+<div class="wrap">
+
+<!-- RESUMO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--accent)"></span> O mês em um parágrafo</h2>
+  <div class="sub">O que aconteceu com o faturamento e com a mídia</div>
+  <p class="lead">Outubro <strong>levou mais gente à loja por menos</strong> e ganhou ritmo a partir do dia 13.
+  A mídia fechou o mês com <strong>R$ 10.188,13</strong> investidos e <strong>104.709 visitas</strong> levadas ao site, a
+  <strong>R$ 0,10 cada</strong>, contra R$ 0,13 em outubro/25. Na loja, o último número medido é o de
+  <strong>1 a 20/10: 853 pedidos e R$ 167.139 em venda bruta</strong>, +15,9% de pedidos e +13,1% de venda sobre os mesmos dias de setembro.
+  De 1 a 12 a loja fez 38,6 pedidos e R$ 6.934 por dia; de 13 a 20, 48,8 pedidos e R$ 10.492 por dia.
+  <strong>O fechamento da loja de 1 a 31/10 (bruto, cancelado e líquido) ainda não entrou neste relatório</strong>, como explica o aviso abaixo.</p>
+  <div class="warn">⚠️ <b>O que ficou de fora e por quê.</b> Este relatório foi gerado em 01/11 por rotina automática, sem acesso ao painel da loja (Octopus) e ao Google Analytics, que só abrem com login no navegador. O faturamento líquido é o número oficial da administração da Roma e também ainda não foi recebido.
+  <b>Por isso estão pendentes:</b> venda bruta, cancelado, líquido, pedidos e ticket do mês cheio; retorno real (MER líquido); quebra do cancelamento por forma de pagamento; funil carrinho → checkout de outubro.
+  <b>Nenhum desses números foi estimado.</b> Meta e Google estão completos, de 1 a 31/10. Os números de loja que aparecem aqui são de 1 a 20/10, os mesmos da parcial já enviada, e estão sempre marcados como tal.</div>
+  <div class="kpi-row">
+    <div class="kpi hero"><div class="l">Faturamento líquido</div><div class="v">pendente</div><div class="s">número da administração · set: R$ 175.493,19</div></div>
+    <div class="kpi"><div class="l">Venda bruta · 1 a 20/10</div><div class="v">R$ 167.139</div><div class="s"><span style="color:var(--green);font-weight:700">▲ 13,1%</span> vs. 1 a 20/09</div></div>
+    <div class="kpi"><div class="l">Cancelado</div><div class="v">pendente</div><div class="s">set: 19,1% do valor · out/25: 14,8%</div></div>
+    <div class="kpi"><div class="l">Pedidos · 1 a 20/10</div><div class="v">853</div><div class="s">42,65/dia · <span style="color:var(--green);font-weight:700">▲ 15,9%</span> vs. 1 a 20/09</div></div>
+    <div class="kpi"><div class="l">Mídia investida</div><div class="v">R$ 10.188,13</div><div class="s">1 a 31/10 · <span style="color:var(--accent);font-weight:700">▲ 6,1%</span> vs. setembro</div></div>
+  </div>
+
+  <div style="margin-top:26px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)">Quanto custou comprar mídia neste mês</div>
+  <div class="kpi-row" style="margin-top:8px">
+    <div class="kpi"><div class="l">Google · mil aparições</div><div class="v">R$ 13,80</div><div class="s"><span style="color:var(--accent);font-weight:700">▲ 41,6%</span> em 12 meses · R$ 5.871,89 investidos</div></div>
+    <div class="kpi"><div class="l">Meta · mil aparições</div><div class="v">R$ 3,88</div><div class="s"><span style="color:var(--green);font-weight:700">▼ 20,7%</span> em 12 meses · R$ 4.316,24 investidos</div></div>
+    <div class="kpi"><div class="l">Custo por visita levada ao site</div><div class="v" style="color:#0a8f6e">R$ 0,10</div><div class="s"><span style="color:var(--green);font-weight:700">▼ 25,3%</span> em 12 meses · 104.709 visitas</div></div>
+    <div class="kpi hero"><div class="l">Retorno por R$ 1 investido</div><div class="v">pendente</div><div class="s">depende do líquido · set: R$ 18,28</div></div>
+  </div>
+  <div class="blue-note">ℹ️ <b>Leia estes números juntos.</b> <b>O espaço no Google ficou 42% mais caro em doze meses</b>, e o do Meta, 21% mais barato.
+  Somando as duas plataformas, <b>a visita saiu 25% mais barata</b>: R$ 0,10 contra R$ 0,13, com 104.709 visitas contra 65.073.
+  <b>A seção do custo do espaço abre essa conta inteira.</b></div>
+  <div class="note">✅ <b>O que já está medido na loja, de 1 a 20/10.</b> Foram 853 pedidos contra 736 nos mesmos dias de setembro e 888 em outubro/25.
+  Na semana de 13 a 19/10 entraram 38 pedidos acima de R$ 500, contra 20 na semana anterior e cerca de 26 por semana em setembro. Os detalhes estão na <a href="../parcial-outubro-26/">parcial de outubro</a>.</div>
+</div>
+
+<!-- COMPARATIVO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--blue)"></span> Outubro/26 × Setembro/26 × Outubro/25</h2>
+  <div class="sub">Sempre nas três réguas — bruto, cancelado e líquido. Os meses cheios aguardam o fechamento de outubro/26; a janela de 1 a 20 compara os mesmos dias nos três períodos</div>
+  <table>
+    <thead><tr><th>Indicador</th><th class="r">Outubro 2026</th><th class="r">Setembro 2026</th><th class="r">vs. setembro</th><th class="r">Outubro 2025</th><th class="r">vs. ano anterior</th></tr></thead>
+    <tbody>
+      <tr><td><b>Venda bruta (loja)</b></td><td class="r"><span class="tag">pendente</span></td><td class="r">R$ 228.829,05</td><td class="r">—</td><td class="r">R$ 313.032,00</td><td class="r">—</td></tr>
+      <tr class="sub"><td>Venda bruta — 1 a 20 do mês</td><td class="r">R$ 167.139,00</td><td class="r">R$ 147.723,00</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 13,1%</span></td><td class="r">R$ 198.985,00</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 16,0%</span></td></tr>
+      <tr><td><b>Cancelado</b></td><td class="r"><span class="tag">pendente</span></td><td class="r">R$ 43.809,96</td><td class="r">—</td><td class="r">R$ 46.449,00</td><td class="r">—</td></tr>
+      <tr class="sub"><td>Cancelado — % do valor vendido</td><td class="r"><span class="tag">pendente</span></td><td class="r">19,1%</td><td class="r">—</td><td class="r">14,8%</td><td class="r">—</td></tr>
+      <tr class="sub"><td>Cancelado — % dos pedidos</td><td class="r"><span class="tag">pendente</span></td><td class="r">13,3%</td><td class="r">—</td><td class="r">15,1%</td><td class="r">—</td></tr>
+      <tr><td><b>Faturamento líquido</b></td><td class="r"><span class="tag">pendente</span></td><td class="r">R$ 175.493,19</td><td class="r">—</td><td class="r">R$ 285.858,00</td><td class="r">—</td></tr>
+      <tr><td>Pedidos</td><td class="r"><span class="tag">pendente</span></td><td class="r">1.114</td><td class="r">—</td><td class="r">1.455</td><td class="r">—</td></tr>
+      <tr class="sub"><td>Pedidos — 1 a 20 do mês</td><td class="r">853</td><td class="r">736</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 15,9%</span></td><td class="r">888</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 3,9%</span></td></tr>
+      <tr><td>Ticket médio (bruto) — 1 a 20 do mês</td><td class="r"><b>R$ 195,94</b></td><td class="r">R$ 200,71</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 2,4%</span></td><td class="r">R$ 224,08</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 12,6%</span></td></tr>
+      <tr><td>Mídia investida</td><td class="r">R$ 10.188,13</td><td class="r">R$ 9.602,37</td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 6,1%</span></td><td class="r">R$ 8.474,36</td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 20,2%</span></td></tr>
+      <tr><td>Mídia sobre o líquido</td><td class="r"><span class="tag">pendente</span></td><td class="r">5,47%</td><td class="r">—</td><td class="r">2,96%</td><td class="r">—</td></tr>
+      <tr class="total"><td>Retorno real (MER líquido)</td><td class="r"><span class="tag">pendente</span></td><td class="r">18,3x</td><td class="r">—</td><td class="r">33,7x</td><td class="r">—</td></tr>
+    </tbody>
+  </table>
+  <div class="blue-note">ℹ️ <b>Como ler esta tabela:</b> setembro/26 está como foi publicado, sem recálculo. Outubro/25 vem da mesma série do estudo de cancelamento e da análise comparativa.
+  Outubro tem 31 dias e setembro 30: por dia, a mídia subiu 2,7%.</div>
+  <div class="warn">⚠️ <b>A linha que falta é a que explica o mês:</b> em setembro, o cancelamento consumiu quase todo o ganho de venda. Sem o cancelado de outubro, não dá para dizer quanto dos +13,1% de venda virou líquido.</div>
+</div>
+
+<!-- HISTÓRICO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--purple)"></span> Outubro ao longo de 4 anos</h2>
+  <div class="sub">Mesmo mês em quatro anos, no Octopus — nesta rodada na coluna Vendas (produto, sem frete), a única extraída para outubro</div>
+  <table>
+    <thead><tr><th>Mês</th><th class="r">Faturamento</th><th class="r">Pedidos</th><th class="r">Ticket médio</th><th class="r">vs. ano anterior</th></tr></thead>
+    <tbody>
+      <tr><td><b>Outubro 2023</b></td><td class="r"><span class="tag">não extraído</span></td><td class="r"><span class="tag">não extraído</span></td><td class="r"><span class="tag">não extraído</span></td><td class="r">—</td></tr>
+      <tr><td><b>Outubro 2024</b></td><td class="r">R$ 377.348,00</td><td class="r">1.981</td><td class="r">R$ 190,48</td><td class="r">—</td></tr>
+      <tr><td><b>Outubro 2025</b></td><td class="r">R$ 313.032,00</td><td class="r">1.455</td><td class="r">R$ 215,14</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 17,0%</span></td></tr>
+      <tr class="total"><td><b>Outubro 2026</b> <span class="tag">só 1 a 20</span></td><td class="r">R$ 167.139,00</td><td class="r">853</td><td class="r">R$ 195,94</td><td class="r"><span class="tag">pendente</span></td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:18px"><canvas id="cAnos" height="110"></canvas></div>
+  <div class="warn">⚠️ <b>A barra de 2026 não se compara com as outras:</b> ela tem 20 dias, contra 31 de 2024 e 2025. A comparação justa, nos mesmos 20 dias, é R$ 198.985 em 2025 contra R$ 167.139 em 2026 (-16,0%).
+  Setembro usou a coluna Total (produto + frete); outubro volta a ela quando os quatro anos forem extraídos do Octopus, e 2023 entra junto.</div>
+  <div class="blue-note">ℹ️ <b>O que a janela de 20 dias já mostra:</b> os pedidos estão perto de 2025 (853 contra 888, -3,9%). A maior parte da diferença de faturamento está no valor de cada pedido: R$ 195,94 contra R$ 224,08.</div>
+</div>
+
+<!-- META -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--blue)"></span> Meta Ads (Facebook / Instagram)</h2>
+  <div class="sub">Conta Roma_Aviamentos (334867505168849) · outubro/2026 fechado, 1 a 31 · R$ 4.316,24 investidos</div>
+  <table>
+    <thead><tr><th>Campanha</th><th class="r">Investido</th><th class="r">Compras</th><th class="r">Receita atribuída</th><th class="r">Retorno</th></tr></thead>
+    <tbody>
+      <tr><td><b>Catálogo — Remarketing (CBO)</b></td><td class="r">R$ 1.039,70</td><td class="r">308</td><td class="r">R$ 43.552,69</td><td class="r"><span class="roas">41,9x</span></td></tr>
+      <tr><td><b>Catálogo — Prospecção (CBO)</b></td><td class="r">R$ 1.034,65</td><td class="r">302</td><td class="r">R$ 35.679,68</td><td class="r"><span class="roas">34,5x</span></td></tr>
+      <tr><td><b>Catálogo — Semelhantes de comprador 50d</b></td><td class="r">R$ 745,73</td><td class="r">208</td><td class="r">R$ 33.036,84</td><td class="r"><span class="roas">44,3x</span></td></tr>
+      <tr><td><b>Tráfego de perfil (frio)</b></td><td class="r">R$ 524,47</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr>
+      <tr><td><b>Reconhecimento Site</b></td><td class="r">R$ 352,47</td><td class="r">8</td><td class="r">R$ 1.136,18</td><td class="r"><span class="tag">topo de funil</span></td></tr>
+      <tr><td><b>Catálogo — Cestas grandes (VALOR_500+) <span class="tag">nova em 13/10</span></b></td><td class="r">R$ 258,53</td><td class="r">78</td><td class="r">R$ 11.519,60</td><td class="r"><span class="roas">44,6x</span></td></tr>
+      <tr><td><b>Catálogo — Remarketing Nordeste</b></td><td class="r">R$ 252,64</td><td class="r">97</td><td class="r">R$ 11.712,11</td><td class="r"><span class="roas">46,4x</span></td></tr>
+      <tr><td><b>Reconhecimento Norte/Nordeste</b></td><td class="r">R$ 108,05</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="tag">topo de funil</span></td></tr>
+      <tr class="total"><td>Total Meta</td><td class="r">R$ 4.316,24</td><td class="r">1.001</td><td class="r">R$ 136.637,10</td><td class="r">31,7x</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ <b>Em outubro a Compra do Meta mudou de régua três vezes, e nenhuma comparação com a loja vale sem isso.</b>
+  A contagem era de 2,20 vezes até meados do mês. A correção veio em etapas: 19/10 (fator ~1,15), 22/10 (Compra só pelo servidor, ~1,04, com vazamento de cerca de 25% pelo navegador) e 27/10 (reforço, alvo 1,0).
+  As 1.001 compras da tabela somam períodos diferentes: <b>839 de 1 a 18/10, 104 de 19 a 21/10 e 58 de 22 a 31/10</b>. Aplicando o fator de cada período, são cerca de <b>528 compras</b> e <b>R$ 72,5 mil</b> de receita atribuída, um custo aproximado de <b>R$ 8,18 por pedido</b>.
+  É uma conta de referência: o fator do mês só se confirma contra os pedidos da loja de 1 a 31/10, que estão pendentes.</div>
+  <div class="blue-note">ℹ️ <b>Por que o painel vendeu tão menos no fim do mês:</b> três coisas aconteceram ao mesmo tempo. A contagem dobrada saiu, a Compra passou a ser enviada só quando o pedido é pago, e a verba foi concentrada no início: <b>R$ 180 por dia de 1 a 20/10 e R$ 65 por dia de 21 a 31/10</b>.
+  As 58 compras de 22 a 31/10 não medem a queda de um período para o outro, e o retorno de 31,7x da tabela também não se compara com os 41,0x de setembro.</div>
+  <div class="note">✅ <b>O catálogo segue carregando a conta:</b> as cinco campanhas de catálogo somam R$ 3.331,25 e 993 das 1.001 compras do painel. Os <b>Semelhantes de comprador 50d</b>, a frente de comprador novo, seguem como a peça que mais vende. A campanha de <b>cestas grandes</b> entrou em 13/10 e fechou o mês com R$ 258,53 investidos.</div>
+  <div class="blue-note">ℹ️ <b>Contra setembro:</b> praticamente a mesma verba (<span style="color:var(--accent);font-weight:700">▲ 0,6%</span>), com 49% mais aparições e mil aparições a R$ 3,88 contra R$ 5,76. <b>Contra outubro/25:</b> verba +36,1% e cliques +98,8% (84.373 contra 42.433).
+  A comparação de compras e receita atribuída não é confiável em nenhum dos dois casos; a que vale é a da loja, na seção 2.</div>
+  <h2 style="font-size:14px;margin-top:30px"><span class="bar" style="background:var(--blue);height:15px"></span> Os criativos que mais performaram</h2>
+  <div class="sub">Todas as peças que rodaram em outubro, ordenadas por compras. A coluna de compras é o número do painel, sem correção de contagem — serve para ordenar as peças entre si, não para somar</div>
+  <table>
+    <thead><tr><th>Criativo</th><th>Onde rodou</th><th class="r">Investido</th><th class="r">Visitas levadas</th><th class="r">Custo por visita</th><th class="r">Quem clica</th><th class="r">Compras</th></tr></thead>
+    <tbody>
+      <tr><td><b>Catálogo para semelhantes de comprador</b></td><td class="tag">clientes novos</td><td class="r">R$ 745,73</td><td class="r">9.617</td><td class="r">R$ 0,08</td><td class="r">9,2%</td><td class="r"><b>208</b></td></tr>
+      <tr><td><b>Catálogo completo</b></td><td class="tag">prospecção</td><td class="r">R$ 540,98</td><td class="r">12.283</td><td class="r">R$ 0,04</td><td class="r">11,2%</td><td class="r"><b>174</b></td></tr>
+      <tr><td><b>Fitas Princess — quem já visitou</b></td><td class="tag">remarketing</td><td class="r">R$ 577,69</td><td class="r">12.504</td><td class="r">R$ 0,05</td><td class="r">11,0%</td><td class="r"><b>162</b></td></tr>
+      <tr><td><b>Curva A — os campeões de venda</b></td><td class="tag">remarketing</td><td class="r">R$ 423,31</td><td class="r">8.881</td><td class="r">R$ 0,05</td><td class="r">12,1%</td><td class="r"><b>130</b></td></tr>
+      <tr><td><b>Fitas Princess — catálogo</b></td><td class="tag">prospecção</td><td class="r">R$ 493,67</td><td class="r">8.940</td><td class="r">R$ 0,06</td><td class="r">10,2%</td><td class="r"><b>128</b></td></tr>
+      <tr><td><b>Princess — Nordeste</b></td><td class="tag">remarketing regional</td><td class="r">R$ 252,64</td><td class="r">5.680</td><td class="r">R$ 0,04</td><td class="r">11,6%</td><td class="r"><b>97</b></td></tr>
+      <tr><td><b>Catálogo sem itens de até R$ 5 — cestas grandes</b></td><td class="tag">valor acima de R$ 500</td><td class="r">R$ 258,53</td><td class="r">5.255</td><td class="r">R$ 0,05</td><td class="r">9,6%</td><td class="r">78</td></tr>
+      <tr><td>Organizadores</td><td class="tag">remarketing</td><td class="r">R$ 38,70</td><td class="r">1.015</td><td class="r">R$ 0,04</td><td class="r">13,8%</td><td class="r">16</td></tr>
+      <tr class="sub"><td><b>Reel da parceira — headband</b> <a href="https://www.instagram.com/p/DdRkdP4sKwN/" target="_blank" rel="noopener" class="tag">ver</a></td><td class="tag">conteúdo de criadora</td><td class="r">R$ 524,47</td><td class="r">18.593</td><td class="r">R$ 0,03</td><td class="r">9,2%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Mix com Natal</td><td class="tag">reconhecimento</td><td class="r">R$ 162,14</td><td class="r">746</td><td class="r">R$ 0,22</td><td class="r">0,7%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Novidades de Natal</td><td class="tag">reconhecimento</td><td class="r">R$ 80,19</td><td class="r">171</td><td class="r">R$ 0,47</td><td class="r">0,7%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Mix de Natal</td><td class="tag">reconhecimento</td><td class="r">R$ 77,81</td><td class="r">275</td><td class="r">R$ 0,28</td><td class="r">0,4%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Mix</td><td class="tag">reconhecimento</td><td class="r">R$ 76,11</td><td class="r">207</td><td class="r">R$ 0,37</td><td class="r">0,3%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Guipir e bordado inglês</td><td class="tag">reconhecimento</td><td class="r">R$ 31,45</td><td class="r">157</td><td class="r">R$ 0,20</td><td class="r">0,6%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Linhas Círculo</td><td class="tag">reconhecimento</td><td class="r">R$ 14,66</td><td class="r">22</td><td class="r">R$ 0,67</td><td class="r">0,4%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Frete grátis SP</td><td class="tag">reconhecimento</td><td class="r">R$ 14,13</td><td class="r">20</td><td class="r">R$ 0,71</td><td class="r">0,4%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>Dia das Crianças</td><td class="tag">reconhecimento</td><td class="r">R$ 3,54</td><td class="r">7</td><td class="r">R$ 0,51</td><td class="r">0,5%</td><td class="tag r">topo de funil</td></tr>
+      <tr class="sub"><td>InLove Círculo</td><td class="tag">reconhecimento</td><td class="r">R$ 0,49</td><td class="r">0</td><td class="r">—</td><td class="r">0,0%</td><td class="tag r">topo de funil</td></tr>
+    </tbody>
+  </table>
+  <div class="note">✅ <b>Fitas Princess segue vencendo nas duas pontas do funil.</b> As duas peças somam <b>21.444 visitas</b> e <b>290 compras no painel</b>, tanto com quem já conhece a loja quanto com quem nunca entrou.</div>
+  <div class="blue-note">ℹ️ <b>E o criativo que mais vendeu de novo não é o que mais levou gente.</b> O <b>catálogo para semelhantes de comprador</b> levou 9.617 visitas, menos que o catálogo completo (12.283), e vendeu mais no painel (208 contra 174), com a visita mais cara da lista de venda (R$ 0,08). É o mesmo padrão de setembro: <b>público melhor, não peça melhor</b>.</div>
+</div>
+
+<!-- GOOGLE -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--yellow)"></span> Google Ads</h2>
+  <div class="sub">Conta Varejo 841-012-9672 · outubro/2026 fechado, 1 a 31 · R$ 5.871,89 investidos</div>
+  <table>
+    <thead><tr><th>Campanha</th><th class="r">Investido</th><th class="r">Conversões</th><th class="r">Receita atribuída</th><th class="r">Retorno</th></tr></thead>
+    <tbody>
+      <tr><td><b>Performance Max</b></td><td class="r">R$ 2.602,29</td><td class="r">417</td><td class="r">R$ 57.276,47</td><td class="r"><span class="roas" style="color:var(--green)">22,0x</span></td></tr>
+      <tr><td><b>Busca — Institucional #3</b></td><td class="r">R$ 2.157,19</td><td class="r">252</td><td class="r">R$ 52.293,78</td><td class="r"><span class="roas" style="color:var(--green)">24,2x</span></td></tr>
+      <tr><td><b>Shopping <span class="tag">pausada em 27/10</span></b></td><td class="r">R$ 954,41</td><td class="r">91</td><td class="r">R$ 10.331,11</td><td class="r"><span class="roas" style="color:var(--green)">10,8x</span></td></tr>
+      <tr><td><b>Shopping — Natal <span class="tag">teste de 02 a 05/10</span></b></td><td class="r">R$ 87,02</td><td class="r">6</td><td class="r">R$ 1.004,25</td><td class="r"><span class="roas" style="color:var(--green)">11,5x</span></td></tr>
+      <tr><td><b>Busca — Natal <span class="tag">teste de 02 a 05/10</span></b></td><td class="r">R$ 70,99</td><td class="r">1</td><td class="r">R$ 201,62</td><td class="r"><span class="roas" style="color:var(--accent)">2,8x</span></td></tr>
+      <tr class="total"><td>Total Google</td><td class="r">R$ 5.871,89</td><td class="r">767</td><td class="r">R$ 121.107,23</td><td class="r">20,6x</td></tr>
+    </tbody>
+  </table>
+  <div class="note">✅ <b>A Roma continua aparecendo no Shopping, agora pela PMax.</b> Em 27/10 a campanha de Shopping foi pausada e a verba foi para a PMax (R$ 100 → R$ 125 por dia), porque a PMax já entregava <b>84% do gasto em anúncio de produto na busca</b> com retorno de <b>24,1x</b>, contra <b>11,0x</b> da campanha de Shopping (27/09 a 26/10). No mês fechado a conclusão se mantém:</div>
+  <table>
+    <thead><tr><th>PMax por canal · 1 a 31/10</th><th class="r">Investido</th><th class="r">% da PMax</th><th class="r">Conversões</th><th class="r">Retorno</th></tr></thead>
+    <tbody>
+      <tr><td><b>Produto na busca (Shopping)</b></td><td class="r">R$ 2.233,46</td><td class="r">85,8%</td><td class="r">381</td><td class="r"><span class="roas">22,4x</span></td></tr>
+      <tr><td>Texto na busca</td><td class="r">R$ 118,02</td><td class="r">4,5%</td><td class="r">8</td><td class="r"><span class="roas">20,0x</span></td></tr>
+      <tr><td>YouTube — produto</td><td class="r">R$ 182,28</td><td class="r">7,0%</td><td class="r">23</td><td class="r"><span class="roas">20,6x</span></td></tr>
+      <tr><td>YouTube vídeo / Discover / outros</td><td class="r">R$ 68,53</td><td class="r">2,6%</td><td class="r">5</td><td class="r"><span class="roas">17,3x</span></td></tr>
+      <tr class="total"><td>Total PMax</td><td class="r">R$ 2.602,29</td><td class="r">100%</td><td class="r">417</td><td class="r">22,0x</td></tr>
+      <tr class="sub"><td>Campanha de Shopping (1 a 27/10, para comparar)</td><td class="r">R$ 954,41</td><td class="r">—</td><td class="r">91</td><td class="r"><span class="roas">10,8x</span></td></tr>
+    </tbody>
+  </table>
+  <table style="margin-top:18px">
+    <thead><tr><th>Anúncio de produto na busca, por dia</th><th class="r">1 a 27/10<br><span class="tag">PMax + Shopping</span></th><th class="r">28 a 31/10<br><span class="tag">só PMax</span></th><th class="r">Δ</th></tr></thead>
+    <tbody>
+      <tr><td>Investido por dia</td><td class="r">R$ 103,16</td><td class="r">R$ 100,64</td><td class="r">-2,4%</td></tr>
+      <tr><td><b>Aparições por dia</b></td><td class="r">10.178</td><td class="r"><b>13.180</b></td><td class="r"><span style="color:var(--green);font-weight:700">▲ 29,5%</span></td></tr>
+      <tr><td><b>Cliques por dia</b></td><td class="r">347</td><td class="r"><b>497</b></td><td class="r"><span style="color:var(--green);font-weight:700">▲ 43,2%</span></td></tr>
+      <tr><td>Conversões por dia</td><td class="r">15,1</td><td class="r">15,9</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 5,6%</span></td></tr>
+      <tr><td>Receita atribuída por dia</td><td class="r">R$ 2.027,54</td><td class="r">R$ 1.389,04</td><td class="r">-31,5%</td></tr>
+    </tbody>
+  </table>
+  <div class="blue-note">ℹ️ <b>Sem a campanha de Shopping, a Roma seguiu no Shopping.</b> De 28 a 31/10, com praticamente o mesmo gasto por dia nesse formato, as aparições e os cliques por dia subiram. A receita atribuída por dia veio menor nesses dias, e o número ainda pode subir, porque a venda é creditada nos dias seguintes ao clique. <b>São só 4 dias:</b> o retorno dessa nova configuração se lê com mais dias, não com este recorte.</div>
+  <div class="blue-note">ℹ️ <b>Outras mudanças de 27/10:</b> a <b>Institucional passou de R$ 91 para R$ 60 por dia</b>. A escala de 13/10 não mudou a loja: de 36,3 para 38,9 pedidos por dia, tendência que já vinha, com o custo por clique 36% maior. O anúncio ganhou 2 títulos novos: <b>"Armarinho Roma"</b> e <b>"Roma Armarinho"</b>. O total do Google por dia ficou igual (R$ 185).</div>
+  <div class="blue-note">ℹ️ <b>Contra setembro:</b> verba +10,6%, conversões +28,7% e receita atribuída +8,3%, com retorno de 20,6x contra 21,1x. <b>Contra outubro/25:</b> verba +10,7%, conversões -10,4% e receita atribuída -24,3%, com 20,6x contra 30,2x. Mil aparições saíram de R$ 9,75 para R$ 13,80, e a seção seguinte abre essa conta.</div>
+  <h2 style="font-size:14px;margin-top:30px"><span class="bar" style="background:var(--yellow);height:15px"></span> Quais leilões a Roma ganhou — e contra quem</h2>
+  <div class="sub">Participação de leilão de outubro: de tudo que a loja poderia ter aparecido, quanto apareceu de fato — e por que não apareceu no resto</div>
+  <table>
+    <thead><tr><th>Frente</th><th class="r">Participação<br>no leilão</th><th class="r">Perdido por<br>ORÇAMENTO</th><th class="r">Perdido por<br>RANK</th><th>O que isso quer dizer</th></tr></thead>
+    <tbody>
+      <tr><td><b>Busca pela marca</b></td><td class="r"><b style="color:#0a8f6e">80,7%</b></td><td class="r">7,8%</td><td class="r">9,9%</td><td class="tag">Ganhamos a maior parte das buscas por "roma aviamentos" e quase não sobra espaço a comprar: set era 64,3%.</td></tr>
+      <tr><td><b>Campanha inteligente</b></td><td class="r">13,1%</td><td class="r">26,5%</td><td class="r"><b style="color:var(--accent)">59,8%</b></td><td class="tag">Perde <b>para concorrente</b>, mais que por verba. O que resolve é relevância: catálogo, preço e página.</td></tr>
+      <tr><td><b>Vitrine de produtos</b> <span class="tag">pausada em 27/10</span></td><td class="r">10,7%</td><td class="r"><b style="color:var(--accent)">84,4%</b></td><td class="r">7,1%</td><td class="tag">Perdia <b>por verba</b>. A verba agora está na PMax, que passa a responder por esse espaço.</td></tr>
+      <tr><td>Vitrine de Natal <span class="tag">teste de 02 a 05/10</span></td><td class="r">11,4%</td><td class="r">75,5%</td><td class="r">12,6%</td><td class="tag">Testada por 4 dias e encerrada.</td></tr>
+      <tr><td>Busca de Natal <span class="tag">teste de 02 a 05/10</span></td><td class="r">abaixo de 10%</td><td class="r">39,9%</td><td class="r">54,4%</td><td class="tag">Testada por 4 dias e encerrada.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">✅ <b>A leitura que importa: perder por orçamento e perder por rank são problemas opostos.</b>
+  <b>Perdido por orçamento</b> é espaço à venda que ninguém comprou, e se resolve com verba.
+  <b>Perdido por rank</b> é concorrente vencendo no leilão, e se resolve com relevância (título e preço no catálogo, velocidade e conteúdo da página).
+  <b>Em outubro, a campanha inteligente perdeu 59,8% por rank e a vitrine, 84,4% por orçamento.</b></div>
+  <div class="blue-note">ℹ️ <b>E a marca é onde o trabalho aparece mais limpo.</b> A participação no leilão da campanha de marca saiu de <b>42,8% em outubro/25 para 80,7%</b>, e o perdido por orçamento caiu de 19,6% para 7,8%. É o indicador menos contaminado que existe: não depende de preço de leilão, de ticket nem de atribuição.</div>
+  <div class="foot-note">Se a Roma quiser a lista nominal de quem disputa cada leilão (o relatório de Insights de leilão do Google, com os domínios concorrentes e a sobreposição de cada um), conseguimos levantar — basta pedir.</div>
+</div>
+
+<!-- CUSTO DO LEILÃO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--accent)"></span> O custo do espaço no Google subiu 42% — e a mídia entregou mais</h2>
+  <div class="sub">Seção fixa desde setembro/26 — separa o que o leilão define (o preço) do que é trabalho de gestão (a atratividade do anúncio)</div>
+
+  <p class="lead"><b>Em outubro de 2025, mil aparições no Google custavam R$ 9,75. Em outubro de 2026, custam R$ 13,80.</b>
+  São <b>42% mais caro</b>, com <b>11% mais verba</b>. No Meta aconteceu o contrário: o espaço ficou 21% mais barato.
+  Esta seção existe para que o preço não seja confundido com desempenho, porque os dois aparecem juntos no resultado e se corrigem de formas diferentes.</p>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="l">Custo por mil aparições · Google</div><div class="v" style="color:var(--accent)">R$ 9,75 → 13,80</div><div class="s">+41,6% · quem define é o leilão</div></div>
+    <div class="kpi"><div class="l">Quantos clicam · Google</div><div class="v" style="color:#0a8f6e">4,16% → 4,78%</div><div class="s">+14,8% · este é o nosso trabalho</div></div>
+    <div class="kpi"><div class="l">Quantos clicam · Meta</div><div class="v" style="color:#0a8f6e">6,55% → 7,59%</div><div class="s">+15,9% · este é o nosso trabalho</div></div>
+    <div class="kpi hero"><div class="l">Cliques levados ao site</div><div class="v">104.709</div><div class="s">contra 65.073 em out/25 · +61%</div></div>
+  </div>
+
+  <table style="margin-top:22px">
+    <thead><tr><th>Outubro · 2025 → 2026</th><th class="r">Google 2025</th><th class="r">Google 2026</th><th class="r">Δ</th><th class="r">Meta 2025</th><th class="r">Meta 2026</th><th class="r">Δ</th></tr></thead>
+    <tbody>
+      <tr><td>Verba investida</td><td class="r">R$ 5.302</td><td class="r">R$ 5.872</td><td class="r">+11%</td><td class="r">R$ 3.172</td><td class="r">R$ 4.316</td><td class="r">+36%</td></tr>
+      <tr><td><b>Custo por mil aparições</b><br><span class="tag">o preço do espaço — quem define é o leilão</span></td><td class="r">R$ 9,75</td><td class="r"><b>R$ 13,80</b></td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 41,6%</span></td><td class="r">R$ 4,89</td><td class="r"><b>R$ 3,88</b></td><td class="r"><span style="color:var(--green);font-weight:700">▼ 20,7%</span></td></tr>
+      <tr><td>Custo por clique</td><td class="r">R$ 0,234</td><td class="r">R$ 0,289</td><td class="r"><span style="color:var(--accent);font-weight:700">▲ 23,3%</span></td><td class="r">R$ 0,075</td><td class="r">R$ 0,051</td><td class="r"><span style="color:var(--green);font-weight:700">▼ 31,6%</span></td></tr>
+      <tr><td>Aparições compradas</td><td class="r">544.016</td><td class="r">425.526</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 21,8%</span></td><td class="r">648.190</td><td class="r">1.111.670</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 71,5%</span></td></tr>
+      <tr><td>Cliques levados ao site</td><td class="r">22.640</td><td class="r">20.336</td><td class="r"><span style="color:var(--accent);font-weight:700">▼ 10,2%</span></td><td class="r">42.433</td><td class="r">84.373</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 98,8%</span></td></tr>
+      <tr><td><b>Quantos clicam</b><br><span class="tag">atratividade do anúncio — este é o nosso trabalho</span></td><td class="r">4,16%</td><td class="r"><b>4,78%</b></td><td class="r"><span style="color:var(--green);font-weight:700">▲ 14,8%</span></td><td class="r">6,55%</td><td class="r"><b>7,59%</b></td><td class="r"><span style="color:var(--green);font-weight:700">▲ 15,9%</span></td></tr>
+      <tr class="total"><td>Conversões por mil aparições<br><span class="tag">o quanto cada espaço comprado vira venda</span></td><td class="r">1,57</td><td class="r">1,80</td><td class="r"><span style="color:var(--green);font-weight:700">▲ 14,6%</span></td><td class="r">—</td><td class="r">—</td><td class="r">—</td></tr>
+    </tbody>
+  </table>
+  <div class="foot-note">Conversões por mil aparições não entra para o Meta porque a contagem da Compra mudou ao longo de outubro/26 e não tem fator medido para 2025.</div>
+
+  <div class="warn">⚠️ <b>A conta fecha exata, e isso importa.</b> Com a verba 11% maior e o espaço 42% mais caro, as aparições do Google <b>tinham</b> que cair 22%: <b>1,11 ÷ 1,42 = 0,78</b>. A verba dividida pelo preço dá o volume.</div>
+
+  <div class="note">✅ <b>A atratividade do anúncio absorveu parte da inflação do leilão.</b> O espaço subiu 42%, mas o <b>clique subiu 23%</b>; a diferença é a melhora de 15% em quantos clicam. No Meta, o clique ficou <b>32% mais barato</b> que um ano atrás.</div>
+
+  <div class="note">✅ <b>E cada espaço comprado virou mais conversão:</b> a cada mil aparições, o Google converteu 1,80 vezes, contra 1,57 em outubro/25. Somando as duas plataformas, outubro levou <b>104.709 cliques</b> ao site contra <b>65.073</b>, com o custo médio por clique <b>25% menor</b>.</div>
+
+  <div class="blue-note">ℹ️ <b>Onde o nosso trabalho é medido direto, a marca quase dobrou: de 42,8% para 80,7% do leilão.</b> Na campanha que defende o nome "roma aviamentos", as buscas perdidas por falta de orçamento caíram de 19,6% para 7,8%, com a taxa de clique subindo de 36,6% para 38,4%.</div>
+
+  <div class="blue-note">ℹ️ <b>Duas ressalvas, uma contra cada lado.</b>
+  (1) <b>A régua de contagem mudou:</b> em 06/09/2026 reduzimos a janela de contagem de vendas do Google de 30 dias para 7, então a contagem de 2026 é mais conservadora, e a comparação de conversões favorece o ano passado.
+  (2) <b>O Meta de 2026 não é o Meta de 2025:</b> a verba de hoje carrega frentes de reconhecimento e de perfil que, por desenho, não vendem no clique.</div>
+
+  <div class="warn">⚠️ <b>O que o preço do leilão NÃO explica.</b> Ele explica por que a loja apareceu menos no Google. Não explica o faturamento: de 1 a 20/10, contra outubro/25, ele recuou mais por <b>ticket</b> (-12,6%) do que por <b>pedido</b> (-3,9%). O efeito do cancelamento em outubro segue pendente, na seção 6.</div>
+</div>
+
+<!-- CONTEUDO DE CRIADORA -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--purple)"></span> O conteúdo de criadora e as visitas ao perfil</h2>
+  <div class="sub">A frente de topo de funil que estreou em 14/09 — e o que ela mudou no custo de levar gente ao perfil da Roma</div>
+
+  <p class="lead"><b>Outubro levou 20.198 pessoas ao perfil e ao site pelas frentes de topo de funil, contra 6.833 em setembro e 830 em agosto.</b>
+  O topo de funil custou <b>R$ 984,99</b> em outubro contra R$ 472,53 em setembro, e a visita saiu de R$ 0,07 para <b>R$ 0,05</b>.</p>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="l">Agosto</div><div class="v">830</div><div class="s">visitas · R$ 340,23 · R$ 0,41 cada</div></div>
+    <div class="kpi"><div class="l">Setembro</div><div class="v">6.833</div><div class="s">visitas · R$ 472,53 · R$ 0,07 cada</div></div>
+    <div class="kpi hero"><div class="l">Outubro</div><div class="v">20.198</div><div class="s">visitas · R$ 984,99 · <b>R$ 0,05 cada</b></div></div>
+    <div class="kpi"><div class="l">Só o reel da parceira</div><div class="v">18.593</div><div class="s">visitas · R$ 524,47 · <b>R$ 0,03 cada</b><br><a href="https://www.instagram.com/p/DdRkdP4sKwN/" target="_blank" rel="noopener">ver o reel</a></div></div>
+  </div>
+
+  <div class="note">✅ <b>O reel da parceira levou 92% de toda a gente que o topo de funil trouxe no mês, com 53% da verba da camada.</b>
+  R$ 524,47 por <b>18.593 visitas ao perfil</b>, <b>R$ 0,03 por pessoa</b>, o clique mais barato de toda a conta, com <b>9,2%</b> de quem viu clicando. A peça é o reel de <a href="https://www.instagram.com/mirianfragnon/" target="_blank" rel="noopener">@mirianfragnon</a> com o cupom TODAXIQUE — <a href="https://www.instagram.com/p/DdRkdP4sKwN/" target="_blank" rel="noopener"><b>ver o conteúdo no Instagram</b></a>.
+  No mesmo mês, as peças de reconhecimento com material próprio custaram de <b>R$ 0,20 a R$ 0,71</b> por visita, com até 0,7% de cliques.</div>
+
+  <div class="warn">⚠️ <b>O que isso significa na prática, e o pedido que vem junto.</b>
+  Topo de funil não vende no clique: ele enche a base que o remarketing e o catálogo colhem nas semanas seguintes.
+  O pedido segue sendo de calendário: <b>definir com quais criadoras e em que ritmo</b>.</div>
+
+  <div class="blue-note">ℹ️ <b>Uma transparência sobre seguidores.</b> O número de seguidores ganhos por mês não entra neste relatório porque não está na nossa central de dados: hoje medimos o que passa pela conta de anúncios (visitas levadas, aparições e cliques), não o saldo de seguidores do perfil.
+  A conexão do Instagram da Roma, feita uma única vez, permite acompanhar seguidores ganhos, alcance orgânico e visitas ao perfil mês a mês. <b>Segue como pedido.</b></div>
+</div>
+
+<!-- ONDE O DINHEIRO ESTÁ PARANDO -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--accent)"></span> Onde o dinheiro está parando</h2>
+  <div class="sub">Seção fixa desde setembro/26 — o cancelamento do mês e a passagem carrinho → checkout, medida em pessoas (GA4), só Brasil</div>
+
+  <p class="lead"><b>Em outubro esta seção ainda não tem dado do mês.</b> O cancelamento depende do painel da loja e a passagem depende do GA4, e nenhum dos dois foi lido nesta rodada. A seção fica no relatório com as referências anteriores, sem estimativa.</p>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="l">Cancelado em outubro</div><div class="v">pendente</div><div class="s">set: R$ 43.809,96 · 148 pedidos</div></div>
+    <div class="kpi"><div class="l">Taxa sobre o valor</div><div class="v">pendente</div><div class="s">set 19,1% · out/25 14,8%</div></div>
+    <div class="kpi"><div class="l">Ticket do cancelado</div><div class="v">pendente</div><div class="s">set R$ 296,01 · out/25 R$ 211,13</div></div>
+    <div class="kpi"><div class="l">Carrinho → pagamento</div><div class="v">pendente</div><div class="s">set 22,1% · ago 21,1%</div></div>
+  </div>
+
+  <h2 style="font-size:14px;margin-top:26px"><span class="bar" style="background:var(--accent);height:15px"></span> 1. O cancelamento do mês</h2>
+  <div class="sub">Pedido feito, mídia já paga, receita que não entra</div>
+  <table>
+    <thead><tr><th>Medida</th><th class="r">Outubro 2026</th><th class="r">Setembro 2026</th><th class="r">Outubro 2025</th><th class="r">Outubro 2024</th></tr></thead>
+    <tbody>
+      <tr><td><b>Valor cancelado</b></td><td class="r"><span class="tag">pendente</span></td><td class="r">R$ 43.809,96</td><td class="r">R$ 46.449,00</td><td class="r">R$ 44.298,00</td></tr>
+      <tr><td>Taxa sobre o valor vendido</td><td class="r"><span class="tag">pendente</span></td><td class="r">19,1%</td><td class="r">14,8%</td><td class="r">11,7%</td></tr>
+      <tr><td>Pedidos cancelados</td><td class="r"><span class="tag">pendente</span></td><td class="r">148</td><td class="r">220</td><td class="r">222</td></tr>
+      <tr><td>Taxa sobre os pedidos</td><td class="r"><span class="tag">pendente</span></td><td class="r">13,3%</td><td class="r">15,1%</td><td class="r">11,2%</td></tr>
+      <tr class="total"><td>Ticket do pedido cancelado</td><td class="r"><span class="tag">pendente</span></td><td class="r">R$ 296,01</td><td class="r">R$ 211,13</td><td class="r">R$ 199,54</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ <b>Sem dado de outubro nesta rodada.</b> O cancelado do mês e a quebra por forma de pagamento entram quando o painel da loja for lido. A referência é setembro, quando o cartão de crédito respondeu por 78,7% do valor cancelado.</div>
+
+  <h2 style="font-size:14px;margin-top:30px"><span class="bar" style="background:var(--yellow);height:15px"></span> 2. A passagem carrinho → checkout</h2>
+  <div class="sub">Pessoas (não sessões), GA4, só Brasil — o tráfego de robô (China + Hong Kong, 53,5% dos visitantes e R$ 0 de receita) está fora</div>
+  <table>
+    <thead><tr><th>Etapa</th><th class="r">Julho</th><th class="r">Agosto</th><th class="r">Setembro <span class="tag">1 a 23</span></th><th class="r">Outubro</th><th>O que acontece aqui</th></tr></thead>
+    <tbody>
+      <tr><td><b>Carrinho</b></td><td class="r">5.302</td><td class="r">5.498</td><td class="r">4.579</td><td class="r"><span class="tag">pendente</span></td><td class="tag">a pessoa montou a compra</td></tr>
+      <tr><td>Resumo do pedido</td><td class="r">2.073</td><td class="r">1.781</td><td class="r">1.546</td><td class="r"><span class="tag">pendente</span></td><td class="tag">entre os dois está a exigência de login</td></tr>
+      <tr class="sub"><td>Passagem carrinho → resumo</td><td class="r">39,1%</td><td class="r">32,4%</td><td class="r">33,8%</td><td class="r"><span class="tag">pendente</span></td><td class="tag">2 de cada 3 não passam</td></tr>
+      <tr><td>Frete</td><td class="r">1.246</td><td class="r">1.329</td><td class="r">1.127</td><td class="r"><span class="tag">pendente</span></td><td class="tag">escolha de transportadora</td></tr>
+      <tr><td>Pagamento</td><td class="r">1.128</td><td class="r">1.159</td><td class="r">1.012</td><td class="r"><span class="tag">pendente</span></td><td class="tag">tela final</td></tr>
+      <tr class="sub"><td>Passagem carrinho → pagamento</td><td class="r">21,3%</td><td class="r">21,1%</td><td class="r">22,1%</td><td class="r"><span class="tag">pendente</span></td><td class="tag">é esta a passagem da régua</td></tr>
+      <tr class="total"><td>Pedidos registrados na loja</td><td class="r">998</td><td class="r">1.028</td><td class="r">861</td><td class="r"><span class="tag">pendente</span></td><td class="tag">quem chega ao pagamento compra: 85% a 89%</td></tr>
+    </tbody>
+  </table>
+  <div class="blue-note">ℹ️ <b>A régua do cliente, como está acordada:</b> <b>1 ponto percentual de passagem = 34 pedidos = R$ 6.826 por mês = R$ 82 mil por ano.</b> Ela segue valendo e será aplicada à passagem de outubro quando ela for medida.</div>
+  <div class="warn">⚠️ <b>A medição do mês cheio ficou para o fechamento.</b> O relatório de setembro combinou medir o funil no mês cheio a partir de outubro. Isso segue de pé: a tabela será preenchida com 1 a 31/10 quando o GA4 for lido, em pessoas e só Brasil.</div>
+  <div class="note">✅ <b>As duas frentes seguem sendo as maiores alavancas fora da mídia.</b> Na conta de setembro, cancelamento e tela de pagamento/login somavam cerca de R$ 48 mil por mês. O valor de outubro depende dos dois números pendentes. Nenhum dos dois se resolve com verba.</div>
+</div>
+
+
+<!-- ANEXOS -->
+<div class="section">
+  <h2><span class="bar" style="background:var(--purple)"></span> Anexos</h2>
+  <div class="sub">As páginas de estudo do mês. Elas não são copiadas para dentro deste relatório — ficam linkadas, com o número completo e o método</div>
+  <div class="steps">
+    <a class="step" href="../cancelamento/"><div class="num">ESTUDO</div><b>O pedido que não se completa</b><span>33 meses de cancelamento, forma de pagamento, quem volta e quem não volta. É a base dos números da seção 6.</span></a>
+    <a class="step" href="../onde-esta-o-problema/"><div class="num">ESTUDO</div><b>Onde está o problema</b><span>O funil do site em pessoas, o tráfego de robô e a régua de 1 p.p. de passagem = 34 pedidos.</span></a>
+    <a class="step" href="../clarity/"><div class="num">ESTUDO</div><b>Comportamento no site (Clarity)</b><span>Gravações e mapas de calor do checkout. Lembrete de régua: o Clarity subcaptura pedido — pedido e receita só pela loja.</span></a>
+    <a class="step" href="../analise-comparativa/"><div class="num">ESTUDO</div><b>Análise comparativa 2025 × 2026</b><span>Canal por canal, o que encolheu e quanto vale cada frente. Fonte da série de faturamento líquido mensal.</span></a>
+    <a class="step" href="../verba-novembro-26/"><div class="num">PLANO</div><b>Para onde vai o investimento — novembro/26</b><span>A distribuição de verba do mês seguinte.</span></a>
+    <a class="step" href="../parcial-outubro-26/"><div class="num">PARCIAL</div><b>Parcial de outubro (1 a 20)</b><span>A fonte dos números de loja deste relatório enquanto o mês não fecha: 853 pedidos e R$ 167.139 em venda bruta.</span></a>
+  </div>
+  <div class="foot-note">As páginas anteriores do cliente continuam no ar e não foram alteradas:
+  <a href="../acompanhamento-julho/">acompanhamento-julho</a> e <a href="../acompanhamento-agosto/">acompanhamento-agosto</a>
+  são as mesmas que a Rose recebeu, e estão espelhadas nas abas <a href="julho.html">Julho 2026</a> e <a href="agosto.html">Agosto 2026</a> desta página.</div>
+</div>
+
+<div class="footer">
+  Fontes: pedidos, venda bruta e ticket — sistema da loja (Octopus/Tray), <b>1 a 20/10/2026, parcial</b>. Fechamento de 1 a 31/10, cancelamento, faturamento líquido e funil do GA4: <b>pendentes nesta versão</b>.<br>
+  Mídia: Meta Ads (conta Roma_Aviamentos 334867505168849) e Google Ads (conta Varejo 841-012-9672) via Windsor.ai, <b>mês inteiro, 1 a 31/10/2026</b>.<br>
+  Réguas do cliente aplicadas: receita é a da loja (líquido), não a do pixel · Compra do Meta com fator por período em outubro (2,20× até meados do mês, ~1,15 desde 19/10, ~1,04 desde 22/10, alvo 1,0 desde 27/10) · visita só Brasil (China e Hong Kong são robô, R$ 0) · pedido e receita nunca pelo Clarity.<br>
+  Comparativos: setembro/2026 como publicado, sem recálculo; outubro/2025 e outubro/2024 da série dos estudos anexos. Participação de leilão: Google Ads, mesma janela.<br>
+  Comparação de leilão (custo por mil aparições, custo por clique, taxa de clique e participação de leilão): Meta Ads e Google Ads, outubro/2025 contra outubro/2026, mesma janela de 31 dias.<br>
+  Roma Aviamentos · Gestão GGD · leitura de 01/11/2026.
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  const fmt = v => 'R$ ' + (v/1000).toFixed(0) + ' mil';
+  new Chart(document.getElementById('cAnos'), {
+    type:'bar',
+    data:{labels:['Out 2023 (não extraído)','Out 2024','Out 2025','Out 2026 (só 1 a 20)'],
+      datasets:[{label:'Faturamento de outubro',
+        data:[null,377348,313032,167139],
+        backgroundColor:['#9b59b6','#4a90d9','#f5a623','#1a1a2e'],borderRadius:6}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
+      scales:{y:{ticks:{callback:fmt},grid:{color:'#eef1f5'}},x:{grid:{display:false}}}}
+  });
+</script>
+</body>
+</html>
