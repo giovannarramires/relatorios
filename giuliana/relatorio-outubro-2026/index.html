@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Giuliana Sueyoshi — Mapa da Criação de Conteúdo — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Giuliana Sueyoshi</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia de <b>Giuliana Sueyoshi</b> — conta de Meta Ads, agora com dois produtos: o <b>Projeto Meu Consultório</b> (R$ 1.297, vendido no lançamento da Imersão Dentista de Valor de 17/10) e o <b>Mapa da Criação de Conteúdo</b> (R$ 29,90, o perpétuo). Outubro foi o <b>mês do lançamento</b>: 90,6% da verba foi para ele, e o perpétuo ficou pausado desde 11/10. <b>Hoje a conta está com tudo pausado</b>: não entrega nada desde 26/10.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · 24 dias com anúncio no ar · 7 campanhas · mais de 100 anúncios · dados lidos em 02/11/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Clique em um mês para abrir o relatório daquele período.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Outubro · Meta Ads</span>
+        <p class="big">44</p>
+        <p class="what">vendas: 12 do Projeto Meu Consultório e 32 do Mapa da Criação de Conteúdo</p>
+        <p class="cost">a <b>R$ 646,20</b> cada no lançamento e <b>R$ 26,93</b> cada no perpétuo (verba com imposto)</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Outubro · retorno</span>
+        <p class="big">2,01x</p>
+        <p class="what">de retorno sobre a mídia</p>
+        <p class="cost"><b>R$ 8.562,21</b> investidos viraram <b>R$ 17.235,68</b> de vendas — <b>R$ 8.673,47</b> acima do que saiu</p>
+      </div>
+    </div>
+    <p class="frase">O mês fechou <b>no azul e com retorno melhor que o de setembro</b> (2,01x contra 1,53x), já contando o imposto que o Meta cobra por fora. Quem puxou foi o lançamento: <b>R$ 7.754,37 de verba, 489 inscrições na imersão e 12 vendas do Projeto Meu Consultório</b>, que somam <b>R$ 15.846,66</b> ou <b>92% do faturamento do mês</b>. O total de vendas caiu de 181 para 44 porque a verba trocou de produto, não porque a venda piorou: o Mapa rodou só 11 dias e, neles, devolveu <b>1,60x</b>. Duas ressalvas: esses valores são os que o Meta registra, <b>ainda sem o extrato da Hubla</b>, e a conta <b>terminou o mês sem nenhum anúncio no ar</b>, nem o perpétuo.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta 912256333622697 (CA01)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega · 24 dias no ar, média de R$ 313,41 por dia</span></td><td class="n">R$ 7.521,93</td><td class="n">R$ 3.779,02</td><td class="n up">+99,0%</td></tr>
+          <tr><td>Imposto da plataforma<span class="muted">13,83% cobrados pelo Meta por fora da verba</span></td><td class="n">R$ 1.040,28</td><td class="n">R$ 522,64</td><td class="n up">+99,0%</td></tr>
+          <tr class="tot"><td>Total pago no mês</td><td class="n">R$ 8.562,21</td><td class="n">R$ 4.301,66</td><td class="n up">+99,0%</td></tr>
+          <tr class="sub-row"><td colspan="4">Como a verba se dividiu</td></tr>
+          <tr><td>Lançamento — Imersão e Projeto Meu Consultório<span class="muted">captação, lembrete e venda com o carrinho aberto · 6 campanhas</span></td><td class="n">R$ 7.754,37</td><td class="n">—</td><td class="n flat">90,6% do total</td></tr>
+          <tr><td>Perpétuo — Mapa da Criação de Conteúdo<span class="muted">só público frio · pausado em 11/10</span></td><td class="n">R$ 807,84</td><td class="n">R$ 4.301,66</td><td class="n flat">9,4% do total</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o investimento dobrou:</b> por causa do lançamento, que não existia em setembro. A verba de mídia combinada era de <b>R$ 7.000,00</b> e foram usados <b>R$ 6.812,24</b> (97,3%), sobrando <b>R$ 187,76</b>. O painel do lançamento mostra R$ 5.508,94 porque ainda não soma a campanha de venda (R$ 1.303,30); o número certo do mês é o desta página.</div>
+    <div class="nota"><b>Sobre o imposto:</b> esta é uma conta brasileira e o Meta cobra <b>13,83%</b> por fora da verba de mídia. Todos os custos por venda e o retorno desta página estão calculados <b>sobre a verba com imposto</b> (R$ 8.562,21), que é o que sai de fato do caixa — não sobre os R$ 7.521,93 que aparecem no Gerenciador. É por isso que o retorno aqui é 2,01x e no painel do Meta aparece 2,29x.</div>
+    <div class="nota"><b>Sete dias do mês não tiveram entrega.</b> A conta não gastou nada em <b>19/10</b> e de <b>26 a 31/10</b>. O dia 19 foi em pleno carrinho aberto: a conta havia entrado em <b>período de carência em 15/10</b> e, em 19/10, estava <b>bloqueada por pagamento</b>. Hoje ela está ativa de novo. Já de 26 a 31/10 a parada veio da pausa das campanhas depois do fechamento do carrinho: nenhuma campanha substituiu o lançamento, nem o perpétuo voltou.</div>
+    <div class="nota"><b>O teto da conta não é um problema em novembro.</b> A conta tem um <b>limite de gasto de R$ 10.000,00</b>, que desliga tudo sozinho quando é atingido. O contador foi <b>zerado em 01/11</b>, ou seja, há <b>R$ 10.000,00 de folga</b>. Nada precisa ser mexido aí.</div>
+    <div class="nota"><b>A segunda conta de anúncio seguiu fora.</b> A conta <b>559010416218341 (Marketing GIULIANA)</b> não tem meio de pagamento válido e não entra em nenhum número deste relatório. Toda a operação de outubro aconteceu na <b>912256333622697</b>.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vendas<span class="muted">compras registradas pelo pixel no checkout da Hubla · 12 do Projeto e 32 do Mapa</span></td><td class="n"><b>44</b></td><td class="n"><b>R$ 194,60</b><span class="muted">média de dois produtos</span></td><td class="n down">−75,7%</td></tr>
+          <tr><td>Faturamento<span class="muted">valor das vendas vindas de anúncio · ticket médio R$ 391,72</span></td><td class="n">R$ 17.235,68</td><td class="n">retorno 2,01x</td><td class="n up">+161,1%</td></tr>
+          <tr><td>Pagamentos iniciados<span class="muted">quem chegou na tela de pagamento · medição incompleta no Projeto (ver abaixo)</span></td><td class="n">45</td><td class="n">R$ 190,27</td><td class="n down">−77,8%</td></tr>
+          <tr><td>Visitas à página<span class="muted">páginas de inscrição e de venda · quem clicou no anúncio e a página abriu</span></td><td class="n">3.116</td><td class="n">R$ 2,75</td><td class="n up">+80,1%</td></tr>
+          <tr><td>Cliques no link<span class="muted">82,5% deles chegaram a abrir a página</span></td><td class="n">3.779</td><td class="n">R$ 2,27</td><td class="n up">+97,1%</td></tr>
+          <tr><td>Exibições e alcance<span class="muted">a mesma pessoa viu 3,88 vezes, em média (eram 6,78)</span></td><td class="n">702.001 · 180.804 pessoas</td><td class="n">R$ 12,20 por mil</td><td class="n up">+279,2% · +562,4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura em uma frase:</b> <b>o lançamento se pagou duas vezes, e a conta alcançou 6,6 vezes mais gente pela metade do preço.</b> O lançamento custou R$ 7.754,37 e registrou R$ 15.939,24 em vendas, <b>retorno de 2,06x</b>. As <b>489 inscrições</b> saíram a <b>R$ 12,07</b> cada, considerando só a captação (R$ 12,82 no painel, que soma também o lembrete), contra o alvo de R$ 5,00. No Mapa, o ponto de perda de setembro continua igual: <b>11,2% de quem viu a página clicou para pagar</b> (eram 11,7%).</div>
+    <div class="nota"><b>A captação ficou bem mais barata na reta final, e isso está medido.</b> De 1 a 12/10, cada inscrição custou <b>R$ 17,31</b> (275 inscrições). De 13 a 16/10, com a verba concentrada nos criativos campeões, custou <b>R$ 6,97</b> (214 inscrições), uma queda de <b>59,7%</b>. Ou seja, 44% das inscrições vieram nos últimos 4 dias. Os valores incluem imposto e o lembrete, que rodou de 12 a 17/10.</div>
+    <div class="nota"><b>O que ficou de fora e por quê — o faturamento oficial é o da Hubla, e ele não está nesta página.</b> Todos os números de venda e de receita acima são <b>o que o pixel do Meta enxerga</b>, com a atribuição do Meta. A Hubla <b>continua sem conexão com o nosso leitor de dados</b>, e com o Projeto isso pesa mais: não há como conferir reembolso, parcelamento nem o que de fato entrou. As 12 vendas aparecem com valores diferentes: <b>7 de R$ 1.581,48, 2 de R$ 1.297,00, 1 de R$ 1.535,30, 1 de R$ 350,00 e 1 de R$ 297,00</b>. Essas duas últimas estão bem abaixo do preço e só a Hubla pode dizer o que são. A separação entre os produtos foi feita por esses valores, inclusive nas <b>2 vendas do Mapa (R$ 29,90 e R$ 62,68)</b> atribuídas a anúncios da captação. Também <b>não medimos quantas inscritas assistiram à imersão</b>, e o passo "pagamentos iniciados" está incompleto no Projeto: registrou 9 inícios para 12 vendas.</div>
+    <div class="nota"><b>Uma comparação com o ano passado não existe:</b> a conta não entregou nada em outubro de 2025 (estava parada desde abril de 2024) e a gestão da GGD começou em setembro de 2026. A partir de 2027 esta linha passa a ter o mesmo mês do ano anterior.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>As 7 campanhas do mês, em 4 frentes</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Campanha</th><th class="n">Verba c/ imposto</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th class="n">Retorno</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Captação da imersão<span class="muted">4 campanhas · 489 inscrições a R$ 12,07 · as vendas são 5 do Projeto e 2 do Mapa</span></td><td class="n">R$ 5.903,85</td><td class="n">7</td><td class="n">R$ 843,41</td><td class="n">1,30x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>Venda do Projeto Meu Consultório</b><span class="muted">remarketing com o carrinho aberto · 17 a 25/10</span></td><td class="n">R$ 1.483,55</td><td class="n"><b>7</b></td><td class="n"><b>R$ 211,94</b></td><td class="n"><b>5,57x</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Lembrete da imersão<span class="muted">contagem regressiva para quem já conhecia · 12 a 17/10 · 112.569 pessoas alcançadas</span></td><td class="n">R$ 366,98</td><td class="n">0</td><td class="n">—</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Perpétuo · Mapa no público frio<span class="muted">1 a 11/10 · teste de criativo que veio de setembro</span></td><td class="n">R$ 807,84</td><td class="n">30</td><td class="n">R$ 26,93</td><td class="n">1,60x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>As 7 campanhas — outubro</td><td class="n">R$ 8.562,21</td><td class="n">44</td><td class="n">R$ 194,60</td><td class="n">2,01x</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O 5,57x da venda precisa ser lido junto com a captação.</b> A campanha de venda falou com quem a captação e a imersão já tinham aquecido, então o retorno dela não se sustentaria sozinho. O número justo é o do lançamento inteiro: <b>2,06x</b>. Já no perpétuo houve melhora real: o público frio do Mapa foi de <b>1,23x em setembro para 1,60x em outubro</b>, com custo por venda praticamente igual (R$ 26,70 → R$ 26,93) e ticket médio maior.</div>
+
+    <p class="sub g"><span class="dot g"></span>Os 5 criativos que levaram a verba</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Criativo</th><th class="n">Verba c/ imposto</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th class="n">Retorno</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AD2_CAIXINHA_VIDEO<span class="muted">o que mais levou verba · 79 inscrições a R$ 11,98, nenhuma venda atribuída</span></td><td class="n">R$ 946,68</td><td class="n">0</td><td class="n">—</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>VIDEO_AD3<span class="muted">o vídeo do Mapa · sozinho, 20 das 30 vendas do perpétuo</span></td><td class="n">R$ 572,63</td><td class="n">20</td><td class="n">R$ 28,63</td><td class="n">1,67x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>L2_06_DIPLOMA_AGENDAVAZIA_ESTATICO</b><span class="muted">o campeão da captação · 155 inscrições a R$ 3,69, abaixo do alvo de R$ 5,00</span></td><td class="n">R$ 571,71</td><td class="n"><b>3</b></td><td class="n">R$ 190,57</td><td class="n"><b>7,80x</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>AD3L2_VIDEO<span class="muted">segundo vídeo da captação · 50 inscrições a R$ 9,35, nenhuma venda atribuída</span></td><td class="n">R$ 467,67</td><td class="n">0</td><td class="n">—</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>ad3 (vídeo de venda do Projeto)</b><span class="muted">a peça que mais vendeu o Projeto · 5 das 7 vendas da campanha de venda</span></td><td class="n">R$ 378,80</td><td class="n"><b>5</b></td><td class="n"><b>R$ 75,76</b></td><td class="n"><b>16,73x</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Os 5 — 34,3% da verba e 63,6% das vendas</td><td class="n">R$ 2.937,50</td><td class="n">28</td><td class="n">R$ 104,91</td><td class="n">4,00x</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O aprendizado do mês: a conclusão de setembro não vale para todo produto.</b> Em setembro a imagem venceu o vídeo no Mapa. Em outubro, com pouca verba, o vídeo ficou à frente (<b>1,65x contra 1,49x</b>), então a diferença ainda não está decidida. No Projeto de R$ 1.297 o resultado foi claro: com verba parecida, os <b>vídeos de venda fizeram 6 vendas a R$ 126,74 e retorno de 8,80x</b>, e os <b>estáticos fizeram 1 venda a R$ 723,09 e 2,19x</b>. Na captação, ao contrário, quem ganhou foi a imagem: o estático do diploma trouxe 155 inscrições, quase o dobro do vídeo que mais gastou. A hipótese é que quem vai pagar caro precisa de mais explicação, e para se inscrever de graça uma mensagem direta basta.</div>
+    <div class="nota"><b>O que saiu, e por quê.</b> Todos os anúncios estão pausados hoje. O <b>AD3_GIULIANA_VIDEO</b> gastou R$ 72,69 por uma única inscrição, e o <b>AD5_IDV_ESTATICO</b> gastou R$ 53,59 sem nenhuma; os dois ficaram com pouca verba na captação. O <b>lembrete</b> custou R$ 366,98 e não tem como ser medido em venda: ele serve para levar gente à imersão, e o comparecimento não foi medido. Um gasto sobrou: no dia <b>25/10</b>, depois da data prevista para fechar o carrinho, a campanha de venda ainda consumiu <b>R$ 83,61</b> (com imposto), sem venda, e foi pausada nesse mesmo dia.</div>
+    <div class="nota"><b>A peça pequena de setembro não era só sorte:</b> o <b>ESTATICO_AD1 no público frio de 18 a 26 anos</b>, que tinha feito 3 vendas com R$ 22,53, recebeu <b>R$ 88,81</b> e fez <b>5 vendas a R$ 17,76 cada</b>, com <b>retorno de 1,74x</b>. Longe dos 4,14x de setembro, mas acima da média do perpétuo. O número ainda é pequeno, porém a peça merece continuar no teste quando o Mapa voltar.</div>
+
+    <p class="sub m"><span class="dot m"></span>Outubro não teve peça cortada por desgaste</p>
+    <div class="nota"><b>Nenhum criativo foi aposentado por fadiga neste mês.</b> O corte previsto em setembro não chegou a ser necessário: a campanha de remarketing do Mapa ficou parada, a frequência da conta caiu de <b>6,78 para 3,88</b> e o perpétuo foi pausado em 11/10, antes de o desgaste aparecer. Os cortes de outubro foram de <b>desempenho</b> (na captação) e de <b>calendário</b> (fim do lançamento).</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Religar o Mapa — a conta está sem nenhum anúncio no ar</h3>
+          <p>O perpétuo está parado desde <b>11/10</b> e a conta inteira desde <b>26/10</b>, com <b>R$ 0 por dia</b> em entrega. O Mapa vinha se pagando (<b>1,60x</b> no frio) e o religamento do remarketing, primeiro item do plano de setembro, <b>não foi feito em outubro</b> porque a verba foi para o lançamento. É a ação mais rápida do mês: volta o frio com VIDEO_AD3 e ESTATICO_AD1 e volta o remarketing com os dois conjuntos que venderam em setembro (VIDEO_AD3 e ESTATICO_AD4).</p>
+          <span class="muda">Verba: de R$ 0 para cerca de R$ 120/dia · 2 conjuntos no frio e 2 no remarketing</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Usar cada formato onde ele ganhou</h3>
+          <p>Em outubro cada formato ganhou em um lugar: o <b>vídeo vendeu o Projeto</b> (6 vendas a R$ 126,74, contra 1 a R$ 723,09 no estático), e a <b>imagem trouxe as inscrições mais baratas</b> (R$ 3,69 no diploma). A inversão de verba para imagem proposta em setembro não aconteceu: o Mapa rodou com 71,7% em vídeo e 28,3% em imagem. Com o retorno empatado em outubro, o teste passa a ser feito com divisão igual antes de mudar a proporção de vez.</p>
+          <span class="muda">Estrutura: Mapa com 50% em vídeo e 50% em imagem · Projeto sempre com vídeo na venda</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Guardar a receita da captação para o próximo lançamento</h3>
+          <p>A inscrição custou <b>R$ 17,31 nos primeiros 12 dias e R$ 6,97 nos últimos 4</b>, quando a verba se concentrou nas peças campeãs. A próxima captação já começa por elas: <b>L2_06_DIPLOMA</b> (R$ 3,69) e <b>AD_CAIXINHA_COMECANDO</b> (R$ 8,16). Ainda não há data de novo lançamento, então nada disso gasta em novembro. Vale também definir como medir o comparecimento na imersão, que não foi medido nesta edição.</p>
+          <span class="muda">Estrutura: captação parte dos campeões · sem verba em novembro até haver data</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Resolver o pagamento antes que a conta pare de novo</h3>
+          <p>A conta entrou em <b>período de carência em 15/10</b> e estava <b>bloqueada por pagamento em 19/10</b>, com o carrinho aberto. Foi um dia sem entrega na semana de venda do lançamento. Setembro já tinha tido 6 dias seguidos parados sem causa identificada. Antes de religar qualquer campanha, vamos conferir a <b>fatura e o meio de pagamento (Elo •1120)</b> e deixar uma forma de pagamento reserva cadastrada.</p>
+          <span class="muda">Depende de você: confirmar o cartão e cadastrar um reserva · nada de verba nova</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Conciliar com a Hubla — agora com muito mais dinheiro em jogo</h3>
+          <p>Os <b>R$ 15.846,66</b> do Projeto Meu Consultório são o que o <b>pixel do Meta</b> enxerga. Sem a Hubla, não sabemos o que foi parcelado, reembolsado ou não pago, nem o que são as vendas registradas a R$ 350,00 e R$ 297,00 — e é o número da Hubla que vale como faturamento. O pedido é o mesmo de setembro e segue em aberto: <b>o relatório de vendas da Hubla</b> (exportação ou acesso de leitura).</p>
+          <span class="muda">Depende de você: liberar o acesso de leitura da Hubla · a partir daí o relatório passa a ter venda medida e venda faturada</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · investimento e resultados pelo Meta Ads (conta 912256333622697) · dados fechados em 31 de outubro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
