@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HOF Germani — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · HOF Germani</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia da <b>HOF Germani</b> — Dr. Marcelo Germani. Outubro rodou nas mesmas <b>três frentes, uma por conta de anúncio</b>: <b>Paciente Modelo</b> (a clínica de Rio Preto, com um primeiro teste em São Paulo no fim do mês), <b>Presenciais BR</b> (o EPIC de novembro e a Especialização) e <b>Portugal</b> (o Elevate Porto, de novembro). Tudo no <b>Meta</b> (Instagram e Facebook) — não há Google Ads em gestão nesta conta.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · 31 dias com anúncio no ar, sem nenhum dia parado · status das peças lido em 02/11/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Os meses anteriores ficam clicáveis aqui. O histórico de investimento mês a mês de 2026, conta por conta, continua no <a class="mes" href="../" style="padding:2px 9px">dashboard financeiro</a>.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Brasil · conversa no WhatsApp e no Direct</span>
+        <p class="big">1.050</p>
+        <p class="what">conversas iniciadas</p>
+        <p class="cost">a <b>R$ 10,42</b> cada — contra <b>R$ 10,68</b> em setembro</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Portugal · Elevate Porto</span>
+        <p class="big">256</p>
+        <p class="what">cadastros no formulário</p>
+        <p class="cost">a <b>R$ 29,39</b> cada — contra <b>R$ 26,00</b> em setembro</p>
+      </div>
+    </div>
+    <p class="frase">Outubro saiu do caixa em <b>R$ 18.463,31</b> nas três contas, uma média de <b>R$ 595,59 por dia</b> — <b>55,4% a mais que setembro</b>. Esse dinheiro abriu <b>1.050 conversas no Brasil</b>, <b>12,9% mais que setembro</b>, e colocou <b>256 cadastros</b> na fila do Elevate Porto, <b>3,4 vezes</b> o mês anterior. A notícia do mês tem dois lados: o Brasil cresceu e ainda ficou um pouco mais barato (<b>−2,4%</b> no custo da conversa), enquanto Portugal cresceu pagando mais caro (<b>+13,0%</b> no custo do cadastro) e virou a maior conta do mês. <b>Quantas dessas conversas e cadastros viraram matrícula de curso ou procedimento vendido, este relatório não afirma</b> — isso acontece no WhatsApp da equipe e na secretaria, e está explicado no bloco 3.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">As três contas em operação — uma por frente</td></tr>
+          <tr><td>Paciente Modelo<span class="muted">conta 468510398381923 · paciente para a clínica de Rio Preto e teste em São Paulo</span></td><td class="n">R$ 4.222,36</td><td class="n">R$ 5.095,39</td><td class="n down">−17,1%</td></tr>
+          <tr><td>Presenciais BR<span class="muted">conta 1734152494253982 · EPIC de novembro e Especialização</span></td><td class="n">R$ 6.715,86</td><td class="n">R$ 4.835,94</td><td class="n up">+38,9%</td></tr>
+          <tr><td>Portugal R$<span class="muted">conta 1084472680730401 · Elevate Porto de novembro</span></td><td class="n">R$ 7.525,09</td><td class="n">R$ 1.949,65</td><td class="n up">+286,0%</td></tr>
+          <tr class="tot"><td>Total das três contas em operação</td><td class="n">R$ 18.463,31</td><td class="n">R$ 11.880,98</td><td class="n up">+55,4%</td></tr>
+          <tr class="sub-row"><td colspan="4">Fora da comparação — conta antiga, já desligada</td></tr>
+          <tr><td>Presenciais (conta antiga)<span class="muted">conta 479768193433776 · frente PLAY · desligada na virada de agosto para setembro</span></td><td class="n">—</td><td class="n">—</td><td class="n flat">sem gasto</td></tr>
+          <tr class="tot"><td>Caixa total do mês, somando tudo que gastou</td><td class="n">R$ 18.463,31</td><td class="n">R$ 11.880,98</td><td class="n up">+55,4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Como ler as contas neste mês:</b> a <b>conta antiga de Presenciais</b> segue desligada e fora do nosso acesso de leitura, e não teve gasto nem em setembro nem em outubro. Por isso, pela primeira vez, a comparação de desempenho e o caixa total usam exatamente as mesmas três contas e os dois totais da tabela são iguais. A linha continua aqui para o formato do relatório não mudar de um mês para o outro.</div>
+    <div class="nota"><b>Os valores desta página são a verba de campanha</b> — a mesma régua do dashboard financeiro da HOF, para que os dois nunca divirjam. O <b>imposto da plataforma (ISS+IOF) não está somado aqui</b>, porque não é assim que a HOF acompanha o investimento. Se um dia a régua mudar para "total pago com imposto", ela muda nas duas páginas no mesmo dia. Os valores de setembro são os publicados no mês passado e não foram recalculados.</div>
+    <div class="nota"><b>Portugal virou a maior conta do mês:</b> foram <b>R$ 7.525,09</b>, ou <b>40,8% de todo o investimento</b>, a uma média de <b>R$ 242,74 por dia</b> nos 31 dias — contra <b>R$ 67,23 por dia</b> em setembro. <b>Isso não é o que o plano de setembro previa</b>: ele dizia para manter a verba e só abrir a segmentação. A segmentação abriu, mas a verba também subiu, e o bloco 4 mostra o que esse dinheiro comprou. Em 02/11 os conjuntos no ar somam <b>R$ 80 por dia</b>, bem abaixo da média de outubro.</div>
+    <div class="nota"><b>A grande troca de verba do mês:</b> Portugal subiu <b>R$ 5.575,44</b> e os cursos presenciais subiram <b>R$ 1.879,92</b>, enquanto o Paciente Modelo caiu <b>R$ 873,03</b>. Ao contrário de setembro, desta vez <b>não foi só realocação</b>: o investimento total cresceu <b>R$ 6.582,33</b>, puxado pelas duas turmas de novembro, o EPIC e o Elevate Porto.</div>
+    <div class="nota"><b>Uma parte da conta Paciente Modelo não é nossa:</b> <b>R$ 387,41</b> (2,1% do mês) saíram de campanhas <b>"SSN"</b>, que rodam dentro dessa conta mas <b>não são gestão GGD</b>. Elas gastaram só de 01 a 06/10 e estão pausadas. Aparecem neste relatório porque gastaram dinheiro da HOF e o total tem que fechar com o extrato do Meta — mas estão sempre em linha própria, para não serem lidas como resultado nosso. A verba sob gestão GGD em outubro foi de <b>R$ 18.075,90</b>.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Conversas iniciadas no Brasil<span class="muted">a régua das duas contas brasileiras — conversa nova no WhatsApp ou no Direct, janela de 7 dias</span></td><td class="n"><b>1.050</b></td><td class="n"><b>R$ 10,42</b></td><td class="n up">+12,9% · custo −2,4%</td></tr>
+          <tr><td>Cadastros no formulário em Portugal<span class="muted">a régua do Elevate Porto — formulário preenchido dentro do Instagram</span></td><td class="n"><b>256</b></td><td class="n"><b>R$ 29,39</b></td><td class="n down">+241,3% · custo +13,0%</td></tr>
+          <tr><td>Matrículas nos cursos e procedimentos vendidos<span class="muted">o que a conversa e o cadastro viram depois</span></td><td class="n"><b>não medido</b></td><td class="n">—</td><td class="n flat">ver nota abaixo</td></tr>
+          <tr><td>Mensagens trocadas no total, no Brasil<span class="muted">todas as conexões por mensagem, não só as primeiras</span></td><td class="n">1.179</td><td class="n">R$ 9,28</td><td class="n up">+15,5% · custo −4,6%</td></tr>
+          <tr><td>Cliques que abriram o destino, no Brasil<span class="muted">quem seguiu até o WhatsApp, o perfil ou a página</span></td><td class="n">4.544</td><td class="n">R$ 2,41</td><td class="n up">+24,9% · custo −11,8%</td></tr>
+          <tr><td>Exibições no Brasil<span class="muted">quantas vezes a peça apareceu · alcance somado das duas contas: 160.116 pessoas</span></td><td class="n">462.476</td><td class="n">R$ 23,65 por mil</td><td class="n up">+53,4% · CPM −28,2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O que ficou de fora e por quê.</b> As réguas combinadas estão medidas: <b>conversa iniciada</b> no Brasil (1.050) e <b>cadastro no formulário</b> em Portugal (256). O que a mídia <b>não</b> consegue ver é o passo seguinte: quantas viraram <b>matrícula paga em curso</b> e quantas viraram <b>procedimento agendado na clínica</b>. O relatório de setembro previa que esta linha passaria a mostrar custo por matrícula em outubro, mas <b>a etiqueta das conversas fechadas e o total de inscritos das turmas não chegaram a nenhuma fonte que este relatório lê</b>. <b>Por isso outubro também é publicado sem número de matrícula e sem ROAS:</b> preferimos entregar o relatório sem esse número a entregá-lo com um número inventado.</div>
+    <div class="nota"><b>O recado honesto dos números de outubro: o Brasil apareceu muito mais, mas isso não virou conversa na mesma proporção.</b> As exibições subiram <b>53,4%</b> com <b>10,1% mais verba</b>, porque o <b>CPM caiu 28,2%</b>, de R$ 32,93 para R$ 23,65. Os cliques no destino subiram <b>24,9%</b> e as conversas, <b>12,9%</b>. Aparecer ficou bem mais barato, e a conversa ficou só um pouco mais barata. Parte dessa diferença vem do EPIC em formulário, que entrou em 20/10 e busca cadastro em vez de conversa: sem essa campanha, o Brasil fez <b>990 conversas a R$ 9,49</b>.</div>
+    <div class="nota"><b>Quanto do mês é gestão GGD:</b> das 1.050 conversas do Brasil, <b>1.026 vieram das campanhas sob nossa gestão</b> (R$ 10.550,81 de verba, <b>R$ 10,28</b> por conversa) e <b>24 vieram das campanhas SSN</b>, que rodam na conta Paciente Modelo mas não são nossas (R$ 387,41, R$ 16,14 por conversa). A tabela acima soma as duas, para fechar com o extrato; o bloco 4 separa.</div>
+    <div class="nota"><b>Uma frente de agosto que também não existiu em outubro:</b> a campanha de <b>Paciente Modelo em Lins</b> levou R$ 760,68 e 46 conversas em agosto (R$ 16,54 cada) e <b>não teve verba nenhuma em setembro nem em outubro</b>. Ela segue nesta página todos os meses: quando voltar, aparece com número; enquanto não voltar, aparece dizendo que não houve.</div>
+    <div class="nota"><b>Portugal merece duas ressalvas, e elas são importantes para novembro:</b> a primeira é que o público ainda se repete. Foram <b>26.237 pessoas alcançadas</b> para <b>159.797 exibições</b>, ou <b>6,1 vezes por pessoa no mês</b> — melhor que as 9,2 de setembro, mas acima do limite de 5 que combinamos. O CPM segue o mais alto das três contas (<b>R$ 47,09</b>). A segunda é que <b>44 dos 256 cadastros vieram de conjuntos voltados ao Brasil</b> (R$ 450,29, R$ 10,23 cada). Olhando só quem foi alcançado em Portugal, são <b>212 cadastros a R$ 33,37</b>.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Paciente Modelo — a frente que traz paciente para a clínica</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Cliques</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Vídeo "Curso" (versão 2)</b><span class="muted">a conversa mais barata de toda a HOF no mês — estreou em 19/10</span></td><td class="n">R$ 301,44</td><td class="n">8.142</td><td class="n">228</td><td class="n"><b>85</b></td><td class="n"><b>R$ 3,55</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr><td><b>Mix</b><span class="muted">a que levou mais verba e mais conversa — campanha dos pinos</span></td><td class="n">R$ 1.501,95</td><td class="n">64.803</td><td class="n">2.014</td><td class="n"><b>285</b></td><td class="n"><b>R$ 5,27</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>Cartaz do edital (versão de rastreio)<span class="muted">mesma campanha do Mix</span></td><td class="n">R$ 533,85</td><td class="n">29.521</td><td class="n">521</td><td class="n">89</td><td class="n">R$ 6,00</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Vídeo "Fazer"<span class="muted">estreou em 19/10, ao lado do "Curso"</span></td><td class="n">R$ 297,43</td><td class="n">7.118</td><td class="n">175</td><td class="n">47</td><td class="n">R$ 6,33</td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>Fazer procedimento<span class="muted">campanha de Rio Preto que parou em 09/10</span></td><td class="n">R$ 371,84</td><td class="n">11.878</td><td class="n">242</td><td class="n">48</td><td class="n">R$ 7,75</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>As outras 42 peças GGD da conta<span class="muted">29 do teste em São Paulo, 8 de resultados, 4 variações dos vídeos e 1 de lipo, sem verba no mês</span></td><td class="n">R$ 828,44</td><td class="n">28.252</td><td class="n">385</td><td class="n">43</td><td class="n">R$ 19,27</td><td><span class="st on">2 no ar</span></td></tr>
+          <tr class="tot"><td>Paciente Modelo — gestão GGD</td><td class="n">R$ 3.834,95</td><td class="n">149.714</td><td class="n">3.565</td><td class="n">597</td><td class="n">R$ 6,42</td><td></td></tr>
+          <tr><td>Campanhas SSN — <b>não são gestão GGD</b><span class="muted">3 peças de WhatsApp, rodando dentro da mesma conta de 01 a 06/10</span></td><td class="n">R$ 387,41</td><td class="n">34.412</td><td class="n">486</td><td class="n">24</td><td class="n">R$ 16,14</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Conta Paciente Modelo — total</td><td class="n">R$ 4.222,36</td><td class="n">184.126</td><td class="n">4.051</td><td class="n">621</td><td class="n">R$ 6,80</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> segue sendo a frente mais barata e previsível da HOF. Ela entregou <b>597 conversas a R$ 6,42</b> sob gestão GGD — contra <b>R$ 7,61</b> em setembro, queda de <b>15,6%</b> no custo, com <b>10,5% menos verba</b> e abaixo da meta de R$ 8 que definimos. As cinco peças da tabela levaram <b>R$ 3.006,51</b> e trouxeram <b>554 das 597 conversas, a R$ 5,43</b>. O vídeo <b>"Curso" (versão 2)</b> é o principal sinal do mês, mas tem só 13 dias de entrega: ainda precisa provar que sustenta esse custo com mais verba.</div>
+    <div class="nota"><b>O que mudou em relação ao plano de setembro:</b> o plano era religar "Checklist", "Lipo combo" e "Cartaz do edital". <b>Só o Cartaz do edital rodou, na versão de rastreio; "Checklist" e "Lipo combo" não receberam verba em outubro.</b> O mês foi construído em cima do <b>Mix</b> e, a partir de 19/10, dos vídeos novos. O resultado ficou dentro da meta, mas por outro caminho. A verba da frente sob gestão GGD ficou em cerca de <b>R$ 124 por dia</b>, abaixo dos R$ 150 previstos.</div>
+    <div class="nota"><b>O que saiu ou não se pagou:</b> o <b>teste em São Paulo</b> (Vila Olímpia e arredores) estreou em 27/10 com 29 peças e, em 5 dias, fez <b>R$ 547,77 para 19 conversas, a R$ 28,83</b>, mais de quatro vezes o custo de Rio Preto. Duas peças seguem no ar, "Checklist SP" e "Cartaz Procura-se SP". É cedo para concluir, mas o número ainda não se paga. A campanha de <b>resultados</b> (16 a 19/10) fez R$ 185,77 para 13 conversas (<b>R$ 14,29</b>) e foi pausada. As 2 conversas da campanha de lipo chegaram sem gasto em outubro: são efeito tardio de anúncios de setembro.</div>
+
+    <p class="sub g"><span class="dot g"></span>Presenciais BR — a frente dos cursos no Brasil</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Frente</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Cliques</th><th class="n">Conversas</th><th class="n">Custo por conversa</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Insiders<span class="muted">não houve verba nem entrega em outubro — campanhas pausadas desde setembro</span></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Imersão para Iniciantes (ONE)<span class="muted">não houve verba em outubro — as 2 conversas são efeito tardio de anúncios de setembro</span></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">2</td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Especialização HOF<span class="muted">20 dias de entrega, pausada em 20/10</span></td><td class="n">R$ 1.819,16</td><td class="n">76.921</td><td class="n">1.168</td><td class="n">88</td><td class="n">R$ 20,67</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>EPIC novembro</b><span class="muted">maior verba da conta — mensagem até 20/10 e formulário em São Paulo desde 20/10, com 51 cadastros a R$ 30,25</span></td><td class="n">R$ 4.896,70</td><td class="n">201.429</td><td class="n">2.544</td><td class="n"><b>339</b></td><td class="n"><b>R$ 14,44</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr class="tot"><td>Conta Presenciais BR — total</td><td class="n">R$ 6.715,86</td><td class="n">278.350</td><td class="n">3.712</td><td class="n">429</td><td class="n">R$ 15,65</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> a conta cresceu <b>38,9%</b> em verba e <b>48,4%</b> em conversas (de 289 para 429), e o custo caiu <b>6,5%</b>, de <b>R$ 16,73</b> para <b>R$ 15,65</b>. O EPIC ficou com <b>72,9% da verba</b> e cumpriu a meta de conversa abaixo de R$ 15, a <b>R$ 14,44</b>. Mas a conta <b>não ficou no patamar de setembro, como o plano previa</b>: subiu R$ 1.879,92.</div>
+    <div class="nota"><b>O EPIC mudou de formato no meio do mês.</b> Na fase de <b>mensagem</b> (01 a 20/10) foram R$ 3.354,09 e <b>279 conversas a R$ 12,02</b>, com intervalo sem nenhum gasto do EPIC entre 09 e 12/10. Na fase de <b>formulário em São Paulo</b>, desde 20/10, foram R$ 1.542,61 e <b>51 cadastros a R$ 30,25</b>; o Meta ainda registrou 60 conversas nessa campanha, que estão somadas no total. Outros 16 registros de cadastro apareceram em campanhas de mensagem do Brasil e <b>não foram somados aos 51</b>. A peça <b>"Problema não é talento"</b> sustenta o formulário, com 44 dos 51 cadastros a <b>R$ 27,79</b>.</div>
+    <div class="nota"><b>Quem já conhece o Dr. Germani responde melhor, mas esse público está se esgotando:</b> no formulário, o público quente fez <b>37 cadastros a R$ 23,70</b> e o público novo fez <b>10 a R$ 35,08</b>. Só que o conjunto quente chegou a <b>8,9 exibições por pessoa</b>, contra 2,6 no novo. Na fase de mensagem, o mesmo padrão: <b>"Deixe de ser mais um"</b> para o público quente fez <b>R$ 3,90</b> a conversa, enquanto <b>"Fuja do óbvio"</b> para odonto em SP/MG chegou a <b>R$ 43,05</b>. Todas as peças da fase de mensagem estão pausadas.</div>
+    <div class="nota"><b>A Especialização melhorou, mas não pelo caminho combinado:</b> o clique dobrou (<b>CTR de 0,80% para 1,52%</b>) e a conversa caiu de <b>R$ 25,14 para R$ 20,67</b>. Os <b>3 criativos novos previstos não rodaram</b>: a frente seguiu só com "Espec 70" e "Espec 23". O que fez diferença foi o público: nos conjuntos de <b>São Paulo, 35 a 45 anos</b>, foram <b>59 conversas a R$ 15,47</b>, contra <b>29 a R$ 31,25</b> nos demais. A frente foi <b>pausada em 20/10</b> e está sem verba hoje.</div>
+    <div class="nota"><b>Insiders e Imersão seguem na tabela sem número:</b> nenhuma das duas teve verba em outubro. Quando voltarem, aparecem com número; enquanto não voltarem, aparecem dizendo que não houve.</div>
+
+    <p class="sub m"><span class="dot m"></span>Portugal — Elevate Porto de novembro</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba</th><th class="n">Exibições</th><th class="n">Cliques</th><th class="n">Cadastros</th><th class="n">Custo por cadastro</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Estático 01</b><span class="muted">a principal do mês em verba e em cadastros — peça nova de outubro</span></td><td class="n">R$ 1.147,88</td><td class="n">35.768</td><td class="n">462</td><td class="n"><b>67</b></td><td class="n"><b>R$ 17,13</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr><td><b>Vídeo Portugal</b><span class="muted">a melhor taxa de clique da frente entre as peças com volume — CTR de 2,60%</span></td><td class="n">R$ 1.056,45</td><td class="n">21.364</td><td class="n">556</td><td class="n"><b>57</b></td><td class="n"><b>R$ 18,53</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>Vídeo 4<span class="muted">terceira peça que segue no ar</span></td><td class="n">R$ 1.064,61</td><td class="n">23.911</td><td class="n">392</td><td class="n">43</td><td class="n">R$ 24,76</td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>Prática<span class="muted">a principal de setembro — custo subiu de R$ 23,96 para R$ 35,59</span></td><td class="n">R$ 676,18</td><td class="n">13.969</td><td class="n">137</td><td class="n">19</td><td class="n">R$ 35,59</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Estático 11<span class="muted">verba alta para o que trouxe</span></td><td class="n">R$ 531,95</td><td class="n">11.327</td><td class="n">120</td><td class="n">13</td><td class="n">R$ 40,92</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>As outras 18 peças<span class="muted">vídeos, estáticos e as peças de setembro — inclui Decisão, Full face e Rosto</span></td><td class="n">R$ 2.848,02</td><td class="n">53.458</td><td class="n">670</td><td class="n">57</td><td class="n">R$ 49,96</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Conta Portugal — total</td><td class="n">R$ 7.525,09</td><td class="n">159.797</td><td class="n">2.337</td><td class="n">256</td><td class="n">R$ 29,39</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> as peças novas de outubro resolveram a frente, mas muito dinheiro passou por peças que não se pagaram. As <b>três que seguem no ar</b> levaram <b>R$ 3.268,94</b> e trouxeram <b>167 dos 256 cadastros, a R$ 19,57</b>, abaixo dos R$ 26 de setembro. As outras 20 levaram <b>R$ 4.256,15</b> para <b>89 cadastros, a R$ 47,82</b>. É esse grupo que puxa a média do mês para R$ 29,39.</div>
+    <div class="nota"><b>As campeãs de setembro cansaram:</b> com mais verba, <b>"Prática"</b> foi de R$ 23,96 para <b>R$ 35,59</b> e <b>"Full face"</b> foi de R$ 24,62 para <b>R$ 73,93</b> (R$ 443,59 para 6 cadastros). <b>"Rosto"</b> e <b>"Decisão"</b> também terminaram caras, a R$ 99,02 e R$ 43,65. Todas estão pausadas. <b>"Intercorrência"</b> não teve verba em outubro.</div>
+    <div class="nota"><b>O resultado contra o que cobramos em setembro:</b> a segmentação abriu para todo o país, e o alcance foi de <b>4.387 para 26.237 pessoas</b>. A frequência caiu de 9,2 para <b>6,1</b>, mas <b>não chegou ao limite de 5</b>. O cadastro ficou em <b>R$ 29,39</b>, <b>acima da meta de R$ 26</b>. E a verba, que deveria ficar igual, <b>quase quadruplicou</b>. Ou seja: mais gente e mais cadastro, sem bater as duas metas.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Paciente Modelo em Rio Preto: dar mais espaço ao vídeo "Curso" e ao Mix</h3>
+          <p><b>Vídeo "Curso" (R$ 3,55)</b> e <b>Mix (R$ 5,27)</b> foram as conversas mais baratas do mês e estão no ar. Rio Preto segue com a verba atual, e o vídeo só ganha verba em degraus, para testar se sustenta o custo com mais volume. Se o custo subir, ele volta ao patamar anterior.</p>
+          <span class="muda">Verba: Rio Preto mantida em R$ 102/dia · remanejamento interno para o vídeo "Curso" · o que cobramos dela: conversa abaixo de R$ 7</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>São Paulo: prazo curto para o teste provar que se paga</h3>
+          <p>O teste fez <b>19 conversas a R$ 28,83</b> em 5 dias e já foi reduzido a 2 peças. Ele segue até 15/11 com a verba atual. Se a conversa não chegar perto de <b>R$ 15</b> até lá, a campanha é encerrada e a verba é devolvida a Rio Preto.</p>
+          <span class="muda">Verba: R$ 75/dia até 15/11 · decisão de manter ou encerrar nessa data</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>EPIC: reta final até a turma de 26 de novembro</h3>
+          <p>O formulário em São Paulo segue como campanha principal até <b>25/11</b>. Como o público quente já está em <b>8,9 exibições por pessoa</b>, entram peças novas nesse conjunto, preservando "Problema não é talento" enquanto o custo se mantiver. A <b>Especialização continua pausada</b> em novembro e só volta com criativos novos, focada no público de São Paulo de 35 a 45 anos, que foi o que funcionou.</p>
+          <span class="muda">Verba: R$ 190/dia até 25/11, cerca de R$ 4.750 · Estrutura: peças novas no público quente · Especialização sem verba</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Portugal: manter só o que se paga até o Elevate</h3>
+          <p>A verba já foi reduzida e está concentrada em <b>Estático 01, Vídeo Portugal e Vídeo 4</b>, que fizeram cadastro a <b>R$ 19,57</b> em outubro. As metas continuam as mesmas: frequência abaixo de 5 e cadastro abaixo de R$ 26. O relatório de novembro mostra separados os cadastros alcançados em Portugal e no Brasil.</p>
+          <span class="muda">Verba: R$ 80/dia, contra média de R$ 243/dia em outubro · Estrutura: 3 peças · o que cobramos dela: frequência abaixo de 5 e cadastro abaixo de R$ 26</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Fechar a régua da matrícula — agora com as turmas perto de acontecer</h3>
+          <p>Outubro foi publicado sabendo que abriram <b>1.050 conversas</b> e <b>256 cadastros</b>, mas <b>sem saber quantas viraram aluno ou paciente</b>, e foram <b>R$ 18.463,31</b> investidos nesse mês. O EPIC e o Elevate são as turmas em que esse número fica mais fácil de levantar: basta nos passar o <b>total de inscritos de cada turma</b> no fechamento. Para a clínica, a saída continua sendo <b>etiquetar no WhatsApp Business</b> as conversas que fecharam. Com isso, o relatório de novembro mostra <b>custo por matrícula</b>.</p>
+          <span class="muda">Depende de vocês: passar o total de inscritos do EPIC e do Elevate, e etiquetar as conversas fechadas da clínica</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · dados fechados em 31 de outubro de 2026 · matrícula e venda não lidas neste mês</span>
+    <a href="../">Dashboard financeiro →</a>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
