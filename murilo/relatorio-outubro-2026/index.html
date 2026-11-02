@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Prof. Murilo Soares — Perpétuo Low Ticket — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Prof. Murilo Soares</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia do <b>Prof. Murilo Soares</b> — conta de Meta Ads do <b>perpétuo low ticket</b>, o Manual do Prequestionamento (R$ 19,90) com checkout na Ticto. Outubro é o <b>primeiro mês cheio</b> da operação e o mês em que a conta deixou de ser só o perpétuo: entraram <b>seguidores</b>, <b>distribuição de conteúdo</b> e, em <b>28 de outubro</b>, a <b>captação da Imersão RR na Prática</b>. Os números de venda abaixo são do perpétuo; o que as outras frentes gastaram e entregaram está no bloco 2 e no bloco 3.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · 31 dias com anúncio no ar · 11 campanhas na conta · 23 criativos no perpétuo · dados lidos em 02/11/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Clique no mês para abrir o relatório dele. Os meses anteriores ficam como foram publicados.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Outubro · Meta Ads</span>
+        <p class="big">114</p>
+        <p class="what">vendas do Manual do Prequestionamento</p>
+        <p class="cost">a <b>R$ 43,30</b> cada (verba com imposto), para um ticket médio de <b>R$ 39,83</b></p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Outubro · retorno</span>
+        <p class="big">0,92x</p>
+        <p class="what">de retorno sobre a mídia</p>
+        <p class="cost"><b>R$ 4.935,65</b> investidos viraram <b>R$ 4.541,00</b> de vendas — <b>R$ 394,65</b> abaixo do que saiu</p>
+      </div>
+    </div>
+    <p class="frase">O perpétuo vendeu mais e <b>fechou um pouco abaixo do que custou</b>: foram <b>114 vendas</b> contra 69 em setembro, mas cada uma saiu a <b>R$ 43,30</b> (eram R$ 36,79) e o retorno passou de <b>1,07x para 0,92x</b>. A conta se explica em três pedaços. O <b>público quente de 180 dias</b> fez <b>91 das 114 vendas</b> e <b>sobrou R$ 762,86</b>, com retorno de <b>1,26x</b>. O <b>público frio</b> gastou <b>R$ 1.430,30</b> e devolveu <b>0,38x</b>, ou <b>R$ 892,60 que saíram e não voltaram</b>. O <b>teste de página</b> custou <b>R$ 264,90 além do que vendeu</b>. E o quente, que é o que paga a conta, ficou mais caro ao longo do mês: a venda foi de <b>R$ 25,88 na primeira semana para R$ 38,08 na última</b>. A campanha do perpétuo está <b>pausada desde 28/10</b>, dia em que a captação do lançamento entrou no ar. Somando todas as frentes, a conta investiu <b>R$ 14.734,18</b> no mês.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — conta 1498770914317901 (CA - Murilo Soares)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega · 31 dias no ar, média de R$ 417,55 por dia</span></td><td class="n">R$ 12.944,02</td><td class="n">R$ 2.230,10</td><td class="n up">+480,4%</td></tr>
+          <tr><td>Imposto da plataforma<span class="muted">13,83% cobrados pelo Meta por fora da verba</span></td><td class="n">R$ 1.790,16</td><td class="n">R$ 308,42</td><td class="n up">+480,4%</td></tr>
+          <tr class="tot"><td>Total pago no mês</td><td class="n">R$ 14.734,18</td><td class="n">R$ 2.538,52</td><td class="n up">+480,4%</td></tr>
+          <tr class="sub-row"><td colspan="4">Como a verba se dividiu — por frente (com imposto)</td></tr>
+          <tr><td>Perpétuo low ticket<span class="muted">a campanha do Manual · rodou de 01 a 28/10 · 29,8% do total</span></td><td class="n">R$ 4.391,95</td><td class="n">R$ 2.538,52</td><td class="n up">+73,0%</td></tr>
+          <tr><td>Teste de página V2 × V3<span class="muted">mesma oferta, páginas diferentes · 4 dias entre 08 e 16/10 · 3,7% do total</span></td><td class="n">R$ 543,70</td><td class="n">—</td><td class="n flat">novo</td></tr>
+          <tr><td>Seguidores<span class="muted">6 campanhas entre 10 e 30/10 · 32,4% do total</span></td><td class="n">R$ 4.776,28</td><td class="n">—</td><td class="n flat">novo</td></tr>
+          <tr><td>Captação da Imersão RR na Prática<span class="muted">2 campanhas de inscrição, desde 28/10 · 28,3% do total</span></td><td class="n">R$ 4.170,33</td><td class="n">—</td><td class="n flat">novo</td></tr>
+          <tr><td>Distribuição de conteúdo no quente<span class="muted">vídeos para quem já conhece o professor, desde 06/10 · 5,8% do total</span></td><td class="n">R$ 851,92</td><td class="n">—</td><td class="n flat">novo</td></tr>
+          <tr class="sub-row"><td colspan="4">Como a verba de venda se dividiu — por público (com imposto)</td></tr>
+          <tr><td>Quente 180 dias — quem já interagiu<span class="muted">envolvimento com o perfil e o conteúdo nos últimos 180 dias · misto 30 a 65 · 60,0% da verba de venda</span></td><td class="n">R$ 2.961,64</td><td class="n">R$ 1.240,19</td><td class="n up">+138,8%</td></tr>
+          <tr><td>Frio — interesse em direito do trabalho<span class="muted">entrega automática do Meta por interesse e cargo · misto 25 a 65 · 17,3% da verba de venda</span></td><td class="n">R$ 853,45</td><td class="n">R$ 661,71</td><td class="n up">+29,0%</td></tr>
+          <tr><td>Frio — semelhantes (LAL)<span class="muted">público parecido com quem já comprou e já engajou · 7,1% da verba de venda</span></td><td class="n">R$ 352,21</td><td class="n">R$ 636,63</td><td class="n down">−44,7%</td></tr>
+          <tr><td>Frio — aberto<span class="muted">sem sugestão de interesse, público novo de outubro · misto 25 a 65 · 4,6% da verba de venda</span></td><td class="n">R$ 224,64</td><td class="n">—</td><td class="n flat">novo</td></tr>
+          <tr><td>Teste de página V2 × V3<span class="muted">rodou nos públicos quente, interesse e semelhantes · 11,0% da verba de venda</span></td><td class="n">R$ 543,70</td><td class="n">—</td><td class="n flat">novo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Como ler a comparação com setembro:</b> <b>setembro foram 5 dias, outubro foi o mês inteiro</b>, por isso os totais sobem tanto. Olhando por dia, o movimento é o contrário: a verba de venda foi de <b>R$ 507,70 por dia</b> em setembro para <b>R$ 176,27 por dia</b> nos 28 dias de outubro em que o perpétuo rodou, e as vendas foram de <b>13,8 para 4,1 por dia</b>. Menos verba por dia, com custo por venda maior.</div>
+    <div class="nota"><b>Sobre o imposto:</b> esta é uma conta brasileira e o Meta cobra <b>13,83%</b> por fora da verba de mídia. Todos os custos por venda e o retorno desta página estão calculados <b>sobre a verba com imposto</b>, que é o que sai de fato do caixa — não sobre o valor que aparece no Gerenciador. É por isso que o retorno aqui é 0,92x e no painel do Meta aparece 1,05x.</div>
+    <div class="nota"><b>O mês rodou os 31 dias, mas o perpétuo rodou 28.</b> A campanha do Manual entregou de <b>01 a 28 de outubro</b> e foi pausada na noite do dia 28, o mesmo dia em que a captação do lançamento subiu. De 29 a 31 de outubro <b>não houve verba de venda do Manual</b>. O teste de página entregou em <b>4 dias</b> (08, 09, 10 e 16/10).</div>
+    <div class="nota"><b>A segunda conta de anúncio seguiu fora.</b> A conta <b>753748845940767 (CA-03)</b> não veiculou nada em outubro — <b>R$ 0,00 em todos os dias do período</b> — e não entra em nenhum número deste relatório. Toda a operação aconteceu na <b>1498770914317901</b>.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vendas<span class="muted">compras registradas pelo pixel 975791790814595 no checkout da Ticto · 106 do perpétuo + 8 do teste de página</span></td><td class="n"><b>114</b></td><td class="n"><b>R$ 43,30</b></td><td class="n up">+65,2%</td></tr>
+          <tr><td>Faturamento<span class="muted">valor das vendas vindas de anúncio · ticket médio R$ 39,83</span></td><td class="n">R$ 4.541,00</td><td class="n">retorno 0,92x</td><td class="n up">+67,0%</td></tr>
+          <tr><td>Checkouts iniciados<span class="muted">quem clicou para comprar · 59,7% deles concluíram a compra</span></td><td class="n">191</td><td class="n">R$ 25,84</td><td class="n up">+73,6%</td></tr>
+          <tr><td>Visitas à página de vendas<span class="muted">só as que foram medidas · a contagem falhou a partir de 07/10, veja a nota abaixo</span></td><td class="n">359</td><td class="n">R$ 13,75</td><td class="n down">−24,3%</td></tr>
+          <tr><td>Cliques no link<span class="muted">13,9% deles chegaram a clicar para comprar (19,7% em setembro)</span></td><td class="n">1.379</td><td class="n">R$ 3,58</td><td class="n up">+146,7%</td></tr>
+          <tr><td>Exibições e alcance<span class="muted">a mesma pessoa viu 4,87 vezes, em média</span></td><td class="n">169.670 · 34.857 pessoas</td><td class="n">R$ 29,09 por mil</td><td class="n up">+201,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Quem mede checkout nesta conta é o "adicionar ao carrinho", e isso é de propósito.</b> O evento de início de checkout está <b>desligado na Ticto</b>, então o sinal que marca "esta pessoa clicou para comprar" é o <b>AddToCart</b> — é ele que está na linha <i>Checkouts iniciados</i> acima. Portanto, os <b>191</b> dessa linha <b>não são 191 carrinhos abandonados</b>: são 191 pessoas que deram o passo de compra, das quais <b>114 pagaram</b>. O pixel ainda registrou <b>88 eventos residuais</b> de início de checkout no perpétuo e no teste; eles <b>não entram em nenhum número desta página</b> justamente porque a régua da conta é o AddToCart.</div>
+    <div class="nota"><b>A linha de visitas à página não vale como comparação em outubro.</b> De 01 a 06/10, <b>75,2% dos cliques do perpétuo</b> apareciam como visita (212 de 282). De 07 a 28/10 foram só <b>13,9%</b> (135 de 968), sem queda parecida nas vendas. Na conferência de <b>27/10</b> encontramos as 3 páginas de venda carregando o código de medição (GTM) por um endereço que não funciona mais, e na leitura de <b>02/11</b> elas continuam assim. O problema ser esse é a explicação mais provável, mas não temos como confirmar que ele começou exatamente em 07/10. <b>Vendas e checkouts não são afetados</b>, porque são registrados na própria Ticto. A correção está no bloco 5.</div>
+    <div class="nota"><b>A leitura em uma frase:</b> <b>o clique ficou mais barato e comprou menos.</b> O clique caiu de R$ 4,54 para <b>R$ 3,58</b>, mas a passagem de clique para checkout caiu de <b>19,7% para 13,9%</b>, e o pagamento também recuou um pouco (<b>62,7% para 59,7%</b>). É isso que leva a venda de R$ 36,79 para R$ 43,30, mesmo com a exibição mais barata (<b>R$ 45,03 para R$ 29,09 por mil</b>).</div>
+    <div class="nota"><b>A frequência virou assunto.</b> Na média do mês a mesma pessoa viu o anúncio <b>4,87 vezes</b>, e no público quente foram <b>6,32 vezes</b>, com <b>17.985 pessoas</b> alcançadas. Setembro já avisava que esse público é pequeno e se desgasta sem criativo novo, e a venda dele subiu semana a semana: <b>R$ 25,88 · R$ 34,33 · R$ 36,41 · R$ 38,08</b>. Isso está previsto no bloco 5.</div>
+    <div class="nota"><b>O que as outras frentes entregaram.</b> A tabela acima é só a venda do Manual. <b>Captação (R$ 4.170,33, 28 a 31/10):</b> <b>176 inscrições na imersão a R$ 23,70</b> com imposto, ou R$ 20,82 sem imposto, contra a meta de R$ 11,50 sem imposto. Os dois primeiros dias ficaram perto de R$ 12 sem imposto; nos dias 30 e 31 a verba mais que dobrou e o custo passou de R$ 27. <b>Seguidores (R$ 4.776,28):</b> o perfil ganhou <b>936 seguidores novos entre 03 e 31/10</b>, saindo de cerca de <b>14 por dia</b> antes das campanhas para <b>38 por dia</b> durante elas. Se todos os 936 fossem da mídia, sairiam a R$ 5,10; contando só o aumento, cerca de <b>R$ 9</b>. <b>Distribuição (R$ 851,92):</b> <b>64.898 pessoas alcançadas</b> e <b>87.903 visualizações de vídeo</b>; ela prepara o público do lançamento e não tem venda própria para medir.</div>
+    <div class="nota"><b>O que ficou de fora e por quê — o faturamento oficial é o da Ticto, e ele não está nesta página.</b> Todos os números de venda e de receita acima são <b>o que o pixel do Meta enxerga</b>, com a atribuição do Meta. A <b>Ticto segue sem conexão com o nosso leitor de dados</b>, então não há como conferir venda a venda nem descontar reembolso, chargeback e boleto/Pix não pago. Trate <b>114 vendas e R$ 4.541,00</b> como a medida da mídia, não como o extrato da Ticto. Vale saber também: <b>só com o Manual a R$ 19,90</b>, as 114 vendas dariam R$ 2.268,60, ou <b>0,46x</b>. Os outros <b>R$ 2.272,40</b> que o pixel soma são item adicional ou outro produto, e só a Ticto mostra qual. É por isso que o painel do perpétuo, que conta só o Manual e só a campanha principal, mostra <b>106 vendas e 0,48x</b> para outubro. Nos seguidores, os dias <b>01 e 02/10 não estão disponíveis</b> na leitura, o número é <b>bruto</b> (não desconta quem deixou de seguir) e não separa o que veio de anúncio do que veio do orgânico.</div>
+    <div class="nota"><b>Uma comparação com o ano passado não existe:</b> a leitura desta conta no nosso sistema começa em <b>fevereiro de 2026</b> e a gestão da GGD começou em <b>26 de setembro de 2026</b>. Não há outubro de 2025 medido para colocar lado a lado. A partir de 2027 esta linha passa a ter o mesmo mês do ano anterior.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Os 4 públicos do mês e o teste de página</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Público</th><th class="n">Verba c/ imposto</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th class="n">Retorno</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Quente 180 dias · quem já interagiu</b><span class="muted">79,8% das vendas com 60,0% da verba · CPM R$ 26,06, o mais barato de todos</span></td><td class="n">R$ 2.961,64</td><td class="n"><b>91</b></td><td class="n"><b>R$ 32,55</b></td><td class="n"><b>1,26x</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Frio · interesse em direito do trabalho<span class="muted">8 vendas em R$ 853,45, a venda mais cara do mês · CPM R$ 32,74</span></td><td class="n">R$ 853,45</td><td class="n">8</td><td class="n">R$ 106,68</td><td class="n">0,47x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Frio · semelhantes (LAL)<span class="muted">o menor retorno do mês: 4 vendas, todas de R$ 19,90 · CPM R$ 38,70</span></td><td class="n">R$ 352,21</td><td class="n">4</td><td class="n">R$ 88,05</td><td class="n">0,23x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Frio · aberto<span class="muted">público novo, com pouca verba · 3 vendas, todas de R$ 19,90 · CPM R$ 37,06</span></td><td class="n">R$ 224,64</td><td class="n">3</td><td class="n">R$ 74,88</td><td class="n">0,27x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Teste de página V2 × V3<span class="muted">empatou em vendas: 4 × 4, veja a nota abaixo</span></td><td class="n">R$ 543,70</td><td class="n">8</td><td class="n">R$ 67,96</td><td class="n">0,51x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Os públicos e o teste — outubro</td><td class="n">R$ 4.935,65</td><td class="n">114</td><td class="n">R$ 43,30</td><td class="n">0,92x</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A verba saiu do frio, como combinado, e o frio continuou sem pagar.</b> No perpétuo, os públicos frios caíram de <b>51,1% para 32,6% da verba</b>, mas o retorno deles ficou onde estava: <b>0,37x em setembro, 0,38x em outubro</b>. Foram <b>R$ 1.430,30</b> para <b>15 vendas</b>, a <b>R$ 95,35</b> cada, ou <b>R$ 892,60 que saíram e não voltaram</b>. No mesmo mês, a venda do quente saiu a <b>R$ 32,55</b>. O quente também piorou contra setembro (de R$ 21,76 e 1,81x para R$ 32,55 e 1,26x), mas segue sendo o único público que devolveu mais do que custou.</div>
+    <div class="nota"><b>O teste de página não apontou um vencedor.</b> Mesmos anúncios e mesmos públicos, só a página mudando: a <b>V2</b> gastou <b>R$ 251,43</b> e fez 4 vendas com ticket de <b>R$ 49,80</b>, retorno de <b>0,79x</b>; a <b>V3</b> gastou <b>R$ 292,27</b> e fez 4 vendas de <b>R$ 19,90</b>, retorno de <b>0,27x</b>. A V2 está na frente porque vende mais item adicional, mas com 4 vendas de cada lado uma venda muda o resultado. As duas estão pausadas.</div>
+
+    <p class="sub g"><span class="dot g"></span>Os 5 criativos que mais venderam</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Criativo</th><th class="n">Verba c/ imposto</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th class="n">Retorno</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>VIDEO_AD03</b><span class="muted">o vídeo que carregou o mês de novo · 25,4% da verba e 35,1% das vendas</span></td><td class="n">R$ 1.255,28</td><td class="n"><b>40</b></td><td class="n"><b>R$ 31,38</b></td><td class="n"><b>1,37x</b></td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>VIDEO_AD01</b><span class="muted">era o melhor de setembro (R$ 18,83 e 2,25x) e foi o que mais perdeu com mais verba</span></td><td class="n">R$ 898,76</td><td class="n"><b>28</b></td><td class="n">R$ 32,10</td><td class="n">1,05x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>ESTATICO_AD07<span class="muted">o estático que mais vendeu · e o CPM mais barato entre os grandes (R$ 23,28)</span></td><td class="n">R$ 759,41</td><td class="n">18</td><td class="n">R$ 42,19</td><td class="n">0,87x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>ESTATICO_AD08<span class="muted">menos vendas e melhor retorno entre os estáticos grandes</span></td><td class="n">R$ 399,98</td><td class="n">10</td><td class="n">R$ 40,00</td><td class="n">1,02x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>ESTATICO_AD09<span class="muted">verba igual à do AD08 e 3 vendas a menos</span></td><td class="n">R$ 401,18</td><td class="n">7</td><td class="n">R$ 57,31</td><td class="n">0,79x</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>Os 5 — 75,3% da verba e 90,4% das vendas</td><td class="n">R$ 3.714,61</td><td class="n">103</td><td class="n">R$ 36,06</td><td class="n">1,09x</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O vídeo venceu a imagem de novo, e com folga maior.</b> Os vídeos ficaram com <b>43,6% do dinheiro</b> (R$ 2.154,04) e entregaram <b>59,6% das vendas</b>, a <b>R$ 31,68</b> cada, com retorno de <b>1,24x</b>. Os estáticos ficaram com <b>56,4%</b> (R$ 2.781,48) para <b>40,4% das vendas</b>, a <b>R$ 60,47</b>, com retorno de <b>0,67x</b>. O plano de setembro era levar o vídeo a cerca de 60% da verba e colocar 2 a 3 vídeos novos: <b>a verba só chegou a 43,6% e nenhum vídeo novo entrou</b>. Os dois vídeos que venderam são os mesmos desde setembro.</div>
+    <div class="nota"><b>O que saiu, e por quê.</b> O <b>ESTATICO_AD02</b>, primeiro corte previsto em setembro, gastou mais <b>R$ 111,61</b> e fez <b>zero venda</b> (pausado). O <b>VIDEO_AD04</b> não recebeu verba em outubro (pausado). Dos <b>13 estáticos novos</b> que entraram (AD11 a AD23), que custaram <b>R$ 777,05</b> e fizeram <b>7 vendas</b>, só o <b>ESTATICO_AD23</b> se destacou, com <b>6 vendas a R$ 54,12</b> e retorno de 0,74x (pausado). O <b>ESTATICO_AD16</b> fez 1 venda (pausado), e os outros 11 somaram <b>R$ 377,32 sem nenhuma venda</b> (todos pausados). Os 18 criativos fora do top 5 consumiram <b>R$ 1.220,91</b> para <b>11 vendas</b>: <b>R$ 110,99 por venda</b>, contra R$ 36,06 dos cinco de cima.</div>
+    <div class="nota"><b>Na captação, duas peças já se separam.</b> Em 4 dias, o <b>vídeo AD12</b> fez <b>29 inscrições a R$ 10,98</b> (no ar) e o <b>carrossel CVAL2</b>, <b>23 a R$ 10,86</b> (no ar), ambos com imposto e contra <b>R$ 23,70</b> da média. Por público, os semelhantes fizeram <b>46 a R$ 17,80</b> e o quente de 180 dias, <b>40 a R$ 18,83</b>; o quente de 90 dias foi o mais caro, com <b>15 a R$ 37,22</b>. São poucos dias de leitura, então isso orienta a verba, mas ainda não é conclusão.</div>
+
+    <p class="sub m"><span class="dot m"></span>Outubro teve desgaste no público quente</p>
+    <div class="nota"><b>O desgaste que setembro previu apareceu</b>, mais no público do que numa peça específica: o quente chegou a <b>6,32 exibições por pessoa</b> e a venda dele subiu <b>47%</b> da primeira para a última semana (de R$ 25,88 para R$ 38,08), com os mesmos dois vídeos à frente. Nenhum criativo foi desligado por esse motivo. A campanha inteira saiu do ar em <b>28/10</b>, junto com a entrada da captação, e todas as peças do perpétuo estão <b>pausadas</b> hoje. Os dados da plataforma mostram a pausa, mas não registram o motivo.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Trazer o custo da inscrição para perto da meta e só então acelerar</h3>
+          <p>A imersão é em <b>14 de novembro</b>. Em outubro a inscrição saiu a <b>R$ 20,82 sem imposto</b>, contra a meta de <b>R$ 11,50</b>, mas o <b>vídeo AD12</b> e o <b>carrossel CVAL2</b> já rodam perto dela. O movimento é concentrar a verba nessas peças e nos públicos <b>semelhantes</b> e <b>quente de 180 dias</b>, e subir em degraus, conferindo o custo a cada passo. Até 02/11 a captação usou <b>R$ 4.102,54</b> dos <b>R$ 24.598,08</b> planejados, e usar o restante até 13/11 pediria <b>R$ 1.707,96 por dia</b>, contra <b>R$ 352 por dia</b> ligados hoje.</p>
+          <span class="muda">Verba: de R$ 352/dia para até R$ 1.707,96/dia até 13/11 · só onde o custo se sustentar</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Abrir o lembrete e a venda do lançamento nas datas previstas</h3>
+          <p>O <b>lembrete</b> começa em <b>07/11</b>, para quem se inscreveu chegar à imersão. A <b>venda</b> começa em <b>14/11</b>, com o carrinho aberto até <b>21/11</b>. As duas fases ainda não gastaram nada e cada uma tem <b>R$ 3.074,76</b> de mídia reservados. A venda é a primeira leitura real de quanto o lançamento devolve.</p>
+          <span class="muda">Verba: R$ 384,35/dia em cada fase · lembrete 07 a 14/11 e venda 14 a 21/11</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Perpétuo e seguidores parados até o carrinho fechar; a volta do perpétuo é só no quente, com vídeo novo</h3>
+          <p>Enquanto o lançamento fala com o mesmo público, nossa recomendação é <b>não religar o perpétuo</b> nem colocar verba nova em <b>seguidores</b>, que levou a maior fatia de outubro (<b>R$ 4.776,28</b>) sem ganho medido por anúncio. Depois de 21/11, o perpétuo volta <b>só no público quente</b>, único acima de 1x, e com os <b>2 a 3 vídeos novos</b> que ficaram devendo em outubro, porque esse público já viu as peças atuais mais de 6 vezes. O <b>frio</b> só volta com novo teste, depois de dois meses perto de 0,38x. A <b>V2</b> entra como página da volta, ainda em observação.</p>
+          <span class="muda">Verba: R$ 0/dia até 21/11 · depois cerca de R$ 105/dia com imposto, o ritmo do quente em outubro</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Consertar a medição das 3 páginas de venda</h3>
+          <p>Na leitura de <b>02/11</b>, as páginas <b>lp.profmurilosoares.com.br</b>, <b>/v2-sb/</b> e <b>/v3/</b> continuam carregando o código de medição por um endereço com problema. Sem o conserto, não dá para saber quantas pessoas chegam à página nem onde elas desistem, justamente o trecho em que outubro piorou. As vendas seguem medidas pela Ticto. A <a href="../correcao-gtm-lp/" style="color:var(--accent)">página com o passo a passo</a> já está pronta para quem cuida do site.</p>
+          <span class="muda">Depende de você: passar a correção a quem cuida do site, antes de o perpétuo voltar · sem mudança de verba</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Conciliar com a Ticto — segue sendo só a régua do Meta</h3>
+          <p>As <b>114 vendas</b> e os <b>R$ 4.541,00</b> desta página são o que o <b>pixel do Meta</b> enxerga. O pedido de setembro continua aberto: sem o <b>relatório de vendas da Ticto</b> não dá para descontar reembolso, chargeback e Pix/boleto não pago, nem separar o que é Manual do que é item adicional. E é o número da Ticto que vale como faturamento. Com o lançamento abrindo venda em 14/11, isso passa a pesar mais.</p>
+          <span class="muda">Depende de você: liberar o acesso de leitura da Ticto, de preferência antes de 14/11 · a partir daí o relatório passa a ter venda medida e venda faturada</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · investimento e resultados pelo Meta Ads (conta 1498770914317901, pixel 975791790814595) · dados fechados em 31 de outubro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
