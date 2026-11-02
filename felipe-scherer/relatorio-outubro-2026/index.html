@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Felipe Scherer — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style></head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Felipe Scherer</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia de <b>Felipe Scherer</b> — conta de Meta Ads. Em outubro a conta seguiu <b>100% dedicada ao Playbook Low Ticket</b>, agora só na Ticto: a oferta de R$ 19,90 e, de 14 a 23/10, um <b>teste de preço</b> com páginas de R$ 37,90, R$ 47, R$ 57 e R$ 67. O investimento ficou praticamente igual ao de setembro; as vendas caíram 14%.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · 31 dias com anúncio no ar · dados do Meta e do pixel lidos em 02/11/2026 · imposto ISS+IOF de 13,83% incluído em todo investimento</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Outubro · Meta Ads · Playbook</span>
+        <p class="big">192</p>
+        <p class="what">vendas do Playbook no mês</p>
+        <p class="cost">a <b>R$ 59,92</b> cada, com <b>R$ 11.504,73</b> investidos (verba + imposto) — <b>6,2 vendas por dia</b></p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Mês anterior · setembro de 2026</span>
+        <p class="big">224</p>
+        <p class="what">vendas do Playbook em setembro</p>
+        <p class="cost">a <b>R$ 51,56</b> cada, com <b>R$ 11.548,45</b> — <b>7,7 vendas por dia</b></p>
+      </div>
+    </div>
+    <p class="frase">Outubro investiu quase o mesmo que setembro (<b>−0,4%</b>) e vendeu <b>14,3% menos</b> (224 → 192), o que levou o custo por venda de <b>R$ 51,56 para R$ 59,92</b>. A maior parte dessa alta tem endereço: o teste de preço consumiu <b>R$ 2.291,07</b> e fez <b>20 vendas</b>. Fora dele, foram <b>172 vendas a R$ 53,57</b>, perto do custo de setembro. O ponto de atenção segue o mesmo: o Playbook sozinho devolveu <b>37 centavos de cada real</b> (eram 41 em setembro) e, neste mês, <b>nenhuma venda do curso caro</b> foi creditada a ele para ajudar a pagar a conta. O que fazer com isso está no bloco 5.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Meta Ads — Playbook Low Ticket</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">o que virou entrega</span></td><td class="n">R$ 10.106,94</td><td class="n">R$ 10.145,35</td><td class="n down">−0,4%</td></tr>
+          <tr><td>Imposto ISS+IOF 13,83%<span class="muted">cobrado por fora da verba</span></td><td class="n">R$ 1.397,79</td><td class="n">R$ 1.403,10</td><td class="n down">−0,4%</td></tr>
+          <tr><td><b>Subtotal do Low Ticket</b></td><td class="n"><b>R$ 11.504,73</b></td><td class="n"><b>R$ 11.548,45</b></td><td class="n down">−0,4%</td></tr>
+          <tr class="sub-row"><td colspan="4">Meta Ads — outras frentes da conta (lançamento JUL/26, remarketing e flash)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">encerrada: nada entregou em outubro</span></td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr><td>Imposto ISS+IOF 13,83%</td><td class="n">R$ 0,00</td><td class="n">R$ 0,00</td><td class="n flat">—</td></tr>
+          <tr><td><b>Subtotal das outras frentes</b></td><td class="n"><b>R$ 0,00</b></td><td class="n"><b>R$ 0,00</b></td><td class="n flat">—</td></tr>
+          <tr class="tot"><td>Total pago no mês</td><td class="n">R$ 11.504,73</td><td class="n">R$ 11.548,45</td><td class="n down">−0,4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>O total mal mudou, e o dinheiro continuou no mesmo lugar:</b> pelo segundo mês seguido, <b>cada centavo foi para o Playbook</b>. A novidade dentro dele foi o teste de preço, que levou <b>19,9% do investimento</b> (R$ 2.291,07).</div>
+    <div class="nota"><b>Ritmo, sem nenhum dia em branco:</b> a média foi de <b>R$ 371,12 por dia</b> (verba + imposto) nos 31 dias, mas o mês teve três fases. De <b>1 a 12/10</b> a conta foi religada aos poucos (R$ 2.733,12 · 51 vendas · R$ 53,59 cada). De <b>13 a 20/10</b>, com o lote novo e o teste de preço, concentrou <b>55% do investimento</b> (R$ 6.362,19 · 91 vendas · R$ 69,91 cada). De <b>21 a 31/10</b> a verba foi reduzida (R$ 2.409,43 · 50 vendas · <b>R$ 48,19 cada</b>), e os últimos três dias ficaram entre R$ 55 e R$ 91 por dia depois dos cortes de 28 e 29/10.</div>
+    <div class="nota"><b>A conta não tem freio escondido:</b> o limite de gasto acumulado segue em <b>zero</b> (ou seja, sem teto), então nada desliga a entrega sozinho. O que define o ritmo é só o orçamento diário de cada conjunto.</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vendas do Playbook<span class="muted">172 a R$ 19,90 · 20 no teste de preço · todas na Ticto</span></td><td class="n"><b>192</b></td><td class="n"><b>R$ 59,92</b></td><td class="n down">−14,3% em volume<span class="muted">custo por venda 16,2% maior</span></td></tr>
+          <tr><td>Faturamento do Playbook<span class="muted">vendas × preço da oferta</span></td><td class="n">R$ 4.246,30</td><td class="n">retorno 0,37x</td><td class="n down">−11,1%<span class="muted">retorno era 0,41x</span></td></tr>
+          <tr><td>Venda do curso caro creditada ao Playbook<span class="muted">quem comprou o Playbook e voltou para o PAT em até 7 dias</span></td><td class="n">0</td><td class="n">—<span class="muted">sem venda no mês</span></td><td class="n down">era 1 em setembro</td></tr>
+          <tr><td>Checkouts iniciados<span class="muted">chegou na tela de pagamento</span></td><td class="n">337</td><td class="n">R$ 34,14</td><td class="n down">−11,3%<span class="muted">380 em setembro</span></td></tr>
+          <tr><td>Visitas à página de vendas<span class="muted">clicou no anúncio e a página abriu</span></td><td class="n">2.298</td><td class="n">R$ 5,01</td><td class="n up">+0,8%<span class="muted">2.279 em setembro</span></td></tr>
+          <tr><td>Exibições e alcance<span class="muted">quantas vezes o anúncio apareceu e para quanta gente</span></td><td class="n">363.266 · 59.347 pessoas</td><td class="n">CPM R$ 31,67</td><td class="n up">+13,9% em exibição<span class="muted">CPM era R$ 36,20</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Onde o mês ganha e onde ele perde:</b> o anúncio trouxe o mesmo volume de gente pelo mesmo preço (visita a R$ 5,01; em setembro, R$ 5,07). A perda veio depois: de cada 100 pessoas que clicaram, <b>83 abriram a página</b> (85 em setembro); de cada 100 que abriram, <b>14,7 iniciaram o pagamento</b> (16,7 em setembro); e <b>57,0% de quem iniciou concluiu</b> (58,9% em setembro). Em números redondos: <b>145 pessoas chegaram na tela de pagamento em outubro e não compraram</b>. A R$ 19,90 cada, são R$ 2.885,50 que pararam no último passo.</div>
+    <div class="nota"><b>O CPM caiu e isso não virou venda:</b> a exibição ficou <b>12,5% mais barata</b> (R$ 36,20 → R$ 31,67) e alcançou <b>59.347 pessoas</b>, com frequência de <b>6,1 exibições por pessoa</b> no mês. Ainda assim a venda encareceu, porque o ganho do leilão não chegou à página nem ao pagamento.</div>
+    <div class="nota"><b>A régua desta página, e o que ficou de fora:</b> o faturamento acima é calculado como <b>vendas × preço da oferta</b>, com o preço de cada página do teste. <b>Não é extrato de checkout:</b> a GGD não tem acesso ao relatório financeiro da Ticto, então <b>reembolso, chargeback e Pix gerado e não pago não estão descontados</b> aqui. Para fechar faturamento de verdade, falta o extrato da Ticto — está no bloco 5.</div>
+    <div class="nota"><b>Dois números que não batem, e por quê.</b> Primeiro: o pixel do Meta somou <b>R$ 6.572,18</b> em valor de compra no mês, mas esta página reconhece <b>R$ 4.246,30</b>. A diferença de R$ 2.325,88 é valor que o pixel declara por cima do preço das ofertas — pode ser adicional do checkout, mas <b>não dá para confirmar sem o extrato</b>, então ficou de fora, por conservadorismo. Se ela se confirmar inteira, o retorno do mês sobe de 0,37x para 0,57x. Segundo: o <b>dashboard de Low Ticket</b> mostra as mesmas <b>192 vendas</b> e o mesmo investimento, mas <b>R$ 3.820,80 de receita e retorno de 0,33x</b>, porque conta todas as vendas a R$ 19,90, inclusive as do teste de preço. Esta página usa o preço de cada oferta. O comparativo de setembro segue com as 224 vendas publicadas naquele relatório; o dashboard mostra 222.</div>
+    <div class="nota"><b>Sobre a venda do curso caro:</b> <b>em outubro não houve nenhuma creditada ao Playbook.</b> A régua é a mesma de setembro e é uma estimativa pelo pixel: a maior soma de compras em um único dia foi de <b>R$ 754,00</b>, abaixo do valor de R$ 2.497 do curso. Isso não quer dizer que o curso não vendeu para quem comprou o Playbook — só que o pixel não registrou. A confirmação depende dos seus números.</div>
+    <div class="nota"><b>Comparação com o ano passado não é possível:</b> em outubro de 2025 a conta investiu <b>R$ 56.587,52</b> com imposto (R$ 49.712,31 de verba), mas foi uma captação de cadastros para lançamento. O Playbook de R$ 19,90 só nasceu em <b>2026</b> — não há venda de Low Ticket para comparar. A linha de ano anterior passa a existir no relatório de outubro de 2027.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Outubro — o custo por venda de cada lote (a régua do Low Ticket)</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Lote / frente</th><th class="n">Investido</th><th class="n">Checkouts</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>LOTE13 — estáticos novos (página vtic2)</b><span class="muted">subiu em 13/10 · a maior verba do mês</span></td><td class="n">R$ 2.332,02</td><td class="n">79</td><td class="n"><b>47</b></td><td class="n">R$ 49,62</td><td><span class="st on">No ar · 2 conjuntos</span></td></tr>
+          <tr><td><b>LOTE07 — estáticos</b><span class="muted">o melhor custo por venda do mês entre os lotes</span></td><td class="n">R$ 2.217,84</td><td class="n">84</td><td class="n"><b>47</b></td><td class="n"><b>R$ 47,19</b></td><td><span class="st off">Pausado 28/10</span></td></tr>
+          <tr><td>Teste de preço — R$ 37,90 · R$ 47 · R$ 57 · R$ 67<span class="muted">de 14 a 23/10 · R$ 37,90 fez 15 das 20 vendas</span></td><td class="n">R$ 2.291,07</td><td class="n">42</td><td class="n">20</td><td class="n">R$ 114,55</td><td><span class="st off">Pausado 23/10</span></td></tr>
+          <tr><td>LOTE12 — vídeos do Playbook<span class="muted">subiu em 05/10</span></td><td class="n">R$ 2.169,22</td><td class="n">58</td><td class="n">35</td><td class="n">R$ 61,98</td><td><span class="st on">No ar · 1 conjunto</span></td></tr>
+          <tr><td>Página vtic2 — a vencedora do teste de setembro<span class="muted">saiu e voltou ao ar ao longo do mês</span></td><td class="n">R$ 2.018,63</td><td class="n">60</td><td class="n">38</td><td class="n">R$ 53,12</td><td><span class="st on">No ar · 3 conjuntos</span></td></tr>
+          <tr><td>Outras 2 campanhas<span class="muted">LOTE08 e página vtic3</span></td><td class="n">R$ 475,95</td><td class="n">14</td><td class="n">5</td><td class="n">R$ 95,19</td><td><span class="st off">Pausadas</span></td></tr>
+          <tr class="tot"><td>Outubro inteiro — 10 campanhas</td><td class="n">R$ 11.504,73</td><td class="n">337</td><td class="n">192</td><td class="n">R$ 59,92</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sub g"><span class="dot g"></span>Os cinco criativos que puxaram o mês</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Criativo</th><th class="n">Investido</th><th class="n">Checkouts</th><th class="n">Vendas</th><th class="n">Custo por venda</th><th>Status hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>AD03_VIDEO_LT</b> — vídeo<span class="muted">o maior volume da conta, de novo</span></td><td class="n">R$ 1.169,43</td><td class="n">40</td><td class="n"><b>26</b></td><td class="n">R$ 44,98</td><td><span class="st on">No ar</span></td></tr>
+          <tr><td><b>AD06_VIDEO_LT</b> — vídeo<span class="muted">o que mais levou gente ao pagamento: 45 checkouts</span></td><td class="n">R$ 1.030,50</td><td class="n">45</td><td class="n">25</td><td class="n">R$ 41,22</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>AD70_ESTA_ASPAS_MULTIFATORIAL</b> — estático<span class="muted">o melhor custo por venda entre os cinco · veio do lote novo</span></td><td class="n">R$ 675,71</td><td class="n">29</td><td class="n">20</td><td class="n"><b>R$ 33,79</b></td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>AD1_PLAYBOOK_VIDEO_LT — vídeo<span class="muted">20 vendas, mas com custo acima da média dos cinco</span></td><td class="n">R$ 1.046,45</td><td class="n">30</td><td class="n">20</td><td class="n">R$ 52,32</td><td><span class="st on">No ar</span></td></tr>
+          <tr><td>AD20_ESTA_FELIPE_LT — estático<span class="muted">de novo entre os cinco que mais venderam</span></td><td class="n">R$ 825,77</td><td class="n">29</td><td class="n">16</td><td class="n">R$ 51,61</td><td><span class="st on">No ar</span></td></tr>
+          <tr class="tot"><td>Os cinco somados</td><td class="n">R$ 4.747,86</td><td class="n">173</td><td class="n">107</td><td class="n">R$ 44,37</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Os cinco criativos acima levaram 41,3% da verba e fizeram 55,7% das vendas</b>, a <b>R$ 44,37</b> cada — 26% abaixo da média do mês. Fora deles, há um caso que merece nome: o estático do lote novo <b>AD73_ESTA_FITA_ALERTA</b> (<span class="st on">No ar</span>) fez <b>6 vendas a R$ 27,08</b> com R$ 162,47 — o <b>melhor custo por venda do mês</b> entre os criativos com pelo menos cinco vendas. O volume ainda é pequeno, por isso ele está em observação.</div>
+    <div class="nota"><b>O que foi cortado, e por quê:</b> todo corte deste mês foi feito <b>na mão</b>, peça por peça — a conta <b>não tem nenhuma regra automática ligada</b>, por decisão nossa, e a estrutura é <b>um conjunto para cada criativo</b>, que é o que permite cortar sem derrubar o resto. Saíram por custo por venda alto: <b>AD44_ESTA_9_ALEGACOES_V2_LT</b> (R$ 642,08 · 6 vendas · R$ 107,01 cada), <b>AD06_VIDEO_SEMPRECO</b> (R$ 480,45 · 4 vendas · R$ 120,11) e <b>AD03_VIDEO_SEMPRECO</b> (R$ 373,19 · 1 venda) — todos <span class="st off">Pausados</span>. Dois criativos gastaram mais de R$ 100 sem vender nada no mês: <b>AD_MIX_VIDEOS_SEMPRECO</b> (R$ 286,49) e <b>AD6_PLAYBOOK_VIDEO_LT</b> (R$ 113,66), ambos <span class="st off">Pausados</span>.</div>
+    <div class="nota"><b>Os três checkouts, lado a lado — e aqui o preço apareceu de verdade:</b> em outubro <b>toda a verba foi para a Ticto</b> (192 vendas); <b>Kiwify e Hubla ficaram em R$ 0,00</b>. O que dá para comparar agora é preço, dentro do mesmo checkout: a <b>R$ 19,90</b> foram R$ 9.213,66 · 172 vendas · R$ 53,57 cada · <b>retorno 0,37x</b>. A <b>R$ 37,90</b> foram R$ 920,68 · 15 vendas · R$ 61,38 · <b>retorno 0,62x</b>, com a maior passagem da página para o pagamento (19,9% contra 15,0%). A <b>R$ 47</b> foram R$ 759,28 · 4 vendas · 0,25x. A <b>R$ 57</b> foram R$ 291,37 · nenhuma venda. A <b>R$ 67</b> foram R$ 319,74 · 1 venda · 0,21x. Pelo valor do pixel, que inclui o que foi declarado acima do preço, a distância diminui: 0,72x a R$ 37,90 contra 0,62x a R$ 19,90. São <b>só 15 vendas</b>, e a página de R$ 37,90 rodou sem os adicionais do checkout, então é indicação, não decisão. <b>Correção sobre setembro:</b> a divisão publicada naquele relatório atribuiu R$ 6.868,67 à Kiwify, mas quase todas essas campanhas levam a marca da Ticto no nome. Aquela comparação entre Ticto e Kiwify não deve ser usada como base; o relatório de setembro não foi recalculado.</div>
+    <div class="nota"><b>Datas dos cortes, para registro (último dia de entrega):</b> 07/10 a página vtic3 · 13/10 o LOTE08 · 16/10 as páginas de R$ 57 e R$ 67 · 20/10 a de R$ 47 · 23/10 a de R$ 37,90 · 28/10 o LOTE07 e o LOTE13 · 29/10 três conjuntos (AD03 vídeo, AD5 vídeo e AD69). A conta entrou em novembro com <b>dois conjuntos a R$ 60,00 por dia</b>; na manhã de 02/11 quatro foram religados, incluindo o LOTE13, e hoje são <b>seis conjuntos no ar, a R$ 183,00 por dia</b> (R$ 208,31 com imposto).</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Manter a verba concentrada nos seis conjuntos no ar — hoje R$ 183 por dia</h3>
+          <p>Outubro mostrou que verba alta não trouxe venda mais barata: de 13 a 20/10 a venda saiu a <b>R$ 69,91</b>; de 21 a 31/10, com menos verba, a <b>R$ 48,19</b>. Novembro começa com <b>AD03 vídeo</b> (2 conjuntos), <b>AD20</b>, <b>AD70</b>, <b>AD73</b> e <b>AD1 vídeo</b>. A verba só sobe no conjunto que provar custo baixo, não na conta inteira.</p>
+          <span class="muda">Verba: R$ 183/dia (R$ 208,31 com imposto), contra a média de R$ 371/dia de outubro · estrutura: 6 conjuntos</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Perseguir retorno de 1,3x: custo por venda perto de R$ 26</h3>
+          <p>Com o valor médio de <b>R$ 34,23 por venda</b> registrado pelo pixel em outubro, retorno de 1,3x pede custo de até <b>R$ 26,33</b> — e esse valor ainda precisa ser confirmado no extrato. Nenhum lote chegou perto: o melhor foi o LOTE07, a R$ 47,19. Entre os criativos, o mais próximo é o <b>AD73</b> (R$ 27,08), seguido do <b>AD70</b> (R$ 33,79). Conjunto com pelo menos 5 vendas a até R$ 30 sobe 30% de verba; depois de R$ 75 investidos, acima de R$ 50 por venda, sai. O corte segue <b>100% manual</b>, com um conjunto por criativo.</p>
+          <span class="muda">Verba: +30% só nos conjuntos que baterem a régua · corte manual, um conjunto por criativo</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Colocar a página nova no ar — o maior gargalo do mês está na página</h3>
+          <p>De cada 100 pessoas que abriram a página, só <b>14,7 foram ao pagamento</b>. A página nova, com a primeira dobra baseada no AD73, já foi enviada à sua equipe; na conferência de 02/11, o endereço <b>/vtic6 ainda não estava no ar</b>. Assim que subir, a proposta é dividir a verba <b>50/50 com a vtic2</b> e ler o resultado com cerca de 300 visitas em cada uma.</p>
+          <span class="muda">Depende de você: publicar a /vtic6 · verba igual, dividida entre as 2 páginas</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Repetir o teste de R$ 37,90, agora em condição igual à oferta atual</h3>
+          <p>Foi o único preço novo que superou o retorno da oferta de R$ 19,90 (<b>0,62x contra 0,37x</b>), mas com só 15 vendas e sem os adicionais do checkout. As páginas de R$ 47, R$ 57 e R$ 67 ficam fora. Para a nova rodada valer, o checkout de R$ 37,90 precisa ter <b>os mesmos adicionais e a taxa padronizada</b>. A decisão do preço é sua; a medição é nossa.</p>
+          <span class="muda">Depende de você: adicionais e taxa no checkout de R$ 37,90 · estrutura: 1 página de teste contra a atual</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Fechar a conta de verdade: extrato da Ticto, curso caro e os 145 checkouts perdidos</h3>
+          <p>O Playbook sozinho devolveu <b>0,37x</b> em outubro, e o pixel não registrou venda do curso caro. Para novembro ser decidido com número, faltam três coisas que só você tem: o <b>relatório de vendas da Ticto</b> (para descontar reembolso e confirmar o valor dos adicionais), <b>quantas vendas do curso caro vieram de quem comprou o Playbook</b> e a confirmação de que a <b>recuperação de carrinho</b> está ligada. Foram <b>145 pessoas</b> que chegaram ao pagamento e não concluíram; se metade fechar, são cerca de <b>72 vendas sem um real a mais de mídia</b>.</p>
+          <span class="muda">Depende de você: relatório da Ticto + vendas do curso caro + recuperação de carrinho · nenhuma mudança de verba</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · investimento e resultados pelo Meta Ads e pelo pixel · dados fechados em 31 de outubro de 2026</span>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
