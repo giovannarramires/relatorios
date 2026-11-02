@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Glauber — Dr. Glauber Voltan — Relatório de Outubro de 2026</title>
+<style>
+  :root{
+    --paper:#f4f6f5; --card:#ffffff; --ink:#12211f; --ink-soft:#46574f;
+    --line:#dfe5e2; --line-soft:#eaefec; --meta:#2f6df0; --meta-soft:#e7effd;
+    --google:#cf861a; --google-soft:#faf0dd; --accent:#127a63; --accent-soft:#e3f1ec;
+    --shadow:0 1px 2px rgba(18,33,31,.05), 0 12px 34px -18px rgba(18,33,31,.22);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0d1512; --card:#14201d; --ink:#e9efec; --ink-soft:#9bada6;
+      --line:#253430; --line-soft:#1c2925; --meta:#6f9dff; --meta-soft:#17263f;
+      --google:#e6a54a; --google-soft:#33260f; --accent:#48c3a0; --accent-soft:#123027;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,36px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:10px;font-weight:720}
+  .lede{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+  .periodo{font-size:12.5px;color:var(--ink-soft);margin-top:12px;font-variant-numeric:tabular-nums}
+
+  /* barra de meses */
+  .meses{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+  .mes{display:inline-flex;align-items:center;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);text-decoration:none}
+  .mes:hover{border-color:var(--accent);color:var(--accent)}
+  .mes.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .meses-nota{font-size:11.5px;color:var(--ink-soft);opacity:.8;margin-bottom:26px}
+
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 14px}
+  section{margin-bottom:38px}
+  .sub{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;margin:22px 0 10px;display:flex;align-items:center;gap:7px}
+  .sub .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dot.m{background:var(--meta)} .dot.g{background:var(--google)}
+  .sub.m{color:var(--meta)} .sub.g{color:var(--google)}
+
+  /* bloco 1 */
+  .headline{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .hl.g{border-color:color-mix(in srgb,var(--google) 32%,var(--line));background:linear-gradient(180deg,var(--google-soft),var(--card) 62%)}
+  .hl.m{border-color:color-mix(in srgb,var(--meta) 32%,var(--line));background:linear-gradient(180deg,var(--meta-soft),var(--card) 62%)}
+  .hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .hl .big{font-size:clamp(34px,6vw,46px);font-weight:720;letter-spacing:-.03em;line-height:1.02;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .hl .what{font-size:14.5px;font-weight:600}
+  .hl .cost{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .hl .cost b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.headline{grid-template-columns:1fr}}
+  .frase{font-size:15px;margin-top:14px;color:var(--ink-soft)}
+
+  /* tabelas */
+  .tw{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--line-soft)}
+  tr.sub-row td{background:var(--line-soft);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:8px 16px}
+  .muted{color:var(--ink-soft);font-size:12.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0;font-weight:400}
+  .up{color:#0c7a54;font-weight:700} .down{color:#b4541a;font-weight:700} .flat{color:var(--ink-soft);font-weight:700}
+  @media (prefers-color-scheme: dark){.up{color:#7ff0c2}.down{color:#e8955c}}
+  .st{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st.on{color:#0c7a54;background:#d6f2e5} .st.off{color:#8a6d3b;background:var(--line-soft)}
+  @media (prefers-color-scheme: dark){.st.on{color:#7ff0c2;background:#12362a}.st.off{color:#c9b68c;background:#2a2317}}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap}
+  td a:hover{text-decoration:underline}
+
+  .nota{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--google);border-radius:0 12px 12px 0;padding:13px 16px;box-shadow:var(--shadow);margin-top:12px}
+  .nota b{color:var(--ink)}
+  .nota+.nota{margin-top:9px}
+
+  /* plano */
+  .plano{display:flex;flex-direction:column;gap:11px}
+  .acao{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:0 14px}
+  .acao .num{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+  .acao h3{font-size:15px;font-weight:700;margin-bottom:5px}
+  .acao p{font-size:13.5px;color:var(--ink-soft)}
+  .acao .muda{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">GGD · Glauber — Dr. Glauber Voltan</p>
+  <h1>Outubro de 2026</h1>
+  <p class="lede">Relatório mensal da mídia do <b>Dr. Glauber Voltan</b> — ensino de bloqueio de nervo guiado por ultrassom, vendido pela HeroSpark. A conta tem duas frentes e elas aparecem separadas aqui: o <b>LANÇAMENTO</b> (Imersão Prática + a esteira da NervUS Formação) e o <b>PERPÉTUO</b> (low ticket — Biblioteca de Casos, Masterclass CSA e Guia Prático). Em outubro o perpétuo teve anúncio de venda até 29/10; a venda da Imersão rodou no começo do mês, sem gasto a partir de 14/10, e voltou de 20 a 25/10.</p>
+  <p class="periodo">Período: 1 a 31 de outubro de 2026 · sem anúncio de venda da Imersão de 14 a 19/10 e depois de 25/10; perpétuo sem anúncio em 30 e 31/10 · status das peças lido em 02/11/2026</p>
+
+  <nav class="meses" aria-label="Meses">
+    <a class="mes" href="../relatorio-setembro-2026/">Setembro 2026</a>
+    <span class="mes on" aria-current="page">Outubro 2026</span>
+  </nav>
+  <p class="meses-nota">Os meses anteriores ficam clicáveis aqui.</p>
+
+  <!-- 1 -->
+  <section>
+    <h2>1 · O mês em um número</h2>
+    <div class="headline">
+      <div class="hl m">
+        <span class="tag">Lançamento · Imersão + NervUS Formação</span>
+        <p class="big">33</p>
+        <p class="what">vendas pagas na HeroSpark</p>
+        <p class="cost">a <b>R$ 166,02</b> cada, já com o imposto da plataforma — eram <b>R$ 152,04</b> em setembro</p>
+      </div>
+      <div class="hl g">
+        <span class="tag">Perpétuo · Low ticket (Guia Prático + Biblioteca de Casos)</span>
+        <p class="big">64</p>
+        <p class="what">vendas pagas na HeroSpark</p>
+        <p class="cost">a <b>R$ 137,85</b> cada — eram <b>R$ 84,81</b> em setembro</p>
+      </div>
+    </div>
+    <p class="frase">Outubro saiu do caixa em <b>R$ 16.683,07</b> nas duas frentes, contra R$ 13.445,55 em setembro — <b>24,1% a mais</b>. Esse dinheiro trouxe <b>97 vendas pagas</b> e <b>R$ 20.161,40</b> de faturamento bruto, um retorno de <b>1,21x</b>. O recado do mês é um só: <b>quem pagou a conta foi a esteira, não o anúncio de venda</b>. As <b>3 NervUS Formação</b>, de R$ 4.997 cada, somam <b>R$ 14.991,00</b> — 74,4% de tudo que entrou — e nenhuma delas chegou com marca de anúncio. O perpétuo foi o contrário: dobrou o volume, levou mais da metade da verba e devolveu <b>0,38x</b>. Faturamento e venda são um piso, porque a base deste mês é a planilha automática de vendas e não houve conferência no painel da HeroSpark (detalhe no bloco 3).</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2 · Quanto foi investido</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Investimento</th><th class="n">Outubro</th><th class="n">Setembro</th><th class="n">Variação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="sub-row"><td colspan="4">Lançamento — Imersão Prática + NervUS Formação</td></tr>
+          <tr><td>Verba em anúncio de venda<span class="muted">o que foi vender ingresso da Imersão, incluindo R$ 195,45 de teste de criativo</span></td><td class="n">R$ 4.880,66</td><td class="n">R$ 8.333,71</td><td class="n down">−41,4%</td></tr>
+          <tr><td>Verba em captação da live<span class="muted">aula de terça R$ 629,39 · Aula Magna R$ 1.120,53 · apoio (vídeo e seguidores) R$ 372,01</span></td><td class="n">R$ 2.121,93</td><td class="n">R$ 691,70</td><td class="n up">+206,8%</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">12,25% cobrados por fora</span></td><td class="n">R$ 857,82</td><td class="n">R$ 1.105,61</td><td class="n down">−22,4%</td></tr>
+          <tr class="tot"><td>Total pago no lançamento</td><td class="n">R$ 7.860,41</td><td class="n">R$ 10.131,02</td><td class="n down">−22,4%</td></tr>
+          <tr class="sub-row"><td colspan="4">Perpétuo — low ticket (Guia Prático, Biblioteca de Casos e Masterclass CSA)</td></tr>
+          <tr><td>Verba em anúncio<span class="muted">Biblioteca até 17/10 · Guia Prático até 29/10</span></td><td class="n">R$ 7.859,83</td><td class="n">R$ 2.952,81</td><td class="n up">+166,2%</td></tr>
+          <tr><td>Impostos da plataforma<span class="muted">12,25% cobrados por fora</span></td><td class="n">R$ 962,83</td><td class="n">R$ 361,72</td><td class="n up">+166,2%</td></tr>
+          <tr class="tot"><td>Total pago no perpétuo</td><td class="n">R$ 8.822,66</td><td class="n">R$ 3.314,53</td><td class="n up">+166,2%</td></tr>
+          <tr class="tot"><td>Total do mês nas duas frentes</td><td class="n">R$ 16.683,07</td><td class="n">R$ 13.445,55</td><td class="n up">+24,1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>Por que o lançamento gastou menos que setembro:</b> a verba de venda da Imersão caiu 41,4%. A campanha <i>IMERSAO_0926</i> levou R$ 3.330,49 e não teve gasto a partir de 14/10. A turma de 07/11 só recebeu verba de venda de <b>21 a 25/10</b> (R$ 1.090,90, mais R$ 195,45 de teste) e parou aí. Quem cresceu foi a captação, que triplicou.</div>
+    <div class="nota"><b>A frente nova do mês:</b> a <b>Aula Magna</b> estreou em 21/10 e levou R$ 1.120,53 antes do imposto. Ela está somada na linha de captação junto com a aula de terça, porque as duas buscam inscrição e não venda. Ela somou <b>49 inscritos</b>: 26 pela lista até 27/10, quando o Meta contava inscrição em dobro, e 23 pelo Meta depois da correção. O perpétuo, que era a frente nova de setembro, teve o primeiro mês cheio e ganhou comparação: gastou <b>2,7 vezes o valor de setembro</b>.</div>
+    <div class="nota"><b>A captação aparece separada de propósito:</b> os R$ 2.121,93 <b>não são verba de venda</b> — o resultado deles é inscrição, alcance de vídeo e seguidor, não compra. Estão somados no total do lançamento porque saíram do mesmo caixa, mas nenhum custo por venda deste relatório usa esse dinheiro no cálculo. O apoio são R$ 313,78 em distribuição de vídeo e R$ 58,23 em seguidores. O número das inscrições está no bloco 3.</div>
+    <div class="nota"><b>O imposto desta conta:</b> o Meta cobra <b>12,25% por fora</b> da verba. De cada R$ 100 de anúncio, saem R$ 112,25 do caixa. Todos os custos por venda deste relatório já estão calculados <b>com o imposto dentro</b> — é o valor que efetivamente saiu, não o que aparece na tela do Gerenciador. O investimento soma as duas contas de anúncio: a principal (R$ 3.932,74) e a do low ticket (R$ 10.929,68, antes do imposto).</div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3 · O que isso deu</h2>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Resultado</th><th class="n">Outubro</th><th class="n">Custo por resultado</th><th class="n">vs. setembro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vendas do lançamento<span class="muted">HeroSpark, pagamento confirmado · lidas na planilha automática de vendas</span></td><td class="n"><b>33</b></td><td class="n"><b>R$ 166,02</b></td><td class="n down">−38,9% · custo +9,2%</td></tr>
+          <tr><td>— destas, ingressos da Imersão<span class="muted">20 dos 30 entraram como adicional no carrinho do perpétuo · nenhuma Gravação registrada na planilha</span></td><td class="n">30</td><td class="n">R$ 182,62</td><td class="n down">−23,1% · custo −13,3%</td></tr>
+          <tr><td>— destas, NervUS Formação<span class="muted">a esteira de R$ 4.997 que vem depois da Imersão</span></td><td class="n">3</td><td class="n">—</td><td class="n up">+50,0%</td></tr>
+          <tr><td>Vendas do perpétuo<span class="muted">Guia Prático 36 · Biblioteca de Casos 18 · Masterclass CSA 10</span></td><td class="n"><b>64</b></td><td class="n"><b>R$ 137,85</b></td><td class="n up">+120,7% · custo +62,5%</td></tr>
+          <tr><td>Inscrições na aula de terça<span class="muted">captação da live, contagem do Meta · Aula Magna à parte: 49 inscritos a R$ 25,67</span></td><td class="n">42</td><td class="n">R$ 16,82</td><td class="n up">+68,0% · custo −45,8%</td></tr>
+          <tr><td>Faturamento bruto das duas frentes<span class="muted">retorno de 1,21x sobre o investido · era 1,70x em setembro</span></td><td class="n">R$ 20.161,40</td><td class="n">ticket médio R$ 207,85</td><td class="n up">+11,4% · ROAS −28,9%</td></tr>
+          <tr><td>Exibições do anúncio<span class="muted">quantas vezes a peça apareceu · 123.471 pessoas somando as duas contas, 2,7 vezes cada</span></td><td class="n">337.892</td><td class="n">R$ 49,37 por mil</td><td class="n up">+87,9% · CPM −34,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura em uma frase:</b> outubro <b>faturou mais e rendeu menos</b>. O faturamento subiu 11,4%, mas o investimento subiu 24,1%. Sem as 3 Formações, o mês teria entrado com R$ 5.170,40 para R$ 16.683,07 investidos. <b>O perpétuo sozinho custou R$ 8.822,66 e faturou R$ 3.390,90 — 0,38x</b>. Somando as Imersões que entraram como adicional nesses carrinhos (R$ 953,50), sobe para <b>0,49x</b>. Uma das 3 Formações foi de quem entrou pelo Guia Prático em 09/10, então essa frente pode alimentar a esteira, mas outubro tem um caso, não uma medida.</div>
+    <div class="nota"><b>A régua de R$ 627 por venda:</b> cada venda do lançamento valeu <b>R$ 508,20</b> em outubro, <b>18,9% abaixo</b> da régua e bem acima dos R$ 307,74 de setembro. O motivo é a mistura: 3 vendas de ticket alto em 33, contra 2 em 54. <b>O ingresso segue longe de fechar a conta sozinho</b>: as 30 Imersões somaram R$ 1.779,50. <b>O custo de R$ 182,62 por ingresso parece melhor do que é:</b> caiu 13,3%, mas <b>20 dos 30 vieram do carrinho do perpétuo</b>, a R$ 47–48,50, pagos por outra verba. Com a marca de um anúncio da Imersão foram <b>só 4</b>; outros 6 chegaram sem marca de anúncio. A campanha da turma de 07/11 levou R$ 1.224,54 com imposto e <b>nenhuma venda com a marca dela na HeroSpark</b> — o Meta contou 1 compra. Até 31/10 essa turma tinha <b>3 ingressos</b>.</div>
+    <div class="nota"><b>O que ficou de fora e por quê — a base não foi conferida no painel.</b> A leitura direta da HeroSpark depende da sessão do navegador, que não estava disponível no fechamento. Os números de venda vêm da <b>planilha automática</b>, que chega até 31/10. Em 1–28/09, ela registrou <b>72 itens e R$ 14.625,98</b>, contra <b>83 itens e R$ 18.104,96</b> no painel — e nenhuma das 13 Gravações. Por isso <b>venda e faturamento de outubro são um piso</b> e custo por venda é um teto. Gravação de outubro <b>não está medida</b>: comparando sem ela, o lançamento foi de 41 para 33 vendas. Ficaram fora da conta: 3 parcelas de Formação antiga (R$ 1.249,23, não são venda nova), 4 testes de R$ 1,99, 1 teste de R$ 11,11 e 2 itens reembolsados (R$ 144,00). Setembro não foi recalculado: a planilha mostra R$ 1.742,41 em 29 e 30/09, incluindo 1 parcela, e o painel segue sem conferência.</div>
+    <div class="nota"><b>Por que o número de compras do Meta não é usado aqui:</b> o Gerenciador fecha outubro com <b>49 compras</b> nas duas contas (43 no perpétuo, 6 no lançamento), contra <b>97 vendas pagas</b> na planilha. O contador do Meta vê cerca de metade do que acontece, e <b>nenhuma das 3 Formações veio com marca de anúncio</b>. As decisões deste relatório usam a venda da HeroSpark. <b>Nenhum retorno ou custo por venda do bloco 1 ou 3 vem da tela do Meta</b>; a coluna de compras do bloco 4 é a única exceção, e ali a venda real aparece ao lado.</div>
+    <div class="nota"><b>Um número do perpétuo que não dá para usar:</b> o Meta registrou <b>448 "checkouts iniciados"</b> na campanha da Biblioteca contra <b>551 cliques no link</b> (81%) e <b>308 contra 348</b> na do Guia Prático (89%). O anúncio leva direto à página de pagamento, então o evento dispara quando a página abre, não quando a pessoa decide pagar. <b>Esse número não vale como intenção de compra</b>. Não há registro de conserto: segue como ação 4.</div>
+    <div class="nota"><b>Um detalhe que vale acompanhar:</b> a frequência subiu onde a verba do perpétuo se concentrou: <b>5,60 exibições por pessoa na Biblioteca e 5,79 no Guia Prático</b>, contra 1,84 na conta principal. A entrega média ficou mais barata (CPM −34,0%), mas parte disso são os R$ 313,78 de distribuição de vídeo, que somaram 60.608 exibições baratas e não buscam venda.</div>
+    <div class="nota"><b>Uma comparação com o ano passado não existe ainda:</b> a gestão da GGD nesta conta começou em 2026, não há outubro de 2025 medido com a mesma régua. A partir de 2027 esta linha passa a ter o ano anterior.</div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4 · O que funcionou e o que saiu</h2>
+
+    <p class="sub m"><span class="dot m"></span>Lançamento — as 5 peças que puxaram o mês</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba c/ imposto</th><th class="n">Exibições</th><th class="n">Checkouts</th><th class="n">Compras</th><th class="n">Custo por compra</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Estático 119 — Laudo</b><span class="muted">HeroSpark: 2 ingressos com a marca do anúncio</span></td><td class="n">R$ 326,43</td><td class="n">3.899</td><td class="n">1</td><td class="n"><b>1</b></td><td class="n">R$ 326,43</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>Vídeo V094 — TORNOZELO</b><span class="muted">HeroSpark: 2 ingressos · 959 cliques no link</span></td><td class="n">R$ 517,82</td><td class="n">36.262</td><td class="n">6</td><td class="n"><b>0</b></td><td class="n">—</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Estático 123 — Tibial<span class="muted">HeroSpark: nenhuma venda com a marca do anúncio</span></td><td class="n">R$ 414,93</td><td class="n">4.108</td><td class="n">3</td><td class="n">1</td><td class="n">R$ 414,93</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Estático 121 — Regra de bolso<span class="muted">HeroSpark: nenhuma venda com a marca do anúncio</span></td><td class="n">R$ 446,20</td><td class="n">5.922</td><td class="n">0</td><td class="n">1</td><td class="n">R$ 446,20</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Vídeo V098 — Medida<span class="muted">maior verba da Imersão · HeroSpark: nenhuma venda</span></td><td class="n">R$ 640,64</td><td class="n">4.843</td><td class="n">2</td><td class="n">1</td><td class="n">R$ 640,64</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>As 5 peças — 42,8% da verba de venda do lançamento</td><td class="n">R$ 2.346,04</td><td class="n">55.034</td><td class="n">12</td><td class="n">4</td><td class="n">R$ 586,51</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> nenhuma peça da Imersão se destacou em outubro. As 5 levaram R$ 2.346,04 e o Meta contou 4 compras, a R$ 586,50 cada. <b>Só duas têm venda confirmada na HeroSpark: o estático 119 e o vídeo V094</b>, com 2 ingressos cada. O V094 repete o sinal de setembro: muito clique (959 em 36.262 exibições) e venda real mesmo sem o Meta contar. As 3 Formações não entram nesta tabela porque nenhuma chegou com marca de anúncio. Todas as peças estavam pausadas na leitura de 02/11.</div>
+
+    <div class="nota"><b>O que saiu do ar no mês, com o número que justifica:</b> a campanha <b>IMERSAO_0926</b> (<span class="st off">Pausado</span>) parou antes de 14/10 com 4 compras no Meta em R$ 3.738,47 com imposto. A <b>campanha da turma de 07/11</b> (<span class="st off">Pausado</span>) e as duas <b>ALUNOS</b> (<span class="st off">Pausado</span>) gastaram de 21 a 25/10 e fecharam em R$ 1.224,54 <b>sem venda com a marca delas na HeroSpark</b>. As sobras de <b>V1_V2_1008</b> e <b>IMG_SET26_1209</b> (<span class="st off">Pausado</span>) somaram R$ 263,82 antes do imposto, sem compra. Os dois <b>testes de tráfego</b> (<span class="st off">Pausado</span>) custaram R$ 195,45 e terminaram como previsto.</div>
+
+    <p class="sub g"><span class="dot g"></span>Perpétuo — as 5 peças do mês</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Peça</th><th class="n">Verba c/ imposto</th><th class="n">Exibições</th><th class="n">Checkouts</th><th class="n">Compras</th><th class="n">Custo por compra</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Guia Prático — arte 010</b><span class="muted">caderno à mão · HeroSpark: 8 Guias e 4 Imersões no carrinho, R$ 582,00</span></td><td class="n">R$ 712,42</td><td class="n">14.833</td><td class="n">101</td><td class="n"><b>10</b></td><td class="n">R$ 71,24</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>Guia Prático — arte 012</b><span class="muted">cartaz de hospital · HeroSpark: 10 Guias e 2 Imersões no carrinho, R$ 587,00</span></td><td class="n">R$ 667,47</td><td class="n">13.665</td><td class="n">65</td><td class="n"><b>9</b></td><td class="n">R$ 74,16</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Biblioteca — arte 007<span class="muted">a Biblioteca com mais compras no Meta · HeroSpark: 2 Biblioteca e 3 adicionais no carrinho, R$ 279,00</span></td><td class="n">R$ 456,34</td><td class="n">7.652</td><td class="n">47</td><td class="n">4</td><td class="n">R$ 114,09</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td><b>Biblioteca — arte 005</b><span class="muted">HeroSpark: 3 Biblioteca e 8 adicionais no carrinho, R$ 527,00</span></td><td class="n">R$ 348,58</td><td class="n">5.052</td><td class="n">31</td><td class="n"><b>3</b></td><td class="n">R$ 116,19</td><td><span class="st off">Pausado</span></td></tr>
+          <tr><td>Biblioteca — arte 009<span class="muted">HeroSpark: 3 Biblioteca e 4 adicionais no carrinho, R$ 423,00</span></td><td class="n">R$ 386,43</td><td class="n">7.528</td><td class="n">44</td><td class="n">2</td><td class="n">R$ 193,22</td><td><span class="st off">Pausado</span></td></tr>
+          <tr class="tot"><td>As 5 peças — 29,1% da verba do perpétuo</td><td class="n">R$ 2.571,24</td><td class="n">48.730</td><td class="n">288</td><td class="n">28</td><td class="n">R$ 91,83</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota"><b>A leitura:</b> o Guia Prático foi o motor do mês: as <b>artes 010 e 012 somaram 19 das 28 compras</b> das cinco peças, a pouco mais de R$ 70 cada no Meta. Mas o Guia custa R$ 47–49, então <b>mesmo a melhor peça paga mais pela venda do que recebe nela</b>. Na HeroSpark, a 012 faturou R$ 587,00 com R$ 667,47 de verba e a 010, R$ 582,00 com R$ 712,42. As apostas de setembro não se confirmaram: a <b>012 da Biblioteca</b> foi a R$ 217,57 por compra, e a <b>NEUR_NAVY</b> a R$ 190,94, contra R$ 72,46 e R$ 71,12.</div>
+
+    <div class="nota"><b>O que saiu do ar no perpétuo:</b> a <b>Biblioteca inteira</b> (<span class="st off">Pausado</span>) parou em 17/10 e o <b>Guia Prático</b> (<span class="st off">Pausado</span>) em 29/10. As duas campanhas de <b>Masterclass CSA</b> (<span class="st off">Pausado</span>) custaram R$ 795,34 sem compra no Meta, e as 10 Masterclass do mês entraram como adicional, somando R$ 190,00. Seis artes do Guia (002, 004, 005, 007, 008 e 011) (<span class="st off">Pausado</span>) gastaram R$ 673,14 sem compra. Os vídeos V01_001 a 004 da Biblioteca (<span class="st off">Pausado</span>) levaram R$ 576,92, também sem compra. A <b>arte 008</b> (<span class="st off">Pausado</span>), em observação até 10/10, saiu com R$ 67,18 no mês e nenhuma venda.</div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5 · O que vem em novembro</h2>
+    <div class="plano">
+
+      <div class="acao">
+        <span class="num">01</span>
+        <div>
+          <h3>Fechar a base de vendas no painel da HeroSpark</h3>
+          <p>Outubro está publicado com a planilha automática, que em setembro ficou <b>abaixo do painel</b>, principalmente nas Gravações. A primeira coisa de novembro é ler o painel de 01 a 31/10 e, junto, os dias 29 e 30/09, que seguem abertos. <b>Até lá, venda e faturamento desta página são um piso.</b></p>
+          <span class="muda">Nada muda de verba · o fechamento de outubro sai cravado</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">02</span>
+        <div>
+          <h3>Decidir a venda da turma de 07/11 — não há campanha de venda no ar</h3>
+          <p>A turma acontece em cinco dias, tinha <b>3 ingressos</b> em 31/10 e a planilha não mostra venda nova em novembro até a leitura de 02/11. O último gasto de venda da Imersão foi em 25/10. Hoje só rodam a captação da Aula Magna, a da aula de terça e a distribuição de vídeo. Ou a venda volta nesta semana com os criativos que já provaram gerar aluno, ou a verba fica para a próxima turma.</p>
+          <span class="muda">Depende de você: religar a venda até 03/11 ou assumir a turma como está</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">03</span>
+        <div>
+          <h3>Só religar o perpétuo com peça nova e teto baixo</h3>
+          <p>A frente parou no fim de outubro devolvendo <b>0,38x</b>, e <b>não faz sentido voltar no formato antigo</b>. A proposta é testar as novas versões das artes 012, 010 e 003 do Guia, já pedidas ao time de criação, a <b>R$ 40/dia no máximo</b>, que foi o último patamar usado. A leitura precisa contar o carrinho inteiro e quem chega à Formação depois.</p>
+          <span class="muda">Verba: de R$ 8.822,66 no mês para no máximo R$ 40/dia, até as peças novas provarem retorno</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">04</span>
+        <div>
+          <h3>Consertar o evento de checkout do perpétuo</h3>
+          <p>Segue igual a setembro: <b>81% a 89% dos cliques viram "checkout iniciado"</b>, porque o evento dispara na abertura da página de pagamento. O Meta continua aprendendo com um sinal que não separa quem quer comprar de quem só abriu a página. O conserto é na página e deve acontecer <b>antes</b> de qualquer religada do perpétuo.</p>
+          <span class="muda">Nada muda de verba · a otimização passa a usar sinal verdadeiro</span>
+        </div>
+      </div>
+
+      <div class="acao">
+        <span class="num">05</span>
+        <div>
+          <h3>Medir quanta Formação vem da captação e do produto de entrada</h3>
+          <p>A esteira pagou o mês: <b>3 NervUS Formação, R$ 14.991,00</b>. Uma veio marcada como Aula Magna, e duas foram de quem já tinha comprado Imersão ou Guia. É pouco para virar regra, mas é o que falta medir, porque a captação já custa R$ 2.381,87 por mês com imposto. A proposta é acompanhar comprador por comprador de onde veio cada Formação em novembro, mantendo o corte automático da Aula Magna acima de R$ 25 por inscrito.</p>
+          <span class="muda">Estrutura: verba de captação não sobe até haver essa leitura</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Preparado por GGD Growth Digital · vendas pela planilha automática da HeroSpark (até 31/10, sem conferência no painel), investimento pelo Meta Ads nas duas contas · dados fechados em 31 de outubro de 2026</span>
+    <a href="../lancamento/">Dash do lançamento →</a>
+    <a href="../perpetuo/">Dash do perpétuo →</a>
+    <a href="../central/">Central do cliente →</a>
+  </footer>
+
+</div>
+</body>
+</html>
