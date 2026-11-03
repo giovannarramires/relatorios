@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Roteiros de gravação · Dr. Giácomo Trojan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+/* Layout: coluna de leitura única (~68ch), roteiros como "folhas de gravação" com trilha de tempo à esquerda */
+:root{
+  --paper:#f6f7f9; --sheet:#ffffff; --ink:#1b2230; --muted:#5b6476; --line:#dde1e8;
+  --accent:#0e6b6b; --accent-soft:#e3f1f0; --warn:#9a4a00; --warn-soft:#fbefe2; --fill:#fff3b8;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12161d; --sheet:#1a2029; --ink:#e7eaf0; --muted:#9aa3b5; --line:#2c3441;
+  --accent:#5cc2bd; --accent-soft:#16302f; --warn:#f0a35c; --warn-soft:#33251a; --fill:#4a4214; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161d; --sheet:#1a2029; --ink:#e7eaf0; --muted:#9aa3b5; --line:#2c3441;
+  --accent:#5cc2bd; --accent-soft:#16302f; --warn:#f0a35c; --warn-soft:#33251a; --fill:#4a4214; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);padding-inline:16px;padding-block:32px 64px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+header .eyebrow,.label{font:600 12px/1.4 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:500 clamp(34px,6vw,50px)/1.08 var(--display);margin:8px 0 12px;text-wrap:balance}
+h2{font:500 30px/1.15 var(--display);margin:0 0 12px;text-wrap:balance}
+h3{font:600 19px/1.3 var(--body);margin:0 0 8px;text-wrap:balance}
+p{margin:0 0 12px;max-width:68ch} .lead{font-size:18px;color:var(--muted)}
+.meta{color:var(--muted);font-size:14px}
+section{display:flex;flex-direction:column;gap:16px}
+a{color:var(--accent)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+tr:last-child td{border-bottom:0} td.n{text-align:right;white-space:nowrap}
+tr.hl td{background:var(--accent-soft)}
+.points{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.point{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.point b{display:block;font:500 22px/1.2 var(--display);margin-bottom:6px}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:12px 16px;border-radius:0 8px 8px 0}
+.note b{color:var(--warn)}
+.fill{background:var(--fill);padding:0 4px;border-radius:3px;font-weight:600;white-space:nowrap}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.sheet-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
+.num{font:500 15px var(--mono);color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--muted)}
+.hooks{display:grid;gap:8px}
+.hook{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.hook span{font:600 13px var(--mono);color:var(--accent);padding-top:3px}
+.hook q{font:italic 400 19px/1.35 var(--display);quotes:"“" "”"}
+.hook small{display:block;color:var(--muted);font-size:13.5px}
+.script{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,.8fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row .t{font:500 13px var(--mono);color:var(--accent);padding-top:3px}
+.row .say{font-size:15.5px} .row .scr{font-size:14px;color:var(--muted)}
+.row.cta .say{font-weight:600}
+@media (max-width:620px){.row{grid-template-columns:56px minmax(0,1fr)}.row .scr{grid-column:2}}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:68ch}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.bank{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.item .num{padding-top:4px}
+.item q{font:italic 400 19px/1.35 var(--display);quotes:"“" "”";display:block}
+.item small{color:var(--muted);font-size:13.5px}
+.axis{font:600 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:20px 0 4px}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+.check li::marker{content:"☐  "}
+
+.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+.toc a{text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--sheet);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:600}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.part{display:flex;flex-direction:column;gap:40px;padding-top:24px;scroll-margin-top:64px}
+.part + .part{border-top:2px solid var(--ink);padding-top:48px}
+.part-title{font:500 clamp(30px,5vw,42px)/1.1 var(--display);margin:8px 0 12px}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.cards a:hover,.cards a:focus-visible{border-color:var(--accent);outline:none}
+.cards b{font:500 21px/1.2 var(--display)} .cards span{color:var(--muted);font-size:14px}
+.cards .label{color:var(--accent)}
+[id^="roteiro-"],[id^="bloco-"],[id^="lb-bloco-"]{scroll-margin-top:64px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Dr. Giácomo Trojan · GGD Growth Digital</div>
+  <h1>Roteiros de gravação</h1>
+  <p class="lead">Tudo o que o Dr. precisa gravar, separado por procedimento. Comece pela parte do procedimento e vá na ordem dos blocos.</p>
+  <p class="meta">3 de novembro de 2026</p>
+</header>
+<div class="cards">
+  <a href="#papada"><span class="label">Lipo de papada</span><b>Cinco roteiros de pós-operatório</b><span>5 vídeos prontos para gravar, com fala palavra por palavra</span></a>
+  <a href="#orelha"><span class="label">Otomodelação</span><b>Orelha em Cinco Blocos</b><span>bullying e estética · 20 conteúdos e o plano de 4 semanas</span></a>
+  <a href="#labio"><span class="label">Lip lift</span><b>Lip lift em Cinco Blocos</b><span>preenchimento e rejuvenescimento · 20 conteúdos e o plano de 4 semanas</span></a>
+</div>
+<nav class="toc" aria-label="Procedimentos"><a href="#papada">Papada · pós-operatório</a><a href="#orelha">Orelha</a><a href="#labio">Lip lift</a></nav>
+<section class="part" id="papada">
+<header class="part-head">
+  <div class="eyebrow">Dr. Giácomo Trojan · Lipo de papada</div>
+  <h2 class="part-title">Cinco roteiros de pós-operatório</h2>
+  <p class="lead">Cinco vídeos para gravar, todos sobre o que acontece depois do procedimento. A fala vem palavra por palavra, com o tempo de cada trecho, o que aparece na tela e três opções de abertura.</p>
+  <p class="meta">3 de novembro de 2026 · GGD Growth Digital · números de 01/09 a 02/11</p>
+</header>
+
+<section>
+  <h2>Por que pós-operatório</h2>
+  <p>Separamos os vídeos que mais trouxeram conversa em dois meses. O de pós-operatório é o único tema que funcionou nas duas frentes em que rodou: com quem já interagiu com o perfil e só com seguidores.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>vídeo</th><th>o que é</th><th class="n">conversas</th><th class="n">custo por conversa</th></tr></thead>
+    <tbody>
+      <tr><td>Gordura + contorno</td><td>quem ainda não conhece o Dr., no ar desde 28/10</td><td class="n">10</td><td class="n">R$ 5,86</td></tr>
+      <tr><td>“Emagreci e não saiu”</td><td>quem já interagiu com o perfil</td><td class="n">18</td><td class="n">R$ 8,20</td></tr>
+      <tr class="hl"><td><b>Pós-operatório</b></td><td>quem já interagiu com o perfil</td><td class="n">16</td><td class="n">R$ 11,16</td></tr>
+      <tr class="hl"><td><b>Pós-operatório</b></td><td>só seguidores</td><td class="n">8</td><td class="n">R$ 16,21</td></tr>
+      <tr><td>Emagreceu e a papada ficou</td><td>quem já interagiu com o perfil</td><td class="n">10</td><td class="n">R$ 23,60</td></tr>
+      <tr><td>Sou magra, por que papada?</td><td>quem já interagiu com o perfil</td><td class="n">9</td><td class="n">R$ 35,30</td></tr>
+    </tbody>
+  </table></div>
+  <div class="points">
+    <div class="point"><b>A pergunta abre</b>O “emagreci e não saiu” e o de pós-operatório abrem com a dúvida dela e levam 8 a 10 de cada 100 pessoas a um quarto do vídeo. A maioria dos outros fica entre 3 e 6.</div>
+    <div class="point"><b>O caso segura</b>Quem tem história com desfecho segura até o fim. O de gordura + contorno leva 37% de quem engatou até o último segundo.</div>
+    <div class="point"><b>É a última dúvida</b>Inchaço, roxo e tempo de recuperação são as perguntas que mais chegam para a Camila. Quem pergunta isso já quer fazer e está vendo se cabe na vida.</div>
+  </div>
+  <p>Por isso cada roteiro abaixo abre com uma pergunta real e fecha com um caso ou uma data concreta.</p>
+</section>
+
+<section>
+  <h2>Antes de gravar</h2>
+  <div class="note"><b>O que só o Dr. pode preencher.</b> Os trechos marcados em <span class="fill">amarelo</span> são prazos clínicos: dias de inchaço, de malha, de retorno ao trabalho, número de retornos e sinais de alerta. Não inventamos nenhum número. O Dr. completa antes de gravar e fala o prazo que ele de fato passa para as pacientes.</div>
+  <ul>
+    <li><b>Comece pela frase.</b> Nada de “oi, tudo bem?”. Os 3 primeiros segundos decidem se a pessoa fica.</li>
+    <li><b>A abertura é sobre ela</b>, a paciente, e não sobre a técnica.</li>
+    <li><b>Grave cada roteiro duas vezes trocando só a abertura.</b> O resto igual. Assim a gente descobre qual abertura funciona.</li>
+    <li>Vertical (9:16), celular na altura dos olhos, janela na frente do rosto, legenda da fala queimada no vídeo e folga em cima e embaixo.</li>
+    <li>Todo vídeo termina com a mesma chamada: <b>mensagem com a palavra AVALIAÇÃO</b>.</li>
+  </ul>
+</section>
+
+<!-- ROTEIRO 1 -->
+<article class="sheet" id="roteiro-1">
+  <div class="sheet-head"><span class="num">Roteiro 1</span><div class="chips"><span class="chip">40–50 s</span><span class="chip">Dr. + imagens da Geise</span><span class="chip">anúncio de mensagem</span></div></div>
+  <h2>“Quantos dias eu vou ficar inchada?”</h2>
+  <p>A pergunta da caixinha emendada no caso da Geise com data na tela. Junta os dois formatos que mais trouxeram conversa: a dúvida que abre e o caso que segura.</p>
+  <div class="label">Escolha a abertura</div>
+  <div class="hooks">
+    <div class="hook"><span>A</span><div><q>Dr., quantos dias eu vou ficar inchada? Essa é a pergunta que eu mais recebo.</q><small>A mais segura: é a pergunta exata que chega no Direct.</small></div></div>
+    <div class="hook"><span>B</span><div><q>Esse é o rosto dela cinco dias depois da lipo de papada.</q><small>Abre já em cima da imagem da Geise. Mais forte se o vídeo do 5º dia estiver bom.</small></div></div>
+    <div class="hook"><span>C</span><div><q>Se o que te segura é o inchaço, assiste até o fim.</q><small>Fala direto com quem já quer e está adiando.</small></div></div>
+  </div>
+  <div class="script">
+    <div class="row"><div class="t">0–3 s</div><div class="say">A abertura escolhida.</div><div class="scr">Dr. do peito para cima. A pergunta escrita na tela no formato de caixinha.</div></div>
+    <div class="row"><div class="t">3–15 s</div><div class="say">“Inchaço existe, sim, e eu prefiro te falar a verdade. Na maioria das pacientes que eu acompanho, ele é mais forte nos primeiros <span class="fill">__ dias</span> e vai baixando a cada semana.”</div><div class="scr">Dr. olhando para a lente.</div></div>
+    <div class="row"><div class="t">15–32 s</div><div class="say">“Olha a Geise. Esse é o dia seguinte. Esse é o quinto dia, ela já em casa, de malha, fazendo as coisas dela. E esse é com <span class="fill">__ dias</span>.”</div><div class="scr">Corta para as imagens dela com o dia escrito em cada uma: “dia 1”, “dia 5”, “dia __”. A última leva “Resultado final”.</div></div>
+    <div class="row"><div class="t">32–42 s</div><div class="say">“Cada corpo reage de um jeito. Por isso eu vejo você em cada retorno, e se alguma coisa sair do esperado você fala direto comigo.”</div><div class="scr">Volta para o Dr.</div></div>
+    <div class="row cta"><div class="t">42–48 s</div><div class="say">“Se o inchaço era o que estava te segurando, me manda uma mensagem com a palavra AVALIAÇÃO que eu te explico como seria no seu caso.”</div><div class="scr">Texto na tela: AVALIAÇÃO.</div></div>
+  </div>
+  <div class="note"><b>Confirmar:</b> se o termo de imagem da Geise cobre o uso das fotos do pós em anúncio.</div>
+</article>
+
+<!-- ROTEIRO 2 -->
+<article class="sheet" id="roteiro-2">
+  <div class="sheet-head"><span class="num">Roteiro 2</span><div class="chips"><span class="chip">45 s</span><span class="chip">Dr. com a malha na mão</span><span class="chip">seguidores</span></div></div>
+  <h2>Três coisas normais no pós</h2>
+  <p>Roxo, malha e sensibilidade, cada um explicado em uma frase. Termina com os sinais que pedem contato na hora. Falar do que não é normal passa mais segurança do que dizer que vai dar tudo certo.</p>
+  <div class="label">Escolha a abertura</div>
+  <div class="hooks">
+    <div class="hook"><span>A</span><div><q>Três coisas que vão acontecer no seu pós-operatório. Nenhuma delas é motivo de susto.</q><small>Promete uma lista curta, e lista segura a pessoa até o terceiro item.</small></div></div>
+    <div class="hook"><span>B</span><div><q>Ficou roxo depois da lipo de papada? Calma, deixa eu te explicar.</q><small>Fala com quem pesquisa o pós antes de marcar.</small></div></div>
+    <div class="hook"><span>C</span><div><q>Essa aqui vai ser a sua companheira por alguns dias.</q><small>Dr. levantando a malha. A imagem faz a pergunta.</small></div></div>
+  </div>
+  <div class="script">
+    <div class="row"><div class="t">0–3 s</div><div class="say">A abertura escolhida.</div><div class="scr">Dr. segurando a malha.</div></div>
+    <div class="row"><div class="t">3–14 s</div><div class="say">“Primeira: pode aparecer um roxinho no pescoço. Tem paciente que fica, tem paciente que quase não fica. Ele vai embora sozinho em <span class="fill">__ dias</span>.”</div><div class="scr">Na tela: “1. roxo”.</div></div>
+    <div class="row"><div class="t">14–24 s</div><div class="say">“Segunda: a malha. Você usa por <span class="fill">__ dias</span>. Ela ajuda a controlar o inchaço e é parte do resultado, então não pula essa fase.”</div><div class="scr">Na tela: “2. malha”. Mostra a malha de perto.</div></div>
+    <div class="row"><div class="t">24–33 s</div><div class="say">“Terceira: a região pode ficar um pouco dormente ou sensível ao toque por algumas semanas. Isso faz parte da recuperação.”</div><div class="scr">Na tela: “3. sensibilidade”.</div></div>
+    <div class="row"><div class="t">33–40 s</div><div class="say">“Agora, se aparecer <span class="fill">sinal de alerta 1</span> ou <span class="fill">sinal de alerta 2</span>, você me chama na hora. Você sai daqui com o meu contato.”</div><div class="scr">Dr. olhando para a lente, tom mais sério.</div></div>
+    <div class="row cta"><div class="t">40–45 s</div><div class="say">“Salva esse vídeo para ver de novo. E se você ainda não fez, me manda uma mensagem com a palavra AVALIAÇÃO.”</div><div class="scr">Texto na tela: AVALIAÇÃO.</div></div>
+  </div>
+</article>
+
+<!-- ROTEIRO 3 -->
+<article class="sheet" id="roteiro-3">
+  <div class="sheet-head"><span class="num">Roteiro 3</span><div class="chips"><span class="chip">30–40 s</span><span class="chip">Dr., resposta direta</span><span class="chip">quem não conhece o Dr.</span></div></div>
+  <h2>“Quando eu volto a trabalhar?”</h2>
+  <p>Três datas em um calendário na tela. É a pergunta prática que faz a pessoa marcar, porque transforma “um dia eu faço” em “dá para fazer em tal mês”.</p>
+  <div class="label">Escolha a abertura</div>
+  <div class="hooks">
+    <div class="hook"><span>A</span><div><q>Dr., eu não posso ficar muito tempo parada. Então vamos falar de datas.</q><small>Repete a objeção com as palavras dela.</small></div></div>
+    <div class="hook"><span>B</span><div><q>Fez a lipo de papada na sexta. O que dá para fazer na segunda?</q><small>Concreta e curiosa. Só usar se o prazo real do Dr. permitir.</small></div></div>
+    <div class="hook"><span>C</span><div><q>Quantos dias de atestado a lipo de papada pede?</q><small>É como a pessoa digita a dúvida no Google.</small></div></div>
+  </div>
+  <div class="script">
+    <div class="row"><div class="t">0–3 s</div><div class="say">A abertura escolhida.</div><div class="scr">Dr. do peito para cima.</div></div>
+    <div class="row"><div class="t">3–10 s</div><div class="say">“O procedimento é com anestesia local. Você fica acordada, sem dor, e vai para casa no mesmo dia.”</div><div class="scr">Na tela: “anestesia local · vai para casa no mesmo dia”.</div></div>
+    <div class="row"><div class="t">10–24 s</div><div class="say">“Trabalho de computador, sem esforço: em geral com <span class="fill">__ dias</span>. Sair, encontrar gente, rotina normal: <span class="fill">__ dias</span>. Academia e esforço físico: depois de <span class="fill">__ dias</span>, com a minha liberação.”</div><div class="scr">Calendário na tela marcando as três datas, uma por vez.</div></div>
+    <div class="row"><div class="t">24–31 s</div><div class="say">“Esses prazos mudam de pessoa para pessoa, e eu fecho os seus na avaliação. Muita paciente marca para uma quinta ou sexta e usa o fim de semana.”</div><div class="scr">Volta para o Dr.</div></div>
+    <div class="row cta"><div class="t">31–37 s</div><div class="say">“Me manda uma mensagem com a palavra AVALIAÇÃO e me fala qual mês fica bom para você. A gente já planeja a data junto.”</div><div class="scr">Texto na tela: AVALIAÇÃO.</div></div>
+  </div>
+  <div class="note"><b>Confirmar com o Dr.:</b> a dica de quinta ou sexta só entra se ele de fato orienta assim.</div>
+</article>
+
+<!-- ROTEIRO 4 -->
+<article class="sheet" id="roteiro-4">
+  <div class="sheet-head"><span class="num">Roteiro 4</span><div class="chips"><span class="chip">60–90 s</span><span class="chip">paciente fala, Camila pergunta</span><span class="chip">anúncio de mensagem</span></div></div>
+  <h2>“O que mudou depois da lipo de papada?”</h2>
+  <p>Depoimento do pós no formato do vídeo de pós-operatório, que é o mais forte da conta entre os que rodam há mais tempo. A Geise já gravou um depoimento assim e ele entra primeiro. Este roteiro serve para as próximas pacientes.</p>
+  <div class="label">As cinco perguntas (Camila faz, fora do vídeo)</div>
+  <ol>
+    <li>“O que mais te incomodava antes?”</li>
+    <li>“Qual era o seu maior medo do pós?”</li>
+    <li>“Como foram os primeiros dias, de verdade?”</li>
+    <li>“Quando você se olhou e percebeu a diferença?”</li>
+    <li>“O que você diria para quem está em dúvida?”</li>
+  </ol>
+  <div class="label">A abertura sai da fala dela</div>
+  <div class="hooks">
+    <div class="hook"><span>A</span><div><q>Eu não tirava foto de lado.</q><small>Exemplo do tipo de frase. A edição pega a frase mais forte que ela disser na pergunta 1 e põe no começo.</small></div></div>
+    <div class="hook"><span>B</span><div><q>Meu medo era ficar inchada e roxa por semanas.</q><small>Da pergunta 2. Abre com o medo e o resto do vídeo responde.</small></div></div>
+    <div class="hook"><span>C</span><div><q>No quinto dia eu já…</q><small>Da pergunta 3, se ela contar algo concreto da rotina.</small></div></div>
+  </div>
+  <div class="script">
+    <div class="row"><div class="t">0–4 s</div><div class="say">A frase mais forte dela, sem a pergunta antes.</div><div class="scr">Rosto dela, legenda grande.</div></div>
+    <div class="row"><div class="t">4–60 s</div><div class="say">As respostas das perguntas 1 a 4, nessa ordem, com corte seco entre elas.</div><div class="scr">Pergunta escrita no alto da tela em cada bloco.</div></div>
+    <div class="row"><div class="t">60–75 s</div><div class="say">A resposta da pergunta 5.</div><div class="scr">Pode entrar imagem dela no espelho ou com 30 dias.</div></div>
+    <div class="row cta"><div class="t">75–82 s</div><div class="say">Dr.: “Se você se viu na história dela, me manda uma mensagem com a palavra AVALIAÇÃO.”</div><div class="scr">Dr. em 5 segundos. Texto na tela: AVALIAÇÃO.</div></div>
+  </div>
+  <ul>
+    <li><b>Não escreva a fala dela.</b> Só as perguntas. O que convence é ela falando do jeito dela.</li>
+    <li>Ela sentada, olhando para a Camila e não para a lente. Celular na altura dos olhos, microfone de lapela, janela na frente.</li>
+    <li>Termo de imagem assinado antes de gravar.</li>
+  </ul>
+</article>
+
+<!-- ROTEIRO 5 -->
+<article class="sheet" id="roteiro-5">
+  <div class="sheet-head"><span class="num">Roteiro 5</span><div class="chips"><span class="chip">50–60 s</span><span class="chip">gravado num retorno real</span><span class="chip">quem já conhece o perfil</span></div></div>
+  <h2>“Eu não te deixo sozinha no pós”</h2>
+  <p>O Dr. num retorno de verdade, mostrando o que ele confere. Mostra o acompanhamento, que é o que mais pesa para quem tem medo. Termina com a mesma paciente com 30 dias.</p>
+  <div class="label">Escolha a abertura</div>
+  <div class="hooks">
+    <div class="hook"><span>A</span><div><q>Isso aqui é o que acontece depois que a sua lipo de papada termina.</q><small>Leva para dentro do consultório, um lugar que a pessoa nunca viu.</small></div></div>
+    <div class="hook"><span>B</span><div><q>O procedimento dura <span class="fill">__</span>. O meu acompanhamento dura <span class="fill">__ semanas</span>.</q><small>O contraste de tempo faz a pessoa ficar.</small></div></div>
+    <div class="hook"><span>C</span><div><q>E se eu precisar de você depois, Dr.?</q><small>A pergunta que vem antes de fechar.</small></div></div>
+  </div>
+  <div class="script">
+    <div class="row"><div class="t">0–3 s</div><div class="say">A abertura escolhida.</div><div class="scr">Dr. com a paciente na cadeira, de lado para a câmera.</div></div>
+    <div class="row"><div class="t">3–12 s</div><div class="say">“Muita gente acha que o meu trabalho termina quando o procedimento termina. Para mim é aí que começa a parte mais importante.”</div><div class="scr">Dr. olhando para a lente.</div></div>
+    <div class="row"><div class="t">12–30 s</div><div class="say">“No retorno eu confiro o inchaço, como está a malha, o pontinho por onde eu entrei e o contorno. Você volta aqui <span class="fill">no dia __, no dia __ e no dia __</span>.”</div><div class="scr">Planos fechados do exame: mãos, malha, perfil. A paciente não precisa aparecer de frente se não quiser.</div></div>
+    <div class="row"><div class="t">30–40 s</div><div class="say">“E entre um retorno e outro você tem o meu contato. Qualquer dúvida, você fala comigo.”</div><div class="scr">Volta para o Dr.</div></div>
+    <div class="row"><div class="t">40–48 s</div><div class="say">Sem fala.</div><div class="scr">A mesma paciente com 30 dias, se olhando no espelho ou de perfil. Na tela: “dia 30 · Resultado final”.</div></div>
+    <div class="row cta"><div class="t">48–55 s</div><div class="say">“Se você quer fazer com quem acompanha cada etapa, me manda uma mensagem com a palavra AVALIAÇÃO.”</div><div class="scr">Texto na tela: AVALIAÇÃO.</div></div>
+  </div>
+  <div class="note"><b>Confirmar:</b> como o Dr. chama o acesso (pontinho, furinho, incisão) e qual paciente topa gravar o retorno com termo.</div>
+</article>
+
+<section>
+  <h2>Onde cada um vai rodar</h2>
+  <p>É a sugestão da GGD para quando os vídeos chegarem.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>roteiro</th><th>frente</th><th>por quê</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Inchaço</td><td>quem já conhece o perfil e quem ainda não conhece</td><td>pergunta mais repetida, vale para os dois</td></tr>
+      <tr><td>2 · Três coisas normais</td><td>seguidores e quem já interagiu</td><td>é para quem já está decidindo</td></tr>
+      <tr><td>3 · Volta ao trabalho</td><td>quem ainda não conhece o perfil</td><td>resposta curta e prática, entende sem conhecer o Dr.</td></tr>
+      <tr><td>4 · Depoimento do pós</td><td>quem já conhece o perfil e quem ainda não conhece</td><td>mesmo formato do vídeo de pós-operatório que está no ar</td></tr>
+      <tr><td>5 · Retorno</td><td>quem já conhece o perfil</td><td>responde ao medo de quem está quase marcando</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>O Dr. preenche antes de gravar</h2>
+  <ul class="check">
+    <li>Quantos dias o inchaço é mais forte</li>
+    <li>Quantos dias de malha</li>
+    <li>Em quantos dias o roxo costuma sumir</li>
+    <li>Volta ao trabalho de computador, à rotina e à academia</li>
+    <li>Datas dos retornos e quanto tempo dura o acompanhamento</li>
+    <li>Quanto tempo dura o procedimento</li>
+    <li>Os dois sinais de alerta que pedem contato na hora</li>
+  </ul>
+</section>
+
+<section>
+  <h2>O que não pode entrar na fala</h2>
+  <ul>
+    <li>Promessa: “não incha”, “não fica roxo”, “não dói nada no pós”, prazo garantido. Sempre “na maioria das pacientes que eu acompanho”.</li>
+    <li>Preço, condição ou parcelamento.</li>
+    <li>“Antes e depois” escrito. Usar “Diagnóstico inicial” e “Resultado final”, e o CRO/SC na legenda.</li>
+    <li>Superlativo: “o melhor”, “o único”.</li>
+    <li>Nome de hospital, universidade ou curso.</li>
+    <li>Paciente sem termo de imagem assinado.</li>
+  </ul>
+</section>
+
+
+</section><section class="part" id="orelha">
+<header class="part-head">
+  <div class="eyebrow">Dr. Giácomo Trojan · Otomodelação</div>
+  <h2 class="part-title">Orelha em Cinco Blocos</h2>
+  <p class="lead">A linha de conteúdo da orelha, no mesmo formato que montamos para a papada. Ela tem dois eixos: o bullying, que é a dor que começa na escola, e a estética, que é o que a pessoa quer de volta no dia a dia. Cada bloco funciona sozinho. Leia, execute, e só então passe para o próximo.</p>
+  <p class="meta">3 de novembro de 2026 · versão 1 · GGD Growth Digital · base: <a href="https://relatorios.giogrowthdigital.com.br/giacomo/orelha-labio/referencias/" target="_blank" rel="noopener">referências de orelha e lábio (28/10)</a> e o modelo <a href="https://relatorios.giogrowthdigital.com.br/giacomo/conteudo/" target="_blank" rel="noopener">Papada em Cinco Blocos</a></p>
+</header>
+
+<section>
+  <div class="label">A ideia, em uma frase</div>
+  <p style="font:italic 400 24px/1.35 var(--display);max-width:none">Quem tem a orelha aberta aprendeu a se esconder: no cabelo solto, no ângulo da foto, no boné. O conteúdo mostra que dá para parar de esconder.</p>
+  <div class="two">
+    <div class="point"><b>Bullying</b>Fala com quem viveu isso na escola e com os pais de quem está vivendo agora. É o eixo da emoção, que faz parar de rolar e comentar.</div>
+    <div class="point"><b>Estética</b>Fala com a adulta que nunca prende o cabelo e evita foto de lado. É o eixo do desejo, que faz mandar mensagem.</div>
+  </div>
+</section>
+
+<!-- BLOCO 1 -->
+<section id="bloco-1">
+  <div class="label">Bloco 1</div>
+  <h2>O que já funciona nesse mercado</h2>
+  <p>Olhamos 10 especialistas de otomodelação na Biblioteca de Anúncios. Os que estão no ar há mais tempo repetem os mesmos padrões.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>quem</th><th>o que pegar</th></tr></thead>
+    <tbody>
+      <tr><td>Dra. Francisca Fabyana</td><td>A história de criança em três linhas: “Ela tem 9 anos. E por muito tempo, não prendia o cabelo na escola.” Nome e emoção, sem termo técnico.</td></tr>
+      <tr><td>Dra. Grazielle Jirousek</td><td>Vídeos de criança no ar há 464 dias, falando com os pais: “Ver o sorriso e a autoestima no rosto de um filho não tem preço.”</td></tr>
+      <tr><td>Dr. Tarlei Fonseca</td><td>Caixinha respondida em selfie (“A partir de quantos anos pode fazer?”) e o caso com nome: “chega encolhida e sai de cabeça erguida”. Põe a resolução do CFO na legenda.</td></tr>
+      <tr><td>Dra. Nathália Salum</td><td>A pergunta que funciona com adulta: “Você evita prender o cabelo ou tirar fotos de determinados ângulos por causa das suas orelhas?”</td></tr>
+      <tr><td>Dra. Ely Éleres</td><td>Vídeos de resultado no ar há 356 dias. Fala em “orelhas abertas” e “liberdade para usar o cabelo”, nunca em defeito.</td></tr>
+      <tr><td>Dr. Uedli Aguiar</td><td>Quadro “Café com Paciente”, conversa com quem já fez. É o formato da Helena e da Geise aplicado à orelha. Também ataca preço e afastamento do trabalho.</td></tr>
+      <tr><td>Dr. Rubens Marinelli</td><td>A reação da paciente logo depois, gravada no carro. E a paciente idosa: orelha não é assunto só de criança.</td></tr>
+      <tr><td>Dr. Kleyton Valverde</td><td>Criador da técnica. Mostra o mesmo paciente “2 anos depois”, que responde sozinho ao “volta a abrir?”.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="label">Frases que abrem os anúncios mais antigos, é esse o tom</div>
+  <div class="hooks">
+    <div class="hook"><span>·</span><div><q>Ela tem 9 anos. E por muito tempo, não prendia o cabelo na escola.</q></div></div>
+    <div class="hook"><span>·</span><div><q>De todos os irmãos, era a única com a orelha de abano.</q></div></div>
+    <div class="hook"><span>·</span><div><q>Você evita prender o cabelo ou tirar fotos de determinados ângulos por causa das suas orelhas?</q></div></div>
+    <div class="hook"><span>·</span><div><q>Eu nunca achei que me incomodava até eu realmente fazer.</q></div></div>
+  </div>
+  <p><b>O que isso vira no perfil do Dr.:</b> a história de criança contada com cuidado (Francisca, Grazielle), a pergunta adulta sobre cabelo e foto (Nathália), a conversa com quem fez (Uedli) e o mesmo paciente meses depois (Kleyton). O que nenhum deles tem e o Dr. tem: <b>a Camila vai fazer e contar a própria experiência</b>. É o caso âncora da linha inteira.</p>
+</section>
+
+<!-- BLOCO 2 -->
+<section id="bloco-2">
+  <div class="label">Bloco 2</div>
+  <h2>As 12 perguntas que o perfil precisa responder</h2>
+  <p>Enquanto essas respostas não estiverem publicadas, quem chega no perfil não tem como decidir. As marcadas em <span class="fill">amarelo</span> dependem da resposta do Dr.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>pergunta</th><th>por que ela importa</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>O que é otomodelação</td><td>Muita gente acha que a única saída é cirurgia com médico.</td></tr>
+      <tr><td>2</td><td><span class="fill">Tem corte? Dá ponto?</span></td><td>A primeira dúvida de quem tem medo, e de todo pai.</td></tr>
+      <tr><td>3</td><td><span class="fill">A partir de que idade pode fazer</span></td><td>É a pergunta dos pais. Os concorrentes respondem “a partir dos 6 anos”; o Dr. confirma a dele.</td></tr>
+      <tr><td>4</td><td><span class="fill">Dói? Tem anestesia?</span></td><td>Medo número 1, principalmente com criança.</td></tr>
+      <tr><td>5</td><td><span class="fill">Quanto tempo leva</span></td><td>“Dá para fazer numa tarde?” destrava a decisão.</td></tr>
+      <tr><td>6</td><td><span class="fill">Quando volto para a escola ou o trabalho</span></td><td>A pergunta prática, igual à da papada.</td></tr>
+      <tr><td>7</td><td><span class="fill">A orelha volta a abrir?</span></td><td>É o que sustenta o valor. Responde com caso de meses depois.</td></tr>
+      <tr><td>8</td><td>Criança fica com medo? Como a gente prepara</td><td>Os pais decidem pelo medo do filho, não pelo deles.</td></tr>
+      <tr><td>9</td><td>Já fiz cirurgia de orelha e abriu. Tem jeito?</td><td>Público que já gastou e se frustrou. Contar a situação sem citar nome de ninguém.</td></tr>
+      <tr><td>10</td><td>Adulto e pessoa mais velha também podem?</td><td>Abre o público para quem carrega isso há 30 anos.</td></tr>
+      <tr><td>11</td><td>Para quem não é indicado</td><td>Dizer não atrai o paciente certo, igual na papada.</td></tr>
+      <tr><td>12</td><td>Como funciona a avaliação</td><td>Transforma interesse em passo concreto.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- BLOCO 3 -->
+<section id="bloco-3">
+  <div class="label">Bloco 3</div>
+  <h2>Os 20 conteúdos, com a frase de abertura pronta</h2>
+  <p>Reels de 30 a 60 segundos. A frase entre aspas é a primeira coisa falada e também o texto do primeiro quadro.</p>
+  <div class="bank">
+    <div class="axis">A dor que começa na escola · bullying</div>
+    <div class="item"><span class="num">01</span><div><q>Ela tinha 8 anos quando parou de prender o cabelo.</q><small>45 s · caso real, contado pelo Dr. ou pela mãe · o conteúdo mais forte da linha · precisa da autorização dos responsáveis</small></div></div>
+    <div class="item"><span class="num">02</span><div><q>Três sinais de que a orelha está incomodando o seu filho, e ele não te conta.</q><small>40 s · Dr. falando com os pais · esconde com o cabelo, foge de foto, não quer cortar curto nem usar boné</small></div></div>
+    <div class="item"><span class="num">03</span><div><q>Qual apelido você ouvia na escola por causa da orelha?</q><small>Story ou reel curto com pedido de comentário · cada resposta vira roteiro de vídeo</small></div></div>
+    <div class="item"><span class="num">04</span><div><q>Eu cresci ouvindo piada da minha orelha.</q><small>60 s · a Camila contando a história dela · abre a série do conteúdo 16</small></div></div>
+    <div class="item"><span class="num">05</span><div><q>Qual é a idade certa para corrigir a orelha de uma criança?</q><small>35 s · Dr. responde · vai para o destaque</small></div></div>
+
+    <div class="axis">O que a adulta deixou de fazer · estética</div>
+    <div class="item"><span class="num">06</span><div><q>Você só usa o cabelo solto por causa das orelhas?</q><small>30 s · Dr. falando · a pergunta que a adulta responde mentalmente com “sim”</small></div></div>
+    <div class="item"><span class="num">07</span><div><q>Rabo de cavalo, coque, cabelo curto. O que você deixou de usar?</q><small>Carrossel · 5 cards · conteúdo de salvar e comentar</small></div></div>
+    <div class="item"><span class="num">08</span><div><q>Brinco, óculos, fone, capacete: a orelha aparece em tudo.</q><small>30 s · montagem de situações do dia a dia, sem paciente</small></div></div>
+    <div class="item"><span class="num">09</span><div><q>Ela esperou <span class="fill">__</span> anos para resolver a orelha.</q><small>45 s · caso de paciente adulta ou mais velha · quebra o “agora não adianta mais”</small></div></div>
+
+    <div class="axis">Tirar o medo</div>
+    <div class="item"><span class="num">10</span><div><q>Otomodelação tem corte? Eu te mostro como é.</q><small>45 s · Dr. explica a técnica dele com as mãos ou um modelo de orelha</small></div></div>
+    <div class="item"><span class="num">11</span><div><q>Dói? Tem anestesia? E se for criança?</q><small>40 s · Dr. no consultório</small></div></div>
+    <div class="item"><span class="num">12</span><div><q>Quanto tempo leva, e quando volta para a escola?</q><small>30 s · resposta direta com datas na tela, igual ao roteiro de volta ao trabalho da papada</small></div></div>
+    <div class="item"><span class="num">13</span><div><q>A orelha volta a abrir depois?</q><small>35 s · Dr. responde e mostra caso de meses depois</small></div></div>
+    <div class="item"><span class="num">14</span><div><q>Fez cirurgia de orelha e ela abriu de novo? Tem jeito.</q><small>40 s · situação contada sem nome de ninguém</small></div></div>
+
+    <div class="axis">Provar</div>
+    <div class="item"><span class="num">15</span><div><q>A primeira vez que ela prendeu o cabelo.</q><small>20 s · sem narração · só a reação · o formato de maior alcance</small></div></div>
+    <div class="item"><span class="num">16</span><div>Série da Camila em 5 episódios<small>avaliação → o dia → 7 dias → 30 dias → “prendi o cabelo” · vira destaque próprio · o ativo mais valioso da linha</small></div></div>
+    <div class="item"><span class="num">17</span><div><q>Eu nunca achei que me incomodava até fazer.</q><small>60–90 s · conversa com quem fez, no formato do depoimento da Helena · Camila pergunta fora do vídeo</small></div></div>
+    <div class="item"><span class="num">18</span><div><q>Dia 1, dia 30, <span class="fill">__</span> meses depois.</q><small>30 s · mesma orelha, mesmo ângulo · exige o padrão de foto do Bloco 5</small></div></div>
+
+    <div class="axis">Convidar</div>
+    <div class="item"><span class="num">19</span><div><q>Como funciona a avaliação de orelha, em 3 passos.</q><small>30 s + story fixo · vai para o destaque</small></div></div>
+    <div class="item"><span class="num">20</span><div><q>Manda uma foto de frente, com o cabelo preso, no Direct.</q><small>20 s · convite direto · já chega com a foto que o Dr. precisa ver</small></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Como falar de bullying sem errar</h2>
+  <div class="note"><b>Este eixo é o que mais funciona e o que mais pode dar errado.</b> As regras abaixo valem para fala, legenda e arte.</div>
+  <ul>
+    <li><b>O apelido só entra na voz de quem viveu.</b> Nunca como piada no gancho e nunca dito pelo Dr. sobre outra pessoa.</li>
+    <li><b>Não assustar os pais.</b> Nada de “seu filho vai sofrer”. Falar de sinais que dá para perceber e de uma decisão da família.</li>
+    <li><b>Não prometer mudança emocional.</b> Nada de “acaba o bullying” ou “muda a vida”. O que se mostra é o concreto: prendeu o cabelo, tirou a foto.</li>
+    <li><b>Palavras.</b> “Orelha aberta”, “proeminente” ou “de abano”, que é como as pessoas procuram. Nunca “defeito” ou “deformidade”.</li>
+    <li><b>Criança em vídeo</b> só com autorização dos responsáveis e termo assinado, sem choro encenado, só o primeiro nome e só se ela quiser aparecer. Plano de costas ou de lado também funciona.</li>
+    <li><b>Anúncio fala com adulto.</b> O público do anúncio são os pais e a adulta. Peça com criança passa pela GGD antes de virar anúncio, porque pode ser reprovada pela Meta.</li>
+  </ul>
+</section>
+
+<!-- BLOCO 4 -->
+<section id="bloco-4">
+  <div class="label">Bloco 4</div>
+  <h2>As quatro primeiras semanas</h2>
+  <p>Três reels por semana, mais stories quase todo dia. A ordem é a mesma da papada: o assunto passa a existir, o medo cai, a prova entra, e só então vem o convite.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>semana</th><th>missão</th><th>reels</th><th>pedido no fim do vídeo</th><th>stories</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Fazer o assunto existir</td><td>01 · 06 · 10</td><td>Salvar e seguir</td><td>Caixinha aberta: “o que você quer saber sobre orelha?” e o 03</td></tr>
+      <tr><td>2</td><td>Derrubar o medo</td><td>02 · 11 · 13</td><td>Comentar ORELHA</td><td>Respostas da caixinha em vídeo e o episódio 1 da Camila</td></tr>
+      <tr><td>3</td><td>Provar</td><td>04 · 15 · 09</td><td>Foto de frente com o cabelo preso no Direct</td><td>Episódios 2 e 3 da Camila</td></tr>
+      <tr><td>4</td><td>Convidar</td><td>17 · 12 · 20</td><td>Agendar a avaliação</td><td>Agenda do mês e como marcar</td></tr>
+    </tbody>
+  </table></div>
+  <div class="label">O que pedir no fim de cada vídeo</div>
+  <div class="two">
+    <div class="point"><b>Semana 1</b>“Salva esse vídeo e manda para alguém que sempre escondeu a orelha.”<br>“Me segue que amanhã eu te mostro como é feito.”</div>
+    <div class="point"><b>Semana 2</b>“Comenta ORELHA aqui embaixo que eu respondo a sua dúvida em vídeo.”<br>“Qual era o apelido? Me conta aqui.”</div>
+    <div class="point"><b>Semana 3</b>“Manda uma foto de frente, com o cabelo preso, no Direct, que eu te digo se o seu caso é de otomodelação.”</div>
+    <div class="point"><b>Semana 4</b>“Se você quer prender o cabelo ainda esse ano, me manda uma mensagem com a palavra AVALIAÇÃO.”</div>
+  </div>
+  <p>Nas semanas 1 e 2, nada de WhatsApp, preço ou link. Pedido de contato cedo demais derruba a entrega e traz curioso.</p>
+</section>
+
+<!-- BLOCO 5 -->
+<section id="bloco-5">
+  <div class="label">Bloco 5</div>
+  <h2>Antes de ligar o tráfego de orelha</h2>
+  <p>O anúncio traz a pessoa até o perfil. Quem convence é o perfil. Esta lista vem antes do primeiro real investido.</p>
+  <div class="two">
+    <div>
+      <h3>O Dr. responde</h3>
+      <ul class="check">
+        <li>Como é a técnica dele: tem corte, dá ponto?</li>
+        <li>Idade mínima</li>
+        <li>Anestesia e se dói</li>
+        <li>Quanto tempo leva por orelha</li>
+        <li>Volta à escola e ao trabalho, curativo ou faixa</li>
+        <li>Para quem não é indicado</li>
+        <li>Se atende caso de cirurgia que abriu de novo</li>
+      </ul>
+    </div>
+    <div>
+      <h3>A equipe monta</h3>
+      <ul class="check">
+        <li>Destaque “Orelha” no perfil, na linha dos destaques por procedimento que a Camila já organiza</li>
+        <li>Termo de imagem da Camila e de cada paciente; para criança, dos responsáveis</li>
+        <li>Pelo menos 6 conteúdos do Bloco 3 publicados</li>
+        <li>Respostas do Direct para orelha (montamos no formato do roteiro da papada)</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <h3>O padrão de foto da orelha</h3>
+    <p>Três fotos, sempre iguais: <b>de frente</b>, <b>de costas</b> e <b>de perfil a 90°</b>, com o cabelo preso, fundo liso, mesma luz e a pessoa sempre no mesmo lugar marcado no chão. Sem essa régua não existe o conteúdo 18, que é o que mais vende.</p>
+  </div>
+  <div class="note"><b>O que nunca entra numa peça de orelha:</b> a palavra “otoplastia” (é cirurgia médica), preço ou condição, “definitivo”, “sem dor” ou “resultado imediato” como promessa (os concorrentes usam, a gente não), “antes e depois” escrito (usar Diagnóstico inicial e Resultado final, com CRO/SC na legenda), nome de pessoa famosa e superlativo. A otomodelação é liberada para cirurgião-dentista pela Nota Técnica CFO 002/2026.</div>
+</section>
+
+
+</section><section class="part" id="labio">
+<header class="part-head">
+  <div class="eyebrow">Dr. Giácomo Trojan · Lip lift</div>
+  <h2 class="part-title">Lip lift em Cinco Blocos</h2>
+  <p class="lead">A linha de conteúdo do lip lift, no mesmo formato da papada e da orelha. Ela tem dois eixos: quem já tentou preenchimento e não ficou natural, e quem viu o lábio de cima alongar com os anos. Cada bloco funciona sozinho. Leia, execute, e só então passe para o próximo.</p>
+  <p class="meta">3 de novembro de 2026 · versão 1 · base: <a href="https://relatorios.giogrowthdigital.com.br/giacomo/orelha-labio/referencias/" target="_blank" rel="noopener">referências de orelha e lábio (28/10)</a></p>
+</header>
+
+<section>
+  <div class="label">A ideia, em uma frase</div>
+  <p style="font:italic 400 24px/1.35 var(--display);max-width:none">Nem todo lábio precisa de mais volume. Às vezes ele precisa de altura, e é isso que o lip lift faz.</p>
+  <div class="two">
+    <div class="point"><b>Cansada de preenchimento</b>Fala com quem já fez preenchimento, não gostou ou cansou de repetir. É o eixo da frustração, que faz parar de rolar, porque ela se reconhece na hora.</div>
+    <div class="point"><b>O lábio que o tempo alongou</b>Fala com a mulher de 40 anos ou mais que mostra cada vez menos dente ao sorrir e vê a boca “cair”. É o eixo do rejuvenescimento, que faz mandar mensagem.</div>
+  </div>
+</section>
+
+<section id="lb-bloco-1">
+  <div class="label">Bloco 1</div>
+  <h2>O que já funciona nesse mercado</h2>
+  <p>Os maiores nomes do lip lift no Brasil são cirurgiões-dentistas bucomaxilofaciais, como o Dr. Isso é argumento, e o mercado já mostra o caminho.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>quem</th><th>o que pegar</th></tr></thead>
+    <tbody>
+      <tr><td>Dra. Fran Souza</td><td>A maior referência do país (237 mil seguidores). Anuncia pouco e cresce acompanhando o mesmo paciente por meses. Mostra domínio em vez de promessa.</td></tr>
+      <tr><td>Instituto Andréa Murta</td><td>Vídeo no ar há 369 dias: “Nada funcionava... até agora. Já tinha tentado preenchimento, micropigmentação...” É a paciente cansada de preenchimento. A promessa é naturalidade: “sutil, delicado e poderoso”.</td></tr>
+      <tr><td>Dra. Sarah Araujo</td><td>Mostra a cicatrização sem medo: pós imediato com pontos, 21 dias, marcação com caneta. Responde antes que perguntem: “foi apenas a cirurgia, não tem preenchimento”.</td></tr>
+      <tr><td>Dra. Karla Lira</td><td>Gancho que vale: “Será que isso é um preenchimento labial?” e “Nem toda mudança nos lábios depende de mais volume.” A arte explica num desenho: diminuir a distância entre o nariz e o lábio.</td></tr>
+      <tr><td>Dra. Vivianni Gil</td><td>Fala para a câmera, informal, com as mãos. Explica o ganho em três palavras: altura do lábio, rugas em volta da boca, dente que aparece.</td></tr>
+      <tr><td>Instituto Shorne</td><td>Copy curta e correta: “cirurgia feita em consultório, cicatriz discreta, a indicação depende de cada rosto.” Termina com a ação clara.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="label">Frases que abrem os anúncios, é esse o tom</div>
+  <div class="hooks">
+    <div class="hook"><span>·</span><div><q>Nada funcionava... até agora.</q></div></div>
+    <div class="hook"><span>·</span><div><q>Será que isso é um preenchimento labial?</q></div></div>
+    <div class="hook"><span>·</span><div><q>Nem toda mudança na aparência dos lábios depende de mais volume.</q></div></div>
+    <div class="hook"><span>·</span><div><q>Muita gente ainda pensa apenas em preenchimento.</q></div></div>
+  </div>
+  <p><b>O que isso vira no perfil do Dr.:</b> a paciente cansada de preenchimento (Andréa Murta), a cicatriz mostrada semana a semana (Sarah Araujo), o “isso não é preenchimento” (Karla Lira) e o acompanhamento de meses (Fran Souza). O concorrente mais perto é um dentista de Florianópolis. Em Balneário, o nome que aparece anunciando lip lift é de cirurgião plástico. O Dr. entra como o cirurgião bucomaxilofacial da cidade que faz lip lift.</p>
+</section>
+
+<section id="lb-bloco-2">
+  <div class="label">Bloco 2</div>
+  <h2>As 12 perguntas que o perfil precisa responder</h2>
+  <p>As marcadas em <span class="fill">amarelo</span> dependem da resposta do Dr.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>pergunta</th><th>por que ela importa</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>O que é lip lift</td><td>Quase ninguém sabe que existe. A maioria acha que lábio é só preenchimento.</td></tr>
+      <tr><td>2</td><td>Qual a diferença para o preenchimento</td><td>É a pergunta que abre o assunto inteiro: altura, não volume.</td></tr>
+      <tr><td>3</td><td>Eu sou candidata?</td><td>Lábio de cima comprido, mostra pouco dente. Ajuda a pessoa a se reconhecer.</td></tr>
+      <tr><td>4</td><td><span class="fill">A cicatriz aparece?</span></td><td>A maior objeção do lip lift. Responde mostrando, não prometendo.</td></tr>
+      <tr><td>5</td><td><span class="fill">Dói? Tem anestesia?</span></td><td>Medo número 1, igual na papada.</td></tr>
+      <tr><td>6</td><td><span class="fill">Quanto tempo leva e quando eu volto à rotina</span></td><td>As referências falam em pontos por cerca de 1 semana. O Dr. confirma o prazo dele.</td></tr>
+      <tr><td>7</td><td><span class="fill">Quando aparece o resultado final</span></td><td>As referências falam em 3 a 6 meses. Evita ansiedade no pós.</td></tr>
+      <tr><td>8</td><td>É permanente?</td><td>Sustenta o valor contra o preenchimento, que precisa repetir.</td></tr>
+      <tr><td>9</td><td>Vai ficar artificial?</td><td>O medo de quem já viu boca exagerada. Responde com naturalidade.</td></tr>
+      <tr><td>10</td><td>Tenho preenchimento. Posso fazer?</td><td>Público grande, que já investe em lábio.</td></tr>
+      <tr><td>11</td><td>Para quem não é indicado</td><td>Dizer não atrai a paciente certa.</td></tr>
+      <tr><td>12</td><td>Como funciona a avaliação</td><td>Transforma interesse em passo concreto.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="lb-bloco-3">
+  <div class="label">Bloco 3</div>
+  <h2>Os 20 conteúdos, com a frase de abertura pronta</h2>
+  <p>Reels de 30 a 60 segundos. A frase entre aspas é a primeira coisa falada e também o texto do primeiro quadro.</p>
+  <div class="bank">
+    <div class="axis">Cansada de preenchimento</div>
+    <div class="item"><span class="num">01</span><div><q>Não tem preenchimento aqui. O lábio não ganhou volume, ganhou altura.</q><small>30 s · Dr. mostra um caso de perfil · abre o assunto, vai fixado</small></div></div>
+    <div class="item"><span class="num">02</span><div><q>Você já fez preenchimento e não ficou natural?</q><small>40 s · Dr. falando · por que, em alguns casos, mais volume não resolve</small></div></div>
+    <div class="item"><span class="num">03</span><div><q>Ela fazia preenchimento a cada <span class="fill">__</span> meses. Até descobrir o que o lábio dela precisava.</q><small>45 s · caso real com desfecho · o formato que segura até o fim</small></div></div>
+    <div class="item"><span class="num">04</span><div><q>Lip lift ou preenchimento? O teste é a distância entre o nariz e a boca.</q><small>Carrossel · 5 cards com desenho · conteúdo de salvar</small></div></div>
+    <div class="item"><span class="num">05</span><div><q>Tenho preenchimento. Posso fazer lip lift?</q><small>35 s · caixinha respondida em selfie</small></div></div>
+
+    <div class="axis">O lábio que o tempo alongou</div>
+    <div class="item"><span class="num">06</span><div><q>Sorria no espelho. Quanto do seu dente de cima aparece?</q><small>40 s · o teste do espelho, no mesmo formato do vídeo de gordura + contorno da papada · a pessoa faz junto</small></div></div>
+    <div class="item"><span class="num">07</span><div><q>Com os anos, o lábio de cima fica mais comprido. E o sorriso some.</q><small>40 s · Dr. explica o envelhecimento da boca</small></div></div>
+    <div class="item"><span class="num">08</span><div><q>As rugas em volta da boca nem sempre são o problema.</q><small>35 s · Dr. falando · abre para quem procura botox ou laser</small></div></div>
+    <div class="item"><span class="num">09</span><div><q>Ela tinha 25 anos e já mostrava pouco dente ao sorrir.</q><small>40 s · caso jovem · mostra que não é só assunto de idade</small></div></div>
+
+    <div class="axis">Tirar o medo</div>
+    <div class="item"><span class="num">10</span><div><q>Onde fica a cicatriz do lip lift? Eu te mostro.</q><small>40 s · Dr. aponta na base do nariz · a pergunta número 1</small></div></div>
+    <div class="item"><span class="num">11</span><div><q>A cicatriz, semana a semana.</q><small>40 s · o dia, 7, 21 e 60 dias da mesma paciente · transparência é o que mais vende lip lift</small></div></div>
+    <div class="item"><span class="num">12</span><div><q>Dói? Tem anestesia? Quanto tempo leva?</q><small>40 s · Dr. no consultório</small></div></div>
+    <div class="item"><span class="num">13</span><div><q>Vai ficar artificial? Essa é a minha regra.</q><small>35 s · Dr. fala do critério de proporção dele</small></div></div>
+    <div class="item"><span class="num">14</span><div><q>Quem NÃO deve fazer lip lift.</q><small>40 s · Dr. falando · dizer não gera confiança</small></div></div>
+
+    <div class="axis">Provar</div>
+    <div class="item"><span class="num">15</span><div><q>O planejamento é feito com caneta, no seu rosto.</q><small>30 s · close da marcação, com o Dr. explicando as medidas · mostra cuidado sem mostrar procedimento</small></div></div>
+    <div class="item"><span class="num">16</span><div>Uma paciente acompanhada em 5 episódios<small>avaliação → marcação → 7 dias → 21 dias → 90 dias · vira destaque próprio</small></div></div>
+    <div class="item"><span class="num">17</span><div><q>Nada funcionava. Até agora.</q><small>60–90 s · conversa com quem fez, no formato do depoimento da Helena · Camila pergunta fora do vídeo</small></div></div>
+    <div class="item"><span class="num">18</span><div><q>O sorriso dela, <span class="fill">__</span> meses depois.</q><small>20 s · sem narração · só o sorriso, de frente e de perfil</small></div></div>
+
+    <div class="axis">Convidar</div>
+    <div class="item"><span class="num">19</span><div><q>Como funciona a avaliação de lip lift, em 3 passos.</q><small>30 s + story fixo · vai para o destaque</small></div></div>
+    <div class="item"><span class="num">20</span><div><q>Manda uma foto sua sorrindo, de frente, no Direct.</q><small>20 s · convite direto · já chega com a foto que o Dr. precisa ver</small></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Como falar de lábio sem errar</h2>
+  <ul>
+    <li><b>Não falar mal do preenchimento.</b> Ele resolve muitos casos. A frase é “nem todo caso pede volume”, nunca “preenchimento é ruim”. Muitas seguidoras fazem e vão se sentir atacadas.</li>
+    <li><b>Mostrar a cicatriz em vez de prometer.</b> Nada de “sem cicatriz” ou “cicatriz invisível”. O caminho é “fica na base do nariz” e a imagem semana a semana.</li>
+    <li><b>Naturalidade no lugar de transformação.</b> O desejo de quem procura lip lift é parecer descansada, não ficar com outra boca.</li>
+    <li><b>Nunca usar celebridade</b> nem a chamada “paciente modelo”, que soa como curso.</li>
+  </ul>
+</section>
+
+<section id="lb-bloco-4">
+  <div class="label">Bloco 4</div>
+  <h2>As quatro primeiras semanas</h2>
+  <p>Três reels por semana, mais stories quase todo dia. A mesma ordem da papada e da orelha.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>semana</th><th>missão</th><th>reels</th><th>pedido no fim do vídeo</th><th>stories</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Fazer o assunto existir</td><td>01 · 06 · 02</td><td>Salvar e seguir</td><td>Caixinha aberta: “o que você quer saber sobre lip lift?”</td></tr>
+      <tr><td>2</td><td>Derrubar o medo</td><td>10 · 13 · 05</td><td>Comentar LÁBIO</td><td>Respostas da caixinha em vídeo</td></tr>
+      <tr><td>3</td><td>Provar</td><td>11 · 15 · 03</td><td>Foto sorrindo no Direct</td><td>Episódios da paciente acompanhada</td></tr>
+      <tr><td>4</td><td>Convidar</td><td>17 · 12 · 20</td><td>Agendar a avaliação</td><td>Agenda do mês e como marcar</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div class="point"><b>Semana 1</b>“Salva esse vídeo e faz o teste do espelho hoje à noite.”<br>“Me segue que amanhã eu te mostro onde fica a cicatriz.”</div>
+    <div class="point"><b>Semana 2</b>“Comenta LÁBIO aqui embaixo que eu respondo a sua dúvida em vídeo.”</div>
+    <div class="point"><b>Semana 3</b>“Manda uma foto sua sorrindo, de frente, no Direct, que eu te digo se o seu caso é de lip lift.”</div>
+    <div class="point"><b>Semana 4</b>“Se você quer resolver isso ainda esse ano, me manda uma mensagem com a palavra AVALIAÇÃO.”</div>
+  </div>
+</section>
+
+<section id="lb-bloco-5">
+  <div class="label">Bloco 5</div>
+  <h2>Antes de ligar o tráfego de lip lift</h2>
+  <div class="two">
+    <div>
+      <h3>O Dr. responde</h3>
+      <ul class="check">
+        <li>Anestesia, se dói e quanto tempo leva</li>
+        <li>Quantos dias de ponto e de volta à rotina</li>
+        <li>Quando aparece o resultado final</li>
+        <li>Para quem não é indicado</li>
+        <li>Se faz em quem tem preenchimento, e com que intervalo</li>
+        <li>Se faz só o lábio de cima ou também o de baixo e os cantos</li>
+      </ul>
+    </div>
+    <div>
+      <h3>A equipe monta</h3>
+      <ul class="check">
+        <li>Destaque “Lip lift” no perfil</li>
+        <li>Termo de imagem de cada paciente, incluindo as fotos da cicatriz</li>
+        <li>Pelo menos 6 conteúdos do Bloco 3 publicados</li>
+        <li>Respostas do Direct para lábio (montamos no formato do roteiro da papada)</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <h3>O padrão de foto do lábio</h3>
+    <p>Quatro fotos, sempre iguais: <b>de frente com a boca em repouso</b>, <b>de frente sorrindo</b>, <b>de perfil a 90°</b> e <b>close da base do nariz</b> para a cicatriz. Fundo liso, mesma luz, sem batom nas duas fotos ou com o mesmo batom nas duas.</p>
+  </div>
+  <div class="note"><b>O que nunca entra numa peça de lábio:</b> preço ou condição, “sem cicatriz” ou “cicatriz invisível”, “resultado garantido”, “antes e depois” escrito (usar Diagnóstico inicial e Resultado final, com CRO/SC na legenda), nome ou imagem de famoso, “paciente modelo” e superlativo. A base que libera o lip lift para cirurgião-dentista são as Resoluções CFO 230/2020 e 286/2026. Vale o Dr. confirmar com o jurídico dele antes do primeiro anúncio.</div>
+</section>
+
+
+</section><footer>GGD Growth Digital · Roteiros de gravação do Dr. Giácomo Trojan · 03/11/2026</footer>
+</div>
+</body>
+</html>
