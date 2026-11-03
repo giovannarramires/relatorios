@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanda Arantes · Sugestões de Conteúdo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nude:#e7d3c4; --nude-soft:#f6ece5; --sand:#c9a58a; --cocoa:#8a6551;
+    --deep:#4a3528; --ink:#3a2c22; --gold:#b98d5f; --cream:#fbf7f3; --line:#eaddd2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+
+  .hero{background:linear-gradient(135deg,#f6ece5 0%,#e7d3c4 55%,#d9bda8 100%);padding:76px 24px 64px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 22% 22%,rgba(255,255,255,.5),transparent 45%)}
+  .hero .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:12px;color:var(--cocoa);font-weight:500;margin-bottom:18px;position:relative}
+  .hero h1{font-size:56px;font-weight:600;color:var(--deep);line-height:1.06;position:relative}
+  .hero .sub{font-size:19px;color:var(--cocoa);margin-top:14px;font-weight:300;position:relative}
+  .hero .period{display:inline-block;margin-top:24px;padding:9px 26px;border:1px solid var(--sand);border-radius:40px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:rgba(255,255,255,.35);position:relative}
+
+  .intro{padding:56px 0 20px;text-align:center}
+  .intro p{font-size:19px;color:var(--ink);font-weight:300;max-width:680px;margin:0 auto}
+  .intro .serif-lead{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--deep);font-style:italic;margin-bottom:18px}
+  .intro strong{color:var(--cocoa);font-weight:500}
+
+  section{padding:34px 0}
+  .s-title{text-align:center;margin-bottom:38px}
+  .s-title .eyebrow{letter-spacing:.35em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:600}
+  .s-title h2{font-size:38px;color:var(--deep);font-weight:600;margin-top:6px}
+
+  .pilar{display:flex;gap:28px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;margin-bottom:24px;box-shadow:0 10px 34px rgba(138,101,81,.07)}
+  .p-side{flex:none;width:78px;text-align:center}
+  .p-ic{font-size:40px}
+  .p-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--sand);line-height:1;margin-top:6px}
+  .p-tag{letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;color:var(--gold);font-weight:600}
+  .p-body h3{font-size:32px;color:var(--deep);font-weight:600;margin:4px 0 10px}
+  .p-desc{color:var(--ink);font-weight:300;font-size:15.5px}
+  .p-freq{display:inline-block;margin:16px 0 6px;background:var(--nude-soft);color:var(--cocoa);font-size:13px;font-weight:500;padding:7px 16px;border-radius:30px}
+  .p-ideias-t{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--deep);font-weight:600;margin-top:14px}
+  .p-ideias{list-style:none;margin-top:8px}
+  .p-ideias li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--ink);font-weight:300;font-size:15px}
+  .p-ideias li::before{content:"✧";position:absolute;left:0;color:var(--sand);font-size:15px}
+
+  .semana{background:linear-gradient(135deg,#6f4d3c,#8a6551);border-radius:24px;padding:44px 38px;box-shadow:0 20px 50px rgba(111,77,60,.26)}
+  .semana h2{text-align:center;font-family:'Cormorant Garamond',serif;font-size:34px;color:#fff;font-weight:600;margin-bottom:6px}
+  .semana .leg{text-align:center;color:#e7d3c4;font-weight:300;margin-bottom:28px;font-size:14.5px}
+  .dias{display:flex;flex-direction:column;gap:10px}
+  .dia{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:15px 22px}
+  .d-nome{font-family:'Cormorant Garamond',serif;font-size:21px;color:#fff;font-weight:600}
+  .d-tema{color:#f0dccd;font-size:14.5px;font-weight:300}
+
+  .fecho{text-align:center;padding:56px 24px 20px}
+  .fecho .serif{font-size:30px;color:var(--deep);font-style:italic;font-weight:500;max-width:640px;margin:0 auto 14px}
+  .fecho p{color:var(--cocoa);font-weight:300;max-width:600px;margin:0 auto;font-size:16px}
+
+  footer{text-align:center;padding:44px 24px 46px;color:var(--cocoa)}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--deep);font-weight:600}
+  footer .sm{font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-top:8px;opacity:.75}
+
+  @media(max-width:720px){
+    .hero h1{font-size:40px}
+    .pilar{flex-direction:column;gap:14px;padding:26px}
+    .p-side{width:auto;display:flex;gap:14px;align-items:center}
+    .p-n{margin-top:0}
+    .dia{flex-direction:column;align-items:flex-start;gap:4px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Estratégia de Conteúdo</div>
+  <h1>Vamos crescer juntas ✨</h1>
+  <div class="sub">Sugestões de conteúdo para atrair novos seguidores</div>
+  <div class="period">Novembro de 2026</div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <div class="serif-lead">Amanda, olhamos com carinho tudo o que você postou.</div>
+    <p>Cruzando os seus posts de outubro com o que rodou nos anúncios, o recado ficou claro: <strong>a estética bonita e salvável traz gente nova, o humor rende o número mais barato e a maternidade faz essa gente ficar</strong>. Outubro fechou com o <strong>melhor custo por seguidor do projeto</strong> — e o Reel segue sendo o formato que mais leva você longe: em média, <strong>1,8x mais alcance</strong> que os carrosséis.</p>
+  </div>
+
+  <section>
+    <div class="s-title">
+      <div class="eyebrow">O Caminho</div>
+      <h2>Três pilares de conteúdo</h2>
+    </div>
+    
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">🔖</div>
+        <div class="p-n">01</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar que o algoritmo entregou em outubro</div>
+        <h3>Estética que dá vontade de salvar</h3>
+        <p class="p-desc">O Reel “✨🖤 so slowly” foi o post mais salvo do mês: 323 salvamentos e 199 compartilhamentos para 11.970 contas alcançadas — uma em cada 37 pessoas que viu, guardou. E o Reel com a Luzia Fazzolli e a Madalegelato, de clima de verão, foi o que mais alcançou fora do seu público (14.449 contas, 100 compartilhamentos). Imagem bonita, ritmo lento e uma sensação clara é o que o Instagram mais entrega para quem ainda não te segue.</p>
+        <div class="p-freq">🎬 2 Reels por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“So slowly” em outra cena — manhã, piscina, fim de tarde</li>
+<li>As cores do verão que você está vestindo agora</li>
+<li>Um detalhe em câmera lenta: tecido, joia, luz</li>
+<li>O seu ritual de domingo, sem fala, só trilha e imagem</li>
+<li>Antes e depois de uma produção — a transformação em 10 segundos</li></ul>
+      </div>
+    </div>
+
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">🔥</div>
+        <div class="p-n">02</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar que mais rende no anúncio</div>
+        <h3>Humor & Reviravolta</h3>
+        <p class="p-desc">O “Ué… mas você achou que ia acontecer o quê?” segue imbatível: em outubro, já como anúncio, fez 25.877 plays de 3s e 9.804 pessoas assistiram até o fim, ao custo de R$ 3,74 por mil plays — o vídeo mais eficiente que a conta já teve. Em outubro não saiu nenhum Reel nesse formato. É a maior oportunidade de novembro: um novo humor com virada no final vira, ao mesmo tempo, alcance orgânico e número barato para o media kit.</p>
+        <div class="p-freq">🎬 1 Reel por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“Você achou que ia acontecer o quê?” — parte 2, outro cenário</li>
+<li>Expectativa x realidade de um passeio com a Heleonora</li>
+<li>O plano perfeito de fim de semana que deu errado</li>
+<li>“Achou que eu ia pular o treino?” — a resposta no final</li>
+<li>Reação a um comentário engraçado que você recebeu</li></ul>
+      </div>
+    </div>
+
+    <div class="pilar">
+      <div class="p-side">
+        <div class="p-ic">💛</div>
+        <div class="p-n">03</div>
+      </div>
+      <div class="p-body">
+        <div class="p-tag">O pilar que transforma em seguidor</div>
+        <h3>Maternidade & Emoção</h3>
+        <p class="p-desc">Continua sendo o que converte. No pago, “Amor de Mãe” trouxe 8.470 visitas ao perfil — 98% de todas as visitas vindas de anúncio — e ajudou a fechar o mês com o melhor custo por seguidor do projeto. Na linha de vídeo, “Prontas pra sim” passou de 12.800 plays. E o Reel “o poder de um elogio” teve o maior tempo médio de visualização do mês (8,7 segundos): quando você conversa com quem assiste, as pessoas ficam.</p>
+        <div class="p-freq">🎬 2 Reels por semana</div>
+        <div class="p-ideias-t">Ideias para começar</div>
+        <ul class="p-ideias"><li>“O poder de um elogio” — parte 2: o elogio que mais te marcou</li>
+<li>Um momento pequeno e real do dia com a Heleonora</li>
+<li>O que mudou em você desde que virou mãe</li>
+<li>Preparando o Natal juntas — a tradição que é só de vocês</li>
+<li>Uma conversa de mãe pra mãe, olhando pra câmera</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="semana">
+      <h2>Uma semana ideal</h2>
+      <div class="leg">Cerca de 5 Reels por semana — em outubro o Reel alcançou 1,8x mais que o carrossel</div>
+      <div class="dias">
+        <div class="dia"><span class="d-nome">Segunda</span><span class="d-tema">💛 Maternidade / emoção</span></div>
+<div class="dia"><span class="d-nome">Terça</span><span class="d-tema">🔖 Estética salvável</span></div>
+<div class="dia"><span class="d-nome">Quarta</span><span class="d-tema">🔥 Humor com reviravolta</span></div>
+<div class="dia"><span class="d-nome">Quinta</span><span class="d-tema">💛 Maternidade / emoção</span></div>
+<div class="dia"><span class="d-nome">Sexta</span><span class="d-tema">🔖 Estética salvável</span></div>
+<div class="dia"><span class="d-nome">Sábado</span><span class="d-tema">📸 Stories de bastidor (sem Reel)</span></div>
+<div class="dia"><span class="d-nome">Domingo</span><span class="d-tema">Descanso / repost do melhor da semana</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fecho">
+    <div class="serif">“A beleza faz parar. O humor faz assistir. A sua verdade faz ficar.”</div>
+    <p>Essas são sugestões para inspirar. O tom, o timing e a magia continuam sendo seus. A gente cuida dos dados e dos anúncios para levar cada Reel seu ainda mais longe. 🤍</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="brand">Gio Growth Digital</div>
+  <div class="sm">Estratégia de Conteúdo · Novembro 2026</div>
+</footer>
+
+</body>
+</html>
