@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+  Felipe Scherer — Imersão ILPZ (17/11) — funil de aquecimento em 3 fases, para aprovação
+  Gestão GGD — Giovanna Ramires · 05/11/2026 · valores COM imposto
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Felipe Scherer — Aquecimento da Imersão ILPZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#eef1f8;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+  --h1:#4338ca;--h2:#2563eb;--f1:#2563eb;--f2:#7c3aed;--f3:#db2777;--lem:#0891b2;--ok:#10b981;--warn:#f59e0b;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 10px 30px rgba(0,0,0,.12);--radius:14px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.header{background:linear-gradient(135deg,var(--h1) 0%,var(--h2) 100%);padding:0 36px;min-height:68px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.header-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;padding-top:12px}
+.header-sub{font-size:11px;color:rgba(255,255,255,.78);padding-bottom:12px}
+.header-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600}
+.container{max-width:980px;margin:0 auto;padding:28px 30px 70px}
+.answer{background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:var(--radius);padding:30px 32px;color:#fff;box-shadow:var(--shadow-lg);margin-bottom:26px}
+.answer .lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.75;margin-bottom:10px}
+.answer .big{font-size:34px;font-weight:900;letter-spacing:-1px;line-height:1.12;margin-bottom:10px}
+.answer .sub{font-size:14.5px;opacity:.92;line-height:1.6;max-width:720px}
+.answer-stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22)}
+.answer-stat .v{font-size:24px;font-weight:900;letter-spacing:-.5px}
+.answer-stat .l{font-size:11px;opacity:.8;margin-top:2px}
+.section-header{display:flex;align-items:baseline;gap:10px;margin:34px 0 14px;flex-wrap:wrap}
+.section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-2)}
+.section-hint{font-size:11.5px;color:var(--text-3)}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow-sm);margin-bottom:16px}
+.card p{font-size:13.5px;color:var(--text-2);line-height:1.65}
+.card p+p{margin-top:10px}
+.card strong{color:var(--text)}
+.funil{display:flex;flex-direction:column;gap:14px}
+.fase{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-sm);border-top:4px solid var(--c);padding:22px 26px}
+.fase-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.fase-num{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--c)}
+.fase h3{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-top:2px}
+.fase-meta{text-align:right}
+.fase-meta .v{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}
+.fase-meta .l{font-size:11.5px;color:var(--text-3)}
+.fase p.obj{font-size:13.5px;color:var(--text-2);line-height:1.6;margin-bottom:14px;max-width:680px}
+.videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.video{border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.video .t{font-size:13.5px;font-weight:700;line-height:1.4}
+.video a{font-size:12px;color:var(--h2);font-weight:600;text-decoration:none}
+.video a:hover{text-decoration:underline}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;background:#f1f5f9;color:var(--text-2);width:fit-content}
+.chip.novo{background:#fef3c7;color:#92400e}
+.video.gravar{border:2px dashed var(--warn);background:#fffbeb}
+.roteiro{background:#f8fafc;border-left:3px solid var(--warn);border-radius:6px;padding:14px 16px;font-size:14px;line-height:1.7;color:var(--text);margin:12px 0;font-style:italic}
+ul.spec{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+ul.spec li{background:#f8fafc;border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--text-2)}
+ul.spec b{display:block;color:var(--text);font-size:13.5px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-3);padding:0 12px 10px;border-bottom:1px solid var(--border)}
+td{padding:11px 12px;border-bottom:1px solid #f1f5f9}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:800;border-top:2px solid var(--border);border-bottom:none}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:8px}
+.tbl{overflow-x:auto}
+.check{display:flex;flex-direction:column;gap:10px;margin:6px 0 16px}
+.check label{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer;line-height:1.5}
+.check input{margin-top:4px;width:17px;height:17px;accent-color:var(--h1)}
+.btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:0;border-radius:10px;padding:12px 20px;font:700 14px Inter,sans-serif;cursor:pointer}
+.btn:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+#msg{width:100%;margin-top:12px;border:1px solid var(--border);border-radius:8px;padding:12px;font:13px/1.55 Inter,sans-serif;color:var(--text);min-height:110px;resize:vertical}
+#ok{font-size:12.5px;color:var(--ok);font-weight:600;margin-left:10px}
+.nota{font-size:12px;color:var(--text-3);line-height:1.6;margin-top:24px}
+.footer{text-align:center;font-size:11.5px;color:var(--text-3);margin-top:40px}
+@media(max-width:640px){.header{padding:0 16px}.container{padding:20px 16px 60px}.answer{padding:24px 20px}.answer .big{font-size:26px}.fase{padding:18px}.fase-meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div><div class="header-title">Felipe Scherer · Imersão ILPZ</div><div class="header-sub">Funil de aquecimento dos inscritos · Gestão GGD</div></div>
+  <div class="header-badge">Para aprovação · 05/11/2026</div>
+</div>
+
+<div class="container">
+
+<div class="answer">
+  <div class="lbl">A proposta</div>
+  <div class="big">Quem se inscreveu chega ao dia 17 pronto para a imersão</div>
+  <div class="sub">Entre a inscrição e a noite de 17/11, os inscritos assistem a uma sequência de vídeos seus sobre laudo pericial, em 3 fases. Cada fase leva a pessoa um passo adiante: primeiro ela entende que o laudo desfavorável não encerra o caso, depois vê que existe método para impugnar e, por fim, vê o resultado e recebe o seu convite para o dia 17. Na última semana entra o lembrete para ninguém esquecer o horário.</div>
+  <div class="answer-stats">
+    <div class="answer-stat"><div class="v">3 fases + lembrete</div><div class="l">de 06/11 a 17/11</div></div>
+    <div class="answer-stat"><div class="v">R$ 1.500</div><div class="l">investimento total, já com imposto</div></div>
+    <div class="answer-stat"><div class="v">7 vídeos prontos + 1 novo</div><div class="l">só falta gravar 1</div></div>
+  </div>
+</div>
+
+<div class="section-header"><div class="section-title">O funil</div><div class="section-hint">vídeos que já tiveram ótima retenção com o seu público</div></div>
+
+<div class="funil">
+  <div class="fase" style="--c:var(--f1)">
+    <div class="fase-top">
+      <div><div class="fase-num">Fase 1 · 06/11 a 16/11</div><h3>O laudo negativo não é o fim</h3></div>
+      <div class="fase-meta"><div class="v">R$ 563</div><div class="l">investimento da fase</div></div>
+    </div>
+    <p class="obj">Abre os olhos para o problema: muito advogado trata o laudo desfavorável como sentença. Estes vídeos mostram que não é bem assim.</p>
+    <div class="videos">
+      <div class="video"><span class="t">Laudo pericial negativo não é sinônimo de improcedência</span><a href="https://www.instagram.com/p/Daz3z55gJDx/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video"><span class="t">Doença degenerativa: a improcedência é certa? Nem sempre</span><a href="https://www.instagram.com/p/Daz3z8MgsUY/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video"><span class="t">A mentira do laudo desfavorável que trava a carreira</span><span class="chip novo">legenda nova com a data de 17/11</span><a href="https://www.instagram.com/p/DbCGTs-Am15/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+    </div>
+  </div>
+
+  <div class="fase" style="--c:var(--f2)">
+    <div class="fase-top">
+      <div><div class="fase-num">Fase 2 · 09/11 a 16/11</div><h3>Existe método para impugnar</h3></div>
+      <div class="fase-meta"><div class="v">R$ 273</div><div class="l">investimento da fase</div></div>
+    </div>
+    <p class="obj">Mostra o caminho: o jeito certo de impugnar, como fazer quesitos que não entregam a perícia e como sustentar o nexo quando o perito nega.</p>
+    <div class="videos">
+      <div class="video"><span class="t">Impugnar um laudo da forma errada pode comprometer a ação</span><a href="https://www.instagram.com/p/DGtI9CMM4P8/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video"><span class="t">Quesitos genéricos entregam a perícia de bandeja</span><span class="chip novo">legenda nova com a data de 17/11</span><a href="https://www.instagram.com/p/DVt51yLABxb/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video"><span class="t">Como comprovar o nexo quando o perito diz que não tem relação</span><span class="chip novo">legenda nova com a data de 17/11</span><a href="https://www.instagram.com/p/DVt52F_APQc/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+    </div>
+  </div>
+
+  <div class="fase" style="--c:var(--f3)">
+    <div class="fase-top">
+      <div><div class="fase-num">Fase 3 · 12/11 a 16/11</div><h3>Funciona, e no dia 17 você mostra como</h3></div>
+      <div class="fase-meta"><div class="v">R$ 137</div><div class="l">investimento da fase</div></div>
+    </div>
+    <p class="obj">Traz a prova e o convite: resultado de quem aplicou o método e o seu chamado direto para a noite da imersão.</p>
+    <div class="videos">
+      <div class="video"><span class="t">Revertemos sentença e laudo pericial desfavoráveis</span><span class="chip novo">legenda nova com a data de 17/11</span><a href="https://www.instagram.com/p/DVt51_1gF9p/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video"><span class="t">Aluno saiu de uma condenação de R$ 180 mil</span><span class="chip novo">legenda nova com a data de 17/11</span><a href="https://www.instagram.com/p/DVt51fvAN9u/" target="_blank" rel="noopener">Ver no Instagram →</a></div>
+      <div class="video gravar"><span class="t">Convite para o dia 17</span><span class="chip novo">precisa gravar · até 11/11</span><span style="font-size:12.5px;color:var(--text-2)">Roteiro sugerido logo abaixo</span></div>
+    </div>
+  </div>
+
+  <div class="fase" style="--c:var(--lem)">
+    <div class="fase-top">
+      <div><div class="fase-num">Lembrete · 11/11 a 17/11 (7 dias)</div><h3>Ninguém esquece o horário</h3></div>
+      <div class="fase-meta"><div class="v">R$ 527</div><div class="l">investimento do lembrete</div></div>
+    </div>
+    <p class="obj">Na última semana, os inscritos recebem o lembrete da imersão: dia 17/11, às 19h30, até o momento de entrar.</p>
+  </div>
+</div>
+
+<div class="section-header"><div class="section-title">O vídeo que precisamos de você</div><div class="section-hint">fecha a fase 3</div></div>
+<div class="card">
+  <p><strong>Um convite seu, falando direto com quem já se inscreveu.</strong> É o último passo antes da imersão, então a ideia é deixar claro o que a pessoa vai ver naquela noite e por que não pode faltar.</p>
+  <div class="roteiro">"Dia 17, às 19h30, eu vou impugnar um laudo pericial do zero, na sua frente. Você vai ver o que eu olho primeiro no laudo, que quesitos eu faço e como eu sustento o nexo quando o perito diz que a doença não tem relação com o trabalho. Se você já sentiu que um laudo desfavorável encerrou o seu caso, essa noite é para você. Te vejo dia 17."</div>
+  <p>O texto é só um ponto de partida. Fique à vontade para falar do seu jeito.</p>
+  <ul class="spec">
+    <li><b>30 a 60 segundos</b>duração</li>
+    <li><b>Vertical (9:16)</b>gravado no celular serve</li>
+    <li><b>Você falando para a câmera</b>sem precisar de edição elaborada</li>
+    <li><b>Até 11/11</b>para entrar a tempo na fase 3</li>
+  </ul>
+</div>
+
+<div class="section-header"><div class="section-title">Investimento</div><div class="section-hint">valores já com imposto</div></div>
+<div class="card tbl">
+  <table>
+    <thead><tr><th>Etapa</th><th>Período</th><th class="num">Investimento</th></tr></thead>
+    <tbody>
+      <tr><td><span class="dot" style="--c:var(--f1)"></span>Fase 1 · o laudo negativo não é o fim</td><td>06/11 a 16/11</td><td class="num">R$ 563</td></tr>
+      <tr><td><span class="dot" style="--c:var(--f2)"></span>Fase 2 · existe método para impugnar</td><td>09/11 a 16/11</td><td class="num">R$ 273</td></tr>
+      <tr><td><span class="dot" style="--c:var(--f3)"></span>Fase 3 · prova e convite</td><td>12/11 a 16/11</td><td class="num">R$ 137</td></tr>
+      <tr><td><span class="dot" style="--c:var(--lem)"></span>Lembrete</td><td>11/11 a 17/11</td><td class="num">R$ 527</td></tr>
+      <tr class="tot"><td>Total</td><td>06/11 a 17/11</td><td class="num">R$ 1.500</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:14px">Esse valor faz parte da verba de R$ 15 mil da imersão (a fatia de 10% reservada para aquecimento e lembrete). Não é investimento adicional.</p>
+</div>
+
+<div class="section-header"><div class="section-title">Para aprovar</div></div>
+<div class="card">
+  <div class="check">
+    <label><input type="checkbox" id="c1" checked> Aprovo o funil em 3 fases + lembrete, de 06/11 a 17/11</label>
+    <label><input type="checkbox" id="c2" checked> Aprovo os 7 vídeos escolhidos</label>
+    <label><input type="checkbox" id="c3" checked> Aprovo o investimento de R$ 1.500 (já dentro da verba da imersão)</label>
+    <label><input type="checkbox" id="c4" checked> Vou gravar o vídeo de convite até 11/11</label>
+  </div>
+  <button class="btn" id="copiar" type="button">Copiar mensagem de aprovação</button><span id="ok"></span>
+  <textarea id="msg" readonly aria-label="Mensagem de aprovação"></textarea>
+  <p style="margin-top:10px">É só colar a mensagem no WhatsApp da Gio. Se quiser trocar algum vídeo, desmarque o item e escreva qual.</p>
+</div>
+
+<p class="nota">A definição operacional da veiculação (para quem cada fase aparece e como a verba se distribui ao longo dos dias) faz parte do trabalho de gestão e é ajustada diariamente conforme a entrega.</p>
+<div class="footer">Gestão GGD · Giovanna Ramires · relatorios.giogrowthdigital.com.br</div>
+</div>
+
+<script>
+var itens={c1:"o funil em 3 fases + lembrete (06/11 a 17/11)",c2:"os 7 vídeos escolhidos",c3:"o investimento de R$ 1.500",c4:"vou gravar o vídeo de convite até 11/11"};
+function montar(){
+  var sim=[],nao=[];
+  for(var k in itens){(document.getElementById(k).checked?sim:nao).push(itens[k]);}
+  var t="Gio, sobre o aquecimento da Imersão ILPZ:";
+  if(sim.length)t+="\n✅ Aprovado: "+sim.join("; ")+".";
+  if(nao.length)t+="\n✏️ Quero ajustar: "+nao.join("; ")+".";
+  document.getElementById("msg").value=t;
+}
+for(var k in itens)document.getElementById(k).addEventListener("change",montar);
+montar();
+document.getElementById("copiar").addEventListener("click",function(){
+  var m=document.getElementById("msg"),ok=document.getElementById("ok");
+  function sel(){m.focus();m.select();ok.textContent="Selecionado, é só copiar";}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m.value).then(function(){ok.textContent="Copiado";},sel);}else sel();
+});
+</script>
+</body>
+</html>
