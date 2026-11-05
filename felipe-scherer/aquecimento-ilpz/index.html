@@ -174,40 +174,9 @@ tr.tot td{font-weight:800;border-top:2px solid var(--border);border-bottom:none}
   <p style="margin-top:14px">Esse valor faz parte da verba de R$ 15 mil da imersão (a fatia de 10% reservada para aquecimento e lembrete). Não é investimento adicional.</p>
 </div>
 
-<div class="section-header"><div class="section-title">Para aprovar</div></div>
-<div class="card">
-  <div class="check">
-    <label><input type="checkbox" id="c1" checked> Aprovo o funil em 3 fases + lembrete, de 06/11 a 17/11</label>
-    <label><input type="checkbox" id="c2" checked> Aprovo os 7 vídeos escolhidos</label>
-    <label><input type="checkbox" id="c3" checked> Aprovo o investimento de R$ 1.500 (já dentro da verba da imersão)</label>
-    <label><input type="checkbox" id="c4" checked> Vou gravar o vídeo de convite até 11/11</label>
-  </div>
-  <button class="btn" id="copiar" type="button">Copiar mensagem de aprovação</button><span id="ok"></span>
-  <textarea id="msg" readonly aria-label="Mensagem de aprovação"></textarea>
-  <p style="margin-top:10px">É só colar a mensagem no WhatsApp da Gio. Se quiser trocar algum vídeo, desmarque o item e escreva qual.</p>
-</div>
-
 <p class="nota">A definição operacional da veiculação (para quem cada fase aparece e como a verba se distribui ao longo dos dias) faz parte do trabalho de gestão e é ajustada diariamente conforme a entrega.</p>
 <div class="footer">Gestão GGD · Giovanna Ramires · relatorios.giogrowthdigital.com.br</div>
 </div>
 
-<script>
-var itens={c1:"o funil em 3 fases + lembrete (06/11 a 17/11)",c2:"os 7 vídeos escolhidos",c3:"o investimento de R$ 1.500",c4:"vou gravar o vídeo de convite até 11/11"};
-function montar(){
-  var sim=[],nao=[];
-  for(var k in itens){(document.getElementById(k).checked?sim:nao).push(itens[k]);}
-  var t="Gio, sobre o aquecimento da Imersão ILPZ:";
-  if(sim.length)t+="\n✅ Aprovado: "+sim.join("; ")+".";
-  if(nao.length)t+="\n✏️ Quero ajustar: "+nao.join("; ")+".";
-  document.getElementById("msg").value=t;
-}
-for(var k in itens)document.getElementById(k).addEventListener("change",montar);
-montar();
-document.getElementById("copiar").addEventListener("click",function(){
-  var m=document.getElementById("msg"),ok=document.getElementById("ok");
-  function sel(){m.focus();m.select();ok.textContent="Selecionado, é só copiar";}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m.value).then(function(){ok.textContent="Copiado";},sel);}else sel();
-});
-</script>
 </body>
 </html>
