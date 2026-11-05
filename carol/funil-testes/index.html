@@ -1,0 +1,143 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Carol · funil dos testes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: coluna única; cada teste = régua do funil (etapas em linha) + tabela; leitura curta embaixo */
+:root{
+  --bg:#f6f5f2;--card:#ffffff;--fg:#22211f;--mut:#6c6862;--line:#e2ded7;
+  --accent:#8a4b6e;--soft:#f1e8ee;--ok:#2f7a4f;--warn:#a86412;
+  --f-disp:"Fraunces",Georgia,serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181719;--card:#211f22;--fg:#ece8e4;--mut:#a39d97;--line:#38343a;--accent:#d49bbb;--soft:#2e2530;--ok:#6cc392;--warn:#e0a457;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#181719;--card:#211f22;--fg:#ece8e4;--mut:#a39d97;--line:#38343a;--accent:#d49bbb;--soft:#2e2530;--ok:#6cc392;--warn:#e0a457;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+.wrap{max-width:900px;margin:0 auto;padding:32px 16px 64px;display:flex;flex-direction:column;gap:34px}
+h1{font:600 2rem/1.15 var(--f-disp);margin:0;text-wrap:balance}
+h2{font:600 1.35rem/1.25 var(--f-disp);margin:0;text-wrap:balance}
+h3{font:600 1rem/1.3 var(--f-body);margin:0}
+.eyebrow{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.sub{color:var(--mut);margin:6px 0 0;max-width:68ch}
+section{display:flex;flex-direction:column;gap:12px}
+p{margin:0;max-width:68ch}
+.funil{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.et{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.et .k{font:500 .68rem var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.et .v{font:600 1.35rem/1.2 var(--f-body);font-variant-numeric:tabular-nums}
+.et .t{font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
+@media (max-width:620px){.funil{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font:500 .68rem var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);vertical-align:bottom}
+tr:last-child td{border-bottom:0}
+tr.tot td{font-weight:600}
+tr.grp td{background:var(--soft);font:500 .72rem var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.hl{color:var(--ok);font-weight:600}
+.defs{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 22px}
+.defs div{font-size:.88rem;min-width:0}
+.defs b{display:block;font-size:.82rem}
+.leitura{border-left:3px solid var(--accent);padding:12px 16px;background:var(--card);border-radius:0 8px 8px 0;display:flex;flex-direction:column;gap:8px}
+.leitura ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.note{color:var(--mut);font-size:.82rem}
+</style>
+</head><body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Dra. Caroline Baima · Imersão Cicatrizes de Acne · 03 a 05/11/2026</div>
+  <h1>Funil dos testes: páginas e ganchos</h1>
+  <p class="sub">Do anúncio até a venda, etapa por etapa, nos dois testes da semana: as páginas novas (v12 e v13 contra a v9) e os 5 ganchos do criativo 01 (H1 a H5).</p>
+</header>
+
+<div class="defs">
+  <div><b>CTR do link</b>cliques no link ÷ impressões</div>
+  <div><b>Taxa de carregamento</b>visitas ÷ cliques no link. Mostra quantos que clicaram esperaram a página abrir.</div>
+  <div><b>Visita → checkout</b>checkouts iniciados ÷ visitas</div>
+  <div><b>Conversão da página</b>vendas ÷ visitas</div>
+  <div><b>Conversão do checkout</b>vendas ÷ checkouts</div>
+  <div><b>Venda</b>ingresso pago na HeroSpark com UTM do anúncio</div>
+</div>
+
+<!-- TESTE DE PÁGINAS -->
+<section>
+  <div class="eyebrow">Teste 1</div>
+  <h2>Páginas v12 × v13 × v9</h2>
+  <p>A mesma campanha de venda, o mesmo público (dermatologia) e os mesmos 2 criativos (estático 083 e vídeo H4). A única diferença é a página de destino.</p>
+  <div class="funil">
+    <div class="et"><span class="k">Impressões</span><span class="v">3.152</span><span class="t">R$244,98 investidos</span></div>
+    <div class="et"><span class="k">Cliques no link</span><span class="v">28</span><span class="t">CTR 0,89%</span></div>
+    <div class="et"><span class="k">Visitas</span><span class="v">26</span><span class="t">carregamento 93%</span></div>
+    <div class="et"><span class="k">Checkouts</span><span class="v">1</span><span class="t">3,8% das visitas</span></div>
+    <div class="et"><span class="k">Vendas</span><span class="v">0</span><span class="t">conv. página 0%</span></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Página</th><th>Investido</th><th>Impr.</th><th>Cliques<br>no link</th><th>CTR</th><th>Visitas</th><th>Carrega-<br>mento</th><th>R$ por<br>visita</th><th>Check-<br>outs</th><th>Visita →<br>checkout</th><th>Vendas</th><th>Conv.<br>página</th></tr>
+    <tr><td>v12</td><td>R$77,49</td><td>1.010</td><td>4</td><td>0,40%</td><td>3</td><td>75%</td><td>R$25,83</td><td>0</td><td>0%</td><td>0</td><td>0%</td></tr>
+    <tr><td>v13</td><td>R$79,06</td><td>1.091</td><td>11</td><td>1,01%</td><td>11</td><td>100%</td><td>R$7,19</td><td>0</td><td>0%</td><td>0</td><td>0%</td></tr>
+    <tr><td>v9 (atual)</td><td>R$88,43</td><td>1.051</td><td>13</td><td>1,24%</td><td>12</td><td>92%</td><td>R$7,37</td><td>1</td><td>8,3%</td><td>0</td><td>0%</td></tr>
+    <tr class="grp"><td colspan="12">Por criativo, somando as 3 páginas</td></tr>
+    <tr><td>Estático 083</td><td>R$122,78</td><td>1.809</td><td>19</td><td>1,05%</td><td>17</td><td>89%</td><td>R$7,22</td><td>0</td><td>0%</td><td>0</td><td>0%</td></tr>
+    <tr><td>Vídeo H4</td><td>R$122,20</td><td>1.343</td><td>9</td><td>0,67%</td><td>9</td><td>100%</td><td>R$13,58</td><td>1</td><td>11%</td><td>0</td><td>0%</td></tr>
+  </table></div>
+  <div class="leitura">
+    <h3>O que dá para dizer</h3>
+    <ul>
+      <li><b>As páginas carregam bem.</b> A v13 e a v9 ficam entre 92% e 100%. A v12 aparece com 75%, mas são só 4 cliques, ou seja, 1 pessoa a menos. Velocidade e abertura não são o problema.</li>
+      <li><b>Ainda não dá para escolher uma página.</b> Para comparar, olhamos visita → checkout e conversão da página, e com 4 a 12 visitas por página não há volume para isso. No L10, a conta precisou de cerca de 95 visitas para cada venda. Este teste tem 26 visitas no total.</li>
+      <li>A v12 recebeu menos visitas porque o anúncio dela teve menos cliques (4). Como o anúncio é o mesmo nas 3 páginas, essa diferença vem da entrega do Meta. Ela não diz nada sobre a página.</li>
+      <li>O único checkout veio da v9, pelo vídeo H4.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TESTE DE GANCHOS -->
+<section>
+  <div class="eyebrow">Teste 2</div>
+  <h2>Os 5 ganchos do criativo 01</h2>
+  <p>O vídeo é o mesmo e só muda o começo (H1 a H5). Primeiro rodamos o teste para escolher o gancho que mais segura e leva gente à página. Depois o H1 e o H4, os vencedores, foram para a campanha de venda.</p>
+
+  <h3>Etapa 1 · teste de gancho (objetivo: visitas na página)</h3>
+  <div class="tbl"><table>
+    <tr><th>Gancho</th><th>Investido</th><th>Impr.</th><th>Segura 3s</th><th>Cliques<br>no link</th><th>CTR</th><th>Visitas</th><th>Carrega-<br>mento</th><th>R$ por<br>visita</th><th>Check-<br>outs</th><th>Vendas</th></tr>
+    <tr><td><b>H1</b></td><td>R$15,43</td><td>2.126</td><td>29,4%</td><td>101</td><td>4,75%</td><td>85</td><td>84%</td><td class="hl">R$0,18</td><td>0</td><td>0</td></tr>
+    <tr><td>H2</td><td>R$15,69</td><td>1.872</td><td>29,8%</td><td>98</td><td>5,24%</td><td>74</td><td>76%</td><td>R$0,21</td><td>0</td><td>0</td></tr>
+    <tr><td>H3</td><td>R$14,54</td><td>1.911</td><td>21,0%</td><td>78</td><td>4,08%</td><td>52</td><td>67%</td><td>R$0,28</td><td>0</td><td>0</td></tr>
+    <tr><td><b>H4</b></td><td>R$15,21</td><td>1.603</td><td class="hl">35,7%</td><td>92</td><td class="hl">5,74%</td><td>80</td><td class="hl">87%</td><td>R$0,19</td><td>0</td><td>0</td></tr>
+    <tr><td>H5</td><td>R$12,65</td><td>1.939</td><td>26,6%</td><td>57</td><td>2,94%</td><td>48</td><td>84%</td><td>R$0,26</td><td>0</td><td>0</td></tr>
+    <tr class="tot"><td>Total</td><td>R$73,52</td><td>9.451</td><td>28,3%</td><td>426</td><td>4,51%</td><td>339</td><td>80%</td><td>R$0,22</td><td>0</td><td>0</td></tr>
+  </table></div>
+
+  <h3>Etapa 2 · H1 e H4 na campanha de venda (objetivo: compra)</h3>
+  <div class="tbl"><table>
+    <tr><th>Gancho</th><th>Investido</th><th>Impr.</th><th>Segura 3s</th><th>Cliques<br>no link</th><th>CTR</th><th>Visitas</th><th>Carrega-<br>mento</th><th>R$ por<br>visita</th><th>Check-<br>outs</th><th>Visita →<br>checkout</th><th>Vendas</th></tr>
+    <tr><td><b>H1</b></td><td>R$139,31</td><td>2.239</td><td>19,1%</td><td>24</td><td>1,07%</td><td>21</td><td>88%</td><td>R$6,63</td><td>0</td><td>0%</td><td>0</td></tr>
+    <tr><td><b>H4</b></td><td>R$172,28</td><td>2.057</td><td>14,0%</td><td>18</td><td>0,88%</td><td>9</td><td>50%</td><td>R$19,14</td><td>1</td><td>11%</td><td>0</td></tr>
+    <tr><td>H4 no teste de páginas</td><td>R$122,20</td><td>1.343</td><td>16,8%</td><td>9</td><td>0,67%</td><td>9</td><td>100%</td><td>R$13,58</td><td>1</td><td>11%</td><td>0</td></tr>
+  </table></div>
+
+  <div class="leitura">
+    <h3>O que dá para dizer</h3>
+    <ul>
+      <li><b>H4 e H1 são os melhores ganchos.</b> O H4 é o que mais segura nos 3 primeiros segundos (35,7%) e o que mais leva ao clique. O H1 entrega a visita mais barata. O H3 é o mais fraco.</li>
+      <li><b>O teste de gancho mede atenção. Ele não mede compra.</b> Com objetivo de visitas, o Meta entrega para quem clica com facilidade: a impressão sai a ~R$8 por mil e a visita a R$0,22. Na campanha de venda, ele entrega para quem tem perfil de comprador: a impressão sai a R$60–85 por mil e a visita a R$7–19. Por isso as 339 visitas do teste não geraram nenhum checkout, e é por isso que o vencedor sempre vai para a venda antes de ser julgado.</li>
+      <li><b>Na venda, os vídeos ainda não converteram.</b> H1 e H4 somam 39 visitas, 2 checkouts e nenhuma venda. É pouco volume para cravar. O mesmo padrão apareceu no L10: as vendas vieram dos anúncios estáticos (083, 117, Prontuário e Cartaz).</li>
+      <li>A taxa de carregamento do H4 na venda (50%) é a única baixa. São só 18 cliques, e o mesmo vídeo carrega bem nas outras campanhas, então tratamos como número pequeno. Vamos acompanhar.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Referência do L10 para comparar</h2>
+  <div class="tbl"><table>
+    <tr><th>Período</th><th>Visita → checkout</th><th>Conv. do checkout</th><th>Conv. da página</th><th>Visitas por venda</th></tr>
+    <tr><td>Campanhas de venda, 22 a 29/10</td><td>9,2%</td><td>11,4%</td><td>~1,1%</td><td>~95</td></tr>
+    <tr><td>Melhores páginas do L10 (v9 e v11-v2)</td><td>—</td><td>—</td><td>2,5%</td><td>~40</td></tr>
+  </table></div>
+  <p>Na conversão da página das melhores, uma venda pede cerca de 40 visitas. Os dois testes juntos ainda não chegaram a esse volume em nenhuma página ou gancho. Por isso o resultado fica como tendência, sem vencedor.</p>
+</section>
+
+<p class="note">Fontes: Meta Ads (janela padrão), 03/11 a 05/11 até ~15h. O dia 05/11 ainda está aberto. Vendas: HeroSpark com UTM, sem nenhuma venda com UTM dos anúncios testados no período. A etapa 2 do H1/H4 inclui a manhã de 04/11.</p>
+</div>
+
+</body></html>
