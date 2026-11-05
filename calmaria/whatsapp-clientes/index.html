@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Cal.maria · Enviar mensagens no WhatsApp</title>
+<style>
+  :root{--bege-claro:#FAF6F1;--bege:#F2EBDF;--branco:#FFF;--marrom:#3D2718;--terracota:#BF6A45;--ocre:#C89640;--verde:#6B7C5C;--zap:#1f8f4e;--muted:rgba(61,39,24,0.62);--linha:rgba(61,39,24,0.12)}
+  *{box-sizing:border-box}
+  body{font-family:'Trebuchet MS','Segoe UI',sans-serif;background:var(--bege-claro);color:var(--marrom);line-height:1.5;margin:0}
+  header{background:linear-gradient(135deg,#6B7C5C 0%,#55654a 100%);color:#FCF7F0;padding:40px 20px 34px;text-align:center;border-bottom:5px solid var(--ocre)}
+  header .marca{font-family:Georgia,serif;font-size:32px}
+  header .sub{opacity:.92;margin-top:6px;font-size:15.5px}
+  .wrap{max-width:900px;margin:0 auto;padding:26px 16px 70px;display:grid;gap:30px}
+  h2{font-family:Georgia,serif;font-weight:normal;font-size:23px;margin:0 0 10px}
+  p{margin:0 0 8px;max-width:72ch}
+  ol{margin:0;padding-left:22px;display:grid;gap:6px;max-width:74ch}
+  .caixa{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+  .aviso{border-left:4px solid var(--ocre)}
+  .nota{font-size:13.5px;color:var(--muted)}
+  label{font-weight:700;font-size:14px}
+  select,textarea,input[type=file]{font:inherit;font-size:14.5px;width:100%;border:1px solid var(--linha);border-radius:8px;padding:9px 11px;background:var(--bege-claro);color:var(--marrom)}
+  textarea{min-height:200px;resize:vertical;white-space:pre-wrap}
+  textarea#colar{min-height:90px}
+  .botoes{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  button,a.zap{font:inherit;font-size:13.5px;font-weight:700;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;text-decoration:none;display:inline-block}
+  button{background:var(--verde);color:#fff}
+  button.leve{background:transparent;color:var(--verde);border:1px solid var(--verde)}
+  a.zap{background:var(--zap);color:#fff;white-space:nowrap}
+  a.zap.feito{background:var(--bege);color:var(--muted)}
+  button:focus-visible,a.zap:focus-visible{outline:3px solid var(--ocre);outline-offset:2px}
+  .placar{font-weight:700;color:var(--verde)}
+  .lista{display:grid;gap:0;background:var(--branco);border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+  .cli{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;padding:11px 14px;border-bottom:1px solid var(--linha);flex-wrap:wrap}
+  .cli:last-child{border-bottom:0}
+  .cli .quem{min-width:0;display:grid}
+  .cli .nome{font-weight:700;overflow-wrap:anywhere}
+  .cli .tel{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .cli.enviado .nome{color:var(--muted);text-decoration:line-through}
+  .cli .acoes{display:flex;gap:8px;align-items:center}
+  .sem{font-size:13px;color:var(--terracota)}
+  .vazio{padding:22px 16px;text-align:center;color:var(--muted)}
+  .previa{background:var(--bege-claro);border-left:4px solid var(--ocre);border-radius:6px;padding:10px 12px;font-size:13.5px;white-space:pre-line}
+  footer{text-align:center;font-size:12.5px;color:var(--muted);padding:0 18px 30px}
+  code{background:var(--bege);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<header>
+  <div class="marca">Enviar mensagens no WhatsApp</div>
+  <div class="sub">Um botão por cliente: abre o WhatsApp com a mensagem pronta e o nome já preenchido</div>
+</header>
+
+<div class="wrap">
+
+<section class="caixa aviso">
+  <h2 style="margin:0">Como usar</h2>
+  <ol>
+    <li>Na loja, vá em <b>Clientes › Exportar</b> e baixe a planilha.</li>
+    <li>Abra esta página no <b>celular ou computador onde está o WhatsApp da Cal.maria</b> e coloque a planilha no passo 1 abaixo.</li>
+    <li>Escolha a mensagem do dia no passo 2. Dá para mudar o texto antes de enviar.</li>
+    <li>Toque em <b>Abrir WhatsApp</b> em cada cliente, confira e aperte enviar. A cliente fica riscada, para você saber onde parou.</li>
+  </ol>
+  <p class="nota" style="margin:0">A planilha fica só neste aparelho: a página lê o arquivo aqui mesmo e não envia nada para lugar nenhum. O que já foi enviado também fica guardado só neste navegador.</p>
+</section>
+
+<section class="caixa">
+  <h2 style="margin:0">1. Lista de clientes</h2>
+  <label for="arquivo">Planilha exportada da loja (.csv)</label>
+  <input type="file" id="arquivo" accept=".csv,text/csv,text/plain">
+  <details>
+    <summary class="nota" style="cursor:pointer">Não tem a planilha? Cole nome e telefone, um por linha</summary>
+    <div style="display:grid;gap:8px;margin-top:8px">
+      <textarea id="colar" placeholder="Maria Souza, 11 98765-4321&#10;Ana Lima; (19) 99876-5432"></textarea>
+      <div class="botoes"><button type="button" id="usarColado">Usar esta lista</button></div>
+    </div>
+  </details>
+  <p class="nota" id="statusLista" style="margin:0" aria-live="polite">Nenhuma lista carregada ainda.</p>
+</section>
+
+<section class="caixa">
+  <h2 style="margin:0">2. Mensagem</h2>
+  <label for="qual">Qual mensagem</label>
+  <select id="qual"></select>
+  <p class="nota" id="praQuem" style="margin:0"></p>
+  <label for="texto">Texto (<code>{nome}</code> vira o primeiro nome de cada cliente)</label>
+  <textarea id="texto"></textarea>
+  <div class="botoes"><button type="button" class="leve" id="restaurar">Voltar ao texto original</button></div>
+</section>
+
+<section style="display:grid;gap:12px">
+  <div class="botoes" style="justify-content:space-between">
+    <h2 style="margin:0">3. Enviar</h2>
+    <span class="placar" id="placar" aria-live="polite"></span>
+  </div>
+  <div class="lista" id="lista"><div class="vazio">Coloque a planilha no passo 1 e as clientes aparecem aqui, cada uma com o botão do WhatsApp.</div></div>
+  <div class="botoes"><button type="button" class="leve" id="zerar">Desmarcar todas desta mensagem</button></div>
+</section>
+
+</div>
+<footer>Cal.maria · preparado por Gio Growth Digital · textos da <a href="../regua-mensagens/" style="color:inherit">régua de mensagens</a></footer>
+
+<script>
+const MSGS = [{"id": "m1", "quando": "Seg 16/11", "titulo": "1. Aviso: a Black vem aí", "pra": "Todas as clientes", "texto": "Oi, {nome}! Aqui é a Tati, da Cal.maria 🌿\n\nA Black Friday da Cal.maria chega na semana que vem, e quem já é cliente fica sabendo antes de todo mundo.\n\nNa quinta (19/11) eu te mando o acesso antecipado, com 15% OFF em zafu, meia lua, bolster, mini bolster, kit zafu + zabuton e descanso para os olhos.\n\nSe estava pensando em completar o seu cantinho de prática, é a hora 🙏"}, {"id": "m2", "quando": "Qui 19/11", "titulo": "2. Acesso antecipado", "pra": "Todas as clientes", "texto": "{nome}, o seu acesso antecipado chegou ✨\n\nA partir de hoje, 15% OFF em tudo da Cal.maria:\n• Zafu: R$ 152,07\n• Zafu meia lua: R$ 161,42\n• Bolster: R$ 194,57\n• Mini bolster: R$ 118,07\n• Kit zafu + zabuton: R$ 266,90\n• Descanso para os olhos: R$ 44,20\n• Bolsa porta-mat: R$ 102,00\n\nÉ só entrar no site: www.vivacalmaria.com.br\n\nCada peça sai do nosso ateliê em pouca quantidade, então o estoque de cada cor é pequeno. Se tiver dúvida de tamanho ou cor, me chama aqui mesmo."}, {"id": "m3", "quando": "Sex 27/11", "titulo": "3. Hoje é Black Friday", "pra": "Quem não comprou ainda", "texto": "Bom dia, {nome}! Hoje é Black Friday na Cal.maria 🖤\n\nOs 15% OFF seguem até segunda (30/11).\n\nUma ideia que as clientes gostam: o bolster para o relaxamento no fim da prática, ou o descanso para os olhos com ervas para a meditação deitada.\n\nwww.vivacalmaria.com.br"}, {"id": "m4", "quando": "Seg 30/11", "titulo": "4. Último dia", "pra": "Quem respondeu e não comprou", "texto": "{nome}, passando só para avisar: hoje é o último dia dos 15% OFF na Cal.maria.\n\nSe quiser, eu te ajudo a escolher a cor ou o modelo por aqui 🙂\n\nwww.vivacalmaria.com.br"}, {"id": "m5", "quando": "Seg 07/12", "titulo": "5. Presente de Natal", "pra": "Todas as clientes", "texto": "Oi, {nome}! Tati da Cal.maria aqui 🎄\n\nSe você tem alguém que medita, pratica yoga ou só precisa desacelerar, este ano dá para presentear com calma.\n\nO Kit Natal Tempo de Cal.maria (R$ 263,90) vem pronto para presente, e é uma edição pequena.\n\nTambém dá para presentear com um zafu, um mini bolster ou o descanso para os olhos com ervas.\n\nwww.vivacalmaria.com.br"}, {"id": "m6", "quando": "Qui 10/12", "titulo": "6. Prazo do Natal", "pra": "Quem não comprou em dezembro", "texto": "{nome}, um lembrete rápido: para o presente chegar antes do Natal, o pedido precisa entrar até [data].\n\nSe precisar de ajuda para escolher, me chama aqui 🌿\n\nwww.vivacalmaria.com.br"}, {"id": "m8", "quando": "O ano todo", "titulo": "Recompra (60 dias depois)", "pra": "Quem comprou zafu ou meia lua", "texto": "Oi, {nome}! Como está o seu zafu? 🙂\n\nMuitas clientes completam a prática com o zabuton embaixo (protege os joelhos e tornozelos no chão) ou com o bolster para o relaxamento no final.\n\nSe quiser ver: www.vivacalmaria.com.br"}];
+let clientes = [];
+const $ = id => document.getElementById(id);
+const guarda = { get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v) }catch(e){ return d } },
+                 set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} } };
+
+function primeiroNome(n){
+  const p = (n || '').trim().split(/\s+/)[0] || '';
+  return p ? p.charAt(0).toUpperCase() + p.slice(1).toLowerCase() : '';
+}
+function telefone(t){
+  let d = (t || '').replace(/\D/g, '');
+  if (!d) return '';
+  d = d.replace(/^0+/, '');
+  if (d.startsWith('55') && (d.length === 12 || d.length === 13)) return d;
+  if (d.length === 10 || d.length === 11) return '55' + d;
+  return '';
+}
+function mostraTel(d){
+  const n = d.slice(2);
+  return n.length === 11 ? `(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7)}` : `(${n.slice(0,2)}) ${n.slice(2,6)}-${n.slice(6)}`;
+}
+function lerCSV(txt){
+  const linha1 = txt.split(/\r?\n/)[0] || '';
+  const sep = (linha1.match(/;/g) || []).length > (linha1.match(/,/g) || []).length ? ';' : ',';
+  const linhas = []; let campo = '', linha = [], aspas = false;
+  for (let i = 0; i < txt.length; i++){
+    const c = txt[i];
+    if (aspas){ if (c === '"'){ if (txt[i+1] === '"'){ campo += '"'; i++ } else aspas = false } else campo += c }
+    else if (c === '"') aspas = true;
+    else if (c === sep){ linha.push(campo); campo = '' }
+    else if (c === '\n' || c === '\r'){ if (c === '\r' && txt[i+1] === '\n') i++; linha.push(campo); linhas.push(linha); linha = []; campo = '' }
+    else campo += c;
+  }
+  if (campo || linha.length){ linha.push(campo); linhas.push(linha) }
+  return linhas.filter(l => l.some(x => x.trim()));
+}
+function achaColuna(cab, testes){
+  const norm = cab.map(h => h.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim());
+  for (const t of testes){ const i = norm.findIndex(h => t(h)); if (i >= 0) return i }
+  return -1;
+}
+function montaDeLinhas(linhas){
+  const cab = linhas[0];
+  const iNome = achaColuna(cab, [h => h === 'nome', h => h.startsWith('nome') && !h.includes('empresa'), h => h.includes('name')]);
+  const iTel = achaColuna(cab, [h => h.includes('celular'), h => h.includes('telefone'), h => h.includes('fone'), h => h.includes('phone'), h => h.includes('whats')]);
+  if (iNome < 0 || iTel < 0) return null;
+  return linhas.slice(1).map(l => ({ nome: (l[iNome] || '').trim(), tel: telefone(l[iTel]) })).filter(c => c.nome);
+}
+function montaColado(txt){
+  return txt.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => {
+    const m = l.match(/^(.*?)[;,\t]\s*([\d()\s+\-.]{8,})$/) || l.match(/^(.*?)\s+([\d()\s+\-.]{8,})$/);
+    return m ? { nome: m[1].trim(), tel: telefone(m[2]) } : { nome: l, tel: '' };
+  }).filter(c => c.nome);
+}
+function semRepetir(lista){
+  const vistos = new Set();
+  return lista.filter(c => { const k = c.tel || c.nome; if (vistos.has(k)) return false; vistos.add(k); return true })
+              .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+}
+function carregou(lista, origem){
+  clientes = semRepetir(lista);
+  const comTel = clientes.filter(c => c.tel).length;
+  $('statusLista').textContent = `${clientes.length} clientes carregadas (${origem}). ${comTel} com celular, ${clientes.length - comTel} sem celular na planilha.`;
+  desenha();
+}
+$('arquivo').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const buf = await f.arrayBuffer();
+  let txt = new TextDecoder('utf-8').decode(buf);
+  if (txt.includes('�')) txt = new TextDecoder('windows-1252').decode(buf);
+  txt = txt.replace(/^﻿/, '');
+  const lista = montaDeLinhas(lerCSV(txt));
+  if (!lista){ $('statusLista').textContent = 'Não achei as colunas de nome e telefone nesta planilha. Confira se é a exportação de Clientes da loja, ou cole nome e telefone no campo abaixo.'; return }
+  carregou(lista, f.name);
+});
+$('usarColado').addEventListener('click', () => {
+  const lista = montaColado($('colar').value);
+  if (!lista.length){ $('statusLista').textContent = 'Cole pelo menos uma linha com nome e telefone.'; return }
+  carregou(lista, 'lista colada');
+});
+
+const sel = $('qual');
+MSGS.forEach(m => { const o = document.createElement('option'); o.value = m.id; o.textContent = `${m.quando} · ${m.titulo}`; sel.appendChild(o) });
+function msgAtual(){ return MSGS.find(m => m.id === sel.value) }
+function carregaTexto(){
+  const m = msgAtual();
+  $('texto').value = guarda.get('texto_' + m.id, m.texto);
+  $('praQuem').textContent = 'Para quem: ' + m.pra;
+  guarda.set('ultima', m.id);
+  desenha();
+}
+sel.value = guarda.get('ultima', MSGS[0].id);
+if (!msgAtual()) sel.value = MSGS[0].id;
+sel.addEventListener('change', carregaTexto);
+$('texto').addEventListener('input', () => { guarda.set('texto_' + sel.value, $('texto').value); desenha() });
+$('restaurar').addEventListener('click', () => { const m = msgAtual(); $('texto').value = m.texto; guarda.set('texto_' + m.id, m.texto); desenha() });
+
+function enviados(){ return guarda.get('enviados_' + sel.value, {}) }
+function marca(k){ const e = enviados(); e[k] = Date.now(); guarda.set('enviados_' + sel.value, e) }
+$('zerar').addEventListener('click', () => { guarda.set('enviados_' + sel.value, {}); desenha() });
+
+function desenha(){
+  const box = $('lista');
+  if (!clientes.length){ $('placar').textContent = ''; return }
+  const e = enviados(), texto = $('texto').value;
+  box.innerHTML = '';
+  let feitos = 0, comTel = 0;
+  clientes.forEach(c => {
+    const k = c.tel || c.nome, ok = !!e[k];
+    if (c.tel) comTel++; if (ok) feitos++;
+    const row = document.createElement('div'); row.className = 'cli' + (ok ? ' enviado' : '');
+    const quem = document.createElement('div'); quem.className = 'quem';
+    const n = document.createElement('span'); n.className = 'nome'; n.textContent = c.nome;
+    const t = document.createElement('span'); t.className = 'tel'; t.textContent = c.tel ? mostraTel(c.tel) : '';
+    quem.append(n, t);
+    const acoes = document.createElement('div'); acoes.className = 'acoes';
+    if (c.tel){
+      const a = document.createElement('a'); a.className = 'zap' + (ok ? ' feito' : '');
+      a.href = 'https://wa.me/' + c.tel + '?text=' + encodeURIComponent(texto.split('{nome}').join(primeiroNome(c.nome)));
+      a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = ok ? 'Enviada ✓ abrir de novo' : 'Abrir WhatsApp';
+      a.addEventListener('click', () => { marca(k); setTimeout(desenha, 300) });
+      acoes.append(a);
+    } else {
+      const s = document.createElement('span'); s.className = 'sem'; s.textContent = 'sem celular'; acoes.append(s);
+    }
+    row.append(quem, acoes); box.append(row);
+  });
+  $('placar').textContent = `${feitos} de ${comTel} enviadas`;
+}
+carregaTexto();
+</script>
+</body>
+</html>
