@@ -128,7 +128,7 @@ select.filtro{padding:10px 30px 10px 12px;border:1px solid var(--linha);border-r
 .mais{display:block;margin:14px auto 0}
 
 /* funil */
-.funil{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow-x:auto;padding-bottom:10px;align-items:start}
+.funil{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:12px;overflow-x:auto;padding-bottom:10px;align-items:start}
 .coluna{background:#EFE9E0;border-radius:var(--raio);padding:10px;min-height:200px}
 .coluna.sobre{outline:2px dashed var(--musgo2);outline-offset:-2px;background:#E9E6DC}
 .coluna h4{margin:4px 6px 10px;font-size:13px;display:flex;align-items:center;gap:8px;font-weight:600}
@@ -208,6 +208,7 @@ select.filtro{padding:10px 30px 10px 12px;border:1px solid var(--linha);border-r
 /* navegação de baixo (celular) */
 .nav-baixo{display:none}
 .so-cel{display:none}
+.dica-cel{display:none}
 
 @media (max-width:1100px){
   .grade-kpi{grid-template-columns:repeat(2,1fr)}
@@ -239,6 +240,7 @@ select.filtro{padding:10px 30px 10px 12px;border:1px solid var(--linha);border-r
   .funil{grid-template-columns:repeat(5,82%);scroll-snap-type:x mandatory}
   .coluna{scroll-snap-align:start}
   .card select{display:block}
+  .dica-cel{display:inline}
   .campos{grid-template-columns:1fr}
   .barras .linha-b{grid-template-columns:100px 1fr 30px}
   .resumo-imp b{font-size:24px}
@@ -320,7 +322,7 @@ select.filtro{padding:10px 30px 10px 12px;border:1px solid var(--linha);border-r
     <!-- FUNIL -->
     <section data-sec="funil" class="oculto">
       <div class="topo">
-        <div><h2>Funil</h2><div class="sub">Arraste o card para mudar a situação <span class="so-cel" style="display:inline">· no celular use a setinha do card</span></div></div>
+        <div><h2>Funil</h2><div class="sub">Arraste o card para mudar a situação <span class="dica-cel">· no celular, use a setinha do card</span></div></div>
         <div class="acoes"><select class="filtro" id="fFunilEt"></select></div>
       </div>
       <div class="funil" id="funil"></div>
@@ -528,7 +530,7 @@ function renderPainel(){
   const rec = [...contatos].sort((a,b) => (b.entrada||'').localeCompare(a.entrada||'') || (b.criado||'').localeCompare(a.criado||'')).slice(0,6);
   $('listaRecentes').innerHTML = rec.length ? rec.map(c => itemMini(c, (c.origem||'—') + ' · ' + quando(c.entrada))).join('') : '<div class="vazio">Nenhum contato ainda.<br>Comece em <b>Novo contato</b> ou <b>Importar da loja</b>.</div>';
   barras('barrasOrigem', contatos.map(c => c.origem || 'Sem origem'), '#55654A');
-  barras('barrasInteresse', contatos.map(c => c.interesse).filter(Boolean), '#50678F');
+  barras('barrasInteresse', contatos.map(c => c.interesse).filter(Boolean), '#50678F', 'Preencha o Interesse na ficha das clientes para ver aqui');
   ligarMini();
 }
 function itemMini(c, det, zap){
@@ -536,11 +538,11 @@ function itemMini(c, det, zap){
   return `<div class="item" data-id="${esc(c.chave)}"><div class="av" style="background:${corAv(c.chave)}">${esc(iniciais(c.nome))}</div><div><div class="nome-l">${esc(c.nome||'Sem nome')}</div><div class="peq-t">${esc(det)}</div></div>${z}</div>`;
 }
 function ligarMini(){ document.querySelectorAll('.lista-mini .item').forEach(el => el.onclick = () => abrirFicha(el.dataset.id)) }
-function barras(id, valores, cor){
+function barras(id, valores, cor, vazio){
   const cont = {}; valores.forEach(v => cont[v] = (cont[v]||0)+1);
   const ord = Object.entries(cont).sort((a,b)=>b[1]-a[1]).slice(0,7);
   const max = ord.length ? ord[0][1] : 1;
-  $(id).innerHTML = ord.length ? ord.map(([k,v]) => `<div class="linha-b"><span>${esc(k)}</span><div class="trilho"><div class="enche" style="width:${Math.max(4,v/max*100)}%;background:${cor}"></div></div><span class="v">${v}</span></div>`).join('') : '<div class="vazio">Aparece aqui quando tiver contatos</div>';
+  $(id).innerHTML = ord.length ? ord.map(([k,v]) => `<div class="linha-b"><span>${esc(k)}</span><div class="trilho"><div class="enche" style="width:${Math.max(4,v/max*100)}%;background:${cor}"></div></div><span class="v">${v}</span></div>`).join('') : `<div class="vazio">${vazio || 'Aparece aqui quando tiver contatos'}</div>`;
 }
 
 /* ---------------- contatos ---------------- */
@@ -898,7 +900,7 @@ function analisarCSV(txt){
 $('btColar').onclick = () => {
   const regs = $('colar').value.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => {
     const m = l.match(/^(.*?)[\s,;:-]*((?:\+?\d[\d\s().-]{8,}\d))\s*$/);
-    return m ? {nome:m[1].trim(), tel:normTel(m[2]), email:''} : {nome:l, tel:'', email:''};
+    return m ? {nome:m[1].replace(/[\s(\-–,;:]+$/,'').trim(), tel:normTel(m[2]), email:''} : {nome:l, tel:'', email:''};
   });
   if(!regs.length){ toast('Cole pelo menos uma linha', true); return }
   prepararImport(regs, $('colarOrigem').value || 'WhatsApp', `${regs.length} linhas coladas`);
