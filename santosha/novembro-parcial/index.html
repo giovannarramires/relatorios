@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Santosha · Novembro até Agora</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: coluna única de leitura, mesma família visual do comparativo dez/jan; números → o que vende → pedido de vídeos */
+:root{
+  --bg:#f6f7f3; --surface:#ffffff; --fg:#1f2a24; --muted:#5f6b63; --line:#dde2da;
+  --accent:#3f6b52; --accent-soft:#e5eee7; --best:#9a6b3a; --best-soft:#f3e9dc; --up:#2f7a4c;
+  --display:"Fraunces", Georgia, serif; --body:"Figtree", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1c241f; --fg:#e6ebe6; --muted:#9aa69e; --line:#2e3832;
+  --accent:#8cc3a2; --accent-soft:#22302a; --best:#d6a46e; --best-soft:#352b20; --up:#7cc79a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1c241f; --fg:#e6ebe6; --muted:#9aa69e; --line:#2e3832;
+  --accent:#8cc3a2; --accent-soft:#22302a; --best:#d6a46e; --best-soft:#352b20; --up:#7cc79a; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:650;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.7rem);line-height:1.1}
+h2{font-size:1.45rem;line-height:1.2}
+h3{font-size:1.1rem;line-height:1.25}
+p{margin:0;max-width:66ch}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:grid;gap:12px}
+.lead{font-size:1.08rem;color:var(--muted)}
+section{display:grid;gap:16px}
+.note{font-size:.85rem;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:2px;min-width:0}
+.kpi .l{font-size:.82rem;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-size:1.9rem;font-weight:650;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:.85rem;color:var(--muted)}
+.kpi .s b{color:var(--up);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+tr.nov td{background:var(--accent-soft);font-weight:600}
+tr.best td:first-child::after{content:"melhor mês";margin-left:8px;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--best);background:var(--best-soft);padding:2px 7px;border-radius:4px;font-weight:600}
+ul.takes{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+ul.takes li{background:var(--accent-soft);border-radius:10px;padding:14px 18px}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:6px;align-content:start;min-width:0}
+.vid .n{font-family:var(--display);font-size:1.5rem;font-weight:650;font-variant-numeric:tabular-nums}
+.vid .t{font-weight:600}
+.vid .d{font-size:.9rem;color:var(--muted)}
+.ask{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:22px 24px;display:grid;gap:16px}
+.ask .when{display:flex;flex-wrap:wrap;gap:10px}
+.pill{display:inline-block;background:var(--accent);color:var(--bg);font-weight:600;font-size:.9rem;padding:4px 12px;border-radius:999px}
+.pill.soft{background:var(--accent-soft);color:var(--fg)}
+ol.pauta{margin:0;padding-left:22px;display:grid;gap:14px}
+ol.pauta li{max-width:68ch}
+ol.pauta b{font-weight:600}
+ol.pauta .why{display:block;font-size:.9rem;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.rule{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:.9rem}
+.rule b{display:block}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.foot{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Santosha · parcial de novembro · 1 a 9/11/2026</span>
+  <h1>Novembro começou com mais pedidos e a melhor conversão desde abril</h1>
+  <p class="lead">A promoção de novembro trouxe mais gente comprando. O próximo passo para o mês render como março e abril é aumentar o valor de cada pedido e colocar vídeos novos no ar antes da Black Friday.</p>
+</header>
+
+<section>
+  <div class="kpis">
+    <div class="kpi"><span class="l">Vendas brutas (1 a 9/11)</span><span class="v">R$ 15.269</span><span class="s"><b>+28%</b> sobre a média de ago–out nos mesmos dias</span></div>
+    <div class="kpi"><span class="l">Pedidos</span><span class="v">48</span><span class="s"><b>+49%</b> sobre a média de ago–out (32)</span></div>
+    <div class="kpi"><span class="l">Conversão da loja</span><span class="v">1,43%</span><span class="s"><b>acima</b> de ago–out (1,15% na média)</span></div>
+    <div class="kpi"><span class="l">Visitas que colocaram no carrinho</span><span class="v">7,5%</span><span class="s"><b>acima</b> de março e abril (5,4% a 5,9%)</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Os primeiros 9 dias de cada mês, lado a lado</h2>
+  <p>Comparamos com os mesmos dias de março e abril (os 2 melhores meses do ano) e de agosto, setembro e outubro (os últimos 3 meses).</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Dias 1 a 9</th><th>Vendas brutas</th><th>Pedidos</th><th>Pedido médio</th><th>Visitas</th><th>Conversão</th></tr></thead>
+    <tbody>
+      <tr class="best"><td>Março</td><td>R$ 10.514</td><td>28</td><td>R$ 364</td><td>3.222</td><td>0,80%</td></tr>
+      <tr class="best"><td>Abril</td><td>R$ 18.726</td><td>47</td><td>R$ 376</td><td>2.669</td><td>1,61%</td></tr>
+      <tr><td>Agosto</td><td>R$ 15.396</td><td>40</td><td>R$ 371</td><td>2.776</td><td>1,26%</td></tr>
+      <tr><td>Setembro</td><td>R$ 11.216</td><td>28</td><td>R$ 377</td><td>2.302</td><td>1,21%</td></tr>
+      <tr><td>Outubro</td><td>R$ 9.096</td><td>29</td><td>R$ 274</td><td>2.633</td><td>0,98%</td></tr>
+      <tr class="nov"><td>Novembro</td><td>R$ 15.269</td><td>48</td><td>R$ 264</td><td>3.354</td><td>1,43%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Meses fechados para referência: março R$ 72.109 · abril R$ 67.680 · agosto R$ 52.897 · setembro R$ 34.725 · outubro R$ 30.449. Mantido o ritmo atual, novembro fecha perto de R$ 51 mil.</p>
+</section>
+
+<section>
+  <h2>O que separa novembro de março e abril</h2>
+  <ul class="takes">
+    <li><b>O valor de cada pedido.</b> A promoção puxou muito e-book e pôster, que são a porta de entrada da marca: foram 56 e-books e 27 pôsteres em 9 dias. O pedido médio ficou em R$ 264. Nos melhores meses era R$ 370. Se os 48 pedidos tivessem esse valor, novembro teria uns R$ 5 mil a mais.</li>
+    <li><b>A reposição chega em dezembro.</b> Matosha Guia Solar e Guia Monstera, os MATravel, as Yoga Bags e o bloco voltam para a loja em dezembro, a tempo do Natal. Em março e abril, esses produtos somaram cerca de R$ 25 mil por mês. Até lá, o destaque fica com os tapetes à venda (Guia Lunar, You are the Sun, Yoginis e Mocha) e com os baralhos.</li>
+    <li><b>Os baralhos estão voltando.</b> Cartasanas e Cartasflow fizeram R$ 4.282 em 9 dias de novembro, acima do ritmo de agosto a outubro (cerca de R$ 3 mil a cada 9 dias). Com estoque, são a frente que mais pode crescer agora.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>O que vende nos anúncios: vídeo com o produto em uso</h2>
+  <p>De agosto até agora, os anúncios que mais trouxeram compras foram vídeos mostrando o produto na prática. E vídeo novo começa a vender rápido: os dois gravados em outubro venderam já nas primeiras semanas.</p>
+  <div class="vids">
+    <div class="vid"><span class="n">47 compras</span><span class="t">Vídeo dos tapetes</span><span class="d">R$ 23,1 mil em vendas. É o anúncio que mais vendeu desde agosto.</span></div>
+    <div class="vid"><span class="n">20 compras</span><span class="t">Vídeo do Manual de Sequências</span><span class="d">R$ 4,3 mil. Mostra o e-book por dentro e leva para os outros produtos.</span></div>
+    <div class="vid"><span class="n">18 compras</span><span class="t">Vídeo do Pôster Ashtanga no cantinho</span><span class="d">R$ 2,4 mil em menos de 3 semanas. Gravado em outubro.</span></div>
+    <div class="vid"><span class="n">17 compras</span><span class="t">Vídeo do Cartasflow nos stories</span><span class="d">R$ 5,6 mil. O campeão das cartas desde janeiro.</span></div>
+    <div class="vid"><span class="n">11 compras</span><span class="t">Depoimento de cliente com o MATravel</span><span class="d">R$ 4,4 mil. Voz de quem usa convence.</span></div>
+  </div>
+  <p class="note">Compras e vendas atribuídas pelo Meta, de 01/08 a 09/11/2026.</p>
+  <ul class="takes">
+    <li><b>Material novo também deixa o anúncio mais barato.</b> Em setembro, aparecer para mil pessoas custava R$ 32. Em outubro, com os vídeos novos no ar, voltou para R$ 21, e em novembro está em R$ 19. Com o mesmo investimento, a marca chega a mais gente.</li>
+  </ul>
+</section>
+
+<section class="ask">
+  <div class="when">
+    <span class="pill">Pedido: 6 vídeos novos, já editados</span>
+    <span class="pill soft">até terça, 18/11</span>
+    <span class="pill soft">Black Friday: 27/11</span>
+  </div>
+  <h2>Precisamos de vídeos novos para a Black Friday e o Natal</h2>
+  <p>O anúncio precisa de cerca de uma semana no ar para aprender a quem mostrar. Com os vídeos editados até 18/11, eles chegam prontos na Black Friday e seguem rendendo em dezembro, o mês mais forte do ano (R$ 86 mil em dezembro de 2025).</p>
+  <ol class="pauta">
+    <li><b>Tapete em uso, um vídeo por estampa à venda</b> (Guia Lunar, You are the Sun, Yoginis, Mocha). Abre com alguém praticando e termina na estampa de perto.
+      <span class="why">É o formato que mais vendeu e é o produto de maior valor.</span></li>
+    <li><b>"Três cartas, uma prática"</b> com o Cartasanas: embaralha, tira 3 cartas e faz as 3 posturas.
+      <span class="why">Os baralhos são a frente com estoque que mais pode crescer.</span></li>
+    <li><b>Kit de presente: tapete + cartas</b>, abrindo o pacote como presente de Natal.
+      <span class="why">Junta os dois produtos de maior valor num pedido só.</span></li>
+    <li><b>Cliente falando do produto</b>, gravado pelo celular dela: há quanto tempo usa, de que mais gosta, onde pratica.
+      <span class="why">O depoimento do MATravel é a prova de que funciona.</span></li>
+    <li><b>Prática em lugar bonito</b> com o tapete (praia, mirante, parque).
+      <span class="why">Foi o maior alcance do perfil e traz gente nova para a marca.</span></li>
+    <li><b>Cantinho de prática</b>: pendurar o pôster, acender a vela, desenrolar o tapete.
+      <span class="why">Repete o jeito do vídeo do pôster, que vendeu logo nas primeiras semanas, agora puxando o tapete junto.</span></li>
+  </ol>
+  <div class="rules">
+    <div class="rule"><b>Vertical 9:16, 9 a 20 s</b>celular em pé</div>
+    <div class="rule"><b>Abre com prática</b>gente em movimento nos 2 primeiros segundos</div>
+    <div class="rule"><b>Frase na tela no início</b>muita gente assiste sem som</div>
+    <div class="rule"><b>Luz natural</b>perto da janela ou ao ar livre</div>
+    <div class="rule"><b>Arquivo final limpo</b>sem marca d'água do CapCut ou do TikTok</div>
+  </div>
+  <p>Os roteiros cena a cena de cada formato estão na <a href="https://relatorios.giogrowthdigital.com.br/santosha/o-que-gravar/" target="_blank" rel="noopener">pauta de gravação</a>.</p>
+</section>
+
+<section>
+  <h2>O que a gente faz do nosso lado</h2>
+  <ul class="takes">
+    <li><b>Até 15/11:</b> seguimos com a promoção de novembro e damos mais peso aos tapetes e aos combos, para subir o valor do pedido.</li>
+    <li><b>Assim que os vídeos editados chegarem:</b> subimos no mesmo dia e lemos em 3 a 4 dias quais vendem, para entrar na Black Friday só com os melhores.</li>
+    <li><b>Na loja:</b> vale conferir se o e-mail de carrinho abandonado está ligado. Em novembro, muita gente chegou até o pagamento. Um lembrete traz parte dessas compras de volta.</li>
+  </ul>
+</section>
+
+<div class="foot">
+  <span>Fonte: relatórios da Shopify (vendas brutas, pedidos, visitas e conversão) e Meta Ads, consultados em 10/11/2026. Novembro considerado até 09/11.</span>
+  <span>Gio Growth Digital</span>
+</div>
+
+</div>
+
+</body>
+</html>
