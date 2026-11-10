@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#3F4A37">
+<title>Cal.maria · CRM</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#F7F3ED; --papel:#FFFFFF; --creme:#FBF8F3; --linha:#E9E1D5; --linha2:#F1EBE2;
+  --tinta:#2F2A24; --suave:#7A7065; --fraco:#A79D91;
+  --musgo:#3F4A37; --musgo2:#55654A; --musgo-claro:#E7ECE1;
+  --terra:#BF6A45; --terra-claro:#F6E6DD;
+  --lilas:#50678F; --lilas-claro:#E6E9F2;
+  --ocre:#C89640; --ocre-claro:#F7EEDC;
+  --zap:#1F8F4E; --zap-claro:#E3F3E9;
+  --cinza-claro:#EFECE8;
+  --sombra:0 1px 2px rgba(47,42,36,.05),0 4px 16px rgba(47,42,36,.06);
+  --raio:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--fundo);color:var(--tinta);font-size:14.5px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.2px;margin:0}
+.oculto{display:none!important}
+
+/* ---------- entrada ---------- */
+#entrada{min-height:100%;display:grid;place-items:center;padding:24px;background:
+  radial-gradient(1200px 600px at 10% -10%,#E7ECE1 0,transparent 60%),
+  radial-gradient(900px 500px at 110% 110%,#E6E9F2 0,transparent 55%),var(--fundo)}
+.cartao-entrada{width:100%;max-width:380px;background:var(--papel);border-radius:22px;box-shadow:var(--sombra);padding:36px 28px 28px;text-align:center}
+.cartao-entrada img{width:96px;height:96px;border-radius:50%}
+.cartao-entrada h1{font-size:34px;margin:14px 0 4px;color:var(--musgo)}
+.cartao-entrada p{color:var(--suave);margin:0 0 22px}
+.cartao-entrada input{width:100%;padding:13px 14px;border:1px solid var(--linha);border-radius:12px;background:var(--creme);text-align:center;font-size:16px;letter-spacing:.5px}
+.cartao-entrada input:focus{outline:2px solid var(--musgo2);outline-offset:1px}
+.cartao-entrada .erro{color:var(--terra);font-size:13px;min-height:20px;margin-top:8px}
+
+/* ---------- estrutura ---------- */
+#app{display:grid;grid-template-columns:240px 1fr;min-height:100%}
+.lateral{background:var(--musgo);color:#EFEBE3;padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.marca{display:flex;align-items:center;gap:10px;padding:4px 8px 22px}
+.marca img{width:42px;height:42px;border-radius:50%}
+.marca b{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;display:block;line-height:1}
+.marca span{font-size:11.5px;opacity:.7;letter-spacing:1.4px;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;cursor:pointer;color:#E3DED4;border:0;background:none;width:100%;text-align:left;font-weight:500}
+.nav svg{width:18px;height:18px;flex:none;opacity:.85}
+.nav:hover{background:rgba(255,255,255,.07)}
+.nav.ativo{background:rgba(255,255,255,.13);color:#fff}
+.nav .qt{margin-left:auto;font-size:11.5px;background:rgba(255,255,255,.14);padding:1px 8px;border-radius:20px}
+.lateral .rodape{margin-top:auto;font-size:12px;opacity:.65;padding:8px 12px;line-height:1.5}
+.lateral .rodape button{background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+main{padding:28px 32px 60px;min-width:0}
+.topo{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.topo h2{font-size:34px;color:var(--musgo);line-height:1}
+.topo .sub{color:var(--suave);margin-top:6px}
+.acoes{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- componentes ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--linha);background:var(--papel);padding:9px 14px;border-radius:10px;cursor:pointer;font-weight:500;white-space:nowrap;text-decoration:none;color:var(--tinta)}
+.btn:hover{border-color:#D6CBBB}
+.btn svg{width:16px;height:16px}
+.btn.prim{background:var(--musgo);border-color:var(--musgo);color:#fff}
+.btn.prim:hover{background:var(--musgo2)}
+.btn.zap{background:var(--zap);border-color:var(--zap);color:#fff}
+.btn.perigo{color:var(--terra);border-color:#EBCDBF}
+.btn.peq{padding:6px 10px;font-size:13px;border-radius:8px}
+.btn:disabled{opacity:.5;cursor:default}
+.painel{background:var(--papel);border-radius:var(--raio);box-shadow:var(--sombra);padding:20px}
+.painel h3{font-size:21px;color:var(--musgo);margin-bottom:12px}
+.grade-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:var(--papel);border-radius:var(--raio);box-shadow:var(--sombra);padding:18px 18px 16px;position:relative;overflow:hidden}
+.kpi .rot{font-size:12.5px;color:var(--suave);font-weight:500}
+.kpi .num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;line-height:1.05;margin-top:6px}
+.kpi .det{font-size:12.5px;color:var(--fraco)}
+.kpi::after{content:"";position:absolute;right:-18px;top:-18px;width:70px;height:70px;border-radius:50%;background:var(--c,var(--musgo-claro));opacity:.7}
+.duas{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:14px}
+.barras .linha-b{display:grid;grid-template-columns:130px 1fr 34px;align-items:center;gap:10px;margin:7px 0;font-size:13.5px}
+.barras .trilho{height:9px;background:var(--linha2);border-radius:9px;overflow:hidden}
+.barras .enche{height:100%;border-radius:9px;background:var(--musgo2)}
+.barras .v{text-align:right;color:var(--suave);font-variant-numeric:tabular-nums}
+.vazio{color:var(--fraco);text-align:center;padding:26px 10px}
+.lista-mini .item{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--linha2);cursor:pointer}
+.lista-mini .item:last-child{border-bottom:0}
+.lista-mini .item:hover{background:var(--creme)}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13.5px;flex:none;color:#fff}
+.nome-l{font-weight:600}
+.peq-t{font-size:12.5px;color:var(--suave)}
+.dir{margin-left:auto;text-align:right}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:500;background:var(--cinza-claro);color:var(--suave);white-space:nowrap}
+.chip.s-novo{background:var(--lilas-claro);color:var(--lilas)}
+.chip.s-conversando{background:var(--ocre-claro);color:#9A6F22}
+.chip.s-comprou{background:var(--zap-claro);color:var(--zap)}
+.chip.s-recorrente{background:var(--musgo-claro);color:var(--musgo)}
+.chip.s-naoquer{background:var(--terra-claro);color:var(--terra)}
+.chip.et{background:var(--creme);border:1px solid var(--linha);color:var(--tinta)}
+.chip.loja{background:#EEF0F6;color:var(--lilas)}
+
+/* filtros */
+.barra-filtros{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.busca{flex:1;min-width:220px;position:relative}
+.busca input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--linha);border-radius:11px;background:var(--papel)}
+.busca svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--fraco)}
+select.filtro{padding:10px 30px 10px 12px;border:1px solid var(--linha);border-radius:11px;background:var(--papel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A7065' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 11px center;appearance:none;-webkit-appearance:none;max-width:190px}
+.contagem{color:var(--suave);font-size:13px;margin:0 0 10px 2px}
+
+/* tabela de contatos */
+.tabela{background:var(--papel);border-radius:var(--raio);box-shadow:var(--sombra);overflow:hidden}
+.tl{display:grid;grid-template-columns:minmax(200px,1.6fr) 150px 140px 1.2fr 110px 92px;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--linha2)}
+.tl.cab{font-size:12px;color:var(--fraco);font-weight:600;text-transform:uppercase;letter-spacing:.6px;background:var(--creme)}
+.tl.lin{cursor:pointer}
+.tl.lin:hover{background:var(--creme)}
+.tl .quem{display:flex;align-items:center;gap:11px;min-width:0}
+.tl .quem div{min-width:0}
+.tl .quem .nome-l,.tl .quem .peq-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ets{display:flex;gap:4px;flex-wrap:wrap}
+.zapb{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--zap-claro);color:var(--zap);border:0;cursor:pointer;text-decoration:none}
+.zapb svg{width:17px;height:17px}
+.zapb.off{background:var(--cinza-claro);color:var(--fraco);pointer-events:none}
+.mais{display:block;margin:14px auto 0}
+
+/* funil */
+.funil{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow-x:auto;padding-bottom:10px;align-items:start}
+.coluna{background:#EFE9E0;border-radius:var(--raio);padding:10px;min-height:200px}
+.coluna.sobre{outline:2px dashed var(--musgo2);outline-offset:-2px;background:#E9E6DC}
+.coluna h4{margin:4px 6px 10px;font-size:13px;display:flex;align-items:center;gap:8px;font-weight:600}
+.coluna h4 .bol{width:9px;height:9px;border-radius:50%}
+.coluna h4 .qt{margin-left:auto;color:var(--suave);font-weight:500}
+.card{background:var(--papel);border-radius:11px;padding:11px 12px;margin-bottom:8px;box-shadow:0 1px 2px rgba(47,42,36,.06);cursor:grab;border:1px solid transparent}
+.card:hover{border-color:var(--linha)}
+.card.arrastando{opacity:.45}
+.card .nome-l{font-size:14px}
+.card .rod{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.card select{margin-left:auto;font-size:12px;border:1px solid var(--linha);border-radius:7px;padding:3px 4px;background:var(--creme);display:none}
+.coluna .mais-c{font-size:12.5px;color:var(--suave);text-align:center;padding:6px}
+
+/* campanhas */
+.camp-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.camp{background:var(--papel);border-radius:var(--raio);box-shadow:var(--sombra);padding:18px;cursor:pointer;display:flex;flex-direction:column;gap:8px;border:1px solid transparent}
+.camp:hover{border-color:var(--linha)}
+.camp h3{font-size:21px;color:var(--musgo)}
+.prog{height:8px;background:var(--linha2);border-radius:8px;overflow:hidden}
+.prog div{height:100%;background:var(--zap);border-radius:8px}
+.camp-nova{border:1.5px dashed #D3C7B6;background:transparent;box-shadow:none;align-items:center;justify-content:center;color:var(--suave);min-height:150px;font-weight:500}
+.envio{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--linha2)}
+.envio.feito .nome-l{color:var(--fraco);text-decoration:line-through}
+.msg-prev{white-space:pre-wrap;background:#E7F6EC;border-radius:12px 12px 12px 3px;padding:12px 14px;font-size:13.5px;max-height:260px;overflow:auto}
+
+/* importar */
+.solta{border:2px dashed #D3C7B6;border-radius:var(--raio);padding:36px 20px;text-align:center;background:var(--papel);cursor:pointer;transition:.15s}
+.solta.sobre{border-color:var(--musgo2);background:var(--musgo-claro)}
+.solta svg{width:38px;height:38px;color:var(--musgo2)}
+.solta b{display:block;font-size:16px;margin:8px 0 4px}
+.passos{counter-reset:p;list-style:none;padding:0;margin:0}
+.passos li{counter-increment:p;position:relative;padding:4px 0 10px 38px}
+.passos li::before{content:counter(p);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:var(--musgo-claro);color:var(--musgo);display:grid;place-items:center;font-weight:600;font-size:13px}
+.resumo-imp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.resumo-imp div{background:var(--creme);border-radius:11px;padding:12px;text-align:center}
+.resumo-imp b{font-family:'Cormorant Garamond',serif;font-size:30px;display:block;line-height:1.1}
+
+/* gaveta (ficha) */
+.veu{position:fixed;inset:0;background:rgba(47,42,36,.32);z-index:40;opacity:0;pointer-events:none;transition:.2s}
+.veu.aberto{opacity:1;pointer-events:auto}
+.gaveta{position:fixed;top:0;right:0;height:100%;width:min(520px,100%);background:var(--fundo);z-index:41;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(47,42,36,.15)}
+.gaveta.aberto{transform:none}
+.g-topo{padding:20px 22px 16px;background:var(--papel);border-bottom:1px solid var(--linha);display:flex;align-items:center;gap:14px}
+.g-topo .av{width:48px;height:48px;font-size:17px}
+.g-topo h3{font-size:26px;color:var(--musgo);line-height:1.1}
+.g-fecha{margin-left:auto;border:0;background:var(--creme);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;color:var(--suave);flex:none}
+.g-corpo{padding:18px 22px;overflow:auto;flex:1}
+.g-pe{padding:14px 22px;background:var(--papel);border-top:1px solid var(--linha);display:flex;gap:8px;align-items:center}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campo{display:flex;flex-direction:column;gap:5px}
+.campo.cheio{grid-column:1/-1}
+.campo label{font-size:12px;font-weight:600;color:var(--suave)}
+.campo input,.campo select,.campo textarea{padding:10px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--papel);width:100%}
+.campo textarea{min-height:70px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:2px solid var(--musgo2);outline-offset:-1px;border-color:transparent}
+.aviso{background:var(--ocre-claro);color:#8A6420;padding:9px 12px;border-radius:10px;font-size:13px;margin-top:10px}
+.sec{margin-top:22px}
+.sec h4{font-size:12px;font-weight:600;color:var(--suave);text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.hist{border-left:2px solid var(--linha);margin-left:6px;padding-left:16px}
+.hist .h{position:relative;margin-bottom:12px}
+.hist .h::before{content:"";position:absolute;left:-22px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--musgo2);border:2px solid var(--fundo)}
+.hist .h .d{font-size:12px;color:var(--fraco)}
+.add-hist{display:flex;gap:8px;margin-bottom:14px}
+.add-hist input{flex:1;padding:9px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--papel)}
+.etiq-in{display:flex;flex-wrap:wrap;gap:6px;padding:7px;border:1px solid var(--linha);border-radius:10px;background:var(--papel);align-items:center}
+.etiq-in input{border:0;outline:0;flex:1;min-width:100px;padding:3px;background:transparent}
+.etiq-in .chip button{border:0;background:none;cursor:pointer;color:var(--fraco);padding:0 0 0 2px;font-size:14px;line-height:1}
+
+/* aviso flutuante */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--musgo);color:#fff;padding:11px 18px;border-radius:12px;box-shadow:var(--sombra);opacity:0;transition:.25s;z-index:60;font-weight:500;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.toast.erro{background:var(--terra)}
+.carregando{display:grid;place-items:center;padding:60px;color:var(--suave)}
+.giro{width:26px;height:26px;border:3px solid var(--linha);border-top-color:var(--musgo2);border-radius:50%;animation:g 0.8s linear infinite;margin:0 auto 10px}
+@keyframes g{to{transform:rotate(360deg)}}
+
+/* navegação de baixo (celular) */
+.nav-baixo{display:none}
+.so-cel{display:none}
+
+@media (max-width:1100px){
+  .grade-kpi{grid-template-columns:repeat(2,1fr)}
+  .duas{grid-template-columns:1fr}
+  .tl{grid-template-columns:minmax(180px,1.6fr) 140px 1fr 92px}
+  .tl .c-origem,.tl .c-ets{display:none}
+}
+@media (max-width:760px){
+  #app{grid-template-columns:1fr}
+  .lateral{display:none}
+  main{padding:18px 16px calc(92px + env(safe-area-inset-bottom))}
+  .topo h2{font-size:30px}
+  .so-cel{display:flex}
+  .cab-cel{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .cab-cel img{width:34px;height:34px;border-radius:50%}
+  .cab-cel b{font-family:'Cormorant Garamond',serif;font-size:21px}
+  .cab-cel button{margin-left:auto}
+  .nav-baixo{display:flex;position:fixed;left:0;right:0;bottom:0;background:var(--papel);border-top:1px solid var(--linha);z-index:30;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .nav-baixo button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--fraco);padding:6px 0;cursor:pointer}
+  .nav-baixo button svg{width:21px;height:21px}
+  .nav-baixo button.ativo{color:var(--musgo)}
+  .grade-kpi{gap:10px}
+  .kpi{padding:14px}
+  .kpi .num{font-size:34px}
+  .tabela{background:none;box-shadow:none}
+  .tl.cab{display:none}
+  .tl.lin{grid-template-columns:1fr auto auto;background:var(--papel);border-radius:12px;margin-bottom:8px;border:0;box-shadow:0 1px 2px rgba(47,42,36,.05)}
+  .tl .c-tel{display:none}
+  .funil{grid-template-columns:repeat(5,82%);scroll-snap-type:x mandatory}
+  .coluna{scroll-snap-align:start}
+  .card select{display:block}
+  .campos{grid-template-columns:1fr}
+  .barras .linha-b{grid-template-columns:100px 1fr 30px}
+  .resumo-imp b{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ENTRADA ============ -->
+<section id="entrada">
+  <form class="cartao-entrada" id="formEntrada">
+    <img src="logo.png" alt="Cal.maria">
+    <h1>Clientes Cal.maria</h1>
+    <p>Digite o código de acesso para entrar</p>
+    <input id="codigo" type="password" autocomplete="current-password" placeholder="código de acesso" required>
+    <div class="erro" id="erroEntrada"></div>
+    <button class="btn prim" style="width:100%;justify-content:center;padding:12px" id="btEntrar">Entrar</button>
+  </form>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" class="oculto">
+  <aside class="lateral">
+    <div class="marca"><img src="logo.png" alt=""><div><b>Cal.maria</b><span>Clientes</span></div></div>
+    <button class="nav" data-tela="painel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Painel</button>
+    <button class="nav" data-tela="contatos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg>Contatos<span class="qt" id="qtContatos">0</span></button>
+    <button class="nav" data-tela="funil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Funil</button>
+    <button class="nav" data-tela="campanhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/></svg>Campanhas</button>
+    <button class="nav" data-tela="importar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Importar da loja</button>
+    <div class="rodape">Os dados ficam salvos na nuvem e aparecem iguais no celular e no computador.<br><button id="btSair">Sair deste aparelho</button></div>
+  </aside>
+
+  <main>
+    <div class="cab-cel so-cel"><img src="logo.png" alt=""><b>Cal.maria</b><button class="btn prim peq" data-novo>+ Contato</button></div>
+
+    <!-- PAINEL -->
+    <section data-sec="painel">
+      <div class="topo">
+        <div><h2 id="saudacao">Olá, Tati</h2><div class="sub" id="dataHoje"></div></div>
+        <div class="acoes"><button class="btn prim" data-novo><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Novo contato</button></div>
+      </div>
+      <div class="grade-kpi">
+        <div class="kpi" style="--c:var(--musgo-claro)"><div class="rot">Contatos</div><div class="num" id="kTotal">0</div><div class="det" id="kTotalDet"></div></div>
+        <div class="kpi" style="--c:var(--lilas-claro)"><div class="rot">Novos nos últimos 7 dias</div><div class="num" id="kNovos">0</div><div class="det">entraram na lista</div></div>
+        <div class="kpi" style="--c:var(--ocre-claro)"><div class="rot">Em conversa</div><div class="num" id="kConv">0</div><div class="det" id="kConvDet"></div></div>
+        <div class="kpi" style="--c:var(--zap-claro)"><div class="rot">Já compraram</div><div class="num" id="kComp">0</div><div class="det" id="kCompDet"></div></div>
+      </div>
+      <div class="duas">
+        <div class="painel"><h3>Precisam de retorno</h3><div class="peq-t" style="margin:-6px 0 8px">Em conversa e sem contato há mais de 5 dias</div><div class="lista-mini" id="listaRetorno"></div></div>
+        <div class="painel"><h3>De onde vêm</h3><div class="barras" id="barrasOrigem"></div></div>
+      </div>
+      <div class="duas">
+        <div class="painel"><h3>Entraram por último</h3><div class="lista-mini" id="listaRecentes"></div></div>
+        <div class="painel"><h3>O que procuram</h3><div class="barras" id="barrasInteresse"></div></div>
+      </div>
+    </section>
+
+    <!-- CONTATOS -->
+    <section data-sec="contatos" class="oculto">
+      <div class="topo">
+        <div><h2>Contatos</h2><div class="sub">Todo mundo do WhatsApp, Instagram, indicações e da loja num lugar só</div></div>
+        <div class="acoes">
+          <button class="btn" id="btExportar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15V3m0 0-4 4m4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Baixar planilha</button>
+          <button class="btn prim" data-novo><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Novo contato</button>
+        </div>
+      </div>
+      <div class="barra-filtros">
+        <div class="busca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="busca" placeholder="Buscar por nome, telefone, e-mail ou anotação"></div>
+        <select class="filtro" id="fSituacao"></select>
+        <select class="filtro" id="fOrigem"></select>
+        <select class="filtro" id="fInteresse"></select>
+        <select class="filtro" id="fEtiqueta"></select>
+      </div>
+      <div class="contagem" id="contagem"></div>
+      <div class="tabela" id="tabela"></div>
+      <button class="btn mais oculto" id="btMais">Mostrar mais</button>
+    </section>
+
+    <!-- FUNIL -->
+    <section data-sec="funil" class="oculto">
+      <div class="topo">
+        <div><h2>Funil</h2><div class="sub">Arraste o card para mudar a situação <span class="so-cel" style="display:inline">· no celular use a setinha do card</span></div></div>
+        <div class="acoes"><select class="filtro" id="fFunilEt"></select></div>
+      </div>
+      <div class="funil" id="funil"></div>
+    </section>
+
+    <!-- CAMPANHAS -->
+    <section data-sec="campanhas" class="oculto">
+      <div id="campLista">
+        <div class="topo">
+          <div><h2>Campanhas</h2><div class="sub">Escolha quem recebe, escreva a mensagem e mande uma por uma no WhatsApp</div></div>
+        </div>
+        <div class="camp-grade" id="campGrade"></div>
+      </div>
+      <div id="campDet" class="oculto"></div>
+    </section>
+
+    <!-- IMPORTAR -->
+    <section data-sec="importar" class="oculto">
+      <div class="topo"><div><h2>Importar da loja</h2><div class="sub">Traga as clientes da Nuvemshop sem digitar e sem duplicar ninguém</div></div></div>
+      <div class="duas">
+        <div>
+          <label class="solta" id="solta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15V4m0 0-4 4m4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+            <b>Solte aqui o arquivo da Nuvemshop</b>
+            <span class="peq-t">ou toque para escolher (.csv)</span>
+            <input type="file" id="arquivo" accept=".csv,text/csv,text/plain" class="oculto">
+          </label>
+          <div id="previa"></div>
+        </div>
+        <div class="painel">
+          <h3>Como baixar a lista na Nuvemshop</h3>
+          <ol class="passos">
+            <li>Entre no painel da loja e clique em <b>Clientes</b>.</li>
+            <li>Clique em <b>Exportar lista</b> (no topo da página) e baixe o arquivo.</li>
+            <li>Volte aqui e solte o arquivo no quadro ao lado.</li>
+            <li>Confira o resumo e clique em <b>Importar</b>.</li>
+          </ol>
+          <p class="peq-t" style="margin:6px 0 0">Pode repetir sempre que quiser (sugestão: toda segunda). Quem já está na lista é atualizado, e as anotações e etiquetas que você colocou ficam como estão.</p>
+          <div class="sec">
+            <h4>Ou cole uma lista</h4>
+            <textarea id="colar" style="width:100%;min-height:100px;padding:10px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--papel)" placeholder="Um contato por linha: nome e telefone&#10;Ex.: Maria Souza 11 99999-0000"></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+              <select class="filtro" id="colarOrigem"></select>
+              <button class="btn" id="btColar">Ver resumo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="nav-baixo">
+    <button data-tela="painel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Painel</button>
+    <button data-tela="contatos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg>Contatos</button>
+    <button data-tela="funil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Funil</button>
+    <button data-tela="campanhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/></svg>Campanhas</button>
+    <button data-tela="importar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Importar</button>
+  </nav>
+</div>
+
+<!-- ficha do contato -->
+<div class="veu" id="veu"></div>
+<aside class="gaveta" id="gaveta" aria-hidden="true"></aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://n8n.giogrowthdigital.com.br/webhook/crm-calmaria-ef5d15c82289d7da3e563f1a';
+const SITUACOES = [
+  {v:'Novo', c:'s-novo', cor:'#50678F'},
+  {v:'Conversando', c:'s-conversando', cor:'#C89640'},
+  {v:'Comprou', c:'s-comprou', cor:'#1F8F4E'},
+  {v:'Cliente recorrente', c:'s-recorrente', cor:'#3F4A37'},
+  {v:'Não quer receber', c:'s-naoquer', cor:'#BF6A45'},
+];
+const ORIGENS = ['WhatsApp','Instagram','Indicação','Aula / estúdio','Professora parceira','Feira / evento','Retirada / loja física','Site','Outro'];
+const INTERESSES = ['Zafu','Meia lua','Bolster','Mini bolster','Kit zafu + zabuton','Descanso de olhos','Bolsa porta-mat','Tapete','Kit Natal','Atacado / estúdio','Vários','Outro'];
+const CORES_AV = ['#55654A','#50678F','#BF6A45','#C89640','#7B6A8F','#4E8A7A','#8A5A44'];
+const MODELOS = [
+  {titulo:'Mês de Black (abertura)', texto:'Oi, {nome}! Aqui é a Tati, da Cal.maria 🌿\n\nComeçou o Mês de Black na Cal.maria: até 30/11, 15% OFF em tudo do site.\n• Zafu: R$ 152,07\n• Zafu meia lua: R$ 161,42\n• Bolster: R$ 194,57\n• Mini bolster: R$ 118,07\n• Kit zafu + zabuton: R$ 266,90\n• Descanso para os olhos: R$ 44,20\n• Bolsa porta-mat: R$ 102,00\n\nÉ só entrar no site: www.vivacalmaria.com.br\n\nCada peça sai do nosso ateliê em pouca quantidade, então o estoque de cada cor é pequeno. Se tiver dúvida de tamanho ou cor, me chama aqui mesmo.'},
+  {titulo:'Lembrete Black (até 30/11)', texto:'{nome}, passando para lembrar: o Mês de Black da Cal.maria segue até 30/11, com 15% OFF em tudo.\n\nSe for presente de Natal, comprando agora chega com folga 🎁\n\nwww.vivacalmaria.com.br'},
+  {titulo:'Hoje é Black Friday', texto:'Bom dia, {nome}! Hoje é Black Friday na Cal.maria 🖤\n\nOs 15% OFF seguem até segunda (30/11).\n\nUma ideia que as clientes gostam: o bolster para o relaxamento no fim da prática, ou o descanso para os olhos com ervas para a meditação deitada.\n\nwww.vivacalmaria.com.br'},
+  {titulo:'Último dia da Black', texto:'{nome}, passando só para avisar: hoje é o último dia dos 15% OFF na Cal.maria.\n\nSe quiser, eu te ajudo a escolher a cor ou o modelo por aqui 🙂\n\nwww.vivacalmaria.com.br'},
+  {titulo:'Presente de Natal', texto:'Oi, {nome}! Tati da Cal.maria aqui 🎄\n\nSe você tem alguém que medita, pratica yoga ou só precisa desacelerar, este ano dá para presentear com calma.\n\nO Kit Natal Tempo de Cal.maria (R$ 263,90) vem pronto para presente, e é uma edição pequena.\n\nTambém dá para presentear com um zafu, um mini bolster ou o descanso para os olhos com ervas.\n\nwww.vivacalmaria.com.br'},
+  {titulo:'Recompra (60 dias depois)', texto:'Oi, {nome}! Como está o seu zafu? 🙂\n\nMuitas clientes completam a prática com o zabuton embaixo (protege os joelhos e tornozelos no chão) ou com o bolster para o relaxamento no final.\n\nSe quiser ver: www.vivacalmaria.com.br'},
+  {titulo:'Mensagem livre', texto:'Oi, {nome}! Aqui é a Tati, da Cal.maria 🌿\n\n'},
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let codigo = '';
+let contatos = [];      // registros tipo contato
+let campanhas = [];     // registros tipo campanha
+let tela = 'painel';
+let limite = 60;
+let fichaAtual = null;
+
+/* ---------------- utilidades ---------------- */
+function hojeISO(){ const d = new Date(); return new Date(d - d.getTimezoneOffset()*6e4).toISOString().slice(0,10) }
+function dataBR(iso){ if(!iso) return ''; const [a,m,d] = iso.slice(0,10).split('-'); return `${d}/${m}/${a}` }
+function diasDesde(iso){ if(!iso) return 9999; return Math.floor((new Date(hojeISO()) - new Date(iso.slice(0,10)))/864e5) }
+function quando(iso){ const n = diasDesde(iso); if(n>=9999) return ''; if(n<=0) return 'hoje'; if(n===1) return 'ontem'; if(n<30) return `há ${n} dias`; return dataBR(iso) }
+function novoId(p){ return p + Date.now().toString(36) + Math.random().toString(36).slice(2,7) }
+function normTel(t){
+  let d = String(t||'').replace(/\D/g,'');
+  if (d.startsWith('00')) d = d.slice(2);
+  if (d.startsWith('0')) d = d.slice(1);
+  if (d.length < 10) return '';
+  if (d.length <= 11) return '55' + d;
+  return d;
+}
+function telBonito(t){
+  if(!t) return '';
+  const m = t.match(/^55(\d{2})(\d{4,5})(\d{4})$/);
+  return m ? `(${m[1]}) ${m[2]}-${m[3]}` : '+' + t;
+}
+function primeiroNome(n){ const p = (n||'').trim().split(/\s+/)[0] || ''; return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase() }
+function iniciais(n){ const p = (n||'?').trim().split(/\s+/); return ((p[0]||'?')[0] + (p.length>1 ? p[p.length-1][0] : '')).toUpperCase() }
+function corAv(s){ let h=0; for(const c of String(s)) h = (h*31 + c.charCodeAt(0))|0; return CORES_AV[Math.abs(h)%CORES_AV.length] }
+function semAcento(s){ return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase() }
+function sit(v){ return SITUACOES.find(s=>s.v===v) || SITUACOES[0] }
+function chipSit(v){ const s = sit(v||'Novo'); return `<span class="chip ${s.c}">${esc(s.v)}</span>` }
+function linkZap(c, texto){ if(!c.tel || c.situacao==='Não quer receber') return ''; return 'https://wa.me/' + c.tel + (texto ? '?text=' + encodeURIComponent(texto) : '') }
+const icZap = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3Z"/></svg>';
+function toast(msg, erro){ const t = $('toast'); t.textContent = msg; t.className = 'toast on' + (erro ? ' erro' : ''); clearTimeout(t._t); t._t = setTimeout(()=> t.className = 'toast', 2600) }
+
+/* ---------------- servidor ---------------- */
+async function api(corpo){
+  const r = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({codigo, ...corpo})});
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+async function salvar(registros){
+  const lista = Array.isArray(registros) ? registros : [registros];
+  for(let i=0; i<lista.length; i+=150){
+    const r = await api({acao:'salvar', contatos: lista.slice(i, i+150)});
+    if(!r.ok) throw new Error(r.erro || 'falha');
+  }
+}
+async function salvarComAviso(reg, msg){
+  try { await salvar(reg); if(msg) toast(msg) }
+  catch(e){ toast('Não consegui salvar. Confira a internet e tente de novo.', true) }
+}
+async function carregar(){
+  const r = await api({acao:'listar'});
+  if(!r.ok) return false;
+  contatos = (r.contatos||[]).filter(x => x.tipo !== 'campanha');
+  campanhas = (r.contatos||[]).filter(x => x.tipo === 'campanha');
+  return true;
+}
+
+/* ---------------- entrada ---------------- */
+$('formEntrada').addEventListener('submit', async e => {
+  e.preventDefault();
+  codigo = $('codigo').value.trim();
+  $('btEntrar').disabled = true; $('erroEntrada').textContent = '';
+  try {
+    if(await carregar()){ try{ localStorage.setItem('crmCalmaria', codigo) }catch(_){} abrirApp() }
+    else $('erroEntrada').textContent = 'Código não confere. Tente de novo.';
+  } catch(_){ $('erroEntrada').textContent = 'Sem conexão com o servidor. Tente de novo em instantes.' }
+  $('btEntrar').disabled = false;
+});
+$('btSair').onclick = () => { try{ localStorage.removeItem('crmCalmaria') }catch(_){} location.reload() };
+
+function abrirApp(){
+  $('entrada').classList.add('oculto'); $('app').classList.remove('oculto');
+  montarFiltros(); irPara(location.hash.slice(1) || 'painel');
+}
+
+/* ---------------- navegação ---------------- */
+document.querySelectorAll('[data-tela]').forEach(b => b.onclick = () => irPara(b.dataset.tela));
+document.querySelectorAll('[data-novo]').forEach(b => b.onclick = () => abrirFicha(null));
+window.addEventListener('hashchange', () => { const t = location.hash.slice(1); if(t && t!==tela) irPara(t) });
+function irPara(t){
+  if(!document.querySelector(`[data-sec="${t}"]`)) t = 'painel';
+  tela = t; if(location.hash.slice(1)!==t) history.replaceState(null,'','#'+t);
+  document.querySelectorAll('[data-sec]').forEach(s => s.classList.toggle('oculto', s.dataset.sec !== t));
+  document.querySelectorAll('[data-tela]').forEach(b => b.classList.toggle('ativo', b.dataset.tela === t));
+  if(t==='campanhas'){ $('campDet').classList.add('oculto'); $('campLista').classList.remove('oculto') }
+  render(); window.scrollTo(0,0);
+}
+function render(){
+  $('qtContatos').textContent = contatos.length;
+  if(tela==='painel') renderPainel();
+  if(tela==='contatos') renderContatos();
+  if(tela==='funil') renderFunil();
+  if(tela==='campanhas') renderCampanhas();
+}
+
+/* ---------------- painel ---------------- */
+function renderPainel(){
+  const h = new Date().getHours();
+  $('saudacao').textContent = (h<12 ? 'Bom dia' : h<18 ? 'Boa tarde' : 'Boa noite') + ', Tati';
+  $('dataHoje').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long', day:'numeric', month:'long'});
+  const tot = contatos.length;
+  const novos = contatos.filter(c => diasDesde(c.entrada) <= 7).length;
+  const conv = contatos.filter(c => c.situacao==='Conversando');
+  const comp = contatos.filter(c => c.situacao==='Comprou' || c.situacao==='Cliente recorrente').length;
+  const comZap = contatos.filter(c => c.tel).length;
+  $('kTotal').textContent = tot; $('kTotalDet').textContent = `${comZap} com WhatsApp`;
+  $('kNovos').textContent = novos;
+  $('kConv').textContent = conv.length; $('kConvDet').textContent = 'negociando agora';
+  $('kComp').textContent = comp; $('kCompDet').textContent = tot ? `${Math.round(comp/tot*100)}% da lista` : '';
+  const ret = conv.filter(c => diasDesde(c.ultima || c.entrada) > 5).sort((a,b) => (a.ultima||a.entrada||'').localeCompare(b.ultima||b.entrada||'')).slice(0,6);
+  $('listaRetorno').innerHTML = ret.length ? ret.map(c => itemMini(c, 'última conversa ' + quando(c.ultima||c.entrada), true)).join('') : '<div class="vazio">Ninguém esperando resposta 🌿</div>';
+  const rec = [...contatos].sort((a,b) => (b.entrada||'').localeCompare(a.entrada||'') || (b.criado||'').localeCompare(a.criado||'')).slice(0,6);
+  $('listaRecentes').innerHTML = rec.length ? rec.map(c => itemMini(c, (c.origem||'—') + ' · ' + quando(c.entrada))).join('') : '<div class="vazio">Nenhum contato ainda.<br>Comece em <b>Novo contato</b> ou <b>Importar da loja</b>.</div>';
+  barras('barrasOrigem', contatos.map(c => c.origem || 'Sem origem'), '#55654A');
+  barras('barrasInteresse', contatos.map(c => c.interesse).filter(Boolean), '#50678F');
+  ligarMini();
+}
+function itemMini(c, det, zap){
+  const z = zap && linkZap(c) ? `<a class="zapb dir" href="${linkZap(c)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${icZap}</a>` : `<div class="dir">${chipSit(c.situacao)}</div>`;
+  return `<div class="item" data-id="${esc(c.chave)}"><div class="av" style="background:${corAv(c.chave)}">${esc(iniciais(c.nome))}</div><div><div class="nome-l">${esc(c.nome||'Sem nome')}</div><div class="peq-t">${esc(det)}</div></div>${z}</div>`;
+}
+function ligarMini(){ document.querySelectorAll('.lista-mini .item').forEach(el => el.onclick = () => abrirFicha(el.dataset.id)) }
+function barras(id, valores, cor){
+  const cont = {}; valores.forEach(v => cont[v] = (cont[v]||0)+1);
+  const ord = Object.entries(cont).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  const max = ord.length ? ord[0][1] : 1;
+  $(id).innerHTML = ord.length ? ord.map(([k,v]) => `<div class="linha-b"><span>${esc(k)}</span><div class="trilho"><div class="enche" style="width:${Math.max(4,v/max*100)}%;background:${cor}"></div></div><span class="v">${v}</span></div>`).join('') : '<div class="vazio">Aparece aqui quando tiver contatos</div>';
+}
+
+/* ---------------- contatos ---------------- */
+function opcoes(sel, rotulo, itens, atual){
+  sel.innerHTML = `<option value="">${rotulo}</option>` + itens.map(i => `<option ${i===atual?'selected':''}>${esc(i)}</option>`).join('');
+}
+function todasEtiquetas(){ const s = new Set(); contatos.forEach(c => (c.etiquetas||[]).forEach(e => s.add(e))); return [...s].sort() }
+function montarFiltros(){
+  opcoes($('fSituacao'), 'Toda situação', SITUACOES.map(s=>s.v), $('fSituacao').value);
+  opcoes($('fOrigem'), 'Toda origem', ORIGENS, $('fOrigem').value);
+  opcoes($('fInteresse'), 'Todo interesse', INTERESSES, $('fInteresse').value);
+  opcoes($('fEtiqueta'), 'Toda etiqueta', ['Da loja (Nuvemshop)', ...todasEtiquetas()], $('fEtiqueta').value);
+  opcoes($('fFunilEt'), 'Todas as etiquetas', todasEtiquetas(), $('fFunilEt').value);
+  opcoes($('colarOrigem'), 'Origem desses contatos', ORIGENS, $('colarOrigem').value || 'WhatsApp');
+}
+['busca','fSituacao','fOrigem','fInteresse','fEtiqueta'].forEach(id => $(id).addEventListener('input', () => { limite = 60; renderContatos() }));
+$('fFunilEt').addEventListener('input', renderFunil);
+$('btMais').onclick = () => { limite += 100; renderContatos() };
+function filtrados(){
+  const q = semAcento($('busca').value.trim()), qd = $('busca').value.replace(/\D/g,'');
+  const fs = $('fSituacao').value, fo = $('fOrigem').value, fi = $('fInteresse').value, fe = $('fEtiqueta').value;
+  return contatos.filter(c => {
+    if(fs && (c.situacao||'Novo') !== fs) return false;
+    if(fo && c.origem !== fo) return false;
+    if(fi && c.interesse !== fi) return false;
+    if(fe === 'Da loja (Nuvemshop)'){ if(!c.loja) return false }
+    else if(fe && !(c.etiquetas||[]).includes(fe)) return false;
+    if(q){
+      const alvo = semAcento([c.nome,c.email,c.insta,c.notas,(c.etiquetas||[]).join(' ')].join(' '));
+      if(!alvo.includes(q) && !(qd.length>=3 && (c.tel||'').includes(qd))) return false;
+    }
+    return true;
+  }).sort((a,b) => (a.nome||'').localeCompare(b.nome||'','pt-BR'));
+}
+function renderContatos(){
+  const lista = filtrados();
+  $('contagem').textContent = lista.length === contatos.length ? `${lista.length} contatos` : `${lista.length} de ${contatos.length} contatos`;
+  if(!contatos.length){ $('tabela').innerHTML = '<div class="painel vazio">Nenhum contato ainda.<br><br><button class="btn prim" data-novo2>+ Novo contato</button> <button class="btn" onclick="irPara(\'importar\')">Importar da loja</button></div>'; document.querySelector('[data-novo2]').onclick = () => abrirFicha(null); $('btMais').classList.add('oculto'); return }
+  const cab = `<div class="tl cab"><div>Nome</div><div class="c-tel">WhatsApp</div><div class="c-origem">Origem</div><div class="c-ets">Etiquetas</div><div>Situação</div><div></div></div>`;
+  const linhas = lista.slice(0, limite).map(c => {
+    const z = linkZap(c);
+    const ets = (c.etiquetas||[]).slice(0,3).map(e => `<span class="chip et">${esc(e)}</span>`).join('') + (c.loja ? '<span class="chip loja">loja</span>' : '');
+    return `<div class="tl lin" data-id="${esc(c.chave)}">
+      <div class="quem"><div class="av" style="background:${corAv(c.chave)}">${esc(iniciais(c.nome))}</div><div><div class="nome-l">${esc(c.nome||'Sem nome')}</div><div class="peq-t">${esc(c.interesse || c.email || '')}</div></div></div>
+      <div class="c-tel peq-t">${esc(telBonito(c.tel))}</div>
+      <div class="c-origem peq-t">${esc(c.origem||'')}</div>
+      <div class="c-ets ets">${ets}</div>
+      <div>${chipSit(c.situacao)}</div>
+      <div style="text-align:right"><a class="zapb ${z?'':'off'}" href="${z||'#'}" target="_blank" rel="noopener" title="Abrir WhatsApp">${icZap}</a></div>
+    </div>`;
+  }).join('');
+  $('tabela').innerHTML = cab + (linhas || '<div class="vazio">Nenhum contato com esses filtros</div>');
+  $('tabela').querySelectorAll('.tl.lin').forEach(el => el.onclick = e => { if(e.target.closest('a')) return; abrirFicha(el.dataset.id) });
+  $('btMais').classList.toggle('oculto', lista.length <= limite);
+}
+$('btExportar').onclick = () => {
+  const cab = ['Nome','WhatsApp','E-mail','Instagram','Origem','Interesse','Etiquetas','Situação','Entrada','Última conversa','Da loja','Anotações'];
+  const linhas = filtrados().map(c => [c.nome, c.tel, c.email, c.insta, c.origem, c.interesse, (c.etiquetas||[]).join(', '), c.situacao, dataBR(c.entrada), dataBR(c.ultima), c.loja?'sim':'', c.notas]);
+  const csv = [cab, ...linhas].map(l => l.map(v => '"' + String(v??'').replace(/"/g,'""') + '"').join(';')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], {type:'text/csv;charset=utf-8'}));
+  a.download = `contatos-calmaria-${hojeISO()}.csv`; a.click();
+};
+
+/* ---------------- ficha ---------------- */
+function abrirFicha(id){
+  const c = id ? contatos.find(x => x.chave === id) : null;
+  fichaAtual = c ? JSON.parse(JSON.stringify(c)) : {chave:novoId('c_'), situacao:'Novo', origem:'WhatsApp', entrada:hojeISO(), etiquetas:[], historico:[], novo:true};
+  desenharFicha();
+  $('gaveta').classList.add('aberto'); $('veu').classList.add('aberto'); $('gaveta').setAttribute('aria-hidden','false');
+  if(!c) setTimeout(()=> $('cNome') && $('cNome').focus(), 260);
+}
+function fecharFicha(){ $('gaveta').classList.remove('aberto'); $('veu').classList.remove('aberto'); $('gaveta').setAttribute('aria-hidden','true'); fichaAtual = null }
+$('veu').onclick = fecharFicha;
+document.addEventListener('keydown', e => { if(e.key==='Escape' && fichaAtual) fecharFicha() });
+function desenharFicha(){
+  const c = fichaAtual, novo = !!c.novo;
+  const sel = (id, itens, v) => `<select id="${id}"><option value=""></option>${itens.map(i=>`<option ${i===v?'selected':''}>${esc(i)}</option>`).join('')}</select>`;
+  const hist = (c.historico||[]).slice().reverse().map(h => `<div class="h"><div class="d">${dataBR(h.data)}</div><div>${esc(h.texto)}</div></div>`).join('');
+  const camps = Object.entries(c.campanhas||{}).map(([id,d]) => { const k = campanhas.find(x=>x.chave===id); return k ? `<span class="chip et">✓ ${esc(k.nome)} · ${dataBR(d)}</span>` : '' }).join(' ');
+  const z = linkZap(c);
+  $('gaveta').innerHTML = `
+    <div class="g-topo">
+      <div class="av" style="background:${corAv(c.chave)}">${esc(iniciais(c.nome||'?'))}</div>
+      <div style="min-width:0"><h3>${novo ? 'Novo contato' : esc(c.nome||'Sem nome')}</h3><div class="peq-t">${novo ? 'Preencha e salve' : 'Na lista desde ' + dataBR(c.entrada)}${c.loja ? ' · cliente da loja' : ''}</div></div>
+      <button class="g-fecha" id="gFecha" aria-label="Fechar">×</button>
+    </div>
+    <div class="g-corpo">
+      <div class="campos">
+        <div class="campo cheio"><label>Nome</label><input id="cNome" value="${esc(c.nome||'')}" placeholder="Nome e sobrenome"></div>
+        <div class="campo"><label>WhatsApp (com DDD)</label><input id="cTel" inputmode="tel" value="${esc(telBonito(c.tel))}" placeholder="(11) 99999-9999"></div>
+        <div class="campo"><label>E-mail</label><input id="cEmail" type="email" value="${esc(c.email||'')}"></div>
+        <div class="campo"><label>Instagram</label><input id="cInsta" value="${esc(c.insta||'')}" placeholder="@perfil"></div>
+        <div class="campo"><label>Situação</label>${sel('cSit', SITUACOES.map(s=>s.v), c.situacao||'Novo')}</div>
+        <div class="campo"><label>Origem</label>${sel('cOrig', ORIGENS, c.origem)}</div>
+        <div class="campo"><label>Interesse</label>${sel('cInt', INTERESSES, c.interesse)}</div>
+        <div class="campo cheio"><label>Etiquetas (campanhas, grupos)</label><div class="etiq-in" id="cEts"></div></div>
+        <div class="campo cheio"><label>Anotações</label><textarea id="cNotas" placeholder="Cor preferida, tamanho, se é professora, aniversário…">${esc(c.notas||'')}</textarea></div>
+      </div>
+      <div id="avisoDup"></div>
+      ${novo ? '' : `
+      <div class="sec"><h4>Conversas</h4>
+        <div class="add-hist"><input id="hTexto" placeholder="O que conversaram hoje?"><button class="btn" id="hAdd">Registrar</button></div>
+        <div class="hist">${hist || '<div class="peq-t">Nenhuma conversa registrada ainda</div>'}</div>
+      </div>
+      ${camps ? `<div class="sec"><h4>Campanhas recebidas</h4><div class="ets">${camps}</div></div>` : ''}
+      ${c.loja ? `<div class="sec"><h4>Na loja</h4><div class="peq-t">${esc(c.loja.resumo || 'Cliente da Nuvemshop')}${c.loja.importado ? ' · atualizado em ' + dataBR(c.loja.importado) : ''}</div></div>` : ''}
+      <div class="sec"><button class="btn perigo peq" id="gApaga">Apagar contato</button></div>`}
+    </div>
+    <div class="g-pe">
+      ${z ? `<a class="btn zap" href="${z}" target="_blank" rel="noopener">${icZap}WhatsApp</a>` : ''}
+      <span style="flex:1"></span>
+      <button class="btn" id="gCancela">Cancelar</button>
+      <button class="btn prim" id="gSalva">Salvar</button>
+    </div>`;
+  $('gFecha').onclick = $('gCancela').onclick = fecharFicha;
+  $('gSalva').onclick = salvarFicha;
+  desenharEtiquetas();
+  $('cTel').addEventListener('blur', checarDuplicado); $('cEmail').addEventListener('blur', checarDuplicado);
+  if(!novo){
+    $('hAdd').onclick = async () => {
+      const t = $('hTexto').value.trim(); if(!t) return;
+      lerCampos(); fichaAtual.historico = [...(fichaAtual.historico||[]), {data:hojeISO(), texto:t}];
+      fichaAtual.ultima = hojeISO();
+      if((fichaAtual.situacao||'Novo') === 'Novo') fichaAtual.situacao = 'Conversando';
+      gravarLocal(fichaAtual); desenharFicha(); render();
+      await salvarComAviso(limpo(fichaAtual), 'Conversa registrada');
+    };
+    $('hTexto').addEventListener('keydown', e => { if(e.key==='Enter') $('hAdd').click() });
+    $('gApaga').onclick = async () => {
+      if(!confirm('Apagar ' + (fichaAtual.nome||'este contato') + ' da lista?')) return;
+      const reg = {chave: fichaAtual.chave, apagado: true};
+      contatos = contatos.filter(x => x.chave !== fichaAtual.chave);
+      fecharFicha(); render(); await salvarComAviso(reg, 'Contato apagado');
+    };
+  }
+}
+function desenharEtiquetas(){
+  const box = $('cEts'); const ets = fichaAtual.etiquetas || [];
+  box.innerHTML = ets.map((e,i) => `<span class="chip et">${esc(e)}<button data-i="${i}" aria-label="tirar">×</button></span>`).join('') + `<input id="cEtNova" list="listaEts" placeholder="${ets.length ? '' : 'ex.: black26, natal26, professora'}"><datalist id="listaEts">${todasEtiquetas().map(e=>`<option value="${esc(e)}">`).join('')}</datalist>`;
+  box.querySelectorAll('button').forEach(b => b.onclick = () => { fichaAtual.etiquetas.splice(+b.dataset.i,1); desenharEtiquetas() });
+  const inp = $('cEtNova');
+  const add = () => { const v = inp.value.trim().replace(/,$/,'').toLowerCase(); if(v && !fichaAtual.etiquetas.includes(v)) fichaAtual.etiquetas.push(v); inp.value=''; desenharEtiquetas(); $('cEtNova').focus() };
+  inp.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===','){ e.preventDefault(); add() } else if(e.key==='Backspace' && !inp.value && fichaAtual.etiquetas.length){ fichaAtual.etiquetas.pop(); desenharEtiquetas(); $('cEtNova').focus() } });
+  inp.addEventListener('change', () => { if(inp.value.trim()) add() });
+}
+function lerCampos(){
+  const c = fichaAtual;
+  c.nome = $('cNome').value.trim(); c.tel = normTel($('cTel').value); c.telDigitado = $('cTel').value.trim();
+  c.email = $('cEmail').value.trim().toLowerCase(); c.insta = $('cInsta').value.trim();
+  c.situacao = $('cSit').value || 'Novo'; c.origem = $('cOrig').value; c.interesse = $('cInt').value;
+  c.notas = $('cNotas').value.trim();
+  const pend = $('cEtNova') && $('cEtNova').value.trim().toLowerCase(); if(pend && !c.etiquetas.includes(pend)) c.etiquetas.push(pend);
+}
+function acharDuplicado(c){ return contatos.find(x => x.chave !== c.chave && ((c.tel && x.tel === c.tel) || (c.email && x.email && x.email === c.email))) }
+function checarDuplicado(){
+  const tel = normTel($('cTel').value), email = $('cEmail').value.trim().toLowerCase();
+  const d = acharDuplicado({chave:fichaAtual.chave, tel, email});
+  $('avisoDup').innerHTML = d ? `<div class="aviso">Já existe <b>${esc(d.nome||'um contato')}</b> com esse ${d.tel===tel?'WhatsApp':'e-mail'}. <a href="#" id="abreDup">Abrir a ficha dela</a></div>` : '';
+  if(d) $('abreDup').onclick = e => { e.preventDefault(); abrirFicha(d.chave) };
+  return d;
+}
+function limpo(c){ const o = {...c}; delete o.novo; delete o.telDigitado; return o }
+function gravarLocal(c){ const i = contatos.findIndex(x => x.chave === c.chave); const o = limpo(c); if(i>=0) contatos[i] = o; else contatos.push(o) }
+async function salvarFicha(){
+  lerCampos(); const c = fichaAtual;
+  if(!c.nome && !c.tel){ toast('Coloque pelo menos o nome ou o WhatsApp', true); return }
+  if(c.telDigitado && !c.tel){ toast('O WhatsApp precisa ter DDD + número', true); return }
+  if(c.novo && checarDuplicado()){ toast('Esse contato já existe — abra a ficha dela', true); return }
+  if(!c.criado) c.criado = new Date().toISOString();
+  const reg = limpo(c); gravarLocal(reg); fecharFicha(); montarFiltros(); render();
+  await salvarComAviso(reg, 'Salvo ✓');
+}
+
+/* ---------------- funil ---------------- */
+function renderFunil(){
+  const fe = $('fFunilEt').value;
+  const base = fe ? contatos.filter(c => (c.etiquetas||[]).includes(fe)) : contatos;
+  $('funil').innerHTML = SITUACOES.map(s => {
+    const itens = base.filter(c => (c.situacao||'Novo') === s.v).sort((a,b) => (b.ultima||b.entrada||'').localeCompare(a.ultima||a.entrada||''));
+    const cards = itens.slice(0,80).map(c => `<div class="card" draggable="true" data-id="${esc(c.chave)}">
+        <div class="nome-l">${esc(c.nome||'Sem nome')}</div>
+        <div class="peq-t">${esc([c.interesse, c.origem].filter(Boolean).join(' · ') || telBonito(c.tel))}</div>
+        <div class="rod">${(c.etiquetas||[]).slice(0,2).map(e=>`<span class="chip et">${esc(e)}</span>`).join('')}<span class="peq-t">${quando(c.ultima||c.entrada)}</span>
+        <select aria-label="Mover para">${SITUACOES.map(o=>`<option ${o.v===s.v?'selected':''}>${esc(o.v)}</option>`).join('')}</select></div>
+      </div>`).join('');
+    return `<div class="coluna" data-sit="${esc(s.v)}"><h4><span class="bol" style="background:${s.cor}"></span>${esc(s.v)}<span class="qt">${itens.length}</span></h4>${cards}${itens.length>80?`<div class="mais-c">+ ${itens.length-80} em Contatos</div>`:''}</div>`;
+  }).join('');
+  $('funil').querySelectorAll('.card').forEach(card => {
+    card.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', card.dataset.id); card.classList.add('arrastando') });
+    card.addEventListener('dragend', () => card.classList.remove('arrastando'));
+    card.addEventListener('click', e => { if(e.target.tagName==='SELECT' || e.target.tagName==='OPTION') return; abrirFicha(card.dataset.id) });
+    card.querySelector('select').addEventListener('change', e => mover(card.dataset.id, e.target.value));
+  });
+  $('funil').querySelectorAll('.coluna').forEach(col => {
+    col.addEventListener('dragover', e => { e.preventDefault(); col.classList.add('sobre') });
+    col.addEventListener('dragleave', () => col.classList.remove('sobre'));
+    col.addEventListener('drop', e => { e.preventDefault(); col.classList.remove('sobre'); mover(e.dataTransfer.getData('text/plain'), col.dataset.sit) });
+  });
+}
+async function mover(id, nova){
+  const c = contatos.find(x => x.chave === id); if(!c || (c.situacao||'Novo') === nova) return;
+  c.situacao = nova; c.ultima = hojeISO();
+  c.historico = [...(c.historico||[]), {data:hojeISO(), texto:'Mudou para ' + nova}];
+  renderFunil(); await salvarComAviso(c, `${primeiroNome(c.nome)} → ${nova}`);
+}
+
+/* ---------------- campanhas ---------------- */
+function publicoDe(k){
+  return contatos.filter(c => {
+    if(!c.tel || c.situacao === 'Não quer receber') return false;
+    if(k.etiqueta === '__loja'){ if(!c.loja) return false }
+    else if(k.etiqueta && !(c.etiquetas||[]).includes(k.etiqueta)) return false;
+    if(k.situacoes && k.situacoes.length && !k.situacoes.includes(c.situacao||'Novo')) return false;
+    if(k.interesse && c.interesse !== k.interesse) return false;
+    return true;
+  }).sort((a,b) => (a.nome||'').localeCompare(b.nome||'','pt-BR'));
+}
+function renderCampanhas(){
+  const ord = [...campanhas].sort((a,b) => (b.criado||'').localeCompare(a.criado||''));
+  $('campGrade').innerHTML = `<div class="camp camp-nova" id="campNova">+ Nova campanha</div>` + ord.map(k => {
+    const pub = publicoDe(k), env = pub.filter(c => (c.campanhas||{})[k.chave]).length;
+    return `<div class="camp" data-id="${esc(k.chave)}"><span class="peq-t">Criada em ${dataBR(k.criado)}</span><h3>${esc(k.nome)}</h3><div class="peq-t">${esc(descPublico(k))}</div><div class="prog"><div style="width:${pub.length?env/pub.length*100:0}%"></div></div><div class="peq-t"><b style="color:var(--tinta)">${env}</b> de ${pub.length} enviadas</div></div>`;
+  }).join('');
+  $('campNova').onclick = () => editarCampanha(null);
+  $('campGrade').querySelectorAll('.camp[data-id]').forEach(el => el.onclick = () => abrirCampanha(el.dataset.id));
+}
+function descPublico(k){
+  const p = [];
+  p.push(k.etiqueta === '__loja' ? 'Clientes da loja' : k.etiqueta ? 'Etiqueta ' + k.etiqueta : 'Todos os contatos');
+  if(k.situacoes && k.situacoes.length) p.push(k.situacoes.join(', '));
+  if(k.interesse) p.push('interesse ' + k.interesse);
+  return p.join(' · ');
+}
+function editarCampanha(id){
+  const k = id ? {...campanhas.find(x=>x.chave===id)} : {chave:novoId('k_'), tipo:'campanha', nome:'', texto:MODELOS[0].texto, etiqueta:'', situacoes:[], interesse:''};
+  $('campLista').classList.add('oculto'); const d = $('campDet'); d.classList.remove('oculto');
+  d.innerHTML = `
+    <div class="topo"><div><h2>${id ? 'Editar campanha' : 'Nova campanha'}</h2><div class="sub">Quem recebe e o que vai na mensagem</div></div>
+      <div class="acoes"><button class="btn" id="kVolta">Voltar</button><button class="btn prim" id="kSalva">Salvar campanha</button></div></div>
+    <div class="duas">
+      <div class="painel">
+        <div class="campos">
+          <div class="campo cheio"><label>Nome da campanha</label><input id="kNome" value="${esc(k.nome)}" placeholder="ex.: Black — abertura"></div>
+          <div class="campo"><label>Quem recebe</label><select id="kEt"><option value="">Todos os contatos</option><option value="__loja" ${k.etiqueta==='__loja'?'selected':''}>Clientes da loja (Nuvemshop)</option>${todasEtiquetas().map(e=>`<option value="${esc(e)}" ${e===k.etiqueta?'selected':''}>Etiqueta: ${esc(e)}</option>`).join('')}</select></div>
+          <div class="campo"><label>Interesse</label><select id="kInt"><option value="">Qualquer</option>${INTERESSES.map(i=>`<option ${i===k.interesse?'selected':''}>${esc(i)}</option>`).join('')}</select></div>
+          <div class="campo cheio"><label>Situação (deixe vazio para todas)</label><div class="ets" id="kSits">${SITUACOES.filter(s=>s.v!=='Não quer receber').map(s=>`<label class="chip ${s.c}" style="cursor:pointer"><input type="checkbox" value="${esc(s.v)}" ${(k.situacoes||[]).includes(s.v)?'checked':''} style="margin:0 3px 0 0">${esc(s.v)}</label>`).join('')}</div></div>
+          <div class="campo cheio"><label>Modelo pronto</label><select id="kModelo"><option value="">Escolha para preencher o texto…</option>${MODELOS.map((m,i)=>`<option value="${i}">${esc(m.titulo)}</option>`).join('')}</select></div>
+          <div class="campo cheio"><label>Mensagem ({nome} vira o primeiro nome da cliente)</label><textarea id="kTexto" style="min-height:220px">${esc(k.texto)}</textarea></div>
+        </div>
+        <p class="peq-t">Quem está como <b>Não quer receber</b> ou sem WhatsApp fica de fora sozinho.</p>
+      </div>
+      <div class="painel"><h3>Prévia</h3><div class="peq-t" id="kQt" style="margin-bottom:10px"></div><div class="msg-prev" id="kPrev"></div></div>
+    </div>`;
+  const ler = () => { k.nome = $('kNome').value.trim(); k.etiqueta = $('kEt').value; k.interesse = $('kInt').value; k.situacoes = [...$('kSits').querySelectorAll('input:checked')].map(i=>i.value); k.texto = $('kTexto').value };
+  const prev = () => { ler(); const pub = publicoDe(k); $('kQt').textContent = `${pub.length} pessoas com WhatsApp recebem`; $('kPrev').textContent = k.texto.split('{nome}').join(pub[0] ? primeiroNome(pub[0].nome) : 'Maria') };
+  d.querySelectorAll('input,select,textarea').forEach(el => el.addEventListener('input', prev));
+  $('kModelo').onchange = e => { const m = MODELOS[+e.target.value]; if(m){ $('kTexto').value = m.texto; if(!$('kNome').value.trim()) $('kNome').value = m.titulo; prev() } };
+  prev();
+  $('kVolta').onclick = () => id ? abrirCampanha(id) : irPara('campanhas');
+  $('kSalva').onclick = async () => {
+    ler(); if(!k.nome){ toast('Dê um nome para a campanha', true); return }
+    if(!k.criado) k.criado = new Date().toISOString();
+    const i = campanhas.findIndex(x=>x.chave===k.chave); if(i>=0) campanhas[i] = k; else campanhas.push(k);
+    abrirCampanha(k.chave); await salvarComAviso(k, 'Campanha salva');
+  };
+}
+function abrirCampanha(id){
+  const k = campanhas.find(x => x.chave === id); if(!k) return irPara('campanhas');
+  $('campLista').classList.add('oculto'); const d = $('campDet'); d.classList.remove('oculto');
+  const pub = publicoDe(k); const env = pub.filter(c => (c.campanhas||{})[k.chave]).length;
+  d.innerHTML = `
+    <div class="topo"><div><h2>${esc(k.nome)}</h2><div class="sub">${esc(descPublico(k))}</div></div>
+      <div class="acoes"><button class="btn" id="kVolta">Todas as campanhas</button><button class="btn" id="kEdita">Editar</button></div></div>
+    <div class="duas">
+      <div class="painel">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"><h3 style="margin:0">Enviar</h3><span class="peq-t" style="margin-left:auto"><b style="color:var(--tinta)">${env}</b> de ${pub.length}</span></div>
+        <div class="prog" style="margin-bottom:10px"><div style="width:${pub.length?env/pub.length*100:0}%"></div></div>
+        <p class="peq-t" style="margin:0 0 6px">Toque em <b>Enviar</b>: o WhatsApp abre com a mensagem pronta e a pessoa fica marcada como enviada.</p>
+        <div id="kEnvios">${pub.length ? pub.map(c => {
+          const feito = (c.campanhas||{})[k.chave];
+          return `<div class="envio ${feito?'feito':''}" data-id="${esc(c.chave)}"><div class="av" style="background:${corAv(c.chave)}">${esc(iniciais(c.nome))}</div><div style="min-width:0"><div class="nome-l">${esc(c.nome||'Sem nome')}</div><div class="peq-t">${feito ? 'enviada ' + quando(feito) : esc(telBonito(c.tel))}</div></div>
+            <div class="dir" style="display:flex;gap:6px">${feito ? `<button class="btn peq" data-desfaz>Desmarcar</button>` : ''}<a class="btn zap peq" data-envia href="${linkZap(c, k.texto.split('{nome}').join(primeiroNome(c.nome)))}" target="_blank" rel="noopener">${icZap}${feito?'De novo':'Enviar'}</a></div></div>`;
+        }).join('') : '<div class="vazio">Ninguém com WhatsApp nesse público ainda</div>'}</div>
+      </div>
+      <div class="painel"><h3>Mensagem</h3><div class="msg-prev">${esc(k.texto.split('{nome}').join(pub[0] ? primeiroNome(pub[0].nome) : 'Maria'))}</div></div>
+    </div>`;
+  $('kVolta').onclick = () => irPara('campanhas');
+  $('kEdita').onclick = () => editarCampanha(id);
+  d.querySelectorAll('[data-envia]').forEach(a => a.addEventListener('click', () => marcarEnvio(a.closest('.envio').dataset.id, k, true)));
+  d.querySelectorAll('[data-desfaz]').forEach(b => b.onclick = () => marcarEnvio(b.closest('.envio').dataset.id, k, false));
+}
+async function marcarEnvio(cid, k, enviado){
+  const c = contatos.find(x => x.chave === cid); if(!c) return;
+  c.campanhas = {...(c.campanhas||{})};
+  if(enviado){ c.campanhas[k.chave] = hojeISO(); c.ultima = hojeISO(); c.historico = [...(c.historico||[]), {data:hojeISO(), texto:'Recebeu a campanha ' + k.nome}] }
+  else delete c.campanhas[k.chave];
+  setTimeout(() => abrirCampanha(k.chave), 300);
+  await salvarComAviso(c, enviado ? 'Marcada como enviada' : 'Desmarcada');
+}
+
+/* ---------------- importar ---------------- */
+const solta = $('solta');
+solta.addEventListener('dragover', e => { e.preventDefault(); solta.classList.add('sobre') });
+solta.addEventListener('dragleave', () => solta.classList.remove('sobre'));
+solta.addEventListener('drop', e => { e.preventDefault(); solta.classList.remove('sobre'); if(e.dataTransfer.files[0]) lerArquivo(e.dataTransfer.files[0]) });
+$('arquivo').addEventListener('change', e => { if(e.target.files[0]) lerArquivo(e.target.files[0]); e.target.value = '' });
+function lerArquivo(f){
+  const r = new FileReader();
+  r.onload = () => {
+    let txt = r.result;
+    if(txt.includes('�')){ const r2 = new FileReader(); r2.onload = () => analisarCSV(r2.result); r2.readAsText(f, 'ISO-8859-1'); return }
+    analisarCSV(txt);
+  };
+  r.readAsText(f, 'UTF-8');
+}
+function partirCSV(txt){
+  txt = txt.replace(/^﻿/, '');
+  const l1 = txt.split(/\r?\n/)[0] || '';
+  const sep = (l1.split(';').length > l1.split(',').length) ? ';' : (l1.split('\t').length > l1.split(',').length ? '\t' : ',');
+  const linhas = []; let campo = '', linha = [], aspas = false;
+  for(let i=0; i<txt.length; i++){
+    const ch = txt[i];
+    if(aspas){ if(ch==='"'){ if(txt[i+1]==='"'){ campo+='"'; i++ } else aspas = false } else campo += ch }
+    else if(ch==='"') aspas = true;
+    else if(ch===sep){ linha.push(campo); campo='' }
+    else if(ch==='\n' || ch==='\r'){ if(ch==='\r' && txt[i+1]==='\n') i++; linha.push(campo); linhas.push(linha); linha=[]; campo='' }
+    else campo += ch;
+  }
+  if(campo || linha.length){ linha.push(campo); linhas.push(linha) }
+  return linhas.filter(l => l.some(v => v.trim()));
+}
+function achaCol(cab, testes){ for(const t of testes){ const i = cab.findIndex(t); if(i>=0) return i } return -1 }
+function analisarCSV(txt){
+  const linhas = partirCSV(txt);
+  if(linhas.length < 2){ toast('Arquivo vazio ou em formato que não reconheci', true); return }
+  const cab = linhas[0].map(h => semAcento(h).trim());
+  const iNome = achaCol(cab, [h=>h==='nome', h=>h.startsWith('nome') && !h.includes('empresa') && !h.includes('loja'), h=>h.includes('nome'), h=>h.includes('name')]);
+  const iTel = achaCol(cab, [h=>h.includes('celular'), h=>h.includes('whats'), h=>h.includes('telefone'), h=>h.includes('fone'), h=>h.includes('phone')]);
+  const iEmail = achaCol(cab, [h=>h.includes('mail')]);
+  const iTotal = achaCol(cab, [h=>h.includes('total') && (h.includes('gast')||h.includes('compr')), h=>h.includes('gasto'), h=>h.includes('valor')]);
+  const iPed = achaCol(cab, [h=>h.includes('pedido') || h.includes('ordens') || h.includes('compras')]);
+  const iUlt = achaCol(cab, [h=>h.includes('ultim') && (h.includes('compra')||h.includes('pedido'))]);
+  if(iNome < 0 && iEmail < 0){ toast('Não achei as colunas de nome/e-mail. É a lista de Clientes da Nuvemshop?', true); return }
+  const regs = linhas.slice(1).map(l => {
+    const partes = [];
+    if(iPed>=0 && l[iPed]) partes.push(l[iPed].trim() + ' pedido(s)');
+    if(iTotal>=0 && l[iTotal]) partes.push('total ' + l[iTotal].trim());
+    if(iUlt>=0 && l[iUlt]) partes.push('última compra ' + l[iUlt].trim());
+    const comprou = iPed < 0 || (parseInt(String(l[iPed]||'').replace(/\D/g,'')) || 0) > 0;
+    return { nome:(l[iNome]||'').trim(), tel:normTel(l[iTel]), email:(l[iEmail]||'').trim().toLowerCase(), resumo:partes.join(' · '), comprou };
+  }).filter(r => r.nome || r.email || r.tel);
+  prepararImport(regs, 'loja', `Arquivo com ${regs.length} clientes · colunas: ${[iNome>=0&&'nome', iTel>=0&&'telefone', iEmail>=0&&'e-mail'].filter(Boolean).join(', ')}`);
+}
+$('btColar').onclick = () => {
+  const regs = $('colar').value.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => {
+    const m = l.match(/^(.*?)[\s,;:-]*((?:\+?\d[\d\s().-]{8,}\d))\s*$/);
+    return m ? {nome:m[1].trim(), tel:normTel(m[2]), email:''} : {nome:l, tel:'', email:''};
+  });
+  if(!regs.length){ toast('Cole pelo menos uma linha', true); return }
+  prepararImport(regs, $('colarOrigem').value || 'WhatsApp', `${regs.length} linhas coladas`);
+};
+function prepararImport(regs, fonte, desc){
+  const porTel = new Map(), porEmail = new Map();
+  contatos.forEach(c => { if(c.tel) porTel.set(c.tel, c); if(c.email) porEmail.set(c.email, c) });
+  const novos = [], atualiza = new Map(); let ignorados = 0; const vistos = new Set();
+  for(const r of regs){
+    const k = r.tel || r.email || ('n:' + semAcento(r.nome));
+    if(vistos.has(k)){ ignorados++; continue } vistos.add(k);
+    const ex = (r.tel && porTel.get(r.tel)) || (r.email && porEmail.get(r.email));
+    if(ex){ atualiza.set(ex.chave, {ex, r}) }
+    else if(fonte !== 'loja' && !r.tel){ ignorados++ }
+    else novos.push(r);
+  }
+  const hoje = hojeISO();
+  const montar = () => {
+    const regsSalvar = [];
+    for(const {ex, r} of atualiza.values()){
+      const c = {...ex};
+      if(!c.nome && r.nome) c.nome = r.nome; if(!c.tel && r.tel) c.tel = r.tel; if(!c.email && r.email) c.email = r.email;
+      if(fonte === 'loja'){ c.loja = {resumo: r.resumo || '', importado: hoje}; if(r.comprou && (!c.situacao || c.situacao==='Novo' || c.situacao==='Conversando')) c.situacao = 'Comprou' }
+      regsSalvar.push(c);
+    }
+    for(const r of novos){
+      const c = {chave:novoId('c_'), nome:r.nome, tel:r.tel, email:r.email, etiquetas:[], historico:[], entrada:hoje, criado:new Date().toISOString()};
+      if(fonte === 'loja'){ c.origem = 'Site'; c.situacao = r.comprou ? 'Comprou' : 'Novo'; c.loja = {resumo: r.resumo || '', importado: hoje} }
+      else { c.origem = fonte; c.situacao = 'Novo' }
+      regsSalvar.push(c);
+    }
+    return regsSalvar;
+  };
+  $('previa').innerHTML = `<div class="painel" style="margin-top:14px"><h3>Resumo antes de importar</h3><div class="peq-t">${esc(desc)}</div>
+    <div class="resumo-imp"><div><b>${novos.length}</b><span class="peq-t">novos</span></div><div><b>${atualiza.size}</b><span class="peq-t">já estavam (atualiza)</span></div><div><b>${ignorados}</b><span class="peq-t">repetidos ou sem contato</span></div></div>
+    ${novos.length ? `<div class="peq-t" style="margin-bottom:12px">Exemplos: ${novos.slice(0,4).map(r => esc(r.nome || r.email)).join(', ')}${novos.length>4?'…':''}</div>` : ''}
+    <div style="display:flex;gap:8px"><button class="btn prim" id="btImportar" ${novos.length+atualiza.size?'':'disabled'}>Importar ${novos.length+atualiza.size} contatos</button><button class="btn" id="btCancelaImp">Cancelar</button></div></div>`;
+  $('btCancelaImp').onclick = () => $('previa').innerHTML = '';
+  $('btImportar').onclick = async () => {
+    const b = $('btImportar'); b.disabled = true; b.textContent = 'Importando…';
+    const lista = montar();
+    try {
+      await salvar(lista);
+      lista.forEach(gravarLocal); montarFiltros();
+      $('previa').innerHTML = `<div class="painel" style="margin-top:14px"><h3>Pronto ✓</h3><p>${novos.length} contatos novos e ${atualiza.size} atualizados.</p><button class="btn prim" onclick="irPara('contatos')">Ver contatos</button></div>`;
+      $('colar').value = ''; toast('Importação concluída');
+    } catch(e){ b.disabled = false; b.textContent = 'Tentar de novo'; toast('A importação parou no meio. Tente de novo: ninguém vai duplicar.', true) }
+  };
+}
+
+/* ---------------- início ---------------- */
+(async () => {
+  let salvo = ''; try{ salvo = localStorage.getItem('crmCalmaria') || '' }catch(_){}
+  if(!salvo) return;
+  codigo = salvo; $('codigo').value = salvo;
+  try { if(await carregar()) abrirApp() } catch(_){ $('erroEntrada').textContent = 'Sem conexão com o servidor. Tente de novo em instantes.' }
+})();
+</script>
+</body>
+</html>
