@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.png">
+<title>CRM Cal.maria — como usar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap">
+<style>
+/* Layout: guia de leitura em coluna única, numerado porque a ordem importa (entrar → trazer clientes → dia a dia → campanhas) */
+:root{
+  --bg:#F6F4F8; --surface:#FFFFFF; --fg:#2B2733; --muted:#6A6475; --line:#E3DEEA;
+  --lilas:#7A63A8; --lilas-claro:#ECE6F5; --ok:#1F8F4E; --cuidado:#BF6A45;
+  --s-novo:#50678F; --s-conv:#C89640; --s-comprou:#1F8F4E; --s-rec:#3F4A37; --s-nao:#BF6A45;
+  --display:"Fraunces", Georgia, serif; --body:"Karla", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#18161C; --surface:#221F28; --fg:#ECE8F2; --muted:#A39CAF; --line:#38333F;
+  --lilas:#B4A0DC; --lilas-claro:#2E2840; --ok:#5BC48A; --cuidado:#E59775;
+  --s-novo:#8FA6D0; --s-conv:#E2B867; --s-comprou:#5BC48A; --s-rec:#A9B79A; --s-nao:#E59775; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#18161C; --surface:#221F28; --fg:#ECE8F2; --muted:#A39CAF; --line:#38333F;
+  --lilas:#B4A0DC; --lilas-claro:#2E2840; --ok:#5BC48A; --cuidado:#E59775;
+  --s-novo:#8FA6D0; --s-conv:#E2B867; --s-comprou:#5BC48A; --s-rec:#A9B79A; --s-nao:#E59775; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16.5px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:700px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:2rem} h2{font-size:1.4rem} h3{font-size:1.05rem;font-family:var(--body);font-weight:700}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lilas);font-weight:700}
+.lead{color:var(--muted);font-size:1.08rem}
+.indice{display:flex;flex-wrap:wrap;gap:8px}
+.indice a{font-size:.88rem;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:5px 12px;border-radius:999px;font-weight:500}
+.indice a:hover{border-color:var(--lilas)}
+.acesso{background:var(--lilas-claro);border-radius:14px;padding:18px 20px;display:grid;gap:10px}
+.linha{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.linha .rot{font-size:.85rem;color:var(--muted);min-width:120px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.9rem;background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:6px;word-break:break-word}
+a{color:var(--lilas);font-weight:700}
+button.copiar{font:inherit;font-size:.8rem;border:1px solid var(--lilas);color:var(--lilas);background:transparent;border-radius:999px;padding:3px 12px;cursor:pointer}
+button.copiar:focus-visible,.indice a:focus-visible{outline:2px solid var(--lilas);outline-offset:2px}
+.passo{display:grid;grid-template-columns:44px 1fr;gap:4px 16px;padding-top:26px;border-top:1px solid var(--line);scroll-margin-top:16px}
+.num{font-family:var(--display);font-size:1.6rem;color:var(--lilas);line-height:1.2}
+.corpo{min-width:0;display:grid;gap:14px}
+ol,ul{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.dica{font-size:.95rem;border-left:3px solid var(--lilas);padding:2px 0 2px 12px}
+.dica b:first-child{color:var(--lilas)}
+.atencao{font-size:.95rem;border-left:3px solid var(--cuidado);padding:2px 0 2px 12px}
+.atencao b:first-child{color:var(--cuidado)}
+.chip{display:inline-block;font-size:.82rem;font-weight:700;padding:2px 11px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap}
+.c-novo{color:var(--s-novo)}.c-conv{color:var(--s-conv)}.c-comprou{color:var(--s-comprou)}.c-rec{color:var(--s-rec)}.c-nao{color:var(--s-nao)}
+.tabela{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.tabela div{display:grid;grid-template-columns:170px 1fr;gap:12px;padding:10px 14px;border-top:1px solid var(--line);align-items:baseline}
+.tabela div:first-child{border-top:0}
+.tabela .k{font-weight:700}
+@media (max-width:520px){.tabela div{grid-template-columns:1fr;gap:2px}.passo{grid-template-columns:30px 1fr}}
+.ex{display:grid;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.95rem}
+.ex .t{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.rotina{background:var(--lilas-claro);border-radius:14px;padding:20px;display:grid;gap:12px}
+.rotina ul{gap:6px}
+b{font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <span class="eyebrow">Para a Tati · Cal.maria</span>
+    <h1>Seu CRM de clientes, passo a passo</h1>
+    <p class="lead">Tati, aqui ficam todas as suas clientes num lugar só: quem é cada uma, de onde veio, o que ela procura, em que pé está a conversa e quem já recebeu cada mensagem de campanha. Funciona no celular e no computador. Siga os passos na ordem na primeira vez; depois, use a rotina do fim da página.</p>
+    <nav class="indice" aria-label="Passos">
+      <a href="#entrar">1. Entrar</a><a href="#importar">2. Trazer da loja</a><a href="#colar">3. Lista do WhatsApp</a><a href="#cadastrar">4. Cadastrar cliente</a><a href="#conversa">5. Anotar conversa</a><a href="#funil">6. Funil</a><a href="#campanha">7. Campanha</a><a href="#rotina">Rotina</a>
+    </nav>
+  </header>
+
+  <section class="acesso" aria-label="Acesso">
+    <div class="linha"><span class="rot">Endereço</span><a href="https://relatorios.giogrowthdigital.com.br/calmaria/crm/" target="_blank" rel="noopener">relatorios.giogrowthdigital.com.br/calmaria/crm/</a></div>
+    <div class="linha"><span class="rot">Código de acesso</span><span>a Gio te manda pelo WhatsApp. Guarde só com você.</span></div>
+  </section>
+
+  <article class="passo" id="entrar">
+    <div class="num">1</div>
+    <div class="corpo">
+      <h2>Entrar no CRM</h2>
+      <ol>
+        <li>Abra o endereço acima no celular ou no computador.</li>
+        <li>Digite o código de acesso que a Gio te mandou e toque em <b>Entrar</b>.</li>
+        <li>Vai aparecer “Olá, Tati”. Pronto, você está no <b>Painel</b>.</li>
+      </ol>
+      <p class="dica"><b>Dica:</b> no celular, salve o endereço na tela inicial (no menu do navegador, “Adicionar à tela de início”). Ele vira um ícone, como um aplicativo. O código só é pedido na primeira vez em cada aparelho.</p>
+      <p class="atencao"><b>Cuidado:</b> se entrar num computador que não é seu, toque em <b>Sair deste aparelho</b> no menu quando terminar.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="importar">
+    <div class="num">2</div>
+    <div class="corpo">
+      <h2>Trazer as clientes da loja (Nuvemshop)</h2>
+      <p>Faça isso na primeira vez e depois uma vez por mês, para entrarem as clientes novas do site. É mais fácil no computador.</p>
+      <h3>Na Nuvemshop</h3>
+      <ol>
+        <li>Entre no painel da loja e clique em <b>Clientes</b>, no menu.</li>
+        <li>Clique em <b>Exportar lista</b>, no topo da página, e baixe o arquivo. Ele vai para a pasta Downloads.</li>
+      </ol>
+      <h3>No CRM</h3>
+      <ol>
+        <li>No menu, toque em <b>Importar</b>.</li>
+        <li>Arraste o arquivo que você baixou para o quadro da tela, ou clique no quadro e escolha o arquivo.</li>
+        <li>Aparece o <b>Resumo antes de importar</b>, dizendo quantas clientes são novas e quantas já estavam na lista e serão atualizadas. Confira.</li>
+        <li>Clique em <b>Importar</b>. Quando aparecer <b>Pronto ✓</b>, toque em <b>Ver contatos</b>.</li>
+      </ol>
+      <p class="dica"><b>Fique tranquila:</b> pode importar a mesma lista quantas vezes quiser. Ninguém fica repetido, porque o CRM reconhece a pessoa pelo WhatsApp ou pelo e-mail. Se a importação parar no meio (internet caiu), é só clicar em <b>Tentar de novo</b>.</p>
+      <p class="atencao"><b>Se der erro</b> “Não achei as colunas de nome/e-mail”: o arquivo escolhido não é a lista de <b>Clientes</b>. Confira se você exportou de Clientes, e não de Vendas ou Produtos.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="colar">
+    <div class="num">3</div>
+    <div class="corpo">
+      <h2>Trazer clientes que só estão no WhatsApp</h2>
+      <p>Para quem comprou ou perguntou pelo WhatsApp, Instagram ou no estúdio e não está no site.</p>
+      <ol>
+        <li>Na tela <b>Importar</b>, desça até o campo de colar.</li>
+        <li>Escreva ou cole <b>uma cliente por linha</b>: o nome e depois o telefone com DDD.</li>
+        <li>Escolha a <b>Origem</b> desses contatos (por exemplo, WhatsApp).</li>
+        <li>Clique em <b>Ver resumo</b>, confira e clique em <b>Importar</b>.</li>
+      </ol>
+      <div class="ex">
+        <span class="t">Exemplo do que colar</span>
+        <code>Maria Souza 11 99999-0000</code>
+        <code>Ana Lima (21) 98888-1234</code>
+        <code>Juliana Prado 31987651234</code>
+      </div>
+      <p class="dica"><b>Dica:</b> pode escrever o telefone do jeito que estiver, com ou sem parênteses, traço ou espaço. O CRM arruma sozinho. Só não pode faltar o DDD.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="cadastrar">
+    <div class="num">4</div>
+    <div class="corpo">
+      <h2>Cadastrar uma cliente nova</h2>
+      <p>Use toda vez que chegar alguém novo: mensagem no WhatsApp, Direct no Instagram, aluna de uma professora parceira, alguém de feira.</p>
+      <ol>
+        <li>Toque em <b>+ Contato</b>, no topo de qualquer tela.</li>
+        <li>Preencha os campos como na tabela abaixo.</li>
+        <li>Toque em <b>Salvar</b>. Aparece <b>Salvo ✓</b> embaixo da tela.</li>
+      </ol>
+      <div class="tabela">
+        <div><span class="k">Nome</span><span>Nome e sobrenome.</span></div>
+        <div><span class="k">WhatsApp (com DDD)</span><span>Ex.: (11) 99999-9999. Sem ele, o botão de mandar mensagem não aparece.</span></div>
+        <div><span class="k">E-mail e Instagram</span><span>Se tiver. Instagram com @.</span></div>
+        <div><span class="k">Situação</span><span>Em que pé está. Para quem acabou de chegar, deixe <span class="chip c-novo">Novo</span>. Veja o passo 6.</span></div>
+        <div><span class="k">Origem</span><span>Como ela chegou: WhatsApp, Instagram, Indicação, Aula / estúdio, Professora parceira, Feira / evento, Retirada / loja física, Site ou Outro.</span></div>
+        <div><span class="k">Interesse</span><span>O que ela procura: Zafu, Meia lua, Bolster, Mini bolster, Kit zafu + zabuton, Descanso de olhos, Bolsa porta-mat, Tapete, Kit Natal, Atacado / estúdio, Vários ou Outro.</span></div>
+        <div><span class="k">Etiquetas</span><span>Grupos para mandar campanha depois. Escreva e aperte <b>Enter</b> (ou vírgula) para cada uma. Ex.: <code>black26</code>, <code>natal26</code>, <code>professora</code>.</span></div>
+        <div><span class="k">Anotações</span><span>O que ajuda a vender: cor preferida, se é professora, data de aniversário, se tem filhos.</span></div>
+      </div>
+      <p class="atencao"><b>Se aparecer</b> “Esse contato já existe — abra a ficha dela”: a cliente já está na lista. Feche, procure o nome em <b>Contatos</b> e atualize a ficha dela.</p>
+      <p class="dica"><b>Para achar alguém:</b> em <b>Contatos</b>, use a busca. Ela procura por nome, telefone, e-mail ou algo que você anotou (por exemplo, “professora”). Os filtros de situação, origem e interesse ajudam a separar grupos. O botão <b>Baixar planilha</b> salva a lista no computador.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="conversa">
+    <div class="num">5</div>
+    <div class="corpo">
+      <h2>Anotar cada conversa</h2>
+      <p>Esse é o hábito que faz o CRM funcionar. Depois de falar com uma cliente:</p>
+      <ol>
+        <li>Abra a ficha dela (em <b>Contatos</b>, toque no nome).</li>
+        <li>No campo “O que conversaram hoje?”, escreva em uma linha. Ex.: “Quer zafu verde, vai decidir depois do salário”.</li>
+        <li>Toque em <b>Registrar</b> (ou aperte Enter). A anotação entra no histórico com a data de hoje.</li>
+        <li>Se mudou alguma coisa, troque a <b>Situação</b> e toque em <b>Salvar</b>.</li>
+      </ol>
+      <p class="dica"><b>Por que importa:</b> o Painel mostra no quadro <b>Precisam de retorno</b> quem está conversando e está há mais de 5 dias sem contato. Toda vez que você registra uma conversa, ela sai desse quadro.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="funil">
+    <div class="num">6</div>
+    <div class="corpo">
+      <h2>Mudar a situação da cliente no Funil</h2>
+      <p>O Funil mostra todas as clientes em colunas, uma por situação:</p>
+      <div class="tabela">
+        <div><span class="k"><span class="chip c-novo">Novo</span></span><span>Entrou na lista e você ainda não conversou.</span></div>
+        <div><span class="k"><span class="chip c-conv">Conversando</span></span><span>Está tirando dúvida, escolhendo cor ou modelo.</span></div>
+        <div><span class="k"><span class="chip c-comprou">Comprou</span></span><span>Fez a primeira compra.</span></div>
+        <div><span class="k"><span class="chip c-rec">Cliente recorrente</span></span><span>Já comprou mais de uma vez.</span></div>
+        <div><span class="k"><span class="chip c-nao">Não quer receber</span></span><span>Pediu para não receber mensagens. Ela sai de todas as campanhas e o botão de WhatsApp some.</span></div>
+      </div>
+      <ul>
+        <li><b>No computador:</b> clique no cartão da cliente e arraste para a outra coluna.</li>
+        <li><b>No celular:</b> dentro do cartão tem uma caixinha de seleção. Toque nela e escolha a nova situação.</li>
+      </ul>
+      <p class="atencao"><b>Importante:</b> se uma cliente pedir para parar de receber mensagens, mude na hora para <span class="chip c-nao">Não quer receber</span>.</p>
+    </div>
+  </article>
+
+  <article class="passo" id="campanha">
+    <div class="num">7</div>
+    <div class="corpo">
+      <h2>Mandar uma campanha pelo WhatsApp</h2>
+      <p>Uma campanha é uma mensagem que você manda para um grupo de clientes, como a abertura da Black ou o presente de Natal. O CRM prepara a mensagem com o nome de cada uma e controla quem já recebeu.</p>
+      <h3>Criar a campanha</h3>
+      <ol>
+        <li>No menu, toque em <b>Campanhas</b> e crie uma nova.</li>
+        <li>Em <b>Nome da campanha</b>, escreva algo que você reconheça. Ex.: “Black — abertura”.</li>
+        <li>Em <b>Quem recebe</b>, escolha: <b>Todos os contatos</b>, <b>Clientes da loja (Nuvemshop)</b> ou uma <b>etiqueta</b> (ex.: só as <code>professora</code>).</li>
+        <li>Se quiser afinar, escolha um <b>Interesse</b> e marque as <b>Situações</b>. Ex.: só quem tem interesse em Bolster e já comprou.</li>
+        <li>Em <b>Modelo pronto</b>, escolha o texto. Já estão prontos: Mês de Black (abertura), Lembrete Black (até 30/11), Hoje é Black Friday, Último dia da Black, Presente de Natal, Recompra (60 dias depois) e Mensagem livre.</li>
+        <li>Mude o texto se quiser. Onde estiver <code>{nome}</code>, o CRM coloca o primeiro nome de cada cliente. Confira como fica na <b>Prévia</b>.</li>
+        <li>Toque em <b>Salvar campanha</b>.</li>
+      </ol>
+      <h3>Enviar</h3>
+      <ol>
+        <li>Abra a campanha. Aparece a lista de quem vai receber.</li>
+        <li>Toque em <b>Enviar</b> ao lado do nome da primeira cliente. O seu WhatsApp abre com a mensagem já escrita.</li>
+        <li>Confira e aperte enviar no WhatsApp.</li>
+        <li>Volte para o CRM. A cliente já aparece como enviada. Siga para a próxima.</li>
+      </ol>
+      <p class="dica"><b>Dá para mandar aos poucos:</b> a barra de progresso mostra quantas já receberam. Pode mandar 20 hoje e o resto amanhã; o CRM lembra onde você parou. Se marcou alguém sem querer, toque em <b>Desmarcar</b>.</p>
+      <p class="atencao"><b>Para não ter o número bloqueado pelo WhatsApp:</b> mande aos poucos, em blocos de 20 a 30 por vez, com intervalo entre os blocos. Mensagem pessoal, com o nome, é sempre melhor que mensagem igual para todas.</p>
+    </div>
+  </article>
+
+  <section class="rotina" id="rotina">
+    <span class="eyebrow">Depois da primeira vez</span>
+    <h2>Sua rotina</h2>
+    <h3>Todo dia (5 minutos)</h3>
+    <ul>
+      <li>Abra o <b>Painel</b> e responda quem está em <b>Precisam de retorno</b>.</li>
+      <li>Cadastre quem chegou novo e registre as conversas do dia.</li>
+      <li>Quem comprou, mude para <span class="chip c-comprou">Comprou</span> ou <span class="chip c-rec">Cliente recorrente</span>.</li>
+    </ul>
+    <h3>Uma vez por mês</h3>
+    <ul>
+      <li>Exporte a lista de Clientes da Nuvemshop e importe no CRM (passo 2).</li>
+    </ul>
+    <h3>Em datas de campanha</h3>
+    <ul>
+      <li>Crie a campanha com o modelo da data e mande aos poucos (passo 7).</li>
+    </ul>
+    <p class="atencao"><b>Se aparecer</b> “Não consegui salvar”: é a internet. Confira a conexão e toque em Salvar de novo. Nada do que já estava salvo se perde.</p>
+  </section>
+</div>
+
+
+</body>
+</html>
