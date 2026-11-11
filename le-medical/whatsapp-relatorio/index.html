@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Resultado mensal da recuperação de carrinho pelo WhatsApp da LE Medical.">
+<title>LE Medical · Resultado do WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--ground:#EEF4FD;--surface:#fff;--ink:#403838;--ink-2:#5f5656;--ink-3:#8a8080;--line:#d9e4f4;--az:#4A7FC7;--soft:#E3EDFB;
+  --msg:#4A7FC7;--ctrl:#b9b2b2;--ok:#1f8a5b;--ok-soft:#e1f3ea;--warn:#b5651d;--warn-soft:#fbeedd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ground:#151719;--surface:#1e2124;--ink:#EEF0F3;--ink-2:#c3c8cf;--ink-3:#8d949c;--line:#2e3338;--az:#8DB6EE;--soft:#1f2a38;
+  --msg:#8DB6EE;--ctrl:#5d6268;--ok:#5fd3a0;--ok-soft:#163328;--warn:#f0a965;--warn-soft:#3a2a17;color-scheme:dark}}
+:root[data-theme="dark"]{--ground:#151719;--surface:#1e2124;--ink:#EEF0F3;--ink-2:#c3c8cf;--ink-3:#8d949c;--line:#2e3338;--az:#8DB6EE;--soft:#1f2a38;
+  --msg:#8DB6EE;--ctrl:#5d6268;--ok:#5fd3a0;--ok-soft:#163328;--warn:#f0a965;--warn-soft:#3a2a17;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,-apple-system,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+.exemplo{background:var(--warn-soft);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px}
+.exemplo b{color:var(--warn)}
+header{border-bottom:1px solid var(--line);padding-bottom:24px;display:grid;gap:10px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--az);font-weight:600;margin:0}
+h1{font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,5vw,42px);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:Nunito,sans-serif;font-weight:800;font-size:23px;margin:0;line-height:1.25}
+p{margin:0;max-width:68ch}
+.sub{color:var(--ink-2);font-size:16px}
+.veredito{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px}
+.grande{font:900 clamp(36px,7vw,56px)/1 Nunito,sans-serif;color:var(--ok);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:13px;font-weight:600;border-radius:99px;padding:4px 12px}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px}
+.kpi span{font-size:13px;color:var(--ink-2)}
+.kpi b{font:800 26px/1.15 Nunito,sans-serif;font-variant-numeric:tabular-nums}
+.bloco{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:14px}
+.legenda{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--ink-2)}
+.legenda i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+svg text{font-family:Inter,sans-serif}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:700}
+.nota{font-size:13px;color:var(--ink-3)}
+ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:70ch}
+footer{padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+#erro{display:none}
+</style>
+</head>
+<body><div class="wrap">
+<div class="exemplo" id="faixa-exemplo" hidden><b>Este é um relatório de exemplo.</b> Os números foram simulados com o volume real de carrinhos da LE (cerca de 590 casos por mês) e taxas conservadoras, para mostrar como vocês vão receber o resultado. O primeiro relatório de verdade sai 7 dias depois do fim do primeiro mês.</div>
+
+<header>
+  <p class="eyebrow" id="eyebrow">LE Medical · Recuperação pelo WhatsApp</p>
+  <h1>Quanto voltou por causa das mensagens</h1>
+  <p class="sub" id="periodo"></p>
+</header>
+
+<p id="erro" class="exemplo">Não foi possível carregar os dados deste relatório.</p>
+
+<section class="veredito">
+  <p class="eyebrow">Vendas a mais por causa do WhatsApp</p>
+  <div class="grande" id="v-incremental">—</div>
+  <p id="v-faixa"></p>
+  <div><span class="pill" id="v-pill"></span></div>
+  <p id="v-retorno"></p>
+</section>
+
+<section class="kpis">
+  <div class="kpi"><span>Pessoas que pararam na compra</span><b id="k-casos">—</b><span id="k-casos-sub"></span></div>
+  <div class="kpi"><span>Mensagens enviadas</span><b id="k-env">—</b><span id="k-env-sub"></span></div>
+  <div class="kpi"><span>Compraram depois da mensagem</span><b id="k-rec">—</b><span id="k-rec-sub"></span></div>
+  <div class="kpi"><span>Custo do mês para a LE</span><b id="k-custo">—</b><span id="k-custo-sub"></span></div>
+</section>
+
+<section class="bloco">
+  <h2>Quem recebeu mensagem comprou mais?</h2>
+  <p id="comp-texto"></p>
+  <div class="legenda"><span><i style="background:var(--msg)"></i>Recebeu mensagem</span><span><i style="background:var(--ctrl)"></i>Não recebeu (grupo de comparação)</span></div>
+  <div class="scroll"><svg id="g-trilhas" width="100%" role="img" aria-label="Taxa de compra por motivo, com e sem mensagem"></svg></div>
+  <p class="nota" id="comp-nota"></p>
+</section>
+
+<section class="bloco">
+  <h2>O caminho das mensagens</h2>
+  <p id="funil-texto"></p>
+  <div class="scroll"><svg id="g-funil" width="100%" role="img" aria-label="Mensagens enviadas, entregues, lidas, cliques e respostas"></svg></div>
+</section>
+
+<section class="bloco">
+  <h2>As vendas, uma a uma</h2>
+  <p>Cada compra de quem recebeu mensagem, pelo contato mais forte antes de pagar. Mostra como a mensagem agiu; o valor que conta como resultado é o da comparação acima.</p>
+  <div class="scroll"><table id="t-evid"><thead><tr><th>O que a pessoa fez</th><th class="n">Vendas</th><th class="n">Valor</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section class="bloco">
+  <h2>Custo e retorno</h2>
+  <div class="scroll"><table id="t-custo"><thead><tr><th>Item</th><th class="n">Quantidade</th><th class="n">Valor</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section class="bloco">
+  <h2>Como a conta é feita</h2>
+  <ul id="metodo"></ul>
+</section>
+
+<footer id="rodape">GGD · Gio Growth Digital · Página não indexada.</footer>
+</div>
+
+<script>
+const brl = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const pct = v => (v * 100).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + '%';
+const num = v => Math.round(v).toLocaleString('pt-BR');
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, txt) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (txt != null) e.textContent = txt; return e; }
+
+function trilhas(svg, linhas) {
+  const W = 860, rowH = 74, L = 210, R = 70, H = linhas.length * rowH + 20;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.style.minWidth = '560px';
+  const max = Math.max(...linhas.flatMap(l => [l.taxa_msg, l.taxa_ctrl]), 0.05) * 1.1;
+  const X = v => L + v / max * (W - L - R);
+  linhas.forEach((l, i) => {
+    const y = 14 + i * rowH;
+    svg.append(el('text', {x: 0, y: y + 20, fill: 'var(--ink)', 'font-size': 15, 'font-weight': 600}, l.trilha));
+    svg.append(el('text', {x: 0, y: y + 40, fill: 'var(--ink-3)', 'font-size': 12.5}, `${l.casos_msg + l.casos_ctrl} pessoas`));
+    [[l.taxa_msg, 'var(--msg)', l.rec_msg + ' de ' + l.casos_msg, 0], [l.taxa_ctrl, 'var(--ctrl)', l.rec_ctrl + ' de ' + l.casos_ctrl, 26]].forEach(([v, c, t, dy]) => {
+      svg.append(el('rect', {x: L, y: y + 6 + dy, width: Math.max(X(v) - L, 2), height: 20, rx: 4, fill: c}));
+      svg.append(el('text', {x: X(v) + 8, y: y + 21 + dy, fill: 'var(--ink)', 'font-size': 13, 'font-weight': 600}, pct(v)));
+      svg.append(el('text', {x: X(v) + 60, y: y + 21 + dy, fill: 'var(--ink-3)', 'font-size': 12}, t));
+    });
+  });
+}
+
+function funil(svg, e) {
+  const etapas = [['Enviadas', e.enviadas], ['Entregues', e.entregues], ['Lidas', e.lidas], ['Clicaram no link', e.cliques], ['Responderam', e.respostas]];
+  const W = 860, rowH = 40, L = 170, R = 240, H = etapas.length * rowH + 8;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.style.minWidth = '560px';
+  etapas.forEach(([nome, v], i) => {
+    const y = 4 + i * rowH, w = Math.max(v / etapas[0][1] * (W - L - R), 2);
+    svg.append(el('text', {x: 0, y: y + 21, fill: 'var(--ink)', 'font-size': 14}, nome));
+    svg.append(el('rect', {x: L, y: y + 4, width: w, height: 24, rx: 4, fill: 'var(--msg)', 'fill-opacity': i ? 0.75 : 1}));
+    svg.append(el('text', {x: L + w + 10, y: y + 21, fill: 'var(--ink)', 'font-size': 14, 'font-weight': 600}, num(v)));
+    if (i) svg.append(el('text', {x: L + w + 70, y: y + 21, fill: 'var(--ink-3)', 'font-size': 12.5}, pct(v / etapas[0][1]) + ' das enviadas'));
+  });
+}
+
+fetch('dados.json', {cache: 'no-store'}).then(r => r.json()).then(d => {
+  const p = d.prova, c = d.custo, e = d.envio, k = d.casos;
+  $('faixa-exemplo').hidden = !d.exemplo;
+  $('eyebrow').textContent = `${d.cliente} · Recuperação pelo WhatsApp`;
+  $('periodo').textContent = d.periodo + ` · conta quem pagou em até ${d.janela_dias} dias depois de parar na compra.`;
+  $('v-incremental').textContent = brl(p.incremental);
+  $('v-faixa').textContent = `Com 95% de confiança, entre ${brl(Math.max(p.incremental_min, 0))} e ${brl(p.incremental_max)}. É a diferença de compra entre quem recebeu e quem não recebeu mensagem, aplicada a quem recebeu.`;
+  $('v-pill').textContent = p.conclusivo ? 'Resultado comprovado neste mês' : 'Ainda não dá para afirmar: precisa de mais um mês';
+  $('v-pill').className = 'pill ' + (p.conclusivo ? 'ok' : 'warn');
+  $('v-retorno').textContent = `Para cada R$ 1 que a LE pagou no mês (mensagens + GGD), voltaram R$ ${c.retorno.toLocaleString('pt-BR', {maximumFractionDigits: 1})} em vendas a mais.`;
+  $('k-casos').textContent = num(k.total);
+  $('k-casos-sub').textContent = `${num(k.mensagem)} receberam · ${num(k.controle)} no grupo de comparação`;
+  $('k-env').textContent = num(e.enviadas);
+  $('k-env-sub').textContent = `1ª ${num(e.por_passo[0])} · 2ª ${num(e.por_passo[1])} · 3ª ${num(e.por_passo[2])}`;
+  $('k-rec').textContent = num(p.rec_msg);
+  $('k-rec-sub').textContent = `${brl(p.receita_msg)} · ${pct(p.taxa_msg)} de quem recebeu`;
+  $('k-custo').textContent = brl(c.total);
+  $('k-custo-sub').textContent = `${brl(c.custo_mensagens)} de mensagens + ${brl(c.taxa_ggd)} GGD`;
+  $('comp-texto').textContent = `No geral, ${pct(p.taxa_msg)} de quem recebeu mensagem comprou, contra ${pct(p.taxa_ctrl)} de quem não recebeu: ${p.diferenca_pp.toLocaleString('pt-BR', {maximumFractionDigits: 1})} pontos a mais (margem de ±${p.margem_pp.toLocaleString('pt-BR', {maximumFractionDigits: 1})}).`;
+  const melhor = [...d.trilhas].sort((a, b) => (b.taxa_msg - b.taxa_ctrl) - (a.taxa_msg - a.taxa_ctrl));
+  $('comp-nota').textContent = `Maior efeito: ${melhor[0].trilha.toLowerCase()}. Menor: ${melhor.at(-1).trilha.toLowerCase()}. Os motivos com poucas pessoas variam muito de um mês para o outro; o que vale é o total.`;
+  trilhas($('g-trilhas'), d.trilhas);
+  $('funil-texto').textContent = `${pct(e.entregues / e.enviadas)} das mensagens chegaram e ${pct(e.lidas / e.enviadas)} foram lidas. ${num(e.erros)} não foram entregues (número inválido, sem WhatsApp ou limite do Meta) e não são cobradas.`;
+  funil($('g-funil'), e);
+  const tb = $('t-evid').tBodies[0];
+  let tv = 0, tr = 0;
+  d.evidencia.forEach(x => { tv += x.vendas; tr += x.receita; tb.insertAdjacentHTML('beforeend', `<tr><td>${x.faixa}</td><td class="n">${num(x.vendas)}</td><td class="n">${brl(x.receita)}</td></tr>`); });
+  tb.insertAdjacentHTML('beforeend', `<tr class="total"><td>Total de quem recebeu mensagem</td><td class="n">${num(tv)}</td><td class="n">${brl(tr)}</td></tr>`);
+  const tc = $('t-custo').tBodies[0];
+  [['Mensagens de venda (carrinho e cartão recusado)', num(c.mensagens_marketing), brl(c.custo_marketing)],
+   ['Avisos de serviço (pedido sem pagamento)', num(c.mensagens_utilidade), brl(c.custo_utilidade)],
+   ['Taxa da GGD', '', brl(c.taxa_ggd)]].forEach(r => tc.insertAdjacentHTML('beforeend', `<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`));
+  tc.insertAdjacentHTML('beforeend', `<tr class="total"><td>Total pago pela LE</td><td class="n"></td><td class="n">${brl(c.total)}</td></tr>`);
+  tc.insertAdjacentHTML('beforeend', `<tr class="total"><td>Vendas a mais por causa das mensagens</td><td class="n"></td><td class="n">${brl(p.incremental)}</td></tr>`);
+  [`Cada pessoa é sorteada uma única vez pelo telefone. ${d.pct_controle}% nunca recebem mensagem e formam o grupo de comparação.`,
+   `Conta como compra o pedido pago pela mesma pessoa (telefone, e-mail ou CPF) em até ${d.janela_dias} dias. A regra é igual para os dois grupos.`,
+   'O resultado é a diferença de compra entre os grupos, aplicada a quem recebeu, com margem de 95% de confiança. Assim não contamos quem compraria de qualquer jeito.',
+   'As vendas pelo link também aparecem no GA4 da loja com a origem whatsapp / recuperacao.'].forEach(t => $('metodo').insertAdjacentHTML('beforeend', `<li>${t}</li>`));
+  $('rodape').textContent = `GGD · Gio Growth Digital · Dados gerados em ${new Date(d.gerado_em).toLocaleDateString('pt-BR')} · Página não indexada.`;
+}).catch(() => { $('erro').style.display = 'block'; });
+</script>
+</body>
+</html>
