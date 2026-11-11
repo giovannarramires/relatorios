@@ -146,7 +146,7 @@ const API = "https://n8n.giogrowthdigital.com.br/webhook/giacomo-leads";
 
 const ARTES = {A:"NOIR",B:"ARCOS",C:"GALERIA",D:"LAMINA",E:"MONOCROMO",F:"DETALHE",H:"CARROSSEL_CAPA"};
 // no ar = ligados na Meta (26/10 conferido; D06–D08 e F09V–F11V ligados em 05/11/2026)
-const NO_AR = ["F06A","F08V","D01","D02","D03","D04","D05","D06","D07","D08","F09V","F10V","F11V"];
+const NO_AR = ["F06A","F08V","D01","D02","D03","D04","D05","D06","D07","D08","F09V","F10V","F11V","OT01","OT02","OT03"];
 const CODIGOS = {};
 ["01","02","03","04","05","06"].forEach(p=>{
   Object.entries(ARTES).forEach(([l,arte])=>{
@@ -167,6 +167,9 @@ CODIGOS.D08 = ["Direct · a papada te envelhece (reel)", 0];
 CODIGOS.F09V = ["P09_V_CONTORNO · frio (vídeo 6708)", 0];
 CODIGOS.F10V = ["P10_V_POS_OP · frio (vídeo 6603)", 0];
 CODIGOS.F11V = ["P11_V_ENVELHECE · frio (reel)", 0];
+CODIGOS.OT01 = ["Correção de orelha · vergonha de prender o cabelo (vídeo 6763)", 0];
+CODIGOS.OT02 = ["Correção de orelha · orelha de abano, 40 min (vídeo 6764)", 0];
+CODIGOS.OT03 = ["Correção de orelha · bullying (vídeo 6765)", 0];
 NO_AR.forEach(c=>{ if(CODIGOS[c]) CODIGOS[c][1]=1; });
 // link do anúncio no Instagram (instagram_permalink_url do criativo, lido na Meta em 26/10/2026)
 const LINKS = {
