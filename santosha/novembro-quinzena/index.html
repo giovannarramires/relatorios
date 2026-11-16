@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Santosha · Primeira Quinzena de Novembro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: mesma família do parcial de 10/11; números → por canal → o que vendeu → por que precisamos de material novo → pedido */
+:root{
+  --bg:#f6f7f3; --surface:#ffffff; --fg:#1f2a24; --muted:#5f6b63; --line:#dde2da;
+  --accent:#3f6b52; --accent-soft:#e5eee7; --best:#9a6b3a; --best-soft:#f3e9dc; --up:#2f7a4c;
+  --display:"Fraunces", Georgia, serif; --body:"Figtree", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1c241f; --fg:#e6ebe6; --muted:#9aa69e; --line:#2e3832;
+  --accent:#8cc3a2; --accent-soft:#22302a; --best:#d6a46e; --best-soft:#352b20; --up:#7cc79a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1c241f; --fg:#e6ebe6; --muted:#9aa69e; --line:#2e3832;
+  --accent:#8cc3a2; --accent-soft:#22302a; --best:#d6a46e; --best-soft:#352b20; --up:#7cc79a; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:650;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.7rem);line-height:1.1}
+h2{font-size:1.45rem;line-height:1.2}
+h3{font-size:1.1rem;line-height:1.25}
+p{margin:0;max-width:66ch}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:grid;gap:12px}
+.lead{font-size:1.08rem;color:var(--muted)}
+section{display:grid;gap:16px}
+.note{font-size:.85rem;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:2px;min-width:0}
+.kpi .l{font-size:.82rem;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-size:1.9rem;font-weight:650;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:.85rem;color:var(--muted)}
+.kpi .s b{color:var(--up);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+tr.nov td{background:var(--accent-soft);font-weight:600}
+tr.best td:first-child::after{content:"melhor mês";margin-left:8px;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--best);background:var(--best-soft);padding:2px 7px;border-radius:4px;font-weight:600}
+ul.takes{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+ul.takes li{background:var(--accent-soft);border-radius:10px;padding:14px 18px}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.vid{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:6px;align-content:start;min-width:0}
+.vid .n{font-family:var(--display);font-size:1.5rem;font-weight:650;font-variant-numeric:tabular-nums}
+.vid .t{font-weight:600}
+.vid .d{font-size:.9rem;color:var(--muted)}
+.ask{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:22px 24px;display:grid;gap:16px}
+.ask .when{display:flex;flex-wrap:wrap;gap:10px}
+.pill{display:inline-block;background:var(--accent);color:var(--bg);font-weight:600;font-size:.9rem;padding:4px 12px;border-radius:999px}
+.pill.soft{background:var(--accent-soft);color:var(--fg)}
+ol.pauta{margin:0;padding-left:22px;display:grid;gap:14px}
+ol.pauta li{max-width:68ch}
+ol.pauta b{font-weight:600}
+ol.pauta .why{display:block;font-size:.9rem;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.rule{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:.9rem}
+.rule b{display:block}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.foot{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px}
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.plat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.plat .n{font-family:var(--display);font-size:1.6rem;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.15}
+.plat ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.93rem}
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:4px;min-width:0}
+.sc.on{border:2px solid var(--accent)}
+.sc .v{font-family:var(--display);font-size:1.7rem;font-weight:650;font-variant-numeric:tabular-nums}
+.sc .d{font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Santosha · primeira quinzena de novembro · 1 a 15/11/2026</span>
+  <h1>A quinzena de novembro vendeu quase o dobro de outubro</h1>
+  <p class="lead">A promoção de novembro dobrou os pedidos e trouxe mais gente comprando pelos anúncios. Ela terminou em 15/11. O que vai puxar a segunda quinzena e a Black Friday é material novo no ar.</p>
+</header>
+
+<section>
+  <div class="kpis">
+    <div class="kpi"><span class="l">Vendas brutas (1 a 15/11)</span><span class="v">R$ 23.581</span><span class="s"><b>+84%</b> sobre 1 a 15/10 (R$ 12.844)</span></div>
+    <div class="kpi"><span class="l">Pedidos</span><span class="v">84</span><span class="s"><b>o dobro</b> de 1 a 15/10 (42)</span></div>
+    <div class="kpi"><span class="l">Compras pelos anúncios do Meta</span><span class="v">67</span><span class="s"><b>2,8x</b> as 24 de 1 a 15/10</span></div>
+    <div class="kpi"><span class="l">Custo para aparecer a mil pessoas</span><span class="v">R$ 17,50</span><span class="s"><b>o menor do semestre</b> (set R$ 32 · out R$ 21)</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Por canal</h2>
+  <div class="plats">
+    <div class="plat">
+      <span class="eyebrow">Meta (Instagram e Facebook)</span>
+      <span class="n">R$ 12,5 mil</span>
+      <span class="note">em 67 compras atribuídas pelo Meta</span>
+      <ul>
+        <li>Na loja, 47 pedidos chegaram direto de um anúncio, somando R$ 10,8 mil. Em outubro foram 10.</li>
+        <li>Os anúncios para quem já conhece a marca foram o motor da quinzena.</li>
+        <li>Com o custo por mil pessoas no menor nível do semestre, o mesmo investimento alcançou mais gente.</li>
+      </ul>
+    </div>
+    <div class="plat">
+      <span class="eyebrow">Google</span>
+      <span class="n">R$ 3,4 mil</span>
+      <span class="note">em 10 compras atribuídas pelo Google</span>
+      <ul>
+        <li>Quem procura "Santosha" no Google é a compra mais eficiente da conta: R$ 2,2 mil em vendas.</li>
+        <li>Concentramos o Google na busca pela marca e no Shopping. O retorno subiu e o investimento ficou menor que o de outubro.</li>
+        <li>Na loja, os pedidos vindos do Google foram de R$ 838 para R$ 2.594.</li>
+      </ul>
+    </div>
+    <div class="plat">
+      <span class="eyebrow">Instagram da marca e acesso direto</span>
+      <span class="n">R$ 6,4 mil</span>
+      <span class="note">em 18 pedidos (link da bio e site digitado)</span>
+      <ul>
+        <li>Muita gente conhece a Santosha pelo anúncio e volta depois pela bio ou digitando o site para fechar a compra.</li>
+        <li>Para medir isso melhor, vale colocar o link com UTM no Linktree (o <a href="https://relatorios.giogrowthdigital.com.br/santosha/links-bio/" target="_blank" rel="noopener">passo a passo está aqui</a>).</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Valores atribuídos pelo Meta e pelo Google a partir dos próprios painéis. Os pedidos por origem foram lidos na Shopify, pelo link de entrada de cada pedido.</p>
+</section>
+
+<section>
+  <h2>O que vendeu</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Produto</th><th>1 a 15/10</th><th>1 a 15/11</th></tr></thead>
+    <tbody>
+      <tr><td>Matosha (tapetes)</td><td>12 un · R$ 6.696</td><td>14 un · R$ 7.812</td></tr>
+      <tr><td>Teoria &amp; Prática (e-book)</td><td>3 un · R$ 144</td><td>76 un · R$ 3.648</td></tr>
+      <tr><td>Cartasflow</td><td>10 un · R$ 2.180</td><td>17 un · R$ 3.607</td></tr>
+      <tr><td>Pôster Ashtanga Yoga</td><td>8 un · R$ 784</td><td>32 un · R$ 3.121</td></tr>
+      <tr><td>Cartasanas de Yoga</td><td>4 un · R$ 1.232</td><td>8 un · R$ 2.324</td></tr>
+      <tr><td>Manual de Sequências</td><td>8 un · R$ 384</td><td>19 un · R$ 786</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="takes">
+    <li><b>Baralhos e pôster cresceram mais de 2x.</b> Cartasflow e Cartasanas somaram R$ 5,9 mil na quinzena, contra R$ 3,4 mil em outubro. O pôster Ashtanga quadruplicou.</li>
+    <li><b>O tapete é o produto de maior valor e vende com o estoque que tem.</b> Foram 14 tapetes na quinzena. A reposição chega em dezembro, a tempo do Natal. Até lá, publicar o MATravel Sunny (14 unidades já na loja, em rascunho) coloca mais um produto acima de R$ 300 nos anúncios.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Os anúncios que mais venderam na quinzena</h2>
+  <p>O campeão de novembro é um vídeo gravado em outubro. Material novo, com o produto em uso, é o que vende.</p>
+  <div class="vids">
+    <div class="vid"><span class="n">30 compras</span><span class="t">Pôster Ashtanga no cantinho de prática</span><span class="d">R$ 3,7 mil. Vídeo gravado em outubro, mais a peça do pôster.</span></div>
+    <div class="vid"><span class="n">11 compras</span><span class="t">Vídeo do Cartasflow</span><span class="d">R$ 2,6 mil. Segue sendo o campeão das cartas.</span></div>
+    <div class="vid"><span class="n">11 compras</span><span class="t">Carrossel e story da promoção de novembro</span><span class="d">R$ 4,2 mil. Os combos e descontos trouxeram os pedidos maiores.</span></div>
+    <div class="vid"><span class="n">9 compras</span><span class="t">Vídeos do Manual de Sequências</span><span class="d">R$ 1,3 mil. O e-book por dentro, que leva para os outros produtos.</span></div>
+  </div>
+  <p class="note">Compras e vendas atribuídas pelo Meta, de 01/11 a 15/11/2026.</p>
+</section>
+
+<section>
+  <h2>Por que precisamos de material novo agora</h2>
+  <ul class="takes">
+    <li><b>Anúncio cansa.</b> Os anúncios para quem já conhece a marca mostram as mesmas peças para o mesmo grupo de pessoas. Depois de algumas semanas, cada real investido traz menos compras. Nos últimos dias da quinzena isso começou a acontecer com as peças que estão no ar desde outubro. É o sinal de que é hora de trocar.</li>
+    <li><b>Vídeo novo vende rápido.</b> Os vídeos gravados em outubro venderam já nas primeiras semanas. O do pôster Ashtanga no cantinho fez 18 compras em menos de 3 semanas.</li>
+    <li><b>Vídeo novo também barateia o anúncio.</b> Quando os vídeos de outubro entraram, o custo para aparecer a mil pessoas caiu de R$ 32 para R$ 21. Em novembro está em R$ 17,50.</li>
+    <li><b>O anúncio precisa de uns dias para aprender.</b> Vídeo que entra até 18/11 chega pronto na Black Friday (27/11) e segue rendendo em dezembro, o mês mais forte do ano (R$ 86 mil em dezembro de 2025).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Onde novembro pode fechar</h2>
+  <div class="scen">
+    <div class="sc"><span class="l eyebrow">Sem material novo</span><span class="v">~R$ 35 mil</span><span class="d">Segunda quinzena só com as peças que já estão no ar.</span></div>
+    <div class="sc on"><span class="l eyebrow">Com os vídeos até 18/11</span><span class="v">~R$ 38 a 39 mil</span><span class="d">Vídeos novos no ar a partir de 19/11, no ritmo de outubro sem promoção.</span></div>
+    <div class="sc"><span class="l eyebrow">Vídeos + Sunny + Black</span><span class="v">até ~R$ 42 mil</span><span class="d">Black Friday (27 a 30/11) com peças novas e o MATravel Sunny publicado.</span></div>
+  </div>
+  <p class="note">Em todos os cenários, novembro fecha acima de setembro (R$ 34,7 mil) e de outubro (R$ 29,9 mil). Até 16/11 já entraram R$ 23,7 mil.</p>
+</section>
+
+<section class="ask">
+  <div class="when">
+    <span class="pill">Pedido: 6 vídeos novos, já editados</span>
+    <span class="pill soft">até terça, 18/11</span>
+    <span class="pill soft">Black Friday: 27/11</span>
+  </div>
+  <h2>O que precisamos de vocês</h2>
+  <ol class="pauta">
+    <li><b>Tapete em uso, um vídeo por estampa à venda</b> (Guia Lunar, Yoginis, Mocha). Abre com alguém praticando e termina na estampa de perto.
+      <span class="why">É o formato que mais vendeu desde agosto (47 compras, R$ 23,1 mil).</span></li>
+    <li><b>"Três cartas, uma prática"</b> com o Cartasanas ou o Cartasflow.
+      <span class="why">Os baralhos foram o que mais cresceu na quinzena.</span></li>
+    <li><b>Kit de presente: tapete + cartas</b>, abrindo o pacote como presente de Natal.
+      <span class="why">Junta os dois produtos de maior valor num pedido só.</span></li>
+    <li><b>Cliente falando do produto</b>, gravado pelo celular dela.
+      <span class="why">O depoimento do MATravel vendeu 11 vezes.</span></li>
+    <li><b>Prática em lugar bonito</b> com o tapete.
+      <span class="why">Traz gente nova para a marca e para os anúncios de quem já conhece.</span></li>
+    <li><b>Cantinho de prática</b>: pendurar o pôster, acender a vela, desenrolar o tapete.
+      <span class="why">Repete o vídeo do pôster, que vendeu nas primeiras semanas, agora puxando o tapete junto.</span></li>
+  </ol>
+  <div class="rules">
+    <div class="rule"><b>Vertical 9:16, 9 a 20 s</b>celular em pé</div>
+    <div class="rule"><b>Abre com prática</b>gente em movimento nos 2 primeiros segundos</div>
+    <div class="rule"><b>Frase na tela no início</b>muita gente assiste sem som</div>
+    <div class="rule"><b>Arquivo final limpo</b>sem marca d'água do CapCut ou do TikTok</div>
+  </div>
+  <p>Também ajuda muito: <b>publicar o MATravel Sunny</b> na loja. Os roteiros cena a cena estão na <a href="https://relatorios.giogrowthdigital.com.br/santosha/o-que-gravar/" target="_blank" rel="noopener">pauta de gravação</a>.</p>
+</section>
+
+<section>
+  <h2>O que a gente faz do nosso lado</h2>
+  <ul class="takes">
+    <li><b>Assim que os vídeos chegarem:</b> subimos no mesmo dia e, em 3 a 4 dias, vemos quais vendem, para entrar na Black Friday só com os melhores.</li>
+    <li><b>Até lá:</b> damos mais peso às peças que seguem vendendo bem, como o pôster e o carrossel de novembro, e ao Google na busca pela marca e no Shopping.</li>
+  </ul>
+</section>
+
+<div class="foot">
+  <span>Fonte: pedidos da Shopify (vendas brutas, sem cancelados), Meta Ads e Google Ads, consultados em 16/11/2026. Comparação com os mesmos dias de outubro.</span>
+  <span>Gio Growth Digital</span>
+</div>
+
+</div>
+
+</body>
+</html>
