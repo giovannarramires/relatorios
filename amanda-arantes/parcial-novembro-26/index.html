@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Amanda Arantes · Parcial de Novembro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --nude:#e7d3c4; --nude-soft:#f6ece5; --sand:#c9a58a; --cocoa:#8a6551;
+    --deep:#4a3528; --ink:#3a2c22; --gold:#b98d5f; --cream:#fbf7f3; --line:#eaddd2;
+    --surface:#ffffff;
+    --pos:#7a8f6a;
+    --shadow:0 1px 2px rgba(74,53,40,.04), 0 10px 30px rgba(138,101,81,.08);
+    --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Jost',sans-serif; background:var(--cream); color:var(--ink);
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif; text-wrap:balance}
+  h1{font-size:clamp(34px,5vw,52px); font-weight:600; line-height:1.1; color:var(--deep); letter-spacing:.2px}
+  h2{font-size:30px; font-weight:600; color:var(--deep)}
+  h3{font-size:21px; font-weight:600; color:var(--deep)}
+
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px 88px; display:flex; flex-direction:column; gap:52px}
+
+  .hero{
+    background:linear-gradient(135deg,#f6ece5 0%,#e7d3c4 55%,#d9bda8 100%);
+    padding:76px 24px 66px; text-align:center; position:relative; overflow:hidden; margin-bottom:8px;
+  }
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.55),transparent 45%);pointer-events:none}
+  .hero-in{max-width:820px; margin:0 auto; position:relative}
+  .hero .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:11.5px;color:var(--cocoa);font-weight:500;margin-bottom:22px}
+  .hero .sub{font-size:19px;color:var(--cocoa);margin-top:18px;font-weight:300;max-width:60ch;margin-left:auto;margin-right:auto}
+  .hero .period{display:inline-block;margin-top:28px;padding:9px 26px;border:1px solid var(--sand);border-radius:40px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:rgba(255,255,255,.4)}
+
+  .eyebrow{font-size:11.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--cocoa)}
+
+  section{display:flex; flex-direction:column; gap:20px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+
+  .painel{padding:32px; display:flex; flex-direction:column; gap:26px}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:26px}
+  .kpi{display:flex; flex-direction:column; gap:3px}
+  .kpi .rot{font-size:13px; color:var(--cocoa); letter-spacing:.02em}
+  .kpi .val{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:38px; line-height:1.05; color:var(--deep); font-variant-numeric:tabular-nums}
+  .kpi .val.destaque{color:var(--gold)}
+  .kpi .nota{font-size:12.5px; color:var(--cocoa); opacity:.9}
+  .barra{height:1px; background:var(--line)}
+
+  .faixa{background:var(--nude-soft); border:1px solid var(--line); border-radius:var(--r); padding:28px 30px; display:flex; flex-direction:column; gap:10px}
+  .faixa .num{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:42px; color:var(--deep); line-height:1.05; font-variant-numeric:tabular-nums}
+  .faixa p{color:var(--cocoa)}
+
+  .tabela-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow)}
+  table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:14.5px}
+  th,td{padding:14px 13px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line)}
+  th:first-child, td:first-child{text-align:left}
+  thead th{font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--cocoa); background:var(--nude-soft)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.destaque td{background:rgba(231,211,196,.28); font-weight:500}
+  td .up{color:var(--pos); font-weight:500}
+  .cap{font-size:13.5px; color:var(--cocoa)}
+
+  ul.lista{list-style:none; display:flex; flex-direction:column; gap:16px}
+  ul.lista li{display:flex; gap:14px; align-items:flex-start}
+  ul.lista li .marc{width:7px;height:7px;border-radius:50%;background:var(--sand);margin-top:11px;flex:none}
+  ul.lista li b{font-weight:500; color:var(--deep)}
+  ul.lista li span{color:var(--cocoa)}
+  ul.lista li b + span, ul.lista li > span > b{color:var(--deep)}
+  ul.lista li > span{color:var(--cocoa)}
+
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px}
+  .bloco{padding:28px; display:flex; flex-direction:column; gap:12px}
+  .bloco p{font-size:15px; color:var(--cocoa)}
+  .bloco p strong{color:var(--deep); font-weight:500}
+
+
+  /* galeria de videos — thumb clicavel que abre o post no Instagram */
+  .videos{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:20px}
+  .vcard{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+    text-decoration:none; color:inherit; transition:transform .18s, box-shadow .18s;
+  }
+  .vcard:hover{transform:translateY(-3px); box-shadow:0 2px 4px rgba(74,53,40,.06), 0 16px 36px rgba(138,101,81,.16)}
+  .vthumb{position:relative; aspect-ratio:9/16; background:var(--nude-soft); overflow:hidden}
+  .vthumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .vthumb .play{
+    position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+    background:linear-gradient(to top, rgba(58,44,34,.34), transparent 42%);
+  }
+  .vthumb .play svg{width:42px;height:42px; filter:drop-shadow(0 2px 8px rgba(0,0,0,.4)); opacity:.94}
+  .selo{
+    position:absolute; top:11px; left:11px; z-index:2;
+    background:rgba(251,247,243,.94); color:var(--deep); border-radius:40px;
+    padding:4px 11px; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:500;
+  }
+  .selo.off{background:rgba(58,44,34,.62); color:#fbf7f3}
+  .vbody{padding:16px 17px 18px; display:flex; flex-direction:column; gap:12px; flex:1}
+  .vbody h3{font-size:18px; line-height:1.2}
+  .vnums{display:flex; flex-direction:column; gap:5px; font-size:13px; color:var(--cocoa)}
+  .vnums div{display:flex; justify-content:space-between; gap:10px; font-variant-numeric:tabular-nums}
+  .vnums b{font-weight:500; color:var(--deep)}
+  .vnums .forte b{color:var(--gold)}
+  .vlink{
+    margin-top:auto; padding-top:11px; border-top:1px solid var(--line);
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--sand);
+    display:flex; align-items:center; gap:6px;
+  }
+  .vcard:hover .vlink{color:var(--cocoa)}
+
+
+  /* o video da campanha de perfil — thumb ao lado do texto */
+  .perfil-card{display:grid; grid-template-columns:150px 1fr; gap:24px; padding:24px; align-items:start}
+  .perfil-card .pthumb{position:relative; aspect-ratio:9/16; border-radius:12px; overflow:hidden; background:var(--nude-soft)}
+  .perfil-card .pthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .perfil-card .ptxt{display:flex; flex-direction:column; gap:12px}
+  .perfil-card .ptxt p{font-size:15px; color:var(--cocoa)}
+  .perfil-card .ptxt p strong{color:var(--deep); font-weight:500}
+  @media (max-width:560px){ .perfil-card{grid-template-columns:110px 1fr; gap:16px; padding:18px} }
+
+  footer{border-top:1px solid var(--line); padding-top:26px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--cocoa)}
+
+  @media (max-width:600px){
+    .wrap{padding:0 18px 60px; gap:40px}
+    .painel{padding:24px}
+    .hero{padding:56px 20px 48px}
+  }
+  @media print{
+    body{background:#fff}
+    .hero{background:linear-gradient(135deg,#f6ece5,#e7d3c4)!important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .card,.faixa,.tabela-wrap,thead th,tbody tr.destaque td{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">Amanda Arantes · acompanhamento de mídia</p>
+    <h1>2.257 seguidores novos em 14 dias, a R$&nbsp;0,29 cada</h1>
+    <p class="sub">O retrato da primeira quinzena de novembro, para você acompanhar o mês enquanto ele ainda está em andamento.</p>
+    <span class="period">1 a 15 de novembro de 2026</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="card painel">
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Seguidores novos</span>
+          <span class="val">2.257</span>
+          <span class="nota">de 1 a 14/11 · 161 por dia</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Custo por seguidor</span>
+          <span class="val destaque">R$ 0,29</span>
+          <span class="nota">era R$ 0,69 em outubro</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Perfil em 15/11</span>
+          <span class="val">61.487</span>
+          <span class="nota">saldo de +1.936 no mês</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Investimento</span>
+          <span class="val">R$ 716</span>
+          <span class="nota">de 1 a 15/11 · dentro do planejado</span>
+        </div>
+      </div>
+      <div class="barra"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="rot">Visualizações de 3s</span>
+          <span class="val">53.764</span>
+          <span class="nota">nos anúncios de vídeo e de perfil</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Assistiram até o fim</span>
+          <span class="val">15.750</span>
+          <span class="nota">ou pelo menos 15 segundos</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Cliques no seu perfil</span>
+          <span class="val">1.168</span>
+          <span class="nota">vindos do anúncio de perfil</span>
+        </div>
+        <div class="kpi">
+          <span class="rot">Vezes que os anúncios apareceram</span>
+          <span class="val">105.759</span>
+          <span class="nota">em feed, stories e reels</span>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Os 2.257 são seguidores <strong>novos</strong>, que começaram a seguir no período (o dia 15 ainda está sendo consolidado pelo Instagram). O saldo de +1.936 já desconta quem deixou de seguir no mesmo intervalo, que é o movimento normal de qualquer perfil desse tamanho.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">O número da quinzena</p>
+    <div class="faixa">
+      <span class="num">R$ 0,29 por seguidor</span>
+      <p>Este é o custo mais baixo desde que começamos a acompanhar. Comparando a mesma janela, o seguidor saiu <strong>pela metade do preço de setembro</strong> e por <strong>menos da metade do de outubro</strong>. O volume também subiu: foram 2.257 seguidores novos em novembro, contra 1.355 em setembro.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como novembro se compara</h2>
+    <p class="cap">Em todos os meses usamos o período do dia 1 ao dia 14, para a comparação ser justa.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Período</th><th>Investimento</th><th>Seguidores novos</th><th>Custo/seguidor</th></tr>
+        </thead>
+        <tbody>
+          <tr class="destaque"><td>1–14 de novembro/26</td><td>R$ 662</td><td>2.257</td><td><span class="up">R$ 0,29</span></td></tr>
+          <tr><td>1–14 de outubro/26</td><td>R$ 560</td><td>817</td><td>R$ 0,69</td></tr>
+          <tr><td>1–14 de setembro/26</td><td>R$ 772</td><td>1.355</td><td>R$ 0,57</td></tr>
+          <tr><td>1–14 de agosto/26</td><td>R$ 550</td><td>660</td><td>R$ 0,83</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Com uma verba parecida com a de agosto e a de outubro, novembro trouxe quase três vezes mais seguidores.</p>
+  </section>
+
+  <section>
+    <h2>O que fez a diferença</h2>
+    <div class="duo">
+      <div class="card bloco">
+        <h3>Verba concentrada em seguidor</h3>
+        <p>Desde o fim de outubro, a maior parte do investimento vai para o <strong>anúncio que leva as pessoas direto ao seu perfil</strong>. Nesta quinzena, 74% da verba foi para ele. Ao lado, um vídeo seu segue rodando para manter alcance e visualizações.</p>
+      </div>
+      <div class="card bloco">
+        <h3>O seu reel de 05/11</h3>
+        <p>O reel “🙃🤭😅” foi muito bem por conta própria: <strong>315 mil pessoas alcançadas e 8,8 mil compartilhamentos</strong>. Nos dias seguintes, os seguidores novos chegaram a 251 por dia. Quando o conteúdo engaja assim, o anúncio também rende mais.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como cada vídeo se saiu</h2>
+    <p class="cap">Medimos quanto custa fazer o vídeo ser visto por pelo menos 3 segundos, a cada mil visualizações. Quanto menor, melhor.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Vídeo</th><th>Visualizações de 3s</th><th>Custo por mil</th><th>Assistiram até o fim</th></tr>
+        </thead>
+        <tbody>
+          <tr class="destaque"><td>“Achou o quê?”</td><td>21.347</td><td><span class="up">R$ 3,84</span></td><td>39%</td></tr>
+          <tr><td>“O poder de um elogio” (teste de 05 a 15/11)</td><td>16.349</td><td>R$ 6,45</td><td>29%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">Testamos “O poder de um elogio” como anúncio por 11 dias. O “Achou o quê?” continuou mais eficiente, então encerramos o teste e levamos essa verba para o anúncio de perfil, que é o que traz seguidor.</p>
+  </section>
+
+  <section>
+    <h2>As próximas duas semanas</h2>
+    <ul class="lista">
+      <li><span class="marc"></span><span><b>Foco em seguidor até o fim do mês.</b> A verba fica concentrada no anúncio de perfil e no “Achou o quê?”, dentro do valor planejado para novembro.</span></li>
+      <li><span class="marc"></span><span><b>Reavaliação na quinta, 19/11.</b> Vamos conferir o custo por seguidor e o ritmo da verba, e ajustar se precisar.</span></li>
+      <li><span class="marc"></span><span><b>Um pedido para os próximos reels:</b> quando possível, use áudio da <b>biblioteca comercial</b> do Instagram ou som original. O reel de 05/11 não pôde virar anúncio porque a Meta bloqueia músicas com direitos autorais. Com áudio liberado, conseguimos anunciar os seus melhores reels assim que eles saem.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Gio Growth Digital · acompanhamento de mídia paga</span>
+    <span>Dados da Meta e do Instagram, de 1 a 15/11/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
