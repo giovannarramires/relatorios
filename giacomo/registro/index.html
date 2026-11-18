@@ -145,8 +145,8 @@ td a{color:inherit}
 const API = "https://n8n.giogrowthdigital.com.br/webhook/giacomo-leads";
 
 const ARTES = {A:"NOIR",B:"ARCOS",C:"GALERIA",D:"LAMINA",E:"MONOCROMO",F:"DETALHE",H:"CARROSSEL_CAPA"};
-// no ar = ligados na Meta (26/10 conferido; D06–D08 e F09V–F11V ligados em 05/11/2026)
-const NO_AR = ["F06A","F08V","D01","D02","D03","D04","D05","D06","D07","D08","F09V","F10V","F11V","OT01","OT02","OT03"];
+// no ar = ligados na Meta (conferido na API em 18/11/2026; orelha OT01–OT03 pausada)
+const NO_AR = ["D01","D02","D03","D07","D08","F08V","F11V","F12V"];
 const CODIGOS = {};
 ["01","02","03","04","05","06"].forEach(p=>{
   Object.entries(ARTES).forEach(([l,arte])=>{
@@ -170,15 +170,27 @@ CODIGOS.F11V = ["P11_V_ENVELHECE · frio (reel)", 0];
 CODIGOS.OT01 = ["Correção de orelha · vergonha de prender o cabelo (vídeo 6763)", 0];
 CODIGOS.OT02 = ["Correção de orelha · orelha de abano, 40 min (vídeo 6764)", 0];
 CODIGOS.OT03 = ["Correção de orelha · bullying (vídeo 6765)", 0];
+CODIGOS.F12V = ["P12_V_POS_OP_DR · frio (vídeo 6987, medo do inchaço e da dor)", 0];
+CODIGOS.F13V = ["P13_V_CONTORNO · frio (vídeo 6988)", 0];
+CODIGOS.Q07V = ["Q07_V_POS_OP_DR · quente (vídeo 6987)", 0];
+CODIGOS.Q08V = ["Q08_V_CONTORNO · quente (vídeo 6988)", 0];
 NO_AR.forEach(c=>{ if(CODIGOS[c]) CODIGOS[c][1]=1; });
-// link do anúncio no Instagram (instagram_permalink_url do criativo, lido na Meta em 26/10/2026)
+// link do anúncio no Instagram (instagram_permalink_url do criativo, lido na Meta em 26/10 e 18/11/2026)
 const LINKS = {
   F06A:"https://www.instagram.com/p/DesKBPpMZ-U/",
   D01:"https://www.instagram.com/p/DesK1_qMimj/",
   D02:"https://www.instagram.com/p/DesK_BiMLia/",
   D03:"https://www.instagram.com/p/De2BblCM_2g/",
   D04:"https://www.instagram.com/p/De2BldXsr6c/",
-  F07V:"https://www.instagram.com/p/De2Djp3Mzdf/"
+  F07V:"https://www.instagram.com/p/De2Djp3Mzdf/",
+  D07:"https://www.instagram.com/p/DfYTM_tsQXt/",
+  D08:"https://www.instagram.com/p/DfYTt7YsBfB/",
+  F08V:"https://www.instagram.com/p/Df2jEolsunH/",
+  F11V:"https://www.instagram.com/p/DfYT5LUMy0P/",
+  F12V:"https://www.instagram.com/p/DfmdlV9sCpF/",
+  F13V:"https://www.instagram.com/p/DfmeGyyMUsX/",
+  Q07V:"https://www.instagram.com/p/DfmdZ_1MHuN/",
+  Q08V:"https://www.instagram.com/p/Dfmd8HVsmDg/"
 };
 function linkVer(c, txt){
   const a=document.createElement("a"); a.className="ver"; a.href=LINKS[c]; a.target="_blank"; a.rel="noopener";
