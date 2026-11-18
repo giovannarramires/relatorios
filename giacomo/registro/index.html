@@ -143,6 +143,8 @@ td a{color:inherit}
 <script>
 // Registros ficam numa Planilha Google da GGD, gravados pelo n8n (workflow "GGD — Giácomo leads por anúncio")
 const API = "https://n8n.giogrowthdigital.com.br/webhook/giacomo-leads";
+// muda a cada publicação: aba aberta com versão velha se recarrega sozinha
+const VERSAO = "2026-11-18-2";
 
 const ARTES = {A:"NOIR",B:"ARCOS",C:"GALERIA",D:"LAMINA",E:"MONOCROMO",F:"DETALHE",H:"CARROSSEL_CAPA"};
 // no ar = ligados na Meta (conferido na API em 18/11/2026; orelha OT01–OT03 pausada)
@@ -317,7 +319,7 @@ $("form").addEventListener("submit", async e=>{
   e.preventDefault();
   const msg=$("f-msg");
   const codigo=$("f-codigo").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
-  if(!CODIGOS[codigo]){ msg.textContent=`O código ${codigo||"(vazio)"} não existe. Confira na mensagem ou use SEM.`; msg.className="hint err"; return; }
+  if(!CODIGOS[codigo]){ msg.textContent=`O código ${codigo||"(vazio)"} não existe. Recarregue a página (pode ser código novo) ou use SEM.`; msg.className="hint err"; return; }
   const lead={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6), codigo, data:$("f-data").value,
     quem:$("f-quem").value.trim(), etapa:$("f-etapa").value, valor:Number($("f-valor").value)||0,
     obs:$("f-obs").value.trim(), criado:new Date().toISOString()};
@@ -333,6 +335,16 @@ $("form").addEventListener("submit", async e=>{
 
 montarFixos(); render(); carregar();
 setInterval(()=>{ if(!document.hidden && !document.activeElement?.closest("td")) carregar(); }, 60000);
+async function conferirVersao(){
+  try{
+    const t = await (await fetch(location.pathname+"?v="+Date.now(), {cache:"no-store"})).text();
+    const m = t.match(/const VERSAO = "([^"]+)"/);
+    const digitando = ["f-codigo","f-quem","f-valor","f-obs"].some(i=>$(i).value.trim());
+    if(m && m[1]!==VERSAO && !digitando) location.reload();
+  }catch(e){}
+}
+setInterval(()=>{ if(!document.hidden) conferirVersao(); }, 120000);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) conferirVersao(); });
 </script>
 </body>
 </html>
