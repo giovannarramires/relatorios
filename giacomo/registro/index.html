@@ -144,11 +144,11 @@ td a{color:inherit}
 // Registros ficam numa Planilha Google da GGD, gravados pelo n8n (workflow "GGD — Giácomo leads por anúncio")
 const API = "https://n8n.giogrowthdigital.com.br/webhook/giacomo-leads";
 // muda a cada publicação: aba aberta com versão velha se recarrega sozinha
-const VERSAO = "2026-11-19-3";
+const VERSAO = "2026-11-23-1";
 
 const ARTES = {A:"NOIR",B:"ARCOS",C:"GALERIA",D:"LAMINA",E:"MONOCROMO",F:"DETALHE",H:"CARROSSEL_CAPA"};
-// no ar = ligados na Meta (19/11/2026: Gio desligou tudo; só D07/D08 voltam nos anúncios novos da campanha PINOS, mesmo post e mesmo código; D05 reprovado de novo, D01 entra no lugar)
-const NO_AR = ["D01","D07","D08"];
+// no ar = ligados na Meta (23/11/2026: entram D09/D10, vídeos novos nos PINOS · 19/11/2026: Gio desligou tudo; só D07/D08 voltam nos anúncios novos da campanha PINOS, mesmo post e mesmo código; D05 reprovado de novo, D01 entra no lugar)
+const NO_AR = ["D01","D07","D08","D09","D10"];
 const CODIGOS = {};
 ["01","02","03","04","05","06"].forEach(p=>{
   Object.entries(ARTES).forEach(([l,arte])=>{
@@ -176,6 +176,8 @@ CODIGOS.F12V = ["P12_V_POS_OP_DR · frio (vídeo 6987, medo do inchaço e da dor
 CODIGOS.F13V = ["P13_V_CONTORNO · frio (vídeo 6988)", 0];
 CODIGOS.Q07V = ["Q07_V_POS_OP_DR · quente (vídeo 6987)", 0];
 CODIGOS.Q08V = ["Q08_V_CONTORNO · quente (vídeo 6988)", 0];
+CODIGOS.D09 = ["Direct · papada 3D, condição de novembro (vídeo 7263)", 0];
+CODIGOS.D10 = ["Direct · quando volto a trabalhar depois da lipo (vídeo 7264)", 0];
 NO_AR.forEach(c=>{ if(CODIGOS[c]) CODIGOS[c][1]=1; });
 // link do anúncio no Instagram (instagram_permalink_url do criativo, lido na Meta em 26/10 e 18/11/2026)
 const LINKS = {
@@ -188,6 +190,8 @@ const LINKS = {
   D05:"https://www.instagram.com/p/Df5UT7cM3Z3/",
   D07:"https://www.instagram.com/p/DfYTM_tsQXt/",
   D08:"https://www.instagram.com/p/DfYTt7YsBfB/",
+  D09:"https://www.instagram.com/p/DgFUAM1MEma/",
+  D10:"https://www.instagram.com/p/DgFULMMMorW/",
   F08V:"https://www.instagram.com/p/Df2jEolsunH/",
   F11V:"https://www.instagram.com/p/DfYT5LUMy0P/",
   F12V:"https://www.instagram.com/p/DfmdlV9sCpF/",
