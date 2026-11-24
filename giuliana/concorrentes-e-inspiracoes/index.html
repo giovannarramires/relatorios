@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Concorrentes e inspirações — Giuliana Sueyoshi</title>
+<style>
+  :root {
+    --ground:#FFFFFF; --surface:#F6F6FA; --ink:#1C1F1A; --ink-soft:#43483E; --muted:#6B6F63;
+    --line:#D6D7DE; --line-soft:#E7E8EE; --accent:#5050A0; --accent-soft:#EEEEF8; --moss:#2F4636;
+    --ok:#2F5E3E; --ok-bg:#EAF2EB; --ok-line:#BBD3C0;
+    --no:#8E3A2A; --no-bg:#F8EAE6; --no-line:#E2BFB6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 34px 60px;overflow-wrap:break-word}
+  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:10.5px;
+    letter-spacing:.17em;text-transform:uppercase;color:var(--accent)}
+  h1{font-family:"Iowan Old Style","Hoefler Text",Palatino,Georgia,serif;font-weight:600;
+    font-size:40px;line-height:1.06;margin:14px 0 0;letter-spacing:-.015em;max-width:20ch}
+  h1 em{font-style:italic;color:var(--accent)}
+  .standfirst{font-size:16.5px;color:var(--ink-soft);max-width:60ch;margin:14px 0 0}
+  header.top{padding:46px 0 26px;border-bottom:2px solid var(--ink)}
+  .meta-line{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:16px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
+  h2{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:26px;
+    line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
+  section{padding-top:38px}
+  .sect-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+  .sect-head p{margin:0;color:var(--muted);font-size:14.5px;max-width:64ch}
+  .sect-head .eyebrow{display:block;margin-bottom:6px}
+  p{max-width:68ch;margin:0 0 12px}
+  a{color:var(--accent)}
+  .lead{background:var(--surface);border-left:3px solid var(--accent);padding:16px 20px;margin:0 0 18px}
+  .lead p{margin:0;max-width:64ch}
+
+  /* linhas repetíveis */
+  .linhas{display:flex;flex-direction:column;gap:10px}
+  .linha{display:grid;grid-template-columns:1.1fr 1fr 1.4fr 34px;gap:8px;align-items:start;
+    border:1px solid var(--line);background:var(--surface);padding:12px}
+  .linha label{display:block;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+  .linha label i{font-style:normal;text-transform:none;letter-spacing:0;opacity:.8}
+  input,textarea{font:inherit;font-size:16px;width:100%;border:1px solid var(--line);background:#fff;
+    color:var(--ink);padding:9px 10px;border-radius:0;outline:none}
+  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+  textarea{min-height:92px;resize:vertical}
+  .linha .rm{align-self:center;justify-self:center;margin-top:16px;width:30px;height:30px;border:1px solid var(--line);
+    background:#fff;color:var(--muted);font-size:18px;line-height:1;cursor:pointer}
+  .linha .rm:hover{color:var(--no);border-color:var(--no-line)}
+  .campo{margin:0 0 16px}
+  .campo label{display:block;font-weight:600;margin:0 0 6px}
+  .campo label i{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:13.5px}
+  button.copy{font:inherit;font-size:13.5px;font-weight:600;background:var(--ink);color:#fff;
+    border:0;padding:10px 16px;cursor:pointer;white-space:nowrap}
+  button.copy:hover{background:var(--accent)}
+  button.copy.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  button.copy.ghost:hover{background:var(--ink);color:#fff}
+  button.enviar{font:inherit;font-size:16px;font-weight:600;background:var(--accent);color:#fff;border:0;
+    padding:14px 26px;cursor:pointer;width:100%;max-width:360px}
+  button.enviar:hover{background:#3E3E86}
+  button.enviar[disabled]{opacity:.6;cursor:wait}
+  .add{margin-top:12px}
+  .toast{font-size:14px;color:var(--no);margin-top:10px;min-height:1.3em}
+  .ok{border:1px solid var(--ok-line);background:var(--ok-bg);padding:26px 24px;margin-top:38px;display:none}
+  .ok h2{color:var(--ok);margin-bottom:10px}
+  .ok p{color:var(--ink-soft)}
+  .hp{position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden}
+  .conta{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);margin:0 0 10px}
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  footer p{max-width:none;font-size:12.5px}
+  @media (max-width:640px){
+    .wrap{padding:0 16px 48px}
+    h1{font-size:31px}
+    h2{font-size:22px}
+    .eyebrow{letter-spacing:.1em}
+    .linha{grid-template-columns:1fr 34px;padding:10px}
+    .linha>div{grid-column:1}
+    .linha .rm{grid-column:2;grid-row:1;margin-top:14px}
+    button.enviar{max-width:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Gio Growth Digital · Preparado para Giuliana Sueyoshi</div>
+  <h1>Concorrentes e <em>inspirações</em></h1>
+  <p class="standfirst">Duas listas rápidas, no seu tempo. Com elas eu passo a acompanhar quem disputa a mesma atenção que você e trago referências do que você gosta de ver — em conteúdo, posicionamento e anúncio.</p>
+  <div class="meta-line">
+    <span>Uns 5 minutos</span>
+    <span>Pode ser pelo celular</span>
+    <span>Sem login</span>
+  </div>
+</header>
+
+<form id="form" novalidate>
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 1</span>
+    <h2>Concorrentes</h2>
+    <p>Quem oferece algo parecido e disputa o mesmo público — da sua cidade ou de fora. Basta o @ do Instagram (ou o site). Nome e observação são opcionais, mas ajudam muito.</p>
+  </div>
+  <div class="linhas" id="conc"></div>
+  <button type="button" class="copy ghost add" data-add="conc">+ adicionar outro concorrente</button>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Parte 2</span>
+    <h2>Inspirações</h2>
+    <p>Pessoas ou marcas que você admira pelo conteúdo, pelo jeito de se posicionar ou pelos anúncios — <b>mesmo de outro ramo</b>. Uma marca de roupa, um atleta, um restaurante: vale tudo o que faz você pensar "quero comunicar assim".</p>
+  </div>
+  <div class="linhas" id="insp"></div>
+  <button type="button" class="copy ghost add" data-add="insp">+ adicionar outra inspiração</button>
+</section>
+
+<section>
+  <div class="sect-head">
+    <span class="eyebrow">Para fechar</span>
+    <h2>Quem está preenchendo</h2>
+  </div>
+  <div class="campo">
+    <label for="quem">Seu nome <i>Para eu saber com quem conversar se tiver dúvida.</i></label>
+    <input id="quem" name="quem" type="text" autocomplete="name" maxlength="80" placeholder="Como você prefere ser chamado(a)">
+  </div>
+  <div class="campo">
+    <label for="obs">Algo mais que eu deva saber? <i>Opcional. Um contexto, um "cuidado com fulano", um "não quero parecer com tal marca".</i></label>
+    <textarea id="obs" name="obs" maxlength="1000" placeholder="Fique à vontade"></textarea>
+  </div>
+  <div class="hp" aria-hidden="true"><label>Site<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+
+  <p class="conta" id="conta">Nenhuma linha preenchida ainda</p>
+  <button type="submit" class="enviar" id="btn">Enviar para a Gio</button>
+  <div class="toast" id="toast" aria-live="polite"></div>
+</section>
+</form>
+
+<div class="ok" id="ok">
+  <h2>Recebi, obrigada!</h2>
+  <p id="okTexto">A lista já chegou pra mim. Nos próximos dias ela entra no acompanhamento e eu volto com o que encontrei.</p>
+  <p>Lembrou de mais alguém? É só abrir este mesmo link e mandar de novo — as listas se somam.</p>
+  <div class="actions" style="margin-top:14px"><button type="button" class="copy ghost" id="deNovo">Mandar mais nomes</button></div>
+</div>
+
+<footer>
+  <p>Gio Growth Digital · Preparado para Giuliana Sueyoshi · 24/11/2026</p>
+  <p>O que você escrever aqui chega só pra mim e serve para orientar o trabalho de mídia. Nada vai para terceiros.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var CLIENTE = 'giuliana';
+  var API = 'https://n8n.giogrowthdigital.com.br/webhook/ggd-concorrentes-inspiracoes';
+  var KEY = 'ggd-ci-' + CLIENTE + '-v1';
+  var PARTES = {
+    conc: {tipo:'concorrente', ph:{arroba:'@perfil ou site', nome:'Nome (opcional)', porque:'O que observar nele (opcional)'}},
+    insp: {tipo:'inspiracao',  ph:{arroba:'@perfil ou site', nome:'Nome (opcional)', porque:'O que admira nele (opcional)'}}
+  };
+  var toast = document.getElementById('toast'), conta = document.getElementById('conta');
+  var form = document.getElementById('form'), ok = document.getElementById('ok');
+
+  function campo(p, nome, rotulo, extra){
+    var d = document.createElement('div');
+    d.innerHTML = '<label>' + rotulo + (extra ? ' <i>' + extra + '</i>' : '') + '</label>';
+    var i = document.createElement('input'); i.type = 'text'; i.setAttribute('data-k', nome);
+    i.placeholder = PARTES[p].ph[nome]; i.maxLength = nome === 'porque' ? 600 : 160;
+    i.autocomplete = 'off'; i.autocapitalize = nome === 'arroba' ? 'none' : 'sentences';
+    if (nome === 'arroba') i.spellcheck = false;
+    d.appendChild(i); return d;
+  }
+  function linha(p, v){
+    v = v || {};
+    var l = document.createElement('div'); l.className = 'linha';
+    l.appendChild(campo(p, 'arroba', '@ do Instagram', 'ou site'));
+    l.appendChild(campo(p, 'nome', 'Nome', 'opcional'));
+    l.appendChild(campo(p, 'porque', 'Por quê / o que observar', 'opcional'));
+    var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'rm'; rm.title = 'Tirar esta linha'; rm.innerHTML = '&times;';
+    rm.addEventListener('click', function(){ l.parentNode.removeChild(l); garantir(p); salvar(); contar(); });
+    l.appendChild(rm);
+    l.querySelectorAll('input').forEach(function(i){ i.value = v[i.dataset.k] || ''; i.addEventListener('input', function(){ salvar(); contar(); }); });
+    document.getElementById(p).appendChild(l); return l;
+  }
+  function garantir(p){ if (!document.getElementById(p).children.length) linha(p); }
+  function ler(p){
+    return Array.prototype.map.call(document.getElementById(p).querySelectorAll('.linha'), function(l){
+      var o = {tipo: PARTES[p].tipo};
+      l.querySelectorAll('input').forEach(function(i){ o[i.dataset.k] = i.value.trim(); });
+      return o;
+    });
+  }
+  function cheias(p){ return ler(p).filter(function(o){ return o.arroba || o.nome; }); }
+  function contar(){
+    var c = cheias('conc').length, i = cheias('insp').length;
+    conta.textContent = (c + i) ? (c + ' concorrente' + (c === 1 ? '' : 's') + ' · ' + i + ' inspiraç' + (i === 1 ? 'ão' : 'ões')) : 'Nenhuma linha preenchida ainda';
+  }
+  function salvar(){
+    try { localStorage.setItem(KEY, JSON.stringify({conc: ler('conc'), insp: ler('insp'),
+      quem: document.getElementById('quem').value, obs: document.getElementById('obs').value})); } catch(e) {}
+  }
+  function aviso(t){ toast.textContent = t; }
+
+  // monta: rascunho salvo neste navegador ou 3 linhas vazias por parte
+  var salvo = null; try { salvo = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e) {}
+  ['conc','insp'].forEach(function(p){
+    var vs = (salvo && salvo[p] && salvo[p].length) ? salvo[p] : [{}, {}, {}];
+    vs.forEach(function(v){ linha(p, v); });
+  });
+  if (salvo) { document.getElementById('quem').value = salvo.quem || ''; document.getElementById('obs').value = salvo.obs || ''; }
+  ['quem','obs'].forEach(function(id){ document.getElementById(id).addEventListener('input', salvar); });
+  contar();
+
+  document.querySelectorAll('[data-add]').forEach(function(b){
+    b.addEventListener('click', function(){ var l = linha(b.dataset.add); l.querySelector('input').focus(); salvar(); });
+  });
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var itens = cheias('conc').concat(cheias('insp'));
+    if (!itens.length) { aviso('Preencha pelo menos um @ (ou nome) em uma das duas partes.'); return; }
+    var btn = document.getElementById('btn'); btn.disabled = true; btn.textContent = 'Enviando…'; aviso('');
+    var corpo = {cliente: CLIENTE, quem: document.getElementById('quem').value.trim(), obs: document.getElementById('obs').value.trim(),
+      site: form.elements.site.value, itens: itens, origem: location.pathname};
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 25000);
+    // text/plain evita o preflight de CORS; o n8n lê o corpo como JSON
+    fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(corpo), signal: ctrl ? ctrl.signal : undefined})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {status: r.status, j: j}; }); })
+      .then(function(r){
+        clearTimeout(t);
+        if (r.status === 200 && r.j && r.j.ok) {
+          try { localStorage.removeItem(KEY); } catch(e) {}
+          var q = corpo.quem ? corpo.quem.split(' ')[0] : '';
+          document.getElementById('okTexto').textContent = (q ? 'Obrigada, ' + q + '! ' : '') +
+            'Recebi ' + itens.length + (itens.length === 1 ? ' nome' : ' nomes') + '. Nos próximos dias a lista entra no acompanhamento e eu volto com o que encontrei.';
+          form.style.display = 'none'; ok.style.display = 'block'; window.scrollTo(0, 0);
+        } else {
+          falhou(r.j && r.j.erro);
+        }
+      })
+      .catch(function(){ clearTimeout(t); falhou(); });
+    function falhou(e){
+      btn.disabled = false; btn.textContent = 'Enviar para a Gio';
+      aviso(e === 'cliente' ? 'Este link não está ligado a um cliente — me avise no WhatsApp, por favor.'
+        : 'Não consegui enviar agora. Tente de novo em um minuto; o que foi escrito fica salvo neste navegador. Se não der, me mande pelo WhatsApp mesmo.');
+    }
+  });
+
+  document.getElementById('deNovo').addEventListener('click', function(){
+    ['conc','insp'].forEach(function(p){ document.getElementById(p).innerHTML = ''; linha(p); linha(p); });
+    document.getElementById('obs').value = '';
+    ok.style.display = 'none'; form.style.display = 'block'; contar(); salvar(); window.scrollTo(0, 0);
+  });
+})();
+</script>
+</body>
+</html>
